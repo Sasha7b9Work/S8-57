@@ -47,7 +47,7 @@ void Upgrade();
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int main()
 {
-    ms = (MainStruct *)malloc(sizeof(MainStruct));
+    ms = static_cast<MainStruct *>(malloc(sizeof(MainStruct)));
     ms->percentUpdate = 0.0F; //-V522
    
     CPU::Init();

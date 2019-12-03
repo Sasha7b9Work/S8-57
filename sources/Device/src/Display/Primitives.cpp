@@ -201,7 +201,9 @@ int Text::DrawDigitsMonospace(int x, int y, int width, Color color)
 {
     color.SetAsCurrent();
 
-    for (uint i = 0; i < std::strlen(text); i++)
+    uint size = std::strlen(text);
+
+    for (uint i = 0; i < size; i++)
     {
         char symbol = text[i];
 
