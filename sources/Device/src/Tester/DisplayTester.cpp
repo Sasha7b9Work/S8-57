@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Data/Reader.h"
+#include "Display/Console.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Display/Primitives.h"
@@ -16,19 +17,6 @@ static bool ready[Tester::NUM_STEPS] = {false, false, false, false, false};
 
 static array8 *datY = (array8 *)OUT_A;
 static array16 *datX = (array16 *)OUT_B;
-
-
-/// Написать легенду изображения
-static void DrawLegend(int x, int y);
-/// Отображает параметры одного канала
-static void DrawParametersChannel(Chan::E ch, int x, int y);
-/// Возвращает цвет, которым нужно рисовать соответствующую "ступеньку"
-static Color ColorForStep(int step);
-/// Рисовать данные ступеньки numStep
-static void DrawData(int step);
-/// Возвращает числовое значение величины соответствующей "ступеньки"
-static String ValueForStep(int step);
-
 
 
 void DisplayTester::Update()
@@ -50,10 +38,12 @@ void DisplayTester::Update()
     Rectangle(::Display::WIDTH - 1, ::Display::HEIGHT - 1).Draw(0, 0, Color::FILL);
     
     Menu::Draw();
+
+    Console::Draw();
 }
 
 
-static Color ColorForStep(int _step)
+Color DisplayTester::ColorForStep(int _step)
 {
     static const Color colors[Tester::NUM_STEPS] = {Color::FILL, Color::GRID, Color::RED, Color::GREEN, Color::BLUE};
 
@@ -70,7 +60,7 @@ static Color ColorForStep(int _step)
 }
 
 
-static void DrawData(int numStep)
+void DisplayTester::DrawData(int numStep)
 {
     if(!ready[numStep])
     {
@@ -101,7 +91,7 @@ void DisplayTester::SetPoints(int numStep, const uint16 dx[TESTER_NUM_POINTS], c
 }
 
 
-static void DrawLegend(int x, int y)
+void DisplayTester::DrawLegend(int x, int y)
 {
     Region(43, 40).Fill(x, y, Color::BACK);
 
@@ -116,7 +106,7 @@ static void DrawLegend(int x, int y)
 }
 
 
-static String ValueForStep(int step)
+String DisplayTester::ValueForStep(int step)
 {
     static pString valuesU[2][5] =
     {
@@ -139,7 +129,7 @@ static String ValueForStep(int step)
 }
 
 
-static void DrawParametersChannel(Chan::E ch, int x, int y)
+void DisplayTester::DrawParametersChannel(Chan::E ch, int x, int y)
 {
     int16 rShift = RShift(ch);
     Tester::Scale scale(Range(ch), ch);
