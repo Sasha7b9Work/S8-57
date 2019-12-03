@@ -150,7 +150,7 @@ static void DrawField(int numField)
 
     if (numField == CUR_FIELD)
     {
-        Region(72, 67).Fill(x - 2, y - 2, Color::FILL);
+        Region(76, 70).Fill(x - 2, y - 2, Color::FILL);
         Color::BACK.SetAsCurrent();
     }
 
@@ -159,19 +159,17 @@ static void DrawField(int numField)
     DrawDigit(x, y, value[1]);
     DrawDigit(x + 38, y, value[0]);
 
-    const char separator[2] = { (numField < 3) ? ':' : '.', '\0' };
-
     if (posX < 2)
     {
-        Text(separator).Draw(x + 76, (numField < 3) ? y - 14 : y, Color::FILL);
+        const char separator[2] = { (numField < 3) ? ':' : '.', '\0' };
+
+        Text(separator).Draw(x + 79, y, Color::FILL);
     }
 }
 
 static void DrawTime()
 {
-    uint time = TIME_MS;
-
-    Font::Set(TypeFont::_GOST28);
+    Font::Set(TypeFont::_GOST72bold);
     int spacing = Font::GetSpacing();
     Font::SetSpacing(5);
     
@@ -182,8 +180,6 @@ static void DrawTime()
     
     Font::Set(TypeFont::_8);
     Font::SetSpacing(spacing);
-
-    Integer(static_cast<int>(TIME_MS - time)).ToString(false).Draw(5, 5);
 }
 
 static void OnOpenClose_Set(bool open)
