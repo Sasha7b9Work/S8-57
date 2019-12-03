@@ -40,8 +40,8 @@ void Handlers::Process(KeyEvent e)
         {RangeLessB,        Empty,             Empty,            Empty},            // RangeLessB 
         {RShiftMoreB,       RShiftMoreB,       Empty,            Empty},            // RShiftMoreB
         {RShiftLessB,       RShiftLessB,       Empty,            Empty},            // RShiftLessB
-        {TBaseMore,         Empty,             Empty,            Empty},            // TBaseMore
-        {TBaseLess,         Empty,             Empty,            Empty},            // TBaseLess
+        {OnTBase,           Empty,             Empty,            Empty},            // TBaseMore
+        {OnTBase,           Empty,             Empty,            Empty},            // TBaseLess
         {OnTShift,          OnTShift,          Empty,            Empty},            // TShiftMore 
         {OnTShift,          OnTShift,          Empty,            Empty},            // TShiftLess 
         {TrigLevMore_Press, TrigLevMore_Press, Empty,            Empty},            // TrigLevMore
@@ -206,28 +206,17 @@ void Handlers::ChangeTBase(int delta)
 }
 
 
-void Handlers::TBaseLess()
+void Handlers::OnTBase()
 {
+    int delta = (event.key == Key::TBaseMore) ? 1 : -1;
+
     if (Device::State::InModeRecorder())
     {
-        OnChangeParameterTime(RecorderScaleX::Change, -1);
+        OnChangeParameterTime(RecorderScaleX::Change, delta);
     }
     else
     {
-        OnChangeParameterTime(ChangeTBase, -1);
-    }
-}
-
-
-void Handlers::TBaseMore()
-{
-    if (Device::State::InModeRecorder())
-    {
-        OnChangeParameterTime(RecorderScaleX::Change, 1);
-    }
-    else
-    {
-        OnChangeParameterTime(ChangeTBase, 1);
+        OnChangeParameterTime(ChangeTBase, delta);
     }
 }
 
@@ -253,6 +242,7 @@ void Handlers::HandlerArrow()
         }
     }
 }
+
 
 bool Handlers::CommonHandlerPage()
 {
