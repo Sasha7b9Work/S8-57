@@ -141,11 +141,9 @@ void ColorType::ReInit()
 
 void ColorType::SetBrightness(float bright)
 {
-    //LOG_WRITE("”становить €ркость %f r=%d g=%d b=%d", bright, red, green, blue);
-
     if (Math::IsEquals(bright, -1.0F))
     {
-        brightness = Math::Max(red / 31.0F, green / 63.0F, blue / 31.0F);
+        brightness = Math::Max(red / 255.0F, green / 255.0F, blue / 255.0F);
 
         CalcSteps();
     }
