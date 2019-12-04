@@ -296,8 +296,8 @@ void DisplayFreqMeter::Draw()
     int spacing = Font::GetSpacing();
     Font::SetSpacing(1);
 
-    int width = 241;
-    int height = 74;
+    int width = 200;
+    int height = 100;
     int x = Grid::Left() + (Grid::Width() - width) / 2;
     int y = Grid::Top() + (Grid::Height() / 2 - height) / 2;
 
