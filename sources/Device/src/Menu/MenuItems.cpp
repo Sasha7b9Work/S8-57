@@ -339,12 +339,12 @@ bool Page::HandlerKey(const KeyEvent &event)
     }
     else if (event.IsPress())
     {
-        if (event.key == Key::Left)
+        if (event.IsLeft())
         {
             ChangeSubPage(-1);
             result = true;
         }
-        else if (event.key == Key::Right)
+        else if (event.IsRight())
         {
             ChangeSubPage(1);
             result = true;

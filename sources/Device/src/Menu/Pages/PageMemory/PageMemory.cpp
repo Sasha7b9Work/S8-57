@@ -355,9 +355,7 @@ static void DrawFileMask(int x, int y)
 
 static bool HandlerKey_Mask(const KeyEvent &event)
 {
-    Key::E key = event.key;
-
-    int angle = (key == Key::Up || key == Key::Right) ? 1 : -1;
+    int angle = (event.IsUp() || event.IsRight()) ? 1 : -1;
 
     OnMemExtSetMaskNameRegSet(angle, Tables::Size() / 4);
 

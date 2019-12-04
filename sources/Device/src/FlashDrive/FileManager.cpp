@@ -312,9 +312,7 @@ static void DecCurrentFile()
 
 bool FileManager::HandlerKey(const KeyEvent &event)
 {
-    Key::E key = event.key;
-
-    int delta = (key == Key::Up || key == Key::Right) ? 1 : -1;
+    int delta = (event.IsUp() || event.IsRight()) ? 1 : -1;
 
     Beeper::RegulatorSwitchRotate();
     if (FM_CURSOR_IN_DIRS)

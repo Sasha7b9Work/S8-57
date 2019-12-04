@@ -201,9 +201,7 @@ static bool HandlerKey_Function(const KeyEvent &event) // -V2506
         return false;
     }
 
-    Key::E key = event.key;
-
-    int delta = (key == Key::Up || key == Key::Right) ? 1 : -1;
+    int delta = (event.IsUp() || event.IsRight()) ? 1 : -1;
 
     if (set.math.modeRegSet == ModeRegSet::RShift)
     {

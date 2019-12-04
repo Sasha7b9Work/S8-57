@@ -205,11 +205,9 @@ static bool HandlerKey_ROM(const KeyEvent &event)
 
     if (event.IsRelease() || event.IsLong())
     {
-        Key::E key = event.key;
-
         Beeper::RegulatorSwitchRotate();
 
-        if (key == Key::Left || key == Key::Down)
+        if (event.IsDecrease())
         {
             Math::CircleDecrease<int8>((int8 *)&NUM_ROM_SIGNAL, 0, ROM::Data::MAX_NUM_SAVED_WAVES - 1);
 
@@ -217,7 +215,7 @@ static bool HandlerKey_ROM(const KeyEvent &event)
 
             result = true;
         }
-        else if (key == Key::Right || key == Key::Up)
+        else if (event.IsIncrease())
         {
             Math::CircleIncrease<int8>((int8 *)&NUM_ROM_SIGNAL, 0, ROM::Data::MAX_NUM_SAVED_WAVES - 1);
 

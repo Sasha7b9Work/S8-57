@@ -322,11 +322,9 @@ bool PageCursorsMeasures::PageSet::HandlerKey(const KeyEvent &event) //-V2506
         return true;
     }
 
-    Key::E key = event.key;
+    float value = event.IsIncrease() ? 1.0F : -1.0F;
 
-    float value = event.IsAboveZero() ? 1.0F : -1.0F;
-
-    if ((set.curs.active == CursorsActive::U) && (key == Key::Up || key == Key::Down))
+    if ((set.curs.active == CursorsActive::U) && (event.IsUp() || event.IsDown()))
     {
         if (set.curs.movement == CursorsMovement::Percents)
         {
@@ -343,7 +341,7 @@ bool PageCursorsMeasures::PageSet::HandlerKey(const KeyEvent &event) //-V2506
         }
         UpdateCursorsForLook();
     }
-    else if((set.curs.active == CursorsActive::T) && (key == Key::Left || key == Key::Right))
+    else if((set.curs.active == CursorsActive::T) && (event.IsLeft() || event.IsRight()))
     {
         if (set.curs.movement == CursorsMovement::Percents)
         {
