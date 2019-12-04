@@ -855,4 +855,8 @@ void ProgressBarFreqMeter::Draw(int x, int y)
     {
 
     }
+    else
+    {
+        // здесь ничего
+    }
 }

@@ -227,6 +227,10 @@ void Handlers::OnArrow()
     {
         openedItem->HandlerKey(event);
     }
+    else
+    {
+        // здесь ничего
+    }
 }
 
 

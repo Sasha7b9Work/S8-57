@@ -1006,6 +1006,10 @@ bool GovernorColor::HandlerKey(const KeyEvent &event)
 
             return true;
         }
+        else
+        {
+            // здесь ничего
+        }
     }
     else
     {
@@ -1020,6 +1024,10 @@ bool GovernorColor::HandlerKey(const KeyEvent &event)
             ct->ComponentChange(-1);
 
             return true;
+        }
+        else
+        {
+            // здесь ничего
         }
     }
 
