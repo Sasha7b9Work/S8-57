@@ -384,7 +384,7 @@ int Math::DigitsInIntPart(float value)
 {
     if (value == std::numeric_limits<float>::infinity())
     {
-        LOG_WRITE("Nan value %f", value);
+        LOG_ERROR("Nan value %f", value);
         return 2;
     }
 

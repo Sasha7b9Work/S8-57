@@ -12,7 +12,7 @@
 #include <cstring>
 
 
-#define EMPTY_STRING    "\xa9\xa9\xa9.\xa9\xa9\xa9"
+#define EMPTY_STRING    "---.---"
 #define OVERFLOW_STRING ">>>"
 
 
@@ -330,11 +330,15 @@ void DisplayFreqMeter::Draw()
 
 void DisplayFreqMeter::DrawFrequency(int x, int _y)
 {
-    int yF = _y + 1;
-    int yT = _y + 5 + Font::GetHeight();
+    _y += 4;
+    
+    int yF = _y;
+    int yT = _y + 4 + Font::GetHeight();
 
-    Text("F").Draw(x + 2, yF, Color::FILL);
-    Text("T").Draw(x + 2, yT);
+    x += 6;
+    
+    Text("F").Draw(x, yF, Color::FILL);
+    Text("T").Draw(x, yT);
 
     Rectangle(10, 10).Draw(x - 20, _y);
     if (FreqMeter::lampFreq)
@@ -353,16 +357,6 @@ void DisplayFreqMeter::DrawFrequency(int x, int _y)
     std::strcpy(strFreq, FreqSetToString(&FreqMeter::freqActual));
 
     Text(strFreq).DrawDigitsMonospace(x + dX, yF, Font::GetWidth('0'));
-
-    if (std::strcmp(strFreq, EMPTY_STRING) == 0)
-    {
-        return;
-    }
-
-    if (std::strcmp(strFreq, OVERFLOW_STRING) == 0)
-    {
-        return;
-    }
 
     float freq = SU::StringToFloat(strFreq);
 
@@ -384,8 +378,15 @@ void DisplayFreqMeter::DrawFrequency(int x, int _y)
     }
 
     Time time(1.0F / freq);
-
-    Text(time.ToStringAccuracy(false, strFreq, 6)).DrawDigitsMonospace(x + dX, yT, Font::GetWidth('0'));
+    
+    if(time.Value() == std::numeric_limits<float>::infinity())
+    {
+        Text(EMPTY_STRING).DrawDigitsMonospace(x + dX, yT, Font::GetWidth('0'));
+    }
+    else
+    {
+        Text(time.ToStringAccuracy(false, strFreq, 6)).DrawDigitsMonospace(x + dX, yT, Font::GetWidth('0'));
+    }
 }
 
 

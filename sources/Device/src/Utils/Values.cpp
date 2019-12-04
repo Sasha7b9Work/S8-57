@@ -32,10 +32,10 @@ static char *IntegerToString(int value, bool alwaysSign, int numMinFields, char 
 
 Float::Float(float val) : value(val)
 {
-    if (value == std::numeric_limits<float>::infinity())
-    {
-        LOG_ERROR("Неправильное число");
-    }
+//    if (value == std::numeric_limits<float>::infinity())
+//    {
+//        LOG_ERROR("Неправильное число");
+//    }
 }
 
 
