@@ -1,9 +1,7 @@
 #pragma once
-#include "Hardware/stm32/stm32.h"
 
 
-
-class STM429 : public STM32
+class STM429
 {
 protected:
 

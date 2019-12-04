@@ -1,9 +1,9 @@
 #include "defines.h"
-#include "Hardware/CPU.h"
-#include "LTDC.h"
 #include "Display/Painter.h"
+#include "Hardware/CPU.h"
+#include "Hardware/LTDC.h"
+#include "Hardware/HAL/HAL.h"
 #include "Settings/SettingsTypes.h"
-
 
 
 static LTDC_HandleTypeDef handleLTDC;

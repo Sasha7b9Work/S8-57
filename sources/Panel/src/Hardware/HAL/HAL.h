@@ -1,6 +1,15 @@
 #pragma once
 
 
+#define ERROR_HANDLER()  ::HAL::ErrorHandler(__FILE__, __LINE__)
+
+
+struct HAL
+{
+    static void ErrorHandler(const char *, int);
+};
+
+
 /// »спользуетс€ дл€ управлени€ €ркостью диспле€
 struct HAL_DAC2
 {

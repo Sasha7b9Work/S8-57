@@ -1471,6 +1471,11 @@
               <FilePath>.\src\Hardware\HAL\HAL.h</FilePath>
             </File>
             <File>
+              <FileName>HAL.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL.cpp</FilePath>
+            </File>
+            <File>
               <FileName>HAL_DAC2_stm.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_DAC2_stm.cpp</FilePath>
@@ -1480,16 +1485,6 @@
         <Group>
           <GroupName>Hardware/stm32</GroupName>
           <Files>
-            <File>
-              <FileName>stm32.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\stm32\stm32.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>stm32.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\stm32\stm32.h</FilePath>
-            </File>
             <File>
               <FileName>stm429.cpp</FileName>
               <FileType>8</FileType>

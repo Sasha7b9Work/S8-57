@@ -8,11 +8,6 @@
 
 #define ERROR_HANDLER()            ::HAL::ErrorHandler(__FILE__, __LINE__)
 
-typedef void(*pFuncTester)();
-
-
-class Battery;
-
 
 struct HAL_RTC
 {
