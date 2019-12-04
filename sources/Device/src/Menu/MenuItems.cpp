@@ -990,7 +990,7 @@ void GovernorColor::HandlerFX(TypePress::E type) const
 
 bool GovernorColor::HandlerKey(const KeyEvent &event)
 {
-    if (!event.IsRelease())
+    if (!event.IsRelease() && !event.IsRepeat())
     {
         return false;
     }

@@ -218,6 +218,10 @@ void ColorType::CalcSteps()
 
 void ColorType::SetColor()
 {
+    LIMITATION(red, 0.0F, 255.0F);
+    LIMITATION(green, 0.0F, 255.0F);
+    LIMITATION(blue, 0.0F, 255.0F);
+
     COLOR(color.value) = MAKE_COLOR(static_cast<int>(red), static_cast<int>(green), static_cast<int>(blue));
     color.LoadValueRGB();
 }
