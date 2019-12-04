@@ -37,6 +37,10 @@ GPIO_PinState HAL_GPIO_ReadPin(const GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
         {
 
         }
+        else
+        {
+            // здесь ничего
+        }
     }
 
     return GPIO_PIN_RESET;
