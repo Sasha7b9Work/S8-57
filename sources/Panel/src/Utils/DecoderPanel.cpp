@@ -5,6 +5,7 @@
 #include "Display/Painter.h"
 #include "Display/Text.h"
 #include "Hardware/Keyboard.h"
+#include "Hardware/HAL/HAL.h"
 
 
 
@@ -47,6 +48,8 @@ static bool DrawLine(uint8);
 
 static bool DrawHLine(uint8);
 
+static bool DisplayBrightness(uint8);
+
 static bool DrawTesterPoints(uint8);
 
 static bool DrawVPointLine(uint8);
@@ -58,6 +61,7 @@ static bool SetMinWidthFont(uint8);
 static bool SetTextSpacing(uint8);
 /// Эту функцию надо вызывать после выполнения последнего шага
 static void FinishCommand();
+
 
 
 
@@ -85,7 +89,7 @@ void Decoder::AddData(uint8 data)
         SetPoint,
         DrawLine,
         DrawTesterPoints,
-        EmptyFunc,
+        DisplayBrightness,
         FuncScreen,
         DrawVPointLine,
         DrawHPointLine,
@@ -198,6 +202,21 @@ static bool DrawTesterPoints(uint8 data)
         }
     }
     return false;
+}
+
+
+static bool DisplayBrightness(uint8 data)
+{
+    if (step == 0)
+    {
+        return false;
+    }
+    if (step == 1)
+    {
+        HAL_DAC2::SetValue(data);
+    }
+
+    return true;
 }
 
 

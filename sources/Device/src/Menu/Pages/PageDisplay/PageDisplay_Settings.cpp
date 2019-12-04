@@ -8,6 +8,7 @@
 
 static void OnChanged_Brightness()
 {
+    Display::LoadBrightness();
 }
 
 DEF_GOVERNOR( gBrightness,                                                                                                                            //--- ÄÈÑÏËÅÉ - ÍÀÑÒĞÎÉÊÈ - ßğêîñòü ---

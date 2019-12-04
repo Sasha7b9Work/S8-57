@@ -24,7 +24,7 @@ struct Command
 // Биты 1..3 - номер шага
 // В старшем полубайте хранится количество усреднений 0 - 1, 1 - 2, 2 - 4, 3 - 8, 4 - 16, 5 - 32, 6 - 64, 7 - 128, 8 - 256
 /* 14 */    Paint_TesterLines,      // 14 |   mode   |   Color    | x[TESTER_NUM_POINTS]        y[TESTER_NUM_POINTS]         3 + 240 * 2 + 240 = 723
-/* 15 */    Paint_Empty,            // 15 |   x[0:7] |  x[8:15]   |      y      | num symbols  |              |        |
+/* 15 */    Display_Brightness,     // 15 | яркость
 /* 16 */    Screen,                 // 16 |  numRow  |
 /* 17 */    Paint_VPointLine,       // 17 |   x[0:7] |  x[8:15]   |      y      |   delta      | count        |
 /* 18 */    Paint_HPointLine,       // 18 |   x[0:7] |  x[8:15]   |      y      |   delta      | count        |

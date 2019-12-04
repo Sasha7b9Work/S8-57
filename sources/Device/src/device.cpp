@@ -45,11 +45,11 @@ void Device::Init()
 
     Tester::Init();
 
-    Display::Init();
-
     FPGA::Init();
 
     Settings::Load();
+
+    Display::Init();
 
     FrequencyCounter::Init();
 

@@ -177,7 +177,7 @@ struct SettingsDisplay
     TypeGrid::E            typeGrid;              ///< Тип сетки
     int                    brightnessGrid;        ///< Яркость сетки от 0 до 100.
     LinkingRShift::E       linkingRShift;         ///< Тип привязки к смещению по вертикали.
-    int16                  brightness;            ///< Яркость дисплея.
+    uint8                  brightness;            ///< Яркость дисплея.
     MenuAutoHide::E        menuAutoHide;          ///< Через сколько времени после последнего нажатия клавиши прятать меню.
     int16                  shiftInMemory;         ///< \brief Показывает смещение левого края стеки относительно нулевого байта памяти в 
                                                   ///< байтах. Т.е. для пикового детектора будет в два раза больше количества точек на экране.

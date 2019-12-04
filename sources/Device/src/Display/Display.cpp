@@ -47,6 +47,8 @@ void Display::Init()
     }
 
     Painter::Init();
+
+    LoadBrightness();
 }
 
 
@@ -384,4 +386,10 @@ static void ReadRow(uint8 row)
 void Display::SaveRow(int row)
 {
     numRow = row;
+}
+
+
+void Display::LoadBrightness()
+{
+    Transceiver::Send(Command::Display_Brightness, set.disp.brightness + 10);
 }
