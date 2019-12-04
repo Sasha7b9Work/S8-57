@@ -201,9 +201,9 @@ void ColorType::BrightnessChange(int delta) // -V2506
 
     if (stepRed < 0.01F && stepGreen < 0.01F && stepBlue < 0.01F)
     {
-        stepRed = 0.31F;
-        stepGreen = 0.63F;
-        stepBlue = 0.31F;
+        stepRed = 2.55F;
+        stepGreen = 2.55F;
+        stepBlue = 2.55F;
     }
 }
 
@@ -225,7 +225,7 @@ void ColorType::SetColor()
 
 void ColorType::ComponentChange(int delta)
 {
-    static const float maxs[4] = {0.0F, 31.0F, 63.0F, 31.0F};
+    static const float maxs[4] = {0.0F, 255.0F, 255.0F, 255.0F};
     float * const pointers[4] = {0, &blue, &green, &red};
     int8 index = currentField;
 

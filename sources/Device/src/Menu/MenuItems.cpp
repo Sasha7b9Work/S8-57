@@ -126,17 +126,6 @@ bool Item::IsOpened() const
 }
 
 
-bool Item::HandlerKey(const KeyEvent &event)
-{
-    if (Is(TypeItem::GovernorColor))
-    {
-        return static_cast<GovernorColor *>(this)->HandlerKey(event);
-    }
-
-    return false;
-}
-
-
 void Item::SetCurrent(bool active) const
 {
     Page *page = const_cast<Page *>(Keeper());
@@ -962,7 +951,6 @@ Color Item::ColorBackground(const Item *choice) const
 }
 
 
-
 void GovernorColor::HandlerFX(TypePress::E type) const
 {
     Item::HandlerFX(type);
@@ -997,4 +985,66 @@ void GovernorColor::HandlerFX(TypePress::E type) const
     {
         // здесь ничего
     }
+}
+
+
+bool GovernorColor::HandlerKey(const KeyEvent &event)
+{
+    if (!event.IsRelease())
+    {
+        return false;
+    }
+
+    ColorType *ct = OwnData()->ct;
+
+    if (event.IsLeft())
+    {
+        Math::CircleIncrease<int8>(&ct->currentField, 0, 3);
+
+        return true;
+    }
+    else if (event.IsRight())
+    {
+        Math::CircleDecrease<int8>(&ct->currentField, 0, 3);
+
+        return true;
+    }
+    else if (ct->currentField == 0)       // €ркость
+    {
+        if (event.IsUp())
+        {
+            ct->BrightnessChange(1);
+
+            return true;
+        }
+        else if (event.IsDown())
+        {
+            ct->BrightnessChange(-1);
+
+            return true;
+        }
+    }
+    else
+    {
+        if (event.IsUp())
+        {
+            ct->ComponentChange(1);
+
+            return true;
+        }
+        else if (event.IsDown())
+        {
+            ct->ComponentChange(-1);
+
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
+const DataGovernorColor *GovernorColor::OwnData() const
+{
+    return static_cast<const DataGovernorColor *>(data->ad);
 }
