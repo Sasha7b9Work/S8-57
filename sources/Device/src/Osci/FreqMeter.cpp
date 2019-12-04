@@ -12,11 +12,6 @@
 #include <cstring>
 
 
-/// Здесь хранится последнее действительное значение частоты. Для вывода в режиме частотомера. 0 означает, что значение выводить не надо
-static BitSet32 freqActual;
-/// Здесь хранится последнее действительное значение периода. Для вывода в режиме частотомера. 0 означает, что значение выводить не надо
-static BitSet32 periodActual;
-
 /// для отладки
 /// \todo удалить
 static BitSet32 lastFreq;
@@ -38,6 +33,8 @@ static bool lampPeriod = false;;
 bool     FrequencyCounter::readPeriod;
 float    FrequencyCounter::prevFreq;
 float    FrequencyCounter::frequency;
+BitSet32 FrequencyCounter::freqActual;
+BitSet32 FrequencyCounter::periodActual;
 
 //                         0    1    2    3    4    5    6 
 static char buffer[11] = {'0', '0', '0', '0', '0', '0', '0', 0, 0, 0, 0};
@@ -264,7 +261,7 @@ float FrequencyCounter::GetFreq()
 #define OVERFLOW_STRING ">>>"
 
 
-static void DrawFrequency(int x, int _y)
+void FrequencyCounter::DrawFrequency(int x, int _y)
 {
     int yF = _y + 1;
     int yT = _y + 5 + Font::GetHeight();
@@ -325,7 +322,7 @@ static void DrawFrequency(int x, int _y)
 }
 
 
-static void DrawPeriod(int x, int y)
+void FrequencyCounter::DrawPeriod(int x, int y)
 {
     Text("T").Draw(x + 2, y + 1, Color::FILL);
     Text("F").Draw(x + 2, y + 10);
@@ -354,26 +351,26 @@ static void DrawPeriod(int x, int y)
         return;
     }
 
-    float period = SU::StringToFloat(strPeriod);
+    float per = SU::StringToFloat(strPeriod);
 
     if (std::strcmp(&strPeriod[std::strlen(strPeriod) - 2], "нс") == 0)
     {
-        period *= 1e-9F;
+        per *= 1e-9F;
     }
     else if (std::strcmp(&strPeriod[std::strlen(strPeriod) - 3], "мкс") == 0)
     {
-        period *= 1e-6F;
+        per *= 1e-6F;
     }
     else if (std::strcmp(&strPeriod[std::strlen(strPeriod) - 2], "мс") == 0)
     {
-        period *= 1e-3F;
+        per *= 1e-3F;
     }
     else
     {
         LOG_ERROR("Здесь мы никогда не должны оказаться");
     }
 
-    Frequency freq(1.0F / period);
+    Frequency freq(1.0F / per);
 
     Text(freq.ToStringAccuracy(strPeriod, 6)).Draw(x + dX, y + 10);
 }
@@ -784,7 +781,7 @@ void FrequencyCounter::SetStateLampPeriod()
 }
 
 
-static void DrawDebugInfo()
+void FrequencyCounter::DrawDebugInfo()
 {
     int width = 50;
     int height = 27;

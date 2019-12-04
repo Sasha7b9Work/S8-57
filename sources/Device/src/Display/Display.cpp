@@ -391,5 +391,5 @@ void Display::SaveRow(int row)
 
 void Display::LoadBrightness()
 {
-    Transceiver::Send(Command::Display_Brightness, set.disp.brightness + 10);
+    Transceiver::Send(Command::Display_Brightness, static_cast<uint8>(set.disp.brightness + 10));
 }

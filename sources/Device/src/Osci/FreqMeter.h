@@ -36,6 +36,12 @@ private:
     static float FreqSetToFreq(const BitSet32 *fr);
 
     static float PeriodSetToFreq(const BitSet32 *period);
+
+    static void DrawFrequency(int x, int _y);
+
+    static void DrawPeriod(int x, int y);
+
+    static void DrawDebugInfo();
     /// ”становленное в true значение означает, что частоту нужно считать по счЄтчику периода
     static bool readPeriod;
 
@@ -44,4 +50,8 @@ private:
     static float frequency;
 
     static float period;
+    /// «десь хранитс€ последнее действительное значение частоты. ƒл€ вывода в режиме частотомера. 0 означает, что значение выводить не надо
+    static BitSet32 freqActual;
+    /// «десь хранитс€ последнее действительное значение периода. ƒл€ вывода в режиме частотомера. 0 означает, что значение выводить не надо
+    static BitSet32 periodActual;
 };
