@@ -7,7 +7,7 @@
 void PageService::OnPress_ResetSettings()
 {
     Settings::Load(true);
-    if (Device::State::InModeOsci())
+    if (Device::InModeOsci())
     {
         Osci::Start();
     }

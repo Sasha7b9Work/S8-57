@@ -91,7 +91,7 @@ bool Osci::IsRunning()
 
 void Osci::Update()
 {
-    if (!Device::State::InModeOsci())
+    if (!Device::InModeOsci())
     {
         return;
     }

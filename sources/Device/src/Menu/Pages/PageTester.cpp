@@ -138,7 +138,7 @@ void PageTester::Init()
 
 static void OnOpenClose_Tester(bool enter)
 {
-    Device::State::SetMode(enter ? Device::Mode::Tester : Device::Mode::Osci);
+    Device::SetMode(enter ? Device::Mode::Tester : Device::Mode::Osci);
 }
 
 

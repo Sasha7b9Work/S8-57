@@ -207,7 +207,7 @@ void PageMultimeter::OnChanged_Mode(bool)
 
 static void OnOpenClose_Multimeter(bool enter)
 {
-    Device::State::SetMode(enter ? Device::Mode::Multimeter : Device::Mode::Osci);
+    Device::SetMode(enter ? Device::Mode::Multimeter : Device::Mode::Osci);
 }
 
 DEF_PAGE_5_VAR( pMultimeter,
@@ -267,7 +267,7 @@ void PageMultimeter::DecodePassword(const KeyEvent &event)
     static int charsMatch = 0;
 
 
-    if (!Device::State::InModeMultimeter())         // Декодирование производим только в режиме мультиметра
+    if (!Device::InModeMultimeter())         // Декодирование производим только в режиме мультиметра
     {
         charsMatch = 0;
         return;

@@ -76,7 +76,7 @@ void Handlers::Empty()
 
 void Handlers::ChangeRShift(Chan::E ch, int16 delta)
 {
-    if (!Device::State::InModeRecorder())
+    if (!Device::InModeRecorder())
     {
         static bool stop[Chan::Count] = { false, false };      // Признак того, что смещение изменять не нужно - оно равно нулю и прошло мало времени
         static uint timeStop[Chan::Count] = { 0, 0 };          // Время устновки признака stop
@@ -136,7 +136,7 @@ void Handlers::OnRangeB()
 
 void Handlers::OnChangeParameterChannel(pFuncVChI16 func, Chan::E ch, int16 delta)
 {
-    if (Device::State::InModeOsci())
+    if (Device::InModeOsci())
     {
         drawingChan = Chan(ch);
     }
@@ -192,7 +192,7 @@ void Handlers::OnTBase()
 {
     int delta = (event.key == Key::TBaseMore) ? 1 : -1;
 
-    if (Device::State::InModeRecorder())
+    if (Device::InModeRecorder())
     {
         OnChangeParameterTime(RecorderScaleX::Change, delta);
     }
@@ -373,7 +373,7 @@ void Handlers::OnTime()
 
 void Handlers::OnStart()
 {
-    if (Device::State::InModeTester())
+    if (Device::InModeTester())
     {
         Tester::StartStop();
     }

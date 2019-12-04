@@ -67,7 +67,7 @@ void RShift::Load()
 
     shift += add;
 
-    if (Chan(ch).IsA() && Device::State::InModeTester())
+    if (Chan(ch).IsA() && Device::InModeTester())
     {
         shift -= Tester::DeltaRShiftA();
     }
@@ -153,7 +153,7 @@ void TShift::Load() const
 
 void TShift::Change(const int delta)
 {
-    if (Device::State::InModeRecorder())
+    if (Device::InModeRecorder())
     {
         return;
     }

@@ -64,7 +64,7 @@ DEF_GRAPH_BUTTON_HINTS_2( bStart,                                               
 
 static void OnOpenClose_Recorder(bool enter)
 {
-    Device::State::SetMode(enter ? Device::Mode::Recorder : Device::Mode::Osci);
+    Device::SetMode(enter ? Device::Mode::Recorder : Device::Mode::Osci);
 }
 
 DEF_PAGE_4( pRecorder,                                                                                                                                        //--- ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– ---

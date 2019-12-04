@@ -2,6 +2,7 @@
 #include "common/Command.h"
 #include "common/Transceiver.h"
 #include "Display/Colors.h"
+#include "Osci/Osci.h"
 #include "Recorder/Recorder.h"
 #pragma warning(push, 0)
 #include <wx/wx.h>
@@ -48,5 +49,7 @@ void Transceiver::Send(uint8)
 
 bool Transceiver::Receive()
 {
+    Osci::ReadPointP2P();
+
     return false;
 }

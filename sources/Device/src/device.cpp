@@ -73,7 +73,7 @@ void SetCurrentMode()
         {
             if (!SetCurrentMode(PageRecorder::self, Device::Mode::Recorder))
             {
-                Device::State::SetMode(Device::Mode::Osci);
+                Device::SetMode(Device::Mode::Osci);
             }
         }
     }
@@ -87,7 +87,7 @@ bool SetCurrentMode(const Page *page, Device::Mode::E mode)
     if (opened && 
         (opened == const_cast<Page *>(page) || opened->ExistKeeper(page)))
     {
-        Device::State::SetMode(mode);
+        Device::SetMode(mode);
         return true;
     }
 
@@ -123,13 +123,13 @@ void Device::Update()
 }
 
 
-Device::Mode::E Device::State::CurrentMode()
+Device::Mode::E Device::CurrentMode()
 {
     return currentMode;
 }
 
 
-void Device::State::SetMode(Mode::E mode)
+void Device::SetMode(Mode::E mode)
 {
     if (mode != currentMode)
     {
@@ -185,25 +185,25 @@ void Device::State::SetMode(Mode::E mode)
 }
 
 
-bool Device::State::InModeTester()
+bool Device::InModeTester()
 {
     return (CurrentMode() == Device::Mode::Tester);
 }
 
 
-bool Device::State::InModeMultimeter()
+bool Device::InModeMultimeter()
 {
     return (CurrentMode() == Device::Mode::Multimeter);
 }
 
 
-bool Device::State::InModeOsci()
+bool Device::InModeOsci()
 {
     return (CurrentMode() == Device::Mode::Osci);
 }
 
 
-bool Device::State::InModeRecorder()
+bool Device::InModeRecorder()
 {
     return (CurrentMode() == Device::Mode::Recorder);
 }

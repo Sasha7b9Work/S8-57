@@ -88,7 +88,7 @@ void Multimeter::Calibrate(int calibr)
 
 void Multimeter::Update()
 {
-    if (!Device::State::InModeMultimeter())
+    if (!Device::InModeMultimeter())
     {
         return;
     }

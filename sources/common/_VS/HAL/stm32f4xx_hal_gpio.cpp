@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "device.h"
 #ifdef GUI
 #include "Recorder/Recorder_win.h"
 #endif
@@ -26,14 +27,19 @@ void  HAL_GPIO_DeInit(GPIO_TypeDef  *, uint32_t)
 
 GPIO_PinState HAL_GPIO_ReadPin(const GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 {
-    GPIO_PinState result = GPIO_PIN_RESET;
-
-    if (GPIOx == GPIOG && GPIO_Pin == GPIO_PIN_1)
+    if (GPIOx == GPIOG && GPIO_Pin == GPIO_PIN_1)                              // Чтение готовности точки регистратора
     {
-        result = RecorderHAL::ReadyPoint() ? GPIO_PIN_SET : GPIO_PIN_RESET;
+        if(Device::InModeRecorder())
+        {
+            return RecorderHAL::ReadyPoint() ? GPIO_PIN_SET : GPIO_PIN_RESET;
+        }
+        else if(Device::InModeOsci())
+        {
+
+        }
     }
 
-    return result;
+    return GPIO_PIN_RESET;
 }
 
 #else

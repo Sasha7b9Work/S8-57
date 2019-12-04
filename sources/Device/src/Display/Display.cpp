@@ -66,7 +66,7 @@ void Display::Update()
         DisplayRecorder::Update
     };
 
-    funcs[static_cast<int>(Device::State::CurrentMode())]();
+    funcs[static_cast<int>(Device::CurrentMode())]();
 
     Console::Draw();
 

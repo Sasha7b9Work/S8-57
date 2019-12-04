@@ -25,21 +25,16 @@ struct Device
     static void Update();
 
     static void Reset();
+    /// Устанавливает режим работы
+    static void SetMode(Mode::E mode);
+    /// Возвращает текущий режим работы
+    static Mode::E CurrentMode();
 
+    static bool InModeTester();
 
-    struct State
-    {
-        /// Устанавливает режим работы
-        static void SetMode(Mode::E mode);
-        /// Возвращает текущий режим работы
-        static Mode::E CurrentMode();
+    static bool InModeMultimeter();
 
-        static bool InModeTester();
+    static bool InModeRecorder();
 
-        static bool InModeMultimeter();
-
-        static bool InModeRecorder();
-
-        static bool InModeOsci();
-    };
+    static bool InModeOsci();
 };

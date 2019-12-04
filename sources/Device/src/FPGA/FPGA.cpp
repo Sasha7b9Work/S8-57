@@ -27,7 +27,7 @@ void FPGA::GiveStart()
     uint8 value = static_cast<uint8>((static_cast<uint8>(set.trig.polarity)) % 2);
 
     uint8 stop = 0;
-    if (Device::State::InModeRecorder())    // ¬ режиме регистратора
+    if (Device::InModeRecorder())           // ¬ режиме регистратора
     {
         stop = (1 << BIT_TRIG_ENABLED);     // устанавливаем признак того, что процесс чтени€ данных бесконечен
     }
@@ -52,7 +52,7 @@ uint16 FPGA::ReadLastRecord(Chan::E ch)
 
 void FPGA::OnPressStart()
 {
-    if (Device::State::InModeRecorder())
+    if (Device::InModeRecorder())
     {
         Recorder::OnPressStart();
     }

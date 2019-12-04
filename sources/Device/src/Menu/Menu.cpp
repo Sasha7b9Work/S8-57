@@ -409,7 +409,7 @@ void Menu::SaveSettings()
     if((timeLastKeyboardEvent != MAX_UINT) && (TIME_MS - timeLastKeyboardEvent > 5000))
     {
         timeLastKeyboardEvent = MAX_UINT;
-        if(!Device::State::InModeTester())
+        if(!Device::InModeTester())
         {
             Settings::Save();
         }

@@ -45,7 +45,7 @@ void FPGA::LoadRegUPR()
 {
     uint8 data = 0;
 
-    if (PeakDetMode().IsEnabled() || Device::State::InModeRecorder())
+    if (PeakDetMode().IsEnabled() || Device::InModeRecorder())
     {
         data |= 1 << BIT_UPR_PEAK;
     }

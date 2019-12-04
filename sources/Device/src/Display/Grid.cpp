@@ -36,7 +36,7 @@ int Grid::Left()
 {
     static const int left[Device::Mode::Count] = { 20, 0, 0, 0 };
 
-    return left[static_cast<int>(Device::State::CurrentMode())];
+    return left[static_cast<int>(Device::CurrentMode())];
 }
 
 
@@ -44,7 +44,7 @@ int Grid::Top()
 {
     static const int top[Device::Mode::Count] = { 19, 0, 0, 0 };
 
-    return top[static_cast<int>(Device::State::CurrentMode())];
+    return top[static_cast<int>(Device::CurrentMode())];
 }
 
 
@@ -52,7 +52,7 @@ int Grid::Width()
 {
     static const int width[Device::Mode::Count] = { 280, Display::WIDTH - 1, 0, 319 };
 
-    return width[static_cast<int>(Device::State::CurrentMode())];
+    return width[static_cast<int>(Device::CurrentMode())];
 }
 
 
@@ -60,7 +60,7 @@ int Grid::Height()
 {
     static const int height[Device::Mode::Count] = { 200, Display::HEIGHT - 1, 0, 239 };
 
-    return height[static_cast<int>(Device::State::CurrentMode())];
+    return height[static_cast<int>(Device::CurrentMode())];
 }
 
 
@@ -134,7 +134,7 @@ void Grid::Draw()
         DrawRecorder
     };
 
-    funcs[static_cast<int>(Device::State::CurrentMode())]();
+    funcs[static_cast<int>(Device::CurrentMode())]();
 }
 
 
