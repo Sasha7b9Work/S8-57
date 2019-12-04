@@ -111,9 +111,9 @@ struct SettingsMemory
 {
 #define MAX_SYMBOLS_IN_FILE_NAME 35
     ENumPointsFPGA::E   enumPoints;                             ///< Число точек
-    ModeBtnMemory::E    modeBtnMemory;
+    ModeBtnMemory::E    _modeBtnMemory;
     TypeSignalROM::E    typeSignalROM;                          ///< Какой сигнал выводить в режиме ПАМЯТЬ-ВНУТР ЗУ
-    ModeWork::E         modeWork;                               ///< Режим работы.
+    ModeWork::E         _modeWork;                               ///< Режим работы.
     bool                flashAutoConnect;                       ///< Если true, при подключении флешки автоматически выводится Файл-Менеджер.
     int8                indexCurSymbolNameMask;                 ///< Индекс текущего символа в режиме задания маски или выбора имени.
     ModeSaveSignal::E   _modeSaveSignal;                         ///< В каком виде сохранять сигнал.

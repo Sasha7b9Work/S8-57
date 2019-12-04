@@ -13,43 +13,43 @@
 
 bool ModeWork::IsRAM()
 {
-    return (set.mem.modeWork == RAM);
+    return (set.mem._modeWork == RAM);
 }
 
 
 void ModeWork::SetRAM()
 {
-    set.mem.modeWork = RAM;
+    set.mem._modeWork = RAM;
 }
 
 
 bool ModeWork::IsDir()
 {
-    return (set.mem.modeWork == Dir);
+    return (set.mem._modeWork == Dir);
 }
 
 
 void ModeWork::SetDir()
 {
-    set.mem.modeWork = Dir;
+    set.mem._modeWork = Dir;
 }
 
 
 bool ModeWork::IsROM()
 {
-    return (set.mem.modeWork == ROM);
+    return (set.mem._modeWork == ROM);
 }
 
 
 ModeWork::operator ModeWork::E()
 {
-    return set.mem.modeWork;
+    return set.mem._modeWork;
 }
 
 
 void ModeWork::Set(E mode)
 {
-    set.mem.modeWork = mode;
+    set.mem._modeWork = mode;
 }
 
 
@@ -300,7 +300,7 @@ DEF_CHOICE_2( cDrive_ModeBtnMemory,                                             
     "",
     "Меню",
     "Сохранение",
-    set.mem.modeBtnMemory, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.mem._modeBtnMemory, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
