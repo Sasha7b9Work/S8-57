@@ -77,6 +77,8 @@ struct TBase
     static const E MIN_PEAK_DET = _200ns;
 
     uint RandK() const;
+    /// Время между точками
+    static float TimePoint(TBase::E base);
 };
 
 

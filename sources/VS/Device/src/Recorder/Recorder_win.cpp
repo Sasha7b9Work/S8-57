@@ -14,8 +14,6 @@ bool RecorderHAL::ReadyPoint()
 {
     static uint timeLastRead = 0;   // Время предыдущего чтения точки
 
-    bool result = false;
-
     static const uint delta[RecorderScaleX::Count] =
     {
         100 / 20,   // 0.1с
@@ -30,10 +28,10 @@ bool RecorderHAL::ReadyPoint()
     if (TIME_MS - timeLastRead >= delta[static_cast<int>(set.rec.scaleX.value)])
     {
         timeLastRead = TIME_MS;
-        result = true;
+        return true;
     }
 
-    return result;
+    return false;
 }
 
 

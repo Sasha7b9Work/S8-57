@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "device.h"
 #ifdef GUI
+#include "Osci/Osci_win.h"
 #include "Recorder/Recorder_win.h"
 #endif
 #include <stm32f4xx_hal.h>
@@ -35,7 +36,7 @@ GPIO_PinState HAL_GPIO_ReadPin(const GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
         }
         else if(Device::InModeOsci())
         {
-
+            return OsciHAL::ReadyPoint() ? GPIO_PIN_SET : GPIO_PIN_RESET;
         }
         else
         {

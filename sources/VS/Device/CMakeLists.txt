@@ -74,7 +74,6 @@ source_group(Menu\\Pages\\PageService                   REGULAR_EXPRESSION      
 source_group(Menu\\Pages\\PageService\\PageDebug        REGULAR_EXPRESSION              src/Menu/Pages/PageService/PageDebug/*)
 source_group(Menu\\Pages\\PageTrig                      REGULAR_EXPRESSION              src/Menu/Pages/PageTrig/*)
 source_group(Multimeter                                 REGULAR_EXPRESSION              src/Multimeter/*)
-source_group(Osci                                       REGULAR_EXPRESSION              src/Osci/*)
 source_group(Osci\\Display                              REGULAR_EXPRESSION              src/Osci/Display/*)
 source_group(Osci\\Measurements\\                       REGULAR_EXPRESSION              src/Osci/Measurements/*)
 source_group(SCPI                                       REGULAR_EXPRESSION              src/SCPI/*)
@@ -172,6 +171,14 @@ source_group(Hardware\\Memory   FILES                src/Hardware/Memory/Memory_
                                         ../../Device/src/Hardware/Memory/Sector.h
                                         ../../Device/src/Hardware/Memory/Sector.cpp
                                                      src/Hardware/Memory/Sector_win.cpp)
+source_group(Osci               FILES   ../../Device/src/Osci/AveragerOsci.cpp
+                                        ../../Device/src/Osci/FreqMeter.h
+                                        ../../Device/src/Osci/FreqMeter.cpp
+                                        ../../Device/src/Osci/Osci.h
+                                        ../../Device/src/Osci/Osci.cpp
+                                        ../../Device/src/Osci/SettingsOsci.cpp
+                                                     src/Osci/Osci_win.h
+                                                     src/Osci/Osci_win.cpp)
 source_group(Recorder           FILES   ../../Device/src/Recorder/DisplayRecorder.h
                                         ../../Device/src/Recorder/DisplayRecorder.cpp
                                         ../../Device/src/Recorder/Recorder.h
@@ -312,7 +319,14 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Menu/Pages/PageService/PageDebug/*
                     ../../Device/src/Menu/Pages/PageTrig/*
                     ../../Device/src/Multimeter/*
-                    ../../Device/src/Osci/*
+                    ../../Device/src/Osci/AveragerOsci.cpp
+                    ../../Device/src/Osci/FreqMeter.h
+                    ../../Device/src/Osci/FreqMeter.cpp
+                    ../../Device/src/Osci/Osci.h
+                    ../../Device/src/Osci/Osci.cpp
+                    ../../Device/src/Osci/SettingsOsci.cpp
+                                 src/Osci/Osci_win.h
+                                 src/Osci/Osci_win.cpp
                     ../../Device/src/Osci/Display/*
                     ../../Device/src/Osci/Measurements/*
                     ../../Device/src/SCPI/*

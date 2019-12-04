@@ -827,6 +827,12 @@ uint TBase::RandK() const
 }
 
 
+float TBase::TimePoint(TBase::E base)
+{
+    return TShift::ToAbs(1, base);
+}
+
+
 TShift::TShift(int tShift)
 {
     LIMITATION(tShift, Min(), Max());
