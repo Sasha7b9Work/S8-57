@@ -68,6 +68,9 @@ struct FileNamingMode
         Mask,        ///< Именовать по маске.
         Manually     ///< Именовать вручную.
     };
+
+    static bool IsManually();
+    static bool IsMask();
 };
 
 /// Число точек сигнала, с которым идёт работа.
@@ -114,7 +117,7 @@ struct SettingsMemory
     ModeSaveSignal::E   modeSaveSignal;                         ///< В каком виде сохранять сигнал.
     char                fileName[MAX_SYMBOLS_IN_FILE_NAME];     ///< Имя файла для режима ручного задания.
     ModeShowIntMem::E   modeShowIntMem;                         ///< Что показывать в режиме ВНУТР ЗУ - считанный или записанный сигнал.
-    FileNamingMode::E   fileNamingMode;                         ///< Режим именования файлов.
+    FileNamingMode::E   _fileNamingMode;                         ///< Режим именования файлов.
     char                fileNameMask[MAX_SYMBOLS_IN_FILE_NAME]; ///< \brief Здесь маска для автоматического именования файлов.
                         ///< \details Правила именования.\n
                         /// \code

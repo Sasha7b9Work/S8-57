@@ -13,31 +13,31 @@
 
 bool ModeWork::IsRAM()
 {
-    return (set.mem.modeWork == ModeWork::RAM);
+    return (set.mem.modeWork == RAM);
 }
 
 
 void ModeWork::SetRAM()
 {
-    set.mem.modeWork = ModeWork::RAM;
+    set.mem.modeWork = RAM;
 }
 
 
 bool ModeWork::IsDir()
 {
-    return (set.mem.modeWork == ModeWork::Dir);
+    return (set.mem.modeWork == Dir);
 }
 
 
 void ModeWork::SetDir()
 {
-    set.mem.modeWork = ModeWork::Dir;
+    set.mem.modeWork = Dir;
 }
 
 
 bool ModeWork::IsROM()
 {
-    return (set.mem.modeWork == ModeWork::ROM);
+    return (set.mem.modeWork == ROM);
 }
 
 
@@ -50,6 +50,18 @@ ModeWork::operator ModeWork::E()
 void ModeWork::Set(E mode)
 {
     set.mem.modeWork = mode;
+}
+
+
+bool FileNamingMode::IsManually()
+{
+    return (set.mem._fileNamingMode == Manually);
+}
+
+
+bool FileNamingMode::IsMask()
+{
+    return (set.mem._fileNamingMode == Mask);
 }
 
 
@@ -168,7 +180,7 @@ DEF_CHOICE_2( cDrive_Name,                                                      
     ,
     "По маске",
     "Вручную",
-    set.mem.fileNamingMode, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.mem._fileNamingMode, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -288,7 +300,7 @@ DEF_CHOICE_2( cDrive_ModeBtnMemory,                                             
 
 static bool IsActive_Mask()
 {
-    return (set.mem.fileNamingMode == FileNamingMode::Mask);
+    return FileNamingMode::IsMask();
 }
 
 static void OnOpenClose_Mask(bool)
@@ -475,7 +487,7 @@ void PageMemory::SaveSignalToFlashDrive()
 {
     if (FDrive::IsConnected())
     {
-        if (set.mem.fileNamingMode == FileNamingMode::Manually)
+        if (FileNamingMode::IsManually())
         {
             Display::SetAddDrawFunction(DrawSetName);
         }
