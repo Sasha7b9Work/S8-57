@@ -34,7 +34,7 @@ void GovernorColor::DrawOpened(int x, int y) const
     OwnData()->ct->Init();
     Rectangle(width + 2, height + 2).Draw(x - 1, y - 1, Color::BACK);
     Rectangle(width, height).Draw(x, y, ColorFrame());
-    Region(width - 2, height / 2 - 2).Fill(x + 1, y + 1, ColorTitleBackground());
+    Region(width - 2, height / 2 - 2).Fill(x + 1, y + 1, OwnData()->ct->color);
     HLine(width).Draw(x, y + Height() / 2 + 2, ColorFrame());
     Text(Title().c_str()).DrawInCenterRect(x +  1, y - 1, width, Height() / 2 + 2, ColorTitleText());
     DrawValue(x + 1, y + 14);
