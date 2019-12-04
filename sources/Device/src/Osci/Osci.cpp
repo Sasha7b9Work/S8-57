@@ -136,7 +136,7 @@ void Osci::UpdateFPGA()
             {
                 Timer::PauseOnTicks(5 * 90 * 20);
     
-                ContextOsci::ReadData();
+                FPGA::ReadData();
     
                 if (set.trig.startMode == TrigStartMode::Single)
                 {

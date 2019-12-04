@@ -42,11 +42,6 @@ void ContextOsci::GiveStart()
     FPGA::GiveStart();
 }
 
-void ContextOsci::ReadData()
-{
-    FPGA::ReadData();
-}
-
 void ContextOsci::Reset()
 {
     FPGA::Reset();

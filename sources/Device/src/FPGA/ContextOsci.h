@@ -17,8 +17,6 @@ struct ContextOsci
 
     static void GiveStart();
 
-    static void ReadData();
-
     static void Reset();
 
     static void SetValueADC(uint16 value);
