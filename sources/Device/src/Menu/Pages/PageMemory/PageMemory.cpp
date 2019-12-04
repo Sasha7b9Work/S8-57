@@ -13,61 +13,61 @@
 
 bool ModeWork::IsRAM()
 {
-    return (set.mem._modeWork == RAM);
+    return (set.mem.modeWork == RAM);
 }
 
 
 void ModeWork::SetRAM()
 {
-    set.mem._modeWork = RAM;
+    set.mem.modeWork = RAM;
 }
 
 
 bool ModeWork::IsDir()
 {
-    return (set.mem._modeWork == Dir);
+    return (set.mem.modeWork == Dir);
 }
 
 
 void ModeWork::SetDir()
 {
-    set.mem._modeWork = Dir;
+    set.mem.modeWork = Dir;
 }
 
 
 bool ModeWork::IsROM()
 {
-    return (set.mem._modeWork == ROM);
+    return (set.mem.modeWork == ROM);
 }
 
 
 ModeWork::operator ModeWork::E()
 {
-    return set.mem._modeWork;
+    return set.mem.modeWork;
 }
 
 
 void ModeWork::Set(E mode)
 {
-    set.mem._modeWork = mode;
+    set.mem.modeWork = mode;
 }
 
 
 bool FileNamingMode::IsManually()
 {
-    return (set.mem._fileNamingMode == Manually);
+    return (set.mem.fileNamingMode == Manually);
 }
 
 
 bool FileNamingMode::IsMask()
 {
-    return (set.mem._fileNamingMode == Mask);
+    return (set.mem.fileNamingMode == Mask);
 }
 
 
 bool ModeSaveSignal::IsBMP()
 {
-    return (set.mem._modeSaveSignal == BMP);
+    return (set.mem.modeSaveSignal == BMP);
 }
 
 
@@ -186,7 +186,7 @@ DEF_CHOICE_2( cDrive_Name,                                                      
     ,
     "По маске",
     "Вручную",
-    set.mem._fileNamingMode, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.mem.fileNamingMode, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -291,7 +291,7 @@ DEF_CHOICE_2( cDrive_SaveAs,                                                    
     ,
     "Изображение",
     "Текст",
-    set.mem._modeSaveSignal, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.mem.modeSaveSignal, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -300,7 +300,7 @@ DEF_CHOICE_2( cDrive_ModeBtnMemory,                                             
     "",
     "Меню",
     "Сохранение",
-    set.mem._modeBtnMemory, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.mem.modeBtnMemory, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

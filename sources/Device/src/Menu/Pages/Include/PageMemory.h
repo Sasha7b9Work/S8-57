@@ -111,15 +111,15 @@ struct SettingsMemory
 {
 #define MAX_SYMBOLS_IN_FILE_NAME 35
     ENumPointsFPGA::E   enumPoints;                             ///< Число точек
-    ModeBtnMemory::E    _modeBtnMemory;
+    ModeBtnMemory::E    modeBtnMemory;
     TypeSignalROM::E    typeSignalROM;                          ///< Какой сигнал выводить в режиме ПАМЯТЬ-ВНУТР ЗУ
-    ModeWork::E         _modeWork;                               ///< Режим работы.
+    ModeWork::E         modeWork;                               ///< Режим работы.
     bool                flashAutoConnect;                       ///< Если true, при подключении флешки автоматически выводится Файл-Менеджер.
     int8                indexCurSymbolNameMask;                 ///< Индекс текущего символа в режиме задания маски или выбора имени.
-    ModeSaveSignal::E   _modeSaveSignal;                         ///< В каком виде сохранять сигнал.
+    ModeSaveSignal::E   modeSaveSignal;                         ///< В каком виде сохранять сигнал.
     char                fileName[MAX_SYMBOLS_IN_FILE_NAME];     ///< Имя файла для режима ручного задания.
-    ModeShowIntMem::E   _modeShowIntMem;                         ///< Что показывать в режиме ВНУТР ЗУ - считанный или записанный сигнал.
-    FileNamingMode::E   _fileNamingMode;                         ///< Режим именования файлов.
+    ModeShowIntMem::E   modeShowIntMem;                         ///< Что показывать в режиме ВНУТР ЗУ - считанный или записанный сигнал.
+    FileNamingMode::E   fileNamingMode;                         ///< Режим именования файлов.
     char                fileNameMask[MAX_SYMBOLS_IN_FILE_NAME]; ///< \brief Здесь маска для автоматического именования файлов.
                         ///< \details Правила именования.\n
                         /// \code
