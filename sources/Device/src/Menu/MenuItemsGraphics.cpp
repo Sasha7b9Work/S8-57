@@ -149,7 +149,7 @@ void Governor::DrawValue(int x, int y) const
 
 void Governor::DrawLowPart(int x, int y) const
 {
-    Region(Width() - 3, Value::HEIGHT - 3).Fill(x + 1, y - 1, ColorBackground(this));
+    Region(Width() - 3, Value::HEIGHT - 3).Fill(x + 1, y - 1, ColorBackground());
 
     if (Menu::OpenedItem() != this)
     {
@@ -224,9 +224,9 @@ void Choice::DrawOpened(int x, int y) const
         bool pressed = i == index;
         if (pressed)
         {
-            Region(Width() - 3, MOSI_HEIGHT - 1).Fill(x + 1, yItem + 2, ColorBackground(this));
+            Region(Width() - 3, MOSI_HEIGHT - 1).Fill(x + 1, yItem + 2, ColorBackground());
         }
-        NameSubItem(i).Draw(x + 4, yItem + 2, pressed ? Color::BLACK : ColorBackground(this));
+        NameSubItem(i).Draw(x + 4, yItem + 2, pressed ? Color::BLACK : ColorBackground());
     }
 }
 
@@ -235,7 +235,7 @@ void Choice::DrawClosed(int x, int y) const
 {
     if (IsActive())
     {
-        Region(Width() - 3, Value::HEIGHT - 3).Fill(x + 1, y + Value::HEIGHT, ColorBackground(this));
+        Region(Width() - 3, Value::HEIGHT - 3).Fill(x + 1, y + Value::HEIGHT, ColorBackground());
 
         int deltaY = static_cast<int>(Step());
         Color colorText = Color::BLACK;

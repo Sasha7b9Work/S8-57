@@ -928,26 +928,9 @@ String Choice::NameSubItem(int i) const
 }
 
 
-Color Item::ColorBackground(const Item *choice) const
+Color Item::ColorBackground() const
 {
-    Color result = Color::GRAY_50;
-
-    // Измерения по частоте
-    if (choice == PageFreqMeter::GetChoiceTimeF())
-    {
-        result = Color::WHITE;
-    }
-    // Измерения по периоду
-    else if (choice == PageFreqMeter::GetChoiceFreqClc() || choice == PageFreqMeter::GetChoiceNumPeriods())
-    {
-        result = Color::YELLOW;
-    }
-    else
-    {
-        // здесь ничего не делаем
-    }
-
-    return result;
+    return Color::GRAY_50;
 }
 
 

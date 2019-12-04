@@ -107,7 +107,7 @@ public:
     /// Возвращает цвет, которым нужно рисовать на заголовке итема
     Color ColorTitleText() const
     {
-        Color result = ColorBackground(this);
+        Color result = ColorBackground();
 
         if (IsActive())
         {
@@ -119,7 +119,7 @@ public:
     /// Цвет обводки итема
     Color ColorFrame() const { return Color::FILL; };
     /// Возвращает цвет, которым нужно заполнять участок выбора
-    Color ColorBackground(const Item *choice) const;
+    Color ColorBackground() const;
 
     bool IsPage() const { return data->type == TypeItem::Page; };
 };

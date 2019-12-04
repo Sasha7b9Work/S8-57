@@ -96,22 +96,6 @@ DEF_CHOICE_6( cNumPeriods,                                                      
 )
 
 
-
-const Choice *PageFreqMeter::GetChoiceTimeF()
-{
-    return static_cast<const Choice *>(&cTimeF);
-}
-
-const Choice *PageFreqMeter::GetChoiceFreqClc()
-{
-    return static_cast<const Choice *>(&cFreqClc);
-}
-
-const Choice *PageFreqMeter::GetChoiceNumPeriods()
-{
-    return static_cast<const Choice *>(&cNumPeriods);
-}
-
 DEF_PAGE_5_VAR( pFreqMeter,                                                                                                                                    //--- ‘”Õ ÷»ﬂ - ◊¿—“Œ“ŒÃ≈– ---
     "◊¿—“Œ“ŒÃ≈–",
     "",
