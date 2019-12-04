@@ -17,9 +17,21 @@ bool ModeWork::IsRAM()
 }
 
 
+void ModeWork::SetRAM()
+{
+    set.mem.modeWork = ModeWork::RAM;
+}
+
+
 bool ModeWork::IsDir()
 {
     return (set.mem.modeWork == ModeWork::Dir);
+}
+
+
+void ModeWork::SetDir()
+{
+    set.mem.modeWork = ModeWork::Dir;
 }
 
 

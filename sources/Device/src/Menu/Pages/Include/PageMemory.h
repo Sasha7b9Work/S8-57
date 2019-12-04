@@ -20,6 +20,8 @@ struct ModeWork
 
     static bool IsRAM();
     static bool IsDir();
+    static void SetRAM();
+    static void SetDir();
 };
 
 /// „то делать при нажатии кнопки ѕјћя“№.
