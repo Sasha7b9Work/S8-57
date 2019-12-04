@@ -407,29 +407,36 @@ void DisplayFreqMeter::DrawFrequency(int x, int _y)
 }
 
 
-void DisplayFreqMeter::DrawPeriod(int x, int y)
+void DisplayFreqMeter::DrawPeriod(int x, int _y)
 {
-    Text("T").Draw(x + 2, y + 1, Color::FILL);
-    Text("F").Draw(x + 2, y + 10);
+    _y += 4;
 
-    Rectangle(10, 10).Draw(x - 20, y + 1);
+    int yT = _y;
+    int yF = _y + 4 + Font::GetHeight();
+
+    x += 6;
+
+    Text("T").Draw(x, yT, Color::FILL);
+    Text("F").Draw(x, yF);
+
+    Rectangle(10, 10).Draw(x - 20, _y + 1);
     if (FreqMeter::lampPeriod)
     {
-        Region(10, 10).Fill(x - 20, y);
+        Region(10, 10).Fill(x - 20, _y);
     }
 
-    int dX = 7;
+    int dX = 17;
 
-    Text("=").Draw(x + dX, y + 1);
+    Text("=").Draw(x + dX, yT);
 
-    Text("=").Draw(x + dX, y + 10);
+    Text("=").Draw(x + dX, yF);
 
-    dX = 12;
+    dX = 32;
 
     char strPeriod[50];
     std::strcpy(strPeriod, PeriodSetToString(&FreqMeter::periodActual));
 
-    Text(strPeriod).Draw(x + dX, y + 1);
+    Text(strPeriod).DrawDigitsMonospace(x + dX, yT, Font::GetWidth('0'));
 
     if ((std::strcmp(strPeriod, EMPTY_STRING) == 0) || (std::strcmp(strPeriod, OVERFLOW_STRING) == 0))
     {
@@ -457,7 +464,7 @@ void DisplayFreqMeter::DrawPeriod(int x, int y)
 
     Frequency freq(1.0F / per);
 
-    Text(freq.ToStringAccuracy(strPeriod, 6)).Draw(x + dX, y + 10);
+    Text(freq.ToStringAccuracy(strPeriod, 6)).DrawDigitsMonospace(x + dX, yF, Font::GetWidth('0'));
 }
 
 void DisplayFreqMeter::DrawDebugInfo()
