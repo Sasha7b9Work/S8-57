@@ -68,8 +68,14 @@ struct DisplayFreqMeter
     static void Draw();
 
 private:
+
     static void DrawFrequency(int x, int _y);
+
     static void DrawPeriod(int x, int y);
     /// Выводит отладочную информацию
     static void DrawDebugInfo();
+
+    static pString FreqSetToString(const BitSet32 *fr);
+
+    static pString PeriodSetToString(const BitSet32 *pr);
 };

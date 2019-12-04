@@ -38,9 +38,7 @@ static char buffer[11] = {'0', '0', '0', '0', '0', '0', '0', 0, 0, 0, 0};
 
 
 
-static pString FreqSetToString(const BitSet32 *fr);
 
-static pString PeriodSetToString(const BitSet32 *pr);
 /// Возвращает порядок младшего разряда считанного значения счётчика периода при данных настройках
 static int LowOrder(FreqMeterFreqClc::E freqCLC, FreqMeterNumberPeriods::E numPeriods);
 /// Преобразует 6 разрядов числа, хранящиеся в стеке, в текстовую строку периода. Младший значащий разряд хранится на вершине стека. order - его порядок
@@ -251,59 +249,6 @@ float FreqMeter::GetFreq()
 }
 
 
-pString PeriodSetToString(const BitSet32 *pr)
-{
-    if (pr->word == 0)
-    {
-        return EMPTY_STRING;
-    }
-    else if (pr->word == MAX_UINT)
-    {
-        return OVERFLOW_STRING;
-    }
-    else
-    {
-        // все случаи обработаны
-    }
-
-    Stack<uint> stack(20);
-
-    uint _period = pr->word;
-
-    while(_period > 0)
-    {
-        stack.Push(_period % 10);
-        _period /= 10;
-    }
-
-    int order = LowOrder(set.freq.freqClc, set.freq.numberPeriods);  // В ордер - порядок младшего значащего разряда
-
-    while(stack.Size() < 6)
-    {
-        stack.Push(0U);                             // Досылаем недостающие нули
-    }
-                                                    // Теперь в стеке все разряды периода, младший (с порядком order - на дне стека)
-
-    Stack<uint> stackResult(6);                     // Здесь будет храниться шесть итоговых рарядов. Последний - младший
-
-    while(stackResult.Size() < 6)
-    {
-        stackResult.Push(stack.Pop());
-    }
-                                                    // Теперь в stackResult все разряды итогового числа. На вершине - младший.
-                                                    // Скорректируем его порядок.
-
-    while(!stack.Empty())
-    {
-        stack.Pop();
-        order++;
-    }
-                                                    // Теперь в order хранится порядок младшего значащего разряда результата (он находится на вершине)
-
-    return StackToString(&stackResult, order);
-}
-
-
 static int LowOrder(FreqMeterFreqClc::E freqCLC, FreqMeterNumberPeriods::E numPeriods)
 {
 /*
@@ -415,154 +360,6 @@ static void WriteStackToBuffer(Stack<uint> *stack, int point, const char *suffix
 
     std::strcpy(&buffer[7], suffix);
 }
-
-
-static pString FreqSetToString(const BitSet32 *fr)
-{
-    if(fr->word == 0)
-    {
-        return EMPTY_STRING;
-    }
-    else if(fr->word == MAX_UINT)
-    {
-        return OVERFLOW_STRING;
-    }
-    else
-    {
-        // здесь ничего не делаем
-    }
-
-    Hex value(fr->word);
-
-    while(value.NumDigits() > 6)
-    {
-        value.Set(value / 10);
-    }
-
-    for(int i = 0; i < 7; i++)
-    {
-        buffer[i] = value.DigitInPosition(6 - i);
-    }
-
-    uint freq = fr->word;
-
-    uint giverFreq = freq;
-
-/// Это герцы * 10
-#define _10Hz   (               100) /* E_2 */
-#define _100Hz  (              1000) /* E_3 */
-#define _1kHz   (         10 * 1000) /* E_4 */
-#define _10kHz  (        100 * 1000) /* E_5 */
-#define _100kHz (       1000 * 1000) /* E_6 */
-#define _1MHz   (  10 * 1000 * 1000) /* E_7 */
-#define _10MHz  ( 100 * 1000 * 1000) /* E_8 */
-#define _100MHz (1000 * 1000 * 1000) /* E_9 */
-
-
-#undef WRITE_SUFFIX
-#define WRITE_SUFFIX(suffix_E4)    \
-    if(giverFreq < _1kHz) { std::strcpy(buffer + 7, suffix_E4); } else if (giverFreq < _1MHz) { std::strcpy(buffer + 7, "кГц"); } else { std::strcpy(buffer + 7, "МГц"); }
-
-#define HIGH_FREQ                            \
-    if(giverFreq < _10MHz)                   \
-    {                                        \
-        std::memmove(buffer, buffer + 1, 2); \
-        buffer[1] = '.';                     \
-    }                                        \
-    else if (giverFreq < _100MHz)            \
-    {                                        \
-        std::memmove(buffer, buffer + 1, 3); \
-        buffer[2] = '.';                     \
-    }                                        \
-    else                                     \
-    {                                        \
-        std::memmove(buffer, buffer + 1, 3); \
-        buffer[3] = '.';                     \
-    }
-
-
-    switch (set.freq.timeCounting)
-    {
-        case FreqMeterTimeCounting::_100ms:
-
-            giverFreq *= 100;
-
-            WRITE_SUFFIX("кГц");
-
-            if(giverFreq < _1MHz)                       // Меньше 1 МГц
-            {
-                if(freq >= _10Hz)                       // Больше или равно 10 Гц
-                {
-                    std::memmove(buffer, buffer + 1, 5);
-                }
-                buffer[4] = '.';
-            }
-            else
-            {
-                HIGH_FREQ;
-            }            
-            break;
-
-        case FreqMeterTimeCounting::_1s:
-
-            giverFreq *= 10;
-
-            WRITE_SUFFIX("Гц");
-
-            if (giverFreq < _1MHz)                      // Меньше 1 МГц
-            {
-                if(giverFreq < _1kHz)                   // Меньше 1 кГц
-                {
-                    std::memmove(buffer, buffer + 1, 6);
-                    buffer[6] = '.';
-                }
-                else
-                {
-                    std::memmove(buffer, buffer + 1, 4);
-                    buffer[3] = '.';
-                }
-            }
-            else
-            {
-                HIGH_FREQ;
-            }
-            break;
-
-        case FreqMeterTimeCounting::_10s:
-
-            WRITE_SUFFIX("Гц");
-
-            if (freq < _1MHz)                       // Меньше 1 МГц
-            {
-                if (giverFreq < _1kHz)              // Меньше 1 кГц
-                {
-                    std::memmove(buffer, buffer + 1, 5);
-                    buffer[5] = '.';
-                }
-                else if(giverFreq < _100kHz)
-                {
-                    std::memmove(buffer, buffer + 1, 3);
-                    buffer[2] = '.';
-                }
-                else
-                {
-                    std::memmove(buffer, buffer + 1, 3);
-                    buffer[3] = '.';
-                }
-            }
-            else
-            {
-                HIGH_FREQ;
-            }
-            break;
-        default:
-            LOG_ERROR("");
-            break;
-    }
-
-    return buffer;
-}
-
 
 
 void FreqMeter::SetStateLamps()
@@ -838,4 +635,204 @@ void DisplayFreqMeter::DrawDebugInfo()
     {
         Region(size - 2, size - 2).Fill(x + 1, y + 16, Color::FILL);
     }
+}
+
+
+pString DisplayFreqMeter::FreqSetToString(const BitSet32 *fr)
+{
+    if (fr->word == 0)
+    {
+        return EMPTY_STRING;
+    }
+    else if (fr->word == MAX_UINT)
+    {
+        return OVERFLOW_STRING;
+    }
+    else
+    {
+        // здесь ничего не делаем
+    }
+
+    Hex value(fr->word);
+
+    while (value.NumDigits() > 6)
+    {
+        value.Set(value / 10);
+    }
+
+    for (int i = 0; i < 7; i++)
+    {
+        buffer[i] = value.DigitInPosition(6 - i);
+    }
+
+    uint freq = fr->word;
+
+    uint giverFreq = freq;
+
+    /// Это герцы * 10
+#define _10Hz   (               100) /* E_2 */
+#define _100Hz  (              1000) /* E_3 */
+#define _1kHz   (         10 * 1000) /* E_4 */
+#define _10kHz  (        100 * 1000) /* E_5 */
+#define _100kHz (       1000 * 1000) /* E_6 */
+#define _1MHz   (  10 * 1000 * 1000) /* E_7 */
+#define _10MHz  ( 100 * 1000 * 1000) /* E_8 */
+#define _100MHz (1000 * 1000 * 1000) /* E_9 */
+
+
+#undef WRITE_SUFFIX
+#define WRITE_SUFFIX(suffix_E4)    \
+    if(giverFreq < _1kHz) { std::strcpy(buffer + 7, suffix_E4); } else if (giverFreq < _1MHz) { std::strcpy(buffer + 7, "кГц"); } else { std::strcpy(buffer + 7, "МГц"); }
+
+#define HIGH_FREQ                            \
+    if(giverFreq < _10MHz)                   \
+    {                                        \
+        std::memmove(buffer, buffer + 1, 2); \
+        buffer[1] = '.';                     \
+    }                                        \
+    else if (giverFreq < _100MHz)            \
+    {                                        \
+        std::memmove(buffer, buffer + 1, 3); \
+        buffer[2] = '.';                     \
+    }                                        \
+    else                                     \
+    {                                        \
+        std::memmove(buffer, buffer + 1, 3); \
+        buffer[3] = '.';                     \
+    }
+
+
+    switch (set.freq.timeCounting)
+    {
+    case FreqMeterTimeCounting::_100ms:
+
+        giverFreq *= 100;
+
+        WRITE_SUFFIX("кГц");
+
+        if (giverFreq < _1MHz)                       // Меньше 1 МГц
+        {
+            if (freq >= _10Hz)                       // Больше или равно 10 Гц
+            {
+                std::memmove(buffer, buffer + 1, 5);
+            }
+            buffer[4] = '.';
+        }
+        else
+        {
+            HIGH_FREQ;
+        }
+        break;
+
+    case FreqMeterTimeCounting::_1s:
+
+        giverFreq *= 10;
+
+        WRITE_SUFFIX("Гц");
+
+        if (giverFreq < _1MHz)                      // Меньше 1 МГц
+        {
+            if (giverFreq < _1kHz)                   // Меньше 1 кГц
+            {
+                std::memmove(buffer, buffer + 1, 6);
+                buffer[6] = '.';
+            }
+            else
+            {
+                std::memmove(buffer, buffer + 1, 4);
+                buffer[3] = '.';
+            }
+        }
+        else
+        {
+            HIGH_FREQ;
+        }
+        break;
+
+    case FreqMeterTimeCounting::_10s:
+
+        WRITE_SUFFIX("Гц");
+
+        if (freq < _1MHz)                       // Меньше 1 МГц
+        {
+            if (giverFreq < _1kHz)              // Меньше 1 кГц
+            {
+                std::memmove(buffer, buffer + 1, 5);
+                buffer[5] = '.';
+            }
+            else if (giverFreq < _100kHz)
+            {
+                std::memmove(buffer, buffer + 1, 3);
+                buffer[2] = '.';
+            }
+            else
+            {
+                std::memmove(buffer, buffer + 1, 3);
+                buffer[3] = '.';
+            }
+        }
+        else
+        {
+            HIGH_FREQ;
+        }
+        break;
+    default:
+        LOG_ERROR("");
+        break;
+    }
+
+    return buffer;
+}
+
+
+pString DisplayFreqMeter::PeriodSetToString(const BitSet32 *pr)
+{
+    if (pr->word == 0)
+    {
+        return EMPTY_STRING;
+    }
+    else if (pr->word == MAX_UINT)
+    {
+        return OVERFLOW_STRING;
+    }
+    else
+    {
+        // все случаи обработаны
+    }
+
+    Stack<uint> stack(20);
+
+    uint _period = pr->word;
+
+    while (_period > 0)
+    {
+        stack.Push(_period % 10);
+        _period /= 10;
+    }
+
+    int order = LowOrder(set.freq.freqClc, set.freq.numberPeriods);  // В ордер - порядок младшего значащего разряда
+
+    while (stack.Size() < 6)
+    {
+        stack.Push(0U);                             // Досылаем недостающие нули
+    }
+    // Теперь в стеке все разряды периода, младший (с порядком order - на дне стека)
+
+    Stack<uint> stackResult(6);                     // Здесь будет храниться шесть итоговых рарядов. Последний - младший
+
+    while (stackResult.Size() < 6)
+    {
+        stackResult.Push(stack.Pop());
+    }
+    // Теперь в stackResult все разряды итогового числа. На вершине - младший.
+    // Скорректируем его порядок.
+
+    while (!stack.Empty())
+    {
+        stack.Pop();
+        order++;
+    }
+    // Теперь в order хранится порядок младшего значащего разряда результата (он находится на вершине)
+
+    return StackToString(&stackResult, order);
 }
