@@ -268,6 +268,10 @@ void Handlers::OnEnter()
     {
         return Menu::IsShown() ? Menu::Hide() : Menu::Show();
     }
+    else
+    {
+        // здесь ничего
+    }
 }
 
 
@@ -287,6 +291,10 @@ void Handlers::OnChannelA()
     {
         RShift(Chan::A, 0);
     }
+    else
+    {
+        // здесь ничего
+    }
 }
 
 
@@ -299,6 +307,10 @@ void Handlers::OnChannelB()
     else if (event.IsLong())
     {
         RShift(Chan::B, 0);
+    }
+    else
+    {
+        // здесь ничего
     }
 }
 
@@ -344,6 +356,10 @@ void Handlers::OnTime()
     {
         TShift().Reset();
     }
+    else
+    {
+        // здесь ничего
+    }
 }
 
 
@@ -369,6 +385,10 @@ void Handlers::OnTrig()
     else if (event.IsLong())
     {
         TrigLevel().Set(0);
+    }
+    else
+    {
+        // здесь ничего
     }
 }
 

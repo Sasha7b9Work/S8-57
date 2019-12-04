@@ -126,6 +126,17 @@ bool Item::IsOpened() const
 }
 
 
+bool Item::HandlerKey(const KeyEvent &event)
+{
+    if (Is(TypeItem::GovernorColor))
+    {
+        return static_cast<GovernorColor *>(this)->HandlerKey(event);
+    }
+
+    return false;
+}
+
+
 void Item::SetCurrent(bool active) const
 {
     Page *page = const_cast<Page *>(Keeper());
