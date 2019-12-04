@@ -103,11 +103,12 @@ static void Draw_T_enableBoth(int x, int y)
 
 void PageCursorsMeasures::PageSet::OnPress_T()
 {
-    if ((set.curs.active == CursorsActive::T) || (set.curs.cntrlT[set.curs.source] == CursorsControl::Disable))
+    if (CursorsActive::IsT() || (set.curs.cntrlT[set.curs.source] == CursorsControl::Disable))
     {
         IncCursCntrlT(set.curs.source);
     }
-    set.curs.active = CursorsActive::T;
+
+    CursorsActive::Set(CursorsActive::T);
 }
 
 static void Draw_T(int x, int y)
@@ -118,7 +119,7 @@ static void Draw_T(int x, int y)
     }
     else
     {
-        if (set.curs.active != CursorsActive::T)
+        if (!CursorsActive::IsT())
         {
             Draw_T_disableBoth(x, y);
         }
@@ -203,11 +204,12 @@ static void Draw_U_enableBoth(int x, int y)
 
 void PageCursorsMeasures::PageSet::OnPress_U()
 {
-    if ((set.curs.active == CursorsActive::U) || (set.curs.cntrlU[set.curs.source] == CursorsControl::Disable))
+    if (CursorsActive::IsU() || (set.curs.cntrlU[set.curs.source] == CursorsControl::Disable))
     {
         IncCursCntrlU(set.curs.source);
     }
-    set.curs.active = CursorsActive::U;
+
+    CursorsActive::Set(CursorsActive::U);
 }
 
 static void Draw_U(int x, int y)
@@ -219,7 +221,7 @@ static void Draw_U(int x, int y)
     }
     else
     {
-        if (set.curs.active != CursorsActive::U)
+        if (!CursorsActive::IsU())
         {
             Draw_U_disableBoth(x, y);
         }
@@ -294,7 +296,7 @@ static void OnPress_Movement()
 
 static void Draw_Movement(int x, int y)
 {
-    if (set.curs.movement == CursorsMovement::Percents)
+    if (CursorsMovement::IsPercents())
     {
         Draw_Movement_Percents(x, y);
     }
@@ -324,9 +326,9 @@ bool PageCursorsMeasures::PageSet::HandlerKey(const KeyEvent &event) //-V2506
 
     float value = event.IsIncrease() ? 1.0F : -1.0F;
 
-    if ((set.curs.active == CursorsActive::U) && (event.IsUp() || event.IsDown()))
+    if (CursorsActive::IsU() && (event.IsUp() || event.IsDown()))
     {
-        if (set.curs.movement == CursorsMovement::Percents)
+        if (CursorsMovement::IsPercents())
         {
             value *= set.curs.deltaU100percents[set.curs.source] / 100.0F;
         }
@@ -341,9 +343,9 @@ bool PageCursorsMeasures::PageSet::HandlerKey(const KeyEvent &event) //-V2506
         }
         UpdateCursorsForLook();
     }
-    else if((set.curs.active == CursorsActive::T) && (event.IsLeft() || event.IsRight()))
+    else if(CursorsActive::IsT() && (event.IsLeft() || event.IsRight()))
     {
-        if (set.curs.movement == CursorsMovement::Percents)
+        if (CursorsMovement::IsPercents())
         {
             value *= set.curs.deltaT100percents[set.curs.source] / 100.0F;
         }
@@ -417,7 +419,7 @@ void PageCursorsMeasures::PageSet::SetShiftCursPosU(Chan::E ch, int numCur, floa
 {
     set.curs.posCurU[ch][numCur] = Math::LimitationRet(set.curs.posCurU[ch][numCur] - delta, 0.0F, MAX_POS_U);
 
-    if (set.curs.movement == CursorsMovement::Pixels)                        // ≈сли перемещение по пиксел€м, то нужно привести к пиксельной сетке экрана
+    if (CursorsMovement::IsPixels())                        // ≈сли перемещение по пиксел€м, то нужно привести к пиксельной сетке экрана
     {
         /// \todo
     }
@@ -430,7 +432,7 @@ void PageCursorsMeasures::PageSet::SetShiftCursPosT(Chan::E ch, int numCur, floa
     // CURsT_POS(ch, numCur) = LimitationFloat(CURsT_POS(ch, numCur) + delta, 0, MAX_POS_T);   
     CursorsMeasurements::SetCursPosT_temp(ch, numCur, Math::LimitationRet(CursorsMeasurements::PosT(ch, numCur) + delta, 0.0F, MAX_POS_T));
 
-    if (set.curs.movement == CursorsMovement::Pixels)                        // ≈сли перемещение по пиксел€м, то нужно привести к пиксельной сетке экрана
+    if (CursorsMovement::IsPixels())         // ≈сли перемещение по пиксел€м, то нужно привести к пиксельной сетке экрана
     {
         /// \todo
     }
@@ -441,19 +443,19 @@ void PageCursorsMeasures::PageSet::UpdateCursorsForLook()
 {
     Chan::E source = set.curs.source;
 
-    if ((set.curs.active == CursorsActive::T) && ((set.curs.lookMode[Chan::A] == CursorsLookMode::Voltage) || (set.curs.lookMode[Chan::A] == CursorsLookMode::Both)))
+    if (CursorsActive::IsT() && (CursorsLookMode::IsVoltage(Chan::A) || CursorsLookMode::IsBoth(Chan::A)))
     {
         SetCursorU(source, 0, Measure::CalculateCursorU(source, CursorsMeasurements::PosT(source, 0)));
     }
-    if ((set.curs.active == CursorsActive::T) && ((set.curs.lookMode[Chan::B] == CursorsLookMode::Voltage) || (set.curs.lookMode[Chan::B] == CursorsLookMode::Both)))
+    if (CursorsActive::IsT() && (CursorsLookMode::IsVoltage(Chan::B) || CursorsLookMode::IsBoth(Chan::B)))
     {
         SetCursorU(source, 1, Measure::CalculateCursorU(source, CursorsMeasurements::PosT(source, 1)));
     }
-    if ((set.curs.active == CursorsActive::U) && ((set.curs.lookMode[Chan::A] == CursorsLookMode::Time) || (set.curs.lookMode[Chan::A] == CursorsLookMode::Both)))
+    if (CursorsActive::IsU() && (CursorsLookMode::IsTime(Chan::A) || CursorsLookMode::IsBoth(Chan::A)))
     {
         SetCursorT(source, 0, Measure::CalculateCursorT(source, set.curs.posCurU[source][0], 0));
     }
-    if ((set.curs.active == CursorsActive::U) && ((set.curs.lookMode[Chan::B] == CursorsLookMode::Time) || (set.curs.lookMode[Chan::B] == CursorsLookMode::Both)))
+    if (CursorsActive::IsU() && (CursorsLookMode::IsTime(Chan::B) || CursorsLookMode::IsBoth(Chan::B)))
     {
         SetCursorT(source, 1, Measure::CalculateCursorT(source, set.curs.posCurU[source][1], 1));
     }
@@ -477,6 +479,6 @@ void PageCursorsMeasures::PageSet::SetCursorT(Chan::E ch, int numCur, float pos)
 bool PageCursorsMeasures::PageSet::IsRegSetActiveOnCursors()
 {
     return ((Menu::OpenedItem() == PageCursorsMeasures::PageSet::self) &&
-        (((set.curs.active == CursorsActive::U) && (set.curs.cntrlU[set.curs.source] == CursorsControl::Disable)) ||
-        ((set.curs.active == CursorsActive::T) && (set.curs.cntrlT[set.curs.source] == CursorsControl::Disable))));
+        ((CursorsActive::IsU() && (set.curs.cntrlU[set.curs.source] == CursorsControl::Disable)) ||
+        (CursorsActive::IsT() && (set.curs.cntrlT[set.curs.source] == CursorsControl::Disable))));
 }

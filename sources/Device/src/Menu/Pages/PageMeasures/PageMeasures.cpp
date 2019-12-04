@@ -41,6 +41,54 @@ bool MeasuresOnDisplay::IsVertical()
 }
 
 
+bool CursorsActive::IsT()
+{
+    return (set.curs.active == T);
+}
+
+
+bool CursorsActive::IsU()
+{
+    return (set.curs.active == U);
+}
+
+
+void CursorsActive::Set(E active)
+{
+    set.curs.active = active;
+}
+
+
+bool CursorsLookMode::IsVoltage(Chan::E ch)
+{
+    return (set.curs.lookMode[ch] == Voltage);
+}
+
+
+bool CursorsLookMode::IsTime(Chan::E ch)
+{
+    return (set.curs.lookMode[ch] == Time);
+}
+
+
+bool CursorsLookMode::IsBoth(Chan::E ch)
+{
+    return (set.curs.lookMode[ch] == Both);
+}
+
+
+bool CursorsMovement::IsPercents()
+{
+    return (set.curs.movement == Percents);
+}
+
+
+bool CursorsMovement::IsPixels()
+{
+    return (set.curs.movement == Pixels);
+}
+
+
 DEF_PAGE_3( pMeasures,                                                                                                                                                    //--- ИЗМЕРЕНИЯ ---
     "ИЗМЕРЕНИЯ",
     "Доступ к настройкам измерений - курсорных и автоматических",

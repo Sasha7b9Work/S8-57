@@ -77,6 +77,10 @@ struct CursorsLookMode
         Time,      ///< Курсоры следят за временем автоматически.
         Both       ///< Курсоры следят за временем и напряжением, в зависимости от того, какой курсоры вращали последним.
     };
+
+    static bool IsVoltage(Chan::E ch);
+    static bool IsTime(Chan::E ch);
+    static bool IsBoth(Chan::E ch);
 };
 
 /// Какие курсоры сейчас активны. Какие активны, те и будут перемещаться по вращению ручки УСТАНОВКА.
@@ -88,6 +92,10 @@ struct CursorsActive
         T,
         None
     };
+
+    static bool IsT();
+    static bool IsU();
+    static void Set(E v);
 };
 
 /// Каким курсором управлять
@@ -110,6 +118,9 @@ struct CursorsMovement
         Pixels,    ///< По пикселям экрана
         Percents   ///< По процентам
     };
+
+    static bool IsPercents();
+    static bool IsPixels();
 };
 
 struct SettingsCursorsMeasures
