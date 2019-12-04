@@ -1,4 +1,5 @@
 #pragma once
+#include "Settings/SettingsOsci.h"
 
 
 #define SHIFT_IN_MEMORY     DisplayOsci::PainterData::FirstPointOnScreen()
@@ -41,6 +42,35 @@ struct DisplayOsci
         static BitSet64 BytesOnDisplay();
         /// Эту функцию надо вызывать при переключении TPos для перерасчёта смещения первого выводимого байта относительно левого края экрана
         static void ChangeTPos();
+    private:
+        /// Нарисовать актуальные данные - соответствующие текущим установкам
+        static void DrawCurrent();
+        /// Нарисовать данные из ОЗУ
+        static void DrawRAM();
+        /// Нарисовать данные из ППЗУ
+        static void DrawROM();
+
+        static void DrawChannel(Chan::E ch);
+
+        static void DrawModeLines(Chan::E ch, int left, int center, const uint8 *data, float scale);
+
+        static void DrawModeLinesPeakDetOn(int center, const uint8 *data, float scale, int x);
+
+        static void DrawModeLinesPeakDetOff(int center, const uint8 *data, float scale, int x);
+
+        static void DrawModePoints(Chan::E ch, int left, int center, const uint8 *data, float scale);
+
+        static void DrawModePointsPeakDetOn(int center, const uint8 *data, float scale, int x);
+
+        static void DrawModePointsPeakDetOff(int center, const uint8 *data, float scale, int x);
+        /// Нарисовать спектр
+        static void DrawSpectrum();
+
+        static void DrawSpectrum(const uint8 *dataIn, uint numPoints, Chan::E ch);
+
+        static void DrawSpectrumChannel(const float *spectrum, Color color);
+
+        static void WriteParametersFFT(Chan::E ch, float freq0, float density0, float freq1, float density1);
     };
 
     struct MemoryWindow

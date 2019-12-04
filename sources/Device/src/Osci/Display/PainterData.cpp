@@ -14,30 +14,6 @@
 #include <cstdlib>
 
 
-/// Нарисовать актуальные данные - соответствующие текущим установкам
-static void DrawCurrent();
-/// Нарисовать данные из ОЗУ
-static void DrawRAM();
-/// Нарисовать данные из ППЗУ
-static void DrawROM();
-
-static void DrawChannel(Chan::E ch);
-
-static void DrawModeLines(Chan::E ch, int left, int center, const uint8 *data, float scale);
-
-static void DrawModeLinesPeakDetOn(int center, const uint8 *data, float scale, int x);
-
-static void DrawModeLinesPeakDetOff(int center, const uint8 *data, float scale, int x);
-
-static void DrawModePoints(Chan::E ch, int left, int center, const uint8 *data, float scale);
-
-static void DrawModePointsPeakDetOn(int center, const uint8 *data, float scale, int x);
-
-static void DrawModePointsPeakDetOff(int center, const uint8 *data, float scale, int x);
-/// Нарисовать спектр
-static void DrawSpectrum();
-
-
 void DisplayOsci::PainterData::DrawData()
 {
     if (AutoMeasurements::DataIsSetting())
@@ -58,7 +34,7 @@ void DisplayOsci::PainterData::DrawData()
 }
 
 
-static void DrawCurrent()
+void DisplayOsci::PainterData::DrawCurrent()
 {
     if (DS == nullptr)
     {
@@ -79,7 +55,7 @@ static void DrawCurrent()
 }
 
 
-static void DrawRAM()
+void DisplayOsci::PainterData::DrawRAM()
 {
     DrawChannel(Chan::A);
     DrawChannel(Chan::B);
@@ -87,7 +63,7 @@ static void DrawRAM()
 }
 
 
-static void DrawSpectrumChannel(const float *spectrum, Color color)
+void DisplayOsci::PainterData::DrawSpectrumChannel(const float *spectrum, Color color)
 {
     color.SetAsCurrent();
     int gridLeft = Grid::Left();
@@ -102,7 +78,7 @@ static void DrawSpectrumChannel(const float *spectrum, Color color)
 }
 
 
-static void WriteParametersFFT(Chan::E ch, float freq0, float density0, float freq1, float density1)
+void DisplayOsci::PainterData::WriteParametersFFT(Chan::E ch, float freq0, float density0, float freq1, float density1)
 {
     int x = Grid::Left() + 259;
     int y = Grid::ChannelBottom() + 5;
@@ -136,7 +112,7 @@ static void WriteParametersFFT(Chan::E ch, float freq0, float density0, float fr
 }
 
 
-static void DRAW_SPECTRUM(const uint8 *dataIn, uint numPoints, Chan::E ch)
+void DisplayOsci::PainterData::DrawSpectrum(const uint8 *dataIn, uint numPoints, Chan::E ch)
 {
     if (!set.ch[ch].enabled)
     {
@@ -185,7 +161,7 @@ static void DRAW_SPECTRUM(const uint8 *dataIn, uint numPoints, Chan::E ch)
 }
 
 
-static void DrawSpectrum()
+void DisplayOsci::PainterData::DrawSpectrum()
 {
     if (!set.fft.enabled || !DS)
     {
@@ -206,23 +182,23 @@ static void DrawSpectrum()
     
         if (set.fft.source == SourceFFT::A)
         {
-            DRAW_SPECTRUM(OUT_A, numPoints, Chan::A);
+            DrawSpectrum(OUT_A, numPoints, Chan::A);
         }
         else if (set.fft.source == SourceFFT::B)
         {
-            DRAW_SPECTRUM(OUT_B, numPoints, Chan::B);
+            DrawSpectrum(OUT_B, numPoints, Chan::B);
         }
         else
         {
             if (set.disp.lastAffectedChannel == Chan::A)
             {
-                DRAW_SPECTRUM(OUT_B, numPoints, Chan::B);
-                DRAW_SPECTRUM(OUT_A, numPoints, Chan::A);
+                DrawSpectrum(OUT_B, numPoints, Chan::B);
+                DrawSpectrum(OUT_A, numPoints, Chan::A);
             }
             else
             {
-                DRAW_SPECTRUM(OUT_A, numPoints, Chan::A);
-                DRAW_SPECTRUM(OUT_B, numPoints, Chan::B);
+                DrawSpectrum(OUT_A, numPoints, Chan::A);
+                DrawSpectrum(OUT_B, numPoints, Chan::B);
             }
         }
     
@@ -233,7 +209,7 @@ static void DrawSpectrum()
 }
 
 
-static void DrawROM()
+void DisplayOsci::PainterData::DrawROM()
 {
     if(set.mem.typeSignalROM == TypeSignalROM::Current || set.mem.typeSignalROM == TypeSignalROM::Both)
     {
@@ -249,7 +225,7 @@ static void DrawROM()
 }
 
 
-static void DrawChannel(Chan::E ch)
+void DisplayOsci::PainterData::DrawChannel(Chan::E ch)
 {
     if (!set.ch[ch].enabled)
     {
@@ -310,7 +286,7 @@ static void DrawChannel(Chan::E ch)
 }
 
 
-static void DrawModeLines(Chan::E ch, int left, int center, const uint8 *data, float scale)
+void DisplayOsci::PainterData::DrawModeLines(Chan::E ch, int left, int center, const uint8 *data, float scale)
 {
     Color::CHAN[ch].SetAsCurrent();
 
@@ -327,7 +303,7 @@ static void DrawModeLines(Chan::E ch, int left, int center, const uint8 *data, f
 }
 
 
-static void DrawModeLinesPeakDetOn(int center, const uint8 *data, float scale, int x)
+void DisplayOsci::PainterData::DrawModeLinesPeakDetOn(int center, const uint8 *data, float scale, int x)
 {
     for (int i = 0; i < 281 * 2; i += 2)
     {
@@ -339,7 +315,7 @@ static void DrawModeLinesPeakDetOn(int center, const uint8 *data, float scale, i
 }
 
 
-static void DrawModeLinesPeakDetOff(int center, const uint8 *data, float scale, int x)
+void DisplayOsci::PainterData::DrawModeLinesPeakDetOff(int center, const uint8 *data, float scale, int x)
 {
     int coordVert = -1;  // На этой координате нужно нарисовать вертикальную линию, чтобы скрыть дефект поточечного вывода, когда считана только часть точек
 
@@ -367,7 +343,7 @@ static void DrawModeLinesPeakDetOff(int center, const uint8 *data, float scale, 
 }
 
 
-static void DrawModePoints(Chan::E ch, int left, int center, const uint8 *data, float scale)
+void DisplayOsci::PainterData::DrawModePoints(Chan::E ch, int left, int center, const uint8 *data, float scale)
 {
     Color::CHAN[ch].SetAsCurrent();
 
@@ -382,7 +358,7 @@ static void DrawModePoints(Chan::E ch, int left, int center, const uint8 *data, 
 }
 
 
-static void DrawModePointsPeakDetOn(int center, const uint8 *data, float scale, int x)
+void DisplayOsci::PainterData::DrawModePointsPeakDetOn(int center, const uint8 *data, float scale, int x)
 {
     for (int i = 0; i < 281 * 2; i += 2)
     {
@@ -393,7 +369,7 @@ static void DrawModePointsPeakDetOn(int center, const uint8 *data, float scale, 
 }
 
 
-static void DrawModePointsPeakDetOff(int center, const uint8 *data, float scale, int x)
+void DisplayOsci::PainterData::DrawModePointsPeakDetOff(int center, const uint8 *data, float scale, int x)
 {
     for (int i = 0; i < 280; i++)
     {
