@@ -105,9 +105,17 @@ struct CursorsControl
     {
         _1,        ///< первым
         _2,        ///< вторым
-        _1_2,      ///< обоими
+        Both,      ///< обоими
         Disable    ///< никаким
     };
+
+    static bool IsDisabledT();
+    static bool IsEnabled1T();
+    static bool IsEnabled2T();
+
+    static bool IsDisabledU();
+    static bool IsEnabled1U();
+    static bool IsEnabled2U();
 };
 
 /// ƒискретность перемещени€ курсоров.
@@ -130,13 +138,13 @@ struct SettingsCursorsMeasures
     bool               showFreq;                ///< ”становленное в true значение, что нужно показывать на экране 1/dT между курсорами.
     CursorsActive::E   active;                  ///<  акие курсоры сейас активны.
     Chan::E            source;                  ///< »сточник - к какому каналу относ€тс€ курсоры.
-    CursorsControl::E  cntrlU[Chan::Count];      ///< јктивные курсоры напр€жени€.
-    CursorsControl::E  cntrlT[Chan::Count];      ///< јктивные курсоры времени.
+    CursorsControl::E  cntrlU[Chan::Count];     ///< јктивные курсоры напр€жени€.
+    CursorsControl::E  cntrlT[Chan::Count];     ///< јктивные курсоры времени.
     CursorsMovement::E movement;                ///<  ак перемещатьс€ курсорам - по точкам или процентам.
     float              deltaU100percents[2];    ///< –ассто€ние между курсорами напр€жени€ дл€ 100%, дл€ обоих каналов.
     float              deltaT100percents[2];    ///< –ассто€ние между курсорами времени дл€ 100%, дл€ обоих каналов.
-    float              posCurU[Chan::Count][2];  ///< “екущие позиции курсоров напр€жени€ обоих каналов.
-    float              posCurT[Chan::Count][2];  ///< “екущие позиции курсоров времени обоих каналов.
+    float              posCurU[Chan::Count][2]; ///< “екущие позиции курсоров напр€жени€ обоих каналов.
+    float              posCurT[Chan::Count][2]; ///< “екущие позиции курсоров времени обоих каналов.
 };
 
 

@@ -89,6 +89,42 @@ bool CursorsMovement::IsPixels()
 }
 
 
+bool CursorsControl::IsDisabledT()
+{
+    return (set.curs.cntrlT[set.curs.source] == Disable);
+}
+
+
+bool CursorsControl::IsEnabled1T()
+{
+    return (set.curs.cntrlT[set.curs.source] == _1) || (set.curs.cntrlT[set.curs.source] == Both);
+}
+
+
+bool CursorsControl::IsEnabled2T()
+{
+    return (set.curs.cntrlT[set.curs.source] == _2) || (set.curs.cntrlT[set.curs.source] == Both);
+}
+
+
+bool CursorsControl::IsDisabledU()
+{
+    return (set.curs.cntrlU[set.curs.source] == Disable);
+}
+
+
+bool CursorsControl::IsEnabled1U()
+{
+    return (set.curs.cntrlU[set.curs.source] == _1) || (set.curs.cntrlU[set.curs.source] == Both);
+}
+
+
+bool CursorsControl::IsEnabled2U()
+{
+    return (set.curs.cntrlU[set.curs.source] == _2) || (set.curs.cntrlU[set.curs.source] == Both);
+}
+
+
 DEF_PAGE_3( pMeasures,                                                                                                                                                    //--- ИЗМЕРЕНИЯ ---
     "ИЗМЕРЕНИЯ",
     "Доступ к настройкам измерений - курсорных и автоматических",

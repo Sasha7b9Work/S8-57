@@ -26,7 +26,7 @@ float CursorsMeasurements::PosU(Chan::E ch, int numCur)
 
 bool CursorsMeasurements::NecessaryDraw()
 {
-    return ((set.curs.cntrlU[set.curs.source] == CursorsControl::Disable) || (set.curs.cntrlT[set.curs.source] == CursorsControl::Disable)) &&
+    return (CursorsControl::IsDisabledU() || CursorsControl::IsDisabledT()) &&
         (set.curs.showCursors || (Menu::OpenedItem() == PageCursorsMeasures::PageSet::self));
 }
 
@@ -73,8 +73,8 @@ void CursorsMeasurements::Draw()
 
     if (NecessaryDraw())
     {
-        bool bothCursors = (set.curs.cntrlT[set.curs.source] == CursorsControl::Disable) &&
-                           (set.curs.cntrlU[set.curs.source] == CursorsControl::Disable);  // Признак того, что включены и вертикальные и горизонтальные курсоры - надо нарисовать 
+        bool bothCursors = CursorsControl::IsDisabledT() &&
+                           CursorsControl::IsDisabledU();  // Признак того, что включены и вертикальные и горизонтальные курсоры - надо нарисовать 
                                                                                            // квадраты в местах пересечения
 
         int x0 = -1;
@@ -93,12 +93,12 @@ void CursorsMeasurements::Draw()
             Rectangle(4, 4).Draw(x1 - 2, y1 - 2);
         }
 
-        if (set.curs.cntrlT[set.curs.source] == CursorsControl::Disable)
+        if (CursorsControl::IsDisabledT())
         {
             DrawVertical(static_cast<int>(CursorsMeasurements::PosT(source, 0)), y0);
             DrawVertical(static_cast<int>(CursorsMeasurements::PosT(source, 1)), y1);
         }
-        if (set.curs.cntrlU[set.curs.source] == CursorsControl::Disable)
+        if (CursorsControl::IsDisabledU())
         {
             DrawHorizontal(static_cast<int>(set.curs.posCurU[source][0]), x0);
             DrawHorizontal(static_cast<int>(set.curs.posCurU[source][1]), x1);

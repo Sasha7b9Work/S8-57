@@ -15,11 +15,11 @@ const float PageCursorsMeasures::PageSet::MAX_POS_T = 280.0F;
 void CalculateConditions(int16 pos0, int16 pos1, CursorsControl::E cursCntrl, bool *condTopLeft, bool *condBottomRight)
 {
     bool zeroLessFirst = pos0 < pos1;
-    *condTopLeft = (cursCntrl == CursorsControl::_1_2) ||         // если управление двумя курсорами одновременно
+    *condTopLeft = (cursCntrl == CursorsControl::Both) ||         // если управление двумя курсорами одновременно
         (cursCntrl == CursorsControl::_1 && zeroLessFirst) ||     // или управление первым курсором и позиция первого меньше, чем позиция второго
         (cursCntrl == CursorsControl::_2 && !zeroLessFirst);      // или управление вторым курсором и позиция второго курсора меньше
 
-    *condBottomRight = (cursCntrl == CursorsControl::_1_2) ||
+    *condBottomRight = (cursCntrl == CursorsControl::Both) ||
         (cursCntrl == CursorsControl::_1 && !zeroLessFirst) ||
         (cursCntrl == CursorsControl::_2 && zeroLessFirst);
 }
@@ -103,7 +103,7 @@ static void Draw_T_enableBoth(int x, int y)
 
 void PageCursorsMeasures::PageSet::OnPress_T()
 {
-    if (CursorsActive::IsT() || (set.curs.cntrlT[set.curs.source] == CursorsControl::Disable))
+    if (CursorsActive::IsT() || CursorsControl::IsDisabledT())
     {
         IncCursCntrlT(set.curs.source);
     }
@@ -113,7 +113,7 @@ void PageCursorsMeasures::PageSet::OnPress_T()
 
 static void Draw_T(int x, int y)
 {
-    if (set.curs.cntrlT[set.curs.source] == CursorsControl::Disable)
+    if (CursorsControl::IsDisabledT())
     {
         Draw_T_disable(x, y);
     }
@@ -204,7 +204,7 @@ static void Draw_U_enableBoth(int x, int y)
 
 void PageCursorsMeasures::PageSet::OnPress_U()
 {
-    if (CursorsActive::IsU() || (set.curs.cntrlU[set.curs.source] == CursorsControl::Disable))
+    if (CursorsActive::IsU() || CursorsControl::IsDisabledU())
     {
         IncCursCntrlU(set.curs.source);
     }
@@ -215,7 +215,7 @@ void PageCursorsMeasures::PageSet::OnPress_U()
 static void Draw_U(int x, int y)
 {
     Chan::E source = set.curs.source;
-    if (set.curs.cntrlU[set.curs.source] == CursorsControl::Disable)
+    if (CursorsControl::IsDisabledU())
     {
         Draw_U_disable(x, y);
     }
@@ -333,11 +333,11 @@ bool PageCursorsMeasures::PageSet::HandlerKey(const KeyEvent &event) //-V2506
             value *= set.curs.deltaU100percents[set.curs.source] / 100.0F;
         }
 
-        if ((set.curs.cntrlU[set.curs.source] == CursorsControl::_1) || (set.curs.cntrlU[set.curs.source] == CursorsControl::_1_2))
+        if (CursorsControl::IsEnabled1U())
         {
             SetShiftCursPosU(set.curs.source, 0, value);
         }
-        if ((set.curs.cntrlU[set.curs.source] == CursorsControl::_2) || (set.curs.cntrlU[set.curs.source] == CursorsControl::_1_2))
+        if (CursorsControl::IsEnabled2U())
         {
             SetShiftCursPosU(set.curs.source, 1, value);
         }
@@ -350,11 +350,11 @@ bool PageCursorsMeasures::PageSet::HandlerKey(const KeyEvent &event) //-V2506
             value *= set.curs.deltaT100percents[set.curs.source] / 100.0F;
         }
 
-        if ((set.curs.cntrlT[set.curs.source] == CursorsControl::_1) || (set.curs.cntrlT[set.curs.source] == CursorsControl::_1_2))
+        if (CursorsControl::IsEnabled1T())
         {
             SetShiftCursPosT(set.curs.source, 0, value);
         }
-        if ((set.curs.cntrlT[set.curs.source] == CursorsControl::_2) || (set.curs.cntrlT[set.curs.source] == CursorsControl::_1_2))
+        if (CursorsControl::IsEnabled2T())
         {
             SetShiftCursPosT(set.curs.source, 1, value);
         }
@@ -479,6 +479,6 @@ void PageCursorsMeasures::PageSet::SetCursorT(Chan::E ch, int numCur, float pos)
 bool PageCursorsMeasures::PageSet::IsRegSetActiveOnCursors()
 {
     return ((Menu::OpenedItem() == PageCursorsMeasures::PageSet::self) &&
-        ((CursorsActive::IsU() && (set.curs.cntrlU[set.curs.source] == CursorsControl::Disable)) ||
-        (CursorsActive::IsT() && (set.curs.cntrlT[set.curs.source] == CursorsControl::Disable))));
+        ((CursorsActive::IsU() && CursorsControl::IsDisabledU()) ||
+        (CursorsActive::IsT() && CursorsControl::IsDisabledT())));
 }
