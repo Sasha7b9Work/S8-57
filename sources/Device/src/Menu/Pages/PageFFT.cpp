@@ -5,6 +5,11 @@
 #include "Menu/Pages/Include/PageFunction.h"
 
 
+static bool IsActive_Parameter()
+{
+    return set.fft.enabled;
+}
+
 
 DEF_CHOICE_2( cView,                                                                                                                                 //--- ФУНКЦИЯ - СПЕКТР - Отображение ---
     "Отображение",
@@ -15,24 +20,14 @@ DEF_CHOICE_2( cView,                                                            
 )
 
 
-static bool IsActive_Scale()
-{
-    return set.fft.enabled;
-}
-
 DEF_CHOICE_2( cScale,                                                                                                                                      //--- ФУНКЦИЯ - СПЕКТР - Шкала ---
     "Шкала",
     "Задаёт масштаб вывода спектра - линейный или логарифмический",
     "Логарифм",
     "Линейная",
-    set.fft.scale, &PageFFT::self, IsActive_Scale, Choice::Changed, Choice::AfterDraw
+    set.fft.scale, &PageFFT::self, IsActive_Parameter, Choice::Changed, Choice::AfterDraw
 )
 
-
-static bool IsActive_Source()
-{
-    return set.fft.enabled;
-}
 
 DEF_CHOICE_3( cSource,                                                                                                                                  //--- ФУНКЦИЯ - СПЕКТР - Источник ---
     "Источник",
@@ -40,14 +35,9 @@ DEF_CHOICE_3( cSource,                                                          
     "Канал 1",
     "Канал 2",
     "Канал 1 + 2",
-    set.fft.source, &PageFFT::self, IsActive_Source, Choice::Changed, Choice::AfterDraw
+    set.fft.source, &PageFFT::self, IsActive_Parameter, Choice::Changed, Choice::AfterDraw
 )
 
-
-static bool IsActive_Window()
-{
-    return set.fft.enabled;
-}
 
 DEF_CHOICE_4( cWindow,                                                                                                                                      //--- ФУНКЦИЯ - СПЕКТР - Окно ---
     "Окно",
@@ -56,7 +46,7 @@ DEF_CHOICE_4( cWindow,                                                          
     "Хэмминга",
     "Блэкмена",
     "Ханна",
-    set.fft.window, &PageFFT::self, IsActive_Window, Choice::Changed, Choice::AfterDraw
+    set.fft.window, &PageFFT::self, IsActive_Parameter, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -92,11 +82,6 @@ DEF_GRAPH_BUTTON( bCursors_Source,                                              
 )
 
 
-static bool IsActive_Cursors()
-{
-    return set.fft.enabled;
-}
-
 static bool HandlerKey_FFT_Cursors(const KeyEvent &event)
 {
     if (event.IsArrow())
@@ -119,7 +104,7 @@ DEF_PAGE_1( pCursors,                                                           
     "КУРСОРЫ", 
     "Включает курсоры для измерения параметров спектра",
     &bCursors_Source,
-    PageName::FFT_Cursors, &PageFFT::self, IsActive_Cursors, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, HandlerKey_FFT_Cursors
+    PageName::FFT_Cursors, &PageFFT::self, IsActive_Parameter, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, HandlerKey_FFT_Cursors
 )
 
 const Page * const PageFFT::PageCursors::self = static_cast<const Page *>(&pCursors);
