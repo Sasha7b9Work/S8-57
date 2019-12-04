@@ -213,15 +213,19 @@ void Handlers::OnFX()
 
 
 void Handlers::OnArrow()
-{ 
+{
+    Item *openedItem = Menu::OpenedItem();
+
     if (Menu::IsShown())
     {
-        Item *openedItem = Menu::OpenedItem();
-
         if (!openedItem->Is(TypeItem::Page))
         {
             openedItem->HandlerKey(event);
         }
+    }
+    else if (openedItem == PageFFT::PageCursors::self)
+    {
+        openedItem->HandlerKey(event);
     }
 }
 

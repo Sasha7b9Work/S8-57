@@ -205,7 +205,7 @@ void DisplayOsci::PainterData::DrawSpectrum()
     }
     
     VLine(Grid::MathHeight()).Draw(Grid::Left(), Grid::ChannelBottom(), Color::FILL);
-    HLine(300).Draw(Grid::Left(), Grid::MathBottom());
+    HLine(290).Draw(Grid::Left(), Grid::MathBottom());
 }
 
 
