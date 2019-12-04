@@ -75,6 +75,9 @@ struct FreqMeterNumberPeriods
         _100k,
         Count
     };
+
+    FreqMeterNumberPeriods() {};
+    operator FreqMeterNumberPeriods::E();
 };
 
 struct SettingsFreqMeter

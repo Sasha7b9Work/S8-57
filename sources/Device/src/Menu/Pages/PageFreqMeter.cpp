@@ -40,6 +40,12 @@ FreqMeterFreqClc::operator FreqMeterFreqClc::E()
 }
 
 
+FreqMeterNumberPeriods::operator FreqMeterNumberPeriods::E()
+{
+    return set.freq.numberPeriods;
+}
+
+
 static void OnChanged_Enable(bool)
 {
     FreqMeter::Init();
