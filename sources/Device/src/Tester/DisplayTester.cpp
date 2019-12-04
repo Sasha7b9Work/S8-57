@@ -71,7 +71,7 @@ void DisplayTester::DrawData(int numStep)
     uint16 *x = &(*datX)[numStep][0];
     uint8 *y = &(*datY)[numStep][0];
     
-    uint8 mode = BUILD_MODE(set.test.viewMode, numStep, set.test.ave);
+    uint8 mode = BUILD_MODE(TesterViewMode(), numStep, set.test.ave);
 
     Painter::DrawTesterData(mode, ColorForStep(numStep), x, y);
 }
@@ -115,9 +115,9 @@ String DisplayTester::ValueForStep(int step)
         {"0 Â", "3 Â",   "6 Â",   "9 Â",   "12 Â"}
     };
 
-    if (set.test.control == TesterControl::Voltage)
+    if (TesterControl::IsVoltage())
     {
-        return String(valuesU[set.test.stepU][step]);
+        return String(valuesU[TesterStepU()][step]);
     }
 
     static pString valuesI[2][5] =
@@ -126,7 +126,7 @@ String DisplayTester::ValueForStep(int step)
         {"0 ìêÀ", "20 ìêÀ", "40 ìêÀ", "60 ìêÀ", "80 ìêÀ"}
     };
 
-    return String(valuesI[set.test.stepI][step]);
+    return String(valuesI[TesterStepI()][step]);
 }
 
 

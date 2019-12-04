@@ -10,6 +10,10 @@ struct TesterControl
         Voltage,
         Current
     };
+
+    operator TesterControl::E();
+
+    static bool IsVoltage();
 };
 
 struct TesterPolarity
@@ -19,6 +23,9 @@ struct TesterPolarity
         Positive,
         Negative
     };
+
+    operator TesterPolarity::E();
+    static bool IsPositive();
 };
 
 struct TesterStepU
@@ -28,6 +35,10 @@ struct TesterStepU
         _100mV,
         _500mV
     };
+
+    TesterStepU() {};
+    operator TesterStepU::E();
+    static bool Is500mV();
 };
 
 struct TesterStepI
@@ -37,6 +48,10 @@ struct TesterStepI
         _4mA,
         _20mA
     };
+
+    TesterStepI() {};
+    operator TesterStepI::E();
+    static bool Is20mA();
 };
 
 struct TesterViewMode
@@ -46,6 +61,8 @@ struct TesterViewMode
         Lines,
         Points
     };
+
+    operator TesterViewMode::E();
 };
 
 struct SettingsTester

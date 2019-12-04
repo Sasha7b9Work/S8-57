@@ -124,10 +124,10 @@ void Tester::Disable() // -V2506
 
     HAL_PIO::Set(Port_TEST_ON, Pin_TEST_ON);
 
-    oldSet.test.control = set.test.control;
-    oldSet.test.polarity = set.test.polarity;
-    oldSet.test.stepU = set.test.stepU;
-    oldSet.test.stepI = set.test.stepI;
+    oldSet.test.control = TesterControl();
+    oldSet.test.polarity = TesterPolarity();
+    oldSet.test.stepU = TesterStepU();
+    oldSet.test.stepI = TesterStepI();
 
     set = oldSet;
     //set.Save();
@@ -238,24 +238,24 @@ void Tester::RecountPoints(uint16 *x, uint8 *y)
 void Tester::LoadPolarity()
 {
     // ”станавливаем пол€рность
-    HAL_PIO::Write(Port_PNP, Pin_PNP, (set.test.polarity == TesterPolarity::Positive) ? HState::Enabled : HState::Disabled);
+    HAL_PIO::Write(Port_PNP, Pin_PNP, TesterPolarity::IsPositive() ? HState::Enabled : HState::Disabled);
 }
 
 
 void Tester::LoadStep()
 {
     // ”станавливаем управление напр€жением или током
-    HAL_PIO::Write(Port_U, Pin_U, (set.test.control == TesterControl::Voltage) ? HState::Enabled : HState::Disabled);
+    HAL_PIO::Write(Port_U, Pin_U, TesterControl::IsVoltage() ? HState::Enabled : HState::Disabled);
 
-    HAL_PIO::Write(Port_I, Pin_I, (set.test.control == TesterControl::Voltage) ? HState::Disabled : HState::Enabled);
+    HAL_PIO::Write(Port_I, Pin_I, TesterControl::IsVoltage() ? HState::Disabled : HState::Enabled);
 
-    if (set.test.control == TesterControl::Voltage)
+    if (TesterControl::IsVoltage())
     {
-        stepU =  255.0F / 3 * ((set.test.stepU == TesterStepU::_500mV) ? 2 : 0.4F) / 5;
+        stepU =  255.0F / 3 * (TesterStepU::Is500mV() ? 2 : 0.4F) / 5;
     }
     else
     {
-        stepU = 255.0F / 3 * ((set.test.stepI == TesterStepI::_20mA) ? 2 : 0.4F) / 5;
+        stepU = 255.0F / 3 * (TesterStepI::Is20mA() ? 2 : 0.4F) / 5;
     }
 }
 

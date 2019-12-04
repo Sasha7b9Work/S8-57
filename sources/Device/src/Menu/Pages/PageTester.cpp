@@ -5,10 +5,63 @@
 #include "Device.h"
 
 
+TesterControl::operator TesterControl::E()
+{
+    return (set.test.control);
+}
+
+
+bool TesterControl::IsVoltage()
+{
+    return (set.test.control == Voltage);
+}
+
+
+TesterViewMode::operator TesterViewMode::E()
+{
+    return set.test.viewMode;
+}
+
+
+TesterPolarity::operator TesterPolarity::E()
+{
+    return set.test.polarity;
+}
+
+
+bool TesterPolarity::IsPositive()
+{
+    return (set.test.polarity == Positive);
+}
+
 
 static void OnChanged_Polarity(bool)
 {
     Tester::LoadPolarity();
+}
+
+
+TesterStepU::operator TesterStepU::E()
+{
+    return set.test.stepU;
+}
+
+
+bool TesterStepU::Is500mV()
+{
+    return (set.test.stepU == _500mV);
+}
+
+
+TesterStepI::operator TesterStepI::E()
+{
+    return set.test.stepI;
+}
+
+
+bool TesterStepI::Is20mA()
+{
+    return (set.test.stepI == _20mA);
 }
 
 
@@ -109,7 +162,7 @@ void PageTester::OnChanged_Control(bool)
 
     Item **items = const_cast<Item **>(page->OwnData()->items);
 
-    if (set.test.control == TesterControl::Voltage)
+    if (TesterControl::IsVoltage())
     {
         items[1] = const_cast<Choice *>(&cStepU);
     }
