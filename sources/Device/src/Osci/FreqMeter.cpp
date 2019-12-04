@@ -20,25 +20,18 @@
 /// \todo удалить
 static BitSet32 lastFreq;
 static BitSet32 lastPeriod;
-/// Последнее время разрешшения чтения частоты
-static uint lastFreqRead;
-/// Последнее время разрешения чтения периода
-static uint lastPeriodRead;
-/// Последнее время переполнения частоты
-static uint lastFreqOver;
-/// Последнее время переполения периода
-static uint lastPeriodOver;
-/// Если true - горит лампочка счёта частоты
-static bool lampFreq = false;
-/// Если false - горит лампочка счёта периода
-static bool lampPeriod = false;;
-
 
 bool     FreqMeter::readPeriod;
 float    FreqMeter::prevFreq;
 float    FreqMeter::frequency;
 BitSet32 FreqMeter::freqActual;
 BitSet32 FreqMeter::periodActual;
+uint     FreqMeter::lastFreqRead;
+uint     FreqMeter::lastPeriodRead;
+uint     FreqMeter::lastFreqOver;
+uint     FreqMeter::lastPeriodOver;
+bool     FreqMeter::lampFreq = false;
+bool     FreqMeter::lampPeriod = false;;
 
 //                         0    1    2    3    4    5    6 
 static char buffer[11] = {'0', '0', '0', '0', '0', '0', '0', 0, 0, 0, 0};
@@ -671,7 +664,7 @@ void DisplayFreqMeter::DrawFrequency(int x, int _y)
     Text("T").Draw(x + 2, yT);
 
     Rectangle(10, 10).Draw(x - 20, _y);
-    if (lampFreq)
+    if (FreqMeter::lampFreq)
     {
         Region(10, 10).Fill(x - 20, _y);
     }
@@ -729,7 +722,7 @@ void DisplayFreqMeter::DrawPeriod(int x, int y)
     Text("F").Draw(x + 2, y + 10);
 
     Rectangle(10, 10).Draw(x - 20, y + 1);
-    if (lampPeriod)
+    if (FreqMeter::lampPeriod)
     {
         Region(10, 10).Fill(x - 20, y);
     }
@@ -806,14 +799,14 @@ void DisplayFreqMeter::DrawDebugInfo()
 
     Rectangle(size, size).Draw(x, y + 4, Color::FILL);
 
-    if (TIME_MS - lastFreqRead < TIME)
+    if (TIME_MS - FreqMeter::lastFreqRead < TIME)
     {
         Region(size - 2, size - 2).Fill(x + 1, y + 5, Color::BLUE);
     }
 
     Rectangle(size, size).Draw(x, y + 15, Color::FILL);
 
-    if (TIME_MS - lastPeriodRead < TIME)
+    if (TIME_MS - FreqMeter::lastPeriodRead < TIME)
     {
         Region(size - 2, size - 2).Fill(x + 1, y + 16, Color::BLUE);
     }
@@ -822,14 +815,14 @@ void DisplayFreqMeter::DrawDebugInfo()
 
     Rectangle(size, size).Draw(x, y + 4, Color::FILL);
 
-    if (TIME_MS - lastFreqOver < TIME)
+    if (TIME_MS - FreqMeter::lastFreqOver < TIME)
     {
         Region(size - 2, size - 2).Fill(x + 1, y + 5, Color::RED);
     }
 
     Rectangle(size, size).Draw(x, y + 15, Color::FILL);
 
-    if (TIME_MS - lastPeriodOver < TIME)
+    if (TIME_MS - FreqMeter::lastPeriodOver < TIME)
     {
         Region(size - 2, size - 2).Fill(x + 1, y + 16, Color::RED);
     }
