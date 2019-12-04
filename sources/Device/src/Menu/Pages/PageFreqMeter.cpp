@@ -10,13 +10,13 @@ FreqMeterEnabled::operator bool()
 }
 
 
-bool FreqMeterModeView::IsFrequency() const
+bool FreqMeterModeView::IsFrequency()
 {
     return (set.freq.modeView == Frequency);
 }
 
 
-bool FreqMeterModeView::IsPeriod() const
+bool FreqMeterModeView::IsPeriod()
 {
     return (set.freq.modeView == Period);
 }
@@ -89,13 +89,13 @@ DEF_CHOICE_2( cModeView,                                                        
 
 static bool IsActive_SettingsFrequency()
 {
-    return FreqMeterEnabled() && FreqMeterModeView().IsPeriod();
+    return FreqMeterEnabled() && FreqMeterModeView::IsPeriod();
 }
 
 
 static bool IsActive_TimeF()
 {
-    return FreqMeterEnabled() && FreqMeterModeView().IsFrequency();
+    return FreqMeterEnabled() && FreqMeterModeView::IsFrequency();
 }
 
 static void OnChanged_TimeF(bool)
@@ -158,12 +158,12 @@ void PageFreqMeter::Init()
 
     Item **items = const_cast<Item **>(page->OwnData()->items);
 
-    if (FreqMeterModeView().IsFrequency())
+    if (FreqMeterModeView::IsFrequency())
     {
         items[2] = const_cast<Choice *>(&cTimeF);
         items[3] = &Item::empty;
     }
-    else if (FreqMeterModeView().IsPeriod())
+    else if (FreqMeterModeView::IsPeriod())
     {
         items[2] = const_cast<Choice *>(&cFreqClc);
         items[3] = const_cast<Choice *>(&cNumPeriods);
