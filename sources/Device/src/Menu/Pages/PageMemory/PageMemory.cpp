@@ -11,6 +11,12 @@
 #include "Utils/Math.h"
 
 
+bool ModeWork::IsRAM() const
+{
+    return (set.mem.modeWork == ModeWork::RAM);
+}
+
+
 static void DrawSetMask();  // Эта функция рисует, когда выбран режим задания маски.
 static void DrawFileMask(int x, int y);
 static void DrawSetName();  // Эта функция рисует, когда нужно задать имя файла для сохранения

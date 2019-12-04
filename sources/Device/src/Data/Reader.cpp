@@ -30,7 +30,7 @@ void Reader::ReadDataFromRAM()
 
     DS = nullptr;
 
-    DS = RAM::Read((set.mem.modeWork == ModeWork::RAM) ? static_cast<uint>(RAM::currentSignal) : 0U);
+    DS = RAM::Read(ModeWork().IsRAM() ? static_cast<uint>(RAM::currentSignal) : 0U);
 
     if (DS)
     {
