@@ -72,7 +72,7 @@ void FreqMeter::LoadSettings()
             BIN_U8(01010000)  //-V2501
         };
 
-        data |= maskTime[set.freq.timeCounting];
+        data |= maskTime[FreqMeterTimeCounting()];
         data |= maskFreqClc[set.freq.freqClc];
         data |= maskPeriod[set.freq.numberPeriods];
     }

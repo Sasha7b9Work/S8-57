@@ -28,6 +28,12 @@ bool FreqMeterTimeCounting::Is100ms() const
 }
 
 
+FreqMeterTimeCounting::operator FreqMeterTimeCounting::E()
+{
+    return set.freq.timeCounting;
+}
+
+
 static void OnChanged_Enable(bool)
 {
     FreqMeter::Init();
