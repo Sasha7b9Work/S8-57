@@ -20,42 +20,42 @@ void Handlers::Process(KeyEvent e)
     event = e;
 
     static const pFuncVV func[Key::Count][4] =
-    { // Press       Repead       Release           Long
-        {Empty,      Empty,       Empty,            Empty},            // None       
-        {Empty,      Empty,       OnFunction,       Empty},            // Function   
-        {Empty,      Empty,       OnMeasures,       Empty},            // Measure    
-        {Empty,      Empty,       OnMemory,         Empty},            // Memory     
-        {Empty,      Empty,       OnService,        Empty},            // Service    
-        {Empty,      Empty,       OnChannelA,       OnChannelA},       // ChannelA   
-        {Empty,      Empty,       OnChannelB,       OnChannelB},       // ChannelB   
-        {Empty,      Empty,       OnTime_Release,   OnTime_Long},      // Time       
-        {OnStart,    Empty,       Empty,            Empty},            // Start      
-        {Empty,      Empty,       OnTrig,           OnTrig},           // Trig       
-        {Empty,      Empty,       OnDisplay,        Empty},            // Display    
-        {OnRangeA,   Empty,       Empty,            Empty},            // RangeMoreA 
-        {OnRangeA,   Empty,       Empty,            Empty},            // RangeLessA 
-        {OnRShiftA,  OnRShiftA,   Empty,            Empty},            // RShiftMoreA
-        {OnRShiftA,  OnRShiftA,   Empty,            Empty},            // RShiftLessA
-        {OnRangeB,   Empty,       Empty,            Empty},            // RangeMoreB 
-        {OnRangeB,   Empty,       Empty,            Empty},            // RangeLessB 
-        {OnRShiftB,  OnRShiftB,   Empty,            Empty},            // RShiftMoreB
-        {OnRShiftB,  OnRShiftB,   Empty,            Empty},            // RShiftLessB
-        {OnTBase,    Empty,       Empty,            Empty},            // TBaseMore
-        {OnTBase,    Empty,       Empty,            Empty},            // TBaseLess
-        {OnTShift,   OnTShift,    Empty,            Empty},            // TShiftMore 
-        {OnTShift,   OnTShift,    Empty,            Empty},            // TShiftLess 
-        {OnTrigLev,  OnTrigLev,   Empty,            Empty},            // TrigLevMore
-        {OnTrigLev,  OnTrigLev,   Empty,            Empty},            // TrigLevLess
-        {OnArrow,    OnArrow,     OnArrow,          OnArrow},          // Left       
-        {OnArrow,    OnArrow,     OnArrow,          OnArrow},          // Right      
-        {OnArrow,    OnArrow,     OnArrow,          OnArrow},          // Up         
-        {OnArrow,    OnArrow,     OnArrow,          OnArrow},          // Down       
-        {Empty,      Empty,       OnEnter_Release,  OnEnter_Long},     // Enter      
-        {OnFX,       Empty,       OnFX,             OnFX},             // F1
-        {OnFX,       Empty,       OnFX,             OnFX},             // F2
-        {OnFX,       Empty,       OnFX,             OnFX},             // F3
-        {OnFX,       Empty,       OnFX,             OnFX},             // F4
-        {OnFX,       Empty,       OnFX,             OnFX}              // F5
+    { // Press       Repead       Release      Long
+        {Empty,      Empty,       Empty,       Empty},       // None       
+        {Empty,      Empty,       OnFunction,  Empty},       // Function   
+        {Empty,      Empty,       OnMeasures,  Empty},       // Measure    
+        {Empty,      Empty,       OnMemory,    Empty},       // Memory     
+        {Empty,      Empty,       OnService,   Empty},       // Service    
+        {Empty,      Empty,       OnChannelA,  OnChannelA},  // ChannelA   
+        {Empty,      Empty,       OnChannelB,  OnChannelB},  // ChannelB   
+        {Empty,      Empty,       OnTime,      OnTime},      // Time       
+        {OnStart,    Empty,       Empty,       Empty},       // Start      
+        {Empty,      Empty,       OnTrig,      OnTrig},      // Trig       
+        {Empty,      Empty,       OnDisplay,   Empty},       // Display    
+        {OnRangeA,   Empty,       Empty,       Empty},       // RangeMoreA 
+        {OnRangeA,   Empty,       Empty,       Empty},       // RangeLessA 
+        {OnRShiftA,  OnRShiftA,   Empty,       Empty},       // RShiftMoreA
+        {OnRShiftA,  OnRShiftA,   Empty,       Empty},       // RShiftLessA
+        {OnRangeB,   Empty,       Empty,       Empty},       // RangeMoreB 
+        {OnRangeB,   Empty,       Empty,       Empty},       // RangeLessB 
+        {OnRShiftB,  OnRShiftB,   Empty,       Empty},       // RShiftMoreB
+        {OnRShiftB,  OnRShiftB,   Empty,       Empty},       // RShiftLessB
+        {OnTBase,    Empty,       Empty,       Empty},       // TBaseMore
+        {OnTBase,    Empty,       Empty,       Empty},       // TBaseLess
+        {OnTShift,   OnTShift,    Empty,       Empty},       // TShiftMore 
+        {OnTShift,   OnTShift,    Empty,       Empty},       // TShiftLess 
+        {OnTrigLev,  OnTrigLev,   Empty,       Empty},       // TrigLevMore
+        {OnTrigLev,  OnTrigLev,   Empty,       Empty},       // TrigLevLess
+        {OnArrow,    OnArrow,     OnArrow,     OnArrow},     // Left       
+        {OnArrow,    OnArrow,     OnArrow,     OnArrow},     // Right      
+        {OnArrow,    OnArrow,     OnArrow,     OnArrow},     // Up         
+        {OnArrow,    OnArrow,     OnArrow,     OnArrow},     // Down       
+        {Empty,      Empty,       OnEnter,     OnEnter},     // Enter      
+        {OnFX,       Empty,       OnFX,        OnFX},        // F1
+        {OnFX,       Empty,       OnFX,        OnFX},        // F2
+        {OnFX,       Empty,       OnFX,        OnFX},        // F3
+        {OnFX,       Empty,       OnFX,        OnFX},        // F4
+        {OnFX,       Empty,       OnFX,        OnFX}         // F5
     };
 
     Key::E       key = e.key;
@@ -250,22 +250,24 @@ bool Handlers::CommonHandlerPage()
     return result;
 }
 
-void Handlers::OnEnter_Release()
-{
-    if (!Menu::IsShown())
-    {
-        Menu::Show();
-    }
-    else
-    {
-        Menu::CloseOpenedItem();
-    }
-}
 
-
-void Handlers::OnEnter_Long()
+void Handlers::OnEnter()
 {
-    return Menu::IsShown() ? Menu::Hide() : Menu::Show();
+    if (event.IsRelease())
+    {
+        if (!Menu::IsShown())
+        {
+            Menu::Show();
+        }
+        else
+        {
+            Menu::CloseOpenedItem();
+        }
+    }
+    else if (event.IsLong())
+    {
+        return Menu::IsShown() ? Menu::Hide() : Menu::Show();
+    }
 }
 
 
@@ -277,11 +279,11 @@ void Handlers::OnTrigLev()
 
 void Handlers::OnChannelA()
 {
-    if (event.type == TypePress::Release)
+    if (event.IsRelease())
     {
         ShowHidePage(PageChannelA::self);
     }
-    else if (event.type == TypePress::Long)
+    else if (event.IsLong())
     {
         RShift(Chan::A, 0);
     }
@@ -290,11 +292,11 @@ void Handlers::OnChannelA()
 
 void Handlers::OnChannelB()
 {
-    if (event.type == TypePress::Release)
+    if (event.IsRelease())
     {
         ShowHidePage(PageChannelB::self);
     }
-    else if (event.type == TypePress::Long)
+    else if (event.IsLong())
     {
         RShift(Chan::B, 0);
     }
@@ -332,15 +334,16 @@ void Handlers::OnService()
 }
 
 
-void Handlers::OnTime_Release()
+void Handlers::OnTime()
 {
-    ShowHidePage(PageTime::self);
-}
-
-
-void Handlers::OnTime_Long()
-{
-    TShift().Reset();
+    if (event.IsRelease())
+    {
+        ShowHidePage(PageTime::self);
+    }
+    else if (event.IsLong())
+    {
+        TShift().Reset();
+    }
 }
 
 
