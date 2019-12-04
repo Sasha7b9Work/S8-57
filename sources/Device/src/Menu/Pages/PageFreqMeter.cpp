@@ -51,7 +51,7 @@ DEF_CHOICE_2( cEnable,                                                          
 
 static bool IsActive_ModeView()
 {
-    return (set.freq.enabled == FreqMeterEnabled::On);
+    return FreqMeterEnabled();
 }
 
 static void OnChanged_ModeView(bool)
@@ -71,13 +71,13 @@ DEF_CHOICE_2( cModeView,                                                        
 
 static bool IsActive_SettingsFrequency()
 {
-    return (set.freq.enabled == FreqMeterEnabled::On) && (set.freq.modeView == FreqMeterModeView::Period);
+    return FreqMeterEnabled() && FreqMeterModeView().IsPeriod();
 }
 
 
 static bool IsActive_TimeF()
 {
-    return (set.freq.enabled == FreqMeterEnabled::On) && (set.freq.modeView == FreqMeterModeView::Frequency);
+    return FreqMeterEnabled() && FreqMeterModeView().IsFrequency();
 }
 
 static void OnChanged_TimeF(bool)

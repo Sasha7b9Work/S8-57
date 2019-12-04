@@ -286,7 +286,7 @@ void DisplayFreqMeter::Draw()
 {
     /// \todo ¬ этой строке точку ставить не где придЄтс€, а в той позиции, где она сто€ла последний раз
 
-    if (set.freq.enabled == FreqMeterEnabled::Off)
+    if (FreqMeterEnabled())
     {
         return;
     }
@@ -307,7 +307,7 @@ void DisplayFreqMeter::Draw()
     x += 2;
     y += 2;
 
-    if (set.freq.modeView == FreqMeterModeView::Frequency)
+    if (FreqMeterModeView().IsFrequency())
     {
         DrawFrequency(x, y);
     }
