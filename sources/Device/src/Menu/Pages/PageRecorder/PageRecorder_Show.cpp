@@ -53,7 +53,7 @@ static bool IsActive_PageShow()
 
 static bool HandlerKey_PageShow(const KeyEvent &event)
 {
-    if (event.type == TypePress::Press || event.type == TypePress::Repeat)
+    if (event.IsPress() || event.IsRepeat())
     {
         if (event.key == Key::Left)
         {

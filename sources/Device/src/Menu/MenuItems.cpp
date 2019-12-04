@@ -337,7 +337,7 @@ bool Page::HandlerKey(const KeyEvent &event)
     {
         result = true;
     }
-    else if (event.type == TypePress::Press)
+    else if (event.IsPress())
     {
         if (event.key == Key::Left)
         {
@@ -703,11 +703,9 @@ bool Choice::HandlerKey(const KeyEvent &event)
 {
     bool result = false;
 
-    if (event.type == TypePress::Press)
+    if (event.IsPress())
     {
-        Key::E key = event.key;
-
-        int delta = (key == Key::Down || key == Key::Right) ? 1 : -1;
+        int delta = (event.IsDown() || event.IsRight()) ? 1 : -1;
 
         ChangeIndex(Menu::IsShown() ? delta : -delta);
 

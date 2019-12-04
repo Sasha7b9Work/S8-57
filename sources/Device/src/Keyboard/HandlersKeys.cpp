@@ -153,15 +153,15 @@ void Handlers::OnChangeParameterTime(pFuncVI func, int delta)
 
 void Handlers::ChangeTShift(int delta)
 {
-    static int prevDelta = 0;                       // Предыдущее направление перемещения
-    static uint timeStartBrake = 0;                 // Время начала торможения
+    static int prevDelta = 0;               // Предыдущее направление перемещения
+    static uint timeStartBrake = 0;         // Время начала торможения
 
-    if ((event.type == TypePress::Repeat) &&        // Если смещаемся не однокртаным нажатием кнопки
-        (prevDelta == delta) &&                     // В том же направлении, что и в прошлый раз
-        (timeStartBrake != 0) &&                    // И "тормоз" включён
-        (TIME_MS - timeStartBrake < 500))           // и прошло ещё мало времени
+    if (event.IsRepeat() &&                 // Если смещаемся не однокртаным нажатием кнопки
+        (prevDelta == delta) &&             // В том же направлении, что и в прошлый раз
+        (timeStartBrake != 0) &&            // И "тормоз" включён
+        (TIME_MS - timeStartBrake < 500))   // и прошло ещё мало времени
     {
-        return;                                     // то ничего не делаем
+        return;                             // то ничего не делаем
     }
 
     prevDelta = delta;
@@ -169,7 +169,7 @@ void Handlers::ChangeTShift(int delta)
 
     TShift().Change(delta);
 
-    if ((TShift() == 0) && (event.type == TypePress::Repeat))   // Если новое пожение смещения - ноль, то включаем торможение
+    if ((TShift() == 0) && event.IsRepeat())   // Если новое пожение смещения - ноль, то включаем торможение
     {
         timeStartBrake = TIME_MS;
     }
@@ -362,11 +362,11 @@ void Handlers::OnStart()
 
 void Handlers::OnTrig()
 {
-    if (event.type == TypePress::Release)
+    if (event.IsRelease())
     {
         ShowHidePage(PageTrig::self);
     }
-    else if (event.type == TypePress::Long)
+    else if (event.IsLong())
     {
         TrigLevel().Set(0);
     }

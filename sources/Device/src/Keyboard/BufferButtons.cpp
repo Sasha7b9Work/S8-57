@@ -22,8 +22,8 @@ static int start;
 void BufferButtons::Push(KeyEvent event)
 {
     if ((event.key == prevPushEvent.key) &&             // Если отпущена кнпока, которая раньше прислала "длинное" нажатие,
-        (prevPushEvent.type == TypePress::Long) &&
-        (event.type == TypePress::Release))
+        prevPushEvent.IsLong() &&
+        event.IsRelease())
     {
         return;                                         // то пропустим это событие - кнопка уже отработала
     }

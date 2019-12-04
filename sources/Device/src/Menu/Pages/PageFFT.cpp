@@ -101,7 +101,7 @@ static bool HandlerKey_FFT_Cursors(const KeyEvent &event)
 {
     if (event.IsArrow())
     {
-        if (event.type == TypePress::Press || event.type == TypePress::Repeat)
+        if (event.IsPress() || event.IsRepeat())
         {
             Key::E key = event.key;
 

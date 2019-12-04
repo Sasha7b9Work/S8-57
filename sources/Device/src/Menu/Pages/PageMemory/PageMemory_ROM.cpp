@@ -203,7 +203,7 @@ static bool HandlerKey_ROM(const KeyEvent &event)
 {
     bool result = false;
 
-    if (event.type == TypePress::Release || event.type == TypePress::Long)
+    if (event.IsRelease() || event.IsLong())
     {
         Key::E key = event.key;
 
