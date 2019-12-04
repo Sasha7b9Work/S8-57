@@ -51,8 +51,7 @@ private:
     static void ChannelB_Release();     // Key::ChannelB
     static void ChannelA_Long();        // Key::ChannelA
     static void ChannelB_Long();        // Key::ChannelB
-    static void Trig_Release();         // Key::Trig
-    static void Trig_Long();            // Key::Trig
+    static void OnTrig();               // Key::Trig
     static void OnTrigLev();            // Key::TrigLevLess, Key::TrigLevMore
     static void OnRangeA();             // Key::RangeLessA, Key::RangeMoreA
     static void OnRangeB();             // Key::RangeLessB, Key::RangeMoreB

@@ -30,7 +30,7 @@ void Handlers::Process(KeyEvent e)
         {Empty,      Empty,       ChannelB_Release, ChannelB_Long},    // ChannelB   
         {Empty,      Empty,       OnTime_Release,   OnTime_Long},      // Time       
         {OnStart,    Empty,       Empty,            Empty},            // Start      
-        {Empty,      Empty,       Trig_Release,     Trig_Long},        // Trig       
+        {Empty,      Empty,       OnTrig,           OnTrig},           // Trig       
         {Empty,      Empty,       OnDisplay,        Empty},            // Display    
         {OnRangeA,   Empty,       Empty,            Empty},            // RangeMoreA 
         {OnRangeA,   Empty,       Empty,            Empty},            // RangeLessA 
@@ -355,15 +355,16 @@ void Handlers::OnStart()
 }
 
 
-void Handlers::Trig_Release()
+void Handlers::OnTrig()
 {
-    ShowHidePage(PageTrig::self);
-}
-
-
-void Handlers::Trig_Long()
-{
-    TrigLevel().Set(0);
+    if (event.type == TypePress::Release)
+    {
+        ShowHidePage(PageTrig::self);
+    }
+    else if (event.type == TypePress::Long)
+    {
+        TrigLevel().Set(0);
+    }
 }
 
 
