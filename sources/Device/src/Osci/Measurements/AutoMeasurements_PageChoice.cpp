@@ -34,9 +34,7 @@ void PageChoiceMeasures::OnKeyEvent(const KeyEvent &event)
         return;
     }
 
-    Key::E key = event.key;
-
-    int8 delta = (key == Key::Up || key == Key::Right) ? 1 : -1;
+    int8 delta = (event.IsUp() || event.IsRight()) ? 1 : -1;
 
     if (isActive)
     {

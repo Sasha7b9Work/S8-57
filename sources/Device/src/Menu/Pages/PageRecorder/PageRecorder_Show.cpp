@@ -55,12 +55,12 @@ static bool HandlerKey_PageShow(const KeyEvent &event)
 {
     if (event.IsPress() || event.IsRepeat())
     {
-        if (event.key == Key::Left)
+        if (event.IsLeft())
         {
             DisplayRecorder::MoveCursorLeft();
             return true;
         }
-        else if (event.key == Key::Right)
+        else if (event.IsRight())
         {
             DisplayRecorder::MoveCursorRight();
             return true;
