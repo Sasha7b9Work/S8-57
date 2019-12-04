@@ -1,6 +1,6 @@
 #pragma once
+#include "Menu/Pages/Include/PageFreqMeter.h"
 #include "Utils/Stack.h"
-
 
 
 class FreqMeter
@@ -78,4 +78,6 @@ private:
     static pString FreqSetToString(const BitSet32 *fr);
 
     static pString PeriodSetToString(const BitSet32 *pr);
+    /// Возвращает порядок младшего разряда считанного значения счётчика периода при данных настройках
+    static int LowOrder(FreqMeterFreqClc::E freqCLC, FreqMeterNumberPeriods::E numPeriods);
 };

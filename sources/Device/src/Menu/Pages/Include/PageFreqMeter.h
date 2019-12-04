@@ -1,6 +1,9 @@
 #pragma once
 
 
+class Page;
+class Choice;
+
 
 struct FreqMeterEnabled
 {
