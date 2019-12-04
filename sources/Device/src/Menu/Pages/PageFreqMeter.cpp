@@ -6,7 +6,19 @@
 
 bool FreqMeterModeView::IsFrequency() const
 {
-    return set.freq.modeView == Frequency;
+    return (set.freq.modeView == Frequency);
+}
+
+
+bool FreqMeterModeView::IsPeriod() const
+{
+    return (set.freq.modeView == Period);
+}
+
+
+bool FreqMeterTimeCounting::Is100ms() const
+{
+    return (set.freq.timeCounting == _100ms);
 }
 
 

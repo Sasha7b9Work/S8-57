@@ -25,6 +25,7 @@ struct FreqMeterModeView
     };
 
     bool IsFrequency() const;
+    bool IsPeriod() const;
 };
 
 /// ¬рем€ счЄта периода.
@@ -37,6 +38,8 @@ struct FreqMeterTimeCounting
         _10s,
         Count
     };
+
+    bool Is100ms() const;
 };
 
 /// „астота заполн€ющих импульсов дл€ счЄта частоты.

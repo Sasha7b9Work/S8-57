@@ -845,14 +845,14 @@ void ProgressBarFreqMeter::Draw(int x, int y)
             width = length;
         }
 
-        if (set.freq.timeCounting == FreqMeterTimeCounting::_100ms && width > length / 2)
+        if (FreqMeterTimeCounting().Is100ms() && width > length / 2)
         {
             width = length;
         }
 
         Region(width, 3).Fill(x, y, Color::FILL);
     }
-    else if (set.freq.modeView == FreqMeterModeView::Period && FreqMeter::timeStartMeasurePeriod != 0)
+    else if (FreqMeterModeView().IsPeriod() && FreqMeter::timeStartMeasurePeriod != 0)
     {
 
     }
