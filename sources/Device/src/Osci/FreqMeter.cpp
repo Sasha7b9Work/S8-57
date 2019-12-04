@@ -830,7 +830,7 @@ void DisplayFreqMeter::WriteStackToBuffer(Stack<uint> *stack, int point, const c
 
 void ProgressBarFreqMeter::Draw(int x, int y)
 {
-    if (set.freq.modeView == FreqMeterModeView::Frequency && FreqMeter::timeStartMeasureFreq != 0)
+    if (FreqMeterModeView().IsFrequency() && FreqMeter::timeStartMeasureFreq != 0)
     {
         static const float time[FreqMeterTimeCounting::Count] = { 100.0F, 1000.0F, 10000.0F };
 

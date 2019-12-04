@@ -4,6 +4,11 @@
 #include "Settings/Settings.h"
 
 
+bool FreqMeterModeView::IsFrequency() const
+{
+    return set.freq.modeView == Frequency;
+}
+
 
 static void OnChanged_Enable(bool)
 {

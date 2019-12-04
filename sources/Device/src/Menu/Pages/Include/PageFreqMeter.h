@@ -23,6 +23,8 @@ struct FreqMeterModeView
         Period,
         Count
     };
+
+    bool IsFrequency() const;
 };
 
 /// Время счёта периода.
