@@ -7,12 +7,12 @@
 
 static void OnChanged_Enable(bool)
 {
-    FrequencyCounter::Init();
+    FreqMeter::Init();
 }
 
 static void OnChanged_FreqMeter_Period(bool)
 {
-    FrequencyCounter::LoadPeriodSettings();
+    FreqMeter::LoadPeriodSettings();
 }
 
 
@@ -59,7 +59,7 @@ static bool IsActive_TimeF()
 
 static void OnChanged_TimeF(bool)
 {
-    FrequencyCounter::LoadFreqSettings();
+    FreqMeter::LoadFreqSettings();
 }
 
 DEF_CHOICE_3( cTimeF,                                                                                                                          //--- ÔÓÍÊÖÈß - ×ÀÑÒÎÒÎÌÅĞ - Âğåìÿ ñ÷¸òà F ---

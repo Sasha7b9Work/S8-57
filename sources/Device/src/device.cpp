@@ -51,7 +51,7 @@ void Device::Init()
 
     Display::Init();
 
-    FrequencyCounter::Init();
+    FreqMeter::Init();
 
     Osci::Init();
 

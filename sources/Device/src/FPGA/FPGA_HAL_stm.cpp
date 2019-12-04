@@ -16,5 +16,5 @@ void FPGA::ReadFlag()
         Trig::pulse = true;
     }
 
-    FrequencyCounter::Update();
+    FreqMeter::Update();
 }

@@ -54,7 +54,7 @@ void DisplayOsci::Update()
     
     BottomPart::Draw(273, Grid::Bottom() + 1);
     
-    FrequencyCounter::Draw();
+    FreqMeter::Draw();
     
     TableMeasures::Draw();
     

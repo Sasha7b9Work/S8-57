@@ -30,11 +30,11 @@ static bool lampFreq = false;
 static bool lampPeriod = false;;
 
 
-bool     FrequencyCounter::readPeriod;
-float    FrequencyCounter::prevFreq;
-float    FrequencyCounter::frequency;
-BitSet32 FrequencyCounter::freqActual;
-BitSet32 FrequencyCounter::periodActual;
+bool     FreqMeter::readPeriod;
+float    FreqMeter::prevFreq;
+float    FreqMeter::frequency;
+BitSet32 FreqMeter::freqActual;
+BitSet32 FreqMeter::periodActual;
 
 //                         0    1    2    3    4    5    6 
 static char buffer[11] = {'0', '0', '0', '0', '0', '0', '0', 0, 0, 0, 0};
@@ -56,7 +56,7 @@ static void WriteStackToBuffer(Stack<uint> *stack, int point, const char *suffix
 
 
 
-void FrequencyCounter::Init()
+void FreqMeter::Init()
 {
     LoadSettings();
     HAL_FSMC::WriteToFPGA8(WR::RESET_COUNTER_FREQ, 1);
@@ -72,7 +72,7 @@ void FrequencyCounter::Init()
 
 
 
-void FrequencyCounter::LoadSettings()
+void FreqMeter::LoadSettings()
 {
     uint8 data = 0;
 
@@ -110,7 +110,7 @@ void FrequencyCounter::LoadSettings()
 
 
 
-void FrequencyCounter::LoadFreqSettings()
+void FreqMeter::LoadFreqSettings()
 {
     LoadSettings();
     HAL_FSMC::WriteToFPGA8(WR::RESET_COUNTER_FREQ, 1);
@@ -119,7 +119,7 @@ void FrequencyCounter::LoadFreqSettings()
 }
 
 
-void FrequencyCounter::LoadPeriodSettings()
+void FreqMeter::LoadPeriodSettings()
 {
     LoadSettings();
     HAL_FSMC::WriteToFPGA8(WR::RESET_COUNTER_PERIOD, 1);
@@ -128,7 +128,7 @@ void FrequencyCounter::LoadPeriodSettings()
 }
 
 
-void FrequencyCounter::Update()
+void FreqMeter::Update()
 {
     SetStateLamps();
 
@@ -183,7 +183,7 @@ void FrequencyCounter::Update()
 }
 
 
-void FrequencyCounter::ReadFreq()
+void FreqMeter::ReadFreq()
 {
     BitSet32 freqSet(*RD::FREQ_BYTE_3, *RD::FREQ_BYTE_2, *RD::FREQ_BYTE_1, *RD::FREQ_BYTE_0);
 
@@ -209,7 +209,7 @@ void FrequencyCounter::ReadFreq()
 }
 
 
-void FrequencyCounter::ReadPeriod()
+void FreqMeter::ReadPeriod()
 {
     BitSet32 periodSet(*RD::PERIOD_BYTE_3, *RD::PERIOD_BYTE_2, *RD::PERIOD_BYTE_1, *RD::PERIOD_BYTE_0);
 
@@ -229,14 +229,14 @@ void FrequencyCounter::ReadPeriod()
 }
 
 
-float FrequencyCounter::FreqSetToFreq(const BitSet32 *fr)
+float FreqMeter::FreqSetToFreq(const BitSet32 *fr)
 {
     const float k[3] = {10.0F, 1.0F, 0.1F};
     return (set.freq.enabled == FreqMeterEnabled::On) ? (fr->word * k[set.freq.timeCounting]) : (fr->word * 10.0F);
 }
 
 
-float FrequencyCounter::PeriodSetToFreq(const BitSet32 *period_)
+float FreqMeter::PeriodSetToFreq(const BitSet32 *period_)
 {
     if (period_->word == 0)
     {
@@ -251,7 +251,7 @@ float FrequencyCounter::PeriodSetToFreq(const BitSet32 *period_)
 }
 
 
-float FrequencyCounter::GetFreq()
+float FreqMeter::GetFreq()
 {
     return frequency;
 }
@@ -261,7 +261,7 @@ float FrequencyCounter::GetFreq()
 #define OVERFLOW_STRING ">>>"
 
 
-void FrequencyCounter::DrawFrequency(int x, int _y)
+void FreqMeter::DrawFrequency(int x, int _y)
 {
     int yF = _y + 1;
     int yT = _y + 5 + Font::GetHeight();
@@ -322,7 +322,7 @@ void FrequencyCounter::DrawFrequency(int x, int _y)
 }
 
 
-void FrequencyCounter::DrawPeriod(int x, int y)
+void FreqMeter::DrawPeriod(int x, int y)
 {
     Text("T").Draw(x + 2, y + 1, Color::FILL);
     Text("F").Draw(x + 2, y + 10);
@@ -376,7 +376,7 @@ void FrequencyCounter::DrawPeriod(int x, int y)
 }
 
 
-void FrequencyCounter::Draw()
+void FreqMeter::Draw()
 {
     /// \todo ¬ этой строке точку ставить не где придЄтс€, а в той позиции, где она сто€ла последний раз
 
@@ -736,14 +736,14 @@ static pString FreqSetToString(const BitSet32 *fr)
 
 
 
-void FrequencyCounter::SetStateLamps()
+void FreqMeter::SetStateLamps()
 {
     SetStateLampFreq();
     SetStateLampPeriod();
 }
 
 
-void FrequencyCounter::SetStateLampFreq()
+void FreqMeter::SetStateLampFreq()
 {
     if(!lampFreq)
     {
@@ -762,7 +762,7 @@ void FrequencyCounter::SetStateLampFreq()
 }
 
 
-void FrequencyCounter::SetStateLampPeriod()
+void FreqMeter::SetStateLampPeriod()
 {
     if(!lampPeriod)
     {
@@ -781,7 +781,7 @@ void FrequencyCounter::SetStateLampPeriod()
 }
 
 
-void FrequencyCounter::DrawDebugInfo()
+void FreqMeter::DrawDebugInfo()
 {
     int width = 50;
     int height = 27;

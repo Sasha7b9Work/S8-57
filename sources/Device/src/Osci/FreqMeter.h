@@ -3,7 +3,7 @@
 
 
 
-class FrequencyCounter
+class FreqMeter
 {
 public:
     /// Инициализация.

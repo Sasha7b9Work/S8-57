@@ -63,7 +63,7 @@ void DisplayOsci::HiPart::Draw()
     if (set.mem.modeWork == ModeWork::Dir)
     {
         char mesFreq[20] = "\x7c=";
-        float freq = FrequencyCounter::GetFreq();
+        float freq = FreqMeter::GetFreq();
         if (freq == -1.0F) //-V550 //-V2550
         {
             std::strcat(mesFreq, "******");
