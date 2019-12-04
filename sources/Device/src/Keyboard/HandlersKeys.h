@@ -47,10 +47,8 @@ private:
     static void OnMeasures();           // Key::Measure
     static void OnDisplay();            // Key::Display
     static void OnMemory();             // Key::Memory
-    static void ChannelA_Release();     // Key::ChannelA
-    static void ChannelB_Release();     // Key::ChannelB
-    static void ChannelA_Long();        // Key::ChannelA
-    static void ChannelB_Long();        // Key::ChannelB
+    static void OnChannelA();           // Key::ChannelA
+    static void OnChannelB();           // Key::ChannelB
     static void OnTrig();               // Key::Trig
     static void OnTrigLev();            // Key::TrigLevLess, Key::TrigLevMore
     static void OnRangeA();             // Key::RangeLessA, Key::RangeMoreA

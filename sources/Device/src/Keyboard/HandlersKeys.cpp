@@ -26,8 +26,8 @@ void Handlers::Process(KeyEvent e)
         {Empty,      Empty,       OnMeasures,       Empty},            // Measure    
         {Empty,      Empty,       OnMemory,         Empty},            // Memory     
         {Empty,      Empty,       OnService,        Empty},            // Service    
-        {Empty,      Empty,       ChannelA_Release, ChannelA_Long},    // ChannelA   
-        {Empty,      Empty,       ChannelB_Release, ChannelB_Long},    // ChannelB   
+        {Empty,      Empty,       OnChannelA,       OnChannelA},       // ChannelA   
+        {Empty,      Empty,       OnChannelB,       OnChannelB},       // ChannelB   
         {Empty,      Empty,       OnTime_Release,   OnTime_Long},      // Time       
         {OnStart,    Empty,       Empty,            Empty},            // Start      
         {Empty,      Empty,       OnTrig,           OnTrig},           // Trig       
@@ -275,27 +275,29 @@ void Handlers::OnTrigLev()
 }
 
 
-void Handlers::ChannelA_Release()
+void Handlers::OnChannelA()
 {
-    ShowHidePage(PageChannelA::self);
+    if (event.type == TypePress::Release)
+    {
+        ShowHidePage(PageChannelA::self);
+    }
+    else if (event.type == TypePress::Long)
+    {
+        RShift(Chan::A, 0);
+    }
 }
 
 
-void Handlers::ChannelB_Release()
+void Handlers::OnChannelB()
 {
-    ShowHidePage(PageChannelB::self);
-}
-
-
-void Handlers::ChannelA_Long()
-{
-    RShift(Chan::A, 0);
-}
-
-
-void Handlers::ChannelB_Long()
-{
-    RShift(Chan::B, 0);
+    if (event.type == TypePress::Release)
+    {
+        ShowHidePage(PageChannelB::self);
+    }
+    else if (event.type == TypePress::Long)
+    {
+        RShift(Chan::B, 0);
+    }
 }
 
 
