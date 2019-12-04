@@ -5,6 +5,48 @@
 #include "Menu/Pages/Include/PageFunction.h"
 
 
+bool ScaleFFT::IsLog()
+{
+    return (set.fft.scale == Log);
+}
+
+
+MaxDBFFT::operator MaxDBFFT::E()
+{
+    return set.fft.maxDB;
+}
+
+
+bool SourceFFT::IsA()
+{
+    return (set.fft.source == A);
+}
+
+
+bool SourceFFT::IsB()
+{
+    return (set.fft.source == B);
+}
+
+
+bool WindowFFT::IsHamming()
+{
+    return (set.fft.window == Hamming);
+}
+
+
+bool WindowFFT::IsBlackman()
+{
+    return (set.fft.window == Blackman);
+}
+
+
+bool WindowFFT::IsHann()
+{
+    return (set.fft.window == Hann);
+}
+
+
 static bool IsActive_Parameter()
 {
     return set.fft.enabled;
@@ -52,7 +94,7 @@ DEF_CHOICE_4( cWindow,                                                          
 
 static bool IsActive_Range()
 {
-    return set.fft.enabled && (set.fft.scale == ScaleFFT::Log);
+    return set.fft.enabled && ScaleFFT::IsLog();
 }
 
 DEF_CHOICE_3( cRange,                                                                                                                                   //--- ‘”Õ ÷»ﬂ - —œ≈ “– - ƒË‡Ô‡ÁÓÌ ---

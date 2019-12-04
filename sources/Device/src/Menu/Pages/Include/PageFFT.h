@@ -9,6 +9,8 @@ struct ScaleFFT
         Log,           ///< Это значение означает логарифмическую шкалу вывода спектра.
         Linear         ///< Это значение означает линейную шкалу вывода спектра.
     };
+
+    static bool IsLog();
 };
 
 struct SourceFFT
@@ -19,6 +21,9 @@ struct SourceFFT
         B,
         Both
     };
+
+    static bool IsA();
+    static bool IsB();
 };
 
 struct WindowFFT
@@ -30,6 +35,10 @@ struct WindowFFT
         Blackman,
         Hann
     };
+
+    static bool IsHamming();
+    static bool IsBlackman();
+    static bool IsHann();
 };
 
 struct MaxDBFFT
@@ -40,6 +49,10 @@ struct MaxDBFFT
         _60,
         _80
     };
+
+    MaxDBFFT() {};
+    operator MaxDBFFT::E();
+
     static float MaxDBforFFT(MaxDBFFT::E maxDB)
     {
         static const float arrayMAX_DB_FOR_FFT[] = { -40.0F, -60.0F, -80.0F };

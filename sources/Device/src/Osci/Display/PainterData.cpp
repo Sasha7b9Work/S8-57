@@ -104,11 +104,11 @@ void DisplayOsci::PainterData::WriteParametersFFT(Chan::E ch, float freq0, float
 
     Color::CHAN[ch].SetAsCurrent();
 
-    Text((set.fft.scale == ScaleFFT::Log) ? SU::Db2String(density0, 4, buffer) : AutoMeasurements::Float2String(density0, false, buffer)).Draw(x, y);
+    Text(ScaleFFT::IsLog() ? SU::Db2String(density0, 4, buffer) : AutoMeasurements::Float2String(density0, false, buffer)).Draw(x, y);
 
     y += dY;
 
-    Text((set.fft.scale == ScaleFFT::Log) ? SU::Db2String(density1, 4, buffer) : AutoMeasurements::Float2String(density1, false, buffer)).Draw(x, y);
+    Text(ScaleFFT::IsLog() ? SU::Db2String(density1, 4, buffer) : AutoMeasurements::Float2String(density1, false, buffer)).Draw(x, y);
 }
 
 
@@ -178,11 +178,11 @@ void DisplayOsci::PainterData::DrawSpectrum()
             numPoints = 2048;
         }
     
-        if (set.fft.source == SourceFFT::A)
+        if (SourceFFT::IsA())
         {
             DrawSpectrum(OUT_A, numPoints, Chan::A);
         }
-        else if (set.fft.source == SourceFFT::B)
+        else if (SourceFFT::IsB())
         {
             DrawSpectrum(OUT_B, numPoints, Chan::B);
         }

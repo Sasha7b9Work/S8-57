@@ -200,9 +200,9 @@ void MathFPGA::CalculateFFT(float *dataR, uint numPoints, float *result, float *
 
     Normalize(result, 256);
 
-    if (set.fft.scale == ScaleFFT::Log)
+    if (ScaleFFT::IsLog())
     {
-        float minDB = MaxDBFFT::MaxDBforFFT(set.fft.maxDB);
+        float minDB = MaxDBFFT::MaxDBforFFT(MaxDBFFT());
 
         for (int i = 0; i < 256; i++)
         {
@@ -254,14 +254,14 @@ static void MultiplyToWindow(float *data, uint numPoints)
     }
 #else
 
-    if (set.fft.window == WindowFFT::Hamming)
+    if (WindowFFT::IsHamming())
     {
         for (uint i = 0; i < numPoints; i++)
         {
             data[i] *= 0.53836F - 0.46164F * std::cosf(2 * Math::PI_F * i / (numPoints - 1));
         }
     }
-    else if (set.fft.window == WindowFFT::Blackman)
+    else if (WindowFFT::IsBlackman())
     {
         float alpha = 0.16F;
         float a0 = (1.0F - alpha) / 2.0F;
@@ -272,7 +272,7 @@ static void MultiplyToWindow(float *data, uint numPoints)
             data[i] *= a0 - a1 * std::cosf(2 * Math::PI_F * i / (numPoints - 1)) + a2 * std::cosf(4 * Math::PI_F * i / (numPoints - 1));
         }
     }
-    else if (set.fft.window == WindowFFT::Hann)
+    else if (WindowFFT::IsHann())
     {
         for (uint i = 0; i < numPoints; i++)
         {
