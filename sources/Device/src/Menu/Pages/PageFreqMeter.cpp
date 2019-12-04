@@ -22,7 +22,7 @@ bool FreqMeterModeView::IsPeriod()
 }
 
 
-bool FreqMeterTimeCounting::Is100ms() const
+bool FreqMeterTimeCounting::Is100ms()
 {
     return (set.freq.timeCounting == _100ms);
 }

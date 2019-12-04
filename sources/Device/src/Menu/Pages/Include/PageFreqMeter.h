@@ -42,7 +42,7 @@ struct FreqMeterTimeCounting
     };
 
     FreqMeterTimeCounting() {};
-    bool Is100ms() const;
+    static bool Is100ms();
     operator FreqMeterTimeCounting::E();
 };
 

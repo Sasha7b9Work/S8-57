@@ -844,7 +844,7 @@ void ProgressBarFreqMeter::Draw(int x, int y)
             width = length;
         }
 
-        if (FreqMeterTimeCounting().Is100ms() && width > length / 2)
+        if (FreqMeterTimeCounting::Is100ms() && width > length / 2)
         {
             width = length;
         }
