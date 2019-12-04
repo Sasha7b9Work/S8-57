@@ -58,8 +58,8 @@ private:
     static uint lastPeriodOver;
     /// Время начала измерения частоты
     static uint timeStartMeasureFreq;
-    /// Если false - горит лампочка счёта периода
-    static bool lampPeriod;
+    /// Время начала измерения периода
+    static uint timeStartMeasurePeriod;
 };
 
 

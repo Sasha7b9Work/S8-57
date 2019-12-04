@@ -31,7 +31,7 @@ uint     FreqMeter::lastPeriodRead;
 uint     FreqMeter::lastFreqOver;
 uint     FreqMeter::lastPeriodOver;
 uint     FreqMeter::timeStartMeasureFreq = 0;
-bool     FreqMeter::lampPeriod = false;;
+uint     FreqMeter::timeStartMeasurePeriod = 0;
 
 //                         0    1    2    3    4    5    6 
 static char buffer[11] = {'0', '0', '0', '0', '0', '0', '0', 0, 0, 0, 0};
@@ -105,7 +105,7 @@ void FreqMeter::LoadPeriodSettings()
     LoadSettings();
     HAL_FSMC::WriteToFPGA8(WR::RESET_COUNTER_PERIOD, 1);
     periodActual.word = 0;
-    lampPeriod = false;
+    timeStartMeasurePeriod = 0;
 }
 
 
@@ -266,18 +266,18 @@ void FreqMeter::SetStateLampFreq()
 
 void FreqMeter::SetStateLampPeriod()
 {
-    if(!lampPeriod)
+    if(timeStartMeasurePeriod == 0)
     {
         if(ContextFreqMeter::GetFlag::PERIOD_IN_PROCESS())
         {
-            lampPeriod = true;
+            timeStartMeasurePeriod = TIME_MS;
         }
     }
     else
     {
         if(ContextFreqMeter::GetFlag::PERIOD_READY())
         {
-            lampPeriod = false;
+            timeStartMeasurePeriod = 0;
         }
     }
 }
@@ -398,11 +398,7 @@ void DisplayFreqMeter::DrawPeriod(int x, int _y)
     Text("T").Draw(x, yT, Color::FILL);
     Text("F").Draw(x, yF);
 
-    Rectangle(10, 10).Draw(x - 20, _y + 1);
-    if (FreqMeter::lampPeriod)
-    {
-        Region(10, 10).Fill(x - 20, _y);
-    }
+    ProgressBarFreqMeter::Draw(x, yF + 4 + Font::GetHeight());
 
     int dX = 17;
 
@@ -834,7 +830,7 @@ void DisplayFreqMeter::WriteStackToBuffer(Stack<uint> *stack, int point, const c
 
 void ProgressBarFreqMeter::Draw(int x, int y)
 {
-    if (FreqMeter::timeStartMeasureFreq != 0)
+    if (set.freq.modeView == FreqMeterModeView::Frequency && FreqMeter::timeStartMeasureFreq != 0)
     {
         static const float time[FreqMeterTimeCounting::Count] = { 100.0F, 1000.0F, 10000.0F };
 
@@ -855,5 +851,9 @@ void ProgressBarFreqMeter::Draw(int x, int y)
         }
 
         Region(width, 3).Fill(x, y, Color::FILL);
+    }
+    else if (set.freq.modeView == FreqMeterModeView::Period && FreqMeter::timeStartMeasurePeriod != 0)
+    {
+
     }
 }
