@@ -12,6 +12,8 @@ struct FreqMeterEnabled
         Off,
         On
     };
+
+    operator bool();
 };
 
 /// Что показывать - период или частоту

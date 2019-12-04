@@ -4,6 +4,12 @@
 #include "Settings/Settings.h"
 
 
+FreqMeterEnabled::operator bool()
+{
+    return (set.freq.enabled == On);
+}
+
+
 bool FreqMeterModeView::IsFrequency() const
 {
     return (set.freq.modeView == Frequency);
