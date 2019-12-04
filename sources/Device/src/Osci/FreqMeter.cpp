@@ -517,7 +517,7 @@ void DisplayFreqMeter::DrawDebugInfo()
 
 pString DisplayFreqMeter::FreqSetToString(const BitSet32 *fr)
 {
-    if (fr->word == 0)
+    if (fr->word < 2)
     {
         return EMPTY_STRING;
     }
