@@ -5,6 +5,7 @@
 
 class FreqMeter
 {
+    friend struct DisplayFreqMeter;
 public:
     /// Инициализация.
     static void Init();
@@ -16,8 +17,6 @@ public:
     static void Update();
     /// Возвращает измеренное значение частоты
     static float GetFreq();
-    /// Отрисовка значения
-    static void Draw();
 
 private:
     /// Установить состояние лампочек счётчиков в состояние, соответствующее текущему моменту
@@ -35,13 +34,7 @@ private:
 
     static float FreqSetToFreq(const BitSet32 *fr);
 
-    static float PeriodSetToFreq(const BitSet32 *period);
-
-    static void DrawFrequency(int x, int _y);
-
-    static void DrawPeriod(int x, int y);
-
-    static void DrawDebugInfo();
+    static float PeriodSetToFreq(const BitSet32 *period);   
     /// Установленное в true значение означает, что частоту нужно считать по счётчику периода
     static bool readPeriod;
 
@@ -54,4 +47,17 @@ private:
     static BitSet32 freqActual;
     /// Здесь хранится последнее действительное значение периода. Для вывода в режиме частотомера. 0 означает, что значение выводить не надо
     static BitSet32 periodActual;
+};
+
+
+struct DisplayFreqMeter
+{
+    /// Отрисовка значения
+    static void Draw();
+
+private:
+    static void DrawFrequency(int x, int _y);
+    static void DrawPeriod(int x, int y);
+    /// Выводит отладочную информацию
+    static void DrawDebugInfo();
 };

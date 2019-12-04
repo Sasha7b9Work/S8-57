@@ -12,6 +12,10 @@
 #include <cstring>
 
 
+#define EMPTY_STRING    "\xa9\xa9\xa9.\xa9\xa9\xa9"
+#define OVERFLOW_STRING ">>>"
+
+
 /// дл€ отладки
 /// \todo удалить
 static BitSet32 lastFreq;
@@ -40,9 +44,6 @@ BitSet32 FreqMeter::periodActual;
 static char buffer[11] = {'0', '0', '0', '0', '0', '0', '0', 0, 0, 0, 0};
 
 
-
-/// ¬ыводит отладочную информацию
-static void DrawDebugInfo();
 
 static pString FreqSetToString(const BitSet32 *fr);
 
@@ -255,171 +256,6 @@ float FreqMeter::GetFreq()
 {
     return frequency;
 }
-
-
-#define EMPTY_STRING    "\xa9\xa9\xa9.\xa9\xa9\xa9"
-#define OVERFLOW_STRING ">>>"
-
-
-void FreqMeter::DrawFrequency(int x, int _y)
-{
-    int yF = _y + 1;
-    int yT = _y + 5 + Font::GetHeight();
-
-    Text("F").Draw(x + 2, yF, Color::FILL);
-    Text("T").Draw(x + 2, yT);
-
-    Rectangle(10, 10).Draw(x - 20, _y);
-    if (lampFreq)
-    {
-        Region(10, 10).Fill(x - 20, _y);
-    }
-
-    int dX = 17;
-
-    Text("=").Draw(x + dX, yF);
-    Text("=").Draw(x + dX, yT);
-
-    dX = 32;
-
-    char strFreq[50];
-    std::strcpy(strFreq, FreqSetToString(&freqActual));
-
-    Text(strFreq).DrawDigitsMonospace(x + dX, yF, Font::GetWidth('0'));
-
-    if (std::strcmp(strFreq, EMPTY_STRING) == 0)
-    {
-        return;
-    }
-
-    if (std::strcmp(strFreq, OVERFLOW_STRING) == 0)
-    {
-        return;
-    }
-
-    float freq = SU::StringToFloat(strFreq);
-
-    if (std::strcmp(&strFreq[std::strlen(strFreq) - 3], "ћ√ц") == 0)
-    {
-        freq *= 1e6F;
-    }
-    else if (std::strcmp(&strFreq[std::strlen(strFreq) - 3], "к√ц") == 0)
-    {
-        freq *= 1e3F;
-    }
-    else if (std::strcmp(&strFreq[std::strlen(strFreq) - 3], "м√ц") == 0)
-    {
-        freq *= 1e-3F;
-    }
-    else
-    {
-        // сюда никогда не дойдЄм
-    }
-
-    Time time(1.0F / freq);
-
-    Text(time.ToStringAccuracy(false, strFreq, 6)).DrawDigitsMonospace(x + dX, yT, Font::GetWidth('0'));
-}
-
-
-void FreqMeter::DrawPeriod(int x, int y)
-{
-    Text("T").Draw(x + 2, y + 1, Color::FILL);
-    Text("F").Draw(x + 2, y + 10);
-
-    Rectangle(10, 10).Draw(x - 20, y + 1);
-    if (lampPeriod)
-    {
-        Region(10, 10).Fill(x - 20, y);
-    }
-
-    int dX = 7;
-
-    Text("=").Draw(x + dX, y + 1);
-
-    Text("=").Draw(x + dX, y + 10);
-
-    dX = 12;
-
-    char strPeriod[50];
-    std::strcpy(strPeriod, PeriodSetToString(&periodActual));
-
-    Text(strPeriod).Draw(x + dX, y + 1);
-
-    if ((std::strcmp(strPeriod, EMPTY_STRING) == 0) || (std::strcmp(strPeriod, OVERFLOW_STRING) == 0))
-    {
-        return;
-    }
-
-    float per = SU::StringToFloat(strPeriod);
-
-    if (std::strcmp(&strPeriod[std::strlen(strPeriod) - 2], "нс") == 0)
-    {
-        per *= 1e-9F;
-    }
-    else if (std::strcmp(&strPeriod[std::strlen(strPeriod) - 3], "мкс") == 0)
-    {
-        per *= 1e-6F;
-    }
-    else if (std::strcmp(&strPeriod[std::strlen(strPeriod) - 2], "мс") == 0)
-    {
-        per *= 1e-3F;
-    }
-    else
-    {
-        LOG_ERROR("«десь мы никогда не должны оказатьс€");
-    }
-
-    Frequency freq(1.0F / per);
-
-    Text(freq.ToStringAccuracy(strPeriod, 6)).Draw(x + dX, y + 10);
-}
-
-
-void FreqMeter::Draw()
-{
-    /// \todo ¬ этой строке точку ставить не где придЄтс€, а в той позиции, где она сто€ла последний раз
-
-    if (set.freq.enabled == FreqMeterEnabled::Off)
-    {
-        return;
-    }
-
-    Font::Set(TypeFont::_GOST28);
-    int spacing = Font::GetSpacing();
-    Font::SetSpacing(1);
-
-    int width = 241;
-    int height = 74;
-    int x = Grid::Left() + (Grid::Width() - width) / 2;
-    int y = Grid::Top() + (Grid::Height() / 2 - height) / 2;
-
-    
-    Region(width - 2, height - 2).Fill(x + 1, y + 1, Color::BACK);
-    Rectangle(width, height).Draw(x, y, Color::FILL);
-
-    x += 2;
-    y += 2;
-
-    if (set.freq.modeView == FreqMeterModeView::Frequency)
-    {
-        DrawFrequency(x, y);
-    }
-    else
-    {
-        DrawPeriod(x, y);
-    }
-   
-    if(false)
-    {
-        DrawDebugInfo();
-    }
-
-    Font::Pop();
-    Font::SetSpacing(spacing);
-    Font::SetMinWidth(0);
-}
-
 
 
 pString PeriodSetToString(const BitSet32 *pr)
@@ -781,7 +617,166 @@ void FreqMeter::SetStateLampPeriod()
 }
 
 
-void FreqMeter::DrawDebugInfo()
+void DisplayFreqMeter::Draw()
+{
+    /// \todo ¬ этой строке точку ставить не где придЄтс€, а в той позиции, где она сто€ла последний раз
+
+    if (set.freq.enabled == FreqMeterEnabled::Off)
+    {
+        return;
+    }
+
+    Font::Set(TypeFont::_GOST28);
+    int spacing = Font::GetSpacing();
+    Font::SetSpacing(1);
+
+    int width = 241;
+    int height = 74;
+    int x = Grid::Left() + (Grid::Width() - width) / 2;
+    int y = Grid::Top() + (Grid::Height() / 2 - height) / 2;
+
+
+    Region(width - 2, height - 2).Fill(x + 1, y + 1, Color::BACK);
+    Rectangle(width, height).Draw(x, y, Color::FILL);
+
+    x += 2;
+    y += 2;
+
+    if (set.freq.modeView == FreqMeterModeView::Frequency)
+    {
+        DrawFrequency(x, y);
+    }
+    else
+    {
+        DrawPeriod(x, y);
+    }
+
+    if (false)
+    {
+        DrawDebugInfo();
+    }
+
+    Font::Pop();
+    Font::SetSpacing(spacing);
+    Font::SetMinWidth(0);
+}
+
+
+void DisplayFreqMeter::DrawFrequency(int x, int _y)
+{
+    int yF = _y + 1;
+    int yT = _y + 5 + Font::GetHeight();
+
+    Text("F").Draw(x + 2, yF, Color::FILL);
+    Text("T").Draw(x + 2, yT);
+
+    Rectangle(10, 10).Draw(x - 20, _y);
+    if (lampFreq)
+    {
+        Region(10, 10).Fill(x - 20, _y);
+    }
+
+    int dX = 17;
+
+    Text("=").Draw(x + dX, yF);
+    Text("=").Draw(x + dX, yT);
+
+    dX = 32;
+
+    char strFreq[50];
+    std::strcpy(strFreq, FreqSetToString(&FreqMeter::freqActual));
+
+    Text(strFreq).DrawDigitsMonospace(x + dX, yF, Font::GetWidth('0'));
+
+    if (std::strcmp(strFreq, EMPTY_STRING) == 0)
+    {
+        return;
+    }
+
+    if (std::strcmp(strFreq, OVERFLOW_STRING) == 0)
+    {
+        return;
+    }
+
+    float freq = SU::StringToFloat(strFreq);
+
+    if (std::strcmp(&strFreq[std::strlen(strFreq) - 3], "ћ√ц") == 0)
+    {
+        freq *= 1e6F;
+    }
+    else if (std::strcmp(&strFreq[std::strlen(strFreq) - 3], "к√ц") == 0)
+    {
+        freq *= 1e3F;
+    }
+    else if (std::strcmp(&strFreq[std::strlen(strFreq) - 3], "м√ц") == 0)
+    {
+        freq *= 1e-3F;
+    }
+    else
+    {
+        // сюда никогда не дойдЄм
+    }
+
+    Time time(1.0F / freq);
+
+    Text(time.ToStringAccuracy(false, strFreq, 6)).DrawDigitsMonospace(x + dX, yT, Font::GetWidth('0'));
+}
+
+
+void DisplayFreqMeter::DrawPeriod(int x, int y)
+{
+    Text("T").Draw(x + 2, y + 1, Color::FILL);
+    Text("F").Draw(x + 2, y + 10);
+
+    Rectangle(10, 10).Draw(x - 20, y + 1);
+    if (lampPeriod)
+    {
+        Region(10, 10).Fill(x - 20, y);
+    }
+
+    int dX = 7;
+
+    Text("=").Draw(x + dX, y + 1);
+
+    Text("=").Draw(x + dX, y + 10);
+
+    dX = 12;
+
+    char strPeriod[50];
+    std::strcpy(strPeriod, PeriodSetToString(&FreqMeter::periodActual));
+
+    Text(strPeriod).Draw(x + dX, y + 1);
+
+    if ((std::strcmp(strPeriod, EMPTY_STRING) == 0) || (std::strcmp(strPeriod, OVERFLOW_STRING) == 0))
+    {
+        return;
+    }
+
+    float per = SU::StringToFloat(strPeriod);
+
+    if (std::strcmp(&strPeriod[std::strlen(strPeriod) - 2], "нс") == 0)
+    {
+        per *= 1e-9F;
+    }
+    else if (std::strcmp(&strPeriod[std::strlen(strPeriod) - 3], "мкс") == 0)
+    {
+        per *= 1e-6F;
+    }
+    else if (std::strcmp(&strPeriod[std::strlen(strPeriod) - 2], "мс") == 0)
+    {
+        per *= 1e-3F;
+    }
+    else
+    {
+        LOG_ERROR("«десь мы никогда не должны оказатьс€");
+    }
+
+    Frequency freq(1.0F / per);
+
+    Text(freq.ToStringAccuracy(strPeriod, 6)).Draw(x + dX, y + 10);
+}
+
+void DisplayFreqMeter::DrawDebugInfo()
 {
     int width = 50;
     int height = 27;
@@ -790,8 +785,8 @@ void FreqMeter::DrawDebugInfo()
     Region(width, height).Fill(x, y, Color::BACK);
     Rectangle(width + 2, height + 2).Draw(x - 1, y - 1, Color::FILL);
 
-    String("%d", freqActual.word).Draw(x + 4, y + 4);
-    String("%d", periodActual.word).Draw(x + 4, y + 15);
+    String("%d", FreqMeter::freqActual.word).Draw(x + 4, y + 4);
+    String("%d", FreqMeter::periodActual.word).Draw(x + 4, y + 15);
 
     x += 100;
     width = 120;
