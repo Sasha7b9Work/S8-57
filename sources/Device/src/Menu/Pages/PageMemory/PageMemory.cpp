@@ -35,6 +35,24 @@ void ModeWork::SetDir()
 }
 
 
+bool ModeWork::IsROM()
+{
+    return (set.mem.modeWork == ModeWork::ROM);
+}
+
+
+ModeWork::operator ModeWork::E()
+{
+    return set.mem.modeWork;
+}
+
+
+void ModeWork::Set(E mode)
+{
+    set.mem.modeWork = mode;
+}
+
+
 static void DrawSetMask();  // Эта функция рисует, когда выбран режим задания маски.
 static void DrawFileMask(int x, int y);
 static void DrawSetName();  // Эта функция рисует, когда нужно задать имя файла для сохранения

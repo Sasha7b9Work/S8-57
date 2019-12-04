@@ -164,7 +164,7 @@ static int DrawMainParameters(int _x, int _y)
         "\xb3\xb4",
         "\xb1\xb2"
     };
-    if (set.mem.modeWork == ModeWork::Dir)
+    if (ModeWork::IsDir())
     {
         std::snprintf(buffer, SIZE, "\xa5\x10%s\x10\xa5\x10%s\x10\xa5\x10", couple[set.trig.input], polar[set.trig.polarity]);
         String(buffer).Draw(x + 18, y1);
@@ -180,7 +180,7 @@ static int DrawMainParameters(int _x, int _y)
         '\xa0',
         '\xb0'
     };
-    if (set.mem.modeWork == ModeWork::Dir)
+    if (ModeWork::IsDir())
     {
         std::snprintf(buffer, 100, "\xa5\x10%c", mode[set.trig.startMode]);
         String(buffer).Draw(x + 63, y1);
@@ -194,7 +194,7 @@ static int DrawMainParameters(int _x, int _y)
 
     Separator::Draw(x - 2, y0 - 1);
 
-    if (set.mem.modeWork == ModeWork::Dir)
+    if (ModeWork::IsDir())
     {
         WriteStringAndNumber("накопл", x, y0 - 4, ENumAccum().Number());
         WriteStringAndNumber("усредн", x, y1, ENumAverage().Number());
@@ -267,7 +267,7 @@ static void DrawTime(int x, int y)
 
     Color::FILL.SetAsCurrent();
 
-    if ((set.mem.modeWork == ModeWork::ROM) || (set.mem.modeWork == ModeWork::RAM))
+    if (ModeWork::IsROM() || ModeWork::IsRAM())
     {
         if (DS)
         {
@@ -307,9 +307,9 @@ static void DrawRightPart(int x0, int y0)
     Separator::Draw(x0 - 1, y0);
 
     static const int xses[3] = { 280, 271, 251 };
-    int x = xses[set.mem.modeWork];
+    int x = xses[ModeWork()];
 
-    if (set.mem.modeWork != ModeWork::RAM)
+    if (!ModeWork::IsRAM())
     {
         x += 2;
 
@@ -328,7 +328,7 @@ static void DrawRightPart(int x0, int y0)
         "ВНТР"
     };
 
-    if (set.mem.modeWork != ModeWork::Dir)
+    if (!ModeWork::IsDir())
     {
         x += 18;
 
@@ -336,14 +336,14 @@ static void DrawRightPart(int x0, int y0)
 
         x += 2;
         String("режим").Draw(x, -1);
-        Text(strs[set.mem.modeWork]).DrawInCenterRect(x + 1, 9, 25, 8);
+        Text(strs[ModeWork()]).DrawInCenterRect(x + 1, 9, 25, 8);
     }
     else
     {
         x -= 9;
     }
 
-    if (set.mem.modeWork != ModeWork::RAM)
+    if (!ModeWork::IsRAM())
     {
         x += 27;
 

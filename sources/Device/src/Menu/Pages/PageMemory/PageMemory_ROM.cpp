@@ -162,7 +162,8 @@ static void OnOpenClose_ROM(bool open)
     {
         Color::ChangeFlash(true);
     }
-    Osci::SetModeWork(open ? ModeWork::ROM : ModeWork::Dir);
+
+    ModeWork::Set(open ? ModeWork::ROM : ModeWork::Dir);
 }
 
 static void AfterDraw_ROM()

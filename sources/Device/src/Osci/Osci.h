@@ -14,8 +14,6 @@ struct Osci
 
     static void Stop(bool pause = false);
 
-    static void SetModeWork(ModeWork::E mode);
-
     static bool IsRunning();
     /// Это вызываем в случае изменения настройки
     static void Restart();

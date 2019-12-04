@@ -25,7 +25,7 @@ void DisplayOsci::PainterData::DrawData()
             DrawROM
         };
     
-        func[set.mem.modeWork]();
+        func[ModeWork()]();
     }
     
     DrawSpectrum();
@@ -169,7 +169,7 @@ void DisplayOsci::PainterData::DrawSpectrum()
     VLine(Grid::MathBottom() - Grid::ChannelBottom()).Draw(Grid::Right(), Grid::ChannelBottom(), Color::BACK);
     
     
-    if (set.mem.modeWork == ModeWork::Dir)
+    if (ModeWork::IsDir())
     {
         uint numPoints = DS->SizeChannel();
     
