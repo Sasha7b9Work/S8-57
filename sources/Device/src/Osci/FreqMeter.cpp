@@ -37,15 +37,6 @@ bool     FreqMeter::lampPeriod = false;;
 static char buffer[11] = {'0', '0', '0', '0', '0', '0', '0', 0, 0, 0, 0};
 
 
-
-
-/// Преобразует 6 разрядов числа, хранящиеся в стеке, в текстовую строку периода. Младший значащий разряд хранится на вершине стека. order - его порядок
-static pString StackToString(Stack<uint> *stack, int order);
-/// Записывает 6 разрядов из стека stack в буфер buffer. Младший разряд на вершине стека. Точку ставить на point позиции, начиная с buffer[0]
-static void WriteStackToBuffer(Stack<uint> *stack, int point, const char *suffix);
-
-
-
 void FreqMeter::Init()
 {
     LoadSettings();
@@ -244,65 +235,6 @@ float FreqMeter::PeriodSetToFreq(const BitSet32 *period_)
 float FreqMeter::GetFreq()
 {
     return frequency;
-}
-
-
-static pString StackToString(Stack<uint> *stack, int order)
-{
-    static const struct StructOrder
-    {
-        int first;
-        int second;
-        const char *s1;
-        const char *s2;
-    }
-    structs[] =
-    {
-        {3, 6, "нс", "пс"},     // -12
-        {1, 4, "мкс", "нс"},    // -11
-        {2, 5, "мкс", "нс"},    // -10
-        {3, 6, "мкс", "нс"},    // -9
-        {1, 4, "мс", "мкс"},    // -8
-        {2, 5, "мс", "мкс"},    // -7
-        {3, 6, "мс", "мкс"},    // -6
-        {1, 4, "с", "мс"},      // -5
-        {2, 5, "с", "мс"},      // -4
-        {3, 6, "с", "мс"},      // -3
-        {4, 4, "с", "с"},       // -2
-        {5, 5, "с", "с"},       // -1
-        {6, 6, "с", "с"}        // 0
-    };
-
-    order += 12;
-
-    const StructOrder &str = structs[order];
-
-    if (stack->NumFirstZeros() < str.first)
-    {
-        WriteStackToBuffer(stack, str.first, str.s1);
-    }
-    else
-    {
-        WriteStackToBuffer(stack, str.second, str.s2);
-    }
-
-    return buffer;
-}
-
-
-static void WriteStackToBuffer(Stack<uint> *stack, int point, const char *suffix)
-{
-    for(int i = 6; i >= 0; i--)
-    {
-        if(point == i)
-        {
-            buffer[i] = '.';
-            continue;
-        }
-        buffer[i] = static_cast<char>(stack->Pop()) | 0x30;
-    }
-
-    std::strcpy(&buffer[7], suffix);
 }
 
 
@@ -833,4 +765,63 @@ int DisplayFreqMeter::LowOrder(FreqMeterFreqClc::E freqCLC, FreqMeterNumberPerio
     static const int order[] = { -5,      -6,        -7,        -8,         -9,         -10,        -11,        -12,        -13,      -14,       -15,        -16 };
 
     return order[freqCLC + numPeriods];
+}
+
+
+pString DisplayFreqMeter::StackToString(Stack<uint> *stack, int order)
+{
+    static const struct StructOrder
+    {
+        int first;
+        int second;
+        const char *s1;
+        const char *s2;
+    }
+    structs[] =
+    {
+        {3, 6, "нс", "пс"},     // -12
+        {1, 4, "мкс", "нс"},    // -11
+        {2, 5, "мкс", "нс"},    // -10
+        {3, 6, "мкс", "нс"},    // -9
+        {1, 4, "мс", "мкс"},    // -8
+        {2, 5, "мс", "мкс"},    // -7
+        {3, 6, "мс", "мкс"},    // -6
+        {1, 4, "с", "мс"},      // -5
+        {2, 5, "с", "мс"},      // -4
+        {3, 6, "с", "мс"},      // -3
+        {4, 4, "с", "с"},       // -2
+        {5, 5, "с", "с"},       // -1
+        {6, 6, "с", "с"}        // 0
+    };
+
+    order += 12;
+
+    const StructOrder &str = structs[order];
+
+    if (stack->NumFirstZeros() < str.first)
+    {
+        WriteStackToBuffer(stack, str.first, str.s1);
+    }
+    else
+    {
+        WriteStackToBuffer(stack, str.second, str.s2);
+    }
+
+    return buffer;
+}
+
+
+void DisplayFreqMeter::WriteStackToBuffer(Stack<uint> *stack, int point, const char *suffix)
+{
+    for (int i = 6; i >= 0; i--)
+    {
+        if (point == i)
+        {
+            buffer[i] = '.';
+            continue;
+        }
+        buffer[i] = static_cast<char>(stack->Pop()) | 0x30;
+    }
+
+    std::strcpy(&buffer[7], suffix);
 }
