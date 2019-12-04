@@ -8,7 +8,7 @@
 #include <cstring>
 
 
-uint16 addrRead = 0;
+uint16 FPGA::addrRead = 0;
 
 
 void FPGA::Init()

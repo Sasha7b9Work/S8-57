@@ -44,6 +44,14 @@ struct Osci
     /// ≈сли Tsm == 0, то структура будет использоватьс€ не дл€ чтени€ данных, а дл€ правильного усредени€.
     /// ¬ этом случае
     static StructReadRand GetInfoForReadRand(int Tsm = NULL_TSHIFT, const uint8 *address = nullptr);
+
+private:
+    /// ¬озвращает true, если уже можно читать данные
+    static bool CanReadData();
+
+    static void UpdateFPGA();
+
+    static void BalanceChannel(Chan::E ch, Range::E range);
 };
 
 struct AveragerOsci

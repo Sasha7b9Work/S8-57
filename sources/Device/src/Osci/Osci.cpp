@@ -3,6 +3,7 @@
 #include "common/Transceiver.h"
 #include "Data/Reader.h"
 #include "FPGA/ContextOsci.h"
+#include "FPGA/FPGA.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Memory/RAM.h"
@@ -15,14 +16,6 @@
 
 
 extern bool givingStart;
-
-extern uint16 addrRead;
-
-
-/// ¬озвращает true, если уже можно читать данные
-static bool CanReadData();
-
-static void UpdateFPGA();
 
 int Osci::addShift = 0;
 
@@ -57,7 +50,7 @@ void Osci::DeInit()
 void Osci::Start()
 {
     givingStart = false;
-    addrRead = 0xffff;
+    FPGA::addrRead = 0xffff;
 
     HAL_FSMC::WriteToFPGA16(WR::PRED_LO, ContextOsci::pred);
     HAL_FSMC::WriteToFPGA16(WR::POST_LO, ContextOsci::post);
@@ -114,7 +107,7 @@ void Osci::Update()
 }
 
 
-static void UpdateFPGA()
+void Osci::UpdateFPGA()
 {
     bool needStop = false;
     
@@ -180,9 +173,9 @@ void Osci::ReadPointP2P()
 }
 
 
-static void BalanceChannel(Chan::E ch, Range::E range)
+void Osci::BalanceChannel(Chan::E ch, Range::E range)
 {
-    Osci::Stop();
+    Stop();
 
     Range(ch).Load(range);
 
@@ -190,7 +183,7 @@ static void BalanceChannel(Chan::E ch, Range::E range)
 
     RShift(ch, 0);
 
-    Osci::Start();
+    Start();
 
     float sum = 0;
 
@@ -249,7 +242,7 @@ bool Osci::InModeRandomizer()
 }
 
 
-static bool CanReadData()
+bool Osci::CanReadData()
 {
     if (set.disp.ENumSignalsInSec.value == ENumSignalsInSec::_25)
     {

@@ -10,8 +10,7 @@
 extern bool givingStart;
 extern uint8 dataRand[Chan::Count][ENumPointsFPGA::MAX_NUM];
 
-/// Здесь хранится адрес, начиная с которого будем читать данные по каналам. Если addrRead == 0xffff, то адрес вначале нужно считать
-uint16 addrRead = 0xffff;
+uint16 FPGA::addrRead = 0xffff;
 
 volatile static int numberMeasuresForGates = 10000;
 

@@ -44,6 +44,7 @@ struct FPGA
     friend struct TrigPolarity;
     friend struct TShift;
     friend struct TrigLevel;
+    friend struct Osci;
 
 private:
 
@@ -89,6 +90,8 @@ private:
     static bool isRunning;
 
     static FlagFPGA flag;
+    /// Здесь хранится адрес, начиная с которого будем читать данные по каналам. Если addrRead == 0xffff, то адрес вначале нужно считать
+    static uint16 addrRead;
 };
 
 struct GPIO
