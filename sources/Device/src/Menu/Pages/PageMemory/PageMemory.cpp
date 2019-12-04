@@ -11,9 +11,15 @@
 #include "Utils/Math.h"
 
 
-bool ModeWork::IsRAM() const
+bool ModeWork::IsRAM()
 {
     return (set.mem.modeWork == ModeWork::RAM);
+}
+
+
+bool ModeWork::IsDir()
+{
+    return (set.mem.modeWork == ModeWork::Dir);
 }
 
 

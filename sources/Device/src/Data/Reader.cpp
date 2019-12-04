@@ -30,7 +30,7 @@ void Reader::ReadDataFromRAM()
 
     DS = nullptr;
 
-    DS = RAM::Read(ModeWork().IsRAM() ? static_cast<uint>(RAM::currentSignal) : 0U);
+    DS = RAM::Read(ModeWork::IsRAM() ? static_cast<uint>(RAM::currentSignal) : 0U);
 
     if (DS)
     {
@@ -46,7 +46,7 @@ void Reader::ReadDataFromRAM()
         FindTrigLevelIfNeed();
     }
 
-    if ((set.mem.modeWork == ModeWork::Dir) && Osci::InModeP2P())
+    if (ModeWork::IsDir() && Osci::InModeP2P())
     {
         ReadDataP2P();
     }

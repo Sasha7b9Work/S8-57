@@ -18,7 +18,8 @@ struct ModeWork
         Count       ///< »спользуетс€ в модуле Data.c. Ќужен, чтобы указать, что мудуль не настроен ни на какой режим.
     };
 
-    bool IsRAM() const;
+    static bool IsRAM();
+    static bool IsDir();
 };
 
 /// „то делать при нажатии кнопки ѕјћя“№.
