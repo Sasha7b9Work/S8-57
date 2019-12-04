@@ -112,6 +112,8 @@ source_group(Display            FILES   ../../Device/src/Display/Colors.h
                                         ../../Device/src/Display/Warnings.cpp)
 source_group(FPGA               FILES   ../../Device/src/FPGA/AD9286.h
                                         ../../Device/src/FPGA/AD9286.cpp
+                                        ../../Device/src/FPGA/Calibrator.h
+                                        ../../Device/src/FPGA/Calibrator.cpp
                                         ../../Device/src/FPGA/Context.cpp
                                         ../../Device/src/FPGA/Context.h
                                         ../../Device/src/FPGA/ContextFreqMeter.cpp
@@ -228,6 +230,8 @@ file(GLOB SOURCES   ../../common/_VS/*
                     
                     ../../Device/src/FPGA/AD9286.h
                     ../../Device/src/FPGA/AD9286.cpp
+                    ../../Device/src/FPGA/Calibrator.h
+                    ../../Device/src/FPGA/Calibrator.cpp
                     ../../Device/src/FPGA/Context.cpp
                     ../../Device/src/FPGA/Context.h
                     ../../Device/src/FPGA/ContextFreqMeter.cpp

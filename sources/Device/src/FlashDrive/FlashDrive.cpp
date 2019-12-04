@@ -116,7 +116,7 @@ void FDrive::Update()
         uint timeStart = TIME_MS;
         NEED_MOUNT = 0;
 
-        Display::FuncOnWaitStart("Обнаружено запоминающее устройство", false);
+        Display::FuncOnWait::Start("Обнаружено запоминающее устройство", false);
 
         if (f_mount(&USBDISKFatFs, static_cast<TCHAR const*>(USBDISKPath), 1) != FR_OK)
         {
@@ -132,7 +132,7 @@ void FDrive::Update()
         {
         };
 
-        Display::FuncOnWaitStop();
+        Display::FuncOnWait::Stop();
     }
     else
     {

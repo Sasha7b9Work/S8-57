@@ -73,7 +73,7 @@ DEF_CHOICE_2( cBandwidthA,                                                      
 
 static void Balance(Chan::E ch)
 {
-    Display::FuncOnWaitStart(ch == Chan::A ? "Балансировка канала 1" : "Балансировка канала 2", false);
+    Display::FuncOnWait::Start(ch == Chan::A ? "Балансировка канала 1" : "Балансировка канала 2", false);
 
     Settings old = set;
 
@@ -85,7 +85,7 @@ static void Balance(Chan::E ch)
 
     Osci::Init();
 
-    Display::FuncOnWaitStop();
+    Display::FuncOnWait::Stop();
 }
 
 

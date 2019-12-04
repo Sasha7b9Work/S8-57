@@ -686,19 +686,44 @@
           <GroupName>FPGA</GroupName>
           <Files>
             <File>
-              <FileName>AD9286.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\FPGA\AD9286.cpp</FilePath>
-            </File>
-            <File>
               <FileName>AD9286.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\FPGA\AD9286.h</FilePath>
             </File>
             <File>
-              <FileName>ContextRecorder.cpp</FileName>
+              <FileName>AD9286.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\FPGA\ContextRecorder.cpp</FilePath>
+              <FilePath>.\src\FPGA\AD9286.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Calibrator.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FPGA\Calibrator.h</FilePath>
+            </File>
+            <File>
+              <FileName>Calibrator.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FPGA\Calibrator.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ContextFreqMeter.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FPGA\ContextFreqMeter.h</FilePath>
+            </File>
+            <File>
+              <FileName>ContextFreqMeter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FPGA\ContextFreqMeter.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ContextOsci.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FPGA\ContextOsci.h</FilePath>
+            </File>
+            <File>
+              <FileName>ContextOsci.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FPGA\ContextOsci.cpp</FilePath>
             </File>
             <File>
               <FileName>ContextRecorder.h</FileName>
@@ -706,14 +731,29 @@
               <FilePath>.\src\FPGA\ContextRecorder.h</FilePath>
             </File>
             <File>
-              <FileName>FPGA.cpp</FileName>
+              <FileName>ContextRecorder.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\FPGA\FPGA.cpp</FilePath>
+              <FilePath>.\src\FPGA\ContextRecorder.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ContextTester.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FPGA\ContextTester.h</FilePath>
+            </File>
+            <File>
+              <FileName>ContextTester.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FPGA\ContextTester.cpp</FilePath>
             </File>
             <File>
               <FileName>FPGA.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\FPGA\FPGA.h</FilePath>
+            </File>
+            <File>
+              <FileName>FPGA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FPGA\FPGA.cpp</FilePath>
             </File>
             <File>
               <FileName>FPGA_HAL.cpp</FileName>
@@ -731,54 +771,24 @@
               <FilePath>.\src\FPGA\FPGA_stm.cpp</FilePath>
             </File>
             <File>
-              <FileName>MathFPGA.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\FPGA\MathFPGA.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TypesFPGA.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\FPGA\TypesFPGA.h</FilePath>
-            </File>
-            <File>
-              <FileName>ContextFreqMeter.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\FPGA\ContextFreqMeter.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ContextFreqMeter.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\FPGA\ContextFreqMeter.h</FilePath>
-            </File>
-            <File>
-              <FileName>ContextTester.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\FPGA\ContextTester.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ContextTester.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\FPGA\ContextTester.h</FilePath>
-            </File>
-            <File>
               <FileName>MathFPGA.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\FPGA\MathFPGA.h</FilePath>
             </File>
             <File>
-              <FileName>ContextOsci.cpp</FileName>
+              <FileName>MathFPGA.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\FPGA\ContextOsci.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ContextOsci.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\FPGA\ContextOsci.h</FilePath>
+              <FilePath>.\src\FPGA\MathFPGA.cpp</FilePath>
             </File>
             <File>
               <FileName>SettingsFPGA.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\FPGA\SettingsFPGA.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>TypesFPGA.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FPGA\TypesFPGA.h</FilePath>
             </File>
           </Files>
         </Group>

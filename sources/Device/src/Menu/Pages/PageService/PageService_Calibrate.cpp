@@ -1,9 +1,9 @@
 #include "defines.h"
+#include "FPGA/Calibrator.h"
+#include "FPGA/ContextOsci.h"
+#include "Hardware/Timer.h"
 #include "Menu/Pages/Include/PageService.h"
 #include "Settings/Settings.h"
-#include "Hardware/Timer.h"
-#include "FPGA/ContextOsci.h"
-
 
 
 static void OnChanged_Calibrator(bool)
@@ -27,17 +27,14 @@ static bool IsActive_Calibrate()
 
 static void OnPress_Calibrate()
 {
-    Display::FuncOnWaitStart("Калибровка канала 1", false);
+    Calibrator::Calibrate();
 
+    Display::FuncOnWait::Start("Калибровка канала 1", false);
     Timer::PauseOnTime(5000);
-
-    Display::FuncOnWaitStop();
-
-    Display::FuncOnWaitStart("Калибровка канала 2", false);
-
+    Display::FuncOnWait::Stop();
+    Display::FuncOnWait::Start("Калибровка канала 2", false);
     Timer::PauseOnTime(5000);
-
-    Display::FuncOnWaitStop();
+    Display::FuncOnWait::Stop();
 }
 
 DEF_BUTTON( bCalibrate,                                                                                                                           //--- СЕРВИС - КАЛИБРАТОР - Калибровать ---

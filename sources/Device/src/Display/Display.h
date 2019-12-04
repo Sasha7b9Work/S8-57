@@ -53,10 +53,6 @@ struct Display
     /// 3. DrawMode::Auto и func != 0 - в этом случае будет выполняться функция func(), определяемая пользователем, но в теле
     /// главного цикла, будучи вызываемой из Update() вместо Update().
     static void SetDrawMode(DrawMode::E mode, pFuncVV func = nullptr);
-
-    static void FuncOnWaitStart(const char *text, bool eraseBackground);
-
-    static void FuncOnWaitStop();
     /// Устанавливает дополнительную функцию, которая будет отрисовываться каждый раз после обновления экрана
     /// timeRemove - время, по истечении которого дополнительная функция отрисовки будет удалена. Если его не указывать, фукнция удаляться самостоятельно не будет
     static void SetAddDrawFunction(pFuncVV func, uint timeRemove = 0);
@@ -72,4 +68,13 @@ struct Display
     static void SaveRow(int row);
 
     static void LoadBrightness();
+
+    struct FuncOnWait
+    {
+        static void Start(const char *text, bool eraseBackground);
+
+        static void Stop();
+    private:
+        static void Func();
+    };
 };

@@ -391,7 +391,7 @@ static bool IsActive_SaveFirmware()
 
 static void OnPress_SaveFirmware()
 {
-    Display::FuncOnWaitStart("Сохраняю прошивку", false);
+    Display::FuncOnWait::Start("Сохраняю прошивку", false);
 
     StructForWrite structForWrite;
 
@@ -410,7 +410,7 @@ static void OnPress_SaveFirmware()
 
     FDrive::CloseFile(&structForWrite);
 
-    Display::FuncOnWaitStop();
+    Display::FuncOnWait::Stop();
 
     Display::ShowWarning("Прошивка сохранена");
 }

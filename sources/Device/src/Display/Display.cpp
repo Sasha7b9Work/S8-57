@@ -127,13 +127,13 @@ void Display::SetDrawMode(DrawMode::E mode, pFuncVV func)
 }
 
 
-void Display::FuncOnWaitStop()
+void Display::FuncOnWait::Stop()
 {
     Display::SetDrawMode(DrawMode::Auto, 0);
 }
 
 
-static void FuncOnWait()
+void Display::FuncOnWait::Func()
 {
     if (clearBackground)
     {
@@ -172,12 +172,12 @@ static void FuncOnWait()
 
 
 
-void Display::FuncOnWaitStart(const char *text, bool eraseBackground)
+void Display::FuncOnWait::Start(const char *text, bool eraseBackground)
 {
     timeStart = TIME_MS;
     textWait = text;
     clearBackground = eraseBackground;
-    Display::SetDrawMode(DrawMode::Hand, FuncOnWait);
+    Display::SetDrawMode(DrawMode::Hand, Func);
 }
 
 
@@ -360,11 +360,11 @@ static void SaveScreenToFlash()
 
     FDrive::CloseFile(&structForWrite);
 
-    Display::FuncOnWaitStart("Файл сохранён", false);
+    Display::FuncOnWait::Start("Файл сохранён", false);
 
     Timer::PauseOnTime(1500);
 
-    Display::FuncOnWaitStop();
+    Display::FuncOnWait::Stop();
 }
 
 
