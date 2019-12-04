@@ -18,6 +18,7 @@ struct Grid
     static int Bottom();
     static int Right();
     static int ChannelCenterHeight();
+    static int ChannelHeight();
     static int FullBottom();
     static int MathBottom();
     static int MathHeight();

@@ -112,6 +112,12 @@ int Grid::ChannelCenterHeight()
 }
 
 
+int Grid::ChannelHeight()
+{
+    return (ChannelBottom() - Top());
+}
+
+
 static void EmptyFunc()
 {
 

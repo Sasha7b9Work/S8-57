@@ -24,10 +24,10 @@ void DisplayOsci::PainterData::DrawData()
             DrawRAM,
             DrawROM
         };
-
+    
         func[set.mem.modeWork]();
     }
-
+    
     DrawSpectrum();
 
     Accumulator::NextFrame();
@@ -204,8 +204,8 @@ void DisplayOsci::PainterData::DrawSpectrum()
     
     }
     
-    HLine(Grid::Right() - Grid::Left()).Draw(Grid::ChannelBottom(), Grid::Left(), Color::FILL);
-    HLine(Grid::Right() - Grid::Left()).Draw(Grid::MathBottom(), Grid::Left());
+    VLine(Grid::MathHeight()).Draw(Grid::Left(), Grid::ChannelBottom(), Color::FILL);
+    HLine(300).Draw(Grid::Left(), Grid::MathBottom());
 }
 
 
