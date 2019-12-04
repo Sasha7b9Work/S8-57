@@ -361,19 +361,19 @@ static int DeltaVforLineGrid()
 {
     int result = 49;
 
-    if (set.meas.show && MeasuresModeViewSignals().IsCompress())
+    if (set.meas.show && MeasuresModeViewSignals::IsCompress())
     {
         if (MeasuresOnDisplay() == MeasuresOnDisplay::_1_5)
         {
-            result = MeasuresSource().IsBoth() ? 55 : 59;
+            result = MeasuresSource::IsBoth() ? 55 : 59;
         }
         else if (MeasuresOnDisplay() == MeasuresOnDisplay::_2_5)
         {
-            result = MeasuresSource().IsBoth() ? 69 : 51;
+            result = MeasuresSource::IsBoth() ? 69 : 51;
         }
         else if (MeasuresOnDisplay() == MeasuresOnDisplay::_3_5)
         {
-            result = MeasuresSource().IsBoth() ? 54 : 68;
+            result = MeasuresSource::IsBoth() ? 54 : 68;
         }
         else
         {
@@ -389,7 +389,7 @@ static int DeltaHforLineGrid()
 {
     int result = 69;
 
-    if (MeasuresModeViewSignals().IsCompress())
+    if (MeasuresModeViewSignals::IsCompress())
     {
         if (MeasuresOnDisplay() == MeasuresOnDisplay::_6_1)
         {

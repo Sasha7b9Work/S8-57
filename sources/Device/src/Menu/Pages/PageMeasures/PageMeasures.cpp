@@ -11,31 +11,31 @@ MeasuresOnDisplay::operator MeasuresOnDisplay::E()
 }
 
 
-bool MeasuresSource::IsA() const
+bool MeasuresSource::IsA()
 {
     return (set.meas.source == MeasuresSource::A);
 }
 
 
-bool MeasuresSource::IsB() const
+bool MeasuresSource::IsB()
 {
     return (set.meas.source == MeasuresSource::B);
 }
 
 
-bool MeasuresSource::IsBoth() const
+bool MeasuresSource::IsBoth()
 {
     return (set.meas.source == MeasuresSource::A_B);
 }
 
 
-bool MeasuresModeViewSignals::IsCompress() const
+bool MeasuresModeViewSignals::IsCompress()
 {
     return (set.meas.modeViewSignals == MeasuresModeViewSignals::Compress);
 }
 
 
-bool MeasuresOnDisplay::IsVertical() const
+bool MeasuresOnDisplay::IsVertical()
 {
     return (set.meas.number == MeasuresOnDisplay::_6_1) || (set.meas.number == MeasuresOnDisplay::_6_2);
 }

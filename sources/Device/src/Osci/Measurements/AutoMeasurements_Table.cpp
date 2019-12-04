@@ -95,16 +95,16 @@ void TableMeasures::Cell::DrawStringMeasure(int x, int y)
     Color colA = Color::CHAN[Chan::A];
     Color colB = Color::CHAN[Chan::B];
 
-    if (MeasuresSource().IsBoth())
+    if (MeasuresSource::IsBoth())
     {
         measureA.Draw(x + 2, y + 11, colA);
         measureB.Draw(x + 2, y + (set.ch[Chan::A].enabled ? 20 : 11), colB); //-V547
     }
-    else if (MeasuresSource().IsA())
+    else if (MeasuresSource::IsA())
     {
         measureA.Draw(x + 2, y + 11, colA);
     }
-    else if (MeasuresSource().IsB())
+    else if (MeasuresSource::IsB())
     {
         measureB.Draw(x + 2, y + 11, colB);
     }
@@ -149,7 +149,7 @@ int TableMeasures::NumRows()
 
 int TableMeasures::GetDeltaGridLeft()
 {
-    if (set.meas.show && MeasuresModeViewSignals().IsCompress())
+    if (set.meas.show && MeasuresModeViewSignals::IsCompress())
     {
         if (MeasuresOnDisplay() == MeasuresOnDisplay::_6_1)
         {
@@ -170,7 +170,7 @@ int TableMeasures::GetDeltaGridLeft()
 
 int TableMeasures::DY()
 {
-    if (MeasuresSource().IsBoth())
+    if (MeasuresSource::IsBoth())
     {
         return 30;
     }

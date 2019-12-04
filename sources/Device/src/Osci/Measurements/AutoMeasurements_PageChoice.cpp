@@ -72,12 +72,12 @@ void PageChoiceMeasures::Draw()
     {
         return;
     }
-    int x = MeasuresOnDisplay().IsVertical() ? (Grid::Right() - 3 * Grid::Width() / 5) : Grid::Left();
+    int x = MeasuresOnDisplay::IsVertical() ? (Grid::Right() - 3 * Grid::Width() / 5) : Grid::Left();
     int y = Grid::Top();
     int dX = Grid::Width() / 5;
     int dY = 22;
-    int maxRow = MeasuresOnDisplay().IsVertical() ? 8 : 5;
-    int maxCol = MeasuresOnDisplay().IsVertical() ? 3 : 5;
+    int maxRow = MeasuresOnDisplay::IsVertical() ? 8 : 5;
+    int maxCol = MeasuresOnDisplay::IsVertical() ? 3 : 5;
 
     TypeMeasure::E meas = TypeMeasure::None;
 

@@ -4,9 +4,9 @@
 
 
 /// ¬ыводить автоматические измерени€ по каналу A
-#define VIEW_MEASURES_A                 (set.ch[Chan::A].enabled && (MeasuresSource().IsA() || MeasuresSource().IsBoth()))
+#define VIEW_MEASURES_A                 (set.ch[Chan::A].enabled && (MeasuresSource::IsA() || MeasuresSource::IsBoth()))
 /// ¬ыводить автоматические измерени€ по каналу B
-#define VIEW_MEASURES_B                 (set.ch[Chan::B].enabled && (MeasuresSource().IsB() || MeasuresSource().IsBoth()))
+#define VIEW_MEASURES_B                 (set.ch[Chan::B].enabled && (MeasuresSource::IsB() || MeasuresSource::IsBoth()))
 
 
 /// —колько автоматических измерений помещаетс€ на экран
@@ -25,7 +25,7 @@ struct MeasuresOnDisplay
     MeasuresOnDisplay() {};
     operator MeasuresOnDisplay::E();
     /// ¬озвращает true, если измерени€ расположены вертикально с левой стороны экрана
-    bool IsVertical() const;
+    static bool IsVertical();
 };
 
 struct MeasuresSource
@@ -36,10 +36,10 @@ struct MeasuresSource
         B,
         A_B
     };
-    MeasuresSource() {};
-    bool IsA() const;
-    bool IsB() const;
-    bool IsBoth() const;
+
+    static bool IsA();
+    static bool IsB();
+    static bool IsBoth();
 };
 
 /// —жимать ли сигналы при выводе измерений.
@@ -50,8 +50,8 @@ struct MeasuresModeViewSignals
         AsIs,       ///< ѕоказывать сигналы как есть.
         Compress    ///< —жимать сетку с сигналами.
     };
-    MeasuresModeViewSignals() {};
-    bool IsCompress() const;
+
+    static bool IsCompress();
 };
 
 
