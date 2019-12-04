@@ -32,7 +32,7 @@ void GovernorColor::DrawOpened(int x, int y) const
     int width = widthOpened;
     int height = heightOpened;
     OwnData()->ct->Init();
-    Rectangle(width + 2, height + 2).Draw(x - 1, y - 1, ColorTitleBackground());
+    Rectangle(width + 2, height + 2).Draw(x - 1, y - 1, Color::BACK);
     Rectangle(width, height).Draw(x, y, ColorFrame());
     Region(width - 2, height / 2 - 2).Fill(x + 1, y + 1, ColorTitleBackground());
     HLine(width).Draw(x, y + Height() / 2 + 2, ColorFrame());
@@ -69,7 +69,7 @@ void GovernorColor::DrawValue(int x, int y) const
         static_cast<int16>(red)
     };
 
-    Region(widthOpened - 2, 12).Fill(x, y, ColorTitleBackground());
+    Region(widthOpened - 2, 12).Fill(x, y, Color::BACK);
     x += 98;
 
     for (int i = 0; i < 4; i++)
