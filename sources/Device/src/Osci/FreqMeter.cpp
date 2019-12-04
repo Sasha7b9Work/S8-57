@@ -73,7 +73,7 @@ void FreqMeter::LoadSettings()
         };
 
         data |= maskTime[FreqMeterTimeCounting()];
-        data |= maskFreqClc[set.freq.freqClc];
+        data |= maskFreqClc[FreqMeterFreqClc()];
         data |= maskPeriod[set.freq.numberPeriods];
     }
     else
@@ -227,7 +227,7 @@ float FreqMeter::PeriodSetToFreq(const BitSet32 *period_)
     const float k[4] = {10e4F, 10e5F, 10e6F, 10e7F};
     const float kP[3] = {1.0F, 10.0F, 100.0F};
 
-    return FreqMeterEnabled() ? (k[set.freq.freqClc] * kP[set.freq.numberPeriods] / static_cast<float>(period_->word)) : (10e5F / static_cast<float>(period_->word));
+    return FreqMeterEnabled() ? (k[FreqMeterFreqClc()] * kP[set.freq.numberPeriods] / static_cast<float>(period_->word)) : (10e5F / static_cast<float>(period_->word));
 }
 
 
@@ -686,7 +686,7 @@ pString DisplayFreqMeter::PeriodSetToString(const BitSet32 *pr)
         _period /= 10;
     }
 
-    int order = LowOrder(set.freq.freqClc, set.freq.numberPeriods);  // В ордер - порядок младшего значащего разряда
+    int order = LowOrder(FreqMeterFreqClc(), set.freq.numberPeriods);  // В ордер - порядок младшего значащего разряда
 
     while (stack.Size() < 6)
     {

@@ -34,6 +34,12 @@ FreqMeterTimeCounting::operator FreqMeterTimeCounting::E()
 }
 
 
+FreqMeterFreqClc::operator FreqMeterFreqClc::E()
+{
+    return set.freq.freqClc;
+}
+
+
 static void OnChanged_Enable(bool)
 {
     FreqMeter::Init();

@@ -57,6 +57,9 @@ struct FreqMeterFreqClc
         _100MHz,
         Count
     };
+
+    FreqMeterFreqClc() {};
+    operator FreqMeterFreqClc::E();
 };
 
 /// Количество периодов.
