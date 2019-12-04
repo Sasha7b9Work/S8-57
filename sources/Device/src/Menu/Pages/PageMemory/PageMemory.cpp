@@ -65,6 +65,12 @@ bool FileNamingMode::IsMask()
 }
 
 
+bool ModeSaveSignal::IsBMP()
+{
+    return (set.mem._modeSaveSignal == BMP);
+}
+
+
 static void DrawSetMask();  // Эта функция рисует, когда выбран режим задания маски.
 static void DrawFileMask(int x, int y);
 static void DrawSetName();  // Эта функция рисует, когда нужно задать имя файла для сохранения
@@ -285,7 +291,7 @@ DEF_CHOICE_2( cDrive_SaveAs,                                                    
     ,
     "Изображение",
     "Текст",
-    set.mem.modeSaveSignal, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.mem._modeSaveSignal, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
