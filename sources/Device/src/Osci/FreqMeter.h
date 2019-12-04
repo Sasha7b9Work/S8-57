@@ -6,6 +6,7 @@
 class FreqMeter
 {
     friend struct DisplayFreqMeter;
+    friend struct ProgressBarFreqMeter;
 public:
     /// Инициализация.
     static void Init();
@@ -84,4 +85,10 @@ private:
     static pString StackToString(Stack<uint> *stack, int order);
     /// Записывает 6 разрядов из стека stack в буфер buffer. Младший разряд на вершине стека. Точку ставить на point позиции, начиная с buffer[0]
     static void WriteStackToBuffer(Stack<uint> *stack, int point, const char *suffix);
+};
+
+
+struct ProgressBarFreqMeter
+{
+    static void Draw(int x, int y);
 };

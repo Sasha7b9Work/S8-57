@@ -340,28 +340,7 @@ void DisplayFreqMeter::DrawFrequency(int x, int _y)
     Text("F").Draw(x, yF, Color::FILL);
     Text("T").Draw(x, yT);
 
-    if (FreqMeter::timeStartMeasureFreq != 0)
-    {
-        static const float time[FreqMeterTimeCounting::Count] = { 100.0F, 1000.0F, 10000.0F };
-
-        int length = 185;
-
-        float percents = (TIME_MS - FreqMeter::timeStartMeasureFreq) / time[set.freq.timeCounting];
-
-        int width = static_cast<int>(length * percents);
-
-        if (width > length)
-        {
-            width = length;
-        }
-
-        if (set.freq.timeCounting == FreqMeterTimeCounting::_100ms && width > length / 2)
-        {
-            width = length;
-        }
-
-        Region(width, 3).Fill(x, yT + 4 + Font::GetHeight(), Color::FILL);
-    }
+    ProgressBarFreqMeter::Draw(x, yT + 4 + Font::GetHeight());
 
     int dX = 17;
 
@@ -850,4 +829,31 @@ void DisplayFreqMeter::WriteStackToBuffer(Stack<uint> *stack, int point, const c
     }
 
     std::strcpy(&buffer[7], suffix);
+}
+
+
+void ProgressBarFreqMeter::Draw(int x, int y)
+{
+    if (FreqMeter::timeStartMeasureFreq != 0)
+    {
+        static const float time[FreqMeterTimeCounting::Count] = { 100.0F, 1000.0F, 10000.0F };
+
+        int length = 185;
+
+        float percents = (TIME_MS - FreqMeter::timeStartMeasureFreq) / time[set.freq.timeCounting];
+
+        int width = static_cast<int>(length * percents);
+
+        if (width > length)
+        {
+            width = length;
+        }
+
+        if (set.freq.timeCounting == FreqMeterTimeCounting::_100ms && width > length / 2)
+        {
+            width = length;
+        }
+
+        Region(width, 3).Fill(x, y, Color::FILL);
+    }
 }
