@@ -32,7 +32,8 @@ struct FreqMeterTimeCounting
     {
         _100ms,
         _1s,
-        _10s
+        _10s,
+        Count
     };
 };
 

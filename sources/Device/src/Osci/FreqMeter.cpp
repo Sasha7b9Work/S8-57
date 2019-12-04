@@ -30,7 +30,7 @@ uint     FreqMeter::lastFreqRead;
 uint     FreqMeter::lastPeriodRead;
 uint     FreqMeter::lastFreqOver;
 uint     FreqMeter::lastPeriodOver;
-bool     FreqMeter::lampFreq = false;
+uint     FreqMeter::timeStartMeasureFreq = 0;
 bool     FreqMeter::lampPeriod = false;;
 
 //                         0    1    2    3    4    5    6 
@@ -96,7 +96,7 @@ void FreqMeter::LoadFreqSettings()
     LoadSettings();
     HAL_FSMC::WriteToFPGA8(WR::RESET_COUNTER_FREQ, 1);
     freqActual.word = 0;
-    lampFreq = false;
+    timeStartMeasureFreq = 0;
 }
 
 
@@ -247,18 +247,18 @@ void FreqMeter::SetStateLamps()
 
 void FreqMeter::SetStateLampFreq()
 {
-    if(!lampFreq)
+    if(timeStartMeasureFreq == 0)
     {
         if(ContextFreqMeter::GetFlag::FREQ_IN_PROCESS())
         {
-            lampFreq = true;
+            timeStartMeasureFreq = TIME_MS;
         }
     }
     else
     {
         if(ContextFreqMeter::GetFlag::FREQ_READY())
         {
-            lampFreq = false;
+            timeStartMeasureFreq = 0;
         }
     }
 }
@@ -297,7 +297,7 @@ void DisplayFreqMeter::Draw()
     Font::SetSpacing(1);
 
     int width = 200;
-    int height = 100;
+    int height = 90;
     int x = Grid::Left() + (Grid::Width() - width) / 2;
     int y = Grid::Top() + (Grid::Height() / 2 - height) / 2;
 
@@ -340,10 +340,27 @@ void DisplayFreqMeter::DrawFrequency(int x, int _y)
     Text("F").Draw(x, yF, Color::FILL);
     Text("T").Draw(x, yT);
 
-    Rectangle(10, 10).Draw(x - 20, _y);
-    if (FreqMeter::lampFreq)
+    if (FreqMeter::timeStartMeasureFreq != 0)
     {
-        Region(10, 10).Fill(x - 20, _y);
+        static const float time[FreqMeterTimeCounting::Count] = { 100.0F, 1000.0F, 10000.0F };
+
+        int length = 185;
+
+        float percents = (TIME_MS - FreqMeter::timeStartMeasureFreq) / time[set.freq.timeCounting];
+
+        int width = static_cast<int>(length * percents);
+
+        if (width > length)
+        {
+            width = length;
+        }
+
+        if (set.freq.timeCounting == FreqMeterTimeCounting::_100ms && width > length / 2)
+        {
+            width = length;
+        }
+
+        Region(width, 3).Fill(x, yT + 4 + Font::GetHeight(), Color::FILL);
     }
 
     int dX = 17;
@@ -653,6 +670,7 @@ pString DisplayFreqMeter::FreqSetToString(const BitSet32 *fr)
             HIGH_FREQ;
         }
         break;
+    case FreqMeterTimeCounting::Count:
     default:
         LOG_ERROR("");
         break;

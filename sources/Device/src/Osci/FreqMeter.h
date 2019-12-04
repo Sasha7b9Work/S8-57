@@ -55,8 +55,8 @@ private:
     static uint lastFreqOver;
     /// Последнее время переполения периода
     static uint lastPeriodOver;
-    /// Если true - горит лампочка счёта частоты
-    static bool lampFreq;
+    /// Время начала измерения частоты
+    static uint timeStartMeasureFreq;
     /// Если false - горит лампочка счёта периода
     static bool lampPeriod;
 };
