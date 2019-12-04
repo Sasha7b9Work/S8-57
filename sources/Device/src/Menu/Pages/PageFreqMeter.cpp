@@ -140,12 +140,12 @@ void PageFreqMeter::Init()
 
     Item **items = const_cast<Item **>(page->OwnData()->items);
 
-    if (set.freq.modeView == FreqMeterModeView::Frequency)
+    if (FreqMeterModeView().IsFrequency())
     {
         items[2] = const_cast<Choice *>(&cTimeF);
         items[3] = &Item::empty;
     }
-    else if (set.freq.modeView == FreqMeterModeView::Period)
+    else if (FreqMeterModeView().IsPeriod())
     {
         items[2] = const_cast<Choice *>(&cFreqClc);
         items[3] = const_cast<Choice *>(&cNumPeriods);
