@@ -6,7 +6,7 @@
 
 #define PRIORITY_SOUND_DMA1_STREAM5 5, 0
 
-#define ERROR_HANDLER()                             ::HAL::ErrorHandler(__FILE__, __LINE__)
+#define ERROR_HANDLER()            ::HAL::ErrorHandler(__FILE__, __LINE__)
 
 typedef void(*pFuncTester)();
 

@@ -40,6 +40,7 @@ source_group(Display                   REGULAR_EXPRESSION src/Display/*)
 source_group(Display\\Font             REGULAR_EXPRESSION ../common/Display/Font/*)
 source_group(FPGA                      REGULAR_EXPRESSION src/FPGA/*)
 source_group(Hardware                  REGULAR_EXPRESSION src/Hardware/*)
+source_group(Hardware\\HAL             REGULAR_EXPRESSION src/Hardware/HAL/*)
 source_group(Hardware\\stm32           REGULAR_EXPRESSION src/Hardware/stm32/*)
 source_group(Settings                  REGULAR_EXPRESSION src/Settings/*)
 source_group(Utils                     REGULAR_EXPRESSION src/Utils/*)
@@ -62,6 +63,7 @@ file(GLOB SOURCES   ../common/_VS/*
                     ../common/Display/Font/*
                     src/FPGA/*
                     src/Hardware/*
+                    src/Hardware/HAL/*
                     src/Hardware/stm32/*
                     src/Settings/*
                     src/Utils/*

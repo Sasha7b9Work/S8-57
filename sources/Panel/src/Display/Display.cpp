@@ -4,6 +4,7 @@
 #include "Hardware/Controls.h"
 #include "Hardware/CPU.h"
 #include "Hardware/LTDC.h"
+#include "Hardware/HAL/HAL.h"
 #include <stdlib.h>
 
 
@@ -23,7 +24,9 @@ uint8 *Display::backBuffer = back;
 
 
 void Display::Init()
-{   
+{
+    HAL_DAC2::Init();
+    HAL_DAC2::SetValue(50);
     LTDC_::Init(reinterpret_cast<uint>(frontBuffer), reinterpret_cast<uint>(backBuffer));
     Painter::LoadPalette();
 }
