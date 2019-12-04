@@ -76,8 +76,7 @@ struct CursorsLookMode
         Voltage,   ///< Курсоры следят за напряжением автоматически.
         Time,      ///< Курсоры следят за временем автоматически.
         Both       ///< Курсоры следят за временем и напряжением, в зависимости от того, какой курсоры вращали последним.
-    } value;
-    explicit CursorsLookMode(E v) : value(v) {};
+    };
 };
 
 /// Какие курсоры сейчас активны. Какие активны, те и будут перемещаться по вращению ручки УСТАНОВКА.
@@ -88,8 +87,7 @@ struct CursorsActive
         U,
         T,
         None
-    } value;
-    explicit CursorsActive(E v) : value(v) {};
+    };
 };
 
 /// Каким курсором управлять
@@ -101,8 +99,7 @@ struct CursorsControl
         _2,        ///< вторым
         _1_2,      ///< обоими
         Disable    ///< никаким
-    } value;
-    explicit CursorsControl(E v) : value(v) {};
+    };
 };
 
 /// Дискретность перемещения курсоров.
@@ -112,8 +109,7 @@ struct CursorsMovement
     {
         Pixels,    ///< По пикселям экрана
         Percents   ///< По процентам
-    } value;
-    explicit CursorsMovement(E v) : value(v) {};
+    };
 };
 
 struct SettingsCursorsMeasures
@@ -141,8 +137,7 @@ struct FuncModeDraw
         Disable,
         Separate,
         Together
-    } value;
-    explicit FuncModeDraw(E v) : value(v) {};
+    };
 };
 
 struct MathFunction
@@ -151,8 +146,7 @@ struct MathFunction
     {
         Sum,
         Mul
-    } value;
-    explicit MathFunction(E v) : value(v) {};
+    };
 };
 
 struct ModeRegSet
@@ -161,8 +155,7 @@ struct ModeRegSet
     {
         Range,
         RShift
-    } value;
-    explicit ModeRegSet(E v) : value(v) {};
+    };
 };
 
 struct SettingsMath
