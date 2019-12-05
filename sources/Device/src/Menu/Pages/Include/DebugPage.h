@@ -23,7 +23,8 @@ struct StretchADC
     {
         Disable,
         Real,
-        Hand
+        Hand,
+        Count
     } value;
     explicit StretchADC(E v) : value(v) {};
 };
@@ -31,20 +32,21 @@ struct StretchADC
 
 struct SettingsNRST
 {
-    int16           balanceADC[Chan::Count];                ///< Значение дополнительного смещения АЦП для ручной балансировки.
-    BalanceADC::E   balanceADCtype;                         ///< Тип балансировки.
-    StretchADC::E   stretchADCtype;                         ///< Тип растяжки канала.
-    int16           stretchADC[Chan::Count][3];             ///< \brief Поправочный коэффициент для ручного, калибровочного и
+    int16           numAveForRand;                              ///< По скольким измерениям усреднять сигнал в режиме рандомизатора.
+    int16           numSmoothForRand;                           ///< Число точек для скользящего фильта в рандомизаторе.
+    int16           correctionTime;                             ///< Коэффициент коррекции времени.
+    int16           enum_gate_max;                              ///< Ограничение ворот в рандомизаторе сверху
+    int16           enum_gate_min;                              ///< Ограничение ворот в рандомизаторе снизу
+
+    BalanceADC::E   balanceADCtype;                             ///< Тип балансировки.
+    int8            rShiftAdd[Chan::Count][Range::Count];       ///< Добавочное смещение, которое пишется сюда при калибровке и балансировке
+    StretchADC::E   stretchADCtype;                             ///< Тип растяжки канала.
+    int16           stretchADC[Chan::Count][StretchADC::Count]; ///< \brief Поправочный коэффициент для ручного, калибровочного и
                     ///< отключенного режимов. Здесь хранится в целом виде, чтобы получить реальный коэффициент, нужно разделить на 1000 и
                     ///< прибавить единицу.
-    int16           rShiftAddStable[Chan::Count][3];        ///< Добавочное смещение для трёх самых чувствительных диапазонов. Задаётся единожды при настройке
-    int16           numAveForRand;                          ///< По скольким измерениям усреднять сигнал в режиме рандомизатора.
-    int16           numSmoothForRand;                       ///< Число точек для скользящего фильта в рандомизаторе.
-    int8            rShiftAdd[Chan::Count][Range::Count];   ///< Добавочное смещение, которое пишется сюда при калибровке и балансировке
-    int16           correctionTime;                         ///< Коэффициент коррекции времени.
-    int16           enum_gate_max;                 ///< Ограничение ворот в рандомизаторе сверху
-    int16           enum_gate_min;                 ///< Ограничение ворот в рандомизаторе снизу
 
+    int16           rShiftAddStable[Chan::Count][3];            ///< Добавочное смещение для трёх самых чувствительных диапазонов. Задаётся единожды при настройке
+    int16           balanceADC[Chan::Count];                    ///< Значение дополнительного смещения АЦП для ручной балансировки.
 };
 
 
