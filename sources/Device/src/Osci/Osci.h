@@ -8,6 +8,8 @@ struct Osci
 
     static void Update();
 
+    static void OnPressStart();
+
     static void DeInit();
 
     static void Start();

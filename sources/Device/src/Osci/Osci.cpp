@@ -2,7 +2,6 @@
 #include "device.h"
 #include "common/Transceiver.h"
 #include "Data/Reader.h"
-#include "FPGA/ContextOsci.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
@@ -37,13 +36,22 @@ void Osci::Init()
     FPGA::LoadCalibratorMode();
     LoadHoldfOff();
     HAL_PIO::Init(HPort::_G, HPin::_1, HMode::Input, HPull::Up);
-    ContextOsci::OnPressStart();
+    Osci::OnPressStart();
 }
 
 
 void Osci::DeInit()
 {
     Stop();
+}
+
+
+void Osci::OnPressStart()
+{
+    if (ModeWork::IsDir())
+    {
+        FPGA::OnPressStart();
+    }
 }
 
 
@@ -154,7 +162,7 @@ void Osci::UpdateFPGA()
     
     if(needStop)
     {
-        ContextOsci::OnPressStart();
+        Osci::OnPressStart();
     }
 }
 

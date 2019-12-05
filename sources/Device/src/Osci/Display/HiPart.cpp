@@ -4,7 +4,6 @@
 #include "Display/Grid.h"
 #include "Display/Primitives.h"
 #include "FPGA/FPGA.h"
-#include "FPGA/ContextOsci.h"
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/AutoMeasurements.h"

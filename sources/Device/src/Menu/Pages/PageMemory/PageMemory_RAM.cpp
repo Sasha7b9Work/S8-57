@@ -2,7 +2,6 @@
 #include "Display/Grid.h"
 #include "Display/Primitives.h"
 #include "Display/Symbols.h"
-#include "FPGA/ContextOsci.h"
 #include "Hardware/Memory/RAM.h"
 #include "Menu/MenuItems.h"
 #include "Osci/Osci.h"
@@ -59,7 +58,7 @@ static void OnOpenClose_RAM(bool enter)
         ModeWork::SetDir();
         if (RUN_FPGA_BEFORE_SB)
         {
-            ContextOsci::OnPressStart();
+            Osci::OnPressStart();
         }
     }
 }

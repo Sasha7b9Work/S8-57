@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "FPGA/ContextOsci.h"
 #include "Menu/Pages/Include/PageTrig.h"
 #include "Settings/Settings.h"
 #include "Osci/Osci.h"
@@ -11,7 +10,7 @@ void PageTrig::OnChanged_Mode(bool)
     Osci::Stop(false);
     if(set.trig.startMode != TrigStartMode::Single)
     {
-        ContextOsci::OnPressStart();
+        Osci::OnPressStart();
     }
     
     // Елси находимся в режиме рандомизатора

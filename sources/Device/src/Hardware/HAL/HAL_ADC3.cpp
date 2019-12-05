@@ -3,7 +3,6 @@
 #include "FPGA/FPGA.h"
 #include "Hardware/HAL/HAL.h"
 #include "Settings/Settings.h"
-#include "FPGA/ContextOsci.h"
 #include "Osci/Osci.h"
 
 

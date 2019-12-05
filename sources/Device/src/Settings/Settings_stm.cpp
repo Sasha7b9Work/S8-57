@@ -1,9 +1,7 @@
 #include "defines.h"
 #include "Settings.h"
 #include "Hardware/Memory/ROM.h"
-#include "FPGA/ContextOsci.h"
 #include "Osci/Osci.h"
-
 
 
 void Settings::Load(bool _default)
@@ -13,7 +11,7 @@ void Settings::Load(bool _default)
         Reset();
         Osci::Init();
         Menu::Init();
-        ContextOsci::OnPressStart();
+        Osci::OnPressStart();
     }
 }
 

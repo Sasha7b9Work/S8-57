@@ -1,7 +1,6 @@
 #include "defines.h"
 #include "device.h"
 #include "FlashDrive/FlashDrive.h"
-#include "FPGA/ContextOsci.h"
 #include "Hardware/Timer.h"
 #include "Keyboard/HandlersKeys.h"
 #include "Keyboard/Keyboard.h"
@@ -379,7 +378,7 @@ void Handlers::OnStart()
     }
     else
     {
-        ContextOsci::OnPressStart();
+        Osci::OnPressStart();
     }
 }
 

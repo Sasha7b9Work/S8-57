@@ -716,16 +716,6 @@
               <FilePath>.\src\FPGA\ContextFreqMeter.cpp</FilePath>
             </File>
             <File>
-              <FileName>ContextOsci.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\FPGA\ContextOsci.h</FilePath>
-            </File>
-            <File>
-              <FileName>ContextOsci.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\FPGA\ContextOsci.cpp</FilePath>
-            </File>
-            <File>
               <FileName>ContextRecorder.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\FPGA\ContextRecorder.h</FilePath>
