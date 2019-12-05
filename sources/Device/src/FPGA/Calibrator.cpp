@@ -8,28 +8,22 @@
 #include <cstring>
 
 
-#define WAIT_AND_GO  Keyboard::Wait(); Display::FuncOnWait::Stop();
-
-
 void Calibrator::Calibrate()
 {
     if (!Calibrate(Chan::A))
     {
-        Display::FuncOnWait::Start("Калибровка канала 1 не прошла", true);
-
-        WAIT_AND_GO;
+        Display::FuncOnWait::Start("Калибровка канала 1 не прошла", true, true);
+        Display::FuncOnWait::Wait();
     }
     else if (!Calibrate(Chan::B))
     {
-        Display::FuncOnWait::Start("Калибровка канала 2 не прошла", true);
-
-        WAIT_AND_GO;
+        Display::FuncOnWait::Start("Калибровка канала 2 не прошла", true, true);
+        Display::FuncOnWait::Wait();
     }
     else
     {
-        Display::FuncOnWait::Start("Калибровка успешно завершена", true);
-
-        WAIT_AND_GO;
+        Display::FuncOnWait::Start("Калибровка успешно завершена", true, true);
+        Display::FuncOnWait::Wait();
     }
 }
 
@@ -37,9 +31,9 @@ void Calibrator::Calibrate()
 bool Calibrator::Calibrate(Chan::E ch)
 {
     Display::FuncOnWait::Start(ch == Chan::A ?  "Подключите встроекнный калибратор ко входу 1 и нажмите любую кнопку" :
-                                                "Подключите встроекнный калибратор ко входу 2 и нажмите любую кнопку", true);
+                                                "Подключите встроекнный калибратор ко входу 2 и нажмите любую кнопку", true, true);
 
-    WAIT_AND_GO;
+    Display::FuncOnWait::Wait();
 
     return Balance(ch) && Stretch(ch);
 }
@@ -124,5 +118,5 @@ void Calibrator::BalanceChannel(Chan::E ch, Range::E range)
 
 bool Calibrator::Stretch(Chan::E)
 {
-    return false;
+    return true;
 }

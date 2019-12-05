@@ -156,9 +156,3 @@ bool Keyboard::KeyIsActive(Key::E key)
 
     return false;
 }
-
-
-void Keyboard::Wait(Key::E key)
-{
-    while (1) {};
-}

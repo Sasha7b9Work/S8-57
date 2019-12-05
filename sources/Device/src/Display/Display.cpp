@@ -8,13 +8,19 @@
 #include "Display/Warnings.h"
 #include "FlashDrive/FlashDrive.h"
 #include "Hardware/Timer.h"
+#include "Keyboard/BufferButtons.h"
 #include "Keyboard/DecoderDevice.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Recorder/DisplayRecorder.h"
+#include "Utils/Values.h"
 #include <cstring>
 
 
 static void EmptyFunc() { }
+
+
+bool Display::FuncOnWait::waitKey = false;
+bool Display::FuncOnWait::running = false;
 
 
 static pFuncVV funcOnHand = nullptr;
@@ -118,7 +124,7 @@ void Display::SetDrawMode(DrawMode::E mode, pFuncVV func)
 
     if (mode == DrawMode::Hand)
     {
-        Timer::SetAndEnable(TypeTimer::Display, funcOnHand, 40);
+        Timer::SetAndEnable(TypeTimer::Display, funcOnHand, 100);
     }
     else
     {
@@ -129,7 +135,9 @@ void Display::SetDrawMode(DrawMode::E mode, pFuncVV func)
 
 void Display::FuncOnWait::Stop()
 {
-    Display::SetDrawMode(DrawMode::Auto, 0);
+    Display::SetDrawMode(DrawMode::Auto, nullptr);
+    running = false;
+    BufferButtons::Clear();
 }
 
 
@@ -177,15 +185,35 @@ void Display::FuncOnWait::Func()
     Text(buf).DrawInCenterRect(x, y + 20, width, height - 20);
 
     Painter::EndScene();
+
+    if (waitKey)
+    {
+        while (Transceiver::Receive()) {};
+
+        Decoder::Update();
+
+        while (!BufferButtons::IsEmpty())
+        {
+            if (BufferButtons::Extract().IsRelease())
+            {
+                Stop();
+            }
+        }
+    }
 }
 
 
 
-void Display::FuncOnWait::Start(const char *text, bool eraseBackground)
+void Display::FuncOnWait::Start(const char *text, bool eraseBackground, bool wait)
 {
+    running = true;
+
+    BufferButtons::Clear();
+
     timeStart = TIME_MS;
     textWait = text;
     clearBackground = eraseBackground;
+    waitKey = wait;
     Display::SetDrawMode(DrawMode::Hand, Func);
 }
 

@@ -10,4 +10,6 @@ struct BufferButtons
     static KeyEvent Extract();
     /// ¬озвращает true, если очередь событий пуста
     static bool IsEmpty();
+
+    static void Clear() { while (!IsEmpty()) { Extract(); } }
 };

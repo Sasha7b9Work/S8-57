@@ -71,10 +71,18 @@ struct Display
 
     struct FuncOnWait
     {
-        static void Start(const char *text, bool eraseBackground);
+        /// waitKey - автоматическое завершение по нажатию любой клавиши
+        static void Start(const char *text, bool eraseBackground, bool waitKey = false);
 
         static void Stop();
+
+        static void Wait() { while (running) {}; }
+
     private:
         static void Func();
+
+        static bool waitKey;
+
+        static bool running;
     };
 };
