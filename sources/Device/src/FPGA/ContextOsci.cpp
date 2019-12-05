@@ -4,7 +4,6 @@
 
 
 uint16 &ContextOsci::pred = FPGA::pred;
-uint16 &ContextOsci::post = FPGA::post;
 uint &ContextOsci::timeStart = FPGA::timeStart;
 bool &ContextOsci::isRunning = FPGA::isRunning;
 
