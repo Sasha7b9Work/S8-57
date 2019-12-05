@@ -12,7 +12,7 @@ private:
 
     static bool Calibrate(Chan::E ch);
 
-    static void BalanceChannel(Chan::E ch, Range::E range);
+    static void Balance(Chan::E ch, Range::E range);
 
     static bool Stretch(Chan::E ch);
 };

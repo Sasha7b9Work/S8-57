@@ -27,8 +27,8 @@ void Calibrator::Calibrate()
 
 bool Calibrator::Calibrate(Chan::E ch)
 {
-    Display::Message::ShowAndWaitKey(ch == Chan::A ?  "Подключите встроекнный калибратор ко входу 1 и нажмите любую кнопку" :
-                                                "Подключите встроекнный калибратор ко входу 2 и нажмите любую кнопку", true);
+    Display::Message::ShowAndWaitKey(ch == Chan::A ?  "Подключите встроенный калибратор ко входу 1 и нажмите любую кнопку" :
+                                                      "Подключите встроенный калибратор ко входу 2 и нажмите любую кнопку", true);
 
     return Balance(ch) && Stretch(ch);
 }
@@ -37,6 +37,8 @@ bool Calibrator::Calibrate(Chan::E ch)
 bool Calibrator::Balance(Chan::E ch)
 {
     Settings old = set;
+
+    ShiftADC::SetDisabled();
 
     static const pString messages[Chan::Count] =
     {
@@ -52,7 +54,7 @@ bool Calibrator::Balance(Chan::E ch)
 
     for (int range = 0; range < Range::Count; range++)
     {
-        BalanceChannel(ch, static_cast<Range::E>(range));
+        Balance(ch, static_cast<Range::E>(range));
     }
 
     std::memcpy(&old.dbg.nrst.shiftADC[ch][0], &set.dbg.nrst.shiftADC[ch][0], sizeof(set.dbg.nrst.shiftADC[ch][0]) * Range::Count);
@@ -67,13 +69,11 @@ bool Calibrator::Balance(Chan::E ch)
 }
 
 
-void Calibrator::BalanceChannel(Chan::E ch, Range::E range)
+void Calibrator::Balance(Chan::E ch, Range::E range)
 {
     Osci::Stop();
 
     Range(ch).Load(range);
-
-    set.dbg.nrst.shiftADC[ch][range] = 0;
 
     RShift(ch, 0);
 
