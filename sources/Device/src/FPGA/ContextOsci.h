@@ -17,9 +17,4 @@ struct ContextOsci
     static uint16 &pred;
     static uint &timeStart;
     static bool &isRunning;
-
-    struct GetFlag
-    {
-        static bool PRED();
-    };
 };

@@ -31,8 +31,3 @@ uint ContextOsci::BytesInChannel()
 {
     return ENumPointsFPGA().BytesInChannel();
 }
-
-bool ContextOsci::GetFlag::PRED()
-{
-    return FPGA::flag.Pred();
-}
