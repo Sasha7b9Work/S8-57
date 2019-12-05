@@ -36,8 +36,3 @@ bool ContextOsci::GetFlag::PRED()
 {
     return FPGA::flag.Pred();
 }
-
-bool ContextOsci::GetFlag::HOLD_OFF()
-{
-    return FPGA::flag.HoldOff();
-}

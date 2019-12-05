@@ -119,7 +119,7 @@ void Osci::UpdateFPGA()
     
         if (ContextOsci::GetFlag::PRED() && !givingStart)
         {
-            if (!Osci::InModeRandomizer() && (set.trig.startMode == TrigStartMode::Auto) && ContextOsci::GetFlag::HOLD_OFF())
+            if (!Osci::InModeRandomizer() && (set.trig.startMode == TrigStartMode::Auto) && FPGA::flag.HoldOff())
             {
                 FPGA::GiveStart();
                 givingStart = true;

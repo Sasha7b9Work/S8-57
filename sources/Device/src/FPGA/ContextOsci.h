@@ -21,6 +21,5 @@ struct ContextOsci
     struct GetFlag
     {
         static bool PRED();
-        static bool HOLD_OFF();
     };
 };
