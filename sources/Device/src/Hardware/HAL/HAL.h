@@ -124,9 +124,12 @@ struct HAL_FSMC
     static uint8 ReadData0() { return *addrData0; }
     static uint8 ReadData1() { return *addrData1; }
 private:
-
+    /// Первый адрес чтения данных
     static uint8 *addrData0;
+    /// Второй адрес чтения данных
     static uint8 *addrData1;
+    /// Конфигурировать для работы с альтерой
+    static void Configure();
 };
 
 struct HAL
