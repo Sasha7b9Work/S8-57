@@ -46,8 +46,3 @@ bool ContextOsci::GetFlag::TRIG_READY()
 {
     return FPGA::flag.TrigReady();
 }
-
-bool ContextOsci::GetFlag::DATA_READY()
-{
-    return FPGA::flag.DataReady();
-}

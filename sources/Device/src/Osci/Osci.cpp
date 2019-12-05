@@ -130,7 +130,7 @@ void Osci::UpdateFPGA()
             }
         }
     
-        if (ContextOsci::GetFlag::DATA_READY())
+        if (FPGA::flag.DataReady())
         {
             if (CanReadData())
             {

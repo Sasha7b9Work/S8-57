@@ -23,6 +23,5 @@ struct ContextOsci
         static bool PRED();
         static bool HOLD_OFF();
         static bool TRIG_READY();
-        static bool DATA_READY();
     };
 };
