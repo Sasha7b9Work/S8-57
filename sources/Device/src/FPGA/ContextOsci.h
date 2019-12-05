@@ -7,8 +7,6 @@ struct ContextOsci
 {
     static void OnPressStart();
 
-    static void GiveStart();
-
     static void Reset();
 
     static void SetValueADC(uint16 value);

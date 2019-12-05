@@ -17,11 +17,6 @@ void ContextOsci::OnPressStart()
     }
 }
 
-void ContextOsci::GiveStart()
-{
-    FPGA::GiveStart();
-}
-
 void ContextOsci::Reset()
 {
     FPGA::Reset();

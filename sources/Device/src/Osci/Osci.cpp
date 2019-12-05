@@ -121,7 +121,7 @@ void Osci::UpdateFPGA()
         {
             if (!Osci::InModeRandomizer() && (set.trig.startMode == TrigStartMode::Auto) && ContextOsci::GetFlag::HOLD_OFF())
             {
-                ContextOsci::GiveStart();
+                FPGA::GiveStart();
                 givingStart = true;
             }
             if (!ContextOsci::GetFlag::TRIG_READY())
