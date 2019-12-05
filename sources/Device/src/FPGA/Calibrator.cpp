@@ -12,22 +12,22 @@ void Calibrator::Calibrate()
 {
     if (!Calibrate(Chan::A))
     {
-        Display::FuncOnWait::StartAndWaitKey("Калибровка канала 1 не прошла", true);
+        Display::Message::ShowAndWaitKey("Калибровка канала 1 не прошла", true);
     }
     else if (!Calibrate(Chan::B))
     {
-        Display::FuncOnWait::StartAndWaitKey("Калибровка канала 2 не прошла", true);
+        Display::Message::ShowAndWaitKey("Калибровка канала 2 не прошла", true);
     }
     else
     {
-        Display::FuncOnWait::StartAndWaitKey("Калибровка успешно завершена", true);
+        Display::Message::ShowAndWaitKey("Калибровка успешно завершена", true);
     }
 }
 
 
 bool Calibrator::Calibrate(Chan::E ch)
 {
-    Display::FuncOnWait::StartAndWaitKey(ch == Chan::A ?  "Подключите встроекнный калибратор ко входу 1 и нажмите любую кнопку" :
+    Display::Message::ShowAndWaitKey(ch == Chan::A ?  "Подключите встроекнный калибратор ко входу 1 и нажмите любую кнопку" :
                                                 "Подключите встроекнный калибратор ко входу 2 и нажмите любую кнопку", true);
 
     return Balance(ch) && Stretch(ch);
@@ -44,7 +44,7 @@ bool Calibrator::Balance(Chan::E ch)
         "Балансировка канала 2"
     };
 
-    Display::FuncOnWait::Start(messages[ch], true);
+    Display::Message::Show(messages[ch], true);
 
     ModeCouple(ch, ModeCouple::GND);
 
@@ -61,7 +61,7 @@ bool Calibrator::Balance(Chan::E ch)
 
     Osci::Init();
 
-    Display::FuncOnWait::Stop();
+    Display::Message::Hide();
 
     return true;
 }

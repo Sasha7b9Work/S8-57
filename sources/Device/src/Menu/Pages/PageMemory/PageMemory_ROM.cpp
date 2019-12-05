@@ -63,11 +63,11 @@ DEF_GRAPH_BUTTON
 
 static void OnPress_Delete()
 {
-    Display::FuncOnWait::Start("Удаляю сохранённые данные", false);
+    Display::Message::Show("Удаляю сохранённые данные", false);
 
     ROM::Data::Erase(NUM_ROM_SIGNAL);
 
-    Display::FuncOnWait::Stop();
+    Display::Message::Hide();
 
     Color::ChangeFlash(true);
 }
@@ -88,7 +88,7 @@ DEF_GRAPH_BUTTON                                                                
 
 static void OnPress_Save()
 {
-    Display::FuncOnWait::Start("Записываю в память", false);
+    Display::Message::Show("Записываю в память", false);
 
     const DataSettings *ds = RAM::Read();
 
@@ -97,7 +97,7 @@ static void OnPress_Save()
         ROM::Data::Save(NUM_ROM_SIGNAL, ds);
     }
 
-    Display::FuncOnWait::Stop();
+    Display::Message::Hide();
 
     Color::ChangeFlash(true);
 }

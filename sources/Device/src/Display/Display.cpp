@@ -19,8 +19,8 @@
 static void EmptyFunc() { }
 
 
-bool Display::FuncOnWait::waitKey = false;
-bool Display::FuncOnWait::running = false;
+bool Display::Message::waitKey = false;
+bool Display::Message::running = false;
 
 
 static pFuncVV funcOnHand = nullptr;
@@ -133,7 +133,7 @@ void Display::SetDrawMode(DrawMode::E mode, pFuncVV func)
 }
 
 
-void Display::FuncOnWait::Stop()
+void Display::Message::Hide()
 {
     Display::SetDrawMode(DrawMode::Auto, nullptr);
     running = false;
@@ -141,7 +141,7 @@ void Display::FuncOnWait::Stop()
 }
 
 
-void Display::FuncOnWait::Func()
+void Display::Message::Func()
 {
     if (clearBackground)
     {
@@ -196,7 +196,7 @@ void Display::FuncOnWait::Func()
         {
             if (BufferButtons::Extract().IsRelease())
             {
-                Stop();
+                Hide();
             }
         }
     }
@@ -204,7 +204,7 @@ void Display::FuncOnWait::Func()
 
 
 
-void Display::FuncOnWait::Start(const char *text, bool eraseBackground)
+void Display::Message::Show(const char *text, bool eraseBackground)
 {
     running = true;
     BufferButtons::Clear();
@@ -216,9 +216,9 @@ void Display::FuncOnWait::Start(const char *text, bool eraseBackground)
 }
 
 
-void Display::FuncOnWait::StartAndWaitKey(const char *text, bool eraseBackground)
+void Display::Message::ShowAndWaitKey(const char *text, bool eraseBackground)
 {
-    Start(text, eraseBackground);
+    Show(text, eraseBackground);
     waitKey = true;
     while (running) {};
 }
@@ -403,11 +403,11 @@ static void SaveScreenToFlash()
 
     FDrive::CloseFile(&structForWrite);
 
-    Display::FuncOnWait::Start("Файл сохранён", false);
+    Display::Message::Show("Файл сохранён", false);
 
     Timer::PauseOnTime(1500);
 
-    Display::FuncOnWait::Stop();
+    Display::Message::Hide();
 }
 
 

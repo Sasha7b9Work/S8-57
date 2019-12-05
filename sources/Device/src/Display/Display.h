@@ -69,14 +69,14 @@ struct Display
 
     static void LoadBrightness();
 
-    struct FuncOnWait
+    struct Message
     {
         /// Выводит на экран сообщение. Для удаления нунжно вызвать функцию Stop()
-        static void Start(const char *text, bool eraseBackground);
+        static void Show(const char *text, bool eraseBackground);
         /// Выводит на экран сообщение и ожидает нажатия кнопки. По нажатии сообщение исчезает с экрана
-        static void StartAndWaitKey(const char *text, bool eraseBackground);
+        static void ShowAndWaitKey(const char *text, bool eraseBackground);
 
-        static void Stop();
+        static void Hide();
 
     private:
         static void Func();
