@@ -23,7 +23,7 @@ static void OnChanged_Balance_Mode(bool)
     Draw_Balance_Mode(0, 0);
 }
 
-DEF_CHOICE_3(cBalance_Mode,                                                                                                                         //--- ОТЛАДКА - АЦП - БАЛАНС - Режим ---
+DEF_CHOICE_3(cBalance_Mode,                                                                                                                          //--- ОТЛАДКА - АЦП - БАЛАНС - Режим ---
     "Режим",
     "",
     DISABLE_RU,
@@ -43,7 +43,7 @@ static void OnChanged_ShiftA()
     set.dbg.nrst.balanceADC[Chan::A] = shiftADCA;
 }
 
-DEF_GOVERNOR(gShiftA,                                                                                                                          //--- ОТЛАДКА - АЦП - БАЛАНС - Смещение 1 ---
+DEF_GOVERNOR(gShiftA,                                                                                                                           //--- ОТЛАДКА - АЦП - БАЛАНС - Смещение 1 ---
     "Смещение 1",
     "",
     shiftADCA, -125, 125,
@@ -56,7 +56,7 @@ static void OnChanged_ShiftB()
     set.dbg.nrst.balanceADC[Chan::B] = shiftADCB;
 }
 
-DEF_GOVERNOR(gShiftB,                                                                                                                          //--- ОТЛАДКА - АЦП - БАЛАНС - Смещение 2 ---
+DEF_GOVERNOR(gShiftB,                                                                                                                           //--- ОТЛАДКА - АЦП - БАЛАНС - Смещение 2 ---
     "Смещение 2",
     "",
     shiftADCB, -125, 125,
@@ -64,7 +64,7 @@ DEF_GOVERNOR(gShiftB,                                                           
 )
 
 
-DEF_PAGE_3(pBalance,                                                                                                                       //--- ОТЛАДКА - АЦП - БАЛАНС ---
+DEF_PAGE_3(pBalance,                                                                                                                                         //--- ОТЛАДКА - АЦП - БАЛАНС ---
     "БАЛАНС",
     "",
     &cBalance_Mode,
@@ -75,7 +75,7 @@ DEF_PAGE_3(pBalance,                                                            
 )
 
 
-DEF_CHOICE_3(cStretch_Mode,                                                                                                                   //--- ОТЛАДКА - АЦП - РАСТЯЖКА - Режим ---
+DEF_CHOICE_3(cStretch_Mode,                                                                                                                        //--- ОТЛАДКА - АЦП - РАСТЯЖКА - Режим ---
     "Режим",
     "",
     DISABLE_RU,
@@ -114,7 +114,7 @@ static void OnChanged_Stretch_A()
     set.dbg.nrst.stretchADC[Chan::A][set.dbg.nrst.stretchADCtype] = stretchA;
 }
 
-DEF_GOVERNOR(gStretch_A,                                                                                                                //--- ОТЛАДКА - АЦП - РАСТЯЖКА - Растяжка 1к ---
+DEF_GOVERNOR(gStretch_A,                                                                                                                     //--- ОТЛАДКА - АЦП - РАСТЯЖКА - Растяжка 1к ---
     "Растяжка 1к",
     "Задаёт ручную растяжку первого канала.\n1 единица = 0.0001",
     stretchA, -10000, 10000,
@@ -127,7 +127,7 @@ static void OnChanged_Stretch_B()
     set.dbg.nrst.stretchADC[Chan::B][set.dbg.nrst.stretchADCtype] = stretchB;
 }
 
-DEF_GOVERNOR(gStretch_B,                                                                                                                //--- ОТЛАДКА - АЦП - РАСТЯЖКА - Растяжка 2к ---
+DEF_GOVERNOR(gStretch_B,                                                                                                                     //--- ОТЛАДКА - АЦП - РАСТЯЖКА - Растяжка 2к ---
     "Растяжка 2к",
     "Задаёт ручную растяжку второго канала.\n1 единица = 0.0001",
     stretchB, -10000, 10000,
@@ -135,7 +135,7 @@ DEF_GOVERNOR(gStretch_B,                                                        
 )
 
 
-DEF_PAGE_3(pStretch,                                                                                                                     //--- ОТЛАДКА - АЦП - РАСТЯЖКА ---
+DEF_PAGE_3(pStretch,                                                                                                                                       //--- ОТЛАДКА - АЦП - РАСТЯЖКА ---
     "РАСТЯЖКА",
     "Устанавливает режим и величину растяжки (для ручного режима)",
     &cStretch_Mode,
