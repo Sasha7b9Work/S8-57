@@ -31,9 +31,15 @@ void TrigInput::Load()
         {BIN_U8(00000000), BIN_U8(00000110)}  // -V2501      // อื
     };
 
-    GPIO::WritePin(FPin::A1S, _GET_BIT(datas[set.trig.input][TrigSource()], 2));
-    GPIO::WritePin(FPin::A0S, _GET_BIT(datas[set.trig.input][TrigSource()], 1));
-    GPIO::WritePin(FPin::LFS, _GET_BIT(datas[set.trig.input][TrigSource()], 0));
+    GPIO::WritePin(FPin::A1S, _GET_BIT(datas[TrigInput()][TrigSource()], 2));
+    GPIO::WritePin(FPin::A0S, _GET_BIT(datas[TrigInput()][TrigSource()], 1));
+    GPIO::WritePin(FPin::LFS, _GET_BIT(datas[TrigInput()][TrigSource()], 0));
+}
+
+
+TrigInput::operator TrigInput::E()
+{
+    return set.trig.input;
 }
 
 
