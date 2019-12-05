@@ -149,12 +149,11 @@ DEF_PAGE_3(pStretch,                                                            
 
 
 
-DEF_PAGE_3(pADC,  //-V1027
+DEF_PAGE_2(pADC,  //-V1027
     "¿÷œ",
     "",
     &pBalance,
     &pStretch,
-    PageDebug::PageADC::PageShift::self,
     PageName::Debug_ADC,
     &PageDebug::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
