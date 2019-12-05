@@ -69,7 +69,7 @@ static void DebugShowSetInfo_Draw()
     {
         for (int range = 0; range < Range::Count; ++range)
         {
-            String("%d", set.dbg.nrst.rShiftAdd[ch][range]).Draw(x + range * 20, y + dY * ddY);
+            String("%d", set.dbg.nrst.shiftADC[ch][range]).Draw(x + range * 20, y + dY * ddY);
         }
         ddY++;
     }

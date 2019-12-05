@@ -15,6 +15,12 @@ void ShiftADC::SetReal()
 }
 
 
+bool ShiftADC::IsReal()
+{
+    return (set.dbg.nrst.shiftADCtype == Real);
+}
+
+
 static int16 shiftADCA;
 static int16 shiftADCB;
 

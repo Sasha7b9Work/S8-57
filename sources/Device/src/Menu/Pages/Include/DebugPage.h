@@ -40,6 +40,7 @@ struct ShiftADC
 
     static void SetDisabled();
     static void SetReal();
+    static bool IsReal();
 };
 
 
@@ -54,7 +55,7 @@ struct SettingsNRST
     BalanceADC::E   balanceADCtype;                             ///< Тип балансировки.
     int16           balanceADC[Chan::Count];                    ///< Значение дополнительного смещения АЦП для ручной балансировки.
     ShiftADC::E     shiftADCtype;                               ///< Тип учитываемого при установке дополнительного смещения
-    int8            rShiftAdd[Chan::Count][Range::Count];       ///< Добавочное смещение, которое пишется сюда при калибровке и балансировке
+    int8            shiftADC[Chan::Count][Range::Count];        ///< Добавочное смещение, которое пишется сюда при калибровке и балансировке
     StretchADC::E   stretchADCtype;                             ///< Тип растяжки канала.
     int16           stretchADC[Chan::Count][StretchADC::Count]; ///< \brief Поправочный коэффициент для ручного, калибровочного и
                     ///< отключенного режимов. Здесь хранится в целом виде, чтобы получить реальный коэффициент, нужно разделить на 1000 и

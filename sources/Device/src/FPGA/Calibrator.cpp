@@ -43,7 +43,7 @@ void Calibrator::Balance(Chan::E ch)
         BalanceChannel(ch, static_cast<Range::E>(range));
     }
 
-    std::memcpy(&old.dbg.nrst.rShiftAdd[ch][0], &set.dbg.nrst.rShiftAdd[ch][0], sizeof(set.dbg.nrst.rShiftAdd[ch][0]) * Range::Count);
+    std::memcpy(&old.dbg.nrst.shiftADC[ch][0], &set.dbg.nrst.shiftADC[ch][0], sizeof(set.dbg.nrst.shiftADC[ch][0]) * Range::Count);
 
     set = old;
 
@@ -59,7 +59,7 @@ void Calibrator::BalanceChannel(Chan::E ch, Range::E range)
 
     Range(ch).Load(range);
 
-    set.dbg.nrst.rShiftAdd[ch][range] = 0;
+    set.dbg.nrst.shiftADC[ch][range] = 0;
 
     RShift(ch, 0);
 
@@ -88,10 +88,10 @@ void Calibrator::BalanceChannel(Chan::E ch, Range::E range)
 
     if (delta > 0.0F)
     {
-        set.dbg.nrst.rShiftAdd[ch][range] = static_cast<int8>(delta * 200.0F / 125.0F + 0.5F);
+        set.dbg.nrst.shiftADC[ch][range] = static_cast<int8>(delta * 200.0F / 125.0F + 0.5F);
     }
     else
     {
-        set.dbg.nrst.rShiftAdd[ch][range] = static_cast<int8>(delta * 200.0F / 125.0F - 0.5F);
+        set.dbg.nrst.shiftADC[ch][range] = static_cast<int8>(delta * 200.0F / 125.0F - 0.5F);
     }
 }
