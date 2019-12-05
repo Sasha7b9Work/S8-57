@@ -158,5 +158,11 @@ struct PageDebug
             static void OnChanged_Mode(bool);
         };
 
+
+        struct PageShift
+        {
+            static const Page *const self;
+        };
+
     };
 };

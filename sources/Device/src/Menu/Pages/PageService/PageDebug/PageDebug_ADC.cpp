@@ -158,14 +158,36 @@ DEF_PAGE_3(pStretch,                                                            
 )
 
 
+static void OnChanged_ShiftType(bool)
+{
+
+}
 
 
+DEF_CHOICE_2(cAddRShift,
+    "Режим",
+    "",
+    DISABLE_RU,
+    "Реальный",
+    set.dbg.nrst.addRShiftADCtype, &PageDebug::PageADC::PageShift::self, Item::Active, OnChanged_ShiftType, Choice::AfterDraw
+)
 
-DEF_PAGE_2(pADC,  //-V1027
+
+DEF_PAGE_1(pAddRShift,
+    "ДОП. СМ.",
+    "Управляет режимом дополнительного смщения по вертикали",
+    &cAddRShift,
+    PageName::Debug_ADC_Shift,
+    &PageDebug::PageADC::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
+)
+
+
+DEF_PAGE_3(pADC,  //-V1027
     "АЦП",
     "",
     &pBalance,
     &pStretch,
+    &pAddRShift,
     PageName::Debug_ADC,
     &PageDebug::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
@@ -173,3 +195,4 @@ DEF_PAGE_2(pADC,  //-V1027
 const Page *const PageDebug::PageADC::self = static_cast<const Page *>(&pADC);
 const Page *const PageDebug::PageADC::PageStretch::self = static_cast<const Page *>(&pStretch);
 const Page *const PageDebug::PageADC::PageBalance::self = static_cast<const Page *>(&pBalance);
+const Page *const PageDebug::PageADC::PageShift::self = static_cast<const Page *>(&pAddRShift);
