@@ -861,7 +861,7 @@ void TShift::Reset() const
 
 void TShift::Draw() const
 {
-    int x = TPos().PosX() - set.time.shift;
+    int x = TPos().PosX() - TShift();
 
     if (x < Grid::Left())
     {
