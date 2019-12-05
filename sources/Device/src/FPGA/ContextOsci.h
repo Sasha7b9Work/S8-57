@@ -7,8 +7,6 @@ struct ContextOsci
 {
     static void OnPressStart();
 
-    static void SetValueADC(uint16 value);
-
     static uint BytesInChannel();
 
     static bool InStateStop();

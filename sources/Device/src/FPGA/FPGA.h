@@ -50,6 +50,8 @@ struct FPGA
     /// ¬ключить/выключить калибратор.
     static void LoadCalibratorMode();
 
+    static void SetValueADC(uint16 value);
+
 private:
 
     static void Init();
@@ -59,8 +61,6 @@ private:
     static void GiveStart();
 
     static void Reset();
-
-    static void SetValueADC(uint16 value);
 
     static void ReadData();
 

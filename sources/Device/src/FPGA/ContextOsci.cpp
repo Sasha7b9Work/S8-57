@@ -27,11 +27,6 @@ bool ContextOsci::InStateWait()
     return FPGA_IN_STATE_WAIT;
 }
 
-void ContextOsci::SetValueADC(uint16 value)
-{
-    FPGA::SetValueADC(value);
-}
-
 uint ContextOsci::BytesInChannel()
 {
     return ENumPointsFPGA().BytesInChannel();

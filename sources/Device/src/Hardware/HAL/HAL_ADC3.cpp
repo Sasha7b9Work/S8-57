@@ -1,6 +1,7 @@
 #include <stm32f4xx_hal.h>
 #include "defines.h"
-#include "HAL.h"
+#include "FPGA/FPGA.h"
+#include "Hardware/HAL/HAL.h"
 #include "Settings/Settings.h"
 #include "FPGA/ContextOsci.h"
 #include "Osci/Osci.h"
@@ -93,7 +94,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 
     if (Osci::InModeRandomizer())
     {
-        ContextOsci::SetValueADC(static_cast<uint16>(HAL_ADC_GetValue(hadc)));
+        FPGA::SetValueADC(static_cast<uint16>(HAL_ADC_GetValue(hadc)));
     }
 }
 
