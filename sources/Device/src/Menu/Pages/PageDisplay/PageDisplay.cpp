@@ -64,6 +64,12 @@ DisplayMapping::E &DisplayMapping::Ref()
 }
 
 
+TypeGrid::E &TypeGrid::Ref()
+{
+    return set.disp._typeGrid;
+}
+
+
 DEF_CHOICE_10( cSmoothing,                                                                                                                                    //--- ДИСПЛЕЙ - Сглаживание ---
     "Сглаж.",
     "Устанавливает количество точек для расчёта сглаженного по соседним точкам сигнала.",
@@ -110,7 +116,7 @@ DEF_CHOICE_4( cType, // -V206                                                   
     "Тип 2",
     "Тип 3",
     "Тип 4",
-    set.disp.typeGrid, &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    TypeGrid::Ref(), &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
