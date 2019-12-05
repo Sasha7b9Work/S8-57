@@ -247,7 +247,7 @@ const Settings Settings::defaultSettings =
 
             BalanceADC::Disable,    // balanceADCtype
             {},                     // balanceADC[Chan::Count]
-            AddRShiftADC::Disable,  // addRShiftADCtype
+            ShiftADC::Disable,      // shiftADCtype
             {},                     // rShiftAdd[Chan::Count][Range::Count][2]
             StretchADC::Disable,    // stretchADCtype
             {},                     // StretchADC[Chan::Count][3]

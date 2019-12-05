@@ -3,15 +3,15 @@
 #include "Settings/Settings.h"
 
 
-void AddRShiftADC::SetDisabled()
+void ShiftADC::SetDisabled()
 {
-    set.dbg.nrst.addRShiftADCtype = Disable;
+    set.dbg.nrst.shiftADCtype = Disable;
 }
 
 
-void AddRShiftADC::SetReal()
+void ShiftADC::SetReal()
 {
-    set.dbg.nrst.addRShiftADCtype = Real;
+    set.dbg.nrst.shiftADCtype = Real;
 }
 
 
@@ -169,7 +169,7 @@ DEF_CHOICE_2(cAddRShift,
     "",
     DISABLE_RU,
     "׀ואכüםûי",
-    set.dbg.nrst.addRShiftADCtype, &PageDebug::PageADC::PageShift::self, Item::Active, OnChanged_ShiftType, Choice::AfterDraw
+    set.dbg.nrst.shiftADCtype, &PageDebug::PageADC::PageShift::self, Item::Active, OnChanged_ShiftType, Choice::AfterDraw
 )
 
 

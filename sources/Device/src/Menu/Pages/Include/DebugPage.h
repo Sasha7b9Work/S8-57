@@ -29,7 +29,7 @@ struct StretchADC
 
 
 /// Дополнительное смещение АЦП
-struct AddRShiftADC
+struct ShiftADC
 {
     enum E
     {
@@ -53,7 +53,7 @@ struct SettingsNRST
 
     BalanceADC::E   balanceADCtype;                             ///< Тип балансировки.
     int16           balanceADC[Chan::Count];                    ///< Значение дополнительного смещения АЦП для ручной балансировки.
-    AddRShiftADC::E addRShiftADCtype;                           ///< Тип учитываемого при установке дополнительного смещения
+    ShiftADC::E     shiftADCtype;                               ///< Тип учитываемого при установке дополнительного смещения
     int8            rShiftAdd[Chan::Count][Range::Count];       ///< Добавочное смещение, которое пишется сюда при калибровке и балансировке
     StretchADC::E   stretchADCtype;                             ///< Тип растяжки канала.
     int16           stretchADC[Chan::Count][StretchADC::Count]; ///< \brief Поправочный коэффициент для ручного, калибровочного и
