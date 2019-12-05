@@ -12,28 +12,23 @@ void Calibrator::Calibrate()
 {
     if (!Calibrate(Chan::A))
     {
-        Display::FuncOnWait::Start("Калибровка канала 1 не прошла", true, true);
-        Display::FuncOnWait::Wait();
+        Display::FuncOnWait::StartAndWaitKey("Калибровка канала 1 не прошла", true);
     }
     else if (!Calibrate(Chan::B))
     {
-        Display::FuncOnWait::Start("Калибровка канала 2 не прошла", true, true);
-        Display::FuncOnWait::Wait();
+        Display::FuncOnWait::StartAndWaitKey("Калибровка канала 2 не прошла", true);
     }
     else
     {
-        Display::FuncOnWait::Start("Калибровка успешно завершена", true, true);
-        Display::FuncOnWait::Wait();
+        Display::FuncOnWait::StartAndWaitKey("Калибровка успешно завершена", true);
     }
 }
 
 
 bool Calibrator::Calibrate(Chan::E ch)
 {
-    Display::FuncOnWait::Start(ch == Chan::A ?  "Подключите встроекнный калибратор ко входу 1 и нажмите любую кнопку" :
-                                                "Подключите встроекнный калибратор ко входу 2 и нажмите любую кнопку", true, true);
-
-    Display::FuncOnWait::Wait();
+    Display::FuncOnWait::StartAndWaitKey(ch == Chan::A ?  "Подключите встроекнный калибратор ко входу 1 и нажмите любую кнопку" :
+                                                "Подключите встроекнный калибратор ко входу 2 и нажмите любую кнопку", true);
 
     return Balance(ch) && Stretch(ch);
 }

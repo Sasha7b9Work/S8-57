@@ -204,17 +204,23 @@ void Display::FuncOnWait::Func()
 
 
 
-void Display::FuncOnWait::Start(const char *text, bool eraseBackground, bool wait)
+void Display::FuncOnWait::Start(const char *text, bool eraseBackground)
 {
     running = true;
-
     BufferButtons::Clear();
-
     timeStart = TIME_MS;
     textWait = text;
     clearBackground = eraseBackground;
-    waitKey = wait;
+    waitKey = false;
     Display::SetDrawMode(DrawMode::Hand, Func);
+}
+
+
+void Display::FuncOnWait::StartAndWaitKey(const char *text, bool eraseBackground)
+{
+    Start(text, eraseBackground);
+    waitKey = true;
+    while (running) {};
 }
 
 

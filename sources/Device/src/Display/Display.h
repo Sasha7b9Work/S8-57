@@ -71,12 +71,12 @@ struct Display
 
     struct FuncOnWait
     {
-        /// waitKey - автоматическое завершение по нажатию любой клавиши
-        static void Start(const char *text, bool eraseBackground, bool waitKey = false);
+        /// Выводит на экран сообщение. Для удаления нунжно вызвать функцию Stop()
+        static void Start(const char *text, bool eraseBackground);
+        /// Выводит на экран сообщение и ожидает нажатия кнопки. По нажатии сообщение исчезает с экрана
+        static void StartAndWaitKey(const char *text, bool eraseBackground);
 
         static void Stop();
-
-        static void Wait() { while (running) {}; }
 
     private:
         static void Func();
