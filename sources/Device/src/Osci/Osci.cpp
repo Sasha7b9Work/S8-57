@@ -167,8 +167,11 @@ void Osci::ReadPointP2P()
 {
     if (InModeP2P() && FPGA::IsRunning() && HAL_PIO::Read(HPort::_G, HPin::_1))
     {
-        BitSet16 dataA(HAL_FSMC::ReadFromFPGA(RD::DATA_A), HAL_FSMC::ReadFromFPGA(RD::DATA_A + 1));
-        BitSet16 dataB(HAL_FSMC::ReadFromFPGA(RD::DATA_B), HAL_FSMC::ReadFromFPGA(RD::DATA_B + 1));
+        HAL_FSMC::SetAddrData(RD::DATA_A, RD::DATA_A + 1);
+        BitSet16 dataA(HAL_FSMC::ReadData0(), HAL_FSMC::ReadData1());
+
+        HAL_FSMC::SetAddrData(RD::DATA_B, RD::DATA_B + 1);
+        BitSet16 dataB(HAL_FSMC::ReadData0(), HAL_FSMC::ReadData1());
 
         LOG_WRITE("%d %d", dataA.halfWord, dataB.halfWord);
 

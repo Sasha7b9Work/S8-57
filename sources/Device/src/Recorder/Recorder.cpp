@@ -79,8 +79,11 @@ void Recorder::ReadPoint()
     {
         if (StorageRecorder::CurrentRecord()->FreeMemory() > 4)
         {
-            BitSet16 dataA(HAL_FSMC::ReadFromFPGA(RD::DATA_A), HAL_FSMC::ReadFromFPGA(RD::DATA_A + 1));
-            BitSet16 dataB(HAL_FSMC::ReadFromFPGA(RD::DATA_B), HAL_FSMC::ReadFromFPGA(RD::DATA_B + 1));
+            HAL_FSMC::SetAddrData(RD::DATA_A, RD::DATA_A + 1);
+            BitSet16 dataA(HAL_FSMC::ReadData0(), HAL_FSMC::ReadData1());
+
+            HAL_FSMC::SetAddrData(RD::DATA_B, RD::DATA_B + 1);
+            BitSet16 dataB(HAL_FSMC::ReadData0(), HAL_FSMC::ReadData1());
 
             StorageRecorder::CurrentRecord()->AddPoint(dataA, dataB);
         }
