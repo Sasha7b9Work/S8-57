@@ -56,7 +56,7 @@ void Osci::Start()
     HAL_FSMC::WriteToFPGA16(WR::POST_LO, FPGA::post);
     HAL_FSMC::WriteToFPGA8(WR::START, 0xff);
 
-    ContextOsci::timeStart = TIME_MS;
+    FPGA::timeStart = TIME_MS;
 
     if (InModeP2P())
     {

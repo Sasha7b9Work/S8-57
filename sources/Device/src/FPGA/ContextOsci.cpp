@@ -3,9 +3,6 @@
 #include "FPGA/FPGA.h"
 
 
-uint &ContextOsci::timeStart = FPGA::timeStart;
-
-
 void ContextOsci::OnPressStart()
 {
     if (ModeWork::IsDir())

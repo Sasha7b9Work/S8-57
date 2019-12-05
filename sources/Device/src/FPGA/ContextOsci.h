@@ -6,6 +6,4 @@
 struct ContextOsci
 {
     static void OnPressStart();
-
-    static uint &timeStart;
 };
