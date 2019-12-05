@@ -6,11 +6,13 @@ struct Calibrator
 {
     static void Calibrate();
     /// Балансировать канал
-    static void Balance(Chan::E ch);
+    static bool Balance(Chan::E ch);
 
 private:
 
+    static bool Calibrate(Chan::E ch);
+
     static void BalanceChannel(Chan::E ch, Range::E range);
 
-    static void Stretch(Chan::E ch);
+    static bool Stretch(Chan::E ch);
 };

@@ -8,25 +8,44 @@
 #include <cstring>
 
 
+#define WAIT_AND_GO  Keyboard::Wait(); Display::FuncOnWait::Stop();
+
+
 void Calibrator::Calibrate()
 {
-    /*
-        Алгоритм калибровки.
-        1. Сбалансировать каналы
-        2. Установить растяжку
-    */
+    if (!Calibrate(Chan::A))
+    {
+        Display::FuncOnWait::Start("Калибровка канала 1 не прошла", true);
 
-    Balance(Chan::A);
+        WAIT_AND_GO;
+    }
+    else if (!Calibrate(Chan::B))
+    {
+        Display::FuncOnWait::Start("Калибровка канала 2 не прошла", true);
 
-    Balance(Chan::B);
+        WAIT_AND_GO;
+    }
+    else
+    {
+        Display::FuncOnWait::Start("Калибровка успешно завершена", true);
 
-    Stretch(Chan::A);
-
-    Stretch(Chan::B);
+        WAIT_AND_GO;
+    }
 }
 
 
-void Calibrator::Balance(Chan::E ch)
+bool Calibrator::Calibrate(Chan::E ch)
+{
+    Display::FuncOnWait::Start(ch == Chan::A ?  "Подключите встроекнный калибратор ко входу 1 и нажмите любую кнопку" :
+                                                "Подключите встроекнный калибратор ко входу 2 и нажмите любую кнопку", true);
+
+    WAIT_AND_GO;
+
+    return Balance(ch) && Stretch(ch);
+}
+
+
+bool Calibrator::Balance(Chan::E ch)
 {
     Settings old = set;
 
@@ -54,6 +73,8 @@ void Calibrator::Balance(Chan::E ch)
     Osci::Init();
 
     Display::FuncOnWait::Stop();
+
+    return true;
 }
 
 
@@ -101,7 +122,7 @@ void Calibrator::BalanceChannel(Chan::E ch, Range::E range)
 }
 
 
-void Calibrator::Stretch(Chan::E)
+bool Calibrator::Stretch(Chan::E)
 {
-
+    return false;
 }

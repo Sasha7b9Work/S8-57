@@ -155,7 +155,16 @@ void Display::FuncOnWait::Func()
     Region(width, height).Fill(x, y, Color::BACK);
     Rectangle(width, height).Draw(x, y, Color::FILL);
 
-    Text(textWait).DrawInCenterRect(x, y, width, height - 20);
+    int length = Font::GetLengthText(textWait);
+
+    if (length < width)
+    {
+        Text(textWait).DrawInCenterRect(x, y, width, height - 20);
+    }
+    else
+    {
+        Text(textWait).DrawInRectWithTransfers(x + 11, y + 20, width, height - 20);
+    }
 
     char buf[100];
     buf[0] = 0;
