@@ -24,7 +24,7 @@ DEF_CHOICE_16( gGateMax,                                                        
     "130",
     "140",
     "150",
-    set.dbg.enum_gate_max, &PageDebug::PageRand::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.dbg.nrst.enum_gate_max, &PageDebug::PageRand::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -48,7 +48,7 @@ DEF_CHOICE_16( gGateMin,                                                        
     "130",
     "140",
     "150",
-    set.dbg.enum_gate_min, &PageDebug::PageRand::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.dbg.nrst.enum_gate_min, &PageDebug::PageRand::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

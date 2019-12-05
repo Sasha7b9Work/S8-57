@@ -236,11 +236,6 @@ const Settings Settings::defaultSettings =
         0,                                      // timeCompensation
         0,                                      // pretriggered
         false,                                  // ShowStats
-        0,                                      // gate_max
-        0,                                      // gate_min
-        {
-            {0}, {0}
-        },
         // Несбрасываемые настройки калибровки
         {
             {},                                 // balanceADC[Chan::Count]
@@ -251,7 +246,9 @@ const Settings Settings::defaultSettings =
             0,                                  // numAveForRand
             0,                                  // numSmoothForRand
             {},                                 // rShiftAdd[Chan::Count][Range::Count][2]
-            0                                   // correctionTime
+            0,                                  // correctionTime
+            0,                                  // gate_max
+            0,                                  // gate_min
         },
         false                                   // runTest
     }

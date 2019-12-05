@@ -63,7 +63,7 @@ void RShift::Load()
 
     int16 shift = RShift(ch) + HARDWARE_ZERO;
 
-    int8 add = set.dbg.addRShift[ch][Range(ch)];
+    int8 add = set.dbg.nrst.rShiftAdd[ch][Range(ch)];
 
     shift += add;
 
