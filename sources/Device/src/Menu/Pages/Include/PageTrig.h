@@ -30,7 +30,7 @@ struct TrigInput
     };
     TrigInput() {};
     /// Установить в соотвествующие положения выводы, отвечающие за источник и вход синхронизации
-    void Load();
+    static void Load();
 };
 
 struct TrigPolarity
