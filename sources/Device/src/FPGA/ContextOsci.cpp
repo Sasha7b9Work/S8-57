@@ -27,11 +27,6 @@ void ContextOsci::OnPressStart()
     }
 }
 
-bool ContextOsci::IsRunning()
-{
-    return FPGA::IsRunning();
-}
-
 void ContextOsci::ReadFlag()
 {
     FPGA::ReadFlag();

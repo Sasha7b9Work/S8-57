@@ -46,6 +46,8 @@ struct FPGA
     friend struct TrigLevel;
     friend struct Osci;
 
+    static bool IsRunning();
+
 private:
 
     static void Init();
@@ -53,8 +55,6 @@ private:
     static void OnPressStart();
     /// Принудительный запуск синхронизации
     static void GiveStart();
-
-    static bool IsRunning();
 
     static void Reset();
 

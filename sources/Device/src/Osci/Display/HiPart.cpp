@@ -3,6 +3,7 @@
 #include "Data/DataSettings.h"
 #include "Display/Grid.h"
 #include "Display/Primitives.h"
+#include "FPGA/FPGA.h"
 #include "FPGA/ContextOsci.h"
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Display/DisplayOsci.h"
@@ -34,8 +35,6 @@ static void DrawTime(int x, int y);
 static void DrawSeparators();
 /// Записывает главные параметры в указанную позицию. Возвращает х-координату правого верхнего угла выведенного изображения
 static int DrawMainParameters(int x, int y);
-/// Нарисовать правую часть - синхронизация и режим работы
-static void DrawRightPart(int x, int y);
 
 static void WriteCursors();
 /// Нарисовать значок пикового детектора
@@ -300,7 +299,7 @@ static void DrawTime(int x, int y)
 }
 
 
-static void DrawRightPart(int x0, int y0)
+void DisplayOsci::HiPart::DrawRightPart(int x0, int y0)
 {
     // Синхроимпульс
 
@@ -352,7 +351,7 @@ static void DrawRightPart(int x0, int y0)
         x += 2;
         int y = y0 + 1;
 
-        if (ContextOsci::IsRunning())       // Рабочий режим
+        if (FPGA::IsRunning())       // Рабочий режим
         {
             Char(Symbol8::PLAY).Draw4SymbolsInRect(x, 1);
         }

@@ -16,6 +16,9 @@ struct DisplayOsci
     struct HiPart
     {
         static void Draw();
+    private:
+        /// Нарисовать правую часть - синхронизация и режим работы
+        static void DrawRightPart(int x0, int y0);
     };
 
     struct BottomPart

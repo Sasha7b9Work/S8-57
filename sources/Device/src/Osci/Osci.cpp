@@ -75,7 +75,7 @@ void Osci::Stop(bool)
 
 void Osci::Restart()
 {
-    if (ContextOsci::IsRunning())
+    if (FPGA::IsRunning())
     {
         Stop();
         Start();
@@ -85,7 +85,7 @@ void Osci::Restart()
 
 bool Osci::IsRunning()
 {
-    return ContextOsci::IsRunning();
+    return FPGA::IsRunning();
 }
 
 
@@ -96,7 +96,7 @@ void Osci::Update()
         return;
     }
 
-    if (ContextOsci::IsRunning())
+    if (FPGA::IsRunning())
     {
         UpdateFPGA();
     };
@@ -161,7 +161,7 @@ void Osci::UpdateFPGA()
 
 void Osci::ReadPointP2P()
 {
-    if (InModeP2P() && ContextOsci::IsRunning() && HAL_PIO::Read(HPort::_G, HPin::_1))
+    if (InModeP2P() && FPGA::IsRunning() && HAL_PIO::Read(HPort::_G, HPin::_1))
     {
         BitSet16 dataA(HAL_FSMC::ReadFromFPGA(RD::DATA_A), HAL_FSMC::ReadFromFPGA(RD::DATA_A + 1));
         BitSet16 dataB(HAL_FSMC::ReadFromFPGA(RD::DATA_B), HAL_FSMC::ReadFromFPGA(RD::DATA_B + 1));
