@@ -9,11 +9,6 @@ uint &ContextOsci::timeStart = FPGA::timeStart;
 bool &ContextOsci::isRunning = FPGA::isRunning;
 
 
-void ContextOsci::LoadRegUPR()
-{
-    FPGA::LoadRegUPR();
-}
-
 void ContextOsci::LoadCalibratorMode()
 {
     FPGA::LoadCalibratorMode();

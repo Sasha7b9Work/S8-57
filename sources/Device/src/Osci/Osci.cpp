@@ -25,7 +25,7 @@ void Osci::Init()
     Stop();
 
     RAM::Init();
-    ContextOsci::LoadRegUPR();
+    FPGA::LoadRegUPR();
     Range::LoadBoth();
     RShift(Chan::A).Load();
     RShift(Chan::B).Load();
@@ -264,7 +264,7 @@ bool Osci::CanReadData()
 
 void Osci::OnChangedPoints()
 {
-    ContextOsci::LoadRegUPR();
+    FPGA::LoadRegUPR();
     ContextOsci::Reset();
     DisplayOsci::PainterData::ChangeTPos();
     ContextOsci::Reset();
