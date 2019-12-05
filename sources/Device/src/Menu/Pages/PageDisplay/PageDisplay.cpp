@@ -58,6 +58,12 @@ DisplayMapping::operator DisplayMapping::E()
 }
 
 
+DisplayMapping::E &DisplayMapping::Ref()
+{
+    return set.disp.mapping;
+}
+
+
 DEF_CHOICE_10( cSmoothing,                                                                                                                                    //--- ДИСПЛЕЙ - Сглаживание ---
     "Сглаж.",
     "Устанавливает количество точек для расчёта сглаженного по соседним точкам сигнала.",
@@ -134,7 +140,7 @@ DEF_CHOICE_2( cViewMode,                                                        
     "Задаёт режим отображения сигнала",
     "Вектор",
     "Точки",
-    set.disp.mapping, &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    DisplayMapping::Ref(), &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

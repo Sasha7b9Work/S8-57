@@ -19,6 +19,7 @@ struct DisplayMapping
     DisplayMapping() {};
     DisplayMapping(DisplayMapping::E v);
     operator DisplayMapping::E();
+    static DisplayMapping::E &Ref();
 };
 
 ///  оличество измерений дл€ расчЄта минимального и максимального значений.
