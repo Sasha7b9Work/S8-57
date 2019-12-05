@@ -46,21 +46,19 @@ bool ContextTester::Read(uint16 *dataA, uint8 *dataB)
     HAL_FSMC::WriteToFPGA16(WR::PRED_LO, aRead);             // Указываем адрес, с которого будем читать данные
     HAL_FSMC::WriteToFPGA8(WR::START_ADDR, 0xff);            // И даём команду ПЛИС, чтобы чтение начиналось с него
 
-    uint8 *addrA = RD::DATA_A; // -V566
-    addrA++;
+    HAL_FSMC::SetAddrData(RD::DATA_A + 1, RD::DATA_B + 1);
+
     for (int i = 0; i < TESTER_NUM_POINTS; i++)         // Читаем данные первого канала
     {
-        *dataA++ = *addrA;
+        *dataA++ = HAL_FSMC::ReadData0();
     }
 
     HAL_FSMC::WriteToFPGA16(WR::PRED_LO, aRead);             // Указываем адрес, с котонрого будем читать данные
     HAL_FSMC::WriteToFPGA8(WR::START_ADDR, 0xff);            // И даём команду ПЛИС, чтобы чтение начиналось с него
 
-    uint8 *addrB = RD::DATA_B; // -V566
-    addrB++;
     for (int i = 0; i < TESTER_NUM_POINTS; i++)         // Читаем данные второго канала
     {
-        *dataB++ = *addrB;
+        *dataB++ = HAL_FSMC::ReadData1();
     }
 
     return true;
