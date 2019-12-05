@@ -66,7 +66,7 @@ DisplayMapping::E &DisplayMapping::Ref()
 
 TypeGrid::E &TypeGrid::Ref()
 {
-    return set.disp._typeGrid;
+    return set.disp.typeGrid;
 }
 
 

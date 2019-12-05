@@ -138,7 +138,7 @@ struct TypeGrid
         _2,
         _3,
         _4,
-        Size
+        Count
     };
 
     static TypeGrid::E &Ref();
@@ -186,7 +186,7 @@ struct SettingsDisplay
     ModeAccumulation::E    modeAccumulation;      ///< Режим накопления сигналов.
     ENumSmoothing          ENumSmoothing;         ///< Перечисление количества точек для скользящего фильтра.
     ENumSignalsInSec       ENumSignalsInSec;      ///< Перечисление числа считываний сигнала в секунда.
-    TypeGrid::E            _typeGrid;              ///< Тип сетки
+    TypeGrid::E            typeGrid;              ///< Тип сетки
     int                    brightnessGrid;        ///< Яркость сетки от 0 до 100.
     LinkingRShift::E       linkingRShift;         ///< Тип привязки к смещению по вертикали.
     uint8                  brightness;            ///< Яркость дисплея.
