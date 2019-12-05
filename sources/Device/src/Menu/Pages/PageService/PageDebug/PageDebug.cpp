@@ -88,10 +88,7 @@ static void DebugShowSetInfo_Draw()
 
     for (int ch = 0; ch < 2; ch++)
     {
-        for (int num = 0; num < 3; num++)
-        {
-            String("%d", set.dbg.nrst.stretchADC[ch][num]).Draw(x + num * 20, y + dY * ch);
-        }
+        String("%d", set.dbg.nrst.stretchADC[ch]).Draw(x, y + dY * ch);
     }
 
     y += dY;
@@ -237,42 +234,3 @@ DEF_PAGE_6( pDebug,                                                             
 )
 
 const Page * const PageDebug::self = static_cast<const Page *>(&pDebug);
-
-
-
-float GetStretchADC(Chan::E ch)
-{
-    static const int16 *addStretch[Range::Count][2] =
-    {
-        {0, 0},  // 2mV
-        {0, 0},  // 5mV
-        {0, 0},  // 10mV
-        {0, 0},
-        {0, 0},
-        {0, 0},
-        {0, 0}, // 200mV
-        {0, 0}, // 500mV
-        {0, 0},
-        {0, 0},
-        {0, 0}
-    };
-
-    const int16 *address = addStretch[Range(ch)][ch];
-
-    int16 stretch = set.dbg.nrst.stretchADC[ch][set.dbg.nrst.stretchADCtype];
-
-    if (address)
-    {
-        stretch += (*address);
-    }
-
-    return stretch * 1e-4F + 1.0F;
-}
-
-
-//------------------------------
-void SetStretchADC(Chan::E ch, float kStretch)
-{
-    set.dbg.nrst.stretchADC[ch][set.dbg.nrst.stretchADCtype] = static_cast<int16>((kStretch - 1.0F) * 1e4F);
-}
-

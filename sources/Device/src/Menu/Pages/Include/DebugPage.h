@@ -25,6 +25,9 @@ struct StretchADC
         Hand,
         Count
     };
+
+    static void SetDisabled();
+    static void SetReal();
 };
 
 
@@ -65,7 +68,7 @@ struct SettingsNRST
     ShiftADC::E     shiftADCtype;                               ///< Тип учитываемого при установке дополнительного смещения
     int8            shiftADC[Chan::Count][Range::Count];        ///< Добавочное смещение, которое пишется сюда при калибровке и балансировке
     StretchADC::E   stretchADCtype;                             ///< Тип растяжки канала.
-    int16           stretchADC[Chan::Count][StretchADC::Count]; ///< \brief Поправочный коэффициент для ручного, калибровочного и
+    int16           stretchADC[Chan::Count];                    ///< \brief Поправочный коэффициент для ручного, калибровочного и
                     ///< отключенного режимов. Здесь хранится в целом виде, чтобы получить реальный коэффициент, нужно разделить на 1000 и
                     ///< прибавить единицу.
 
@@ -97,12 +100,6 @@ struct SettingsDebug
     bool         runTest;                       ///< Если true, то нужно выполнять тест при запуске
     SettingsNRST nrst;
 };
-
-float   GetStretchADC(Chan::E ch);
-
-void    SetStretchADC(Chan::E ch, float kStretch);
-
-
 
 
 struct PageDebug

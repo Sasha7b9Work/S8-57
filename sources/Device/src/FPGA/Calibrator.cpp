@@ -21,6 +21,8 @@ void Calibrator::Calibrate()
     else
     {
         Display::Message::ShowAndWaitKey("Калибровка успешно завершена", true);
+        StretchADC::SetReal();
+        ShiftADC::SetReal();
     }
 }
 
@@ -111,7 +113,25 @@ void Calibrator::Balance(Chan::E ch, Range::E range)
 }
 
 
-bool Calibrator::Stretch(Chan::E)
+bool Calibrator::Stretch(Chan::E ch)
 {
+    Settings old = set;
+
+    ShiftADC::SetReal();
+
+    static const pString messages[Chan::Count] =
+    {
+        "Растяжка канала 1",
+        "Растяжка канала 2"
+    };
+
+    Display::Message::Show(messages[ch], true);
+
+    //old.dbg.nrst.shiftADC[Chan::A] = set.dbg.nrst.shiftADC[Chan::A];
+
+    set = old;
+
+    Display::Message::Hide();
+
     return true;
 }

@@ -33,6 +33,12 @@ ShiftADC::operator ShiftADC::E()
 }
 
 
+void StretchADC::SetReal()
+{
+    set.dbg.nrst.stretchADCtype = Real;
+}
+
+
 static int16 shiftADCA;
 static int16 shiftADCB;
 
@@ -123,13 +129,11 @@ void PageDebug::PageADC::PageStretch::OnChanged_Mode(bool)
 {
     if (set.dbg.nrst.stretchADCtype == StretchADC::Disable)
     {
-        stretchA = set.dbg.nrst.stretchADC[Chan::A][StretchADC::Disable] = 0;
-        stretchB = set.dbg.nrst.stretchADC[Chan::B][StretchADC::Disable] = 0;
     }
     else
     {
-        stretchA = set.dbg.nrst.stretchADC[Chan::A][set.dbg.nrst.stretchADCtype];
-        stretchB = set.dbg.nrst.stretchADC[Chan::B][set.dbg.nrst.stretchADCtype];
+        stretchA = set.dbg.nrst.stretchADC[Chan::A];
+        stretchB = set.dbg.nrst.stretchADC[Chan::B];
     }
 }
 
@@ -141,7 +145,7 @@ static bool IsActive_StretchAB()
 
 static void OnChanged_Stretch_A()
 {
-    set.dbg.nrst.stretchADC[Chan::A][set.dbg.nrst.stretchADCtype] = stretchA;
+    //set.dbg.nrst.stretchADC[Chan::A] = stretchA;
 }
 
 DEF_GOVERNOR(gStretch_A,                                                                                                                     //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - –‡ÒÚˇÊÍ‡ 1Í ---
@@ -154,7 +158,7 @@ DEF_GOVERNOR(gStretch_A,                                                        
 
 static void OnChanged_Stretch_B()
 {
-    set.dbg.nrst.stretchADC[Chan::B][set.dbg.nrst.stretchADCtype] = stretchB;
+    //set.dbg.nrst.stretchADC[Chan::B][set.dbg.nrst.stretchADCtype] = stretchB;
 }
 
 DEF_GOVERNOR(gStretch_B,                                                                                                                     //--- Œ“À¿ƒ ¿ - ¿÷œ - –¿—“ﬂ∆ ¿ - –‡ÒÚˇÊÍ‡ 2Í ---
