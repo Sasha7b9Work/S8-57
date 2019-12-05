@@ -69,8 +69,8 @@ struct SettingsDebug
     int16        timeCompensation;              ///< Дополнительное смещение по времени для данной развёртки режима рандомизатора.
     int16        pretriggered;                  ///< Регулируемая величина предзапуска для исследования рандомизатора.
     bool         ShowStats;                     ///< Показывать статистику на экране (fps, например).
-    SettingsNRST nrst;
     bool         runTest;                       ///< Если true, то нужно выполнять тест при запуске
+    SettingsNRST nrst;
 };
 
 float   GetStretchADC(Chan::E ch);

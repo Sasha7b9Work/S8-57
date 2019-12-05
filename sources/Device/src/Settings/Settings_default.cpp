@@ -236,6 +236,7 @@ const Settings Settings::defaultSettings =
         0,                                      // timeCompensation
         0,                                      // pretriggered
         false,                                  // ShowStats
+        false,                                   // runTest
         // Несбрасываемые настройки калибровки
         {
             {},                                 // balanceADC[Chan::Count]
@@ -249,7 +250,6 @@ const Settings Settings::defaultSettings =
             0,                                  // correctionTime
             0,                                  // gate_max
             0,                                  // gate_min
-        },
-        false                                   // runTest
+        }
     }
 };
