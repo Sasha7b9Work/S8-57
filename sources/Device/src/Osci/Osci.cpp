@@ -52,7 +52,7 @@ void Osci::Start()
     givingStart = false;
     FPGA::addrRead = 0xffff;
 
-    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, ContextOsci::pred);
+    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::pred);
     HAL_FSMC::WriteToFPGA16(WR::POST_LO, FPGA::post);
     HAL_FSMC::WriteToFPGA8(WR::START, 0xff);
 

@@ -3,7 +3,6 @@
 #include "FPGA/FPGA.h"
 
 
-uint16 &ContextOsci::pred = FPGA::pred;
 uint &ContextOsci::timeStart = FPGA::timeStart;
 
 
