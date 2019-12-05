@@ -124,7 +124,7 @@ void Osci::UpdateFPGA()
                 FPGA::GiveStart();
                 givingStart = true;
             }
-            if (!ContextOsci::GetFlag::TRIG_READY())
+            if (!FPGA::flag.TrigReady())
             {
                 Trig::pulse = false;
             }
