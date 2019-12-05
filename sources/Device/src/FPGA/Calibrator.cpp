@@ -10,6 +10,9 @@
 
 void Calibrator::Calibrate()
 {
+    StretchADC::SetReal();
+    ShiftADC::SetReal();
+
     if (!Calibrate(Chan::A))
     {
         Display::Message::ShowAndWaitKey("Калибровка канала 1 не прошла", true);
@@ -21,8 +24,6 @@ void Calibrator::Calibrate()
     else
     {
         Display::Message::ShowAndWaitKey("Калибровка успешно завершена", true);
-        StretchADC::SetReal();
-        ShiftADC::SetReal();
     }
 }
 
@@ -127,9 +128,11 @@ bool Calibrator::Stretch(Chan::E ch)
 
     Display::Message::Show(messages[ch], true);
 
-    //old.dbg.nrst.shiftADC[Chan::A] = set.dbg.nrst.shiftADC[Chan::A];
+    old.dbg.nrst.stretchADC[Chan::A] = set.dbg.nrst.stretchADC[Chan::A];
 
     set = old;
+
+    Osci::Init();
 
     Display::Message::Hide();
 
