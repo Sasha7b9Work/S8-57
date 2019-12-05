@@ -18,7 +18,7 @@ static uint CurrentFrame();
 
 void DisplayOsci::Accumulator::NextFrame()
 {
-    if (set.disp.modeAccumulation == ModeAccumulation::Reset)
+    if (ModeAccumulation::IsReset())
     {
         static uint prevFrame = 0;
 

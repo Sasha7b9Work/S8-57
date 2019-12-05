@@ -6,6 +6,11 @@
 #include "Settings/Settings.h"
 
 
+bool ModeAccumulation::IsReset()
+{
+    return (set.disp.modeAccumulation == Reset);
+}
+
 
 DEF_CHOICE_2( cEnable,                                                                                                                                 //--- ДИСПЛЕЙ - НАКОПЛЕНИЕ - Режим ---
     "Режим",
