@@ -38,9 +38,15 @@ struct ShiftADC
         Count
     };
 
+    ShiftADC(Chan::E _ch) : ch(_ch) {};
     static void SetDisabled();
     static void SetReal();
     static bool IsReal();
+
+    int8 Value() const;
+
+private:
+    Chan::E ch;
 };
 
 

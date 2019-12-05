@@ -21,6 +21,12 @@ bool ShiftADC::IsReal()
 }
 
 
+int8 ShiftADC::Value() const
+{
+    return IsReal() ? set.dbg.nrst.shiftADC[ch][Range(ch)] : 0;
+}
+
+
 static int16 shiftADCA;
 static int16 shiftADCB;
 
@@ -166,7 +172,8 @@ DEF_PAGE_3(pStretch,                                                            
 
 static void OnChanged_ShiftType(bool)
 {
-
+    RShift(Chan::A).Load();
+    RShift(Chan::B).Load();
 }
 
 

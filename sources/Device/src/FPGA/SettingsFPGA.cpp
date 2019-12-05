@@ -63,9 +63,7 @@ void RShift::Load()
 
     int16 shift = RShift(ch) + HARDWARE_ZERO;
 
-    int8 add = set.dbg.nrst.shiftADC[ch][Range(ch)];
-
-    shift += add;
+    shift += ShiftADC(ch).Value();
 
     if (Chan(ch).IsA() && Device::InModeTester())
     {
