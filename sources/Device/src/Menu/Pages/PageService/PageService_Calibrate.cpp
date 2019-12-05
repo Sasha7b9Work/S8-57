@@ -28,13 +28,6 @@ static bool IsActive_Calibrate()
 static void OnPress_Calibrate()
 {
     Calibrator::Calibrate();
-
-    Display::FuncOnWait::Start("Калибровка канала 1", false);
-    Timer::PauseOnTime(5000);
-    Display::FuncOnWait::Stop();
-    Display::FuncOnWait::Start("Калибровка канала 2", false);
-    Timer::PauseOnTime(5000);
-    Display::FuncOnWait::Stop();
 }
 
 DEF_BUTTON( bCalibrate,                                                                                                                           //--- СЕРВИС - КАЛИБРАТОР - Калибровать ---

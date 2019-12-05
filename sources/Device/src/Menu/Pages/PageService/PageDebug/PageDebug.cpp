@@ -320,16 +320,13 @@ static void DebugShowSetInfo_Draw()
 
     int ddY = 0;
 
-    for (int type = 0; type < 2; type++)
+    for (int ch = 0; ch < 2; ch++)
     {
-        for (int ch = 0; ch < 2; ch++)
+        for (int range = 0; range < Range::Count; ++range)
         {
-            for (int range = 0; range < Range::Count; ++range)
-            {
-                String("%d", set.dbg.nrst.rShiftAdd[ch][range][type]).Draw(x + range * 20, y + dY * ddY);
-            }
-            ddY++;
+            String("%d", set.dbg.nrst.rShiftAdd[ch][range]).Draw(x + range * 20, y + dY * ddY);
         }
+        ddY++;
     }
 
     y += dY * 3;

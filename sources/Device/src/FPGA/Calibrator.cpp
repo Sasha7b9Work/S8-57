@@ -5,16 +5,35 @@
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Osci.h"
 #include <cmath>
+#include <cstring>
 
 
 void Calibrator::Calibrate()
 {
+    /*
+        Алгоритм калибровки.
+        1. Сбалансировать каналы
+        2. Установить растяжку
+    */
 
+    Balance(Chan::A);
+
+    Balance(Chan::B);
 }
 
 
 void Calibrator::Balance(Chan::E ch)
 {
+    Settings old = set;
+
+    static const pString messages[Chan::Count] =
+    {
+        "Балансировка канала 1",
+        "Балансировка канала 2"
+    };
+
+    Display::FuncOnWait::Start(messages[ch], true);
+
     ModeCouple(ch, ModeCouple::GND);
 
     TBase::Load(TBase::_100ms);
@@ -23,6 +42,14 @@ void Calibrator::Balance(Chan::E ch)
     {
         BalanceChannel(ch, static_cast<Range::E>(range));
     }
+
+    std::memcpy(&old.dbg.nrst.rShiftAdd[ch][0], &set.dbg.addRShift[ch][0], sizeof(set.dbg.addRShift[ch][0]) * Range::Count);
+
+    set = old;
+
+    Osci::Init();
+
+    Display::FuncOnWait::Stop();
 }
 
 

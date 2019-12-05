@@ -67,19 +67,7 @@ DEF_CHOICE_2( cBandwidthA,                                                      
 
 static void Balance(Chan::E ch)
 {
-    Display::FuncOnWait::Start(ch == Chan::A ? "Балансировка канала 1" : "Балансировка канала 2", false);
-
-    Settings old = set;
-
     Calibrator::Balance(ch);
-
-    std::memcpy(&old.dbg.addRShift[0][0], &set.dbg.addRShift[0][0], sizeof(int8) * 2 * Range::Count);
-
-    set = old;
-
-    Osci::Init();
-
-    Display::FuncOnWait::Stop();
 }
 
 
