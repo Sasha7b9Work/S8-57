@@ -27,8 +27,6 @@ struct Osci
     static void OnChangedPoints();
 
     static void ReadPointP2P();
-    /// Балансировать канал
-    static void Balance(Chan::E ch);
     /// Загрузить значение удержания синхронизации
     static void LoadHoldfOff();
 
@@ -50,8 +48,6 @@ private:
     static bool CanReadData();
 
     static void UpdateFPGA();
-
-    static void BalanceChannel(Chan::E ch, Range::E range);
 };
 
 struct AveragerOsci

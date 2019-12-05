@@ -1,13 +1,7 @@
 #include "defines.h"
-#include "Menu/Pages/Include/PageChannels.h"
-#include "Display/Display.h"
-#include "FPGA/FPGA.h"
-#include "Menu/MenuItems.h"
-#include "Keyboard/Keyboard.h"
-#include "Settings/Settings.h"
-#include "Utils/CommonFunctions.h"
-#include "Hardware/Timer.h"
+#include "FPGA/Calibrator.h"
 #include "Osci/Osci.h"
+#include "Settings/Settings.h"
 #include <cstring>
 
 
@@ -77,7 +71,7 @@ static void Balance(Chan::E ch)
 
     Settings old = set;
 
-    Osci::Balance(ch);
+    Calibrator::Balance(ch);
 
     std::memcpy(&old.dbg.addRShift[0][0], &set.dbg.addRShift[0][0], sizeof(int8) * 2 * Range::Count);
 

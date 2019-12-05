@@ -1,17 +1,13 @@
 #include "defines.h"
 #include "device.h"
-#include "common/Transceiver.h"
 #include "Data/Reader.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Memory/RAM.h"
+#include "Osci/Osci.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/AutoMeasurements.h"
-#include "Settings/Settings.h"
-#include "Utils/Debug.h"
-#include <cstring>
-#include <cmath>
 
 
 extern bool givingStart;
@@ -177,63 +173,6 @@ void Osci::ReadPointP2P()
         LOG_WRITE("%d %d", dataA.halfWord, dataB.halfWord);
 
         RAM::GetFrameP2P()->AddPoints(dataA, dataB);
-    }
-}
-
-
-void Osci::BalanceChannel(Chan::E ch, Range::E range)
-{
-    Stop();
-
-    Range(ch).Load(range);
-
-    set.dbg.addRShift[ch][range] = 0;
-
-    RShift(ch, 0);
-
-    Start();
-
-    float sum = 0;
-
-    int numPoints = 0;
-
-    uint8 *address = (ch == Chan::A) ? RD::DATA_A : RD::DATA_B;
-    address++;
-
-    while (numPoints < 100)
-    {
-        if(!Transceiver::InInteraction())
-        {
-            if (HAL_PIO::Read(HPort::_G, HPin::_1))
-            {
-                sum += HAL_FSMC::ReadFromFPGA(address);
-                numPoints++;
-            }
-        }
-    }
-
-    float delta = std::fabsf(sum / numPoints - 127.0F);
-
-    if (delta > 0)
-    {
-        set.dbg.addRShift[ch][range] = static_cast<int8>(delta * 200.0F / 125.0F + 0.5F);
-    }
-    else
-    {
-        set.dbg.addRShift[ch][range] = static_cast<int8>(delta * 200.0F / 125.0F - 0.5F);
-    }
-}
-
-
-void Osci::Balance(Chan::E ch)
-{
-    ModeCouple(ch, ModeCouple::GND);
-
-    TBase::Load(TBase::_100ms);
-
-    for (int range = 0; range < Range::Count; range++)
-    {
-        BalanceChannel(ch, static_cast<Range::E>(range));
     }
 }
 
