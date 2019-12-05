@@ -3,6 +3,18 @@
 #include "Settings/Settings.h"
 
 
+void AddRShiftADC::SetDisabled()
+{
+    set.dbg.nrst.addRShiftADCtype = Disable;
+}
+
+
+void AddRShiftADC::SetReal()
+{
+    set.dbg.nrst.addRShiftADCtype = Real;
+}
+
+
 static int16 shiftADCA;
 static int16 shiftADCB;
 

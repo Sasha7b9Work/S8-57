@@ -12,8 +12,7 @@ struct BalanceADC
         Disable,     ///< Балансировка выключена.
         Settings,    ///< Используются значения балансировки, которые получены автоматически.
         Hand         ///< Используются значения балансировки, заданные вручную.
-    } value;
-    explicit BalanceADC(E v) : value(v) {};
+    };
 };
 
 /// Тип растяжки АЦП
@@ -25,8 +24,22 @@ struct StretchADC
         Real,
         Hand,
         Count
-    } value;
-    explicit StretchADC(E v) : value(v) {};
+    };
+};
+
+
+/// Дополнительное смещение АЦП
+struct AddRShiftADC
+{
+    enum E
+    {
+        Disable,    ///< Дополнительное смещение не учитывется
+        Real,       ///< Принимается дополнительное смещение, рассчитанное прик калибровке
+        Count
+    };
+
+    static void SetDisabled();
+    static void SetReal();
 };
 
 
@@ -39,6 +52,8 @@ struct SettingsNRST
     int16           enum_gate_min;                              ///< Ограничение ворот в рандомизаторе снизу
 
     BalanceADC::E   balanceADCtype;                             ///< Тип балансировки.
+    int16           balanceADC[Chan::Count];                    ///< Значение дополнительного смещения АЦП для ручной балансировки.
+    AddRShiftADC::E addRShiftADCtype;                           ///< Тип учитываемого при установке дополнительного смещения
     int8            rShiftAdd[Chan::Count][Range::Count];       ///< Добавочное смещение, которое пишется сюда при калибровке и балансировке
     StretchADC::E   stretchADCtype;                             ///< Тип растяжки канала.
     int16           stretchADC[Chan::Count][StretchADC::Count]; ///< \brief Поправочный коэффициент для ручного, калибровочного и
@@ -46,7 +61,6 @@ struct SettingsNRST
                     ///< прибавить единицу.
 
     int16           rShiftAddStable[Chan::Count][3];            ///< Добавочное смещение для трёх самых чувствительных диапазонов. Задаётся единожды при настройке
-    int16           balanceADC[Chan::Count];                    ///< Значение дополнительного смещения АЦП для ручной балансировки.
 };
 
 

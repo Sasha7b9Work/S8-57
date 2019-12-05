@@ -239,19 +239,20 @@ const Settings Settings::defaultSettings =
         false,                                   // runTest
         // Несбрасываемые настройки калибровки
         {
-            0,                    // numAveForRand
-            0,                    // numSmoothForRand
-            0,                    // correctionTime
-            0,                    // gate_max
-            0,                    // gate_min
+            0,                      // numAveForRand
+            0,                      // numSmoothForRand
+            0,                      // correctionTime
+            0,                      // gate_max
+            0,                      // gate_min
 
-            BalanceADC::Disable,  // balanceADCtype
-            {},                   // rShiftAdd[Chan::Count][Range::Count][2]
-            StretchADC::Disable,  // stretchADCtype
-            {},                   // StretchADC[Chan::Count][3]
+            BalanceADC::Disable,    // balanceADCtype
+            {},                     // balanceADC[Chan::Count]
+            AddRShiftADC::Disable,  // addRShiftADCtype
+            {},                     // rShiftAdd[Chan::Count][Range::Count][2]
+            StretchADC::Disable,    // stretchADCtype
+            {},                     // StretchADC[Chan::Count][3]
 
-            {},                   // rShiftAddStable[Chan::Count][3]
-            {}                    // balanceADC[Chan::Count]
+            {}                      // rShiftAddStable[Chan::Count][3]
         }
     }
 };
