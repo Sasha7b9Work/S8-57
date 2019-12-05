@@ -73,7 +73,7 @@ private:
 
     static void ReadFlag();
 
-    static bool ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data);
+    static bool ReadDataChanenlRand(Chan::E ch, uint8 *address, uint8 *data);
 
     static int CalculateShift();
 

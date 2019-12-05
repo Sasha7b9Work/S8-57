@@ -131,7 +131,7 @@ int FPGA::CalculateShift()
 }
 
 
-bool FPGA::ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data)
+bool FPGA::ReadDataChanenlRand(Chan::E ch, uint8 *addr, uint8 *data)
 {
     int Tsm = CalculateShift();
 
@@ -141,7 +141,7 @@ bool FPGA::ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data)
         return false;
     }
 
-    Osci::StructReadRand infoRead = Osci::GetInfoForReadRand(Tsm, address);
+    Osci::StructReadRand infoRead = Osci::GetInfoForReadRand(Tsm, addr);
 
     uint step = infoRead.step;
 
@@ -149,13 +149,15 @@ bool FPGA::ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data)
 
     uint8 *last = &dataRand[ch][ENumPointsFPGA().PointsInChannel()];
 
+    HAL_FSMC::SetAddrData(addr);
+
     if (ENumAverage() > 1)
     {
         uint8 *dataPointer = &data[infoRead.posFirst];              // Указатель в переданном массиве
 
         while (dataRead < last)
         {
-            *dataRead = *address;
+            *dataRead = HAL_FSMC::ReadData0();
             *dataPointer = *dataRead;
 
             dataRead += step;
@@ -166,7 +168,7 @@ bool FPGA::ReadDataChanenlRand(Chan::E ch, const uint8 *address, uint8 *data)
     {
         while (dataRead < last)
         {
-            *dataRead = *address;
+            *dataRead = HAL_FSMC::ReadData0();
             dataRead += step;
         }
 
@@ -195,36 +197,38 @@ bool FPGA::ReadDataChanenl(Chan::E ch, uint8 *data, uint numPoints)
     HAL_FSMC::WriteToFPGA8(WR::START_ADDR, 0xff);
 
 
-    uint8 *addr0 = Chan(ch).IsA() ? RD::DATA_A : RD::DATA_B;  // -V566
-    uint8 *addr1 = addr0 + 1;
+    uint8 *a0 = Chan(ch).IsA() ? RD::DATA_A : RD::DATA_B;  // -V566
+    uint8 *a1 = a0 + 1;
+
+    HAL_FSMC::SetAddrData(a0, a1);
 
     if (Osci::InModeRandomizer())
     {
-        return ReadDataChanenlRand(ch, addr1, data);
+        return ReadDataChanenlRand(ch, a1, data);
     }
     else
     {
         uint8 *p = data;
 
-        *p = *addr0;    // Первая точка почему-то неправильная читается. Просто откидываем её.
-        *p = *addr1;    // -V519
+        *p = HAL_FSMC::ReadData0();    // Первая точка почему-то неправильная читается. Просто откидываем её.
+        *p = HAL_FSMC::ReadData1();    // -V519
 
         if (PeakDetMode().IsEnabled())
         {
             for (uint i = 0; i < numPoints; i++)
             {
-                *p++ = *addr0;
-                *p++ = *addr1;
+                *p++ = HAL_FSMC::ReadData0();
+                *p++ = HAL_FSMC::ReadData1();
             }
         }
         else
         {
             for (uint i = 0; i < numPoints / 4U; ++i)   // -V112
             {
-                *p++ = *addr1;
-                *p++ = *addr1;
-                *p++ = *addr1;
-                *p++ = *addr1;
+                *p++ = HAL_FSMC::ReadData1();
+                *p++ = HAL_FSMC::ReadData1();
+                *p++ = HAL_FSMC::ReadData1();
+                *p++ = HAL_FSMC::ReadData1();
             }
         }
     }
