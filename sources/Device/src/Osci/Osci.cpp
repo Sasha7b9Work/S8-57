@@ -63,13 +63,13 @@ void Osci::Start()
         RAM::PrepareNewFrameP2P();
     }
 
-    ContextOsci::isRunning = true;
+    FPGA::isRunning = true;
 }
 
 
 void Osci::Stop(bool)
 {
-    ContextOsci::isRunning = false;
+    FPGA::isRunning = false;
 }
 
 
