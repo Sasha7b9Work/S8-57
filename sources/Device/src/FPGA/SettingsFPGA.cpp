@@ -50,9 +50,9 @@ static bool NeedLoadRShift(Chan::E ch)
 }
 
 
-void RShift::Load()
+void RShift::Load(bool force)
 {
-    if(!NeedLoadRShift(ch))
+    if(!force && !NeedLoadRShift(ch))
     {
         return;
     }

@@ -39,6 +39,8 @@ struct ShiftADC
     };
 
     ShiftADC(Chan::E _ch) : ch(_ch) {};
+    operator ShiftADC::E();
+
     static void SetDisabled();
     static void SetReal();
     static bool IsReal();

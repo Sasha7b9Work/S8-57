@@ -137,8 +137,8 @@ public:
 
     /// Изменить на delta
     void Change(int16 delta);
-    /// Загрузить в аппаратуру
-    void Load();
+    /// Загрузить в аппаратуру. Если force, то загружать нужно, не проверяя никакие условия
+    void Load(bool force = false);
     /// Отрисовать оба на экране
     static void DrawBoth();
     /// Преобразовать в строку

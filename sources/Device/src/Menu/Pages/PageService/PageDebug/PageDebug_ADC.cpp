@@ -27,6 +27,12 @@ int8 ShiftADC::Value() const
 }
 
 
+ShiftADC::operator ShiftADC::E()
+{
+    return set.dbg.nrst.shiftADCtype;
+}
+
+
 static int16 shiftADCA;
 static int16 shiftADCB;
 
@@ -172,8 +178,8 @@ DEF_PAGE_3(pStretch,                                                            
 
 static void OnChanged_ShiftType(bool)
 {
-    RShift(Chan::A).Load();
-    RShift(Chan::B).Load();
+    RShift(Chan::A).Load(true);
+    RShift(Chan::B).Load(true);
 }
 
 
