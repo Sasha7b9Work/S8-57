@@ -47,6 +47,8 @@ struct FPGA
     friend struct Osci;
 
     static bool IsRunning();
+    /// ¬ключить/выключить калибратор.
+    static void LoadCalibratorMode();
 
 private:
 
@@ -67,8 +69,6 @@ private:
     static bool ReadDataChanenl(Chan::E ch, uint8 *data, uint numBytes);
 
     static void ClearDataRand();
-    /// ¬ключить/выключить калибратор.
-    static void LoadCalibratorMode();
 
     static void LoadRegUPR();
 

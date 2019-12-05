@@ -34,7 +34,7 @@ void Osci::Init()
     TrigPolarity().Load();
     TBase().Load();
     TShift().Load();
-    ContextOsci::LoadCalibratorMode();
+    FPGA::LoadCalibratorMode();
     LoadHoldfOff();
     HAL_PIO::Init(HPort::_G, HPin::_1, HMode::Input, HPull::Up);
     ContextOsci::OnPressStart();

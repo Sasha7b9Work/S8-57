@@ -5,8 +5,6 @@
 
 struct ContextOsci
 {
-    static void LoadCalibratorMode();
-
     static void OnPressStart();
 
     static void GiveStart();

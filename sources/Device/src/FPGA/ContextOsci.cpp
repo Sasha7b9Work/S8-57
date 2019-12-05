@@ -9,11 +9,6 @@ uint &ContextOsci::timeStart = FPGA::timeStart;
 bool &ContextOsci::isRunning = FPGA::isRunning;
 
 
-void ContextOsci::LoadCalibratorMode()
-{
-    FPGA::LoadCalibratorMode();
-}
-
 void ContextOsci::OnPressStart()
 {
     if (ModeWork::IsDir())
