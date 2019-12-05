@@ -21,8 +21,3 @@ bool ContextOsci::InStateStop()
 {
     return FPGA_IN_STATE_STOP;
 }
-
-bool ContextOsci::InStateWait()
-{
-    return FPGA_IN_STATE_WAIT;
-}

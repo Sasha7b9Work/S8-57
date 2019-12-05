@@ -359,7 +359,7 @@ void DisplayOsci::HiPart::DrawRightPart(int x0, int y0)
         {
             Region(10, 10).Fill(x + 3, y + 3);
         }
-        else if (ContextOsci::InStateWait())  // Режим ожидания сигнала
+        else if (FPGA::InStateWait())  // Режим ожидания сигнала
         {
             int w = 4;
             int h = 14;

@@ -6,7 +6,6 @@
 
 #define FPGA_IN_STATE_STOP (FPGA::fpgaStateWork == StateWorkFPGA_Stop)
 #define FPGA_IN_STATE_WORK (FPGA::fpgaStateWork == StateWorkFPGA_Work)
-#define FPGA_IN_STATE_WAIT (FPGA::fpgaStateWork == StateWorkFPGA_Wait)
 
 
 struct FlagFPGA
@@ -52,6 +51,8 @@ struct FPGA
 
     static void SetValueADC(uint16 value);
 
+    static bool InStateWait() { return (fpgaStateWork == StateWorkFPGA_Wait); }
+
 private:
 
     static void Init();
@@ -85,9 +86,9 @@ private:
     /// «начение, считанное из handleADC
     static uint16 valueADC;
 
-    static StateWorkFPGA fpgaStateWork;
-
     static bool isRunning;
+
+    static StateWorkFPGA fpgaStateWork;
 
     static FlagFPGA flag;
     /// «десь хранитс€ адрес, начина€ с которого будем читать данные по каналам. ≈сли addrRead == 0xffff, то адрес вначале нужно считать
