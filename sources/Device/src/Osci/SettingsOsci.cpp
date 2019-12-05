@@ -506,7 +506,7 @@ pString Chan::Name() const
 void TrigLevel::Load() const
 {
     /// \todo Здесь много лишних движений. Нужно что-то сделать с вводом SET_TRIGLEV_SOURCE
-    uint16 value = static_cast<uint16>(HARDWARE_ZERO + set.trig.level[ch]);
+    uint16 value = static_cast<uint16>(HARDWARE_ZERO - set.trig.level[ch]);
 
     GPIO::WriteRegisters(FPin::SPI3_CS1, static_cast<uint16>(0xa000 | (value << 2)));
 
