@@ -27,7 +27,8 @@
 #define PAN_READY_RECEIVE               (ReadPAN() == 2)
 #define PAN_RECIEVE_TRANSMIT_CONFIRM    (ReadPAN() == 3)
 
-uint8 *HAL_FSMC::addrData = nullptr;
+uint8 *HAL_FSMC::addrData0 = nullptr;
+uint8 *HAL_FSMC::addrData1 = nullptr;
 
 static void Configure();
 
@@ -222,9 +223,11 @@ uint8 HAL_FSMC::ReadFromFPGA(const uint8 *address)
 }
 
 
-void HAL_FSMC::SetAddrData(uint8 *address)
+void HAL_FSMC::SetAddrData(uint8 *address0, uint8 *address1)
 {
-    addrData = address;
+    addrData0 = address0;
+    addrData1 = address1;
+
     if (DataBusMode::state != DataBusMode::FPGA)
     {
         Configure();

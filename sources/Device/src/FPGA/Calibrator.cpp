@@ -86,8 +86,7 @@ void Calibrator::Balance(Chan::E ch, Range::E range)
 
     int numPoints = 0;
 
-    uint8 *address = (ch == Chan::A) ? RD::DATA_A : RD::DATA_B;
-    address++;
+    HAL_FSMC::SetAddrData(((ch == Chan::A) ? RD::DATA_A : RD::DATA_B) + 1);
 
     while (numPoints < 100)
     {
@@ -95,7 +94,7 @@ void Calibrator::Balance(Chan::E ch, Range::E range)
         {
             if (HAL_PIO::Read(HPort::_G, HPin::_1))
             {
-                sum += HAL_FSMC::ReadFromFPGA(address);
+                sum += HAL_FSMC::ReadData0();
                 numPoints++;
             }
         }

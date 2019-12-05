@@ -119,12 +119,14 @@ struct HAL_FSMC
     static uint8 ReadFromFPGA(const uint8 *address);
 
     /// Установить адрес для чтения данных
-    static void SetAddrData(uint8 *address);
+    static void SetAddrData(uint8 *address0, uint8 *address1 = nullptr);
     /// Читать данные с установленного адреса
-    static uint8 ReadData() { return *addrData; }
+    static uint8 ReadData0() { return *addrData0; }
+    static uint8 ReadData1() { return *addrData1; }
 private:
 
-    static uint8 *addrData;
+    static uint8 *addrData0;
+    static uint8 *addrData1;
 };
 
 struct HAL
