@@ -148,7 +148,7 @@ struct LinkingRShift
     {
         Voltage,      ///< Смещение привязано к напряжению
         Position      ///< Смещение привязано к позиции
-    } value;
+    };
 };
 
 /// Через какое время после последнего нажатия кнопки скрывать меню.
@@ -162,7 +162,11 @@ struct MenuAutoHide
         _15 = 15,  ///< Через 15 секунд.
         _30 = 30,  ///< Через 30 секунд.
         _60 = 60   ///< Через 60 секунд.
-    } value;
+    };
+
+    MenuAutoHide() {};
+    operator MenuAutoHide::E();
+    static MenuAutoHide::E &Ref();
 };
 
 

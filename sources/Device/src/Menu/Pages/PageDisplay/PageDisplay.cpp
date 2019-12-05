@@ -4,6 +4,18 @@
 #include "Settings/Settings.h"
 
 
+MenuAutoHide::operator MenuAutoHide::E()
+{
+    return set.disp.menuAutoHide;
+}
+
+
+MenuAutoHide::E &MenuAutoHide::Ref()
+{
+    return set.disp.menuAutoHide;
+}
+
+
 int ENumMinMax::Number() const
 {
     return (1 << set.disp.enumMinMax);
