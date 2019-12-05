@@ -26,8 +26,3 @@ bool ContextOsci::InStateWait()
 {
     return FPGA_IN_STATE_WAIT;
 }
-
-uint ContextOsci::BytesInChannel()
-{
-    return ENumPointsFPGA().BytesInChannel();
-}
