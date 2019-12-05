@@ -17,11 +17,6 @@ void ContextOsci::OnPressStart()
     }
 }
 
-void ContextOsci::Reset()
-{
-    FPGA::Reset();
-}
-
 bool ContextOsci::InStateStop()
 {
     return FPGA_IN_STATE_STOP;

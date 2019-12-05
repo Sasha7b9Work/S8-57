@@ -265,11 +265,11 @@ bool Osci::CanReadData()
 void Osci::OnChangedPoints()
 {
     FPGA::LoadRegUPR();
-    ContextOsci::Reset();
+    FPGA::Reset();
     DisplayOsci::PainterData::ChangeTPos();
-    ContextOsci::Reset();
+    FPGA::Reset();
     TShift(set.time.shift);
-    ContextOsci::Reset();
+    FPGA::Reset();
     RAM::Init();
 }
 
