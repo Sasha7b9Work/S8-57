@@ -11,4 +11,6 @@ struct Calibrator
 private:
 
     static void BalanceChannel(Chan::E ch, Range::E range);
+
+    static void Stretch(Chan::E ch);
 };

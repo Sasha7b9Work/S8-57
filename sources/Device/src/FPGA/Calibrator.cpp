@@ -19,6 +19,10 @@ void Calibrator::Calibrate()
     Balance(Chan::A);
 
     Balance(Chan::B);
+
+    Stretch(Chan::A);
+
+    Stretch(Chan::B);
 }
 
 
@@ -94,4 +98,10 @@ void Calibrator::BalanceChannel(Chan::E ch, Range::E range)
     {
         set.dbg.nrst.shiftADC[ch][range] = static_cast<int8>(delta * 200.0F / 125.0F - 0.5F);
     }
+}
+
+
+void Calibrator::Stretch(Chan::E)
+{
+
 }

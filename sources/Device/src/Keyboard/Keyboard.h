@@ -106,4 +106,6 @@ struct Keyboard
     static void Unlock();
     /// Возвращает true, если кнопка не заблокирована
     static bool KeyIsActive(Key::E key);
+
+    static void Wait(Key::E key);
 };

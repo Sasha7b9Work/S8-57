@@ -6,6 +6,8 @@
 /// Источник синхронизации
 struct TrigSource
 {
+    TrigSource() {};
+    operator Chan::E();
     static void Load();
 };
 

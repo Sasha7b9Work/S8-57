@@ -551,7 +551,7 @@ TrigLevel::TrigLevel(Chan::E _ch) : ch(_ch)
 {
     if(ch == Chan::Count)
     {
-        ch = set.trig.source;
+        ch = TrigSource();
     }
 }
 
@@ -586,7 +586,7 @@ void Trig::DrawOnGrid()
 
         Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
 
-        float trigLevVal = RShift::ToAbs(set.trig.level[set.trig.source], Range(set.trig.source)) * Divider(set.trig.source).ToAbs();
+        float trigLevVal = RShift::ToAbs(set.trig.level[TrigSource()], Range(TrigSource())) * Divider(TrigSource()).ToAbs();
 
         Voltage voltage(trigLevVal);
 
