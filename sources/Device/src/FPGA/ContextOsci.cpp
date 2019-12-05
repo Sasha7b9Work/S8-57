@@ -16,8 +16,3 @@ void ContextOsci::OnPressStart()
         FPGA::OnPressStart();
     }
 }
-
-bool ContextOsci::InStateStop()
-{
-    return FPGA_IN_STATE_STOP;
-}

@@ -355,7 +355,7 @@ void DisplayOsci::HiPart::DrawRightPart(int x0, int y0)
         {
             Char(Symbol8::PLAY).Draw4SymbolsInRect(x, 1);
         }
-        else if (ContextOsci::InStateStop())  // Режим остановки
+        else if (FPGA::InStateStop())  // Режим остановки
         {
             Region(10, 10).Fill(x + 3, y + 3);
         }

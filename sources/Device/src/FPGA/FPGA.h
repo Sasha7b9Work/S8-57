@@ -4,10 +4,6 @@
 #include "FPGA/MathFPGA.h"
 
 
-#define FPGA_IN_STATE_STOP (FPGA::fpgaStateWork == StateWorkFPGA_Stop)
-#define FPGA_IN_STATE_WORK (FPGA::fpgaStateWork == StateWorkFPGA_Work)
-
-
 struct FlagFPGA
 {
     static uint16 flag;
@@ -52,6 +48,8 @@ struct FPGA
     static void SetValueADC(uint16 value);
 
     static bool InStateWait() { return (fpgaStateWork == StateWorkFPGA_Wait); }
+
+    static bool InStateStop() { return (fpgaStateWork == StateWorkFPGA_Stop); }
 
 private:
 
