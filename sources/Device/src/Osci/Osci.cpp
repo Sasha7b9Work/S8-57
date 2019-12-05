@@ -115,7 +115,7 @@ void Osci::UpdateFPGA()
 
     for (uint i = 0; i < number; i++)
     {
-        ContextOsci::ReadFlag();
+        FPGA::ReadFlag();
     
         if (ContextOsci::GetFlag::PRED() && !givingStart)
         {

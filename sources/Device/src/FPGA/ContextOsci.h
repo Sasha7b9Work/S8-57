@@ -11,8 +11,6 @@ struct ContextOsci
 
     static void OnPressStart();
 
-    static void ReadFlag();
-
     static void GiveStart();
 
     static void Reset();

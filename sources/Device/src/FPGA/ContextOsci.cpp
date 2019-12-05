@@ -27,11 +27,6 @@ void ContextOsci::OnPressStart()
     }
 }
 
-void ContextOsci::ReadFlag()
-{
-    FPGA::ReadFlag();
-}
-
 void ContextOsci::GiveStart()
 {
     FPGA::GiveStart();
