@@ -8,9 +8,9 @@ bool Chan::IsEnabled()
 }
 
 
-bool Chan::IsInversed() const
+bool Chan::IsInversed()
 {
-    return set.ch[value].inverse;
+    return Ref().inverse;
 }
 
 

@@ -25,7 +25,7 @@ struct Chan
     bool IsA() const { return value == A; };
     bool IsB() const { return value == B; }
     bool IsEnabled();
-    bool IsInversed() const;
+    bool IsInversed();
 };
 
 
