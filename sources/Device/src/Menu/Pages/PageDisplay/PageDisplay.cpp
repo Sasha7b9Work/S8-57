@@ -10,12 +10,6 @@ LinkingRShift::E &LinkingRShift::Ref()
 }
 
 
-MenuAutoHide::operator MenuAutoHide::E()
-{
-    return set.disp.menuAutoHide;
-}
-
-
 MenuAutoHide::E &MenuAutoHide::Ref()
 {
     return set.disp.menuAutoHide;

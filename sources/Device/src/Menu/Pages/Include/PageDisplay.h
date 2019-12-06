@@ -182,8 +182,8 @@ struct MenuAutoHide
     };
 
     MenuAutoHide() {};
-    operator MenuAutoHide::E();
     static MenuAutoHide::E &Ref();
+    operator MenuAutoHide::E() { return Ref(); };
 };
 
 
