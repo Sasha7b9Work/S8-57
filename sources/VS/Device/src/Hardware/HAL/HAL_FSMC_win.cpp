@@ -35,3 +35,15 @@ void HAL_FSMC::SetAddrData(uint8 *address0, uint8 *address1)
     addrData0 = address0;
     addrData1 = address1;
 }
+
+
+uint8 HAL_FSMC::ReadData0()
+{
+    return *addrData0;
+}
+
+
+uint8 HAL_FSMC::ReadData1()
+{
+    return *addrData1;
+}

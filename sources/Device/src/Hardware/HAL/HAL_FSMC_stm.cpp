@@ -232,3 +232,15 @@ void HAL_FSMC::SetAddrData(uint8 *address0, uint8 *address1)
         Configure();
     }
 }
+
+
+uint8 HAL_FSMC::ReadData0()
+{
+    return *addrData0;
+}
+
+
+uint8 HAL_FSMC::ReadData1()
+{
+    return *addrData1;
+}

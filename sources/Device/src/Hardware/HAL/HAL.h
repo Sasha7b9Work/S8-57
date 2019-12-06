@@ -121,8 +121,8 @@ struct HAL_FSMC
     /// Установить адрес для чтения данных
     static void SetAddrData(uint8 *address0, uint8 *address1 = nullptr);
     /// Читать данные с установленного адреса
-    static uint8 ReadData0() { return *addrData0; }
-    static uint8 ReadData1() { return *addrData1; }
+    static uint8 ReadData0();
+    static uint8 ReadData1();
 private:
     /// Первый адрес чтения данных
     static uint8 *addrData0;
