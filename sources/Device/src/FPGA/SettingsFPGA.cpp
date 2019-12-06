@@ -350,7 +350,7 @@ pString Range::Name() const
 
 ModeCouple::ModeCouple(Chan::E _ch, ModeCouple::E modeCoupe) : ch(_ch)
 {
-    set.ch[ch].couple = modeCoupe;
+    Ref(ch) = modeCoupe;
     Range::LoadBoth();
 }
 
@@ -358,13 +358,19 @@ ModeCouple::ModeCouple(Chan::E _ch, ModeCouple::E modeCoupe) : ch(_ch)
 pString ModeCouple::UGO() const
 {
     static const pString couple[] = { "\x92", "\x91", "\x90" };
-    return couple[set.ch[ch].couple];
+    return couple[Ref(ch)];
+}
+
+
+ModeCouple::E &ModeCouple::Ref(Chan::E ch)
+{
+    return set.ch[ch].couple;
 }
 
 
 ModeCouple::operator ModeCouple::E()
 {
-    return set.ch[ch].couple;
+    return Ref(ch);
 }
 
 

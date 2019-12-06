@@ -191,6 +191,8 @@ struct ModeCouple
     /// С помощью этого можно установить новое значение
     ModeCouple(Chan::E ch, ModeCouple::E couple);
 
+    static ModeCouple::E &Ref(Chan::E);
+
     operator ModeCouple::E();
     
     pString UGO() const;
