@@ -11,6 +11,12 @@
 #include "Utils/Math.h"
 
 
+TypeSignalROM::E &TypeSignalROM::Ref()
+{
+    return set.mem.typeSignalROM;
+}
+
+
 ModeBtnMemory::E &ModeBtnMemory::Ref()
 {
     return set.mem.modeBtnMemory;

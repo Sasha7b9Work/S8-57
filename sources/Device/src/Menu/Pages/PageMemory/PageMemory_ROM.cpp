@@ -118,7 +118,7 @@ DEF_GRAPH_BUTTON                                                                
 
 static void OnPress_TypeSignal()
 {
-    Math::CircleIncrease<uint8>(reinterpret_cast<uint8*>(&set.mem.typeSignalROM), 0, TypeSignalROM::Count - 1);
+    Math::CircleIncrease<uint8>(reinterpret_cast<uint8*>(&TypeSignalROM::Ref()), 0, TypeSignalROM::Count - 1);
 }
 
 static void Draw_Recorded(int x, int y)
@@ -141,7 +141,7 @@ static void Draw_TypeSignal(int x, int y)
     typedef void (*pFuncDraw)(int, int);
 
     static const pFuncDraw func[TypeSignalROM::Count] = { Draw_Recorded, Draw_Current, Draw_Both };
-    func[set.mem.typeSignalROM](x, y);
+    func[TypeSignalROM::Ref()](x, y);
 }
 
 DEF_GRAPH_BUTTON_HINTS_3                                                                                                                            //--- œ¿Ãﬂ“‹ - ¬Õ”“– «” - “ËÔ ÒË„Ì‡Î‡ ---
