@@ -451,12 +451,6 @@ void RShift::DrawBoth()
 }
 
 
-int Chan::RequestBytes(DataSettings *) const
-{
-    return ENumPointsFPGA::MAX_NUM;
-}
-
-
 pString Chan::Name() const
 {
     static pString names[Chan::Count] =

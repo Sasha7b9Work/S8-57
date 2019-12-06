@@ -16,12 +16,11 @@ struct Chan
         Count
     } value;
     Chan(E v) : value(v) { };
-    bool IsA() const { return value == A; };
-    bool IsB() const { return value == B; }
-    /// Возвращает количество памяти, требуемой для сохранения данных одного канала
-    int RequestBytes(DataSettings *ds) const;
     pString Name() const;
     operator Chan::E() { return value; };
+
+    bool IsA() const { return value == A; };
+    bool IsB() const { return value == B; }
     bool IsEnabled() const;
     bool IsInversed() const;
 };
