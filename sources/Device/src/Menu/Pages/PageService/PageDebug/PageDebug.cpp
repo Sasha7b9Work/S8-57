@@ -82,7 +82,7 @@ static void DebugShowSetInfo_Draw()
 
     pString s[3] = {"выключено", "настроено автоматически", "задано вручную"};
     DRAW_FORMAT("balanceADCtype : %s", (set.dbg.nrst.balanceADCtype < 3 ? s[set.dbg.nrst.balanceADCtype] : "!!! неправильное значение !!!")); //-V547 //-V2528
-    DRAW_FORMAT("stretchADCtype : %s", (StretchADC() < 3 ? s[StretchADC()] : "!!! неправильное значение !!!")); //-V547 //-V2528
+    DRAW_FORMAT("stretchADCtype : %s", (StretchADC::Type() < 3 ? s[StretchADC::Type()] : "!!! неправильное значение !!!")); //-V547 //-V2528
 
     x = String("stretchADC :").Draw(x0, INC_Y) + 5; //-V2528
 
