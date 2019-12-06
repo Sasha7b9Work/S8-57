@@ -9,12 +9,10 @@ struct PeakDetMode
         Disabled,
         Enabled
     };
-
-    PeakDetMode() {};
-
-    operator PeakDetMode::E();
-
-    bool IsEnabled() const;
+    PeakDetMode() {}
+    static PeakDetMode::E &Ref();
+    operator PeakDetMode::E() { return Ref(); }
+    static bool IsEnabled();
 };
 
 /// Положение точки синхронизация на сигнале.

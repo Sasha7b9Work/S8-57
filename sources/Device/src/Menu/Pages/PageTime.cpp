@@ -36,7 +36,7 @@ void TPos::Draw() const
 }
 
 
-PeakDetMode::operator PeakDetMode::E()
+PeakDetMode::E &PeakDetMode::Ref()
 {
     return set.time.peakDet;
 }
@@ -70,9 +70,9 @@ int TPos::InBytes() const
 }
 
 
-bool PeakDetMode::IsEnabled() const
+bool PeakDetMode::IsEnabled()
 {
-    return (set.time.peakDet == PeakDetMode::Enabled) && (TBase() >= TBase::MIN_PEAK_DET);
+    return (Ref() == PeakDetMode::Enabled) && (TBase() >= TBase::MIN_PEAK_DET);
 }
 
 
@@ -116,7 +116,7 @@ DEF_CHOICE_2( cPeakDet,                                                         
     ,
     DISABLE_RU,
     ENABLE_RU,
-    set.time.peakDet, &PageTime::self, IsActive_PeakDet, PageTime::OnChanged_PeakDet, Choice::AfterDraw
+    PeakDetMode::Ref(), &PageTime::self, IsActive_PeakDet, PageTime::OnChanged_PeakDet, Choice::AfterDraw
 )
 
 
