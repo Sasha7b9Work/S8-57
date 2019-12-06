@@ -82,7 +82,6 @@ struct ENumAccum
         _128,
         _Infinity
     };
-    ENumAccum() {};
     static ENumAccum::E &Ref();
     operator ENumAccum::E() { return Ref(); }
     int Number()            { return (1 << Ref()); };
