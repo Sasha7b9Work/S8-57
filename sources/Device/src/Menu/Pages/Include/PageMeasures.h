@@ -142,8 +142,9 @@ struct CursorsMovement
         Percents   ///< По процентам
     };
 
-    static bool IsPercents();
-    static bool IsPixels();
+    static CursorsMovement::E &Ref();
+    static bool IsPercents() { return Ref() == Percents; }
+    static bool IsPixels() { return Ref() == Pixels; }
 };
 
 

@@ -291,7 +291,7 @@ static void Draw_Movement_Points(int x, int y)
 
 static void OnPress_Movement()
 {
-    Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&set.curs.movement), 0, 1);
+    Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&CursorsMovement::Ref()), 0, 1);
 }
 
 static void Draw_Movement(int x, int y)

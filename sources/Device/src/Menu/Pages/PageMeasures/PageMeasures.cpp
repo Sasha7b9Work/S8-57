@@ -52,15 +52,10 @@ CursorsLookMode::E &CursorsLookMode::Ref(Chan::E ch)
     return set.curs.lookMode[ch];
 }
 
-bool CursorsMovement::IsPercents()
-{
-    return (set.curs.movement == Percents);
-}
 
-
-bool CursorsMovement::IsPixels()
+CursorsMovement::E &CursorsMovement::Ref()
 {
-    return (set.curs.movement == Pixels);
+    return set.curs.movement;
 }
 
 
