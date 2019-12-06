@@ -6,43 +6,43 @@
 
 FreqMeterEnabled::operator bool()
 {
-    return (set.freq.enabled == On);
+    return (setFreq->enabled == On);
 }
 
 
 bool FreqMeterModeView::IsFrequency()
 {
-    return (set.freq.modeView == Frequency);
+    return (setFreq->modeView == Frequency);
 }
 
 
 bool FreqMeterModeView::IsPeriod()
 {
-    return (set.freq.modeView == Period);
+    return (setFreq->modeView == Period);
 }
 
 
 bool FreqMeterTimeCounting::Is100ms()
 {
-    return (set.freq.timeCounting == _100ms);
+    return (setFreq->timeCounting == _100ms);
 }
 
 
 FreqMeterTimeCounting::operator FreqMeterTimeCounting::E()
 {
-    return set.freq.timeCounting;
+    return setFreq->timeCounting;
 }
 
 
 FreqMeterFreqClc::operator FreqMeterFreqClc::E()
 {
-    return set.freq.freqClc;
+    return setFreq->freqClc;
 }
 
 
 FreqMeterNumberPeriods::operator FreqMeterNumberPeriods::E()
 {
-    return set.freq.numberPeriods;
+    return setFreq->numberPeriods;
 }
 
 
@@ -62,7 +62,7 @@ DEF_CHOICE_2( cEnable,                                                          
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.freq.enabled, &PageFreqMeter::self, Item::Active, OnChanged_Enable, Choice::AfterDraw
+    setFreq->enabled, &PageFreqMeter::self, Item::Active, OnChanged_Enable, Choice::AfterDraw
 )
 
 
@@ -82,7 +82,7 @@ DEF_CHOICE_2( cModeView,                                                        
     "",
     "×àñòîòà",
     "Ïåðèîä",
-    set.freq.modeView, &PageFreqMeter::self, IsActive_ModeView, OnChanged_ModeView, Choice::AfterDraw
+    setFreq->modeView, &PageFreqMeter::self, IsActive_ModeView, OnChanged_ModeView, Choice::AfterDraw
 )
 
 
@@ -109,7 +109,7 @@ DEF_CHOICE_3( cTimeF,                                                           
     "100ìñ",
     "1ñ",
     "10ñ",
-    set.freq.timeCounting, &PageFreqMeter::self, IsActive_TimeF, OnChanged_TimeF, Choice::AfterDraw
+    setFreq->timeCounting, &PageFreqMeter::self, IsActive_TimeF, OnChanged_TimeF, Choice::AfterDraw
 )
 
 
@@ -120,7 +120,7 @@ DEF_CHOICE_4( cFreqClc,                                                         
     "1ÌÃö",
     "10ÌÃö",
     "100ÌÃö",
-    set.freq.freqClc, &PageFreqMeter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, Choice::AfterDraw
+    setFreq->freqClc, &PageFreqMeter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, Choice::AfterDraw
 )
 
 
@@ -133,7 +133,7 @@ DEF_CHOICE_6( cNumPeriods,                                                      
     "1000",
     "10000",
     "100000",
-    set.freq.numberPeriods, &PageFreqMeter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, Choice::AfterDraw
+    setFreq->numberPeriods, &PageFreqMeter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, Choice::AfterDraw
 )
 
 

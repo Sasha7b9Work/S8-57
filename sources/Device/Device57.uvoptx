@@ -159,7 +159,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\Multimeter\DisplayMultimeter.cpp</Filename>
+          <Filename>&lt;2&gt;.\src\Multimeter\DisplayMultimeter.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\src/Multimeter/DisplayMultimeter.cpp\85</Expression>
         </Bp>
@@ -168,16 +168,32 @@
           <Type>0</Type>
           <LineNumber>284</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134491444</Address>
+          <Address>134491508</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\Hardware\HAL\HAL_FSMC_stm.cpp</Filename>
+          <Filename>&lt;2&gt;.\src\Hardware\HAL\HAL_FSMC_stm.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\src/Hardware/HAL/HAL_FSMC_stm.cpp\284</Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>201</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134481572</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>&lt;2&gt;.\src\FPGA\SettingsFPGA.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\S8_57\src/FPGA/SettingsFPGA.cpp\201</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>

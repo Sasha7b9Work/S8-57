@@ -183,11 +183,11 @@ void Range::Change(int16 delta)
 
     if (delta > 0)
     {
-        ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&set.ch[ch].range), static_cast<uint8>(Range::Count - 1)); // -V206
+        ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&setCh[ch]->range), static_cast<uint8>(Range::Count - 1)); // -V206
     }
     else
     {
-        ::Math::LimitationDecrease<uint8>(reinterpret_cast<uint8 *>(&set.ch[ch].range), 0);  // -V206
+        ::Math::LimitationDecrease<uint8>(reinterpret_cast<uint8 *>(&setCh[ch]->range), 0);  // -V206
     }
     Range::LoadBoth();
 
@@ -198,19 +198,19 @@ void Range::Change(int16 delta)
 void RShift::Set(int16 rShift)
 {
     ::Math::Limitation(&rShift, MIN, MAX);
-    set.ch[ch].rShift = rShift;
+    setCh[ch]->rShift = rShift;   
     Load();
 }
 
 RShift::operator int16()
 {
-    return set.ch[ch].rShift;
+    return setCh[ch]->rShift;
 }
 
 
 void RShift::Change(int16 delta)
 {
-    ::Math::AdditionThisLimitation<int16>(&set.ch[ch].rShift, STEP * delta, MIN, MAX);
+    ::Math::AdditionThisLimitation<int16>(&setCh[ch]->rShift, STEP * delta, MIN, MAX);
 
     RShift(ch).Load();
 }
@@ -344,13 +344,13 @@ pString Range::Name() const
         StructRange("20Â")
     };
 
-    return names[set.ch[ch].range].name;
+    return names[setCh[ch]->range].name;
 };
 
 
 ModeCouple::ModeCouple(Chan::E _ch, ModeCouple::E modeCoupe) : ch(_ch)
 {
-    set.ch[ch].couple = modeCoupe;
+    setCh[ch]->couple = modeCoupe;
     Range::LoadBoth();
 }
 
@@ -358,13 +358,13 @@ ModeCouple::ModeCouple(Chan::E _ch, ModeCouple::E modeCoupe) : ch(_ch)
 pString ModeCouple::UGO() const
 {
     static const pString couple[] = { "\x92", "\x91", "\x90" };
-    return couple[set.ch[ch].couple];
+    return couple[setCh[ch]->couple];
 }
 
 
 ModeCouple::operator ModeCouple::E()
 {
-    return set.ch[ch].couple;
+    return setCh[ch]->couple;
 }
 
 
@@ -373,11 +373,11 @@ void Bandwidth::Load()
     Chan::E ch = GetChannel();
     static const FPin::E pinsLF[2] = { FPin::LF1, FPin::LF2 };
 
-    GPIO::WritePin(pinsLF[static_cast<int>(ch)], (set.ch[static_cast<int>(ch)].bandwidth.value == Bandwidth::_20MHz));
+    GPIO::WritePin(pinsLF[static_cast<int>(ch)], (setCh[ch]->bandwidth.value == Bandwidth::_20MHz));
 }
 
 
 Chan::E Bandwidth::GetChannel() const
 {
-    return (&set.ch[Chan::A].bandwidth.value == &this->value) ? Chan::A : Chan::B;
+    return (&setChA->bandwidth.value == &this->value) ? Chan::A : Chan::B;
 }
