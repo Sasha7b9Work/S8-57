@@ -16,9 +16,9 @@ MenuAutoHide::E &MenuAutoHide::Ref()
 }
 
 
-int ENumMinMax::Number() const
+ENumMinMax::E &ENumMinMax::Ref()
 {
-    return (1 << set.disp.enumMinMax);
+    return set.disp.enumMinMax;
 }
 
 

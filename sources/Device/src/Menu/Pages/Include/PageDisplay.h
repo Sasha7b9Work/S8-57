@@ -18,9 +18,9 @@ struct DisplayMapping
     };
 
     DisplayMapping() {};
+    static DisplayMapping::E &Ref();
     DisplayMapping(DisplayMapping::E v) { Ref() = v; }
     operator DisplayMapping::E()        { return Ref(); }
-    static DisplayMapping::E &Ref();
     static bool IsLines()               { return Ref() == Lines; }
     static bool IsDots()                { return Ref() == Dots; }
 };
@@ -40,8 +40,9 @@ struct ENumMinMax
         _128,
         Count
     };
-    ENumMinMax() {};
-    int Number() const;
+
+    ENumMinMax::E &Ref();
+    int Number() { return 1 << Ref(); }
 };
 
 /// Количество усреднений по измерениям.
@@ -184,7 +185,7 @@ struct SettingsDisplay
 { //-V802
     DisplayMapping::E      mapping;
     ENumMinMax::E          enumMinMax;            ///< Перечисление количества измерений для определения минимумов и масимумов.
-    uint8                  notUsing0;
+    uint8                  _;
     ENumAverage::E         enumAverage;           ///< Число усреднений сигнала.
     ENumAccum::E           enumAccum;             ///< Число накоплений сигнала на экране.
     ModeAccumulation::E    modeAccumulation;      ///< Режим накопления сигналов.
