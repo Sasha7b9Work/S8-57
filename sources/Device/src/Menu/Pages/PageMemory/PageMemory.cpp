@@ -23,45 +23,9 @@ ModeBtnMemory::E &ModeBtnMemory::Ref()
 }
 
 
-bool ModeWork::IsRAM()
-{
-    return (set.mem.modeWork == RAM);
-}
-
-
-void ModeWork::SetRAM()
-{
-    set.mem.modeWork = RAM;
-}
-
-
-bool ModeWork::IsDir()
-{
-    return (set.mem.modeWork == Dir);
-}
-
-
-void ModeWork::SetDir()
-{
-    set.mem.modeWork = Dir;
-}
-
-
-bool ModeWork::IsROM()
-{
-    return (set.mem.modeWork == ROM);
-}
-
-
-ModeWork::operator ModeWork::E()
+ModeWork::E &ModeWork::Ref()
 {
     return set.mem.modeWork;
-}
-
-
-void ModeWork::Set(E mode)
-{
-    set.mem.modeWork = mode;
 }
 
 

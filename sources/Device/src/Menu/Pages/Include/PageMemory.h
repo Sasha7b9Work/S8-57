@@ -18,15 +18,15 @@ struct ModeWork
         Count       ///< »спользуетс€ в модуле Data.c. Ќужен, чтобы указать, что мудуль не настроен ни на какой режим.
     };
 
-
-    ModeWork() {};
-    static bool IsRAM();
-    static bool IsDir();
-    static bool IsROM();
-    static void SetRAM();
-    static void SetDir();
-    operator ModeWork::E();
-    static void Set(E v);
+    ModeWork() {}
+    static ModeWork::E &Ref();
+    operator ModeWork::E() { return Ref(); }
+    static bool IsRAM()  { return Ref() == RAM; }
+    static bool IsDir()  { return Ref() == Dir; }
+    static bool IsROM()  { return Ref() == ROM; }
+    static void SetRAM() { Ref() = RAM; }
+    static void SetDir() { Ref() = Dir; }
+    static void Set(E v) { Ref() = v;   }
 };
 
 /// „то делать при нажатии кнопки ѕјћя“№.
