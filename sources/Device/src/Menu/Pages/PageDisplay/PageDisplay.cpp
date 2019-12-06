@@ -4,6 +4,12 @@
 #include "Settings/Settings.h"
 
 
+LinkingRShift::E &LinkingRShift::Ref()
+{
+    return set.disp.linkingRShift;
+}
+
+
 MenuAutoHide::operator MenuAutoHide::E()
 {
     return set.disp.menuAutoHide;
@@ -81,7 +87,7 @@ DEF_CHOICE_2( cScaleYtype,                                                      
     "смещения на экране.",
     "Напряжение",
     "Деления",
-    set.disp.linkingRShift, &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    LinkingRShift::Ref(), &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
