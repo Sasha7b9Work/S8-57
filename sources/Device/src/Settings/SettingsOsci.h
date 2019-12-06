@@ -16,14 +16,14 @@ struct Chan
         A,
         B,
         Count
-    } value;
-    Chan(E v) : value(v) { };
+    } ch;
+    Chan(E v) : ch(v) { };
     pString Name() const;
-    operator Chan::E() { return value; };
+    operator Chan::E() { return ch; };
     SettingsChannel &Ref();
 
-    bool IsA() const { return value == A; };
-    bool IsB() const { return value == B; }
+    bool IsA() const { return ch == A; };
+    bool IsB() const { return ch == B; }
     bool IsEnabled();
     bool IsInversed();
 };

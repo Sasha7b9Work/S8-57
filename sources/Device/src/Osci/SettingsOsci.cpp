@@ -459,7 +459,7 @@ pString Chan::Name() const
         "Канал 2"
     };
 
-    return names[value];
+    return names[ch];
 }
 
 
