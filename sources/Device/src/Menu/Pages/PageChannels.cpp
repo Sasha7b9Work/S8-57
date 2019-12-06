@@ -7,13 +7,13 @@
 
 int Divider::ToAbs() const
 {
-    return (setCh[ch]->divider == _1) ? 1 : 10;
+    return (set.ch[ch].divider == _1) ? 1 : 10;
 }
 
 
 Divider::operator Divider::E()
 {
-    return setCh[ch]->divider;
+    return set.ch[ch].divider;
 }
 
 
@@ -47,13 +47,13 @@ DEF_CHOICE_3( cCoupleA,                                                         
     "Пост",
     "Перем",
     "Земля",
-    setChA->couple, &PageChannelA::self, Item::Active, PageChannelA::OnChanged_Couple, Choice::AfterDraw
+    set.ch[Chan::A].couple, &PageChannelA::self, Item::Active, PageChannelA::OnChanged_Couple, Choice::AfterDraw
 )
 
 
 static void OnChanged_BandwidthA(bool)
 {
-    setChA->bandwidth.Load();
+    set.ch[Chan::A].bandwidth.Load();
 }
 
 DEF_CHOICE_2( cBandwidthA,                                                                                                                                         //--- КАНАЛ 1 - Полоса ---
@@ -61,7 +61,7 @@ DEF_CHOICE_2( cBandwidthA,                                                      
     "Задаёт полосу пропускания канала",
     "Полная",
     "20МГц",
-    setChA->bandwidth, &PageChannelA::self, Item::Active, OnChanged_BandwidthA, Choice::AfterDraw
+    set.ch[Chan::A].bandwidth, &PageChannelA::self, Item::Active, OnChanged_BandwidthA, Choice::AfterDraw
 )
 
 
@@ -88,7 +88,7 @@ DEF_CHOICE_2( cDividerA,                                                        
     "",
     "1X",
     "10X",
-    setChA->divider, &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.ch[Chan::A].divider, &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -136,13 +136,13 @@ DEF_CHOICE_3( cCoupleB,                                                         
     "Пост",
     "Перем",
     "Земля",
-    setChB->couple, &PageChannelB::self, Item::Active, PageChannelB::OnChanged_Couple, Choice::AfterDraw
+    set.ch[Chan::B].couple, &PageChannelB::self, Item::Active, PageChannelB::OnChanged_Couple, Choice::AfterDraw
 )
 
 
 static void OnChanged_BandwidthB(bool)
 {
-    setChB->bandwidth.Load();
+    set.ch[Chan::B].bandwidth.Load();
 }
 
 DEF_CHOICE_2( cBandwidthB,                                                                                                                                         //--- КАНАЛ 2 - Полоса ---
@@ -150,7 +150,7 @@ DEF_CHOICE_2( cBandwidthB,                                                      
     "",
     "Полная",
     "20МГц",
-    setChB->bandwidth, &PageChannelB::self, Item::Active, OnChanged_BandwidthB, Choice::AfterDraw
+    set.ch[Chan::B].bandwidth, &PageChannelB::self, Item::Active, OnChanged_BandwidthB, Choice::AfterDraw
 )
 
 
@@ -171,7 +171,7 @@ DEF_CHOICE_2( cDividerB,                                                        
     "",
     "1X",
     "10X",
-    setChB->divider, &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.ch[Chan::B].divider, &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

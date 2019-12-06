@@ -308,7 +308,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\FPGA\SettingsFPGA.cpp</Filename>
+          <Filename>d:\Projects\stm32\S8-57\sources\Panel\src\FPGA\SettingsFPGA.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -324,7 +324,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\FPGA\Calibrator.cpp</Filename>
+          <Filename>d:\Projects\stm32\S8-57\sources\Panel\src\FPGA\Calibrator.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -340,7 +340,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\FPGA\SettingsFPGA.cpp</Filename>
+          <Filename>d:\Projects\stm32\S8-57\sources\Panel\src\FPGA\SettingsFPGA.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>

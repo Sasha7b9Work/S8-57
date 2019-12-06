@@ -291,8 +291,8 @@ void TBase::Load(TBase::E base)
 
     TShift().Load();
 
-    setChA->bandwidth.Load();
-    setChB->bandwidth.Load();
+    set.ch[Chan::A].bandwidth.Load();
+    set.ch[Chan::B].bandwidth.Load();
 
     MessageMgr::OsciSettingsEffectOnAverageChanged();
 }
@@ -336,8 +336,8 @@ void Range::LoadBoth()
     GPIO::WritePin(FPin::A3, _GET_BIT(valueB, 1));
     GPIO::WritePin(FPin::A4, _GET_BIT(valueB, 0));
 
-    setChA->bandwidth.Load();
-    setChB->bandwidth.Load();
+    set.ch[Chan::A].bandwidth.Load();
+    set.ch[Chan::B].bandwidth.Load();
 
     if(set.disp.lastAffectedChannel == Chan::B)
     {
@@ -358,7 +358,7 @@ void Range::LoadBoth()
 
 pString Range::ToString(int8 _divider) const
 {
-    return ranges[setCh[ch]->range][_divider].name;
+    return ranges[set.ch[ch].range][_divider].name;
 }
 
 
@@ -769,7 +769,7 @@ void Range::Load(E range)
 {
     set.disp.SetLastAffectedChannel(ch);
 
-    setCh[ch]->range = range;
+    set.ch[ch].range = range;
 
     LoadBoth();
 }
@@ -777,7 +777,7 @@ void Range::Load(E range)
 
 Range::operator Range::E()
 {
-    return setCh[ch]->range;
+    return set.ch[ch].range;
 }
 
 

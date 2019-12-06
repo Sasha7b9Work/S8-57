@@ -3,8 +3,8 @@
 #include "Settings/SettingsOsci.h"
 
 
-#define SET_ENABLED_BOTH        (setChA->enabled && setChB->enabled)
-#define SET_DISABLED_BOTH       (!setChA->enabled && !setChB->enabled)
+#define SET_ENABLED_BOTH        (set.ch[Chan::A].enabled && set.ch[Chan::B].enabled)
+#define SET_DISABLED_BOTH       (!set.ch[Chan::A].enabled && !set.ch[Chan::B].enabled)
 
 
 /// Режим калибровки.

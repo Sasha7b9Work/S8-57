@@ -42,7 +42,7 @@ public:
 
     SettingsMenu            menu;
     SettingsDisplay         disp;
-    SettingsChannel         _ch[Chan::Count];
+    SettingsChannel         ch[Chan::Count];
     SettingsTrig            trig;
     SettingsTime            time;
     SettingsMemory          mem;
@@ -50,7 +50,7 @@ public:
     SettingsAutoMeasures    meas;
     SettingsMath            math;
     SettingsFFT             fft;
-    SettingsFreqMeter       _freq;
+    SettingsFreqMeter       freq;
     SettingsTester          test;
     SettingsMultimeter      mult;
     SettingsRecorder        rec;
@@ -60,8 +60,3 @@ public:
 #pragma pack(pop)
 
 extern Settings set;
-
-extern SettingsChannel *const setCh[Chan::Count];
-extern SettingsChannel *const setChA;
-extern SettingsChannel *const setChB;
-extern SettingsFreqMeter *const setFreq;

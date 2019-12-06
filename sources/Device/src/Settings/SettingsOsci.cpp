@@ -16,5 +16,5 @@ bool Chan::IsInversed()
 
 SettingsChannel &Chan::Ref()
 {
-    return *setCh[ch];
+    return set.ch[ch];
 }

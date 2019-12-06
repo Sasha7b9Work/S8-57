@@ -35,8 +35,8 @@ static void Draw_Balance_Mode(int, int)
 {
     int8 shift[2][3] =
     {
-        {0, setChA->balanceShiftADC, static_cast<int8>(set.dbg.nrst.balanceADC[Chan::A])},
-        {0, setChB->balanceShiftADC, static_cast<int8>(set.dbg.nrst.balanceADC[Chan::B])}
+        {0, set.ch[Chan::A].balanceShiftADC, static_cast<int8>(set.dbg.nrst.balanceADC[Chan::A])},
+        {0, set.ch[Chan::B].balanceShiftADC, static_cast<int8>(set.dbg.nrst.balanceADC[Chan::B])}
     };
 
     shiftADCA = shift[Chan::A][set.dbg.nrst.balanceADCtype];
