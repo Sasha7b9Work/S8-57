@@ -196,7 +196,6 @@ struct SettingsDisplay
     ENumSmoothing::E       enumSmoothing;         ///< Перечисление количества точек для скользящего фильтра.
     ENumSignalsInSec::E    enumSignalsInSec;      ///< Перечисление числа считываний сигнала в секунда.
     TypeGrid::E            typeGrid;              ///< Тип сетки
-    int                    brightnessGrid;        ///< Яркость сетки от 0 до 100.
     LinkingRShift::E       linkingRShift;         ///< Тип привязки к смещению по вертикали.
     uint8                  brightness;            ///< Яркость дисплея.
     MenuAutoHide::E        menuAutoHide;          ///< Через сколько времени после последнего нажатия клавиши прятать меню.
