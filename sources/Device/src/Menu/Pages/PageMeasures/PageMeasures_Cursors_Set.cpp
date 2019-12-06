@@ -129,7 +129,7 @@ static void Draw_T(int x, int y)
             Chan::E source = CursorsSource();
 
             CalculateConditions(static_cast<int16>(CursorsMeasurements::PosT(source, 0)), static_cast<int16>(CursorsMeasurements::PosT(source, 1)), 
-                set.curs.cntrlT[source], &condLeft, &condDown);
+                CursorsControl::RefT(source), &condLeft, &condDown);
 
             if (condLeft && condDown)
             {
@@ -404,7 +404,7 @@ void PageCursorsMeasures::PageSet::IncCursCntrlU(Chan::E ch)
 
 void PageCursorsMeasures::PageSet::IncCursCntrlT(Chan::E ch)
 {
-    Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&set.curs.cntrlT[ch]), 0, 3);
+    Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&CursorsControl::RefT(ch)), 0, 3);
 }
 
 

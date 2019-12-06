@@ -82,24 +82,6 @@ CursorsControl::E &CursorsControl::RefT(Chan::E ch)
 }
 
 
-bool CursorsControl::IsDisabledT()
-{
-    return (set.curs.cntrlT[CursorsSource()] == Disabled);
-}
-
-
-bool CursorsControl::IsEnabled1T()
-{
-    return (set.curs.cntrlT[CursorsSource()] == _1) || (set.curs.cntrlT[CursorsSource()] == Both);
-}
-
-
-bool CursorsControl::IsEnabled2T()
-{
-    return (set.curs.cntrlT[CursorsSource()] == _2) || (set.curs.cntrlT[CursorsSource()] == Both);
-}
-
-
 DEF_PAGE_3( pMeasures,                                                                                                                                                    //--- ИЗМЕРЕНИЯ ---
     "ИЗМЕРЕНИЯ",
     "Доступ к настройкам измерений - курсорных и автоматических",
