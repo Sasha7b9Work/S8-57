@@ -5,13 +5,7 @@
 #include <cstring>
 
 
-int Divider::ToAbs() const
-{
-    return (set.ch[ch].divider == _1) ? 1 : 10;
-}
-
-
-Divider::operator Divider::E()
+Divider::E &Divider::Ref(Chan::E ch)
 {
     return set.ch[ch].divider;
 }
@@ -24,7 +18,6 @@ static const char chanCouple[] =  "Задаёт вид связи с источником сигнала.\n"
                                   "1. \"Пост\" - открытый вход.\n"
                                   "2. \"Перем\" - закрытый вход.\n"
                                   "3. \"Земля\" - вход соединён с землёй.";
-
 
 
 DEF_CHOICE_2( cInputA,                                                                                                                                               //--- КАНАЛ 1 - Вход ---
@@ -88,7 +81,7 @@ DEF_CHOICE_2( cDividerA,                                                        
     "",
     "1X",
     "10X",
-    set.ch[Chan::A].divider, &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    Divider::Ref(Chan::A), &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -171,7 +164,7 @@ DEF_CHOICE_2( cDividerB,                                                        
     "",
     "1X",
     "10X",
-    set.ch[Chan::B].divider, &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    Divider::Ref(Chan::B), &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
