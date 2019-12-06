@@ -6,6 +6,8 @@
 
 
 struct DataSettings;
+struct SettingsChannel;
+
 
 struct Chan
 {
@@ -18,10 +20,11 @@ struct Chan
     Chan(E v) : value(v) { };
     pString Name() const;
     operator Chan::E() { return value; };
+    SettingsChannel &Ref();
 
     bool IsA() const { return value == A; };
     bool IsB() const { return value == B; }
-    bool IsEnabled() const;
+    bool IsEnabled();
     bool IsInversed() const;
 };
 
