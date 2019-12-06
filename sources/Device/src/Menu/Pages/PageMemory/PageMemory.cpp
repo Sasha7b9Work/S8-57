@@ -11,6 +11,12 @@
 #include "Utils/Math.h"
 
 
+ModeBtnMemory::E &ModeBtnMemory::Ref()
+{
+    return set.mem.modeBtnMemory;
+}
+
+
 bool ModeWork::IsRAM()
 {
     return (set.mem.modeWork == RAM);
@@ -300,7 +306,7 @@ DEF_CHOICE_2( cDrive_ModeBtnMemory,                                             
     "",
     "Меню",
     "Сохранение",
-    set.mem.modeBtnMemory, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    ModeBtnMemory::Ref(), &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

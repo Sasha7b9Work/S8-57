@@ -37,6 +37,8 @@ struct ModeBtnMemory
         Menu,     ///< Будет открывааться соответствующая страница меню.
         Save      ///< Сохранение содержимого экрана на флешку.
     };
+
+    static ModeBtnMemory::E &Ref();
 };
 
 /// Как сохранять данные на флешку.
@@ -107,10 +109,10 @@ struct TypeSignalROM
     };
 };
 
+#define MAX_SYMBOLS_IN_FILE_NAME 35
 
 struct SettingsMemory
 {
-#define MAX_SYMBOLS_IN_FILE_NAME 35
     ENumPointsFPGA::E   enumPoints;                             ///< Число точек
     ModeBtnMemory::E    modeBtnMemory;
     TypeSignalROM::E    typeSignalROM;                          ///< Какой сигнал выводить в режиме ПАМЯТЬ-ВНУТР ЗУ
