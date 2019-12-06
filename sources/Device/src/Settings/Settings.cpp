@@ -6,9 +6,7 @@
 #include <cstring>
 
 
-
 Settings set = Settings::defaultSettings;
-
 
 
 void Settings::Reset()

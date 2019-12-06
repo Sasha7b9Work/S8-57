@@ -142,7 +142,7 @@ const Settings Settings::defaultSettings =
 
     // Настройки математики
     {
-        FuncModeDraw::Disable,      // modeDraw
+        FuncModeDraw::Disabled,     // modeDraw
         MathFunction::Sum,          // function
         ModeRegSet::Range,          // modeRegSet
         Divider::_1,                // divider

@@ -170,10 +170,15 @@ struct FuncModeDraw
 {
     enum E
     {
-        Disable,
+        Disabled,
         Separate,
         Together
     };
+    FuncModeDraw() {}
+    static FuncModeDraw::E &Ref();
+    operator FuncModeDraw::E() { return Ref(); }
+    static bool IsDisabled()   { return Ref() == Disabled; }
+    static bool IsSeparate()   { return Ref() == Separate; }
 };
 
 struct MathFunction

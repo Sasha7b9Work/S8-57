@@ -5,6 +5,12 @@
 #include "Settings/Settings.h"
 
 
+FuncModeDraw::E &FuncModeDraw::Ref()
+{
+    return set.math.modeDraw;
+}
+
+
 MeasuresOnDisplay::operator MeasuresOnDisplay::E()
 {
     return set.meas.number;
