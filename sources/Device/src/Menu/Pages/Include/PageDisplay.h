@@ -58,8 +58,9 @@ struct ENumAverage
         Count
     };
     ENumAverage() {};
-    operator ENumAverage::E();
-    int Number() const;
+    operator ENumAverage::E() { return Ref(); };
+    int Number()              { return (1 << Ref()); };
+    static ENumAverage::E &Ref();
 };
 
 /// Количество накоплений.

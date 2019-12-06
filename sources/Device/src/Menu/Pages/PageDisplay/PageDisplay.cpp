@@ -22,15 +22,9 @@ int ENumMinMax::Number() const
 }
 
 
-ENumAverage::operator ENumAverage::E()
+ENumAverage::E &ENumAverage::Ref()
 {
     return set.disp.enumAverage;
-}
-
-
-int ENumAverage::Number() const
-{
-    return (1 << set.disp.enumAverage);
 }
 
 
@@ -137,7 +131,7 @@ DEF_CHOICE_9( cAverage_Num,                                                     
     "64",
     "128",
     "256",
-    set.disp.enumAverage, &PageDisplay::self, Item::Active, OnChange_AverageNum, Choice::AfterDraw
+    ENumAverage::Ref(), &PageDisplay::self, Item::Active, OnChange_AverageNum, Choice::AfterDraw
 )
 
 
