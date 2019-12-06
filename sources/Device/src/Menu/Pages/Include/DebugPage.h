@@ -51,6 +51,7 @@ struct ShiftADC
     static void SetDisabled() { Ref() = Disable; };
     static void SetReal()     { Ref() = Real; };
     static bool IsReal()      { return Ref() == Real; };
+    void Set(Range::E range, int8 value);
 
 private:
     Chan::E ch;

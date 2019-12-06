@@ -106,11 +106,11 @@ void Calibrator::Balance(Chan::E ch, Range::E range)
 
     if (delta > 0.0F)
     {
-        set.dbg.nrst.shiftADC[ch][range] = static_cast<int8>(delta * 200.0F / 125.0F + 0.5F);
+        ShiftADC(ch).Set(range, static_cast<int8>(delta * 200.0F / 125.0F + 0.5F));
     }
     else
     {
-        set.dbg.nrst.shiftADC[ch][range] = static_cast<int8>(delta * 200.0F / 125.0F - 0.5F);
+        ShiftADC(ch).Set(range, static_cast<int8>(delta * 200.0F / 125.0F - 0.5F));
     }
 }
 
