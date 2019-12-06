@@ -222,6 +222,12 @@ void TrigPolarity::Load()
 }
 
 
+TrigPolarity::E &TrigPolarity::Ref()
+{
+    return set.trig.polarity;
+}
+
+
 int TShift::Min() const
 {
 #define k 0

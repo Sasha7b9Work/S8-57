@@ -79,7 +79,7 @@ DEF_CHOICE_2( cPolarity, //-V206                                                
     ,
     "Фронт",
     "Срез",
-    set.trig.polarity, &PageTrig::self, Item::Active, OnChanged_Polarity, Choice::AfterDraw
+    TrigPolarity::Ref(), &PageTrig::self, Item::Active, OnChanged_Polarity, Choice::AfterDraw
 )
 
 

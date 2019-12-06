@@ -46,8 +46,10 @@ struct TrigPolarity
         Rising,
         Falling
     };
-
+    TrigPolarity() {}
+    static TrigPolarity::E &Ref();
     void Load();
+    operator TrigPolarity::E() { return Ref(); }
 };
 
 /// Режим запуска.
