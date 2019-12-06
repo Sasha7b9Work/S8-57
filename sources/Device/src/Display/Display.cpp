@@ -278,9 +278,9 @@ uint ENumSignalsInSec::TimeBetweenFramesMS() const
 }
 
 
-uint ENumSmoothing::ToNumber() const
+ENumSmoothing::E &ENumSmoothing::Ref()
 {
-    return static_cast<uint>(value + 1U);
+    return set.disp.enumSmoothing;
 }
 
 

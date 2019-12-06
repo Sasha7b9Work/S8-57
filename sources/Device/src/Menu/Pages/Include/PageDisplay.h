@@ -114,9 +114,9 @@ struct ENumSmoothing
         _8points,
         _9points,
         _10points
-    } value;
-    explicit ENumSmoothing(E v) : value(v) { };
-    uint ToNumber() const;
+    };
+    static ENumSmoothing::E &Ref();
+    static uint ToNumber() { return static_cast<uint>(Ref() + 1); };
 };
 
 /// Ограничение FPS.
@@ -190,7 +190,7 @@ struct SettingsDisplay
     ENumAverage::E         enumAverage;           ///< Число усреднений сигнала.
     ENumAccum::E           enumAccum;             ///< Число накоплений сигнала на экране.
     ModeAccumulation::E    modeAccumulation;      ///< Режим накопления сигналов.
-    ENumSmoothing          ENumSmoothing;         ///< Перечисление количества точек для скользящего фильтра.
+    ENumSmoothing::E       enumSmoothing;         ///< Перечисление количества точек для скользящего фильтра.
     ENumSignalsInSec       ENumSignalsInSec;      ///< Перечисление числа считываний сигнала в секунда.
     TypeGrid::E            typeGrid;              ///< Тип сетки
     int                    brightnessGrid;        ///< Яркость сетки от 0 до 100.
