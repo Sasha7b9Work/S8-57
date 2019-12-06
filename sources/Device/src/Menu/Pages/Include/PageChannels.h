@@ -14,7 +14,7 @@ struct CalibrationMode
     {
         x1,
         x10,
-        Disable
+        Disabled
     };
 };
 

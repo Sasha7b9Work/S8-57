@@ -1,7 +1,11 @@
 #include "defines.h"
 #include "common/Transceiver.h"
+#include "FPGA/TypesFPGA.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
+#include "Menu/Pages/Include/DebugPage.h"
+#include "Settings/Settings.h"
+#include "Utils/Math.h"
 #include <stm32f4xx_hal.h>
 
 
@@ -236,11 +240,44 @@ void HAL_FSMC::SetAddrData(uint8 *address0, uint8 *address1)
 
 uint8 HAL_FSMC::ReadData0()
 {
-    return *addrData0;
+    int delta = VALUE::AVE - static_cast<int>(*addrData0);
+
+    uint8 result = static_cast<uint8>(VALUE::AVE - static_cast<int>(delta * GetStretch(addrData0)));
+
+    Math::Limitation(&result, VALUE::MIN, VALUE::MAX);
+
+    return result;
 }
 
 
 uint8 HAL_FSMC::ReadData1()
 {
-    return *addrData1;
+    int delta = VALUE::AVE - static_cast<int>(*addrData1);
+
+    uint8 result = static_cast<uint8>(VALUE::AVE - static_cast<int>(delta * GetStretch(addrData0)));
+
+    Math::Limitation(&result, VALUE::MIN, VALUE::MAX);
+
+    return result;
+}
+
+
+float HAL_FSMC::GetStretch(uint8 *address)
+{
+    if (StretchADC::IsDisabled())
+    {
+        return 1.0F;
+    }
+
+    static const float *stretchs[4] =
+    {
+        &set.dbg.nrst.stretchADC[0],
+        &set.dbg.nrst.stretchADC[0],
+        &set.dbg.nrst.stretchADC[1],
+        &set.dbg.nrst.stretchADC[1]
+    };
+
+    int delta = address - RD::DATA_A;
+
+    return *stretchs[delta];
 }

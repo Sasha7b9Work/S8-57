@@ -52,7 +52,7 @@ const Settings Settings::defaultSettings =
             Bandwidth(Bandwidth::Full),     // bandwidth
             false,                          // inverse
             Divider::_1,                    // divider
-            CalibrationMode::Disable,       // calibrationMode
+            CalibrationMode::Disabled,      // calibrationMode
         },
         {
             0,                              // shift
@@ -63,7 +63,7 @@ const Settings Settings::defaultSettings =
             Bandwidth(Bandwidth::Full),     // bandwidth
             false,                          // inverse
             Divider::_1,                    // divider
-            CalibrationMode::Disable,       // calibrationMode
+            CalibrationMode::Disabled,      // calibrationMode
         }
     },
 
@@ -248,9 +248,9 @@ const Settings Settings::defaultSettings =
             0,                      // correctionTime
             0,                      // enum_gate_max
             0,                      // enum_gate_min
-            BalanceADC::Disable,    // balanceADCtype
+            BalanceADC::Disabled,    // balanceADCtype
             ShiftADC::Disable,      // shiftADCtype
-            StretchADC::Disable     // stretchADCtype
+            StretchADC::Disabled     // stretchADCtype
         }
     }
 };

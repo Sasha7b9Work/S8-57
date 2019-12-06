@@ -9,9 +9,9 @@ struct BalanceADC
 {
     enum E
     {
-        Disable,     ///< Балансировка выключена.
-        Settings,    ///< Используются значения балансировки, которые получены автоматически.
-        Hand         ///< Используются значения балансировки, заданные вручную.
+        Disabled,   ///< Балансировка выключена.
+        Settings,   ///< Используются значения балансировки, которые получены автоматически.
+        Hand        ///< Используются значения балансировки, заданные вручную.
     };
 };
 
@@ -20,7 +20,7 @@ struct StretchADC
 {
     enum E
     {
-        Disable,
+        Disabled,
         Real,
         Hand,
         Count
@@ -29,7 +29,8 @@ struct StretchADC
     static StretchADC::E &Ref();
     operator StretchADC::E() { return Ref(); }
     static void SetReal()    { Ref() = Real; };
-    static bool IsDisable()  { return (Ref() == Disable); };
+    static bool IsDisabled() { return (Ref() == Disabled); };
+    static bool IsReal()     { return (Ref() == Real); }
     static bool IsHand()     { return (Ref() == Hand); };
 };
 

@@ -130,6 +130,8 @@ private:
     static uint8 *addrData1;
     /// Конфигурировать для работы с альтерой
     static void Configure();
+    /// Возвращает растяжку для данного адреса
+    static float GetStretch(uint8 *address);
 };
 
 struct HAL

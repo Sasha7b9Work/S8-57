@@ -100,12 +100,11 @@ DEF_PAGE_3(pBalance,                                                            
 )
 
 
-DEF_CHOICE_3(cStretch_Mode,                                                                                                                        //--- ОТЛАДКА - АЦП - РАСТЯЖКА - Режим ---
+DEF_CHOICE_2(cStretch_Mode,                                                                                                                        //--- ОТЛАДКА - АЦП - РАСТЯЖКА - Режим ---
     "Режим",
     "",
     DISABLE_RU,
     "Реальный",
-    "Ручной",
     StretchADC::Ref(), &PageDebug::PageADC::PageStretch::self, Item::Active, PageDebug::PageADC::PageStretch::OnChanged_Mode, Choice::AfterDraw
 )
 
@@ -116,7 +115,7 @@ static int16 stretchB;
 
 void PageDebug::PageADC::PageStretch::OnChanged_Mode(bool)
 {
-    if (StretchADC::IsDisable())
+    if (StretchADC::IsDisabled())
     {
     }
     else
@@ -185,7 +184,7 @@ DEF_CHOICE_2(cAddRShift,
 )
 
 
-DEF_PAGE_1(pAddRShift,
+DEF_PAGE_1(pShift,
     "ДОП. СМ.",
     "Управляет режимом дополнительного смщения по вертикали",
     &cAddRShift,
@@ -199,7 +198,7 @@ DEF_PAGE_3(pADC,  //-V1027
     "",
     &pBalance,
     &pStretch,
-    &pAddRShift,
+    &pShift,
     PageName::Debug_ADC,
     &PageDebug::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
@@ -207,4 +206,4 @@ DEF_PAGE_3(pADC,  //-V1027
 const Page *const PageDebug::PageADC::self = static_cast<const Page *>(&pADC);
 const Page *const PageDebug::PageADC::PageStretch::self = static_cast<const Page *>(&pStretch);
 const Page *const PageDebug::PageADC::PageBalance::self = static_cast<const Page *>(&pBalance);
-const Page *const PageDebug::PageADC::PageShift::self = static_cast<const Page *>(&pAddRShift);
+const Page *const PageDebug::PageADC::PageShift::self = static_cast<const Page *>(&pShift);
