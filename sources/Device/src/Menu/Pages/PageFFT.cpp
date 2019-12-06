@@ -22,7 +22,7 @@ WindowFFT::E &WindowFFT::Ref()
 }
 
 
-MaxDBFFT::operator MaxDBFFT::E()
+MaxDBFFT::E &MaxDBFFT::Ref()
 {
     return set.fft.maxDB;
 }
@@ -84,7 +84,7 @@ DEF_CHOICE_3( cRange,                                                           
     "-40Да",
     "-60Да",
     "-80Да",
-    set.fft.maxDB, &PageFFT::self, IsActive_Range, Choice::Changed, Choice::AfterDraw
+    MaxDBFFT::Ref(), &PageFFT::self, IsActive_Range, Choice::Changed, Choice::AfterDraw
 )
 
 
