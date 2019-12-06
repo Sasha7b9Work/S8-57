@@ -16,28 +16,15 @@ SourceFFT::E &SourceFFT::Ref()
     return set.fft.source;
 }
 
+WindowFFT::E &WindowFFT::Ref()
+{
+    return set.fft.window;
+}
+
 
 MaxDBFFT::operator MaxDBFFT::E()
 {
     return set.fft.maxDB;
-}
-
-
-bool WindowFFT::IsHamming()
-{
-    return (set.fft.window == Hamming);
-}
-
-
-bool WindowFFT::IsBlackman()
-{
-    return (set.fft.window == Blackman);
-}
-
-
-bool WindowFFT::IsHann()
-{
-    return (set.fft.window == Hann);
 }
 
 
@@ -82,7 +69,7 @@ DEF_CHOICE_4( cWindow,                                                          
     "Хэмминга",
     "Блэкмена",
     "Ханна",
-    set.fft.window, &PageFFT::self, IsActive_Parameter, Choice::Changed, Choice::AfterDraw
+    WindowFFT::Ref(), &PageFFT::self, IsActive_Parameter, Choice::Changed, Choice::AfterDraw
 )
 
 

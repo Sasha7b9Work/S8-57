@@ -35,10 +35,10 @@ struct WindowFFT
         Blackman,
         Hann
     };
-
-    static bool IsHamming();
-    static bool IsBlackman();
-    static bool IsHann();
+    static WindowFFT::E &Ref();
+    static bool IsHamming()  { return Ref() == Hamming; }
+    static bool IsBlackman() { return Ref() == Blackman; }
+    static bool IsHann()     { return Ref() == Hann; }
 };
 
 struct MaxDBFFT
