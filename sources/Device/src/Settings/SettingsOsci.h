@@ -1,6 +1,10 @@
 #pragma once
 
 
+#define ChanA Chan(Chan::A)
+#define ChanB Chan(Chan::B)
+
+
 struct DataSettings;
 
 struct Chan
@@ -19,6 +23,7 @@ struct Chan
     int RequestBytes(DataSettings *ds) const;
     pString Name() const;
     operator Chan::E() { return value; };
+    bool IsEnabled() const;
 };
 
 
