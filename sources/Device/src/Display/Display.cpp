@@ -270,11 +270,17 @@ bool Display::IsSeparate()
 }
 
 
-uint ENumSignalsInSec::TimeBetweenFramesMS() const
+uint ENumSignalsInSec::TimeBetweenFramesMS()
 {
     static const uint time[] = { 40, 100, 200, 500, 1000 };
 
-    return time[static_cast<int>(value)];
+    return time[ENumSignalsInSec()];
+}
+
+
+ENumSignalsInSec::E &ENumSignalsInSec::Ref()
+{
+    return set.disp.enumSignalsInSec;
 }
 
 

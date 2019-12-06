@@ -24,21 +24,21 @@ const Settings Settings::defaultSettings =
 
     // ÃÂÌ˛ ƒ»—œÀ≈…
     {
-        DisplayMapping::Lines,                      // modeDrawSignal
-        ENumMinMax::_1,                             // ENumMinMax
-        0,                                          // not used
-        ENumAverage::_1,                            // ENumAverage
-        ENumAccum::_1,                              // ENumAccum
-        ModeAccumulation::NoReset,                  // modeAccumulation
-        ENumSmoothing::Disable,                     // ENumSmoothing
-        ENumSignalsInSec(ENumSignalsInSec::_25),    // ENumSignalsInSec
-        TypeGrid::_1,                               // typeGrid
-        50,                                         // brightnessGrid
-        LinkingRShift::Position,                    // linkingRShift
-        100,                                        // brightness
-        MenuAutoHide::None,                         // menuAutoHide
-        370,                                        // shiftInMemory
-        Chan::A                                     // lastAffectedChannel
+        DisplayMapping::Lines,              // modeDrawSignal
+        ENumMinMax::_1,                     // ENumMinMax
+        0,                                  // not used
+        ENumAverage::_1,                    // ENumAverage
+        ENumAccum::_1,                      // ENumAccum
+        ModeAccumulation::NoReset,          // modeAccumulation
+        ENumSmoothing::Disable,             // ENumSmoothing
+        ENumSignalsInSec::_25,              // ENumSignalsInSec
+        TypeGrid::_1,                       // typeGrid
+        50,                                 // brightnessGrid
+        LinkingRShift::Position,            // linkingRShift
+        100,                                // brightness
+        MenuAutoHide::None,                 // menuAutoHide
+        370,                                // shiftInMemory
+        Chan::A                             // lastAffectedChannel
     },
 
     // ÃÂÌ˛  ¿Õ¿À 1,  ¿Õ¿À 2

@@ -129,10 +129,13 @@ struct ENumSignalsInSec
         _5,
         _2,
         _1
-    } value;
-    explicit ENumSignalsInSec(E v) : value(v) { };
+    };
+    ENumSignalsInSec() {}
+    static ENumSignalsInSec::E &Ref();
     /// Возвращает количество миллисекунда между кадрами
-    uint TimeBetweenFramesMS() const;
+    static uint TimeBetweenFramesMS();
+    operator ENumSignalsInSec::E() { return Ref(); }
+    static bool Is25()             { return Ref() == _25; }
 };
 
 /// Тип сетки на экране.
@@ -191,7 +194,7 @@ struct SettingsDisplay
     ENumAccum::E           enumAccum;             ///< Число накоплений сигнала на экране.
     ModeAccumulation::E    modeAccumulation;      ///< Режим накопления сигналов.
     ENumSmoothing::E       enumSmoothing;         ///< Перечисление количества точек для скользящего фильтра.
-    ENumSignalsInSec       ENumSignalsInSec;      ///< Перечисление числа считываний сигнала в секунда.
+    ENumSignalsInSec::E    enumSignalsInSec;      ///< Перечисление числа считываний сигнала в секунда.
     TypeGrid::E            typeGrid;              ///< Тип сетки
     int                    brightnessGrid;        ///< Яркость сетки от 0 до 100.
     LinkingRShift::E       linkingRShift;         ///< Тип привязки к смещению по вертикали.

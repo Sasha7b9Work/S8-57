@@ -194,14 +194,14 @@ bool Osci::InModeRandomizer()
 
 bool Osci::CanReadData()
 {
-    if (set.disp.ENumSignalsInSec.value == ENumSignalsInSec::_25)
+    if (ENumSignalsInSec::Is25())
     {
         return true;
     }
     
     static uint timePrevRead = 0;
 
-    if (TIME_MS > timePrevRead + set.disp.ENumSignalsInSec.TimeBetweenFramesMS())
+    if (TIME_MS > timePrevRead + ENumSignalsInSec::TimeBetweenFramesMS())
     {
         timePrevRead = TIME_MS;
 
