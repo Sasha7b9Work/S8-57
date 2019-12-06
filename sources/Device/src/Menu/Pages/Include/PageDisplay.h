@@ -16,10 +16,13 @@ struct DisplayMapping
         Dots,
         Count
     };
+
     DisplayMapping() {};
-    DisplayMapping(DisplayMapping::E v);
-    operator DisplayMapping::E();
+    DisplayMapping(DisplayMapping::E v) { Ref() = v; }
+    operator DisplayMapping::E()        { return Ref(); }
     static DisplayMapping::E &Ref();
+    static bool IsLines()               { return Ref() == Lines; }
+    static bool IsDots()                { return Ref() == Dots; }
 };
 
 ///  оличество измерений дл€ расчЄта минимального и максимального значений.

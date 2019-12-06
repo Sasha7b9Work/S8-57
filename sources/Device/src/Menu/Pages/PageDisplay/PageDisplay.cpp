@@ -40,18 +40,6 @@ int ENumAccum::Number() const
 }
 
 
-DisplayMapping::DisplayMapping(DisplayMapping::E v)
-{
-    set.disp.mapping = v;
-}
-
-
-DisplayMapping::operator DisplayMapping::E()
-{
-    return set.disp.mapping;
-}
-
-
 DisplayMapping::E &DisplayMapping::Ref()
 {
     return set.disp.mapping;

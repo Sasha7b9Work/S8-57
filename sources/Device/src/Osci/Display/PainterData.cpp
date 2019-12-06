@@ -273,7 +273,7 @@ void DisplayOsci::PainterData::DrawChannel(Chan::E ch)
     }
 
 
-    if (DisplayMapping() == DisplayMapping::Lines)
+    if (DisplayMapping::IsLines())
     {
         DrawModeLines(ch, left, center, data, scale);
     }

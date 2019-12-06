@@ -44,14 +44,14 @@ bool TestMapping()
     {
         SCPI_APPEND_STRING(commandLines); //-V814
 
-        if(DisplayMapping() != DisplayMapping::Lines)
+        if(!DisplayMapping::IsLines())
         {
             SCPI_EXIT_ERROR();
         }
 
         SCPI_APPEND_STRING(commandDots); //-V814
 
-        if(DisplayMapping() != DisplayMapping::Dots)
+        if(!DisplayMapping::IsDots())
         {
             SCPI_EXIT_ERROR();
         }
