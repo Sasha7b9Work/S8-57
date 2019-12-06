@@ -105,7 +105,7 @@ DEF_CHOICE_5( cPoints,                                                          
     namesLengthMemory[2],
     namesLengthMemory[3],
     namesLengthMemory[4],
-    set.mem.enumPoints, &PageMemory::self, IsActive_Points, PageMemory::OnChanged_Points, Choice::AfterDraw
+    ENumPointsFPGA::Ref(), &PageMemory::self, IsActive_Points, PageMemory::OnChanged_Points, Choice::AfterDraw
 )
 
 
