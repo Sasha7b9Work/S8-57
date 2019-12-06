@@ -92,11 +92,14 @@ struct ENumPointsFPGA
     };
     ENumPointsFPGA() {};
     static ENumPointsFPGA::E &Ref();
+    operator ENumPointsFPGA::E() { return Ref(); }
     static uint BytesInChannel() { uint result = PointsInChannel(); if (PeakDetMode().IsEnabled()) { result *= 2; } return result; };
     static uint PointsInChannel() { return ENUM_TO_REL_POINTS(Ref()); };
-    operator ENumPointsFPGA::E() { return Ref(); }
+    static ENumPointsFPGA::E FromNumPoints(int numPoints);
     static const uint MAX_NUM = 8192;
 };
+
+int ENumPoints_2_NumPoints(ENumPointsFPGA::E numPoints);
 
 /// Какой сигнал показывать в режиме ПАМЯТЬ - ВНЕШН ЗУ
 struct TypeSignalROM
@@ -140,10 +143,6 @@ struct SettingsMemory
                         /// будет всегда равен 0001, т.к. для определения номера просматриваются.
                         /// \endcode
 };
-
-ENumPointsFPGA::E NumPoints_2_ENumPoints(int numPoints);
-int ENumPoints_2_NumPoints(ENumPointsFPGA::E numPoints);
-
 
 
 struct PageMemory

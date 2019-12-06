@@ -406,11 +406,6 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
 }
 
 
-ENumPointsFPGA::E &ENumPointsFPGA::Ref()
-{
-    return set.mem.enumPoints;
-}
-
 void TrigLevel::Find()
 {
     if (DS && ENABLED_DS(ch))

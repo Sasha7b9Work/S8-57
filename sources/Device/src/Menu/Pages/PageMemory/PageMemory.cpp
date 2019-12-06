@@ -34,9 +34,30 @@ ModeSaveSignal::E &ModeSaveSignal::Ref()
     return set.mem.modeSaveSignal;
 }
 
+
 FileNamingMode::E &FileNamingMode::Ref()
 {
     return set.mem.fileNamingMode;
+}
+
+
+ENumPointsFPGA::E &ENumPointsFPGA::Ref()
+{
+    return set.mem.enumPoints;
+}
+
+
+ENumPointsFPGA::E ENumPointsFPGA::FromNumPoints(int numPoints)
+{
+    if(numPoints == 8192)      { return ENumPointsFPGA::_8k; }
+    else if(numPoints == 4096) { return ENumPointsFPGA::_4k; }
+    else if(numPoints == 2048) { return ENumPointsFPGA::_2k; }
+    else if(numPoints == 1024) { return ENumPointsFPGA::_1k; }
+    else if(numPoints == 512)  { return ENumPointsFPGA::_512; }
+
+    LOG_ERROR("Неправильное количество точек");
+
+    return ENumPointsFPGA::Count;
 }
 
 
@@ -654,21 +675,6 @@ DEF_PAGE_4( pSetName,                                                           
 )
 
 const Page * const PageSetName::self = static_cast<const Page *>(&pSetName);
-
-
-ENumPointsFPGA::E NumPoints_2_ENumPoints(int numPoints)
-{
-    if (numPoints == 8192) { return ENumPointsFPGA::_8k; }
-    else if (numPoints == 4096) { return ENumPointsFPGA::_4k; }
-    else if (numPoints == 2048) { return ENumPointsFPGA::_2k; }
-    else if (numPoints == 1024) { return ENumPointsFPGA::_1k; }
-    else
-    {
-        LOG_ERROR("");
-    }
-    return ENumPointsFPGA::_512;
-}
-
 
 
 int ENumPoints_2_NumPoints(ENumPointsFPGA::E numPoints)
