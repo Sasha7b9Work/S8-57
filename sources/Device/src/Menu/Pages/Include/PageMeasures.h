@@ -100,6 +100,16 @@ struct CursorsActive
     static void Set(E v) { Ref() = v; }
 };
 
+
+struct CursorsSource
+{
+    CursorsSource() {}
+    static Chan::E &Ref();
+    operator Chan::E() { return Ref(); }
+    static bool IsA() { return Ref() == Chan::A; }
+};
+
+
 ///  аким курсором управл€ть
 struct CursorsControl
 {
@@ -108,16 +118,19 @@ struct CursorsControl
         _1,        ///< первым
         _2,        ///< вторым
         Both,      ///< обоими
-        Disable    ///< никаким
+        Disabled    ///< никаким
     };
+
+    static CursorsControl::E &RefU(Chan::E ch);
+    static CursorsControl::E &RefT(Chan::E ch);
 
     static bool IsDisabledT();
     static bool IsEnabled1T();
     static bool IsEnabled2T();
 
-    static bool IsDisabledU();
-    static bool IsEnabled1U();
-    static bool IsEnabled2U();
+    static bool IsDisabledU() { return RefU(CursorsSource()) == Disabled; }
+    static bool IsEnabled1U() { return RefU(CursorsSource()) == _1 || RefU(CursorsSource()) == Both; }
+    static bool IsEnabled2U() { return RefU(CursorsSource()) == _2 || RefU(CursorsSource()) == Both; }
 };
 
 /// ƒискретность перемещени€ курсоров.
@@ -131,15 +144,6 @@ struct CursorsMovement
 
     static bool IsPercents();
     static bool IsPixels();
-};
-
-
-struct CursorsSource
-{
-    CursorsSource() {}
-    static Chan::E &Ref();
-    operator Chan::E() { return Ref(); }
-    static bool IsA()  { return Ref() == Chan::A; }
 };
 
 

@@ -230,7 +230,7 @@ static void Draw_U(int x, int y)
             bool condTop = false, condDown = false;
 
             CalculateConditions(static_cast<int16>(CursorsMeasurements::PosU(source, 0)), static_cast<int16>(CursorsMeasurements::PosU(source, 1)),
-                set.curs.cntrlU[source], &condTop, &condDown);
+                CursorsControl::RefU(source), &condTop, &condDown);
 
             if (condTop && condDown)
             {
@@ -398,7 +398,7 @@ void PageCursorsMeasures::PageSet::SetCursSource(Chan::E ch)
 
 void PageCursorsMeasures::PageSet::IncCursCntrlU(Chan::E ch)
 {
-    Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&set.curs.cntrlU[ch]), 0, 3);
+    Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&CursorsControl::RefU(ch)), 0, 3);
 }
 
 

@@ -105,22 +105,22 @@ const Settings Settings::defaultSettings =
 
     // Курсорные измерения
     {
-        false,                                              // showCursors
-        {CursorsLookMode::None, CursorsLookMode::None},     // lookMode[2]
-        true,                                               // showFreq
-        CursorsActive::None,                                // active
-        Chan::A,                                            // source
-        {CursorsControl::Disable, CursorsControl::Disable}, // cntrlU[Chan::Count]
-        {CursorsControl::Disable, CursorsControl::Disable}, // cntrlT[Chan::Count]
-        CursorsMovement::Pixels,                            // movement
-        {80,  80},                                          // deltaU100percents[2]
-        {120, 120},                                         // deltaT100percents[2]
-        {                                                   // posCurU[Chan::Count][2]
-        { 60, 140 },                                        // Канал 1
-        { 60, 140 }},                                       // Канал 2
-        {                                                   // posCurT[Chan::Count][2]
-        { 80, 200 },                                        // Канал 1
-        { 80, 200 }}                                        // Канал 2
+        false,                                                // showCursors
+        {CursorsLookMode::None, CursorsLookMode::None},       // lookMode[2]
+        true,                                                 // showFreq
+        CursorsActive::None,                                  // active
+        Chan::A,                                              // source
+        {CursorsControl::Disabled, CursorsControl::Disabled}, // cntrlU[Chan::Count]
+        {CursorsControl::Disabled, CursorsControl::Disabled}, // cntrlT[Chan::Count]
+        CursorsMovement::Pixels,                              // movement
+        {80,  80},                                            // deltaU100percents[2]
+        {120, 120},                                           // deltaT100percents[2]
+        {                                                     // posCurU[Chan::Count][2]
+        { 60, 140 },                                          // Канал 1
+        { 60, 140 }},                                         // Канал 2
+        {                                                     // posCurT[Chan::Count][2]
+        { 80, 200 },                                          // Канал 1
+        { 80, 200 }}                                          // Канал 2
     },
 
     // Меню ИЗМЕРЕНИЯ

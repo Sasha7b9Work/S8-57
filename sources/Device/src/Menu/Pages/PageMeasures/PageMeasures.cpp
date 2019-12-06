@@ -70,9 +70,21 @@ Chan::E &CursorsSource::Ref()
 }
 
 
+CursorsControl::E &CursorsControl::RefU(Chan::E ch)
+{
+    return set.curs.cntrlU[ch];
+}
+
+
+CursorsControl::E &CursorsControl::RefT(Chan::E ch)
+{
+    return set.curs.cntrlT[ch];
+}
+
+
 bool CursorsControl::IsDisabledT()
 {
-    return (set.curs.cntrlT[CursorsSource()] == Disable);
+    return (set.curs.cntrlT[CursorsSource()] == Disabled);
 }
 
 
@@ -85,24 +97,6 @@ bool CursorsControl::IsEnabled1T()
 bool CursorsControl::IsEnabled2T()
 {
     return (set.curs.cntrlT[CursorsSource()] == _2) || (set.curs.cntrlT[CursorsSource()] == Both);
-}
-
-
-bool CursorsControl::IsDisabledU()
-{
-    return (set.curs.cntrlU[CursorsSource()] == Disable);
-}
-
-
-bool CursorsControl::IsEnabled1U()
-{
-    return (set.curs.cntrlU[CursorsSource()] == _1) || (set.curs.cntrlU[CursorsSource()] == Both);
-}
-
-
-bool CursorsControl::IsEnabled2U()
-{
-    return (set.curs.cntrlU[CursorsSource()] == _2) || (set.curs.cntrlU[CursorsSource()] == Both);
 }
 
 
