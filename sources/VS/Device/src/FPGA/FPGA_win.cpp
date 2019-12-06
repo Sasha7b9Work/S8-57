@@ -78,7 +78,7 @@ static bool GenerateNormalModeData(Chan::E ch, uint8 *data, uint numBytes)
 }
 
 
-bool FPGA::ReadDataChanenl(Chan::E ch, uint8 *data, uint numBytes)
+bool FPGA::ReadDataChannel(Chan::E ch, uint8 *data, uint numBytes)
 {
     if (!set.ch[ch].enabled)
     {

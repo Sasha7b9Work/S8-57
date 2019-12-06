@@ -65,7 +65,7 @@ private:
 
     static uint16 ReadLastRecord(Chan::E ch);
 
-    static bool ReadDataChanenl(Chan::E ch, uint8 *data, uint numBytes);
+    static bool ReadDataChannel(Chan::E ch, uint8 *data, uint numBytes);
 
     static void ClearDataRand();
 
@@ -73,7 +73,7 @@ private:
 
     static void ReadFlag();
 
-    static bool ReadDataChanenlRand(Chan::E ch, uint8 *address, uint8 *data);
+    static bool ReadDataChannelRand(Chan::E ch, uint8 *address, uint8 *data);
 
     static int CalculateShift();
 

@@ -131,7 +131,7 @@ int FPGA::CalculateShift()
 }
 
 
-bool FPGA::ReadDataChanenlRand(Chan::E ch, uint8 *addr, uint8 *data)
+bool FPGA::ReadDataChannelRand(Chan::E ch, uint8 *addr, uint8 *data)
 {
     int Tsm = CalculateShift();
 
@@ -179,7 +179,7 @@ bool FPGA::ReadDataChanenlRand(Chan::E ch, uint8 *addr, uint8 *data)
 }
 
 
-bool FPGA::ReadDataChanenl(Chan::E ch, uint8 *data, uint numPoints)
+bool FPGA::ReadDataChannel(Chan::E ch, uint8 *data, uint numPoints)
 {
     if (addrRead == 0xffff)
     {
@@ -204,7 +204,7 @@ bool FPGA::ReadDataChanenl(Chan::E ch, uint8 *data, uint numPoints)
 
     if (Osci::InModeRandomizer())
     {
-        return ReadDataChanenlRand(ch, a1, data);
+        return ReadDataChannelRand(ch, a1, data);
     }
     else
     {
