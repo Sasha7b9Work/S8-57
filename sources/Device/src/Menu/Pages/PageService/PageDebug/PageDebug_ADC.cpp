@@ -9,20 +9,21 @@ ShiftADC::E &ShiftADC::Ref()
 }
 
 
+StretchADC::E &StretchADC::Ref()
+{
+    return set.dbg.nrst.stretchADCtype;
+}
+
+
 int8 ShiftADC::Value() const
 {
     return IsReal() ? set.dbg.nrst.shiftADC[ch][Range(ch)] : 0;
 }
 
 
-void StretchADC::SetReal()
-{
-    set.dbg.nrst.stretchADCtype = Real;
-}
-
-
 static int16 shiftADCA;
 static int16 shiftADCB;
+
 
 static void Draw_Balance_Mode(int, int)
 {
@@ -99,7 +100,7 @@ DEF_CHOICE_3(cStretch_Mode,                                                     
     DISABLE_RU,
     "Реальный",
     "Ручной",
-    set.dbg.nrst.stretchADCtype, &PageDebug::PageADC::PageStretch::self, Item::Active, PageDebug::PageADC::PageStretch::OnChanged_Mode, Choice::AfterDraw
+    StretchADC::Ref(), &PageDebug::PageADC::PageStretch::self, Item::Active, PageDebug::PageADC::PageStretch::OnChanged_Mode, Choice::AfterDraw
 )
 
 
@@ -109,7 +110,7 @@ static int16 stretchB;
 
 void PageDebug::PageADC::PageStretch::OnChanged_Mode(bool)
 {
-    if (set.dbg.nrst.stretchADCtype == StretchADC::Disable)
+    if (StretchADC::IsDisable())
     {
     }
     else
@@ -122,7 +123,7 @@ void PageDebug::PageADC::PageStretch::OnChanged_Mode(bool)
 
 static bool IsActive_StretchAB()
 {
-    return (set.dbg.nrst.stretchADCtype == StretchADC::Hand);
+    return StretchADC::IsHand();
 }
 
 static void OnChanged_Stretch_A()

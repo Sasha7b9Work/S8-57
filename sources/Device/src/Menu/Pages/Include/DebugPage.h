@@ -25,9 +25,12 @@ struct StretchADC
         Hand,
         Count
     };
-
-    static void SetDisabled();
-    static void SetReal();
+    StretchADC() {};
+    static StretchADC::E &Ref();
+    operator StretchADC::E() { return Ref(); }
+    static void SetReal()    { Ref() = Real; };
+    static bool IsDisable()  { return (Ref() == Disable); };
+    static bool IsHand()     { return (Ref() == Hand); };
 };
 
 
@@ -43,11 +46,11 @@ struct ShiftADC
 
     ShiftADC(Chan::E _ch) : ch(_ch) {};
     static ShiftADC::E &Ref();
-    operator ShiftADC::E() { return Ref(); }
+    operator ShiftADC::E()    { return Ref(); }
     int8 Value() const;
     static void SetDisabled() { Ref() = Disable; };
-    static void SetReal() { Ref() = Real; };
-    static bool IsReal() { return Ref() == Real; };
+    static void SetReal()     { Ref() = Real; };
+    static bool IsReal()      { return Ref() == Real; };
 
 private:
     Chan::E ch;
