@@ -98,7 +98,6 @@ struct ENumPointsFPGA
     static const uint MAX_NUM = 8192;
 };
 
-int ENumPoints_2_NumPoints(ENumPointsFPGA::E numPoints);
 
 ///  акой сигнал показывать в режиме ѕјћя“№ - ¬Ќ≈ЎЌ «”
 struct TypeSignalROM

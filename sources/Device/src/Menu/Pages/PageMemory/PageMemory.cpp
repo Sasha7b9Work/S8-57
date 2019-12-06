@@ -661,17 +661,3 @@ DEF_PAGE_4( pSetName,                                                           
 )
 
 const Page * const PageSetName::self = static_cast<const Page *>(&pSetName);
-
-
-int ENumPoints_2_NumPoints(ENumPointsFPGA::E numPoints)
-{
-    static const int n[ENumPointsFPGA::Count] =
-    {
-        512,
-        1024,
-        2048,
-        4096,
-        8192
-    };
-    return n[static_cast<uint>(numPoints)];
-}
