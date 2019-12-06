@@ -165,6 +165,11 @@ void Display::Message::Func()
 
     int length = Font::GetLengthText(textWait);
 
+    if (waitKey)
+    {
+        y += 10;
+    }
+
     if (length < width)
     {
         Text(textWait).DrawInCenterRect(x, y, width, height - 20);
@@ -174,12 +179,14 @@ void Display::Message::Func()
         Text(textWait).DrawInRectWithTransfers(x + 11, y + 20, width, height - 20);
     }
 
-    char buf[100];
-    buf[0] = 0;
+    char buf[100] = { 0 };
 
-    for (uint i = 0; i < time; i++)
+    if (!waitKey)
     {
-        std::strcat(buf, "."); //-V2513
+        for (uint i = 0; i < time; i++)
+        {
+            std::strcat(buf, "."); //-V2513
+        }
     }
 
     Text(buf).DrawInCenterRect(x, y + 20, width, height - 20);
