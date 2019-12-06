@@ -20,8 +20,8 @@ void DataSettings::Fill(uint8 *_dataA, uint8 * _dataB)
     TSHIFT(this) = TShift();
     Lval_COUPLE_A(this) = ModeCouple(Chan::A);
     Lval_COUPLE_B(this) = ModeCouple(Chan::B);
-    TRIGLEV_A(this) = TrigLevel(Chan::A);
-    TRIGLEV_B(this) = TrigLevel(Chan::B);
+    TRIGLEV_A(this) = TrigLevel(Chan::A).Value();
+    TRIGLEV_B(this) = TrigLevel(Chan::B).Value();
     Lval_PEAKDET(this) = PeakDetMode();
     Lval_DIVIDER_A(this) = Divider(Chan::A);
     Lval_DIVIDER_B(this) = Divider(Chan::B);

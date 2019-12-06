@@ -272,7 +272,9 @@ struct TrigLevel
 
     void Set(int16 level);
 
-    operator int16();
+    static int16 &Ref(Chan::E);
+
+    int16 Value() { return Ref(ch); };
     /// Загрузить уровень синхронизации в аппаратную часть
     void Load() const;
     /// Изменить уровень синхронизации на delta единиц

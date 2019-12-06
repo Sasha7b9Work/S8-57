@@ -466,7 +466,7 @@ pString Chan::Name() const
 void TrigLevel::Load() const
 {
     /// \todo Здесь много лишних движений. Нужно что-то сделать с вводом SET_TRIGLEV_SOURCE
-    uint16 value = static_cast<uint16>(HARDWARE_ZERO - set.trig.level[ch]);
+    uint16 value = static_cast<uint16>(HARDWARE_ZERO - TrigLevel(ch).Value());
 
     GPIO::WriteRegisters(FPin::SPI3_CS1, static_cast<uint16>(0xa000 | (value << 2)));
 
@@ -476,7 +476,7 @@ void TrigLevel::Load() const
 
 void TrigLevel::Change(int16 delta)
 {
-    Math::AdditionThisLimitation(&set.trig.level[ch], TrigLevel::STEP * delta, TrigLevel::MIN, TrigLevel::MAX);
+    Math::AdditionThisLimitation(&TrigLevel::Ref(ch), TrigLevel::STEP * delta, TrigLevel::MIN, TrigLevel::MAX);
 
     Load();
 
@@ -501,7 +501,7 @@ void Trig::NeedForDraw()
 }
 
 
-TrigLevel::operator int16()
+int16 &TrigLevel::Ref(Chan::E ch)
 {
     return set.trig.level[ch];
 }
@@ -518,9 +518,9 @@ TrigLevel::TrigLevel(Chan::E _ch) : ch(_ch)
 
 void TrigLevel::Set(int16 newLevel)
 {
-    set.trig.level[ch] = newLevel;
+    TrigLevel::Ref(ch) = newLevel;
 
-    Math::Limitation(&set.trig.level[ch], TrigLevel::MIN, TrigLevel::MAX);
+    Math::Limitation(&TrigLevel::Ref(ch), TrigLevel::MIN, TrigLevel::MAX);
 
     Load();
 
@@ -546,7 +546,7 @@ void Trig::DrawOnGrid()
 
         Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
 
-        float trigLevVal = RShift::ToAbs(set.trig.level[TrigSource()], Range(TrigSource())) * Divider(TrigSource()).ToAbs();
+        float trigLevVal = RShift::ToAbs(TrigLevel().Value(), Range(TrigSource())) * Divider(TrigSource()).ToAbs();
 
         Voltage voltage(trigLevVal);
 
@@ -559,7 +559,7 @@ void TrigLevel::Draw() const
 {
     float scale = 1.0F / ((MAX - MIN) / 2.4F / Grid::Height());
 
-    int y = Grid::ChannelCenterHeight() - static_cast<int>((TrigLevel() + RShift(ch)) * scale);
+    int y = Grid::ChannelCenterHeight() - static_cast<int>((TrigLevel().Value() + RShift(ch)) * scale);
 
     int x = Grid::Right();
     int xSymbol = Grid::Right() + 5;
