@@ -167,7 +167,7 @@ void TBase::Change(int delta)
 
     if (delta > 0)
     {
-        ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&set.time.base), static_cast<uint8>(TBase::Count - 1));
+        ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&TBase::Ref()), static_cast<uint8>(TBase::Count - 1));
     }
     else
     {
@@ -178,7 +178,7 @@ void TBase::Change(int delta)
             return;													// и выходим
         }
 
-        ::Math::LimitationDecrease<uint8>(reinterpret_cast<uint8 *>(&set.time.base), 0);
+        ::Math::LimitationDecrease<uint8>(reinterpret_cast<uint8 *>(&TBase::Ref()), 0);
     }
 
     if (old == TBase())
@@ -239,7 +239,7 @@ pString TBase::ToString() const
         StructTBase("10\x10с")
     };
 
-    return tBases[set.time.base].name;
+    return tBases[TBase()].name;
 }
 
 
@@ -247,7 +247,7 @@ void TBase::Load(TBase::E base)
 {
     if (base != Count)
     {
-        set.time.base = base;
+        Ref() = base;
     }
 
 
@@ -287,7 +287,7 @@ void TBase::Load(TBase::E base)
 
     FPGA::ClearDataRand();
 
-    HAL_FSMC::WriteToFPGA8(WR::TBASE, values[set.time.base]);
+    HAL_FSMC::WriteToFPGA8(WR::TBASE, values[TBase()]);
 
     TShift().Load();
 
@@ -795,7 +795,7 @@ Range::operator Range::E()
 
 uint TBase::RandK() const
 {
-    return Kr[set.time.base];
+    return Kr[TBase()];
 }
 
 
