@@ -28,15 +28,9 @@ ENumAverage::E &ENumAverage::Ref()
 }
 
 
-ENumAccum::operator ENumAccum::E()
+ENumAccum::E &ENumAccum::Ref()
 {
     return set.disp.enumAccum;
-}
-
-
-int ENumAccum::Number() const
-{
-    return (1 << set.disp.enumAccum);
 }
 
 

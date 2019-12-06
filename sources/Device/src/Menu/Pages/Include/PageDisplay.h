@@ -83,8 +83,9 @@ struct ENumAccum
         _Infinity
     };
     ENumAccum() {};
-    operator ENumAccum::E();
-    int Number() const;
+    static ENumAccum::E &Ref();
+    operator ENumAccum::E() { return Ref(); }
+    int Number()            { return (1 << Ref()); };
 };
 
 struct ModeAccumulation
