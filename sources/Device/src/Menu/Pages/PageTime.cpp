@@ -36,16 +36,11 @@ PeakDetMode::E &PeakDetMode::Ref()
 }
 
 
-SampleType::operator SampleType::E()
+SampleType::E &SampleType::Ref()
 {
     return set.time.sampleType;
 }
 
-
-void SampleType::Set(SampleType::E type)
-{
-    set.time.sampleType = type;
-}
 
 TPos::E &TPos::Ref()
 {
@@ -88,7 +83,7 @@ DEF_CHOICE_2( cSample,                                                          
     ,
     "–еальное врем€",
     "Ёквивалентна€",
-    set.time.sampleType, &PageTime::self, IsActive_Sample, 0, 0
+    SampleType::Ref(), &PageTime::self, IsActive_Sample, 0, 0
 )
 
 

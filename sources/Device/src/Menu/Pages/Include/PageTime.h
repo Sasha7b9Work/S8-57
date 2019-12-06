@@ -47,11 +47,11 @@ struct SampleType
         Equal    ///< эквивалентная - сигнал строится по последним точкам, полученным от рандомизатора.
     };
 
-    SampleType() {};
+    static SampleType::E &Ref();
 
-    void Set(SampleType::E type);
+    operator SampleType::E() { return Ref(); }
 
-    operator SampleType::E();
+    static void Set(SampleType::E type) { Ref() = type; }
 };
 
 /// Функция ВР/ДЕЛ.
