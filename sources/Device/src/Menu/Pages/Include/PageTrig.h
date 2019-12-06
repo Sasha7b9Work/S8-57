@@ -20,8 +20,11 @@ struct TrigModeFind
     {
         Hand,      ///< Уровень синхронизации устанавливается вручную или автоматически - однократным нажажтием кнопки.
         Auto       ///< Подстройки уровня синхронизации производится автоматически после каждого нового считанного сигнала.
-    } value;
-    explicit TrigModeFind(E v) : value(v) {};
+    };
+
+    static TrigModeFind::E &Ref();
+    static bool IsAuto() { return Ref() == Auto; }
+    static bool IsHand() { return Ref() == Hand; }
 };
 
 struct TrigInput

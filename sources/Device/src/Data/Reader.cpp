@@ -100,7 +100,7 @@ void Reader::ReadDataP2P()
 
 static void FindTrigLevelIfNeed()
 {
-    if (set.trig.modeFind == TrigModeFind::Auto)
+    if (TrigModeFind::IsAuto())
     {
         TrigLevel().Find();
     }

@@ -474,6 +474,12 @@ void TrigLevel::Load() const
 }
 
 
+TrigModeFind::E &TrigModeFind::Ref()
+{
+    return set.trig.modeFind;
+}
+
+
 void TrigLevel::Change(int16 delta)
 {
     Math::AdditionThisLimitation(&TrigLevel::Ref(ch), TrigLevel::STEP * delta, TrigLevel::MIN, TrigLevel::MAX);
@@ -492,7 +498,7 @@ static void DisableDrawing()
 
 void Trig::NeedForDraw()
 {
-    if (!set.fft.enabled && (set.trig.modeFind == TrigModeFind::Hand))
+    if (!set.fft.enabled && TrigModeFind::IsHand())
     {
         needDraw = true;
         Timer::SetAndStartOnce(TypeTimer::ShowLevelTrigLev, DisableDrawing, 2000);
