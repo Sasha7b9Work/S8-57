@@ -5,9 +5,9 @@
 #include "Menu/Pages/Include/PageFunction.h"
 
 
-bool ScaleFFT::IsLog()
+ScaleFFT::E &ScaleFFT::Ref()
 {
-    return (set.fft.scale == Log);
+    return set.fft.scale;
 }
 
 
@@ -67,7 +67,7 @@ DEF_CHOICE_2( cScale,                                                           
     "Задаёт масштаб вывода спектра - линейный или логарифмический",
     "Логарифм",
     "Линейная",
-    set.fft.scale, &PageFFT::self, IsActive_Parameter, Choice::Changed, Choice::AfterDraw
+    ScaleFFT::Ref(), &PageFFT::self, IsActive_Parameter, Choice::Changed, Choice::AfterDraw
 )
 
 
