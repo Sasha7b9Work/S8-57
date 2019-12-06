@@ -358,7 +358,7 @@ void Range::LoadBoth()
 
 pString Range::ToString(int8 _divider) const
 {
-    return ranges[set.ch[ch].range][_divider].name;
+    return ranges[Ref(ch)][_divider].name;
 }
 
 
@@ -769,15 +769,21 @@ void Range::Load(E range)
 {
     set.disp.SetLastAffectedChannel(ch);
 
-    set.ch[ch].range = range;
+    Ref(ch) = range;
 
     LoadBoth();
 }
 
 
-Range::operator Range::E()
+Range::E &Range::Ref(Chan::E ch)
 {
     return set.ch[ch].range;
+}
+
+
+Range::operator Range::E()
+{
+    return Ref(ch);
 }
 
 

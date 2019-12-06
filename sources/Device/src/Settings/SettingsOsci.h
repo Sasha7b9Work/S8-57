@@ -111,6 +111,8 @@ struct Range
     /// Этот конструктор - чтобы узнать текущее знаечение Range
     explicit Range(Chan::E _ch) : ch(_ch) {}
 
+    static Range::E &Ref(Chan::E ch);
+
     void Load(E range);
 
     operator Range::E();
