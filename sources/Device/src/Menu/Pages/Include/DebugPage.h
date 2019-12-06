@@ -25,13 +25,14 @@ struct StretchADC
         Hand,
         Count
     };
-    StretchADC() {};
+    StretchADC() {}
     static StretchADC::E &Ref();
-    operator StretchADC::E() { return Ref(); }
-    static void SetReal()    { Ref() = Real; };
-    static bool IsDisabled() { return (Ref() == Disabled); };
-    static bool IsReal()     { return (Ref() == Real); }
-    static bool IsHand()     { return (Ref() == Hand); };
+    operator StretchADC::E()  { return Ref(); }
+    static void SetDisabled() { Ref() = Disabled; }
+    static void SetReal()     { Ref() = Real; }
+    static bool IsDisabled()  { return (Ref() == Disabled); }
+    static bool IsReal()      { return (Ref() == Real); }
+    static bool IsHand()      { return (Ref() == Hand); }
 };
 
 

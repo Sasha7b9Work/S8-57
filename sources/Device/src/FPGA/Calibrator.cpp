@@ -117,10 +117,6 @@ void Calibrator::Balance(Chan::E ch, Range::E range)
 
 bool Calibrator::Stretch(Chan::E ch)
 {
-    Settings old = set;
-
-    ShiftADC::SetReal();
-
     static const pString messages[Chan::Count] =
     {
         "Растяжка канала 1",
@@ -128,6 +124,14 @@ bool Calibrator::Stretch(Chan::E ch)
     };
 
     Display::Message::Show(messages[ch], true);
+
+    Settings old = set;
+
+    ShiftADC::SetReal();
+
+    StretchADC::SetDisabled();
+
+
 
     old.dbg.nrst.stretchADC[Chan::A] = set.dbg.nrst.stretchADC[Chan::A];
 
