@@ -114,7 +114,7 @@ void DisplayOsci::PainterData::WriteParametersFFT(Chan::E ch, float freq0, float
 
 void DisplayOsci::PainterData::DrawSpectrum(const uint8 *dataIn, uint numPoints, Chan::E ch)
 {
-    if (!set.ch[ch].enabled)
+    if (!Chan(ch).IsEnabled())
     {
         return;
     }
@@ -225,7 +225,7 @@ void DisplayOsci::PainterData::DrawROM()
 
 void DisplayOsci::PainterData::DrawChannel(Chan::E ch)
 {
-    if (!set.ch[ch].enabled)
+    if (!Chan(ch).IsEnabled())
     {
         return;
     }

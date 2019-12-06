@@ -1289,7 +1289,7 @@ String Measure::GetStringMeasure(Chan::E ch, char* buffer, int lenBuf)
 {
     TypeMeasure::E type = GetType();
 
-    if (!set.ch[static_cast<int>(ch)].enabled)
+    if (!Chan(ch).IsEnabled())
     {
         return String("");
     }

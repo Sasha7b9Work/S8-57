@@ -4,9 +4,9 @@
 
 
 /// ¬ыводить автоматические измерени€ по каналу A
-#define VIEW_MEASURES_A                 (set.ch[Chan::A].enabled && (MeasuresSource::IsA() || MeasuresSource::IsBoth()))
+#define VIEW_MEASURES_A                 (ChanA.IsEnabled() && (MeasuresSource::IsA() || MeasuresSource::IsBoth()))
 /// ¬ыводить автоматические измерени€ по каналу B
-#define VIEW_MEASURES_B                 (set.ch[Chan::B].enabled && (MeasuresSource::IsB() || MeasuresSource::IsBoth()))
+#define VIEW_MEASURES_B                 (ChanB.IsEnabled() && (MeasuresSource::IsB() || MeasuresSource::IsBoth()))
 
 
 /// —колько автоматических измерений помещаетс€ на экран

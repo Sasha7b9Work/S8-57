@@ -27,11 +27,11 @@ void DisplayOsci::MemoryWindow::Draw()
 
     for (int i = 0; i < 2; i++)
     {
-        Chan::E chan = chans[i];
-        if (set.ch[chan].enabled)
+        Chan::E ch = chans[i];
+        if (Chan(ch).IsEnabled())
         {
-            Color::CHAN[chan].SetAsCurrent();
-            DrawDataInRect(X(), Y(), Width(), Height(), OUT(chan), ENumPointsFPGA::PointsInChannel());
+            Color::CHAN[ch].SetAsCurrent();
+            DrawDataInRect(X(), Y(), Width(), Height(), OUT(ch), ENumPointsFPGA::PointsInChannel());
         }
     }
 }
