@@ -41,7 +41,7 @@ struct SettingsChannel
     ModeCouple::E       couple;              ///< Связь по входу
     bool                enabled;             ///< Включен/выключен канал
     int8                balanceShiftADC;     ///< Добавочное смещение для балансировки АЦП
-    Bandwidth           bandwidth;           ///< Ограничение полосы
+    Bandwidth::E        bandwidth;           ///< Ограничение полосы
     bool                inverse;
     Divider::E          divider;             ///< Множитель
     CalibrationMode::E  calibrationMode;     ///< Режим калибровки

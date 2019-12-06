@@ -53,7 +53,7 @@ DEF_CHOICE_3( cCoupleA,                                                         
 
 static void OnChanged_BandwidthA(bool)
 {
-    set.ch[Chan::A].bandwidth.Load();
+    Bandwidth(Chan::A).Load();
 }
 
 DEF_CHOICE_2( cBandwidthA,                                                                                                                                         //--- КАНАЛ 1 - Полоса ---
@@ -61,7 +61,7 @@ DEF_CHOICE_2( cBandwidthA,                                                      
     "Задаёт полосу пропускания канала",
     "Полная",
     "20МГц",
-    set.ch[Chan::A].bandwidth, &PageChannelA::self, Item::Active, OnChanged_BandwidthA, Choice::AfterDraw
+    Bandwidth::Ref(Chan::A), &PageChannelA::self, Item::Active, OnChanged_BandwidthA, Choice::AfterDraw
 )
 
 
@@ -142,7 +142,7 @@ DEF_CHOICE_3( cCoupleB,                                                         
 
 static void OnChanged_BandwidthB(bool)
 {
-    set.ch[Chan::B].bandwidth.Load();
+    Bandwidth(Chan::B).Load();
 }
 
 DEF_CHOICE_2( cBandwidthB,                                                                                                                                         //--- КАНАЛ 2 - Полоса ---
@@ -150,7 +150,7 @@ DEF_CHOICE_2( cBandwidthB,                                                      
     "",
     "Полная",
     "20МГц",
-    set.ch[Chan::B].bandwidth, &PageChannelB::self, Item::Active, OnChanged_BandwidthB, Choice::AfterDraw
+    Bandwidth::Ref(Chan::B), &PageChannelB::self, Item::Active, OnChanged_BandwidthB, Choice::AfterDraw
 )
 
 

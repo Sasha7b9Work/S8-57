@@ -368,22 +368,15 @@ ModeCouple::E &ModeCouple::Ref(Chan::E ch)
 }
 
 
-ModeCouple::operator ModeCouple::E()
+Bandwidth::E &Bandwidth::Ref(Chan::E ch)
 {
-    return Ref(ch);
+    return set.ch[ch].bandwidth;
 }
 
 
 void Bandwidth::Load()
 {
-    Chan::E ch = GetChannel();
     static const FPin::E pinsLF[2] = { FPin::LF1, FPin::LF2 };
 
-    GPIO::WritePin(pinsLF[static_cast<int>(ch)], (set.ch[static_cast<int>(ch)].bandwidth.value == Bandwidth::_20MHz));
-}
-
-
-Chan::E Bandwidth::GetChannel() const
-{
-    return (&set.ch[Chan::A].bandwidth.value == &this->value) ? Chan::A : Chan::B;
+    GPIO::WritePin(pinsLF[ch], Bandwidth(ch).Is20MHz());
 }

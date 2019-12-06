@@ -193,7 +193,7 @@ struct ModeCouple
 
     static ModeCouple::E &Ref(Chan::E);
 
-    operator ModeCouple::E();
+    operator ModeCouple::E() { return Ref(ch);};
     
     pString UGO() const;
 
@@ -207,14 +207,15 @@ struct Bandwidth
     {
         Full,     ///< Если это значение выбрано в меню КАНАЛ, то при этом положение устанавливается полоса из ОТЛАДКА-КАНАЛЫ-Полоса.
         _20MHz,
-    } value;
+    };
 
-    explicit Bandwidth(E v) : value(v) {};
+    Bandwidth(Chan::E c) : ch(c) {}
+    static Bandwidth::E &Ref(Chan::E);
     void Load();
+    bool Is20MHz() { return Ref(ch) == _20MHz; };
 
 private:
-    /// Возвращает канал, для которого является действующей эта настройка
-    Chan::E GetChannel() const;
+    Chan::E ch;
 };
 
 struct TShift

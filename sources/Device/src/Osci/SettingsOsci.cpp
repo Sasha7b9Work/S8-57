@@ -291,8 +291,8 @@ void TBase::Load(TBase::E base)
 
     TShift().Load();
 
-    set.ch[Chan::A].bandwidth.Load();
-    set.ch[Chan::B].bandwidth.Load();
+    Bandwidth(Chan::A).Load();
+    Bandwidth(Chan::B).Load();
 
     MessageMgr::OsciSettingsEffectOnAverageChanged();
 }
@@ -336,8 +336,8 @@ void Range::LoadBoth()
     GPIO::WritePin(FPin::A3, _GET_BIT(valueB, 1));
     GPIO::WritePin(FPin::A4, _GET_BIT(valueB, 0));
 
-    set.ch[Chan::A].bandwidth.Load();
-    set.ch[Chan::B].bandwidth.Load();
+    Bandwidth(Chan::A).Load();
+    Bandwidth(Chan::B).Load();
 
     if(set.disp.lastAffectedChannel == Chan::B)
     {

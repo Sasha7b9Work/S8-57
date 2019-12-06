@@ -48,7 +48,7 @@ const Settings Settings::defaultSettings =
             ModeCouple::DC,                 // couple
             true,                           // enabled
             0,                              // balanceShiftADC
-            Bandwidth(Bandwidth::Full),     // bandwidth
+            Bandwidth::Full,                // bandwidth
             false,                          // inverse
             Divider::_1,                    // divider
             CalibrationMode::Disabled,      // calibrationMode
@@ -59,7 +59,7 @@ const Settings Settings::defaultSettings =
             ModeCouple::DC,                 // couple
             true,                           // enabled
             0,                              // balanceShiftADC
-            Bandwidth(Bandwidth::Full),     // bandwidth
+            Bandwidth::Full,                // bandwidth
             false,                          // inverse
             Divider::_1,                    // divider
             CalibrationMode::Disabled,      // calibrationMode
