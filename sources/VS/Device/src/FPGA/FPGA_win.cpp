@@ -78,12 +78,14 @@ static bool GenerateNormalModeData(Chan::E ch, uint8 *data, uint numBytes)
 }
 
 
-bool FPGA::ReadDataChannel(Chan::E ch, uint8 *data, uint numBytes)
+bool FPGA::ReadDataChannel(Chan::E ch, uint8 *data)
 {
     if (!set.ch[ch].enabled)
     {
         return false;
     }
+
+    uint numPoints = ENumPointsFPGA::PointsInChannel();
 
     if (Osci::InModeP2P())
     {
@@ -95,13 +97,13 @@ bool FPGA::ReadDataChannel(Chan::E ch, uint8 *data, uint numBytes)
     }
     else
     {
-        return GenerateNormalModeData(ch, data, numBytes);
+        return GenerateNormalModeData(ch, data, numPoints);
     }
 
     double amplitude = 100.0 * TuneGeneratorDialog::amplitude[ch];
     double offset = 0.0 + TuneGeneratorDialog::offset[ch];
 
-    for (uint i = 0; i < numBytes; i++)
+    for (uint i = 0; i < numPoints; i++)
     {
         double value = offset + VALUE::AVE + amplitude * (sin(i * 0.1)) + NextNoise();
 

@@ -86,11 +86,12 @@ struct ENumPointsFPGA
         _4k,
         _8k,
         Count
-    } value;
-    ENumPointsFPGA();
-    uint BytesInChannel() const;
-    uint PointsInChannel() const;
-    operator ENumPointsFPGA::E() { return value; }
+    };
+    ENumPointsFPGA() {};
+    static ENumPointsFPGA::E &Ref();
+    static uint BytesInChannel() { uint result = PointsInChannel(); if (PeakDetMode().IsEnabled()) { result *= 2; } return result; };
+    static uint PointsInChannel() { return ENUM_TO_REL_POINTS(Ref()); };
+    operator ENumPointsFPGA::E() { return Ref(); }
     static const uint MAX_NUM = 8192;
 };
 

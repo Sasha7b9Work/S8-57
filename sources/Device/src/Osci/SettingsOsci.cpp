@@ -406,28 +406,10 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
 }
 
 
-ENumPointsFPGA::ENumPointsFPGA()
+ENumPointsFPGA::E &ENumPointsFPGA::Ref()
 {
-    value = set.mem.enumPoints;
+    return set.mem.enumPoints;
 }
-
-
-uint ENumPointsFPGA::BytesInChannel() const
-{
-    uint result = ENUM_TO_REL_POINTS(value);
-    if (PeakDetMode().IsEnabled())
-    {
-        result *= 2;
-    }
-
-    return result;
-}
-
-uint ENumPointsFPGA::PointsInChannel() const
-{
-    return ENUM_TO_REL_POINTS(value);
-}
-
 
 void TrigLevel::Find()
 {
