@@ -100,7 +100,7 @@ void FPGA::LoadCalibratorMode()
 }
 
 
-void TShift::LoadReal() const
+void TShift::LoadReal()
 {
     FPGA::post = static_cast<uint16>(TShift() - TShift().Min());
     int Pred = static_cast<int>(ENumPointsFPGA::PointsInChannel()) - static_cast<int>(FPGA::post);
@@ -125,7 +125,7 @@ static uint GetK()
 }
 
 
-void TShift::LoadRandomize() const
+void TShift::LoadRandomize()
 {
     uint k = TBase().RandK();
 
@@ -154,7 +154,7 @@ void TShift::LoadRandomize() const
 }
 
 
-void TShift::Load() const
+void TShift::Load()
 {
     if (Osci::InModeRandomizer())
     {
@@ -174,7 +174,7 @@ void TShift::Change(const int delta)
         return;
     }
 
-    TShift tShift(set.time.shift + delta);
+    TShift::Set(set.time._shift + delta);
 }
 
 
@@ -234,7 +234,7 @@ TrigPolarity::E &TrigPolarity::Ref()
 }
 
 
-int TShift::Min() const
+int TShift::Min()
 {
 #define k 0
 #define mul 2
@@ -257,7 +257,7 @@ int TShift::Min() const
 }
 
 
-int TShift::Max() const
+int TShift::Max()
 {
     return 60000;
 }

@@ -805,13 +805,13 @@ float TBase::TimePoint(TBase::E base)
 }
 
 
-TShift::TShift(int tShift)
+void TShift::Set(int tShift)
 {
     LIMITATION(tShift, Min(), Max());
 
-    set.time.shift = tShift;
+    set.time._shift = tShift;
 
-    TShift::Load();
+    Load();
 
     Osci::Restart();
 
@@ -821,13 +821,13 @@ TShift::TShift(int tShift)
 
 TShift::operator int()
 {
-    return set.time.shift;
+    return set.time._shift;
 }
 
 
 void TShift::Reset() const
 {
-    TShift zero(0);
+    TShift::Set(0);
 }
 
 

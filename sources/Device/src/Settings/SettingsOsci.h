@@ -220,15 +220,14 @@ private:
 
 struct TShift
 {
-    TShift() {};
-    TShift(const int tShift);
+    static void Set(int);
 
     operator int();
 
-    int Min() const;
-    int Max() const;
+    static int Min();
+    static int Max();
 
-    void Load() const;
+    static void Load();
 
     void Change(const int delta);
 
@@ -241,9 +240,9 @@ struct TShift
     void Draw() const;
 
 private:
-    void LoadReal() const;
+    static void LoadReal();
 
-    void LoadRandomize() const;
+    static void LoadRandomize();
     /// Ќарисовать "нормальное" изображение маркера смещени€, когда позици€ смещени€ находитс€ на экране
     void DrawNormal(const int x, const int y) const;
     /// Ќарисовать маркер смещени€, когда позици€ смещени€ находитс€ за левой границей экрана
