@@ -123,7 +123,7 @@ void Osci::UpdateFPGA()
     
         if (FPGA::flag.Pred() && !givingStart)
         {
-            if (!Osci::InModeRandomizer() && (set.trig.startMode == TrigStartMode::Auto) && FPGA::flag.HoldOff())
+            if (!Osci::InModeRandomizer() && TrigStartMode::IsAuto() && FPGA::flag.HoldOff())
             {
                 FPGA::GiveStart();
                 givingStart = true;
@@ -142,7 +142,7 @@ void Osci::UpdateFPGA()
     
                 FPGA::ReadData();
     
-                if (set.trig.startMode == TrigStartMode::Single)
+                if (TrigStartMode::IsSingle())
                 {
                     needStop = true;
                     Trig::pulse = false;

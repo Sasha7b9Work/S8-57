@@ -8,7 +8,7 @@
 void PageTrig::OnChanged_Mode(bool)
 {
     Osci::Stop(false);
-    if(set.trig.startMode != TrigStartMode::Single)
+    if(!TrigStartMode::IsSingle())
     {
         Osci::OnPressStart();
     }
@@ -20,12 +20,12 @@ void PageTrig::OnChanged_Mode(bool)
     {
         // и переключаемся на одиночный режим запуска, то надо сохранить имеющийся тип выборки, чтобы восстановить при возвращении в режим 
         // рандомизатора автоматический или ждущий
-        if (set.trig.startMode == TrigStartMode::Single)
+        if (TrigStartMode::IsSingle())
         {
             set.time.sampleTypeOld = SampleType();
             SampleType().Set(SampleType::Real);
         }
-        else if(set.trig.startMode == TrigStartMode::Auto)    // Иначе восстановим ранее сохранённый
+        else if(TrigStartMode::IsAuto())    // Иначе восстановим ранее сохранённый
         {
             SampleType().Set(set.time.sampleTypeOld);
         }
@@ -47,7 +47,7 @@ DEF_CHOICE_3( cMode, // -V206                                                   
     "Авто ",
     "Ждущий",
     "Однократный",
-    set.trig.startMode, &PageTrig::self, Item::Active, PageTrig::OnChanged_Mode, Choice::AfterDraw
+    TrigStartMode::Ref(), &PageTrig::self, Item::Active, PageTrig::OnChanged_Mode, Choice::AfterDraw
 )
 
 

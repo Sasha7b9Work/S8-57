@@ -10,6 +10,12 @@
 #include "Utils/Values.h"
 
 
+TrigStartMode::E &TrigStartMode::Ref()
+{
+    return set.trig.startMode;
+}
+
+
 void TrigSource::Load()
 {
     TrigInput().Load();

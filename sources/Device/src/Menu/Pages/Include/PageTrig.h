@@ -60,8 +60,13 @@ struct TrigStartMode
         Auto,     ///< Автоматический.
         Wait,     ///< Ждущий.
         Single    ///< Однократный.
-    } value;
-    explicit TrigStartMode(E v) : value(v) {};
+    };
+    TrigStartMode() {}
+    static TrigStartMode::E &Ref();
+    operator TrigStartMode::E() { return Ref(); }
+    static bool IsSingle()      { return Ref() == Single; }
+    static bool IsWait()        { return Ref() == Wait; }
+    static bool IsAuto()        { return Ref() == Auto; }
 };
 
 
