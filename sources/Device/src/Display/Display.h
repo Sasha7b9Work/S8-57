@@ -83,6 +83,6 @@ struct Display
 
         static bool waitKey;
 
-        static bool running;
+        static volatile bool running;
     };
 };

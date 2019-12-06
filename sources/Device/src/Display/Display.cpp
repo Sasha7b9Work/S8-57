@@ -20,7 +20,7 @@ static void EmptyFunc() { }
 
 
 bool Display::Message::waitKey = false;
-bool Display::Message::running = false;
+volatile bool Display::Message::running = false;
 
 
 static pFuncVV funcOnHand = nullptr;
