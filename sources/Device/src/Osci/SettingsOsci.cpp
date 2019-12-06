@@ -451,22 +451,6 @@ void RShift::DrawBoth()
 }
 
 
-int Chan::PointsInChannel() const
-{
-    //DEF__STRUCT(StructNumPoints, int) numPoints[ENumPointsFPGA::Count] =
-    static const int numPoints[ENumPointsFPGA::Count] =
-    {
-        512,
-        1024,
-        2048,
-        4096,
-        8192
-    };
-
-    return numPoints[ENumPointsFPGA()];
-}
-
-
 int Chan::RequestBytes(DataSettings *) const
 {
     return ENumPointsFPGA::MAX_NUM;
