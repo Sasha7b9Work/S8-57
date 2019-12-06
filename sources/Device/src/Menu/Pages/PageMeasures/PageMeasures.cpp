@@ -64,39 +64,45 @@ bool CursorsMovement::IsPixels()
 }
 
 
+Chan::E &CursorsSource::Ref()
+{
+    return set.curs.source;
+}
+
+
 bool CursorsControl::IsDisabledT()
 {
-    return (set.curs.cntrlT[set.curs.source] == Disable);
+    return (set.curs.cntrlT[CursorsSource()] == Disable);
 }
 
 
 bool CursorsControl::IsEnabled1T()
 {
-    return (set.curs.cntrlT[set.curs.source] == _1) || (set.curs.cntrlT[set.curs.source] == Both);
+    return (set.curs.cntrlT[CursorsSource()] == _1) || (set.curs.cntrlT[CursorsSource()] == Both);
 }
 
 
 bool CursorsControl::IsEnabled2T()
 {
-    return (set.curs.cntrlT[set.curs.source] == _2) || (set.curs.cntrlT[set.curs.source] == Both);
+    return (set.curs.cntrlT[CursorsSource()] == _2) || (set.curs.cntrlT[CursorsSource()] == Both);
 }
 
 
 bool CursorsControl::IsDisabledU()
 {
-    return (set.curs.cntrlU[set.curs.source] == Disable);
+    return (set.curs.cntrlU[CursorsSource()] == Disable);
 }
 
 
 bool CursorsControl::IsEnabled1U()
 {
-    return (set.curs.cntrlU[set.curs.source] == _1) || (set.curs.cntrlU[set.curs.source] == Both);
+    return (set.curs.cntrlU[CursorsSource()] == _1) || (set.curs.cntrlU[CursorsSource()] == Both);
 }
 
 
 bool CursorsControl::IsEnabled2U()
 {
-    return (set.curs.cntrlU[set.curs.source] == _2) || (set.curs.cntrlU[set.curs.source] == Both);
+    return (set.curs.cntrlU[CursorsSource()] == _2) || (set.curs.cntrlU[CursorsSource()] == Both);
 }
 
 

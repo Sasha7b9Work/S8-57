@@ -133,6 +133,16 @@ struct CursorsMovement
     static bool IsPixels();
 };
 
+
+struct CursorsSource
+{
+    CursorsSource() {}
+    static Chan::E &Ref();
+    operator Chan::E() { return Ref(); }
+    static bool IsA()  { return Ref() == Chan::A; }
+};
+
+
 struct SettingsCursorsMeasures
 {
     bool               showCursors;             ///< Показывать ли курсоры.

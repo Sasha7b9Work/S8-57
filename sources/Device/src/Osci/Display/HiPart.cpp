@@ -390,7 +390,7 @@ static void WriteCursors()
         separator.Draw(203, 1);
 
         x += 3;
-        Chan::E source = set.curs.source;
+        Chan::E source = CursorsSource();
         Color colorText = Color::CHAN[source];
         if (CursorsControl::IsDisabledU())
         {
