@@ -218,7 +218,7 @@ void Osci::OnChangedPoints()
     FPGA::Reset();
     DisplayOsci::PainterData::ChangeTPos();
     FPGA::Reset();
-    TShift::Set(set.time._shift);
+    TShift::Set(TShift());
     FPGA::Reset();
     RAM::Init();
 }

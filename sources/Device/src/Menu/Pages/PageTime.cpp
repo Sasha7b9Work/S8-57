@@ -123,7 +123,7 @@ DEF_CHOICE_2( cPeakDet,                                                         
 void PageTime::OnChanged_TPos(bool active)
 {
     PageMemory::OnChanged_Points(active);
-    TShift::Set(set.time._shift);
+    TShift::Set(TShift());
 }
 
 DEF_CHOICE_3( cTPos,                                                                                                                                                 //--- РАЗВЕРТКА - То ---
@@ -135,19 +135,6 @@ DEF_CHOICE_3( cTPos,                                                            
     "Право",
     set.time.tPos, &PageTime::self, Item::Active, PageTime::OnChanged_TPos, Choice::AfterDraw
 )
-
-
-//_DEF_CHOICE_2(cDivRole,                                                                                       //--- РАЗВЕРТКА - Ф-ция ВР/ДЕЛ ---
-//    "Ф-ция ВР/ДЕЛ"
-//    ,
-//    "Задаёт функцию для ручки ВРЕМЯ/ДЕЛ: в режиме сбора информации (ПУСК/СТОП в положении ПУСК):\n"
-//    "1. \"Время\" - изменение смещения по времени.\n"
-//    "2. \"Память\" - перемещение по памяти."
-//    ,
-//    "Время",
-//    "Память",
-//    TIME_DIV_XPOS, PageTime::self, 0, 0, 0
-//)
 
 
 DEF_CHOICE_2( cShiftXtype,                                                                                                                                     //--- РАЗВЕРТКА - Смещение ---

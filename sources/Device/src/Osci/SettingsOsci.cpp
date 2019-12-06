@@ -809,7 +809,7 @@ void TShift::Set(int tShift)
 {
     LIMITATION(tShift, Min(), Max());
 
-    set.time._shift = tShift;
+    set.time.shift = tShift;
 
     Load();
 
@@ -821,7 +821,7 @@ void TShift::Set(int tShift)
 
 TShift::operator int()
 {
-    return set.time._shift;
+    return set.time.shift;
 }
 
 
