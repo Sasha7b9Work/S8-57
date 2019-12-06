@@ -137,7 +137,7 @@ bool FPGA::ReadDataChannelRand(Chan::E ch, uint8 *addr, uint8 *data)
 
     if (Tsm == NULL_TSHIFT)
     {
-        std::memcpy(data, &dataRand[ch][0], ENumPointsFPGA().PointsInChannel());
+        std::memcpy(data, &dataRand[ch][0], ENumPointsFPGA::PointsInChannel());
         return false;
     }
 
@@ -147,7 +147,7 @@ bool FPGA::ReadDataChannelRand(Chan::E ch, uint8 *addr, uint8 *data)
 
     uint8 *dataRead = &dataRand[ch][infoRead.posFirst];
 
-    uint8 *last = &dataRand[ch][ENumPointsFPGA().PointsInChannel()];
+    uint8 *last = &dataRand[ch][ENumPointsFPGA::PointsInChannel()];
 
     HAL_FSMC::SetAddrData(addr);
 
@@ -172,7 +172,7 @@ bool FPGA::ReadDataChannelRand(Chan::E ch, uint8 *addr, uint8 *data)
             dataRead += step;
         }
 
-        std::memcpy(data, &dataRand[ch][0], ENumPointsFPGA().PointsInChannel());
+        std::memcpy(data, &dataRand[ch][0], ENumPointsFPGA::PointsInChannel());
     }
 
     return true;

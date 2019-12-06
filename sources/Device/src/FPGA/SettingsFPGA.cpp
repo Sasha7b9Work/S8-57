@@ -97,7 +97,7 @@ void FPGA::LoadCalibratorMode()
 void TShift::LoadReal() const
 {
     FPGA::post = static_cast<uint16>(TShift() - TShift().Min());
-    int Pred = static_cast<int>(ENumPointsFPGA().PointsInChannel()) - static_cast<int>(FPGA::post);
+    int Pred = static_cast<int>(ENumPointsFPGA::PointsInChannel()) - static_cast<int>(FPGA::post);
 
     if (Pred < 0)
     {
@@ -125,7 +125,7 @@ void TShift::LoadRandomize() const
 
     FPGA::post = static_cast<uint16>((TShift() - TShift().Min() - GetK()) / k);
 
-    int Pred = static_cast<int>(ENumPointsFPGA().PointsInChannel()) / static_cast<int>(k) - static_cast<int>(FPGA::post);
+    int Pred = static_cast<int>(ENumPointsFPGA::PointsInChannel()) / static_cast<int>(k) - static_cast<int>(FPGA::post);
 
     if (Pred < 0)
     {

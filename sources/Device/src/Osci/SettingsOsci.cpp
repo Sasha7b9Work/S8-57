@@ -463,7 +463,7 @@ int Chan::PointsInChannel() const
         8192
     };
 
-    return numPoints[static_cast<int>(ENumPointsFPGA())];
+    return numPoints[ENumPointsFPGA()];
 }
 
 

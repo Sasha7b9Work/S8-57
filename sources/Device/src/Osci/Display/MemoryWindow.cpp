@@ -31,7 +31,7 @@ void DisplayOsci::MemoryWindow::Draw()
         if (set.ch[chan].enabled)
         {
             Color::CHAN[chan].SetAsCurrent();
-            DrawDataInRect(X(), Y(), Width(), Height(), OUT(chan), ENumPointsFPGA().PointsInChannel());
+            DrawDataInRect(X(), Y(), Width(), Height(), OUT(chan), ENumPointsFPGA::PointsInChannel());
         }
     }
 }
@@ -81,8 +81,8 @@ static void DrawDataInRect(int x, int y, int width, int height, const uint8 *dat
 
 static void DrawScreenArea()
 {
-    float relBegin = static_cast<float>(SHIFT_IN_MEMORY) / ENumPointsFPGA().PointsInChannel();          // Относительное начало экранной области относительно всей памяти
-    float relWidth = static_cast<float>(Grid::Width() + 1) / ENumPointsFPGA().PointsInChannel();        // Относительное (относительно всей шириный окна) ширина видимой области
+    float relBegin = static_cast<float>(SHIFT_IN_MEMORY) / ENumPointsFPGA::PointsInChannel();          // Относительное начало экранной области относительно всей памяти
+    float relWidth = static_cast<float>(Grid::Width() + 1) / ENumPointsFPGA::PointsInChannel();        // Относительное (относительно всей шириный окна) ширина видимой области
 
     int begin = static_cast<int>(relBegin * DisplayOsci::MemoryWindow::Width() + 0.5F);                 // Реальное начало экранной области относительно начала окна памяти
     int width = static_cast<int>(relWidth * DisplayOsci::MemoryWindow::Width() + 0.5F);                 // Реальная ширина видимой области
