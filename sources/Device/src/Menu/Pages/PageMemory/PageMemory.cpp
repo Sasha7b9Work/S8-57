@@ -29,21 +29,14 @@ ModeWork::E &ModeWork::Ref()
 }
 
 
-bool FileNamingMode::IsManually()
-{
-    return (set.mem.fileNamingMode == Manually);
-}
-
-
-bool FileNamingMode::IsMask()
-{
-    return (set.mem.fileNamingMode == Mask);
-}
-
-
 ModeSaveSignal::E &ModeSaveSignal::Ref()
 {
     return set.mem.modeSaveSignal;
+}
+
+FileNamingMode::E &FileNamingMode::Ref()
+{
+    return set.mem.fileNamingMode;
 }
 
 
@@ -162,7 +155,7 @@ DEF_CHOICE_2( cDrive_Name,                                                      
     ,
     "По маске",
     "Вручную",
-    set.mem.fileNamingMode, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    FileNamingMode::Ref(), &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
