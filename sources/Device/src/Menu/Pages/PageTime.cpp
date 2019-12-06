@@ -42,6 +42,12 @@ SampleType::E &SampleType::Ref()
 }
 
 
+LinkingTShift::E &LinkingTShift::Ref()
+{
+    return set.time.linkingTShift;
+}
+
+
 TPos::E &TPos::Ref()
 {
     return set.time.tPos;
@@ -137,7 +143,7 @@ DEF_CHOICE_2( cShiftXtype,                                                      
     ,
     "Время",
     "Деления",
-    set.time.linkingTShift, &PageTime::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    LinkingTShift::Ref(), &PageTime::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 DEF_PAGE_4( pTime,                                                                                                                                                        //--- РАЗВЕРТКА ---

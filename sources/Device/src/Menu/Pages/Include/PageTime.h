@@ -72,6 +72,8 @@ struct LinkingTShift
         Time,     ///< Смещение привязано к времени
         Position  ///< Смещение привязано к позиции
     };
+
+    static LinkingTShift::E &Ref();
 };
 
 
@@ -82,7 +84,7 @@ struct LinkingTShift
     PeakDetMode::E      peakDet;
     TPos::E             tPos;
     SampleType::E       sampleType;
-    FunctionTime::E     timeDivXPos;
+    FunctionTime::E     _timeDivXPos;
     LinkingTShift::E    linkingTShift;  ///< Тип привязки смещения по горизонтали
     SampleType::E       sampleTypeOld;
 };
