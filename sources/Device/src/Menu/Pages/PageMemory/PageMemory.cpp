@@ -47,20 +47,6 @@ ENumPointsFPGA::E &ENumPointsFPGA::Ref()
 }
 
 
-ENumPointsFPGA::E ENumPointsFPGA::FromNumPoints(int numPoints)
-{
-    if(numPoints == 8192)      { return ENumPointsFPGA::_8k; }
-    else if(numPoints == 4096) { return ENumPointsFPGA::_4k; }
-    else if(numPoints == 2048) { return ENumPointsFPGA::_2k; }
-    else if(numPoints == 1024) { return ENumPointsFPGA::_1k; }
-    else if(numPoints == 512)  { return ENumPointsFPGA::_512; }
-
-    LOG_ERROR("Неправильное количество точек");
-
-    return ENumPointsFPGA::Count;
-}
-
-
 static void DrawSetMask();  // Эта функция рисует, когда выбран режим задания маски.
 static void DrawFileMask(int x, int y);
 static void DrawSetName();  // Эта функция рисует, когда нужно задать имя файла для сохранения
