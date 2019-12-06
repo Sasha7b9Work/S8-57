@@ -296,7 +296,7 @@ void Handlers::OnChannelA()
     }
     else if (event.IsLong())
     {
-        RShift(Chan::A, 0);
+        RShift(Chan::A).Set(0);
     }
     else
     {
@@ -313,7 +313,7 @@ void Handlers::OnChannelB()
     }
     else if (event.IsLong())
     {
-        RShift(Chan::B, 0);
+        RShift(Chan::B).Set(0);
     }
     else
     {

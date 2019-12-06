@@ -138,7 +138,7 @@ public:
     /// Этим конструктором можно узнать значение
     RShift(Chan::E _ch) : ch(_ch) {};
     /// Этим конструктором можно установить значение
-    RShift(Chan::E ch, int16 rShift);
+    void Set(int16 rShift);
 
     operator int16();
 

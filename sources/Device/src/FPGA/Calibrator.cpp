@@ -78,7 +78,7 @@ void Calibrator::Balance(Chan::E ch, Range::E range)
 
     Range(ch).Load(range);
 
-    RShift(ch, 0);
+    RShift(ch).Set(0);
 
     Osci::Start();
 
@@ -131,7 +131,7 @@ bool Calibrator::Stretch(Chan::E ch)
 
     StretchADC::SetDisabled();
 
-
+    //RShift(ch).Load()
 
     old.dbg.nrst.stretchADC[Chan::A] = set.dbg.nrst.stretchADC[Chan::A];
 

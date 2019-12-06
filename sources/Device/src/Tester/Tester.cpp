@@ -88,8 +88,8 @@ void Tester::Enable() // -V2506
     Range(Chan::A).Load(Range::_2V);
     Range(Chan::B).Load(Range::_2V);
 
-    RShift(Chan::A, 0);
-    RShift(Chan::B, 0);
+    RShift(Chan::A).Set(0);
+    RShift(Chan::B).Set(0);
 
     HAL_PIO::Reset(Port_TEST_ON, Pin_TEST_ON);       // Включаем тестер-компонент
 
