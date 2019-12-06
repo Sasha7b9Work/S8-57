@@ -42,13 +42,12 @@ struct ShiftADC
     };
 
     ShiftADC(Chan::E _ch) : ch(_ch) {};
-    operator ShiftADC::E();
-
-    static void SetDisabled();
-    static void SetReal();
-    static bool IsReal();
-
+    static ShiftADC::E &Ref();
+    operator ShiftADC::E() { return Ref(); }
     int8 Value() const;
+    static void SetDisabled() { Ref() = Disable; };
+    static void SetReal() { Ref() = Real; };
+    static bool IsReal() { return Ref() == Real; };
 
 private:
     Chan::E ch;

@@ -246,11 +246,11 @@ const Settings Settings::defaultSettings =
             0,                      // gate_min
 
             BalanceADC::Disable,    // balanceADCtype
-            {},                     // balanceADC[Chan::Count]
+            {0, 0},                 // balanceADC[Chan::Count]
             ShiftADC::Disable,      // shiftADCtype
-            {},                     // rShiftAdd[Chan::Count][Range::Count][2]
+            {},                     // rShiftAdd[Chan::Count][Range::Count]
             StretchADC::Disable,    // stretchADCtype
-            {},                     // StretchADC[Chan::Count][3]
+            {1.0F, 1.0F},           // StretchADC[Chan::Count][3]
 
             {}                      // rShiftAddStable[Chan::Count][3]
         }

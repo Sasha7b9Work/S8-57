@@ -3,33 +3,15 @@
 #include "Settings/Settings.h"
 
 
-void ShiftADC::SetDisabled()
+ShiftADC::E &ShiftADC::Ref()
 {
-    set.dbg.nrst.shiftADCtype = Disable;
-}
-
-
-void ShiftADC::SetReal()
-{
-    set.dbg.nrst.shiftADCtype = Real;
-}
-
-
-bool ShiftADC::IsReal()
-{
-    return (set.dbg.nrst.shiftADCtype == Real);
+    return set.dbg.nrst.shiftADCtype;
 }
 
 
 int8 ShiftADC::Value() const
 {
     return IsReal() ? set.dbg.nrst.shiftADC[ch][Range(ch)] : 0;
-}
-
-
-ShiftADC::operator ShiftADC::E()
-{
-    return set.dbg.nrst.shiftADCtype;
 }
 
 
@@ -192,7 +174,7 @@ DEF_CHOICE_2(cAddRShift,
     "",
     DISABLE_RU,
     "׀ואכüםûי",
-    set.dbg.nrst.shiftADCtype, &PageDebug::PageADC::PageShift::self, Item::Active, OnChanged_ShiftType, Choice::AfterDraw
+    ShiftADC::Ref(), &PageDebug::PageADC::PageShift::self, Item::Active, OnChanged_ShiftType, Choice::AfterDraw
 )
 
 
