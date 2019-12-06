@@ -58,24 +58,10 @@ void CursorsActive::Set(E active)
     set.curs.active = active;
 }
 
-
-bool CursorsLookMode::IsVoltage(Chan::E ch)
+CursorsLookMode::E &CursorsLookMode::Ref(Chan::E ch)
 {
-    return (set.curs.lookMode[ch] == Voltage);
+    return set.curs.lookMode[ch];
 }
-
-
-bool CursorsLookMode::IsTime(Chan::E ch)
-{
-    return (set.curs.lookMode[ch] == Time);
-}
-
-
-bool CursorsLookMode::IsBoth(Chan::E ch)
-{
-    return (set.curs.lookMode[ch] == Both);
-}
-
 
 bool CursorsMovement::IsPercents()
 {

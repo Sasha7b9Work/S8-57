@@ -78,9 +78,10 @@ struct CursorsLookMode
         Both       ///< Курсоры следят за временем и напряжением, в зависимости от того, какой курсоры вращали последним.
     };
 
-    static bool IsVoltage(Chan::E ch);
-    static bool IsTime(Chan::E ch);
-    static bool IsBoth(Chan::E ch);
+    static CursorsLookMode::E &Ref(Chan::E);
+    static bool IsVoltage(Chan::E ch) { return Ref(ch) == Voltage; }
+    static bool IsTime(Chan::E ch)    { return Ref(ch) == Time; }
+    static bool IsBoth(Chan::E ch)    { return Ref(ch) == Both; }
 };
 
 /// Какие курсоры сейчас активны. Какие активны, те и будут перемещаться по вращению ручки УСТАНОВКА.
@@ -134,7 +135,7 @@ struct CursorsMovement
 struct SettingsCursorsMeasures
 {
     bool               showCursors;             ///< Показывать ли курсоры.
-    CursorsLookMode::E lookMode[2];             ///< Режимы слежения за курсорами для двух пар курсоров.
+    CursorsLookMode::E lookMode[Chan::Count];   ///< Режимы слежения за курсорами для двух пар курсоров.
     bool               showFreq;                ///< Установленное в true значение, что нужно показывать на экране 1/dT между курсорами.
     CursorsActive::E   active;                  ///< Какие курсоры сейас активны.
     Chan::E            source;                  ///< Источник - к какому каналу относятся курсоры.
