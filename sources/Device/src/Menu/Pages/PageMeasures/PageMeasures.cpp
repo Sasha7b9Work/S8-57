@@ -11,6 +11,12 @@ FuncModeDraw::E &FuncModeDraw::Ref()
 }
 
 
+MathFunction::E &MathFunction::Ref()
+{
+    return set.math.function;
+}
+
+
 MeasuresOnDisplay::operator MeasuresOnDisplay::E()
 {
     return set.meas.number;
