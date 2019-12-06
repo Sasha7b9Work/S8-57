@@ -179,8 +179,10 @@ bool FPGA::ReadDataChannelRand(Chan::E ch, uint8 *addr, uint8 *data)
 }
 
 
-bool FPGA::ReadDataChannel(Chan::E ch, uint8 *data, uint numPoints)
+bool FPGA::ReadDataChannel(Chan::E ch, uint8 *data)
 {
+    uint numPoints = ENumPointsFPGA();
+
     if (addrRead == 0xffff)
     {
         uint k = 1;

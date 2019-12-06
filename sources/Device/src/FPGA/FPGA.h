@@ -65,7 +65,7 @@ private:
 
     static uint16 ReadLastRecord(Chan::E ch);
 
-    static bool ReadDataChannel(Chan::E ch, uint8 *data, uint numBytes);
+    static bool ReadDataChannel(Chan::E ch, uint8 *data);
 
     static void ClearDataRand();
 

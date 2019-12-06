@@ -102,9 +102,9 @@ void FPGA::ReadData()
     ds.Fill();
     RAM::PrepareForNewData(&ds);
 
-    if (ReadDataChannel(Chan::A, ds.dataA, ds.SizeChannel()))
+    if (ReadDataChannel(Chan::A, ds.dataA))
     {
-        if (ReadDataChannel(Chan::B, ds.dataB, ds.SizeChannel()))
+        if (ReadDataChannel(Chan::B, ds.dataB))
         {
         }
         else
