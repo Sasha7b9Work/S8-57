@@ -6,9 +6,9 @@
 #include "Settings/Settings.h"
 
 
-bool ModeAccumulation::IsReset()
+ModeAccumulation::E &ModeAccumulation::Ref()
 {
-    return (set.disp.modeAccumulation == Reset);
+    return set.disp.modeAccumulation;
 }
 
 
@@ -17,7 +17,7 @@ DEF_CHOICE_2( cEnable,                                                          
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.disp.modeAccumulation, &PageDisplay::PageAccumulation::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    ModeAccumulation::Ref(), &PageDisplay::PageAccumulation::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
