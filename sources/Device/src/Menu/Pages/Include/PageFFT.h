@@ -21,9 +21,9 @@ struct SourceFFT
         B,
         Both
     };
-
-    static bool IsA();
-    static bool IsB();
+    static SourceFFT::E &Ref();
+    static bool IsA() { return Ref() == A; }
+    static bool IsB() { return Ref() == B; }
 };
 
 struct WindowFFT

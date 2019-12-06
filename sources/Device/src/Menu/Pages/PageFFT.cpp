@@ -11,21 +11,15 @@ ScaleFFT::E &ScaleFFT::Ref()
 }
 
 
+SourceFFT::E &SourceFFT::Ref()
+{
+    return set.fft.source;
+}
+
+
 MaxDBFFT::operator MaxDBFFT::E()
 {
     return set.fft.maxDB;
-}
-
-
-bool SourceFFT::IsA()
-{
-    return (set.fft.source == A);
-}
-
-
-bool SourceFFT::IsB()
-{
-    return (set.fft.source == B);
 }
 
 
@@ -77,7 +71,7 @@ DEF_CHOICE_3( cSource,                                                          
     "Канал 1",
     "Канал 2",
     "Канал 1 + 2",
-    set.fft.source, &PageFFT::self, IsActive_Parameter, Choice::Changed, Choice::AfterDraw
+    SourceFFT::Ref(), &PageFFT::self, IsActive_Parameter, Choice::Changed, Choice::AfterDraw
 )
 
 
