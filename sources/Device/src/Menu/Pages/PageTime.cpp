@@ -10,13 +10,7 @@
 #include "Osci/Osci.h"
 
 
-TPos::operator TPos::E()
-{
-    return set.time.tPos;
-}
-
-
-int TPos::PosX() const
+int TPos::PosX()
 {
     int x[] = { Grid::Left(), (Grid::Right() - Grid::Left()) / 2 + Grid::Left(), Grid::Right() };
 
@@ -24,7 +18,7 @@ int TPos::PosX() const
 }
 
 
-void TPos::Draw() const
+void TPos::Draw()
 {
     int x0 = PosX() - 3;
 
@@ -53,8 +47,13 @@ void SampleType::Set(SampleType::E type)
     set.time.sampleType = type;
 }
 
+TPos::E &TPos::Ref()
+{
+    return set.time.tPos;
+}
 
-int TPos::InBytes() const
+
+int TPos::InBytes()
 {
     static const int m[][2][3] =
     {
@@ -66,7 +65,7 @@ int TPos::InBytes() const
         {{0,  8192, 16382}, {0,  8192, 16382}},
         {{0, 16384, 32766}, {0, 16384, 32766}}
     };
-    return m[ENumPointsFPGA()][PeakDetMode()][set.time.tPos];
+    return m[ENumPointsFPGA()][PeakDetMode()][Ref()];
 }
 
 
@@ -133,7 +132,7 @@ DEF_CHOICE_3( cTPos,                                                            
     "Лево",
     "Центр",
     "Право",
-    set.time.tPos, &PageTime::self, Item::Active, PageTime::OnChanged_TPos, Choice::AfterDraw
+    TPos::Ref(), &PageTime::self, Item::Active, PageTime::OnChanged_TPos, Choice::AfterDraw
 )
 
 

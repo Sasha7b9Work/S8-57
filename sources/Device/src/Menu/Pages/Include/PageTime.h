@@ -25,15 +25,17 @@ struct TPos
         Right          ///< Привязка к правому краю.
     };
 
-    TPos() {};
+    TPos() {}
 
-    operator TPos::E();
+    static TPos::E &Ref();
+
+    operator TPos::E() { return Ref(); }
     /// Узнать привязку отсительно уровня синхронизации в байтах
-    int InBytes() const;
+    static int InBytes();
 
-    void Draw() const;
+    static void Draw();
 
-    int PosX() const;
+    static int PosX();
 };
 
 /// Тип выборки для режима рандомизатора.
