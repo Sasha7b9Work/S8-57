@@ -279,5 +279,7 @@ float HAL_FSMC::GetStretch(uint8 *address)
 
     int delta = address - RD::DATA_A;
 
-    return *stretchs[delta];
+    float result = *stretchs[delta];
+
+    return result;
 }
