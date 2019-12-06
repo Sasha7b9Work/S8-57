@@ -202,6 +202,11 @@ struct ModeRegSet
         Range,
         RShift
     };
+    ModeRegSet() {}
+    static ModeRegSet::E &Ref();
+    operator ModeRegSet::E() { return Ref(); }
+    static bool IsRange()    { return Ref() == Range; }
+    static bool IsRShift()   { return Ref() == RShift; }
 };
 
 struct SettingsMath

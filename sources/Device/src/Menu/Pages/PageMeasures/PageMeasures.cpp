@@ -17,6 +17,12 @@ MathFunction::E &MathFunction::Ref()
 }
 
 
+ModeRegSet::E &ModeRegSet::Ref()
+{
+    return set.math.modeRegSet;
+}
+
+
 MeasuresOnDisplay::operator MeasuresOnDisplay::E()
 {
     return set.meas.number;

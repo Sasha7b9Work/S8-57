@@ -100,7 +100,7 @@ DEF_GRAPH_BUTTON_HINTS_2( bType,                                                
 
 static void OnPress_ModeArrows()
 {
-    Math::CircleIncrease<int8>(reinterpret_cast<int8*>(&set.math.modeRegSet), 0, 1);
+    Math::CircleIncrease<int8>(reinterpret_cast<int8*>(&ModeRegSet::Ref()), 0, 1);
 }
 
 static void Draw_ModeArrows_Range(int x, int y)
@@ -118,7 +118,7 @@ static void Draw_ModeArrows(int x, int y)
     typedef void (*pFuncDraw)(int, int);
 
     static const pFuncDraw funcs[2] = { Draw_ModeArrows_Range, Draw_ModeArrows_RShift };
-    funcs[set.math.modeRegSet](x, y);
+    funcs[ModeRegSet()](x, y);
 }
 
 static bool IsActive_ModeArrows()
@@ -203,14 +203,14 @@ static bool HandlerKey_Function(const KeyEvent &event) // -V2506
 
     int delta = (event.IsUp() || event.IsRight()) ? 1 : -1;
 
-    if (set.math.modeRegSet == ModeRegSet::RShift)
+    if (ModeRegSet::IsRShift())
     {
         if (RShift::ChangeMath(delta))
         {
             Beeper::RegulatorShiftRotate();
         }
     }
-    if (set.math.modeRegSet == ModeRegSet::Range)
+    if (ModeRegSet::IsRange())
     {
         static int sum = 0;
         sum -= delta;
