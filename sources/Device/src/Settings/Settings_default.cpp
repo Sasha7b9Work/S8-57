@@ -217,42 +217,40 @@ const Settings Settings::defaultSettings =
         
     // Меню ОТЛАДКА
     {
-        true,                                   // showConsole
-        30,                                     // numStrings
-        8,                                      // sizeFont
-        false,                                  // modePauseConsole
-        false,                                  // showAll
-        false,                                  // showFlag
-        { false, false },                       // showRShift[2]
-        false,                                  // showTrigLev
-        { false, false },                       // showRange[2]
-        { false, false },                       // showChanParam[2]
-        false,                                  // showTrigParam
-        false,                                  // showTShift
-        false,                                  // showTBase
-        10,                                     // numMeasuresForGates
-        false,                                  // showRandInfo
-        false,                                  // showRandStat
-        0,                                      // timeCompensation
-        0,                                      // pretriggered
-        false,                                  // ShowStats
-        false,                                   // runTest
+        true,                       // showConsole
+        30,                         // numStrings
+        8,                          // sizeFont
+        false,                      // modePauseConsole
+        false,                      // showAll
+        false,                      // showFlag
+        { false, false },           // showRShift[2]
+        false,                      // showTrigLev
+        { false, false },           // showRange[2]
+        { false, false },           // showChanParam[2]
+        false,                      // showTrigParam
+        false,                      // showTShift
+        false,                      // showTBase
+        10,                         // numMeasuresForGates
+        false,                      // showRandInfo
+        false,                      // showRandStat
+        0,                          // timeCompensation
+        0,                          // pretriggered
+        false,                      // ShowStats
+        false,                      // runTest
         // Несбрасываемые настройки калибровки
         {
+            {1.0F, 1.0F},           // stretchADC[Chan::Count]
+            {},                     // rShiftAddStable[Chan::Count][3]
+            {},                     // shiftADC[Chan::Count][Range::Count]
+            {0, 0},                 // balanceADC[Chan::Count]
             0,                      // numAveForRand
             0,                      // numSmoothForRand
             0,                      // correctionTime
-            0,                      // gate_max
-            0,                      // gate_min
-
+            0,                      // enum_gate_max
+            0,                      // enum_gate_min
             BalanceADC::Disable,    // balanceADCtype
-            {0, 0},                 // balanceADC[Chan::Count]
             ShiftADC::Disable,      // shiftADCtype
-            {},                     // rShiftAdd[Chan::Count][Range::Count]
-            StretchADC::Disable,    // stretchADCtype
-            {1.0F, 1.0F},           // StretchADC[Chan::Count][3]
-
-            {}                      // rShiftAddStable[Chan::Count][3]
+            StretchADC::Disable     // stretchADCtype
         }
     }
 };
