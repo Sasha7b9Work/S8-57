@@ -3,10 +3,6 @@
 #include "Settings/SettingsOsci.h"
 
 
-#define SET_ENABLED_BOTH        (set.ch[Chan::A].enabled && set.ch[Chan::B].enabled)
-#define SET_DISABLED_BOTH       (!set.ch[Chan::A].enabled && !set.ch[Chan::B].enabled)
-
-
 /// Делитель.
 struct Divider
 {
