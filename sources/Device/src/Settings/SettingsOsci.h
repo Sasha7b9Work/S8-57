@@ -24,6 +24,7 @@ struct Chan
     pString Name() const;
     operator Chan::E() { return value; };
     bool IsEnabled() const;
+    bool IsInversed() const;
 };
 
 
