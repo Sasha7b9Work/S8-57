@@ -3,10 +3,6 @@
 #include "Menu/MenuItems.h"
 
 
-/// ¬озвращает позицию активного пункта на странице Page::Name.
-#define MENU_POS_ACT_ITEM(name)     (set.menu.posActItem[name])
-
-
 struct SettingsMenu
 {
     bool    show;                               ///< ≈сли true, то нужно показывать текущую страницу
@@ -18,6 +14,12 @@ struct SettingsMenu
 
 struct Menu
 {
+    struct Position
+    {
+        /// ¬озвращает позицию активного пункта на странице name
+        static int8 &ActItem(PageName::E name);
+    };
+
     static void Init();
 
     static void ChangeStateFlashDrive();

@@ -119,7 +119,7 @@ bool Item::IsOpened() const
     }
     else
     {
-        result = (MENU_POS_ACT_ITEM(parent->OwnData()->name) & 0x80) != 0;
+        result = (Menu::Position::ActItem(static_cast<PageName::E>(parent->OwnData()->name)) & 0x80) != 0;
     }
 
     return result;
@@ -375,19 +375,19 @@ void Page::SetAsCurrent() const
 
 bool Page::CurrentItemIsOpened() const
 {
-    return _GET_BIT(MENU_POS_ACT_ITEM(OwnData()->name), 7) == 1;
+    return _GET_BIT(Menu::Position::ActItem(static_cast<PageName::E>(OwnData()->name)), 7) == 1;
 }
 
 
 void Page::SetPosActItem(int8 pos) const
 {
-    MENU_POS_ACT_ITEM(OwnData()->name) = pos;
+    Menu::Position::ActItem(static_cast<PageName::E>(OwnData()->name)) = pos;
 }
 
 
 int8 Page::PosCurrentItem() const
 {
-    return MENU_POS_ACT_ITEM(OwnData()->name) & 0x7f;
+    return Menu::Position::ActItem(static_cast<PageName::E>(OwnData()->name)) & 0x7f;
 }
 
 

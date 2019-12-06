@@ -462,3 +462,9 @@ void Menu::CloseAllBadOpenedPages()
     CloseIfSubPage(const_cast<Page *>(PageROM::self), opened);
     CloseIfSubPage(const_cast<Page *>(PageRAM::self), opened);
 }
+
+
+int8 &Menu::Position::ActItem(PageName::E name)
+{
+    return set.menu.posActItem[name];
+}
