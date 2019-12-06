@@ -41,22 +41,11 @@ bool MeasuresOnDisplay::IsVertical()
 }
 
 
-bool CursorsActive::IsT()
+CursorsActive::E &CursorsActive::Ref()
 {
-    return (set.curs.active == T);
+    return set.curs.active;
 }
 
-
-bool CursorsActive::IsU()
-{
-    return (set.curs.active == U);
-}
-
-
-void CursorsActive::Set(E active)
-{
-    set.curs.active = active;
-}
 
 CursorsLookMode::E &CursorsLookMode::Ref(Chan::E ch)
 {

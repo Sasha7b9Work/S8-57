@@ -94,9 +94,10 @@ struct CursorsActive
         None
     };
 
-    static bool IsT();
-    static bool IsU();
-    static void Set(E v);
+    static CursorsActive::E &Ref();
+    static bool IsT()    { return Ref() == T; }
+    static bool IsU()    { return Ref() == U; }
+    static void Set(E v) { Ref() = v; }
 };
 
 /// Каким курсором управлять
