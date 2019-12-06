@@ -7,8 +7,10 @@
 struct TrigSource
 {
     TrigSource() {};
-    operator Chan::E();
     static void Load();
+    static Chan::E &Ref();
+    operator Chan::E() { return Ref(); };
+
 };
 
 /// Режим поиска синхронизции

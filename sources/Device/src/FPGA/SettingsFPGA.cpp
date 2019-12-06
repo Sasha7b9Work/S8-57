@@ -16,7 +16,7 @@ void TrigSource::Load()
 }
 
 
-TrigSource::operator Chan::E()
+Chan::E &TrigSource::Ref()
 {
     return set.trig.source;
 }
