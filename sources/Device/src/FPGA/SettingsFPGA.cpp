@@ -37,7 +37,7 @@ void TrigInput::Load()
 }
 
 
-TrigInput::operator TrigInput::E()
+TrigInput::E &TrigInput::Ref()
 {
     return set.trig.input;
 }

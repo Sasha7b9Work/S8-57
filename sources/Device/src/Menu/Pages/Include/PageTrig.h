@@ -33,7 +33,8 @@ struct TrigInput
         LF
     };
     TrigInput() {};
-    operator TrigInput::E();
+    static TrigInput::E &Ref();
+    operator TrigInput::E() { return Ref(); }
     /// Установить в соотвествующие положения выводы, отвечающие за источник и вход синхронизации
     static void Load();
 };
