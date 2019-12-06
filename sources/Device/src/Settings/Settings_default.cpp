@@ -50,8 +50,7 @@ const Settings Settings::defaultSettings =
             0,                              // balanceShiftADC
             Bandwidth::Full,                // bandwidth
             false,                          // inverse
-            Divider::_1,                    // divider
-            CalibrationMode::Disabled,      // calibrationMode
+            Divider::_1                     // divider
         },
         {
             0,                              // shift
@@ -61,8 +60,7 @@ const Settings Settings::defaultSettings =
             0,                              // balanceShiftADC
             Bandwidth::Full,                // bandwidth
             false,                          // inverse
-            Divider::_1,                    // divider
-            CalibrationMode::Disabled,      // calibrationMode
+            Divider::_1                     // divider
         }
     },
 

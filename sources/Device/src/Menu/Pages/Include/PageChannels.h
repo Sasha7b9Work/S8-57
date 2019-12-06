@@ -7,17 +7,6 @@
 #define SET_DISABLED_BOTH       (!set.ch[Chan::A].enabled && !set.ch[Chan::B].enabled)
 
 
-/// Режим калибровки.
-struct CalibrationMode
-{
-    enum E
-    {
-        x1,
-        x10,
-        Disabled
-    };
-};
-
 /// Делитель.
 struct Divider
 {
@@ -47,7 +36,6 @@ struct SettingsChannel
     Bandwidth::E        bandwidth;           ///< Ограничение полосы
     bool                inverse;
     Divider::E          divider;             ///< Множитель
-    CalibrationMode::E  calibrationMode;     ///< Режим калибровки
 };
 
 
