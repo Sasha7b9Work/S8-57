@@ -49,8 +49,8 @@ struct ModeSaveSignal
         BMP,
         TXT
     };
-
-    static bool IsBMP();
+    static ModeSaveSignal::E &Ref();
+    static bool IsBMP() { return Ref() == BMP; }
 };
 
 /// Что показывать в режиме Внутр ЗУ - считанный или записанный сигнал.

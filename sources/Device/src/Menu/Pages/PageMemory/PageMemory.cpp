@@ -41,9 +41,9 @@ bool FileNamingMode::IsMask()
 }
 
 
-bool ModeSaveSignal::IsBMP()
+ModeSaveSignal::E &ModeSaveSignal::Ref()
 {
-    return (set.mem.modeSaveSignal == BMP);
+    return set.mem.modeSaveSignal;
 }
 
 
@@ -267,7 +267,7 @@ DEF_CHOICE_2( cDrive_SaveAs,                                                    
     ,
     "Изображение",
     "Текст",
-    set.mem.modeSaveSignal, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    ModeSaveSignal::Ref(), &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
