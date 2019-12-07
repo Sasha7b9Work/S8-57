@@ -4,17 +4,6 @@
 #include "Settings/SettingsOsci.h"
 
 
-/// Используется при выборе оси
-struct RecorderAxis
-{
-    enum E
-    {
-        X,
-        Y
-    } value;
-    explicit RecorderAxis(E v) : value(v) {};
-};
-
 /// Масшаб по времени
 struct RecorderScaleX
 {
@@ -48,7 +37,7 @@ struct SettingsRecorder
     bool                    enSensor;       ///< Включение записи показаний датчика
     Recorder::TypeMemory::E typeMemory;     ///< Место хранения записываемых/показываемых данных
     Recorder::Axis::E       axisMove;       ///< Текущая ось перемещения
-    RecorderAxis::E         axisZoom;       ///< Текущая ось масштабирования
+    Recorder::Axis::E       axisZoom;       ///< Текущая ось масштабирования
     RecorderScaleX          scaleX;         ///< Установленный масштаб по времени
     int8                    currentCursor;  ///< Курсор, которым сейчас можно управлять
     Range::E                unused[2];      ///< Масштаб по вертикали в режиме регистратора

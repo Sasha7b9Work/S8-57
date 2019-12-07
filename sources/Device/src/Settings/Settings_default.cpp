@@ -198,7 +198,7 @@ const Settings Settings::defaultSettings =
         false,                                  // sourceSensor
         Recorder::TypeMemory::RAM,              // typeMemory
         Recorder::Axis::X,                      // axisMove
-        RecorderAxis::X,                        // axisZoom
+        Recorder::Axis::X,                      // axisZoom
         RecorderScaleX(RecorderScaleX::_100ms), // scaleX
         0,                                      // currentCursor
         { Range::_1V, Range::_1V }              // range
