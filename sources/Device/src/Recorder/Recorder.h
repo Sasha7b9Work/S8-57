@@ -7,6 +7,8 @@ struct Recorder
 
     static bool IsEnabledB();
 
+    static bool IsEnabledSensor();
+
     static void Init();
 
     static void DeInit();

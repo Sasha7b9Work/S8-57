@@ -294,3 +294,9 @@ bool Recorder::IsEnabledB()
 {
     return set.rec.enB;
 }
+
+
+bool Recorder::IsEnabledSensor()
+{
+    return set.rec.enSensor;
+}

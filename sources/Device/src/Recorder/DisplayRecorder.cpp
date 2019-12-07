@@ -216,7 +216,7 @@ static void DrawData()
 
                 VLine(max - min).Draw(x, min, Color::CHAN[Chan::A]);
             }
-            if (set.rec.enB)
+            if (Recorder::IsEnabledB())
             {
                 int min = Y(point.Min(Chan::B));
                 int max = Y(point.Max(Chan::B));
