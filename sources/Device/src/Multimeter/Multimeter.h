@@ -83,4 +83,17 @@ struct Multimeter
         static RangeDC::E &Ref();
         operator RangeDC::E() { return Ref(); }
     };
+
+    /// Предел измерения переменного напряжения
+    struct RangeAC
+    {
+        enum E
+        {
+            _2V,
+            _20V,
+            _400V
+        };
+        static RangeAC::E &Ref();
+        operator RangeAC::E() { return Ref(); }
+    };
 };

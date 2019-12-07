@@ -1,17 +1,6 @@
 #pragma once
 
 
-/// Предел измерения переменного напряжения
-struct MultimeterRangeAC
-{
-    enum E
-    {
-        _2V,
-        _20V,
-        _400V
-    };
-};
-
 /// Предел измерения тока
 struct MultimeterRangeCurrent
 {
@@ -39,7 +28,7 @@ struct SettingsMultimeter
     Multimeter::AVP::E            avp;
     Multimeter::Measure::E        meas;
     Multimeter::RangeDC::E        rangeVoltageDC;
-    MultimeterRangeAC::E          rangeVoltageAC;
+    Multimeter::RangeAC::E          _rangeVoltageAC;
     MultimeterRangeCurrent::E     rangeCurrentAC;     ///< Предел измерения переменного тока
     MultimeterRangeCurrent::E     rangeCurrentDC;     ///< Предел измерения постоянного тока
     MultimeterRangeResistance::E  rangeResist;
