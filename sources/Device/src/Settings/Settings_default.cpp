@@ -199,7 +199,7 @@ const Settings Settings::defaultSettings =
         Recorder::TypeMemory::RAM,              // typeMemory
         Recorder::Axis::X,                      // axisMove
         Recorder::Axis::X,                      // axisZoom
-        RecorderScaleX(RecorderScaleX::_100ms), // scaleX
+        Recorder::ScaleX::_100ms,               // scaleX
         0,                                      // currentCursor
         { Range::_1V, Range::_1V }              // range
     },

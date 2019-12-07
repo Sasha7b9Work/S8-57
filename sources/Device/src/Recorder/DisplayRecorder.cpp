@@ -60,7 +60,7 @@ static void DrawSettings(int x, int y)
 
     Region(30, 30).DrawBounded(x, y, Color::BACK, Color::FILL);
 
-    Text(RecorderScaleX::Current().ToString()).Draw(x + 2, y + 2);
+    Text(Recorder::ScaleX::ToString()).Draw(x + 2, y + 2);
 
     Text(Range(Chan::A).ToString(static_cast<int8>(Divider(Chan::A)))).Draw(x + 2, y + 11, Color::CHAN[Chan::A]);
 
@@ -91,7 +91,7 @@ static int Y(int value)
 
 static char *DeltaTime(char buffer[20])
 {
-    float delta = std::fabsf(static_cast<float>(posCursor[0] - posCursor[1])) * RecorderScaleX::Current().TimeForPointMS() / 1000.0F;
+    float delta = std::fabsf(static_cast<float>(posCursor[0] - posCursor[1])) * Recorder::ScaleX::TimeForPointMS() / 1000.0F;
 
     std::strcpy(buffer, Time(delta).ToString(false).c_str());
 
@@ -103,7 +103,7 @@ static char *TimeCursor(int numCur, char buffer[20])
 {
     int numPoint = startPoint + posCursor[numCur];
 
-    float time = (static_cast<float>(numPoint) * RecorderScaleX::Current().TimeForPointMS()) / 1000.0F;
+    float time = (static_cast<float>(numPoint) * Recorder::ScaleX::TimeForPointMS()) / 1000.0F;
 
     std::strcpy(buffer, Time(time).ToString(false).c_str());
 

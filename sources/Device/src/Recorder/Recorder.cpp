@@ -42,7 +42,7 @@ void Recorder::Init()
     ContextRecorder::LoadRegUPR();
     Range::LoadBoth();
     TrigInput().Load();
-    RecorderScaleX::Load();
+    Recorder::ScaleX::Load();
     TShift().Load();
     Osci::LoadHoldfOff();
 
@@ -164,17 +164,17 @@ bool Recorder::IsRunning()
 }
 
 
-void RecorderScaleX::Change(int delta)
+void Recorder::ScaleX::Change(int delta)
 {
     if (!Recorder::IsRunning())
     {
         if (delta > 0)
         {
-            ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&set.rec.scaleX.value), static_cast<uint8>(RecorderScaleX::Count - 1));
+            ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&Recorder::ScaleX::Ref()), static_cast<uint8>(Recorder::ScaleX::Count - 1));
         }
         else
         {
-            ::Math::LimitationDecrease<uint8>(reinterpret_cast<uint8 *>(&set.rec.scaleX.value), 0);
+            ::Math::LimitationDecrease<uint8>(reinterpret_cast<uint8 *>(&Recorder::ScaleX::Ref()), 0);
         }
 
         Load();
@@ -182,13 +182,7 @@ void RecorderScaleX::Change(int delta)
 }
 
 
-RecorderScaleX &RecorderScaleX::Current()
-{
-    return set.rec.scaleX;
-}
-
-
-pString RecorderScaleX::ToString() const
+pString Recorder::ScaleX::ToString()
 {
     static const struct StructScaleX
     {
@@ -198,7 +192,7 @@ pString RecorderScaleX::ToString() const
             name = nRU;
         };
     }
-    scales[RecorderScaleX::Count] =
+    scales[Count] =
     {
         StructScaleX("0.1\x10ñ"),
         StructScaleX("0.2\x10ñ"),
@@ -209,18 +203,18 @@ pString RecorderScaleX::ToString() const
         StructScaleX("10\x10ñ")
     };
 
-    return scales[static_cast<int>(value)].name;
+    return scales[Ref()].name;
 }
 
 
-uint RecorderScaleX::BytesToSec() const
+uint Recorder::ScaleX::BytesToSec() const
 {
     static const struct StructBytes
     {
         uint value;
         StructBytes(uint v) : value(v) {};
     }
-    bytes[RecorderScaleX::Count] =
+    bytes[Count] =
     {
         800,
         400,
@@ -231,18 +225,18 @@ uint RecorderScaleX::BytesToSec() const
         8
     };
 
-    return bytes[static_cast<int>(value)].value;
+    return bytes[Ref()].value;
 }
 
 
-uint RecorderScaleX::TimeForPointMS() const
+uint Recorder::ScaleX::TimeForPointMS()
 {
     static const struct StructTime
     {
         uint value;
         StructTime(uint v) : value(v) {};
     }
-    bytes[RecorderScaleX::Count] =
+    bytes[Count] =
     {
         5,
         10,
@@ -253,7 +247,7 @@ uint RecorderScaleX::TimeForPointMS() const
         500
     };
 
-    return bytes[static_cast<int>(value)].value;
+    return bytes[Ref()].value;
 }
 
 #ifdef WIN32
@@ -261,9 +255,9 @@ uint RecorderScaleX::TimeForPointMS() const
 #endif
 
 
-void RecorderScaleX::Load()
+void Recorder::ScaleX::Load()
 {
-    static const uint8 values[RecorderScaleX::Count] =
+    static const uint8 values[Count] =
     {
         BIN_U8(01010110),  // -V2501  // 100ms  
         BIN_U8(01010111),  // -V2501  // 200ms  
@@ -274,7 +268,7 @@ void RecorderScaleX::Load()
         BIN_U8(01011110)   // -V2501  // 10s
     };
 
-    HAL_FSMC::WriteToFPGA8(WR::TBASE, values[static_cast<int>(RecorderScaleX::Current().value)]);
+    HAL_FSMC::WriteToFPGA8(WR::TBASE, values[Ref()]);
 
     if (Recorder::IsRunning())
     {
@@ -305,4 +299,10 @@ bool Recorder::IsEnabledSensor()
 Recorder::TypeMemory::E &Recorder::TypeMemory::Ref()
 {
     return set.rec.typeMemory;
+}
+
+
+Recorder::ScaleX::E &Recorder::ScaleX::Ref()
+{
+    return set.rec.scaleX;
 }

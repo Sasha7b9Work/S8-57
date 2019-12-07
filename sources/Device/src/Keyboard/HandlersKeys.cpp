@@ -193,7 +193,7 @@ void Handlers::OnTBase()
 
     if (Device::InModeRecorder())
     {
-        OnChangeParameterTime(RecorderScaleX::Change, delta);
+        OnChangeParameterTime(Recorder::ScaleX::Change, delta);
     }
     else
     {
