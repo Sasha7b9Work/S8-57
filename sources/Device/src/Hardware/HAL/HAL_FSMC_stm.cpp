@@ -262,7 +262,7 @@ uint8 HAL_FSMC::ReadData1()
 }
 
 
-float HAL_FSMC::GetStretch(uint8 *address)
+float HAL_FSMC::GetStretch(const uint8 *address)
 {
     if (StretchADC::IsDisabled())
     {

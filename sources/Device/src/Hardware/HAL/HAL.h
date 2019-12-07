@@ -131,7 +131,7 @@ private:
     /// Конфигурировать для работы с альтерой
     static void Configure();
     /// Возвращает растяжку для данного адреса
-    static float GetStretch(uint8 *address);
+    static float GetStretch(const uint8 *address);
 };
 
 struct HAL
