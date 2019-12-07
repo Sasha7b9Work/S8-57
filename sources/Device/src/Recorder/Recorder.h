@@ -24,4 +24,16 @@ struct Recorder
     static bool IsRunning();
 
     static void ReadPoint();
+
+    /// Где хранятся данные
+    struct TypeMemory
+    {
+        enum E
+        {
+            RAM,    ///< ОЗУ
+            ROM,    ///< Внутр ЗУ
+            EXT     ///< Внешн ЗУ
+        };
+        static TypeMemory::E &Ref();
+    };
 };

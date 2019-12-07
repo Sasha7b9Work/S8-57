@@ -300,3 +300,9 @@ bool Recorder::IsEnabledSensor()
 {
     return set.rec.enSensor;
 }
+
+
+Recorder::TypeMemory::E &Recorder::TypeMemory::Ref()
+{
+    return set.rec.typeMemory;
+}

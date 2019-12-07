@@ -1,19 +1,8 @@
 #pragma once
 #include "Menu/MenuItems.h"
+#include "Recorder/Recorder.h"
 #include "Settings/SettingsOsci.h"
 
-
-/// Где хранятся данные
-struct RecorderTypeMemory
-{
-    enum E
-    {
-        RAM,    ///< ОЗУ
-        ROM,    ///< Внутр ЗУ
-        EXT     ///< Внешн ЗУ
-    } value;
-    explicit RecorderTypeMemory(E v) : value(v) {};
-};
 
 /// Используется при выборе оси
 struct RecorderAxis
@@ -57,7 +46,7 @@ struct SettingsRecorder
     bool                    enA;            ///< Включение записи канала 1
     bool                    enB;            ///< Включение записи канала 2
     bool                    enSensor;       ///< Включение записи показаний датчика
-    RecorderTypeMemory::E   typeMemory;     ///< Место хранения записываемых/показываемых данных
+    Recorder::TypeMemory::E typeMemory;     ///< Место хранения записываемых/показываемых данных
     RecorderAxis::E         axisMove;       ///< Текущая ось перемещения
     RecorderAxis::E         axisZoom;       ///< Текущая ось масштабирования
     RecorderScaleX          scaleX;         ///< Установленный масштаб по времени
