@@ -13,6 +13,10 @@ struct BalanceADC
         Settings,   ///< Используются значения балансировки, которые получены автоматически.
         Hand        ///< Используются значения балансировки, заданные вручную.
     };
+    BalanceADC() {}
+    static BalanceADC::E &Ref();
+    operator BalanceADC::E() { return Ref(); }
+    static bool IsHand()     { return Ref() == Hand; }
 };
 
 /// Тип растяжки АЦП

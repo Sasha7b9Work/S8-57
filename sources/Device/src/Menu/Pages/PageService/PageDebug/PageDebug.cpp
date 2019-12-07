@@ -16,6 +16,12 @@
 #include <cstdio>
 
 
+BalanceADC::E &BalanceADC::Ref()
+{
+    return set.dbg.nrst.balanceADCtype;
+}
+
+
 /// В этой структуре будут храниться данные серийного номера при открытой странице ppSerialNumer
 typedef struct
 {
@@ -81,7 +87,7 @@ static void DebugShowSetInfo_Draw()
     DRAW_FORMAT("numAveForRand : %d", set.dbg.nrst.numAveForRand); //-V2528
 
     pString s[3] = {"выключено", "настроено автоматически", "задано вручную"};
-    DRAW_FORMAT("balanceADCtype : %s", (set.dbg.nrst.balanceADCtype < 3 ? s[set.dbg.nrst.balanceADCtype] : "!!! неправильное значение !!!")); //-V547 //-V2528
+    DRAW_FORMAT("balanceADCtype : %s", (BalanceADC() < 3 ? s[BalanceADC()] : "!!! неправильное значение !!!")); //-V547 //-V2528
     DRAW_FORMAT("stretchADCtype : %s", (StretchADC::Type() < 3 ? s[StretchADC::Type()] : "!!! неправильное значение !!!")); //-V547 //-V2528
 
     x = String("stretchADC :").Draw(x0, INC_Y) + 5; //-V2528

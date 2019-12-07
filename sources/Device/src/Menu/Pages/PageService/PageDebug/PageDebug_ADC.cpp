@@ -39,8 +39,8 @@ static void Draw_Balance_Mode(int, int)
         {0, set.ch[Chan::B].balanceShiftADC, static_cast<int8>(set.dbg.nrst.balanceADC[Chan::B])}
     };
 
-    shiftADCA = shift[Chan::A][set.dbg.nrst.balanceADCtype];
-    shiftADCB = shift[Chan::B][set.dbg.nrst.balanceADCtype];
+    shiftADCA = shift[Chan::A][BalanceADC()];
+    shiftADCB = shift[Chan::B][BalanceADC()];
 }
 
 static void OnChanged_Balance_Mode(bool)
@@ -54,13 +54,13 @@ DEF_CHOICE_3(cBalance_Mode,                                                     
     DISABLE_RU,
     "Реальный",
     "Ручной",
-    set.dbg.nrst.balanceADCtype, &PageDebug::PageADC::PageBalance::self, Item::Active, OnChanged_Balance_Mode, Draw_Balance_Mode
+    BalanceADC::Ref(), &PageDebug::PageADC::PageBalance::self, Item::Active, OnChanged_Balance_Mode, Draw_Balance_Mode
 )
 
 
 static bool IsActive_ShiftAB()
 {
-    return (set.dbg.nrst.balanceADCtype == BalanceADC::Hand);
+    return BalanceADC::IsHand();
 }
 
 static void OnChanged_ShiftA()
