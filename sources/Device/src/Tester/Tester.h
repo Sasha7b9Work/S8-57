@@ -89,6 +89,18 @@ struct Tester
         static bool IsVoltage();
     };
 
+    struct Polarity
+    {
+        enum E
+        {
+            Positive,
+            Negative
+        };
+
+        operator Polarity::E();
+        static bool IsPositive();
+    };
+
 private:
     /// Текущий шаг
     static int step;

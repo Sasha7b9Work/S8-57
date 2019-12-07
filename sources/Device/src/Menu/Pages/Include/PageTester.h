@@ -1,18 +1,6 @@
 #pragma once
 
 
-struct TesterPolarity
-{
-    enum E
-    {
-        Positive,
-        Negative
-    };
-
-    operator TesterPolarity::E();
-    static bool IsPositive();
-};
-
 struct TesterStepU
 {
     enum E
@@ -53,7 +41,7 @@ struct TesterViewMode
 struct SettingsTester
 {
     Tester::Control::E  control;
-    TesterPolarity::E   polarity;
+    Tester::Polarity::E   polarity;
     TesterStepU::E      stepU;
     TesterStepI::E      stepI;
     ENumAverage::E      ave;                   ///< Количество усреднений

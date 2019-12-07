@@ -125,7 +125,7 @@ void Tester::Disable() // -V2506
     HAL_PIO::Set(Port_TEST_ON, Pin_TEST_ON);
 
     oldSet.test.control = Control();
-    oldSet.test.polarity = TesterPolarity();
+    oldSet.test.polarity = Polarity();
     oldSet.test.stepU = TesterStepU();
     oldSet.test.stepI = TesterStepI();
 
@@ -238,7 +238,7 @@ void Tester::RecountPoints(uint16 *x, uint8 *y)
 void Tester::LoadPolarity()
 {
     // ”станавливаем пол€рность
-    HAL_PIO::Write(Port_PNP, Pin_PNP, TesterPolarity::IsPositive() ? HState::Enabled : HState::Disabled);
+    HAL_PIO::Write(Port_PNP, Pin_PNP, Polarity::IsPositive() ? HState::Enabled : HState::Disabled);
 }
 
 
@@ -332,4 +332,16 @@ Tester::Control::operator Tester::Control::E()
 bool Tester::Control::IsVoltage()
 {
     return (set.test.control == Voltage);
+}
+
+
+Tester::Polarity::operator Tester::Polarity::E()
+{
+    return set.test.polarity;
+}
+
+
+bool Tester::Polarity::IsPositive()
+{
+    return (set.test.polarity == Positive);
 }

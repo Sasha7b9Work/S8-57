@@ -11,18 +11,6 @@ TesterViewMode::operator TesterViewMode::E()
 }
 
 
-TesterPolarity::operator TesterPolarity::E()
-{
-    return set.test.polarity;
-}
-
-
-bool TesterPolarity::IsPositive()
-{
-    return (set.test.polarity == Positive);
-}
-
-
 static void OnChanged_Polarity(bool)
 {
     Tester::LoadPolarity();
