@@ -42,8 +42,9 @@ struct FreqMeterTimeCounting
     };
 
     FreqMeterTimeCounting() {};
-    operator FreqMeterTimeCounting::E();
-    static bool Is100ms();
+    static FreqMeterTimeCounting::E &Ref();
+    operator FreqMeterTimeCounting::E() { return Ref(); }
+    static bool Is100ms()               { return Ref() == _100ms; }
 };
 
 /// „астота заполн€ющих импульсов дл€ счЄта частоты.

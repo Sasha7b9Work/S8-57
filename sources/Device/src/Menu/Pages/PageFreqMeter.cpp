@@ -16,13 +16,7 @@ FreqMeterModeView::E &FreqMeterModeView::Ref()
 }
 
 
-bool FreqMeterTimeCounting::Is100ms()
-{
-    return (set.freq.timeCounting == _100ms);
-}
-
-
-FreqMeterTimeCounting::operator FreqMeterTimeCounting::E()
+FreqMeterTimeCounting::E &FreqMeterTimeCounting::Ref()
 {
     return set.freq.timeCounting;
 }
@@ -103,7 +97,7 @@ DEF_CHOICE_3( cTimeF,                                                           
     "100мс",
     "1с",
     "10с",
-    set.freq.timeCounting, &PageFreqMeter::self, IsActive_TimeF, OnChanged_TimeF, Choice::AfterDraw
+    FreqMeterTimeCounting::Ref(), &PageFreqMeter::self, IsActive_TimeF, OnChanged_TimeF, Choice::AfterDraw
 )
 
 
