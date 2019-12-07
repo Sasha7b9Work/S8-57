@@ -10,15 +10,9 @@ FreqMeterEnabled::E &FreqMeterEnabled::Ref()
 }
 
 
-bool FreqMeterModeView::IsFrequency()
+FreqMeterModeView::E &FreqMeterModeView::Ref()
 {
-    return (set.freq.modeView == Frequency);
-}
-
-
-bool FreqMeterModeView::IsPeriod()
-{
-    return (set.freq.modeView == Period);
+    return set.freq.modeView;
 }
 
 
@@ -82,7 +76,7 @@ DEF_CHOICE_2( cModeView,                                                        
     "",
     "Частота",
     "Период",
-    set.freq.modeView, &PageFreqMeter::self, IsActive_ModeView, OnChanged_ModeView, Choice::AfterDraw
+    FreqMeterModeView::Ref(), &PageFreqMeter::self, IsActive_ModeView, OnChanged_ModeView, Choice::AfterDraw
 )
 
 
