@@ -36,4 +36,14 @@ struct Recorder
         };
         static TypeMemory::E &Ref();
     };
+
+    /// Используется при выборе оси
+    struct Axis
+    {
+        enum E
+        {
+            X,
+            Y
+        };
+    };
 };

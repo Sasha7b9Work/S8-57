@@ -47,7 +47,7 @@ struct SettingsRecorder
     bool                    enB;            ///< Включение записи канала 2
     bool                    enSensor;       ///< Включение записи показаний датчика
     Recorder::TypeMemory::E typeMemory;     ///< Место хранения записываемых/показываемых данных
-    RecorderAxis::E         axisMove;       ///< Текущая ось перемещения
+    Recorder::Axis::E       axisMove;       ///< Текущая ось перемещения
     RecorderAxis::E         axisZoom;       ///< Текущая ось масштабирования
     RecorderScaleX          scaleX;         ///< Установленный масштаб по времени
     int8                    currentCursor;  ///< Курсор, которым сейчас можно управлять

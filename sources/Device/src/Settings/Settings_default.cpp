@@ -196,8 +196,8 @@ const Settings Settings::defaultSettings =
         true,                                   // sourceChanA
         true,                                   // sourceChanB
         false,                                  // sourceSensor
-        Recorder::TypeMemory::RAM,                // typeMemory
-        RecorderAxis::X,                        // axisMove
+        Recorder::TypeMemory::RAM,              // typeMemory
+        Recorder::Axis::X,                      // axisMove
         RecorderAxis::X,                        // axisZoom
         RecorderScaleX(RecorderScaleX::_100ms), // scaleX
         0,                                      // currentCursor
