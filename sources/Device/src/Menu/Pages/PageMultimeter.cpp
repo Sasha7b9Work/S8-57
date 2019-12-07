@@ -7,7 +7,7 @@
 
 static bool IsActive_RangesVoltageDC()
 {
-    return (set.mult.meas == MultimeterMeasure::VoltageDC);
+    return Multimeter::Measure::IsVoltageDC();
 }
 
 static void OnChange_VoltageDC(bool active)
@@ -30,7 +30,7 @@ DEF_CHOICE_3( cRangesVoltageDC,                                                 
 
 static bool IsActive_RnagesVoltageAC()
 {
-    return (set.mult.meas == MultimeterMeasure::VoltageAC);
+    return Multimeter::Measure::IsVoltageAC();
 }
 
 static void OnChange_VoltageAC(bool active)
@@ -88,7 +88,7 @@ DEF_CHOICE_2( cRangesCurrentAC,
 
 static bool IsActive_RangesReistance()
 {
-    return (set.mult.meas == MultimeterMeasure::Resistance);
+    return Multimeter::Measure::IsResistance();
 }
 
 static void OnChange_Resistance(bool active)
@@ -128,7 +128,7 @@ DEF_CHOICE_7( cMode,
     "R",
     "VD",
     "Прозвонка",
-    set.mult.meas, &PageMultimeter::self, Item::Active, PageMultimeter::OnChanged_Mode, Choice::AfterDraw
+    Multimeter::Measure::Ref(), &PageMultimeter::self, Item::Active, PageMultimeter::OnChanged_Mode, Choice::AfterDraw
 )
 
 
@@ -173,27 +173,27 @@ void PageMultimeter::OnChanged_Mode(bool)
 
     Item **items = const_cast<Item **>(page->OwnData()->items);
 
-    if (set.mult.meas == MultimeterMeasure::VoltageDC)
+    if (Multimeter::Measure::IsVoltageDC())
     {
         items[1] = const_cast<Choice *>(&cRangesVoltageDC);
     }
-    else if (set.mult.meas == MultimeterMeasure::VoltageAC)
+    else if (Multimeter::Measure::IsVoltageAC())
     {
         items[1] = const_cast<Choice *>(&cRangesVoltageAC);
     }
-    else if (set.mult.meas == MultimeterMeasure::CurrentDC)
+    else if (Multimeter::Measure::IsCurrentDC())
     {
         items[1] = const_cast<Choice *>(&cRangesCurrentDC);
     }
-    else if (set.mult.meas == MultimeterMeasure::CurrentAC)
+    else if (Multimeter::Measure::IsCurrentAC())
     {
         items[1] = const_cast<Choice *>(&cRangesCurrentAC);
     }
-    else if (set.mult.meas == MultimeterMeasure::Resistance)
+    else if (Multimeter::Measure::IsResistance())
     {
         items[1] = const_cast<Choice *>(&cRangesResistance);
     }
-    else if (set.mult.meas == MultimeterMeasure::TestDiode)
+    else if (Multimeter::Measure::IsTestDiode())
     {
         items[1] = nullptr;
     }

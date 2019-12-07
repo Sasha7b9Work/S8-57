@@ -102,23 +102,23 @@ void DisplayMultimeter::Update()
 
 static int GetRange()
 {
-    if (set.mult.meas == MultimeterMeasure::VoltageDC)
+    if (Multimeter::Measure::IsVoltageDC())
     {
         return set.mult.rangeVoltageDC;
     }
-    else if (set.mult.meas == MultimeterMeasure::VoltageAC)
+    else if (Multimeter::Measure::IsVoltageAC())
     {
         return set.mult.rangeVoltageAC;
     }
-    else if (set.mult.meas == MultimeterMeasure::CurrentDC)
+    else if (Multimeter::Measure::IsCurrentDC())
     {
         return set.mult.rangeCurrentDC;
     }
-    else if (set.mult.meas == MultimeterMeasure::CurrentAC)
+    else if (Multimeter::Measure::IsCurrentAC())
     {
         return set.mult.rangeCurrentAC;
     }
-    else if (set.mult.meas == MultimeterMeasure::Resistance)
+    else if (Multimeter::Measure::IsResistance())
     {
         return set.mult.rangeResist;
     }
@@ -137,7 +137,7 @@ void DisplayMultimeter::ChangedMode()
 
     std::memset(outBuffer, '-', 7); //-V512
 
-    static const int position[MultimeterMeasure::Count][4] =
+    static const int position[Multimeter::Measure::Count][4] =
     {
         {2, 3, 4},      // VoltageDC
         {2, 3, 4},      // VoltageAC
@@ -148,7 +148,7 @@ void DisplayMultimeter::ChangedMode()
         (2),            // Bell
     };
     
-    static const pString suffix[MultimeterMeasure::Count][4] =
+    static const pString suffix[Multimeter::Measure::Count][4] =
     {
         {"V=", "V=", "V="},
         {"V~", "V~", "V~"},
@@ -159,9 +159,9 @@ void DisplayMultimeter::ChangedMode()
         {"k\x5e="}
     };
 
-    outBuffer[position[set.mult.meas][GetRange()]] = '.';
+    outBuffer[position[Multimeter::Measure()][GetRange()]] = '.';
     
-    std::strcpy(&outBuffer[7], suffix[set.mult.meas][GetRange()]);
+    std::strcpy(&outBuffer[7], suffix[Multimeter::Measure()][GetRange()]);
 }
 
 
@@ -174,7 +174,7 @@ void DisplayMultimeter::SetMeasure(const uint8 buf[13])
         pFuncVCC func;
         Func(pFuncVCC f) : func(f) {};
     }
-    funcs[MultimeterMeasure::Count] =
+    funcs[Multimeter::Measure::Count] =
     {
         PrepareConstantVoltage,
         PrepareVariableVoltage,
@@ -185,9 +185,9 @@ void DisplayMultimeter::SetMeasure(const uint8 buf[13])
         PrepareBell
     };
 
-    MultimeterMeasure::E meas = MultimeterMeasure::GetCode(reinterpret_cast<const char *>(buf));
+    Multimeter::Measure::E meas = Multimeter::Measure::GetCode(reinterpret_cast<const char *>(buf));
 
-    if (meas >= MultimeterMeasure::Count)
+    if (meas >= Multimeter::Measure::Count)
     {
         return;
     }

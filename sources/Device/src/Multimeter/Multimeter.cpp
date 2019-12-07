@@ -94,17 +94,17 @@ void Multimeter::Update()
     }
     
     uint8 range = 0;
-    if(set.mult.meas == MultimeterMeasure::VoltageDC)        { range = static_cast<uint8>(set.mult.rangeVoltageDC); }
-    else if(set.mult.meas == MultimeterMeasure::VoltageAC)   { range = static_cast<uint8>(set.mult.rangeVoltageAC); }
-    else if(set.mult.meas == MultimeterMeasure::CurrentDC)   { range = static_cast<uint8>(set.mult.rangeCurrentDC); }
-    else if(set.mult.meas == MultimeterMeasure::CurrentAC)   { range = static_cast<uint8>(set.mult.rangeCurrentAC); }
-    else if(set.mult.meas == MultimeterMeasure::Resistance)  { range = static_cast<uint8>(set.mult.rangeResist); }
+    if(Measure::IsVoltageDC())        { range = static_cast<uint8>(set.mult.rangeVoltageDC); }
+    else if(Measure::IsVoltageAC())   { range = static_cast<uint8>(set.mult.rangeVoltageAC); }
+    else if(Measure::IsCurrentDC())   { range = static_cast<uint8>(set.mult.rangeCurrentDC); }
+    else if(Measure::IsCurrentAC())   { range = static_cast<uint8>(set.mult.rangeCurrentAC); }
+    else if(Measure::IsResistance())  { range = static_cast<uint8>(set.mult.rangeResist); }
     else
     {
         // больше выборов нету
     }
 
-    char symbol = MultimeterMeasure(set.mult.meas).Symbol();
+    char symbol = Measure::Symbol();
 
     uint8 send[] =
     {
@@ -120,9 +120,9 @@ void Multimeter::Update()
 }
 
 
-MultimeterMeasure::E MultimeterMeasure::GetCode(const char buffer[13])
+Multimeter::Measure::E Multimeter::Measure::GetCode(const char buffer[13])
 {
-    MultimeterMeasure::E result = MultimeterMeasure::Count;
+    Measure::E result = Count;
 
     int pos = 0;
 
@@ -133,31 +133,31 @@ MultimeterMeasure::E MultimeterMeasure::GetCode(const char buffer[13])
 
     if (pos == 13)
     {
-        return MultimeterMeasure::Count;
+        return Count;
     }
 
     switch (buffer[pos - 2])
     {
     case 'U':
-        result = MultimeterMeasure::VoltageDC;
+        result = VoltageDC;
         break;
     case 'V':
-        result = MultimeterMeasure::VoltageAC;
+        result = VoltageAC;
         break;
     case 'I':
-        result = MultimeterMeasure::CurrentDC;
+        result = CurrentDC;
         break;
     case 'J':
-        result = MultimeterMeasure::CurrentAC;
+        result = CurrentAC;
         break;
     case 'R':
-        result = MultimeterMeasure::Resistance;
+        result = Resistance;
         break;
     case 'Y':
-        result = MultimeterMeasure::TestDiode;
+        result = TestDiode;
         break;
     case 'W':
-        result = MultimeterMeasure::Bell;
+        result = Bell;
         break;
     }
 
@@ -175,4 +175,10 @@ static void ReceiveCallback()
 Multimeter::AVP::E &Multimeter::AVP::Ref()
 {
     return set.mult.avp;
+}
+
+
+Multimeter::Measure::E &Multimeter::Measure::Ref()
+{
+    return set.mult.meas;
 }

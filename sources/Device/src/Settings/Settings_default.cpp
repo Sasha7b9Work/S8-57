@@ -173,17 +173,17 @@ const Settings Settings::defaultSettings =
     // Настройки тестер-компонента
     {
         Tester::Control::Voltage,       // control
-        Tester::Polarity::Positive,       // polarity
-        Tester::StepU::_100mV,            // stepU
-        Tester::StepI::_4mA,              // stepI
+        Tester::Polarity::Positive,     // polarity
+        Tester::StepU::_100mV,          // stepU
+        Tester::StepI::_4mA,            // stepI
         ENumAverage::_1,                // smooth
-        Tester::ViewMode::Lines           // viewMode
+        Tester::ViewMode::Lines         // viewMode
     },
 
     // Настройки мультиметра
     {
-        Multimeter::AVP::Off,                     // avp
-        MultimeterMeasure::VoltageDC,           // meas
+        Multimeter::AVP::Off,                   // avp
+        Multimeter::Measure::VoltageDC,         // meas
         MultimeterRangeDC::_2V,                 // rangeCV
         MultimeterRangeAC::_2V,                 // rangeVV
         MultimeterRangeCurrent::_2A,            // rangeCurrentAC

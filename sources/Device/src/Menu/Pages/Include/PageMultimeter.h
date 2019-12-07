@@ -45,34 +45,10 @@ struct MultimeterRangeResistance
     };
 };
 
-/// Режим измерений мультиметра
-struct MultimeterMeasure
-{
-    enum E
-    {
-        VoltageDC,
-        VoltageAC,
-        CurrentDC,
-        CurrentAC,
-        Resistance,
-        TestDiode,
-        Bell,
-        Count
-    } value;
-    explicit MultimeterMeasure(E v) : value(v) { };
-    char Symbol() const
-    {
-        static const char symbols[Count] = { 'U', 'V', 'I', 'J', 'R', 'Y', 'W' };
-        return symbols[value]; //-V2006
-    }
-    /// Получить код измерения из принятого буфера
-    static MultimeterMeasure::E GetCode(const char buffer[13]);
-};
-
 struct SettingsMultimeter
 {
     Multimeter::AVP::E            avp;
-    MultimeterMeasure::E          meas;
+    Multimeter::Measure::E        meas;
     MultimeterRangeDC::E          rangeVoltageDC;
     MultimeterRangeAC::E          rangeVoltageAC;
     MultimeterRangeCurrent::E     rangeCurrentAC;     ///< Предел измерения переменного тока
