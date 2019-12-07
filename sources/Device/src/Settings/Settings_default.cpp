@@ -234,7 +234,6 @@ const Settings Settings::defaultSettings =
         false,                      // runTest
         // Несбрасываемые настройки калибровки
         {
-            {},                                     // rShiftAddStable[Chan::Count][3]
             0,                                      // numAveForRand
             0,                                      // numSmoothForRand
             0,                                      // correctionTime

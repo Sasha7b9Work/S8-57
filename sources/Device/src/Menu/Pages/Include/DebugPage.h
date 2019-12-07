@@ -62,24 +62,23 @@ struct ShiftADC
 
 struct SettingsNRST
 {
-    int16       rShiftAddStable[Chan::Count][3];    ///< Добавочное смещение для трёх самых чувствительных диапазонов. Задаётся единожды при настройке
-    int16       numAveForRand;                      ///< По скольким измерениям усреднять сигнал в режиме рандомизатора.
-    int16       numSmoothForRand;                   ///< Число точек для скользящего фильта в рандомизаторе.
-    int16       correctionTime;                     ///< Коэффициент коррекции времени.
-    int16       enum_gate_max;                      ///< Ограничение ворот в рандомизаторе сверху
-    int16       enum_gate_min;                      ///< Ограничение ворот в рандомизаторе снизу
-    BalanceADC  balanceADC;                         ///< Тип балансировки.
-    ShiftADC    shiftADC;                           ///< Тип учитываемого при установке дополнительного смещения
-    StretchADC  stretchADC;                         ///< Тип растяжки канала.
+    int16       numAveForRand;          ///< По скольким измерениям усреднять сигнал в режиме рандомизатора.
+    int16       numSmoothForRand;       ///< Число точек для скользящего фильта в рандомизаторе.
+    int16       correctionTime;         ///< Коэффициент коррекции времени.
+    int16       enum_gate_max;          ///< Ограничение ворот в рандомизаторе сверху
+    int16       enum_gate_min;          ///< Ограничение ворот в рандомизаторе снизу
+    BalanceADC  balanceADC;             ///< Тип балансировки.
+    ShiftADC    shiftADC;               ///< Тип учитываемого при установке дополнительного смещения
+    StretchADC  stretchADC;             ///< Тип растяжки канала.
 };
 
 
 struct SettingsDebug
 { //-V802
-    int8         showConsole;                   ///< Показывать ли консоль
-    int16        numStrings;                    ///< Число строк в консоли.
-    int8         sizeFont;                      ///< Размер шрифта консоли - 0 - 5, 1 - 8.
-    bool         modePauseConsole;              ///< Если true, то вывод в консоль останавливается нажатием кнопки ПУСК/СТОП.
+    int8         showConsole;           ///< Показывать ли консоль
+    int16        numStrings;            ///< Число строк в консоли.
+    int8         sizeFont;              ///< Размер шрифта консоли - 0 - 5, 1 - 8.
+    bool         modePauseConsole;      ///< Если true, то вывод в консоль останавливается нажатием кнопки ПУСК/СТОП.
     bool         showAll;
     bool         showFlag;
     bool         showRShift[2];
@@ -89,13 +88,13 @@ struct SettingsDebug
     bool         showTrigParam;
     bool         showTShift;
     bool         showTBase;
-    int16        numMeasuresForGates;           ///< Число измерений для ворот.
-    bool         showRandInfo;                  ///< Выводить информацию по рандомизатору - ворота и считанное значение.
-    bool         showRandStat;                  ///< Выводить график статистики.
-    int16        timeCompensation;              ///< Дополнительное смещение по времени для данной развёртки режима рандомизатора.
-    int16        pretriggered;                  ///< Регулируемая величина предзапуска для исследования рандомизатора.
-    bool         ShowStats;                     ///< Показывать статистику на экране (fps, например).
-    bool         runTest;                       ///< Если true, то нужно выполнять тест при запуске
+    int16        numMeasuresForGates;   ///< Число измерений для ворот.
+    bool         showRandInfo;          ///< Выводить информацию по рандомизатору - ворота и считанное значение.
+    bool         showRandStat;          ///< Выводить график статистики.
+    int16        timeCompensation;      ///< Дополнительное смещение по времени для данной развёртки режима рандомизатора.
+    int16        pretriggered;          ///< Регулируемая величина предзапуска для исследования рандомизатора.
+    bool         ShowStats;             ///< Показывать статистику на экране (fps, например).
+    bool         runTest;               ///< Если true, то нужно выполнять тест при запуске
     SettingsNRST nrst;
 };
 
