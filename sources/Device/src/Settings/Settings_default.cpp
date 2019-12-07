@@ -184,7 +184,7 @@ const Settings Settings::defaultSettings =
     {
         Multimeter::AVP::Off,                   // avp
         Multimeter::Measure::VoltageDC,         // meas
-        MultimeterRangeDC::_2V,                 // rangeCV
+        Multimeter::RangeDC::_2V,               // rangeCV
         MultimeterRangeAC::_2V,                 // rangeVV
         MultimeterRangeCurrent::_2A,            // rangeCurrentAC
         MultimeterRangeCurrent::_2A,            // rangeCurrentDC

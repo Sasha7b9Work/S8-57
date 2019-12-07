@@ -70,4 +70,17 @@ struct Multimeter
         static bool IsCurrentAC()  { return Ref() == CurrentAC; }
         static bool IsTestDiode()  { return Ref() == TestDiode; }
     };
+
+    /// Предел имзерения постоянного напряжения
+    struct RangeDC
+    {
+        enum E
+        {
+            _2V,
+            _20V,
+            _500V
+        };
+        static RangeDC::E &Ref();
+        operator RangeDC::E() { return Ref(); }
+    };
 };

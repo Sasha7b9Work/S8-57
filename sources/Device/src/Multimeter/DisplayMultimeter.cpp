@@ -104,7 +104,7 @@ static int GetRange()
 {
     if (Multimeter::Measure::IsVoltageDC())
     {
-        return set.mult.rangeVoltageDC;
+        return Multimeter::RangeDC();
     }
     else if (Multimeter::Measure::IsVoltageAC())
     {

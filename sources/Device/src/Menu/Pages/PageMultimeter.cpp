@@ -24,7 +24,7 @@ DEF_CHOICE_3( cRangesVoltageDC,                                                 
     "2 Â",
     "20 Â",
     "500 Â",
-    set.mult.rangeVoltageDC, &PageMultimeter::self, IsActive_RangesVoltageDC, OnChange_VoltageDC, Choice::AfterDraw
+    Multimeter::RangeDC::Ref(), &PageMultimeter::self, IsActive_RangesVoltageDC, OnChange_VoltageDC, Choice::AfterDraw
 )
 
 
