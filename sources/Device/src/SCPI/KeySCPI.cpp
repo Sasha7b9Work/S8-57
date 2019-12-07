@@ -83,7 +83,7 @@ static const char *FuncKeyPress(const char *buffer)
 
 static void HintKeyPress(String *message)
 {
-    FUNC_HINT(message, keyNames);
+    SCPI::ProcessHint(message, keyNames);
 }
 
 
@@ -109,7 +109,7 @@ static const char *FuncKeyLong(const char *buffer)
 
 static void HintKeyLong(String *message)
 {
-    FUNC_HINT(message, keyNames);
+    SCPI::ProcessHint(message, keyNames);
 }
 
 

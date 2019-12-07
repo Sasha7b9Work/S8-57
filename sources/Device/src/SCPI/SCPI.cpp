@@ -261,3 +261,17 @@ static bool ProcessTest(const StructSCPI strct[]) //-V2504
 
     return true;
 }
+
+
+void SCPI::ProcessHint(String *message, const char *const names[])
+{
+    message->Append(" {");
+    for(int i = 0; i < names[i][0] != 0; i++)
+    {
+        message->Append(names[i]);
+        message->Append(" |");
+    }
+    message->RemoveFromEnd();
+    message->Append('}');
+    SCPI::SendAnswer(message->c_str());
+}

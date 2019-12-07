@@ -62,5 +62,5 @@ bool TestMapping()
 
 static void HintMapping(String *message)
 {
-    FUNC_HINT(message, mapping);
+    SCPI::ProcessHint(message, mapping);
 }

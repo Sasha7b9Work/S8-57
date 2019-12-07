@@ -68,5 +68,5 @@ static bool TestScale()
 
 static void HintScale(String *message)
 {
-    FUNC_HINT(message, tBaseNames)
+    SCPI::ProcessHint(message, tBaseNames);
 }

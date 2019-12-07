@@ -57,7 +57,7 @@ static const char *FuncRange(const char *buffer)
 
 static void HintRange(String *message)
 {
-    FUNC_HINT(message, rangeName);
+    SCPI::ProcessHint(message, rangeName);
 }
 
 

@@ -62,16 +62,6 @@ struct StructSCPI
 
 #define SCPI_APPEND_STRING(string) SCPI::AppendNewData(string.c_str(), std::strlen(string.c_str())); SCPI::Update()
 
-#define FUNC_HINT(message, names)               \
-    message->Append(" {");                      \
-    for(int i = 0; i < names[i][0] != 0; i++)   \
-    {                                           \
-        message->Append(names[i]);              \
-        message->Append(" |");                  \
-    }                                           \
-    message->RemoveFromEnd();                   \
-    message->Append('}');                       \
-    SCPI::SendAnswer(message->c_str());
 
 namespace SCPI
 {
@@ -94,4 +84,6 @@ namespace SCPI
     void SendBadSymbols();
 
     bool Test();
+
+    void ProcessHint(String *message, const char *const names[]);
 };
