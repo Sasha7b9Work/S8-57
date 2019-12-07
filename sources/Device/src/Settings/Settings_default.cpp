@@ -163,11 +163,11 @@ const Settings Settings::defaultSettings =
 
     // Настройки частотомера
     {
-        FreqMeterEnabled::Off,         // enabled
-        FreqMeterModeView::Frequency,  // modeView
-        FreqMeterTimeCounting::_1s,    // timeCounting
-        FreqMeterFreqClc::_1MHz,       // freqClc
-        FreqMeterNumberPeriods::_10    // numberPeriods
+        FreqMeter::Enabled::Off,        // enabled
+        FreqMeterModeView::Frequency,   // modeView
+        FreqMeterTimeCounting::_1s,     // timeCounting
+        FreqMeter::FreqClc::_1MHz,      // freqClc
+        FreqMeter::NumberPeriods::_10   // numberPeriods
     },
 
     // Настройки тестер-компонента

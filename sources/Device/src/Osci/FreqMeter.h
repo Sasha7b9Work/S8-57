@@ -1,5 +1,5 @@
 #pragma once
-#include "Menu/Pages/Include/PageFreqMeter.h"
+//#include "Menu/Pages/Include/PageFreqMeter.h"
 #include "Utils/Stack.h"
 
 
@@ -60,6 +60,52 @@ private:
     static uint timeStartMeasureFreq;
     /// Время начала измерения периода
     static uint timeStartMeasurePeriod;
+
+public:
+    struct Enabled
+    {
+        enum E
+        {
+            Off,
+            On
+        };
+        static Enabled::E &Ref();
+        operator bool() { return Ref() == On; }
+    };
+
+    /// Частота заполняющих импульсов для счёта частоты.
+    struct FreqClc
+    {
+        enum E
+        {
+            _100kHz,
+            _1MHz,
+            _10MHz,
+            _100MHz,
+            Count
+        };
+
+        FreqClc() {};
+        operator FreqClc::E();
+    };
+
+    /// Количество периодов.
+    struct NumberPeriods
+    {
+        enum E
+        {
+            _1,
+            _10,
+            _100,
+            _1k,
+            _10k,
+            _100k,
+            Count
+        };
+
+        NumberPeriods() {};
+        operator NumberPeriods::E();
+    };
 };
 
 
@@ -80,7 +126,7 @@ private:
 
     static pString PeriodSetToString(const BitSet32 *pr);
     /// Возвращает порядок младшего разряда считанного значения счётчика периода при данных настройках
-    static int LowOrder(FreqMeterFreqClc::E freqCLC, FreqMeterNumberPeriods::E numPeriods);
+    static int LowOrder(FreqMeter::FreqClc::E freqCLC, FreqMeter::NumberPeriods::E numPeriods);
     /// Преобразует 6 разрядов числа, хранящиеся в стеке, в текстовую строку периода. Младший значащий разряд хранится на вершине стека. order - его порядок
     static pString StackToString(Stack<uint> *stack, int order);
     /// Записывает 6 разрядов из стека stack в буфер buffer. Младший разряд на вершине стека. Точку ставить на point позиции, начиная с buffer[0]

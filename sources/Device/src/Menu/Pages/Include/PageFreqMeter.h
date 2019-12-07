@@ -1,20 +1,10 @@
 #pragma once
+#include "Osci/FreqMeter.h"
 
 
 class Page;
 class Choice;
 
-
-struct FreqMeterEnabled
-{
-    enum E
-    {
-        Off,
-        On
-    };
-    static FreqMeterEnabled::E &Ref();
-    operator bool() { return Ref() == On; }
-};
 
 /// Что показывать - период или частоту
 struct FreqMeterModeView
@@ -47,47 +37,14 @@ struct FreqMeterTimeCounting
     static bool Is100ms()               { return Ref() == _100ms; }
 };
 
-/// Частота заполняющих импульсов для счёта частоты.
-struct FreqMeterFreqClc
-{
-    enum E
-    {
-        _100kHz,
-        _1MHz,
-        _10MHz,
-        _100MHz,
-        Count
-    };
-
-    FreqMeterFreqClc() {};
-    operator FreqMeterFreqClc::E();
-};
-
-/// Количество периодов.
-struct FreqMeterNumberPeriods
-{
-    enum E
-    {
-        _1,
-        _10,
-        _100,
-        _1k,
-        _10k,
-        _100k,
-        Count
-    };
-
-    FreqMeterNumberPeriods() {};
-    operator FreqMeterNumberPeriods::E();
-};
 
 struct SettingsFreqMeter
 {
-    FreqMeterEnabled::E        enabled;
-    FreqMeterModeView::E       modeView;
-    FreqMeterTimeCounting::E   timeCounting;  ///< Время счёта частоты.
-    FreqMeterFreqClc::E        freqClc;       ///< Частота заполнения.
-    FreqMeterNumberPeriods::E  numberPeriods; ///< Количество периодов.
+    FreqMeter::Enabled::E        enabled;
+    FreqMeterModeView::E         modeView;
+    FreqMeterTimeCounting::E     timeCounting;  ///< Время счёта частоты.
+    FreqMeter::FreqClc::E        freqClc;       ///< Частота заполнения.
+    FreqMeter::NumberPeriods::E  numberPeriods; ///< Количество периодов.
 };
 
 

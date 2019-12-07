@@ -57,12 +57,12 @@ void FreqMeter::LoadSettings()
 {
     uint8 data = 0;
 
-    if (FreqMeterEnabled())
+    if (Enabled())
     {
         const uint16 maskTime[3] = {0, 1, 2};
         const uint16 maskFreqClc[4] = {0, (1 << 2), (1 << 3), ((1 << 3) + (1 << 2))};
 
-        static const uint16 maskPeriod[FreqMeterNumberPeriods::Count] =
+        static const uint16 maskPeriod[NumberPeriods::Count] =
         { //        654 - задействованные биты
             BIN_U8(00000000), //-V2501
             BIN_U8(00010000), //-V2501
@@ -73,8 +73,8 @@ void FreqMeter::LoadSettings()
         };
 
         data |= maskTime[FreqMeterTimeCounting()];
-        data |= maskFreqClc[FreqMeterFreqClc()];
-        data |= maskPeriod[FreqMeterNumberPeriods()];
+        data |= maskFreqClc[FreqClc()];
+        data |= maskPeriod[NumberPeriods()];
     }
     else
     {
@@ -213,7 +213,7 @@ void FreqMeter::ReadPeriod()
 float FreqMeter::FreqSetToFreq(const BitSet32 *fr)
 {
     const float k[3] = {10.0F, 1.0F, 0.1F};
-    return FreqMeterEnabled() ? (fr->word * k[FreqMeterTimeCounting()]) : (fr->word * 10.0F);
+    return Enabled() ? (fr->word * k[FreqMeterTimeCounting()]) : (fr->word * 10.0F);
 }
 
 
@@ -227,7 +227,7 @@ float FreqMeter::PeriodSetToFreq(const BitSet32 *period_)
     const float k[4] = {10e4F, 10e5F, 10e6F, 10e7F};
     const float kP[3] = {1.0F, 10.0F, 100.0F};
 
-    return FreqMeterEnabled() ? (k[FreqMeterFreqClc()] * kP[FreqMeterNumberPeriods()] / static_cast<float>(period_->word)) : (10e5F / static_cast<float>(period_->word));
+    return Enabled() ? (k[FreqClc()] * kP[NumberPeriods()] / static_cast<float>(period_->word)) : (10e5F / static_cast<float>(period_->word));
 }
 
 
@@ -286,7 +286,7 @@ void DisplayFreqMeter::Draw()
 {
     /// \todo В этой строке точку ставить не где придётся, а в той позиции, где она стояла последний раз
 
-    if (!FreqMeterEnabled())
+    if (!FreqMeter::Enabled())
     {
         return;
     }
@@ -686,7 +686,7 @@ pString DisplayFreqMeter::PeriodSetToString(const BitSet32 *pr)
         _period /= 10;
     }
 
-    int order = LowOrder(FreqMeterFreqClc(), FreqMeterNumberPeriods());  // В ордер - порядок младшего значащего разряда
+    int order = LowOrder(FreqMeter::FreqClc(), FreqMeter::NumberPeriods());  // В ордер - порядок младшего значащего разряда
 
     while (stack.Size() < 6)
     {
@@ -714,7 +714,7 @@ pString DisplayFreqMeter::PeriodSetToString(const BitSet32 *pr)
 }
 
 
-int DisplayFreqMeter::LowOrder(FreqMeterFreqClc::E freqCLC, FreqMeterNumberPeriods::E numPeriods)
+int DisplayFreqMeter::LowOrder(FreqMeter::FreqClc::E freqCLC, FreqMeter::NumberPeriods::E numPeriods)
 {
     /*
         Измеряемое значение | Принимаемое значение | Вывод на экран | последний значащий разряд
@@ -859,4 +859,22 @@ void ProgressBarFreqMeter::Draw(int x, int y)
     {
         // здесь ничего
     }
+}
+
+
+FreqMeter::Enabled::E &FreqMeter::Enabled::Ref()
+{
+    return set.freq.enabled;
+}
+
+
+FreqMeter::FreqClc::operator FreqMeter::FreqClc::E()
+{
+    return set.freq.freqClc;
+}
+
+
+FreqMeter::NumberPeriods::operator FreqMeter::NumberPeriods::E()
+{
+    return set.freq.numberPeriods;
 }

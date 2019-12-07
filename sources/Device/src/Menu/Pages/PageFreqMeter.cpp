@@ -4,12 +4,6 @@
 #include "Settings/Settings.h"
 
 
-FreqMeterEnabled::E &FreqMeterEnabled::Ref()
-{
-    return set.freq.enabled;
-}
-
-
 FreqMeterModeView::E &FreqMeterModeView::Ref()
 {
     return set.freq.modeView;
@@ -19,18 +13,6 @@ FreqMeterModeView::E &FreqMeterModeView::Ref()
 FreqMeterTimeCounting::E &FreqMeterTimeCounting::Ref()
 {
     return set.freq.timeCounting;
-}
-
-
-FreqMeterFreqClc::operator FreqMeterFreqClc::E()
-{
-    return set.freq.freqClc;
-}
-
-
-FreqMeterNumberPeriods::operator FreqMeterNumberPeriods::E()
-{
-    return set.freq.numberPeriods;
 }
 
 
@@ -50,14 +32,14 @@ DEF_CHOICE_2( cEnable,                                                          
     "",
     DISABLE_RU,
     ENABLE_RU,
-    FreqMeterEnabled::Ref(), &PageFreqMeter::self, Item::Active, OnChanged_Enable, Choice::AfterDraw
+    FreqMeter::Enabled::Ref(), &PageFreqMeter::self, Item::Active, OnChanged_Enable, Choice::AfterDraw
 )
 
 
 
 static bool IsActive_ModeView()
 {
-    return FreqMeterEnabled();
+    return FreqMeter::Enabled();
 }
 
 static void OnChanged_ModeView(bool)
@@ -77,13 +59,13 @@ DEF_CHOICE_2( cModeView,                                                        
 
 static bool IsActive_SettingsFrequency()
 {
-    return FreqMeterEnabled() && FreqMeterModeView::IsPeriod();
+    return FreqMeter::Enabled() && FreqMeterModeView::IsPeriod();
 }
 
 
 static bool IsActive_TimeF()
 {
-    return FreqMeterEnabled() && FreqMeterModeView::IsFrequency();
+    return FreqMeter::Enabled() && FreqMeterModeView::IsFrequency();
 }
 
 static void OnChanged_TimeF(bool)
