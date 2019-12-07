@@ -102,9 +102,9 @@ public:
             _100k,
             Count
         };
-
-        NumberPeriods() {};
-        operator NumberPeriods::E();
+        NumberPeriods() {}
+        static NumberPeriods::E &Ref();
+        operator NumberPeriods::E() { return Ref(); }
     };
 
     /// Что показывать - период или частоту

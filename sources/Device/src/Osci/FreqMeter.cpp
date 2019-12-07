@@ -874,12 +874,6 @@ FreqMeter::FreqClc::operator FreqMeter::FreqClc::E()
 }
 
 
-FreqMeter::NumberPeriods::operator FreqMeter::NumberPeriods::E()
-{
-    return set.freq.numberPeriods;
-}
-
-
 FreqMeter::ModeView::E &FreqMeter::ModeView::Ref()
 {
     return set.freq.modeView;
@@ -889,4 +883,10 @@ FreqMeter::ModeView::E &FreqMeter::ModeView::Ref()
 FreqMeter::TimeCounting::E &FreqMeter::TimeCounting::Ref()
 {
     return set.freq.timeCounting;
+}
+
+
+FreqMeter::NumberPeriods::E &FreqMeter::NumberPeriods::Ref()
+{
+    return set.freq.numberPeriods;
 }

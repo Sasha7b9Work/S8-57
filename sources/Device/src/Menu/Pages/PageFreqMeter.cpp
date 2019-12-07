@@ -91,7 +91,7 @@ DEF_CHOICE_6( cNumPeriods,                                                      
     "1000",
     "10000",
     "100000",
-    set.freq.numberPeriods, &PageFreqMeter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, Choice::AfterDraw
+    FreqMeter::NumberPeriods::Ref(), &PageFreqMeter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, Choice::AfterDraw
 )
 
 
