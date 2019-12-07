@@ -9,9 +9,9 @@ ShiftADC &ShiftADC::Ref()
 }
 
 
-StretchADC::E &StretchADC::Ref()
+StretchADC &StretchADC::Ref()
 {
-    return set.dbg.nrst.stretchADCtype;
+    return set.dbg.nrst.stretchADC;
 }
 
 
@@ -108,8 +108,8 @@ void PageDebug::PageADC::PageStretch::OnChanged_Mode(bool)
     }
     else
     {
-        stretchA = static_cast<int16>(set.dbg.nrst.stretchADC[Chan::A]);
-        stretchB = static_cast<int16>(set.dbg.nrst.stretchADC[Chan::B]);
+        stretchA = static_cast<int16>(StretchADC::Value(Chan::A));
+        stretchB = static_cast<int16>(StretchADC::Value(Chan::B));
     }
 }
 

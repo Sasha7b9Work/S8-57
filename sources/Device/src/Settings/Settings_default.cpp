@@ -234,7 +234,6 @@ const Settings Settings::defaultSettings =
         false,                      // runTest
         // Несбрасываемые настройки калибровки
         {
-            {1.0F, 1.0F},                           // stretchADC[Chan::Count]
             {},                                     // rShiftAddStable[Chan::Count][3]
             0,                                      // numAveForRand
             0,                                      // numSmoothForRand
@@ -243,7 +242,7 @@ const Settings Settings::defaultSettings =
             0,                                      // enum_gate_min
             { BalanceADC::Disabled, {0, 0} },       // balanceADC
             { ShiftADC::Disable,    {{0}, {0}} },   // shiftADC
-            StretchADC::Disabled                    // stretchADCtype
+            { StretchADC::Disabled, {1.0F, 1.0F} }  // stretchADCtype
         }
     }
 };

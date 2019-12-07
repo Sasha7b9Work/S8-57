@@ -271,10 +271,10 @@ float HAL_FSMC::GetStretch(const uint8 *address)
 
     static const float *stretchs[4] =
     {
-        &set.dbg.nrst.stretchADC[0],
-        &set.dbg.nrst.stretchADC[0],
-        &set.dbg.nrst.stretchADC[1],
-        &set.dbg.nrst.stretchADC[1]
+        &StretchADC::Ref().stretch[Chan::A],
+        &StretchADC::Ref().stretch[Chan::A],
+        &StretchADC::Ref().stretch[Chan::B],
+        &StretchADC::Ref().stretch[Chan::B]
     };
 
     int delta = address - RD::DATA_A;

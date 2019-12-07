@@ -133,7 +133,7 @@ bool Calibrator::Stretch(Chan::E ch)
 
     //RShift(ch).Load()
 
-    old.dbg.nrst.stretchADC[Chan::A] = set.dbg.nrst.stretchADC[Chan::A];
+    old.dbg.nrst.stretchADC.stretch[Chan::A] = StretchADC::Value(Chan::A);
 
     set = old;
 
