@@ -6,11 +6,11 @@
 // :KEY:PRESS:
 static const char *FuncKeyPress(const char *);
 static bool TestKeyPress();
-static void HintKeyPress(uint);
+static void HintKeyPress(String *);
 // :KEY:LONG:
 static const char *FuncKeyLong(const char *);
 static bool TestKeyLong();
-static void HintKeyLong(uint);
+static void HintKeyLong(String *);
 
 
 static const char *const keyNames[Key::Count] =
@@ -81,9 +81,9 @@ static const char *FuncKeyPress(const char *buffer)
 }
 
 
-static void HintKeyPress(uint size)
+static void HintKeyPress(String *message)
 {
-    FUNC_HINT(size, keyNames);
+    FUNC_HINT(message, keyNames);
 }
 
 
@@ -107,9 +107,9 @@ static const char *FuncKeyLong(const char *buffer)
 }
 
 
-static void HintKeyLong(uint size)
+static void HintKeyLong(String *message)
 {
-    FUNC_HINT(size, keyNames);
+    FUNC_HINT(message, keyNames);
 }
 
 

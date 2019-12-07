@@ -234,6 +234,15 @@ void String::RemoveFromBegin(uint numSymbols)
 }
 
 
+void String::RemoveFromEnd()
+{
+    if(Size() > 0)
+    {
+        buffer[Size() - 1] = '\0';
+    }
+}
+
+
 uint String::Size() const
 {
     if (buffer == nullptr)

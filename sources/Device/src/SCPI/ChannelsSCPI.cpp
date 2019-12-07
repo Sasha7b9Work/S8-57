@@ -8,7 +8,7 @@
 // :CHANNEL{1|2}:RANGE:
 static const char *FuncRange(const char *);
 static bool TestRange();
-static void HintRange(uint);
+static void HintRange(String *);
 
 
 static const char *const rangeName[] =
@@ -55,9 +55,9 @@ static const char *FuncRange(const char *buffer)
 }
 
 
-static void HintRange(uint size)
+static void HintRange(String *message)
 {
-    FUNC_HINT(size, rangeName);
+    FUNC_HINT(message, rangeName);
 }
 
 

@@ -9,10 +9,11 @@
     4. Команда должна заканчиваться символом с кодом 0x0D.
 */
 
+class String;
 
 typedef const char *(*FuncSCPI)(const char *);
 typedef bool (*FuncTestSCPI)();
-typedef void (*FuncHint)(uint);
+typedef void (*FuncHint)(String *);
 
 
 /// Структура, соотвествующая узлу дерева.
@@ -61,18 +62,16 @@ struct StructSCPI
 
 #define SCPI_APPEND_STRING(string) SCPI::AppendNewData(string.c_str(), std::strlen(string.c_str())); SCPI::Update()
 
-#define FUNC_HINT(size, names)                  \
-    String message;                             \
-    for(uint i = 0; i < size; i++)              \
-    {                                           \
-        message.Append(' ');                    \
-    }                                           \
+#define FUNC_HINT(message, names)               \
+    message->Append(" {");                      \
     for(int i = 0; i < names[i][0] != 0; i++)   \
     {                                           \
-        message.Append(names[i]);               \
-        message.Append(" |");                   \
+        message->Append(names[i]);              \
+        message->Append(" |");                  \
     }                                           \
-    SCPI::SendAnswer(message.c_str());
+    message->RemoveFromEnd();                   \
+    message->Append('}');                       \
+    SCPI::SendAnswer(message->c_str());
 
 namespace SCPI
 {

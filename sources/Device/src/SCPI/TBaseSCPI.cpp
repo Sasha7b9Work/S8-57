@@ -6,7 +6,7 @@
 // :TIME:SCALE:
 static const char *FuncScale(const char *);
 static bool TestScale();
-static void HintScale(uint);
+static void HintScale(String *);
 
 
 static const char *const tBaseNames[] =
@@ -66,7 +66,7 @@ static bool TestScale()
 }
 
 
-static void HintScale(uint size)
+static void HintScale(String *message)
 {
-    FUNC_HINT(size, tBaseNames)
+    FUNC_HINT(message, tBaseNames)
 }

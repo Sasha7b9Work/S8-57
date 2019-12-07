@@ -11,20 +11,20 @@
 // *IDN?
 static const char *FuncIDN(const char *);
 static bool TestIDN();
-static void HintIDN(uint);
+static void HintIDN(String *);
 // *RST
 static const char *FuncReset(const char *);
 static bool TestReset();
-static void HintReset(uint);
+static void HintReset(String *);
 // :HELP
 static const char *FuncHelp(const char *);
 static bool TestHelp();
-static void HintHelp(uint);
+static void HintHelp(String *);
 // :TEST
 static const char *FuncTest(const char *);
 static bool TestTest();
 static void Process(const StructSCPI strct[], String message);
-static void HintTest(uint);
+static void HintTest(String *);
 
 
 const StructSCPI SCPI::head[] =
@@ -51,9 +51,9 @@ static const char *FuncIDN(const char *buffer)
 }
 
 
-static void HintIDN(uint)
+static void HintIDN(String *message)
 {
-
+    SCPI::SendAnswer(message->c_str());
 }
 
 
@@ -67,9 +67,9 @@ static const char *FuncReset(const char *buffer)
 }
 
 
-static void HintReset(uint)
+static void HintReset(String *message)
 {
-
+    SCPI::SendAnswer(message->c_str());
 }
 
 
@@ -85,9 +85,9 @@ static const char *FuncHelp(const char *buffer)
 }
 
 
-static void HintHelp(uint)
+static void HintHelp(String *message)
 {
-
+    SCPI::SendAnswer(message->c_str());
 }
 
 
@@ -116,9 +116,9 @@ static const char *FuncTest(const char *buffer)
 }
 
 
-static void HintTest(uint)
+static void HintTest(String *message)
 {
-
+    SCPI::SendAnswer(message->c_str());
 }
 
 
@@ -160,10 +160,8 @@ static void Process(const StructSCPI strct[], String msg)
         {
             String message(msg);
             message.Append(strct->key);
-            uint size = message.Size();
             SCPI::SendAnswer(strct->hint);
-            SCPI::SendAnswer(message.c_str());
-            strct->funcHint(size);
+            strct->funcHint(&message);
             SCPI::SendAnswer("");
         }
         else

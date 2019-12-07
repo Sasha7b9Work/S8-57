@@ -39,6 +39,8 @@ public:
     /// Удаляет numSymbols из начала строки
     void RemoveFromBegin(uint numSymbols);
 
+    void RemoveFromEnd();
+
     uint Size() const;
 
     char &operator[](uint i);

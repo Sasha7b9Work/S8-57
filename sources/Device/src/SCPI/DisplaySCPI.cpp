@@ -8,7 +8,7 @@
 // :DISPLAY:MAPPING
 static const char *FuncMapping(const char *);
 static bool TestMapping();
-static void HintMapping(uint);
+static void HintMapping(String *);
 
 
 static const char *const mapping[] =
@@ -60,7 +60,7 @@ bool TestMapping()
 }
 
 
-static void HintMapping(uint size)
+static void HintMapping(String *message)
 {
-    FUNC_HINT(size, mapping);
+    FUNC_HINT(message, mapping);
 }
