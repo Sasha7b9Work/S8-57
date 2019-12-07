@@ -12,11 +12,11 @@ struct BalanceADC
         Disabled,   ///< Балансировка выключена.
         Settings,   ///< Используются значения балансировки, которые получены автоматически.
         Hand        ///< Используются значения балансировки, заданные вручную.
-    };
-    BalanceADC() {}
+    } value;
     static BalanceADC::E &Ref();
-    operator BalanceADC::E() { return Ref(); }
-    static bool IsHand()     { return Ref() == Hand; }
+    static bool IsHand()        { return Ref() == Hand; }
+    static int16 &Value(Chan::E ch);
+    int16  balance[Chan::Count];                    ///< Значение дополнительного смещения АЦП для ручной балансировки.
 };
 
 /// Тип растяжки АЦП
@@ -67,16 +67,14 @@ struct SettingsNRST
     float           stretchADC[Chan::Count];                    ///< Хранится в целом виде, чтобы получить реальный коэффициент, нужно разделить на 1000 и прибавить единицу.
     int16           rShiftAddStable[Chan::Count][3];            ///< Добавочное смещение для трёх самых чувствительных диапазонов. Задаётся единожды при настройке
     int8            shiftADC[Chan::Count][Range::Count];        ///< Добавочное смещение, которое пишется сюда при калибровке и балансировке
-    int16           balanceADC[Chan::Count];                    ///< Значение дополнительного смещения АЦП для ручной балансировки.
     int16           numAveForRand;                              ///< По скольким измерениям усреднять сигнал в режиме рандомизатора.
     int16           numSmoothForRand;                           ///< Число точек для скользящего фильта в рандомизаторе.
     int16           correctionTime;                             ///< Коэффициент коррекции времени.
     int16           enum_gate_max;                              ///< Ограничение ворот в рандомизаторе сверху
     int16           enum_gate_min;                              ///< Ограничение ворот в рандомизаторе снизу
-    BalanceADC::E   balanceADCtype;                             ///< Тип балансировки.
+    BalanceADC      balanceADC;                                 ///< Тип балансировки.
     ShiftADC::E     shiftADCtype;                               ///< Тип учитываемого при установке дополнительного смещения
     StretchADC::E   stretchADCtype;                             ///< Тип растяжки канала.
-
 };
 
 

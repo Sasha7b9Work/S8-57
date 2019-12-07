@@ -3,6 +3,12 @@
 #include "Settings/Settings.h"
 
 
+int16 &BalanceADC::Value(Chan::E ch)
+{
+    return set.dbg.nrst.balanceADC.balance[ch];
+}
+
+
 ShiftADC::E &ShiftADC::Ref()
 {
     return set.dbg.nrst.shiftADCtype;
@@ -35,12 +41,12 @@ static void Draw_Balance_Mode(int, int)
 {
     int8 shift[2][3] =
     {
-        {0, set.ch[Chan::A].balanceShiftADC, static_cast<int8>(set.dbg.nrst.balanceADC[Chan::A])},
-        {0, set.ch[Chan::B].balanceShiftADC, static_cast<int8>(set.dbg.nrst.balanceADC[Chan::B])}
+        {0, set.ch[Chan::A].balanceShiftADC, static_cast<int8>(BalanceADC::Value(Chan::A))},
+        {0, set.ch[Chan::B].balanceShiftADC, static_cast<int8>(BalanceADC::Value(Chan::B))}
     };
 
-    shiftADCA = shift[Chan::A][BalanceADC()];
-    shiftADCB = shift[Chan::B][BalanceADC()];
+    shiftADCA = shift[Chan::A][BalanceADC::Ref()];
+    shiftADCB = shift[Chan::B][BalanceADC::Ref()];
 }
 
 static void OnChanged_Balance_Mode(bool)
@@ -65,7 +71,7 @@ static bool IsActive_ShiftAB()
 
 static void OnChanged_ShiftA()
 {
-    set.dbg.nrst.balanceADC[Chan::A] = shiftADCA;
+    BalanceADC::Value(Chan::A) = shiftADCA;
 }
 
 DEF_GOVERNOR(gShiftA,                                                                                                                           //--- Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— - —ÏÂ˘ÂÌËÂ 1 ---
@@ -78,7 +84,7 @@ DEF_GOVERNOR(gShiftA,                                                           
 
 static void OnChanged_ShiftB()
 {
-    set.dbg.nrst.balanceADC[Chan::B] = shiftADCB;
+    BalanceADC::Value(Chan::B) = shiftADCB;
 }
 
 DEF_GOVERNOR(gShiftB,                                                                                                                           //--- Œ“À¿ƒ ¿ - ¿÷œ - ¡¿À¿Õ— - —ÏÂ˘ÂÌËÂ 2 ---
