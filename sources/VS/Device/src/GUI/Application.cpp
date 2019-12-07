@@ -39,8 +39,6 @@ enum
 
 static Frame *frame = nullptr;
 
-static bool isRunning = false;
-
 
 wxIMPLEMENT_APP_NO_MAIN(Application);
 
@@ -182,7 +180,6 @@ Frame::Frame(const wxString& title)
     ConsoleSCPI::Self()->Show();
 
     frame = this;
-    isRunning = true;
 }
 
 
@@ -226,15 +223,12 @@ void Frame::OnSize(wxCommandEvent&)
 
 void Frame::OnQuit(wxCommandEvent& WXUNUSED(event))
 {
-    isRunning = false;
     Close(true);
 }
 
 
 void Frame::OnClose(wxCloseEvent &event)
 {
-    isRunning = false;
-
     SaveSettings();
 
     ConsoleSCPI::Self()->Destroy();
