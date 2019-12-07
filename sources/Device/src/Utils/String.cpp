@@ -48,7 +48,7 @@ String::String(const char *format, ...) : buffer(nullptr)
         return;
     }
 
-    static const int SIZE = 100;
+    static const int SIZE = 500;
     char buf[SIZE + 1];
 
     std::va_list args;

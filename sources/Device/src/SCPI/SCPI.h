@@ -63,18 +63,16 @@ struct StructSCPI
 
 #define FUNC_HINT(size, names)                  \
     String message;                             \
-                                                \
     for(uint i = 0; i < size; i++)              \
     {                                           \
         message.Append(' ');                    \
     }                                           \
-                                                \
     for(int i = 0; i < names[i][0] != 0; i++)   \
     {                                           \
-        String msg(message);                    \
-        msg.Append(names[i]);                   \
-        SCPI::SendAnswer(msg.c_str());          \
-    }
+        message.Append(names[i]);               \
+        message.Append(" |");                   \
+    }                                           \
+    SCPI::SendAnswer(message.c_str());
 
 namespace SCPI
 {
