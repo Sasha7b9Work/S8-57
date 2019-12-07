@@ -5,27 +5,9 @@
 #include "Device.h"
 
 
-TesterViewMode::operator TesterViewMode::E()
-{
-    return set.test.viewMode;
-}
-
-
 static void OnChanged_Polarity(bool)
 {
     Tester::LoadPolarity();
-}
-
-
-TesterStepU::operator TesterStepU::E()
-{
-    return set.test.stepU;
-}
-
-
-bool TesterStepU::Is500mV()
-{
-    return (set.test.stepU == _500mV);
 }
 
 
@@ -34,7 +16,7 @@ DEF_CHOICE_2( cPolarity,                                                        
     "Полярность испытательного воздействия",
     "+",
     "-",
-    set.test.polarity, &PageTester::self, Item::Active, OnChanged_Polarity, Choice::AfterDraw
+    Tester::Polarity::Ref(), &PageTester::self, Item::Active, OnChanged_Polarity, Choice::AfterDraw
 )
 
 

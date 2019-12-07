@@ -174,10 +174,10 @@ const Settings Settings::defaultSettings =
     {
         Tester::Control::Voltage,       // control
         Tester::Polarity::Positive,       // polarity
-        TesterStepU::_100mV,            // stepU
+        Tester::StepU::_100mV,            // stepU
         Tester::StepI::_4mA,              // stepI
         ENumAverage::_1,                // smooth
-        TesterViewMode::Lines           // viewMode
+        Tester::ViewMode::Lines           // viewMode
     },
 
     // Настройки мультиметра

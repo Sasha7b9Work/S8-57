@@ -96,7 +96,7 @@ struct Tester
             Positive,
             Negative
         };
-
+        static Polarity::E &Ref();
         operator Polarity::E();
         static bool IsPositive();
     };
@@ -112,6 +112,31 @@ struct Tester
         StepI() {};
         operator StepI::E();
         static bool Is20mA();
+    };
+
+    struct StepU
+    {
+        enum E
+        {
+            _100mV,
+            _500mV
+        };
+
+        StepU() {};
+        operator StepU::E();
+        static bool Is500mV();
+    };
+
+
+    struct ViewMode
+    {
+        enum E
+        {
+            Lines,
+            Points
+        };
+
+        operator ViewMode::E();
     };
 
 private:

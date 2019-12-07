@@ -1,39 +1,14 @@
 #pragma once
 
 
-struct TesterStepU
-{
-    enum E
-    {
-        _100mV,
-        _500mV
-    };
-
-    TesterStepU() {};
-    operator TesterStepU::E();
-    static bool Is500mV();
-};
-
-
-struct TesterViewMode
-{
-    enum E
-    {
-        Lines,
-        Points
-    };
-
-    operator TesterViewMode::E();
-};
-
 struct SettingsTester
 {
     Tester::Control::E  control;
     Tester::Polarity::E   polarity;
-    TesterStepU::E      stepU;
+    Tester::StepU::E      stepU;
     Tester::StepI::E      stepI;
     ENumAverage::E      ave;                   ///< Количество усреднений
-    TesterViewMode::E   viewMode;
+    Tester::ViewMode::E   viewMode;
 };
 
 
