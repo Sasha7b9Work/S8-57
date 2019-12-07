@@ -70,7 +70,7 @@ void Multimeter::ChangeAVP()
 {
     ChangeMode();
 
-    char send[] = { 0x02, 'Z', (set.mult.avp == MultimeterAVP::On) ? '1' : '0', 0x0a };
+    char send[] = { 0x02, 'Z', AVP::IsEnabled() ? '1' : '0', 0x0a };
 
     USART3_::Transmit(send, 100);
 
@@ -169,4 +169,10 @@ static void ReceiveCallback()
 {
     DisplayMultimeter::SetMeasure(bufferUART);
     USART3_::StartReceiveIT(bufferUART);
+}
+
+
+Multimeter::AVP::E &Multimeter::AVP::Ref()
+{
+    return set.mult.avp;
 }

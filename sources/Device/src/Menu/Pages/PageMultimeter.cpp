@@ -142,7 +142,7 @@ DEF_CHOICE_2 ( cAVP,
     "Автовыбор предела",
     DISABLE_RU,
     ENABLE_RU,
-    set.mult.avp, &PageMultimeter::self, Item::Active, OnChanged_AVP, Choice::AfterDraw
+    Multimeter::AVP::Ref(), &PageMultimeter::self, Item::Active, OnChanged_AVP, Choice::AfterDraw
 )
 
 

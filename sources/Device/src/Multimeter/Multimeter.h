@@ -25,4 +25,17 @@ struct Multimeter
     static void Calibrate(int calibr);
 
     static void ChangeAVP();
+
+    /// АВП - автовыбор предела
+    struct AVP
+    {
+        enum E
+        {
+            Off,
+            On
+        };
+
+        static AVP::E &Ref();
+        static bool IsEnabled() { return Ref() == On; }
+    };
 };

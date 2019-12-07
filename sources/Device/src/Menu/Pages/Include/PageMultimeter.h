@@ -1,17 +1,6 @@
 #pragma once
 
 
-
-/// АВП - автовыбор предела
-struct MultimeterAVP
-{
-    enum E
-    {
-        Off,
-        On
-    };
-};
-
 /// Предел имзерения постоянного напряжения
 struct MultimeterRangeDC
 {
@@ -82,7 +71,7 @@ struct MultimeterMeasure
 
 struct SettingsMultimeter
 {
-    MultimeterAVP::E              avp;
+    Multimeter::AVP::E            avp;
     MultimeterMeasure::E          meas;
     MultimeterRangeDC::E          rangeVoltageDC;
     MultimeterRangeAC::E          rangeVoltageAC;
