@@ -172,7 +172,7 @@ const Settings Settings::defaultSettings =
 
     // Настройки тестер-компонента
     {
-        TesterControl::Voltage,         // control
+        Tester::Control::Voltage,       // control
         TesterPolarity::Positive,       // polarity
         TesterStepU::_100mV,            // stepU
         TesterStepI::_4mA,              // stepI

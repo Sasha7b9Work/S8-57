@@ -5,18 +5,6 @@
 #include "Device.h"
 
 
-TesterControl::operator TesterControl::E()
-{
-    return (set.test.control);
-}
-
-
-bool TesterControl::IsVoltage()
-{
-    return (set.test.control == Voltage);
-}
-
-
 TesterViewMode::operator TesterViewMode::E()
 {
     return set.test.viewMode;
@@ -162,7 +150,7 @@ void PageTester::OnChanged_Control(bool)
 
     Item **items = const_cast<Item **>(page->OwnData()->items);
 
-    if (TesterControl::IsVoltage())
+    if (Tester::Control::IsVoltage())
     {
         items[1] = const_cast<Choice *>(&cStepU);
     }

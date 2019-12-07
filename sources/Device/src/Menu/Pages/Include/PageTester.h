@@ -1,21 +1,6 @@
 #pragma once
 
 
-
-/// Чем будем управлять в тестер-компоненте - напряжением или током
-struct TesterControl
-{
-    enum E
-    {
-        Voltage,
-        Current
-    };
-
-    operator TesterControl::E();
-
-    static bool IsVoltage();
-};
-
 struct TesterPolarity
 {
     enum E
@@ -67,7 +52,7 @@ struct TesterViewMode
 
 struct SettingsTester
 {
-    TesterControl::E    control;
+    Tester::Control::E  control;
     TesterPolarity::E   polarity;
     TesterStepU::E      stepU;
     TesterStepI::E      stepI;

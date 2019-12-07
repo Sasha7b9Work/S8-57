@@ -124,7 +124,7 @@ void Tester::Disable() // -V2506
 
     HAL_PIO::Set(Port_TEST_ON, Pin_TEST_ON);
 
-    oldSet.test.control = TesterControl();
+    oldSet.test.control = Control();
     oldSet.test.polarity = TesterPolarity();
     oldSet.test.stepU = TesterStepU();
     oldSet.test.stepI = TesterStepI();
@@ -245,11 +245,11 @@ void Tester::LoadPolarity()
 void Tester::LoadStep()
 {
     // ”станавливаем управление напр€жением или током
-    HAL_PIO::Write(Port_U, Pin_U, TesterControl::IsVoltage() ? HState::Enabled : HState::Disabled);
+    HAL_PIO::Write(Port_U, Pin_U, Control::IsVoltage() ? HState::Enabled : HState::Disabled);
 
-    HAL_PIO::Write(Port_I, Pin_I, TesterControl::IsVoltage() ? HState::Disabled : HState::Enabled);
+    HAL_PIO::Write(Port_I, Pin_I, Control::IsVoltage() ? HState::Disabled : HState::Enabled);
 
-    if (TesterControl::IsVoltage())
+    if (Control::IsVoltage())
     {
         stepU =  255.0F / 3 * (TesterStepU::Is500mV() ? 2 : 0.4F) / 5;
     }
@@ -320,4 +320,16 @@ String Tester::Shift::ToString(Scale::E scale) // -V2506
     float shiftAbs = RShift::ToAbs(shift, static_cast<Range::E>(scale)) * 1e-3F;
 
     return Current(shiftAbs).ToString();
+}
+
+
+Tester::Control::operator Tester::Control::E()
+{
+    return (set.test.control);
+}
+
+
+bool Tester::Control::IsVoltage()
+{
+    return (set.test.control == Voltage);
 }

@@ -75,6 +75,20 @@ struct Tester
         Chan::E ch;
     };
 
+    /// Чем будем управлять в тестер-компоненте - напряжением или током
+    struct Control
+    {
+        enum E
+        {
+            Voltage,
+            Current
+        };
+
+        operator Control::E();
+
+        static bool IsVoltage();
+    };
+
 private:
     /// Текущий шаг
     static int step;

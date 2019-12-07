@@ -86,7 +86,7 @@ public:
         };
 
         FreqClc() {};
-        static FreqMeter::E &Ref();
+        static FreqClc::E &Ref();
         operator FreqClc::E() { return Ref(); }
     };
 
