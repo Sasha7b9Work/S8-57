@@ -7,7 +7,7 @@ struct SettingsTester
     Tester::Polarity::E polarity;
     Tester::StepU::E    stepU;
     Tester::StepI::E    stepI;
-    ENumAverage::E      ave;                   ///< Количество усреднений
+    ENumAverage::E      enumAverage;    ///< Количество усреднений
     Tester::ViewMode::E viewMode;
 };
 

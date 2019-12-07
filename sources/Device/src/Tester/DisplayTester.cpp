@@ -71,7 +71,7 @@ void DisplayTester::DrawData(int numStep)
     uint16 *x = &(*datX)[numStep][0];
     uint8 *y = &(*datY)[numStep][0];
     
-    uint8 mode = BUILD_MODE(Tester::ViewMode(), numStep, set.test.ave);
+    uint8 mode = BUILD_MODE(Tester::ViewMode(), numStep, Tester::ENUMAverage());
 
     Painter::DrawTesterData(mode, ColorForStep(numStep), x, y);
 }

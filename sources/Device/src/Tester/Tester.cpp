@@ -351,3 +351,9 @@ Tester::ViewMode::E &Tester::ViewMode::Ref()
 {
     return set.test.viewMode;
 }
+
+
+ENumAverage::E &Tester::ENUMAverage::Ref()
+{
+    return set.test.enumAverage;
+}

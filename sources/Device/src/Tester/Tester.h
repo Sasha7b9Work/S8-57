@@ -1,6 +1,7 @@
 #pragma once
 #include "common/Command.h"
 #include "Hardware/HAL/HAL_PIO.h"
+#include "Menu/Pages/Include/PageDisplay.h"
 #include "Settings/SettingsOsci.h"
 
 
@@ -139,6 +140,12 @@ struct Tester
 
         static ViewMode::E &Ref();
         operator ViewMode::E() { return Ref(); }
+    };
+
+    struct ENUMAverage
+    {
+        static ENumAverage::E &Ref();
+        operator ENumAverage::E() { return Ref(); }
     };
 
 private:
