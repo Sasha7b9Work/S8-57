@@ -868,7 +868,7 @@ FreqMeter::Enabled::E &FreqMeter::Enabled::Ref()
 }
 
 
-FreqMeter::FreqClc::operator FreqMeter::FreqClc::E()
+FreqMeter::FreqClc::E &FreqMeter::FreqClc::Ref()
 {
     return set.freq.freqClc;
 }

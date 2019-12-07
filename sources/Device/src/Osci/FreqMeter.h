@@ -86,7 +86,8 @@ public:
         };
 
         FreqClc() {};
-        operator FreqClc::E();
+        static FreqMeter::E &Ref();
+        operator FreqClc::E() { return Ref(); }
     };
 
     /// Количество периодов.

@@ -78,7 +78,7 @@ DEF_CHOICE_4( cFreqClc,                                                         
     "1ÌÃö",
     "10ÌÃö",
     "100ÌÃö",
-    set.freq.freqClc, &PageFreqMeter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, Choice::AfterDraw
+    FreqMeter::FreqClc::Ref(), &PageFreqMeter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, Choice::AfterDraw
 )
 
 
