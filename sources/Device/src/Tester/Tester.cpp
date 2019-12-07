@@ -341,18 +341,13 @@ Tester::StepU::E &Tester::StepU::Ref()
 }
 
 
-Tester::StepI::operator Tester::StepI::E()
+Tester::StepI::E &Tester::StepI::Ref()
 {
     return set.test.stepI;
 }
 
 
-bool Tester::StepI::Is20mA()
-{
-    return (set.test.stepI == _20mA);
-}
-
-Tester::ViewMode::operator Tester::ViewMode::E()
+Tester::ViewMode::E &Tester::ViewMode::Ref()
 {
     return set.test.viewMode;
 }

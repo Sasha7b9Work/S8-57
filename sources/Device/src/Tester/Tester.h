@@ -110,8 +110,9 @@ struct Tester
         };
 
         StepI() {};
-        operator StepI::E();
-        static bool Is20mA();
+        static StepI::E &Ref();
+        operator StepI::E()  { return Ref(); }
+        static bool Is20mA() { return Ref() == _20mA; }
     };
 
     struct StepU
@@ -136,7 +137,8 @@ struct Tester
             Points
         };
 
-        operator ViewMode::E();
+        static ViewMode::E &Ref();
+        operator ViewMode::E() { return Ref(); }
     };
 
 private:

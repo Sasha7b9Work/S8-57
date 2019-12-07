@@ -48,7 +48,7 @@ DEF_CHOICE_2( cStepI,
     "Шаг исптытательного тока",
     "4 мкА",
     "20 мкА",
-    set.test.stepI, &PageTester::self, Item::Active, OnChanged_Step, Choice::AfterDraw
+    Tester::StepI::Ref(), &PageTester::self, Item::Active, OnChanged_Step, Choice::AfterDraw
 )
 
 
@@ -57,7 +57,7 @@ DEF_CHOICE_2( cViewMode,
     "",
     "Линии",
     "Точки",
-    set.test.viewMode, &PageTester::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    Tester::ViewMode::Ref(), &PageTester::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
