@@ -46,6 +46,13 @@ TypeGrid::E &TypeGrid::Ref()
 }
 
 
+void ENumAverage::Set(ENumAverage::E v)
+{
+    Ref() = v;
+    AveragerOsci::SettingChanged();
+}
+
+
 DEF_CHOICE_10( cSmoothing,                                                                                                                                    //--- ДИСПЛЕЙ - Сглаживание ---
     "Сглаж.",
     "Устанавливает количество точек для расчёта сглаженного по соседним точкам сигнала.",
