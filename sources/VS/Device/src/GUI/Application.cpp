@@ -175,7 +175,7 @@ Frame::Frame(const wxString& title)
 
     timer.SetOwner(this, TIMER_ID);
 
-    timer.Start(0);
+    timer.Start(10);
 
     timerLongPress.SetOwner(this, TIMER_LONG_ID);
 
