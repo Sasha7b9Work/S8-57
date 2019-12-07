@@ -28,8 +28,9 @@ void MemoryLoad()
 {
     wxFile file;
 
-    if(file.Open(FILE_NAME, wxFile::read))
+    if(file.Exists(FILE_NAME))
     {
+        file.Open(FILE_NAME, wxFile::read);
         file.Read(eeprom, ROM::SIZE);
         file.Close();
     }
