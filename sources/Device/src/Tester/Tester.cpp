@@ -323,15 +323,9 @@ String Tester::Shift::ToString(Scale::E scale) // -V2506
 }
 
 
-Tester::Control::operator Tester::Control::E()
+Tester::Control::E &Tester::Control::Ref()
 {
-    return (set.test.control);
-}
-
-
-bool Tester::Control::IsVoltage()
-{
-    return (set.test.control == Voltage);
+    return set.test.control;
 }
 
 

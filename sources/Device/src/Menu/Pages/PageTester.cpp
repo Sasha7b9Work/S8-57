@@ -25,7 +25,7 @@ DEF_CHOICE_2( cControl,                                                         
     "Тип испытательного воздействия",
     "Напряжение",
     "Ток",
-    set.test.control, &PageTester::self, Item::Active, PageTester::OnChanged_Control, Choice::AfterDraw
+    Tester::Control::Ref(), &PageTester::self, Item::Active, PageTester::OnChanged_Control, Choice::AfterDraw
 )
 
 

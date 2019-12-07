@@ -4,11 +4,11 @@
 struct SettingsTester
 {
     Tester::Control::E  control;
-    Tester::Polarity::E   polarity;
-    Tester::StepU::E      stepU;
-    Tester::StepI::E      stepI;
+    Tester::Polarity::E polarity;
+    Tester::StepU::E    stepU;
+    Tester::StepI::E    stepI;
     ENumAverage::E      ave;                   ///< Количество усреднений
-    Tester::ViewMode::E   viewMode;
+    Tester::ViewMode::E viewMode;
 };
 
 
