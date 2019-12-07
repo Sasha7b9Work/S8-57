@@ -40,8 +40,8 @@ static const StructSCPI chan[] =
 
 const StructSCPI SCPI::channels[] =
 {
-    SCPI_NODE("1:", chan, ""),
-    SCPI_NODE("2:", chan, ""),
+    SCPI_NODE("1:", chan),
+    SCPI_NODE("2:", chan),
     SCPI_EMPTY()
 };
 

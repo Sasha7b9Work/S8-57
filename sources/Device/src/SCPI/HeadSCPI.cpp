@@ -29,10 +29,10 @@ const StructSCPI SCPI::head[] =
     SCPI_LEAF("*RST",      FuncReset,      TestReset, "Reset settings to default values"),
     SCPI_LEAF(":HELP",     FuncHelp,       TestHelp,  "Output of this help"),
     SCPI_LEAF(":TEST",     FuncTest,       TestTest,  "Run all tests"),
-    SCPI_NODE(":CHANNEL",  SCPI::channels, ""),
-    SCPI_NODE(":DISPLAY",  SCPI::display,  ""),
-    SCPI_NODE(":KEY",      SCPI::key,      ""),
-    SCPI_NODE(":TIMEBASE", SCPI::tBase,    ""),
+    SCPI_NODE(":CHANNEL",  SCPI::channels),
+    SCPI_NODE(":DISPLAY",  SCPI::display),
+    SCPI_NODE(":KEY",      SCPI::key),
+    SCPI_NODE(":TIMEBASE", SCPI::tBase),
     SCPI_EMPTY()
 };
 
