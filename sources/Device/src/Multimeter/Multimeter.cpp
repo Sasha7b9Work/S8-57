@@ -192,5 +192,5 @@ Multimeter::RangeDC::E &Multimeter::RangeDC::Ref()
 
 Multimeter::RangeAC::E &Multimeter::RangeAC::Ref()
 {
-    return set.mult._rangeVoltageAC;
+    return set.mult.rangeVoltageAC;
 }

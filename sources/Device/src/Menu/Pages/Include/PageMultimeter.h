@@ -28,7 +28,7 @@ struct SettingsMultimeter
     Multimeter::AVP::E            avp;
     Multimeter::Measure::E        meas;
     Multimeter::RangeDC::E        rangeVoltageDC;
-    Multimeter::RangeAC::E          _rangeVoltageAC;
+    Multimeter::RangeAC::E        rangeVoltageAC;
     MultimeterRangeCurrent::E     rangeCurrentAC;     ///< Предел измерения переменного тока
     MultimeterRangeCurrent::E     rangeCurrentDC;     ///< Предел измерения постоянного тока
     MultimeterRangeResistance::E  rangeResist;
