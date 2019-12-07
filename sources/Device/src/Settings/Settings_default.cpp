@@ -188,7 +188,7 @@ const Settings Settings::defaultSettings =
         Multimeter::RangeAC::_2V,               // rangeVV
         Multimeter::RangeCurrentAC::_2A,        // rangeCurrentAC
         Multimeter::RangeCurrentDC::_2A,        // rangeCurrentDC
-        MultimeterRangeResistance::_10M         // rangeResist
+        Multimeter::RangeResistance::_10M       // rangeResist
     },
 
     // Настройки регистратора

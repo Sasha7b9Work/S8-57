@@ -120,7 +120,7 @@ static int GetRange()
     }
     else if (Multimeter::Measure::IsResistance())
     {
-        return set.mult.rangeResist;
+        return Multimeter::RangeResistance();
     }
     else
     {

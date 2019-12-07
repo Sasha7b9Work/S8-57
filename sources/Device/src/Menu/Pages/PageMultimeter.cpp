@@ -106,7 +106,7 @@ DEF_CHOICE_4( cRangesResistance,                                                
     "20 êÎì",
     "200 êÎì",
     "10 ÌÎì",
-    set.mult.rangeResist, &PageMultimeter::self, IsActive_RangesReistance, OnChange_Resistance, Choice::AfterDraw
+    Multimeter::RangeResistance::Ref(), &PageMultimeter::self, IsActive_RangesReistance, OnChange_Resistance, Choice::AfterDraw
 )
 
 DEF_CHOICE_7( cMode,

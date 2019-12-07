@@ -120,4 +120,18 @@ struct Multimeter
         static RangeCurrentDC::E &Ref();
         operator RangeCurrentDC::E() { return Ref(); }
     };
+
+    /// ѕредел измерени€ сопротивлен€ посто€нному току
+    struct RangeResistance
+    {
+        enum E
+        {
+            _2k,
+            _20k,
+            _200k,
+            _10M
+        };
+        static RangeResistance::E &Ref();
+        operator RangeResistance::E() { return Ref(); }
+    };
 };

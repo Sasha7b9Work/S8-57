@@ -1,27 +1,15 @@
 #pragma once
 
 
-/// ѕредел измерени€ сопротивлен€ посто€нному току
-struct MultimeterRangeResistance
-{
-    enum E
-    {
-        _2k,
-        _20k,
-        _200k,
-        _10M
-    };
-};
-
 struct SettingsMultimeter
 {
-    Multimeter::AVP::E            avp;
-    Multimeter::Measure::E        meas;
-    Multimeter::RangeDC::E        rangeVoltageDC;
-    Multimeter::RangeAC::E        rangeVoltageAC;
-    Multimeter::RangeCurrentAC::E rangeCurrentAC;     ///< ѕредел измерени€ переменного тока
-    Multimeter::RangeCurrentDC::E rangeCurrentDC;     ///< ѕредел измерени€ посто€нного тока
-    MultimeterRangeResistance::E  rangeResist;
+    Multimeter::AVP::E             avp;
+    Multimeter::Measure::E         meas;
+    Multimeter::RangeDC::E         rangeVoltageDC;
+    Multimeter::RangeAC::E         rangeVoltageAC;
+    Multimeter::RangeCurrentAC::E  rangeCurrentAC;     ///< ѕредел измерени€ переменного тока
+    Multimeter::RangeCurrentDC::E  rangeCurrentDC;     ///< ѕредел измерени€ посто€нного тока
+    Multimeter::RangeResistance::E rangeResist;
 };
 
 
