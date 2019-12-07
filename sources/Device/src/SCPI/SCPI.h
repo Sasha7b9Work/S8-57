@@ -12,7 +12,7 @@
 
 typedef const char *(*FuncSCPI)(const char *);
 typedef bool (*FuncTestSCPI)();
-typedef void (*FuncHint)();
+typedef void (*FuncHint)(uint);
 
 
 /// —труктура, соотвествующа€ узлу дерева.
@@ -36,8 +36,8 @@ struct StructSCPI
 };
 
 
-#define SCPI_NODE(key, strct)            {key, strct,   nullptr, nullptr, nullptr}
-#define SCPI_LEAF(key, func, test, hint) {key, nullptr, func,    test,    hint}
+#define SCPI_NODE(key, strct)                      {key, strct,   nullptr, nullptr, nullptr}
+#define SCPI_LEAF(key, func, test, hint, funcHint) {key, nullptr, func,    test,    hint,   funcHint}
 #define SCPI_EMPTY() {""}
 
 #define SCPI_PROLOG(t)  if(SCPI::IsLineEnding(&t)) { SCPI::SendBadSymbols();
@@ -61,6 +61,20 @@ struct StructSCPI
 
 #define SCPI_APPEND_STRING(string) SCPI::AppendNewData(string.c_str(), std::strlen(string.c_str())); SCPI::Update()
 
+#define FUNC_HINT(size, names)                  \
+    String message;                             \
+                                                \
+    for(uint i = 0; i < size; i++)              \
+    {                                           \
+        message.Append(' ');                    \
+    }                                           \
+                                                \
+    for(int i = 0; i < names[i][0] != 0; i++)   \
+    {                                           \
+        String msg(message);                    \
+        msg.Append(names[i]);                   \
+        SCPI::SendAnswer(msg.c_str());          \
+    }
 
 namespace SCPI
 {

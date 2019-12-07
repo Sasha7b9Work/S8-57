@@ -11,24 +11,28 @@
 // *IDN?
 static const char *FuncIDN(const char *);
 static bool TestIDN();
+static void HintIDN(uint);
 // *RST
 static const char *FuncReset(const char *);
 static bool TestReset();
+static void HintReset(uint);
 // :HELP
 static const char *FuncHelp(const char *);
 static bool TestHelp();
+static void HintHelp(uint);
 // :TEST
 static const char *FuncTest(const char *);
 static bool TestTest();
 static void Process(const StructSCPI strct[], String message);
+static void HintTest(uint);
 
 
 const StructSCPI SCPI::head[] =
 {
-    SCPI_LEAF("*IDN?",     FuncIDN,        TestIDN,   "ID request"),
-    SCPI_LEAF("*RST",      FuncReset,      TestReset, "Reset settings to default values"),
-    SCPI_LEAF(":HELP",     FuncHelp,       TestHelp,  "Output of this help"),
-    SCPI_LEAF(":TEST",     FuncTest,       TestTest,  "Run all tests"),
+    SCPI_LEAF("*IDN?",     FuncIDN,        TestIDN,   "ID request", HintIDN),
+    SCPI_LEAF("*RST",      FuncReset,      TestReset, "Reset settings to default values", HintReset),
+    SCPI_LEAF(":HELP",     FuncHelp,       TestHelp,  "Output of this help", HintHelp),
+    SCPI_LEAF(":TEST",     FuncTest,       TestTest,  "Run all tests", HintTest),
     SCPI_NODE(":CHANNEL",  SCPI::channels),
     SCPI_NODE(":DISPLAY",  SCPI::display),
     SCPI_NODE(":KEY",      SCPI::key),
@@ -47,6 +51,12 @@ static const char *FuncIDN(const char *buffer)
 }
 
 
+static void HintIDN(uint)
+{
+
+}
+
+
 static const char *FuncReset(const char *buffer)
 {
     SCPI_PROLOG(buffer)
@@ -54,6 +64,12 @@ static const char *FuncReset(const char *buffer)
     PageService::OnPress_ResetSettings();
 
     SCPI_EPILOG(buffer)
+}
+
+
+static void HintReset(uint)
+{
+
 }
 
 
@@ -66,6 +82,12 @@ static const char *FuncHelp(const char *buffer)
     Process(SCPI::head, message);
 
     SCPI_EPILOG(buffer);
+}
+
+
+static void HintHelp(uint)
+{
+
 }
 
 
@@ -91,6 +113,12 @@ static const char *FuncTest(const char *buffer)
     }
 
     return nullptr;
+}
+
+
+static void HintTest(uint)
+{
+
 }
 
 
@@ -132,9 +160,11 @@ static void Process(const StructSCPI strct[], String msg)
         {
             String message(msg);
             message.Append(strct->key);
-            message.Append("   :   ");
+            uint size = message.Size();
+            message.Append(" :   ");
             message.Append(strct->hint);
             SCPI::SendAnswer(message.c_str());
+            strct->funcHint(size);
         }
         else
         {

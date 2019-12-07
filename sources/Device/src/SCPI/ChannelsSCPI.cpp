@@ -7,9 +7,8 @@
 
 // :CHANNEL{1|2}:RANGE:
 static const char *FuncRange(const char *);
-
-
 static bool TestRange();
+static void HintRange(uint);
 
 
 static const char *const rangeName[] =
@@ -33,7 +32,7 @@ static const char *const rangeName[] =
 
 static const StructSCPI chan[] =
 {
-    SCPI_LEAF("RANGE", FuncRange, TestRange, "Vertical zoom control"),
+    SCPI_LEAF("RANGE", FuncRange, TestRange, "Vertical zoom control", HintRange),
     SCPI_EMPTY()
 };
 
@@ -53,6 +52,12 @@ static const char *FuncRange(const char *buffer)
     SCPI_REQUEST(SCPI::SendAnswer(rangeName[Range(ch)]));
 
     SCPI_PROCESS_ARRAY(rangeName, Range(ch).Load(static_cast<Range::E>(i)))
+}
+
+
+static void HintRange(uint size)
+{
+    FUNC_HINT(size, rangeName);
 }
 
 

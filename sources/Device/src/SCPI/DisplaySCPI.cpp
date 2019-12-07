@@ -7,9 +7,8 @@
 
 // :DISPLAY:MAPPING
 static const char *FuncMapping(const char *);
-
-
 static bool TestMapping();
+static void HintMapping(uint);
 
 
 static const char *const mapping[] =
@@ -22,7 +21,7 @@ static const char *const mapping[] =
 
 const StructSCPI SCPI::display[] =
 {
-    SCPI_LEAF(":MAPPING", FuncMapping, TestMapping, "Signal display control"),
+    SCPI_LEAF(":MAPPING", FuncMapping, TestMapping, "Signal display control", HintMapping),
     SCPI_EMPTY()
 };
 
@@ -58,4 +57,10 @@ bool TestMapping()
     }
 
     return true;
+}
+
+
+static void HintMapping(uint size)
+{
+    FUNC_HINT(size, mapping);
 }

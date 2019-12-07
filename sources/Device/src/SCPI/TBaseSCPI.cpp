@@ -5,9 +5,8 @@
 
 // :TIME:SCALE:
 static const char *FuncScale(const char *);
-
-
 static bool TestScale();
+static void HintScale(uint);
 
 
 static const char *const tBaseNames[] =
@@ -48,7 +47,7 @@ static const char *const tBaseNames[] =
 
 const StructSCPI SCPI::tBase[] =
 {
-    SCPI_LEAF(":SCALE", FuncScale, TestScale, "Horizontal zoom control"),
+    SCPI_LEAF(":SCALE", FuncScale, TestScale, "Horizontal zoom control", HintScale),
     SCPI_EMPTY()
 };
 
@@ -64,4 +63,10 @@ static const char *FuncScale(const char *buffer)
 static bool TestScale()
 {
    return true;
+}
+
+
+static void HintScale(uint size)
+{
+    FUNC_HINT(size, tBaseNames)
 }
