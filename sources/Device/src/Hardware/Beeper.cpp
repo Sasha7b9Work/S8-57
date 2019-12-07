@@ -134,7 +134,7 @@ static void SetWave()
 
 static void Beep(const TypeWave::E newTypeWave, const float newFreq, const float newAmpl, const int newDuration)
 {
-    if (bellIsEnabled || soundWarnIsBeep || !(set.serv.soundVolume == 0))
+    if (bellIsEnabled || soundWarnIsBeep || Beeper::Volume() == 0)
     {
         return;
     }
@@ -142,7 +142,7 @@ static void Beep(const TypeWave::E newTypeWave, const float newFreq, const float
     if (frequency != newFreq || amplitude != newAmpl || typeWave != newTypeWave) //-V550 //-V2550
     {
         frequency = newFreq;
-        amplitude = newAmpl * set.serv.soundVolume / 100.0F;
+        amplitude = newAmpl * Beeper::Volume() / 100.0F;
         typeWave = newTypeWave;
         
         Stop();
@@ -288,4 +288,10 @@ void Beeper::Test()
     RegulatorSwitchRotate();
     WarnBeepBad();
     WarnBeepGood();
+}
+
+
+uint8 Beeper::Volume()
+{
+    return set.serv.soundVolume;
 }

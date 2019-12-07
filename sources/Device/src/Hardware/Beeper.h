@@ -37,6 +37,8 @@ struct Beeper
 
     static void Test();
 
+    static uint8 Volume();
+
     struct Bell
     {
         static void On();
