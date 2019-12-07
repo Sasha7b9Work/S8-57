@@ -47,18 +47,14 @@ struct ShiftADC
         Disable,    ///< Дополнительное смещение не учитывется
         Real,       ///< Принимается дополнительное смещение, рассчитанное прик калибровке
         Count
-    };
-
-    ShiftADC(Chan::E _ch) : ch(_ch) {};
-    static ShiftADC::E &Ref();
-    int8 Value() const;
-    static void SetDisabled() { Ref() = Disable; };
-    static void SetReal()     { Ref() = Real; };
-    static bool IsReal()      { return Ref() == Real; };
-    void Set(Range::E range, int8 value);
-
-private:
-    Chan::E ch;
+    } value;
+    static ShiftADC &Ref();
+    static void SetDisabled() { Ref().value = Disable; };
+    static void SetReal()     { Ref().value = Real; };
+    static bool IsReal()      { return Ref().value == Real; };
+    static void Set(Chan::E ch, Range::E range, int8 value) { Ref().shift[ch][range] = value; }
+    static int8 Value(Chan::E ch, Range::E range) { return IsReal() ? Ref().shift[ch][range] : 0; };
+    int8  shift[Chan::Count][Range::Count];        ///< Добавочное смещение, которое пишется сюда при калибровке и балансировке
 };
 
 
@@ -66,14 +62,13 @@ struct SettingsNRST
 {
     float           stretchADC[Chan::Count];                    ///< Хранится в целом виде, чтобы получить реальный коэффициент, нужно разделить на 1000 и прибавить единицу.
     int16           rShiftAddStable[Chan::Count][3];            ///< Добавочное смещение для трёх самых чувствительных диапазонов. Задаётся единожды при настройке
-    int8            shiftADC[Chan::Count][Range::Count];        ///< Добавочное смещение, которое пишется сюда при калибровке и балансировке
     int16           numAveForRand;                              ///< По скольким измерениям усреднять сигнал в режиме рандомизатора.
     int16           numSmoothForRand;                           ///< Число точек для скользящего фильта в рандомизаторе.
     int16           correctionTime;                             ///< Коэффициент коррекции времени.
     int16           enum_gate_max;                              ///< Ограничение ворот в рандомизаторе сверху
     int16           enum_gate_min;                              ///< Ограничение ворот в рандомизаторе снизу
     BalanceADC      balanceADC;                                 ///< Тип балансировки.
-    ShiftADC::E     shiftADCtype;                               ///< Тип учитываемого при установке дополнительного смещения
+    ShiftADC        shiftADC;                                   ///< Тип учитываемого при установке дополнительного смещения
     StretchADC::E   stretchADCtype;                             ///< Тип растяжки канала.
 };
 

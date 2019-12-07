@@ -3,21 +3,9 @@
 #include "Settings/Settings.h"
 
 
-ShiftADC::E &ShiftADC::Ref()
+ShiftADC &ShiftADC::Ref()
 {
-    return set.dbg.nrst.shiftADCtype;
-}
-
-
-int8 ShiftADC::Value() const
-{
-    return IsReal() ? set.dbg.nrst.shiftADC[ch][Range(ch)] : 0;
-}
-
-
-void ShiftADC::Set(Range::E range, int8 value)
-{
-    set.dbg.nrst.shiftADC[ch][range] = value;
+    return set.dbg.nrst.shiftADC;
 }
 
 
