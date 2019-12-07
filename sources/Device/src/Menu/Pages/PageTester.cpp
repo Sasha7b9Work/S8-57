@@ -29,18 +29,6 @@ bool TesterStepU::Is500mV()
 }
 
 
-TesterStepI::operator TesterStepI::E()
-{
-    return set.test.stepI;
-}
-
-
-bool TesterStepI::Is20mA()
-{
-    return (set.test.stepI == _20mA);
-}
-
-
 DEF_CHOICE_2( cPolarity,                                                                                                                              //--- ТЕСТЕР-КОМПОНЕНТ - Полярность ---
     "Полярность",
     "Полярность испытательного воздействия",

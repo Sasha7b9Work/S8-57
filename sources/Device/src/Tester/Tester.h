@@ -101,6 +101,19 @@ struct Tester
         static bool IsPositive();
     };
 
+    struct StepI
+    {
+        enum E
+        {
+            _4mA,
+            _20mA
+        };
+
+        StepI() {};
+        operator StepI::E();
+        static bool Is20mA();
+    };
+
 private:
     /// Текущий шаг
     static int step;

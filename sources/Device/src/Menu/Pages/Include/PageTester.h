@@ -14,18 +14,6 @@ struct TesterStepU
     static bool Is500mV();
 };
 
-struct TesterStepI
-{
-    enum E
-    {
-        _4mA,
-        _20mA
-    };
-
-    TesterStepI() {};
-    operator TesterStepI::E();
-    static bool Is20mA();
-};
 
 struct TesterViewMode
 {
@@ -43,7 +31,7 @@ struct SettingsTester
     Tester::Control::E  control;
     Tester::Polarity::E   polarity;
     TesterStepU::E      stepU;
-    TesterStepI::E      stepI;
+    Tester::StepI::E      stepI;
     ENumAverage::E      ave;                   ///< Количество усреднений
     TesterViewMode::E   viewMode;
 };
