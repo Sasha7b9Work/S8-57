@@ -8,6 +8,19 @@ struct Calibrator
     /// Балансировать канал
     static bool Balance(Chan::E ch);
 
+    struct Mode
+    {
+        enum E
+        {
+            Freq,
+            DC,
+            GND
+        };
+        Mode() {}
+        static Mode::E &Ref();
+        operator Mode::E() { return Ref(); }
+    };
+
 private:
 
     static bool Calibrate(Chan::E ch);

@@ -143,3 +143,9 @@ bool Calibrator::Stretch(Chan::E ch)
 
     return true;
 }
+
+
+Calibrator::Mode::E &Calibrator::Mode::Ref()
+{
+    return set.serv.calibratorMode;
+}

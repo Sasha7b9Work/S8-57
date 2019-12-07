@@ -1,21 +1,11 @@
 #pragma once
+#include "FPGA/Calibrator.h"
 #include "Menu/MenuItems.h"
 
 
-struct CalibratorMode
-{
-    enum E
-    {
-        Freq,
-        DC,
-        GND
-    } value;
-    explicit CalibratorMode(E v) : value(v) {};
-};
-
 struct SettingsService
 {
-    CalibratorMode::E   calibratorMode;            ///< Режим работы калибратора.
+    Calibrator::Mode::E calibratorMode;            ///< Режим работы калибратора.
     uint8               soundVolume;               ///< Громкость звука
     bool                showInfoVoltage;           ///< Показывать напряжение батареи на экране
 };
