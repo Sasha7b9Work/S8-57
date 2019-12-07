@@ -72,7 +72,7 @@ void FreqMeter::LoadSettings()
             BIN_U8(01010000)  //-V2501
         };
 
-        data |= maskTime[FreqMeterTimeCounting()];
+        data |= maskTime[TimeCounting()];
         data |= maskFreqClc[FreqClc()];
         data |= maskPeriod[NumberPeriods()];
     }
@@ -213,7 +213,7 @@ void FreqMeter::ReadPeriod()
 float FreqMeter::FreqSetToFreq(const BitSet32 *fr)
 {
     const float k[3] = {10.0F, 1.0F, 0.1F};
-    return Enabled() ? (fr->word * k[FreqMeterTimeCounting()]) : (fr->word * 10.0F);
+    return Enabled() ? (fr->word * k[TimeCounting()]) : (fr->word * 10.0F);
 }
 
 
@@ -307,7 +307,7 @@ void DisplayFreqMeter::Draw()
     x += 2;
     y += 2;
 
-    if (FreqMeterModeView::IsFrequency())
+    if (FreqMeter::ModeView::IsFrequency())
     {
         DrawFrequency(x, y);
     }
@@ -577,9 +577,9 @@ pString DisplayFreqMeter::FreqSetToString(const BitSet32 *fr)
     }
 
 
-    switch (FreqMeterTimeCounting())
+    switch (FreqMeter::TimeCounting())
     {
-    case FreqMeterTimeCounting::_100ms:
+    case FreqMeter::TimeCounting::_100ms:
 
         giverFreq *= 100;
 
@@ -599,7 +599,7 @@ pString DisplayFreqMeter::FreqSetToString(const BitSet32 *fr)
         }
         break;
 
-    case FreqMeterTimeCounting::_1s:
+    case FreqMeter::TimeCounting::_1s:
 
         giverFreq *= 10;
 
@@ -624,7 +624,7 @@ pString DisplayFreqMeter::FreqSetToString(const BitSet32 *fr)
         }
         break;
 
-    case FreqMeterTimeCounting::_10s:
+    case FreqMeter::TimeCounting::_10s:
 
         WRITE_SUFFIX("Ãö");
 
@@ -651,7 +651,7 @@ pString DisplayFreqMeter::FreqSetToString(const BitSet32 *fr)
             HIGH_FREQ;
         }
         break;
-    case FreqMeterTimeCounting::Count:
+    case FreqMeter::TimeCounting::Count:
     default:
         LOG_ERROR("");
         break;
@@ -829,13 +829,13 @@ void DisplayFreqMeter::WriteStackToBuffer(Stack<uint> *stack, int point, const c
 
 void ProgressBarFreqMeter::Draw(int x, int y)
 {
-    if (FreqMeterModeView::IsFrequency() && FreqMeter::timeStartMeasureFreq != 0)
+    if (FreqMeter::ModeView::IsFrequency() && FreqMeter::timeStartMeasureFreq != 0)
     {
-        static const float time[FreqMeterTimeCounting::Count] = { 100.0F, 1000.0F, 10000.0F };
+        static const float time[FreqMeter::TimeCounting::Count] = { 100.0F, 1000.0F, 10000.0F };
 
         int length = 185;
 
-        float percents = (TIME_MS - FreqMeter::timeStartMeasureFreq) / time[FreqMeterTimeCounting()];
+        float percents = (TIME_MS - FreqMeter::timeStartMeasureFreq) / time[FreqMeter::TimeCounting()];
 
         int width = static_cast<int>(length * percents);
 
@@ -844,14 +844,14 @@ void ProgressBarFreqMeter::Draw(int x, int y)
             width = length;
         }
 
-        if (FreqMeterTimeCounting::Is100ms() && width > length / 2)
+        if (FreqMeter::TimeCounting::Is100ms() && width > length / 2)
         {
             width = length;
         }
 
         Region(width, 3).Fill(x, y, Color::FILL);
     }
-    else if (FreqMeterModeView::IsPeriod() && FreqMeter::timeStartMeasurePeriod != 0)
+    else if (FreqMeter::ModeView::IsPeriod() && FreqMeter::timeStartMeasurePeriod != 0)
     {
 
     }
@@ -877,4 +877,16 @@ FreqMeter::FreqClc::operator FreqMeter::FreqClc::E()
 FreqMeter::NumberPeriods::operator FreqMeter::NumberPeriods::E()
 {
     return set.freq.numberPeriods;
+}
+
+
+FreqMeter::ModeView::E &FreqMeter::ModeView::Ref()
+{
+    return set.freq.modeView;
+}
+
+
+FreqMeter::TimeCounting::E &FreqMeter::TimeCounting::Ref()
+{
+    return set.freq.timeCounting;
 }

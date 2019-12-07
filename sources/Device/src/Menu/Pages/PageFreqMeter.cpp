@@ -4,18 +4,6 @@
 #include "Settings/Settings.h"
 
 
-FreqMeterModeView::E &FreqMeterModeView::Ref()
-{
-    return set.freq.modeView;
-}
-
-
-FreqMeterTimeCounting::E &FreqMeterTimeCounting::Ref()
-{
-    return set.freq.timeCounting;
-}
-
-
 static void OnChanged_Enable(bool)
 {
     FreqMeter::Init();
@@ -52,20 +40,20 @@ DEF_CHOICE_2( cModeView,                                                        
     "",
     "„астота",
     "ѕериод",
-    FreqMeterModeView::Ref(), &PageFreqMeter::self, IsActive_ModeView, OnChanged_ModeView, Choice::AfterDraw
+    FreqMeter::ModeView::Ref(), &PageFreqMeter::self, IsActive_ModeView, OnChanged_ModeView, Choice::AfterDraw
 )
 
 
 
 static bool IsActive_SettingsFrequency()
 {
-    return FreqMeter::Enabled() && FreqMeterModeView::IsPeriod();
+    return FreqMeter::Enabled() && FreqMeter::ModeView::IsPeriod();
 }
 
 
 static bool IsActive_TimeF()
 {
-    return FreqMeter::Enabled() && FreqMeterModeView::IsFrequency();
+    return FreqMeter::Enabled() && FreqMeter::ModeView::IsFrequency();
 }
 
 static void OnChanged_TimeF(bool)
@@ -79,7 +67,7 @@ DEF_CHOICE_3( cTimeF,                                                           
     "100мс",
     "1с",
     "10с",
-    FreqMeterTimeCounting::Ref(), &PageFreqMeter::self, IsActive_TimeF, OnChanged_TimeF, Choice::AfterDraw
+    FreqMeter::TimeCounting::Ref(), &PageFreqMeter::self, IsActive_TimeF, OnChanged_TimeF, Choice::AfterDraw
 )
 
 
@@ -128,12 +116,12 @@ void PageFreqMeter::Init()
 
     Item **items = const_cast<Item **>(page->OwnData()->items);
 
-    if (FreqMeterModeView::IsFrequency())
+    if (FreqMeter::ModeView::IsFrequency())
     {
         items[2] = const_cast<Choice *>(&cTimeF);
         items[3] = &Item::empty;
     }
-    else if (FreqMeterModeView::IsPeriod())
+    else if (FreqMeter::ModeView::IsPeriod())
     {
         items[2] = const_cast<Choice *>(&cFreqClc);
         items[3] = const_cast<Choice *>(&cNumPeriods);

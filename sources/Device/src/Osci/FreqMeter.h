@@ -106,6 +106,37 @@ public:
         NumberPeriods() {};
         operator NumberPeriods::E();
     };
+
+    /// Что показывать - период или частоту
+    struct ModeView
+    {
+        enum E
+        {
+            Frequency,
+            Period,
+            Count
+        };
+        static ModeView::E &Ref();
+        static bool IsFrequency() { return Ref() == Frequency; }
+        static bool IsPeriod() { return Ref() == Period; }
+    };
+
+    /// Время счёта периода.
+    struct TimeCounting
+    {
+        enum E
+        {
+            _100ms,
+            _1s,
+            _10s,
+            Count
+        };
+
+        TimeCounting() {};
+        static TimeCounting::E &Ref();
+        operator TimeCounting::E() { return Ref(); }
+        static bool Is100ms() { return Ref() == _100ms; }
+    };
 };
 
 
