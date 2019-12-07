@@ -16,9 +16,9 @@
 #include <cstdio>
 
 
-BalanceADC::E &BalanceADC::Ref()
+BalanceADC &BalanceADC::Ref()
 {
-    return set.dbg.nrst.balanceADC.value;
+    return set.dbg.nrst.balanceADC;
 }
 
 
@@ -87,7 +87,7 @@ static void DebugShowSetInfo_Draw()
     DRAW_FORMAT("numAveForRand : %d", set.dbg.nrst.numAveForRand); //-V2528
 
     pString s[3] = {"выключено", "настроено автоматически", "задано вручную"};
-    DRAW_FORMAT("balanceADCtype : %s", (BalanceADC::Ref() < 3 ? s[BalanceADC::Ref()] : "!!! неправильное значение !!!")); //-V547 //-V2528
+    DRAW_FORMAT("balanceADCtype : %s", (BalanceADC::Ref().value < 3 ? s[BalanceADC::Ref().value] : "!!! неправильное значение !!!")); //-V547 //-V2528
     DRAW_FORMAT("stretchADCtype : %s", (StretchADC::Type() < 3 ? s[StretchADC::Type()] : "!!! неправильное значение !!!")); //-V547 //-V2528
 
     x = String("stretchADC :").Draw(x0, INC_Y) + 5; //-V2528

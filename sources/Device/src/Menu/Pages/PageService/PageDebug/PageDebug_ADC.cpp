@@ -3,12 +3,6 @@
 #include "Settings/Settings.h"
 
 
-int16 &BalanceADC::Value(Chan::E ch)
-{
-    return set.dbg.nrst.balanceADC.balance[ch];
-}
-
-
 ShiftADC::E &ShiftADC::Ref()
 {
     return set.dbg.nrst.shiftADCtype;
@@ -45,8 +39,8 @@ static void Draw_Balance_Mode(int, int)
         {0, set.ch[Chan::B].balanceShiftADC, static_cast<int8>(BalanceADC::Value(Chan::B))}
     };
 
-    shiftADCA = shift[Chan::A][BalanceADC::Ref()];
-    shiftADCB = shift[Chan::B][BalanceADC::Ref()];
+    shiftADCA = shift[Chan::A][BalanceADC::Ref().value];
+    shiftADCB = shift[Chan::B][BalanceADC::Ref().value];
 }
 
 static void OnChanged_Balance_Mode(bool)

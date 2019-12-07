@@ -13,9 +13,9 @@ struct BalanceADC
         Settings,   ///< Используются значения балансировки, которые получены автоматически.
         Hand        ///< Используются значения балансировки, заданные вручную.
     } value;
-    static BalanceADC::E &Ref();
-    static bool IsHand()        { return Ref() == Hand; }
-    static int16 &Value(Chan::E ch);
+    static BalanceADC &Ref();
+    static bool IsHand()            { return Ref().value == Hand; }
+    static int16 &Value(Chan::E ch) { return Ref().balance[ch]; }
     int16  balance[Chan::Count];                    ///< Значение дополнительного смещения АЦП для ручной балансировки.
 };
 
