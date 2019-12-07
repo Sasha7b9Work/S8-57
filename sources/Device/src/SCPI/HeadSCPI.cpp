@@ -161,10 +161,10 @@ static void Process(const StructSCPI strct[], String msg)
             String message(msg);
             message.Append(strct->key);
             uint size = message.Size();
-            message.Append(" :   ");
-            message.Append(strct->hint);
+            SCPI::SendAnswer(strct->hint);
             SCPI::SendAnswer(message.c_str());
             strct->funcHint(size);
+            SCPI::SendAnswer("");
         }
         else
         {
