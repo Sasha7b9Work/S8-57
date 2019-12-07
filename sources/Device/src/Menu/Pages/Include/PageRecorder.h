@@ -14,7 +14,6 @@ struct SettingsRecorder
     Recorder::Axis::E       axisZoom;       ///< Текущая ось масштабирования
     Recorder::ScaleX::E     scaleX;         ///< Установленный масштаб по времени
     int8                    currentCursor;  ///< Курсор, которым сейчас можно управлять
-    Range::E                unused[2];      ///< Масштаб по вертикали в режиме регистратора
 };
 
 
