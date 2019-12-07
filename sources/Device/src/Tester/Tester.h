@@ -97,8 +97,8 @@ struct Tester
             Negative
         };
         static Polarity::E &Ref();
-        operator Polarity::E();
-        static bool IsPositive();
+        operator Polarity::E()   { return Ref(); }
+        static bool IsPositive() { return Ref() == Positive; }
     };
 
     struct StepI

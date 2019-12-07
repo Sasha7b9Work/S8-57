@@ -335,18 +335,6 @@ Tester::Polarity::E &Tester::Polarity::Ref()
 }
 
 
-Tester::Polarity::operator Tester::Polarity::E()
-{
-    return set.test.polarity;
-}
-
-
-bool Tester::Polarity::IsPositive()
-{
-    return (set.test.polarity == Positive);
-}
-
-
 Tester::StepI::operator Tester::StepI::E()
 {
     return set.test.stepI;
