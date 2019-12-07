@@ -121,10 +121,10 @@ struct Tester
             _100mV,
             _500mV
         };
-
-        StepU() {};
-        operator StepU::E();
-        static bool Is500mV();
+        StepU() {}
+        static StepU::E &Ref();
+        operator StepU::E()   { return Ref(); }
+        static bool Is500mV() { return Ref() == _500mV; }
     };
 
 

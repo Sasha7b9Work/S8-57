@@ -335,6 +335,12 @@ Tester::Polarity::E &Tester::Polarity::Ref()
 }
 
 
+Tester::StepU::E &Tester::StepU::Ref()
+{
+    return set.test.stepU;
+}
+
+
 Tester::StepI::operator Tester::StepI::E()
 {
     return set.test.stepI;
@@ -349,16 +355,4 @@ bool Tester::StepI::Is20mA()
 Tester::ViewMode::operator Tester::ViewMode::E()
 {
     return set.test.viewMode;
-}
-
-
-Tester::StepU::operator Tester::StepU::E()
-{
-    return set.test.stepU;
-}
-
-
-bool Tester::StepU::Is500mV()
-{
-    return (set.test.stepU == _500mV);
 }
