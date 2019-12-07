@@ -205,7 +205,6 @@ const Settings Settings::defaultSettings =
 
     // Ìåíþ ÑÅÐÂÈÑ
     {
-        ColorScheme::WhiteLetters,              // colorScheme
         CalibratorMode::Freq,                   // calibratorMode
         0,                                      // soundVolume
         false                                   // showInfoVoltage
