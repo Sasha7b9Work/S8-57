@@ -4,9 +4,9 @@
 #include "Settings/Settings.h"
 
 
-FreqMeterEnabled::operator bool()
+FreqMeterEnabled::E &FreqMeterEnabled::Ref()
 {
-    return (set.freq.enabled == On);
+    return set.freq.enabled;
 }
 
 
@@ -62,7 +62,7 @@ DEF_CHOICE_2( cEnable,                                                          
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.freq.enabled, &PageFreqMeter::self, Item::Active, OnChanged_Enable, Choice::AfterDraw
+    FreqMeterEnabled::Ref(), &PageFreqMeter::self, Item::Active, OnChanged_Enable, Choice::AfterDraw
 )
 
 

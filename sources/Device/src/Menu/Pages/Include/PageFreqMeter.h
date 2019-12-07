@@ -12,8 +12,8 @@ struct FreqMeterEnabled
         Off,
         On
     };
-
-    operator bool();
+    static FreqMeterEnabled::E &Ref();
+    operator bool() { return Ref() == On; }
 };
 
 /// Что показывать - период или частоту
