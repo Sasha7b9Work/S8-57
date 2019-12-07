@@ -3,6 +3,10 @@
 
 struct Recorder
 {
+    static bool IsEnabledA();
+
+    static bool IsEnabledB();
+
     static void Init();
 
     static void DeInit();

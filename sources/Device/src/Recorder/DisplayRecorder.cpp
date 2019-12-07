@@ -209,7 +209,7 @@ static void DrawData()
     {
         if (!point.IsEmpty())
         {
-            if (set.rec.enA)
+            if (Recorder::IsEnabledA())
             {
                 int min = Y(point.Min(Chan::A));
                 int max = Y(point.Max(Chan::A));

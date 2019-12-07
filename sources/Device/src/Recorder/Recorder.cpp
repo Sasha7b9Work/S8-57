@@ -282,3 +282,15 @@ void RecorderScaleX::Load()
         Recorder::Start();
     }
 }
+
+
+bool Recorder::IsEnabledA()
+{
+    return set.rec.enA;
+}
+
+
+bool Recorder::IsEnabledB()
+{
+    return set.rec.enB;
+}
