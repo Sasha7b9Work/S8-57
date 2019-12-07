@@ -22,7 +22,7 @@ static const char *const mapping[] =
 
 const StructSCPI SCPI::display[] =
 {
-    SCPI_LEAF(":MAPPING", FuncMapping, TestMapping),
+    SCPI_LEAF(":MAPPING", FuncMapping, TestMapping, "Signal display control"),
     SCPI_EMPTY()
 };
 

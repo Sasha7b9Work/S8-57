@@ -48,7 +48,7 @@ static const char *const tBaseNames[] =
 
 const StructSCPI SCPI::tBase[] =
 {
-    SCPI_LEAF(":SCALE", FuncScale, TestScale),
+    SCPI_LEAF(":SCALE", FuncScale, TestScale, "Horizontal zoom control"),
     SCPI_EMPTY()
 };
 

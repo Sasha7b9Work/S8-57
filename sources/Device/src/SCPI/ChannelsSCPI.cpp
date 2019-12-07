@@ -33,15 +33,15 @@ static const char *const rangeName[] =
 
 static const StructSCPI chan[] =
 {
-    SCPI_LEAF("RANGE", FuncRange, TestRange),
+    SCPI_LEAF("RANGE", FuncRange, TestRange, "Vertical zoom control"),
     SCPI_EMPTY()
 };
 
 
 const StructSCPI SCPI::channels[] =
 {
-    SCPI_NODE("1:", chan),
-    SCPI_NODE("2:", chan),
+    SCPI_NODE("1:", chan, ""),
+    SCPI_NODE("2:", chan, ""),
     SCPI_EMPTY()
 };
 

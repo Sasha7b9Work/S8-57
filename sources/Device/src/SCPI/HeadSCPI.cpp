@@ -10,26 +10,29 @@
 
 // *IDN?
 static const char *FuncIDN(const char *);
+static bool TestIDN();
 // *RST
 static const char *FuncReset(const char *);
+static bool TestReset();
+// :HELP
+static const char *FuncHelp(const char *);
+static bool TestHelp();
 // :TEST
 static const char *FuncTest(const char *);
-
-
-static bool TestIDN();
-static bool TestReset();
 static bool TestTest();
+static void Process(const StructSCPI strct[], String message);
 
 
 const StructSCPI SCPI::head[] =
 {
-    SCPI_LEAF("*IDN?",     FuncIDN,        TestIDN),
-    SCPI_LEAF("*RST",      FuncReset,      TestReset),
-    SCPI_LEAF(":TEST",     FuncTest,       TestTest),
-    SCPI_NODE(":CHANNEL",  SCPI::channels),
-    SCPI_NODE(":DISPLAY",  SCPI::display),
-    SCPI_NODE(":KEY",      SCPI::key),
-    SCPI_NODE(":TIMEBASE", SCPI::tBase),
+    SCPI_LEAF("*IDN?",     FuncIDN,        TestIDN,   "ID request"),
+    SCPI_LEAF("*RST",      FuncReset,      TestReset, "Reset settings to default values"),
+    SCPI_LEAF(":HELP",     FuncHelp,       TestHelp,  "Output of this help"),
+    SCPI_LEAF(":TEST",     FuncTest,       TestTest,  "Run all tests"),
+    SCPI_NODE(":CHANNEL",  SCPI::channels, ""),
+    SCPI_NODE(":DISPLAY",  SCPI::display,  ""),
+    SCPI_NODE(":KEY",      SCPI::key,      ""),
+    SCPI_NODE(":TIMEBASE", SCPI::tBase,    ""),
     SCPI_EMPTY()
 };
 
@@ -51,6 +54,18 @@ static const char *FuncReset(const char *buffer)
     PageService::OnPress_ResetSettings();
 
     SCPI_EPILOG(buffer)
+}
+
+
+static const char *FuncHelp(const char *buffer)
+{
+    SCPI_PROLOG(buffer);
+    
+    String message;
+
+    Process(SCPI::head, message);
+
+    SCPI_EPILOG(buffer);
 }
 
 
@@ -91,7 +106,41 @@ static bool TestReset()
 }
 
 
+static bool TestHelp()
+{
+    return true;
+}
+
+
 static bool TestTest()
 {
     return true;
+}
+
+
+static void Process(const StructSCPI strct[], String msg)
+{
+    while(!strct->IsEmpty())
+    {
+        if(strct->IsNode())
+        {
+            String message(msg);
+            message.Append(strct->key);
+            Process(strct->strct, message);
+        }
+        else if(strct->IsLeaf())
+        {
+            String message(msg);
+            message.Append(strct->key);
+            message.Append("   :   ");
+            message.Append(strct->hint);
+            SCPI::SendAnswer(message.c_str());
+        }
+        else
+        {
+            LOG_ERROR("—юда мы не можем попасть");
+        }
+
+        strct++;
+    }
 }
