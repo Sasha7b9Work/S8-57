@@ -116,7 +116,7 @@ static int GetRange()
     }
     else if (Multimeter::Measure::IsCurrentAC())
     {
-        return set.mult.rangeCurrentAC;
+        return Multimeter::RangeCurrentAC();
     }
     else if (Multimeter::Measure::IsResistance())
     {

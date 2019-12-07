@@ -29,7 +29,7 @@ struct SettingsMultimeter
     Multimeter::Measure::E        meas;
     Multimeter::RangeDC::E        rangeVoltageDC;
     Multimeter::RangeAC::E        rangeVoltageAC;
-    MultimeterRangeCurrent::E     rangeCurrentAC;     ///< Предел измерения переменного тока
+    Multimeter::RangeCurrentAC::E rangeCurrentAC;     ///< Предел измерения переменного тока
     MultimeterRangeCurrent::E     rangeCurrentDC;     ///< Предел измерения постоянного тока
     MultimeterRangeResistance::E  rangeResist;
 };

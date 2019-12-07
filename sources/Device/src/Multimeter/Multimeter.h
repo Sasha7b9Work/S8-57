@@ -96,4 +96,16 @@ struct Multimeter
         static RangeAC::E &Ref();
         operator RangeAC::E() { return Ref(); }
     };
+
+    /// Предел измерения тока
+    struct RangeCurrentAC
+    {
+        enum E
+        {
+            _20mA,
+            _2A
+        };
+        static RangeCurrentAC::E &Ref();
+        operator RangeCurrentAC::E() { return Ref(); }
+    };
 };
