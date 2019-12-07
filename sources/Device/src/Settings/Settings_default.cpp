@@ -186,8 +186,8 @@ const Settings Settings::defaultSettings =
         Multimeter::Measure::VoltageDC,         // meas
         Multimeter::RangeDC::_2V,               // rangeCV
         Multimeter::RangeAC::_2V,               // rangeVV
-        Multimeter::RangeCurrentAC::_2A,            // rangeCurrentAC
-        MultimeterRangeCurrent::_2A,            // rangeCurrentDC
+        Multimeter::RangeCurrentAC::_2A,        // rangeCurrentAC
+        Multimeter::RangeCurrentDC::_2A,        // rangeCurrentDC
         MultimeterRangeResistance::_10M         // rangeResist
     },
 

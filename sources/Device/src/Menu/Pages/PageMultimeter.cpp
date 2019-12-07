@@ -65,7 +65,7 @@ DEF_CHOICE_2( cRangesCurrentDC,
     "Диапазон измерения",
     "20мА",
     "2А",
-    set.mult.rangeCurrentDC, &PageMultimeter::self, Item::Active, OnChange_CurrentDC, Choice::AfterDraw
+    Multimeter::RangeCurrentDC::Ref(), &PageMultimeter::self, Item::Active, OnChange_CurrentDC, Choice::AfterDraw
 )
 
 

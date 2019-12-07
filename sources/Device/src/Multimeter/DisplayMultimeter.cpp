@@ -112,7 +112,7 @@ static int GetRange()
     }
     else if (Multimeter::Measure::IsCurrentDC())
     {
-        return set.mult.rangeCurrentDC;
+        return Multimeter::RangeCurrentDC();
     }
     else if (Multimeter::Measure::IsCurrentAC())
     {

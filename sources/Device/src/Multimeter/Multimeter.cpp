@@ -96,7 +96,7 @@ void Multimeter::Update()
     uint8 range = 0;
     if(Measure::IsVoltageDC())        { range = static_cast<uint8>(RangeDC()); }
     else if(Measure::IsVoltageAC())   { range = static_cast<uint8>(RangeAC()); }
-    else if(Measure::IsCurrentDC())   { range = static_cast<uint8>(set.mult.rangeCurrentDC); }
+    else if(Measure::IsCurrentDC())   { range = static_cast<uint8>(RangeCurrentDC()); }
     else if(Measure::IsCurrentAC())   { range = static_cast<uint8>(RangeCurrentAC()); }
     else if(Measure::IsResistance())  { range = static_cast<uint8>(set.mult.rangeResist); }
     else
@@ -199,4 +199,10 @@ Multimeter::RangeAC::E &Multimeter::RangeAC::Ref()
 Multimeter::RangeCurrentAC::E &Multimeter::RangeCurrentAC::Ref()
 {
     return set.mult.rangeCurrentAC;
+}
+
+
+Multimeter::RangeCurrentDC::E &Multimeter::RangeCurrentDC::Ref()
+{
+    return set.mult.rangeCurrentDC;
 }

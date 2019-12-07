@@ -1,16 +1,6 @@
 #pragma once
 
 
-/// Предел измерения тока
-struct MultimeterRangeCurrent
-{
-    enum E
-    {
-        _20mA,
-        _2A
-    };
-};
-
 /// Предел измерения сопротивленя постоянному току
 struct MultimeterRangeResistance
 {
@@ -30,7 +20,7 @@ struct SettingsMultimeter
     Multimeter::RangeDC::E        rangeVoltageDC;
     Multimeter::RangeAC::E        rangeVoltageAC;
     Multimeter::RangeCurrentAC::E rangeCurrentAC;     ///< Предел измерения переменного тока
-    MultimeterRangeCurrent::E     rangeCurrentDC;     ///< Предел измерения постоянного тока
+    Multimeter::RangeCurrentDC::E rangeCurrentDC;     ///< Предел измерения постоянного тока
     MultimeterRangeResistance::E  rangeResist;
 };
 

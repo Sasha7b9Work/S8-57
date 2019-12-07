@@ -97,7 +97,7 @@ struct Multimeter
         operator RangeAC::E() { return Ref(); }
     };
 
-    /// Предел измерения тока
+    /// Предел измерения переменного тока
     struct RangeCurrentAC
     {
         enum E
@@ -107,5 +107,17 @@ struct Multimeter
         };
         static RangeCurrentAC::E &Ref();
         operator RangeCurrentAC::E() { return Ref(); }
+    };
+
+    /// Предел измерения постоянного тока
+    struct RangeCurrentDC
+    {
+        enum E
+        {
+            _20mA,
+            _2A
+        };
+        static RangeCurrentDC::E &Ref();
+        operator RangeCurrentDC::E() { return Ref(); }
     };
 };
