@@ -7,7 +7,7 @@ struct Calibrator
     /// Запускает процедуру калибровки
     static void Calibrate();
     /// Балансировать канал на всех диапазонах
-    static bool Balance(Chan::E ch);
+    static bool Balance(Chan::E ch, bool showHint = true);
 
 private:
     /// Откалибровать канал Ch

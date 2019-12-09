@@ -41,11 +41,17 @@ bool Calibrator::Calibrate(Chan::E ch)
     Display::Message::ShowAndWaitKey(ch == Chan::A ?  "Подключите встроенный калибратор ко входу 1 и нажмите любую кнопку" :
                                                       "Подключите встроенный калибратор ко входу 2 и нажмите любую кнопку", true);
 
-    return Balance(ch) && Stretch(ch);
+    Display::Message::Show(ch == Chan::A ? "Калибрую канал 1" : "Калибрую канал 2", true);
+
+    bool result = Balance(ch, false) && Stretch(ch);
+
+    Display::Message::Hide();
+
+    return result;
 }
 
 
-bool Calibrator::Balance(Chan::E ch)
+bool Calibrator::Balance(Chan::E ch, bool showHint)
 {
     Settings old = set;
 
@@ -53,11 +59,14 @@ bool Calibrator::Balance(Chan::E ch)
 
     static const pString messages[Chan::Count] =
     {
-        "Балансировка канала 1",
-        "Балансировка канала 2"
+        "Балансирую канал 1",
+        "Балансирую канал 2"
     };
 
-    Display::Message::Show(messages[ch], true);
+    if (showHint)
+    {
+        Display::Message::Show(messages[ch], true);
+    }
 
     ModeCouple(ch).SetGND();
 
@@ -74,7 +83,10 @@ bool Calibrator::Balance(Chan::E ch)
 
     Osci::Init();
 
-    Display::Message::Hide();
+    if (showHint)
+    {
+        Display::Message::Hide();
+    }
 
     return true;
 }
@@ -174,14 +186,6 @@ float Calibrator::FindStretchK(Chan::E ch)
 
 bool Calibrator::Stretch(Chan::E ch)
 {
-    static const pString messages[Chan::Count] =
-    {
-        "Растяжка канала 1",
-        "Растяжка канала 2"
-    };
-
-    Display::Message::Show(messages[ch], true);
-
     Settings old = set;
 
     ShiftADC::SetReal();
@@ -205,8 +209,6 @@ bool Calibrator::Stretch(Chan::E ch)
     set = old;
 
     Osci::Init();
-
-    Display::Message::Hide();
 
     return (k > 0.0F);
 }
