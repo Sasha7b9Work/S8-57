@@ -5,6 +5,7 @@
 
 /// \brief Тип балансировки АЦП каналов.
 /// Дело в том, что уровни АЦП не совпадают из-за отличия характеристик ( ? ), поэтому мы вводим дополнительное смещение для одного из АЦП канала.
+#pragma pack(push, 1)
 struct BalanceADC
 {
     enum E
@@ -58,6 +59,8 @@ struct ShiftADC
     static int8 Value(Chan::E ch, Range::E range) { return IsReal() ? Ref().shift[ch][range] : 0; };
     int8  shift[Chan::Count][Range::Count];        ///< Добавочное смещение, которое пишется сюда при калибровке и балансировке
 };
+
+#pragma pack(pop)
 
 
 struct SettingsNRST
