@@ -263,7 +263,7 @@ static bool ProcessTest(const StructSCPI strct[]) //-V2504
 }
 
 
-void SCPI::ProcessHint(String *message, const char *const names[])
+void SCPI::ProcessHint(String *message, const char *const *names)
 {
     message->Append(" {");
     for(int i = 0; i < names[i][0] != 0; i++)

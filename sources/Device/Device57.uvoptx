@@ -159,7 +159,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\FPGA\Calibrator.cpp</Filename>
+          <Filename>.\src\FPGA\Calibrator.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\src/FPGA/Calibrator.cpp\142</Expression>
         </Bp>
@@ -175,7 +175,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\FPGA\Calibrator.cpp</Filename>
+          <Filename>.\src\FPGA\Calibrator.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\src/FPGA/Calibrator.cpp\135</Expression>
         </Bp>
@@ -191,7 +191,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Multimeter\DisplayMultimeter.cpp</Filename>
+          <Filename>.\src\Multimeter\DisplayMultimeter.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\src/Multimeter/DisplayMultimeter.cpp\85</Expression>
         </Bp>
@@ -207,7 +207,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Hardware\HAL\HAL_FSMC_stm.cpp</Filename>
+          <Filename>.\src\Hardware\HAL\HAL_FSMC_stm.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\src/Hardware/HAL/HAL_FSMC_stm.cpp\284</Expression>
         </Bp>
@@ -223,7 +223,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\FPGA\SettingsFPGA.cpp</Filename>
+          <Filename>.\src\FPGA\SettingsFPGA.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\src/FPGA/SettingsFPGA.cpp\201</Expression>
         </Bp>

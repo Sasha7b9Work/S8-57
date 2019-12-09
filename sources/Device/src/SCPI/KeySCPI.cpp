@@ -6,11 +6,11 @@
 // :KEY:PRESS:
 static const char *FuncKeyPress(const char *);
 static bool TestKeyPress();
-static void HintKeyPress(String *);
 // :KEY:LONG:
 static const char *FuncKeyLong(const char *);
 static bool TestKeyLong();
-static void HintKeyLong(String *);
+
+static void HintKey(String *);
 
 
 static const char *const keyNames[Key::Count] =
@@ -55,8 +55,8 @@ static const char *const keyNames[Key::Count] =
 
 const StructSCPI SCPI::key[] =
 {
-    SCPI_LEAF(":PRESS", FuncKeyPress, TestKeyPress, "Button press",            HintKeyPress),
-    SCPI_LEAF(":LONG",  FuncKeyLong,  TestKeyLong,  "Press and hold a button", HintKeyLong),
+    SCPI_LEAF(":PRESS", FuncKeyPress, TestKeyPress, "Button press",            HintKey),
+    SCPI_LEAF(":LONG",  FuncKeyLong,  TestKeyLong,  "Press and hold a button", HintKey),
     SCPI_EMPTY()
 };
 
@@ -81,7 +81,7 @@ static const char *FuncKeyPress(const char *buffer)
 }
 
 
-static void HintKeyPress(String *message)
+static void HintKey(String *message)
 {
     SCPI::ProcessHint(message, keyNames);
 }
@@ -104,12 +104,6 @@ static const char *FuncKeyLong(const char *buffer)
     }
 
     return nullptr;
-}
-
-
-static void HintKeyLong(String *message)
-{
-    SCPI::ProcessHint(message, keyNames);
 }
 
 

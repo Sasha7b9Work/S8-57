@@ -85,5 +85,5 @@ namespace SCPI
 
     bool Test();
 
-    void ProcessHint(String *message, const char *const names[]); //-V2504
+    void ProcessHint(String *message, const char *const *names); //-V2504
 };

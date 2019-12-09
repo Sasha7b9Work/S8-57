@@ -20,10 +20,11 @@ static void HintReset(String *);
 static const char *FuncHelp(const char *);
 static bool TestHelp();
 static void HintHelp(String *);
+static void ProcessHelp(const StructSCPI *strct, String message);
+
 // :TEST
 static const char *FuncTest(const char *);
 static bool TestTest();
-static void Process(const StructSCPI strct[], String message); //-V2504
 static void HintTest(String *);
 
 
@@ -51,7 +52,7 @@ static const char *FuncIDN(const char *buffer)
 }
 
 
-static void HintIDN(String *message)
+static void HintIDN(String *message) //-V2009
 {
     SCPI::SendAnswer(message->c_str());
 }
@@ -67,7 +68,7 @@ static const char *FuncReset(const char *buffer)
 }
 
 
-static void HintReset(String *message)
+static void HintReset(String *message) //-V2009
 {
     SCPI::SendAnswer(message->c_str());
 }
@@ -79,13 +80,13 @@ static const char *FuncHelp(const char *buffer)
     
     String message;
 
-    Process(SCPI::head, message);
+    ProcessHelp(SCPI::head, message);
 
     SCPI_EPILOG(buffer);
 }
 
 
-static void HintHelp(String *message)
+static void HintHelp(String *message) //-V2009
 {
     SCPI::SendAnswer(message->c_str());
 }
@@ -116,7 +117,7 @@ static const char *FuncTest(const char *buffer)
 }
 
 
-static void HintTest(String *message)
+static void HintTest(String *message) //-V2009
 {
     SCPI::SendAnswer(message->c_str());
 }
@@ -146,7 +147,7 @@ static bool TestTest()
 }
 
 
-static void Process(const StructSCPI strct[], String msg)
+static void ProcessHelp(const StructSCPI *strct, String msg)
 {
     while(!strct->IsEmpty())
     {
@@ -154,11 +155,11 @@ static void Process(const StructSCPI strct[], String msg)
         {
             String message(msg);
             message.Append(strct->key);
-            Process(strct->strct, message);
+            ProcessHelp(strct->strct, message);
         }
         else if(strct->IsLeaf())
         {
-            String message(msg);
+            String message(msg); //-V820
             message.Append(strct->key);
             SCPI::SendAnswer(strct->hint);
             strct->funcHint(&message);
