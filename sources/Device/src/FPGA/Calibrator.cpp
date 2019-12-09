@@ -126,24 +126,49 @@ float Calibrator::FindStretchK(Chan::E ch)
 {
     Osci::Stop();
 
-    static const int NUM_POINTS = 300;
+    float sumMIN = 0.0F;
+    float sumMAX = 0.0F;
 
-    uint8 buffer[NUM_POINTS];
-
-    int numPoints = 0;
+    int numMIN = 0;
+    int numMAX = 0;
 
     uint8 *addr = ((ch == Chan::A) ? RD::DATA_A : RD::DATA_B) + 1;
 
-    while (numPoints < NUM_POINTS)
+    for (int i = 0; i < 300; i++)
     {
         if (!Transceiver::InInteraction())
         {
             HAL_FSMC::SetAddrData(addr);
-            buffer[numPoints++] = HAL_FSMC::ReadData0();
+            uint8 d = HAL_FSMC::ReadData0();
+
+            if (d > VALUE::MAX - 32)
+            {
+                sumMAX += d;
+                numMAX++;
+            }
+            else if (d < VALUE::MIN + 32)
+            {
+                sumMIN += d;
+                numMIN++;
+            }
+            else
+            {
+                return -1.0F;
+            }
         }
     }
 
-    return 1.1F;
+    static const float pointsInPixel = (VALUE::MAX - VALUE::MIN) / 200.0F;  // Столько пикселей на экране занимает одна точка сигнала по вертикали
+
+    float patternMIN = VALUE::MIN + pointsInPixel * 20;
+    float patternMAX = VALUE::MAX - pointsInPixel * 20;
+    float patternDELTA = patternMAX - patternMIN;
+
+    float min = sumMIN / numMIN;
+    float max = sumMAX / numMAX;
+    float delta = max - min;
+
+    return (patternDELTA / delta);
 }
 
 
@@ -183,7 +208,7 @@ bool Calibrator::Stretch(Chan::E ch)
 
     Display::Message::Hide();
 
-    return true;
+    return (k > 0.0F);
 }
 
 
