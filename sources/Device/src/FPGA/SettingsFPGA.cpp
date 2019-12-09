@@ -16,8 +16,13 @@ TrigStartMode::E &TrigStartMode::Ref()
 }
 
 
-void TrigSource::Load()
+void TrigSource::Set(Chan::E ch)
 {
+    if (ch != Chan::Count)
+    {
+        set.trig.source = ch;
+    }
+
     TrigInput().Load();
 }
 

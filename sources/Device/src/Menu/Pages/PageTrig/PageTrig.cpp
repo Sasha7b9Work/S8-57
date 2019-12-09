@@ -53,7 +53,7 @@ DEF_CHOICE_3( cMode, // -V206                                                   
 
 static void OnChanged_Source(bool)
 {
-    TrigSource::Load();
+    TrigSource::Set();
 }
 
 DEF_CHOICE_2( cSource, // -V206                                                                                                                                    //--- СИНХР - Источник ---

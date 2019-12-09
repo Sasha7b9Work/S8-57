@@ -7,7 +7,7 @@
 struct TrigSource
 {
     TrigSource() {};
-    static void Load();
+    static void Set(Chan::E ch = Chan::Count);
     static Chan::E &Ref();
     operator Chan::E() { return Ref(); };
 

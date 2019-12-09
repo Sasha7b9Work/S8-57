@@ -118,6 +118,31 @@ void Calibrator::Balance(Chan::E ch, Range::E range)
 }
 
 
+float Calibrator::FindStretchK(Chan::E ch)
+{
+    Osci::Stop();
+
+    static const int NUM_POINTS = 300;
+
+    uint8 buffer[NUM_POINTS];
+
+    int numPoints = 0;
+
+    uint8 *addr = ((ch == Chan::A) ? RD::DATA_A : RD::DATA_B) + 1;
+
+    while (numPoints < NUM_POINTS)
+    {
+        if (!Transceiver::InInteraction())
+        {
+            HAL_FSMC::SetAddrData(addr);
+            buffer[numPoints++] = HAL_FSMC::ReadData0();
+        }
+    }
+
+    return 1.0F;
+}
+
+
 bool Calibrator::Stretch(Chan::E ch)
 {
     static const pString messages[Chan::Count] =
@@ -131,18 +156,15 @@ bool Calibrator::Stretch(Chan::E ch)
     Settings old = set;
 
     ShiftADC::SetReal();
-
     StretchADC::SetDisabled();
 
     ModeCouple(ch).SetAC();
-
     RShift(ch).Set(0);
-
     Range(ch).Set500mV();
-
     TBase::Set200us();
-
     TShift::Set(0);
+    TrigSource::Set(ch);
+    TrigLevel(ch).Set(0);
 
     float k = FindStretchK(ch);
 
@@ -164,12 +186,6 @@ bool Calibrator::Stretch(Chan::E ch)
 Calibrator::Mode::E &Calibrator::Mode::Ref()
 {
     return set.serv.calibratorMode;
-}
-
-
-float Calibrator::FindStretchK(Chan::E)
-{
-    return 1.0F;
 }
 
 
