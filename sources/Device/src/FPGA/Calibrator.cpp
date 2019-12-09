@@ -25,6 +25,10 @@ void Calibrator::Calibrate()
 
         return BadExit();
     }
+    else
+    {
+        // больше ничего делать не нужно
+    }
 
     Display::Message::ShowAndWaitKey("Калибровка успешно завершена", true);
 
@@ -139,7 +143,7 @@ float Calibrator::FindStretchK(Chan::E ch)
         }
     }
 
-    return 1.0F;
+    return 1.1F;
 }
 
 

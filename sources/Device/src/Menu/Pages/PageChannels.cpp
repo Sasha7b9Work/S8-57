@@ -31,7 +31,7 @@ DEF_CHOICE_2( cInputA,                                                          
 
 void PageChannelA::OnChanged_Couple(bool)
 {
-    ModeCouple(Chan::A).Set(ModeCouple(Chan::A));
+    Range::LoadBoth();
 }
 
 DEF_CHOICE_3( cCoupleA,                                                                                                                                             //--- ÊÀÍÀË 1 - Ñâÿçü ---
@@ -120,7 +120,7 @@ DEF_CHOICE_2( cInputB,                                                          
 
 void PageChannelB::OnChanged_Couple(bool)
 {
-    ModeCouple(Chan::B).Set(ModeCouple(Chan::B));
+    Range::LoadBoth();
 }
 
 DEF_CHOICE_3( cCoupleB,                                                                                                                                             //--- ÊÀÍÀË 2 - Ñâÿçü ---

@@ -23,7 +23,7 @@ static void HintHelp(String *);
 // :TEST
 static const char *FuncTest(const char *);
 static bool TestTest();
-static void Process(const StructSCPI strct[], String message);
+static void Process(const StructSCPI strct[], String message); //-V2504
 static void HintTest(String *);
 
 
