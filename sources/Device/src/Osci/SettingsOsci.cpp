@@ -766,7 +766,7 @@ void VALUE::PointsFromVoltage(const float *voltage, int numPoints, Range::E rang
 }
 
 
-void Range::Load(E range)
+void Range::Set(E range)
 {
     set.disp.SetLastAffectedChannel(ch);
 

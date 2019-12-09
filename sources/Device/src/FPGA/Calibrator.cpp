@@ -16,15 +16,19 @@ void Calibrator::Calibrate()
     if (!Calibrate(Chan::A))
     {
         Display::Message::ShowAndWaitKey("Калибровка канала 1 не прошла", true);
+
+        return BadExit();
     }
     else if (!Calibrate(Chan::B))
     {
         Display::Message::ShowAndWaitKey("Калибровка канала 2 не прошла", true);
+
+        return BadExit();
     }
-    else
-    {
-        Display::Message::ShowAndWaitKey("Калибровка успешно завершена", true);
-    }
+
+    Display::Message::ShowAndWaitKey("Калибровка успешно завершена", true);
+
+    NormalExit();
 }
 
 
@@ -51,7 +55,7 @@ bool Calibrator::Balance(Chan::E ch)
 
     Display::Message::Show(messages[ch], true);
 
-    ModeCouple(ch, ModeCouple::GND);
+    ModeCouple(ch).SetGND();
 
     TBase::Load(TBase::_100ms);
 
@@ -76,7 +80,7 @@ void Calibrator::Balance(Chan::E ch, Range::E range)
 {
     Osci::Stop();
 
-    Range(ch).Load(range);
+    Range(ch).Set(range);
 
     RShift(ch).Set(0);
 
@@ -85,7 +89,6 @@ void Calibrator::Balance(Chan::E ch, Range::E range)
     float sum = 0;
 
     int numPoints = 0;
-
 
     uint8 *addr = ((ch == Chan::A) ? RD::DATA_A : RD::DATA_B) + 1;
 
@@ -131,9 +134,22 @@ bool Calibrator::Stretch(Chan::E ch)
 
     StretchADC::SetDisabled();
 
-    //RShift(ch).Load()
+    ModeCouple(ch).SetAC();
 
-    old.dbg.nrst.stretchADC.stretch[Chan::A] = StretchADC::Value(Chan::A);
+    RShift(ch).Set(0);
+
+    Range(ch).Set500mV();
+
+    //TBase::Set(TBase::_200us);
+
+    TShift::Set(0);
+
+    float k = FindStretchK(ch);
+
+    if (k > 0.0F)
+    {
+        old.dbg.nrst.stretchADC.stretch[ch] = k;
+    }
 
     set = old;
 
@@ -148,4 +164,24 @@ bool Calibrator::Stretch(Chan::E ch)
 Calibrator::Mode::E &Calibrator::Mode::Ref()
 {
     return set.serv.calibratorMode;
+}
+
+
+float Calibrator::FindStretchK(Chan::E)
+{
+    return 1.0F;
+}
+
+
+void Calibrator::NormalExit()
+{
+    StretchADC::SetReal();
+    ShiftADC::SetReal();
+}
+
+
+void Calibrator::BadExit()
+{
+    StretchADC::SetDisabled();
+    ShiftADC::SetDisabled();
 }

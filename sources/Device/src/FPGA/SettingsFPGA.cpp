@@ -360,13 +360,6 @@ pString Range::Name() const
 };
 
 
-ModeCouple::ModeCouple(Chan::E _ch, ModeCouple::E modeCoupe) : ch(_ch)
-{
-    Ref(ch) = modeCoupe;
-    Range::LoadBoth();
-}
-
-
 pString ModeCouple::UGO() const
 {
     static const pString couple[] = { "\x92", "\x91", "\x90" };

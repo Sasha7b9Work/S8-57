@@ -115,7 +115,9 @@ struct Range
 
     static Range::E &Ref(Chan::E ch);
 
-    void Load(E range);
+    void Set(E range);
+    void Set500mV() { Set(_500mV); }
+    void Set2V()    { Set(_2V); }
 
     operator Range::E();
     
@@ -190,8 +192,12 @@ struct ModeCouple
     };
     /// С помощью этого можно узнать значение
     ModeCouple(Chan::E _ch) : ch(_ch) {};
-    /// С помощью этого можно установить новое значение
-    ModeCouple(Chan::E ch, ModeCouple::E couple);
+
+    void Set(ModeCouple::E couple) { Ref(ch) = couple; Range::LoadBoth(); }
+
+    void SetGND() { Set(GND); }
+
+    void SetAC() { Set(AC); }
 
     static ModeCouple::E &Ref(Chan::E);
 

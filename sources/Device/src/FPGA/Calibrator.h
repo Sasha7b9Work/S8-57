@@ -4,9 +4,26 @@
 
 struct Calibrator
 {
+    /// Запускает процедуру калибровки
     static void Calibrate();
-    /// Балансировать канал
+    /// Балансировать канал на всех диапазонах
     static bool Balance(Chan::E ch);
+
+private:
+    /// Откалибровать канал Ch
+    static bool Calibrate(Chan::E ch);
+    /// Балансировать канал на одном диапазоне
+    static void Balance(Chan::E ch, Range::E range);
+    /// "Растянуть" канал
+    static bool Stretch(Chan::E ch);
+    /// Найти коэффициент растяжки канала
+    static float FindStretchK(Chan::E ch);
+
+    static void NormalExit();
+
+    static void BadExit();
+
+public:
 
     struct Mode
     {
@@ -20,12 +37,4 @@ struct Calibrator
         static Mode::E &Ref();
         operator Mode::E() { return Ref(); }
     };
-
-private:
-
-    static bool Calibrate(Chan::E ch);
-
-    static void Balance(Chan::E ch, Range::E range);
-
-    static bool Stretch(Chan::E ch);
 };
