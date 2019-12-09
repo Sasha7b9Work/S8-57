@@ -57,7 +57,7 @@ bool Calibrator::Balance(Chan::E ch)
 
     ModeCouple(ch).SetGND();
 
-    TBase::Load(TBase::_100ms);
+    TBase::Set100ms();
 
     for (int range = 0; range < Range::Count; range++)
     {
@@ -140,7 +140,7 @@ bool Calibrator::Stretch(Chan::E ch)
 
     Range(ch).Set500mV();
 
-    //TBase::Set(TBase::_200us);
+    TBase::Set200us();
 
     TShift::Set(0);
 

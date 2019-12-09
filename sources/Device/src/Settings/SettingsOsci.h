@@ -76,7 +76,10 @@ struct TBase
 
     pString ToString() const;
 
-    static void Load(E v = Count);
+    static void Set(E v = Count);
+    static void Set200us() { Set(_200us); }
+    static void Set500us() { Set(_500us); }
+    static void Set100ms() { Set(_100ms); }
 
     void Change(int delta);
 

@@ -27,7 +27,7 @@ void Osci::Init()
     TrigInput::Load();
     TrigLevel().Load();
     TrigPolarity().Load();
-    TBase::Load();
+    TBase::Set();
     TShift().Load();
     FPGA::LoadCalibratorMode();
     LoadHoldfOff();

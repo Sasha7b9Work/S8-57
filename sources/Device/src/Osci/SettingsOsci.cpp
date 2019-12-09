@@ -186,7 +186,7 @@ void TBase::Change(int delta)
         return;
     }
 
-    Load();
+    Set();
 
     Osci::Restart();
 
@@ -243,7 +243,7 @@ pString TBase::ToString() const
 }
 
 
-void TBase::Load(TBase::E base)
+void TBase::Set(TBase::E base)
 {
     if (base != Count)
     {
