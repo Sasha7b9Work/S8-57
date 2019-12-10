@@ -171,7 +171,7 @@ void DisplayOsci::PainterData::DrawSpectrum()
     
     if (ModeWork::IsDir())
     {
-        uint numPoints = DS->SizeChannel();
+        uint numPoints = DS->BytesInChannel();
     
         if (numPoints > 2048)       /// \todo Пока 8к и более не хочет считать
         {

@@ -45,7 +45,7 @@ bool DataSettings::Equals(const DataSettings &ds) const
 }
 
 
-uint DataSettings::SizeChannel() const
+uint DataSettings::BytesInChannel() const
 {
     uint result = ENUM_TO_REL_POINTS(ENUM_POINTS(this));
 
@@ -70,12 +70,12 @@ uint DataSettings::NeedMemoryForData() const
 
     if (enableA)
     {
-        result += SizeChannel();
+        result += BytesInChannel();
     }
 
     if (enableB)
     {
-        result += SizeChannel();
+        result += BytesInChannel();
     }
 
     return result;
@@ -124,9 +124,24 @@ void PackedTime::ChangeYear(int delta)
 }
 
 
+void FrameP2P::Clear()
+{
+    ds = nullptr;
+}
+
+
+void FrameP2P::Prepare(DataSettings *_ds)
+{
+    ds = _ds;
+    numPoints = 0;
+}
+
+
 void FrameP2P::AddPoints(BitSet16, BitSet16)
 {
+    numPoints++;
 
+    //uint length = ds->BytesInChannel();
 }
 
 

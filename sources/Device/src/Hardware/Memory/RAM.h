@@ -6,8 +6,9 @@ struct FrameP2P;
 struct Packet;
 
 
-struct RAM
+class RAM
 {
+public:
     /// Ќомер текущего с конца сигнала. 0 - последний считанный сигнал, 1 - предпоследний считанный сигнал.
     static int16 currentSignal;
     /// »нициализирует первоначальное состо€ние пам€ти

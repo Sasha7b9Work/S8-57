@@ -412,7 +412,7 @@ void TrigLevel::Find()
     {
         const uint8 *data = IN(ch);
 
-        uint numBytes = DS->SizeChannel();
+        uint numBytes = DS->BytesInChannel();
 
         uint8 max = Math::MaxFromArray(data, 0, static_cast<int>(numBytes) - 1);
         uint8 min = Math::MinFromArray(data, 0, static_cast<int>(numBytes) - 1);

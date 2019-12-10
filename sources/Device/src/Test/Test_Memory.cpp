@@ -108,7 +108,7 @@ bool Test::ROM::Data::Test()
 
 static void FillData(DataSettings *ds)
 {
-    uint numPoints = ds->SizeChannel();
+    uint numPoints = ds->BytesInChannel();
 
     FILL(ds->enableA, ds->dataA);
     FILL(ds->enableB, ds->dataB);
@@ -125,7 +125,7 @@ static void FillData(DataSettings *ds)
 
 static bool CheckData(const DataSettings *ds)
 {
-    uint numPoints = ds->SizeChannel();
+    uint numPoints = ds->BytesInChannel();
 
     CHECK(ds->enableA, ds->dataA);
     CHECK(ds->enableB, ds->dataB);
@@ -136,7 +136,6 @@ static bool CheckData(const DataSettings *ds)
 
 static void PrepareDS(DataSettings *ds)
 {
-    ds->Fill();
     ds->enableA = static_cast<uint>(std::rand() % 2);
     ds->enableB = ds->enableA ? static_cast<uint>(std::rand() % 2) : 1;
     ds->peackDet = static_cast<uint>(PeakDetMode::Disabled);

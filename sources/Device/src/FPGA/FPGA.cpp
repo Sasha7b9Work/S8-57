@@ -99,7 +99,6 @@ void FPGA::ClearDataRand()
 void FPGA::ReadData()
 {
     DataSettings ds;
-    ds.Fill();
     RAM::PrepareForNewData(&ds);
 
     if (ReadDataChannel(Chan::A, ds.dataA))
@@ -124,11 +123,11 @@ void FPGA::ReadData()
             {
                 if (ENABLED_A(last))
                 {
-                    AveragerOsci::Process(Chan::A, last->dataA, last->SizeChannel());
+                    AveragerOsci::Process(Chan::A, last->dataA, last->BytesInChannel());
                 }
                 if (ENABLED_B(last))
                 {
-                    AveragerOsci::Process(Chan::B, last->dataB, last->SizeChannel());
+                    AveragerOsci::Process(Chan::B, last->dataB, last->BytesInChannel());
                 }
             }
         }

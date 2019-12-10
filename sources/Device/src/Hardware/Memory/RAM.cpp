@@ -48,13 +48,13 @@ struct Packet
         if (ds->enableA)                                                                                // Записываем данные первого канала
         {
             data.dataA = reinterpret_cast<uint8 *>(address);
-            address = WriteToRAM(address, ds->dataA, ds->SizeChannel());
+            address = WriteToRAM(address, ds->dataA, ds->BytesInChannel());
         }
 
         if (ds->dataB)                                                                                  // Записываем данные второго канала
         {
             data.dataB = reinterpret_cast<uint8 *>(address);
-            WriteToRAM(address, ds->dataB, ds->SizeChannel());
+            WriteToRAM(address, ds->dataB, ds->BytesInChannel());
         }
 
         std::memcpy(reinterpret_cast<uint *>(Address() + sizeof(Packet)), &data, sizeof(DataSettings)); // Записываем скорректированные настройки
@@ -71,7 +71,7 @@ struct Packet
         if (ds->enableA)
         {
             ds->dataA = addrData;
-            addrData += ds->SizeChannel();
+            addrData += ds->BytesInChannel();
         }
 
         if (ds->enableB)
@@ -115,12 +115,14 @@ void RAM::Init()
 {
     oldest = reinterpret_cast<Packet *>(BEGIN);
     newest = nullptr;
-    frameP2P.ds = nullptr;
+    frameP2P.Clear();
 }
 
 
 void RAM::PrepareForNewData(DataSettings *ds)
 {
+    ds->Fill();
+
     ds->id = NumberDatas() ? Read()->id + 1 : 0;
 
     uint address = AllocateMemoryForPacket(ds);         // Находим адрес для записи нового пакета
@@ -257,5 +259,8 @@ FrameP2P *RAM::GetFrameP2P()
 
 void RAM::PrepareNewFrameP2P()
 {
+    DataSettings ds;
+    PrepareForNewData(&ds);
 
+    frameP2P.Prepare(Read());
 }

@@ -54,7 +54,8 @@ struct DataSettings
     /// Заполняет структуру в соответствии с текущими настройками
     void Fill(uint8 *dataA = 0, uint8 *dataB = 0);
     /// Возвращает размер занимаемый данными одного канала
-    uint SizeChannel() const;
+    uint BytesInChannel() const;
+    /// Количество отсчётов на канал
     uint PointsInChannel() const;
     /// Возвращает требуемое количество памяти для хранения данных каналов
     uint NeedMemoryForData() const;
@@ -122,13 +123,15 @@ struct DataSettings
 #define Lval_DIVIDER_B(ds)      ((ds)->multiplierB)
 
 #define ENUM_POINTS(ds)         ((ds)->enumPoints)
-#define BYTES_IN_CHANNEL(ds)    ((uint)(ds)->SizeChannel())
+#define BYTES_IN_CHANNEL(ds)    ((uint)(ds)->BytesInChannel())
 
 
 struct FrameP2P
 {
     uint numPoints;
     DataSettings *ds;
+    void Clear();
+    void Prepare(DataSettings *ds);
     void FillBufferForDraw(Chan::E ch, Buffer *buffer);
     void AddPoints(BitSet16 dataA, BitSet16 dataB);
 };

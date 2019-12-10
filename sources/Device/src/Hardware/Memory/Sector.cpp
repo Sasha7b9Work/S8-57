@@ -72,7 +72,7 @@ bool PacketROM::WriteToSector(const Sector *sector) const
         ds.dataB = reinterpret_cast<uint8 *>(addressWrite) + sizeof(PacketROM) + sizeof(DataSettings);
         if (ds.enableA)
         {
-            ds.dataB += ds.SizeChannel();
+            ds.dataB += ds.BytesInChannel();
         }
     }
 
@@ -86,13 +86,13 @@ bool PacketROM::WriteToSector(const Sector *sector) const
 
     if (ds.enableA)
     {
-        HAL_ROM::WriteBufferBytes(addressWrite, UnPack()->dataA, ds.SizeChannel());
-        addressWrite += ds.SizeChannel();
+        HAL_ROM::WriteBufferBytes(addressWrite, UnPack()->dataA, ds.BytesInChannel());
+        addressWrite += ds.BytesInChannel();
     }
 
     if (ds.enableB)
     {
-        HAL_ROM::WriteBufferBytes(addressWrite, UnPack()->dataB, ds.SizeChannel());
+        HAL_ROM::WriteBufferBytes(addressWrite, UnPack()->dataB, ds.BytesInChannel());
     }
 
     return true;
@@ -168,7 +168,7 @@ static void TranslateAddressToROM(const DataSettings *ds, const PacketROM *packe
     if (ds->enableA)
     {
         const_cast<DataSettings *>(ds)->dataA = addressData;
-        addressData += ds->SizeChannel();
+        addressData += ds->BytesInChannel();
     }
 
     if (ds->enableB)
@@ -195,7 +195,7 @@ const PacketROM *Sector::WriteData(uint numInROM, const DataSettings *ds) const
 
     uint sizeDS = sizeof(DataSettings);
 
-    uint sizeData = static_cast<uint>(ds->SizeChannel() * 2);
+    uint sizeData = static_cast<uint>(ds->BytesInChannel() * 2);
 
     volatile uint needSpace = sizePacket + sizeDS + sizeData;
 
@@ -225,12 +225,12 @@ const PacketROM *Sector::WriteData(uint numInROM, const DataSettings *ds) const
 
     if (ds->enableA)
     {
-        WriteToROM(&recordAddress, addressDataA, ds->SizeChannel());
+        WriteToROM(&recordAddress, addressDataA, ds->BytesInChannel());
     }
 
     if (ds->enableB)
     {
-        WriteToROM(&recordAddress, addressDataB, ds->SizeChannel());
+        WriteToROM(&recordAddress, addressDataB, ds->BytesInChannel());
     }
 
     return packet;
@@ -249,7 +249,7 @@ const PacketROM *Sector::FindValidPacket(uint numInROM) const
 
             if (ds && ds->numInROM == numInROM)
             {
-                for (uint j = 0; j < ds->SizeChannel(); j++)
+                for (uint j = 0; j < ds->BytesInChannel(); j++)
                 {
                     if (ds->enableA)
                     {
