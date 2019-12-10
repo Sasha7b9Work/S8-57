@@ -44,6 +44,6 @@ void Painter::DrawTesterData(uint8 mode, Color color, const uint16 *x, const uin
         *pointer8++ = y[i];
     }
 
-    Transceiver::Send(buffer.data, buffer.size);
+    Transceiver::Send(buffer.data, buffer.Size());
 }
 

@@ -129,7 +129,7 @@ struct DataSettings
 
 struct FrameP2P
 {
-    /// Количество считанных точек
+    /// Количество считанных байт
     uint numPoints;
     DataSettings *ds;
     void Clear();
@@ -137,4 +137,17 @@ struct FrameP2P
     /// Заполняет buffer последними size точками сигнала. Если (redraw == true), то последующие точки рисуются поверх предыдущих
     void FillBufferForDraw(Chan::E ch, Buffer *buffer, bool redraw);
     void AddPoints(BitSet16 dataA, BitSet16 dataB);
+private:
+    /// С этим каналом сейчас работаем
+    Chan::E ch;
+    /// Позиция байта, который сейчас будет записан в buffer
+    uint currentByte;
+    uint ReadedBytesForChannel() const;
+    /// Заполнить буфер в простом режме - когда количество считанных байт меньше размера буфера
+    void FillBufferSimple(Buffer *buffer);
+    void FillBufferRedraw(Buffer* buffer);
+    void FillBufferNoRedraw(Buffer* buffer);
+    /// Возвращает следующий байт данных. Если возвращаемое значение равно VALUE::NONE, данные кончились
+    uint8 GetNextByte();
+    uint8 GetByte(uint position);
 };

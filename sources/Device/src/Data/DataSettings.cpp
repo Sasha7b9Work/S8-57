@@ -183,27 +183,102 @@ void FrameP2P::AddPoints(BitSet16 a, BitSet16 b)
 }
 
 
-void FrameP2P::FillBufferForDraw(Chan::E ch, Buffer *buffer, bool redraw)
+uint FrameP2P::ReadedBytesForChannel() const
 {
-	const uint sizeChannel = ds->BytesInChannel();
+    if (ds == nullptr)
+    {
+        return 0;
+    }
 
-	buffer->Realloc(sizeChannel);
+    uint result = numPoints;
 
-	buffer->Fill(VALUE::NONE);
+    if (ds->peackDet)
+    {
+        result *= 2;
+    }
 
-    if (!ENABLED(ds, ch))
+    return result;
+}
+
+
+void FrameP2P::FillBufferForDraw(Chan::E _ch, Buffer *buffer, bool redraw)
+{
+    ch = _ch;
+    currentByte = 0;
+
+    buffer->Fill(VALUE::NONE);
+
+    if (ds == nullptr || !ENABLED(ds, ch))
     {
         return;
     }
 
-    if (numPoints <= ds->PointsInChannel())
+    uint readedBytes = ReadedBytesForChannel();
+
+    if (readedBytes <= buffer->Size())
     {
-        std::memcpy(buffer->data, DATA(ds, ch), sizeChannel);
+        FillBufferSimple(buffer);
+    }
+    else if(redraw)
+    {
+        FillBufferRedraw(buffer);
     }
     else
     {
-
+        FillBufferNoRedraw(buffer);
     }
+}
+
+
+void FrameP2P::FillBufferSimple(Buffer *buffer)
+{
+    std::memcpy(buffer->data, ds->dataA, ReadedBytesForChannel());
+}
+
+
+void FrameP2P::FillBufferRedraw(Buffer *buffer)
+{
+    uint8 data = GetNextByte();
+
+    uint pointer = 0;
+
+    while (data != VALUE::NONE)
+    {
+        buffer->data[pointer++] = data;
+        if (pointer == buffer->Size())
+        {
+            pointer = 0;
+        }
+        data = GetNextByte();
+    }
+}
+
+
+void FrameP2P::FillBufferNoRedraw(Buffer* buffer)
+{
+    FillBufferRedraw(buffer);
+}
+
+
+uint8 FrameP2P::GetNextByte()
+{
+    uint8 result = VALUE::NONE;
+
+    uint bytes = (ds->peackDet) ? (numPoints * 2) : numPoints;
+
+    if (currentByte < bytes)
+    {
+        result = GetByte(currentByte);
+        currentByte++;
+    }
+
+    return result;
+}
+
+
+uint8 FrameP2P::GetByte(uint)
+{
+    return VALUE::NONE;
 }
 
 
