@@ -247,7 +247,7 @@ void DisplayOsci::PainterData::DrawChannel(Chan::E ch)
     {
         if (FRAME_P2P)
         {
-            FRAME_P2P->FillBufferForDraw(ch, &buffer);
+            FRAME_P2P->FillBufferForDraw(ch, &buffer, true);
             data = buffer.data;
         }
         else if(DS == nullptr)

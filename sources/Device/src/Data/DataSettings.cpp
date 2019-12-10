@@ -1,6 +1,8 @@
 #include "defines.h"
 #include "Data/DataSettings.h"
 #include "Settings/Settings.h"
+#include "Utils/Buffer.h"
+#include <cstring>
 
 
 void DataSettings::Fill(uint8 *_dataA, uint8 * _dataB)
@@ -181,9 +183,27 @@ void FrameP2P::AddPoints(BitSet16 a, BitSet16 b)
 }
 
 
-void FrameP2P::FillBufferForDraw(Chan::E, Buffer *)
+void FrameP2P::FillBufferForDraw(Chan::E ch, Buffer *buffer, bool redraw)
 {
+	const uint sizeChannel = ds->BytesInChannel();
 
+	buffer->Realloc(sizeChannel);
+
+	buffer->Fill(VALUE::NONE);
+
+    if (!ENABLED(ds, ch))
+    {
+        return;
+    }
+
+    if (numPoints <= ds->PointsInChannel())
+    {
+        std::memcpy(buffer->data, DATA(ds, ch), sizeChannel);
+    }
+    else
+    {
+
+    }
 }
 
 

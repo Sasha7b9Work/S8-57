@@ -63,6 +63,7 @@ struct DataSettings
     void Log() const;
 };
 
+#define DATA(ds, ch)         (((ch) == Chan::A) ? (ds)->dataA : (ds)->dataB)
 
 #define Lval_ENABLED_A(ds)      ((ds)->enableA)
 #define Lval_ENABLED_B(ds)      ((ds)->enableB)
@@ -133,6 +134,7 @@ struct FrameP2P
     DataSettings *ds;
     void Clear();
     void Prepare(DataSettings *ds);
-    void FillBufferForDraw(Chan::E ch, Buffer *buffer);
+    /// Заполняет buffer последними size точками сигнала. Если (redraw == true), то последующие точки рисуются поверх предыдущих
+    void FillBufferForDraw(Chan::E ch, Buffer *buffer, bool redraw);
     void AddPoints(BitSet16 dataA, BitSet16 dataB);
 };

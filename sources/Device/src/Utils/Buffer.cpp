@@ -23,6 +23,15 @@ void Buffer::Realloc(uint _size)
 }
 
 
+void Buffer::Fill(uint8 value)
+{
+    if (size)
+    {
+        std::memset(data, value, size);
+    }
+}
+
+
 void Buffer::Free()
 {
     std::free(data);
