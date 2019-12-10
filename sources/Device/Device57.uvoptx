@@ -118,7 +118,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGUARM</Key>
-          <Name>фт@</Name>
+          <Name>/</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -150,82 +150,34 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>142</LineNumber>
+          <LineNumber>105</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134445056</Address>
+          <Address>134470514</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\FPGA\Calibrator.cpp</Filename>
+          <Filename>&lt;2&gt;.\src\FPGA\FPGA.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\S8_57\src/FPGA/Calibrator.cpp\142</Expression>
+          <Expression>\\S8_57\src/FPGA/FPGA.cpp\105</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>135</LineNumber>
+          <LineNumber>108</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134445022</Address>
+          <Address>134475310</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\FPGA\Calibrator.cpp</Filename>
+          <Filename>&lt;2&gt;.\src\Osci\Osci.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\S8_57\src/FPGA/Calibrator.cpp\135</Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
-          <LineNumber>85</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134402922</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\Multimeter\DisplayMultimeter.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\S8_57\src/Multimeter/DisplayMultimeter.cpp\85</Expression>
-        </Bp>
-        <Bp>
-          <Number>3</Number>
-          <Type>0</Type>
-          <LineNumber>284</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134494196</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\Hardware\HAL\HAL_FSMC_stm.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\S8_57\src/Hardware/HAL/HAL_FSMC_stm.cpp\284</Expression>
-        </Bp>
-        <Bp>
-          <Number>4</Number>
-          <Type>0</Type>
-          <LineNumber>201</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134479294</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\FPGA\SettingsFPGA.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\S8_57\src/FPGA/SettingsFPGA.cpp\201</Expression>
+          <Expression>\\S8_57\src/Osci/Osci.cpp\108</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -1006,7 +958,7 @@
 
   <Group>
     <GroupName>FPGA</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -2890,7 +2842,7 @@
 
   <Group>
     <GroupName>Osci</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -2970,7 +2922,7 @@
 
   <Group>
     <GroupName>Osci/Display</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -3001,42 +2953,18 @@
     <File>
       <GroupNumber>29</GroupNumber>
       <FileNumber>207</FileNumber>
-      <FileType>8</FileType>
+      <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Osci\Display\HiPart.cpp</PathWithFileName>
-      <FilenameWithoutPath>HiPart.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Osci\Display\DisplayOsci.h</PathWithFileName>
+      <FilenameWithoutPath>DisplayOsci.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>29</GroupNumber>
       <FileNumber>208</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Osci\Display\MemoryWindow.cpp</PathWithFileName>
-      <FilenameWithoutPath>MemoryWindow.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>29</GroupNumber>
-      <FileNumber>209</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Osci\Display\PainterData.cpp</PathWithFileName>
-      <FilenameWithoutPath>PainterData.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>29</GroupNumber>
-      <FileNumber>210</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3048,13 +2976,37 @@
     </File>
     <File>
       <GroupNumber>29</GroupNumber>
-      <FileNumber>211</FileNumber>
-      <FileType>5</FileType>
+      <FileNumber>209</FileNumber>
+      <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Osci\Display\DisplayOsci.h</PathWithFileName>
-      <FilenameWithoutPath>DisplayOsci.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Osci\Display\HiPart.cpp</PathWithFileName>
+      <FilenameWithoutPath>HiPart.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>29</GroupNumber>
+      <FileNumber>210</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\Osci\Display\MemoryWindow.cpp</PathWithFileName>
+      <FilenameWithoutPath>MemoryWindow.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>29</GroupNumber>
+      <FileNumber>211</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\Osci\Display\PainterData.cpp</PathWithFileName>
+      <FilenameWithoutPath>PainterData.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

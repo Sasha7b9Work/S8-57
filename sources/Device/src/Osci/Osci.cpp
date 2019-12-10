@@ -173,7 +173,7 @@ void Osci::ReadPointP2P()
         HAL_FSMC::SetAddrData(RD::DATA_B, RD::DATA_B + 1);
         BitSet16 dataB(HAL_FSMC::ReadData0(), HAL_FSMC::ReadData1());
 
-        LOG_WRITE("%d %d", dataA.halfWord, dataB.halfWord);
+        //LOG_WRITE("%d %d", dataA.halfWord, dataB.halfWord);
 
         RAM::GetFrameP2P()->AddPoints(dataA, dataB);
     }

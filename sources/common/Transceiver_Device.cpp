@@ -170,6 +170,12 @@ void Transceiver::Send(const uint8 *data, uint size)
 
 bool Transceiver::Receive()
 {
+#ifdef DEVICE
+
+    Osci::ReadPointP2P();
+
+#endif
+
     inInteraction = true;
 
     DataBusMode::state = DataBusMode::DeviceReceive;
@@ -196,12 +202,6 @@ bool Transceiver::Receive()
     Set_MODE(Mode::Disabled);
 
     inInteraction = false;
-
-#ifdef DEVICE
-
-    Osci::ReadPointP2P();
-
-#endif
 
     return true;
 }

@@ -1551,6 +1551,16 @@
               <FilePath>.\src\Osci\Display\BottomPart.cpp</FilePath>
             </File>
             <File>
+              <FileName>DisplayOsci.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Osci\Display\DisplayOsci.h</FilePath>
+            </File>
+            <File>
+              <FileName>DisplayOsci.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Display\DisplayOsci.cpp</FilePath>
+            </File>
+            <File>
               <FileName>HiPart.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\Display\HiPart.cpp</FilePath>
@@ -1564,16 +1574,6 @@
               <FileName>PainterData.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\Display\PainterData.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DisplayOsci.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\Display\DisplayOsci.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DisplayOsci.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Osci\Display\DisplayOsci.h</FilePath>
             </File>
           </Files>
         </Group>
