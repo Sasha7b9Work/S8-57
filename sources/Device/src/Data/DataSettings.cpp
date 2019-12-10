@@ -135,15 +135,15 @@ void FrameP2P::Clear()
 void FrameP2P::Prepare(DataSettings *_ds)
 {
     ds = _ds;
-    numPoints = 0;
+    numBytes = 0;
 }
 
 
 void FrameP2P::AddPoints(BitSet16 a, BitSet16 b)
 {
-    uint length = ds->PointsInChannel();
+    uint length = ds->BytesInChannel();
 
-    uint position = numPoints;
+    uint position = numBytes;
 
     while (position >= length)
     {
@@ -163,6 +163,8 @@ void FrameP2P::AddPoints(BitSet16 a, BitSet16 b)
         {
             dB[position] = b.halfWord;
         }
+
+        numBytes += 2;
     }
     else
     {
@@ -177,9 +179,9 @@ void FrameP2P::AddPoints(BitSet16 a, BitSet16 b)
         {
             dB[position] = b.byte0;
         }
-    }
 
-    numPoints++;
+        numBytes++;
+    }
 }
 
 
@@ -190,14 +192,7 @@ uint FrameP2P::ReadedBytesForChannel() const
         return 0;
     }
 
-    uint result = numPoints;
-
-    if (ds->peackDet)
-    {
-        result *= 2;
-    }
-
-    return result;
+    return numBytes;
 }
 
 
@@ -262,17 +257,7 @@ void FrameP2P::FillBufferNoRedraw(Buffer* buffer)
 
 uint8 FrameP2P::GetNextByte()
 {
-    uint8 result = VALUE::NONE;
-
-    uint bytes = (ds->peackDet) ? (numPoints * 2) : numPoints;
-
-    if (currentByte < bytes)
-    {
-        result = GetByte(currentByte);
-        currentByte++;
-    }
-
-    return result;
+    return (currentByte < numBytes) ? GetByte(currentByte++) : VALUE::NONE;
 }
 
 

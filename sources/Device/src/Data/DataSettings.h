@@ -130,7 +130,7 @@ struct DataSettings
 struct FrameP2P
 {
     /// Количество считанных байт
-    uint numPoints;
+    uint numBytes;
     DataSettings *ds;
     void Clear();
     void Prepare(DataSettings *ds);
