@@ -128,8 +128,8 @@ struct DataSettings
 
 struct FrameP2P
 {
-    /// Номер точки, которая сейчас будет записываться. Не может быть больше ds->PointsInChannel()
-    uint pointer;
+    /// Количество считанных точек
+    uint numPoints;
     DataSettings *ds;
     void Clear();
     void Prepare(DataSettings *ds);

@@ -133,12 +133,21 @@ void FrameP2P::Clear()
 void FrameP2P::Prepare(DataSettings *_ds)
 {
     ds = _ds;
-    pointer = 0;
+    numPoints = 0;
 }
 
 
 void FrameP2P::AddPoints(BitSet16 a, BitSet16 b)
 {
+    uint length = ds->PointsInChannel();
+
+    uint position = numPoints;
+
+    while (position >= length)
+    {
+        position -= length;
+    }
+
     if (ds->peackDet)
     {
         uint16 *dA = reinterpret_cast<uint16 *>(ds->dataA);
@@ -146,11 +155,11 @@ void FrameP2P::AddPoints(BitSet16 a, BitSet16 b)
 
         if (ds->enableA)
         {
-            dA[pointer] = a.halfWord;
+            dA[position] = a.halfWord;
         }
         if (ds->enableB)
         {
-            dB[pointer] = b.halfWord;
+            dB[position] = b.halfWord;
         }
     }
     else
@@ -160,20 +169,15 @@ void FrameP2P::AddPoints(BitSet16 a, BitSet16 b)
 
         if (ds->enableA)
         {
-            dA[pointer] = a.byte0;
+            dA[position] = a.byte0;
         }
         if (ds->enableB)
         {
-            dB[pointer] = b.byte0;
+            dB[position] = b.byte0;
         }
     }
 
-    pointer++;
-
-    if (pointer == ds->PointsInChannel())
-    {
-        pointer = 0;
-    }
+    numPoints++;
 }
 
 
