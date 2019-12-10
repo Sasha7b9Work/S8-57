@@ -1,8 +1,9 @@
 #pragma once
 
 
-struct FrameP2P;
 struct DataSettings;
+struct FrameP2P;
+struct Packet;
 
 
 struct RAM
@@ -21,4 +22,18 @@ struct RAM
     static void PrepareNewFrameP2P();
 
     static FrameP2P *GetFrameP2P();
+
+private:
+    /// Указатель на самый старый записанный пакет. Он будет стёрт первым
+    static Packet *oldest;
+    /// Указатель на последний записанный пакет. Он будет стёрт последним
+    static Packet *newest;
+    /// Фрейм поточечного может быть только один в памяти и может указывать только на последние данные
+    static FrameP2P frameP2P;
+    /// Освободить место для записи пакета с данными в соответствии с ds
+    static uint AllocateMemoryForPacket(const DataSettings *ds);
+    /// Удалить самую старую запись
+    static void RemoveOldest();
+    /// Освободить size байт памяти с начала буфера
+    static void AllocateMemoryFromBegin(uint size);
 };

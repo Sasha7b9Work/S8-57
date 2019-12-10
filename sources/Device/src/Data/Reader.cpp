@@ -77,8 +77,6 @@ void Reader::ReadDataFromROM()
 
 void Reader::ReadDataP2P()
 {
-    return;
-    
     if (Osci::InModeP2P())
     {
         FRAME_P2P = RAM::GetFrameP2P();

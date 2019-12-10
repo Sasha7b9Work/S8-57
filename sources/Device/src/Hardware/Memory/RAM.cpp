@@ -7,24 +7,16 @@
 #include <cstdlib>
 
 
-struct Packet;
-
-
 #define BEGIN reinterpret_cast<uint>(Heap::Begin())
 #define END   reinterpret_cast<uint>(Heap::End())
 
-int16 RAM::currentSignal = 0;
-/// Указатель на самый старый записанный пакет. Он будет стёрт первым
-Packet *oldest = reinterpret_cast<Packet *>(BEGIN);
-/// Указатель на последний записанный пакет. Он будет стёрт последним
-Packet *newest = nullptr;
 
-/// Удалить самую старую запись
-static void RemoveOldest();
-/// Освободить место для записи пакета с данными в соответствии с ds
-static uint AllocateMemoryForPacket(const DataSettings *ds);
-/// Освободить size байт памяти с начала буфера
-static void AllocateMemoryFromBegin(uint size);
+int16 RAM::currentSignal = 0;
+Packet *RAM::oldest = reinterpret_cast<Packet *>(BEGIN);
+Packet *RAM::newest = nullptr;
+FrameP2P RAM::frameP2P;
+
+
 /// Записывает по адресу dest. Возвращает адрес первого байта после записи
 static uint *WriteToRAM(uint *dest, const void *src, uint size)
 {
@@ -123,6 +115,7 @@ void RAM::Init()
 {
     oldest = reinterpret_cast<Packet *>(BEGIN);
     newest = nullptr;
+    frameP2P.ds = nullptr;
 }
 
 
@@ -191,7 +184,7 @@ uint RAM::NumberDatas()
     return result;
 }
 
-static uint AllocateMemoryForPacket(const DataSettings *ds)
+uint RAM::AllocateMemoryForPacket(const DataSettings *ds)
 {
     if (newest == nullptr)                                                  // Ещё нет ни одной записи
     {
@@ -241,7 +234,7 @@ static uint AllocateMemoryForPacket(const DataSettings *ds)
 }
 
 
-static void AllocateMemoryFromBegin(uint size)
+void RAM::AllocateMemoryFromBegin(uint size)
 {
     while (oldest->Address() - BEGIN < size)
     {
@@ -250,7 +243,7 @@ static void AllocateMemoryFromBegin(uint size)
 }
 
 
-static void RemoveOldest()
+void RAM::RemoveOldest()
 {
     oldest = reinterpret_cast<Packet *>(oldest->addrNewest);
 }
@@ -258,9 +251,7 @@ static void RemoveOldest()
 
 FrameP2P *RAM::GetFrameP2P()
 {
-    static FrameP2P frame;
-
-    return &frame;
+    return &frameP2P;
 }
 
 
