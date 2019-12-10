@@ -129,6 +129,10 @@ void Transceiver::Send(uint8 data)
 
 void Transceiver::Send(const uint8 *data, uint size)
 {
+#ifdef DEVICE
+    Recorder::ReadPoint();
+    Osci::ReadPointP2P();
+#endif
     inInteraction = true;
 
     if (DataBusMode::state != DataBusMode::DeviceTransmit)        // Если пины ещё не инициализированы для передачи -
@@ -164,6 +168,7 @@ void Transceiver::Send(const uint8 *data, uint size)
 
 #ifdef DEVICE
     Recorder::ReadPoint();
+    Osci::ReadPointP2P();
 #endif
 }
 
@@ -171,9 +176,7 @@ void Transceiver::Send(const uint8 *data, uint size)
 bool Transceiver::Receive()
 {
 #ifdef DEVICE
-
     Osci::ReadPointP2P();
-
 #endif
 
     inInteraction = true;
@@ -184,7 +187,12 @@ bool Transceiver::Receive()
 
     Set_MODE(Mode::Receive);                        // Сообщаем панели, что готовы принять данные
 
-    while (State_READY() == State::Passive) {};     // Ожидаем сигнал готовности от панели
+    while (State_READY() == State::Passive)         // Ожидаем сигнал готовности от панели
+    {
+#ifdef DEVICE
+        Osci::ReadPointP2P();
+#endif
+    };     
 
     if (Receiver::State_FL0() == State::Passive)    // Если панель сообщает о том, что данных нет
     {
