@@ -126,22 +126,54 @@ void PackedTime::ChangeYear(int delta)
 
 void FrameP2P::Clear()
 {
-    ds = nullptr;
+    Prepare(nullptr);
 }
 
 
 void FrameP2P::Prepare(DataSettings *_ds)
 {
     ds = _ds;
-    numPoints = 0;
+    pointer = 0;
 }
 
 
-void FrameP2P::AddPoints(BitSet16, BitSet16)
+void FrameP2P::AddPoints(BitSet16 a, BitSet16 b)
 {
-    numPoints++;
+    if (ds->peackDet)
+    {
+        uint16 *dA = reinterpret_cast<uint16 *>(ds->dataA);
+        uint16 *dB = reinterpret_cast<uint16 *>(ds->dataB);
 
-    //uint length = ds->BytesInChannel();
+        if (ds->enableA)
+        {
+            dA[pointer] = a.halfWord;
+        }
+        if (ds->enableB)
+        {
+            dB[pointer] = b.halfWord;
+        }
+    }
+    else
+    {
+        uint8 *dA = ds->dataA;
+        uint8 *dB = ds->dataB;
+
+        if (ds->enableA)
+        {
+            dA[pointer] = a.byte0;
+        }
+        if (ds->enableB)
+        {
+            dB[pointer] = b.byte0;
+        }
+    }
+
+    pointer++;
+
+    if (pointer == ds->PointsInChannel())
+    {
+        pointer = 0;
+    }
 }
 
 
