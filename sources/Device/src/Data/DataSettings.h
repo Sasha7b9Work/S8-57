@@ -143,11 +143,9 @@ private:
     /// Позиция байта, который сейчас будет записан в buffer
     uint currentByte;
     uint ReadedBytesForChannel() const;
-    /// Заполнить буфер в простом режме - когда количество считанных байт меньше размера буфера
-    void FillBufferSimple(Buffer *buffer);
-    void FillBufferRedraw(Buffer* buffer);
-    void FillBufferNoRedraw(Buffer* buffer);
     /// Возвращает следующий байт данных. Если возвращаемое значение равно VALUE::NONE, данные кончились
     uint8 GetNextByte();
     uint8 GetByte(uint position);
+    /// Возвращает позицию в буфере первого байта данных
+    uint GetPositionZeroByte();
 };

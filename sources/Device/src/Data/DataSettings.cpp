@@ -208,19 +208,18 @@ void FrameP2P::FillBufferForDraw(Chan::E _ch, Buffer *buffer, bool redraw)
         return;
     }
 
-    uint readedBytes = ReadedBytesForChannel();
+    uint position = GetPositionZeroByte();
 
-    if (readedBytes <= buffer->Size())
+    uint8 data = GetNextByte();
+
+    while (data != VALUE::NONE)
     {
-        FillBufferSimple(buffer);
-    }
-    else if(redraw)
-    {
-        FillBufferRedraw(buffer);
-    }
-    else
-    {
-        FillBufferNoRedraw(buffer);
+        buffer->data[position++] = data;
+        data = GetNextByte();
+        if (position == buffer->Size())
+        {
+            position = 0;
+        }
     }
 }
 
@@ -263,6 +262,8 @@ uint8 FrameP2P::GetNextByte()
 
 uint8 FrameP2P::GetByte(uint)
 {
+
+
     return VALUE::NONE;
 }
 
