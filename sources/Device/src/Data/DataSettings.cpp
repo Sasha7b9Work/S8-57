@@ -196,7 +196,7 @@ uint FrameP2P::ReadedBytesForChannel() const
 }
 
 
-void FrameP2P::FillBufferForDraw(Chan::E _ch, Buffer *buffer, bool redraw)
+void FrameP2P::FillBufferForDraw(Chan::E _ch, Buffer *buffer)
 {
     ch = _ch;
     currentByte = 0;
@@ -224,36 +224,6 @@ void FrameP2P::FillBufferForDraw(Chan::E _ch, Buffer *buffer, bool redraw)
 }
 
 
-void FrameP2P::FillBufferSimple(Buffer *buffer)
-{
-    std::memcpy(buffer->data, ds->dataA, ReadedBytesForChannel());
-}
-
-
-void FrameP2P::FillBufferRedraw(Buffer *buffer)
-{
-    uint8 data = GetNextByte();
-
-    uint pointer = 0;
-
-    while (data != VALUE::NONE)
-    {
-        buffer->data[pointer++] = data;
-        if (pointer == buffer->Size())
-        {
-            pointer = 0;
-        }
-        data = GetNextByte();
-    }
-}
-
-
-void FrameP2P::FillBufferNoRedraw(Buffer* buffer)
-{
-    FillBufferRedraw(buffer);
-}
-
-
 uint8 FrameP2P::GetNextByte()
 {
     return (currentByte < numBytes) ? GetByte(currentByte++) : VALUE::NONE;
@@ -265,6 +235,12 @@ uint8 FrameP2P::GetByte(uint)
 
 
     return VALUE::NONE;
+}
+
+
+uint FrameP2P::GetPositionZeroByte()
+{
+    return 0;
 }
 
 

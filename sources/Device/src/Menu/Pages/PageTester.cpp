@@ -20,6 +20,15 @@ DEF_CHOICE_2( cPolarity,                                                        
 )
 
 
+DEF_CHOICE_2( cConductivity,
+    "Проводимость",
+    "Тип проводимости биполярного транзистора",
+    "n-p-n",
+    "p-n-p",
+    Tester::Polarity::Ref(), &PageTester::self, Item::Active, OnChanged_Polarity, Choice::AfterDraw
+)
+
+
 DEF_CHOICE_2( cControl,                                                                                                                               //--- ТЕСТЕР-КОМПОНЕНТ - Управление ---
     "Управление",
     "Тип испытательного воздействия",
@@ -93,7 +102,7 @@ DEF_PAGE_5_VAR( pTester,
     "",
     &cControl,
     &cStepU,
-    &cPolarity,
+    &cConductivity,
     &cViewMode,
     &cAveraging,
     PageName::Tester, &PageFunction::self, Item::Active, Page::NormalTitle, OnOpenClose_Tester, Page::BeforeDraw, Page::HandlerKeyEvent
@@ -111,10 +120,12 @@ void PageTester::OnChanged_Control(bool)
     if (Tester::Control::IsVoltage())
     {
         items[1] = const_cast<Choice *>(&cStepU);
+        items[2] = const_cast<Choice *>(&cConductivity);
     }
     else
     {
         items[1] = const_cast<Choice *>(&cStepI);
+        items[2] = const_cast<Choice *>(&cPolarity);
     }
 
     Tester::LoadStep();

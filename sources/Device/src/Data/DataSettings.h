@@ -135,7 +135,7 @@ struct FrameP2P
     void Clear();
     void Prepare(DataSettings *ds);
     /// Заполняет buffer последними size точками сигнала. Если (redraw == true), то последующие точки рисуются поверх предыдущих
-    void FillBufferForDraw(Chan::E ch, Buffer *buffer, bool redraw);
+    void FillBufferForDraw(Chan::E ch, Buffer *buffer);
     void AddPoints(BitSet16 dataA, BitSet16 dataB);
 private:
     /// С этим каналом сейчас работаем
