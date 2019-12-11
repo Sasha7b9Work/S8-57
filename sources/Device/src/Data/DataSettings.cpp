@@ -185,62 +185,11 @@ void FrameP2P::AddPoints(BitSet16 a, BitSet16 b)
 }
 
 
-uint FrameP2P::ReadedBytesForChannel() const
+void FrameP2P::FillBufferForDraw(Chan::E ch, Buffer *buffer)
 {
-    if (ds == nullptr)
-    {
-        return 0;
-    }
-
-    return numBytes;
-}
-
-
-void FrameP2P::FillBufferForDraw(Chan::E _ch, Buffer *buffer)
-{
-    ch = _ch;
-    currentByte = 0;
-
     buffer->Fill(VALUE::NONE);
 
-    if (ds == nullptr || !ENABLED(ds, ch))
-    {
-        return;
-    }
 
-    uint position = GetPositionZeroByte();
-
-    uint8 data = GetNextByte();
-
-    while (data != VALUE::NONE)
-    {
-        buffer->data[position++] = data;
-        data = GetNextByte();
-        if (position == buffer->Size())
-        {
-            position = 0;
-        }
-    }
-}
-
-
-uint8 FrameP2P::GetNextByte()
-{
-    return (currentByte < numBytes) ? GetByte(currentByte++) : VALUE::NONE;
-}
-
-
-uint8 FrameP2P::GetByte(uint)
-{
-
-
-    return VALUE::NONE;
-}
-
-
-uint FrameP2P::GetPositionZeroByte()
-{
-    return 0;
 }
 
 

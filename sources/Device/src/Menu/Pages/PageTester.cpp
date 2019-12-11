@@ -11,7 +11,7 @@ static void OnChanged_Polarity(bool)
 }
 
 
-DEF_CHOICE_2( cPolarity,                                                                                                                              //--- ТЕСТЕР-КОМПОНЕНТ - Полярность ---
+DEF_CHOICE_2( cPolarity,                                                                                                                                        //--- ТЕСТЕР - Полярность ---
     "Полярность",
     "Полярность испытательного воздействия",
     "+",
@@ -20,7 +20,7 @@ DEF_CHOICE_2( cPolarity,                                                        
 )
 
 
-DEF_CHOICE_2( cConductivity,
+DEF_CHOICE_2( cConductivity,                                                                                                                                  //--- ТЕСТЕР - Проводимость ---
     "Проводимость",
     "Тип проводимости биполярного транзистора",
     "n-p-n",
@@ -29,7 +29,7 @@ DEF_CHOICE_2( cConductivity,
 )
 
 
-DEF_CHOICE_2( cControl,                                                                                                                               //--- ТЕСТЕР-КОМПОНЕНТ - Управление ---
+DEF_CHOICE_2( cControl,                                                                                                                                         //--- ТЕСТЕР - Управление ---
     "Управление",
     "Тип испытательного воздействия",
     "Напряжение",

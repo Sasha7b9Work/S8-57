@@ -129,8 +129,6 @@ struct DataSettings
 
 struct FrameP2P
 {
-    /// Количество считанных байт
-    uint numBytes;
     DataSettings *ds;
     void Clear();
     void Prepare(DataSettings *ds);
@@ -138,14 +136,10 @@ struct FrameP2P
     void FillBufferForDraw(Chan::E ch, Buffer *buffer);
     void AddPoints(BitSet16 dataA, BitSet16 dataB);
 private:
-    /// С этим каналом сейчас работаем
-    Chan::E ch;
-    /// Позиция байта, который сейчас будет записан в buffer
-    uint currentByte;
-    uint ReadedBytesForChannel() const;
-    /// Возвращает следующий байт данных. Если возвращаемое значение равно VALUE::NONE, данные кончились
-    uint8 GetNextByte();
+	/// Количество считанных байт
+	uint numBytes;
+    /// Возвращает байт из позиции position
     uint8 GetByte(uint position);
-    /// Возвращает позицию в буфере первого байта данных
-    uint GetPositionZeroByte();
+    /// Количество хранимых байт
+    uint StoredBytes();
 };
