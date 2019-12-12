@@ -243,23 +243,6 @@ void DisplayOsci::PainterData::DrawChannel(Chan::E ch)
     /// Для отрисовки поточечного вывода
     Buffer buffer;
 
-    if (Osci::InModeP2P())
-    {
-        if (FRAME_P2P)
-        {
-            FRAME_P2P->FillBufferForDraw(ch, &buffer);
-            data = buffer.data;
-        }
-        else if(DS == nullptr)
-        {
-            return;
-        }
-        else
-        {
-            // Будем выводит целый фрейм, несмотря на то, что поточечный вывод
-        }
-    }
-
     int center = (Grid::Bottom() - Grid::Top()) / 2 + Grid::Top();
 
     int left = Grid::Left();

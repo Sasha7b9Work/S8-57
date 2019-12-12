@@ -30,7 +30,7 @@ void Reader::ReadDataFromRAM()
 
     DS = nullptr;
 
-    DS = RAM::Read(ModeWork::IsRAM() ? static_cast<uint>(RAM::currentSignal) : 0U);
+    DS = RAM::Get(ModeWork::IsRAM() ? static_cast<uint>(RAM::currentSignal) : 0U);
 
     if (DS)
     {
@@ -44,11 +44,6 @@ void Reader::ReadDataFromRAM()
         }
 
         FindTrigLevelIfNeed();
-    }
-
-    if (ModeWork::IsDir() && Osci::InModeP2P())
-    {
-        ReadDataP2P();
     }
 }
 
@@ -70,29 +65,6 @@ void Reader::ReadDataFromROM()
         if (DS->enableB)
         {
             IN_B = DS->dataB;
-        }
-    }
-}
-
-
-void Reader::ReadDataP2P()
-{
-    if (Osci::InModeP2P())
-    {
-        FRAME_P2P = RAM::GetFrameP2P();
-        if (FRAME_P2P)
-        {
-            if (DS)
-            {
-                if (TrigStartMode::IsWait() && DS->Equals(*FRAME_P2P->ds))
-                {
-                    FRAME_P2P = nullptr;
-                }
-                else
-                {
-                    DS = FRAME_P2P->ds;
-                }
-            }
         }
     }
 }

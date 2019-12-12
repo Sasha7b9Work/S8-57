@@ -61,6 +61,7 @@ struct DataSettings
     uint NeedMemoryForData() const;
     bool Equals(const DataSettings &ds) const;
     void Log() const;
+    void AddPoint(BitSet16 &dataA, BitSet16 &dataB);
 };
 
 #define DATA(ds, ch)         (((ch) == Chan::A) ? (ds)->dataA : (ds)->dataB)
@@ -125,21 +126,3 @@ struct DataSettings
 
 #define ENUM_POINTS(ds)         ((ds)->enumPoints)
 #define BYTES_IN_CHANNEL(ds)    ((uint)(ds)->BytesInChannel())
-
-
-struct FrameP2P
-{
-    DataSettings *ds;
-    void Clear();
-    void Prepare(DataSettings *ds);
-    /// Заполняет buffer последними size точками сигнала. Если (redraw == true), то последующие точки рисуются поверх предыдущих
-    void FillBufferForDraw(Chan::E ch, Buffer *buffer);
-    void AddPoints(BitSet16 dataA, BitSet16 dataB);
-private:
-	/// Количество считанных байт
-	uint numBytes;
-    /// Возвращает байт из позиции position
-    uint8 GetByte(uint position);
-    /// Количество хранимых байт
-    uint StoredBytes();
-};

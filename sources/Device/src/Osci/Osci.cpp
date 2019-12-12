@@ -64,7 +64,8 @@ void Osci::Start()
 
     if (InModeP2P())
     {
-        RAM::PrepareNewFrameP2P();
+        DataSettings ds;
+        RAM::PrepareForNewData(&ds);
     }
 
     FPGA::isRunning = true;
@@ -173,7 +174,7 @@ void Osci::ReadPointP2P()
         HAL_FSMC::SetAddrData(RD::DATA_B, RD::DATA_B + 1);
         BitSet16 dataB(HAL_FSMC::ReadData0(), HAL_FSMC::ReadData1());
 
-        RAM::GetFrameP2P()->AddPoints(dataA, dataB);
+        RAM::Get()->AddPoint(dataA, dataB);
     }
 }
 

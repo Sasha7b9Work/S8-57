@@ -4,16 +4,12 @@
 #include "Menu/Pages/Include/PageMemory.h"
 
 
-struct FrameP2P;
-
-extern FrameP2P *frameP2P;
 extern const DataSettings *pDS;     ///< Указатель на настройки текущего рисуемого сигнала. Обращаться к нему следует через макрос DS.
 extern uint8 *dataOUT[2];           ///< Считанные данные второго канала
 extern const uint8 *dataIN[2];
 extern uint16 *ave[2];
 
 #define DS          pDS             ///< Указатель на настройки текущего рисуемого сигнала.
-#define FRAME_P2P   frameP2P        ///< В поточечном режиме если этот указатель действительный, то нужно выводить фрейм поточечного вывода, иначе - полный сигнал
 
 #define IN(ch)  (dataIN[static_cast<int>(ch)])
 #define IN_A    IN(Chan::A)
@@ -65,8 +61,4 @@ public:
     static void ReadDataFromRAM();
 
     static void ReadDataFromROM();
-private:
-    /// Читает фрейм поточечного вывода
-    static void ReadDataP2P();
-
 };

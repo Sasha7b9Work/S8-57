@@ -90,7 +90,7 @@ static void OnPress_Save()
 {
     Display::Message::Show("Записываю в память", false);
 
-    const DataSettings *ds = RAM::Read();
+    const DataSettings *ds = RAM::Get();
 
     if (ds)
     {

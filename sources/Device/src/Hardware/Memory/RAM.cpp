@@ -14,7 +14,6 @@
 int16 RAM::currentSignal = 0;
 Packet *RAM::oldest = reinterpret_cast<Packet *>(BEGIN);
 Packet *RAM::newest = nullptr;
-FrameP2P RAM::frameP2P;
 
 
 /// Записывает по адресу dest. Возвращает адрес первого байта после записи
@@ -115,7 +114,6 @@ void RAM::Init()
 {
     oldest = reinterpret_cast<Packet *>(BEGIN);
     newest = nullptr;
-    frameP2P.Clear();
 }
 
 
@@ -123,7 +121,7 @@ void RAM::PrepareForNewData(DataSettings *ds)
 {
     ds->Fill();
 
-    ds->id = NumberDatas() ? Read()->id + 1 : 0;
+    ds->id = NumberDatas() ? Get()->id + 1 : 0;
 
     uint address = AllocateMemoryForPacket(ds);         // Находим адрес для записи нового пакета
 
@@ -138,7 +136,7 @@ void RAM::PrepareForNewData(DataSettings *ds)
 }
 
 
-DataSettings *RAM::Read(uint numFromEnd)
+DataSettings *RAM::Get(uint numFromEnd)
 {
     uint number = NumberDatas();
     
@@ -248,19 +246,4 @@ void RAM::AllocateMemoryFromBegin(uint size)
 void RAM::RemoveOldest()
 {
     oldest = reinterpret_cast<Packet *>(oldest->addrNewest);
-}
-
-
-FrameP2P *RAM::GetFrameP2P()
-{
-    return &frameP2P;
-}
-
-
-void RAM::PrepareNewFrameP2P()
-{
-    DataSettings ds;
-    PrepareForNewData(&ds);
-
-    frameP2P.Prepare(Read());
 }

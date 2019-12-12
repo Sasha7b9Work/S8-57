@@ -41,7 +41,7 @@ bool Test::RAM::Test()
 
         for (uint j = 0; j < ::RAM::NumberDatas(); j++)
         {
-            DataSettings *read = ::RAM::Read(std::rand() % ::RAM::NumberDatas());
+            DataSettings *read = ::RAM::Get(std::rand() % ::RAM::NumberDatas());
 
             if (read && !CheckData(read))
             {

@@ -114,8 +114,8 @@ void FPGA::ReadData()
 
     if (ENumAverage() != ENumAverage::_1)               // Если включено усреднение
     {
-        DataSettings *last = RAM::Read(0);
-        DataSettings *prev = RAM::Read(1);
+        DataSettings *last = RAM::Get(0);
+        DataSettings *prev = RAM::Get(1);
 
         if (prev && last)
         {

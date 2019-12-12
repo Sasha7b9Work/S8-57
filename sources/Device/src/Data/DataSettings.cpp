@@ -126,69 +126,8 @@ void PackedTime::ChangeYear(int delta)
 }
 
 
-void FrameP2P::Clear()
+void DataSettings::AddPoint(BitSet16 &, BitSet16 &)
 {
-    Prepare(nullptr);
-}
-
-
-void FrameP2P::Prepare(DataSettings *_ds)
-{
-    ds = _ds;
-    numBytes = 0;
-}
-
-
-void FrameP2P::AddPoints(BitSet16 a, BitSet16 b)
-{
-    uint length = ds->BytesInChannel();
-
-    uint position = numBytes;
-
-    while (position >= length)
-    {
-        position -= length;
-    }
-
-    if (ds->peackDet)
-    {
-        uint16 *dA = reinterpret_cast<uint16 *>(ds->dataA);
-        uint16 *dB = reinterpret_cast<uint16 *>(ds->dataB);
-
-        if (ds->enableA)
-        {
-            dA[position] = a.halfWord;
-        }
-        if (ds->enableB)
-        {
-            dB[position] = b.halfWord;
-        }
-
-        numBytes += 2;
-    }
-    else
-    {
-        uint8 *dA = ds->dataA;
-        uint8 *dB = ds->dataB;
-
-        if (ds->enableA)
-        {
-            dA[position] = a.byte0;
-        }
-        if (ds->enableB)
-        {
-            dB[position] = b.byte0;
-        }
-
-        numBytes++;
-    }
-}
-
-
-void FrameP2P::FillBufferForDraw(Chan::E ch, Buffer *buffer)
-{
-    buffer->Fill(VALUE::NONE);
-
 
 }
 

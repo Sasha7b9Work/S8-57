@@ -47,9 +47,7 @@ void Device::Init()
 
     FPGA::Init();
 
-    //Settings::Load();
-
-    Settings::Reset();
+    Settings::Load();
 
     Display::Init();
 
