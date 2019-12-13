@@ -71,6 +71,8 @@ struct HPort
 #define PIN_USART3_TX   HPort::_D, HPin::_8
 #define PIN_USART3_RX   HPort::_D, HPin::_9
 
+#define PIN_ADC3        HPort::_F, HPin::_10
+
 
 struct HPin
 {

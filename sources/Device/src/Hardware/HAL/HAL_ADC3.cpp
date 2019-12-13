@@ -22,13 +22,7 @@ void HAL_ADC3::Init()
 
     __ADC3_CLK_ENABLE();
 
-    static GPIO_InitTypeDef isGPIOadc =
-    {
-        GPIO_PIN_10,
-        GPIO_MODE_ANALOG,
-        GPIO_NOPULL
-    };
-    HAL_GPIO_Init(GPIOF, &isGPIOadc);
+    HAL_PIO::Init(PIN_ADC3, HMode::Analog, HPull::No);
 
     static GPIO_InitTypeDef isGPIOexti =
     {
