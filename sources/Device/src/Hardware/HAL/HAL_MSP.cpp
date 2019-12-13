@@ -25,34 +25,6 @@ void HAL_MspInit(void)
 }
 
 
-void HAL_ADC_MspInit(const ADC_HandleTypeDef* hadc)
-{
-    GPIO_InitTypeDef GPIO_InitStruct;
-    if (hadc->Instance == ADC3)
-    {
-        __HAL_RCC_ADC3_CLK_ENABLE();
-        // ADC3 GPIO Configuration    
-        // PF10     ------> ADC3_IN8 
-        GPIO_InitStruct.Pin = GPIO_PIN_10;
-        GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-        GPIO_InitStruct.Pull = GPIO_NOPULL;
-        HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
-    }
-}
-
-
-void HAL_ADC_MspDeInit(const ADC_HandleTypeDef* hadc)
-{
-    if (hadc->Instance == ADC3)
-    {
-        __HAL_RCC_ADC3_CLK_DISABLE();
-        // ADC3 GPIO Configuration    
-        // PF10     ------> ADC3_IN8 
-        HAL_GPIO_DeInit(GPIOF, GPIO_PIN_10);
-    }
-}
-
-
 void HAL_SPI_MspInit(const SPI_HandleTypeDef* hspi)
 {
     GPIO_InitTypeDef GPIO_InitStruct;
