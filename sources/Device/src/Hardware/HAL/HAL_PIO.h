@@ -15,12 +15,10 @@ struct HPort
         _H,
         Count
     };
-
-    static const E CS_RAM = _G;
 };
 
 
-#define PORT_CS_RAM HPort::CS_RAM, HPin::_10
+#define PORT_CS_RAM HPort::_G, HPin::_10
 
 
 struct HPin
