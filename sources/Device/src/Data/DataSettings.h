@@ -67,6 +67,8 @@ private:
     static int numPointsP2P;
     /// Указатель на позицию записываемых данныхывалыова
     static int pointerP2P;
+    /// Если true, то это фрейм поточечного вывода
+    static bool isFrameP2P;
 };
 
 #define DATA(ds, ch)         (((ch) == Chan::A) ? (ds)->dataA : (ds)->dataB)

@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Data/DataSettings.h"
+#include "Osci/Osci.h"
 #include "Settings/Settings.h"
 #include "Utils/Buffer.h"
 #include <cstring>
@@ -7,10 +8,15 @@
 
 int DataSettings::numPointsP2P = 0;
 int DataSettings::pointerP2P = 0;
+bool DataSettings::isFrameP2P = false;
 
 
 void DataSettings::Fill()
 {
+    numPointsP2P = pointerP2P = 0;
+
+    isFrameP2P = Osci::InModeP2P();
+
     Lval_ENABLED_A(this) = ChanA.IsEnabled() ? 1U : 0U;
     Lval_ENABLED_B(this) = ChanB.IsEnabled() ? 1U : 0U;
     INVERSE_A(this)      = ChanA.IsInversed() ? 1U : 0U;
