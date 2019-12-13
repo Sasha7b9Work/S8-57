@@ -22,6 +22,7 @@ struct HPort
 
 #define PORT_AD9286_SCK HPort::_B, HPin::_10
 #define PORT_AD9286_DAT HPort::_C, HPin::_3
+#define PORT_AD9286_CS  HPort::_E, HPin::_11
 
 
 struct HPin
