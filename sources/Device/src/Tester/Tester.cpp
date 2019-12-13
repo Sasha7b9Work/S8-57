@@ -12,11 +12,6 @@
 
 static Settings oldSet = Settings::defaultSettings;
 
-#ifdef OLD_VERSION
-uint16 Tester::Pin_U       = HPin::_15;
-#else
-uint16 Tester::Pin_U       = HPin::_0;
-#endif
 
 int Tester::step = 0;
 float Tester::stepU = 0.0F;
@@ -40,15 +35,11 @@ void Tester::Init()
         }
     }
 
-    HAL_PIO::Init(HPort::_A, HPin::_5, HMode::Analog, HPull::No);    // Настраиваем выходной порт
-
-    //                                    U
-    //uint pins = static_cast<uint>(Tester::Pin_U);
-    //HAL_PIO::Init(Port_TEST_ON, pins, HMode::Output_PP, HPull::Down);
-
+    HAL_PIO::Init(PIN_TESTER_DAC, HMode::Analog, HPull::No);
     HAL_PIO::Init(PIN_TESTER_PNP, HMode::Output_PP, HPull::Down);
     HAL_PIO::Init(PIN_TESTER_ON, HMode::Output_PP, HPull::Down);
     HAL_PIO::Init(PIN_TESTER_I, HMode::Output_PP, HPull::Down);
+    HAL_PIO::Init(PIN_TESTER_U, HMode::Output_PP, HPull::Down);
     HAL_PIO::Init(PIN_TESTER_STR, HMode::RisingIT, HPull::No);
 
     HAL_PIO::Set(PIN_TESTER_ON);         // Отключаем тестер-компонет
@@ -244,7 +235,7 @@ void Tester::LoadPolarity()
 void Tester::LoadStep()
 {
     // Устанавливаем управление напряжением или током
-    HAL_PIO::Write(Port_U, Pin_U, Control::IsVoltage() ? HState::Enabled : HState::Disabled);
+    HAL_PIO::Write(PIN_TESTER_U, Control::IsVoltage() ? HState::Enabled : HState::Disabled);
 
     HAL_PIO::Write(PIN_TESTER_I, Control::IsVoltage() ? HState::Disabled : HState::Enabled);
 

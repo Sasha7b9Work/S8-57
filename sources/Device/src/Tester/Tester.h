@@ -7,15 +7,6 @@
 
 struct Tester
 {
-#ifdef OLD_VERSION
-#define Port_U        HPort::_F
-#else
-#define Port_U        HPort::_B
-#endif
-
-    static uint16 Pin_PNP;
-    static uint16 Pin_U;
-
     static const int NUM_STEPS = 5;
     /// Инициализация аппаратной части
     static void Init();
