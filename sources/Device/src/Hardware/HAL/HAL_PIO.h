@@ -65,6 +65,8 @@ struct HPort
 #define PIN_DAC1        HPort::_A, HPin::_4
 
 #define PIN_PCD_VBUS    HPort::_A, HPin::_9
+#define PIN_PCD_DP      HPort::_A, HPin::_12
+#define PIN_PCD_DM      HPort::_A, HPin::_11
 
 #define PORT_SPI3_SCK   HPort::_C, HPin::_10
 #define PORT_SPI3_DAT   HPort::_C, HPin::_12
@@ -155,6 +157,7 @@ struct HAlternate
         AF0_MCO,
         AF5_SPI4,
         AF7_USART3,
+        AF10_OTG_FS,
         Count
     };
 };

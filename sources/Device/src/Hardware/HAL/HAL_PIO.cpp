@@ -47,7 +47,8 @@ static const uint alternates[HAlternate::Count] =
 {
     GPIO_AF0_MCO,
     GPIO_AF5_SPI4,
-    GPIO_AF7_USART3
+    GPIO_AF7_USART3,
+    GPIO_AF10_OTG_FS
 };
 
 
