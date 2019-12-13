@@ -13,12 +13,10 @@
 static Settings oldSet = Settings::defaultSettings;
 
 #ifdef OLD_VERSION
-uint16 Tester::Pin_TEST_ON = HPin::_13;
 uint16 Tester::Pin_PNP     = HPin::_14;
 uint16 Tester::Pin_U       = HPin::_15;
 uint16 Tester::Pin_I       = HPin::_0;
 #else
-uint16 Tester::Pin_TEST_ON = HPin::_3;
 uint16 Tester::Pin_PNP     = HPin::_6;
 uint16 Tester::Pin_U       = HPin::_0;
 uint16 Tester::Pin_I       = HPin::_2;
@@ -50,8 +48,10 @@ void Tester::Init()
     HAL_PIO::Init(HPort::_A, HPin::_5, HMode::Analog, HPull::No);    // Настраиваем выходной порт
 
     //                                      TEST_ON               PNP               U
-    uint pins = static_cast<uint>(Tester::Pin_TEST_ON | Tester::Pin_PNP | Tester::Pin_U);
-    HAL_PIO::Init(Port_TEST_ON, pins, HMode::Output_PP, HPull::Down);
+    //uint pins = static_cast<uint>(Tester::Pin_TEST_ON | Tester::Pin_PNP | Tester::Pin_U);
+    //HAL_PIO::Init(Port_TEST_ON, pins, HMode::Output_PP, HPull::Down);
+
+    HAL_PIO::Init(PIN_TESTER_ON, HMode::Output_PP, HPull::Down);
 
     //                               I
     HAL_PIO::Init(Port_I, Tester::Pin_I, HMode::Output_PP, HPull::Down);
@@ -59,7 +59,7 @@ void Tester::Init()
     //              TEST_STR - EXTI9
     HAL_PIO::Init(Port_TEST_STR, Tester::Pin_TEST_STR, HMode::RisingIT, HPull::No);
 
-    HAL_PIO::Set(Port_TEST_ON, Tester::Pin_TEST_ON);         // Отключаем тестер-компонет
+    HAL_PIO::Set(PIN_TESTER_ON);         // Отключаем тестер-компонет
 
     HAL_DAC2::Init();
 
@@ -98,7 +98,7 @@ void Tester::Enable() // -V2506
     RShift(Chan::A).Set(0);
     RShift(Chan::B).Set(0);
 
-    HAL_PIO::Reset(Port_TEST_ON, Pin_TEST_ON);       // Включаем тестер-компонент
+    HAL_PIO::Reset(PIN_TESTER_ON);       // Включаем тестер-компонент
 
     Osci::Stop();
 
@@ -129,7 +129,7 @@ void Tester::Disable() // -V2506
 
     HAL_NVIC::DisableIRQ(HAL_NVIC::irqEXTI9_5);      // Выключаем прерывания от тактовых импульсов
 
-    HAL_PIO::Set(Port_TEST_ON, Pin_TEST_ON);
+    HAL_PIO::Set(PIN_TESTER_ON);
 
     oldSet.test.control = Control();
     oldSet.test.polarity = Polarity();
