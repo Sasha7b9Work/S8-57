@@ -33,7 +33,7 @@ void Osci::Init()
     TShift().Load();
     FPGA::LoadCalibratorMode();
     LoadHoldfOff();
-    HAL_PIO::Init(PORT_P2P, PIN_P2P, HMode::Input, HPull::Up);
+    HAL_PIO::Init(PIN_P2P, HMode::Input, HPull::Up);
     Osci::OnPressStart();
 }
 
@@ -168,7 +168,7 @@ void Osci::UpdateFPGA()
 
 void Osci::ReadPointP2P()
 {
-    if (InModeP2P() && FPGA::IsRunning() && HAL_PIO::Read(PORT_P2P, PIN_P2P))
+    if (InModeP2P() && FPGA::IsRunning() && HAL_PIO::Read(PIN_P2P))
     {
         HAL_FSMC::SetAddrData(RD::DATA_A, RD::DATA_A + 1);
         BitSet16 dataA(HAL_FSMC::ReadData0(), HAL_FSMC::ReadData1());
