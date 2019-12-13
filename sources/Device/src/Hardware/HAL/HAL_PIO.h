@@ -18,7 +18,9 @@ struct HPort
 };
 
 
-#define PORT_CS_RAM HPort::_G, HPin::_10
+#define PORT_CS_RAM     HPort::_G, HPin::_10
+
+#define PORT_AD9286_SCK HPort::_B, HPin::_10
 
 
 struct HPin

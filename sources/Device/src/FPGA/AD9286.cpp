@@ -4,16 +4,12 @@
 #include "Hardware/HAL/HAL_PIO.h"
 
 
-#define PIN_SCK     HPin::_10
-#define PORT_SCK    HPort::_B
-
 #define PIN_DAT     HPin::_3
 #define PORT_DAT    HPort::_C
 
 #define PIN_CS      HPin::_11
 #define PORT_CS     HPort::_E
 
-#define SCK         PORT_SCK, PIN_SCK
 #define DAT         PORT_DAT, PIN_DAT
 #define CS          PORT_CS,  PIN_CS
 
@@ -36,11 +32,11 @@ void AD9286::Init()
 
     HAL_PIO::Init(PORT_DAT, PIN_DAT, HMode::Output_PP, HPull::Up);     // Инициализация DAT
     
-    HAL_PIO::Init(PORT_SCK, PIN_SCK, HMode::Output_PP, HPull::Up);     // Инициализация SCK
+    HAL_PIO::Init(PORT_AD9286_SCK, HMode::Output_PP, HPull::Up);     // Инициализация SCK
 
     HAL_PIO::Set(CS);
     HAL_PIO::Reset(DAT);
-    HAL_PIO::Reset(SCK);
+    HAL_PIO::Reset(PORT_AD9286_SCK);
 
     Tune();
 }
@@ -72,10 +68,10 @@ static void WriteByte(uint8 address, uint8 byte)
         }
         PAUSE_ON_TICKS(100);
 
-        HAL_PIO::Set(SCK);
+        HAL_PIO::Set(PORT_AD9286_SCK);
         PAUSE_ON_TICKS(100);
 
-        HAL_PIO::Reset(SCK);
+        HAL_PIO::Reset(PORT_AD9286_SCK);
     }
 
     HAL_PIO::Set(CS);
