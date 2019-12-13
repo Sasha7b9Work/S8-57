@@ -24,13 +24,7 @@ void HAL_ADC3::Init()
 
     HAL_PIO::Init(PIN_ADC3, HMode::Analog, HPull::No);
 
-    static GPIO_InitTypeDef isGPIOexti =
-    {
-        GPIO_PIN_11,
-        GPIO_MODE_IT_RISING,
-        GPIO_NOPULL
-    };
-    HAL_GPIO_Init(GPIOB, &isGPIOexti);
+    HAL_PIO::Init(PIN_ADC3_IT, HMode::RisingIT, HPull::No);
 
     HAL_NVIC_SetPriority(ADC_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(ADC_IRQn);
