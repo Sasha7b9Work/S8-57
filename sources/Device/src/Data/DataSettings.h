@@ -52,7 +52,7 @@ struct DataSettings
     uint        notUsed     : 7;
     PackedTime  time;
     /// Заполняет структуру в соответствии с текущими настройками
-    void Fill(uint8 *dataA = 0, uint8 *dataB = 0);
+    void Fill();
     /// Возвращает размер занимаемый данными одного канала
     uint BytesInChannel() const;
     /// Количество отсчётов на канал
@@ -62,6 +62,11 @@ struct DataSettings
     bool Equals(const DataSettings &ds) const;
     void Log() const;
     void AddPoint(BitSet16 &dataA, BitSet16 &dataB);
+private:
+    /// Количество всех считанных точек в поточечном режиме
+    static int numPointsP2P;
+    /// Указатель на позицию записываемых данныхывалыова
+    static int pointerP2P;
 };
 
 #define DATA(ds, ch)         (((ch) == Chan::A) ? (ds)->dataA : (ds)->dataB)

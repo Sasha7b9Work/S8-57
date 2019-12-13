@@ -5,30 +5,31 @@
 #include <cstring>
 
 
-void DataSettings::Fill(uint8 *_dataA, uint8 * _dataB)
-{
-    dataA = _dataA;
-    dataB = _dataB;
+int DataSettings::numPointsP2P = 0;
+int DataSettings::pointerP2P = 0;
 
+
+void DataSettings::Fill()
+{
     Lval_ENABLED_A(this) = ChanA.IsEnabled() ? 1U : 0U;
     Lval_ENABLED_B(this) = ChanB.IsEnabled() ? 1U : 0U;
-    INVERSE_A(this) = ChanA.IsInversed() ? 1U : 0U;
-    INVERSE_B(this) = ChanB.IsInversed() ? 1U : 0U;
-    Lval_RANGE_A(this) = Range(Chan::A);
-    Lval_RANGE_B(this) = Range(Chan::B);
-    RSHIFT_A(this) = RShift(Chan::A);
-    RSHIFT_B(this) = RShift(Chan::B);
-    Lval_TBASE(this) = TBase();
-    TSHIFT(this) = TShift();
-    Lval_COUPLE_A(this) = ModeCouple(Chan::A);
-    Lval_COUPLE_B(this) = ModeCouple(Chan::B);
-    TRIGLEV_A(this) = TrigLevel(Chan::A).Value();
-    TRIGLEV_B(this) = TrigLevel(Chan::B).Value();
-    Lval_PEAKDET(this) = PeakDetMode();
+    INVERSE_A(this)      = ChanA.IsInversed() ? 1U : 0U;
+    INVERSE_B(this)      = ChanB.IsInversed() ? 1U : 0U;
+    Lval_RANGE_A(this)   = Range(Chan::A);
+    Lval_RANGE_B(this)   = Range(Chan::B);
+    RSHIFT_A(this)       = RShift(Chan::A);
+    RSHIFT_B(this)       = RShift(Chan::B);
+    Lval_TBASE(this)     = TBase();
+    TSHIFT(this)         = TShift();
+    Lval_COUPLE_A(this)  = ModeCouple(Chan::A);
+    Lval_COUPLE_B(this)  = ModeCouple(Chan::B);
+    TRIGLEV_A(this)      = TrigLevel(Chan::A).Value();
+    TRIGLEV_B(this)      = TrigLevel(Chan::B).Value();
+    Lval_PEAKDET(this)   = PeakDetMode();
     Lval_DIVIDER_A(this) = Divider(Chan::A);
     Lval_DIVIDER_B(this) = Divider(Chan::B);
-    TIME_MS_DS(this) = 0;                        // Ёто важно дл€ режима поточеного вывода. ќзначает, что полный сигнал ещЄ не считан
-    ENUM_POINTS(this) = ENumPointsFPGA();
+    TIME_MS_DS(this)     = 0;                   // Ёто важно дл€ режима поточеного вывода. ќзначает, что полный сигнал ещЄ не считан
+    ENUM_POINTS(this)    = ENumPointsFPGA();
 }
 
 
@@ -126,7 +127,9 @@ void PackedTime::ChangeYear(int delta)
 }
 
 
-void DataSettings::AddPoint(BitSet16 &, BitSet16 &)
+
+
+void DataSettings::AddPoint(BitSet16 &pA, BitSet16 &pB)
 {
 
 }
