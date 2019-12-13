@@ -15,13 +15,10 @@ static Settings oldSet = Settings::defaultSettings;
 #ifdef OLD_VERSION
 uint16 Tester::Pin_PNP     = HPin::_14;
 uint16 Tester::Pin_U       = HPin::_15;
-uint16 Tester::Pin_I       = HPin::_0;
 #else
 uint16 Tester::Pin_PNP     = HPin::_6;
 uint16 Tester::Pin_U       = HPin::_0;
-uint16 Tester::Pin_I       = HPin::_2;
 #endif
-uint16 Tester::Pin_TEST_STR = HPin::_9;
 
 int Tester::step = 0;
 float Tester::stepU = 0.0F;
@@ -47,17 +44,13 @@ void Tester::Init()
 
     HAL_PIO::Init(HPort::_A, HPin::_5, HMode::Analog, HPull::No);    // Настраиваем выходной порт
 
-    //                                      TEST_ON               PNP               U
-    //uint pins = static_cast<uint>(Tester::Pin_TEST_ON | Tester::Pin_PNP | Tester::Pin_U);
+    //                                      PNP               U
+    //uint pins = static_cast<uint>(Tester::Pin_PNP | Tester::Pin_U);
     //HAL_PIO::Init(Port_TEST_ON, pins, HMode::Output_PP, HPull::Down);
 
     HAL_PIO::Init(PIN_TESTER_ON, HMode::Output_PP, HPull::Down);
-
-    //                               I
-    HAL_PIO::Init(Port_I, Tester::Pin_I, HMode::Output_PP, HPull::Down);
-
-    //              TEST_STR - EXTI9
-    HAL_PIO::Init(Port_TEST_STR, Tester::Pin_TEST_STR, HMode::RisingIT, HPull::No);
+    HAL_PIO::Init(PIN_TESTER_I, HMode::Output_PP, HPull::Down);
+    HAL_PIO::Init(PIN_TESTER_STR, HMode::RisingIT, HPull::No);
 
     HAL_PIO::Set(PIN_TESTER_ON);         // Отключаем тестер-компонет
 
@@ -254,7 +247,7 @@ void Tester::LoadStep()
     // Устанавливаем управление напряжением или током
     HAL_PIO::Write(Port_U, Pin_U, Control::IsVoltage() ? HState::Enabled : HState::Disabled);
 
-    HAL_PIO::Write(Port_I, Pin_I, Control::IsVoltage() ? HState::Disabled : HState::Enabled);
+    HAL_PIO::Write(PIN_TESTER_I, Control::IsVoltage() ? HState::Disabled : HState::Enabled);
 
     if (Control::IsVoltage())
     {

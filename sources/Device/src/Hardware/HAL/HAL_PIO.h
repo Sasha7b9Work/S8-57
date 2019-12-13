@@ -27,6 +27,7 @@ struct HPort
 #define PORT_A0S        HPort::_G, HPin::_5
 #define PIN_P2P         HPort::_G, HPin::_1
 #define PIN_TESTER_ON   HPort::_F, HPin::_13
+#define PIN_TESTER_I    HPort::_G, HPin::_0
 #else
 #define PORT_A2         HPort::_B, HPin::_13
 #define PORT_A3         HPort::_G, HPin::_8
@@ -37,7 +38,10 @@ struct HPort
 #define PORT_A0S        HPort::_A, HPin::_10
 #define PIN_P2P         HPort::_F, HPin::_11
 #define PIN_TESTER_ON   HPort::_A, HPin::_3
+#define PIN_TESTER_I    HPort::_B, HPin::_2
 #endif
+
+#define PIN_TESTER_STR  HPort::_C, HPin::_9
 
 #define PORT_CS_RAM     HPort::_G, HPin::_10
 

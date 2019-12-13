@@ -10,18 +10,13 @@ struct Tester
 #ifdef OLD_VERSION
 #define Port_PNP      HPort::_F
 #define Port_U        HPort::_F
-#define Port_I        HPort::_G
 #else
 #define Port_PNP      HPort::_A
 #define Port_U        HPort::_B
-#define Port_I        HPort::_B
 #endif
-#define Port_TEST_STR HPort::_C
 
     static uint16 Pin_PNP;
     static uint16 Pin_U;
-    static uint16 Pin_I;
-    static uint16 Pin_TEST_STR;
 
     static const int NUM_STEPS = 5;
     /// Инициализация аппаратной части
