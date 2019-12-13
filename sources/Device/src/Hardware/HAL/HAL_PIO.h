@@ -69,6 +69,11 @@ struct HPort
 #define PORT_SPI3_CS1   HPort::_D, HPin::_3
 #define PORT_SPI3_CS2   HPort::_G, HPin::_13
 
+#define PIN_SPI4_CS    HPort::_E, HPin::_11
+#define PIN_SPI4_SCK   HPort::_E, HPin::_12
+#define PIN_SPI4_MISO  HPort::_E, HPin::_13
+#define PIN_SPI4_MOSI  HPort::_E, HPin::_14
+
 #define PIN_TESTER_STR  HPort::_C, HPin::_9
 #define PIN_TESTER_DAC  HPort::_A, HPin::_5
 
@@ -146,6 +151,7 @@ struct HAlternate
     enum E
     {
         AF0_MCO,
+        AF5_SPI4,
         AF7_USART3,
         Count
     };
