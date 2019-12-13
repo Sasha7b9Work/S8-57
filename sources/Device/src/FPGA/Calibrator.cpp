@@ -112,7 +112,7 @@ void Calibrator::Balance(Chan::E ch, Range::E range)
     {
         if (!Transceiver::InInteraction())
         {
-            if (HAL_PIO::Read(HPort::_G, HPin::_1))
+            if (HAL_PIO::Read(PORT_P2P, PIN_P2P))
             {
                 HAL_FSMC::SetAddrData(addr);
                 sum += HAL_FSMC::ReadData0();

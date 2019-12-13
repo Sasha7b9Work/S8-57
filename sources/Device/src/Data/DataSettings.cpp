@@ -135,7 +135,7 @@ void PackedTime::ChangeYear(int delta)
 
 
 
-void DataSettings::AddPoint(BitSet16 &pA, BitSet16 &pB)
+void DataSettings::AddPoint(BitSet16 &, BitSet16 &)
 {
 
 }

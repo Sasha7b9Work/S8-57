@@ -971,6 +971,16 @@
           <GroupName>Hardware/Memory</GroupName>
           <Files>
             <File>
+              <FileName>ExtendedRAM.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Memory\ExtendedRAM.h</FilePath>
+            </File>
+            <File>
+              <FileName>ExtendedRAM.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Memory\ExtendedRAM.cpp</FilePath>
+            </File>
+            <File>
               <FileName>RAM.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Memory\RAM.h</FilePath>

@@ -11,6 +11,10 @@
 #define NUM_VER "0.0.1"
 
 
+// ¬ старой версии (опытных образцах) добавлена внешн€€ пам€ть и изменена некотора€ распиновка. ƒл€ компил€ции старой версии раскомментируйте следующую строку
+//#define OLD_VERSION
+
+
 typedef const char  *const  pString;
 typedef unsigned char       uchar;
 typedef signed char         int8;

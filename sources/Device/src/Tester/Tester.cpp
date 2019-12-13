@@ -12,10 +12,17 @@
 
 static Settings oldSet = Settings::defaultSettings;
 
+#ifdef OLD_VERSION
 uint16 Tester::Pin_TEST_ON = HPin::_13;
-uint16 Tester::Pin_PNP = HPin::_14;
-uint16 Tester::Pin_U = HPin::_15;
-uint16 Tester::Pin_I = HPin::_0;
+uint16 Tester::Pin_PNP     = HPin::_14;
+uint16 Tester::Pin_U       = HPin::_15;
+uint16 Tester::Pin_I       = HPin::_0;
+#else
+uint16 Tester::Pin_TEST_ON = HPin::_3;
+uint16 Tester::Pin_PNP     = HPin::_6;
+uint16 Tester::Pin_U       = HPin::_0;
+uint16 Tester::Pin_I       = HPin::_2;
+#endif
 uint16 Tester::Pin_TEST_STR = HPin::_9;
 
 int Tester::step = 0;

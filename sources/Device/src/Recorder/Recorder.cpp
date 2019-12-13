@@ -75,7 +75,7 @@ void Recorder::Update()
 
 void Recorder::ReadPoint()
 {
-    if (IsRunning() && HAL_PIO::Read(HPort::_G, HPin::_1))
+    if (IsRunning() && HAL_PIO::Read(PORT_P2P, PIN_P2P))
     {
         if (StorageRecorder::CurrentRecord()->FreeMemory() > 4)
         {

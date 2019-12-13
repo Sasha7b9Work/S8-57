@@ -2,6 +2,15 @@
 #include "Settings/Settings.h"
 
 
+#ifdef OLD_VERSION
+#define PORT_P2P HPort::_G
+#define PIN_P2P  HPin::_1
+#else
+#define PORT_P2P HPort::_F
+#define PIN_P2P  HPin::_11
+#endif
+
+
 struct Osci
 {
     static void Init();

@@ -4,6 +4,7 @@
 #include "FPGA/FPGA.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
+#include "Hardware/Memory/ExtendedRAM.h"
 #include "Hardware/Memory/RAM.h"
 #include "Osci/Osci.h"
 #include "Osci/Display/DisplayOsci.h"
@@ -20,6 +21,7 @@ void Osci::Init()
     Stop();
 
     RAM::Init();
+    ExtRAM::Init();
     FPGA::LoadRegUPR();
     Range::LoadBoth();
     RShift(Chan::A).Load();
@@ -31,7 +33,7 @@ void Osci::Init()
     TShift().Load();
     FPGA::LoadCalibratorMode();
     LoadHoldfOff();
-    HAL_PIO::Init(HPort::_G, HPin::_1, HMode::Input, HPull::Up);
+    HAL_PIO::Init(PORT_P2P, PIN_P2P, HMode::Input, HPull::Up);
     Osci::OnPressStart();
 }
 
@@ -166,7 +168,7 @@ void Osci::UpdateFPGA()
 
 void Osci::ReadPointP2P()
 {
-    if (InModeP2P() && FPGA::IsRunning() && HAL_PIO::Read(HPort::_G, HPin::_1))
+    if (InModeP2P() && FPGA::IsRunning() && HAL_PIO::Read(PORT_P2P, PIN_P2P))
     {
         HAL_FSMC::SetAddrData(RD::DATA_A, RD::DATA_A + 1);
         BitSet16 dataA(HAL_FSMC::ReadData0(), HAL_FSMC::ReadData1());

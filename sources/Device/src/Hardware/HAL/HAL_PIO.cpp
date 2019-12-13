@@ -21,6 +21,11 @@ uint16 HPin::_14 = GPIO_PIN_14;
 uint16 HPin::_15 = GPIO_PIN_15;
 
 
+HPort::E PORT::CS_RAM = HPort::_G;
+
+const uint16 PIN::CS_RAM = HPin::_10;
+
+
 static const uint modes[HMode::Count] =
 {
     GPIO_MODE_ANALOG,
