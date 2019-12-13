@@ -13,10 +13,8 @@
 static Settings oldSet = Settings::defaultSettings;
 
 #ifdef OLD_VERSION
-uint16 Tester::Pin_PNP     = HPin::_14;
 uint16 Tester::Pin_U       = HPin::_15;
 #else
-uint16 Tester::Pin_PNP     = HPin::_6;
 uint16 Tester::Pin_U       = HPin::_0;
 #endif
 
@@ -44,10 +42,11 @@ void Tester::Init()
 
     HAL_PIO::Init(HPort::_A, HPin::_5, HMode::Analog, HPull::No);    // Настраиваем выходной порт
 
-    //                                      PNP               U
-    //uint pins = static_cast<uint>(Tester::Pin_PNP | Tester::Pin_U);
+    //                                    U
+    //uint pins = static_cast<uint>(Tester::Pin_U);
     //HAL_PIO::Init(Port_TEST_ON, pins, HMode::Output_PP, HPull::Down);
 
+    HAL_PIO::Init(PIN_TESTER_PNP, HMode::Output_PP, HPull::Down);
     HAL_PIO::Init(PIN_TESTER_ON, HMode::Output_PP, HPull::Down);
     HAL_PIO::Init(PIN_TESTER_I, HMode::Output_PP, HPull::Down);
     HAL_PIO::Init(PIN_TESTER_STR, HMode::RisingIT, HPull::No);
@@ -238,7 +237,7 @@ void Tester::RecountPoints(uint16 *x, uint8 *y)
 void Tester::LoadPolarity()
 {
     // Устанавливаем полярность
-    HAL_PIO::Write(Port_PNP, Pin_PNP, Polarity::IsPositive() ? HState::Enabled : HState::Disabled);
+    HAL_PIO::Write(PIN_TESTER_PNP, Polarity::IsPositive() ? HState::Enabled : HState::Disabled);
 }
 
 

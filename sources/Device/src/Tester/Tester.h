@@ -8,10 +8,8 @@
 struct Tester
 {
 #ifdef OLD_VERSION
-#define Port_PNP      HPort::_F
 #define Port_U        HPort::_F
 #else
-#define Port_PNP      HPort::_A
 #define Port_U        HPort::_B
 #endif
 
