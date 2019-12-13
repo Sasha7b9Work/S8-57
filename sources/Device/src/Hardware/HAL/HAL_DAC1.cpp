@@ -1,5 +1,6 @@
 #include "defines.h"
-#include "HAL.h"
+#include "Hardware/HAL/HAL.h"
+#include "Hardware/HAL/HAL_PIO.h"
 #include <stm32f4xx_hal.h>
 
 
@@ -12,15 +13,7 @@ void HAL_DAC1::Init()
     __TIM7_CLK_ENABLE();
     __DAC_CLK_ENABLE();
 
-    GPIO_InitTypeDef structGPIO =
-    {
-        GPIO_PIN_4,
-        GPIO_MODE_ANALOG,
-        GPIO_NOPULL,
-        0, 0
-    };
-
-    HAL_GPIO_Init(GPIOA, &structGPIO);
+    HAL_PIO::Init(PIN_DAC1, HMode::Analog, HPull::No);
 
     static DMA_HandleTypeDef hdmaDAC1 =
     {

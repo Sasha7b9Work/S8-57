@@ -45,33 +45,34 @@ struct HPort
 #define PIN_TESTER_PNP  HPort::_A, HPin::_6
 #endif
 
-#define PIN_TESTER_STR  HPort::_C, HPin::_9
-#define PIN_TESTER_DAC  HPort::_A, HPin::_5
+#define PORT_A1         HPort::_D, HPin::_10
+#define PORT_LFS        HPort::_G, HPin::_6
 
-#define PORT_CS_RAM     HPort::_G, HPin::_10
-
-#define PORT_AD9286_SCK HPort::_B, HPin::_10
-#define PORT_AD9286_DAT HPort::_C, HPin::_3
-#define PORT_AD9286_CS  HPort::_E, HPin::_11
+#define PIN_ADC3        HPort::_F, HPin::_10
 
 #define PORT_AT2516_OUT HPort::_C, HPin::_3
 #define PORT_AT2516_IN  HPort::_C, HPin::_2
 #define PORT_AT2516_CLK HPort::_B, HPin::_10
 #define PORT_AT2516_CS  HPort::_B, HPin::_12
 
+#define PORT_AD9286_SCK HPort::_B, HPin::_10
+#define PORT_AD9286_DAT HPort::_C, HPin::_3
+#define PORT_AD9286_CS  HPort::_E, HPin::_11
+
+#define PORT_CS_RAM     HPort::_G, HPin::_10
+
+#define PIN_DAC1        HPort::_A, HPin::_4
 
 #define PORT_SPI3_SCK   HPort::_C, HPin::_10
 #define PORT_SPI3_DAT   HPort::_C, HPin::_12
 #define PORT_SPI3_CS1   HPort::_D, HPin::_3
 #define PORT_SPI3_CS2   HPort::_G, HPin::_13
 
-#define PORT_A1         HPort::_D, HPin::_10
-#define PORT_LFS        HPort::_G, HPin::_6
+#define PIN_TESTER_STR  HPort::_C, HPin::_9
+#define PIN_TESTER_DAC  HPort::_A, HPin::_5
 
 #define PIN_USART3_TX   HPort::_D, HPin::_8
 #define PIN_USART3_RX   HPort::_D, HPin::_9
-
-#define PIN_ADC3        HPort::_F, HPin::_10
 
 
 struct HPin
