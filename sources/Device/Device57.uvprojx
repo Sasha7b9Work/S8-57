@@ -916,9 +916,9 @@
               <FilePath>.\src\Hardware\HAL\HAL_IT.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_MSP.cpp</FileName>
+              <FileName>HAL_HCD.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_MSP.cpp</FilePath>
+              <FilePath>.\src\Hardware\HAL\HAL_HCD.cpp</FilePath>
             </File>
             <File>
               <FileName>HAL_NVIC.cpp</FileName>
@@ -929,6 +929,11 @@
               <FileName>HAL_OTP.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_OTP.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_PCD.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_PCD.cpp</FilePath>
             </File>
             <File>
               <FileName>HAL_PIO.cpp</FileName>

@@ -50,6 +50,10 @@ void HAL::Init()
     HAL_FSMC::Init();
 
     HAL_SPI4::Init();
+
+    HAL_PCD::Init();
+
+    HAL_HCD::Init();
 }
 
 
