@@ -51,15 +51,10 @@ void AT25160N::Init()
 
     //__HAL_RCC_SPI2_CLK_ENABLE();
 
-    //                                  SCK                    NSS
-    uint pins = static_cast<uint>(HPin::_10 | HPin::_12);
-    HAL_PIO::Init(HPort::_B, pins, HMode::Output_PP, HPull::Down);
-
-    //                                                      MOSI
-    HAL_PIO::Init(HPort::_C, HPin::_3, HMode::Output_PP, HPull::Down);
-
-    //                                                      MISO
-    HAL_PIO::Init(HPort::_C, HPin::_2, HMode::Input, HPull::Down);
+    HAL_PIO::Init(PORT_AT2516_CLK, HMode::Output_PP, HPull::Down);
+    HAL_PIO::Init(PORT_AT2516_CS, HMode::Output_PP, HPull::Down);
+    HAL_PIO::Init(PORT_AT2516_OUT, HMode::Output_PP, HPull::Down);
+    HAL_PIO::Init(PORT_AT2516_IN, HMode::Input, HPull::Down);
 
     HAL_PIO::Set(PORT_AT2516_CS);
     HAL_PIO::Reset(PORT_AT2516_OUT);
