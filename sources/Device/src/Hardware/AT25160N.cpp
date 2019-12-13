@@ -4,11 +4,6 @@
 #include "Hardware/HAL/HAL_PIO.h"
 
 
-#define PIN_OUT     HPort::_C, HPin::_3
-#define PIN_IN      HPort::_C, HPin::_2
-#define PIN_CLK     HPort::_B, HPin::_10
-#define PIN_CS      HPort::_B, HPin::_12
-
 #define WREN    BIN_U8(00000110)        ///< Set Write Enable Latch
 #define WRDI    BIN_U8(00000100)        ///< Reset Write Enable Latch
 #define RDSR    BIN_U8(00000101)        ///< Read Status Register
@@ -66,9 +61,9 @@ void AT25160N::Init()
     //                                                      MISO
     HAL_PIO::Init(HPort::_C, HPin::_2, HMode::Input, HPull::Down);
 
-    HAL_PIO::Set(PIN_CS);
-    HAL_PIO::Reset(PIN_OUT);
-    HAL_PIO::Reset(PIN_CLK);
+    HAL_PIO::Set(PORT_AT2516_CS);
+    HAL_PIO::Reset(PORT_AT2516_OUT);
+    HAL_PIO::Reset(PORT_AT2516_CLK);
 }
 
 
@@ -149,7 +144,7 @@ static void Write32BytesOrLess(uint address, const uint8 * /*data*/, uint size)
 
     SetWriteLatch();
 
-    HAL_PIO::Reset(PIN_CS);
+    HAL_PIO::Reset(PORT_AT2516_CS);
 
     WriteByte(WRITE); //-V2501
 
@@ -173,15 +168,15 @@ static void Write32BytesOrLess(uint address, const uint8 * /*data*/, uint size)
         }
     }
 
-    HAL_PIO::Set(PIN_CS);
+    HAL_PIO::Set(PORT_AT2516_CS);
 }
 
 
 static void SetWriteLatch()
 {
-    HAL_PIO::Reset(PIN_CS);
+    HAL_PIO::Reset(PORT_AT2516_CS);
     WriteByte(WREN); //-V2501
-    HAL_PIO::Set(PIN_CS);
+    HAL_PIO::Set(PORT_AT2516_CS);
 }
 
 
@@ -189,18 +184,18 @@ static void ResetWriteLatch()
 {
     WaitFinishWrite();
 
-    HAL_PIO::Reset(PIN_CS);
+    HAL_PIO::Reset(PORT_AT2516_CS);
     WriteByte(WRDI); //-V2501
-    HAL_PIO::Set(PIN_CS);
+    HAL_PIO::Set(PORT_AT2516_CS);
 }
 
 
 static uint8 ReadStatusRegister()
 {
-    HAL_PIO::Reset(PIN_CS);
+    HAL_PIO::Reset(PORT_AT2516_CS);
     WriteByte(RDSR); //-V2501
     uint8 result = ReadByte();
-    HAL_PIO::Set(PIN_CS);
+    HAL_PIO::Set(PORT_AT2516_CS);
     return result;
 }
 
@@ -209,10 +204,10 @@ static void WriteStatusRegister(uint8 data)
 {
     WaitFinishWrite();
 
-    HAL_PIO::Reset(PIN_CS);
+    HAL_PIO::Reset(PORT_AT2516_CS);
     WriteByte(WRSR); //-V2501
     WriteByte(data);
-    HAL_PIO::Set(PIN_CS);
+    HAL_PIO::Set(PORT_AT2516_CS);
 }
 
 
@@ -243,11 +238,11 @@ static void WriteByte(uint8 byte)
     {
         if (_GET_BIT(byte, bit))
         {
-            HAL_PIO::Set(PIN_OUT);
+            HAL_PIO::Set(PORT_AT2516_OUT);
         }
-        HAL_PIO::Set(PIN_CLK);
-        HAL_PIO::Reset(PIN_CLK);
-        HAL_PIO::Reset(PIN_OUT);
+        HAL_PIO::Set(PORT_AT2516_CLK);
+        HAL_PIO::Reset(PORT_AT2516_CLK);
+        HAL_PIO::Reset(PORT_AT2516_OUT);
     }
 }
 
@@ -258,13 +253,13 @@ static uint8 ReadByte()
 
     for(int i = 0; i < 8; i++)
     {
-        HAL_PIO::Set(PIN_CLK);
+        HAL_PIO::Set(PORT_AT2516_CLK);
         retValue <<= 1;
-        if(HAL_PIO::Read(PIN_IN))
+        if(HAL_PIO::Read(PORT_AT2516_IN))
         {
             retValue |= 0x01;
         }
-        HAL_PIO::Reset(PIN_CLK);
+        HAL_PIO::Reset(PORT_AT2516_CLK);
     }
 
     return retValue;
@@ -275,7 +270,7 @@ static void ReadData(uint address, uint8 *data, uint size)
 {
     WaitFinishWrite();
 
-    HAL_PIO::Reset(PIN_CS);
+    HAL_PIO::Reset(PORT_AT2516_CS);
 
     WriteByte(READ); //-V2501
     WriteByte((address >> 8) & 0xff);
@@ -299,5 +294,5 @@ static void ReadData(uint address, uint8 *data, uint size)
         }
     }
 
-    HAL_PIO::Set(PIN_CS);
+    HAL_PIO::Set(PORT_AT2516_CS);
 }

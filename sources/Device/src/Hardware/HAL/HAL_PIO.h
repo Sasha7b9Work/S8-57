@@ -24,6 +24,12 @@ struct HPort
 #define PORT_AD9286_DAT HPort::_C, HPin::_3
 #define PORT_AD9286_CS  HPort::_E, HPin::_11
 
+#define PORT_AT2516_OUT HPort::_C, HPin::_3
+#define PORT_AT2516_IN  HPort::_C, HPin::_2
+#define PORT_AT2516_CLK HPort::_B, HPin::_10
+#define PORT_AT2516_CS  HPort::_B, HPin::_12
+
+
 #define PORT_SPI3_SCK   HPort::_C, HPin::_10
 #define PORT_SPI3_DAT   HPort::_C, HPin::_12
 #define PORT_SPI3_CS1   HPort::_D, HPin::_3
