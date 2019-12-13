@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
+#include "Hardware/HAL/HAL_PIO.h"
 #include <stm32f4xx_hal.h>
 
 
@@ -21,11 +22,7 @@ void HAL_PCD::Init()
 
     HAL_GPIO_Init(GPIOA, &isGPIO);
 
-    isGPIO.Pin = GPIO_PIN_9;
-    isGPIO.Mode = GPIO_MODE_INPUT;
-    isGPIO.Pull = GPIO_NOPULL;
-
-    HAL_GPIO_Init(GPIOA, &isGPIO);
+    HAL_PIO::Init(PIN_PCD_VBUS, HMode::Input, HPull::No, HSpeed::VeryHigh);
 
     HAL_NVIC_SetPriority(OTG_FS_IRQn, 0, 0);
 

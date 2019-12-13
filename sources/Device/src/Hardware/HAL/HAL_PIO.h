@@ -64,6 +64,8 @@ struct HPort
 
 #define PIN_DAC1        HPort::_A, HPin::_4
 
+#define PIN_PCD_VBUS    HPort::_A, HPin::_9
+
 #define PORT_SPI3_SCK   HPort::_C, HPin::_10
 #define PORT_SPI3_DAT   HPort::_C, HPin::_12
 #define PORT_SPI3_CS1   HPort::_D, HPin::_3
