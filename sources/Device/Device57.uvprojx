@@ -951,6 +951,11 @@
               <FilePath>.\src\Hardware\HAL\HAL_RTC.cpp</FilePath>
             </File>
             <File>
+              <FileName>HAL_SPI4.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_SPI4.cpp</FilePath>
+            </File>
+            <File>
               <FileName>HAL_TIM2_stm.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_TIM2_stm.cpp</FilePath>

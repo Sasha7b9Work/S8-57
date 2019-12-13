@@ -2,43 +2,6 @@
 #include <stm32f4xx_hal.h>
 
 
-void HAL_SPI_MspInit(const SPI_HandleTypeDef* hspi)
-{
-    GPIO_InitTypeDef GPIO_InitStruct;
-    if (hspi->Instance == SPI4)
-    {
-        __HAL_RCC_SPI4_CLK_ENABLE();
-        // SPI4 GPIO Configuration    
-        // PE11     ------> SPI4_NSS
-        // PE12     ------> SPI4_SCK
-        // PE13     ------> SPI4_MISO
-        // PE14     ------> SPI4_MOSI 
-        GPIO_InitStruct.Pin = GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14;
-        GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-        GPIO_InitStruct.Pull = GPIO_NOPULL;
-        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-        GPIO_InitStruct.Alternate = GPIO_AF5_SPI4;
-        HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
-    }
-}
-
-
-void HAL_SPI_MspDeInit(const SPI_HandleTypeDef* hspi)
-{
-    if (hspi->Instance == SPI4)
-    {
-        __HAL_RCC_SPI4_CLK_DISABLE();
-
-        // SPI4 GPIO Configuration    
-        // PE11     ------> SPI4_NSS
-        // PE12     ------> SPI4_SCK
-        // PE13     ------> SPI4_MISO
-        // PE14     ------> SPI4_MOSI 
-        HAL_GPIO_DeInit(GPIOE, GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14);
-    }
-}
-
-
 // Инициализация VCP
 void HAL_PCD_MspInit(PCD_HandleTypeDef *)
 {

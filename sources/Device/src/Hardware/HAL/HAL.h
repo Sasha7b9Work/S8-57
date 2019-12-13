@@ -42,6 +42,12 @@ struct HAL_DAC1
     static void ConfigTIM7(uint16 prescaler, uint16 period);
 };
 
+
+struct HAL_SPI4
+{
+    static void Init();
+};
+
 struct HAL_TIM2
 {
     static uint TimeUS();
