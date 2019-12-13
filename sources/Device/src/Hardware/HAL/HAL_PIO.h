@@ -55,6 +55,9 @@ struct HPort
 #define PORT_A0S        HPort::_A, HPin::_10
 #endif
 
+#define PIN_USART3_TX   HPort::_D, HPin::_8
+#define PIN_USART3_RX   HPort::_D, HPin::_9
+
 
 struct HPin
 {
