@@ -15,34 +15,24 @@ uint16 FlagFPGA::flag = 0;
 struct PinStruct
 {
     HPort::E gpioTD;
-    uint16              pin;
+    uint16   pin;
 };
 
 static PinStruct pins[FPin::Count] =
 {
-    {HPort::_C , HPin::_10},   // SPI3_SCK
-    {HPort::_C , HPin::_12},   // SPI3_DAT
-    {HPort::_D , HPin::_3},    // SPI3_CS1
-    {HPort::_G , HPin::_13},   // SPI3_CS2
-    {HPort::_D , HPin::_10},   // A1
-#ifdef OLD_VERSION
-    {HPort::_D , HPin::_11},   // A2
-    {HPort::_D , HPin::_12},   // A3
-    {HPort::_D , HPin::_13},   // A4
-    {HPort::_G , HPin::_2},    // LF1 Ограничение полосы
-    {HPort::_G , HPin::_3},    // LF2 Ограничение полосы
-    {HPort::_G , HPin::_4},    // A1S
-    {HPort::_G , HPin::_5},    // A0S
-#else
-    {HPort::_B , HPin::_13},   // A2
-    {HPort::_G , HPin::_8},    // A3
-    {HPort::_C , HPin::_6},    // A4
-    {HPort::_C , HPin::_7},    // LF1 Ограничение полосы
-    {HPort::_C , HPin::_8},    // LF2 Ограничение полосы
-    {HPort::_A , HPin::_8},    // A1S
-    {HPort::_A , HPin::_10},   // A0S
-#endif
-    {HPort::_G , HPin::_6}     // LFS
+    { PORT_SPI3_SCK },  // SPI3_SCK
+    { PORT_SPI3_DAT },  // SPI3_DAT
+    { PORT_SPI3_CS1 },  // SPI3_CS1
+    { PORT_SPI3_CS2 },  // SPI3_CS2
+    { PORT_A1 },        // A1
+    { PORT_A2 },        // A2
+    { PORT_A3 },        // A3
+    { PORT_A4 },        // A4
+    { PORT_LF1 },       // LF1 Ограничение полосы
+    { PORT_LF2 },       // LF2 Ограничение полосы
+    { PORT_A1S },       // A1S
+    { PORT_A0S },       // A0S
+    { PORT_LFS }        // LFS
 };
 
 

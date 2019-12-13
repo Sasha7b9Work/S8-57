@@ -24,6 +24,31 @@ struct HPort
 #define PORT_AD9286_DAT HPort::_C, HPin::_3
 #define PORT_AD9286_CS  HPort::_E, HPin::_11
 
+#define PORT_SPI3_SCK   HPort::_C, HPin::_10
+#define PORT_SPI3_DAT   HPort::_C, HPin::_12
+#define PORT_SPI3_CS1   HPort::_D, HPin::_3
+#define PORT_SPI3_CS2   HPort::_G, HPin::_13
+
+#define PORT_A1         HPort::_D, HPin::_10
+#define PORT_LFS        HPort::_G, HPin::_6
+#ifdef OLD_VERSION
+#define PORT_A2         HPort::_D, HPin::_11
+#define PORT_A3         HPort::_D, HPin::_12
+#define PORT_A4         HPort::_D, HPin::_13
+#define PORT_LF1        HPort::_G, HPin::_2
+#define PORT_LF2        HPort::_G, HPin::_3
+#define PORT_A1S        HPort::_G, HPin::_4
+#define PORT_A0S        HPort::_G, HPin::_5
+#else
+#define PORT_A2         HPort::_B, HPin::_13
+#define PORT_A3         HPort::_G, HPin::_8
+#define PORT_A4         HPort::_C, HPin::_6
+#define PORT_LF1        HPort::_C, HPin::_7
+#define PORT_LF2        HPort::_C, HPin::_8
+#define PORT_A1S        HPort::_A, HPin::_8
+#define PORT_A0S        HPort::_A, HPin::_10
+#endif
+
 
 struct HPin
 {
