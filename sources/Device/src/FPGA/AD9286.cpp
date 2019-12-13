@@ -4,13 +4,9 @@
 #include "Hardware/HAL/HAL_PIO.h"
 
 
-#define PIN_DAT     HPin::_3
-#define PORT_DAT    HPort::_C
-
 #define PIN_CS      HPin::_11
 #define PORT_CS     HPort::_E
 
-#define DAT         PORT_DAT, PIN_DAT
 #define CS          PORT_CS,  PIN_CS
 
 
@@ -30,12 +26,12 @@ void AD9286::Init()
    
     HAL_PIO::Init(PORT_CS, PIN_CS, HMode::Output_PP, HPull::Up);       // Инициализация CS
 
-    HAL_PIO::Init(PORT_DAT, PIN_DAT, HMode::Output_PP, HPull::Up);     // Инициализация DAT
+    HAL_PIO::Init(PORT_AD9286_DAT, HMode::Output_PP, HPull::Up);     // Инициализация DAT
     
     HAL_PIO::Init(PORT_AD9286_SCK, HMode::Output_PP, HPull::Up);     // Инициализация SCK
 
     HAL_PIO::Set(CS);
-    HAL_PIO::Reset(DAT);
+    HAL_PIO::Reset(PORT_AD9286_DAT);
     HAL_PIO::Reset(PORT_AD9286_SCK);
 
     Tune();
@@ -60,11 +56,11 @@ static void WriteByte(uint8 address, uint8 byte)
     {
         if (_GET_BIT(value, i))
         {
-            HAL_PIO::Set(DAT);
+            HAL_PIO::Set(PORT_AD9286_DAT);
         }
         else
         {
-            HAL_PIO::Reset(DAT);
+            HAL_PIO::Reset(PORT_AD9286_DAT);
         }
         PAUSE_ON_TICKS(100);
 
