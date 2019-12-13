@@ -19,6 +19,10 @@ struct HPort
     static const E CS_RAM = _G;
 };
 
+
+#define PORT_CS_RAM HPort::CS_RAM, HPin::_10
+
+
 struct HPin
 {
     static uint16 _0;
@@ -39,10 +43,6 @@ struct HPin
     static uint16 _15;
 };
 
-struct PIN
-{
-    static const uint16 CS_RAM;
-};
 
 struct HState
 {
