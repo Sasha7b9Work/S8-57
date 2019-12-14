@@ -112,22 +112,22 @@ struct HPort
 
 struct HPin
 {
-    static uint16 _0;
-    static uint16 _1;
-    static uint16 _2;
-    static uint16 _3;
-    static uint16 _4;
-    static uint16 _5;
-    static uint16 _6;
-    static uint16 _7;
-    static uint16 _8;
-    static uint16 _9;
-    static uint16 _10;
-    static uint16 _11;
-    static uint16 _12;
-    static uint16 _13;
-    static uint16 _14;
-    static uint16 _15;
+    static const uint16 _0;
+    static const uint16 _1;
+    static const uint16 _2;
+    static const uint16 _3;
+    static const uint16 _4;
+    static const uint16 _5;
+    static const uint16 _6;
+    static const uint16 _7;
+    static const uint16 _8;
+    static const uint16 _9;
+    static const uint16 _10;
+    static const uint16 _11;
+    static const uint16 _12;
+    static const uint16 _13;
+    static const uint16 _14;
+    static const uint16 _15;
 };
 
 
