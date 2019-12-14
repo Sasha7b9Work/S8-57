@@ -5,6 +5,14 @@
 #define PIN_MODE1   HPort::_C, HPin::_4
 #define PIN_READY   HPort::_G, HPin::_12
 #define PIN_FL0     HPort::_D, HPin::_5
+#define PIN_D0      HPort::_D, HPin::_14
+#define PIN_D1      HPort::_D, HPin::_15
+#define PIN_D2      HPort::_D, HPin::_0
+#define PIN_D3      HPort::_D, HPin::_1
+#define PIN_D4      HPort::_E, HPin::_7
+#define PIN_D5      HPort::_E, HPin::_8
+#define PIN_D6      HPort::_E, HPin::_9
+#define PIN_D7      HPort::_E, HPin::_10
 
 
 struct HPort

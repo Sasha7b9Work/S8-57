@@ -49,12 +49,6 @@ struct Receiver
 };
 
 
-//                                      D0           D1           D2          D3          D4          D5          D6          D7
-static const GPIO_TypeDef *ports[] = { GPIOD,       GPIOD,       GPIOD,      GPIOD,      GPIOE,      GPIOE,      GPIOE,      GPIOE };
-static const uint16 pins[]         = { GPIO_PIN_14, GPIO_PIN_15, GPIO_PIN_0, GPIO_PIN_1, GPIO_PIN_7, GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10 };
-
-
-
 void Transceiver::Init()
 {
     HAL_PIO::Init(PIN_MODE0, HMode::Output_PP, HPull::Down);
@@ -226,17 +220,21 @@ State::E Receiver::State_FL0()
 
 uint8 Receiver::ReadData()
 {
-    uint8 result = 0;
-
-    for (int i = 7; i >= 0; i--)
-    {
-        result |= HAL_GPIO_ReadPin(const_cast<GPIO_TypeDef *>(ports[i]), pins[i]);
-
-        if (i != 0)
-        {
-            result <<= 1;
-        }
-    }
+    uint8 result = HAL_PIO::Read(PIN_D7);
+    result <<= 1;
+    result |= HAL_PIO::Read(PIN_D6);
+    result <<= 1;
+    result |= HAL_PIO::Read(PIN_D5);
+    result <<= 1;
+    result |= HAL_PIO::Read(PIN_D4);
+    result <<= 1;
+    result |= HAL_PIO::Read(PIN_D3);
+    result <<= 1;
+    result |= HAL_PIO::Read(PIN_D2);
+    result <<= 1;
+    result |= HAL_PIO::Read(PIN_D1);
+    result <<= 1;
+    result |= HAL_PIO::Read(PIN_D0);
 
     return result;
 }
