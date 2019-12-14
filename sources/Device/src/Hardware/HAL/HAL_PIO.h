@@ -1,22 +1,6 @@
 #pragma once
 
 
-struct HPort
-{
-    enum E
-    {
-        _A,
-        _B,
-        _C,
-        _D,
-        _E,
-        _F,
-        _G,
-        _H,
-        Count
-    };
-};
-
 #ifdef OLD_VERSION
 #define PORT_A2         HPort::_D, HPin::_11
 #define PORT_A3         HPort::_D, HPin::_12
@@ -94,6 +78,22 @@ struct HPort
 #define PIN_USART3_TX   HPort::_D, HPin::_8
 #define PIN_USART3_RX   HPort::_D, HPin::_9
 
+
+struct HPort
+{
+    enum E
+    {
+        _A,
+        _B,
+        _C,
+        _D,
+        _E,
+        _F,
+        _G,
+        _H,
+        Count
+    };
+};
 
 struct HPin
 {
