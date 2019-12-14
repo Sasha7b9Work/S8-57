@@ -1,5 +1,6 @@
 #include "defines.h"
-#include "HAL.h"
+#include "Hardware/HAL/HAL.h"
+#include "Hardware/HAL/HAL_PIO.h"
 #include <stm32f4xx_hal.h>
 
 
@@ -24,16 +25,8 @@ void HAL_ADC1::Init()
 
     __ADC1_CLK_ENABLE();
 
-    static GPIO_InitTypeDef isGPIOadc =
-    {
-        GPIO_PIN_2,
-        GPIO_MODE_ANALOG,
-        GPIO_NOPULL
-    };
-    HAL_GPIO_Init(GPIOA, &isGPIOadc);
-
-    isGPIOadc.Pin = GPIO_PIN_1;
-    HAL_GPIO_Init(GPIOB, &isGPIOadc);
+    HAL_PIO::Init(PIN_ADC1_IN2, HMode::Analog, HPull::No);
+    HAL_PIO::Init(PIN_ADC1_IN9, HMode::Analog, HPull::No);
 
     handle.Instance = ADC1;
     handle.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;

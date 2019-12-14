@@ -48,6 +48,9 @@ struct HPort
 #define PORT_A1         HPort::_D, HPin::_10
 #define PORT_LFS        HPort::_G, HPin::_6
 
+#define PIN_ADC1_IN2    HPort::_A, HPin::_2
+#define PIN_ADC1_IN9    HPort::_B, HPin::_1
+
 #define PIN_ADC3        HPort::_F, HPin::_10
 #define PIN_ADC3_IT     HPort::_B, HPin::_11
 
