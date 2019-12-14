@@ -14,18 +14,6 @@
 #define ADDR_ALTERA3    ((uint8 *)NOR_MEMORY_ADRESS3)
 #define ADDR_DISPLAY    ((uint8 *)NOR_MEMORY_ADRESS4)
 
-#define PORT_PAN_1      GPIOC
-#define PIN_PAN_1       GPIO_PIN_4
-
-#define PORT_PAN_0      GPIOA
-#define PIN_PAN_0       GPIO_PIN_7
-
-
-#define PAN_BUSY                        (ReadPAN() == 0)
-#define PAN_READY_TRANSMIT              (ReadPAN() == 1)
-#define PAN_READY_RECEIVE               (ReadPAN() == 2)
-#define PAN_RECIEVE_TRANSMIT_CONFIRM    (ReadPAN() == 3)
-
 
 uint8 *HAL_FSMC::addrData0 = nullptr;
 uint8 *HAL_FSMC::addrData1 = nullptr;
@@ -36,17 +24,8 @@ void HAL_FSMC::Init()
     __HAL_RCC_FMC_CLK_ENABLE();
     __HAL_RCC_GPIOF_CLK_ENABLE();
 
-    GPIO_InitTypeDef isGPIO =               // PAN_0
-    {
-        PIN_PAN_0,
-        GPIO_MODE_INPUT,
-        GPIO_PULLDOWN
-    };
-    HAL_GPIO_Init(PORT_PAN_0, &isGPIO);
-
-    isGPIO.Pin = PIN_PAN_1;                 // PAN_1
-    HAL_GPIO_Init(PORT_PAN_1, &isGPIO);
-
+    HAL_PIO::Init(PIN_PAN0, HMode::Input, HPull::Down);
+    HAL_PIO::Init(PIN_PAN1, HMode::Input, HPull::Down);
     HAL_PIO::Init(PIN_NE4, HMode::Output_PP, HPull::Down);
 
     HAL_PIO::Set(PIN_NE4);
