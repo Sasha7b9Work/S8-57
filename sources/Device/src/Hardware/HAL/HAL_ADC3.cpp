@@ -22,13 +22,6 @@ void HAL_ADC3::Init()
 
     __ADC3_CLK_ENABLE();
 
-    GPIO_InitTypeDef isGPIO;
-
-    isGPIO.Pin = GPIO_PIN_11;
-    isGPIO.Mode = GPIO_MODE_IT_RISING;
-    isGPIO.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(GPIOB, &isGPIO);
-
     HAL_PIO::Init(PIN_ADC3, HMode::Analog, HPull::No);
 
     HAL_PIO::Init(PIN_ADC3_IT, HMode::RisingIT, HPull::No);
