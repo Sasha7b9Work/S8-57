@@ -3,10 +3,7 @@
 #include <stm32f4xx_hal.h>
 
 
-
 static void SystemClockConfig();
-static void MX_GPIO_Init();
-
 
 
 void HAL::Init()
@@ -42,8 +39,6 @@ void HAL::Init()
     RCC->AHB1ENR |= RCC_AHB1ENR_GPIOJEN;
 
     SystemClockConfig();
-
-    MX_GPIO_Init();
 
     HAL_CRC32::Init();
 
@@ -125,18 +120,4 @@ void HAL::Delay(uint timeMS)
 uint HAL::TimeMS()
 {
     return HAL_GetTick();
-}
-
-
-static void MX_GPIO_Init()
-{
-    GPIO_InitTypeDef GPIO_InitStruct;
-
-    /*Configure GPIO pins : PC10 PC12 */
-    GPIO_InitStruct.Pin = GPIO_PIN_10 | GPIO_PIN_12;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_InitStruct.Alternate = GPIO_AF6_SPI3;
-    HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 }
