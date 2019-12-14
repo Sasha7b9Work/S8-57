@@ -57,6 +57,7 @@
 #define PIN_HCD_DP      HPort::_B, HPin::_15
 
 #define PIN_MODE0       HPort::_A, HPin::_7
+#define PIN_MODE1       HPort::_C, HPin::_4
 
 #define PIN_PCD_VBUS    HPort::_A, HPin::_9
 #define PIN_PCD_DP      HPort::_A, HPin::_12

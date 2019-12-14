@@ -10,10 +10,6 @@
 #endif
 
 
-#define PORT_MODE1  GPIOC
-#define PIN_MODE1   GPIO_PIN_4
-#define MODE1       PORT_MODE1, PIN_MODE1
-
 #define PORT_READY  GPIOG
 #define PIN_READY   GPIO_PIN_12
 #define READY       PORT_READY, PIN_READY
@@ -70,14 +66,10 @@ static const uint16 pins[]         = { GPIO_PIN_14, GPIO_PIN_15, GPIO_PIN_0, GPI
 
 void Transceiver::Init()
 {
-    GPIO_InitTypeDef gpio;
-    gpio.Mode = GPIO_MODE_OUTPUT_PP;
-
     HAL_PIO::Init(PIN_MODE0, HMode::Output_PP, HPull::Down);
+    HAL_PIO::Init(PIN_MODE1, HMode::Output_PP, HPull::Down);
 
-    gpio.Pin = PIN_MODE1;
-    HAL_GPIO_Init(PORT_MODE1, &gpio);   // MODE1 - используется для выбора режима
-
+    GPIO_InitTypeDef gpio;
     gpio.Pin = PIN_READY;                 
     gpio.Mode = GPIO_MODE_INPUT;
     gpio.Pull = GPIO_PULLDOWN;
@@ -152,11 +144,11 @@ void Transceiver::Send(const uint8 *data, uint size)
         //                                                                          Биты 4,5,6,7
         GPIOE->ODR = (GPIOE->ODR & 0xf87f) + static_cast<uint16>((static_cast<int16>(d) & 0xf0) << 3);
 
-        PORT_MODE1->BSRR = PIN_MODE1;                   // Установить MODE1 в "1" - это означает, что M0M1 == 01 и устройство ждёт подверждения от панели о принятых данных
+        GPIOC->BSRR = GPIO_PIN_4;                       // Установить MODE1 в "1" - это означает, что M0M1 == 01 и устройство ждёт подверждения от панели о принятых данных
 
         while (!(PORT_READY->IDR & PIN_READY)) {};      // Ожидаем сигнал подтверждения - "1" на READY будет означать, что панель приняла данные //-V712
 
-        PORT_MODE1->BSRR = (uint)PIN_MODE1 << 16U;      // Установить MODE1 в "0" - это означает, что устройство в состоянии Disable
+        GPIOC->BSRR = (uint)GPIO_PIN_4 << 16U;          // Установить MODE1 в "0" - это означает, что устройство в состоянии Disable
 
         while (PORT_READY->IDR & PIN_READY) {};         // Ожидаем, когда уровень на READY станет раным "0". //-V712
     }
@@ -223,17 +215,17 @@ void Set_MODE(Mode::E mode)
     if (mode == Mode::Send)
     {
         HAL_PIO::Reset(PIN_MODE0);
-        HAL_GPIO_WritePin(MODE1, GPIO_PIN_SET);
+        HAL_PIO::Set(PIN_MODE1);
     }
     else if (mode == Mode::Receive)
     {
-        HAL_GPIO_WritePin(MODE1, GPIO_PIN_RESET);
+        HAL_PIO::Reset(PIN_MODE1);
         HAL_PIO::Set(PIN_MODE0);
     }
     else if (mode == Mode::Disabled)
     {
         HAL_PIO::Reset(PIN_MODE0);
-        HAL_GPIO_WritePin(MODE1, GPIO_PIN_RESET);
+        HAL_PIO::Reset(PIN_MODE1);
         /// \todo С этим надо что-то делать. Непонятно, почему без задержки не работает
         //Timer::PauseOnOPS(200);
     }
