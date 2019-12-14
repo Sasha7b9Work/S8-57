@@ -10,11 +10,6 @@
 #endif
 
 
-//#define PORT_FL0    GPIOD
-//#define PIN_FL0     GPIO_PIN_5
-//#define FL0         PORT_FL0, PIN_FL0
-
-
 struct Mode
 {
     enum E
