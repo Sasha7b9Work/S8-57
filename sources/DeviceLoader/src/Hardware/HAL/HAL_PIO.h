@@ -14,6 +14,9 @@
 #define PIN_D6      HPort::_E, HPin::_9
 #define PIN_D7      HPort::_E, HPin::_10
 
+#define PIN_HCD_DM  HPort::_B, HPin::_14
+#define PIN_HCD_DP  HPort::_B, HPin::_15
+
 
 struct HPort
 {
@@ -107,5 +110,5 @@ struct HAL_PIO
 
     static void Set(HPort::E port, uint16 pin);
 
-    static bool Read(HPort::E port, uint16 pin);
+    static uint8 Read(HPort::E port, uint16 pin);
 };
