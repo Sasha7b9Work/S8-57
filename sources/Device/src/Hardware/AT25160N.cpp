@@ -155,11 +155,11 @@ static void Write32BytesOrLess(uint address, const uint8 * /*data*/, uint size)
         {
             //if (_GET_BIT(byte, bit))
             //{
-            //    GPIOC->BSRR = GPIO_PIN_3;
+            //    GPIOC->BSRR = GPIO _PIN_3;
             //}
-            //GPIOB->BSRR = GPIO_PIN_10;
-            //GPIOC->BSRR = GPIO_PIN_3 << 16U;
-            //GPIOB->BSRR = GPIO_PIN_10 << 16U;
+            //GPIOB->BSRR = GPIO _PIN_10;
+            //GPIOC->BSRR = GPIO _PIN_3 << 16U;
+            //GPIOB->BSRR = GPIO _PIN_10 << 16U;
         }
     }
 
@@ -277,7 +277,7 @@ static void ReadData(uint address, uint8 *data, uint size)
 
         for (int j = 0; j < 8; j++)
         {
-            //GPIOB->BSRR = GPIO_PIN_10;
+            //GPIOB->BSRR = GPIO _PIN_10;
             //
             //data[i] <<= 1;
             //if (HAL_PIO::Read(PIN_IN))
@@ -285,7 +285,7 @@ static void ReadData(uint address, uint8 *data, uint size)
             //    data[i] |= 0x01;
             //}
             //
-            //GPIOB->BSRR = GPIO_PIN_10 << 16U;
+            //GPIOB->BSRR = GPIO _PIN_10 << 16U;
         }
     }
 

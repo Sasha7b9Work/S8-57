@@ -71,7 +71,7 @@ void HAL_FSMC::Init()
     // Настроим адресные выводы для ПЛИС
 
     //               A0           A1           A2           A3           A4           A5
-    //isGPIO.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5;
+    //isGPIO.Pin = GPIO _PIN_0 | GPIO _PIN_1 | GPIO _PIN_2 | GPIO _PIN_3 | GPIO _PIN_4 | GPIO _PIN_5;
     //HAL_GPIO_Init(GPIOF, &isGPIO);
 
     GPIOF->AFR[0] &= HEX_FROM_2(ff00, 0000);
@@ -88,7 +88,7 @@ void HAL_FSMC::Init()
     GPIOF->PUPDR |= HEX_FROM_2(0000, 0aaa);     // Устанавливаем pull-down
 
     //               D4           D5           D6           D7
-    //isGPIO.Pin = GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10;
+    //isGPIO.Pin = GPIO _PIN_7 | GPIO _PIN_8 | GPIO _PIN_9 | GPIO _PIN_10;
     //HAL_GPIO_Init(GPIOE, &isGPIO);
 
     GPIOE->OSPEEDR |= HEX_FROM_2(003f, 8000);
