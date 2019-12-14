@@ -14,17 +14,12 @@
 #define ADDR_ALTERA3    ((uint8 *)NOR_MEMORY_ADRESS3)
 #define ADDR_DISPLAY    ((uint8 *)NOR_MEMORY_ADRESS4)
 
-#define PORT_NE4        GPIOG
-#define PIN_NE4         GPIO_PIN_12
-
 #define PORT_PAN_1      GPIOC
 #define PIN_PAN_1       GPIO_PIN_4
 
 #define PORT_PAN_0      GPIOA
 #define PIN_PAN_0       GPIO_PIN_7
 
-#define NE4_SET         (PORT_NE4->BSRR = PIN_NE4)
-#define NE4_RESET       (PORT_NE4->BSRR = (uint)PIN_NE4 << 16U)
 
 #define PAN_BUSY                        (ReadPAN() == 0)
 #define PAN_READY_TRANSMIT              (ReadPAN() == 1)
@@ -52,11 +47,9 @@ void HAL_FSMC::Init()
     isGPIO.Pin = PIN_PAN_1;                 // PAN_1
     HAL_GPIO_Init(PORT_PAN_1, &isGPIO);
 
-    isGPIO.Pin = PIN_NE4;
-    isGPIO.Mode = GPIO_MODE_OUTPUT_PP;
-    HAL_GPIO_Init(PORT_NE4, &isGPIO);        // NE4
+    HAL_PIO::Init(PIN_NE4, HMode::Output_PP, HPull::Down);
 
-    NE4_SET;
+    HAL_PIO::Set(PIN_NE4);
 
     // ”станавливаем прив€зку дл€ пинов шины данных
     // GPIOD 14, 15, 0, 1 - D0, D1, D2, D3

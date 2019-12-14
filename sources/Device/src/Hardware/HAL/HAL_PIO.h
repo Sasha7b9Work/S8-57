@@ -69,6 +69,8 @@
 #define PIN_D6          HPort::_E, HPin::_9
 #define PIN_D7          HPort::_E, HPin::_10
 
+#define PIN_NE4         HPort::_G, HPin::_12
+
 #define PIN_PCD_VBUS    HPort::_A, HPin::_9
 #define PIN_PCD_DP      HPort::_A, HPin::_12
 #define PIN_PCD_DM      HPort::_A, HPin::_11
