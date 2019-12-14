@@ -96,3 +96,8 @@ void HAL_PIO::Reset(HPort::E port, uint16 pin)
 {
     HAL_GPIO_WritePin(PORT(port), pin, GPIO_PIN_RESET);
 }
+
+bool HAL_PIO::Read(HPort::E port, uint16 pin)
+{
+    return (HAL_GPIO_ReadPin(PORT(port), pin) == GPIO_PIN_SET);
+}

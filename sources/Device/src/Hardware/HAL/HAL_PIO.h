@@ -58,6 +58,7 @@
 
 #define PIN_MODE0       HPort::_A, HPin::_7
 #define PIN_MODE1       HPort::_C, HPin::_4
+#define PIN_READY       HPort::_G, HPin::_12
 
 #define PIN_PCD_VBUS    HPort::_A, HPin::_9
 #define PIN_PCD_DP      HPort::_A, HPin::_12
@@ -68,10 +69,10 @@
 #define PORT_SPI3_CS1   HPort::_D, HPin::_3
 #define PORT_SPI3_CS2   HPort::_G, HPin::_13
 
-#define PIN_SPI4_CS    HPort::_E, HPin::_11
-#define PIN_SPI4_SCK   HPort::_E, HPin::_12
-#define PIN_SPI4_MISO  HPort::_E, HPin::_13
-#define PIN_SPI4_MOSI  HPort::_E, HPin::_14
+#define PIN_SPI4_CS     HPort::_E, HPin::_11
+#define PIN_SPI4_SCK    HPort::_E, HPin::_12
+#define PIN_SPI4_MISO   HPort::_E, HPin::_13
+#define PIN_SPI4_MOSI   HPort::_E, HPin::_14
 
 #define PIN_TESTER_STR  HPort::_C, HPin::_9
 #define PIN_TESTER_DAC  HPort::_A, HPin::_5

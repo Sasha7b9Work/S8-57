@@ -10,10 +10,6 @@
 #endif
 
 
-#define PORT_READY  GPIOG
-#define PIN_READY   GPIO_PIN_12
-#define READY       PORT_READY, PIN_READY
-
 #define PORT_FL0    GPIOD
 #define PIN_FL0     GPIO_PIN_5
 #define FL0         PORT_FL0, PIN_FL0
@@ -68,12 +64,7 @@ void Transceiver::Init()
 {
     HAL_PIO::Init(PIN_MODE0, HMode::Output_PP, HPull::Down);
     HAL_PIO::Init(PIN_MODE1, HMode::Output_PP, HPull::Down);
-
-    GPIO_InitTypeDef gpio;
-    gpio.Pin = PIN_READY;                 
-    gpio.Mode = GPIO_MODE_INPUT;
-    gpio.Pull = GPIO_PULLDOWN;
-    HAL_GPIO_Init(PORT_READY, &gpio);   // READY - используется для чтения подтверждения из панели
+    HAL_PIO::Init(PIN_READY, HMode::Input, HPull::Down);    // используется для чтения подтверждения из панели
 
     Set_MODE(Mode::Disabled);
 }
@@ -146,11 +137,11 @@ void Transceiver::Send(const uint8 *data, uint size)
 
         GPIOC->BSRR = GPIO_PIN_4;                       // Установить MODE1 в "1" - это означает, что M0M1 == 01 и устройство ждёт подверждения от панели о принятых данных
 
-        while (!(PORT_READY->IDR & PIN_READY)) {};      // Ожидаем сигнал подтверждения - "1" на READY будет означать, что панель приняла данные //-V712
+        while (!(GPIOG->IDR & GPIO_PIN_12)) {};      // Ожидаем сигнал подтверждения - "1" на READY будет означать, что панель приняла данные //-V712
 
         GPIOC->BSRR = (uint)GPIO_PIN_4 << 16U;          // Установить MODE1 в "0" - это означает, что устройство в состоянии Disable
 
-        while (PORT_READY->IDR & PIN_READY) {};         // Ожидаем, когда уровень на READY станет раным "0". //-V712
+        while (GPIOG->IDR & GPIO_PIN_12) {};         // Ожидаем, когда уровень на READY станет раным "0". //-V712
     }
 
     inInteraction = false;
@@ -206,7 +197,7 @@ bool Transceiver::Receive()
 
 State::E State_READY()
 {
-    return (HAL_GPIO_ReadPin(READY) == GPIO_PIN_SET) ? State::Active : State::Passive;
+    return  HAL_PIO::Read(PIN_READY) ? State::Active : State::Passive;
 }
 
 

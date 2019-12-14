@@ -1,8 +1,9 @@
 #pragma once
 
 
-#define PIN_MODE0       HPort::_A, HPin::_7
-#define PIN_MODE1       HPort::_C, HPin::_4
+#define PIN_MODE0   HPort::_A, HPin::_7
+#define PIN_MODE1   HPort::_C, HPin::_4
+#define PIN_READY   HPort::_G, HPin::_12
 
 
 struct HPort
@@ -96,4 +97,6 @@ struct HAL_PIO
     static void Reset(HPort::E port, uint16 pin);
 
     static void Set(HPort::E port, uint16 pin);
+
+    static bool Read(HPort::E port, uint16 pin);
 };
