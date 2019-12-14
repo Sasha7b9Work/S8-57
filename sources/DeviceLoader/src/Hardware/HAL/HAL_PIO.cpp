@@ -101,3 +101,23 @@ uint8 HAL_PIO::Read(HPort::E port, uint16 pin)
 {
     return static_cast<uint8>(HAL_GPIO_ReadPin(PORT(port), pin));
 }
+
+void HAL_PIO::TuneDataPinsToReceive()
+{
+    GPIO_InitTypeDef gpio;
+
+    gpio.Mode = GPIO_MODE_INPUT;
+    gpio.Pull = GPIO_PULLDOWN;
+
+    gpio.Pin = GPIO_PIN_0 |           // D2
+        GPIO_PIN_1 |           // D3
+        GPIO_PIN_14 |           // D0
+        GPIO_PIN_15;            // D1
+    HAL_GPIO_Init(GPIOD, &gpio);
+
+    gpio.Pin = GPIO_PIN_7 |            // D4
+        GPIO_PIN_8 |            // D5
+        GPIO_PIN_9 |            // D6
+        GPIO_PIN_10;            // D7
+    HAL_GPIO_Init(GPIOE, &gpio);
+}

@@ -111,4 +111,6 @@ struct HAL_PIO
     static void Set(HPort::E port, uint16 pin);
 
     static uint8 Read(HPort::E port, uint16 pin);
+    /// Инициализировать пины данных для приёма из панели
+    static void TuneDataPinsToReceive();
 };

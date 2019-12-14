@@ -40,8 +40,6 @@ struct Receiver
 {
     /// Инициализация FL0 на чтение
     static void Init_FL0_IN();
-    /// Инициализировать пины для приёма из панели
-    static void InitPinsReceive();
     /// Возвращает состояние FL0
     static State::E State_FL0();
     /// Считывает байт данных с ШД
@@ -62,27 +60,6 @@ void Transceiver::Init()
 void Receiver::Init_FL0_IN()
 {
     HAL_PIO::Init(PIN_FL0, HMode::Input, HPull::Down);  // Будем на этом выводе узнавать, есть ли у панели данные для передачи
-}
-
-
-void Receiver::InitPinsReceive()
-{
-    GPIO_InitTypeDef gpio;
-
-    gpio.Mode = GPIO_MODE_INPUT;
-    gpio.Pull = GPIO_PULLDOWN;
-
-    gpio.Pin = GPIO_PIN_0  |           // D2
-               GPIO_PIN_1  |           // D3
-               GPIO_PIN_14 |           // D0
-               GPIO_PIN_15;            // D1
-    HAL_GPIO_Init(GPIOD, &gpio);
-
-    gpio.Pin = GPIO_PIN_7 |            // D4
-               GPIO_PIN_8 |            // D5
-               GPIO_PIN_9 |            // D6
-               GPIO_PIN_10;            // D7
-    HAL_GPIO_Init(GPIOE, &gpio);
 }
 
 
@@ -166,7 +143,7 @@ bool Transceiver::Receive()
         return false;                               // и выходим
     }
 
-    Receiver::InitPinsReceive();                    // Инициалазируем пины данных на приём
+    HAL_PIO::TuneDataPinsToReceive();               // Инициалазируем пины данных на приём
 
     uint8 data = Receiver::ReadData();              // Читаем байт
     
