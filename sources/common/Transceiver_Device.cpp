@@ -10,9 +10,9 @@
 #endif
 
 
-#define PORT_FL0    GPIOD
-#define PIN_FL0     GPIO_PIN_5
-#define FL0         PORT_FL0, PIN_FL0
+//#define PORT_FL0    GPIOD
+//#define PIN_FL0     GPIO_PIN_5
+//#define FL0         PORT_FL0, PIN_FL0
 
 
 struct Mode
@@ -72,11 +72,7 @@ void Transceiver::Init()
 
 void Receiver::Init_FL0_IN()
 {
-    GPIO_InitTypeDef gpio;
-    gpio.Pin = PIN_FL0;
-    gpio.Mode = GPIO_MODE_INPUT;
-    gpio.Pull = GPIO_PULLDOWN;
-    HAL_GPIO_Init(PORT_FL0, &gpio);     // Будем на этом выводе узнавать, есть ли у панели данные для передачи
+    HAL_PIO::Init(PIN_FL0, HMode::Input, HPull::Down);  // Будем на этом выводе узнавать, есть ли у панели данные для передачи
 }
 
 
@@ -229,7 +225,7 @@ void Set_MODE(Mode::E mode)
 
 State::E Receiver::State_FL0()
 {
-    return (HAL_GPIO_ReadPin(FL0) == GPIO_PIN_SET) ? State::Active : State::Passive;
+    return HAL_PIO::Read(PIN_FL0) ? State::Active : State::Passive;
 }
 
 

@@ -4,6 +4,7 @@
 #define PIN_MODE0   HPort::_A, HPin::_7
 #define PIN_MODE1   HPort::_C, HPin::_4
 #define PIN_READY   HPort::_G, HPin::_12
+#define PIN_FL0     HPort::_D, HPin::_5
 
 
 struct HPort
