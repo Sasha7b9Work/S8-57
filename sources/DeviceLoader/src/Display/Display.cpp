@@ -50,23 +50,6 @@ static TypeWelcomeScreen typeScreen = TypeWelcomeScreen_Wave;
 #define WAVE_OR_ALL (WAVE || ALL)
 
 
-
-static void InitHardware()
-{
-    GPIO_InitTypeDef isGPIO_ =
-    {
-        GPIO_PIN_11,
-        GPIO_MODE_INPUT,
-        GPIO_NOPULL,
-        GPIO_SPEED_HIGH,
-        GPIO_AF0_MCO,
-    };
-    // Сигнал готовности дисплея  к приёму команды
-    HAL_GPIO_Init(GPIOG, &isGPIO_);
-}
-
-
-
 void Display::Init()
 {
     ms->display.value = 0.0F;
@@ -85,8 +68,6 @@ void Display::Init()
     }
 
     Painter::ResetFlash();
-
-    InitHardware();
 
     Painter::LoadPalette();
 
