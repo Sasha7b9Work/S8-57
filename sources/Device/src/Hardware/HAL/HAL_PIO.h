@@ -69,6 +69,9 @@ struct HPort
 
 #define PIN_DAC2        HPort::_A, HPin::_5
 
+#define PIN_HCD_DM      HPort::_B, HPin::_14
+#define PIN_HCD_DP      HPort::_B, HPin::_15
+
 #define PIN_PCD_VBUS    HPort::_A, HPin::_9
 #define PIN_PCD_DP      HPort::_A, HPin::_12
 #define PIN_PCD_DM      HPort::_A, HPin::_11
@@ -150,6 +153,7 @@ struct HSpeed
     enum E
     {
         Low,
+        High,
         VeryHigh,
         Count
     };
@@ -163,6 +167,7 @@ struct HAlternate
         AF5_SPI4,
         AF7_USART3,
         AF10_OTG_FS,
+        AF12_OTG_HS_FS,
         Count
     };
 };

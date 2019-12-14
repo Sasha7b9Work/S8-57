@@ -40,6 +40,7 @@ static const uint pulles[HPull::Count] =
 static const uint speedes[HSpeed::Count] =
 {
     GPIO_SPEED_FREQ_LOW,
+    GPIO_SPEED_FREQ_HIGH,
     GPIO_SPEED_FREQ_VERY_HIGH
 };
 
@@ -48,7 +49,8 @@ static const uint alternates[HAlternate::Count] =
     GPIO_AF0_MCO,
     GPIO_AF5_SPI4,
     GPIO_AF7_USART3,
-    GPIO_AF10_OTG_FS
+    GPIO_AF10_OTG_FS,
+    GPIO_AF12_OTG_HS_FS
 };
 
 
