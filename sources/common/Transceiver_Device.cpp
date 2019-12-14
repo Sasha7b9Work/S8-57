@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "common/Transceiver.h"
+#include "Hardware/HAL/HAL_PIO.h"
 #include "Keyboard/DecoderDevice.h"
 #include <stm32f4xx_hal.h>
 
@@ -8,10 +9,6 @@
 #include "Recorder/Recorder.h"
 #endif
 
-
-#define PORT_MODE0  GPIOA
-#define PIN_MODE0   GPIO_PIN_7
-#define MODE0       PORT_MODE0, PIN_MODE0
 
 #define PORT_MODE1  GPIOC
 #define PIN_MODE1   GPIO_PIN_4
@@ -74,9 +71,9 @@ static const uint16 pins[]         = { GPIO_PIN_14, GPIO_PIN_15, GPIO_PIN_0, GPI
 void Transceiver::Init()
 {
     GPIO_InitTypeDef gpio;
-    gpio.Pin = PIN_MODE0;
     gpio.Mode = GPIO_MODE_OUTPUT_PP;
-    HAL_GPIO_Init(PORT_MODE0, &gpio);   // MODE0 - используетс€ дл€ выбора режима
+
+    HAL_PIO::Init(PIN_MODE0, HMode::Output_PP, HPull::Down);
 
     gpio.Pin = PIN_MODE1;
     HAL_GPIO_Init(PORT_MODE1, &gpio);   // MODE1 - используетс€ дл€ выбора режима
@@ -225,17 +222,17 @@ void Set_MODE(Mode::E mode)
 {
     if (mode == Mode::Send)
     {
-        HAL_GPIO_WritePin(MODE0, GPIO_PIN_RESET);
+        HAL_PIO::Reset(PIN_MODE0);
         HAL_GPIO_WritePin(MODE1, GPIO_PIN_SET);
     }
     else if (mode == Mode::Receive)
     {
         HAL_GPIO_WritePin(MODE1, GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(MODE0, GPIO_PIN_SET);
+        HAL_PIO::Set(PIN_MODE0);
     }
     else if (mode == Mode::Disabled)
     {
-        HAL_GPIO_WritePin(MODE0, GPIO_PIN_RESET);
+        HAL_PIO::Reset(PIN_MODE0);
         HAL_GPIO_WritePin(MODE1, GPIO_PIN_RESET);
         /// \todo — этим надо что-то делать. Ќепон€тно, почему без задержки не работает
         //Timer::PauseOnOPS(200);
