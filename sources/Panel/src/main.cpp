@@ -9,9 +9,13 @@
 #include "Hardware/Keyboard.h"
 #include "Hardware/HAL/HAL.h"
 #include <cstdlib>
+#include <cstdio>
 
 
-char *drawSymbol = "0";
+int drawSymbol = 10;
+
+int SL = -1;
+int RL = -1;
 
 
 using std::rand;
@@ -28,18 +32,6 @@ int main()
 
     while(1)
     {
-        Painter::BeginScene();
-
-        Painter::SetColor(Color::WHITE);
-
-        Painter::FillRegion(0, 0, 200, 200);
-
-        Painter::SetColor(Color::BLACK);
-
-        Text::Draw(10, 10, drawSymbol);
-        
-        Painter::EndScene();
-
         static uint prevTime = 0;
         
         Transceiver::Receive();
@@ -49,5 +41,23 @@ int main()
             Keyboard::Update();
             prevTime = TIME_MS;
         }
+
+        Painter::BeginScene();
+
+        Painter::SetColor(Color::WHITE);
+
+        Painter::FillRegion(0, 0, 200, 200);
+
+        Painter::SetColor(Color::BLACK);
+
+        char buffer[100];
+
+        std::sprintf(buffer, "%d rl = %d sl = %d", drawSymbol, RL, SL);
+
+        Text::Draw(10, 10, buffer);
+
+        Painter::EndScene();
+
+        drawSymbol = 0;
     }
 }

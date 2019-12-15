@@ -114,6 +114,11 @@ void Keyboard::Init()
 }
 
 
+extern int drawSymbol;
+extern int RL;
+extern int SL;
+
+
 void Keyboard::Update()
 {
     if (!init)
@@ -137,6 +142,10 @@ void Keyboard::Update()
             {
                 if (timePress[rl][sl])                      // Если клавиша находится в нажатом положении
                 {
+                    drawSymbol = (int)control;
+                    RL = rl;
+                    SL = sl;
+
                     if (time - timePress[rl][sl] > 100)     // Если прошло более 100 мс с момента нажатия
                     {
                         if (!BUTTON_IS_PRESS(state))        // Если сейчас кнопка находится в отжатом состояини
@@ -194,8 +203,6 @@ void Keyboard::Update()
     SET_ALL_SL;
 }
 
-extern char *drawSymbol;
-
 static void SendCommand(Control control, Control::Action::E action)
 {
     uint8 data[3] =
@@ -206,11 +213,6 @@ static void SendCommand(Control control, Control::Action::E action)
     };
 
     Transceiver::Send(data, 3);
-
-    if(action == Control::Action::Press)
-    {
-        drawSymbol = (char *)(control + ' ' + 1);
-    }
 }   
 
 
