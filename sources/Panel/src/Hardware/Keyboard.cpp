@@ -194,6 +194,7 @@ void Keyboard::Update()
     SET_ALL_SL;
 }
 
+extern char *drawSymbol;
 
 static void SendCommand(Control control, Control::Action::E action)
 {
@@ -205,6 +206,11 @@ static void SendCommand(Control control, Control::Action::E action)
     };
 
     Transceiver::Send(data, 3);
+
+    if(action == Control::Action::Press)
+    {
+        drawSymbol = (char *)(control + ' ' + 1);
+    }
 }   
 
 
