@@ -146,12 +146,22 @@ void AutoMeasurements::CalculateMeasures()
         return;
     }
     
-    maxIsCalculating[0] = maxIsCalculating[1] = maxSteadyIsCalculating[0] = maxSteadyIsCalculating[1] = false;
-    minIsCalculating[0] = minIsCalculating[1] = minSteadyIsCalculating[0] = minSteadyIsCalculating[1] = false;
-    aveIsCalculating[0] = aveIsCalculating[1] = false;
-    periodIsCaclulating[0] = periodIsCaclulating[1] = false;
-    periodAccurateIsCalculating[0] = periodAccurateIsCalculating[1] = false;
-    picIsCalculating[0] = picIsCalculating[1] = false;
+    maxIsCalculating[0] = false;
+    maxIsCalculating[1] = false;
+    maxSteadyIsCalculating[0] = false;
+    maxSteadyIsCalculating[1] = false;
+    minIsCalculating[0] = false;
+    minIsCalculating[1] = false;
+    minSteadyIsCalculating[0] = false;
+    minSteadyIsCalculating[1] = false;
+    aveIsCalculating[0] = false;
+    aveIsCalculating[1] = false;
+    periodIsCaclulating[0] = false;
+    periodIsCaclulating[1] = false;
+    periodAccurateIsCalculating[0] = false;
+    periodAccurateIsCalculating[1] = false;
+    picIsCalculating[0] = false;
+    picIsCalculating[1] = false;
 
     for(int str = 0; str < TableMeasures::NumRows(); str++)
     {
@@ -165,8 +175,14 @@ void AutoMeasurements::CalculateMeasures()
             {
                 if(type == set.meas.marked || set.meas.marked == TypeMeasure::None)
                 {
-                    markerTime[Chan::A][0] = markerTime[Chan::A][1] = markerTime[Chan::B][0] = markerTime[Chan::B][1] = Integer::ERROR;
-                    markerVoltage[Chan::A][0] = markerVoltage[Chan::A][1] = markerVoltage[Chan::B][0] = markerVoltage[Chan::B][1] = Integer::ERROR;
+                    markerTime[Chan::A][0] = Integer::ERROR;
+                    markerTime[Chan::A][1] = Integer::ERROR;
+                    markerTime[Chan::B][0] = Integer::ERROR;
+                    markerTime[Chan::B][1] = Integer::ERROR;
+                    markerVoltage[Chan::A][0] = Integer::ERROR;
+                    markerVoltage[Chan::A][1] = Integer::ERROR;
+                    markerVoltage[Chan::B][0] = Integer::ERROR;
+                    markerVoltage[Chan::B][1] = Integer::ERROR;
                 }
                 
                 if(VIEW_MEASURES_A)

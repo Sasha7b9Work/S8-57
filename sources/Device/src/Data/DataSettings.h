@@ -61,7 +61,7 @@ struct DataSettings
     uint NeedMemoryForData() const;
     bool Equals(const DataSettings &ds) const;
     void Log() const;
-    void AddPoint(BitSet16 &a, BitSet16 &b);
+    void AddPoint(const BitSet16 &a, const BitSet16 &b);
 private:
     /// Количество всех считанных точек в поточечном режиме
     static uint numBytesP2P;

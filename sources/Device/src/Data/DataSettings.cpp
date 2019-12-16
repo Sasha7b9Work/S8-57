@@ -13,7 +13,8 @@ bool DataSettings::isFrameP2P = false;
 
 void DataSettings::Fill()
 {
-    numBytesP2P = pointerP2P = 0;
+    numBytesP2P = 0;
+    pointerP2P = 0;
 
     isFrameP2P = Osci::InModeP2P();
 
@@ -133,7 +134,7 @@ void PackedTime::ChangeYear(int delta)
 }
 
 
-void DataSettings::AddPoint(BitSet16 &a, BitSet16 &b)
+void DataSettings::AddPoint(const BitSet16 &a, const BitSet16 &b)
 {
     if(!isFrameP2P)
     {
