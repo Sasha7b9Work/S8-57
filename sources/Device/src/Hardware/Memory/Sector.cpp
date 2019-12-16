@@ -62,7 +62,9 @@ bool PacketROM::WriteToSector(const Sector *sector) const
 
     DataSettings ds = *UnPack(); //-V522
 
-    ds.dataA = ds.dataB = nullptr;
+    ds.dataA = nullptr;
+    ds.dataB = nullptr;
+
     if (ds.enableA)
     {
         ds.dataA = reinterpret_cast<uint8 *>(addressWrite) + sizeof(PacketROM) + sizeof(DataSettings);

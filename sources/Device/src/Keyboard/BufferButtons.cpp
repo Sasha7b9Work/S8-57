@@ -52,7 +52,8 @@ KeyEvent BufferButtons::Extract()
     start++;
     if(start == end)
     {
-        start = end = 0;
+        start = 0;
+        end = 0;
     }
 
     return result;

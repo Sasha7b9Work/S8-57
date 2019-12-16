@@ -79,7 +79,8 @@ void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, uint size)
 
 void AveragerOsci::SettingChanged()
 {
-    numSignals[0] = numSignals[1] = 0;
+    numSignals[0] = 0;
+    numSignals[1] = 0;
 }
 
 

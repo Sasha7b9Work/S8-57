@@ -36,7 +36,8 @@ struct Packet
     void Pack(const DataSettings *ds)
     {
         DataSettings data = *ds;
-        data.dataA = data.dataB = nullptr;
+        data.dataA = nullptr;
+        data.dataB = nullptr;
 
         addrNewest = 0x0000000;                                                                         // ”казываем, что это самый последний пакет
 
@@ -66,7 +67,8 @@ struct Packet
         addrNewest = 0x00000000;
         uint *address = reinterpret_cast<uint *>(Address() + sizeof(Packet));
 
-        ds->dataA = ds->dataB = nullptr;
+        ds->dataA = nullptr;
+        ds->dataB = nullptr;
         uint8 *addrData = reinterpret_cast<uint8 *>(reinterpret_cast<uint8 *>(address) + sizeof(DataSettings));
 
         if (ds->enableA)

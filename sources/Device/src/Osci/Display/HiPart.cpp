@@ -185,7 +185,7 @@ static int DrawMainParameters(int _x, int _y)
     }
 
     y1 = y1 - 6;
-    int y2 = y1 + 6;
+
     Font::Set(TypeFont::_5);
 
     x += 77;
@@ -196,7 +196,7 @@ static int DrawMainParameters(int _x, int _y)
     {
         WriteStringAndNumber("накопл", x, y0 - 4, ENumAccum().Number());
         WriteStringAndNumber("усредн", x, y1, ENumAverage().Number());
-        WriteStringAndNumber("мн\x93мкс", x, y2, ENumMinMax().Number());
+        WriteStringAndNumber("мн\x93мкс", x, y1 + 6, ENumMinMax().Number());
     }
 
     Separator::Draw(x + 43, y0 - 1);
@@ -218,12 +218,10 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
     //int8 divider = (int8)SET_DIVIDER(ch);
     Range::E range = Range(ch);
 
-    const int widthField = 91;
-    const int heightField = 8;
     Color colorDraw = inverse ? Color::WHITE : color;
     if (inverse)
     {
-        Region(widthField, heightField).Fill(x, y, color);
+        Region(91, 8).Fill(x, y, color);
     }
     const int SIZE = 100;
 
@@ -377,12 +375,12 @@ void DisplayOsci::HiPart::DrawRightPart(int x0, int y0)
 
 static void WriteCursors()
 {
-    int x = 0;
-    int y1 = 0;
-    int y2 = 0 + 9;
-
     if (CursorsMeasurements::NecessaryDraw())
     {
+        int x = 0;
+        int y1 = 0;
+        int y2 = 0 + 9;
+
         VLine separator(Grid::Top() - 3);
 
         separator.Draw(x, 1, Color::FILL);

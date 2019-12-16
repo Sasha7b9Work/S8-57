@@ -119,7 +119,6 @@ void Governor::DrawClosed(int x, int y) const
 
 void Governor::DrawValue(int x, int y) const
 {
-    int startX = x + 40;
     int signGovernor = (GetValue() < 0) ? -1 : 1;
     
     int value = GetValue();
@@ -142,6 +141,8 @@ void Governor::DrawValue(int x, int y) const
 
     if (sign)
     {
+        int startX = x + 40;
+
         Char(signGovernor < 0 ? '\x9b' : '\x9a').Draw(startX - 30, y);
     }
 }
