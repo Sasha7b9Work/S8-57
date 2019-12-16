@@ -52,7 +52,7 @@ static const char *FuncIDN(const char *buffer)
 }
 
 
-static void HintIDN(String *message) //-V2009
+static void HintIDN(String *message) //-V2009 //-V2558
 {
     SCPI::SendAnswer(message->c_str());
 }
@@ -68,7 +68,7 @@ static const char *FuncReset(const char *buffer)
 }
 
 
-static void HintReset(String *message) //-V2009
+static void HintReset(String *message) //-V2009 //-V2558
 {
     SCPI::SendAnswer(message->c_str());
 }
@@ -86,7 +86,7 @@ static const char *FuncHelp(const char *buffer)
 }
 
 
-static void HintHelp(String *message) //-V2009
+static void HintHelp(String *message) //-V2009 //-V2558
 {
     SCPI::SendAnswer(message->c_str());
 }
@@ -117,7 +117,7 @@ static const char *FuncTest(const char *buffer)
 }
 
 
-static void HintTest(String *message) //-V2009
+static void HintTest(String *message) //-V2009 //-V2558
 {
     SCPI::SendAnswer(message->c_str());
 }

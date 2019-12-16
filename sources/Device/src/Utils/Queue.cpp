@@ -28,7 +28,8 @@ void Queue<T>::Destroy()
     {
         delete[] pointer;
         pointer = nullptr;
-        iFront = iBack = 0;
+        iFront = 0;
+        iBack = 0;
     }
 }
 

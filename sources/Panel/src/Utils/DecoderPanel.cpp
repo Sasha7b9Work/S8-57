@@ -163,7 +163,8 @@ static bool DrawTesterPoints(uint8 data)
 
     if(step == 0)
     {
-        numX = numY = 0;
+        numX = 0;
+        numY = 0;
     }
     else if(step == 1)
     {

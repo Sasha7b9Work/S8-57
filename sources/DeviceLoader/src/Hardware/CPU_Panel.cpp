@@ -100,7 +100,8 @@ uint16 CPU::Panel::NextData()
         uint16 data = dataTransmitted[firstPos++];
         if(firstPos == lastPos)
         {
-            firstPos = lastPos = 0;
+            firstPos = 0;
+            lastPos = 0;
         }
         return data;
     }

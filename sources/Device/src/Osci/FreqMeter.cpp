@@ -42,7 +42,8 @@ void FreqMeter::Init()
     LoadSettings();
     HAL_FSMC::WriteToFPGA8(WR::RESET_COUNTER_FREQ, 1);
     HAL_FSMC::WriteToFPGA8(WR::RESET_COUNTER_PERIOD, 1);
-    freqActual.word = periodActual.word = 0;
+    freqActual.word = 0;
+    periodActual.word = 0;
 }
 
 

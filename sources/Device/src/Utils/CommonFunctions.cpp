@@ -95,11 +95,6 @@ char *CF::GetWord(char *string, int n, char *out, int size)
         return 0;
     }
 
-    if (n == 1)
-    {
-        n = 1;
-    }
-
     // Находим начало искомого слова
     int currentWord = 0;
     do
@@ -157,7 +152,11 @@ BufferMax5::BufferMax5()
 void BufferMax5::Clear()
 {
     numElements = 0;
-    buffer[0] = buffer[1] = buffer[2] = buffer[3] = buffer[4] = 0;
+    buffer[0] = 0;
+    buffer[1] = 0;
+    buffer[2] = 0;
+    buffer[3] = 0;
+    buffer[4] = 0;
 }
 
 

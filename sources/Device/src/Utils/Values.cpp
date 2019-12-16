@@ -504,12 +504,13 @@ static char *FloatToString(float value, bool alwaysSign, int numDigits, char buf
 
 int Hex::NumDigits() const
 {
-    uint val = value;
-
+    uint val = value / 10;
     int num = 1;
-    while ((val /= 10) > 0)
+
+    while (val > 0)
     {
         num++;
+        val = val / 10;
     }
     return num;
 }
@@ -519,9 +520,11 @@ int Integer::NumDigits() const
 {
     int val = Math::Abs(value);
     int num = 1;
-    while ((val /= 10) > 0)
+    val = val / 10;
+    while (val > 0)
     {
         num++;
+        val = val / 10;
     }
     return num;
 }
