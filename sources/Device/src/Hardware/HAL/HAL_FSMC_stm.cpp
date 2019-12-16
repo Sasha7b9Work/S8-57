@@ -124,7 +124,7 @@ void HAL_FSMC::Configure()
     {   //    NOE          NWE          NE1
         GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_7,
         GPIO_MODE_AF_PP,
-        GPIO_PULLDOWN,
+        GPIO_PULLUP,
         GPIO_SPEED_FREQ_VERY_HIGH,
         GPIO_AF12_FMC
     };
