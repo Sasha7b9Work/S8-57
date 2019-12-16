@@ -64,4 +64,8 @@ public:
 private:
     /// Поиск уровня синхронизации, если установлен автоматический режим поиска
     static void FindTrigLevelIfNeed();
+    /// Читать из ОЗУ в реальном режиме
+    static void ReadModeReal();
+    /// Читать из ОЗУ в поточечном режиме
+    static void ReadModeP2P();
 };
