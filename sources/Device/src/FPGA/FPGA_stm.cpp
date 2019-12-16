@@ -204,6 +204,8 @@ bool FPGA::ReadDataChannel(Chan::E ch, uint8 *data)
 
     HAL_FSMC::SetAddrData(a0, a1);
 
+    int numberReads = 0;
+
     if (Osci::InModeRandomizer())
     {
         return ReadDataChannelRand(ch, a1, data);
@@ -231,6 +233,7 @@ bool FPGA::ReadDataChannel(Chan::E ch, uint8 *data)
                 *p++ = HAL_FSMC::ReadData1();
                 *p++ = HAL_FSMC::ReadData1();
                 *p++ = HAL_FSMC::ReadData1();
+                numberReads += 4;
             }
         }
     }

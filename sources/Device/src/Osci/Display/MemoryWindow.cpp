@@ -59,8 +59,16 @@ static void DrawDataInRect(int x, int y, int width, int height, const uint8 *dat
         int min = 255;
         int max = 0;
 
+        bool needDraw = true;
+
         for (int j = start; j <= end; j++)
         {
+            if(data[j] == VALUE::NONE)
+            {
+                needDraw = false;
+                break;
+            }
+                
             if (data[j] < min)
             {
                 min = data[j];
@@ -71,10 +79,13 @@ static void DrawDataInRect(int x, int y, int width, int height, const uint8 *dat
             }
         }
 
-        int deltaMIN = static_cast<int>(min * stepY + 0.5F);
-        int deltaMAX = static_cast<int>(max * stepY + 0.5F);
+        if(needDraw)
+        {
+            int deltaMIN = static_cast<int>(min * stepY + 0.5F);
+            int deltaMAX = static_cast<int>(max * stepY + 0.5F);
 
-        VLine(deltaMIN - deltaMAX).Draw(x + i, y0 - deltaMIN);
+            VLine(deltaMIN - deltaMAX).Draw(x + i, y0 - deltaMIN);
+        }
     }
 }
 

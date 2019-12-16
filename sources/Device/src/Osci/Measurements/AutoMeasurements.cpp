@@ -1470,7 +1470,10 @@ static void LimitationData(Chan::E ch, uint numBytes)
 
     for (uint i = 0; i < numBytes; i++)
     {
-        Math::Limitation<uint8>(data, VALUE::MIN, VALUE::MAX);
+        if(*data != VALUE::NONE)
+        {
+            Math::Limitation<uint8>(data, VALUE::MIN, VALUE::MAX);
+        }
         data++;
     }
 }

@@ -136,7 +136,7 @@ void Osci::UpdateFPGA()
                 Trig::pulse = false;
             }
         }
-    
+        
         if (FPGA::flag.DataReady())
         {
             if (CanReadData())
