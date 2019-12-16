@@ -245,20 +245,46 @@ void DataSettings::Log() const
 void DataSettings::FillScreenBuffer(Buffer *buffer, Chan::E ch) const
 {
     uint8 *data = buffer->data;
+    std::memset(data, VALUE::NONE, buffer->Size());
 
-    uint pointer = 0;
-    
-    for(uint numByte = 0; numByte < GetNumberStoredBytes(); numByte++)
+    posSeparate = MAX_UINT;
+
+    if(numBytesP2P > 0 && numBytesP2P <= buffer->Size())
     {
-        data[pointer] = GetByte(numByte, ch);
-        pointer++;
-        if(pointer == buffer->Size())
+        std::memcpy(data, (ch == Chan::A) ? dataA : dataB, numBytesP2P);
+        posSeparate = static_cast<int>(numBytesP2P - 1);
+    }
+    else
+    {
+        uint size = GetNumberStoredBytes();
+        if(size < BytesInChannel())
         {
-            pointer = 0;
+            size = BytesInChannel();
+        }
+
+        uint pointer = 0;
+
+        for(uint numByte = 0; numByte < size; numByte++)
+        {
+            uint8 d = GetByte(numByte, ch);
+
+            if(d != VALUE::NONE)
+            {
+                data[pointer] = d;
+            }
+
+            if((d == VALUE::NONE) && (posSeparate == MAX_UINT))
+            {
+                posSeparate = static_cast<int>(pointer);
+            }
+
+            pointer++;
+            if(pointer == buffer->Size())
+            {
+                pointer = 0;
+            }
         }
     }
-
-    posSeparate = static_cast<int>(pointer);
 }
 
 
