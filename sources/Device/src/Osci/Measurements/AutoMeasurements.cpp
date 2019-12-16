@@ -790,9 +790,6 @@ float CalculateMinSteadyRel(Chan::E ch)
                 }
             }
             min[static_cast<int>(ch)] = static_cast<float>(sum) / numSums;
-            int numMin = numSums;
-
-            int numDeleted = 0;
 
             float pic = CalculatePicRel(ch);
             if (pic == Float::ERROR) //-V550 //-V2550
@@ -801,6 +798,10 @@ float CalculateMinSteadyRel(Chan::E ch)
             }
             else
             {
+                int numDeleted = 0;
+
+                int numMin = numSums;
+
                 float value = pic / 9.0F;
 
                 data = &dataIn[firstByte];
@@ -873,9 +874,6 @@ float CalculateMaxSteadyRel(Chan::E ch)
                 }
             }
             max[static_cast<int>(ch)] = static_cast<float>(sum) / numSums;
-            int numMax = numSums;
-
-            int numDeleted = 0;
 
             float pic = CalculatePicRel(ch);
 
@@ -885,6 +883,10 @@ float CalculateMaxSteadyRel(Chan::E ch)
             }
             else
             {
+                int numDeleted = 0;
+
+                int numMax = numSums;
+
                 float value = pic / 9.0F;
 
                 data = &dataIn[firstByte];
