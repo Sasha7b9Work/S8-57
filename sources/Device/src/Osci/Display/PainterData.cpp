@@ -354,8 +354,12 @@ void DisplayOsci::PainterData::DrawModePointsPeakDetOff(int center, const uint8 
 {
     for (int i = 0; i < 280; i++)
     {
-        float value = center - (data[i] - VALUE::AVE) * scale;
-        Pixel().Draw(x + i, ROUND(uint8, value));
+        uint8 v8 = data[i];
+        if(v8 != VALUE::NONE)
+        {
+            float value = center - (v8 - VALUE::AVE) * scale;
+            Pixel().Draw(x + i, ROUND(uint8, value));
+        }
     }
 }
 
