@@ -239,3 +239,45 @@ void DataSettings::Log() const
         LOG_WRITE("B: откл");
     }
 }
+
+
+void DataSettings::FillScreenBuffer(Buffer *buffer, Chan::E ch) const
+{
+    uint8 *data = buffer->data;
+
+    uint pointer = 0;
+    
+    for(uint numByte = 0; numByte < GetNumberStoredBytes(); numByte++)
+    {
+        data[pointer] = GetByte(numByte, ch);
+        pointer++;
+        if(pointer == buffer->Size())
+        {
+            pointer = 0;
+        }
+    }
+}
+
+
+uint DataSettings::GetNumberStoredBytes() const
+{
+    if(numBytesP2P < BytesInChannel())
+    {
+        return numBytesP2P;
+    }
+
+    return BytesInChannel();
+}
+
+
+uint8 DataSettings::GetByte(uint position, Chan::E ch) const
+{
+    if(GetNumberStoredBytes() < BytesInChannel())
+    {
+        uint8 *data = (ch == Chan::A) ? dataA : dataB;
+
+        return data[position];
+    }
+
+    return VALUE::AVE;
+}

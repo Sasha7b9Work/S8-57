@@ -26,8 +26,8 @@ static void FindTrigLevelIfNeed();
 
 void Reader::ReadDataFromRAM()
 {
-    IN_A = IN_B = nullptr;
-
+    IN_A = nullptr;
+    IN_B = nullptr;
     DS = nullptr;
 
     DS = RAM::Get(ModeWork::IsRAM() ? static_cast<uint>(RAM::currentSignal) : 0U);

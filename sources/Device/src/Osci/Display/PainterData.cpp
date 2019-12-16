@@ -135,12 +135,13 @@ void DisplayOsci::PainterData::DrawSpectrum(const uint8 *dataIn, uint numPoints,
     float density1 = 0.0F;
     int y0 = 0;
     int y1 = 0;
-    int s = 2;
 
     float *spectrum = static_cast<float *>(std::malloc(numPoints * sizeof(float)));
 
     if (spectrum)
     {
+        int s = 2;
+
         VALUE::PointsToVoltage(dataIn, numPoints, RANGE_DS(ch), (int16)RSHIFT_DS(ch), dataR);
 
         MathFPGA::CalculateFFT(dataR, numPoints, spectrum, &freq0, &density0, &freq1, &density1, &y0, &y1);
@@ -232,16 +233,12 @@ void DisplayOsci::PainterData::DrawChannel(Chan::E ch)
 
     uint8 *data = OUT(ch);
 
-
     data += SHIFT_IN_MEMORY;
 
     if (PeakDetMode().IsEnabled())
     {
         data += SHIFT_IN_MEMORY;
     }
-
-    /// Для отрисовки поточечного вывода
-    Buffer buffer;
 
     int center = (Grid::Bottom() - Grid::Top()) / 2 + Grid::Top();
 
@@ -255,6 +252,13 @@ void DisplayOsci::PainterData::DrawChannel(Chan::E ch)
         scale /= 2.0F;
     }
 
+    Buffer buffer(static_cast<uint>(Grid::Width()));
+
+    if(DS->isFrameP2P)
+    {
+        DS->FillScreenBuffer(&buffer, ch);
+        data = buffer.data;
+    }
 
     if (DisplayMapping::IsLines())
     {
