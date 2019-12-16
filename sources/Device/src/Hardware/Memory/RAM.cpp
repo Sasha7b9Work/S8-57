@@ -61,6 +61,8 @@ struct Packet
     /// Подготовить пакет для сохранения данных в соответствии с настройками ds
     void Prepare(DataSettings *ds)
     {
+        uint bytesInChannel = ds->BytesInChannel();
+
         addrNewest = 0x00000000;
         uint *address = reinterpret_cast<uint *>(Address() + sizeof(Packet));
 
@@ -70,12 +72,14 @@ struct Packet
         if (ds->enableA)
         {
             ds->dataA = addrData;
-            addrData += ds->BytesInChannel();
+            std::memset(addrData, VALUE::NONE, bytesInChannel);
+            addrData += bytesInChannel;
         }
 
         if (ds->enableB)
         {
             ds->dataB = addrData;
+            std::memset(addrData, VALUE::NONE, bytesInChannel);
         }
 
         WriteToRAM(address, ds, sizeof(DataSettings));
