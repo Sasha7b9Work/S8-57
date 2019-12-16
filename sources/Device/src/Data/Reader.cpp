@@ -20,9 +20,6 @@ const DataSettings *pDS = nullptr;
 
 FrameP2P *frameP2P = nullptr;
 
-/// ѕоиск уровн€ синхронизации, если установлен автоматический режим поиска
-static void FindTrigLevelIfNeed();
-
 
 void Reader::ReadDataFromRAM()
 {
@@ -30,7 +27,14 @@ void Reader::ReadDataFromRAM()
     IN_B = nullptr;
     DS = nullptr;
 
-    DS = RAM::Get(ModeWork::IsRAM() ? static_cast<uint>(RAM::currentSignal) : 0U);
+    if(Osci::InModeP2P())
+    {
+
+    }
+    else
+    {
+        DS = RAM::Get(ModeWork::IsRAM() ? static_cast<uint>(RAM::currentSignal) : 0U);
+    }
 
     if (DS)
     {
@@ -70,7 +74,7 @@ void Reader::ReadDataFromROM()
 }
 
 
-static void FindTrigLevelIfNeed()
+void Reader::FindTrigLevelIfNeed()
 {
     if (TrigModeFind::IsAuto())
     {
