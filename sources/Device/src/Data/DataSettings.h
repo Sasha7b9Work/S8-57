@@ -68,6 +68,8 @@ struct DataSettings
     /// Если true, то это фрейм поточечного вывода
     static bool isFrameP2P;
     void FillScreenBuffer(Buffer *buffer, Chan::E ch) const;
+    /// Позиция раздела в поточечном выводе - в ней нужно нарисовать вертикальную линию
+    static int posSeparate;
 private:
     /// Количество всех считанных точек в поточечном режиме
     static uint numBytesP2P;

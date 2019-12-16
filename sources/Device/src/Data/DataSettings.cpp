@@ -9,6 +9,7 @@
 uint DataSettings::numBytesP2P = 0;
 uint DataSettings::pointerP2P = 0;
 bool DataSettings::isFrameP2P = false;
+int DataSettings::posSeparate = 0;
 
 
 void DataSettings::Fill()
@@ -256,6 +257,8 @@ void DataSettings::FillScreenBuffer(Buffer *buffer, Chan::E ch) const
             pointer = 0;
         }
     }
+
+    posSeparate = static_cast<int>(pointer);
 }
 
 
@@ -276,8 +279,8 @@ uint8 DataSettings::GetByte(uint position, Chan::E ch) const
     {
         uint8 *data = (ch == Chan::A) ? dataA : dataB;
 
-        return data[position];
+        return (position < numBytesP2P) ? data[position] : VALUE::NONE;
     }
 
-    return VALUE::AVE;
+    return VALUE::NONE;
 }
