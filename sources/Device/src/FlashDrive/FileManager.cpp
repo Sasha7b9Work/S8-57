@@ -39,7 +39,10 @@ static int numFiles = 0;
 void FileManager::Init()
 {
     std::strcpy(currentDir, "\\");
-    numFirstDir = numFirstFile = numCurDir = numCurFile = 0;
+    numFirstDir = 0;
+    numFirstFile = 0;
+    numCurDir = 0;
+    numCurFile = 0;
 }
 
 
@@ -206,7 +209,10 @@ void FileManager::Press_LevelDown() //-V2506
             FDrive::CloseCurrentDir(&sfrd);
             std::strcat(currentDir, "\\");
             std::strcat(currentDir, nameDir);
-            numFirstDir = numFirstFile = numCurDir = numCurFile = 0;
+            numFirstDir = 0;
+            numFirstFile = 0;
+            numCurDir = 0;
+            numCurFile = 0;
         }
 
     }
@@ -227,7 +233,10 @@ void FileManager::Press_LevelUp() //-V2506
         pointer--;
     }
     *pointer = '\0';
-    numFirstDir = numFirstFile = numCurDir = numCurFile = 0;
+    numFirstDir = 0;
+    numFirstFile = 0;
+    numCurDir = 0;
+    numCurFile = 0;
     FM_CURSOR_IN_DIRS = 1;
 }
 

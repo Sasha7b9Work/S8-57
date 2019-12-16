@@ -54,8 +54,8 @@ void Reader::ReadDataFromRAM()
 
 void Reader::ReadDataFromROM()
 {
-    IN_A = IN_B = nullptr;
-
+    IN_A = nullptr;
+    IN_B = nullptr;
     DS = nullptr;
 
     DS = ROM::Data::Read(NUM_ROM_SIGNAL);
