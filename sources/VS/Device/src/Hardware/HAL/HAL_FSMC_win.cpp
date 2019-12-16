@@ -1,7 +1,9 @@
 #include "defines.h"
 #include "FPGA/TypesFPGA.h"
+#include "GUI/Dialogs/TuneGeneratorDialog.h"
 #include "Hardware/HAL/HAL.h"
 #include "Recorder/Recorder_win.h"
+#include "Utils/Math.h"
 
 
 uint8 *HAL_FSMC::addrData0 = nullptr;
@@ -39,11 +41,21 @@ void HAL_FSMC::SetAddrData(uint8 *address0, uint8 *address1)
 
 uint8 HAL_FSMC::ReadData0()
 {
-    return *addrData0;
+    static uint prevTime = TIME_MS;
+
+    Chan::E ch = (addrData0 == RD::DATA_A || addrData0 == RD::DATA_A_PEAK_MIN) ? Chan::A : Chan::B;
+
+    double freq = TuneGeneratorDialog::frequency[ch];
+
+    double amplitude = 100.0;
+
+    double value = VALUE::AVE + amplitude * (sin(2 * Math::PI * (TIME_MS - prevTime) * freq));
+
+    return static_cast<uint8>(value);
 }
 
 
 uint8 HAL_FSMC::ReadData1()
 {
-    return *addrData1;
+    return VALUE::AVE;
 }
