@@ -6,14 +6,14 @@
 #include <cstring>
 
 
-int DataSettings::numPointsP2P = 0;
-int DataSettings::pointerP2P = 0;
+uint DataSettings::numBytesP2P = 0;
+uint DataSettings::pointerP2P = 0;
 bool DataSettings::isFrameP2P = false;
 
 
 void DataSettings::Fill()
 {
-    numPointsP2P = pointerP2P = 0;
+    numBytesP2P = pointerP2P = 0;
 
     isFrameP2P = Osci::InModeP2P();
 
@@ -133,11 +133,82 @@ void PackedTime::ChangeYear(int delta)
 }
 
 
-
-
-void DataSettings::AddPoint(BitSet16 &, BitSet16 &)
+void DataSettings::AddPoint(BitSet16 &a, BitSet16 &b)
 {
+    if(!isFrameP2P)
+    {
+        return;
+    }
 
+    if(PeakDetMode::IsEnabled())
+    {
+        AddPeakDetPoint(a.halfWord, b.halfWord);
+        numBytesP2P += 2;
+    }
+    else
+    {
+        AddNormalPoint(a.byte0, b.byte1);
+        numBytesP2P += 1;
+    }
+}
+
+
+void DataSettings::AddNormalPoint(uint8 a, uint8 b)
+{
+    if(enableA)
+    {
+        AddNormalPoint(Chan::A, a);
+    }
+    if(enableB)
+    {
+        AddNormalPoint(Chan::B, b);
+    }
+
+    pointerP2P++;
+
+    if(pointerP2P == BytesInChannel())
+    {
+        pointerP2P = 0;
+    }
+}
+
+
+void DataSettings::AddPeakDetPoint(uint16 a, uint16 b)
+{
+    if(enableA)
+    {
+        AddPeakDetPoint(Chan::A, a);
+    }
+    if(enableB)
+    {
+        AddPeakDetPoint(Chan::B, b);
+    }
+
+    pointerP2P += 2;
+    if(pointerP2P == BytesInChannel())
+    {
+        pointerP2P = 0;
+    }
+}
+
+
+void DataSettings::AddNormalPoint(Chan::E ch, uint8 point)
+{
+    uint8 *data = (ch == Chan::A) ? dataA : dataB;
+
+    data[pointerP2P] = point;
+}
+
+
+void DataSettings::AddPeakDetPoint(Chan::E ch, uint16 point)
+{
+    uint8 *data = (ch == Chan::A) ? dataA : dataB;
+
+    data += pointerP2P;
+
+    uint16 *d16 = reinterpret_cast<uint16 *>(data);
+
+    *d16 = point;
 }
 
 

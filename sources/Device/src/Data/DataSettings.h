@@ -61,14 +61,20 @@ struct DataSettings
     uint NeedMemoryForData() const;
     bool Equals(const DataSettings &ds) const;
     void Log() const;
-    void AddPoint(BitSet16 &dataA, BitSet16 &dataB);
+    void AddPoint(BitSet16 &a, BitSet16 &b);
 private:
     /// Количество всех считанных точек в поточечном режиме
-    static int numPointsP2P;
-    /// Указатель на позицию записываемых данныхывалыова
-    static int pointerP2P;
+    static uint numBytesP2P;
+    /// Указатель на позицию записываемых данных. В байтах
+    static uint pointerP2P;
     /// Если true, то это фрейм поточечного вывода
     static bool isFrameP2P;
+    /// Добавить точки при выключенном пиковом детекторе
+    void AddNormalPoint(uint8 a, uint8 b);
+    void AddNormalPoint(Chan::E ch, uint8 point);
+    /// Добавить точки при включённом пиковом детекторе
+    void AddPeakDetPoint(uint16 a, uint16 b);
+    void AddPeakDetPoint(Chan::E ch, uint16 point);
 };
 
 #define DATA(ds, ch)         (((ch) == Chan::A) ? (ds)->dataA : (ds)->dataB)
