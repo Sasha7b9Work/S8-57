@@ -41,18 +41,18 @@ void DataSettings::Fill()
 }
 
 
-bool DataSettings::Equals(const DataSettings *ds) const
+bool DataSettings::Equals(const DataSettings &ds) const
 {
     return
-        RANGE_A(this) == Lval_RANGE_A(ds) &&
-        RANGE_B(this) == Lval_RANGE_B(ds) &&
-        RSHIFT_A(this) == RSHIFT_A(ds) &&
-        RSHIFT_B(this) == RSHIFT_B(ds) &&
-        TBASE(this) == TBASE(ds) &&
-        TSHIFT(this) == TSHIFT(ds) &&
-        TRIGLEV_A(this) == TRIGLEV_A(ds) &&
-        TRIGLEV_B(this) == TRIGLEV_B(ds) &&
-        ENUM_POINTS(this) == ENUM_POINTS(ds);
+        RANGE_A(this) == Lval_RANGE_A(&ds) &&
+        RANGE_B(this) == Lval_RANGE_B(&ds) &&
+        RSHIFT_A(this) == RSHIFT_A(&ds) &&
+        RSHIFT_B(this) == RSHIFT_B(&ds) &&
+        TBASE(this) == TBASE(&ds) &&
+        TSHIFT(this) == TSHIFT(&ds) &&
+        TRIGLEV_A(this) == TRIGLEV_A(&ds) &&
+        TRIGLEV_B(this) == TRIGLEV_B(&ds) &&
+        ENUM_POINTS(this) == ENUM_POINTS(&ds);
 }
 
 

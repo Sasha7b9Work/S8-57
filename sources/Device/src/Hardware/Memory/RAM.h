@@ -14,7 +14,7 @@ public:
     /// Инициализирует первоначальное состояние памяти
     static void Init();
     /// Подготовить в хранилище место для хранения новых данных
-    static DataSettings *PrepareForNewData();
+    static void PrepareForNewData(DataSettings *ds);
     /// Считать информацию о num с конца сохранённых данных. 0 - последние данные, 1 - предпоследние
     static DataSettings *Get(uint num = 0);
     /// Возвращает количество записей в памяти
@@ -31,6 +31,4 @@ private:
     static void RemoveOldest();
     /// Освободить size байт памяти с начала буфера
     static void AllocateMemoryFromBegin(uint size);
-    /// Возвращает последний фрейм в памяти для записи данных потому что он фрейм поточечного вывода
-    static bool ReturnLastFrameP2PforRead(DataSettings *ds);
 };
