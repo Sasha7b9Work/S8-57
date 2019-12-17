@@ -3,6 +3,8 @@
 
 struct Console
 {
+    static void Init();
+
     static void Draw();
 
     static void AddString(char *string);
@@ -10,6 +12,7 @@ struct Console
     static bool IsShown();
     /// Эту фнукцию надо вызвыть, когда пользователь изменяет максимальное количество строк в консоли
     static void OnChanged_MaxStringsInConsole();
+
 private:
     static CHAR_BUF2(buffer, 33, 100);
     /// true означает, что идёт процесс вывода консоли и добавлять в неё новые строки нельзя (это происходит, когда добавление идёт из прерывания)

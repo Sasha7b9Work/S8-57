@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "device.h"
 #include "common/Transceiver.h"
+#include "Display/Console.h"
 #include "FlashDrive/FlashDrive.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/Battery.h"
@@ -28,6 +29,8 @@ static Device::Mode::E currentMode = Device::Mode::Osci;
 void Device::Init()
 {
     HAL::Init();
+
+    Console::Init();
 
     Timer::Init();
     

@@ -14,6 +14,14 @@ int Console::stringInConsole = 0;
 int16 Console::prevMaxStrinsInConsole = -1;
 
 
+void Console::Init()
+{
+    inProcessDraw = false;
+    inProcessAddingString = false;
+    stringInConsole = 0;
+    prevMaxStrinsInConsole = -1;
+}
+
 
 void Console::Draw()
 {
