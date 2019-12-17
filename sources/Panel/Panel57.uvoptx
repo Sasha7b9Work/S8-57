@@ -164,7 +164,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;3&gt;.\src\Hardware\Keyboard.cpp</Filename>
+          <Filename>.\src\Hardware\Keyboard.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\PanelOSC\src/Hardware/Keyboard.cpp\212</Expression>
         </Bp>
@@ -180,7 +180,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\device.cpp</Filename>
+          <Filename>d:\Projects\stm32\S8-57\sources\Panel\src\device.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -196,7 +196,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\device.cpp</Filename>
+          <Filename>d:\Projects\stm32\S8-57\sources\Panel\src\device.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
