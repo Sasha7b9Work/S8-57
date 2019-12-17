@@ -30,36 +30,21 @@ void HAL_FSMC::Init()
 
     HAL_PIO::Set(PIN_NE4);
 
-    GPIO_InitTypeDef is;
-    is.Mode = GPIO_MODE_AF_PP;
-    is.Pull = GPIO_PULLUP;
-    is.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    is.Alternate = GPIO_AF12_FMC;
-
     // Устанавливаем привязку для пинов шины данных
     // GPIOD 14, 15, 0, 1 - D0, D1, D2, D3
     // GPIOE  7, 8, 9, 10 - D4, D5, D6, D7
 
-    //GPIOD->PUPDR &= 0x0ffffff0U;     // Обнуляем пины 15, 14, 1, 0
-    //GPIOD->PUPDR |= 0xa000000aU;     // Устанавливаем для этих пинов GPIO_PULLDOWN
+    GPIOD->PUPDR &= 0x0ffffff0U;     // Обнуляем пины 15, 14, 1, 0
+    GPIOD->PUPDR |= 0xa000000aU;     // Устанавливаем для этих пинов GPIO_PULLDOWN
 
-    is.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_14 | GPIO_PIN_15;
-    HAL_GPIO_Init(GPIOD, &is);
-
-    //GPIOE->PUPDR &= 0xffc03fffU;     // Обнуляем пины 7, 8, 9, 10
-    //GPIOE->PUPDR |= 0x00268000U;     // Устанавливаем для этих пинов GPIO_PULLDOWN
-
-    is.Pin = GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10;
-    HAL_GPIO_Init(GPIOE, &is);
+    GPIOE->PUPDR &= 0xffc03fffU;     // Обнуляем пины 7, 8, 9, 10
+    GPIOE->PUPDR |= 0x00268000U;     // Устанавливаем для этих пинов GPIO_PULLDOWN
 
     // Настроим адресные выводы для ПЛИС
 
     //               A0           A1           A2           A3           A4           A5
     //isGPIO.Pin = GPIO _PIN_0 | GPIO _PIN_1 | GPIO _PIN_2 | GPIO _PIN_3 | GPIO _PIN_4 | GPIO _PIN_5;
     //HAL_GPIO_Init(GPIOF, &isGPIO);
-
-    is.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5;
-    HAL_GPIO_Init(GPIOF, &is);
 
     GPIOF->AFR[0] &= HEX_FROM_2(ff00, 0000);
     GPIOF->AFR[0] |= HEX_FROM_2(00cc, cccc);    // Устанавливаем GPIO_AF12_FMC
@@ -135,7 +120,7 @@ void HAL_FSMC::Configure()
 {
     DataBusMode::state = DataBusMode::FPGA;
 
-    static GPIO_InitTypeDef isGPIO =
+    static const GPIO_InitTypeDef isGPIO =
     {   //    NOE          NWE          NE1
         GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_7,
         GPIO_MODE_AF_PP,
@@ -174,12 +159,6 @@ void HAL_FSMC::Configure()
 
     GPIOE->MODER &= HEX_FROM_2(ffc0, 3fff);
     GPIOE->MODER |= HEX_FROM_2(002a, 8fff);     // Alternate function mode
-
-    isGPIO.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_14 | GPIO_PIN_15;
-    HAL_GPIO_Init(GPIOD, &isGPIO);
-
-    isGPIO.Pin = GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10;
-    HAL_GPIO_Init(GPIOE, &isGPIO);
 }
 
 
@@ -203,7 +182,7 @@ void HAL_FSMC::WriteToFPGA8(uint8 *address, uint8 value)
     {
         Configure();
     }
-    
+
     *address = value;
 }
 
