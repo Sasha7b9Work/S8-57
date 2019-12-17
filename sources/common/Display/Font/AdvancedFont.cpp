@@ -2,6 +2,7 @@
 #include "AdvancedFont.h"
 #include "fontGOST28.inc"
 #include "fontGOST72bold.inc"
+#include "fontOMEGA72.inc"
 
 
 struct NativeSymbol
@@ -51,6 +52,10 @@ AdvancedFont::AdvancedFont(TypeFont::E t)
     else if(currentType == TypeFont::_GOST72bold)
     {
         font = fontGOST72bold;
+    }
+    else if(currentType == TypeFont::_OMEGA72)
+    {
+        font = fontOMEGA72;
     }
     else
     {

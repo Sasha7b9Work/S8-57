@@ -68,7 +68,20 @@ static void DrawSymbols()
 
     Font::SetSpacing(5);
 
-    Text(&outBuffer[7]).Draw(120, 125);
+    if(outBuffer[8] == '\x01')
+    {
+        x = Text(String(outBuffer[7])).Draw(120, 125);
+
+        Font::Set(TypeFont::_OMEGA72);
+
+        Text(String('\x01')).Draw(x + 5, 130);
+
+        Font::Set(TypeFont::_GOST72bold);
+    }
+    else
+    {
+        Text(&outBuffer[7]).Draw(120, 125);
+    }
 
     Font::SetSpacing(1);
 }
@@ -84,7 +97,7 @@ static void DrawMeasure()
     
     DrawSymbols();
 
-    Font::Pop();
+    Font::Set(TypeFont::_8);
 }
 
 
@@ -153,10 +166,10 @@ void DisplayMultimeter::ChangedMode()
         {"V=", "V=", "V="},
         {"V~", "V~", "V~"},
         {"mA=", "A="},
-        {"mA=", "A="},
-        {"k\x5e", "k\x5e", "k\x5e", "M\x5e"},
+        {"mA~", "A~"},
+        {"k\x01", "k\x01", "k\x01", "M\x01"},
         {"V="},
-        {"k\x5e="}
+        {"k\x01"}
     };
 
     outBuffer[position[Multimeter::Measure()][GetRange()]] = '.';
