@@ -2,6 +2,7 @@
 #include "Data/DataSettings.h"
 #include "Data/Heap.h"
 #include "Hardware/Memory/RAM.h"
+#include "Osci/Osci.h"
 #include "Utils/Math.h"
 #include <cstring>
 #include <cstdlib>
@@ -123,13 +124,19 @@ void RAM::Init()
 }
 
 
-void RAM::PrepareForNewData(DataSettings *ds)
+DataSettings *RAM::PrepareForNewData()
 {
-    ds->Fill();
+    DataSettings ds;
+    ds.Fill();
 
-    ds->id = NumberDatas() ? Get()->id + 1 : 0;
+    //if(ReturnLastFrameP2PforRead(&ds))
+    //{
+    //    return;
+    //}
 
-    uint address = AllocateMemoryForPacket(ds);         // Находим адрес для записи нового пакета
+    ds.id = NumberDatas() ? Get()->id + 1 : 0;
+
+    uint address = AllocateMemoryForPacket(&ds);         // Находим адрес для записи нового пакета
 
     if (newest)
     {
@@ -138,7 +145,31 @@ void RAM::PrepareForNewData(DataSettings *ds)
 
     newest = reinterpret_cast<Packet *>(address);       // Устанавилваем этот адрес в качестве новейшего пакета
 
-    newest->Prepare(ds);                                   // И упаковываем данные
+    newest->Prepare(&ds);                               // И упаковываем данные
+}
+
+
+bool RAM::ReturnLastFrameP2PforRead(DataSettings *ds)
+{
+    if(Osci::InModeP2P())
+    {
+        DataSettings *last = Get();
+
+        if(last && last->Equals(ds))
+        {
+            if(DataSettings::isFrameP2P)    // Если последний есть фрейм поточечного вывода
+            {
+                ds->dataA = last->dataA;
+                ds->dataB = last->dataB;
+
+                DataSettings::isFrameP2P = false;
+
+                return true;
+            }
+        }
+    }
+
+    return false;
 }
 
 

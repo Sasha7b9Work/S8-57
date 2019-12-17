@@ -31,13 +31,11 @@ bool Test::RAM::Test()
             line = Display::AddMessage(String("Запись %d из %d, %3.1f%%", i, numRecord, 100.0F * i / numRecord).c_str(), line);
         }
 
-        DataSettings ds;
+        DataSettings *ds = ::RAM::PrepareForNewData();
 
-        PrepareDS(&ds);
+        PrepareDS(ds);
 
-        ::RAM::PrepareForNewData(&ds);
-
-        FillData(&ds);
+        FillData(ds);
 
         for (uint j = 0; j < ::RAM::NumberDatas(); j++)
         {
