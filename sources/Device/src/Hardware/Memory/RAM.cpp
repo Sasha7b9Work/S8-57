@@ -146,6 +146,8 @@ DataSettings *RAM::PrepareForNewData()
     newest = reinterpret_cast<Packet *>(address);       // Устанавилваем этот адрес в качестве новейшего пакета
 
     newest->Prepare(&ds);                               // И упаковываем данные
+
+    return Get(0);
 }
 
 

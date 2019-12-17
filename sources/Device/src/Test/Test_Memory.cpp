@@ -141,10 +141,12 @@ static void PrepareDS(DataSettings *ds)
 }
 
 
-static DataSettings *CreateDataInRAM(DataSettings *ds)
+static DataSettings *CreateDataInRAM(DataSettings *)
 {
-    PrepareDS(ds);
-    ::RAM::PrepareForNewData(ds);
-    FillData(ds);
-    return ds;
+
+    return nullptr;
+    //PrepareDS(ds);
+    //::RAM::PrepareForNewData(ds);
+    //FillData(ds);
+    //return ds;
 }

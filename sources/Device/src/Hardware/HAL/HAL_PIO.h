@@ -25,7 +25,7 @@
 #define PIN_P2P         HPort::_F, HPin::_11
 #define PIN_TESTER_ON   HPort::_A, HPin::_3
 #define PIN_TESTER_I    HPort::_B, HPin::_2
-#define PIN_TESTER_U    HPort::_F, HPin::_0
+#define PIN_TESTER_U    HPort::_B, HPin::_0
 #define PIN_TESTER_PNP  HPort::_A, HPin::_6
 #endif
 
