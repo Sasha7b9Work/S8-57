@@ -123,13 +123,15 @@ void RAM::Init()
 }
 
 
-void RAM::PrepareForNewData(DataSettings *ds)
+DataSettings *RAM::PrepareForNewData()
 {
-    ds->Fill();
+    DataSettings ds;
 
-    ds->id = NumberDatas() ? Get()->id + 1 : 0;
+    ds.Fill();
 
-    uint address = AllocateMemoryForPacket(ds);         // Находим адрес для записи нового пакета
+    ds.id = NumberDatas() ? Get()->id + 1 : 0;
+
+    uint address = AllocateMemoryForPacket(&ds);         // Находим адрес для записи нового пакета
 
     if (newest)
     {
@@ -138,7 +140,9 @@ void RAM::PrepareForNewData(DataSettings *ds)
 
     newest = reinterpret_cast<Packet *>(address);       // Устанавилваем этот адрес в качестве новейшего пакета
 
-    newest->Prepare(ds);                                   // И упаковываем данные
+    newest->Prepare(&ds);                                   // И упаковываем данные
+
+    return Get();
 }
 
 

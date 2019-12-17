@@ -66,8 +66,7 @@ void Osci::Start()
 
     if (InModeP2P())
     {
-        DataSettings ds;
-        RAM::PrepareForNewData(&ds);
+        RAM::PrepareForNewData();
     }
 
     FPGA::isRunning = true;

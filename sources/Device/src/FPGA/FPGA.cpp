@@ -98,12 +98,11 @@ void FPGA::ClearDataRand()
 
 void FPGA::ReadData()
 {
-    DataSettings ds;
-    RAM::PrepareForNewData(&ds);
+    DataSettings *ds = RAM::PrepareForNewData();
 
-    if (ReadDataChannel(Chan::A, ds.dataA))
+    if (ReadDataChannel(Chan::A, ds->dataA))
     {
-        if (ReadDataChannel(Chan::B, ds.dataB))
+        if (ReadDataChannel(Chan::B, ds->dataB))
         {
         }
         else
