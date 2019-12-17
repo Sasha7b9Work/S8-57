@@ -164,9 +164,9 @@ void DisplayMultimeter::ChangedMode()
     static const pString suffix[Multimeter::Measure::Count][4] =
     {
         {"V=", "V=", "V="},
-        {"V~", "V~", "V~"},
+        {"V\x7e", "V\x7e", "V\x7e"},
         {"mA=", "A="},
-        {"mA~", "A~"},
+        {"mA\x7e", "A\x7e"},
         {"k\x01", "k\x01", "k\x01", "M\x01"},
         {"V="},
         {"k\x01"}
