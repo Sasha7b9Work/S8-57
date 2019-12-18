@@ -232,7 +232,7 @@ static void OnPress_Calibrate0()
 DEF_BUTTON( bCalibrate0,
     "Калибр 0",
     "",
-    &PageMultimeter::PageCalibration::self, Item::Active, OnPress_Calibrate0
+    &PageMultimeter::Calibration::self, Item::Active, OnPress_Calibrate0
 )
 
 
@@ -244,7 +244,7 @@ static void OnPress_Calibrate1()
 DEF_BUTTON( bCalibrate1,
     "Калибр 1",
     "",
-    &PageMultimeter::PageCalibration::self, Item::Active, OnPress_Calibrate1
+    &PageMultimeter::Calibration::self, Item::Active, OnPress_Calibrate1
 )
 
 DEF_PAGE_2( pCalibration,
@@ -255,7 +255,7 @@ DEF_PAGE_2( pCalibration,
     PageName::Multimeter_Cal, &PageMultimeter::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageMultimeter::PageCalibration::self = static_cast<const Page *>(&pCalibration);
+const Page * const PageMultimeter::Calibration::self = static_cast<const Page *>(&pCalibration);
 
 
 void PageMultimeter::DecodePassword(const KeyEvent &event)
@@ -292,7 +292,7 @@ void PageMultimeter::DecodePassword(const KeyEvent &event)
 
             Item **items = const_cast<Item **>(page->OwnData()->items);
 
-            items[4] = const_cast<Page *>(PageMultimeter::PageCalibration::self);
+            items[4] = const_cast<Page *>(PageMultimeter::Calibration::self);
 
             Menu::CloseOpenedItem();
         }

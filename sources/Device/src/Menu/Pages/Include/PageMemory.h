@@ -175,13 +175,13 @@ struct PageDrive
     static const Page * const self;
 
 
-    struct PageManager
+    struct Manager
     {
         static const Page * const self;
     };
 
 
-    struct PageMask
+    struct Mask
     {
         static const Page * const self;
     };

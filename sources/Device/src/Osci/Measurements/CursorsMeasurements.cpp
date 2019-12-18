@@ -27,7 +27,7 @@ float CursorsMeasurements::PosU(Chan::E ch, int numCur)
 bool CursorsMeasurements::NecessaryDraw()
 {
     return (CursorsControl::IsDisabledU() || CursorsControl::IsDisabledT()) &&
-        (set.curs.showCursors || (Menu::OpenedItem() == PageCursorsMeasures::PageSet::self));
+        (set.curs.showCursors || (Menu::OpenedItem() == PageCursorsMeasures::Set::self));
 }
 
 

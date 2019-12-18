@@ -25,7 +25,7 @@ struct PageMultimeter
     static const Page *const self;
 
 
-    struct PageCalibration
+    struct Calibration
     {
         static const Page *const self;
     };

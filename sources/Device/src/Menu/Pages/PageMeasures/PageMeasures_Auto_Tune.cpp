@@ -14,7 +14,7 @@ static void Draw_Markers(int x, int y)
 DEF_GRAPH_BUTTON( bMarkers,                                                                                                                          //--- ИЗМЕРЕНИЯ - НАСТРОИТЬ - Маркер ---
     "Маркер",
     "Позволяет установить маркеры для визуального контроля измерений",
-    &PageAutoMeasures::PageTune::self, Item::Active, Measure::ShortPressOnSmallButonMarker, Draw_Markers
+    &PageAutoMeasures::Tune::self, Item::Active, Measure::ShortPressOnSmallButonMarker, Draw_Markers
 )
 
 
@@ -26,7 +26,7 @@ static void Draw_Settings(int x, int y)
 DEF_GRAPH_BUTTON( bSettings,                                                                                                                      //--- ИЗМЕРЕНИЯ - НАСТРОИТЬ - Настройка ---
     "Настройка",
     "Позволяет выбрать необходимые измерения",
-    &PageAutoMeasures::PageTune::self, Item::Active, PageChoiceMeasures::ChangeState, Draw_Settings
+    &PageAutoMeasures::Tune::self, Item::Active, PageChoiceMeasures::ChangeState, Draw_Settings
 )
 
 
@@ -54,4 +54,4 @@ DEF_PAGE_2( pTune,
     PageName::AutoMeasures_Tune, &PageAutoMeasures::self, IsActive_Tune, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, HandlerKey_Tune
 )
 
-const Page *const PageAutoMeasures::PageTune::self = static_cast<const Page *>(&pTune);
+const Page *const PageAutoMeasures::Tune::self = static_cast<const Page *>(&pTune);

@@ -233,7 +233,7 @@ struct PageAutoMeasures
     static const Page * const self;
 
 
-    class PageTune
+    class Tune
     {
     public:
         static const Page * const self;
@@ -247,7 +247,7 @@ struct PageCursorsMeasures
     static const Page * const self;
 
 
-    struct PageSet
+    struct Set
     {
         static const Page * const self;
 

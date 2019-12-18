@@ -93,7 +93,7 @@ static void Draw_Manager_Tab(int x, int y)
 DEF_GRAPH_BUTTON( bManager_Tab,                                                                                                                   //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Tab ---
     "Tab",
     "Переход между каталогами и файлами",
-    &PageDrive::PageManager::self, Item::Active, FileManager::Press_Tab, Draw_Manager_Tab
+    &PageDrive::Manager::self, Item::Active, FileManager::Press_Tab, Draw_Manager_Tab
 )
 
 
@@ -105,7 +105,7 @@ static void Draw_Manager_LevelUp(int x, int y)
 DEF_GRAPH_BUTTON( bManager_LevelUp,                                                                                                 //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Выйти из каталога ---
     "Выйти из каталого",
     "Переход в родительский каталог",
-    &PageDrive::PageManager::self, Item::Active, FileManager::Press_LevelUp, Draw_Manager_LevelUp
+    &PageDrive::Manager::self, Item::Active, FileManager::Press_LevelUp, Draw_Manager_LevelUp
 )
 
 
@@ -117,7 +117,7 @@ static void Draw_Manager_LevelDown(int x, int y)
 DEF_GRAPH_BUTTON( bManager_LevelDown,                                                                                                 //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ - Войти в каталог ---
     "Войти в каталог",
     "Переход в выбранный каталог",
-    &PageDrive::PageManager::self, Item::Active, FileManager::Press_LevelDown, Draw_Manager_LevelDown
+    &PageDrive::Manager::self, Item::Active, FileManager::Press_LevelDown, Draw_Manager_LevelDown
 )
 
 
@@ -150,7 +150,7 @@ DEF_PAGE_3( pManager,                                                           
     &PageDrive::self, IsActive_Drive_Manager, Page::NormalTitle, PageMemory::OnOpenClose_Drive_Manager, Page::BeforeDraw, FileManager::HandlerKey
 )
 
-const Page * const PageDrive::PageManager::self = static_cast<const Page *>(&pManager);
+const Page * const PageDrive::Manager::self = static_cast<const Page *>(&pManager);
 
 
 DEF_CHOICE_2( cDrive_Name,                                                                                                                            //--- ПАМЯТЬ - ВНЕШН ЗУ - Имя файла ---
@@ -179,7 +179,7 @@ static void Draw_Delete(int x, int y)
 DEF_GRAPH_BUTTON( bMask_Delete,                                                                                                                 //--- ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Удалить ---
     "Удалить",
     "Удаляет все введённые символы",
-    &PageDrive::PageMask::self, Item::Active, OnPress_Mask_Delete, Draw_Delete
+    &PageDrive::Mask::self, Item::Active, OnPress_Mask_Delete, Draw_Delete
 )
 
 
@@ -207,7 +207,7 @@ static void Draw_Backspace(int x, int y)
 DEF_GRAPH_BUTTON( bMask_Backspace,                                                                                                      //--- ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Backspace ---
     "Backspace",
     "Удаляет последний введённый символ",
-    &PageDrive::PageMask::self, Item::Active, OnPress_Mask_Backspace, Draw_Backspace
+    &PageDrive::Mask::self, Item::Active, OnPress_Mask_Backspace, Draw_Backspace
 )
 
 
@@ -255,7 +255,7 @@ static void Draw_Insert(int x, int y)
 DEF_GRAPH_BUTTON( bMask_Insert,                                                                                                                //--- ПАМЯТЬ - ВНЕШН ЗУ - МАСКА - Вставить ---
     "Вставить",
     "Вставляет выбранный символ",
-    &PageDrive::PageMask::self, Item::Active, OnPress_Mask_Insert, Draw_Insert
+    &PageDrive::Mask::self, Item::Active, OnPress_Mask_Insert, Draw_Insert
 )
 
 
@@ -425,7 +425,7 @@ DEF_PAGE_3( pMask,                                                              
     &PageDrive::self, IsActive_Mask, Page::NormalTitle, OnOpenClose_Mask, Page::BeforeDraw, HandlerKey_Mask
 )
 
-const Page * const PageDrive::PageMask::self = static_cast<const Page *>(&pMask);
+const Page * const PageDrive::Mask::self = static_cast<const Page *>(&pMask);
 
 
 DEF_CHOICE_2( cDrive_Autoconnect,                                                                                                               //--- ПАМЯТЬ - ВНЕШН ЗУ - Автоподключение ---
@@ -437,12 +437,12 @@ DEF_CHOICE_2( cDrive_Autoconnect,                                               
 )
 
 
-       DEF_PAGE_6( pDrive,   //-V1027                                                                                                                             //--- ПАМЯТЬ - ВНЕШН ЗУ ---
+DEF_PAGE_6( pDrive,   //-V1027                                                                                                                                    //--- ПАМЯТЬ - ВНЕШН ЗУ ---
     "ВНЕШН ЗУ",
     "Работа с внешним запоминающим устройством.",
-    PageDrive::PageManager::self,
+    PageDrive::Manager::self,
     &cDrive_Name,
-    PageDrive::PageMask::self,
+    PageDrive::Mask::self,
     &cDrive_SaveAs,
     &cDrive_ModeBtnMemory,
     &cDrive_Autoconnect,

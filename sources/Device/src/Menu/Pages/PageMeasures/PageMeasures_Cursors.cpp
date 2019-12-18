@@ -42,7 +42,7 @@ DEF_PAGE_3( pCursors,                                                           
     "Курсорные измерения",
     &cShow,
     &cShowFreq,
-    PageCursorsMeasures::PageSet::self,
+    PageCursorsMeasures::Set::self,
     PageName::CursorsMeasures, &PageMeasures::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 

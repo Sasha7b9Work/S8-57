@@ -59,7 +59,7 @@ DEF_PAGE_4( pAuto,                                                              
     &cIsShow,
     &cNumber,
     &cChannels,
-    PageAutoMeasures::PageTune::self,
+    PageAutoMeasures::Tune::self,
     PageName::AutoMeasures, &PageMeasures::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 

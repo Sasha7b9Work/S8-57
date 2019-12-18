@@ -137,7 +137,7 @@ void Menu::ChangeStateFlashDrive()
 {
     if(!FDrive::IsConnected())
     {
-        if(Menu::OpenedItem() == PageDrive::PageManager::self)
+        if(Menu::OpenedItem() == PageDrive::Manager::self)
         {
             OpenedItem()->HandlerFX(TypePress::Release);
         }
