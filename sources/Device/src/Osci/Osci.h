@@ -51,10 +51,17 @@ private:
 
     static void UpdateFPGA();
 
+    /// Функции старта
     static void (*funcStart)();
     static void StartAuto();
     static void StartWait();
     static void StartSingle();
+
+    /// Функции стопа
+    static void (*funcStop)(bool pause);
+    static void StopAuto(bool pause = false);
+    static void StopWait(bool pause = false);
+    static void StopSingle(bool pause = false);
 };
 
 struct AveragerOsci

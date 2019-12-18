@@ -52,6 +52,7 @@ typedef void (*pFuncVB)(bool);
 typedef bool (*pFuncBV)();
 
 void EmptyFuncVV();
+void EmptyFuncVB(bool);
 
 
 #ifndef _WIN32

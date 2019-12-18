@@ -13,6 +13,7 @@
 
 int Osci::addShift = 0;
 void (*Osci::funcStart)() = EmptyFuncVV;
+void (*Osci::funcStop)(bool) = EmptyFuncVB;
 
 
 void Osci::Init()
@@ -244,9 +245,13 @@ Osci::StructReadRand Osci::GetInfoForReadRand(int Tsm, const uint8 *address)
 
 void Osci::ChangedTrigStartMode()
 {
-    static const pFuncVV funcs[TrigStartMode::Count] = {Osci::StartAuto, Osci::StartWait, Osci::StartSingle};
+    static const pFuncVV start[TrigStartMode::Count] = {Osci::StartAuto, Osci::StartWait, Osci::StartSingle};
 
-    funcStart = funcs[TrigStartMode()];
+    static const pFuncVB stop[TrigStartMode::Count] = {Osci::StopAuto, Osci::StopWait, Osci::StopSingle};
+
+    funcStart = start[TrigStartMode()];
+
+    funcStop = stop[TrigStartMode()];
 }
 
 
@@ -293,6 +298,24 @@ void Osci::StartSingle()
     }
 
     FPGA::isRunning = true;
+}
+
+
+void Osci::StopAuto(bool pause)
+{
+
+}
+
+
+void Osci::StopWait(bool pause)
+{
+
+}
+
+
+void Osci::StopSingle(bool pause)
+{
+
 }
 
 
