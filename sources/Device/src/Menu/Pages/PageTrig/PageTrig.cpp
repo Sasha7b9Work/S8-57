@@ -6,33 +6,7 @@
 
 void PageTrig::OnChanged_Mode(bool)
 {
-    Osci::Stop();
-    if(!TrigStartMode::IsSingle())
-    {
-        Osci::OnPressStart();
-    }
-    
-    // Елси находимся в режиме рандомизатора
-    if(Osci::InModeRandomizer())
-    /// \todo Это вместо функции sTime_RandomizeModeEnabled() было сделано потому, что с функцией экран периодически отваливался
-    //if (SET_TBASE < TBase_50ns)
-    {
-        // и переключаемся на одиночный режим запуска, то надо сохранить имеющийся тип выборки, чтобы восстановить при возвращении в режим 
-        // рандомизатора автоматический или ждущий
-        if (TrigStartMode::IsSingle())
-        {
-            set.time.sampleTypeOld = SampleType();
-            SampleType().Set(SampleType::Real);
-        }
-        else if(TrigStartMode::IsAuto())    // Иначе восстановим ранее сохранённый
-        {
-            SampleType().Set(set.time.sampleTypeOld);
-        }
-		else
-		{
-			// нет действий
-		}
-    }
+    Osci::ChangedTrigStartMode();
 }
 
 DEF_CHOICE_3( cMode, // -V206                                                                                                                                         //--- СИНХР - Режим ---

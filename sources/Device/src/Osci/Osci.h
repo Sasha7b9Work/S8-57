@@ -68,6 +68,8 @@ private:
     static void StopAutoP2P();
     static void StopWaitP2P();
     static void StopSingleP2P();
+
+    static void SetFunctionsStartStop();
 };
 
 struct AveragerOsci

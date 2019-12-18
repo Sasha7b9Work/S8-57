@@ -236,16 +236,49 @@ Osci::StructReadRand Osci::GetInfoForReadRand(int Tsm, const uint8 *address)
 
 void Osci::ChangedTrigStartMode()
 {
+    Stop();
+
+    SetFunctionsStartStop();
+
+    if(!TrigStartMode::IsSingle())
+    {
+        OnPressStart();
+    }
+
+    // Елси находимся в режиме рандомизатора
+    if(Osci::InModeRandomizer())
+    {
+        // и переключаемся на одиночный режим запуска, то надо сохранить имеющийся тип выборки, чтобы восстановить при возвращении в режим 
+        // рандомизатора автоматический или ждущий
+        if(TrigStartMode::IsSingle())
+        {
+            set.time.sampleTypeOld = SampleType();
+            SampleType().Set(SampleType::Real);
+        }
+        else if(TrigStartMode::IsAuto())    // Иначе восстановим ранее сохранённый
+        {
+            SampleType().Set(set.time.sampleTypeOld);
+        }
+        else
+        {
+            // нет действий
+        }
+    }
+}
+
+
+void Osci::SetFunctionsStartStop()
+{
     static const pFuncVV start[2][TrigStartMode::Count] =
     {
         { EmptyFuncVV /*Osci::StartAutoP2P*/,  EmptyFuncVV /*Osci::StartWaitP2P*/,  EmptyFuncVV /*Osci::StartSingleP2P*/ },
-        { EmptyFuncVV /*Osci::StartAutoReal*/, EmptyFuncVV /*Osci::StartWaitReal*/, EmptyFuncVV /*Osci::StartSingleReal*/ }
+        { Osci::StartAutoReal, EmptyFuncVV /*Osci::StartWaitReal*/, EmptyFuncVV /*Osci::StartSingleReal*/ }
     };
 
     static const pFuncVV stop[2][TrigStartMode::Count] =
     {
         { EmptyFuncVV /*Osci::StopAutoP2P*/,  EmptyFuncVV /*Osci::StopWaitP2P*/,  EmptyFuncVV /*Osci::StopSingleP2P*/ },
-        { EmptyFuncVV /*Osci::StopAutoReal*/, EmptyFuncVV /*Osci::StopWaitReal*/, EmptyFuncVV /*Osci::StopSingleReal*/ }
+        { Osci::StopAutoReal, EmptyFuncVV /*Osci::StopWaitReal*/, EmptyFuncVV /*Osci::StopSingleReal*/ }
     };
 
     int index = InModeP2P() ? 0 : 1;
@@ -258,19 +291,26 @@ void Osci::ChangedTrigStartMode()
 
 void Osci::StartAutoReal()
 {
+    FPGA::givingStart = false;
+    FPGA::addrRead = 0xffff;
 
+    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::pred);
+    HAL_FSMC::WriteToFPGA16(WR::POST_LO, FPGA::post);
+    HAL_FSMC::WriteToFPGA8(WR::START, 0xff);
+
+    FPGA::isRunning = true;
 }
 
 
 void Osci::StartAutoP2P()
 {
-
+    
 }
 
 
 void Osci::StopAutoReal()
 {
-
+    FPGA::isRunning = false;
 }
 
 
