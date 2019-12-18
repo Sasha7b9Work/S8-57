@@ -11,8 +11,6 @@
 #include "Osci/Measurements/AutoMeasurements.h"
 
 
-extern bool givingStart;
-
 int Osci::addShift = 0;
 void (*Osci::funcStart)() = EmptyFuncVV;
 
@@ -119,12 +117,11 @@ void Osci::UpdateFPGA()
     {
         FPGA::ReadFlag();
     
-        if (FPGA::flag.Pred() && !givingStart)
+        if (FPGA::flag.Pred() && !FPGA::givingStart)
         {
             if (!Osci::InModeRandomizer() && TrigStartMode::IsAuto() && FPGA::flag.HoldOff())
             {
                 FPGA::GiveStart();
-                givingStart = true;
             }
             if (!FPGA::flag.TrigReady())
             {

@@ -89,6 +89,8 @@ private:
     static FlagFPGA flag;
     /// Здесь хранится адрес, начиная с которого будем читать данные по каналам. Если addrRead == 0xffff, то адрес вначале нужно считать
     static uint16 addrRead;
+    /// True, если дан запуск
+    static bool givingStart;
 };
 
 struct GPIO

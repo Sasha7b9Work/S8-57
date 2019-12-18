@@ -8,6 +8,7 @@
 #include <cstring>
 
 
+bool   FPGA::givingStart = false;
 uint16 FPGA::valueADC = 0;
 uint16 FPGA::post = static_cast<uint16>(~(512));
 uint16 FPGA::pred = static_cast<uint16>(~(512));
@@ -16,9 +17,6 @@ uint8 dataRand[Chan::Count][ENumPointsFPGA::MAX_NUM];    ///< Здесь будут данные
 
 bool          FPGA::isRunning = false;
 StateWorkFPGA FPGA::fpgaStateWork = StateWorkFPGA_Stop;
-
-/// True, если дан запуск
-bool givingStart = false;
 
 
 void FPGA::GiveStart()
@@ -33,6 +31,8 @@ void FPGA::GiveStart()
 
     HAL_FSMC::WriteToFPGA8(WR::TRIG, static_cast<uint8>(value++ | stop));
     HAL_FSMC::WriteToFPGA8(WR::TRIG, static_cast<uint8>((value % 2) | stop));
+
+    givingStart = true;
 }
 
 

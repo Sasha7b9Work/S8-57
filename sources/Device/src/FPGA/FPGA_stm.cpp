@@ -7,7 +7,6 @@
 #include <cstring>
 
 
-extern bool givingStart;
 extern uint8 dataRand[Chan::Count][ENumPointsFPGA::MAX_NUM];
 
 uint16 FPGA::addrRead = 0xffff;
