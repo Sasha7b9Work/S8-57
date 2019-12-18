@@ -101,7 +101,7 @@ static void Draw_Cursors_Source(int x, int y)
 DEF_GRAPH_BUTTON( bCursors_Source,                                                                                                            //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ - Источник ---
     "Источник",
     "Выбор источника для расчёта спектра",
-    &PageFFT::PageCursors::self, Item::Active, OnPress_Cursors_Source, Draw_Cursors_Source
+    &PageFFT::Cursors::self, Item::Active, OnPress_Cursors_Source, Draw_Cursors_Source
 )
 
 
@@ -130,7 +130,7 @@ DEF_PAGE_1( pCursors,                                                           
     PageName::FFT_Cursors, &PageFFT::self, IsActive_Parameter, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, HandlerKey_FFT_Cursors
 )
 
-const Page * const PageFFT::PageCursors::self = static_cast<const Page *>(&pCursors);
+const Page * const PageFFT::Cursors::self = static_cast<const Page *>(&pCursors);
 
 static bool IsActive_FFT()
 {

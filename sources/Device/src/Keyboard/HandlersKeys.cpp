@@ -222,7 +222,7 @@ void Handlers::OnArrow()
             openedItem->HandlerKey(event);
         }
     }
-    else if (openedItem == PageFFT::PageCursors::self)
+    else if (openedItem == PageFFT::Cursors::self)
     {
         openedItem->HandlerKey(event);
     }

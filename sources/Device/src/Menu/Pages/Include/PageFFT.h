@@ -78,7 +78,7 @@ struct PageFFT
 {
     static const Page *const self;
 
-    struct PageCursors
+    struct Cursors
     {
         static const Page *const self;
     };
