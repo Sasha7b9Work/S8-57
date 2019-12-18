@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Data/DataSettings.h"
+#include "Hardware/HAL/HAL.h"
 #include "Osci/Osci.h"
 #include "Settings/Settings.h"
 #include "Utils/Buffer.h"
@@ -36,7 +37,8 @@ void DataSettings::Fill()
     Lval_PEAKDET(this)   = PeakDetMode();
     Lval_DIVIDER_A(this) = Divider(Chan::A);
     Lval_DIVIDER_B(this) = Divider(Chan::B);
-    TIME_MS_DS(this)     = 0;                   // Ёто важно дл€ режима поточеного вывода. ќзначает, что полный сигнал ещЄ не считан
+    TIME_TIME(this)      = HAL_RTC::GetPackedTime();
+    TIME_MS_DS(this)     = 0;
     ENUM_POINTS(this)    = ENumPointsFPGA();
 }
 

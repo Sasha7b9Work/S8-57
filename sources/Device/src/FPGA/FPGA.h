@@ -79,8 +79,6 @@ private:
 
     static uint16 post;
     static uint16 pred;
-    /// Время подачи старта
-    static uint timeStart;
     /// Значение, считанное из handleADC
     static uint16 valueADC;
 

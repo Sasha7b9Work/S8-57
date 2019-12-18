@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Data/DataSettings.h"
 #include "Data/Heap.h"
+#include "Hardware/Timer.h"
 #include "Hardware/Memory/RAM.h"
 #include "Osci/Osci.h"
 #include "Utils/Math.h"
@@ -131,6 +132,7 @@ DataSettings *RAM::PrepareForNewData()
     if(result)
     {
         DataSettings::isFrameP2P = false;
+        TIME_MS_DS(result) = TIME_MS;       // «десь записываем врем€ считывани€ полного фрейма поточечного режима, чтобы знать, когда давать следующий старт в автоматическом режиме
         return result;
     }
 

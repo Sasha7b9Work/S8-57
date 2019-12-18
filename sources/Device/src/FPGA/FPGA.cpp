@@ -15,7 +15,6 @@ uint16 FPGA::pred = static_cast<uint16>(~(512));
 uint8 dataRand[Chan::Count][ENumPointsFPGA::MAX_NUM];    ///< «десь будут данные рандомизатора
 
 bool          FPGA::isRunning = false;
-uint          FPGA::timeStart = 0;
 StateWorkFPGA FPGA::fpgaStateWork = StateWorkFPGA_Stop;
 
 /// True, если дан запуск

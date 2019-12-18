@@ -62,14 +62,45 @@ void Osci::Start()
     HAL_FSMC::WriteToFPGA16(WR::POST_LO, FPGA::post);
     HAL_FSMC::WriteToFPGA8(WR::START, 0xff);
 
-    FPGA::timeStart = TIME_MS;
-
     if (InModeP2P())
     {
-        RAM::PrepareForNewData();
+        DataSettings *last = RAM::Get();
+
+        if(last == nullptr)
+        {
+            RAM::PrepareForNewData();
+        }
+        else
+        {
+            DataSettings ds;
+            ds.Fill();
+
+            if(!last->Equals(ds) || (TIME_MS - TIME_MS_DS(last) > 1000))
+            {
+                RAM::PrepareForNewData();
+            }
+        }
     }
 
     FPGA::isRunning = true;
+}
+
+
+void Osci::Update()
+{
+    if(!Device::InModeOsci())
+    {
+        return;
+    }
+
+    if(FPGA::IsRunning())
+    {
+        UpdateFPGA();
+    };
+
+    Reader::ReadDataFromRAM();
+
+    AutoMeasurements::SetData();
 }
 
 
@@ -92,24 +123,6 @@ void Osci::Restart()
 bool Osci::IsRunning()
 {
     return FPGA::IsRunning();
-}
-
-
-void Osci::Update()
-{
-    if (!Device::InModeOsci())
-    {
-        return;
-    }
-
-    if (FPGA::IsRunning())
-    {
-        UpdateFPGA();
-    };
-
-    Reader::ReadDataFromRAM();
-
-    AutoMeasurements::SetData();
 }
 
 
@@ -167,7 +180,7 @@ void Osci::UpdateFPGA()
 
 void Osci::ReadPointP2P()
 {
-    if (InModeP2P() && FPGA::IsRunning() && HAL_PIO::Read(PIN_P2P))
+    if (DataSettings::isFrameP2P && InModeP2P() && FPGA::IsRunning() && HAL_PIO::Read(PIN_P2P))
     {
         HAL_FSMC::SetAddrData(RD::DATA_A, RD::DATA_A + 1);
         BitSet16 dataA(HAL_FSMC::ReadData0(), HAL_FSMC::ReadData1());
