@@ -8,6 +8,9 @@
 #include <cstring>
 
 
+#define SYMBOL_OMEGA '\x01'
+
+
 /// Данные для вывода.
 static char outBuffer[15];
 
@@ -20,7 +23,6 @@ static void PrepareResistance(const char *);
 static void PrepareTestDiode(const char *);
 
 static bool received = false;
-
 
 
 static char Symbol(uint i)
@@ -175,6 +177,11 @@ void DisplayMultimeter::ChangedMode()
     outBuffer[position[Multimeter::Measure()][GetRange()]] = '.';
     
     std::strcpy(&outBuffer[7], suffix[Multimeter::Measure()][GetRange()]);
+    
+    if(Multimeter::Measure().IsResistance() || Multimeter::Measure::IsTestDiode())
+    {
+        outBuffer[8] = SYMBOL_OMEGA;
+    }
 }
 
 
@@ -246,7 +253,7 @@ static void PrepareVariableCurrent(const char *buf)
 void PrepareResistance(const char *buf)
 {
     outBuffer[7] = buf[8];
-    outBuffer[8] = '\x5e';
+    outBuffer[8] = SYMBOL_OMEGA;
 }
 
 
@@ -258,7 +265,8 @@ static bool ResistanceLess100()
 
 static void PrepareBell(const char *)
 {
-    std::strcpy(outBuffer + 7, "k\x5e");
+    outBuffer[7] = 'k';
+    outBuffer[8] = SYMBOL_OMEGA;
 
     if (ResistanceLess100())
     {
