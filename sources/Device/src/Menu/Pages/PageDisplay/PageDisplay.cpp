@@ -137,13 +137,13 @@ DEF_PAGE_8( pDisplay,                                                           
     "ДИСПЛЕЙ",
     "Содержит настройки отображения дисплея.",
     &cViewMode,
-    PageDisplay::PageAccumulation::self,
+    PageDisplay::Accumulation::self,
     &cAverage_Num,
     &cSmoothing,
     &cType,
     &cRefreshFPS,
     &cScaleYtype,
-    PageDisplay::PageSettings::self,
+    PageDisplay::Settings::self,
     PageName::Display, nullptr, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 

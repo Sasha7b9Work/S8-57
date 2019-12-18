@@ -218,7 +218,7 @@ struct PageDisplay
     static const Page * const self;
 
 
-    struct PageAccumulation
+    struct Accumulation
     {
         static const Page * const self;
 
@@ -226,12 +226,12 @@ struct PageDisplay
     };
 
 
-    struct PageSettings
+    struct Settings
     {
         static const Page * const self;
 
 
-        struct PageColors
+        struct Colors
         {
             static const Page * const self;
             /// Для сетки

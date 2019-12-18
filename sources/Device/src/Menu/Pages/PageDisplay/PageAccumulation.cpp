@@ -17,7 +17,7 @@ DEF_CHOICE_2( cEnable,                                                          
     "",
     DISABLE_RU,
     ENABLE_RU,
-    ModeAccumulation::Ref(), &PageDisplay::PageAccumulation::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    ModeAccumulation::Ref(), &PageDisplay::Accumulation::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -36,7 +36,7 @@ DEF_CHOICE_9( cNumber,                                                          
     "64",
     "128",
     "Бесконечность",
-    ENumAccum::Ref(), &PageDisplay::PageAccumulation::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    ENumAccum::Ref(), &PageDisplay::Accumulation::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -46,7 +46,7 @@ static bool IsActive_Accum_Clear()
     return true;
 }
 
-void PageDisplay::PageAccumulation::OnPress_Accumulation_Clear()
+void PageDisplay::Accumulation::OnPress_Accumulation_Clear()
 {
     DisplayOsci::SetFlagRedraw();
 }
@@ -54,7 +54,7 @@ void PageDisplay::PageAccumulation::OnPress_Accumulation_Clear()
 DEF_BUTTON( bClear,                                                                                                                                 //--- ДИСПЛЕЙ - НАКОПЛЕНИЕ - Очистить ---
     "Очистить",
     "Очищает экран от накопленных сигналов.",
-    &PageDisplay::PageAccumulation::self, IsActive_Accum_Clear, PageDisplay::PageAccumulation::OnPress_Accumulation_Clear
+    &PageDisplay::Accumulation::self, IsActive_Accum_Clear, PageDisplay::Accumulation::OnPress_Accumulation_Clear
 )
 
 
@@ -73,4 +73,4 @@ DEF_PAGE_3( pAccum,                                                             
     PageName::Display_Accumulation, &PageDisplay::self, IsActive_Accum, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageDisplay::PageAccumulation::self = static_cast<const Page *>(&pAccum);
+const Page * const PageDisplay::Accumulation::self = static_cast<const Page *>(&pAccum);

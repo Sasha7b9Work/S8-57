@@ -12,34 +12,34 @@ static void OnPress_ResetColors()
 DEF_BUTTON( bReset,                                                                                                                          //--- ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Сбросить ---
     "Сбросить",
     "Сброс всех цветов на значения по умолчанию",
-    &PageDisplay::PageSettings::PageColors::self, Item::Active, OnPress_ResetColors
+    &PageDisplay::Settings::Colors::self, Item::Active, OnPress_ResetColors
 )
 
 
-ColorType PageDisplay::PageSettings::PageColors::colorTypeA = COLOR_TYPE(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, Color::CHAN[Chan::A])
+ColorType PageDisplay::Settings::Colors::colorTypeA = COLOR_TYPE(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, Color::CHAN[Chan::A])
 
 DEF_GOVERNOR_COLOR( gcChannelA,                                                                                                               //--- ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Канал 1 ---
     "Канал 1",
     "Выбор цвета канала 1",
-    PageDisplay::PageSettings::PageColors::colorTypeA, &PageDisplay::PageSettings::PageColors::self
+    PageDisplay::Settings::Colors::colorTypeA, &PageDisplay::Settings::Colors::self
 )
 
 
-ColorType PageDisplay::PageSettings::PageColors::colorTypeB = COLOR_TYPE(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, Color::CHAN[Chan::B])
+ColorType PageDisplay::Settings::Colors::colorTypeB = COLOR_TYPE(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, Color::CHAN[Chan::B])
 
 DEF_GOVERNOR_COLOR( gcChannelB,                                                                                                               //--- ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Канал 2 ---
     "Канал 2",
     "Выбор цвета канала 1",
-    PageDisplay::PageSettings::PageColors::colorTypeB, &PageDisplay::PageSettings::PageColors::self
+    PageDisplay::Settings::Colors::colorTypeB, &PageDisplay::Settings::Colors::self
 )
 
 
-ColorType PageDisplay::PageSettings::PageColors::colorTypeGrid = COLOR_TYPE(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, Color::GRID)
+ColorType PageDisplay::Settings::Colors::colorTypeGrid = COLOR_TYPE(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, Color::GRID)
 
 DEF_GOVERNOR_COLOR( gcGrid,                                                                                                                     //--- ДИСПЛЕЙ - НАСТРОЙКИ - ЦВЕТА - Сетка ---
     "Сетка",
     "Устанавливает цвет сетки",
-    PageDisplay::PageSettings::PageColors::colorTypeGrid, &PageDisplay::PageSettings::PageColors::self
+    PageDisplay::Settings::Colors::colorTypeGrid, &PageDisplay::Settings::Colors::self
 )
 
 
@@ -50,7 +50,7 @@ DEF_PAGE_4( pColors,                                                            
     &gcChannelA,
     &gcChannelB,
     &gcGrid,
-    PageName::Display_Settings_Colors, &PageDisplay::PageSettings::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
+    PageName::Display_Settings_Colors, &PageDisplay::Settings::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageDisplay::PageSettings::PageColors::self = static_cast<const Page *>(&pColors);
+const Page * const PageDisplay::Settings::Colors::self = static_cast<const Page *>(&pColors);
