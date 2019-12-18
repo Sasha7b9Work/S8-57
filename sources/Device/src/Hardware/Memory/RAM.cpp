@@ -127,11 +127,11 @@ void RAM::Init()
 
 DataSettings *RAM::PrepareForNewData()
 {
-    DataSettings *result = CurrentFrameIsP2P();
+    DataSettings *result = LastFrameExistAndP2P();
 
     if(result)
     {
-        DataSettings::isFrameP2P = false;
+        result->isFrameP2P = 0;
         TIME_MS_DS(result) = TIME_MS;       // «десь записываем врем€ считывани€ полного фрейма поточечного режима, чтобы знать, когда давать следующий старт в автоматическом режиме
         return result;
     }
@@ -157,22 +157,32 @@ DataSettings *RAM::PrepareForNewData()
 }
 
 
-DataSettings *RAM::CurrentFrameIsP2P()
+DataSettings *RAM::LastFrameExistAndP2P()
 {
-    if(!Osci::InModeP2P() || NumberDatas() == 0 || DataSettings::isFrameP2P == false)
+    if(!Osci::InModeP2P() || NumberDatas() == 0)
     {
         return nullptr;
     }
 
-    DataSettings ds;
-    ds.Fill();
+    DataSettings *last = Get();
 
-    if(ds.Equals(*Get()))
+    if(last->IsFrameP2P() && last->EqualsCurrentSettings())
     {
-        return Get();
+        return last;
     }
 
     return nullptr;
+}
+
+
+bool RAM::LastFrameIsP2P()
+{
+    if(NumberDatas() == 0)
+    {
+        return false;
+    }
+
+    return Get()->IsFrameP2P();
 }
 
 

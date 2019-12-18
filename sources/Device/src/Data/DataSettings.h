@@ -51,7 +51,8 @@ friend class RAM;
     uint        multiplierB : 1;
     uint        enumPoints  : 3;
     uint        numInROM    : 5;    ///< Номер данных в памяти ROM
-    uint        notUsed     : 7;
+    uint        isFrameP2P  : 1;    ///< Если true, то это фрейм поточечного вывода
+    uint        notUsed     : 6;
     PackedTime  time;
     /// Заполняет структуру в соответствии с текущими настройками
     void Fill();
@@ -62,16 +63,16 @@ friend class RAM;
     /// Возвращает требуемое количество памяти для хранения данных каналов
     uint NeedMemoryForData() const;
     bool Equals(const DataSettings &ds) const;
+    bool EqualsCurrentSettings() const;
     void Log() const;
 
     /// Далее пойдут поточечные функции
 
     void AddPoint(const BitSet16 &a, const BitSet16 &b);
-    /// Если true, то это фрейм поточечного вывода
-    static bool isFrameP2P;
     void FillScreenBuffer(Buffer *buffer, Chan::E ch) const;
     /// Позиция раздела в поточечном выводе - в ней нужно нарисовать вертикальную линию
     static int posSeparate;
+    bool IsFrameP2P() { return (isFrameP2P == 1); }
 private:
     /// Количество всех считанных точек в поточечном режиме
     static uint numBytesP2P;

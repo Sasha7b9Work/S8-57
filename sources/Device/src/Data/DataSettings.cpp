@@ -9,7 +9,6 @@
 
 uint DataSettings::numBytesP2P = 0;
 uint DataSettings::pointerP2P = 0;
-bool DataSettings::isFrameP2P = false;
 int DataSettings::posSeparate = 0;
 
 
@@ -17,8 +16,6 @@ void DataSettings::Fill()
 {
     numBytesP2P = 0;
     pointerP2P = 0;
-
-    isFrameP2P = Osci::InModeP2P();
 
     Lval_ENABLED_A(this) = ChanA.IsEnabled() ? 1U : 0U;
     Lval_ENABLED_B(this) = ChanB.IsEnabled() ? 1U : 0U;
@@ -55,6 +52,14 @@ bool DataSettings::Equals(const DataSettings &ds) const
         TRIGLEV_A(this) == TRIGLEV_A(&ds) &&
         TRIGLEV_B(this) == TRIGLEV_B(&ds) &&
         ENUM_POINTS(this) == ENUM_POINTS(&ds);
+}
+
+
+bool DataSettings::EqualsCurrentSettings() const
+{
+    DataSettings ds;
+    ds.Fill();
+    return (this->Equals(ds));
 }
 
 
@@ -139,7 +144,7 @@ void PackedTime::ChangeYear(int delta)
 
 void DataSettings::AddPoint(const BitSet16 &a, const BitSet16 &b)
 {
-    if(!isFrameP2P)
+    if(!IsFrameP2P())
     {
         return;
     }

@@ -28,7 +28,7 @@ void DisplayOsci::PainterData::DrawData()
         func[ModeWork()]();
     }
 
-    if(DS && DS->isFrameP2P)
+    if(DS && RAM::LastFrameIsP2P())
     {
         VLine(Grid::Height()).Draw(Grid::Left() + DS->posSeparate, Grid::Top(), Color::GRID);
     }
@@ -260,7 +260,7 @@ void DisplayOsci::PainterData::DrawChannel(Chan::E ch)
 
     Buffer buffer(static_cast<uint>(Grid::Width()));
 
-    if(DS->isFrameP2P)
+    if(RAM::LastFrameIsP2P())
     {
         DS->FillScreenBuffer(&buffer, ch);
         data = buffer.data;

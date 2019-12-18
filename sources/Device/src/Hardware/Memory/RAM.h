@@ -19,6 +19,8 @@ public:
     static DataSettings *Get(uint num = 0);
     /// Возвращает количество записей в памяти
     static uint NumberDatas();
+    /// Возвращает true, если последний фрейм является фреймом поточечного вывода
+    static bool LastFrameIsP2P();
 
 private:
     /// Указатель на самый старый записанный пакет. Он будет стёрт первым
@@ -31,6 +33,6 @@ private:
     static void RemoveOldest();
     /// Освободить size байт памяти с начала буфера
     static void AllocateMemoryFromBegin(uint size);
-    /// Если текущий фрейм является фреймом поточечного вывода, то возвращает этот фрейм
-    static DataSettings *CurrentFrameIsP2P();
+    /// Если последний фрейм существует и является фреймом поточечного вывода, возвращает true
+    static DataSettings *LastFrameExistAndP2P();
 };

@@ -180,7 +180,7 @@ void Osci::UpdateFPGA()
 
 void Osci::ReadPointP2P()
 {
-    if (DataSettings::isFrameP2P && InModeP2P() && FPGA::IsRunning() && HAL_PIO::Read(PIN_P2P))
+    if (RAM::LastFrameIsP2P() && InModeP2P() && FPGA::IsRunning() && HAL_PIO::Read(PIN_P2P))
     {
         HAL_FSMC::SetAddrData(RD::DATA_A, RD::DATA_A + 1);
         BitSet16 dataA(HAL_FSMC::ReadData0(), HAL_FSMC::ReadData1());
