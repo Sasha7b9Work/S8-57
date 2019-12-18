@@ -9,8 +9,8 @@
 #include <cstdlib>
 
 
-#define BEGIN reinterpret_cast<uint>(Heap::Begin())
-#define END   reinterpret_cast<uint>(Heap::End())
+#define BEGIN reinterpret_cast<uint>(Heap::BeginStorageRAM())
+#define END   reinterpret_cast<uint>(Heap::EndStorageRAM())
 
 
 int16 RAM::currentSignal = 0;
