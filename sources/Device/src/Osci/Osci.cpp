@@ -70,9 +70,23 @@ void Osci::Start()
         {
             RAM::PrepareForNewData(true);
         }
+        else if(last->isFrameP2P && !last->EqualsCurrentSettings())
+        {
+            RAM::PrepareForNewData(true);
+        }
     }
 
     FPGA::isRunning = true;
+}
+
+
+void Osci::Restart()
+{
+    if(FPGA::IsRunning())
+    {
+        Stop();
+        Start();
+    }
 }
 
 
@@ -106,16 +120,6 @@ void Osci::Update()
 void Osci::Stop(bool)
 {
     FPGA::isRunning = false;
-}
-
-
-void Osci::Restart()
-{
-    if (FPGA::IsRunning())
-    {
-        Stop();
-        Start();
-    }
 }
 
 

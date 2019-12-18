@@ -127,6 +127,11 @@ void RAM::Init()
 
 DataSettings *RAM::PrepareForNewData(bool forP2P)
 {
+    if(ChangedSettingsInP2P())
+    {
+        return Get();
+    }
+
     DataSettings *result = LastFrameExistAndP2P();
 
     if(result)
@@ -176,6 +181,29 @@ DataSettings *RAM::LastFrameExistAndP2P()
     }
 
     return nullptr;
+}
+
+
+bool RAM::ChangedSettingsInP2P()
+{
+    if(NumberDatas() == 0 || !LastFrameIsP2P())
+    {
+        return false;
+    }
+
+    DataSettings *last = Get();
+
+    if(last->EqualsCurrentSettings())
+    {
+        return false;
+    }
+
+    DataSettings ds;
+    ds.Fill();
+
+    *last = ds;
+
+    return true;
 }
 
 

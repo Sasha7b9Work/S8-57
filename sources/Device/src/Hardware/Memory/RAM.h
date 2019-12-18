@@ -35,4 +35,6 @@ private:
     static void AllocateMemoryFromBegin(uint size);
     /// Если последний фрейм существует и является фреймом поточечного вывода, возвращает true
     static DataSettings *LastFrameExistAndP2P();
+    /// Возвращает true, если произошёл перезапуск поточечного фрейма из-за изменения настроек
+    static bool ChangedSettingsInP2P();
 };
