@@ -245,29 +245,75 @@ Osci::StructReadRand Osci::GetInfoForReadRand(int Tsm, const uint8 *address)
 
 void Osci::ChangedTrigStartMode()
 {
-    static const pFuncVV start[TrigStartMode::Count] = {Osci::StartAuto, Osci::StartWait, Osci::StartSingle};
+    static const pFuncVV start[2][TrigStartMode::Count] =
+    {
+        { Osci::StartAutoP2P,  Osci::StartWaitP2P,  Osci::StartSingleP2P },
+        { Osci::StartAutoReal, Osci::StartWaitReal, Osci::StartSingleReal }
+    };
 
-    static const pFuncVV stop[TrigStartMode::Count] = {Osci::StopAuto, Osci::StopWait, Osci::StopSingle};
+    static const pFuncVV stop[2][TrigStartMode::Count] =
+    {
+        { Osci::StopAutoP2P,  Osci::StopWaitP2P,  Osci::StopSingleP2P },
+        { Osci::StopAutoReal, Osci::StopWaitReal, Osci::StopSingleReal }
+    };
 
-    funcStart = start[TrigStartMode()];
+    int index = InModeP2P() ? 0 : 1;
 
-    funcStop = stop[TrigStartMode()];
+    funcStart = start[index][TrigStartMode()];
+
+    funcStop = stop[index][TrigStartMode()];
 }
 
 
-void Osci::StartAuto()
+void Osci::StartAutoReal()
 {
 
 }
 
 
-void Osci::StartWait()
+void Osci::StartAutoP2P()
 {
 
 }
 
 
-void Osci::StartSingle()
+void Osci::StopAutoReal()
+{
+
+}
+
+
+void Osci::StopAutoP2P()
+{
+
+}
+
+
+void Osci::StartWaitReal()
+{
+
+}
+
+
+void Osci::StartWaitP2P()
+{
+
+}
+
+
+void Osci::StopWaitReal()
+{
+
+}
+
+
+void Osci::StopWaitP2P()
+{
+
+}
+
+
+void Osci::StartSingleReal()
 {
     FPGA::givingStart = false;
     FPGA::addrRead = 0xffff;
@@ -301,21 +347,21 @@ void Osci::StartSingle()
 }
 
 
-void Osci::StopAuto()
+void Osci::StartSingleP2P()
 {
-    FPGA::isRunning = false;
+
 }
 
 
-void Osci::StopWait()
+void Osci::StopSingleReal()
 {
-    FPGA::isRunning = false;
+
 }
 
 
-void Osci::StopSingle()
+void Osci::StopSingleP2P()
 {
-    FPGA::isRunning = false;
+
 }
 
 

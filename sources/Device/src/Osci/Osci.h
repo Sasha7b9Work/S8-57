@@ -53,15 +53,21 @@ private:
 
     /// Функции старта
     static void (*funcStart)();
-    static void StartAuto();
-    static void StartWait();
-    static void StartSingle();
+    static void StartAutoReal();
+    static void StartWaitReal();
+    static void StartSingleReal();
+    static void StartAutoP2P();
+    static void StartWaitP2P();
+    static void StartSingleP2P();
 
     /// Функции стопа
     static void (*funcStop)();
-    static void StopAuto();
-    static void StopWait();
-    static void StopSingle();
+    static void StopAutoReal();
+    static void StopWaitReal();
+    static void StopSingleReal();
+    static void StopAutoP2P();
+    static void StopWaitP2P();
+    static void StopSingleP2P();
 };
 
 struct AveragerOsci
