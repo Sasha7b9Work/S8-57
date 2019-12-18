@@ -92,8 +92,6 @@ struct SettingsTrig
 
 struct PageTrig
 {
-    static void OnChanged_Mode(bool active);
-
     static const Page * const self;
 
 

@@ -4,7 +4,7 @@
 #include "Osci/Osci.h"
 
 
-void PageTrig::OnChanged_Mode(bool)
+static void OnChanged_Mode(bool)
 {
     Osci::ChangedTrigStartMode();
 }
@@ -20,7 +20,7 @@ DEF_CHOICE_3( cMode, // -V206                                                   
     "Авто ",
     "Ждущий",
     "Однократный",
-    TrigStartMode::Ref(), &PageTrig::self, Item::Active, PageTrig::OnChanged_Mode, Choice::AfterDraw
+    TrigStartMode::Ref(), &PageTrig::self, Item::Active, OnChanged_Mode, Choice::AfterDraw
 )
 
 
