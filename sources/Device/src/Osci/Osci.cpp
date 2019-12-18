@@ -13,7 +13,7 @@
 
 int Osci::addShift = 0;
 void (*Osci::funcStart)() = EmptyFuncVV;
-void (*Osci::funcStop)(bool) = EmptyFuncVB;
+void (*Osci::funcStop)() = EmptyFuncVV;
 
 
 void Osci::Init()
@@ -97,9 +97,9 @@ void Osci::Update()
 }
 
 
-void Osci::Stop(bool)
+void Osci::Stop()
 {
-    FPGA::isRunning = false;
+    funcStop();
 }
 
 
@@ -247,7 +247,7 @@ void Osci::ChangedTrigStartMode()
 {
     static const pFuncVV start[TrigStartMode::Count] = {Osci::StartAuto, Osci::StartWait, Osci::StartSingle};
 
-    static const pFuncVB stop[TrigStartMode::Count] = {Osci::StopAuto, Osci::StopWait, Osci::StopSingle};
+    static const pFuncVV stop[TrigStartMode::Count] = {Osci::StopAuto, Osci::StopWait, Osci::StopSingle};
 
     funcStart = start[TrigStartMode()];
 
@@ -301,21 +301,21 @@ void Osci::StartSingle()
 }
 
 
-void Osci::StopAuto(bool pause)
+void Osci::StopAuto()
 {
-
+    FPGA::isRunning = false;
 }
 
 
-void Osci::StopWait(bool pause)
+void Osci::StopWait()
 {
-
+    FPGA::isRunning = false;
 }
 
 
-void Osci::StopSingle(bool pause)
+void Osci::StopSingle()
 {
-
+    FPGA::isRunning = false;
 }
 
 

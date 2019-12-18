@@ -6,9 +6,7 @@
 
 void PageTrig::OnChanged_Mode(bool)
 {
-
-
-    Osci::Stop(false);
+    Osci::Stop();
     if(!TrigStartMode::IsSingle())
     {
         Osci::OnPressStart();

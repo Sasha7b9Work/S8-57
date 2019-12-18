@@ -14,7 +14,7 @@ struct Osci
 
     static void Start();
 
-    static void Stop(bool pause = false);
+    static void Stop();
 
     static bool IsRunning();
     /// Это вызываем в случае изменения настройки
@@ -58,10 +58,10 @@ private:
     static void StartSingle();
 
     /// Функции стопа
-    static void (*funcStop)(bool pause);
-    static void StopAuto(bool pause = false);
-    static void StopWait(bool pause = false);
-    static void StopSingle(bool pause = false);
+    static void (*funcStop)();
+    static void StopAuto();
+    static void StopWait();
+    static void StopSingle();
 };
 
 struct AveragerOsci
