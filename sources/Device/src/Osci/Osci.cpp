@@ -33,6 +33,7 @@ void Osci::Init()
     FPGA::LoadCalibratorMode();
     LoadHoldfOff();
     HAL_PIO::Init(PIN_P2P, HMode::Input, HPull::Up);
+    ChangedTrigStartMode();
     Osci::OnPressStart();
 }
 
@@ -263,7 +264,35 @@ void Osci::StartWait()
 
 void Osci::StartSingle()
 {
+    FPGA::givingStart = false;
+    FPGA::addrRead = 0xffff;
 
+    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::pred);
+    HAL_FSMC::WriteToFPGA16(WR::POST_LO, FPGA::post);
+    HAL_FSMC::WriteToFPGA8(WR::START, 0xff);
+
+    if(InModeP2P())
+    {
+        if(TrigStartMode::IsSingle())
+        {
+            RAM::PrepareForNewData(true);
+        }
+        else
+        {
+            DataSettings *last = RAM::Get();
+
+            if(last == nullptr)
+            {
+                RAM::PrepareForNewData(true);
+            }
+            else if(last->isFrameP2P && !last->EqualsCurrentSettings())
+            {
+                RAM::PrepareForNewData(true);
+            }
+        }
+    }
+
+    FPGA::isRunning = true;
 }
 
 
