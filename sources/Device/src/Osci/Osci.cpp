@@ -271,14 +271,14 @@ void Osci::SetFunctionsStartStop()
 {
     static const pFuncVV start[2][TrigStartMode::Count] =
     {
-        { EmptyFuncVV /*Osci::StartAutoP2P*/,  EmptyFuncVV /*Osci::StartWaitP2P*/,  EmptyFuncVV /*Osci::StartSingleP2P*/ },
-        { Osci::StartAutoReal, EmptyFuncVV /*Osci::StartWaitReal*/, EmptyFuncVV /*Osci::StartSingleReal*/ }
+        { EmptyFuncVV, EmptyFuncVV, EmptyFuncVV },
+        { StartReal,   StartReal,   StartReal }
     };
 
     static const pFuncVV stop[2][TrigStartMode::Count] =
     {
-        { EmptyFuncVV /*Osci::StopAutoP2P*/,  EmptyFuncVV /*Osci::StopWaitP2P*/,  EmptyFuncVV /*Osci::StopSingleP2P*/ },
-        { Osci::StopAutoReal, EmptyFuncVV /*Osci::StopWaitReal*/, EmptyFuncVV /*Osci::StopSingleReal*/ }
+        { EmptyFuncVV, EmptyFuncVV , EmptyFuncVV },
+        { StopReal,    StopReal,     StopReal }
     };
 
     int index = InModeP2P() ? 0 : 1;
@@ -289,7 +289,7 @@ void Osci::SetFunctionsStartStop()
 }
 
 
-void Osci::StartAutoReal()
+void Osci::StartReal()
 {
     FPGA::givingStart = false;
     FPGA::addrRead = 0xffff;
@@ -308,7 +308,7 @@ void Osci::StartAutoP2P()
 }
 
 
-void Osci::StopAutoReal()
+void Osci::StopReal()
 {
     FPGA::isRunning = false;
 }
@@ -320,19 +320,7 @@ void Osci::StopAutoP2P()
 }
 
 
-void Osci::StartWaitReal()
-{
-
-}
-
-
 void Osci::StartWaitP2P()
-{
-
-}
-
-
-void Osci::StopWaitReal()
 {
 
 }
@@ -344,27 +332,8 @@ void Osci::StopWaitP2P()
 }
 
 
-void Osci::StartSingleReal()
-{
-    FPGA::givingStart = false;
-    FPGA::addrRead = 0xffff;
-
-    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::pred);
-    HAL_FSMC::WriteToFPGA16(WR::POST_LO, FPGA::post);
-    HAL_FSMC::WriteToFPGA8(WR::START, 0xff);
-
-    FPGA::isRunning = true;
-}
-
-
 void Osci::StartSingleP2P()
 {
-}
-
-
-void Osci::StopSingleReal()
-{
-
 }
 
 
