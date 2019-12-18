@@ -18,7 +18,7 @@ DEF_CHOICE_2( cHoldOff,                                                         
     ,
     DISABLE_RU,
     ENABLE_RU,
-    set.trig.holdOffEnabled, &PageTrig::PageHoldOff::self, Item::Active, OnChanged_HoldOff, Choice::AfterDraw
+    set.trig.holdOffEnabled, &PageTrig::HoldOff::self, Item::Active, OnChanged_HoldOff, Choice::AfterDraw
 )
 
 
@@ -31,7 +31,7 @@ static void OnChanged_Duration()
 DEF_GOVERNOR( gDuration,                                                                                                                           //--- СИНХР - УДЕРЖАНИЕ - Длительность ---
     "Длительность",
     "Задаёт длительность промежутка между импульсами синхронизации",
-    set.trig.holdOff, 10, 32000, &PageTrig::PageHoldOff::self, Item::Active, OnChanged_Duration
+    set.trig.holdOff, 10, 32000, &PageTrig::HoldOff::self, Item::Active, OnChanged_Duration
 )
 
 /// \todo gDuration должен обеспечивать возможность хранения большего значения, чем 32000
@@ -47,4 +47,4 @@ DEF_PAGE_2( pHoldOff,                                                           
     &PageTrig::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageTrig::PageHoldOff::self = static_cast<const Page *>(&pHoldOff);
+const Page * const PageTrig::HoldOff::self = static_cast<const Page *>(&pHoldOff);

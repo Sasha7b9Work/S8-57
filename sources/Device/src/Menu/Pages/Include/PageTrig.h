@@ -95,13 +95,13 @@ struct PageTrig
     static const Page * const self;
 
 
-    struct PageHoldOff
+    struct HoldOff
     {
         static const Page * const self;
     };
 
 
-    struct PageFind
+    struct Find
     {
         static const Page * const self;
     };

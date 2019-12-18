@@ -12,7 +12,7 @@ DEF_CHOICE_2( cMode,                                                            
     "2. \"Автоматический\" - поиск производится автоматически.",
     "Ручной",
     "Автоматический",
-    TrigModeFind::Ref(), &PageTrig::PageFind::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    TrigModeFind::Ref(), &PageTrig::Find::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -24,7 +24,7 @@ static void OnPress_Search()
 DEF_BUTTON( bSearch,                                                                                                                                          //--- СИНХР - ПОИСК - Найти ---
     "Найти",
     "Производит поиск уровня синхронизации.",
-    &PageTrig::PageFind::self, Item::Active, OnPress_Search
+    &PageTrig::Find::self, Item::Active, OnPress_Search
 )
 
 
@@ -38,4 +38,4 @@ DEF_PAGE_2( pFind,                                                              
     &PageTrig::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageTrig::PageFind::self = static_cast<const Page *>(&pFind);
+const Page * const PageTrig::Find::self = static_cast<const Page *>(&pFind);

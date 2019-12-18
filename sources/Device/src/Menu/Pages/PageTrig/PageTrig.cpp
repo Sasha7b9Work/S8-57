@@ -82,8 +82,8 @@ DEF_PAGE_6( pTrig,                                                              
     &cSource,
     &cPolarity,
     &cFiltr,
-    PageTrig::PageHoldOff::self,
-    PageTrig::PageFind::self,
+    PageTrig::HoldOff::self,
+    PageTrig::Find::self,
     PageName::Trig, nullptr, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
