@@ -97,7 +97,7 @@ void FPGA::ClearDataRand()
 
 void FPGA::ReadData()
 {
-    DataSettings *ds = RAM::PrepareForNewData(false);
+    DataSettings *ds = RAM::PrepareForNewData();
 
     if (ReadDataChannel(Chan::A, ds->dataA))
     {

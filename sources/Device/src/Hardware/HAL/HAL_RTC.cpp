@@ -96,8 +96,6 @@ PackedTime HAL_RTC::GetPackedTime()
     time.month = isDate.Month;
     time.day = isDate.Date;
 
-    time.timeMS = TIME_MS;
-
     return time;
 }
 

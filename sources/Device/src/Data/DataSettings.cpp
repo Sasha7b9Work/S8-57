@@ -36,7 +36,6 @@ void DataSettings::Fill()
     Lval_DIVIDER_A(this) = Divider(Chan::A);
     Lval_DIVIDER_B(this) = Divider(Chan::B);
     TIME_TIME(this)      = HAL_RTC::GetPackedTime();
-    TIME_MS_DS(this)     = 0;
     ENUM_POINTS(this)    = ENumPointsFPGA();
 }
 
@@ -145,11 +144,6 @@ void PackedTime::ChangeYear(int delta)
 
 void DataSettings::AddPoint(const BitSet16 &a, const BitSet16 &b)
 {
-    if(!IsFrameP2P())
-    {
-        return;
-    }
-
     if(PeakDetMode::IsEnabled())
     {
         AddPeakDetPoint(a.halfWord, b.halfWord);

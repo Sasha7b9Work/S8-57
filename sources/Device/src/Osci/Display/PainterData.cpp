@@ -28,7 +28,7 @@ void DisplayOsci::PainterData::DrawData()
         func[ModeWork()]();
     }
 
-    if(DS && RAM::LastFrameIsP2P())
+    if(DS)
     {
         VLine(Grid::Height()).Draw(Grid::Left() + DS->posSeparate, Grid::Top(), Color::GRID);
     }
@@ -256,14 +256,6 @@ void DisplayOsci::PainterData::DrawChannel(Chan::E ch)
     {
         center -= (Grid::Bottom() - Grid::Top()) / 4;
         scale /= 2.0F;
-    }
-
-    Buffer buffer(static_cast<uint>(Grid::Width()));
-
-    if(RAM::LastFrameIsP2P())
-    {
-        DS->FillScreenBuffer(&buffer, ch);
-        data = buffer.data;
     }
 
     if (DisplayMapping::IsLines())

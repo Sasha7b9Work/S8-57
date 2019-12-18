@@ -14,13 +14,11 @@ public:
     /// Инициализирует первоначальное состояние памяти
     static void Init();
     /// Подготовить в хранилище место для хранения новых данных
-    static DataSettings *PrepareForNewData(bool forP2P);
+    static DataSettings *PrepareForNewData();
     /// Считать информацию о num с конца сохранённых данных. 0 - последние данные, 1 - предпоследние
     static DataSettings *Get(uint num = 0);
     /// Возвращает количество записей в памяти
     static uint NumberDatas();
-    /// Возвращает true, если последний фрейм является фреймом поточечного вывода
-    static bool LastFrameIsP2P();
 
 private:
     /// Указатель на самый старый записанный пакет. Он будет стёрт первым
@@ -33,8 +31,4 @@ private:
     static void RemoveOldest();
     /// Освободить size байт памяти с начала буфера
     static void AllocateMemoryFromBegin(uint size);
-    /// Если последний фрейм существует и является фреймом поточечного вывода, возвращает true
-    static DataSettings *LastFrameExistAndP2P();
-    /// Возвращает true, если произошёл перезапуск поточечного фрейма из-за изменения настроек
-    static bool ChangedSettingsInP2P();
 };

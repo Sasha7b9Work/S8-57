@@ -7,8 +7,6 @@ class Buffer;
 
 struct PackedTime
 {
-    unsigned timeMS : 32;   /// \brief ¬рем€ в миллисекундах от старта системы. “.к. структура заполн€етс€ во врем€ сохранени€ данных в хранилище, то 
-                              /// timeMS == 0 означает, что полный сигнал в режиме поточеного вывода ещЄ не считан
     unsigned hours : 5;
     unsigned minutes : 6;
     unsigned seconds : 6;
@@ -18,7 +16,7 @@ struct PackedTime
     unsigned day : 5;
     unsigned notUsed1 : 27;
     PackedTime(uint h = 11, uint m = 11, uint s = 11, uint d = 11, uint mo = 11, uint y = 11) :
-        timeMS(0), hours(h), minutes(m), seconds(s), year(y), month(mo), notUsed0(0), day(d), notUsed1(0) {};
+        hours(h), minutes(m), seconds(s), year(y), month(mo), notUsed0(0), day(d), notUsed1(0) {};
     /// »зменение значени€ пол€ на +/- 1
     void ChangeHours(int delta);
     void ChangeMinutes(int delta);
@@ -51,8 +49,7 @@ friend class RAM;
     uint        multiplierB : 1;
     uint        enumPoints  : 3;
     uint        numInROM    : 5;    ///< Ќомер данных в пам€ти ROM
-    uint        isFrameP2P  : 1;    ///< ≈сли true, то это фрейм поточечного вывода
-    uint        notUsed     : 6;
+    uint        notUsed     : 7;
     PackedTime  time;
     /// «аполн€ет структуру в соответствии с текущими настройками
     void Fill();
@@ -72,7 +69,6 @@ friend class RAM;
     void FillScreenBuffer(Buffer *buffer, Chan::E ch) const;
     /// ѕозици€ раздела в поточечном выводе - в ней нужно нарисовать вертикальную линию
     static int posSeparate;
-    bool IsFrameP2P() { return (isFrameP2P == 1); }
 private:
     ///  оличество всех считанных точек в поточечном режиме
     static uint numBytesP2P;
@@ -125,7 +121,6 @@ private:
 #define TIME_SECONDS(ds)        ((ds)->time.seconds)
 #define TIME_MONTH(ds)          ((ds)->time.month)
 #define TIME_YEAR(ds)           ((ds)->time.year)
-#define TIME_MS_DS(ds)          ((ds)->time.timeMS)
 
 #define INVERSE_A(ds)           ((ds)->inverseA)
 #define INVERSE_B(ds)           ((ds)->inverseB)

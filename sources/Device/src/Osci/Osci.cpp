@@ -77,15 +77,6 @@ void Osci::Update()
         return;
     }
 
-    if(InModeP2P() && !RAM::LastFrameIsP2P() && !TrigStartMode::IsSingle())
-    {
-        DataSettings *last = RAM::Get();
-        if((TIME_MS - TIME_MS_DS(last) > 1000))
-        {
-            RAM::PrepareForNewData(true);
-        }
-    }
-
     if(FPGA::IsRunning())
     {
         UpdateFPGA();
@@ -162,7 +153,7 @@ void Osci::UpdateFPGA()
 
 void Osci::ReadPointP2P()
 {
-    if (RAM::LastFrameIsP2P() && InModeP2P() && FPGA::IsRunning() && HAL_PIO::Read(PIN_P2P))
+    if (InModeP2P() && FPGA::IsRunning() && HAL_PIO::Read(PIN_P2P))
     {
         HAL_FSMC::SetAddrData(RD::DATA_A, RD::DATA_A + 1);
         BitSet16 dataA(HAL_FSMC::ReadData0(), HAL_FSMC::ReadData1());
@@ -247,14 +238,14 @@ void Osci::ChangedTrigStartMode()
 {
     static const pFuncVV start[2][TrigStartMode::Count] =
     {
-        { Osci::StartAutoP2P,  Osci::StartWaitP2P,  Osci::StartSingleP2P },
-        { Osci::StartAutoReal, Osci::StartWaitReal, Osci::StartSingleReal }
+        { EmptyFuncVV /*Osci::StartAutoP2P*/,  EmptyFuncVV /*Osci::StartWaitP2P*/,  EmptyFuncVV /*Osci::StartSingleP2P*/ },
+        { EmptyFuncVV /*Osci::StartAutoReal*/, EmptyFuncVV /*Osci::StartWaitReal*/, EmptyFuncVV /*Osci::StartSingleReal*/ }
     };
 
     static const pFuncVV stop[2][TrigStartMode::Count] =
     {
-        { Osci::StopAutoP2P,  Osci::StopWaitP2P,  Osci::StopSingleP2P },
-        { Osci::StopAutoReal, Osci::StopWaitReal, Osci::StopSingleReal }
+        { EmptyFuncVV /*Osci::StopAutoP2P*/,  EmptyFuncVV /*Osci::StopWaitP2P*/,  EmptyFuncVV /*Osci::StopSingleP2P*/ },
+        { EmptyFuncVV /*Osci::StopAutoReal*/, EmptyFuncVV /*Osci::StopWaitReal*/, EmptyFuncVV /*Osci::StopSingleReal*/ }
     };
 
     int index = InModeP2P() ? 0 : 1;
@@ -322,34 +313,12 @@ void Osci::StartSingleReal()
     HAL_FSMC::WriteToFPGA16(WR::POST_LO, FPGA::post);
     HAL_FSMC::WriteToFPGA8(WR::START, 0xff);
 
-    if(InModeP2P())
-    {
-        if(TrigStartMode::IsSingle())
-        {
-            RAM::PrepareForNewData(true);
-        }
-        else
-        {
-            DataSettings *last = RAM::Get();
-
-            if(last == nullptr)
-            {
-                RAM::PrepareForNewData(true);
-            }
-            else if(last->isFrameP2P && !last->EqualsCurrentSettings())
-            {
-                RAM::PrepareForNewData(true);
-            }
-        }
-    }
-
     FPGA::isRunning = true;
 }
 
 
 void Osci::StartSingleP2P()
 {
-
 }
 
 
