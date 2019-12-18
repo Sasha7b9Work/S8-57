@@ -16,7 +16,7 @@ DEF_CHOICE_2( cCalibrator, // -V206                                             
     "Режим работы калибратора",
     "Перем",
     "Пост",
-    Calibrator::Mode::Ref(), &PageService::PageCalibrate::self, Item::Active, OnChanged_Calibrator, Choice::AfterDraw
+    Calibrator::Mode::Ref(), &PageService::Calibrate::self, Item::Active, OnChanged_Calibrator, Choice::AfterDraw
 )
 
 
@@ -33,7 +33,7 @@ static void OnPress_Calibrate()
 DEF_BUTTON( bCalibrate,                                                                                                                           //--- СЕРВИС - КАЛИБРАТОР - Калибровать ---
     "Калибровать",
     "Запуск процедуры калибровки",
-    &PageService::PageCalibrate::self, IsActive_Calibrate, OnPress_Calibrate
+    &PageService::Calibrate::self, IsActive_Calibrate, OnPress_Calibrate
 )
 
 
@@ -45,4 +45,4 @@ DEF_PAGE_2( pCalibrate,                                                         
     PageName::Service_Calibrator, &PageService::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageService::PageCalibrate::self = static_cast<const Page *>(&pCalibrate);
+const Page * const PageService::Calibrate::self = static_cast<const Page *>(&pCalibrate);

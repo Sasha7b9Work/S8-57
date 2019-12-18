@@ -53,7 +53,7 @@ static void OnPress_Close()
 DEF_BUTTON( bClose,
     "Закрыть",
     "Закрыть страницу информации",
-    &PageService::PageInformation::self, Item::Active, OnPress_Close
+    &PageService::Information::self, Item::Active, OnPress_Close
 )
 
 static void OnOpenClose_Page(bool enter)
@@ -78,4 +78,4 @@ DEF_PAGE_1 ( pInfo,
     PageName::Service_Info, &PageService::self, Item::Active, Page::NormalTitle, OnOpenClose_Page, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page *const PageService::PageInformation::self = static_cast<const Page *>(&pInfo);
+const Page *const PageService::Information::self = static_cast<const Page *>(&pInfo);

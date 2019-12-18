@@ -48,10 +48,10 @@ DEF_PAGE_7( pService,                                                           
     "Дополнительные настройки, калибровка, поиск сигнала, математические функции",
     &bResetSettings,
     &bAutoSearch,
-    PageService::PageCalibrate::self,
+    PageService::Calibrate::self,
     &cSoundVolume,
     PageRTC::self,
-    PageService::PageInformation::self,
+    PageService::Information::self,
     PageDebug::self,
     PageName::Service, nullptr, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )

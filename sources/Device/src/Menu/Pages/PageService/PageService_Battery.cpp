@@ -10,7 +10,7 @@ DEF_CHOICE_2( cShow,                                                            
     "Включает/отключает вывод иноформации о напряжении батарии на экран",
     DISABLE_RU,
     ENABLE_RU,
-    set.serv.showInfoVoltage, &PageService::PageBattery::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.serv.showInfoVoltage, &PageService::Battery::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -21,4 +21,4 @@ DEF_PAGE_1( pBattery,                                                           
     PageName::Service_Battery, &PageService::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageService::PageBattery::self = static_cast<const Page *>(&pBattery);
+const Page * const PageService::Battery::self = static_cast<const Page *>(&pBattery);

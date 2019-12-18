@@ -10,7 +10,7 @@ DEF_CHOICE_2( cChanA,                                                           
     "Выбор канала 1 для записи и просмотра",
     DISABLE_RU,
     ENABLE_RU,
-    set.rec.enA, &PageRecorder::PageSource::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.rec.enA, &PageRecorder::Source::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -19,7 +19,7 @@ DEF_CHOICE_2( cChanB,                                                           
     "Выбор канала 2 для записи и просмотра",
     DISABLE_RU,
     ENABLE_RU,
-    set.rec.enB, &PageRecorder::PageSource::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.rec.enB, &PageRecorder::Source::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -28,7 +28,7 @@ DEF_CHOICE_2( cSensor,                                                          
     "Выбор датчика для записи и просмотра",
     DISABLE_RU,
     ENABLE_RU,
-    set.rec.enSensor, &PageRecorder::PageSource::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.rec.enSensor, &PageRecorder::Source::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -47,4 +47,4 @@ DEF_PAGE_3( pSource,                                                            
     PageName::Recorder_Source, &PageRecorder::self, IsActive_Source, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
-const Page * const PageRecorder::PageSource::self = static_cast<const Page *>(&pSource);
+const Page * const PageRecorder::Source::self = static_cast<const Page *>(&pSource);

@@ -168,7 +168,7 @@ static void DrawParametersCursors()
 
 static void DrawCursors()
 {
-    if (Menu::OpenedItem() != PageRecorder::PageShow::self)
+    if (Menu::OpenedItem() != PageRecorder::Show::self)
     {
         return;
     }
@@ -237,7 +237,7 @@ static void DrawMemoryWindow()
 {
     static int prevNumPoints = 0;
 
-    if (Menu::OpenedItem() != PageRecorder::PageShow::self || StorageRecorder::CurrentRecord()->NumPoints() == 0)
+    if (Menu::OpenedItem() != PageRecorder::Show::self || StorageRecorder::CurrentRecord()->NumPoints() == 0)
     {
         return;
     }

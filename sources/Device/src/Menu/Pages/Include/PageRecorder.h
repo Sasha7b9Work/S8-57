@@ -21,21 +21,21 @@ struct PageRecorder
 {
     static const Page *const self;
 
-    struct PageSource
+    struct Source
     {
         static const Page *const self;
     };
 
-    struct PageShow
+    struct Show
     {
         static const Page *const self;
 
-        struct PageChoice
+        struct Choice
         {
             static const Page *const self;
         };
 
-        struct PageCursors
+        struct Cursors
         {
             static const Page *const self;
         };

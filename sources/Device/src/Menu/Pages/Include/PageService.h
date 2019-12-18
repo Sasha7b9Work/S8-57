@@ -18,19 +18,19 @@ struct PageService
 
     static void OnPress_ResetSettings();
 
-    struct PageBattery
+    struct Battery
     {
         static const Page * const self; 
     };
 
 
-    struct PageCalibrate
+    struct Calibrate
     {
         static const Page * const self;
     };
 
 
-    struct PageInformation
+    struct Information
     {
         static const Page * const self;
     };

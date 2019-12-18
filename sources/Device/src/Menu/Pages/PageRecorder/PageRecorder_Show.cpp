@@ -23,7 +23,7 @@ static void Draw_Right(int x, int y)
 DEF_GRAPH_BUTTON( bScreenRight,                                                                                                     //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Экран вправо ---
     "Экран вправо",
     "Переместить окно просмотра на один экран вправо",
-    &PageRecorder::PageShow::self, Item::Active, OnPress_Right, Draw_Right
+    &PageRecorder::Show::self, Item::Active, OnPress_Right, Draw_Right
 )
 
 
@@ -42,7 +42,7 @@ static void Draw_Left(int x, int y)
 DEF_GRAPH_BUTTON( bScreenLeft,                                                                                                       //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Экран влево ---
     "Экран влево",
     "Переместить окно просмотра на один экран влево",
-    &PageRecorder::PageShow::self, Item::Active, OnPress_Left, Draw_Left
+    &PageRecorder::Show::self, Item::Active, OnPress_Left, Draw_Left
 )
 
 
@@ -77,11 +77,11 @@ static bool HandlerKey_PageShow(const KeyEvent &event)
 DEF_PAGE_4( pShow,                                                                                                                                 //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР ---
     "ПРОСМОТР",
     "Просмотр записанных данных",
-    PageRecorder::PageShow::PageChoice::self,
+    PageRecorder::Show::Choice::self,
     &bScreenLeft,
     &bScreenRight,
-    PageRecorder::PageShow::PageCursors::self,
+    PageRecorder::Show::Cursors::self,
     PageName::Recorder_Show, &PageRecorder::self, IsActive_PageShow, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, HandlerKey_PageShow
 )
 
-const Page * const PageRecorder::PageShow::self = static_cast<const Page *>(&pShow);
+const Page * const PageRecorder::Show::self = static_cast<const Page *>(&pShow);
