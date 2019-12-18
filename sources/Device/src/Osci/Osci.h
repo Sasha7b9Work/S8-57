@@ -29,6 +29,8 @@ struct Osci
     static void ReadPointP2P();
     /// Загрузить значение удержания синхронизации
     static void LoadHoldfOff();
+    /// Эту функцию нужно вызывать при изменении режима запуска
+    static void ChangedTrigStartMode();
 
     static int addShift;
 
@@ -48,6 +50,11 @@ private:
     static bool CanReadData();
 
     static void UpdateFPGA();
+
+    static void (*funcStart)();
+    static void StartAuto();
+    static void StartWait();
+    static void StartSingle();
 };
 
 struct AveragerOsci

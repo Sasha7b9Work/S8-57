@@ -14,6 +14,7 @@
 extern bool givingStart;
 
 int Osci::addShift = 0;
+void (*Osci::funcStart)() = EmptyFuncVV;
 
 
 void Osci::Init()
@@ -55,35 +56,7 @@ void Osci::OnPressStart()
 
 void Osci::Start()
 {
-    givingStart = false;
-    FPGA::addrRead = 0xffff;
-
-    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::pred);
-    HAL_FSMC::WriteToFPGA16(WR::POST_LO, FPGA::post);
-    HAL_FSMC::WriteToFPGA8(WR::START, 0xff);
-
-    if (InModeP2P())
-    {
-        if(TrigStartMode::IsSingle())
-        {
-            RAM::PrepareForNewData(true);
-        }
-        else
-        {
-            DataSettings *last = RAM::Get();
-
-            if(last == nullptr)
-            {
-                RAM::PrepareForNewData(true);
-            }
-            else if(last->isFrameP2P && !last->EqualsCurrentSettings())
-            {
-                RAM::PrepareForNewData(true);
-            }
-        }
-    }
-
-    FPGA::isRunning = true;
+    funcStart();
 }
 
 
@@ -269,3 +242,62 @@ Osci::StructReadRand Osci::GetInfoForReadRand(int Tsm, const uint8 *address)
 
     return result;
 }
+
+
+void Osci::ChangedTrigStartMode()
+{
+    static const pFuncVV funcs[TrigStartMode::Count] = {Osci::StartAuto, Osci::StartWait, Osci::StartSingle};
+
+    funcStart = funcs[TrigStartMode()];
+}
+
+
+void Osci::StartAuto()
+{
+
+}
+
+
+void Osci::StartWait()
+{
+
+}
+
+
+void Osci::StartSingle()
+{
+
+}
+
+
+/*
+    givingStart = false;
+    FPGA::addrRead = 0xffff;
+
+    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::pred);
+    HAL_FSMC::WriteToFPGA16(WR::POST_LO, FPGA::post);
+    HAL_FSMC::WriteToFPGA8(WR::START, 0xff);
+
+    if (InModeP2P())
+    {
+        if(TrigStartMode::IsSingle())
+        {
+            RAM::PrepareForNewData(true);
+        }
+        else
+        {
+            DataSettings *last = RAM::Get();
+
+            if(last == nullptr)
+            {
+                RAM::PrepareForNewData(true);
+            }
+            else if(last->isFrameP2P && !last->EqualsCurrentSettings())
+            {
+                RAM::PrepareForNewData(true);
+            }
+        }
+    }
+
+    FPGA::isRunning = true;
+*/

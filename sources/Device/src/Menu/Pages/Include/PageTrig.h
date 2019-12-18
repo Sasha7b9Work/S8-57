@@ -62,7 +62,8 @@ struct TrigStartMode
     {
         Auto,     ///< Автоматический.
         Wait,     ///< Ждущий.
-        Single    ///< Однократный.
+        Single,   ///< Однократный.
+        Count
     };
     TrigStartMode() {}
     static TrigStartMode::E &Ref();

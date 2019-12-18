@@ -51,6 +51,8 @@ typedef void (*pFuncVV)();
 typedef void (*pFuncVB)(bool);
 typedef bool (*pFuncBV)();
 
+void EmptyFuncVV();
+
 
 #ifndef _WIN32
 #if __ARMCLIB_VERSION < 6070001

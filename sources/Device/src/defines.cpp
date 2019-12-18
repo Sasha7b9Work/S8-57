@@ -1,6 +1,11 @@
 #include "defines.h"
 
 
+void EmptyFuncVV()
+{
+
+}
+
 
 volatile BitField gBF =
 {

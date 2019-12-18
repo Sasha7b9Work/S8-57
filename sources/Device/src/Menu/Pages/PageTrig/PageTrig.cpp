@@ -4,9 +4,10 @@
 #include "Osci/Osci.h"
 
 
-
 void PageTrig::OnChanged_Mode(bool)
 {
+
+
     Osci::Stop(false);
     if(!TrigStartMode::IsSingle())
     {
