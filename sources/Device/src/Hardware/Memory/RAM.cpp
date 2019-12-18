@@ -201,6 +201,10 @@ bool RAM::ChangedSettingsInP2P()
     DataSettings ds;
     ds.Fill();
 
+    ds.id = last->id;
+    ds.dataA = last->dataA;
+    ds.dataB = last->dataB;
+
     *last = ds;
 
     return true;
