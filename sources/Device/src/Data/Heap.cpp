@@ -4,7 +4,7 @@
 #include "Menu/Pages/Include/PageMemory.h"
 
 
-static const uint SIZE_BUFFER = 79 * 1024;
+static const uint SIZE_BUFFER = 112 * 1024;
 static uint8 buffer[SIZE_BUFFER];
 
 //                                                                                  Chan::Count Пиковый детектор не учитываем, потому что при пиковом детекторе максимальная длина памяти в точках составляет половину от доступной
