@@ -57,7 +57,7 @@ private:
 
     static void OnPressStart();
     /// Принудительный запуск синхронизации
-    static void GiveStart();
+    static void ForcedStart();
 
     static void Reset();
 

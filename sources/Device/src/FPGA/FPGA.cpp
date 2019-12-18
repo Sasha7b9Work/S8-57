@@ -19,7 +19,7 @@ bool          FPGA::isRunning = false;
 StateWorkFPGA FPGA::fpgaStateWork = StateWorkFPGA_Stop;
 
 
-void FPGA::GiveStart()
+void FPGA::ForcedStart()
 {
     uint8 value = static_cast<uint8>((static_cast<uint8>(TrigPolarity())) % 2);
 

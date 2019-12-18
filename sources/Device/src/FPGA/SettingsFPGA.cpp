@@ -236,7 +236,7 @@ void RShift::Change(int16 delta)
 
 void TrigPolarity::Load()
 {
-    FPGA::GiveStart();
+    FPGA::ForcedStart();
 }
 
 

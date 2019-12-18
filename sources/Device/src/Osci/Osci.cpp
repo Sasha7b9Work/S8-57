@@ -114,7 +114,7 @@ void Osci::UpdateFPGA()
         {
             if (!Osci::InModeRandomizer() && TrigStartMode::IsAuto() && FPGA::flag.HoldOff())
             {
-                FPGA::GiveStart();
+                FPGA::ForcedStart();
             }
             if (!FPGA::flag.TrigReady())
             {

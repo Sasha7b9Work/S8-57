@@ -22,7 +22,7 @@ bool ContextTester::Start()
     HAL_FSMC::WriteToFPGA16(WR::PRED_LO, static_cast<uint16>(~(1)));
     HAL_FSMC::WriteToFPGA8(WR::START, 0xff);
 
-    FPGA::GiveStart();
+    FPGA::ForcedStart();
 
     return true;
 }
