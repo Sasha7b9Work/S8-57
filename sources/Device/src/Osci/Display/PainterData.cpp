@@ -28,7 +28,7 @@ void DisplayOsci::PainterData::DrawData()
         func[ModeWork()]();
     }
 
-    if(FrameP2P::ds)
+    if(FrameP2P::IsCorrect())
     {
         VLine(Grid::Height()).Draw(Grid::Left() + FrameP2P::posSeparate, Grid::Top(), Color::GRID);
     }

@@ -295,6 +295,8 @@ void TBase::Set(TBase::E base)
     Bandwidth(Chan::B).Load();
 
     MessageMgr::OsciSettingsEffectOnAverageChanged();
+
+    Osci::ChangedTBase();
 }
 
 

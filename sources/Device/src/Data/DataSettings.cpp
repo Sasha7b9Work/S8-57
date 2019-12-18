@@ -11,7 +11,8 @@
 uint FrameP2P::numBytesP2P = 0;
 uint FrameP2P::pointerP2P = 0;
 int FrameP2P::posSeparate = 0;
-DataSettings *FrameP2P::ds = nullptr;
+DataSettings FrameP2P::ds;
+bool FrameP2P::isCorrect = false;
 
 
 void DataSettings::Fill()
@@ -155,20 +156,26 @@ void FrameP2P::AddPoint(const BitSet16 &a, const BitSet16 &b)
 }
 
 
+bool FrameP2P::IsCorrect()
+{
+    return isCorrect;
+}
+
+
 void FrameP2P::AddNormalPoint(uint8 a, uint8 b)
 {
-    if(ds->enableA)
+    if(ds.enableA)
     {
         AddNormalPoint(Chan::A, a);
     }
-    if(ds->enableB)
+    if(ds.enableB)
     {
         AddNormalPoint(Chan::B, b);
     }
 
     pointerP2P++;
 
-    if(pointerP2P == ds->BytesInChannel())
+    if(pointerP2P == ds.BytesInChannel())
     {
         pointerP2P = 0;
     }
@@ -177,17 +184,17 @@ void FrameP2P::AddNormalPoint(uint8 a, uint8 b)
 
 void FrameP2P::AddPeakDetPoint(uint16 a, uint16 b)
 {
-    if(ds->enableA)
+    if(ds.enableA)
     {
         AddPeakDetPoint(Chan::A, a);
     }
-    if(ds->enableB)
+    if(ds.enableB)
     {
         AddPeakDetPoint(Chan::B, b);
     }
 
     pointerP2P += 2;
-    if(pointerP2P == ds->BytesInChannel())
+    if(pointerP2P == ds.BytesInChannel())
     {
         pointerP2P = 0;
     }
@@ -196,7 +203,7 @@ void FrameP2P::AddPeakDetPoint(uint16 a, uint16 b)
 
 void FrameP2P::AddNormalPoint(Chan::E ch, uint8 point)
 {
-    uint8 *data = (ch == Chan::A) ? ds->dataA : ds->dataB;
+    uint8 *data = (ch == Chan::A) ? ds.dataA : ds.dataB;
 
     data[pointerP2P] = point;
 }
@@ -204,7 +211,7 @@ void FrameP2P::AddNormalPoint(Chan::E ch, uint8 point)
 
 void FrameP2P::AddPeakDetPoint(Chan::E ch, uint16 point)
 {
-    uint8 *data = (ch == Chan::A) ? ds->dataA : ds->dataB;
+    uint8 *data = (ch == Chan::A) ? ds.dataA : ds.dataB;
 
     data += pointerP2P;
 
@@ -251,15 +258,15 @@ void FrameP2P::FillScreenBuffer(Buffer *buffer, Chan::E ch) const
 
     if(numBytesP2P > 0 && numBytesP2P <= buffer->Size())
     {
-        std::memcpy(data, (ch == Chan::A) ? ds->dataA : ds->dataB, numBytesP2P);
+        std::memcpy(data, (ch == Chan::A) ? ds.dataA : ds.dataB, numBytesP2P);
         posSeparate = static_cast<int>(numBytesP2P - 1);
     }
     else
     {
         uint size = GetNumberStoredBytes();
-        if(size < ds->BytesInChannel())
+        if(size < ds.BytesInChannel())
         {
-            size = ds->BytesInChannel();
+            size = ds.BytesInChannel();
         }
 
         uint pointer = 0;
@@ -290,20 +297,20 @@ void FrameP2P::FillScreenBuffer(Buffer *buffer, Chan::E ch) const
 
 uint FrameP2P::GetNumberStoredBytes() const
 {
-    if(numBytesP2P < ds->BytesInChannel())
+    if(numBytesP2P < ds.BytesInChannel())
     {
         return numBytesP2P;
     }
 
-    return ds->BytesInChannel();
+    return ds.BytesInChannel();
 }
 
 
 uint8 FrameP2P::GetByte(uint position, Chan::E ch) const
 {
-    if(GetNumberStoredBytes() < ds->BytesInChannel())
+    if(GetNumberStoredBytes() < ds.BytesInChannel())
     {
-        uint8 *data = (ch == Chan::A) ? ds->dataA : ds->dataB;
+        uint8 *data = (ch == Chan::A) ? ds.dataA : ds.dataB;
 
         return (position < numBytesP2P) ? data[position] : VALUE::NONE;
     }

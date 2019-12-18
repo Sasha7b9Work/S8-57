@@ -130,12 +130,15 @@ friend class RAM;
 
 struct FrameP2P
 {
-    static DataSettings *ds;
+    static DataSettings ds;
     static void AddPoint(const BitSet16 &a, const BitSet16 &b);
     void FillScreenBuffer(Buffer *buffer, Chan::E ch) const;
+    static bool IsCorrect();
     /// ѕозици€ раздела в поточечном выводе - в ней нужно нарисовать вертикальную линию
     static int posSeparate;
 private:
+    /// true, если идЄт работа в поточечном режиме
+    static bool isCorrect;
     ///  оличество всех считанных точек в поточечном режиме
     static uint numBytesP2P;
     /// ”казатель на позицию записываемых данных. ¬ байтах

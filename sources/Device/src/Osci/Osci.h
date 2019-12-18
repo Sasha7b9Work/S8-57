@@ -31,6 +31,8 @@ struct Osci
     static void LoadHoldfOff();
     /// Эту функцию нужно вызывать при изменении режима запуска
     static void ChangedTrigStartMode();
+    /// Эту функцию нужно вызывать при изменении TBase
+    static void ChangedTBase();
 
     static int addShift;
 

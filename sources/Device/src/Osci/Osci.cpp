@@ -145,7 +145,7 @@ void Osci::UpdateFPGA()
 
 void Osci::ReadPointP2P()
 {
-    if (InModeP2P() && FPGA::IsRunning() && HAL_PIO::Read(PIN_P2P))
+    if (FrameP2P::IsCorrect() && FPGA::IsRunning() && HAL_PIO::Read(PIN_P2P))
     {
         HAL_FSMC::SetAddrData(RD::DATA_A, RD::DATA_A + 1);
         BitSet16 dataA(HAL_FSMC::ReadData0(), HAL_FSMC::ReadData1());
@@ -229,6 +229,12 @@ Osci::StructReadRand Osci::GetInfoForReadRand(int Tsm, const uint8 *address)
 void Osci::OnPressStart()
 {
     return IsRunning() ? Stop() : Start();
+}
+
+
+void Osci::ChangedTBase()
+{
+    SetFunctionsStartStop();
 }
 
 
