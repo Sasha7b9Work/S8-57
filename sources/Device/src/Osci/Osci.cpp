@@ -64,15 +64,22 @@ void Osci::Start()
 
     if (InModeP2P())
     {
-        DataSettings *last = RAM::Get();
-
-        if(last == nullptr)
+        if(TrigStartMode::IsSingle())
         {
             RAM::PrepareForNewData(true);
         }
-        else if(last->isFrameP2P && !last->EqualsCurrentSettings())
+        else
         {
-            RAM::PrepareForNewData(true);
+            DataSettings *last = RAM::Get();
+
+            if(last == nullptr)
+            {
+                RAM::PrepareForNewData(true);
+            }
+            else if(last->isFrameP2P && !last->EqualsCurrentSettings())
+            {
+                RAM::PrepareForNewData(true);
+            }
         }
     }
 
@@ -97,7 +104,7 @@ void Osci::Update()
         return;
     }
 
-    if(InModeP2P() && !RAM::LastFrameIsP2P())
+    if(InModeP2P() && !RAM::LastFrameIsP2P() && !TrigStartMode::IsSingle())
     {
         DataSettings *last = RAM::Get();
         if((TIME_MS - TIME_MS_DS(last) > 1000))
