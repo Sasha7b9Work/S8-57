@@ -28,9 +28,9 @@ void DisplayOsci::PainterData::DrawData()
         func[ModeWork()]();
     }
 
-    if(DS)
+    if(FrameP2P::ds)
     {
-        VLine(Grid::Height()).Draw(Grid::Left() + DS->posSeparate, Grid::Top(), Color::GRID);
+        VLine(Grid::Height()).Draw(Grid::Left() + FrameP2P::posSeparate, Grid::Top(), Color::GRID);
     }
     
     DrawSpectrum();

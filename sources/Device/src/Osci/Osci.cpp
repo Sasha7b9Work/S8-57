@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "device.h"
+#include "Data/DataSettings.h"
 #include "Data/Reader.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/Timer.h"
@@ -152,7 +153,7 @@ void Osci::ReadPointP2P()
         HAL_FSMC::SetAddrData(RD::DATA_B, RD::DATA_B + 1);
         BitSet16 dataB(HAL_FSMC::ReadData0(), HAL_FSMC::ReadData1());
 
-        RAM::Get()->AddPoint(dataA, dataB);
+        FrameP2P::AddPoint(dataA, dataB);
     }
 }
 

@@ -62,29 +62,8 @@ friend class RAM;
     bool Equals(const DataSettings &ds) const;
     bool EqualsCurrentSettings() const;
     void Log() const;
-
-    /// Далее пойдут поточечные функции
-
-    void AddPoint(const BitSet16 &a, const BitSet16 &b);
-    void FillScreenBuffer(Buffer *buffer, Chan::E ch) const;
-    /// Позиция раздела в поточечном выводе - в ней нужно нарисовать вертикальную линию
-    static int posSeparate;
-private:
-    /// Количество всех считанных точек в поточечном режиме
-    static uint numBytesP2P;
-    /// Указатель на позицию записываемых данных. В байтах
-    static uint pointerP2P;
-    /// Добавить точки при выключенном пиковом детекторе
-    void AddNormalPoint(uint8 a, uint8 b);
-    void AddNormalPoint(Chan::E ch, uint8 point);
-    /// Добавить точки при включённом пиковом детекторе
-    void AddPeakDetPoint(uint16 a, uint16 b);
-    void AddPeakDetPoint(Chan::E ch, uint16 point);
-    /// Возвращает количество имеющихся байт канала
-    uint GetNumberStoredBytes() const;
-    /// Возвращает значение байта в позиции position
-    uint8 GetByte(uint position, Chan::E ch) const;
 };
+
 
 #define DATA(ds, ch)         (((ch) == Chan::A) ? (ds)->dataA : (ds)->dataB)
 
@@ -147,3 +126,28 @@ private:
 
 #define ENUM_POINTS(ds)         ((ds)->enumPoints)
 #define BYTES_IN_CHANNEL(ds)    ((uint)(ds)->BytesInChannel())
+
+
+struct FrameP2P
+{
+    static DataSettings *ds;
+    static void AddPoint(const BitSet16 &a, const BitSet16 &b);
+    void FillScreenBuffer(Buffer *buffer, Chan::E ch) const;
+    /// Позиция раздела в поточечном выводе - в ней нужно нарисовать вертикальную линию
+    static int posSeparate;
+private:
+    /// Количество всех считанных точек в поточечном режиме
+    static uint numBytesP2P;
+    /// Указатель на позицию записываемых данных. В байтах
+    static uint pointerP2P;
+    /// Добавить точки при выключенном пиковом детекторе
+    static void AddNormalPoint(uint8 a, uint8 b);
+    static void AddNormalPoint(Chan::E ch, uint8 point);
+    /// Добавить точки при включённом пиковом детекторе
+    static void AddPeakDetPoint(uint16 a, uint16 b);
+    static void AddPeakDetPoint(Chan::E ch, uint16 point);
+    /// Возвращает количество имеющихся байт канала
+    uint GetNumberStoredBytes() const;
+    /// Возвращает значение байта в позиции position
+    uint8 GetByte(uint position, Chan::E ch) const;
+};
