@@ -163,7 +163,9 @@ static void CreateButtons(Frame *frame)
 
     int x00 = 145;
 
-    width = height = 25;
+    width = 25;
+    height = 25;
+
     x0 = x00 + 160;
     y0 = Frame::HEIGHT + 100;
 
@@ -180,8 +182,6 @@ static void CreateButtons(Frame *frame)
 
     width = 51;
     x0 = x00 + 5;
-
-    y0 = Frame::HEIGHT + 100;
 
     size.SetWidth(width);
 

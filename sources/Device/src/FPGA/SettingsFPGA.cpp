@@ -16,6 +16,13 @@ TrigStartMode::E &TrigStartMode::Ref()
 }
 
 
+void TrigStartMode::Set(TrigStartMode::E v)
+{
+    set.trig.startMode = v;
+    Osci::ChangedTrigStartMode();
+}
+
+
 void TrigSource::Set(Chan::E ch)
 {
     if (ch != Chan::Count)

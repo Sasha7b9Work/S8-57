@@ -1891,6 +1891,16 @@
           <GroupName>SCPI</GroupName>
           <Files>
             <File>
+              <FileName>ChannelsSCPI.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\SCPI\ChannelsSCPI.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ChannelsSCPI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\ChannelsSCPI.h</FilePath>
+            </File>
+            <File>
               <FileName>DisplaySCPI.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\SCPI\DisplaySCPI.cpp</FilePath>
@@ -1941,14 +1951,14 @@
               <FilePath>.\src\SCPI\TBaseSCPI.h</FilePath>
             </File>
             <File>
-              <FileName>ChannelsSCPI.cpp</FileName>
+              <FileName>TriggerSCPI.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\SCPI\ChannelsSCPI.cpp</FilePath>
+              <FilePath>.\src\SCPI\TriggerSCPI.cpp</FilePath>
             </File>
             <File>
-              <FileName>ChannelsSCPI.h</FileName>
+              <FileName>TriggerSCPI.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\SCPI\ChannelsSCPI.h</FilePath>
+              <FilePath>.\src\SCPI\TriggerSCPI.h</FilePath>
             </File>
           </Files>
         </Group>
