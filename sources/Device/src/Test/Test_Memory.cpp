@@ -31,7 +31,7 @@ bool Test::RAM::Test()
             line = Display::AddMessage(String("Запись %d из %d, %3.1f%%", i, numRecord, 100.0F * i / numRecord).c_str(), line);
         }
 
-        DataSettings *ds = ::RAM::PrepareForNewData();
+        DataSettings *ds = ::RAM::PrepareForNewData(false);
 
         PrepareDS(ds);
 
@@ -144,7 +144,7 @@ static void PrepareDS(DataSettings *ds)
 static DataSettings *CreateDataInRAM(DataSettings *ds)
 {
     PrepareDS(ds);
-    ::RAM::PrepareForNewData();
+    ::RAM::PrepareForNewData(false);
     FillData(ds);
     return ds;
 }

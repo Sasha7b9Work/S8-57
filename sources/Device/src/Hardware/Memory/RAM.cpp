@@ -125,7 +125,7 @@ void RAM::Init()
 }
 
 
-DataSettings *RAM::PrepareForNewData()
+DataSettings *RAM::PrepareForNewData(bool forP2P)
 {
     DataSettings *result = LastFrameExistAndP2P();
 
@@ -153,7 +153,11 @@ DataSettings *RAM::PrepareForNewData()
 
     newest->Prepare(&ds);                               // И упаковываем данные
 
-    return Get();
+    result = Get();
+
+    result->isFrameP2P = forP2P ? 1U : 0U;
+
+    return result;
 }
 
 

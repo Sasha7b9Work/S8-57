@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Data/DataSettings.h"
+#include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Osci.h"
 #include "Settings/Settings.h"

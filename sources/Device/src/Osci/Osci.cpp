@@ -68,17 +68,7 @@ void Osci::Start()
 
         if(last == nullptr)
         {
-            RAM::PrepareForNewData();
-        }
-        else
-        {
-            DataSettings ds;
-            ds.Fill();
-
-            if(!last->Equals(ds) || (TIME_MS - TIME_MS_DS(last) > 1000))
-            {
-                RAM::PrepareForNewData();
-            }
+            RAM::PrepareForNewData(true);
         }
     }
 
@@ -91,6 +81,15 @@ void Osci::Update()
     if(!Device::InModeOsci())
     {
         return;
+    }
+
+    if(InModeP2P() && !RAM::LastFrameIsP2P())
+    {
+        DataSettings *last = RAM::Get();
+        if((TIME_MS - TIME_MS_DS(last) > 1000))
+        {
+            RAM::PrepareForNewData(true);
+        }
     }
 
     if(FPGA::IsRunning())

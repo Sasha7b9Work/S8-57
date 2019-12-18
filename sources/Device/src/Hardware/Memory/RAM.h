@@ -14,7 +14,7 @@ public:
     /// Инициализирует первоначальное состояние памяти
     static void Init();
     /// Подготовить в хранилище место для хранения новых данных
-    static DataSettings *PrepareForNewData();
+    static DataSettings *PrepareForNewData(bool forP2P);
     /// Считать информацию о num с конца сохранённых данных. 0 - последние данные, 1 - предпоследние
     static DataSettings *Get(uint num = 0);
     /// Возвращает количество записей в памяти
