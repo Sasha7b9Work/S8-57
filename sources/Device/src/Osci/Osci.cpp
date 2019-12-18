@@ -35,22 +35,13 @@ void Osci::Init()
     LoadHoldfOff();
     HAL_PIO::Init(PIN_P2P, HMode::Input, HPull::Up);
     ChangedTrigStartMode();
-    Osci::OnPressStart();
+    Osci::Start();
 }
 
 
 void Osci::DeInit()
 {
     Stop();
-}
-
-
-void Osci::OnPressStart()
-{
-    if (ModeWork::IsDir())
-    {
-        FPGA::OnPressStart();
-    }
 }
 
 
@@ -146,7 +137,7 @@ void Osci::UpdateFPGA()
     
     if(needStop)
     {
-        Osci::OnPressStart();
+        Osci::Stop();
     }
 }
 
@@ -234,6 +225,12 @@ Osci::StructReadRand Osci::GetInfoForReadRand(int Tsm, const uint8 *address)
 }
 
 
+void Osci::OnPressStart()
+{
+    return IsRunning() ? Stop() : Start();
+}
+
+
 void Osci::ChangedTrigStartMode()
 {
     Stop();
@@ -242,7 +239,7 @@ void Osci::ChangedTrigStartMode()
 
     if(!TrigStartMode::IsSingle())
     {
-        OnPressStart();
+        Start();
     }
 
     // Елси находимся в режиме рандомизатора

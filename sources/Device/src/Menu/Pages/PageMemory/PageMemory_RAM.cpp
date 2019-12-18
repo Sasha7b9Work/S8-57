@@ -58,7 +58,7 @@ static void OnOpenClose_RAM(bool enter)
         ModeWork::SetDir();
         if (RUN_FPGA_BEFORE_SB)
         {
-            Osci::OnPressStart();
+            Osci::Start();
         }
     }
 }
