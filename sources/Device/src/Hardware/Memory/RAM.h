@@ -31,4 +31,6 @@ private:
     static void RemoveOldest();
     /// Освободить size байт памяти с начала буфера
     static void AllocateMemoryFromBegin(uint size);
+    /// Если текущий фрейм является фреймом поточечного вывода, то возвращает этот фрейм
+    static DataSettings *CurrentFrameIsP2P();
 };

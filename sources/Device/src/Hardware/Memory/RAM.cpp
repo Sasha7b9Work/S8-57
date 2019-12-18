@@ -2,6 +2,7 @@
 #include "Data/DataSettings.h"
 #include "Data/Heap.h"
 #include "Hardware/Memory/RAM.h"
+#include "Osci/Osci.h"
 #include "Utils/Math.h"
 #include <cstring>
 #include <cstdlib>
@@ -125,6 +126,14 @@ void RAM::Init()
 
 DataSettings *RAM::PrepareForNewData()
 {
+    DataSettings *result = CurrentFrameIsP2P();
+
+    if(result)
+    {
+        DataSettings::isFrameP2P = false;
+        return result;
+    }
+
     DataSettings ds;
 
     ds.Fill();
@@ -140,9 +149,28 @@ DataSettings *RAM::PrepareForNewData()
 
     newest = reinterpret_cast<Packet *>(address);       // Устанавилваем этот адрес в качестве новейшего пакета
 
-    newest->Prepare(&ds);                                   // И упаковываем данные
+    newest->Prepare(&ds);                               // И упаковываем данные
 
     return Get();
+}
+
+
+DataSettings *RAM::CurrentFrameIsP2P()
+{
+    if(!Osci::InModeP2P() || NumberDatas() == 0 || DataSettings::isFrameP2P == false)
+    {
+        return nullptr;
+    }
+
+    DataSettings ds;
+    ds.Fill();
+
+    if(ds.Equals(*Get()))
+    {
+        return Get();
+    }
+
+    return nullptr;
 }
 
 
