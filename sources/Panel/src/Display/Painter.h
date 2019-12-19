@@ -3,7 +3,7 @@
 #include "common/Command.h"
 #include "Display/Colors.h"
 #include "Display/DisplayTypes.h"
-#include "Display/Font/Font_p.h"
+#include "common/Display/Font/Font.h"
 
 
 struct Painter

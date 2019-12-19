@@ -65,7 +65,7 @@ static void DrawLongString(int x, int y, const char *string, bool hightlight)
     {
         color.SetAsCurrent();
 
-//		Text(string).DrawWithLimitation(x, y, x, y, WIDTH_COL, 10);
+		Text(string).DrawWithLimitation(x, y, x, y, WIDTH_COL, 10);
 
         String("...").Draw(x + WIDTH_COL + 3, y);
     }

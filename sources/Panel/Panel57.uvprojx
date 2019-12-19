@@ -336,7 +336,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER, STM32F429xx, DEBUG,PANEL</Define>
               <Undefine></Undefine>
-              <IncludePath>.\src;.\src\libs\CMSIS;.\src\libs\HAL;..\libs\common;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\;.\src\Display\Font</IncludePath>
+              <IncludePath>.\src;.\src\libs\CMSIS;.\src\libs\HAL;..\libs\common;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1361,59 +1361,59 @@
           <GroupName>Display/Font</GroupName>
           <Files>
             <File>
-              <FileName>AdvancedFont_p.h</FileName>
+              <FileName>AdvancedFont.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\Font\AdvancedFont_p.h</FilePath>
+              <FilePath>..\common\Display\Font\AdvancedFont.h</FilePath>
             </File>
             <File>
-              <FileName>AdvancedFont_p.cpp</FileName>
+              <FileName>AdvancedFont.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Display\Font\AdvancedFont_p.cpp</FilePath>
+              <FilePath>..\common\Display\Font\AdvancedFont.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font_p.h</FileName>
+              <FileName>Font.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\Font\Font_p.h</FilePath>
+              <FilePath>..\common\Display\Font\Font.h</FilePath>
             </File>
             <File>
-              <FileName>Font_p.cpp</FileName>
+              <FileName>Font.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Display\Font\Font_p.cpp</FilePath>
+              <FilePath>..\common\Display\Font\Font.cpp</FilePath>
             </File>
             <File>
               <FileName>font5.inc</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\Font\font5.inc</FilePath>
+              <FilePath>..\common\Display\Font\font5.inc</FilePath>
             </File>
             <File>
               <FileName>font8.inc</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\Font\font8.inc</FilePath>
+              <FilePath>..\common\Display\Font\font8.inc</FilePath>
             </File>
             <File>
               <FileName>fontGOST28.inc</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\Font\fontGOST28.inc</FilePath>
+              <FilePath>..\common\Display\Font\fontGOST28.inc</FilePath>
             </File>
             <File>
               <FileName>fontGOST72bold.inc</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\Font\fontGOST72bold.inc</FilePath>
+              <FilePath>..\common\Display\Font\fontGOST72bold.inc</FilePath>
             </File>
             <File>
               <FileName>fontOMEGA72.inc</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\Font\fontOMEGA72.inc</FilePath>
+              <FilePath>..\common\Display\Font\fontOMEGA72.inc</FilePath>
             </File>
             <File>
               <FileName>fontUGO.inc</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\Font\fontUGO.inc</FilePath>
+              <FilePath>..\common\Display\Font\fontUGO.inc</FilePath>
             </File>
             <File>
               <FileName>fontUGO2.inc</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\Font\fontUGO2.inc</FilePath>
+              <FilePath>..\common\Display\Font\fontUGO2.inc</FilePath>
             </File>
           </Files>
         </Group>

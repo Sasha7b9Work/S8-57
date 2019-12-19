@@ -101,6 +101,8 @@ public:
     int DrawInCenterRect(int x, int y, int width, int height, Color color = Color::NUMBER);
 
     void DrawInCenterBoundedRect(int x, int y, int width, int height, Color color = Color::NUMBER);
+
+    int DrawWithLimitation(int x, int y, int limitX, int limitY, int limitWidth, int limitHeight);
     /// Выводит текст на прямоугольнике цвета colorBackgound
     int DrawOnBackground(int x, int y, Color colorBackground);
 
@@ -118,6 +120,7 @@ public:
 
 private:
     const char *text;
+    int DrawCharWithLimitation(int eX, int eY, char _symbol, int limitX, int limitY, int limitWidth, int limitHeight);
 
     int DrawSmall(int x, int y, Color color = Color::NUMBER);
 };
