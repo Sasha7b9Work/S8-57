@@ -38,8 +38,6 @@ static pFuncVV funcAfterUpdateOnce = EmptyFunc;
 
 static int numRow = -1;
 
-static void SaveScreenToFlash();
-
 static void ReadRow(uint8 row);
 /// Выполняет функцию, определённую для выполнения после отрисовки
 static void ExecuteFuncAfterUpdateOnce();
@@ -86,12 +84,7 @@ void Display::Update()
 
     ExecuteFuncAfterUpdateOnce();
 
-    if (needSaveScreen)
-    {
-        SaveScreenToFlash();
-
-        needSaveScreen = 0;
-    }
+    SaveScreenToFlash();
 }
 
 
@@ -304,8 +297,15 @@ static void CreateFileName(char name[256])
 }
 
 
-static void SaveScreenToFlash()
+void Display::SaveScreenToFlash()
 {
+    if(!needSaveScreen)
+    {
+        return;
+    }
+
+    needSaveScreen = false;
+
     if (!FDrive::IsConnected())
     {
         return;

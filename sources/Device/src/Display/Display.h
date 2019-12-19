@@ -85,4 +85,7 @@ struct Display
 
         static volatile bool running;
     };
+
+private:
+    static void SaveScreenToFlash();
 };
