@@ -2,6 +2,7 @@
 #include "Display/Primitives.h"
 #include "Hardware/Battery.h"
 #include "Hardware/HAL/HAL.h"
+#include "Settings/Settings.h"
 #include "Utils/Averager.h"
 
 
@@ -89,15 +90,21 @@ void Battery::Draw(int x, int y)
 
     float percents = CalculatePercents(akk);
 
-    Color::FILL.SetAsCurrent();
-
-    Font::Set(TypeFont::_5);
-
-    //Text(String("%1.2f Â %4.1f%%", akk, percents)).Draw(x + 4, y - 1);
-
-    Font::Set(TypeFont::_8);
+    //Text(String("%1.2f Â", akk)).Draw(x + 8, y, Color::FILL);
+    //Text("Test").Draw(x + 8, y, Color::FILL);
 
     DrawUGO(x + 1, y + 9, percents);
+
+    if(set.dbg.showBattery)
+    {
+        //Font::Set(TypeFont::_5);
+
+        //Text(String("%1.2f Â %4.1f%%", akk, percents)).Draw(x + 4, y + 3, Color::FILL);
+
+        //Font::Pop();
+
+        Text(String("%1.2f Â", akk)).Draw(x + 8, y, Color::FILL);
+    }
 }
 
 

@@ -232,6 +232,7 @@ const Settings Settings::defaultSettings =
         0,                          // pretriggered
         false,                      // ShowStats
         false,                      // runTest
+        false,                      // showBattery
         // Несбрасываемые настройки калибровки
         {
             0,                                      // numAveForRand

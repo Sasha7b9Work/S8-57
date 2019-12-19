@@ -98,6 +98,7 @@ struct SettingsDebug
     int16        pretriggered;          ///< Регулируемая величина предзапуска для исследования рандомизатора.
     bool         ShowStats;             ///< Показывать статистику на экране (fps, например).
     bool         runTest;               ///< Если true, то нужно выполнять тест при запуске
+    bool         showBattery;           ///< Показывать или нет состояние батареи
     SettingsNRST nrst;
 };
 

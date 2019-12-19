@@ -41,6 +41,15 @@ DEF_CHOICE_2( cStats,                                                           
 )
 
 
+DEF_CHOICE_2( cBattery,
+    "Батарея",
+    "Показывать дополнительную информацию о состоянии батареи",
+    "Не показывать",
+    "Показывать",
+    set.dbg.showBattery, &PageDebug::self, Item::Active, Choice::Changed, Choice::AfterDraw
+)
+
+
 static int IncreaseY(int &y, int dY)
 {
     y += dY;
@@ -226,13 +235,14 @@ DEF_PAGE_2( pSerialNumber,                                                      
 const Page * const PageDebug::PageSerialNumber::self = static_cast<const Page *>(&pSerialNumber);
 
 
-DEF_PAGE_6( pDebug,                                                                                                                                                         //--- ОТЛАДКА ---
+DEF_PAGE_7( pDebug,                                                                                                                                                         //--- ОТЛАДКА ---
     "ОТЛАДКА",
     "",
     PageDebug::PageConsole::self,
     PageDebug::PageADC::self,
     PageDebug::PageRand::self,
     &cStats,
+    &cBattery,
     &bSaveFirmware,
     PageDebug::PageTests::self,
     PageName::Debug,
