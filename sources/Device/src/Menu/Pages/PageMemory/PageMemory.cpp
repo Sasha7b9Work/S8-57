@@ -153,19 +153,6 @@ DEF_PAGE_3( pManager,                                                           
 const Page * const PageDrive::Manager::self = static_cast<const Page *>(&pManager);
 
 
-DEF_CHOICE_2( cDrive_Name,                                                                                                                            //--- ПАМЯТЬ - ВНЕШН ЗУ - Имя файла ---
-    "Имя файла"
-    ,
-    "Задаёт режим наименования файлов при сохранении на внешний накопитель:\n"
-    "\"По маске\" - файлы именуются автоматически по заранее введённой маске (след. пункт меню),\n"
-    "\"Вручную\" - каждый раз имя файла нужно задавать вручную"
-    ,
-    "По маске",
-    "Вручную",
-    FileNamingMode::Ref(), &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
-)
-
-
 static void OnPress_Mask_Delete()
 {
     set.mem.fileNameMask[0] = '\0';
@@ -256,27 +243,6 @@ DEF_GRAPH_BUTTON( bMask_Insert,                                                 
     "Вставить",
     "Вставляет выбранный символ",
     &PageDrive::Mask::self, Item::Active, OnPress_Mask_Insert, Draw_Insert
-)
-
-
-DEF_CHOICE_2( cDrive_SaveAs,                                                                                                                      //--- ПАМЯТЬ - ВНЕШН ЗУ - Сохранять как ---
-    "Сохранять как"
-    ,
-    "Если выбран вариант \"Изображение\", сигнал будет сохранён в текущем каталоге в графическом файле с расширением BMP\n"
-    "Если выбран вариант \"Текст\", сигнал будет сохранён в текущем каталоге в текстовом виде в файле с раширением TXT"
-    ,
-    "Изображение",
-    "Текст",
-    ModeSaveSignal::Ref(), &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
-)
-
-
-DEF_CHOICE_2( cDrive_ModeBtnMemory,                                                                                                               //--- ПАМЯТЬ - ВНЕШН ЗУ - Реж кн ПАМЯТЬ ---
-    "Реж кн ПАМЯТЬ",
-    "",
-    "Меню",
-    "Сохранение",
-    ModeBtnMemory::Ref(), &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -426,31 +392,6 @@ DEF_PAGE_3( pMask,                                                              
 )
 
 const Page * const PageDrive::Mask::self = static_cast<const Page *>(&pMask);
-
-
-DEF_CHOICE_2( cDrive_Autoconnect,                                                                                                               //--- ПАМЯТЬ - ВНЕШН ЗУ - Автоподключение ---
-    "Автоподкл.",
-    "Eсли \"Вкл\", при подключении внешнего накопителя происходит автоматический переход на страницу ПАМЯТЬ - Внешн ЗУ",
-    DISABLE_RU,
-    ENABLE_RU,
-    set.mem.flashAutoConnect, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
-)
-
-
-DEF_PAGE_6( pDrive,   //-V1027                                                                                                                                    //--- ПАМЯТЬ - ВНЕШН ЗУ ---
-    "ВНЕШН ЗУ",
-    "Работа с внешним запоминающим устройством.",
-    PageDrive::Manager::self,
-    &cDrive_Name,
-    PageDrive::Mask::self,
-    &cDrive_SaveAs,
-    &cDrive_ModeBtnMemory,
-    &cDrive_Autoconnect,
-    PageName::Memory_Drive,
-    &PageMemory::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
-)
-
-const Page * const PageDrive::self = static_cast<const Page *>(&pDrive);
 
 
 DEF_PAGE_4( pMemory,                                                                                                                                                         //--- ПЯМЯТЬ ---

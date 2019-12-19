@@ -1386,6 +1386,11 @@
               <FilePath>.\src\Menu\Pages\PageMemory\PageMemory.cpp</FilePath>
             </File>
             <File>
+              <FileName>PageMemory_Drive.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageMemory\PageMemory_Drive.cpp</FilePath>
+            </File>
+            <File>
               <FileName>PageMemory_RAM.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageMemory\PageMemory_RAM.cpp</FilePath>
