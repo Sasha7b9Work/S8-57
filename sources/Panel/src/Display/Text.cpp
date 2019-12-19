@@ -28,20 +28,20 @@ int Text::DrawChar(int eX, int eY, uint8 symbol, Color color)
 {
     Painter::SetColor(color);
     
-    uint8 width = Font::GetWidth(symbol);
-    uint8 height = Font::GetHeight();
+    uint8 width = PFont::GetWidth(symbol);
+    uint8 height = PFont::GetHeight();
 
-    int delta = Font::IsBig() ? 0 : (9 - height);
+    int delta = PFont::IsBig() ? 0 : (9 - height);
 
     for (int row = 0; row < height; row++)
     {
-        if (Font::RowNotEmpty(symbol, row))
+        if (PFont::RowNotEmpty(symbol, row))
         {
             int x = eX;
             int y = eY + row + delta;
             for (int bit = 0; bit < width; bit++)
             {
-                if (Font::BitIsExist(symbol, row, bit))
+                if (PFont::BitIsExist(symbol, row, bit))
                 {
                     Painter::SetPoint(x, y);
                 }

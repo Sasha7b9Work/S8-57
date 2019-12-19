@@ -3,11 +3,11 @@
 
 
 
-struct AdvancedFont
+struct PAdvancedFont
 {
-    AdvancedFont() {};
+    PAdvancedFont() {};
     /// Установить действующий шрифт
-    AdvancedFont(TypeFont::E type);
+    PAdvancedFont(PTypeFont::E type);
     /// Возвращает true, если в строке row есть пиксели
     bool RowNotEmpty(uint8 symbol, int row);
     /// Возвращает ширину символа
@@ -20,5 +20,5 @@ struct AdvancedFont
     bool BitIsExist(uint8 symbol, int row, int bit);
 
 private:
-    static TypeFont::E currentType;
+    static PTypeFont::E currentType;
 };

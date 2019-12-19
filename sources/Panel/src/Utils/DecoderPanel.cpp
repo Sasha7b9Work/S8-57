@@ -572,7 +572,7 @@ static bool FuncLengthText(uint8 data)
         if(readingSymbols == numSymbols)
         {
             buffer[readingSymbols] = 0;
-            Font::SendLengthText(buffer);
+            PFont::SendLengthText(buffer);
             delete []buffer;
             return true;
         }
@@ -617,7 +617,7 @@ static bool SetFont(uint8 data)
         return false;
     }
 
-    Font::Set(static_cast<TypeFont::E>(data));
+    PFont::Set(static_cast<PTypeFont::E>(data));
 
     return true;
 }

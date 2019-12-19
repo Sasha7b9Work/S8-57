@@ -3,7 +3,6 @@ cmake_minimum_required(VERSION 3.0)
 project (Panel56)
 
 include_directories(..
-                    ../common/Display/Font
                     ../common/_VS
                     ../common/_VS/std_includes
                     src
