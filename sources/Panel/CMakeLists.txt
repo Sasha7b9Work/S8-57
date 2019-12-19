@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.0)
 project (Panel56)
 
 include_directories(..
+                    ../common/Display/Font
                     ../common/_VS
                     ../common/_VS/std_includes
                     src
@@ -37,7 +38,7 @@ source_group(_VS\\CMSIS                REGULAR_EXPRESSION ../common/_VS/CMSIS/*)
 source_group(src                       REGULAR_EXPRESSION src/*)
 source_group(libs\\HAL                 REGULAR_EXPRESSION src/libs/HAL/*.h)
 source_group(Display                   REGULAR_EXPRESSION src/Display/*)
-source_group(Display\\Font             REGULAR_EXPRESSION ../common/Display/Font/*)
+source_group(Display\\Font             REGULAR_EXPRESSION src/Display/Font/*)
 source_group(FPGA                      REGULAR_EXPRESSION src/FPGA/*)
 source_group(Hardware                  REGULAR_EXPRESSION src/Hardware/*)
 source_group(Hardware\\HAL             REGULAR_EXPRESSION src/Hardware/HAL/*)
@@ -60,7 +61,7 @@ file(GLOB SOURCES   ../common/_VS/*
                     ../common/Transceiver_Panel.cpp
                     src/Data/*
                     src/Display/*
-                    ../common/Display/Font/*
+                    src/Display/Font/*
                     src/FPGA/*
                     src/Hardware/*
                     src/Hardware/HAL/*
