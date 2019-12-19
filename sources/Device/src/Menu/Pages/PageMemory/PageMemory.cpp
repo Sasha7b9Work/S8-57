@@ -502,7 +502,7 @@ static void OnPress_SetName_Delete()
 DEF_GRAPH_BUTTON( bSetName_Delete,                                                                                                                              //--- ИМЯ ФАЙЛА - Удалить ---
     "Удалить",
     "Удаляет все введённые символы",
-    &PageSetName::self, Item::Active, OnPress_SetName_Delete, Draw_Delete
+    &PageDrive::SetName::self, Item::Active, OnPress_SetName_Delete, Draw_Delete
 )
 
 
@@ -518,7 +518,7 @@ static void OnPress_SetName_Backspace()
 DEF_GRAPH_BUTTON( bSetName_Backspace,                                                                                                                         //--- ИМЯ ФАЙЛА - Backspace ---
     "Backspace",
     "Удаляет последний символ",
-    &PageSetName::self, Item::Active, OnPress_SetName_Backspace, Draw_Backspace
+    &PageDrive::SetName::self, Item::Active, OnPress_SetName_Backspace, Draw_Backspace
 )
 
 
@@ -535,7 +535,7 @@ static void OnPress_SetName_Insert()
 DEF_GRAPH_BUTTON( bSetName_Insert,                                                                                                                             //--- ИМЯ ФАЙЛА - Вставить ---
     "Вставить",
     "Вводит очередной символ",
-    &PageSetName::self, Item::Active, OnPress_SetName_Insert, Draw_Insert
+    &PageDrive::SetName::self, Item::Active, OnPress_SetName_Insert, Draw_Insert
 )
 
 
@@ -559,7 +559,7 @@ static void Draw_SetName_Save(int x, int y)
 DEF_GRAPH_BUTTON( bSetName_Save,                                                                                                                              //--- ИМЯ ФАЙЛА - Сохранить ---
     "Сохранить",
     "Сохранение на флеш под заданным именем",
-    &PageSetName::self, Item::Active, OnPress_SetName_Save, Draw_SetName_Save
+    &PageDrive::SetName::self, Item::Active, OnPress_SetName_Save, Draw_SetName_Save
 )
 
 
@@ -601,4 +601,4 @@ DEF_PAGE_4( pSetName,                                                           
     PageName::Memory_SetName, nullptr, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, HandlerKey_SetName
 )
 
-const Page * const PageSetName::self = static_cast<const Page *>(&pSetName);
+const Page * const PageDrive::SetName::self = static_cast<const Page *>(&pSetName);

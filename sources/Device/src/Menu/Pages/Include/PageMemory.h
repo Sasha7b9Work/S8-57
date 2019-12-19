@@ -185,10 +185,9 @@ struct PageDrive
     {
         static const Page * const self;
     };
-};
 
-
-struct PageSetName
-{
-    static const Page * const self;
+    struct SetName
+    {
+        static const Page *const self;
+    };
 };
