@@ -3,6 +3,7 @@
 #include "common/Command.h"
 #include "common/Transceiver.h"
 #include "Hardware/HAL/HAL.h"
+#include "Font.h"
 #include "font8.inc"
 #include "font5.inc"
 #include "fontUGO.inc"

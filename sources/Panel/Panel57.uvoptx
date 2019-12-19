@@ -1145,7 +1145,7 @@
 
   <Group>
     <GroupName>Display/Font</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1204,7 +1204,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\Display\Font\font5.inc</PathWithFileName>
+      <PathWithFileName>.\src\Display\Font\font5.inc</PathWithFileName>
       <FilenameWithoutPath>font5.inc</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1216,7 +1216,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\Display\Font\font8.inc</PathWithFileName>
+      <PathWithFileName>.\src\Display\Font\font8.inc</PathWithFileName>
       <FilenameWithoutPath>font8.inc</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1228,7 +1228,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\Display\Font\fontGOST28.inc</PathWithFileName>
+      <PathWithFileName>.\src\Display\Font\fontGOST28.inc</PathWithFileName>
       <FilenameWithoutPath>fontGOST28.inc</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1240,7 +1240,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\Display\Font\fontGOST72bold.inc</PathWithFileName>
+      <PathWithFileName>.\src\Display\Font\fontGOST72bold.inc</PathWithFileName>
       <FilenameWithoutPath>fontGOST72bold.inc</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1252,7 +1252,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\Display\Font\fontOMEGA72.inc</PathWithFileName>
+      <PathWithFileName>.\src\Display\Font\fontOMEGA72.inc</PathWithFileName>
       <FilenameWithoutPath>fontOMEGA72.inc</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1264,7 +1264,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\Display\Font\fontUGO.inc</PathWithFileName>
+      <PathWithFileName>.\src\Display\Font\fontUGO.inc</PathWithFileName>
       <FilenameWithoutPath>fontUGO.inc</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1276,7 +1276,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\Display\Font\fontUGO2.inc</PathWithFileName>
+      <PathWithFileName>.\src\Display\Font\fontUGO2.inc</PathWithFileName>
       <FilenameWithoutPath>fontUGO2.inc</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>

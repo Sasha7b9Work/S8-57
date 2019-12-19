@@ -1,8 +1,10 @@
 #include "defines.h"
 #include "AdvancedFont.h"
+#ifdef PANEL
 #include "fontGOST28.inc"
 #include "fontGOST72bold.inc"
 #include "fontOMEGA72.inc"
+#endif
 
 
 struct NativeSymbol
