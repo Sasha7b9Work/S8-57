@@ -14,6 +14,7 @@ include_directories(../../VS/Device/src
                     ../../common/_VS/HAL
                     ../../common/_VS/USBD
                     ../../common/_VS/USBH
+                    ../../common/Display/Font
                     ../../../../ThirdParty/wxWidgets/include
                     ../../../../ThirdParty/wxWidgets/generated/lib/vc_dll/mswud)
                     
@@ -54,7 +55,7 @@ source_group(_VS\\HAL                                   REGULAR_EXPRESSION ../co
 source_group(_VS\\HAL\\Legacy                           REGULAR_EXPRESSION ../common/_VS/HAL/Legacy/*)
 source_group(_VS\\USBD                                  REGULAR_EXPRESSION ../common/_VS/USBD/*)
 source_group(_VS\\USBH                                  REGULAR_EXPRESSION ../common/_VS/USBH/*)
-source_group(Display\\Font                              REGULAR_EXPRESSION ../common/Display/Font/*)
+source_group(Display\\Font                              REGULAR_EXPRESSION ../../Panel/src/Display/Font/*)
 source_group(Data                                       REGULAR_EXPRESSION              src/Data/*)
 source_group(FlashDrive                                 REGULAR_EXPRESSION              src/FlashDrive/*)
 source_group(GUI                                        REGULAR_EXPRESSION              src/GUI/*)
@@ -232,7 +233,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Display/Symbols.h
                     ../../Device/src/Display/Warnings.h
                     ../../Device/src/Display/Warnings.cpp                    
-                    ../../common/Display/Font/*
+                    ../../Panel/src/Display/Font/*
 
                     ../../Device/src/FlashDrive/*
                     
