@@ -434,8 +434,7 @@ static void ReadRow(uint8 row)
 
     while (numRow == -1)
     {
-        uint8 data = 0;
-        Transceiver::Send(data);
+        Transceiver::Receive();
         Decoder::Update();
     }
 }
