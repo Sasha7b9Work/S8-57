@@ -31,7 +31,6 @@ struct DFont
 
 public:
     static int  GetLengthText(pString text);
-
     /// Устанавливает текущий шрифт. Ранее установленный можно восстановить функцией Pop()
     static void Set(const DTypeFont::E typeFont);
     static DTypeFont::E Current();
@@ -48,5 +47,14 @@ public:
     static void SetSpacing(int spacing);
     /// Возвращает количество пустых пикселей между символами
     static int GetSpacing();
+};
+
+
+struct WorkerLengthText
+{
+    static int Run(pString text);
     static void SetLength(uint8);
+private:
+    /// Используется для приёма длины текста от панели
+    static int recvLength;
 };

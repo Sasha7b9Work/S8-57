@@ -168,7 +168,7 @@ static bool FuncLengthText(uint8 data)
 
     if(step == 1)
     {
-        DFont::SetLength(data);
+        WorkerLengthText::SetLength(data);
     }
 
     return true;

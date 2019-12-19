@@ -26,14 +26,20 @@ DTypeFont::E currentFont = DTypeFont::_8;
 
 static int spacing = 1;
 
-/// Используется для приёма длины текста от панели
-static int recvLength = -1;
+
+int WorkerLengthText::recvLength = -1;
 
 
 int DFont::GetLengthText(pString text)
 {
+    return WorkerLengthText::Run(text);
+}
+
+
+int WorkerLengthText::Run(pString text)
+{
     recvLength = -1;
-    
+
     uint lenText = std::strlen(text);
 
     uint size = lenText + 2;
@@ -45,8 +51,8 @@ int DFont::GetLengthText(pString text)
     std::memcpy(buffer + 2, text, lenText);
 
     Transceiver::Send(buffer, size);
-    
-    delete [] buffer;
+
+    delete[] buffer;
 
     while(recvLength == -1)
     {
@@ -57,7 +63,8 @@ int DFont::GetLengthText(pString text)
     return recvLength;
 }
 
-void DFont::SetLength(uint8 l)
+
+void WorkerLengthText::SetLength(uint8 l)
 {
     recvLength = l;
 }
