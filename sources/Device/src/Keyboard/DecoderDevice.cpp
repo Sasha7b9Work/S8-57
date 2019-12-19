@@ -8,24 +8,11 @@
 #include <cstdlib>
 
 
-#define SIZE_BUFFER 1024
-static uint8 buffer[SIZE_BUFFER];
-int Decoder::pointer = 0;
-pFuncBU8 Decoder::curFunc;
-/// Текущий байт выполняемой функции
-static int step;
-
-static uint8 *pixels = nullptr;
-
-
-static bool ButtonPress(uint8);
-
-static bool FuncScreen(uint8);
-
-static bool FuncLengthText(uint8);
-/// Добавляет текстовую строку в консоль
-static bool AddToConsole(uint8);
-
+int      Decoder::pointer = 0;
+pFuncBU8 Decoder::curFunc = nullptr;
+int      Decoder::step = -1;
+uint8   *Decoder::pixels = nullptr;
+uint8    Decoder::buffer[Decoder::SIZE_BUFFER];
 
 
 void Decoder::AddData(uint8 data)
@@ -129,7 +116,7 @@ void Decoder::RunStep(uint8 data)
 }
 
 
-static bool ButtonPress(uint8 data)
+bool Decoder::ButtonPress(uint8 data)
 {
     static Key::E button;
     if (step == 0)
@@ -156,7 +143,7 @@ void Decoder::SetBufferForScreenRow(uint8 *_pixels)
 }
 
 
-static bool FuncScreen(uint8 data)
+bool Decoder::FuncScreen(uint8 data)
 {
     static int numString = 0;
 
@@ -187,7 +174,7 @@ static bool FuncScreen(uint8 data)
 }
 
 
-static bool FuncLengthText(uint8 data)
+bool Decoder::FuncLengthText(uint8 data)
 {
     if(step == 0)
     {
@@ -203,7 +190,7 @@ static bool FuncLengthText(uint8 data)
 }
 
 
-static bool AddToConsole(uint8 data)
+bool Decoder::AddToConsole(uint8 data)
 {
     static char *text = nullptr;        // Здесь будет храниться принятая строка
 
