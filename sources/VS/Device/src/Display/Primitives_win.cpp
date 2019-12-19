@@ -80,7 +80,7 @@ int Text::DrawSmall(int x, int y, Color color)
     for (uint i = 0; i < numSymbols; i++)
     {
         x = DrawChar(x, y, text[i]);
-        x += Font::GetSpacing();
+        x += DFont::GetSpacing();
     }
 
     return x;
@@ -91,7 +91,7 @@ static int DrawChar(int eX, int eY, char s)
 {
     uint8 symbol = static_cast<uint8>(s);
 
-    int8 width = static_cast<int8>(Font::GetWidth(symbol));
+    int8 width = static_cast<int8>(PFont::GetWidth(symbol));
     int8 height = static_cast<int8>(Font::GetHeight());
 
     int delta = Font::IsBig() ? 0 : (9 - height);
