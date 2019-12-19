@@ -33,27 +33,32 @@ static int recvLength = -1;
 
 
 #ifdef STM32F437xx
-//int Font::GetLengthText(pString text)
-//{
-//    recvLength = -1;
-//
-//    uint size = std::strlen(text) + 1;
-//
-//    uint8 *buffer = new uint8[size];
-//    buffer[0] = Command::Text_Length;
-//
-//    std::memcpy(buffer + 1, text, std::strlen(text));
-//
-//    Transceiver::Send(buffer, size);
-//
-//    while(recvLength == -1)
-//    {
-//        Transceiver::Receive();
-//        Decoder::Update();
-//    }
-//
-//    return recvLength;
-//}
+int Font::GetLengthText(pString text)
+{
+    recvLength = -1;
+    
+    uint lenText = std::strlen(text);
+
+    uint size = lenText + 2;
+
+    uint8 *buffer = new uint8[size];
+    buffer[0] = Command::Text_Length;
+    buffer[1] = lenText;
+
+    std::memcpy(buffer + 2, text, lenText);
+
+    Transceiver::Send(buffer, size);
+    
+    delete [] buffer;
+
+    while(recvLength == -1)
+    {
+        Transceiver::Receive();
+        Decoder::Update();
+    }
+
+    return recvLength;
+}
 
 void Font::SetLength(uint8 l)
 {
@@ -63,7 +68,7 @@ void Font::SetLength(uint8 l)
 #endif
 
 
-//#ifdef STM32F429xx
+#ifdef STM32F429xx
 int Font::GetLengthText(pString text)
 {
     int result = 0;
@@ -77,7 +82,6 @@ int Font::GetLengthText(pString text)
     return result;
 }
 
-#ifdef STM32F429xx
 void Font::SendLengthText(char *text)
 {
     uint8 length = static_cast<uint8>(GetLengthText(text));

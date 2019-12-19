@@ -95,8 +95,8 @@ void Decoder::AddData(uint8 data)
         DrawHPointLine,
         SetMinWidthFont,
         SetTextSpacing,
-        FuncLengthText,
-        EmptyFunc
+        EmptyFunc,
+        FuncLengthText
     };
 
     if (step == 0)
