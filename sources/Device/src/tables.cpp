@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "Tables.h"
 #include "Display/Primitives.h"
-#include "common/Display/Font/Font.h"
+#include "common/Display/Font/Font_d.h"
 
 
 /// Таблица символов алфавита и спецсимволов для ввода текста

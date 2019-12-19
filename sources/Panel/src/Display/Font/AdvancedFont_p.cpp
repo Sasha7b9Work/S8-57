@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "AdvancedFont.h"
+#include "AdvancedFont_p.h"
 #include "fontGOST28.inc"
 #include "fontGOST72bold.inc"
 #include "fontOMEGA72.inc"

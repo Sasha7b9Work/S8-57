@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Menu/Pages/Include/PageRecorder.h"
-#include "common/Display/Font/Font.h"
+#include "common/Display/Font/Font_d.h"
 #include "Display/Symbols.h"
 #include "Display/Primitives.h"
 

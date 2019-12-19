@@ -801,8 +801,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\Display\Font\AdvancedFont.h</PathWithFileName>
-      <FilenameWithoutPath>AdvancedFont.h</FilenameWithoutPath>
+      <PathWithFileName>..\common\Display\Font\AdvancedFont_d.h</PathWithFileName>
+      <FilenameWithoutPath>AdvancedFont_d.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -813,8 +813,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\Display\Font\AdvancedFont.cpp</PathWithFileName>
-      <FilenameWithoutPath>AdvancedFont.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\common\Display\Font\AdvancedFont_d.cpp</PathWithFileName>
+      <FilenameWithoutPath>AdvancedFont_d.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -825,8 +825,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\Display\Font\Font.h</PathWithFileName>
-      <FilenameWithoutPath>Font.h</FilenameWithoutPath>
+      <PathWithFileName>..\common\Display\Font\Font_d.h</PathWithFileName>
+      <FilenameWithoutPath>Font_d.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -837,8 +837,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\Display\Font\Font.cpp</PathWithFileName>
-      <FilenameWithoutPath>Font.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\common\Display\Font\Font_d.cpp</PathWithFileName>
+      <FilenameWithoutPath>Font_d.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

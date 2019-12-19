@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "AdvancedFont.h"
+#include "AdvancedFont_p.h"
 #include "common/Command.h"
 #include "common/Transceiver.h"
 #include "Hardware/HAL/HAL.h"

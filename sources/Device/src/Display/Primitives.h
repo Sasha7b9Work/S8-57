@@ -1,7 +1,7 @@
 #pragma once
 #include "Utils/String.h"
 #include "Display/Symbols.h"
-#include "common/Display/Font/Font.h"
+#include "common/Display/Font/Font_d.h"
 
 
 class Region

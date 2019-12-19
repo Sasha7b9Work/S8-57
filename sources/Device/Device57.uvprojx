@@ -606,24 +606,24 @@
           <GroupName>Display/Font</GroupName>
           <Files>
             <File>
-              <FileName>AdvancedFont.h</FileName>
+              <FileName>AdvancedFont_d.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\common\Display\Font\AdvancedFont.h</FilePath>
+              <FilePath>..\common\Display\Font\AdvancedFont_d.h</FilePath>
             </File>
             <File>
-              <FileName>AdvancedFont.cpp</FileName>
+              <FileName>AdvancedFont_d.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\common\Display\Font\AdvancedFont.cpp</FilePath>
+              <FilePath>..\common\Display\Font\AdvancedFont_d.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font.h</FileName>
+              <FileName>Font_d.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\common\Display\Font\Font.h</FilePath>
+              <FilePath>..\common\Display\Font\Font_d.h</FilePath>
             </File>
             <File>
-              <FileName>Font.cpp</FileName>
+              <FileName>Font_d.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\common\Display\Font\Font.cpp</FilePath>
+              <FilePath>..\common\Display\Font\Font_d.cpp</FilePath>
             </File>
             <File>
               <FileName>font5.inc</FileName>

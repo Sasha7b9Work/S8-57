@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "common/Display/Font/Font.h"
+#include "common/Display/Font/Font_d.h"
 #include "Data/DataSettings.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"

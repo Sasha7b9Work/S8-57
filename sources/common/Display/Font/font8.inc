@@ -1,4 +1,3 @@
-#include "font.h"
 const Font font8 = {
 	8, {
 /*0*/		{ 0, { 0,	0,	0,	0,	0,	0,	0,	0	} },	
