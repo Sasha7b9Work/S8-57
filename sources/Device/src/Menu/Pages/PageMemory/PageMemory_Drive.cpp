@@ -3,7 +3,7 @@
 #include "Settings/Settings.h"
 
 
-DEF_CHOICE_2(cDrive_SaveAs,                                                                                                                      //--- ПАМЯТЬ - ВНЕШН ЗУ - Сохранять как ---
+DEF_CHOICE_2(cSaveAs,                                                                                                                             //--- ПАМЯТЬ - ВНЕШН ЗУ - Сохранять как ---
     "Сохранять как"
     ,
     "Если выбран вариант \"Изображение\", сигнал будет сохранён в текущем каталоге в графическом файле с расширением BMP\n"
@@ -15,7 +15,7 @@ DEF_CHOICE_2(cDrive_SaveAs,                                                     
 )
 
 
-DEF_CHOICE_2(cDrive_Name,                                                                                                                            //--- ПАМЯТЬ - ВНЕШН ЗУ - Имя файла ---
+DEF_CHOICE_2(cName,                                                                                                                                   //--- ПАМЯТЬ - ВНЕШН ЗУ - Имя файла ---
     "Имя файла"
     ,
     "Задаёт режим наименования файлов при сохранении на внешний накопитель:\n"
@@ -28,7 +28,7 @@ DEF_CHOICE_2(cDrive_Name,                                                       
 )
 
 
-DEF_CHOICE_2(cDrive_ModeBtnMemory,                                                                                                               //--- ПАМЯТЬ - ВНЕШН ЗУ - Реж кн ПАМЯТЬ ---
+DEF_CHOICE_2(cModeBtnMemory,                                                                                                                      //--- ПАМЯТЬ - ВНЕШН ЗУ - Реж кн ПАМЯТЬ ---
     "Реж кн ПАМЯТЬ",
     "",
     "Меню",
@@ -37,7 +37,7 @@ DEF_CHOICE_2(cDrive_ModeBtnMemory,                                              
 )
 
 
-DEF_CHOICE_2(cDrive_Autoconnect,                                                                                                               //--- ПАМЯТЬ - ВНЕШН ЗУ - Автоподключение ---
+DEF_CHOICE_2(cAutoconnect,                                                                                                                      //--- ПАМЯТЬ - ВНЕШН ЗУ - Автоподключение ---
     "Автоподкл.",
     "Eсли \"Вкл\", при подключении внешнего накопителя происходит автоматический переход на страницу ПАМЯТЬ - Внешн ЗУ",
     DISABLE_RU,
@@ -46,15 +46,15 @@ DEF_CHOICE_2(cDrive_Autoconnect,                                                
 )
 
 
-DEF_PAGE_6(pDrive,   //-V1027                                                                                                                                    //--- ПАМЯТЬ - ВНЕШН ЗУ ---
+DEF_PAGE_6(pDrive,   //-V1027                                                                                                                                     //--- ПАМЯТЬ - ВНЕШН ЗУ ---
     "ВНЕШН ЗУ",
     "Работа с внешним запоминающим устройством.",
     PageDrive::Manager::self,
-    &cDrive_Name,
+    &cName,
     PageDrive::Mask::self,
-    &cDrive_SaveAs,
-    &cDrive_ModeBtnMemory,
-    &cDrive_Autoconnect,
+    &cSaveAs,
+    &cModeBtnMemory,
+    &cAutoconnect,
     PageName::Memory_Drive,
     &PageMemory::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
