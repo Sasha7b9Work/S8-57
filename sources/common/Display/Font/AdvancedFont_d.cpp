@@ -49,19 +49,15 @@ AdvancedFont::AdvancedFont(TypeFont::E t)
     
     if(currentType == TypeFont::_GOST28)
     {
-        font = fontGOST28;
     }
     else if(currentType == TypeFont::_GOST72bold)
     {
-        font = fontGOST72bold;
     }
     else if(currentType == TypeFont::_OMEGA72)
     {
-        font = fontOMEGA72;
     }
     else
     {
-        font = nullptr;
     }
 }
 

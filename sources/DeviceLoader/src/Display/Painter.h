@@ -146,10 +146,6 @@ private:
     static Color currentColor;
 
     static TypeFont::E currentTypeFont;
-
-    static void DrawCharHardCol(int x, int y, char symbol);
-
-    static int DrawCharWithLimitation(int eX, int eY, uint8 symbol, int limitX, int limitY, int limitWidth, int limitHeight);
 };
 
 

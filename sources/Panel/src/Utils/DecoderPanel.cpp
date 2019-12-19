@@ -61,6 +61,8 @@ static bool SetMinWidthFont(uint8);
 static bool SetTextSpacing(uint8);
 /// Обработка запроса на вычисление длины текста
 static bool FuncLengthText(uint8);
+/// Возвращает ширину символа
+static bool FuncSymbolWidth(uint8);
 /// Эту функцию надо вызывать после выполнения последнего шага
 static void FinishCommand();
 
@@ -96,7 +98,8 @@ void Decoder::AddData(uint8 data)
         SetMinWidthFont,
         SetTextSpacing,
         EmptyFunc,
-        FuncLengthText
+        FuncLengthText,
+        FuncSymbolWidth
     };
 
     if (step == 0)
@@ -580,6 +583,18 @@ static bool FuncLengthText(uint8 data)
     }
 
     return false;
+}
+
+
+static bool FuncSymbolWidth(uint8 data)
+{
+    if(step == 0)
+    {
+        return false;
+    }
+
+    Font::GetWidth(data);
+    return true;
 }
 
 

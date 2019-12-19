@@ -4,10 +4,12 @@
 #include "common/Transceiver.h"
 #include "Hardware/HAL/HAL.h"
 #include "Font.h"
+#ifdef PANEL
 #include "font8.inc"
 #include "font5.inc"
 #include "fontUGO.inc"
 #include "fontUGO2.inc"
+#endif
 #include <cstring>
 
 #ifdef DEVICE
@@ -18,9 +20,6 @@
 #include "Keyboard/DecoderLoader.h"
 #endif
 
-
-const Font *fonts[TypeFont::Count] = {&font5, &font8, &fontUGO, &fontUGO2, nullptr};
-const Font *font = &font8;
 
 TypeFont::E pushedFont = TypeFont::_8;
 TypeFont::E currentFont = TypeFont::_8;
@@ -125,22 +124,17 @@ void Font::Set(const TypeFont::E typeFont)
         switch (typeFont)
         {
         case TypeFont::_5:
-            font = &font5;
             break;
         case TypeFont::_8:
-            font = &font8;
             break;
         case TypeFont::_UGO:
-            font = &fontUGO;
             break;
         case TypeFont::_UGO2:
-            font = &fontUGO2;
             break;
         case TypeFont::_GOST28:
         case TypeFont::_GOST72bold:
         case TypeFont::_OMEGA72:
         {
-            font = nullptr;
             volatile AdvancedFont f(typeFont);
         }       
             break;
@@ -194,6 +188,7 @@ static bool FontIsSmall()
 }
 
 
+#ifdef PANEL
 uint8 Font::GetWidth(uint8 symbol)
 {
     if (FontIsSmall())
@@ -203,25 +198,31 @@ uint8 Font::GetWidth(uint8 symbol)
 
     return AdvancedFont().GetWidth(symbol);
 }
+#endif
 
 
+#ifdef PANEL
 uint8 Font::GetWidth(char symbol)
 {
     return GetWidth(static_cast<uint8>(symbol));
 }
+#endif
 
 
 uint8 Font::GetHeight()
 {
-    if (FontIsSmall())
-    {
-        return static_cast<uint8>(font->_height);
-    }
-
-    return AdvancedFont().GetHeight();
+    //if (FontIsSmall())
+    //{
+    //    return static_cast<uint8>(font->_height);
+    //}
+    //
+    //return AdvancedFont().GetHeight();
+    
+    return 8;
 }
 
 
+#ifdef PANEL
 bool Font::RowNotEmpty(uint8 symbol, int row)
 {
     if (FontIsSmall())
@@ -231,8 +232,10 @@ bool Font::RowNotEmpty(uint8 symbol, int row)
 
     return AdvancedFont().RowNotEmpty(symbol, row);
 }
+#endif
 
 
+#ifdef PANEL
 bool Font::BitIsExist(uint8 symbol, int row, int bit)
 {
     if (FontIsSmall())
@@ -242,6 +245,7 @@ bool Font::BitIsExist(uint8 symbol, int row, int bit)
 
     return AdvancedFont().BitIsExist(symbol, row, bit);
 }
+#endif
 
 
 bool Font::IsBig()

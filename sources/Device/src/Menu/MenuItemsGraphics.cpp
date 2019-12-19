@@ -170,21 +170,21 @@ void Governor::DrawLowPart(int x, int y) const
         }
         else
         {
-            int drawX = x + 1;
-            int limX = x + 1;
-            int limY = y - 2;
+//            int drawX = x + 1;
+//            int limX = x + 1;
+//            int limY = y - 2;
             int limWidth = Width();
-            int limHeight = Value::HEIGHT - 1;
+//            int limHeight = Value::HEIGHT - 1;
             Color::BLACK.SetAsCurrent();
             if (delta > 0)
             {
-				x = Text(Integer(GetValue()).ToString(false, 1)).DrawWithLimitation(drawX, y - delta, limX, limY, limWidth, limHeight);
-				Text(Integer(NextValue()).ToString(false, 1)).DrawWithLimitation(drawX, y + 10 - delta, limX, limY, limWidth, limHeight);
+				//x = Text(Integer(GetValue()).ToString(false, 1)).DrawWithLimitation(drawX, y - delta, limX, limY, limWidth, limHeight);
+				//Text(Integer(NextValue()).ToString(false, 1)).DrawWithLimitation(drawX, y + 10 - delta, limX, limY, limWidth, limHeight);
             }
             if (delta < 0)
             {
-				x = Text(Integer(GetValue()).ToString(false, 1)).DrawWithLimitation(drawX, y - delta, limX, limY, limWidth, limHeight);
-				Text(Integer(PrevValue()).ToString(false, 1)).DrawWithLimitation(drawX, y - 10 - delta, limX, limY, limWidth, limHeight);
+				//x = Text(Integer(GetValue()).ToString(false, 1)).DrawWithLimitation(drawX, y - delta, limX, limY, limWidth, limHeight);
+				//Text(Integer(PrevValue()).ToString(false, 1)).DrawWithLimitation(drawX, y - 10 - delta, limX, limY, limWidth, limHeight);
             }
         }
         
@@ -248,12 +248,12 @@ void Choice::DrawClosed(int x, int y) const
         else
         {
             Color::BACK.SetAsCurrent();
-            Text(NameCurrentSubItem()).DrawWithLimitation(x + 4, y + Value::HEIGHT - deltaY + 1, x, y + 11, Width(), Value::HEIGHT - 1);
+//            Text(NameCurrentSubItem()).DrawWithLimitation(x + 4, y + Value::HEIGHT - deltaY + 1, x, y + 11, Width(), Value::HEIGHT - 1);
 
             HLine(Item::Width() + 1).Draw(x + 1, y + (deltaY > 0 ? 24 : 19) - deltaY);
 
-            Text(deltaY > 0 ? NameNextSubItem() : NamePrevSubItem()).DrawWithLimitation(x + 4, y + (deltaY > 0 ? (Value::HEIGHT + 13) : 9) - deltaY, x, y + 11,
-                Item::Width(), Value::HEIGHT - 1);
+//            Text(deltaY > 0 ? NameNextSubItem() : NamePrevSubItem()).DrawWithLimitation(x + 4, y + (deltaY > 0 ? (Value::HEIGHT + 13) : 9) - deltaY, x, y + 11,
+//                Item::Width(), Value::HEIGHT - 1);
         }
 
         OwnData()->funcAfterDraw(x, y);

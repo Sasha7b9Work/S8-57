@@ -74,9 +74,7 @@ int Char::Draw(int x, int y, Color color)
 {
     Font::Set(font);
 
-	String("%c", ch).Draw(x, y, color);
-
-    int result = x + Font::GetWidth(ch) + 1;
+	int result = String("%c", ch).Draw(x, y, color) + 1;
 
     Font::Pop();
 
@@ -137,53 +135,6 @@ int Text::Draw(int x, int y, Color color)
     }
 
     return x;
-}
-
-
-int Text::DrawWithLimitation(int x, int y, int limitX, int limitY, int limitWidth, int limitHeight)
-{
-    int retValue = x;
-
-    while (*text)
-    {
-        x = DrawCharWithLimitation(x, y, *text, limitX, limitY, limitWidth, limitHeight);
-        retValue += Font::GetWidth(*text);
-        text++;
-    }
-
-    return retValue + 1;
-}
-
-
-int Text::DrawCharWithLimitation(int eX, int eY, char _symbol, int limitX, int limitY, int limitWidth, int limitHeight)
-{
-    uint8 symbol = static_cast<uint8>(_symbol);
-
-    int8 width = static_cast<int8>(Font::GetWidth(symbol));
-    int8 height = static_cast<int8>(Font::GetHeight());
-
-    for (int b = 0; b < height; b++)
-    {
-        if(Font::RowNotEmpty(symbol, b))
-        {
-            int x = eX;
-            int y = eY + b + 9 - height;
-            int endBit = 8 - width;
-            for (int bit = 7; bit >= endBit; bit--)
-            {
-                if (Font::BitIsExist(symbol, b, bit))
-                {
-                    if ((x >= limitX) && (x <= (limitX + limitWidth)) && (y >= limitY) && (y <= limitY + limitHeight))
-                    {
-                        Pixel().Draw(x, y);
-                    }
-                }
-                x++;
-            }
-        }
-    }
-
-    return eX + width + 1;
 }
 
 

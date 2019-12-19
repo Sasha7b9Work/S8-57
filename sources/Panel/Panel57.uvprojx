@@ -1361,24 +1361,24 @@
           <GroupName>Display/Font</GroupName>
           <Files>
             <File>
-              <FileName>AdvancedFont.h</FileName>
+              <FileName>AdvancedFont_p.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\common\Display\Font\AdvancedFont.h</FilePath>
+              <FilePath>.\src\Display\Font\AdvancedFont_p.h</FilePath>
             </File>
             <File>
-              <FileName>AdvancedFont.cpp</FileName>
+              <FileName>AdvancedFont_p.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\common\Display\Font\AdvancedFont.cpp</FilePath>
+              <FilePath>.\src\Display\Font\AdvancedFont_p.cpp</FilePath>
             </File>
             <File>
-              <FileName>Font.h</FileName>
+              <FileName>Font_p.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\common\Display\Font\Font.h</FilePath>
+              <FilePath>.\src\Display\Font\Font_p.h</FilePath>
             </File>
             <File>
-              <FileName>Font.cpp</FileName>
+              <FileName>Font_p.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\common\Display\Font\Font.cpp</FilePath>
+              <FilePath>.\src\Display\Font\Font_p.cpp</FilePath>
             </File>
             <File>
               <FileName>font5.inc</FileName>
