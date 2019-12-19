@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "AdvancedFont_p.h"
+#include "AdvancedFont_win.h"
 #include "common/Command.h"
 #include "common/Transceiver.h"
 #include "Hardware/HAL/HAL.h"
@@ -19,7 +19,6 @@ TypeFont::E currentFont = TypeFont::_8;
 static int spacing = 1;
 
 
-#ifdef STM32F429xx
 int Font::GetLengthText(pString text)
 {
     int result = 0;
@@ -41,7 +40,6 @@ void Font::SendLengthText(char *text)
 
     Transceiver::Send(data, 2);
 }
-#endif
 
 
 TypeFont::E Font::Current()

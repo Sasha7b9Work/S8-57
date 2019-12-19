@@ -55,32 +55,32 @@ source_group(_VS\\HAL                                   REGULAR_EXPRESSION ../co
 source_group(_VS\\HAL\\Legacy                           REGULAR_EXPRESSION ../common/_VS/HAL/Legacy/*)
 source_group(_VS\\USBD                                  REGULAR_EXPRESSION ../common/_VS/USBD/*)
 source_group(_VS\\USBH                                  REGULAR_EXPRESSION ../common/_VS/USBH/*)
-source_group(Display\\Font                              REGULAR_EXPRESSION ../../Panel/src/Display/Font/*)
-source_group(Data                                       REGULAR_EXPRESSION              src/Data/*)
-source_group(FlashDrive                                 REGULAR_EXPRESSION              src/FlashDrive/*)
-source_group(GUI                                        REGULAR_EXPRESSION              src/GUI/*)
-source_group(GUI\\Dialogs                               REGULAR_EXPRESSION              src/GUI/Dialogs/*)
-source_group(Keyboard                                   REGULAR_EXPRESSION              src/Keyboard/*)
-source_group(Menu                                       REGULAR_EXPRESSION              src/Menu/*)
-source_group(Menu\\Pages                                REGULAR_EXPRESSION              src/Menu/Pages/*)
-source_group(Menu\\Pages\\Include                       REGULAR_EXPRESSION              src/Menu/Pages/Include/*)
-source_group(Menu\\Pages\\PageDebug                     REGULAR_EXPRESSION              src/Menu/Pages/PageDebug/*)
-source_group(Menu\\Pages\\PageDisplay                   REGULAR_EXPRESSION              src/Menu/Pages/PageDisplay/*)
-source_group(Menu\\Pages\\PageFunction                  REGULAR_EXPRESSION              src/Menu/Pages/PageFunction/*)
-source_group(Menu\\Pages\\PageRecorder                  REGULAR_EXPRESSION              src/Menu/Pages/PageRecorder/*)
-source_group(Menu\\Pages\\PageHelp                      REGULAR_EXPRESSION              src/Menu/Pages/PageHelp/*)
-source_group(Menu\\Pages\\PageMeasures                  REGULAR_EXPRESSION              src/Menu/Pages/PageMeasures/*)
-source_group(Menu\\Pages\\PageMemory                    REGULAR_EXPRESSION              src/Menu/Pages/PageMemory/*)
-source_group(Menu\\Pages\\PageService                   REGULAR_EXPRESSION              src/Menu/Pages/PageService/*)
-source_group(Menu\\Pages\\PageService\\PageDebug        REGULAR_EXPRESSION              src/Menu/Pages/PageService/PageDebug/*)
-source_group(Menu\\Pages\\PageTrig                      REGULAR_EXPRESSION              src/Menu/Pages/PageTrig/*)
-source_group(Multimeter                                 REGULAR_EXPRESSION              src/Multimeter/*)
-source_group(Osci\\Display                              REGULAR_EXPRESSION              src/Osci/Display/*)
-source_group(Osci\\Measurements\\                       REGULAR_EXPRESSION              src/Osci/Measurements/*)
-source_group(SCPI                                       REGULAR_EXPRESSION              src/SCPI/*)
-source_group(Test                                       REGULAR_EXPRESSION              src/Test/*)
-source_group(Tester                                     REGULAR_EXPRESSION              src/Tester/*)
-source_group(Utils                                      REGULAR_EXPRESSION              src/Utils/*)
+source_group(Display\\Font                              REGULAR_EXPRESSION src/Display/Font/*)
+source_group(Data                                       REGULAR_EXPRESSION src/Data/*)
+source_group(FlashDrive                                 REGULAR_EXPRESSION src/FlashDrive/*)
+source_group(GUI                                        REGULAR_EXPRESSION src/GUI/*)
+source_group(GUI\\Dialogs                               REGULAR_EXPRESSION src/GUI/Dialogs/*)
+source_group(Keyboard                                   REGULAR_EXPRESSION src/Keyboard/*)
+source_group(Menu                                       REGULAR_EXPRESSION src/Menu/*)
+source_group(Menu\\Pages                                REGULAR_EXPRESSION src/Menu/Pages/*)
+source_group(Menu\\Pages\\Include                       REGULAR_EXPRESSION src/Menu/Pages/Include/*)
+source_group(Menu\\Pages\\PageDebug                     REGULAR_EXPRESSION src/Menu/Pages/PageDebug/*)
+source_group(Menu\\Pages\\PageDisplay                   REGULAR_EXPRESSION src/Menu/Pages/PageDisplay/*)
+source_group(Menu\\Pages\\PageFunction                  REGULAR_EXPRESSION src/Menu/Pages/PageFunction/*)
+source_group(Menu\\Pages\\PageRecorder                  REGULAR_EXPRESSION src/Menu/Pages/PageRecorder/*)
+source_group(Menu\\Pages\\PageHelp                      REGULAR_EXPRESSION src/Menu/Pages/PageHelp/*)
+source_group(Menu\\Pages\\PageMeasures                  REGULAR_EXPRESSION src/Menu/Pages/PageMeasures/*)
+source_group(Menu\\Pages\\PageMemory                    REGULAR_EXPRESSION src/Menu/Pages/PageMemory/*)
+source_group(Menu\\Pages\\PageService                   REGULAR_EXPRESSION src/Menu/Pages/PageService/*)
+source_group(Menu\\Pages\\PageService\\PageDebug        REGULAR_EXPRESSION src/Menu/Pages/PageService/PageDebug/*)
+source_group(Menu\\Pages\\PageTrig                      REGULAR_EXPRESSION src/Menu/Pages/PageTrig/*)
+source_group(Multimeter                                 REGULAR_EXPRESSION src/Multimeter/*)
+source_group(Osci\\Display                              REGULAR_EXPRESSION src/Osci/Display/*)
+source_group(Osci\\Measurements\\                       REGULAR_EXPRESSION src/Osci/Measurements/*)
+source_group(SCPI                                       REGULAR_EXPRESSION src/SCPI/*)
+source_group(Test                                       REGULAR_EXPRESSION src/Test/*)
+source_group(Tester                                     REGULAR_EXPRESSION src/Tester/*)
+source_group(Utils                                      REGULAR_EXPRESSION src/Utils/*)
 source_group(src                FILES   ../../Device/src/defines.h
                                         ../../Device/src/defines.cpp
                                         ../../Device/src/device.h
@@ -233,7 +233,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Display/Symbols.h
                     ../../Device/src/Display/Warnings.h
                     ../../Device/src/Display/Warnings.cpp                    
-                    ../../Panel/src/Display/Font/*
+                                 src/Display/Font/*
 
                     ../../Device/src/FlashDrive/*
                     

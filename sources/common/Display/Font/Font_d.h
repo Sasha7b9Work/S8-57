@@ -21,7 +21,7 @@ struct TypeFont
         _OMEGA72,       // Используется в мультиметре для вывода обозначения ом. Имеет только один символ
         Count,
         None
-    } value;
+    };
 };
 
 struct Font
@@ -46,14 +46,7 @@ public:
     static void SetMinWidth(uint8 width);
     /// Устанавливает количество пустых пикселей между символами.
     static void SetSpacing(int spacing);
-
-#ifdef STM32F437xx
     /// Возвращает количество пустых пикселей между символами
     static int GetSpacing();
     static void SetLength(uint8);
-#endif
-
-#ifdef STM32F429xx
-    static void SendLengthText(char *text);
-#endif
 };

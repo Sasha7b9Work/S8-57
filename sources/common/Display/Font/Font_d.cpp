@@ -26,13 +26,10 @@ TypeFont::E currentFont = TypeFont::_8;
 
 static int spacing = 1;
 
-#ifndef PANEL
 /// Используется для приёма длины текста от панели
 static int recvLength = -1;
-#endif
 
 
-#ifdef STM32F437xx
 int Font::GetLengthText(pString text)
 {
     recvLength = -1;
@@ -65,37 +62,7 @@ void Font::SetLength(uint8 l)
     recvLength = l;
 }
 
-#endif
 
-
-#ifdef STM32F429xx
-int Font::GetLengthText(pString text)
-{
-    int result = 0;
-    char *symbol = const_cast<char *>(text);
-
-    while(*symbol)
-    {
-        result += Font::GetWidth(*symbol) + spacing;
-        symbol++;
-    }
-    return result;
-}
-
-void Font::SendLengthText(char *text)
-{
-    uint8 length = static_cast<uint8>(GetLengthText(text));
-
-    uint8 data[2] = { Command::Text_Length, length };
-
-    Transceiver::Send(data, 2);
-}
-#endif
-
-
-#ifdef PANEL
-static void SendTypeFontToPanel(TypeFont::E) {};
-#else
 static void SendTypeFontToPanel(TypeFont::E type)
 {
     static TypeFont::E prevType = TypeFont::Count;
@@ -106,7 +73,6 @@ static void SendTypeFontToPanel(TypeFont::E type)
         prevType = type;
     }
 }
-#endif
 
 
 TypeFont::E Font::Current()
@@ -161,9 +127,6 @@ void Font::Pop()
 }
 
 
-#ifdef PANEL
-void Font::SetSpacing(int) {}
-#else
 void Font::SetSpacing(int _spacing)
 {
     spacing = _spacing;
@@ -174,17 +137,12 @@ int Font::GetSpacing()
 {
     return spacing;
 }
-#endif
 
 
-#ifdef PANEL
-void Font::SetMinWidth(uint8) {}
-#else
 void Font::SetMinWidth(uint8 width)
 {
     Transceiver::Send(Command::Paint_SetMinWidthFont, width);
 }
-#endif
 
 
 static bool FontIsSmall()
