@@ -67,7 +67,7 @@ static void RemoveOld()
 
 static void DrawMessages()
 {
-    Font::Set(TypeFont::_8);
+    DFont::Set(DTypeFont::_8);
 
     int y = Grid::BottomForWarnings();                   // Координата y нижнего левого угла прямоугольника, в котором будет отрисовано очередное сообщение
 
@@ -131,7 +131,7 @@ int WarningStruct::Height(int) const
 
 void WarningStruct::Draw(int x, int y) const
 {
-    int width = Font::GetLengthText(message.c_str());
+    int width = DFont::GetLengthText(message.c_str());
 
     Region(width + 3, 10).DrawBounded(x, y, Color::FLASH_10, Color::FILL);
 

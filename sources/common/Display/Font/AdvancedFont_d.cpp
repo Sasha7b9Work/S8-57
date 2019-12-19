@@ -35,25 +35,25 @@ struct HeaderFont
 };
 
 
-TypeFont::E AdvancedFont::currentType = TypeFont::None;
+DTypeFont::E DAdvancedFont::currentType = DTypeFont::None;
 
 
 static const unsigned char * font = nullptr;
 
 
-AdvancedFont::AdvancedFont(TypeFont::E t)
+DAdvancedFont::DAdvancedFont(DTypeFont::E t)
 {
     currentType = t;
     
-    if(currentType == TypeFont::_GOST28)
+    if(currentType == DTypeFont::_GOST28)
     {
         font = fontGOST28;
     }
-    else if(currentType == TypeFont::_GOST72bold)
+    else if(currentType == DTypeFont::_GOST72bold)
     {
         font = fontGOST72bold;
     }
-    else if(currentType == TypeFont::_OMEGA72)
+    else if(currentType == DTypeFont::_OMEGA72)
     {
         font = fontOMEGA72;
     }
@@ -64,7 +64,7 @@ AdvancedFont::AdvancedFont(TypeFont::E t)
 }
 
 
-bool AdvancedFont::RowNotEmpty(uint8 s, int r)
+bool DAdvancedFont::RowNotEmpty(uint8 s, int r)
 {
     HeaderFont *header = HeaderFont::Sefl();
 
@@ -95,14 +95,14 @@ bool AdvancedFont::RowNotEmpty(uint8 s, int r)
 }
 
 
-uint8 AdvancedFont::GetWidth(uint8 num)
+uint8 DAdvancedFont::GetWidth(uint8 num)
 {
     NativeSymbol *symbol = HeaderFont::Sefl()->GetSymbol(num);
 
     return symbol ? symbol->width : 0U;
 }
 
-uint8 AdvancedFont::GetHeight(uint8 num)
+uint8 DAdvancedFont::GetHeight(uint8 num)
 {
     NativeSymbol *symbol = HeaderFont::Sefl()->GetSymbol(num);
 
@@ -110,7 +110,7 @@ uint8 AdvancedFont::GetHeight(uint8 num)
 }
 
 
-uint8 AdvancedFont::GetHeight()
+uint8 DAdvancedFont::GetHeight()
 {
     uint8 result = 0;
 
@@ -184,7 +184,7 @@ uint8 *NativeSymbol::Data()
 }
 
 
-bool AdvancedFont::BitIsExist(uint8 s, int row, int bit)
+bool DAdvancedFont::BitIsExist(uint8 s, int row, int bit)
 {
     NativeSymbol *symbol = HeaderFont::Sefl()->GetSymbol(s);
 

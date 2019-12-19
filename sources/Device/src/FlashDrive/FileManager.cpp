@@ -48,7 +48,7 @@ void FileManager::Init()
 
 static void DrawLongString(int x, int y, const char *string, bool hightlight)
 {
-    int length = Font::GetLengthText(string);
+    int length = DFont::GetLengthText(string);
 
     Color color = Color::FILL;
     if (hightlight)
@@ -123,7 +123,7 @@ static void DrawFiles(int x, int y)
 static void DrawNameCurrentDir(int left, int top) //-V2506
 {
     Color::FILL.SetAsCurrent();
-    int length = Font::GetLengthText(currentDir);
+    int length = DFont::GetLengthText(currentDir);
     if (length < 277)
     {
         String(currentDir).Draw(left + 1, top + 1);
@@ -141,7 +141,7 @@ static void DrawNameCurrentDir(int left, int top) //-V2506
             {
                 return;
             }
-            length = Font::GetLengthText(++pointer);
+            length = DFont::GetLengthText(++pointer);
         }
         String(pointer).Draw(left + 1, top + 1);
     }

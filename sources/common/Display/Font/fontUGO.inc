@@ -1,4 +1,4 @@
-const Font fontUGO = {
+const DFont fontUGO = {
 	8, {
 /*0*/		{ 0, { 0,	0,	0,	0,	0,	0,	0,	0	} },	
 /*1*/		{ 0, { 0,	0,	0,	0,	0,	0,	0,	0	} },	

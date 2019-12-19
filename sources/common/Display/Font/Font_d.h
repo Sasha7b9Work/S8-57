@@ -2,13 +2,13 @@
 #include "defines.h"
 
 
-struct Symbol
+struct DSymbol
 {
     uchar width;
     uchar bytes[8];
 };
 
-struct TypeFont
+struct DTypeFont
 {
     enum E
     {
@@ -24,17 +24,17 @@ struct TypeFont
     };
 };
 
-struct Font
+struct DFont
 {
     int _height;
-    Symbol symbols[256];
+    DSymbol symbols[256];
 
 public:
     static int  GetLengthText(pString text);
 
     /// Устанавливает текущий шрифт. Ранее установленный можно восстановить функцией Pop()
-    static void Set(const TypeFont::E typeFont);
-    static TypeFont::E Current();
+    static void Set(const DTypeFont::E typeFont);
+    static DTypeFont::E Current();
     /// Восстанавливает шрифт, бывший текущим перед последним вызовом SetCurrent()
     static void Pop();
     static bool IsBig();

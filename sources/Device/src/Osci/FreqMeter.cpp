@@ -292,9 +292,9 @@ void DisplayFreqMeter::Draw()
         return;
     }
 
-    Font::Set(TypeFont::_GOST28);
-    int spacing = Font::GetSpacing();
-    Font::SetSpacing(1);
+    DFont::Set(DTypeFont::_GOST28);
+    int spacing = DFont::GetSpacing();
+    DFont::SetSpacing(1);
 
     int width = 200;
     int height = 90;
@@ -322,9 +322,9 @@ void DisplayFreqMeter::Draw()
         DrawDebugInfo();
     }
 
-    Font::Pop();
-    Font::SetSpacing(spacing);
-    Font::SetMinWidth(0);
+    DFont::Pop();
+    DFont::SetSpacing(spacing);
+    DFont::SetMinWidth(0);
 }
 
 
@@ -333,14 +333,14 @@ void DisplayFreqMeter::DrawFrequency(int x, int _y)
     _y += 4;
     
     int yF = _y;
-    int yT = _y + 4 + Font::GetHeight();
+    int yT = _y + 4 + DFont::GetHeight();
 
     x += 6;
     
     Text("F").Draw(x, yF, Color::FILL);
     Text("T").Draw(x, yT);
 
-    ProgressBarFreqMeter::Draw(x, yT + 4 + Font::GetHeight());
+    ProgressBarFreqMeter::Draw(x, yT + 4 + DFont::GetHeight());
 
     int dX = 17;
 
@@ -352,7 +352,7 @@ void DisplayFreqMeter::DrawFrequency(int x, int _y)
     char strFreq[50];
     std::strcpy(strFreq, FreqSetToString(&FreqMeter::freqActual));
 
-    Text(strFreq).DrawDigitsMonospace(x + dX, yF, Font::GetWidth('0'));
+    Text(strFreq).DrawDigitsMonospace(x + dX, yF, DFont::GetWidth('0'));
 
     float freq = SU::StringToFloat(strFreq);
 
@@ -377,11 +377,11 @@ void DisplayFreqMeter::DrawFrequency(int x, int _y)
     
     if(time.Value() == std::numeric_limits<float>::infinity())
     {
-        Text(EMPTY_STRING).DrawDigitsMonospace(x + dX, yT, Font::GetWidth('0'));
+        Text(EMPTY_STRING).DrawDigitsMonospace(x + dX, yT, DFont::GetWidth('0'));
     }
     else
     {
-        Text(time.ToStringAccuracy(false, strFreq, 6)).DrawDigitsMonospace(x + dX, yT, Font::GetWidth('0'));
+        Text(time.ToStringAccuracy(false, strFreq, 6)).DrawDigitsMonospace(x + dX, yT, DFont::GetWidth('0'));
     }
 }
 
@@ -391,14 +391,14 @@ void DisplayFreqMeter::DrawPeriod(int x, int _y)
     _y += 4;
 
     int yT = _y;
-    int yF = _y + 4 + Font::GetHeight();
+    int yF = _y + 4 + DFont::GetHeight();
 
     x += 6;
 
     Text("T").Draw(x, yT, Color::FILL);
     Text("F").Draw(x, yF);
 
-    ProgressBarFreqMeter::Draw(x, yF + 4 + Font::GetHeight());
+    ProgressBarFreqMeter::Draw(x, yF + 4 + DFont::GetHeight());
 
     int dX = 17;
 
@@ -411,7 +411,7 @@ void DisplayFreqMeter::DrawPeriod(int x, int _y)
     char strPeriod[50];
     std::strcpy(strPeriod, PeriodSetToString(&FreqMeter::periodActual));
 
-    Text(strPeriod).DrawDigitsMonospace(x + dX, yT, Font::GetWidth('0'));
+    Text(strPeriod).DrawDigitsMonospace(x + dX, yT, DFont::GetWidth('0'));
 
     if ((std::strcmp(strPeriod, EMPTY_STRING) == 0) || (std::strcmp(strPeriod, OVERFLOW_STRING) == 0))
     {
@@ -439,7 +439,7 @@ void DisplayFreqMeter::DrawPeriod(int x, int _y)
 
     Frequency freq(1.0F / per);
 
-    Text(freq.ToStringAccuracy(strPeriod, 6)).DrawDigitsMonospace(x + dX, yF, Font::GetWidth('0'));
+    Text(freq.ToStringAccuracy(strPeriod, 6)).DrawDigitsMonospace(x + dX, yF, DFont::GetWidth('0'));
 }
 
 void DisplayFreqMeter::DrawDebugInfo()

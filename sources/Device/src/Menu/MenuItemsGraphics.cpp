@@ -129,13 +129,13 @@ void Governor::DrawValue(int x, int y) const
         value = -value;
     }
     
-    Font::Set(TypeFont::_5);
+    DFont::Set(DTypeFont::_5);
     bool sign = (OwnData()->min < 0);
     
     Integer(OwnData()->max).ToString(sign, 1).Draw(x + 50, y - 5, Color::WHITE);
     Integer(OwnData()->min).ToString(sign, 1).Draw(x + 50, y + 1);
     
-    Font::Set(TypeFont::_8);
+    DFont::Set(DTypeFont::_8);
 
     DrawValueWithSelectedPosition(x + 3, y, value, NumDigits(), currentDigit, true);
 

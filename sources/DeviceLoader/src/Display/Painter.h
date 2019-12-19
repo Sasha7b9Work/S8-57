@@ -86,9 +86,9 @@ public:
 
     static void SendToInterfaces(uint8 *pointer, int size);
 
-    static void SetFont(TypeFont::E typeFont);
+    static void SetFont(DTypeFont::E typeFont);
     ///  Загрузить шрифта в дисплей
-    static void LoadFont(TypeFont::E typeFont);
+    static void LoadFont(DTypeFont::E typeFont);
 
     static int DrawChar(int x, int y, char symbol, Color color = Color::NUMBER);
 
@@ -145,7 +145,7 @@ private:
 
     static Color currentColor;
 
-    static TypeFont::E currentTypeFont;
+    static DTypeFont::E currentTypeFont;
 
     static void DrawCharHardCol(int x, int y, char symbol);
 

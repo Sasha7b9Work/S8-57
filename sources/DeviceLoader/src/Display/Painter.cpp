@@ -9,7 +9,7 @@
 
 
 Color       Painter::currentColor = Color::NUMBER;
-TypeFont::E Painter::currentTypeFont = TypeFont::Count;
+DTypeFont::E Painter::currentTypeFont = DTypeFont::Count;
 
 
 
@@ -152,7 +152,7 @@ void Painter::DrawRectangle(int, int , int , int , Color )
 }
 
 
-void Painter::LoadFont(TypeFont::E typeFont)
+void Painter::LoadFont(DTypeFont::E typeFont)
 {
 
 }

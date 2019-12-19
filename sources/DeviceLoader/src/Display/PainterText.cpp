@@ -13,8 +13,8 @@ extern void CalculateCurrentColor();
 
 int Painter::DrawTextOnBackground(int x, int y, const char *text, Color colorBackground)
 {
-    int width = Font::GetLengthText(text);
-    int height = Font::GetHeight();
+    int width = DFont::GetLengthText(text);
+    int height = DFont::GetHeight();
 
     Color colorText(GetColor());
     FillRegion(x - 1, y, width, height, colorBackground);
@@ -37,19 +37,19 @@ int Painter::DrawFormatText(int x, int y, char *format, ...)
 
 int Painter::DrawCharWithLimitation(int eX, int eY, uint8 symbol, int limitX, int limitY, int limitWidth, int limitHeight)
 {
-    int8 width = static_cast<int8>(Font::GetWidth(symbol));
-    int8 height = static_cast<int8>(Font::GetHeight());
+    int8 width = static_cast<int8>(DFont::GetWidth(symbol));
+    int8 height = static_cast<int8>(DFont::GetHeight());
 
     for (int b = 0; b < height; b++)
     {
-        if (Font::RowNotEmpty(symbol, b))
+        if (DFont::RowNotEmpty(symbol, b))
         {
             int x = eX;
             int y = eY + b + 9 - height;
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (Font::BitIsExist(symbol, b, bit))
+                if (DFont::BitIsExist(symbol, b, bit))
                 {
                     if ((x >= limitX) && (x <= (limitX + limitWidth)) && (y >= limitY) && (y <= limitY + limitHeight))
                     {
@@ -72,7 +72,7 @@ int Painter::DrawTextWithLimitationC(int x, int y, const char *text, Color color
     while (*text)
     {
         x = DrawCharWithLimitation(x, y, static_cast<uint8>(*text), limitX, limitY, limitWidth, limitHeight);
-        retValue += Font::GetWidth(*text);
+        retValue += DFont::GetWidth(*text);
         text++;
     }
     return retValue + 1;
@@ -293,7 +293,7 @@ static int DrawPartWord(char *word, int x, int y, int xRight, bool draw)
     for (int i = numSyllabels - 2; i >= 0; i--)
     {
         char *subString = PartWordForTransfer(word, lengthSyllables, i, buffer);
-        int length = Font::GetLengthText(subString);
+        int length = DFont::GetLengthText(subString);
         if (xRight - x > length - 5)
         {
             if (draw)
@@ -346,7 +346,7 @@ int Painter::DrawTextInRectWithTransfers(int eX, int eY, int eWidth, int eHeight
             }
             else                                            // ј здесь найдено по крайней мере два буквенных символа, т.е. найдено слово
             {
-                int lengthString = Font::GetLengthText(word);
+                int lengthString = DFont::GetLengthText(word);
                 if (x + lengthString > right + 5)
                 {
                     int numSymb = DrawPartWord(word, x, y, right, true);
@@ -399,11 +399,11 @@ static bool GetHeightTextWithTransfers(int left, int top, int right, const char 
                 {
                     continue;
                 }
-                x += Font::GetWidth(symbol);
+                x += DFont::GetWidth(symbol);
             }
             else                                            // ј здесь найдено по крайней мере два буквенных символа, т.е. найдено слово
             {
-                int lengthString = Font::GetLengthText(word);
+                int lengthString = DFont::GetLengthText(word);
                 if (x + lengthString > right + 5)
                 {
                     int numSymb = DrawPartWord(word, x, y, right, false);
@@ -414,7 +414,7 @@ static bool GetHeightTextWithTransfers(int left, int top, int right, const char 
                 else
                 {
                     curSymbol += length;
-                    x += Font::GetLengthText(word);
+                    x += DFont::GetLengthText(word);
                 }
             }
         }
@@ -463,8 +463,8 @@ int Painter::DrawFormText(int x, int y, Color color, pString text, ...)
 int Painter::DrawStringInCenterRect(int eX, int eY, int width, int eHeight, const char *text, Color color)
 {
     SetColor(color);
-    int lenght = Font::GetLengthText(text);
-    int height = Font::GetHeight();
+    int lenght = DFont::GetLengthText(text);
+    int height = DFont::GetHeight();
     int x = eX + (width - lenght) / 2;
     int y = eY + (eHeight - height) / 2;
     return DrawText(x, y, text);
@@ -474,7 +474,7 @@ int Painter::DrawStringInCenterRect(int eX, int eY, int width, int eHeight, cons
 void Painter::DrawStringInCenterRectOnBackgroundC(int x, int y, int width, int height, const char *text, Color colorText, int widthBorder, 
                                                   Color colorBackground)
 {
-    int lenght = Font::GetLengthText(text);
+    int lenght = DFont::GetLengthText(text);
     int eX = DrawStringInCenterRect(x, y, width, height, text, colorBackground);
     int w = lenght + widthBorder * 2 - 2;
     int h = 7 + widthBorder * 2 - 1;
@@ -497,7 +497,7 @@ int Painter::GetLenghtSubString(const char *text)
     int retValue = 0;
     while (((*text) != ' ') && ((*text) != '\0'))
     {
-        retValue += Font::GetWidth(*text);
+        retValue += DFont::GetWidth(*text);
         text++;
     }
     return retValue;
@@ -544,7 +544,7 @@ void Painter::DrawTextInRect(int x, int y, int width, const char *text)
         if (length + x > xEnd)
         {
             x = xStart;
-            y += Font::GetHeight();
+            y += DFont::GetHeight();
         }
         int numSymbols = 0;
         numSymbols = DrawSubString(x, y, text);
@@ -558,7 +558,7 @@ void Painter::DrawTextInRect(int x, int y, int width, const char *text)
 
 void Painter::DrawTextRelativelyRight(int xRight, int y, const char *text, Color color)
 {
-    int lenght = Font::GetLengthText(text);
+    int lenght = DFont::GetLengthText(text);
     DrawText(xRight - lenght, y, text, color);
 }
 
@@ -609,19 +609,19 @@ void Painter::DrawBigText(int eX, int eY, int size, const char *text, Color colo
 
 int Painter::DrawBigChar(int eX, int eY, int size, uint8 symbol)
 {
-    uint8 width = Font::GetWidth(symbol);
-    uint8 height = Font::GetHeight();
+    uint8 width = DFont::GetWidth(symbol);
+    uint8 height = DFont::GetHeight();
 
     for (int b = 0; b < height; b++)
     {
-        if (Font::RowNotEmpty(symbol, b))
+        if (DFont::RowNotEmpty(symbol, b))
         {
             int x = eX;
             int y = eY + b * size + 9 - height;
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (Font::BitIsExist(symbol, b, bit))
+                if (DFont::BitIsExist(symbol, b, bit))
                 {
                     for (int i = 0; i < size; i++)
                     {

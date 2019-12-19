@@ -69,13 +69,13 @@ class Char
 public:
     explicit Char(SymbolUGO::E ch);
     explicit Char(SymbolUGO2::E ch);
-    explicit Char(char ch, TypeFont::E font = TypeFont::_8);
+    explicit Char(char ch, DTypeFont::E font = DTypeFont::_8);
     int Draw(int x, int y, Color color = Color::NUMBER);
     void Draw4SymbolsInRect(int x, int y, Color color = Color::NUMBER);
     void Draw10SymbolsInRect(int x, int y, Color color = Color::NUMBER);
 private:
     char ch;
-    TypeFont::E font;
+    DTypeFont::E font;
 };
 
 

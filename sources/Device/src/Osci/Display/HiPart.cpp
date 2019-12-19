@@ -54,7 +54,7 @@ void DisplayOsci::HiPart::Draw()
 
     x += 42;
 
-    Font::Set(TypeFont::_8);
+    DFont::Set(DTypeFont::_8);
 
     Separator::Draw(x + 1, y0);
 
@@ -186,7 +186,7 @@ static int DrawMainParameters(int _x, int _y)
 
     y1 = y1 - 6;
 
-    Font::Set(TypeFont::_5);
+    DFont::Set(DTypeFont::_5);
 
     x += 77;
 

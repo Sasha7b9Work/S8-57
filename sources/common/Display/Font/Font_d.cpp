@@ -18,11 +18,11 @@
 #endif
 
 
-const Font *fonts[TypeFont::Count] = {&font5, &font8, &fontUGO, &fontUGO2, nullptr};
-const Font *font = &font8;
+const DFont *fonts[DTypeFont::Count] = {&font5, &font8, &fontUGO, &fontUGO2, nullptr};
+const DFont *font = &font8;
 
-TypeFont::E pushedFont = TypeFont::_8;
-TypeFont::E currentFont = TypeFont::_8;
+DTypeFont::E pushedFont = DTypeFont::_8;
+DTypeFont::E currentFont = DTypeFont::_8;
 
 static int spacing = 1;
 
@@ -30,7 +30,7 @@ static int spacing = 1;
 static int recvLength = -1;
 
 
-int Font::GetLengthText(pString text)
+int DFont::GetLengthText(pString text)
 {
     recvLength = -1;
     
@@ -57,15 +57,15 @@ int Font::GetLengthText(pString text)
     return recvLength;
 }
 
-void Font::SetLength(uint8 l)
+void DFont::SetLength(uint8 l)
 {
     recvLength = l;
 }
 
 
-static void SendTypeFontToPanel(TypeFont::E type)
+static void SendTypeFontToPanel(DTypeFont::E type)
 {
-    static TypeFont::E prevType = TypeFont::Count;
+    static DTypeFont::E prevType = DTypeFont::Count;
 
     if (prevType != type)
     {
@@ -75,13 +75,13 @@ static void SendTypeFontToPanel(TypeFont::E type)
 }
 
 
-TypeFont::E Font::Current()
+DTypeFont::E DFont::Current()
 {
     return currentFont;
 }
 
 
-void Font::Set(const TypeFont::E typeFont)
+void DFont::Set(const DTypeFont::E typeFont)
 {
     pushedFont = currentFont;
 
@@ -89,28 +89,28 @@ void Font::Set(const TypeFont::E typeFont)
     {
         switch (typeFont)
         {
-        case TypeFont::_5:
+        case DTypeFont::_5:
             font = &font5;
             break;
-        case TypeFont::_8:
+        case DTypeFont::_8:
             font = &font8;
             break;
-        case TypeFont::_UGO:
+        case DTypeFont::_UGO:
             font = &fontUGO;
             break;
-        case TypeFont::_UGO2:
+        case DTypeFont::_UGO2:
             font = &fontUGO2;
             break;
-        case TypeFont::_GOST28:
-        case TypeFont::_GOST72bold:
-        case TypeFont::_OMEGA72:
+        case DTypeFont::_GOST28:
+        case DTypeFont::_GOST72bold:
+        case DTypeFont::_OMEGA72:
         {
             font = nullptr;
-            volatile AdvancedFont f(typeFont);
+            volatile DAdvancedFont f(typeFont);
         }       
             break;
-        case TypeFont::None:
-        case TypeFont::Count:
+        case DTypeFont::None:
+        case DTypeFont::Count:
             break;
         }
 
@@ -121,25 +121,25 @@ void Font::Set(const TypeFont::E typeFont)
 }
 
 
-void Font::Pop()
+void DFont::Pop()
 {
     Set(pushedFont);
 }
 
 
-void Font::SetSpacing(int _spacing)
+void DFont::SetSpacing(int _spacing)
 {
     spacing = _spacing;
     Transceiver::Send(Command::Paint_SetTextSpacing, static_cast<uint8>(spacing));
 }
 
-int Font::GetSpacing()
+int DFont::GetSpacing()
 {
     return spacing;
 }
 
 
-void Font::SetMinWidth(uint8 width)
+void DFont::SetMinWidth(uint8 width)
 {
     Transceiver::Send(Command::Paint_SetMinWidthFont, width);
 }
@@ -147,61 +147,61 @@ void Font::SetMinWidth(uint8 width)
 
 static bool FontIsSmall()
 {
-    return currentFont <= TypeFont::_UGO2;
+    return currentFont <= DTypeFont::_UGO2;
 }
 
 
-uint8 Font::GetWidth(uint8 symbol)
+uint8 DFont::GetWidth(uint8 symbol)
 {
     if (FontIsSmall())
     {
         return font->symbols[symbol].width;
     }
 
-    return AdvancedFont().GetWidth(symbol);
+    return DAdvancedFont().GetWidth(symbol);
 }
 
 
-uint8 Font::GetWidth(char symbol)
+uint8 DFont::GetWidth(char symbol)
 {
     return GetWidth(static_cast<uint8>(symbol));
 }
 
 
-uint8 Font::GetHeight()
+uint8 DFont::GetHeight()
 {
     if (FontIsSmall())
     {
         return static_cast<uint8>(font->_height);
     }
 
-    return AdvancedFont().GetHeight();
+    return DAdvancedFont().GetHeight();
 }
 
 
-bool Font::RowNotEmpty(uint8 symbol, int row)
+bool DFont::RowNotEmpty(uint8 symbol, int row)
 {
     if (FontIsSmall())
     {
         return font->symbols[symbol].bytes[row] != 0;
     }
 
-    return AdvancedFont().RowNotEmpty(symbol, row);
+    return DAdvancedFont().RowNotEmpty(symbol, row);
 }
 
 
-bool Font::BitIsExist(uint8 symbol, int row, int bit)
+bool DFont::BitIsExist(uint8 symbol, int row, int bit)
 {
     if (FontIsSmall())
     {
         return font->symbols[symbol].bytes[row] & (1 << (7 - bit));
     }
 
-    return AdvancedFont().BitIsExist(symbol, row, bit);
+    return DAdvancedFont().BitIsExist(symbol, row, bit);
 }
 
 
-bool Font::IsBig()
+bool DFont::IsBig()
 {
     return !FontIsSmall();
 }

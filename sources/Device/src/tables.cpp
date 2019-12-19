@@ -94,7 +94,7 @@ void Tables::DrawStr(int index, int x, int y)
     const char *str = symbolsAlphaBet[index];
     if (index == set.mem.indexCurSymbolNameMask)
     {
-        Region(Font::GetLengthText(str), 9).Fill(x - 1, y, Color::FLASH_10);
+        Region(DFont::GetLengthText(str), 9).Fill(x - 1, y, Color::FLASH_10);
     }
 
     String(symbolsAlphaBet[index]).Draw(x, y, index == set.mem.indexCurSymbolNameMask ? Color::FLASH_01 : Color::FILL);

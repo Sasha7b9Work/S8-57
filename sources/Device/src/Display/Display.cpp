@@ -60,7 +60,7 @@ void Display::Update()
 {
     Color::ChangeFlash(false);
 
-    Font::Set(TypeFont::_8);
+    DFont::Set(DTypeFont::_8);
 
     inStateDraw = true;
 
@@ -158,7 +158,7 @@ void Display::Message::Func()
     Region(width, height).Fill(x, y, Color::BACK);
     Rectangle(width, height).Draw(x, y, Color::FILL);
 
-    int length = Font::GetLengthText(textWait);
+    int length = DFont::GetLengthText(textWait);
 
     if (waitKey)
     {

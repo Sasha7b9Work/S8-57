@@ -71,9 +71,9 @@ void Display::Init()
 
     Painter::LoadPalette();
 
-    Painter::LoadFont(TypeFont::_8);
+    Painter::LoadFont(DTypeFont::_8);
 
-    Font::Set(TypeFont::_8);
+    DFont::Set(DTypeFont::_8);
 
     InitPoints();
 }
@@ -250,19 +250,19 @@ static int RandValue(int min, int max)
 
 static int DrawBigCharInBuffer(int eX, int eY, int size, uint8 symbol, uint8 buffer[320][240])
 {
-    uint8 width = Font::GetWidth (symbol);
-    uint8 height = Font::GetHeight();
+    uint8 width = DFont::GetWidth (symbol);
+    uint8 height = DFont::GetHeight();
 
     for (int b = 0; b < height; b++)
     {
-        if (Font::RowNotEmpty(symbol, b))
+        if (DFont::RowNotEmpty(symbol, b))
         {
             int x = eX;
             int y = eY + b * size + 9 - height;
             int endBit = 8 - width;
             for (int bit = 7; bit >= endBit; bit--)
             {
-                if (Font::BitIsExist(symbol, b, bit))
+                if (DFont::BitIsExist(symbol, b, bit))
                 {
                     for (int i = 0; i < size; i++)
                     {

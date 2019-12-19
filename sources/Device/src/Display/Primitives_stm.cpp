@@ -137,7 +137,7 @@ int Text::DrawSmall(int x, int y, Color color)
 
     Transceiver::Send(buffer.data, sizeBuffer);
 
-    return x + Font::GetLengthText(text) + 1;
+    return x + DFont::GetLengthText(text) + 1;
 }
 
 

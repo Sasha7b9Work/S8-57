@@ -339,7 +339,7 @@ int Menu::Y0()
 
 void Menu::Draw()
 {
-    Font::Set(TypeFont::_8);
+    DFont::Set(DTypeFont::_8);
 
     if (Menu::IsShown())
     {

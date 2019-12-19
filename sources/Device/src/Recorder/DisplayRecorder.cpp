@@ -43,7 +43,7 @@ void DisplayRecorder::Update()
 
     DrawMemoryWindow();
 
-    Font::Set(TypeFont::_8);
+    DFont::Set(DTypeFont::_8);
 
     Warnings::Draw();
 

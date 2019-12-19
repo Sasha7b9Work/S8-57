@@ -68,24 +68,24 @@ static void DrawSymbols()
         x += (Symbol(i) == '.') ? 16 : 38;
     }
 
-    Font::SetSpacing(5);
+    DFont::SetSpacing(5);
 
     if(outBuffer[8] == '\x01')
     {
         x = Text(String(outBuffer[7])).Draw(120, 125);
 
-        Font::Set(TypeFont::_OMEGA72);
+        DFont::Set(DTypeFont::_OMEGA72);
 
         Text(String('\x01')).Draw(x + 5, 130);
 
-        Font::Set(TypeFont::_GOST72bold);
+        DFont::Set(DTypeFont::_GOST72bold);
     }
     else
     {
         Text(&outBuffer[7]).Draw(120, 125);
     }
 
-    Font::SetSpacing(1);
+    DFont::SetSpacing(1);
 }
 
 
@@ -93,13 +93,13 @@ static void DrawMeasure()
 {
     Color color = received ? Color::FILL : Color::GRAY_50;
 
-    Font::Set(TypeFont::_GOST72bold);
+    DFont::Set(DTypeFont::_GOST72bold);
 
     color.SetAsCurrent();
     
     DrawSymbols();
 
-    Font::Set(TypeFont::_8);
+    DFont::Set(DTypeFont::_8);
 }
 
 

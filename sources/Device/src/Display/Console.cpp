@@ -37,19 +37,19 @@ void Console::Draw()
 
     inProcessDraw = true;
 
-    Font::Set(TypeFont::_5);
+    DFont::Set(DTypeFont::_5);
 
     int y = -1;
 
     for (int i = 0; i < stringInConsole; i++)
     {
-        int length = Font::GetLengthText(buffer[i]);
+        int length = DFont::GetLengthText(buffer[i]);
         Region(length, 6).Fill(0, y + 3, Color::BACK);
         String(buffer[i]).Draw(1, y, Color::FILL);
         y += 6;
     }
 
-    Font::Set(TypeFont::_8);
+    DFont::Set(DTypeFont::_8);
 
     inProcessDraw = false;
 }

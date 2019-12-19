@@ -590,7 +590,7 @@ void TrigLevel::Draw() const
 
     static const char symbols[2] = { '1', '2' };
 
-    Char(symbols[ch], TypeFont::_5).Draw(xSymbol, y - 6, Color::BACK);
+    Char(symbols[ch], DTypeFont::_5).Draw(xSymbol, y - 6, Color::BACK);
 
     Trig::DrawOnGrid();
 }
@@ -613,7 +613,7 @@ void RShift::Draw()
 
     Char(Symbol8::RSHIFT_NORMAL).Draw(Grid::Left() - 8, y - 4);
 
-    Char(Chan(ch).IsA() ? '1' : '2', TypeFont::_5).Draw(Grid::Left() - 7, y - 6, Color::BACK);
+    Char(Chan(ch).IsA() ? '1' : '2', DTypeFont::_5).Draw(Grid::Left() - 7, y - 6, Color::BACK);
 }
 
 
