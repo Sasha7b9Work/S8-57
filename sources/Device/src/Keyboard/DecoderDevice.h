@@ -15,4 +15,12 @@ public:
     static void Update();
     /// Даёт декодеру буфер для сохранения строки картинки
     static void SetBufferForScreenRow(uint8 *pixels);
+private:
+    static int pointer;
+    /// Выполняемая функция
+    static pFuncBU8 curFunc;
+
+    static void RunStep(uint8 data);
+    /// Эту функцию надо вызывать после выполнения последнего шага
+    static void FinishCommand();
 };

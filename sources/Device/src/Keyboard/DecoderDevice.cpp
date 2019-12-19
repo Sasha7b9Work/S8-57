@@ -5,36 +5,24 @@
 #include "Utils/Debug.h"
 #include "Display/Painter.h"
 #include "Keyboard/BufferButtons.h"
-
 #include <cstdlib>
 
 
-
-Decoder decoder;
-
 #define SIZE_BUFFER 1024
 static uint8 buffer[SIZE_BUFFER];
-static int pointer = 0;
-
-/// Выполняемая функция
-static pFuncBU8 curFunc;
+int Decoder::pointer = 0;
+pFuncBU8 Decoder::curFunc;
 /// Текущий байт выполняемой функции
 static int step;
 
 static uint8 *pixels = nullptr;
 
 
-
-static void RunStep(uint8 data);
-
 static bool ButtonPress(uint8);
 
 static bool FuncScreen(uint8);
 
 static bool FuncLengthText(uint8);
-
-/// Эту функцию надо вызывать после выполнения последнего шага
-static void FinishCommand();
 /// Добавляет текстовую строку в консоль
 static bool AddToConsole(uint8);
 
@@ -72,7 +60,7 @@ static bool EmptyFunc(uint8)
 }
 
 
-static void RunStep(uint8 data)
+void Decoder::RunStep(uint8 data)
 {
     static const struct StructFunc
     {
@@ -248,7 +236,7 @@ static bool AddToConsole(uint8 data)
 }
 
 
-static void FinishCommand()
+void Decoder::FinishCommand()
 {
     step = 0;
     curFunc = 0;
