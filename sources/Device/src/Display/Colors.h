@@ -32,6 +32,7 @@ public:
     static Color DATA_HALF_B;
     static Color SEPARATOR;
     static Color YELLOW;
+    static Color BATTERY;
 
     static Color NUMBER;
 
@@ -93,6 +94,7 @@ private:
         COLOR_DATA_HALF_B = 25,
         COLOR_SEPARATOR = 26,
         COLOR_YELLOW = 27,
+        COLOR_BATTERY = 28,
 
         COLOR_NUMBER = 32,
 

@@ -6,24 +6,13 @@
 
 
 /// Максимальное значение, которое возможно считать с АЦП
-static const float MAX_ADC_REL = static_cast<float>((1 << 12) - 1);
+const float Battery::MAX_ADC_REL = static_cast<float>((1 << 12) - 1);
 /// Напряжение, соответствующее MAX_ADC_REL
-static const float MAX_ADC_ABS = 2.91F;
+const float Battery::MAX_ADC_ABS = 2.91F;
 
-static const float VOLTAGE_100_PERCENTS = 8.2F;
+const float Battery::VOLTAGE_100_PERCENTS = 8.2F;
 
-static const float VOLTAGE_0_PERCENTS = 6.0F;
-
-
-
-/// Перевод считанного значения ЦАП источника в вольты
-static float PowerADC_ToVoltage(float value);
-/// Перевод считанного значения ЦАП батареи в вольты
-static float BatADC_ToVoltage(float value);
-/// Рассчитать процент отставшегося заряда
-static float CalculatePercents(float volts);
-/// Отобразить заряд батареи в графическом виде
-static void DrawBatteryUGO(int x, int y, float procents);
+const float Battery::VOLTAGE_0_PERCENTS = 6.0F;
 
 
 void Battery::Init()
@@ -56,7 +45,7 @@ float Battery::GetVoltagePOW(uint *adc)
 }
 
 
-static float CalculatePercents(float volts)
+float Battery::CalculatePercents(float volts)
 {
     if (volts >= VOLTAGE_100_PERCENTS)
     {
@@ -75,16 +64,18 @@ static float CalculatePercents(float volts)
 }
 
 
-static void DrawBatteryUGO(int x, int y, float percents)
+void Battery::DrawUGO(int x, int y, float percents)
 {
     int width = 38;
 
-    Rectangle(width + 2, 8).Draw(x + 5, y, Color::FILL);
-    Rectangle(4, 4).Draw(x + 1, y + 2);
+    int dY = 5;
+
+    Rectangle(width + 2, 8 + dY).Draw(x + 5, y - dY, Color::BATTERY);
+    Rectangle(4, 4 + dY).Draw(x + 1, y + 2 - dY);
 
     int filled = static_cast<int>((width - 2) * percents / 100.0F + 0.5F);
 
-    Region(filled, 4).Fill(x + width - filled + 5, y + 2);
+    Region(filled, 4 + dY).Fill(x + width - filled + 5, y + 2 - dY, Color::BATTERY);
 }
 
 
@@ -102,15 +93,15 @@ void Battery::Draw(int x, int y)
 
     Font::Set(TypeFont::_5);
 
-    Text(String("%1.2f В %4.1f%%", akk, percents)).Draw(x + 4, y - 1);
+    //Text(String("%1.2f В %4.1f%%", akk, percents)).Draw(x + 4, y - 1);
 
     Font::Set(TypeFont::_8);
 
-    DrawBatteryUGO(x + 1, y + 10, percents);
+    DrawUGO(x + 1, y + 9, percents);
 }
 
 
-static float PowerADC_ToVoltage(float value)
+float Battery::PowerADC_ToVoltage(float value)
 {
     const float k = 124.0F / 24.0F;
 
@@ -118,7 +109,7 @@ static float PowerADC_ToVoltage(float value)
 }
 
 
-static float BatADC_ToVoltage(float value)
+float Battery::BatADC_ToVoltage(float value)
 {
     const float k = 101.1F / 26.1F;
 
