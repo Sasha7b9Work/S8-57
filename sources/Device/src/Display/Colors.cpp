@@ -35,7 +35,7 @@ extern uint GlobalColors[256] =
     /* 25 */    MAKE_COLOR(0x00, 0x80, 0x00),       // DATA_HALF_B
     /* 26 */    MAKE_COLOR(0xc0, 0xc0, 0xc0),       // SEPARATOR
     /* 27 */    MAKE_COLOR(0xff, 0xff, 0x00),       // YELLOW
-    /* 28 */    MAKE_COLOR(0x00, 0xcf, 0x00)        // BATTERY
+    /* 28 */    MAKE_COLOR(0x00, 0x7f, 0x00)        // BATTERY
 };
 
 

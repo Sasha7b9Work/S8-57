@@ -62,6 +62,8 @@ void Display::Update()
 {
     Color::ChangeFlash(false);
 
+    Font::Set(TypeFont::_8);
+
     inStateDraw = true;
 
     static const pFuncVV funcs[Device::Mode::Count] =

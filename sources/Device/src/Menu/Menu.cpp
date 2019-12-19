@@ -339,6 +339,8 @@ int Menu::Y0()
 
 void Menu::Draw()
 {
+    Font::Set(TypeFont::_8);
+
     if (Menu::IsShown())
     {
         Item *item = OpenedItem();

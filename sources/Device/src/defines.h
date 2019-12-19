@@ -249,18 +249,6 @@ extern volatile BitField gBF;   ///< @brief Структура сделана volatile, потому ч
                                 ///< Вероятно, это связано с переменной soundIsBeep (перед стиранием сектора в цикле происходит ожидание, когда эта 
                                 ///< переменная изменит своё состояние (каковое изменение происходит из прерывания, ясен перец)).
 
-enum StateCalibration
-{
-    StateCalibration_None,
-    StateCalibration_ADCinProgress,
-    StateCalibration_RShiftAstart,
-    StateCalibration_RShiftAinProgress,
-    StateCalibration_RShiftBstart,
-    StateCalibration_RShiftBinProgress,
-    StateCalibration_ErrorCalibrationA,
-    StateCalibration_ErrorCalibrationB
-};
-
 enum StateWorkFPGA
 {
     StateWorkFPGA_Stop,     ///< СТОП - не занимается считыванием информации.
