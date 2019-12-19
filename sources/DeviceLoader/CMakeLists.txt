@@ -21,7 +21,7 @@ include_directories(../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc
                     src/libs/FatFS
                     src/libs/USBH)
                     
-add_definitions(-DSTM32F437xx)
+add_definitions(-DSTM32F437xx -DLOADER)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 

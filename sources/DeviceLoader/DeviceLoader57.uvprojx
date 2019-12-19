@@ -334,7 +334,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_HAL_DRIVER,STM32F437xx</Define>
+              <Define>USE_HAL_DRIVER,STM32F437xx,LOADER</Define>
               <Undefine></Undefine>
               <IncludePath>..\common\libs\STM32Cube_F4\Middlewares\Third_Party\FatFs\src;.\src\libs\FatFS;..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;.\src\libs\HAL;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Core\Inc;.\src\libs\USBH;..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc;.\src;..\;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include</IncludePath>
             </VariousControls>
@@ -891,14 +891,34 @@
           <GroupName>Keyboard</GroupName>
           <Files>
             <File>
-              <FileName>DecoderDevice.cpp</FileName>
+              <FileName>BufferButtons.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Keyboard\DecoderDevice.cpp</FilePath>
+              <FilePath>.\src\Keyboard\BufferButtons.cpp</FilePath>
             </File>
             <File>
-              <FileName>DecoderDevice.h</FileName>
+              <FileName>BufferButtons.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Keyboard\DecoderDevice.h</FilePath>
+              <FilePath>.\src\Keyboard\BufferButtons.h</FilePath>
+            </File>
+            <File>
+              <FileName>DecoderLoader.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Keyboard\DecoderLoader.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DecoderLoader.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Keyboard\DecoderLoader.h</FilePath>
+            </File>
+            <File>
+              <FileName>Keyboard.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Keyboard\Keyboard.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Keyboard.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Keyboard\Keyboard.h</FilePath>
             </File>
           </Files>
         </Group>

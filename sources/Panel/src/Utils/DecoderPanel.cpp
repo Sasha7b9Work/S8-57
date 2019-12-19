@@ -59,10 +59,10 @@ static bool DrawHPointLine(uint8);
 static bool SetMinWidthFont(uint8);
 /// Устанавливает расстояние между символами при выводе текста
 static bool SetTextSpacing(uint8);
+/// Обработка запроса на вычисление длины текста
+static bool FuncLengthText(uint8);
 /// Эту функцию надо вызывать после выполнения последнего шага
 static void FinishCommand();
-
-
 
 
 void Decoder::AddData(uint8 data)
@@ -95,6 +95,7 @@ void Decoder::AddData(uint8 data)
         DrawHPointLine,
         SetMinWidthFont,
         SetTextSpacing,
+        FuncLengthText,
         EmptyFunc
     };
 
@@ -543,11 +544,41 @@ static bool DrawText(uint8 data)
             {
                 buffer[readingSymbols] = 0;
                 Text::Draw(x, y, buffer);
-                delete [] buffer;
+                delete []buffer;
                 return true;
             }
             break;
     }
+    return false;
+}
+
+
+static bool FuncLengthText(uint8 data)
+{
+    static int numSymbols;
+    static int readingSymbols;
+    static char *buffer;
+
+    switch(step)
+    {
+    case 0: break;
+    case 1:
+        numSymbols = data;
+        readingSymbols = 0;
+        buffer = new char[static_cast<uint>(numSymbols + 1)];
+        break;
+    default:
+        buffer[readingSymbols++] = static_cast<char>(data);
+        if(readingSymbols == numSymbols)
+        {
+            buffer[readingSymbols] = 0;
+            Font::SendLengthText(buffer);
+            delete []buffer;
+            return true;
+        }
+        break;
+    }
+
     return false;
 }
 

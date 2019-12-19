@@ -10,7 +10,7 @@ include_directories(..
                     src/libs/HAL
                     ../common/_VS/CMSIS)
                     
-add_definitions(-DSTM32F437xx -DPANEL)
+add_definitions(-DSTM32F429xx -DPANEL)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 

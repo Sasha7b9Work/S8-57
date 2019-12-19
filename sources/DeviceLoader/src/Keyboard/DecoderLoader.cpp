@@ -1,8 +1,6 @@
 #include "defines.h"
 #include "log.h"
-#include "DecoderDevice.h"
-#include "Menu/Menu.h"
-#include "Utils/Debug.h"
+#include "DecoderLoader.h"
 #include "Display/Painter.h"
 #include "Keyboard/BufferButtons.h"
 
@@ -21,15 +19,9 @@ static pFuncBU8 curFunc;
 /// Текущий байт выполняемой функции
 static int step;
 
-static uint8 *pixels = nullptr;
-
-
-
 static void RunStep(uint8 data);
 
 static bool ButtonPress(uint8);
-
-static bool FuncScreen(uint8);
 
 static bool FuncLengthText(uint8);
 
@@ -97,7 +89,7 @@ static void RunStep(uint8 data)
         EmptyFunc,      // Paint_DrawLine,
         EmptyFunc,      // Paint_TesterLines,
         EmptyFunc,      // Paint_DrawBigText,
-        FuncScreen,     // Screen
+        EmptyFunc,      // Screen
         EmptyFunc,      // Paint_VPointLine
         EmptyFunc,      // Paint_HPointLine
         EmptyFunc,      // Paint_SetMonoSpaceFont
@@ -162,40 +154,8 @@ static bool ButtonPress(uint8 data)
 }
 
 
-void Decoder::SetBufferForScreenRow(uint8 *_pixels)
+void Decoder::SetBufferForScreenRow(uint8 *)
 {
-    pixels = _pixels;
-}
-
-
-static bool FuncScreen(uint8 data)
-{
-    static int numString = 0;
-
-    if (step == 0)
-    {
-        return false;
-    }
-
-    if (step == 1)
-    {
-        numString = data;
-        return false;
-    }
-
-    if (step < 321)
-    {
-        pixels[step - 2] = data;
-        return false;
-    }
-
-    if (step == 321)
-    {
-        Display::SaveRow(numString);
-    }
-
-
-    return true;
 }
 
 

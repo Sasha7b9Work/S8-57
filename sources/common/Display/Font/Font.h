@@ -31,6 +31,7 @@ struct Font
 
 public:
     static int  GetLengthText(pString text);
+
     /// Устанавливает текущий шрифт. Ранее установленный можно восстановить функцией Pop()
     static void Set(const TypeFont::E typeFont);
     static TypeFont::E Current();
@@ -45,8 +46,14 @@ public:
     static void SetMinWidth(uint8 width);
     /// Устанавливает количество пустых пикселей между символами.
     static void SetSpacing(int spacing);
+
+#ifdef STM32F437xx
     /// Возвращает количество пустых пикселей между символами
-#ifndef PANEL
     static int GetSpacing();
+    static void SetLength(uint8);
+#endif
+
+#ifdef STM32F429xx
+    static void SendLengthText(char *text);
 #endif
 };

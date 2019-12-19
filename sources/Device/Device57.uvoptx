@@ -164,7 +164,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Keyboard\HandlersKeys.cpp</Filename>
+          <Filename>D:\Projects\stm32\S8-57\sources\DeviceLoader\src\Keyboard\HandlersKeys.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\src/Keyboard/HandlersKeys.cpp\381</Expression>
         </Bp>
@@ -180,7 +180,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;2&gt;.\src\Hardware\Battery.cpp</Filename>
+          <Filename>D:\Projects\stm32\S8-57\sources\DeviceLoader\src\Hardware\Battery.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\src/Hardware/Battery.cpp\82</Expression>
         </Bp>

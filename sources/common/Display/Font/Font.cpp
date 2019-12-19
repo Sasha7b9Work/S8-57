@@ -7,6 +7,15 @@
 #include "font5.inc"
 #include "fontUGO.inc"
 #include "fontUGO2.inc"
+#include <cstring>
+
+#ifdef DEVICE
+#include "Keyboard/DecoderDevice.h"
+#endif
+
+#ifdef LOADER
+#include "Keyboard/DecoderLoader.h"
+#endif
 
 
 const Font *fonts[TypeFont::Count] = {&font5, &font8, &fontUGO, &fontUGO2, nullptr};
@@ -17,19 +26,67 @@ TypeFont::E currentFont = TypeFont::_8;
 
 static int spacing = 1;
 
+#ifndef PANEL
+/// Используется для приёма длины текста от панели
+static int recvLength = -1;
+#endif
 
+
+#ifdef STM32F437xx
+//int Font::GetLengthText(pString text)
+//{
+//    recvLength = -1;
+//
+//    uint size = std::strlen(text) + 1;
+//
+//    uint8 *buffer = new uint8[size];
+//    buffer[0] = Command::Text_Length;
+//
+//    std::memcpy(buffer + 1, text, std::strlen(text));
+//
+//    Transceiver::Send(buffer, size);
+//
+//    while(recvLength == -1)
+//    {
+//        Transceiver::Receive();
+//        Decoder::Update();
+//    }
+//
+//    return recvLength;
+//}
+
+void Font::SetLength(uint8 l)
+{
+    recvLength = l;
+}
+
+#endif
+
+
+//#ifdef STM32F429xx
 int Font::GetLengthText(pString text)
 {
     int result = 0;
     char *symbol = const_cast<char *>(text);
 
-    while (*symbol)
+    while(*symbol)
     {
         result += Font::GetWidth(*symbol) + spacing;
         symbol++;
     }
     return result;
 }
+
+#ifdef STM32F429xx
+void Font::SendLengthText(char *text)
+{
+    uint8 length = static_cast<uint8>(GetLengthText(text));
+
+    uint8 data[2] = { Command::Text_Length, length };
+
+    Transceiver::Send(data, 2);
+}
+#endif
 
 
 #ifdef PANEL
