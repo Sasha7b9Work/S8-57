@@ -8,11 +8,12 @@ public:
     static void Init();
 
     static void Draw(int x, int y);
+
+private:
     /// Получить значение напряжения батареи
     static float GetVoltageAKK(uint *adc);
     /// Получить значение напряжения источника зарядного напряжения
     static float GetVoltagePOW(uint *adc);
-private:
     /// Перевод считанного значения ЦАП источника в вольты
     static float PowerADC_ToVoltage(float value);
     /// Перевод считанного значения ЦАП батареи в вольты
