@@ -206,12 +206,13 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../common/_VS/USBH/*
                     
                     ../../common/Command.h
-                    ../../common/DataBus.cpp
-                    ../../common/DataBus.h
-                    ../../common/Message.cpp
+                    ../../common/Decoder_d.h
+                    ../../common/Decoder_d.cpp
                     ../../common/Message.h
-                    ../../common/Transceiver.cpp
+                    ../../common/Message.cpp
                     ../../common/Transceiver.h
+                    ../../common/Transceiver.cpp
+                    ../../common/Transceiver_d.cpp
                     ../common/Transceiver_win.cpp
                     
                     ../../Device/src/Data/*
