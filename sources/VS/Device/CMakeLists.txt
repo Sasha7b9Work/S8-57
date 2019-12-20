@@ -41,12 +41,13 @@ add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for me
 add_compile_options(/wd26812)   # Prefer 'enum class' over 'enum' (Enum.3)
 
 source_group(common                 FILES   ../../common/Command.h
-                                            ../../common/DataBus.cpp
-                                            ../../common/DataBus.h
-                                            ../../common/Message.cpp
+                                            ../../common/Decoder_d.h
+                                            ../../common/Decoder_d.cpp
                                             ../../common/Message.h
-                                            ../../common/Transceiver.cpp
+                                            ../../common/Message.cpp
                                             ../../common/Transceiver.h
+                                            ../../common/Transceiver.cpp
+                                            ../../common/Transceiver_d.cpp
                                             ../common/Transceiver_win.cpp)
 source_group(_VS                                        REGULAR_EXPRESSION ../common/_VS/*)
 source_group(_VS\\CMSIS                                 REGULAR_EXPRESSION ../common/_VS/CMSIS/*)
