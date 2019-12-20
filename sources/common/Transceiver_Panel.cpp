@@ -151,7 +151,7 @@ bool Transceiver::Receive()
 
     if (mode == ModeDevice::Send)
     {
-        Decoder::AddData((uint8)GPIOE->IDR);        // Читаем и обрабатываем байт данных
+        PDecoder::AddData((uint8)GPIOE->IDR);       // Читаем и обрабатываем байт данных
         
         PORT_READY->BSRR = PIN_READY;               // Устанавливаем признак, что данные приняты - "1" на READY
         

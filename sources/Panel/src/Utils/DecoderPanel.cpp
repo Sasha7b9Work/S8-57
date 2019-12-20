@@ -65,7 +65,7 @@ static bool FuncLengthText(uint8);
 static void FinishCommand();
 
 
-void Decoder::AddData(uint8 data)
+void PDecoder::AddData(uint8 data)
 {
     static const struct StructFunc
     {

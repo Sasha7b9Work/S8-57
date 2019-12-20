@@ -4,7 +4,7 @@
 
 
 
-class Decoder
+class PDecoder
 {
 public:
     static void AddData(uint8 data);
