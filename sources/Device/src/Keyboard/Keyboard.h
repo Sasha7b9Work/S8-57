@@ -69,6 +69,7 @@ struct TypePress
     explicit TypePress(E v) : value(v)  { };
     pString ToString();
     bool IsLong() const { return value == Long; };
+    const char *ToChar() const;
 };
 
 

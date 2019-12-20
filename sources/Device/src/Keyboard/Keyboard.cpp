@@ -156,3 +156,18 @@ bool Keyboard::KeyIsActive(Key::E key)
 
     return false;
 }
+
+
+const char *TypePress::ToChar() const
+{
+    static const char *ugo[TypePress::Count] =
+    {
+        "+",
+        "повтор",
+        "-",
+        "длительно"
+        "такого не бывает"
+    };
+
+    return ugo[value];
+}
