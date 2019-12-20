@@ -18,6 +18,8 @@ public:
 private:
 
     static int pointer;
+
+    static uint8 *pixels;
     /// Выполняемая функция
     static pFuncBU8 curFunc;
 
@@ -30,4 +32,6 @@ private:
     static bool FuncLengthText(uint8);
 
     static bool FuncScreen(uint8);
+
+    static bool ButtonPress(uint8);
 };

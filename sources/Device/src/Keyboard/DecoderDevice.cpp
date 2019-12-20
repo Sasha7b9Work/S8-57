@@ -10,14 +10,11 @@
 
 #define SIZE_BUFFER 1024
 static uint8 buffer[SIZE_BUFFER];
-int Decoder::pointer = 0;
+int      Decoder::pointer = 0;
 pFuncBU8 Decoder::curFunc;
+uint8   *Decoder::pixels = nullptr;
 /// Текущий байт выполняемой функции
 static int step;
-
-static uint8 *pixels = nullptr;
-
-static bool ButtonPress(uint8);
 
 
 void Decoder::AddData(uint8 data)
@@ -121,7 +118,7 @@ void Decoder::RunStep(uint8 data)
 }
 
 
-static bool ButtonPress(uint8 data)
+bool Decoder::ButtonPress(uint8 data)
 {
     static Key::E button;
     if (step == 0)
