@@ -14,4 +14,6 @@ public:
     static void Update();
     static bool IsRun();
     static void AddStringToIndicating(pString string);
+    // \todo Заглушка. Нужно избавиться
+    static void SaveRow(int) {};
 };

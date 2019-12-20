@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "AdvancedFont_d.h"
 #include "common/Command.h"
+#include "common/Decoder_d.h"
 #include "common/Transceiver.h"
 #include "Hardware/HAL/HAL.h"
 #include "font8.inc"
@@ -8,14 +9,6 @@
 #include "fontUGO.inc"
 #include "fontUGO2.inc"
 #include <cstring>
-
-#ifdef DEVICE
-#include "Hardware/DecoderDevice.h"
-#endif
-
-#ifdef LOADER
-#include "Hardware/DecoderLoader.h"
-#endif
 
 
 const DFont *fonts[DTypeFont::Count] = {&font5, &font8, &fontUGO, &fontUGO2, nullptr};

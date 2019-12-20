@@ -336,7 +336,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F437xx,LOADER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\common\libs\STM32Cube_F4\Middlewares\Third_Party\FatFs\src;.\src\libs\FatFS;..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;.\src\libs\HAL;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Core\Inc;.\src\libs\USBH;..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc;.\src;..\;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include</IncludePath>
+              <IncludePath>..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\common\libs\STM32Cube_F4\Middlewares\Third_Party\FatFs\src;..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Core\Inc;..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;.\src\libs\FatFS;.\src\libs\HAL;.\src\libs\USBH;.\src;..\</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -410,6 +410,16 @@
         <Group>
           <GroupName>common</GroupName>
           <Files>
+            <File>
+              <FileName>Decoder_d.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Decoder_d.h</FilePath>
+            </File>
+            <File>
+              <FileName>Decoder_d.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Decoder_d.cpp</FilePath>
+            </File>
             <File>
               <FileName>Transceiver.h</FileName>
               <FileType>5</FileType>
@@ -819,16 +829,6 @@
               <FileName>CPU_Panel.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\CPU_Panel.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DecoderLoader.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\DecoderLoader.h</FilePath>
-            </File>
-            <File>
-              <FileName>DecoderLoader.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\DecoderLoader.cpp</FilePath>
             </File>
             <File>
               <FileName>Timer.h</FileName>

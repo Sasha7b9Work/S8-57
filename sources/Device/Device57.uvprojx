@@ -386,9 +386,14 @@
               <FilePath>..\common\Command.h</FilePath>
             </File>
             <File>
-              <FileName>Message.cpp</FileName>
+              <FileName>Decoder_d.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Decoder_d.h</FilePath>
+            </File>
+            <File>
+              <FileName>Decoder_d.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\common\Message.cpp</FilePath>
+              <FilePath>..\common\Decoder_d.cpp</FilePath>
             </File>
             <File>
               <FileName>Message.h</FileName>
@@ -396,14 +401,19 @@
               <FilePath>..\common\Message.h</FilePath>
             </File>
             <File>
-              <FileName>Transceiver.cpp</FileName>
+              <FileName>Message.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\common\Transceiver.cpp</FilePath>
+              <FilePath>..\common\Message.cpp</FilePath>
             </File>
             <File>
               <FileName>Transceiver.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\common\Transceiver.h</FilePath>
+            </File>
+            <File>
+              <FileName>Transceiver.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Transceiver.cpp</FilePath>
             </File>
             <File>
               <FileName>Transceiver_d.cpp</FileName>
@@ -819,16 +829,6 @@
               <FileName>Beeper.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Beeper.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DecoderDevice.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\DecoderDevice.h</FilePath>
-            </File>
-            <File>
-              <FileName>DecoderDevice.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\DecoderDevice.cpp</FilePath>
             </File>
             <File>
               <FileName>Timer.h</FileName>

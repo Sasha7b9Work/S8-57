@@ -1,16 +1,12 @@
 #include "defines.h"
-#include "common/Transceiver.h"
+#include "Decoder_d.h"
+#include "Transceiver.h"
 #include "Hardware/HAL/HAL_PIO.h"
 #include <stm32f4xx_hal.h>
 
 #ifdef DEVICE
-#include "Hardware/DecoderDevice.h"
 #include "Osci/Osci.h"
 #include "Recorder/Recorder.h"
-#endif
-
-#ifdef LOADER
-#include "Hardware/DecoderLoader.h"
 #endif
 
 

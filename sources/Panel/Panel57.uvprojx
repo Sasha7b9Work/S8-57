@@ -1216,9 +1216,19 @@
           <GroupName>common</GroupName>
           <Files>
             <File>
-              <FileName>Transceiver.cpp</FileName>
+              <FileName>Command.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Command.h</FilePath>
+            </File>
+            <File>
+              <FileName>Decoder_p.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Decoder_p.h</FilePath>
+            </File>
+            <File>
+              <FileName>Decoder_p.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\common\Transceiver.cpp</FilePath>
+              <FilePath>..\common\Decoder_p.cpp</FilePath>
             </File>
             <File>
               <FileName>Transceiver.h</FileName>
@@ -1226,9 +1236,9 @@
               <FilePath>..\common\Transceiver.h</FilePath>
             </File>
             <File>
-              <FileName>Command.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\Command.h</FilePath>
+              <FileName>Transceiver.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Transceiver.cpp</FilePath>
             </File>
             <File>
               <FileName>Transceiver_p.cpp</FileName>
@@ -1439,16 +1449,6 @@
               <FileName>Controls.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Controls.h</FilePath>
-            </File>
-            <File>
-              <FileName>DecoderPanel.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\DecoderPanel.h</FilePath>
-            </File>
-            <File>
-              <FileName>DecoderPanel.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\DecoderPanel.cpp</FilePath>
             </File>
             <File>
               <FileName>Keyboard.cpp</FileName>

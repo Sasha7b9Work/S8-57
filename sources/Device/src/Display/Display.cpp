@@ -1,13 +1,14 @@
 #include "defines.h"
 #include "device.h"
+#include "common/Decoder_d.h"
 #include "common/Transceiver.h"
 #include "Display/Console.h"
 #include "Display/Display.h"
 #include "Display/Painter.h"
 #include "Display/Primitives.h"
 #include "Display/Warnings.h"
+#include "common/Display/Font/Font_d.h"
 #include "FlashDrive/FlashDrive.h"
-#include "Hardware/DecoderDevice.h"
 #include "Hardware/Timer.h"
 #include "Keyboard/BufferButtons.h"
 #include "Osci/Display/DisplayOsci.h"
@@ -58,6 +59,8 @@ void Display::Init()
 
 void Display::Update()
 {
+    DFont::SetSpacing();
+
     Color::ChangeFlash(false);
 
     DFont::Set(DTypeFont::_8);

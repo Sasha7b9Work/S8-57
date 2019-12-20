@@ -1,31 +1,21 @@
 #include "defines.h"
 #include "log.h"
-#include "DecoderLoader.h"
+#include "Decoder_d.h"
+#ifdef DEVICE
+#include "Menu/Menu.h"
+#include "Utils/Debug.h"
+#endif
+#include "Display/Display.h"
 #include "Display/Painter.h"
 #include "Keyboard/BufferButtons.h"
 #include <cstdlib>
 
 
-#define SIZE_BUFFER 1024
-static uint8 buffer[SIZE_BUFFER];
-static int pointer = 0;
-
-/// Выполняемая функция
-static pFuncBU8 curFunc;
-/// Текущий байт выполняемой функции
-static int step;
-
-static void RunStep(uint8 data);
-
-static bool ButtonPress(uint8);
-
-static bool FuncLengthText(uint8);
-
-/// Эту функцию надо вызывать после выполнения последнего шага
-static void FinishCommand();
-/// Добавляет текстовую строку в консоль
-static bool AddToConsole(uint8);
-
+int      DDecoder::pointer = 0;
+pFuncBU8 DDecoder::curFunc = nullptr;
+uint8   *DDecoder::pixels = nullptr;
+int      DDecoder::step = 0;
+uint8    DDecoder::buffer[DDecoder::SIZE_BUFFER];
 
 
 void DDecoder::AddData(uint8 data)
@@ -60,7 +50,7 @@ static bool EmptyFunc(uint8)
 }
 
 
-static void RunStep(uint8 data)
+void DDecoder::RunStep(uint8 data)
 {
     static const struct StructFunc
     {
@@ -85,7 +75,7 @@ static void RunStep(uint8 data)
         EmptyFunc,      // Paint_DrawLine,
         EmptyFunc,      // Paint_TesterLines,
         EmptyFunc,      // Paint_DrawBigText,
-        EmptyFunc,      // Screen
+        FuncScreen,     // Screen
         EmptyFunc,      // Paint_VPointLine
         EmptyFunc,      // Paint_HPointLine
         EmptyFunc,      // Paint_SetMonoSpaceFont
@@ -129,7 +119,7 @@ static void RunStep(uint8 data)
 }
 
 
-static bool ButtonPress(uint8 data)
+bool DDecoder::ButtonPress(uint8 data)
 {
     static Key::E button;
     if (step == 0)
@@ -150,12 +140,44 @@ static bool ButtonPress(uint8 data)
 }
 
 
-void DDecoder::SetBufferForScreenRow(uint8 *)
+void DDecoder::SetBufferForScreenRow(uint8 *_pixels)
 {
+    pixels = _pixels;
 }
 
 
-static bool FuncLengthText(uint8 data)
+bool DDecoder::FuncScreen(uint8 data)
+{
+    static int numString = 0;
+
+    if (step == 0)
+    {
+        return false;
+    }
+
+    if (step == 1)
+    {
+        numString = data;
+        return false;
+    }
+
+    if (step < 321)
+    {
+        pixels[step - 2] = data;
+        return false;
+    }
+
+    if (step == 321)
+    {
+        Display::SaveRow(numString);
+    }
+
+
+    return true;
+}
+
+
+bool DDecoder::FuncLengthText(uint8 data)
 {
     if(step == 0)
     {
@@ -171,7 +193,7 @@ static bool FuncLengthText(uint8 data)
 }
 
 
-static bool AddToConsole(uint8 data)
+bool DDecoder::AddToConsole(uint8 data)
 {
     static char *text = nullptr;        // Здесь будет храниться принятая строка
 
@@ -204,9 +226,8 @@ static bool AddToConsole(uint8 data)
 }
 
 
-static void FinishCommand()
+void DDecoder::FinishCommand()
 {
     step = 0;
     curFunc = 0;
 }
-

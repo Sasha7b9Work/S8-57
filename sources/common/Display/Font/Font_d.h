@@ -44,7 +44,7 @@ public:
     static bool BitIsExist(uint8 symbol, int row, int bit);
     static void SetMinWidth(uint8 width);
     /// Устанавливает количество пустых пикселей между символами.
-    static void SetSpacing(int spacing);
+    static void SetSpacing(int spacing = 1);
     /// Возвращает количество пустых пикселей между символами
     static int GetSpacing();
 };

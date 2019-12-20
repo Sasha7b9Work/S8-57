@@ -1,6 +1,6 @@
 #include "log.h"
 #include "structs.h"
-#include "DecoderPanel.h"
+#include "Decoder_p.h"
 #include "Display/Display.h"
 #include "Display/Painter.h"
 #include "Display/Text.h"
