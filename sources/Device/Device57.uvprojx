@@ -821,6 +821,16 @@
               <FilePath>.\src\Hardware\Beeper.cpp</FilePath>
             </File>
             <File>
+              <FileName>DecoderDevice.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\DecoderDevice.h</FilePath>
+            </File>
+            <File>
+              <FileName>DecoderDevice.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\DecoderDevice.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Timer.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Timer.h</FilePath>
@@ -1109,16 +1119,6 @@
               <FileName>BufferButtons.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Keyboard\BufferButtons.h</FilePath>
-            </File>
-            <File>
-              <FileName>DecoderDevice.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Keyboard\DecoderDevice.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DecoderDevice.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Keyboard\DecoderDevice.h</FilePath>
             </File>
             <File>
               <FileName>HandlersKeys.cpp</FileName>

@@ -791,14 +791,14 @@
               <FilePath>.\src\Hardware\Controls.h</FilePath>
             </File>
             <File>
-              <FileName>CPU.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU.cpp</FilePath>
-            </File>
-            <File>
               <FileName>CPU.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\CPU.h</FilePath>
+            </File>
+            <File>
+              <FileName>CPU.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\CPU.cpp</FilePath>
             </File>
             <File>
               <FileName>CPU_FLASH.cpp</FileName>
@@ -821,14 +821,24 @@
               <FilePath>.\src\Hardware\CPU_Panel.cpp</FilePath>
             </File>
             <File>
-              <FileName>Timer.cpp</FileName>
+              <FileName>DecoderLoader.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\DecoderLoader.h</FilePath>
+            </File>
+            <File>
+              <FileName>DecoderLoader.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Timer.cpp</FilePath>
+              <FilePath>.\src\Hardware\DecoderLoader.cpp</FilePath>
             </File>
             <File>
               <FileName>Timer.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Timer.h</FilePath>
+            </File>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Timer.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -904,16 +914,6 @@
               <FileName>BufferButtons.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Keyboard\BufferButtons.h</FilePath>
-            </File>
-            <File>
-              <FileName>DecoderLoader.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Keyboard\DecoderLoader.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DecoderLoader.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Keyboard\DecoderLoader.h</FilePath>
             </File>
             <File>
               <FileName>Keyboard.cpp</FileName>

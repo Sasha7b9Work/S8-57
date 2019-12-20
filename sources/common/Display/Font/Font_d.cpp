@@ -10,11 +10,11 @@
 #include <cstring>
 
 #ifdef DEVICE
-#include "Keyboard/DecoderDevice.h"
+#include "Hardware/DecoderDevice.h"
 #endif
 
 #ifdef LOADER
-#include "Keyboard/DecoderLoader.h"
+#include "Hardware/DecoderLoader.h"
 #endif
 
 

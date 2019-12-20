@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Transceiver.h"
-#include "Utils/DecoderPanel.h"
+#include "Hardware/DecoderPanel.h"
 #include "Hardware/Timer.h"
 #include <cstring>
 

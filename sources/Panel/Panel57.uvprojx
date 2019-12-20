@@ -1441,6 +1441,16 @@
               <FilePath>.\src\Hardware\Controls.h</FilePath>
             </File>
             <File>
+              <FileName>DecoderPanel.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\DecoderPanel.h</FilePath>
+            </File>
+            <File>
+              <FileName>DecoderPanel.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\DecoderPanel.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Keyboard.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Keyboard.cpp</FilePath>
@@ -1515,16 +1525,6 @@
         <Group>
           <GroupName>Utils</GroupName>
           <Files>
-            <File>
-              <FileName>DecoderPanel.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\DecoderPanel.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DecoderPanel.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\DecoderPanel.h</FilePath>
-            </File>
             <File>
               <FileName>Math.cpp</FileName>
               <FileType>8</FileType>

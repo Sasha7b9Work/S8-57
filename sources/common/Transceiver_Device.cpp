@@ -4,13 +4,13 @@
 #include <stm32f4xx_hal.h>
 
 #ifdef DEVICE
-#include "Keyboard/DecoderDevice.h"
+#include "Hardware/DecoderDevice.h"
 #include "Osci/Osci.h"
 #include "Recorder/Recorder.h"
 #endif
 
 #ifdef LOADER
-#include "Keyboard/DecoderLoader.h"
+#include "Hardware/DecoderLoader.h"
 #endif
 
 

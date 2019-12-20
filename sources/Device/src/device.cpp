@@ -10,7 +10,7 @@
 #include "Hardware/VCP.h"
 #include "Hardware/HAL/HAL.h"
 #include "Keyboard/BufferButtons.h"
-#include "Keyboard/DecoderDevice.h"
+#include "Hardware/DecoderDevice.h"
 #include "Menu/MenuItems.h"
 #include "Recorder/Recorder.h"
 #include "SCPI/SCPI.h"
