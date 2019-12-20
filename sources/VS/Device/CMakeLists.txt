@@ -47,7 +47,6 @@ source_group(common                 FILES   ../../common/Command.h
                                             ../../common/Message.cpp
                                             ../../common/Transceiver.h
                                             ../../common/Transceiver.cpp
-                                            ../../common/Transceiver_d.cpp
                                             ../common/Transceiver_win.cpp)
 source_group(_VS                                        REGULAR_EXPRESSION ../common/_VS/*)
 source_group(_VS\\CMSIS                                 REGULAR_EXPRESSION ../common/_VS/CMSIS/*)
@@ -212,7 +211,6 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../common/Message.cpp
                     ../../common/Transceiver.h
                     ../../common/Transceiver.cpp
-                    ../../common/Transceiver_d.cpp
                     ../common/Transceiver_win.cpp
                     
                     ../../Device/src/Data/*
