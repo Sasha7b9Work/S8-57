@@ -17,12 +17,9 @@ static int step;
 
 static uint8 *pixels = nullptr;
 
-
 static bool ButtonPress(uint8);
 
 static bool FuncScreen(uint8);
-
-static bool FuncLengthText(uint8);
 
 
 void Decoder::AddData(uint8 data)
@@ -184,7 +181,7 @@ static bool FuncScreen(uint8 data)
 }
 
 
-static bool FuncLengthText(uint8 data)
+bool Decoder::FuncLengthText(uint8 data)
 {
     if(step == 0)
     {

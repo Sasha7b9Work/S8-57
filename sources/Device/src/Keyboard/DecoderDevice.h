@@ -25,4 +25,6 @@ private:
     static void FinishCommand();
     /// ƒобавл€ет текстовую строку в консоль
     static bool AddToConsole(uint8);
+
+    static bool FuncLengthText(uint8);
 };
