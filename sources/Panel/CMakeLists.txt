@@ -23,14 +23,12 @@ add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for me
 add_compile_options(/wd26812)   #The enum type %type% is unscoped. Prefer 'enum class' over 'enum' (Enum.3)
 
 source_group(common                    FILES ../common/Command.h
-                                             ../common/DataBus.cpp
-                                             ../common/DataBus.h
-                                             ../common/Message.cpp
-                                             ../common/Message.h
+                                             ../common/Decoder_p.h
+                                             ../common/Decoder_p.cpp
                                              ../common/Transceiver.cpp
                                              ../common/Transceiver.h
                                              ../common/Transceiver.cpp
-                                             ../common/Transceiver_Panel.cpp)
+                                             ../common/Transceiver_p.cpp)
 source_group(_VS                       REGULAR_EXPRESSION ../common/_VS/*)
 source_group(_VS\\std_includes         REGULAR_EXPRESSION ../common/_VS/std_includes/*)
 source_group(_VS\\CMSIS                REGULAR_EXPRESSION ../common/_VS/CMSIS/*)
@@ -50,14 +48,12 @@ file(GLOB SOURCES   ../common/_VS/*
                     ../common/_VS/std_includes/*
                     ../common/_VS/CMSIS/*
                     ../common/Command.h
-                    ../common/DataBus.cpp
-                    ../common/DataBus.h
-                    ../common/Message.cpp
-                    ../common/Message.h
+                    ../common/Decoder_p.h
+                    ../common/Decoder_p.cpp
                     ../common/Transceiver.cpp
                     ../common/Transceiver.h
                     ../common/Transceiver.cpp
-                    ../common/Transceiver_Panel.cpp
+                    ../common/Transceiver_p.cpp
                     src/Data/*
                     src/Display/*
                     src/Display/Font/*

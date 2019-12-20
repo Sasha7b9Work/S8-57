@@ -35,13 +35,13 @@ add_compile_options(/wd26812)   #The enum type %type% is unscoped. Prefer 'enum 
 
 
 source_group(common                                  FILES ../common/Command.h
-                                                           ../common/DataBus.cpp
-                                                           ../common/DataBus.h
-                                                           ../common/Message.cpp
+                                                           ../common/Decoder_d.h
+                                                           ../common/Decoder_d.cpp
                                                            ../common/Message.h
-                                                           ../common/Transceiver.cpp
+                                                           ../common/Message.cpp
                                                            ../common/Transceiver.h
-                                                           ../common/Transceiver_Device.cpp)
+                                                           ../common/Transceiver.cpp
+                                                           ../common/Transceiver_d.cpp)
 source_group(_VS                                     REGULAR_EXPRESSION ../common/_VS/*)
 source_group(_VS\\std_includes                       REGULAR_EXPRESSION ../common/_VS/std_includes/*)
 source_group(src                                     REGULAR_EXPRESSION src/*)
@@ -82,16 +82,14 @@ source_group(Utils                                   REGULAR_EXPRESSION src/Util
 source_group(doc                                     REGULAR_EXPRESSION ../../doc/description/doc/*)
 
 
-file(GLOB SOURCES   ../common/_VS/*
-                    ../common/_VS/std_includes/*
-                    ../common/Command.h
-                    ../common/DataBus.cpp
-                    ../common/DataBus.h
-                    ../common/Message.cpp
+file(GLOB SOURCES   ../common/Command.h
+                    ../common/Decoder_d.h
+                    ../common/Decoder_d.cpp
                     ../common/Message.h
-                    ../common/Transceiver.cpp
+                    ../common/Message.cpp
                     ../common/Transceiver.h
-                    ../common/Transceiver_Device.cpp
+                    ../common/Transceiver.cpp
+                    ../common/Transceiver_d.cpp
                     
                     ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc.h
                     ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc_ex.h
