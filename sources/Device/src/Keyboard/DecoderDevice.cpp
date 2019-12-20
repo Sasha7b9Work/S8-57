@@ -228,4 +228,3 @@ void Decoder::FinishCommand()
     step = 0;
     curFunc = 0;
 }
-

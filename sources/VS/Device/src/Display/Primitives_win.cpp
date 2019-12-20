@@ -91,20 +91,20 @@ static int DrawChar(int eX, int eY, char s)
 {
     uint8 symbol = static_cast<uint8>(s);
 
-    int8 width = static_cast<int8>(PFont::GetWidth(symbol));
-    int8 height = static_cast<int8>(Font::GetHeight());
+    int8 width = static_cast<int8>(DFont::GetWidth(symbol));
+    int8 height = static_cast<int8>(DFont::GetHeight());
 
-    int delta = Font::IsBig() ? 0 : (9 - height);
+    int delta = DFont::IsBig() ? 0 : (9 - height);
 
     for (int row = 0; row < height; row++)
     {
-        if (Font::RowNotEmpty(symbol, row))
+        if (DFont::RowNotEmpty(symbol, row))
         {
             int x = eX;
             int y = eY + row + delta;
             for (int bit = 0; bit < width; bit++)
             {
-                if (Font::BitIsExist(symbol, row, bit))
+                if (DFont::BitIsExist(symbol, row, bit))
                 {
                     memDC.DrawPoint({ x, y });
                 }
