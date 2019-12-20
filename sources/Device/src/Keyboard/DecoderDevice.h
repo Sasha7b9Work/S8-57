@@ -16,6 +16,7 @@ public:
     /// Даёт декодеру буфер для сохранения строки картинки
     static void SetBufferForScreenRow(uint8 *pixels);
 private:
+
     static int pointer;
     /// Выполняемая функция
     static pFuncBU8 curFunc;
@@ -27,4 +28,6 @@ private:
     static bool AddToConsole(uint8);
 
     static bool FuncLengthText(uint8);
+
+    static bool FuncScreen(uint8);
 };

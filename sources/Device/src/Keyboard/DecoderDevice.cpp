@@ -19,8 +19,6 @@ static uint8 *pixels = nullptr;
 
 static bool ButtonPress(uint8);
 
-static bool FuncScreen(uint8);
-
 
 void Decoder::AddData(uint8 data)
 {
@@ -150,7 +148,7 @@ void Decoder::SetBufferForScreenRow(uint8 *_pixels)
 }
 
 
-static bool FuncScreen(uint8 data)
+bool Decoder::FuncScreen(uint8 data)
 {
     static int numString = 0;
 
