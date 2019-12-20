@@ -23,9 +23,6 @@ static bool ButtonPress(uint8);
 static bool FuncScreen(uint8);
 
 static bool FuncLengthText(uint8);
-/// ƒобавл€ет текстовую строку в консоль
-static bool AddToConsole(uint8);
-
 
 
 void Decoder::AddData(uint8 data)
@@ -203,7 +200,7 @@ static bool FuncLengthText(uint8 data)
 }
 
 
-static bool AddToConsole(uint8 data)
+bool Decoder::AddToConsole(uint8 data)
 {
     static char *text = nullptr;        // «десь будет хранитьс€ прин€та€ строка
 
