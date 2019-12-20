@@ -1226,14 +1226,14 @@
               <FilePath>..\common\Transceiver.h</FilePath>
             </File>
             <File>
-              <FileName>Transceiver_Panel.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\common\Transceiver_Panel.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Command.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\common\Command.h</FilePath>
+            </File>
+            <File>
+              <FileName>Transceiver_p.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Transceiver_p.cpp</FilePath>
             </File>
           </Files>
         </Group>

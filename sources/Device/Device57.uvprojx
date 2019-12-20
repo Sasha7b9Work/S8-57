@@ -406,9 +406,9 @@
               <FilePath>..\common\Transceiver.h</FilePath>
             </File>
             <File>
-              <FileName>Transceiver_Device.cpp</FileName>
+              <FileName>Transceiver_d.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\common\Transceiver_Device.cpp</FilePath>
+              <FilePath>..\common\Transceiver_d.cpp</FilePath>
             </File>
           </Files>
         </Group>
