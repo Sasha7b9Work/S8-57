@@ -46,5 +46,5 @@ public:
     static void SetMinWidth(uint8 width);
     /// Устанавливает количество пустых пикселей между символами.
     static void SetSpacing(int spacing);
-    static void SendLengthText(char *text);
+    static void SendLengthText(const char *text);
 };

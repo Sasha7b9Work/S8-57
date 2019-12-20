@@ -32,7 +32,7 @@ int PFont::GetLengthText(pString text)
     return result;
 }
 
-void PFont::SendLengthText(char *text)
+void PFont::SendLengthText(const char *text)
 {
     uint8 length = static_cast<uint8>(GetLengthText(text));
 
