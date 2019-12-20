@@ -57,7 +57,7 @@ int WorkerLengthText::Run(pString text)
     while(recvLength == -1)
     {
         Transceiver::Receive();
-        Decoder::Update();
+        DDecoder::Update();
     }
 
     return recvLength;

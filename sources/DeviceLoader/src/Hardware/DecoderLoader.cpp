@@ -3,12 +3,8 @@
 #include "DecoderLoader.h"
 #include "Display/Painter.h"
 #include "Keyboard/BufferButtons.h"
-
 #include <cstdlib>
 
-
-
-Decoder decoder;
 
 #define SIZE_BUFFER 1024
 static uint8 buffer[SIZE_BUFFER];
@@ -32,7 +28,7 @@ static bool AddToConsole(uint8);
 
 
 
-void Decoder::AddData(uint8 data)
+void DDecoder::AddData(uint8 data)
 {
     if (pointer < SIZE_BUFFER)
     {
@@ -45,7 +41,7 @@ void Decoder::AddData(uint8 data)
 }
 
 
-void Decoder::Update()
+void DDecoder::Update()
 {
     if (pointer)
     {
@@ -154,7 +150,7 @@ static bool ButtonPress(uint8 data)
 }
 
 
-void Decoder::SetBufferForScreenRow(uint8 *)
+void DDecoder::SetBufferForScreenRow(uint8 *)
 {
 }
 

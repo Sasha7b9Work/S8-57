@@ -8,14 +8,14 @@
 #include <cstdlib>
 
 
-int      Decoder::pointer = 0;
-pFuncBU8 Decoder::curFunc = nullptr;
-uint8   *Decoder::pixels = nullptr;
-int      Decoder::step = 0;
-uint8    Decoder::buffer[Decoder::SIZE_BUFFER];
+int      DDecoder::pointer = 0;
+pFuncBU8 DDecoder::curFunc = nullptr;
+uint8   *DDecoder::pixels = nullptr;
+int      DDecoder::step = 0;
+uint8    DDecoder::buffer[DDecoder::SIZE_BUFFER];
 
 
-void Decoder::AddData(uint8 data)
+void DDecoder::AddData(uint8 data)
 {
     if (pointer < SIZE_BUFFER)
     {
@@ -28,7 +28,7 @@ void Decoder::AddData(uint8 data)
 }
 
 
-void Decoder::Update()
+void DDecoder::Update()
 {
     if (pointer)
     {
@@ -47,7 +47,7 @@ static bool EmptyFunc(uint8)
 }
 
 
-void Decoder::RunStep(uint8 data)
+void DDecoder::RunStep(uint8 data)
 {
     static const struct StructFunc
     {
@@ -116,7 +116,7 @@ void Decoder::RunStep(uint8 data)
 }
 
 
-bool Decoder::ButtonPress(uint8 data)
+bool DDecoder::ButtonPress(uint8 data)
 {
     static Key::E button;
     if (step == 0)
@@ -137,13 +137,13 @@ bool Decoder::ButtonPress(uint8 data)
 }
 
 
-void Decoder::SetBufferForScreenRow(uint8 *_pixels)
+void DDecoder::SetBufferForScreenRow(uint8 *_pixels)
 {
     pixels = _pixels;
 }
 
 
-bool Decoder::FuncScreen(uint8 data)
+bool DDecoder::FuncScreen(uint8 data)
 {
     static int numString = 0;
 
@@ -174,7 +174,7 @@ bool Decoder::FuncScreen(uint8 data)
 }
 
 
-bool Decoder::FuncLengthText(uint8 data)
+bool DDecoder::FuncLengthText(uint8 data)
 {
     if(step == 0)
     {
@@ -190,7 +190,7 @@ bool Decoder::FuncLengthText(uint8 data)
 }
 
 
-bool Decoder::AddToConsole(uint8 data)
+bool DDecoder::AddToConsole(uint8 data)
 {
     static char *text = nullptr;        // Здесь будет храниться принятая строка
 
@@ -223,7 +223,7 @@ bool Decoder::AddToConsole(uint8 data)
 }
 
 
-void Decoder::FinishCommand()
+void DDecoder::FinishCommand()
 {
     step = 0;
     curFunc = 0;

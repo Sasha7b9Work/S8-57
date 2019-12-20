@@ -151,7 +151,7 @@ bool Transceiver::Receive()
 
     uint8 data = Receiver::ReadData();              // Читаем байт
     
-    Decoder::AddData(data);                         // И отправляем его на выполнение
+    DDecoder::AddData(data);                         // И отправляем его на выполнение
 
     Set_MODE(Mode::Disabled);
 

@@ -122,7 +122,7 @@ void Device::Update()
 
     SCPI::Update();
 
-    Decoder::Update();
+    DDecoder::Update();
 }
 
 

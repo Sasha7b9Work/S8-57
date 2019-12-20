@@ -192,7 +192,7 @@ void Display::Message::Func()
     {
         while (Transceiver::Receive()) {};
 
-        Decoder::Update();
+        DDecoder::Update();
 
         while (!BufferButtons::IsEmpty())
         {
@@ -407,7 +407,7 @@ void Display::SaveScreenToFlash()
 
     uint8 pixels[320];
 
-    Decoder::SetBufferForScreenRow(pixels);
+    DDecoder::SetBufferForScreenRow(pixels);
 
     for (int row = 239; row >= 0; row--)
     {
@@ -435,7 +435,7 @@ static void ReadRow(uint8 row)
     while (numRow == -1)
     {
         Transceiver::Receive();
-        Decoder::Update();
+        DDecoder::Update();
     }
 }
 

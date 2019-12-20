@@ -6,7 +6,7 @@
 typedef bool(*pFuncBU8)(uint8);
 
 
-class Decoder
+class DDecoder
 {
 public:
 
