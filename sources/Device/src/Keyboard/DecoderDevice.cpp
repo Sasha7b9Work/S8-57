@@ -8,13 +8,11 @@
 #include <cstdlib>
 
 
-#define SIZE_BUFFER 1024
-static uint8 buffer[SIZE_BUFFER];
 int      Decoder::pointer = 0;
-pFuncBU8 Decoder::curFunc;
+pFuncBU8 Decoder::curFunc = nullptr;
 uint8   *Decoder::pixels = nullptr;
-/// Текущий байт выполняемой функции
-static int step;
+int      Decoder::step = 0;
+uint8    Decoder::buffer[Decoder::SIZE_BUFFER];
 
 
 void Decoder::AddData(uint8 data)

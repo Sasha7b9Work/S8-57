@@ -22,6 +22,11 @@ private:
     static uint8 *pixels;
     /// Выполняемая функция
     static pFuncBU8 curFunc;
+    /// Текущий байт выполняемой функции
+    static int step;
+
+    static const int SIZE_BUFFER = 1024;
+    static uint8 buffer[SIZE_BUFFER];
 
     static void RunStep(uint8 data);
     /// Эту функцию надо вызывать после выполнения последнего шага
