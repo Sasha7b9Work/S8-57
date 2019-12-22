@@ -1,5 +1,5 @@
 @echo off
 cd ..\generated\Win32\Device\Debug
-start Device57.exe
+start S8-57.exe
 cd ..\..\..\..\scripts
 @echo on

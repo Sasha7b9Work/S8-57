@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 
-project (Device56)
+project (Device)
 
 include_directories(../common/_VS
                     ../common/_VS/std_includes
@@ -131,4 +131,4 @@ file(GLOB SOURCES   ../common/Command.h
                     ../../doc/description/doc/*
                     )
 
-add_library(Device57 ${SOURCES})
+add_library(Device ${SOURCES})

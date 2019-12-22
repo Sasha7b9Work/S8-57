@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.0)
 #    cmake_policy(SET CMP0026 OLD)
 #endif()
 
-project (Device56)
+project (DLoader)
 
 include_directories(../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc
                     ../common/libs/STM32Cube_F4/Drivers/CMSIS/Device/ST/STM32F4xx/Include
@@ -83,4 +83,4 @@ file(GLOB SOURCES   ../common/Decoder_d.h
                     src/Settings/*
                     src/Utils/*)
 
-add_library(DeviceLoader ${SOURCES})
+add_library(DLoader ${SOURCES})

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 
-project (Panel56)
+project (Panel)
 
 include_directories(..
                     ../common/_VS
@@ -66,4 +66,4 @@ file(GLOB SOURCES   ../common/_VS/*
                     src/*
                     src/libs/HAL/*.h)
 
-add_library(Panel57 ${SOURCES})
+add_library(Panel ${SOURCES})
