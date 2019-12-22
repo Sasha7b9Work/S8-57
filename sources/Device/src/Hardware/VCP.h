@@ -3,15 +3,13 @@
 #include <usbd_def.h>
 
 
-
-#define VCP_FLUSH()                       VCP::Flush()
-#define VCP_SEND_DATA_SYNCH(buffer, size) VCP::SendDataSynch(buffer, size)
-#define CONNECTED_TO_USB                  VCP::connectedToUSB
-#define CABLE_USB_IS_CONNECTED            VCP::cableUSBisConnected
-
+#define VCP_FLUSH()                       DVCP::Flush()
+#define VCP_SEND_DATA_SYNCH(buffer, size) DVCP::SendDataSynch(buffer, size)
+#define CONNECTED_TO_USB                  DVCP::connectedToUSB
+#define CABLE_USB_IS_CONNECTED            DVCP::cableUSBisConnected
 
 
-class VCP
+class DVCP
 {
 public:
     static const int DEVICE_FS = 0;

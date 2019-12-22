@@ -134,9 +134,9 @@ USBD_StatusTypeDef  USBD_LL_Init (USBD_HandleTypeDef *pdev)
 { 
     NVIC_SetPriority (SysTick_IRQn, 0);  
   
-    if(pdev->id == VCP::DEVICE_FS)
+    if(pdev->id == DVCP::DEVICE_FS)
     {
-        PCD_HandleTypeDef *handlePCD = (PCD_HandleTypeDef *)VCP::HandlePCD();
+        PCD_HandleTypeDef *handlePCD = (PCD_HandleTypeDef *)DVCP::HandlePCD();
         // Link The driver to the stack
         handlePCD->pData = pdev;
         pdev->pData = handlePCD;

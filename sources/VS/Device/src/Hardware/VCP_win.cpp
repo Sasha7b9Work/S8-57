@@ -6,28 +6,28 @@
 PCD_HandleTypeDef  handlePCD;
 
 
-bool   VCP::connectedToUSB = false;
-bool   VCP::cableUSBisConnected = false;
+bool   DVCP::connectedToUSB = false;
+bool   DVCP::cableUSBisConnected = false;
 
 
-void VCP::Init()
+void DVCP::Init()
 {
 
 }
 
-void *VCP::HandlePCD()
+void *DVCP::HandlePCD()
 {
     return static_cast<void *>(&handlePCD);
 }
 
 
-void VCP::SendDataAsynch(const uint8 *text, uint)
+void DVCP::SendDataAsynch(const uint8 *text, uint)
 {
     ConsoleSCPI::Self()->AddText(reinterpret_cast<const char *>(text));
 }
 
 
-void VCP::SendStringAsynch(const char *message)
+void DVCP::SendStringAsynch(const char *message)
 {
     String text(">>> %s", message);
     ConsoleSCPI::Self()->AddText(text.c_str());

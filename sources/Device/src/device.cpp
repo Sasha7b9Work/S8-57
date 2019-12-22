@@ -44,7 +44,7 @@ void Device::Init()
 
     HAL_RTC::Init();
 
-    VCP::Init();
+    DVCP::Init();
 
     Tester::Init();
 
