@@ -19,9 +19,9 @@ void DisplayOsci::BottomPart::Draw(int x0, int y0)
     {
     }
 
-    if (DVCP::connectedToUSB || DVCP::cableUSBisConnected)
+    if (VCP::connectedToUSB || VCP::cableUSBisConnected)
     {
-        Char(SymbolUGO2::USB).Draw4SymbolsInRect(x0 + 72, y0 + 2, DVCP::connectedToUSB ? Color::WHITE : Color::FLASH_01);
+        Char(SymbolUGO2::USB).Draw4SymbolsInRect(x0 + 72, y0 + 2, VCP::connectedToUSB ? Color::WHITE : Color::FLASH_01);
     }
 
     Color::FILL.SetAsCurrent();

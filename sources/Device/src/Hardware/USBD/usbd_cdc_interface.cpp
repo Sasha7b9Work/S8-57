@@ -40,15 +40,15 @@ USBD_CDC_ItfTypeDef USBD_CDC_fops =
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void SetAttributeConnected()
 {
-    DVCP::cableUSBisConnected = true;
-    DVCP::connectedToUSB = false;
+    VCP::cableUSBisConnected = true;
+    VCP::connectedToUSB = false;
 }
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static int8_t CDC_Itf_Init()
 {
-    USBD_CDC_SetRxBuffer((USBD_HandleTypeDef *)DVCP::HandleUSBD(), UserRxBuffer);
+    USBD_CDC_SetRxBuffer((USBD_HandleTypeDef *)VCP::HandleUSBD(), UserRxBuffer);
     Timer::SetAndStartOnce(TypeTimer::USB, SetAttributeConnected, 100);   /** \todo Задержка введена для того, чтобы не было ложных срабатываний в 
                                                                  usbd_conf.c:HAL_PCD_SetupStageCallback при определении подключения хоста */
     return (USBD_OK);
@@ -58,8 +58,8 @@ static int8_t CDC_Itf_Init()
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 static int8_t CDC_Itf_DeInit()
 {
-    DVCP::cableUSBisConnected = false;
-    DVCP::connectedToUSB = false;
+    VCP::cableUSBisConnected = false;
+    VCP::connectedToUSB = false;
 
     return (USBD_OK);
 }
@@ -130,7 +130,7 @@ static int8_t CDC_Itf_Receive(uint8 *buffer, uint *length)
 {
     SCPI::AppendNewData(reinterpret_cast<const char *>(buffer), *length);
 
-    USBD_CDC_ReceivePacket((USBD_HandleTypeDef *)DVCP::HandleUSBD());
+    USBD_CDC_ReceivePacket((USBD_HandleTypeDef *)VCP::HandleUSBD());
 
     return (USBD_OK);
 }

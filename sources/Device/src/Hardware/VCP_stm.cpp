@@ -13,8 +13,8 @@
 
 USBD_HandleTypeDef handleUSBD;
 PCD_HandleTypeDef  handlePCD;
-bool               DVCP::cableUSBisConnected = false;
-bool               DVCP::connectedToUSB = false;
+bool               VCP::cableUSBisConnected = false;
+bool               VCP::connectedToUSB = false;
 
 
 
@@ -22,7 +22,7 @@ static bool PrevSendingComplete();
 
 
 
-void DVCP::Init()
+void VCP::Init()
 {
     USBD_Init(&handleUSBD, &VCP_Desc, DEVICE_FS);
     USBD_RegisterClass(&handleUSBD, &USBD_CDC);
@@ -31,13 +31,13 @@ void DVCP::Init()
 }
 
 
-void *DVCP::HandleUSBD()
+void *VCP::HandleUSBD()
 {
     return static_cast<void *>(&handleUSBD);
 }
 
 
-void *DVCP::HandlePCD()
+void *VCP::HandlePCD()
 {
     return static_cast<void *>(&handlePCD);
 }
@@ -50,7 +50,7 @@ static bool PrevSendingComplete()
 }
 
 
-void DVCP::SendDataAsynch(const uint8 *buffer, uint size)
+void VCP::SendDataAsynch(const uint8 *buffer, uint size)
 {
 #define SIZE_BUFFER 64U
     static uint8 trBuf[SIZE_BUFFER];
@@ -69,7 +69,7 @@ static uint8 buffSend[SIZE_BUFFER_VCP];
 static int sizeBuffer = 0;
 
 
-void DVCP::Flush()
+void VCP::Flush()
 {
     if (sizeBuffer)
     {
@@ -86,9 +86,9 @@ void DVCP::Flush()
 }
 
 
-void DVCP::SendDataSynch(const void *_buffer, uint size)
+void VCP::SendDataSynch(const void *_buffer, uint size)
 {
-    if (DVCP::connectedToUSB)
+    if (VCP::connectedToUSB)
     {
         char *buffer = static_cast<char *>(const_cast<void *>(_buffer));
         if (size == 0)
@@ -125,21 +125,21 @@ void DVCP::SendDataSynch(const void *_buffer, uint size)
 }
 
 
-void DVCP::SendStringAsynch(const char *data)
+void VCP::SendStringAsynch(const char *data)
 {
     SendDataAsynch(reinterpret_cast<uint8 *>(const_cast<char *>(data)), std::strlen(data));
 }
 
 
-void DVCP::SendStringSynch(char *data)
+void VCP::SendStringSynch(char *data)
 {
     SendDataSynch(reinterpret_cast<uint8 *>(data), std::strlen(data));
 }
 
 
-void DVCP::SendFormatStringAsynch(char *format, ...)
+void VCP::SendFormatStringAsynch(char *format, ...)
 {
-    if (DVCP::connectedToUSB)
+    if (VCP::connectedToUSB)
     {
         static char buffer[200];
         std::va_list args;
@@ -152,7 +152,7 @@ void DVCP::SendFormatStringAsynch(char *format, ...)
 }
 
 
-void DVCP::SendFormatStringSynch(char *format, ...)
+void VCP::SendFormatStringSynch(char *format, ...)
 {
     char buffer[200];
     std::va_list args;
@@ -164,7 +164,7 @@ void DVCP::SendFormatStringSynch(char *format, ...)
 }
 
 
-void DVCP::SendByte(uint8 byte)
+void VCP::SendByte(uint8 byte)
 {
     SendDataSynch(&byte, 1);
 }

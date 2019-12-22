@@ -212,11 +212,11 @@ void SCPI::SendAnswer(const char *message)
     {
         String msg(message);
         msg.Append(0x0D);
-        DVCP::SendStringAsynch(msg.c_str());
+        VCP::SendStringAsynch(msg.c_str());
     }
     else
     {
-        DVCP::SendStringAsynch(message);
+        VCP::SendStringAsynch(message);
     }
 }
 

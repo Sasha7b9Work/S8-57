@@ -3,7 +3,7 @@
 #include <usbd_def.h>
 
 
-class DVCP
+class VCP
 {
 public:
     static const int DEVICE_FS = 0;

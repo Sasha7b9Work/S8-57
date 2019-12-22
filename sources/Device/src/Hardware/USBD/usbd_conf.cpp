@@ -31,12 +31,12 @@ void HAL_PCD_SetupStageCallback(PCD_HandleTypeDef *hpcd)
         {                                                           //
             if (prevLength != 0)                                    //
             {                                                       //
-                DVCP::cableUSBisConnected = true;                   // Это потому, что при включении прибора с подключенным шнуром
-                DVCP::connectedToUSB = true;                        // GOVNOCODE Таким вот замысловатым образом определяем, что к нам подконнектился хост (
+                VCP::cableUSBisConnected = true;                    // Это потому, что при включении прибора с подключенным шнуром
+                VCP::connectedToUSB = true;                         // GOVNOCODE Таким вот замысловатым образом определяем, что к нам подконнектился хост (
             }                                                       //
             else                                                    //
             {                                                       //
-                DVCP::connectedToUSB = false;                       //
+                VCP::connectedToUSB = false;                        //
                 Settings::Save();                                   // При отконнекчивании сохраняем настройки
             }                                                       /// \todo Возможно, это не нужно делать
             //CONNECTED_TO_USB = prevLength != 0;                   // 
@@ -134,9 +134,9 @@ USBD_StatusTypeDef  USBD_LL_Init (USBD_HandleTypeDef *pdev)
 { 
     NVIC_SetPriority (SysTick_IRQn, 0);  
   
-    if(pdev->id == DVCP::DEVICE_FS)
+    if(pdev->id == VCP::DEVICE_FS)
     {
-        PCD_HandleTypeDef *handlePCD = (PCD_HandleTypeDef *)DVCP::HandlePCD();
+        PCD_HandleTypeDef *handlePCD = (PCD_HandleTypeDef *)VCP::HandlePCD();
         // Link The driver to the stack
         handlePCD->pData = pdev;
         pdev->pData = handlePCD;
