@@ -43,6 +43,7 @@ add_compile_options(/wd26812)   # Prefer 'enum class' over 'enum' (Enum.3)
 source_group(common                 FILES   ../../common/Command.h
                                             ../../common/Decoder_d.h
                                             ../../common/Decoder_d.cpp
+                                            ../../common/Decoder_p.h
                                             ../../common/Message.h
                                             ../../common/Message.cpp
                                             ../../common/Transceiver.h
@@ -55,7 +56,6 @@ source_group(_VS\\HAL                                   REGULAR_EXPRESSION ../co
 source_group(_VS\\HAL\\Legacy                           REGULAR_EXPRESSION ../common/_VS/HAL/Legacy/*)
 source_group(_VS\\USBD                                  REGULAR_EXPRESSION ../common/_VS/USBD/*)
 source_group(_VS\\USBH                                  REGULAR_EXPRESSION ../common/_VS/USBH/*)
-source_group(Display\\Font                              REGULAR_EXPRESSION ../common/Display/Font/*)
 source_group(Data                                       REGULAR_EXPRESSION src/Data/*)
 source_group(FlashDrive                                 REGULAR_EXPRESSION src/FlashDrive/*)
 source_group(GUI                                        REGULAR_EXPRESSION src/GUI/*)
@@ -110,6 +110,14 @@ source_group(Display            FILES   ../../Device/src/Display/Colors.h
                                         ../../Device/src/Display/Symbols.h
                                         ../../Device/src/Display/Warnings.h
                                         ../../Device/src/Display/Warnings.cpp)
+source_group(Display\\Font      FILES   ../../common/Display/Font/AdvancedFont_d.h
+                                        ../../common/Display/Font/AdvancedFont_d.cpp
+                                        ../../common/Display/Font/font5.inc
+                                        ../../common/Display/Font/font8.inc
+                                        ../../common/Display/Font/Font_d.h
+                                        ../../common/Display/Font/Font_d.cpp
+                                        ../../Panel/src/Display/Font/Font_p.h
+                                                    src/Display/Font/Font_p_win.cpp)
 source_group(FPGA               FILES   ../../Device/src/FPGA/AD9286.h
                                         ../../Device/src/FPGA/AD9286.cpp
                                         ../../Device/src/FPGA/Calibrator.h
@@ -207,6 +215,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../common/Command.h
                     ../../common/Decoder_d.h
                     ../../common/Decoder_d.cpp
+                    ../../common/Decoder_p.h
                     ../../common/Message.h
                     ../../common/Message.cpp
                     ../../common/Transceiver.h
@@ -232,8 +241,16 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Display/PainterMem.cpp
                     ../../Device/src/Display/Symbols.h
                     ../../Device/src/Display/Warnings.h
-                    ../../Device/src/Display/Warnings.cpp                    
-                    ../../common/Display/Font/*
+                    ../../Device/src/Display/Warnings.cpp
+                    
+                    ../../common/Display/Font/AdvancedFont_d.h
+                    ../../common/Display/Font/AdvancedFont_d.cpp
+                    ../../common/Display/Font/font5.inc
+                    ../../common/Display/Font/font8.inc
+                    ../../common/Display/Font/Font_d.h
+                    ../../common/Display/Font/Font_d.cpp
+                    ../../Panel/src/Display/Font/Font_p.h
+                                src/Display/Font/Font_p_win.cpp
 
                     ../../Device/src/FlashDrive/*
                     
