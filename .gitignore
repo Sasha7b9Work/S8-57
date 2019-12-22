@@ -15,28 +15,18 @@ out.txt
 
 sources/ThirdParty/*
 sources/generated/*
-sources/fonts/*.inc
 
 doc/doxygen/OSC/*
-
-bugs/*
 
 sources/Device/DebugConfig/*
 sources/Device/Listings/*
 sources/Device/Objects/*
-sources/DeviceLoader/DebugConfig/*
-sources/DeviceLoader/Listings/*
-sources/DeviceLoader/Objects/*
+sources/DLoader/DebugConfig/*
+sources/DLoader/Listings/*
+sources/DLoader/Objects/*
 
 sources/Panel/DebugConfig/*
 sources/Panel/Listings/*
 sources/Panel/Objects/*
-
-sources/VS/.vs/*
-
-sources/VS/Debug/*
-sources/VS/Device56/Debug/*
-sources/VS/Panel56/Debug/*
-sources/VS/Device56-win32/Debug/*
 
 sources/fonts/big/out/*
