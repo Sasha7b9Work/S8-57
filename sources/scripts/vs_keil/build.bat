@@ -16,9 +16,9 @@ MSBuild.exe ..\..\generated\Keil\Panel\Panel.vcxproj -clp:ErrorsOnly;WarningsOnl
 set BUILD_STATUS=%ERRORLEVEL%
 if not %BUILD_STATUS%==0 goto Failed
 
-@echo %TIME%   Building DeviceLoader ...
+@echo %TIME%   Building DLoader ...
 
-MSBuild.exe ..\..\generated\Keil\DeviceLoader\DLoader.vcxproj -clp:ErrorsOnly;WarningsOnly -nologo
+MSBuild.exe ..\..\generated\Keil\DLoader\DLoader.vcxproj -clp:ErrorsOnly;WarningsOnly -nologo
 set BUILD_STATUS=%ERRORLEVEL%
 if %BUILD_STATUS%==0 goto Success
 

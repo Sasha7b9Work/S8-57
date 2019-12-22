@@ -20,5 +20,5 @@ project (S8-57)
 set (TARGET_NAME S8-57)
 
 add_subdirectory(Device)
-add_subdirectory(DeviceLoader)
+add_subdirectory(DLoader)
 add_subdirectory(Panel)
