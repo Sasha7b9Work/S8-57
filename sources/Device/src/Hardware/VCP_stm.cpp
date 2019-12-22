@@ -88,7 +88,7 @@ void DVCP::Flush()
 
 void DVCP::SendDataSynch(const void *_buffer, uint size)
 {
-    if (CONNECTED_TO_USB)
+    if (DVCP::connectedToUSB)
     {
         char *buffer = static_cast<char *>(const_cast<void *>(_buffer));
         if (size == 0)
@@ -139,7 +139,7 @@ void DVCP::SendStringSynch(char *data)
 
 void DVCP::SendFormatStringAsynch(char *format, ...)
 {
-    if (CONNECTED_TO_USB)
+    if (DVCP::connectedToUSB)
     {
         static char buffer[200];
         std::va_list args;
