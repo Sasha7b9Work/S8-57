@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 
-project (Device57)
+project (S8-57)
 
 include_directories(../../VS/Device/src
                     ../../Device/src
@@ -366,12 +366,12 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/tables.h
                     ../../Device/src/tables.cpp)
                     
-add_executable(Device57 ${SOURCES})
+add_executable(S8-57 ${SOURCES})
 
-target_link_libraries(Device57 ../../../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase31ud)
-target_link_libraries(Device57 ../../../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw31ud_core)
+target_link_libraries(S8-57 ../../../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase31ud)
+target_link_libraries(S8-57 ../../../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw31ud_core)
 
-target_link_libraries(Device57 WinMM.lib)
-target_link_libraries(Device57 version.lib)
-target_link_libraries(Device57 Imm32.Lib)
-target_link_libraries(Device57 Setupapi.lib)
+target_link_libraries(S8-57 WinMM.lib)
+target_link_libraries(S8-57 version.lib)
+target_link_libraries(S8-57 Imm32.Lib)
+target_link_libraries(S8-57 Setupapi.lib)
