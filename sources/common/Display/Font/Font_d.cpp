@@ -3,6 +3,7 @@
 #include "common/Command.h"
 #include "common/Decoder_d.h"
 #include "common/Transceiver.h"
+#include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "font8.inc"
 #include "font5.inc"
@@ -33,25 +34,35 @@ int WorkerLengthText::Run(pString text)
 {
     recvLength = -1;
 
-    uint lenText = std::strlen(text);
-
-    uint size = lenText + 2;
-
-    uint8 *buffer = new uint8[size];
-    buffer[0] = Command::Text_Length;
-    buffer[1] = static_cast<uint8>(lenText);
-
-    std::memcpy(buffer + 2, text, lenText);
-
-    Transceiver::Send(buffer, size);
-
-    delete[] buffer;
-
-    while(recvLength == -1)
+    do
     {
-        Transceiver::Receive();
-        DDecoder::Update();
-    }
+        uint lenText = std::strlen(text);
+
+        uint size = lenText + 2;
+
+        uint8 *buffer = new uint8[size];
+        buffer[0] = Command::Text_Length;
+        buffer[1] = static_cast<uint8>(lenText);
+
+        std::memcpy(buffer + 2, text, lenText);
+
+        Transceiver::Send(buffer, size);
+
+        delete[] buffer;
+
+        uint start = TIME_MS;
+
+        while(recvLength == -1)
+        {
+            Transceiver::Receive();
+            DDecoder::Update();
+
+            if(TIME_MS - start > 10)        /// \todo временный костыль. Надо разобраться, почему тут зависает
+            {
+                break;
+            }
+        }
+    } while(recvLength == -1);
 
     return recvLength;
 }
