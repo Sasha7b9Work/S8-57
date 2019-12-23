@@ -300,9 +300,7 @@ void Osci::StartNormal()
     FPGA::givingStart = false;
     FPGA::addrRead = 0xffff;
 
-    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::pred);
-    HAL_FSMC::WriteToFPGA16(WR::POST_LO, FPGA::post);
-    HAL_FSMC::WriteToFPGA8(WR::START, 0xff);
+    FPGA::GiveStart(FPGA::pred, FPGA::post);
 
     FPGA::isRunning = true;
 }
@@ -313,9 +311,7 @@ void Osci::StartAutoP2P()
     FPGA::givingStart = false;
     FPGA::addrRead = 0xffff;
 
-    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::pred);
-    HAL_FSMC::WriteToFPGA16(WR::POST_LO, FPGA::post);
-    HAL_FSMC::WriteToFPGA8(WR::START, 0xff);
+    FPGA::GiveStart(FPGA::pred, FPGA::post);
 
     FPGA::isRunning = true;
 }

@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Display/Painter.h"
 #include "Display/Primitives.h"
+#include "FPGA/FPGA.h"
 #include "FPGA/ContextRecorder.h"
 #include "Hardware/Timer.h"
 #include "Hardware/Memory/ROM.h"
@@ -107,9 +108,7 @@ void Recorder::Start()
 
     StorageRecorder::CreateNewRecord();
 
-    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, 0); //-V525
-    HAL_FSMC::WriteToFPGA16(WR::POST_LO, 0);
-    HAL_FSMC::WriteToFPGA8(WR::START, 0xff);
+    FPGA::GiveStart(0, 0);
 
     running = true;
 }

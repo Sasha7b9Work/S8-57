@@ -51,6 +51,8 @@ struct FPGA
 
     static bool InStateStop() { return (fpgaStateWork == StateWorkFPGA_Stop); }
 
+    static void GiveStart(uint16 pred, uint16 post);
+
 private:
 
     static void Init();

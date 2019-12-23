@@ -131,3 +131,11 @@ void FPGA::ReadData()
         }
     }
 }
+
+
+void FPGA::GiveStart(uint16 pr, uint16 po)
+{
+    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, pr);
+    HAL_FSMC::WriteToFPGA16(WR::POST_LO, po);
+    HAL_FSMC::WriteToFPGA8(WR::START, 0xff);
+}
