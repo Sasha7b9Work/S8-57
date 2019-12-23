@@ -55,14 +55,14 @@ private:
 
     /// Функции старта
     static void (*funcStart)();
-    static void StartReal();
+    static void StartNormal();
     static void StartAutoP2P();
     static void StartWaitP2P();
     static void StartSingleP2P();
 
     /// Функции стопа
     static void (*funcStop)();
-    static void StopReal();
+    static void StopNormal();
     static void StopAutoP2P();
     static void StopWaitP2P();
     static void StopSingleP2P();

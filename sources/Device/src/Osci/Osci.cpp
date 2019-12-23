@@ -275,17 +275,19 @@ void Osci::SetFunctionsStartStop()
 {
     static const pFuncVV start[2][TrigStartMode::Count] =
     {
-        { EmptyFuncVV, EmptyFuncVV, EmptyFuncVV },
-        { StartReal,   StartReal,   StartReal }
+        //  Auto          Wait          Single
+        { StartNormal,  StartNormal,  StartNormal    },     // Normal mode
+        { StartAutoP2P, StartWaitP2P, StartSingleP2P }      // P2P mode
     };
 
     static const pFuncVV stop[2][TrigStartMode::Count] =
     {
-        { EmptyFuncVV, EmptyFuncVV , EmptyFuncVV },
-        { StopReal,    StopReal,     StopReal }
+        //  Auto         Wait         Single
+        { StopNormal,  StopNormal,  StopNormal    },        // Normal mode
+        { StopAutoP2P, StopWaitP2P, StopSingleP2P }         // P2P mode
     };
 
-    int index = InModeP2P() ? 0 : 1;
+    int index = InModeP2P() ? 1 : 0;
 
     funcStart = start[index][TrigStartMode()];
 
@@ -293,7 +295,7 @@ void Osci::SetFunctionsStartStop()
 }
 
 
-void Osci::StartReal()
+void Osci::StartNormal()
 {
     FPGA::givingStart = false;
     FPGA::addrRead = 0xffff;
@@ -312,7 +314,7 @@ void Osci::StartAutoP2P()
 }
 
 
-void Osci::StopReal()
+void Osci::StopNormal()
 {
     FPGA::isRunning = false;
 }
