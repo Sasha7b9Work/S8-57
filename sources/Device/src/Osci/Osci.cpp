@@ -310,7 +310,14 @@ void Osci::StartNormal()
 
 void Osci::StartAutoP2P()
 {
-    
+    FPGA::givingStart = false;
+    FPGA::addrRead = 0xffff;
+
+    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::pred);
+    HAL_FSMC::WriteToFPGA16(WR::POST_LO, FPGA::post);
+    HAL_FSMC::WriteToFPGA8(WR::START, 0xff);
+
+    FPGA::isRunning = true;
 }
 
 
@@ -322,7 +329,7 @@ void Osci::StopNormal()
 
 void Osci::StopAutoP2P()
 {
-
+    FPGA::isRunning = false;
 }
 
 
