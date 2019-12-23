@@ -134,7 +134,7 @@ struct FrameP2P
     /// Подготовить фрейм для нового цикла чтения
     static void Prepare();
     static void AddPoint(const BitSet16 &a, const BitSet16 &b);
-    static void FillScreenBuffer(Buffer *buffer, Chan::E ch, int width);
+    static void FillScreenBuffer(Buffer *buffer, Chan::E ch);
     /// true, если данные нужно выводить из поточечного фрейма
     static bool IsCorrect();
     /// Позиция раздела в поточечном выводе - в ней нужно нарисовать вертикальную линию

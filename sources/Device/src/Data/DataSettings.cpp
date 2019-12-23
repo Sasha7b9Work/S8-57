@@ -251,7 +251,7 @@ void DataSettings::Log() const
 }
 
 
-void FrameP2P::FillScreenBuffer(Buffer *buffer, Chan::E ch, int)
+void FrameP2P::FillScreenBuffer(Buffer *buffer, Chan::E ch)
 {
     uint8 *data = buffer->data;
     std::memset(data, VALUE::NONE, buffer->Size());

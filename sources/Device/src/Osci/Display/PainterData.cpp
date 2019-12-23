@@ -258,11 +258,11 @@ void DisplayOsci::PainterData::DrawChannel(Chan::E ch)
         scale /= 2.0F;
     }
 
-    Buffer dataP2P;
+    Buffer dataP2P(Grid::Width());
 
     if(FrameP2P::IsCorrect())
     {
-        FrameP2P::FillScreenBuffer(&dataP2P, ch, Grid::Width());
+        FrameP2P::FillScreenBuffer(&dataP2P, ch);
         data = dataP2P.data;
     }
 
