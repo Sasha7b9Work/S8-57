@@ -56,7 +56,6 @@ private:
     /// Функции старта
     static void (*funcStart)();
     static void StartNormal();
-    static void StartAutoP2P();
     static void StartWaitP2P();
     static void StartSingleP2P();
 

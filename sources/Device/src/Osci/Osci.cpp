@@ -275,9 +275,9 @@ void Osci::SetFunctionsStartStop()
 {
     static const pFuncVV start[2][TrigStartMode::Count] =
     {
-        //  Auto          Wait          Single
-        { StartNormal,  StartNormal,  StartNormal    },     // Normal mode
-        { StartAutoP2P, StartWaitP2P, StartSingleP2P }      // P2P mode
+        //  Auto         Wait          Single
+        { StartNormal, StartNormal,  StartNormal    },     // Normal mode
+        { StartNormal, StartWaitP2P, StartSingleP2P }      // P2P mode
     };
 
     static const pFuncVV stop[2][TrigStartMode::Count] =
@@ -296,19 +296,6 @@ void Osci::SetFunctionsStartStop()
 
 
 void Osci::StartNormal()
-{
-    FPGA::givingStart = false;
-    FPGA::addrRead = 0xffff;
-
-    FrameP2P::Prepare();
-
-    FPGA::GiveStart(FPGA::pred, FPGA::post);
-
-    FPGA::isRunning = true;
-}
-
-
-void Osci::StartAutoP2P()
 {
     FPGA::givingStart = false;
     FPGA::addrRead = 0xffff;
