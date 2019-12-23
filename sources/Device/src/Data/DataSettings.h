@@ -131,6 +131,8 @@ friend class RAM;
 struct FrameP2P
 {
     static DataSettings ds;
+    /// Подготовить фрейм для нового цикла чтения
+    static void Prepare();
     static void AddPoint(const BitSet16 &a, const BitSet16 &b);
     void FillScreenBuffer(Buffer *buffer, Chan::E ch) const;
     static bool IsCorrect();

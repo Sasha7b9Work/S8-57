@@ -27,14 +27,7 @@ void Reader::ReadDataFromRAM()
     IN_B = nullptr;
     DS = nullptr;
 
-    if(Osci::InModeP2P())
-    {
-        ReadModeP2P();
-    }
-    else
-    {
-        ReadModeReal();
-    }
+    DS = RAM::Get(ModeWork::IsRAM() ? static_cast<uint>(RAM::currentSignal) : 0U);
 
     if (DS)
     {
@@ -49,18 +42,6 @@ void Reader::ReadDataFromRAM()
 
         FindTrigLevelIfNeed();
     }
-}
-
-
-void Reader::ReadModeReal()
-{
-    DS = RAM::Get(ModeWork::IsRAM() ? static_cast<uint>(RAM::currentSignal) : 0U);
-}
-
-
-void Reader::ReadModeP2P()
-{
-    DS = RAM::Get(ModeWork::IsRAM() ? static_cast<uint>(RAM::currentSignal) : 0U);
 }
 
 

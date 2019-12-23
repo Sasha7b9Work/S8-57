@@ -317,3 +317,17 @@ uint8 FrameP2P::GetByte(uint position, Chan::E ch) const
 
     return VALUE::NONE;
 }
+
+
+void FrameP2P::Prepare()
+{
+    ds.Fill();
+
+    posSeparate = 0;
+
+    isCorrect = true;
+
+    numBytesP2P = 0;
+
+    pointerP2P = 0;
+}

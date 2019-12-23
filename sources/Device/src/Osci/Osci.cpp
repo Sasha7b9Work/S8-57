@@ -313,6 +313,8 @@ void Osci::StartAutoP2P()
 
     FPGA::GiveStart(FPGA::pred, FPGA::post);
 
+    FrameP2P::Prepare();
+
     FPGA::isRunning = true;
 }
 
