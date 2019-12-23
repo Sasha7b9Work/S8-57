@@ -16,7 +16,7 @@ out.txt
 sources/ThirdParty/*
 sources/generated/*
 
-doc/doxygen/OSC/*
+doc/doxygen/S8-57/*
 
 sources/Device/DebugConfig/*
 sources/Device/Listings/*
