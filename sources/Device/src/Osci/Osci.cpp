@@ -300,6 +300,8 @@ void Osci::StartNormal()
     FPGA::givingStart = false;
     FPGA::addrRead = 0xffff;
 
+    FrameP2P::Prepare();
+
     FPGA::GiveStart(FPGA::pred, FPGA::post);
 
     FPGA::isRunning = true;
@@ -311,9 +313,9 @@ void Osci::StartAutoP2P()
     FPGA::givingStart = false;
     FPGA::addrRead = 0xffff;
 
-    FPGA::GiveStart(FPGA::pred, FPGA::post);
-
     FrameP2P::Prepare();
+
+    FPGA::GiveStart(FPGA::pred, FPGA::post);
 
     FPGA::isRunning = true;
 }

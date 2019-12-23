@@ -258,6 +258,14 @@ void DisplayOsci::PainterData::DrawChannel(Chan::E ch)
         scale /= 2.0F;
     }
 
+    Buffer dataP2P;
+
+    if(FrameP2P::IsCorrect())
+    {
+        FrameP2P::FillScreenBuffer(&dataP2P, ch, Grid::Width());
+        data = dataP2P.data;
+    }
+
     if (DisplayMapping::IsLines())
     {
         DrawModeLines(ch, left, center, data, scale);

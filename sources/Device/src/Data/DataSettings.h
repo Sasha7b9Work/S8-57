@@ -130,17 +130,16 @@ friend class RAM;
 
 struct FrameP2P
 {
-    static DataSettings ds;
+    static DataSettings *ds;
     /// Подготовить фрейм для нового цикла чтения
     static void Prepare();
     static void AddPoint(const BitSet16 &a, const BitSet16 &b);
-    void FillScreenBuffer(Buffer *buffer, Chan::E ch) const;
+    static void FillScreenBuffer(Buffer *buffer, Chan::E ch, int width);
+    /// true, если данные нужно выводить из поточечного фрейма
     static bool IsCorrect();
     /// Позиция раздела в поточечном выводе - в ней нужно нарисовать вертикальную линию
     static int posSeparate;
 private:
-    /// true, если идёт работа в поточечном режиме
-    static bool isCorrect;
     /// Количество всех считанных точек в поточечном режиме
     static uint numBytesP2P;
     /// Указатель на позицию записываемых данных. В байтах
@@ -152,7 +151,7 @@ private:
     static void AddPeakDetPoint(uint16 a, uint16 b);
     static void AddPeakDetPoint(Chan::E ch, uint16 point);
     /// Возвращает количество имеющихся байт канала
-    uint GetNumberStoredBytes() const;
+    static uint GetNumberStoredBytes();
     /// Возвращает значение байта в позиции position
-    uint8 GetByte(uint position, Chan::E ch) const;
+    static uint8 GetByte(uint position, Chan::E ch);
 };
