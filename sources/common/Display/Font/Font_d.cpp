@@ -34,10 +34,10 @@ int WorkerLengthText::Run(pString text)
 {
     recvLength = -1;
 
+    uint lenText = std::strlen(text);
+
     do
     {
-        uint lenText = std::strlen(text);
-
         uint size = lenText + 2;
 
         uint8 *buffer = new uint8[size];
