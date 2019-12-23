@@ -131,9 +131,6 @@ bool Transceiver::Receive()
 
     while (State_READY() == State::Passive)         // ќжидаем сигнал готовности от панели
     {
-#ifdef DEVICE
-        Osci::ReadPointP2P();
-#endif
     };     
 
     if (Receiver::State_FL0() == State::Passive)    // ≈сли панель сообщает о том, что данных нет
@@ -152,6 +149,10 @@ bool Transceiver::Receive()
     Set_MODE(Mode::Disabled);
 
     inInteraction = false;
+
+#ifdef DEVICE
+    Osci::ReadPointP2P();
+#endif
 
     return true;
 }
