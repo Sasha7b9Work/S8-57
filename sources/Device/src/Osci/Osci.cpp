@@ -282,9 +282,9 @@ void Osci::SetFunctionsStartStop()
 
     static const pFuncVV stop[2][TrigStartMode::Count] =
     {
-        //  Auto         Wait         Single
-        { StopNormal,  StopNormal,  StopNormal    },        // Normal mode
-        { StopAutoP2P, StopWaitP2P, StopSingleP2P }         // P2P mode
+        //  Auto        Wait         Single
+        { StopNormal, StopNormal,  StopNormal    },        // Normal mode
+        { StopNormal, StopWaitP2P, StopSingleP2P }         // P2P mode
     };
 
     int index = InModeP2P() ? 1 : 0;
@@ -314,12 +314,6 @@ void Osci::StopNormal()
 }
 
 
-void Osci::StopAutoP2P()
-{
-    FPGA::isRunning = false;
-}
-
-
 void Osci::StartWaitP2P()
 {
 
@@ -341,36 +335,3 @@ void Osci::StopSingleP2P()
 {
 
 }
-
-
-/*
-    givingStart = false;
-    FPGA::addrRead = 0xffff;
-
-    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, FPGA::pred);
-    HAL_FSMC::WriteToFPGA16(WR::POST_LO, FPGA::post);
-    HAL_FSMC::WriteToFPGA8(WR::START, 0xff);
-
-    if (InModeP2P())
-    {
-        if(TrigStartMode::IsSingle())
-        {
-            RAM::PrepareForNewData(true);
-        }
-        else
-        {
-            DataSettings *last = RAM::Get();
-
-            if(last == nullptr)
-            {
-                RAM::PrepareForNewData(true);
-            }
-            else if(last->isFrameP2P && !last->EqualsCurrentSettings())
-            {
-                RAM::PrepareForNewData(true);
-            }
-        }
-    }
-
-    FPGA::isRunning = true;
-*/

@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Data/DataSettings.h"
 #include "Data/Heap.h"
+#include "Data/Reader.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Memory/RAM.h"
@@ -253,7 +254,7 @@ void DataSettings::Log() const
 
 void FrameP2P::FillScreenBuffer(Buffer *buffer, Chan::E ch)
 {
-    uint8 *data = buffer->data;
+    uint8 *data = OUT(ch);
     std::memset(data, VALUE::NONE, buffer->Size());
 
     posSeparate = MAX_UINT;

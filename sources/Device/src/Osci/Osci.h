@@ -62,7 +62,6 @@ private:
     /// Функции стопа
     static void (*funcStop)();
     static void StopNormal();
-    static void StopAutoP2P();
     static void StopWaitP2P();
     static void StopSingleP2P();
 
