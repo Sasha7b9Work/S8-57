@@ -10,7 +10,7 @@
 /// Это пространство CCM-памяти
 static uint8 ccm[4][16 * 1024] __attribute__((section("CCM_DATA")));
 /// Это указатели на считанные данные
-const uint8 *dataIN[2] = { nullptr, nullptr };
+uint8 *dataIN[2] = { nullptr, nullptr };
 /// Это указатели на данные, пересчитанные и готовые к выводу
 uint8 *dataOUT[2] = { ccm[0], ccm[1] };
 /// 

@@ -6,7 +6,7 @@
 
 extern const DataSettings *pDS;     ///< ”казатель на настройки текущего рисуемого сигнала. ќбращатьс€ к нему следует через макрос DS.
 extern uint8 *dataOUT[2];           ///< —читанные данные второго канала
-extern const uint8 *dataIN[2];
+extern uint8 *dataIN[2];
 extern uint16 *ave[2];
 
 #define DS          pDS             ///< ”казатель на настройки текущего рисуемого сигнала.

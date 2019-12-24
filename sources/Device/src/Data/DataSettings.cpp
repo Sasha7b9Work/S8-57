@@ -254,14 +254,14 @@ void DataSettings::Log() const
 
 void FrameP2P::FillScreenBuffer(Buffer *buffer, Chan::E ch)
 {
-    uint8 *data = OUT(ch);
-    std::memset(data, VALUE::NONE, buffer->Size());
+    uint8 *out = buffer->data;
+    std::memset(out, VALUE::NONE, buffer->Size());
 
     posSeparate = MAX_UINT;
 
     if(numBytesP2P > 0 && numBytesP2P <= buffer->Size())
     {
-        std::memcpy(data, (ch == Chan::A) ? ds->dataA : ds->dataB, numBytesP2P);
+        std::memcpy(out, (ch == Chan::A) ? ds->dataA : ds->dataB, numBytesP2P);
         posSeparate = static_cast<int>(numBytesP2P - 1);
     }
     else
@@ -280,7 +280,7 @@ void FrameP2P::FillScreenBuffer(Buffer *buffer, Chan::E ch)
 
             if(d != VALUE::NONE)
             {
-                data[pointer] = d;
+                out[pointer] = d;
             }
 
             if((d == VALUE::NONE) && (posSeparate == MAX_UINT))

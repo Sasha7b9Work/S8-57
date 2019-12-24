@@ -1453,29 +1453,29 @@ void AutoMeasurements::CountedToCurrentSettings()
     {
         Smoother::Run(IN_A, OUT_A, NUM_BYTES, ENumSmoothing::ToNumber());
         std::memcpy(DS->dataA, OUT_A, NUM_BYTES);
-        CountedToCurrentSettings(Chan::A, NUM_BYTES);
-        LimitationData(Chan::A, NUM_BYTES);
+        CountedToCurrentSettings(Chan::A, NUM_BYTES, IN_A, OUT_A);
+        LimitationData(OUT_A, NUM_BYTES);
     }
 
     if (ENABLED_DS_B)
     {
         Smoother::Run(IN_B, OUT_B, NUM_BYTES, ENumSmoothing::ToNumber());
         std::memcpy(DS->dataB, OUT_B, NUM_BYTES);
-        CountedToCurrentSettings(Chan::B, NUM_BYTES);
-        LimitationData(Chan::B, NUM_BYTES);
+        CountedToCurrentSettings(Chan::B, NUM_BYTES, IN_A, OUT_A);
+        LimitationData(OUT_B, NUM_BYTES);
     }
 }
 
 
-void AutoMeasurements::CountedToCurrentSettings(Chan::E ch, uint numBytes)
+void AutoMeasurements::CountedToCurrentSettings(Chan::E ch, uint numBytes, const uint8 *in, uint8 *out)
 {
-    CountedToCurrentRShift(ch, numBytes);
+    CountedToCurrentRShift(ch, numBytes, in, out);
 }
 
 
-void AutoMeasurements::LimitationData(Chan::E ch, uint numBytes)
+void AutoMeasurements::LimitationData(uint8 *inOut, uint numBytes)
 {
-    uint8 *data = OUT(ch);
+    uint8 *data = inOut;
 
     for (uint i = 0; i < numBytes; i++)
     {
@@ -1488,7 +1488,7 @@ void AutoMeasurements::LimitationData(Chan::E ch, uint numBytes)
 }
 
 
-void AutoMeasurements::CountedToCurrentRShift(Chan::E ch, uint numBytes)
+void AutoMeasurements::CountedToCurrentRShift(Chan::E ch, uint numBytes, const uint8 *in, uint8 *out)
 {
     int16 shiftDS = RSHIFT_DS(ch);
     Range::E rangeDS = RANGE_DS(ch);
@@ -1498,14 +1498,14 @@ void AutoMeasurements::CountedToCurrentRShift(Chan::E ch, uint numBytes)
 
     if((shiftDS == shiftSET) && (rangeDS == rangeSET))
     {
-        std::memcpy(OUT(ch), IN(ch), numBytes);
+        std::memcpy(out, in, numBytes);
     }
     else
     {
         for(uint i = 0; i < numBytes; i++)
         {
-            float voltage = VALUE::ToVoltage(IN(ch)[i], rangeDS, shiftDS);
-            OUT(ch)[i] = VALUE::FromVoltage(voltage, rangeSET, shiftSET);
+            float voltage = VALUE::ToVoltage(in[i], rangeDS, shiftDS);
+            out[i] = VALUE::FromVoltage(voltage, rangeSET, shiftSET);
         }
     }
 }
