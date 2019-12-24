@@ -12,34 +12,6 @@ FlagFPGA FPGA::flag;
 
 uint16 FlagFPGA::flag = 0;
 
-struct PinStruct
-{
-    HPort::E gpioTD;
-    uint16   pin;
-};
-
-static PinStruct pins[FPin::Count] =
-{
-    { PIN_SPI3_SCK },  // SPI3_SCK
-    { PIN_SPI3_DAT },  // SPI3_DAT
-    { PIN_SPI3_CS1 },  // SPI3_CS1
-    { PIN_SPI3_CS2 },  // SPI3_CS2
-    { PIN_A1 },        // A1
-    { PIN_A2 },        // A2
-    { PIN_A3 },        // A3
-    { PIN_A4 },        // A4
-    { PIN_LF1 },       // LF1 Ограничение полосы
-    { PIN_LF2 },       // LF2 Ограничение полосы
-    { PIN_LF3 },       // A1S
-    { PIN_A0S },       // A0S
-    { PIN_LFS }        // LFS
-};
-
-
-
-#define PORT(pin)   (pins[pin].gpioTD)
-
-
 
 void FPGA::LoadRegUPR()
 {
@@ -67,16 +39,19 @@ void FPGA::LoadRegUPR()
 
 void GPIO::Init()
 {
-    for (int i = 0; i < FPin::Count; i++)
-    {
-        HAL_PIO::Init(PORT(static_cast<int>(i)), GetPin(static_cast<FPin::E>(i)) , HMode::Output_PP, HPull::Down);
-    }
-}
-
-
-uint16 GPIO::GetPin(FPin::E pin)
-{
-    return pins[static_cast<int>(pin)].pin;
+    HAL_PIO::Init(PIN_SPI3_SCK, HMode::Output_PP, HPull::Down);     // SPI3_SCK
+    HAL_PIO::Init(PIN_SPI3_DAT, HMode::Output_PP, HPull::Down);     // SPI3_DAT
+    HAL_PIO::Init(PIN_SPI3_CS1, HMode::Output_PP, HPull::Down);     // SPI3_CS1
+    HAL_PIO::Init(PIN_SPI3_CS2, HMode::Output_PP, HPull::Down);     // SPI3_CS2
+    HAL_PIO::Init(PIN_A1, HMode::Output_PP, HPull::Down);     // A1
+    HAL_PIO::Init(PIN_A2, HMode::Output_PP, HPull::Down);     // A2
+    HAL_PIO::Init(PIN_A3, HMode::Output_PP, HPull::Down);     // A3
+    HAL_PIO::Init(PIN_A4, HMode::Output_PP, HPull::Down);     // A4
+    HAL_PIO::Init(PIN_LF1, HMode::Output_PP, HPull::Down);     // LF1 Ограничение полосы
+    HAL_PIO::Init(PIN_LF2, HMode::Output_PP, HPull::Down);     // LF2 Ограничение полосы
+    HAL_PIO::Init(PIN_LF3, HMode::Output_PP, HPull::Down);     // A1S
+    HAL_PIO::Init(PIN_A0S, HMode::Output_PP, HPull::Down);     // A0S
+    HAL_PIO::Init(PIN_LFS, HMode::Output_PP, HPull::Down);     // LFS
 }
 
 

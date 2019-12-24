@@ -44,7 +44,7 @@ struct HPin
 #define PIN_A4         HPort::_D, HPin::_13
 #define PIN_LF1        HPort::_G, HPin::_2
 #define PIN_LF2        HPort::_G, HPin::_3
-#define PIN_LF3        HPort::_G, HPin::_4
+#define PIN_LF3        HPort::_G, HPin::_4      // A1S
 #define PIN_A0S        HPort::_G, HPin::_5
 #define PIN_P2P         HPort::_G, HPin::_1
 #define PIN_TESTER_ON   HPort::_F, HPin::_13
@@ -57,7 +57,7 @@ struct HPin
 #define PIN_A4         HPort::_C, HPin::_6
 #define PIN_LF1        HPort::_C, HPin::_7
 #define PIN_LF2        HPort::_C, HPin::_8
-#define PIN_LF3        HPort::_A, HPin::_8
+#define PIN_LF3        HPort::_A, HPin::_8      // A1S
 #define PIN_A0S        HPort::_A, HPin::_10
 #define PIN_P2P         HPort::_F, HPin::_11
 #define PIN_TESTER_ON   HPort::_A, HPin::_3
