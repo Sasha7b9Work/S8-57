@@ -72,25 +72,3 @@ struct Flag
         _PERIOD_IN_PROCESS = 11  ///< Установленное в единицу значение означает, что идёт процесс измерения - счётчик запущен и считает
     } value;
 };
-
-struct FPin
-{
-    enum E
-    {
-        SPI3_SCK,
-        SPI3_DAT,
-        SPI3_CS1,
-        SPI3_CS2,
-        A1,
-        A2,
-        A3,
-        A4,
-        LF1,
-        LF2,
-        A1S,
-        A0S,
-        LFS,
-        Count
-    } value;
-    explicit FPin(E v) : value(v) {};
-};
