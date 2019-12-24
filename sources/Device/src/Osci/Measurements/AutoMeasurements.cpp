@@ -1452,7 +1452,7 @@ void AutoMeasurements::CountedToCurrentSettings()
     if (ENABLED_DS_A)
     {
         Smoother::Run(IN_A, OUT_A, NUM_BYTES, ENumSmoothing::ToNumber());
-        std::memcpy(DS->dataA, OUT_A, NUM_BYTES);
+        std::memcpy(IN_A, OUT_A, NUM_BYTES);
         CountedToCurrentSettings(Chan::A, NUM_BYTES, IN_A, OUT_A);
         LimitationData(OUT_A, NUM_BYTES);
     }
@@ -1460,8 +1460,8 @@ void AutoMeasurements::CountedToCurrentSettings()
     if (ENABLED_DS_B)
     {
         Smoother::Run(IN_B, OUT_B, NUM_BYTES, ENumSmoothing::ToNumber());
-        std::memcpy(DS->dataB, OUT_B, NUM_BYTES);
-        CountedToCurrentSettings(Chan::B, NUM_BYTES, IN_A, OUT_A);
+        std::memcpy(IN_B, OUT_B, NUM_BYTES);
+        CountedToCurrentSettings(Chan::B, NUM_BYTES, IN_B, OUT_B);
         LimitationData(OUT_B, NUM_BYTES);
     }
 }
