@@ -113,12 +113,6 @@ void GPIO::WriteRegisters(HPort::E portCS, uint16 pinCS, uint16 value)
 }
 
 
-void GPIO::SetPin(FPin::E pin)
-{
-    HAL_PIO::Set(PORT(static_cast<int>(pin)), GetPin(pin));
-}
-
-
 bool FlagFPGA::DataReady()
 {
     return _GET_BIT(flag, Flag::_DATA_READY) == 1;

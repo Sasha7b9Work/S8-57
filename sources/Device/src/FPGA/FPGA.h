@@ -93,6 +93,5 @@ struct GPIO
 {
     static void Init();
     static uint16 GetPin(FPin::E pin);
-    static void SetPin(FPin::E pin);
     static void WriteRegisters(HPort::E port, uint16 pin, uint16 value);
 };
