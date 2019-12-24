@@ -125,12 +125,6 @@ void GPIO::ResetPin(FPin::E pin)
 }
 
 
-void GPIO::WritePin(FPin::E pin, int enable)
-{
-    HAL_PIO::Write(PORT(static_cast<int>(pin)), GetPin(pin), enable);
-}
-
-
 bool FlagFPGA::DataReady()
 {
     return _GET_BIT(flag, Flag::_DATA_READY) == 1;

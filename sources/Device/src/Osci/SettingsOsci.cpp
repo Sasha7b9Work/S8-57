@@ -330,13 +330,13 @@ void Range::LoadBoth()
 
     uint8 valueA = vals[Range(Chan::A)];
 
-    GPIO::WritePin(FPin::A1, _GET_BIT(valueA, 1));
-    GPIO::WritePin(FPin::A2, _GET_BIT(valueA, 0));
+    HAL_PIO::Write(PIN_A1, _GET_BIT(valueA, 1));
+    HAL_PIO::Write(PIN_A2, _GET_BIT(valueA, 0));
 
     uint8 valueB = vals[Range(Chan::B)];
 
-    GPIO::WritePin(FPin::A3, _GET_BIT(valueB, 1));
-    GPIO::WritePin(FPin::A4, _GET_BIT(valueB, 0));
+    HAL_PIO::Write(PIN_A3, _GET_BIT(valueB, 1));
+    HAL_PIO::Write(PIN_A4, _GET_BIT(valueB, 0));
 
     Bandwidth(Chan::A).Load();
     Bandwidth(Chan::B).Load();
