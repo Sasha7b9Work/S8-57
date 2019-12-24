@@ -91,7 +91,7 @@ void GPIO::WriteRegisters(FPin::E cs, uint16 value)
             WritePin(FPin::SPI3_DAT, _GET_BIT(value, i));
             PAUSE_ON_TICKS(100);
             SetPin(FPin::SPI3_SCK);
-            ResetPin(FPin::SPI3_SCK);
+            HAL_PIO::Reset(PIN_SPI3_SCK);
         }
     }
     else if (cs == FPin::SPI3_CS2)
@@ -101,7 +101,7 @@ void GPIO::WriteRegisters(FPin::E cs, uint16 value)
             WritePin(FPin::SPI3_DAT, _GET_BIT(value, i));
             PAUSE_ON_TICKS(100);
             SetPin(FPin::SPI3_SCK);
-            ResetPin(FPin::SPI3_SCK);
+            HAL_PIO::Reset(PIN_SPI3_SCK);
         }
     }
     else

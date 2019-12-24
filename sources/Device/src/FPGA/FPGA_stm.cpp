@@ -24,8 +24,8 @@ void FPGA::Init()
     GPIO::SetPin(FPin::SPI3_CS1);
     GPIO::SetPin(FPin::SPI3_CS2);
 
-    GPIO::ResetPin(FPin::SPI3_SCK);
-    GPIO::ResetPin(FPin::SPI3_DAT);
+    HAL_PIO::Reset(PIN_SPI3_SCK);
+    HAL_PIO::Reset(PIN_SPI3_DAT);
 
     AD9286::Init();
 
