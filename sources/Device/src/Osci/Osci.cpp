@@ -94,52 +94,65 @@ bool Osci::IsRunning()
 
 void Osci::UpdateFPGA()
 {
-    bool needStop = false;
-    
     uint number = (Osci::InModeRandomizer()) ? TBase().RandK() : 1;
 
     for (uint i = 0; i < number; i++)
     {
         FPGA::ReadFlag();
     
-        if (FPGA::flag.Pred() && !FPGA::forcedStart)
+        ProcessFlagPred();
+
+        if(ProcessFlagReady())
         {
-            if (!Osci::InModeRandomizer() && TrigStartMode::IsAuto() && FPGA::flag.HoldOff())
+            Osci::Stop();
+            break;
+        }
+    }
+}
+
+
+void Osci::ProcessFlagPred()
+{
+    if(FPGA::flag.Pred() && !FPGA::forcedStart)
+    {
+        if(!Osci::InModeRandomizer() && TrigStartMode::IsAuto() && FPGA::flag.HoldOff())
+        {
+            FPGA::ForcedStart();
+        }
+        if(!FPGA::flag.TrigReady())
+        {
+            Trig::pulse = false;
+        }
+    }
+}
+
+
+bool Osci::ProcessFlagReady()
+{
+    bool needStop = false;
+
+    if(FPGA::flag.DataReady())
+    {
+        if(CanReadData())
+        {
+            Timer::PauseOnTicks(5 * 90 * 20);
+
+            FPGA::ReadData();
+
+            if(TrigStartMode::IsSingle())
             {
-                FPGA::ForcedStart();
-            }
-            if (!FPGA::flag.TrigReady())
-            {
+                needStop = true;
                 Trig::pulse = false;
             }
-        }
-        
-        if (FPGA::flag.DataReady())
-        {
-            if (CanReadData())
+            else
             {
                 Timer::PauseOnTicks(5 * 90 * 20);
-    
-                FPGA::ReadData();
-    
-                if (TrigStartMode::IsSingle())
-                {
-                    needStop = true;
-                    Trig::pulse = false;
-                }
-                else
-                {
-                    Timer::PauseOnTicks(5 * 90 * 20);
-                    Osci::Start(false);
-                }
+                Osci::Start(false);
             }
         }
     }
-    
-    if(needStop)
-    {
-        Osci::Stop();
-    }
+
+    return needStop;
 }
 
 

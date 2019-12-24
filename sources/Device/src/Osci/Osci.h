@@ -67,6 +67,10 @@ private:
     static void StopSingleP2P();
 
     static void SetFunctionsStartStop();
+    /// В зависимости от состояния флага готовности данных читает данные и возвращает флаг необходимости остановить процесс сбора информации
+    static bool ProcessFlagReady();
+    /// Обработать флаг предзапуска
+    static void ProcessFlagPred();
 };
 
 struct AveragerOsci
