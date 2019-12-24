@@ -21,8 +21,8 @@ void FPGA::Init()
 
     GPIO::Init();
 
-    GPIO::SetPin(FPin::SPI3_CS1);
-    GPIO::SetPin(FPin::SPI3_CS2);
+    HAL_PIO::Set(PIN_SPI3_CS1);
+    HAL_PIO::Set(PIN_SPI3_CS2);
 
     HAL_PIO::Reset(PIN_SPI3_SCK);
     HAL_PIO::Reset(PIN_SPI3_DAT);
