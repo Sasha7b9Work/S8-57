@@ -69,4 +69,13 @@ struct AutoMeasurements
     static int markerVoltage[Chan::Count][2];
     /// Позиция активного измерения (на котором курсор)
     static int8 posActive;
+private:
+    /// Привести смещение канала ch по вертикали к текущему
+    static void CountedToCurrentRShift(Chan::E ch, uint numBytes);
+    /// Данные из IN_A, IN_B пересчитать к текущим настройкам и записать в OUT_A, OUT_B
+    static void CountedToCurrentSettings();
+
+    static void CountedToCurrentSettings(Chan::E ch, uint numBytes);
+    /// Вписать значения данных в разрещённый диапазон
+    static void LimitationData(Chan::E ch, uint numBytes);
 };

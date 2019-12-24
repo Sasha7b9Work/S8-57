@@ -129,15 +129,6 @@ static bool picIsCalculating[2] = {false, false};
 /// Входной буфер данных канала ch
 #define CHOICE_BUFFER (OUT(ch))
 
-/// Данные из IN_A, IN_B пересчитать к текущим настройкам и записать в OUT_A, OUT_B
-static void CountedToCurrentSettings();
-static void CountedToCurrentSettings(Chan::E ch, uint numBytes);
-/// Привести смещение канала ch по вертикали к текущему
-static void CountedToCurrentRShift(Chan::E ch, uint numBytes);
-/// Вписать значения данных в разрещённый диапазон
-static void LimitationData(Chan::E ch, uint numBytes);
-
-
 
 void AutoMeasurements::CalculateMeasures()
 {
@@ -1454,7 +1445,7 @@ Measure AutoMeasurements::GetActiveMeasure()
 }
 
 
-static void CountedToCurrentSettings()
+void AutoMeasurements::CountedToCurrentSettings()
 {
     const uint NUM_BYTES = BYTES_IN_CHANNEL_DS;
 
@@ -1476,13 +1467,13 @@ static void CountedToCurrentSettings()
 }
 
 
-static void CountedToCurrentSettings(Chan::E ch, uint numBytes)
+void AutoMeasurements::CountedToCurrentSettings(Chan::E ch, uint numBytes)
 {
     CountedToCurrentRShift(ch, numBytes);
 }
 
 
-static void LimitationData(Chan::E ch, uint numBytes)
+void AutoMeasurements::LimitationData(Chan::E ch, uint numBytes)
 {
     uint8 *data = OUT(ch);
 
@@ -1497,7 +1488,7 @@ static void LimitationData(Chan::E ch, uint numBytes)
 }
 
 
-static void CountedToCurrentRShift(Chan::E ch, uint numBytes)
+void AutoMeasurements::CountedToCurrentRShift(Chan::E ch, uint numBytes)
 {
     int16 shiftDS = RSHIFT_DS(ch);
     Range::E rangeDS = RANGE_DS(ch);
