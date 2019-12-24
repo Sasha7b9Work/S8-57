@@ -39,8 +39,8 @@ struct HPin
 
 
 #ifdef OLD_VERSION
-#define PORT_A2         HPort::_D, HPin::_11
-#define PORT_A3         HPort::_D, HPin::_12
+#define PIN_A2         HPort::_D, HPin::_11
+#define PIN_A3         HPort::_D, HPin::_12
 #define PORT_A4         HPort::_D, HPin::_13
 #define PORT_LF1        HPort::_G, HPin::_2
 #define PORT_LF2        HPort::_G, HPin::_3
@@ -52,8 +52,8 @@ struct HPin
 #define PIN_TESTER_U    HPort::_F, HPin::_15
 #define PIN_TESTER_PNP  HPort::_F, HPin::_14
 #else
-#define PORT_A2         HPort::_B, HPin::_13
-#define PORT_A3         HPort::_G, HPin::_8
+#define PIN_A2         HPort::_B, HPin::_13
+#define PIN_A3         HPort::_G, HPin::_8
 #define PORT_A4         HPort::_C, HPin::_6
 #define PORT_LF1        HPort::_C, HPin::_7
 #define PORT_LF2        HPort::_C, HPin::_8

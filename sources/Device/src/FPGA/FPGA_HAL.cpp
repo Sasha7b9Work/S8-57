@@ -12,36 +12,6 @@ FlagFPGA FPGA::flag;
 
 uint16 FlagFPGA::flag = 0;
 
-struct PinStruct
-{
-    HPort::E gpioTD;
-    uint16   pin;
-};
-
-static PinStruct pins[] =
-{
-    { PIN_SPI3_SCK },   // SPI3_SCK
-    { PIN_SPI3_DAT },   // SPI3_DAT
-    { PIN_SPI3_CS1 },   // SPI3_CS1
-    { PIN_SPI3_CS2 },   // SPI3_CS2
-    { PORT_A1 },        // A1
-    { PORT_A2 },        // A2
-    { PORT_A3 },        // A3
-    { PORT_A4 },        // A4
-    { PORT_LF1 },       // LF1 Ограничение полосы
-    { PORT_LF2 },       // LF2 Ограничение полосы
-    { PORT_A1S },       // A1S
-    { PORT_A0S },       // A0S
-    { PORT_LFS },       // LFS
-    { HPort::Count}
-};
-
-
-
-#define PORT(pin)   (pins[pin].gpioTD)
-
-
-
 void FPGA::LoadRegUPR()
 {
     uint8 data = 0;

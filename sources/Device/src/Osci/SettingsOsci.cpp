@@ -331,11 +331,11 @@ void Range::LoadBoth()
     uint8 valueA = vals[Range(Chan::A)];
 
     HAL_PIO::Write(PORT_A1, _GET_BIT(valueA, 1));
-    HAL_PIO::Write(PORT_A2, _GET_BIT(valueA, 0));
+    HAL_PIO::Write(PIN_A2, _GET_BIT(valueA, 0));
 
     uint8 valueB = vals[Range(Chan::B)];
 
-    HAL_PIO::Write(PORT_A3, _GET_BIT(valueB, 1));
+    HAL_PIO::Write(PIN_A3, _GET_BIT(valueB, 1));
     HAL_PIO::Write(PORT_A4, _GET_BIT(valueB, 0));
 
     Bandwidth(Chan::A).Load();
