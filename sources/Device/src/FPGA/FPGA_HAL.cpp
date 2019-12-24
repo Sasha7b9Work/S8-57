@@ -37,24 +37,6 @@ void FPGA::LoadRegUPR()
 }
 
 
-void GPIO::Init()
-{
-    HAL_PIO::Init(PIN_SPI3_SCK, HMode::Output_PP, HPull::Down);     // SPI3_SCK
-    HAL_PIO::Init(PIN_SPI3_DAT, HMode::Output_PP, HPull::Down);     // SPI3_DAT
-    HAL_PIO::Init(PIN_SPI3_CS1, HMode::Output_PP, HPull::Down);     // SPI3_CS1
-    HAL_PIO::Init(PIN_SPI3_CS2, HMode::Output_PP, HPull::Down);     // SPI3_CS2
-    HAL_PIO::Init(PIN_A1, HMode::Output_PP, HPull::Down);           // A1
-    HAL_PIO::Init(PIN_A2, HMode::Output_PP, HPull::Down);           // A2
-    HAL_PIO::Init(PIN_A3, HMode::Output_PP, HPull::Down);           // A3
-    HAL_PIO::Init(PIN_A4, HMode::Output_PP, HPull::Down);           // A4
-    HAL_PIO::Init(PIN_LF1, HMode::Output_PP, HPull::Down);          // LF1 Ограничение полосы
-    HAL_PIO::Init(PIN_LF2, HMode::Output_PP, HPull::Down);          // LF2 Ограничение полосы
-    HAL_PIO::Init(PIN_LF3, HMode::Output_PP, HPull::Down);          // A1S
-    HAL_PIO::Init(PIN_A0S, HMode::Output_PP, HPull::Down);          // A0S
-    HAL_PIO::Init(PIN_LFS, HMode::Output_PP, HPull::Down);          // LFS
-}
-
-
 void GPIO::WriteRegisters(HPort::E portCS, uint16 pinCS, uint16 value)
 {
     HAL_PIO::Reset(portCS, pinCS);

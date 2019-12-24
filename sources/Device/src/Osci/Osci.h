@@ -47,6 +47,12 @@ struct Osci
     /// В этом случае
     static StructReadRand GetInfoForReadRand(int Tsm = NULL_TSHIFT, const uint8 *address = nullptr);
 
+    /// Управитель входными цепями
+    struct InputController
+    {
+        static void Init();
+    };
+
 private:
     /// Возвращает true, если уже можно читать данные
     static bool CanReadData();

@@ -91,6 +91,5 @@ private:
 
 struct GPIO
 {
-    static void Init();
     static void WriteRegisters(HPort::E port, uint16 pin, uint16 value);
 };
