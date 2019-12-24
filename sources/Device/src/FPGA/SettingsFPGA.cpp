@@ -50,8 +50,8 @@ void TrigInput::Load()
     };
 
     HAL_PIO::Write(PIN_LF3, _GET_BIT(datas[TrigInput()][TrigSource()], 2));
-    GPIO::WritePin(FPin::A0S, _GET_BIT(datas[TrigInput()][TrigSource()], 1));
-    GPIO::WritePin(FPin::LFS, _GET_BIT(datas[TrigInput()][TrigSource()], 0));
+    HAL_PIO::Write(PIN_A0S, _GET_BIT(datas[TrigInput()][TrigSource()], 1));
+    HAL_PIO::Write(PIN_LFS, _GET_BIT(datas[TrigInput()][TrigSource()], 0));
 }
 
 
