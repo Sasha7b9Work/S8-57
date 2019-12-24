@@ -8,7 +8,7 @@
 #include <cstring>
 
 
-bool   FPGA::givingStart = false;
+bool   FPGA::forcedStart = false;
 uint16 FPGA::valueADC = 0;
 uint16 FPGA::post = static_cast<uint16>(~(512));
 uint16 FPGA::pred = static_cast<uint16>(~(512));
@@ -32,7 +32,7 @@ void FPGA::ForcedStart()
     HAL_FSMC::WriteToFPGA8(WR::TRIG, static_cast<uint8>(value++ | stop));
     HAL_FSMC::WriteToFPGA8(WR::TRIG, static_cast<uint8>((value % 2) | stop));
 
-    givingStart = true;
+    forcedStart = true;
 }
 
 
@@ -63,7 +63,7 @@ void FPGA::OnPressStart()
         }
         else
         {
-            Osci::Start();
+            Osci::Start(true);
         }
     }
 }
@@ -97,6 +97,8 @@ void FPGA::ClearDataRand()
 
 void FPGA::ReadData()
 {
+    Osci::Stop();
+
     DataSettings *ds = RAM::PrepareForNewData();
 
     if (ReadDataChannel(Chan::A, ds->dataA))

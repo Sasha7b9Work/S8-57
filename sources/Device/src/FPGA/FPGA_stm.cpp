@@ -17,7 +17,7 @@ volatile static int numberMeasuresForGates = 10000;
 
 void FPGA::Init()
 {
-    givingStart = false;
+    forcedStart = false;
 
     GPIO::Init();
 

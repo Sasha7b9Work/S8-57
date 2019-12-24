@@ -11,8 +11,8 @@ struct Osci
     static void OnPressStart();
 
     static void DeInit();
-
-    static void Start();
+    /// (Если button == true) - это запуск кнопкой
+    static void Start(bool button);
 
     static void Stop();
 
@@ -54,10 +54,11 @@ private:
     static void UpdateFPGA();
 
     /// Функции старта
-    static void (*funcStart)();
-    static void StartNormal();
-    static void StartWaitP2P();
-    static void StartSingleP2P();
+    static void (*funcStart)(bool);
+    static void StartNormal(bool button);
+    static void StartP2P(bool button);
+    static void StartWaitP2P(bool button);
+    static void StartSingleP2P(bool button);
 
     /// Функции стопа
     static void (*funcStop)();

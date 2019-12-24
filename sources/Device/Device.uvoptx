@@ -150,50 +150,34 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>105</LineNumber>
+          <LineNumber>24</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134480560</Address>
+          <Address>134468298</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\device.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\FPGA\FPGA.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\S8_57\src/device.cpp\105</Expression>
+          <Expression>\\S8_57\src/FPGA/FPGA.cpp\24</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>1511</LineNumber>
+          <LineNumber>140</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134459108</Address>
+          <Address>134469498</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Osci\Measurements\AutoMeasurements.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\FPGA\FPGA.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\S8_57\src/Osci/Measurements/AutoMeasurements.cpp\1511</Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
-          <LineNumber>1436</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134459474</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Osci\Measurements\AutoMeasurements.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\S8_57\src/Osci/Measurements/AutoMeasurements.cpp\1436</Expression>
+          <Expression>\\S8_57\src/FPGA/FPGA.cpp\140</Expression>
         </Bp>
       </Breakpoint>
       <Tracepoint>
@@ -353,7 +337,7 @@
 
   <Group>
     <GroupName>src</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -993,7 +977,7 @@
 
   <Group>
     <GroupName>FPGA</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

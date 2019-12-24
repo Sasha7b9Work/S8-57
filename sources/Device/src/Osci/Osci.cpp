@@ -12,8 +12,8 @@
 #include "Osci/Measurements/AutoMeasurements.h"
 
 
-int Osci::addShift = 0;
-void (*Osci::funcStart)() = EmptyFuncVV;
+int    Osci::addShift = 0;
+void (*Osci::funcStart)(bool) = EmptyFuncVB;
 void (*Osci::funcStop)() = EmptyFuncVV;
 
 
@@ -36,7 +36,7 @@ void Osci::Init()
     LoadHoldfOff();
     HAL_PIO::Init(PIN_P2P, HMode::Input, HPull::Up);
     ChangedTrigStartMode();
-    Osci::Start();
+    Osci::Start(true);
 }
 
 
@@ -46,9 +46,9 @@ void Osci::DeInit()
 }
 
 
-void Osci::Start()
+void Osci::Start(bool button)
 {
-    funcStart();
+    funcStart(button);
 }
 
 
@@ -57,7 +57,7 @@ void Osci::Restart()
     if(FPGA::IsRunning())
     {
         Stop();
-        Start();
+        Start(true);
     }
 }
 
@@ -102,7 +102,7 @@ void Osci::UpdateFPGA()
     {
         FPGA::ReadFlag();
     
-        if (FPGA::flag.Pred() && !FPGA::givingStart)
+        if (FPGA::flag.Pred() && !FPGA::forcedStart)
         {
             if (!Osci::InModeRandomizer() && TrigStartMode::IsAuto() && FPGA::flag.HoldOff())
             {
@@ -130,7 +130,7 @@ void Osci::UpdateFPGA()
                 else
                 {
                     Timer::PauseOnTicks(5 * 90 * 20);
-                    Osci::Start();
+                    Osci::Start(false);
                 }
             }
         }
@@ -228,7 +228,7 @@ Osci::StructReadRand Osci::GetInfoForReadRand(int Tsm, const uint8 *address)
 
 void Osci::OnPressStart()
 {
-    return IsRunning() ? Stop() : Start();
+    return IsRunning() ? Stop() : Start(true);
 }
 
 
@@ -246,7 +246,7 @@ void Osci::ChangedTrigStartMode()
 
     if(!TrigStartMode::IsSingle())
     {
-        Start();
+        Start(true);
     }
 
     // Елси находимся в режиме рандомизатора
@@ -273,11 +273,11 @@ void Osci::ChangedTrigStartMode()
 
 void Osci::SetFunctionsStartStop()
 {
-    static const pFuncVV start[2][TrigStartMode::Count] =
+    static const pFuncVB start[2][TrigStartMode::Count] =
     {
         //  Auto         Wait          Single
         { StartNormal, StartNormal,  StartNormal    },     // Normal mode
-        { StartNormal, StartWaitP2P, StartSingleP2P }      // P2P mode
+        { StartP2P,    StartWaitP2P, StartSingleP2P }      // P2P mode
     };
 
     static const pFuncVV stop[2][TrigStartMode::Count] =
@@ -295,9 +295,9 @@ void Osci::SetFunctionsStartStop()
 }
 
 
-void Osci::StartNormal()
+void Osci::StartNormal(bool)
 {
-    FPGA::givingStart = false;
+    FPGA::forcedStart = false;
     FPGA::addrRead = 0xffff;
 
     FrameP2P::Prepare();
@@ -308,13 +308,29 @@ void Osci::StartNormal()
 }
 
 
+void Osci::StartP2P(bool button)
+{
+    FPGA::forcedStart = false;
+    FPGA::addrRead = 0xffff;
+
+    FrameP2P::Prepare();
+
+    if(button || TrigStartMode::IsWait())
+    {
+        FPGA::GiveStart(FPGA::pred, FPGA::post);
+        FrameP2P::Prepare();
+    }
+    FPGA::isRunning = true;
+}
+
+
 void Osci::StopNormal()
 {
     FPGA::isRunning = false;
 }
 
 
-void Osci::StartWaitP2P()
+void Osci::StartWaitP2P(bool)
 {
 
 }
@@ -326,7 +342,7 @@ void Osci::StopWaitP2P()
 }
 
 
-void Osci::StartSingleP2P()
+void Osci::StartSingleP2P(bool)
 {
 }
 

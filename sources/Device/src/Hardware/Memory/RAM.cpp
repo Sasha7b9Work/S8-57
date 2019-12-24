@@ -127,6 +127,17 @@ void RAM::Init()
 
 DataSettings *RAM::PrepareForNewData()
 {
+    if(FrameP2P::IsCorrect())
+    {
+        FrameP2P::ds = nullptr;
+
+        DataSettings *result = Get();
+
+        result->timeMS = TIME_MS;
+
+        return result;
+    }
+
     DataSettings ds;
 
     ds.Fill();
@@ -144,7 +155,11 @@ DataSettings *RAM::PrepareForNewData()
 
     newest->Prepare(&ds);                               // И упаковываем данные
 
-    return Get();
+    DataSettings *result = Get();
+
+    result->timeMS = TIME_MS;
+
+    return result;
 }
 
 

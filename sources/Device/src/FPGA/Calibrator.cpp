@@ -100,7 +100,7 @@ void Calibrator::Balance(Chan::E ch, Range::E range)
 
     RShift(ch).Set(0);
 
-    Osci::Start();
+    Osci::Start(false);
 
     float sum = 0;
 
