@@ -78,6 +78,18 @@ void Multimeter::ChangeAVP()
 }
 
 
+void Multimeter::LoadZero(int zero)
+{
+    ChangeMode();
+
+    char send[] = { 0x02, 'Z', 'E', 'R', 'O', (zero == 0) ? '0' : '1', 0x0a };
+
+    USART3_::Transmit(send, 100);
+
+    USART3_::StartReceiveIT(bufferUART);
+}
+
+
 void Multimeter::Calibrate(int calibr)
 {
     char send[] = { 0x02, 'K', 'A', 'L', 'I', 'B', (calibr == 0) ? '0' : '1', 0x0a };

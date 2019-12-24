@@ -25,6 +25,8 @@ struct Multimeter
     static void Calibrate(int calibr);
 
     static void ChangeAVP();
+    /// Если (zero != 0) - заслать режим нуля
+    static void LoadZero(int zero);
 
     /// АВП - автовыбор предела
     struct AVP

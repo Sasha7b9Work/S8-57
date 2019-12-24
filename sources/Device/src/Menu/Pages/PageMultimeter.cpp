@@ -145,13 +145,12 @@ DEF_CHOICE_2 ( cAVP,
     Multimeter::AVP::Ref(), &PageMultimeter::self, Item::Active, OnChanged_AVP, Choice::AfterDraw
 )
 
+static int8 zero = 0;
 
 static void OnChanged_Zero(bool)
 {
-    //Multimeter::LoadZero();
+    Multimeter::LoadZero(zero);
 }
-
-static int8 zero = 0;
 
 DEF_CHOICE_2( cZero,
     "Нуль",
