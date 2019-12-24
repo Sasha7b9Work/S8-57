@@ -261,7 +261,7 @@ void FrameP2P::FillScreenBuffer(Buffer *buffer, Chan::E ch)
 
     if(numBytesP2P > 0 && numBytesP2P <= buffer->Size())
     {
-        std::memcpy(out, (ch == Chan::A) ? ds->dataA : ds->dataB, numBytesP2P);
+        std::memcpy(out, OUT(ch), numBytesP2P);
         posSeparate = static_cast<int>(numBytesP2P - 1);
     }
     else
@@ -313,7 +313,7 @@ uint8 FrameP2P::GetByte(uint position, Chan::E ch)
 {
     if(GetNumberStoredBytes() < ds->BytesInChannel())
     {
-        uint8 *data = (ch == Chan::A) ? ds->dataA : ds->dataB;
+        uint8 *data = OUT(ch);
 
         return (position < numBytesP2P) ? data[position] : VALUE::NONE;
     }

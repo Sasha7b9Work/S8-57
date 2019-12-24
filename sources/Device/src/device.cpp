@@ -102,9 +102,9 @@ void Device::Update()
 {
     START_MULTI_MEASUREMENT();
 
-    Display::Update();
-
     Osci::Update();
+    
+    Display::Update();
 
     Menu::SaveSettings();
 
