@@ -20,13 +20,13 @@ struct PinStruct
 
 static PinStruct pins[FPin::Count] =
 {
-    { PORT_SPI3_SCK },  // SPI3_SCK
-    { PORT_SPI3_DAT },  // SPI3_DAT
-    { PORT_SPI3_CS1 },  // SPI3_CS1
-    { PORT_SPI3_CS2 },  // SPI3_CS2
+    { PIN_SPI3_SCK },  // SPI3_SCK
+    { PIN_SPI3_DAT },  // SPI3_DAT
+    { PIN_SPI3_CS1 },  // SPI3_CS1
+    { PIN_SPI3_CS2 },  // SPI3_CS2
     { PORT_A1 },        // A1
-    { PORT_A2 },        // A2
-    { PORT_A3 },        // A3
+    { PIN_A2 },        // A2
+    { PIN_A3 },        // A3
     { PORT_A4 },        // A4
     { PORT_LF1 },       // LF1 Ограничение полосы
     { PORT_LF2 },       // LF2 Ограничение полосы
