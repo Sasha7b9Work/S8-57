@@ -58,7 +58,7 @@ struct HAL_PIO
     /// Установка в "0"
     static void Reset(HPort::E port, uint16 pin);
     static void Write(HPort::E port, uint16 pin, int state);
-    static void Write(StructPIN &pin, int state);
+    static void Write(const StructPIN &pin, int state);
     static uint8 Read(HPort::E port, uint16 pin);
 
     static void EXTI_CLEAR_IT_BIT(uint16 pin);

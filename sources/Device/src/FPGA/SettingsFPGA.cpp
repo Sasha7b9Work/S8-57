@@ -393,7 +393,7 @@ Bandwidth::E &Bandwidth::Ref(Chan::E ch)
 
 void Bandwidth::Load()
 {
-    static const FPin::E pinsLF[2] = { FPin::LF1, FPin::LF2 };
+    static const StructPIN pinsLF[2] = { {PIN_LF1}, {PIN_LF2} };
 
-    GPIO::WritePin(pinsLF[ch], Bandwidth(ch).Is20MHz());
+    HAL_PIO::Write(pinsLF[ch], Bandwidth(ch).Is20MHz());
 }
