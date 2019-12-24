@@ -109,4 +109,6 @@ struct Sector
     static int Number(uint address);
 
     void Log() const;
+private:
+    static void TranslateAddressToROM(const DataSettings *ds, const PacketROM *packet);
 };

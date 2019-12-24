@@ -9,9 +9,16 @@
 #include <cstdlib>
 
 
+
+struct TestMemoryStruct
+{
+    static void FillData(DataSettings *ds);
+    static bool CheckData(const DataSettings *ds);
+
+};
+
+
 static void PrepareDS(DataSettings *ds);
-static void FillData(DataSettings *ds);
-static bool CheckData(const DataSettings *ds);
 /// Создаёт данные в RAM под индексом "0"
 static DataSettings *CreateDataInRAM(DataSettings *ds);
 
@@ -35,13 +42,13 @@ bool Test::RAM::Test()
 
         PrepareDS(ds);
 
-        FillData(ds);
+        TestMemoryStruct::FillData(ds);
 
         for (uint j = 0; j < ::RAM::NumberDatas(); j++)
         {
             DataSettings *read = ::RAM::Get(std::rand() % ::RAM::NumberDatas());
 
-            if (read && !CheckData(read))
+            if (read && !TestMemoryStruct::CheckData(read))
             {
                 return false;
             }
@@ -80,7 +87,7 @@ bool Test::ROM::Data::Test()
 
             if (dsRead)
             {
-                if (!CheckData(dsRead))
+                if (!TestMemoryStruct::CheckData(dsRead))
                 {
                     return false;
                 }
@@ -104,7 +111,7 @@ bool Test::ROM::Data::Test()
             { data[i] = static_cast<uint8>(data[0] * i); }  \
     }
 
-static void FillData(DataSettings *ds)
+void TestMemoryStruct::FillData(DataSettings *ds)
 {
     uint numPoints = ds->BytesInChannel();
 
@@ -121,7 +128,7 @@ static void FillData(DataSettings *ds)
     }
 
 
-static bool CheckData(const DataSettings *ds)
+bool TestMemoryStruct::CheckData(const DataSettings *ds)
 {
     uint numPoints = ds->BytesInChannel();
 
@@ -145,6 +152,6 @@ static DataSettings *CreateDataInRAM(DataSettings *ds)
 {
     PrepareDS(ds);
     ::RAM::PrepareForNewData();
-    FillData(ds);
+    TestMemoryStruct::FillData(ds);
     return ds;
 }

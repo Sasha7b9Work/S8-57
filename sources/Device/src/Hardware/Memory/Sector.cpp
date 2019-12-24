@@ -163,7 +163,7 @@ static void WriteToROM(uint *address, const void *data, uint size)
 }
 
 
-static void TranslateAddressToROM(const DataSettings *ds, const PacketROM *packet)
+void Sector::TranslateAddressToROM(const DataSettings *ds, const PacketROM *packet)
 {
     uint8 *addressData = reinterpret_cast<uint8 *>(packet->Address() + sizeof(PacketROM) + sizeof(DataSettings)); // По этому адресу будут записаны данные первого из записываемых каналов
 

@@ -27,5 +27,6 @@ namespace Test
     namespace RAM
     {
         bool Test();
+
     }
 }

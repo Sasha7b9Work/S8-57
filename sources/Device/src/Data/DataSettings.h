@@ -29,10 +29,19 @@ struct PackedTime
 struct DataSettings
 {
 friend class RAM;
+friend class Reader;
+friend struct PacketROM;
+friend struct FrameP2P;
+friend struct Sector;
+friend struct FPGA;
+friend struct Packet;
+friend struct TestMemoryStruct;
 
     uint        id;                 ///< —квозной id данных. 1-й номер получают данные, считанные первыми после включени€ прибора и каждые следующие увиличиваютс€ на 1
+private:
     uint8       *dataA;             ///< ѕо этому адресу хран€тс€ данные 1-го канала
     uint8       *dataB;             ///< ѕо этому адресу хран€тс€ данные 2-го канала. ѕри хранение в Buffer данные 2-го канала идут сразу после 1-го канала
+public:
     int16       rShift[2];
     int16       trigLev[2];
     int         tShift;             ///< —мещение по времени
