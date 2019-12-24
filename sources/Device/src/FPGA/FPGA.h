@@ -88,8 +88,3 @@ private:
     /// True, если дан принудительный запуск
     static bool forcedStart;
 };
-
-struct GPIO
-{
-    static void WriteRegisters(HPort::E port, uint16 pin, uint16 value);
-};

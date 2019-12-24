@@ -388,3 +388,35 @@ void Osci::InputController::Init()
     HAL_PIO::Init(PIN_A0S, HMode::Output_PP, HPull::Down);          // A0S
     HAL_PIO::Init(PIN_LFS, HMode::Output_PP, HPull::Down);          // LFS
 }
+
+void Osci::InputController::Write(HPort::E portCS, uint16 pinCS, uint16 value)
+{
+    HAL_PIO::Reset(portCS, pinCS);
+
+    if(portCS == PORT_SPI3_CS1)
+    {
+        for(int i = 15; i >= 0; --i)
+        {
+            HAL_PIO::Write(PIN_SPI3_DAT, _GET_BIT(value, i));
+            PAUSE_ON_TICKS(100);
+            HAL_PIO::Set(PIN_SPI3_SCK);
+            HAL_PIO::Reset(PIN_SPI3_SCK);
+        }
+    }
+    else if(portCS == PORT_SPI3_CS2)
+    {
+        for(int i = 0; i < 16; ++i)
+        {
+            HAL_PIO::Write(PIN_SPI3_DAT, _GET_BIT(value, i));
+            PAUSE_ON_TICKS(100);
+            HAL_PIO::Set(PIN_SPI3_SCK);
+            HAL_PIO::Reset(PIN_SPI3_SCK);
+        }
+    }
+    else
+    {
+        // нет действий
+    }
+
+    HAL_PIO::Reset(portCS, pinCS);
+}

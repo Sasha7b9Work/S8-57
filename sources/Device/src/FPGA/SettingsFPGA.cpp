@@ -100,7 +100,7 @@ void RShift::Load(bool force)
         shift -= Tester::DeltaRShiftA();
     }
 
-    GPIO::WriteRegisters(PIN_SPI3_CS1, static_cast<uint16>(mask[ch] | (shift << 2)));
+    Osci::InputController::Write(PIN_SPI3_CS1, static_cast<uint16>(mask[ch] | (shift << 2)));
 
     Osci::Restart();
 }

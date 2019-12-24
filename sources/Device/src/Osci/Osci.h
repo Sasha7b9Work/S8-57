@@ -51,6 +51,7 @@ struct Osci
     struct InputController
     {
         static void Init();
+        static void Write(HPort::E port, uint16 pin, uint16 value);
     };
 
 private:
