@@ -115,13 +115,19 @@ void Osci::ProcessFlagPred()
 {
     if(FPGA::flag.Pred() && !FPGA::forcedStart)
     {
-        if(!Osci::InModeRandomizer() && TrigStartMode::IsAuto() && FPGA::flag.HoldOff())
-        {
-            FPGA::ForcedStart();
-        }
         if(!FPGA::flag.TrigReady())
         {
             Trig::pulse = false;
+        }
+
+        if(InModeP2P() && !FrameP2P::IsCorrect())
+        {
+            return;
+        }
+
+        if(!InModeRandomizer() && TrigStartMode::IsAuto() && FPGA::flag.HoldOff())
+        {
+            FPGA::ForcedStart();
         }
     }
 }
