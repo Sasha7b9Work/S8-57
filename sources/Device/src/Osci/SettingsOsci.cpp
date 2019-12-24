@@ -304,11 +304,11 @@ void Range::LoadBoth()
 {
     uint16 val = static_cast<uint16>(ValueForRange(Chan::B) + (ValueForRange(Chan::A) << 8));
 
-    GPIO::WriteRegisters(FPin::SPI3_CS2, val);
+    GPIO::WriteRegisters(PIN_SPI3_CS2, val);
 
     PAUSE_ON_MS(10);                // Задержка нужна, чтобы импульсные реле успели отработать
 
-    GPIO::WriteRegisters(FPin::SPI3_CS2, 0);    // Записываем ноль, чтобы реле не потребляли энергии
+    GPIO::WriteRegisters(PIN_SPI3_CS2, 0);    // Записываем ноль, чтобы реле не потребляли энергии
 
     //DEF__STRUCT(StructRange, uint8) vals[Range::Count] =
     static const uint8 vals[Range::Count] =
@@ -330,13 +330,13 @@ void Range::LoadBoth()
 
     uint8 valueA = vals[Range(Chan::A)];
 
-    GPIO::WritePin(FPin::A1, _GET_BIT(valueA, 1));
-    GPIO::WritePin(FPin::A2, _GET_BIT(valueA, 0));
+    HAL_PIO::Write(PORT_A1, _GET_BIT(valueA, 1));
+    HAL_PIO::Write(PORT_A2, _GET_BIT(valueA, 0));
 
     uint8 valueB = vals[Range(Chan::B)];
 
-    GPIO::WritePin(FPin::A3, _GET_BIT(valueB, 1));
-    GPIO::WritePin(FPin::A4, _GET_BIT(valueB, 0));
+    HAL_PIO::Write(PORT_A3, _GET_BIT(valueB, 1));
+    HAL_PIO::Write(PORT_A4, _GET_BIT(valueB, 0));
 
     Bandwidth(Chan::A).Load();
     Bandwidth(Chan::B).Load();
@@ -465,7 +465,7 @@ void TrigLevel::Load() const
     /// \todo Здесь много лишних движений. Нужно что-то сделать с вводом SET_TRIGLEV_SOURCE
     uint16 value = static_cast<uint16>(HARDWARE_ZERO - TrigLevel(ch).Value());
 
-    GPIO::WriteRegisters(FPin::SPI3_CS1, static_cast<uint16>(0xa000 | (value << 2)));
+    GPIO::WriteRegisters(PIN_SPI3_CS1, static_cast<uint16>(0xa000 | (value << 2)));
 
     Osci::Restart();
 }

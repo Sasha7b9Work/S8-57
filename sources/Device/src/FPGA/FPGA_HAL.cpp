@@ -18,12 +18,12 @@ struct PinStruct
     uint16   pin;
 };
 
-static PinStruct pins[FPin::Count] =
+static PinStruct pins[] =
 {
-    { PORT_SPI3_SCK },  // SPI3_SCK
-    { PORT_SPI3_DAT },  // SPI3_DAT
-    { PORT_SPI3_CS1 },  // SPI3_CS1
-    { PORT_SPI3_CS2 },  // SPI3_CS2
+    { PIN_SPI3_SCK },   // SPI3_SCK
+    { PIN_SPI3_DAT },   // SPI3_DAT
+    { PIN_SPI3_CS1 },   // SPI3_CS1
+    { PIN_SPI3_CS2 },   // SPI3_CS2
     { PORT_A1 },        // A1
     { PORT_A2 },        // A2
     { PORT_A3 },        // A3
@@ -32,7 +32,8 @@ static PinStruct pins[FPin::Count] =
     { PORT_LF2 },       // LF2 Ограничение полосы
     { PORT_A1S },       // A1S
     { PORT_A0S },       // A0S
-    { PORT_LFS }        // LFS
+    { PORT_LFS },       // LFS
+    { HPort::Count}
 };
 
 
@@ -65,43 +66,28 @@ void FPGA::LoadRegUPR()
 }
 
 
-void GPIO::Init()
+void GPIO::WriteRegisters(HPort::E port, uint16 pin, uint16 value)
 {
-    for (int i = 0; i < FPin::Count; i++)
-    {
-        HAL_PIO::Init(PORT(static_cast<int>(i)), GetPin(static_cast<FPin::E>(i)) , HMode::Output_PP, HPull::Down);
-    }
-}
+    HAL_PIO::Reset(port, pin);
 
-
-uint16 GPIO::GetPin(FPin::E pin)
-{
-    return pins[static_cast<int>(pin)].pin;
-}
-
-
-void GPIO::WriteRegisters(FPin::E cs, uint16 value)
-{
-    ResetPin(cs);
-
-    if (cs == FPin::SPI3_CS1)
+    if (port == HPort::_D)          // PD3 - CS1
     {
         for (int i = 15; i >= 0; --i)
         {
-            WritePin(FPin::SPI3_DAT, _GET_BIT(value, i));
+            HAL_PIO::Write(PIN_SPI3_DAT, _GET_BIT(value, i));
             PAUSE_ON_TICKS(100);
-            SetPin(FPin::SPI3_SCK);
-            ResetPin(FPin::SPI3_SCK);
+            HAL_PIO::Set(PIN_SPI3_SCK);
+            HAL_PIO::Reset(PIN_SPI3_SCK);
         }
     }
-    else if (cs == FPin::SPI3_CS2)
+    else if (port == HPort::_G)     // PG13 - CS2
     {
         for (int i = 0; i < 16; ++i)
         {
-            WritePin(FPin::SPI3_DAT, _GET_BIT(value, i));
+            HAL_PIO::Write(PIN_SPI3_DAT, _GET_BIT(value, i));
             PAUSE_ON_TICKS(100);
-            SetPin(FPin::SPI3_SCK);
-            ResetPin(FPin::SPI3_SCK);
+            HAL_PIO::Set(PIN_SPI3_SCK);
+            HAL_PIO::Read(PIN_SPI3_SCK);
         }
     }
     else
@@ -109,25 +95,7 @@ void GPIO::WriteRegisters(FPin::E cs, uint16 value)
         // нет действий
     }
 
-    SetPin(cs);
-}
-
-
-void GPIO::SetPin(FPin::E pin)
-{
-    HAL_PIO::Set(PORT(static_cast<int>(pin)), GetPin(pin));
-}
-
-
-void GPIO::ResetPin(FPin::E pin)
-{
-    HAL_PIO::Reset(PORT(static_cast<int>(pin)), GetPin(pin));
-}
-
-
-void GPIO::WritePin(FPin::E pin, int enable)
-{
-    HAL_PIO::Write(PORT(static_cast<int>(pin)), GetPin(pin), enable ? HState::Enabled : HState::Disabled);
+    HAL_PIO::Set(port, pin);
 }
 
 
