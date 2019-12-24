@@ -5,6 +5,6 @@
 
 void ExtRAM::Init()
 {
-    HAL_PIO::Init(PORT_CS_RAM, HMode::Output_PP, HPull::Up);
-    HAL_PIO::Set(PORT_CS_RAM);
+    HAL_PIO::Init(PIN_CS_RAM, HMode::Output_PP, HPull::Up);
+    HAL_PIO::Set(PIN_CS_RAM);
 }

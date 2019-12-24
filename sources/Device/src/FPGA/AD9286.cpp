@@ -18,15 +18,15 @@ void AD9286::Init()
         SCK - 69 - PB10
     */
    
-    HAL_PIO::Init(PORT_AD9286_CS, HMode::Output_PP, HPull::Up);       // Инициализация CS
+    HAL_PIO::Init(PIN_AD9286_CS, HMode::Output_PP, HPull::Up);       // Инициализация CS
 
-    HAL_PIO::Init(PORT_AD9286_DAT, HMode::Output_PP, HPull::Up);     // Инициализация DAT
+    HAL_PIO::Init(PIN_AD9286_DAT, HMode::Output_PP, HPull::Up);     // Инициализация DAT
     
-    HAL_PIO::Init(PORT_AD9286_SCK, HMode::Output_PP, HPull::Up);     // Инициализация SCK
+    HAL_PIO::Init(PIN_AD9286_SCK, HMode::Output_PP, HPull::Up);     // Инициализация SCK
 
-    HAL_PIO::Set(PORT_AD9286_CS);
-    HAL_PIO::Reset(PORT_AD9286_DAT);
-    HAL_PIO::Reset(PORT_AD9286_SCK);
+    HAL_PIO::Set(PIN_AD9286_CS);
+    HAL_PIO::Reset(PIN_AD9286_DAT);
+    HAL_PIO::Reset(PIN_AD9286_SCK);
 
     Tune();
 }
@@ -42,7 +42,7 @@ void AD9286::Tune()
 
 static void WriteByte(uint8 address, uint8 byte)
 {
-    HAL_PIO::Reset(PORT_AD9286_CS);
+    HAL_PIO::Reset(PIN_AD9286_CS);
 
     uint value = static_cast<uint>((address << 8) + byte);
 
@@ -50,19 +50,19 @@ static void WriteByte(uint8 address, uint8 byte)
     {
         if (_GET_BIT(value, i))
         {
-            HAL_PIO::Set(PORT_AD9286_DAT);
+            HAL_PIO::Set(PIN_AD9286_DAT);
         }
         else
         {
-            HAL_PIO::Reset(PORT_AD9286_DAT);
+            HAL_PIO::Reset(PIN_AD9286_DAT);
         }
         PAUSE_ON_TICKS(100);
 
-        HAL_PIO::Set(PORT_AD9286_SCK);
+        HAL_PIO::Set(PIN_AD9286_SCK);
         PAUSE_ON_TICKS(100);
 
-        HAL_PIO::Reset(PORT_AD9286_SCK);
+        HAL_PIO::Reset(PIN_AD9286_SCK);
     }
 
-    HAL_PIO::Set(PORT_AD9286_CS);
+    HAL_PIO::Set(PIN_AD9286_CS);
 }

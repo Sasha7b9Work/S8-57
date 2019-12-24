@@ -41,11 +41,11 @@ struct HPin
 #ifdef OLD_VERSION
 #define PIN_A2         HPort::_D, HPin::_11
 #define PIN_A3         HPort::_D, HPin::_12
-#define PORT_A4         HPort::_D, HPin::_13
-#define PORT_LF1        HPort::_G, HPin::_2
-#define PORT_LF2        HPort::_G, HPin::_3
-#define PORT_A1S        HPort::_G, HPin::_4
-#define PORT_A0S        HPort::_G, HPin::_5
+#define PIN_A4         HPort::_D, HPin::_13
+#define PIN_LF1        HPort::_G, HPin::_2
+#define PIN_LF2        HPort::_G, HPin::_3
+#define PIN_LF3        HPort::_G, HPin::_4
+#define PIN_A0S        HPort::_G, HPin::_5
 #define PIN_P2P         HPort::_G, HPin::_1
 #define PIN_TESTER_ON   HPort::_F, HPin::_13
 #define PIN_TESTER_I    HPort::_G, HPin::_0
@@ -54,11 +54,11 @@ struct HPin
 #else
 #define PIN_A2         HPort::_B, HPin::_13
 #define PIN_A3         HPort::_G, HPin::_8
-#define PORT_A4         HPort::_C, HPin::_6
-#define PORT_LF1        HPort::_C, HPin::_7
-#define PORT_LF2        HPort::_C, HPin::_8
-#define PORT_A1S        HPort::_A, HPin::_8
-#define PORT_A0S        HPort::_A, HPin::_10
+#define PIN_A4         HPort::_C, HPin::_6
+#define PIN_LF1        HPort::_C, HPin::_7
+#define PIN_LF2        HPort::_C, HPin::_8
+#define PIN_LF3        HPort::_A, HPin::_8
+#define PIN_A0S        HPort::_A, HPin::_10
 #define PIN_P2P         HPort::_F, HPin::_11
 #define PIN_TESTER_ON   HPort::_A, HPin::_3
 #define PIN_TESTER_I    HPort::_B, HPin::_2
@@ -66,8 +66,8 @@ struct HPin
 #define PIN_TESTER_PNP  HPort::_A, HPin::_6
 #endif
 
-#define PORT_A1         HPort::_D, HPin::_10
-#define PORT_LFS        HPort::_G, HPin::_6
+#define PIN_A1         HPort::_D, HPin::_10
+#define PIN_LFS        HPort::_G, HPin::_6
 
 #define PIN_ADC1_IN2    HPort::_A, HPin::_2
 #define PIN_ADC1_IN9    HPort::_B, HPin::_1
@@ -75,16 +75,16 @@ struct HPin
 #define PIN_ADC3        HPort::_F, HPin::_10
 #define PIN_ADC3_IT     HPort::_B, HPin::_11
 
-#define PORT_AT2516_OUT HPort::_C, HPin::_3
-#define PORT_AT2516_IN  HPort::_C, HPin::_2
-#define PORT_AT2516_CLK HPort::_B, HPin::_10
-#define PORT_AT2516_CS  HPort::_B, HPin::_12
+#define PIN_AT2516_OUT HPort::_C, HPin::_3
+#define PIN_AT2516_IN  HPort::_C, HPin::_2
+#define PIN_AT2516_CLK HPort::_B, HPin::_10
+#define PIN_AT2516_CS  HPort::_B, HPin::_12
 
-#define PORT_AD9286_SCK HPort::_B, HPin::_10
-#define PORT_AD9286_DAT HPort::_C, HPin::_3
-#define PORT_AD9286_CS  HPort::_E, HPin::_11
+#define PIN_AD9286_SCK HPort::_B, HPin::_10
+#define PIN_AD9286_DAT HPort::_C, HPin::_3
+#define PIN_AD9286_CS  HPort::_E, HPin::_11
 
-#define PORT_CS_RAM     HPort::_G, HPin::_10
+#define PIN_CS_RAM     HPort::_G, HPin::_10
 
 #define PIN_DAC1        HPort::_A, HPin::_4
 

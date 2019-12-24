@@ -24,15 +24,15 @@ static PinStruct pins[FPin::Count] =
     { PIN_SPI3_DAT },  // SPI3_DAT
     { PIN_SPI3_CS1 },  // SPI3_CS1
     { PIN_SPI3_CS2 },  // SPI3_CS2
-    { PORT_A1 },        // A1
+    { PIN_A1 },        // A1
     { PIN_A2 },        // A2
     { PIN_A3 },        // A3
-    { PORT_A4 },        // A4
-    { PORT_LF1 },       // LF1 Ограничение полосы
-    { PORT_LF2 },       // LF2 Ограничение полосы
-    { PORT_A1S },       // A1S
-    { PORT_A0S },       // A0S
-    { PORT_LFS }        // LFS
+    { PIN_A4 },        // A4
+    { PIN_LF1 },       // LF1 Ограничение полосы
+    { PIN_LF2 },       // LF2 Ограничение полосы
+    { PIN_LF3 },       // A1S
+    { PIN_A0S },       // A0S
+    { PIN_LFS }        // LFS
 };
 
 
