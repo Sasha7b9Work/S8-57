@@ -79,7 +79,6 @@ source_group(Tester                                  REGULAR_EXPRESSION src/Test
 source_group(ThirdParty\\HAL                         FILES ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc.h
                                                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc_ex.h)
 source_group(Utils                                   REGULAR_EXPRESSION src/Utils/*)
-source_group(doc                                     REGULAR_EXPRESSION ../../doc/description/doc/*)
 
 
 file(GLOB SOURCES   ../common/Command.h
@@ -127,8 +126,6 @@ file(GLOB SOURCES   ../common/Command.h
                     src/Tester/*
                     src/Utils/*
                     src/*
-                    
-                    ../../doc/description/doc/*
                     )
 
 add_library(Device ${SOURCES})
