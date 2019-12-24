@@ -88,7 +88,7 @@ void GPIO::WriteRegisters(FPin::E cs, uint16 value)
     {
         for (int i = 15; i >= 0; --i)
         {
-            WritePin(FPin::SPI3_DAT, _GET_BIT(value, i));
+            HAL_PIO::Write(PIN_SPI3_DAT, _GET_BIT(value, i));
             PAUSE_ON_TICKS(100);
             HAL_PIO::Set(PIN_SPI3_SCK);
             HAL_PIO::Reset(PIN_SPI3_SCK);
@@ -98,7 +98,7 @@ void GPIO::WriteRegisters(FPin::E cs, uint16 value)
     {
         for (int i = 0; i < 16; ++i)
         {
-            WritePin(FPin::SPI3_DAT, _GET_BIT(value, i));
+            HAL_PIO::Write(PIN_SPI3_DAT, _GET_BIT(value, i));
             PAUSE_ON_TICKS(100);
             HAL_PIO::Set(PIN_SPI3_SCK);
             HAL_PIO::Reset(PIN_SPI3_SCK);
