@@ -42,6 +42,7 @@ source_group(common                                  FILES ../common/Command.h
                                                            ../common/Transceiver.h
                                                            ../common/Transceiver.cpp
                                                            ../common/Transceiver_d.cpp)
+source_group(doc                                     REGULAR_EXPRESSION ../doc/*)
 source_group(_VS                                     REGULAR_EXPRESSION ../common/_VS/*)
 source_group(_VS\\std_includes                       REGULAR_EXPRESSION ../common/_VS/std_includes/*)
 source_group(src                                     REGULAR_EXPRESSION src/*)
@@ -93,6 +94,7 @@ file(GLOB SOURCES   ../common/Command.h
                     ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc.h
                     ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc_ex.h
                     
+                    ../doc/*
                     src/Data/*
                     src/Display/*
                     ../common/Display/Font/*
