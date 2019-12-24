@@ -127,7 +127,7 @@ void GPIO::ResetPin(FPin::E pin)
 
 void GPIO::WritePin(FPin::E pin, int enable)
 {
-    HAL_PIO::Write(PORT(static_cast<int>(pin)), GetPin(pin), enable ? HState::Enabled : HState::Disabled);
+    HAL_PIO::Write(PORT(static_cast<int>(pin)), GetPin(pin), enable);
 }
 
 

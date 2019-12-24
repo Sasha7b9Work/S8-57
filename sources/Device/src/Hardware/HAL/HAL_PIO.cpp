@@ -101,12 +101,6 @@ void HAL_PIO::Reset(HPort::E port, uint16 pin)
 }
 
 
-void HAL_PIO::Write(HPort::E port, uint16 pin, HState::E state)
-{
-    HAL_GPIO_WritePin(PORT(port), pin, (state == HState::Enabled) ? GPIO_PIN_SET : GPIO_PIN_RESET);
-}
-
-
 void HAL_PIO::Write(HPort::E port, uint16 pin, int state)
 {
     HAL_GPIO_WritePin(PORT(port), pin, (state == 0) ? GPIO_PIN_RESET : GPIO_PIN_SET);

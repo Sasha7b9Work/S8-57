@@ -228,16 +228,16 @@ void Tester::RecountPoints(uint16 *x, uint8 *y)
 void Tester::LoadPolarity()
 {
     // ”станавливаем пол€рность
-    HAL_PIO::Write(PIN_TESTER_PNP, Polarity::IsPositive() ? HState::Enabled : HState::Disabled);
+    HAL_PIO::Write(PIN_TESTER_PNP, Polarity::IsPositive() ? 1 : 0);
 }
 
 
 void Tester::LoadStep()
 {
     // ”станавливаем управление напр€жением или током
-    HAL_PIO::Write(PIN_TESTER_U, Control::IsVoltage() ? HState::Enabled : HState::Disabled);
+    HAL_PIO::Write(PIN_TESTER_U, Control::IsVoltage() ? 1 : 0);
 
-    HAL_PIO::Write(PIN_TESTER_I, Control::IsVoltage() ? HState::Disabled : HState::Enabled);
+    HAL_PIO::Write(PIN_TESTER_I, Control::IsVoltage() ? 0 : 1);
 
     if (Control::IsVoltage())
     {
