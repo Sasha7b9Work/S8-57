@@ -107,18 +107,6 @@ void HAL_PIO::Write(HPort::E port, uint16 pin, HState::E state)
 }
 
 
-void HAL_PIO::Write(HPort::E port, uint16 pin, int state)
-{
-    HAL_GPIO_WritePin(PORT(port), pin, (state == 0) ? GPIO_PIN_RESET : GPIO_PIN_SET);
-}
-
-
-void HAL_PIO::Write(const StructPIN &pin, int state)
-{
-    HAL_PIO::Write(pin.port, pin.pin, state);
-}
-
-
 uint8 HAL_PIO::Read(HPort::E port, uint16 pin)
 {
     return static_cast<uint8>(HAL_GPIO_ReadPin(PORT(port), pin));

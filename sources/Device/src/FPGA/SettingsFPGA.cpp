@@ -49,9 +49,9 @@ void TrigInput::Load()
         {BIN_U8(00000000), BIN_U8(00000110)}  // -V2501      // อื
     };
 
-    HAL_PIO::Write(PORT_A1S, _GET_BIT(datas[TrigInput()][TrigSource()], 2));
-    HAL_PIO::Write(PORT_A0S, _GET_BIT(datas[TrigInput()][TrigSource()], 1));
-    HAL_PIO::Write(PORT_LFS, _GET_BIT(datas[TrigInput()][TrigSource()], 0));
+    GPIO::WritePin(FPin::A1S, _GET_BIT(datas[TrigInput()][TrigSource()], 2));
+    GPIO::WritePin(FPin::A0S, _GET_BIT(datas[TrigInput()][TrigSource()], 1));
+    GPIO::WritePin(FPin::LFS, _GET_BIT(datas[TrigInput()][TrigSource()], 0));
 }
 
 
@@ -100,7 +100,7 @@ void RShift::Load(bool force)
         shift -= Tester::DeltaRShiftA();
     }
 
-    GPIO::WriteRegisters(PIN_SPI3_CS1, static_cast<uint16>(mask[ch] | (shift << 2)));
+    GPIO::WriteRegisters(FPin::SPI3_CS1, static_cast<uint16>(mask[ch] | (shift << 2)));
 
     Osci::Restart();
 }
@@ -393,7 +393,7 @@ Bandwidth::E &Bandwidth::Ref(Chan::E ch)
 
 void Bandwidth::Load()
 {
-    static const StructPIN pinsLF[2] = { { PORT_LF1 }, { PORT_LF2 } };
+    static const FPin::E pinsLF[2] = { FPin::LF1, FPin::LF2 };
 
-    HAL_PIO::Write(pinsLF[ch], Bandwidth(ch).Is20MHz());
+    GPIO::WritePin(pinsLF[ch], Bandwidth(ch).Is20MHz());
 }
