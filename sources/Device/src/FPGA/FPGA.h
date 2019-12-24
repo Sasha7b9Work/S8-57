@@ -47,10 +47,6 @@ struct FPGA
 
     static void SetValueADC(uint16 value);
 
-    static bool InStateWait() { return (fpgaStateWork == StateWorkFPGA_Wait); }
-
-    static bool InStateStop() { return (fpgaStateWork == StateWorkFPGA_Stop); }
-
     static void GiveStart(uint16 pred, uint16 post);
 
 private:
@@ -85,8 +81,6 @@ private:
     static uint16 valueADC;
 
     static bool isRunning;
-
-    static StateWorkFPGA fpgaStateWork;
 
     static FlagFPGA flag;
     /// Здесь хранится адрес, начиная с которого будем читать данные по каналам. Если addrRead == 0xffff, то адрес вначале нужно считать

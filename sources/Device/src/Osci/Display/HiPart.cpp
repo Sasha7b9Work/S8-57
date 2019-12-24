@@ -346,25 +346,25 @@ void DisplayOsci::HiPart::DrawRightPart(int x0, int y0)
         VLine(Grid::Top() - 3).Draw(x, 1, Color::FILL);
 
         x += 2;
-        int y = y0 + 1;
+        //int y = y0 + 1;
 
         if (FPGA::IsRunning())       // Рабочий режим
         {
             Char(Symbol8::PLAY).Draw4SymbolsInRect(x, 1);
         }
-        else if (FPGA::InStateStop())  // Режим остановки
-        {
-            Region(10, 10).Fill(x + 3, y + 3);
-        }
-        else if (FPGA::InStateWait())  // Режим ожидания сигнала
-        {
-            int w = 4;
-            int h = 14;
-            int delta = 4;
-            x = x + 2;
-            Region(w, h).Fill(x, y + 1);
-            Region(w, h).Fill(x + w + delta, y + 1);
-        }
+        //else if (FPGA::InStateStop())  // Режим остановки
+        //{
+        //    Region(10, 10).Fill(x + 3, y + 3);
+        //}
+        //else if (FPGA::InStateWait())  // Режим ожидания сигнала
+        //{
+        //    int w = 4;
+        //    int h = 14;
+        //    int delta = 4;
+        //    x = x + 2;
+        //    Region(w, h).Fill(x, y + 1);
+        //    Region(w, h).Fill(x + w + delta, y + 1);
+        //}
         else
         {
             // больше ничего не обрабатываем
