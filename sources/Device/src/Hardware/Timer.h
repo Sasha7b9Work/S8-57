@@ -28,7 +28,6 @@ struct TypeTimer
         Display,                ///< Таймер на ручную отрисовку экрана
         RemoveAddFunction,      ///< Таймер на удаление дополнительной функции отрисовки
         USB,                    ///<
-        StartViewP2P,           ///< Таймер начала отображения следующего фрейма поточечного вывода
         Temp,
         Count
     };
@@ -52,8 +51,8 @@ struct Timer
     static void Enable(TypeTimer::E type);
 
     static void Disable(TypeTimer::E type);
-
-    static bool IsRun(TypeTimer::E type);
+    /// Возвращает true, если таймер в данный момент ведёт отсчёт
+    static bool IsRunning(TypeTimer::E type);
 
     static void PauseOnTime(uint timeMS);
 

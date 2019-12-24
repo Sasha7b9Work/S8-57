@@ -17,7 +17,6 @@ int  FrameP2P::posSeparate = 0;
 DataSettings *FrameP2P::ds = nullptr;
 
 
-
 void DataSettings::Fill()
 {
     Lval_ENABLED_A(this) = ChanA.IsEnabled() ? 1U : 0U;

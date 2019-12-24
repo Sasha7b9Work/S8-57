@@ -259,3 +259,14 @@ void RAM::RemoveOldest()
 {
     oldest = reinterpret_cast<Packet *>(oldest->addrNewest);
 }
+
+
+bool RAM::LastSettingsEqualsCurrent()
+{
+    if(NumberDatas() == 0)
+    {
+        return false;
+    }
+
+    return Get()->EqualsCurrentSettings();
+}

@@ -39,7 +39,7 @@ static uint NearestTime();
 /// Настроить систему на таймер
 static void TuneTIM(::TypeTimer::E type);
 
-bool ::Timer::IsRun(::TypeTimer::E type)
+bool ::Timer::IsRunning(::TypeTimer::E type)
 {
     return TIME_NEXT(type) != UINT_MAX; //-V2523
 }

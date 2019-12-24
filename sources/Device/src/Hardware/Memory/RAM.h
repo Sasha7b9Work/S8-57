@@ -19,6 +19,8 @@ public:
     static DataSettings *Get(uint num = 0);
     /// Возвращает количество записей в памяти
     static uint NumberDatas();
+    /// Возвращает true, если настройки последнего сохранённого сигнала соответствуют текущим
+    static bool LastSettingsEqualsCurrent();
 
 private:
     /// Указатель на самый старый записанный пакет. Он будет стёрт первым
