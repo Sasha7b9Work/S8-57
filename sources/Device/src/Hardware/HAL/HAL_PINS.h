@@ -117,8 +117,10 @@ struct HPin
 
 #define PIN_SPI3_SCK    HPort::_C, HPin::_10
 #define PIN_SPI3_DAT    HPort::_C, HPin::_12
-#define PIN_SPI3_CS1    HPort::_D, HPin::_3
-#define PIN_SPI3_CS2    HPort::_G, HPin::_13
+#define PORT_SPI3_CS1   HPort::_D
+#define PIN_SPI3_CS1    PORT_SPI3_CS1, HPin::_3
+#define PORT_SPI3_CS2   HPort::_G
+#define PIN_SPI3_CS2    PORT_SPI3_CS2, HPin::_13
 
 #define PIN_SPI4_CS     HPort::_E, HPin::_11
 #define PIN_SPI4_SCK    HPort::_E, HPin::_12

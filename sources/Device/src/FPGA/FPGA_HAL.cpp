@@ -80,11 +80,11 @@ uint16 GPIO::GetPin(FPin::E pin)
 }
 
 
-void GPIO::WriteRegisters(FPin::E cs, uint16 value)
+void GPIO::WriteRegisters(HPort::E portCS, uint16 pinCS, uint16 value)
 {
-    ResetPin(cs);
+    HAL_PIO::Reset(portCS, pinCS);
 
-    if (cs == FPin::SPI3_CS1)
+    if(portCS == PORT_SPI3_CS1)
     {
         for (int i = 15; i >= 0; --i)
         {
@@ -94,7 +94,7 @@ void GPIO::WriteRegisters(FPin::E cs, uint16 value)
             HAL_PIO::Reset(PIN_SPI3_SCK);
         }
     }
-    else if (cs == FPin::SPI3_CS2)
+    else if (portCS == PORT_SPI3_CS2)
     {
         for (int i = 0; i < 16; ++i)
         {
@@ -109,7 +109,7 @@ void GPIO::WriteRegisters(FPin::E cs, uint16 value)
         // нет действий
     }
 
-    SetPin(cs);
+    HAL_PIO::Reset(portCS, pinCS);
 }
 
 
