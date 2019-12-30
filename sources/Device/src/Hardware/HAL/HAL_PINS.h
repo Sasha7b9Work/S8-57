@@ -66,8 +66,8 @@ struct HPin
 #define PIN_TESTER_PNP  HPort::_A, HPin::_6
 #endif
 
-#define PIN_A1         HPort::_D, HPin::_10
-#define PIN_LFS        HPort::_G, HPin::_6
+#define PIN_A1          HPort::_D, HPin::_10
+#define PIN_LFS         HPort::_G, HPin::_6
 
 #define PIN_ADC1_IN2    HPort::_A, HPin::_2
 #define PIN_ADC1_IN9    HPort::_B, HPin::_1
@@ -75,16 +75,16 @@ struct HPin
 #define PIN_ADC3        HPort::_F, HPin::_10
 #define PIN_ADC3_IT     HPort::_B, HPin::_11
 
-#define PIN_AT2516_OUT HPort::_C, HPin::_3
-#define PIN_AT2516_IN  HPort::_C, HPin::_2
-#define PIN_AT2516_CLK HPort::_B, HPin::_10
-#define PIN_AT2516_CS  HPort::_B, HPin::_12
+#define PIN_AT2516_OUT  HPort::_C, HPin::_3
+#define PIN_AT2516_IN   HPort::_C, HPin::_2
+#define PIN_AT2516_CLK  HPort::_B, HPin::_10
+#define PIN_AT2516_CS   HPort::_B, HPin::_12
 
-#define PIN_AD9286_SCK HPort::_B, HPin::_10
-#define PIN_AD9286_DAT HPort::_C, HPin::_3
-#define PIN_AD9286_CS  HPort::_E, HPin::_11
+#define PIN_AD9286_SCK  HPort::_B, HPin::_10
+#define PIN_AD9286_DAT  HPort::_C, HPin::_3
+#define PIN_AD9286_CS   HPort::_E, HPin::_11
 
-#define PIN_CS_RAM     HPort::_G, HPin::_10
+#define PIN_CS_RAM      HPort::_G, HPin::_10
 
 #define PIN_DAC1        HPort::_A, HPin::_4
 
