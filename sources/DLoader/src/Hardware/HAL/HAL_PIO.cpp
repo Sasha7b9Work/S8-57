@@ -87,6 +87,21 @@ void HAL_PIO::Init(HPort::E port, uint pins, HMode::E mode, HPull::E pull, HSpee
 }
 
 
+void HAL_PIO::InitOutput(HPort::E port, uint16 pin, HPull::E pull, int state)
+{
+    GPIO_InitTypeDef isGPIO =
+    {
+        pin,
+        GPIO_MODE_OUTPUT_PP,
+        PULL(pull)
+    };
+
+    HAL_GPIO_Init(PORT(port), &isGPIO);
+
+    HAL_GPIO_WritePin(PORT(port), pin, static_cast<GPIO_PinState>(state));
+}
+
+
 void HAL_PIO::Set(HPort::E port, uint16 pin)
 {
     HAL_GPIO_WritePin(PORT(port), pin, GPIO_PIN_SET);

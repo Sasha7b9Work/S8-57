@@ -53,6 +53,7 @@ struct HAlternate
 struct HAL_PIO
 {
     static void Init(HPort::E port, uint pins, HMode::E mode, HPull::E pull, HSpeed::E speed = HSpeed::Low, HAlternate::E alternate = HAlternate::AF0_MCO);
+    static void InitOutput(HPort::E port, uint16 pin, HPull::E pull, int state);
     /// Установка в "1"
     static void Set(HPort::E port, uint16 pin);
     /// Установка в "0"
