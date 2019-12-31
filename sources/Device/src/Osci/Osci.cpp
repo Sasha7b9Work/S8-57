@@ -418,5 +418,5 @@ void Osci::InputController::Write(HPort::E portCS, uint16 pinCS, uint16 value)
         // нет действий
     }
 
-    HAL_PIO::Reset(portCS, pinCS);
+    HAL_PIO::Set(portCS, pinCS);
 }
