@@ -39,9 +39,9 @@ State::E State_READY();
 struct Receiver
 {
     /// Инициализация FL0 на чтение
-    static void Init_FL0_IN();
+    static void Init_WR_IN();
     /// Возвращает состояние FL0
-    static State::E State_FL0();
+    static State::E State_WR();
     /// Считывает байт данных с ШД
     static uint8 ReadData();
 };
@@ -57,9 +57,9 @@ void Transceiver::Init()
 }
 
 
-void Receiver::Init_FL0_IN()
+void Receiver::Init_WR_IN()
 {
-    HAL_PIO::Init(PIN_FL0, HMode::Input, HPull::Down);  // Будем на этом выводе узнавать, есть ли у панели данные для передачи
+    HAL_PIO::Init(P_PIN_WR, HMode::Input, HPull::Down);  // Будем на этом выводе узнавать, есть ли у панели данные для передачи
 }
 
 
@@ -125,7 +125,7 @@ bool Transceiver::Receive()
 
     DataBusMode::state = DataBusMode::DeviceReceive;
 
-    Receiver::Init_FL0_IN();                        // Инициализируем FL0 на чтение
+    Receiver::Init_WR_IN();                        // Инициализируем FL0 на чтение
 
     Set_MODE(Mode::Receive);                        // Сообщаем панели, что готовы принять данные
 
@@ -133,7 +133,7 @@ bool Transceiver::Receive()
     {
     };     
 
-    if (Receiver::State_FL0() == State::Passive)    // Если панель сообщает о том, что данных нет
+    if (Receiver::State_WR() == State::Passive)    // Если панель сообщает о том, что данных нет
     {
         Set_MODE(Mode::Disabled);                   // То отключаем взаимодействие с панелью
 
@@ -190,9 +190,9 @@ void Set_MODE(Mode::E mode)
 }
 
 
-State::E Receiver::State_FL0()
+State::E Receiver::State_WR()
 {
-    return HAL_PIO::Read(PIN_FL0) ? State::Active : State::Passive;
+    return HAL_PIO::Read(P_PIN_WR) ? State::Active : State::Passive;
 }
 
 
