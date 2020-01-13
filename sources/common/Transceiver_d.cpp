@@ -14,11 +14,11 @@ struct PinWR
 {
     static void SetActive()
     {
-        HAL_PIO::Write(PIN_P_WR, 0);
+        HAL_PIO::Reset(PIN_P_WR);
     }
     static void SetPassive()
     {
-        HAL_PIO::Write(PIN_P_WR, 1);
+        HAL_PIO::Set(PIN_P_WR);
     }
 };
 
@@ -34,11 +34,11 @@ struct PinCS
 {
     static void SetActive()
     {
-        HAL_PIO::Write(PIN_P_CS, 0);
+        HAL_PIO::Reset(PIN_P_CS);
     }
     static void SetPassive()
     {
-        HAL_PIO::Write(PIN_P_CS, 1);
+        HAL_PIO::Set(PIN_P_CS);
     }
 };
 

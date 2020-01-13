@@ -33,7 +33,8 @@ source_group(_VS                       REGULAR_EXPRESSION ../common/_VS/*)
 source_group(_VS\\std_includes         REGULAR_EXPRESSION ../common/_VS/std_includes/*)
 source_group(_VS\\CMSIS                REGULAR_EXPRESSION ../common/_VS/CMSIS/*)
 source_group(src                       REGULAR_EXPRESSION src/*)
-source_group(libs\\HAL                 REGULAR_EXPRESSION src/libs/HAL/*.h)
+source_group(libs\\HAL                 FILES src/libs/HAL/stm32f4xx_hal_conf.h
+                                             src/libs/HAL/stm32f4xx_it.h)
 source_group(Display                   REGULAR_EXPRESSION src/Display/*)
 source_group(Display\\Font             REGULAR_EXPRESSION src/Display/Font/*)
 source_group(FPGA                      REGULAR_EXPRESSION src/FPGA/*)
@@ -64,6 +65,7 @@ file(GLOB SOURCES   ../common/_VS/*
                     src/Settings/*
                     src/Utils/*
                     src/*
-                    src/libs/HAL/*.h)
+                    src/libs/HAL/stm32f4xx_hal_conf.h
+                    src/libs/HAL/stm32f4xx_it.h)
 
 add_library(Panel ${SOURCES})
