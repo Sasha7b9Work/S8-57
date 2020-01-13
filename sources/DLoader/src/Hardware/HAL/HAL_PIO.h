@@ -3,7 +3,7 @@
 
 #define P_PIN_BUSY       HPort::_A, HPin::_7
 #define P_PIN_DATA_READY HPort::_C, HPin::_4
-#define PIN_READY        HPort::_G, HPin::_12
+#define P_PIN_CS         HPort::_G, HPin::_12
 #define P_PIN_WR         HPort::_D, HPin::_5
 #define PIN_D0           HPort::_D, HPin::_14
 #define PIN_D1           HPort::_D, HPin::_15

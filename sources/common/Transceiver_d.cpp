@@ -51,7 +51,7 @@ void Transceiver::Init()
 {
     HAL_PIO::Init(P_PIN_BUSY, HMode::Output_PP, HPull::Down);
     HAL_PIO::Init(P_PIN_DATA_READY, HMode::Output_PP, HPull::Down);
-    HAL_PIO::Init(PIN_READY, HMode::Input, HPull::Down);    // используется для чтения подтверждения из панели
+    HAL_PIO::Init(P_PIN_CS, HMode::Input, HPull::Down);    // используется для чтения подтверждения из панели
 
     Set_MODE(Mode::Disabled);
 }
@@ -160,7 +160,7 @@ bool Transceiver::Receive()
 
 State::E State_READY()
 {
-    return  HAL_PIO::Read(PIN_READY) ? State::Active : State::Passive;
+    return  HAL_PIO::Read(P_PIN_CS) ? State::Active : State::Passive;
 }
 
 
