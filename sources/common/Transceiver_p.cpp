@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Decoder_p.h"
 #include "Transceiver.h"
 
 
@@ -24,40 +25,85 @@
 
 
 
-struct PinBusy
+namespace PinBusy
 {
     /// ”становить признак того, что панель зан€та
-    static void SetActive()   { HAL_GPIO_WritePin(BUSY, GPIO_PIN_RESET); }
+    void SetActive()   { HAL_GPIO_WritePin(BUSY, GPIO_PIN_RESET); }
     /// —н€ть признак того, что панель зан€та
-    static void SetPassive() { HAL_GPIO_WritePin(BUSY, GPIO_PIN_SET); }
+    void SetPassive() { HAL_GPIO_WritePin(BUSY, GPIO_PIN_SET); }
+
+    void Init()
+    {
+        GPIO_InitTypeDef gpio;
+        gpio.Pin = PIN_BUSY;
+        gpio.Mode = GPIO_MODE_OUTPUT_OD;
+        gpio.Pull = GPIO_PULLUP;
+        HAL_GPIO_Init(PORT_BUSY, &gpio);
+    }
 };
 
 
-struct PinDataReady
+namespace PinDataReady
 {
-    static void SetActive()   { HAL_GPIO_WritePin(DATA_READY, GPIO_PIN_RESET); }
-    static void SetPassive() { HAL_GPIO_WritePin(DATA_READY, GPIO_PIN_SET); }
+    void SetActive()   { HAL_GPIO_WritePin(DATA_READY, GPIO_PIN_RESET); }
+    void SetPassive() { HAL_GPIO_WritePin(DATA_READY, GPIO_PIN_SET); }
+
+    void Init()
+    {
+        GPIO_InitTypeDef gpio;
+        gpio.Pin = PIN_DATA_READY;
+        gpio.Mode = GPIO_MODE_OUTPUT_OD;
+        gpio.Pull = GPIO_PULLUP;
+        HAL_GPIO_Init(PORT_DATA_READY, &gpio);
+    }
 };
 
 
-struct FlagCS
+namespace PinCS
 {
-    static bool IsSet()   { return HAL_GPIO_ReadPin(CS) == GPIO_PIN_RESET; }
-    static bool IsReset() { return HAL_GPIO_ReadPin(CS) == GPIO_PIN_SET; }
+    void Init()
+    {
+        GPIO_InitTypeDef gpio;
+        gpio.Pin = PIN_CS;
+        gpio.Mode = GPIO_MODE_INPUT;
+        gpio.Pull = GPIO_PULLUP;
+        HAL_GPIO_Init(PORT_CS, &gpio);
+    }
+
+    bool IsActive()   { return HAL_GPIO_ReadPin(CS) == GPIO_PIN_RESET; }
+    bool IsPassive() { return HAL_GPIO_ReadPin(CS) == GPIO_PIN_SET; }
 };
 
 
-struct FlagWR
+namespace PinWR
 {
-    static bool IsSet()   { return HAL_GPIO_ReadPin(WR) == GPIO_PIN_RESET; }
-    static bool IsReset() { return HAL_GPIO_ReadPin(WR) == GPIO_PIN_SET; }
+    void Init()
+    {
+        GPIO_InitTypeDef gpio;
+        gpio.Pin = PIN_WR;
+        gpio.Mode = GPIO_MODE_INPUT;
+        gpio.Pull = GPIO_PULLUP;
+        HAL_GPIO_Init(PORT_WR, &gpio);
+    }
+
+    bool IsActive()   { return HAL_GPIO_ReadPin(WR) == GPIO_PIN_RESET; }
+    bool IsPassive() { return HAL_GPIO_ReadPin(WR) == GPIO_PIN_SET; }
 };
 
 
-struct FlagRD
+namespace PinRD
 {
-    static bool IsSet()   { return HAL_GPIO_ReadPin(RD) == GPIO_PIN_RESET; }
-    static bool IsReset() { return HAL_GPIO_ReadPin(RD) == GPIO_PIN_SET; }
+    void Init()
+    {
+        GPIO_InitTypeDef gpio;
+        gpio.Pin = PIN_CS;
+        gpio.Mode = GPIO_MODE_INPUT;
+        gpio.Pull = GPIO_PULLUP;
+        HAL_GPIO_Init(PORT_CS, &gpio);
+    }
+
+    bool IsActive()   { return HAL_GPIO_ReadPin(RD) == GPIO_PIN_RESET; }
+    bool IsPassive() { return HAL_GPIO_ReadPin(RD) == GPIO_PIN_SET; }
 };
 
 
@@ -74,38 +120,88 @@ private:
 
 void Transceiver::Init()
 {
-    GPIO_InitTypeDef gpio;
-    gpio.Pin = PIN_BUSY |        // BUSY - здесь выставл€етс€ признак зан€тости
-        PIN_DATA_READY;          // DATA_READY - здесь выставл€етс€ признак того, что есть данные дл€ передачи
-    gpio.Mode = GPIO_MODE_OUTPUT_OD;
-    gpio.Pull = GPIO_PULLUP;
-    HAL_GPIO_Init(PORT_BUSY, &gpio);
-
+    PinBusy::Init();
     PinBusy::SetPassive();
+
+    PinDataReady::Init();
     PinDataReady::SetPassive();
 
-    gpio.Pin = PIN_CS |         // CS от устройства. ѕо этому сигналу будем начинать операцию чтени€ или записи
-        PIN_WR |                // WR - ѕризнак того, что устройство выполн€ет запись
-        PIN_RD;                 // RD - ѕризнак того, что устройство выполн€ет чтение
-    gpio.Mode = GPIO_MODE_INPUT;
-    HAL_GPIO_Init(PORT_CS, &gpio);
+    PinCS::Init();
+    PinRD::Init();
+    PinWR::Init();
+
+    DataBus::Init();
 }
 
 
-void Transceiver::Send(const uint8 *, uint)
+static void SetData(uint8 data)
 {
+    static const uint16 pins[8] = {GPIO_PIN_0, GPIO_PIN_1, GPIO_PIN_2, GPIO_PIN_3, GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6, GPIO_PIN_7};
 
+    for(int i = 0; i < 8; i++)
+    {
+        HAL_GPIO_WritePin(GPIOE, pins[i], static_cast<GPIO_PinState>(data & 0x01));
+        data >>= 1;
+    }
+}
+
+
+static void SendByte(uint8 data)
+{
+    SetData(data);                          // ¬ыставл€ем шину данных
+
+    PinBusy::SetPassive();                  // ¬ыставл€ем признак того, что данные выставлены
+
+    while(PinCS::IsActive()) {};            // ∆дЄм, пока устройство считает данные
+
+    PinBusy::SetActive();                   // ¬ыставл€ем признак того, что подтерждение получено
+}
+
+
+void Transceiver::Send(const uint8 *data, uint size)
+{
+    PinBusy::SetActive();                   // ”станавливаем признак того, что панель зан€та
+
+    PinDataReady::SetActive();              // ”станавливаем признак того, что у панели есть данные дл€ передачи
+
+    while(PinRD::IsPassive())               // ∆дЄм, когда устройство будет готово к чтению
+    {
+        int i = 0;
+    }
+
+    DataBus::InitTransmit();                // Ќастраиваем шину данных на передачу
+
+    for(uint i = 0; i < size; i++)
+    {
+        SendByte(*data++);
+    }
+
+    PinDataReady::SetPassive();             // —нимаем признак готовности данных дл€ передачи
+
+    while(PinRD::IsActive()) {}             // ќжидаем пока устройсво выйдет из режима чтени€
+
+    PinBusy::SetPassive();                  // ”станавливаем признак тогќ, что панель готова к приЄму данных
+
+    DataBus::InitReceive();                 // ¬озвращаем шину данных в обычное состо€ние - режим приЄма
 }
 
 
 bool Transceiver::Receive()
 {
-    if(FlagCS::IsReset() && FlagWR::IsReset())
+    if(PinCS::IsActive() && PinWR::IsActive())
     {
-        return false;
+        uint8 data = (uint8)GPIOE->IDR;     // ѕросто читаем данные 
+
+        PinBusy::SetActive();               // ”станавливаем признак того, что данные прин€ты
+
+        PDecoder::AddData(data);            // ќбрабатываем данные
+
+        PinBusy::SetPassive();              // » устанавливаем признак того, что панель снова свободна
+
+        return true;
     }
 
-    return true;
+    return false;
 }
 
 
@@ -116,4 +212,20 @@ void DataBus::InitReceive()
     gpio.Mode = GPIO_MODE_INPUT;
     gpio.Pull = GPIO_PULLUP;
     HAL_GPIO_Init(GPIOE, &gpio);
+}
+
+
+void DataBus::InitTransmit()
+{
+    GPIO_InitTypeDef gpio;
+    gpio.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;   // D0...D7
+    gpio.Mode = GPIO_MODE_OUTPUT_OD;
+    gpio.Pull = GPIO_PULLUP;
+    HAL_GPIO_Init(GPIOE, &gpio);
+}
+
+
+void DataBus::Init()
+{
+    InitReceive();
 }

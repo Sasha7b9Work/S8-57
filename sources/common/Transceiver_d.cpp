@@ -12,14 +12,8 @@
 
 struct PinWR
 {
-    static void SetActive()
-    {
-        HAL_PIO::Reset(PIN_P_WR);
-    }
-    static void SetPassive()
-    {
-        HAL_PIO::Set(PIN_P_WR);
-    }
+    static void SetActive()  { HAL_PIO::Reset(PIN_P_WR); }
+    static void SetPassive() { HAL_PIO::Set(PIN_P_WR); }
 };
 
 
@@ -32,24 +26,16 @@ struct PinRD
 
 struct PinCS
 {
-    static void SetActive()
-    {
-        HAL_PIO::Reset(PIN_P_CS);
-    }
-    static void SetPassive()
-    {
-        HAL_PIO::Set(PIN_P_CS);
-    }
+    static void SetActive()  { HAL_PIO::Reset(PIN_P_CS); }
+    static void SetPassive() { HAL_PIO::Set(PIN_P_CS); }
 };
 
 
-struct Panel
+// Пин занятости панели
+struct PinBusy
 {
-    static bool IsBusy()
-    {
-        return HAL_PIO::Read(PIN_P_BUSY) == 0;
-    }
-    static void IsDataReady();
+    static bool IsActive()  { return HAL_PIO::Read(PIN_P_BUSY) == 0; }
+    static bool IsPassive() { return HAL_PIO::Read(PIN_P_BUSY) == 1; }
 };
 
 
@@ -105,11 +91,11 @@ static void SendByte(uint8 byte)
 
     PinWR::SetActive();             // Устанавливаем флаг записи
 
-    while(Panel::IsBusy()) {};      // И ждём, пока панель выставит флаг готовности к взаимодействию
+    while(PinBusy::IsActive()) {};  // И ждём, пока панель выставит флаг готовности к взаимодействию
 
     PinCS::SetActive();             // Устанавливаем чипселект
 
-    while(!Panel::IsBusy()) {};     // Ждём, пока панель опять перейдёт в занятое состояние - считает даные
+    while(PinBusy::IsPassive()) {}; // Ждём, пока панель опять перейдёт в занятое состояние - считает даные
 
     PinCS::SetPassive();            // Заканчиваем цикл обмена
     PinWR::SetPassive();
