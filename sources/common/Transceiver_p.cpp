@@ -160,6 +160,8 @@ static void SendByte(uint8 data)
 
 void Transceiver::Send(const uint8 *data, uint size)
 {
+    return;
+    
     PinBusy::SetActive();                   // ”станавливаем признак того, что панель зан€та
 
     PinDataReady::SetActive();              // ”станавливаем признак того, что у панели есть данные дл€ передачи
@@ -188,9 +190,20 @@ void Transceiver::Send(const uint8 *data, uint size)
 
 bool Transceiver::Receive()
 {
+    static int counter = 0;
+
+    static uint8 buffer[32];
+
     if(PinCS::IsActive() && PinWR::IsActive())
     {
         uint8 data = (uint8)GPIOE->IDR;     // ѕросто читаем данные 
+
+        buffer[counter++] = data;
+
+        if(counter == 32)
+        {
+            counter = counter;
+        }
 
         PinBusy::SetActive();               // ”станавливаем признак того, что данные прин€ты
 

@@ -82,6 +82,17 @@ void Transceiver::Send(uint8 data)
 
 static void SendByte(uint8 byte)
 {
+    static int counter = 0;
+
+    static uint8 buffer[32];
+
+    buffer[counter++] = byte;
+
+    if(counter == 32)
+    {
+        counter = counter;
+    }
+
     // Устанавливаем данные на шине данных
 
     //                                                                                биты 0,1                                    биты 2,3
