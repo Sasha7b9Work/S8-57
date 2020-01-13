@@ -26,9 +26,6 @@ void HAL_FSMC::Init()
 
     HAL_PIO::Init(PIN_PAN0, HMode::Input, HPull::Down);
     HAL_PIO::Init(PIN_PAN1, HMode::Input, HPull::Down);
-    HAL_PIO::Init(PIN_NE4, HMode::Output_PP, HPull::Down);
-
-    HAL_PIO::Set(PIN_NE4);
 
     // ”станавливаем прив€зку дл€ пинов шины данных
     // GPIOD 14, 15, 0, 1 - D0, D1, D2, D3
