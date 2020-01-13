@@ -24,19 +24,19 @@
 
 
 
-struct FlagBusy
+struct PinBusy
 {
     /// ”становить признак того, что панель зан€та
-    static void Set()   { HAL_GPIO_WritePin(BUSY, GPIO_PIN_SET); }
+    static void SetActive()   { HAL_GPIO_WritePin(BUSY, GPIO_PIN_RESET); }
     /// —н€ть признак того, что панель зан€та
-    static void Reset() { HAL_GPIO_WritePin(BUSY, GPIO_PIN_RESET); }
+    static void SetPassive() { HAL_GPIO_WritePin(BUSY, GPIO_PIN_SET); }
 };
 
 
-struct FlagDataReady
+struct PinDataReady
 {
-    static void Set()   { HAL_GPIO_WritePin(DATA_READY, GPIO_PIN_RESET); }
-    static void Reset() { HAL_GPIO_WritePin(DATA_READY, GPIO_PIN_SET); }
+    static void SetActive()   { HAL_GPIO_WritePin(DATA_READY, GPIO_PIN_RESET); }
+    static void SetPassive() { HAL_GPIO_WritePin(DATA_READY, GPIO_PIN_SET); }
 };
 
 
@@ -81,8 +81,8 @@ void Transceiver::Init()
     gpio.Pull = GPIO_PULLUP;
     HAL_GPIO_Init(PORT_BUSY, &gpio);
 
-    FlagBusy::Reset();
-    FlagDataReady::Reset();
+    PinBusy::SetPassive();
+    PinDataReady::SetPassive();
 
     gpio.Pin = PIN_CS |         // CS от устройства. ѕо этому сигналу будем начинать операцию чтени€ или записи
         PIN_WR |                // WR - ѕризнак того, что устройство выполн€ет запись
