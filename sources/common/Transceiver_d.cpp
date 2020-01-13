@@ -39,9 +39,9 @@ State::E State_READY();
 struct Receiver
 {
     /// Инициализация FL0 на чтение
-    static void Init_WR_IN();
+    static void Init_FL0_IN();
     /// Возвращает состояние FL0
-    static State::E State_WR();
+    static State::E State_FL0();
     /// Считывает байт данных с ШД
     static uint8 ReadData();
 };
@@ -49,17 +49,17 @@ struct Receiver
 
 void Transceiver::Init()
 {
-    HAL_PIO::Init(P_PIN_BUSY, HMode::Output_PP, HPull::Down);
-    HAL_PIO::Init(P_PIN_DATA_READY, HMode::Output_PP, HPull::Down);
-    HAL_PIO::Init(P_PIN_CS, HMode::Input, HPull::Down);    // используется для чтения подтверждения из панели
+    HAL_PIO::Init(PIN_MODE0, HMode::Output_PP, HPull::Down);
+    HAL_PIO::Init(PIN_MODE1, HMode::Output_PP, HPull::Down);
+    HAL_PIO::Init(PIN_READY, HMode::Input, HPull::Down);    // используется для чтения подтверждения из панели
 
     Set_MODE(Mode::Disabled);
 }
 
 
-void Receiver::Init_WR_IN()
+void Receiver::Init_FL0_IN()
 {
-    HAL_PIO::Init(P_PIN_WR, HMode::Input, HPull::Down);  // Будем на этом выводе узнавать, есть ли у панели данные для передачи
+    HAL_PIO::Init(PIN_FL0, HMode::Input, HPull::Down);  // Будем на этом выводе узнавать, есть ли у панели данные для передачи
 }
 
 
@@ -125,7 +125,7 @@ bool Transceiver::Receive()
 
     DataBusMode::state = DataBusMode::DeviceReceive;
 
-    Receiver::Init_WR_IN();                        // Инициализируем FL0 на чтение
+    Receiver::Init_FL0_IN();                        // Инициализируем FL0 на чтение
 
     Set_MODE(Mode::Receive);                        // Сообщаем панели, что готовы принять данные
 
@@ -133,7 +133,7 @@ bool Transceiver::Receive()
     {
     };     
 
-    if (Receiver::State_WR() == State::Passive)    // Если панель сообщает о том, что данных нет
+    if (Receiver::State_FL0() == State::Passive)    // Если панель сообщает о том, что данных нет
     {
         Set_MODE(Mode::Disabled);                   // То отключаем взаимодействие с панелью
 
@@ -160,7 +160,7 @@ bool Transceiver::Receive()
 
 State::E State_READY()
 {
-    return  HAL_PIO::Read(P_PIN_CS) ? State::Active : State::Passive;
+    return  HAL_PIO::Read(PIN_READY) ? State::Active : State::Passive;
 }
 
 
@@ -168,18 +168,18 @@ void Set_MODE(Mode::E mode)
 {
     if (mode == Mode::Send)
     {
-        HAL_PIO::Reset(P_PIN_BUSY);
-        HAL_PIO::Set(P_PIN_DATA_READY);
+        HAL_PIO::Reset(PIN_MODE0);
+        HAL_PIO::Set(PIN_MODE1);
     }
     else if (mode == Mode::Receive)
     {
-        HAL_PIO::Reset(P_PIN_DATA_READY);
-        HAL_PIO::Set(P_PIN_BUSY);
+        HAL_PIO::Reset(PIN_MODE1);
+        HAL_PIO::Set(PIN_MODE0);
     }
     else if (mode == Mode::Disabled)
     {
-        HAL_PIO::Reset(P_PIN_BUSY);
-        HAL_PIO::Reset(P_PIN_DATA_READY);
+        HAL_PIO::Reset(PIN_MODE0);
+        HAL_PIO::Reset(PIN_MODE1);
         /// \todo С этим надо что-то делать. Непонятно, почему без задержки не работает
         //Timer::PauseOnOPS(200);
     }
@@ -190,9 +190,9 @@ void Set_MODE(Mode::E mode)
 }
 
 
-State::E Receiver::State_WR()
+State::E Receiver::State_FL0()
 {
-    return HAL_PIO::Read(P_PIN_WR) ? State::Active : State::Passive;
+    return HAL_PIO::Read(PIN_FL0) ? State::Active : State::Passive;
 }
 
 
