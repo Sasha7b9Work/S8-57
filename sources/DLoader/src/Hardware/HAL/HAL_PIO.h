@@ -1,7 +1,7 @@
 #pragma once
 
 
-#define PIN_MODE0   HPort::_A, HPin::_7
+#define P_PIN_BUSY  HPort::_A, HPin::_7
 #define PIN_MODE1   HPort::_C, HPin::_4
 #define PIN_READY   HPort::_G, HPin::_12
 #define P_PIN_WR    HPort::_D, HPin::_5

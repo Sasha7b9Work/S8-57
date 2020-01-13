@@ -49,7 +49,7 @@ struct Receiver
 
 void Transceiver::Init()
 {
-    HAL_PIO::Init(PIN_MODE0, HMode::Output_PP, HPull::Down);
+    HAL_PIO::Init(P_PIN_BUSY, HMode::Output_PP, HPull::Down);
     HAL_PIO::Init(PIN_MODE1, HMode::Output_PP, HPull::Down);
     HAL_PIO::Init(PIN_READY, HMode::Input, HPull::Down);    // используетс€ дл€ чтени€ подтверждени€ из панели
 
@@ -168,17 +168,17 @@ void Set_MODE(Mode::E mode)
 {
     if (mode == Mode::Send)
     {
-        HAL_PIO::Reset(PIN_MODE0);
+        HAL_PIO::Reset(P_PIN_BUSY);
         HAL_PIO::Set(PIN_MODE1);
     }
     else if (mode == Mode::Receive)
     {
         HAL_PIO::Reset(PIN_MODE1);
-        HAL_PIO::Set(PIN_MODE0);
+        HAL_PIO::Set(P_PIN_BUSY);
     }
     else if (mode == Mode::Disabled)
     {
-        HAL_PIO::Reset(PIN_MODE0);
+        HAL_PIO::Reset(P_PIN_BUSY);
         HAL_PIO::Reset(PIN_MODE1);
         /// \todo — этим надо что-то делать. Ќепон€тно, почему без задержки не работает
         //Timer::PauseOnOPS(200);
