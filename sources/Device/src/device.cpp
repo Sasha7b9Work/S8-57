@@ -102,25 +102,25 @@ void Device::Update()
 {
     START_MULTI_MEASUREMENT();
 
-    //Osci::Update();
+    Osci::Update();
     
     Display::Update();
 
-    //Menu::SaveSettings();
-    //
-    //Recorder::Update();
-    //
-    //Tester::Update();
-    //
-    //Multimeter::Update();
-    //
-    //Menu::Update();
-    //
-    //FDrive::Update();
-    //
-    //while (Transceiver::Receive()) {};
-    //
-    //SCPI::Update();
+    Menu::SaveSettings();
+
+    Recorder::Update();
+
+    Tester::Update();
+
+    Multimeter::Update();
+
+    Menu::Update();
+
+    FDrive::Update();
+
+    while (Transceiver::Receive()) {};
+
+    SCPI::Update();
 
     DDecoder::Update();
 }

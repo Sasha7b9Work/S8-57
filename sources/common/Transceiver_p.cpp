@@ -1,215 +1,163 @@
 #include "defines.h"
-#include "Decoder_p.h"
 #include "Transceiver.h"
+#include "Decoder_p.h"
+#include "Hardware/Timer.h"
+#include <cstring>
 
 
-#define PORT_BUSY        GPIOC
-#define PIN_BUSY         GPIO_PIN_14
-#define BUSY             PORT_BUSY, PIN_BUSY
+#define PORT_MODE0  GPIOC
+#define PIN_MODE0   GPIO_PIN_14
+#define MODE0       PORT_MODE0, PIN_MODE0
 
-#define PORT_DATA_READY  GPIOC
-#define PIN_DATA_READY   GPIO_PIN_15
-#define DATA_READY       PORT_DATA_READY, PIN_DATA_READY
+#define PORT_MODE1  GPIOC
+#define PIN_MODE1   GPIO_PIN_15
+#define MODE1       PORT_MODE1, PIN_MODE1
 
-#define PORT_CS          GPIOC
-#define PIN_CS           GPIO_PIN_13
-#define CS               PORT_CS, PIN_CS
+#define PORT_READY  GPIOC
+#define PIN_READY   GPIO_PIN_13
+#define READY       PORT_READY, PIN_READY
 
-#define PORT_WR          GPIOD
-#define PIN_WR           GPIO_PIN_5
-#define WR               PORT_WR, PIN_WR
-
-#define PORT_RD          GPIOD
-#define PIN_RD           GPIO_PIN_4
-#define RD               PORT_RD, PIN_RD
+#define PORT_FL0    GPIOD
+#define PIN_FL0     GPIO_PIN_5
+#define FL0         PORT_FL0, PIN_FL0
 
 
-
-namespace PinBusy
+/// Режим работы устройства (не панели)
+struct ModeDevice
 {
-    /// Установить признак того, что панель занята
-    void SetActive()   { HAL_GPIO_WritePin(BUSY, GPIO_PIN_RESET); }
-    /// Снять признак того, что панель занята
-    void SetPassive() { HAL_GPIO_WritePin(BUSY, GPIO_PIN_SET); }
-
-    void Init()
+    enum E
     {
-        GPIO_InitTypeDef gpio;
-        gpio.Pin = PIN_BUSY;
-        gpio.Mode = GPIO_MODE_OUTPUT_OD;
-        gpio.Pull = GPIO_PULLUP;
-        HAL_GPIO_Init(PORT_BUSY, &gpio);
-    }
+        Disabled,   ///< Обмен между устройствами не идёт
+        Send,       ///< Передача данных в панель
+        Receive,    ///< Приём данных от панели
+        Forbidden   ///< Недопустимый режим
+    };
 };
 
-
-namespace PinDataReady
+struct State
 {
-    void SetActive()   { HAL_GPIO_WritePin(DATA_READY, GPIO_PIN_RESET); }
-    void SetPassive() { HAL_GPIO_WritePin(DATA_READY, GPIO_PIN_SET); }
-
-    void Init()
+    enum E
     {
-        GPIO_InitTypeDef gpio;
-        gpio.Pin = PIN_DATA_READY;
-        gpio.Mode = GPIO_MODE_OUTPUT_OD;
-        gpio.Pull = GPIO_PULLUP;
-        HAL_GPIO_Init(PORT_DATA_READY, &gpio);
-    }
+        Passive,    ///< Установлен "0"
+        Active      ///< Установлена "1"
+    };
 };
 
 
-namespace PinCS
+/// /// Эту функцию нужно вызывать всякий раз при инициализации пинов на приём или передачу.
+void(*CallbackOnInitPins)();
+/// В этой функции все пины должны быть инициализированы на вход, чтобы не блокировать шины.
+void DeInitPins();
+/// Удалить из буфера переданные данные
+void DiscardTransmittedData();
+
+ModeDevice::E Mode_Device();
+
+void Set_READY(State::E state);
+///  Деинициализировать D
+void DeInit_FL0();
+
+void InitDataPins();
+/// Засылает данные в устройство, если таковые имеются
+void TransmitData();
+/// Установить данные на шину
+void SetData(uint8 data);
+/// Инициализировать FL0 на вывод - будем через него ссобщать о наличии/отутсвии данных для передачи
+void Init_FL0_OUT();
+
+void Set_FL0(State::E state);
+
+struct Receiver
 {
-    void Init()
-    {
-        GPIO_InitTypeDef gpio;
-        gpio.Pin = PIN_CS;
-        gpio.Mode = GPIO_MODE_INPUT;
-        gpio.Pull = GPIO_PULLUP;
-        HAL_GPIO_Init(PORT_CS, &gpio);
-    }
-
-    bool IsActive()   { return HAL_GPIO_ReadPin(CS) == GPIO_PIN_RESET; }
-    bool IsPassive() { return HAL_GPIO_ReadPin(CS) == GPIO_PIN_SET; }
+    /// Инициализирует 8 выводов данных на приём
+    static void InitDataPins();
 };
 
+static uint8 buffer[1024];
 
-namespace PinWR
-{
-    void Init()
-    {
-        GPIO_InitTypeDef gpio;
-        gpio.Pin = PIN_WR;
-        gpio.Mode = GPIO_MODE_INPUT;
-        gpio.Pull = GPIO_PULLUP;
-        HAL_GPIO_Init(PORT_WR, &gpio);
-    }
+static uint _bytesInBuffer = 0;
 
-    bool IsActive()   { return HAL_GPIO_ReadPin(WR) == GPIO_PIN_RESET; }
-    bool IsPassive() { return HAL_GPIO_ReadPin(WR) == GPIO_PIN_SET; }
-};
-
-
-namespace PinRD
-{
-    void Init()
-    {
-        GPIO_InitTypeDef gpio;
-        gpio.Pin = PIN_CS;
-        gpio.Mode = GPIO_MODE_INPUT;
-        gpio.Pull = GPIO_PULLUP;
-        HAL_GPIO_Init(PORT_CS, &gpio);
-    }
-
-    bool IsActive()   { return HAL_GPIO_ReadPin(RD) == GPIO_PIN_RESET; }
-    bool IsPassive() { return HAL_GPIO_ReadPin(RD) == GPIO_PIN_SET; }
-};
-
-
-struct DataBus
-{
-    static void Init();
-    static void InitReceive();
-    static void InitTransmit();
-
-private:
-    static bool inModeRecive;
-};
 
 
 void Transceiver::Init()
 {
-    PinBusy::Init();
-    PinBusy::SetPassive();
+    GPIO_InitTypeDef gpio;
+    gpio.Pin = PIN_MODE0;
+    gpio.Mode = GPIO_MODE_INPUT;
+    gpio.Pull = GPIO_PULLUP;
+    HAL_GPIO_Init(PORT_MODE0, &gpio);   // MODE0 - используется для чтения режима устройства //-V525
 
-    PinDataReady::Init();
-    PinDataReady::SetPassive();
+    gpio.Pin = PIN_MODE1;
+    HAL_GPIO_Init(PORT_MODE1, &gpio);   // MODE1 - используется для чтения режима устройства
 
-    PinCS::Init();
-    PinRD::Init();
-    PinWR::Init();
+    gpio.Pin = PIN_FL0;
+    gpio.Pull = GPIO_PULLUP;
+    HAL_GPIO_Init(PORT_FL0, &gpio);     // FL0 - исиользуется для чтения подтверждения от устройства
 
-    DataBus::Init();
+    gpio.Pin = PIN_READY;               
+    gpio.Mode = GPIO_MODE_OUTPUT_PP;
+    HAL_GPIO_Init(PORT_READY, &gpio);   // READY - используется для подтверждения чтения данных
+    
+    Set_READY(State::Passive);
+
+    DeInitPins();
 }
 
 
-static void SetData(uint8 data)
+void DeInitPins()
 {
-    static const uint16 pins[8] = {GPIO_PIN_0, GPIO_PIN_1, GPIO_PIN_2, GPIO_PIN_3, GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6, GPIO_PIN_7};
+    DeInit_FL0();
 
-    for(int i = 0; i < 8; i++)
-    {
-        HAL_GPIO_WritePin(GPIOE, pins[i], static_cast<GPIO_PinState>(data & 0x01));
-        data >>= 1;
-    }
+    Receiver::InitDataPins();
 }
 
 
-static void SendByte(uint8 data)
+void Receiver::InitDataPins()
 {
-    SetData(data);                          // Выставляем шину данных
+    GPIO_InitTypeDef gpio;
+    gpio.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;   // D0...D7
+    gpio.Mode = GPIO_MODE_INPUT;
+    gpio.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(GPIOE, &gpio);
+}
 
-    PinBusy::SetPassive();                  // Выставляем признак того, что данные выставлены
 
-    while(PinCS::IsActive()) {};            // Ждём, пока устройство считает данные
-
-    PinBusy::SetActive();                   // Выставляем признак того, что подтерждение получено
+void InitDataPins()
+{
+    GPIO_InitTypeDef gpio;
+    gpio.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;   // D0...D7
+    gpio.Mode = GPIO_MODE_OUTPUT_PP;
+    HAL_GPIO_Init(GPIOE, &gpio);
 }
 
 
 void Transceiver::Send(const uint8 *data, uint size)
 {
-    return;
-    
-    PinBusy::SetActive();                   // Устанавливаем признак того, что панель занята
-
-    PinDataReady::SetActive();              // Устанавливаем признак того, что у панели есть данные для передачи
-
-    while(PinRD::IsPassive())               // Ждём, когда устройство будет готово к чтению
-    {
-        int i = 0;
-    }
-
-    DataBus::InitTransmit();                // Настраиваем шину данных на передачу
-
-    for(uint i = 0; i < size; i++)
-    {
-        SendByte(*data++);
-    }
-
-    PinDataReady::SetPassive();             // Снимаем признак готовности данных для передачи
-
-    while(PinRD::IsActive()) {}             // Ожидаем пока устройсво выйдет из режима чтения
-
-    PinBusy::SetPassive();                  // Устанавливаем признак тогО, что панель готова к приёму данных
-
-    DataBus::InitReceive();                 // Возвращаем шину данных в обычное состояние - режим приёма
+    std::memcpy(&buffer[_bytesInBuffer], data, size);
+    _bytesInBuffer += size;
 }
 
 
 bool Transceiver::Receive()
 {
-    static int counter = 0;
+    ModeDevice::E mode = Mode_Device();
 
-    static uint8 buffer[32];
-
-    if(PinCS::IsActive() && PinWR::IsActive())
+    if (mode == ModeDevice::Receive)
     {
-        uint8 data = (uint8)GPIOE->IDR;     // Просто читаем данные 
+        TransmitData();
 
-        buffer[counter++] = data;
+        return true;
+    }
 
-        if(counter == 32)
-        {
-            counter = counter;
-        }
+    if (mode == ModeDevice::Send)
+    {
+        PDecoder::AddData((uint8)GPIOE->IDR);       // Читаем и обрабатываем байт данных
+        
+        PORT_READY->BSRR = PIN_READY;               // Устанавливаем признак, что данные приняты - "1" на READY
+        
+        while (PORT_MODE1->IDR & PIN_MODE1) {};     // Ждём сигнал подтверждения. Пока MODE1 находтися в "1" - устройство не дождалось подтверждения //-V712
 
-        PinBusy::SetActive();               // Устанавливаем признак того, что данные приняты
-
-        PDecoder::AddData(data);            // Обрабатываем данные
-
-        PinBusy::SetPassive();              // И устанавливаем признак того, что панель снова свободна
+        PORT_READY->BSRR = (uint)PIN_READY << 16U;  // И убираем сигнал готовности, устанавливая READY в "0"
 
         return true;
     }
@@ -218,27 +166,103 @@ bool Transceiver::Receive()
 }
 
 
-void DataBus::InitReceive()
+void TransmitData()
+{
+    Init_FL0_OUT();                             // Инициализируем FL0 для того, чтобы выставить на нём признак наличия или отсутствия данных
+
+    if (_bytesInBuffer == 0)
+    {
+        Set_FL0(State::Passive);                // Выставляем признак того, что данных для передачи нет
+    }
+    else
+    {
+        Set_FL0(State::Active);                 // Выставляем признак того, что есть данные для передачи
+        
+        InitDataPins();                         // Инициализируем пины даннх для передачи
+
+        SetData(buffer[0]);                     // Устанавливаем пины на ШД в соответствии с передаваемыми данными
+
+        DiscardTransmittedData();
+    }
+
+    Set_READY(State::Active);                   // Устанавливаем признак того, что данные выставлены
+
+    while (Mode_Device() == ModeDevice::Receive) {};  // Ждём от прибора подтверждения того, что данные приняты
+
+    Set_READY(State::Passive);                  // Выходим из режима передачи
+
+    DeInitPins();                               // Деинициализируем выводы
+}
+
+
+void DiscardTransmittedData()
+{
+    if (_bytesInBuffer > 0)
+    {
+        _bytesInBuffer--;                        // Удаляем переданные данные из буфера
+
+        std::memmove(&buffer[0], &buffer[1], _bytesInBuffer);
+    }
+}
+
+
+void Set_READY(State::E state)
+{
+    HAL_GPIO_WritePin(READY, (state == State::Active) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+}
+
+
+void Set_FL0(State::E state)
+{
+    HAL_GPIO_WritePin(FL0, (state == State::Active) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+}
+
+
+void SetData(uint8 data)
+{
+    static const uint16 pins[8] = {GPIO_PIN_0, GPIO_PIN_1, GPIO_PIN_2, GPIO_PIN_3, GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6, GPIO_PIN_7};
+
+    for (int i = 0; i < 8; i++)
+    {
+        HAL_GPIO_WritePin(GPIOE, pins[i], static_cast<GPIO_PinState>(data & 0x01));
+        data >>= 1;
+    }
+}
+
+
+void Init_FL0_OUT()
 {
     GPIO_InitTypeDef gpio;
-    gpio.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;   // D0...D7
+    gpio.Pin = PIN_FL0;
+    gpio.Mode = GPIO_MODE_OUTPUT_PP;
+    HAL_GPIO_Init(PORT_FL0, &gpio);
+}
+
+
+void DeInit_FL0()
+{
+    GPIO_InitTypeDef gpio;
+    gpio.Pin = PIN_FL0;
     gpio.Mode = GPIO_MODE_INPUT;
     gpio.Pull = GPIO_PULLUP;
-    HAL_GPIO_Init(GPIOE, &gpio);
+    HAL_GPIO_Init(PORT_FL0, &gpio);     // FL0 инициализируем на прослушивание - чтобы не мешать работе шины
 }
 
 
-void DataBus::InitTransmit()
+ModeDevice::E Mode_Device()
 {
-    GPIO_InitTypeDef gpio;
-    gpio.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;   // D0...D7
-    gpio.Mode = GPIO_MODE_OUTPUT_OD;
-    gpio.Pull = GPIO_PULLUP;
-    HAL_GPIO_Init(GPIOE, &gpio);
-}
+    //                  MODE    0  1
+    static const ModeDevice::E modes [2][2] =
+    {
+        {ModeDevice::Disabled, ModeDevice::Send},
+        {ModeDevice::Receive,  ModeDevice::Forbidden}
+    };
 
+    //int m0 = HAL_GPIO_ReadPin(MODE0);
+    int m0 = (PORT_MODE0->IDR & PIN_MODE0) ? 1 : 0;
+    
+    //int m1 = HAL_GPIO_ReadPin(MODE1);
+    int m1 = (PORT_MODE1->IDR & PIN_MODE1) ? 1 : 0;
 
-void DataBus::Init()
-{
-    InitReceive();
+    return modes[m0][m1];
 }

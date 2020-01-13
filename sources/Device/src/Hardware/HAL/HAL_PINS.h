@@ -93,19 +93,19 @@ struct HPin
 #define PIN_HCD_DM      HPort::_B, HPin::_14
 #define PIN_HCD_DP      HPort::_B, HPin::_15
 
-#define PIN_P_BUSY       HPort::_A, HPin::_7   /*  43 P_BUSY       (I) */
-#define PIN_P_DATA_READY HPort::_C, HPin::_4   /*  44 P_DATA_READY (I) */
-#define PIN_P_CS         HPort::_G, HPin::_12  /* 127 CS           (0) */
-#define PIN_P_WR         HPort::_D, HPin::_5   /* 119 WR           (0) */
-#define PIN_P_RD         HPort::_D, HPin::_4   /* 118 RD           (0) */
-#define PIN_P_D0         HPort::_D, HPin::_14
-#define PIN_P_D1         HPort::_D, HPin::_15
-#define PIN_P_D2         HPort::_D, HPin::_0
-#define PIN_P_D3         HPort::_D, HPin::_1
-#define PIN_P_D4         HPort::_E, HPin::_7
-#define PIN_P_D5         HPort::_E, HPin::_8
-#define PIN_P_D6         HPort::_E, HPin::_9
-#define PIN_P_D7         HPort::_E, HPin::_10
+#define PIN_MODE0       HPort::_A, HPin::_7     /*  43 CS_DISP1 */
+#define PIN_MODE1       HPort::_C, HPin::_4     /*  44 SEL_DISP */
+#define PIN_READY       HPort::_G, HPin::_12    /* 127 CS_DISP  */
+#define PIN_FL0         HPort::_D, HPin::_5     /* 119 WR       */
+#define PIN_CONNECT     HPort::_D, HPin::_4     /* 118 RD       */
+#define PIN_D0          HPort::_D, HPin::_14
+#define PIN_D1          HPort::_D, HPin::_15
+#define PIN_D2          HPort::_D, HPin::_0
+#define PIN_D3          HPort::_D, HPin::_1
+#define PIN_D4          HPort::_E, HPin::_7
+#define PIN_D5          HPort::_E, HPin::_8
+#define PIN_D6          HPort::_E, HPin::_9
+#define PIN_D7          HPort::_E, HPin::_10
 
 #define PIN_NE4         HPort::_G, HPin::_12
 #define PIN_PAN0        HPort::_A, HPin::_7
