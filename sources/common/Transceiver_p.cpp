@@ -71,9 +71,6 @@ private:
     static bool inModeRecive;
 };
 
-/// Инициализировать шину данных на приём
-static void InitDataPinsOnReceive();
-
 
 void Transceiver::Init()
 {
@@ -92,8 +89,6 @@ void Transceiver::Init()
         PIN_RD;                 // RD - Признак того, что устройство выполняет чтение
     gpio.Mode = GPIO_MODE_INPUT;
     HAL_GPIO_Init(PORT_CS, &gpio);
-
-    DataBus::Init();
 }
 
 
