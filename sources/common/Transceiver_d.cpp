@@ -10,6 +10,49 @@
 #endif
 
 
+struct PinWR
+{
+    static void SetActive()
+    {
+        HAL_PIO::Write(PIN_P_WR, 0);
+    }
+    static void SetPassive()
+    {
+        HAL_PIO::Write(PIN_P_WR, 1);
+    }
+};
+
+
+struct PinRD
+{
+    static void SetAcitve();
+    static void SetPassive();
+};
+
+
+struct PinCS
+{
+    static void SetActive()
+    {
+        HAL_PIO::Write(PIN_P_CS, 0);
+    }
+    static void SetPassive()
+    {
+        HAL_PIO::Write(PIN_P_CS, 1);
+    }
+};
+
+
+struct Panel
+{
+    static bool IsBusy()
+    {
+        return HAL_PIO::Read(PIN_P_BUSY) == 0;
+    }
+    static void IsDataReady();
+};
+
+
 struct Mode
 {
     enum E
@@ -51,6 +94,28 @@ void Transceiver::Send(uint8 data)
 }
 
 
+static void SendByte(uint8 byte)
+{
+    // Устанавливаем данные на шине данных
+
+    //                                                                                биты 0,1                                    биты 2,3
+    GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + static_cast<uint16>((static_cast<int16>(byte) & 0x03) << 14) + ((static_cast<uint16>(byte & 0x0c)) >> 2);  // Записываем данные в выходные пины
+    //                                                                             Биты 4,5,6,7
+    GPIOE->ODR = (GPIOE->ODR & 0xf87f) + static_cast<uint16>((static_cast<int16>(byte) & 0xf0) << 3);
+
+    PinWR::SetActive();             // Устанавливаем флаг записи
+
+    while(Panel::IsBusy()) {};      // И ждём, пока панель выставит флаг готовности к взаимодействию
+
+    PinCS::SetActive();             // Устанавливаем чипселект
+
+    while(!Panel::IsBusy()) {};     // Ждём, пока панель опять перейдёт в занятое состояние - считает даные
+
+    PinCS::SetPassive();            // Заканчиваем цикл обмена
+    PinWR::SetPassive();
+}
+
+
 void Transceiver::Send(const uint8 *data, uint size)
 {
     inInteraction = true;
@@ -70,26 +135,10 @@ void Transceiver::Send(const uint8 *data, uint size)
         HAL_PIO::InitOutput(PIN_P_RD, HPull::Down, 1);
     }
 
+
     for (uint i = 0; i < size; i++)
     {
-        uint8 d = *data++;
-
-        while(HAL_PIO::Read(PIN_P_BUSY) == 1) {};   // Ждём подтверждения готовности панели к взаимодействию
-
-        //                                                                             биты 0,1                                 биты 2,3
-        GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + static_cast<uint16>((static_cast<int16>(d) & 0x03) << 14) + ((static_cast<uint16>(d & 0x0c)) >> 2);  // Записываем данные в выходные пины
-        //                                                                          Биты 4,5,6,7
-        GPIOE->ODR = (GPIOE->ODR & 0xf87f) + static_cast<uint16>((static_cast<int16>(d) & 0xf0) << 3);
-
-        HAL_PIO::Reset(PIN_P_WR);                   // Устанавливаем признак записи
-
-        HAL_PIO::Reset(PIN_P_CS);                   // И даём чип-селект, чтобы панель предприняла определённые действия
-
-        while(HAL_PIO::Read(PIN_P_BUSY) == 0) {};   // Ждём, пока панель снимет признак того, что она свободна - захватила наши данные
-
-        HAL_PIO::Set(PIN_P_CS);
-
-        HAL_PIO::Set(PIN_P_WR);
+        SendByte(*data++);
     }
 
     inInteraction = false;

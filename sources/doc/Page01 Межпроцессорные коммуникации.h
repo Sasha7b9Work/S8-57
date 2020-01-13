@@ -5,68 +5,61 @@
     \section section1 Межплатный шлейф
 
     \code
-    +----+-------+--------------+----+--------------+-------------+-------+
-    | №  | Наим. |    437ZIT         |              |   429VIT6           |
-    |конт|       |     FPGA          |              |   Панель            |
-    +----+-------+--------------+----+--------------+-------------+-------+
-    |    |       | 43  PA7      | I  | P_BUSY       | 8  PC14     | O     | Panel::IsBusy()  Panel::IsFree()
-    |    |       | 44  PC4      | I  | P_DATA_READY | 9  PC15     | O "1" | Panel::DataReady()                DATA_READY (активный - "0")
-    |    |       | 127 PG12     | O  | CS           | 7  PC13     | I "1" | SetCS() ResetCS()                 Чип селект (активный - "0")
-    |    |       | 119 PD5  WR  | O  | WR           | 86 PD5  WR  | I     | SetWR()
-    |    |       | 118 PD4  RD  | O  | RD           | 85 PD4  RD  | I     | SetRD()                           Чтение/запись в/из панели "1" - чтение, "0" - запись
-    |    |       |              |    |              |             |       |
-    |    | AD0   | 85  PD14 D0  | IO | D0           | 97 PE0  DA0 | IO    | \
-    |    | AD1   | 86  PD15 D1  | IO | D1           | 98 PE1  DA1 | IO    | |
-    |    | AD2   | 114 PD0  D2  | IO | D2           | 1  PE2  DA2 | IO    | |
-    |    | AD3   | 115 PD1  D3  | IO | D3           | 2  PE3  DA3 | IO    | | WriteData() ReadData()
-    |    | AD4   | 58  PE7  D4  | IO | D4           | 3  PE4  DA4 | IO    | |
-    |    | AD5   | 59  PE8  D5  | IO | D5           | 4  PE5  DA5 | IO    | |
-    |    | AD6   | 60  PE9  D6  | IO | D6           | 5  PE6  DA6 | IO    | |
-    |    | AD7   | 63  PE10 D7  | IO | D7           | 38 PE7  DA7 | IO    | /
-    +----+-------+--------------+----+--------------+-------------+-------+
+    +----+-----+--------------+----+--------------+-------------+----+
+    | №  |Наим.|    437ZIT         |              |   429VIT6        |
+    |конт|     |     FPGA          |              |   Панель         |
+    +----+-----+--------------+----+--------------+-------------+----+
+    |    |     | 43  PA7      | I  | P_BUSY       | 8  PC14     | O  |\ Если 0 - панель находится в занятом состоянии
+    |    |     | 44  PC4      | I  | P_DATA_READY | 9  PC15     | O  || Если 0 - у панели есть данные для передачи
+    |    |     | 127 PG12     | O  | CS           | 7  PC13     | I  ||
+    |    |     | 119 PD5  WR  | O  | WR           | 86 PD5  WR  | I  ||
+    |    |     | 118 PD4  RD  | O  | RD           | 85 PD4  RD  | I  |/
+    |    |     |              |    |              |             |    |
+    |    | AD0 | 85  PD14 D0  | IO | D0           | 97 PE0  DA0 | IO | \
+    |    | AD1 | 86  PD15 D1  | IO | D1           | 98 PE1  DA1 | IO | |
+    |    | AD2 | 114 PD0  D2  | IO | D2           | 1  PE2  DA2 | IO | |
+    |    | AD3 | 115 PD1  D3  | IO | D3           | 2  PE3  DA3 | IO | | WriteData() ReadData()
+    |    | AD4 | 58  PE7  D4  | IO | D4           | 3  PE4  DA4 | IO | |
+    |    | AD5 | 59  PE8  D5  | IO | D5           | 4  PE5  DA5 | IO | |
+    |    | AD6 | 60  PE9  D6  | IO | D6           | 5  PE6  DA6 | IO | |
+    |    | AD7 | 63  PE10 D7  | IO | D7           | 38 PE7  DA7 | IO | /
+    +----+-----+--------------+----+--------------+-------------+----+
     
+        Запись в панель и чтение из панели производится по одной совместной 8-битной шине.
     
-    Алгоритм устройства
-    
-    void Device::Update()
-    {
-        while(ReadByte() {}     Читаем байты из панели, пока они там есть
-        
-        while(WriteByte()) {}    Засылаем байты в панель, пока есть что засылать
-    }
-    
-    bool Device::ReadByte()
-    {
-        while(Panel::IsBusy()) {}
-        
-        if(Panel::DataReady())
-        {
-            SetCS();
-            
-            uint8 byte = ReadByteFromDataBus();
-            
-            Buffer::Push(byte);
-            
-            ClearCS();
-            
-            return true;
-        }
-        
-        return false;
-    }
-    
-    bool Device::WriteByte()
-    {
-        while(Panel::IsBusy()) {}
-        
-        if(!Panel::DataReady())
-        {
-            
-        }
-        
-        return false;
-    }
+    *** Запись в панель ***
 
+    void Device::WriteByte(uint8 byte)
+    {
+        SetDataBus(byte);               // Выставляем данные на шину
+        SetWR();                        // Выбираем режим записи в панель
+        while(Panel::IsBusy()) {}       // Ждём пока панель освободится
+        SetCS();                        // И даём чип-селект
+        while(Panel::IsReady() {}       // Ждём, пока панель считает данные
+        ResetCS();                      // И завершаем обмен
+    }
+    
+    void Panel::Update()
+    {
+        if(!Buffer::IsEmpty())      // Если есть данные для передачи
+        {
+            SetDataReady();         // То выставляем соотвествующий флаг
+        }
+        
+        if(!PinCS::IsSet())
+        {
+            return;
+        }
+        
+        if(PinWR::IsSet())
+        {
+            ReadByte();
+        }
+        else if(PinWR::IsSet())
+        {
+            WriteByte();
+        }
+    }
 
     \endcode
        
