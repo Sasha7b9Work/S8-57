@@ -93,11 +93,12 @@ struct HPin
 #define PIN_HCD_DM      HPort::_B, HPin::_14
 #define PIN_HCD_DP      HPort::_B, HPin::_15
 
-#define PIN_MODE0       HPort::_A, HPin::_7     /*  43 CS_DISP1 */
-#define PIN_MODE1       HPort::_C, HPin::_4     /*  44 SEL_DISP */
-#define PIN_READY       HPort::_G, HPin::_12    /* 127 CS_DISP  */
-#define PIN_FL0         HPort::_D, HPin::_5     /* 119 WR       */
-//#define PIN_CONNECT     HPort::_D, HPin::_4     /* 118 RD       */
+#define PIN_PAN_READY   HPort::_A, HPin::_7
+#define PIN_PAN_DATA    HPort::_C, HPin::_4
+#define PIN_CS          HPort::_G, HPin::_12
+#define PIN_WR          HPort::_D, HPin::_5
+#define PIN_RD          HPort::_D, HPin::_4
+
 #define PIN_D0          HPort::_D, HPin::_14
 #define PIN_D1          HPort::_D, HPin::_15
 #define PIN_D2          HPort::_D, HPin::_0

@@ -109,6 +109,8 @@ void HAL_FSMC::Init()
     hsram->Extended->BWTR[hsram->Init.NSBank] = 0x0FFFFFFFU;
 
     __FMC_NORSRAM_ENABLE(hsram->Instance, hsram->Init.NSBank);
+
+    InitPanel();
 }
 
 
