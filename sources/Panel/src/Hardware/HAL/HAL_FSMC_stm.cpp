@@ -117,20 +117,22 @@ void HAL_FSMC::SendToPanel(uint8 *, uint)
 
 bool HAL_FSMC::Receive()
 {
-    if(pinCS.IsActive())   // Приём или передачи данных возможна при активном CS основного МК
+    if(pinCS.IsPassive())   // Если CS неактивен - ведущий МК не хочет общаться
     {
-        if(pinWR.IsActive())
-        {
-            uint8 data = DataBus::Read();
+        return false;
+    }
+        
+    if(pinWR.IsActive())
+    {
+        uint8 data = DataBus::Read();
 
-            pinReady.SetPassive();
+        pinReady.SetPassive();
 
-            PDecoder::AddData(data);
+        PDecoder::AddData(data);
 
-            pinReady.SetActive();
+        pinReady.SetActive();
 
-            return true;
-        }
+        return true;
     }
 
     return false;

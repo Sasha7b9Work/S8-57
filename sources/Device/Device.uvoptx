@@ -150,18 +150,18 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>93</LineNumber>
+          <LineNumber>153</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134439384</Address>
+          <Address>134417804</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>D:\Projects\stm32\S8-57\sources\common\Transceiver_d.cpp</Filename>
+          <Filename>.\src\Hardware\HAL\HAL_FSMC_PAN_stm.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\S8_57\../common/Transceiver_d.cpp\93</Expression>
+          <Expression>\\S8_57\src/Hardware/HAL/HAL_FSMC_PAN_stm.cpp\153</Expression>
         </Bp>
       </Breakpoint>
       <Tracepoint>
@@ -1341,7 +1341,7 @@
 
   <Group>
     <GroupName>Hardware/HAL</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
