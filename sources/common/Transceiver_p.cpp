@@ -5,21 +5,25 @@
 #include <cstring>
 
 
-#define PORT_MODE0  GPIOC
-#define PIN_MODE0   GPIO_PIN_14
+#define PORT_MODE0  GPIOD
+#define PIN_MODE0   GPIO_PIN_5
 #define MODE0       PORT_MODE0, PIN_MODE0
 
-#define PORT_MODE1  GPIOC
-#define PIN_MODE1   GPIO_PIN_15
+#define PORT_MODE1  GPIOD
+#define PIN_MODE1   GPIO_PIN_4
 #define MODE1       PORT_MODE1, PIN_MODE1
 
 #define PORT_READY  GPIOC
-#define PIN_READY   GPIO_PIN_13
+#define PIN_READY   GPIO_PIN_4
 #define READY       PORT_READY, PIN_READY
 
-#define PORT_FL0    GPIOD
-#define PIN_FL0     GPIO_PIN_5
+#define PORT_FL0    GPIOA
+#define PIN_FL0     GPIO_PIN_7
 #define FL0         PORT_FL0, PIN_FL0
+
+#define PORT_CS     GPIOG
+#define PIN_CS      GPIO_PIN_12
+#define CS          PORT_CS, PIN_CS
 
 
 /// Режим работы устройства (не панели)
