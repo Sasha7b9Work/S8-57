@@ -97,13 +97,13 @@ void Transceiver::Send(const uint8 *data, uint size)
         //                                                                          Ѕиты 4,5,6,7
         GPIOE->ODR = (GPIOE->ODR & 0xf87f) + static_cast<uint16>((static_cast<int16>(d) & 0xf0) << 3);
 
-        GPIOC->BSRR = GPIO_PIN_4;                       // ”становить MODE1 в "1" - это означает, что M0M1 == 01 и устройство ждЄт подверждени€ от панели о прин€тых данных
+        HAL_PIO::Set(PIN_MODE1);                     // ”становить MODE1 в "1" - это означает, что M0M1 == 01 и устройство ждЄт подверждени€ от панели о прин€тых данных
 
-        while (!(GPIOG->IDR & GPIO_PIN_12)) {};      // ќжидаем сигнал подтверждени€ - "1" на READY будет означать, что панель прин€ла данные //-V712
+        while(HAL_PIO::Read(PIN_READY) == 0) {};     // ќжидаем сигнал подтверждени€ - "1" на READY будет означать, что панель прин€ла данные //-V712
 
-        GPIOC->BSRR = (uint)GPIO_PIN_4 << 16U;          // ”становить MODE1 в "0" - это означает, что устройство в состо€нии Disable
+        HAL_PIO::Reset(PIN_MODE1);                   // ”становить MODE1 в "0" - это означает, что устройство в состо€нии Disable
 
-        while (GPIOG->IDR & GPIO_PIN_12) {};         // ќжидаем, когда уровень на READY станет раным "0". //-V712
+        while(HAL_PIO::Read(PIN_READY) == 1) {};         // ќжидаем, когда уровень на READY станет раным "0". //-V712
     }
 
     inInteraction = false;
