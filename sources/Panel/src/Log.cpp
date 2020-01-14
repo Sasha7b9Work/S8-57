@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "common/Command.h"
-#include "common/Transceiver.h"
 #include "log.h"
+#include "Hardware/HAL/HAL.h"
 #include <Display/Display.h>
 #include <Hardware/CPU.h>
 #include <stdarg.h>
@@ -80,7 +80,7 @@ static void AddToConsole(const char *text)
         buffer[0] = Command::AddToConsole;
         buffer[1] = static_cast<uint8>(std::strlen(text));
         std::strcpy(reinterpret_cast<char *>(buffer + 1), text);
-        Transceiver::Send(buffer, std::strlen(text) + 2);
+        HAL_FSMC::SendToPanel(buffer, std::strlen(text) + 2);
 
         std::free(buffer);
     }

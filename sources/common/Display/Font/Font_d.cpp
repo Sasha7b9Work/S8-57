@@ -2,7 +2,6 @@
 #include "AdvancedFont_d.h"
 #include "common/Command.h"
 #include "common/Decoder_d.h"
-#include "common/Transceiver.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "font8.inc"
@@ -46,7 +45,7 @@ int WorkerLengthText::Run(pString text)
 
         std::memcpy(buffer + 2, text, lenText);
 
-        Transceiver::Send(buffer, size);
+        HAL_FSMC::SendToPanel(buffer, size);
 
         delete[] buffer;
 
@@ -54,7 +53,7 @@ int WorkerLengthText::Run(pString text)
 
         while(recvLength == -1)
         {
-            Transceiver::Receive();
+            HAL_FSMC::Receive();
             DDecoder::Update();
 
             if(TIME_MS - start > 10)        /// \todo временный костыль. Надо разобраться, почему тут зависает
@@ -80,7 +79,7 @@ static void SendTypeFontToPanel(DTypeFont::E type)
 
     if (prevType != type)
     {
-        Transceiver::Send(Command::Paint_SetFont, static_cast<uint8>(type));
+        HAL_FSMC::SendToPanel(Command::Paint_SetFont, static_cast<uint8>(type));
         prevType = type;
     }
 }
@@ -141,7 +140,7 @@ void DFont::Pop()
 void DFont::SetSpacing(int _spacing)
 {
     spacing = _spacing;
-    Transceiver::Send(Command::Paint_SetTextSpacing, static_cast<uint8>(spacing));
+    HAL_FSMC::SendToPanel(Command::Paint_SetTextSpacing, static_cast<uint8>(spacing));
 }
 
 int DFont::GetSpacing()
@@ -152,7 +151,7 @@ int DFont::GetSpacing()
 
 void DFont::SetMinWidth(uint8 width)
 {
-    Transceiver::Send(Command::Paint_SetMinWidthFont, width);
+    HAL_FSMC::SendToPanel(Command::Paint_SetMinWidthFont, width);
 }
 
 

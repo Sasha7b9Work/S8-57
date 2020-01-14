@@ -45,10 +45,7 @@ source_group(common                 FILES   ../../common/Command.h
                                             ../../common/Decoder_d.cpp
                                             ../../common/Decoder_p.h
                                             ../../common/Message.h
-                                            ../../common/Message.cpp
-                                            ../../common/Transceiver.h
-                                            ../../common/Transceiver.cpp
-                                            ../common/Transceiver_win.cpp)
+                                            ../../common/Message.cpp)
 source_group(_VS                                        REGULAR_EXPRESSION ../common/_VS/*)
 source_group(_VS\\CMSIS                                 REGULAR_EXPRESSION ../common/_VS/CMSIS/*)
 source_group(_VS\\FatFS                                 REGULAR_EXPRESSION ../common/_VS/FatFS/*)
@@ -157,6 +154,7 @@ source_group(Hardware\\HAL      FILES   ../../Device/src/Hardware/HAL/HAL.h
                                         ../../Device/src/Hardware/HAL/HAL_DAC1.cpp
                                                      src/Hardware/HAL/HAL_DAC2_win.cpp
                                                      src/Hardware/HAL/HAL_FSMC_win.cpp
+                                                     src/Hardware/HAL/HAL_FSMC_PAN_win.cpp
                                         ../../Device/src/Hardware/HAL/HAL_IT.cpp
                                         ../../Device/src/Hardware/HAL/HAL_MSP.cpp
                                         ../../Device/src/Hardware/HAL/HAL_NVIC.cpp
@@ -299,6 +297,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Hardware/HAL/HAL_DAC1.cpp
                                  src/Hardware/HAL/HAL_DAC2_win.cpp
                                  src/Hardware/HAL/HAL_FSMC_win.cpp
+                                 src/Hardware/HAL/HAL_FSMC_PAN_win.cpp
                     ../../Device/src/Hardware/HAL/HAL_IT.cpp
                     ../../Device/src/Hardware/HAL/HAL_MSP.cpp
                     ../../Device/src/Hardware/HAL/HAL_NVIC.cpp

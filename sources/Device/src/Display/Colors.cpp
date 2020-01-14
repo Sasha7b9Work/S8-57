@@ -1,6 +1,6 @@
 #include "defines.h"
-#include "common/Transceiver.h"
 #include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 
@@ -304,7 +304,7 @@ static void WriteToDisplay(Color color)
     {
         lastColor = color;
 
-        Transceiver::Send(Command::Paint_SetColor, lastColor.value);
+        HAL_FSMC::SendToPanel(Command::Paint_SetColor, lastColor.value);
     }
 }
 
@@ -323,7 +323,7 @@ void Color::LoadValueRGB()
         static_cast<uint8>(rgb >> 24)
     };
 
-    Transceiver::Send(buffer, 6);
+    HAL_FSMC::SendToPanel(buffer, 6);
 }
 
 

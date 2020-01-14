@@ -405,21 +405,6 @@
               <FileType>8</FileType>
               <FilePath>..\common\Message.cpp</FilePath>
             </File>
-            <File>
-              <FileName>Transceiver.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\Transceiver.h</FilePath>
-            </File>
-            <File>
-              <FileName>Transceiver.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\common\Transceiver.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Transceiver_d.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\common\Transceiver_d.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -924,6 +909,11 @@
               <FileName>HAL_FSMC_stm.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_FSMC_stm.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_FSMC_PAN_stm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_FSMC_PAN_stm.cpp</FilePath>
             </File>
             <File>
               <FileName>HAL_IT.cpp</FileName>

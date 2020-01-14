@@ -1,9 +1,9 @@
 #include "defines.h"
-#include "common/Transceiver.h"
 #include "Display/Averager.h"
 #include "Display/Painter.h"
 #include "Display/Display.h"
 #include "Hardware/LTDC.h"
+#include "Hardware/HAL/HAL.h"
 #include "Utils/Math.h"
 #include <cstring>
 #include <cmath>
@@ -55,7 +55,7 @@ void Painter::EndScene(void)
 
         std::memcpy(buffer + 2, Display::GetBuffer() + sendingString * SIZE_STRING, SIZE_STRING);
 
-        Transceiver::Send(buffer, SIZE_STRING);
+        HAL_FSMC::SendToPanel(buffer, SIZE_STRING);
 
         sendingString++;
         if (sendingString == 120)
@@ -262,7 +262,7 @@ void Painter::SendRow(int row)
 
     std::memcpy(&data[2], points, 320);
 
-    Transceiver::Send(data, 322);
+    HAL_FSMC::SendToPanel(data, 322);
 }
 
 

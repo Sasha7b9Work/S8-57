@@ -1,7 +1,6 @@
 #include "defines.h"
 #include "device.h"
 #include "common/Decoder_d.h"
-#include "common/Transceiver.h"
 #include "Display/Console.h"
 #include "FlashDrive/FlashDrive.h"
 #include "FPGA/FPGA.h"
@@ -35,8 +34,6 @@ void Device::Init()
     Timer::Init();
     
     PAUSE_ON_MS(500);
-    
-    Transceiver::Init();
 
     Beeper::Init();
 
@@ -118,7 +115,7 @@ void Device::Update()
 
     FDrive::Update();
 
-    while (Transceiver::Receive()) {};
+    while (HAL_FSMC::Receive()) {};
 
     SCPI::Update();
 

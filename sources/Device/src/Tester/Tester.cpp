@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "common/Transceiver.h"
 #include "FPGA/ContextTester.h"
 #include "FPGA/MathFPGA.h"
 #include "Hardware/Timer.h"
@@ -155,7 +154,7 @@ void Tester::ProcessStep()
        |<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|                  */
 
 
-    if (Transceiver::InInteraction() || Timer::IsBusy())
+    if (HAL_FSMC::InteractionWithPanel() || Timer::IsBusy())
     {
         return;
     }

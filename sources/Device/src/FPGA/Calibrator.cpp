@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "common/Transceiver.h"
 #include "FPGA/Calibrator.h"
 #include "FPGA/TypesFPGA.h"
 #include "Hardware/HAL/HAL.h"
@@ -110,7 +109,7 @@ void Calibrator::Balance(Chan::E ch, Range::E range)
 
     while (numPoints < 100)
     {
-        if (!Transceiver::InInteraction())
+        if (!HAL_FSMC::InteractionWithPanel())
         {
             if (HAL_PIO::Read(PIN_P2P))
             {
@@ -148,7 +147,7 @@ float Calibrator::FindStretchK(Chan::E ch)
 
     for (int i = 0; i < 300; i++)
     {
-        if (!Transceiver::InInteraction())
+        if (!HAL_FSMC::InteractionWithPanel())
         {
             HAL_FSMC::SetAddrData(addr);
             uint8 d = HAL_FSMC::ReadData0();

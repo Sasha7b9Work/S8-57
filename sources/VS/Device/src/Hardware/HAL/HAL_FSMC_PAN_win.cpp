@@ -1,10 +1,10 @@
 #include "defines.h"
 #include "common/Command.h"
 #include "common/Decoder_d.h"
-#include "common/Transceiver.h"
 #include "common/Display/Font/Font_d.h"
 #include "Display/Colors.h"
 #include "../../Panel/src/Display/Font/Font_p.h"
+#include "Hardware/HAL/HAL.h"
 #include "Osci/Osci.h"
 #include "Recorder/Recorder.h"
 #pragma warning(push, 0)
@@ -18,13 +18,13 @@ wxColour colorDraw;
 extern wxMemoryDC memDC;
 
 
-void Transceiver::Init()
+void HAL_FSMC::Init()
 {
 
 }
 
 
-void Transceiver::Send(const uint8 *data, uint num)
+void HAL_FSMC::SendToPanel(uint8 *data, uint num)
 {
     if(data == nullptr)
     {
@@ -64,15 +64,29 @@ void Transceiver::Send(const uint8 *data, uint num)
 }
 
 
-void Transceiver::Send(uint8)
+void HAL_FSMC::SendToPanel(uint8)
 {
 
 }
 
 
-bool Transceiver::Receive()
+bool HAL_FSMC::Receive()
 {
     Osci::ReadPointP2P();
 
+    return false;
+}
+
+
+void HAL_FSMC::SendToPanel(uint8 byte0, uint8 byte1)
+{
+    uint8 data[2] = { byte0, byte1 };
+
+    SendToPanel(data, 2);
+}
+
+
+bool HAL_FSMC::InteractionWithPanel()
+{
     return false;
 }

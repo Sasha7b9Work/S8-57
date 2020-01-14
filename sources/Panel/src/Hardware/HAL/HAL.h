@@ -17,3 +17,13 @@ struct HAL_DAC2
     /// «начение value от 0 до 100
     static void SetValue(uint value);
 };
+
+
+struct HAL_FSMC
+{
+    static void Init();
+
+    static void SendToPanel(uint8 *data, uint size);
+
+    static bool Receive();
+};

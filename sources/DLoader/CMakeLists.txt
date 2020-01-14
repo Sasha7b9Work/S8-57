@@ -45,10 +45,7 @@ source_group(libs\\FatFS            REGULAR_EXPRESSION src/libs/FatFS/*)
 source_group(libs\\HAL              REGULAR_EXPRESSION src/libs/HAL/*)
 source_group(libs\\USBH             REGULAR_EXPRESSION src/libs/USBH/*)
 source_group(common                 FILES ../common/Decoder_d.h
-                                          ../common/Decoder_d.cpp
-                                          ../common/Transceiver.h
-                                          ../common/Transceiver.cpp
-                                          ../common/Transceiver_d.cpp)
+                                          ../common/Decoder_d.cpp)
 source_group(Display                REGULAR_EXPRESSION src/Display/*)
 source_group(Display\\Font          REGULAR_EXPRESSION ../common/Display/Font/*)
 source_group(Hardware               REGULAR_EXPRESSION src/Hardware/*)
@@ -61,9 +58,6 @@ source_group(Utils                  REGULAR_EXPRESSION src/Utils/*)
 
 file(GLOB SOURCES   ../common/Decoder_d.h
                     ../common/Decoder_d.cpp
-                    ../common/Transceiver.h
-                    ../common/Transceiver.cpp
-                    ../common/Transceiver_d.cpp
                     src/main.h
                     src/main.cpp
                     src/defines.h

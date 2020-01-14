@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "common/Command.h"
-#include "common/Transceiver.h"
 #include "Hardware/Keyboard.h"
+#include "Hardware/HAL/HAL.h"
 
 
 #define SL0 GPIO_PIN_14
@@ -204,7 +204,7 @@ static void SendCommand(Control control, Control::Action::E action)
         static_cast<uint8>(action)
     };
 
-    Transceiver::Send(data, 3);
+    HAL_FSMC::SendToPanel(data, 3);
 }   
 
 

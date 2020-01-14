@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "common/Transceiver.h"
 #include "FPGA/TypesFPGA.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
@@ -17,6 +16,9 @@
 
 uint8 *HAL_FSMC::addrData0 = nullptr;
 uint8 *HAL_FSMC::addrData1 = nullptr;
+
+
+HAL_FSMC::Mode::E HAL_FSMC::mode = HAL_FSMC::Mode::FPGA;
 
 
 void HAL_FSMC::Init()
@@ -110,9 +112,9 @@ void HAL_FSMC::Init()
 }
 
 
-void HAL_FSMC::Configure()
+void HAL_FSMC::ConfigureToFPGA()
 {
-    DataBusMode::state = DataBusMode::FPGA;
+    mode = Mode::FPGA;
 
     static const GPIO_InitTypeDef isGPIO =
     {   //    NOE          NWE          NE1
@@ -158,9 +160,9 @@ void HAL_FSMC::Configure()
 
 void HAL_FSMC::WriteToFPGA16(uint8 *address, uint16 value)
 {
-    if (DataBusMode::state != DataBusMode::FPGA)
+    if(mode != Mode::FPGA)
     {
-        Configure();
+        ConfigureToFPGA();
     }
 
     PAUSE_ON_TICKS(100);    /// \todo Без этой строки замедлен вывод при включённой оптимизации и TBase >= 0.5мс
@@ -172,9 +174,9 @@ void HAL_FSMC::WriteToFPGA16(uint8 *address, uint16 value)
 
 void HAL_FSMC::WriteToFPGA8(uint8 *address, uint8 value)
 {
-    if (DataBusMode::state != DataBusMode::FPGA)
+    if(mode != Mode::FPGA)
     {
-        Configure();
+        ConfigureToFPGA();
     }
 
     *address = value;
@@ -183,9 +185,9 @@ void HAL_FSMC::WriteToFPGA8(uint8 *address, uint8 value)
 
 uint8 HAL_FSMC::ReadFromFPGA(const uint8 *address)
 {
-    if (DataBusMode::state != DataBusMode::FPGA)
+    if(mode != Mode::FPGA)
     {
-        Configure();
+        ConfigureToFPGA();
     }
 
     return *address;
@@ -197,9 +199,9 @@ void HAL_FSMC::SetAddrData(uint8 *address0, uint8 *address1)
     addrData0 = address0;
     addrData1 = address1;
 
-    if (DataBusMode::state != DataBusMode::FPGA)
+    if(mode != Mode::FPGA)
     {
-        Configure();
+        ConfigureToFPGA();
     }
 }
 

@@ -1,7 +1,7 @@
 #include "defines.h"
-#include "common/Transceiver.h"
 #include "Display/Primitives.h"
 #include "Display/Painter.h"
+#include "Hardware/HAL/HAL.h"
 #include <cstring>
 #pragma warning(push, 0)
 #include <wx/wx.h>
@@ -39,7 +39,7 @@ void Rectangle::Draw(int x, int y, Color color)
     color.SetAsCurrent();
 
     memDC.DrawRectangle({ x, y, width + 1, height + 1 });
-    Transceiver::Send(nullptr, 0);                            // Это нужно лишь для того, чтобы регистратор читал точки
+    HAL_FSMC::SendToPanel(nullptr, 0);                            // Это нужно лишь для того, чтобы регистратор читал точки
 }
 
 

@@ -24,11 +24,7 @@ add_compile_options(/wd26812)   #The enum type %type% is unscoped. Prefer 'enum 
 
 source_group(common                    FILES ../common/Command.h
                                              ../common/Decoder_p.h
-                                             ../common/Decoder_p.cpp
-                                             ../common/Transceiver.cpp
-                                             ../common/Transceiver.h
-                                             ../common/Transceiver.cpp
-                                             ../common/Transceiver_p.cpp)
+                                             ../common/Decoder_p.cpp)
 source_group(_VS                       REGULAR_EXPRESSION ../common/_VS/*)
 source_group(_VS\\std_includes         REGULAR_EXPRESSION ../common/_VS/std_includes/*)
 source_group(_VS\\CMSIS                REGULAR_EXPRESSION ../common/_VS/CMSIS/*)
@@ -51,10 +47,6 @@ file(GLOB SOURCES   ../common/_VS/*
                     ../common/Command.h
                     ../common/Decoder_p.h
                     ../common/Decoder_p.cpp
-                    ../common/Transceiver.cpp
-                    ../common/Transceiver.h
-                    ../common/Transceiver.cpp
-                    ../common/Transceiver_p.cpp
                     src/Data/*
                     src/Display/*
                     src/Display/Font/*

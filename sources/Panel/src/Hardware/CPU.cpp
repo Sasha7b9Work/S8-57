@@ -20,6 +20,8 @@ void CPU::Init()
     __HAL_RCC_DMA2D_CLK_ENABLE();
     __HAL_RCC_LTDC_CLK_ENABLE();
     __HAL_RCC_TIM4_CLK_ENABLE();
+
+    HAL_FSMC::Init();
 }
 
 

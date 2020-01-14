@@ -1,12 +1,12 @@
 #include "defines.h"
 #include "device.h"
 #include "common/Decoder_d.h"
-#include "common/Transceiver.h"
 #include "Display/Console.h"
 #include "Display/Display.h"
 #include "Display/Painter.h"
 #include "Display/Primitives.h"
 #include "Display/Warnings.h"
+#include "Hardware/HAL/HAL.h"
 #include "common/Display/Font/Font_d.h"
 #include "FlashDrive/FlashDrive.h"
 #include "Hardware/Timer.h"
@@ -193,7 +193,7 @@ void Display::Message::Func()
 
     if (waitKey)
     {
-        while (Transceiver::Receive()) {};
+        while (HAL_FSMC::Receive()) {};
 
         DDecoder::Update();
 
@@ -433,11 +433,11 @@ static void ReadRow(uint8 row)
 {
     numRow = -1;
 
-    Transceiver::Send(Command::Screen, row);
+    HAL_FSMC::SendToPanel(Command::Screen, row);
 
     while (numRow == -1)
     {
-        Transceiver::Receive();
+        HAL_FSMC::Receive();
         DDecoder::Update();
     }
 }
@@ -451,5 +451,5 @@ void Display::SaveRow(int row)
 
 void Display::LoadBrightness()
 {
-    Transceiver::Send(Command::Display_Brightness, static_cast<uint8>(set.disp.brightness + 10));
+    HAL_FSMC::SendToPanel(Command::Display_Brightness, static_cast<uint8>(set.disp.brightness + 10));
 }

@@ -1,7 +1,6 @@
 #include "defines.h"
 #include "AdvancedFont_p.h"
 #include "common/Command.h"
-#include "common/Transceiver.h"
 #include "Hardware/HAL/HAL.h"
 #include "font8.inc"
 #include "font5.inc"
@@ -38,7 +37,7 @@ void PFont::SendLengthText(const char *text)
 
     uint8 data[2] = { Command::Text_Length, length };
 
-    Transceiver::Send(data, 2);
+    HAL_FSMC::SendToPanel(data, 2);
 }
 
 

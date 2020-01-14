@@ -2,9 +2,9 @@
 #include "Hardware/HAL/HAL.h"
 
 
-void HAL_FSMC::SendToPanel(uint8, uint8)
+bool HAL_FSMC::Receive()
 {
-    
+    return false;
 }
 
 
@@ -14,7 +14,7 @@ void HAL_FSMC::SendToPanel(uint8 *, uint)
 }
 
 
-bool HAL_FSMC::Receive()
+void HAL_FSMC::Init()
 {
-    return false;
+    
 }

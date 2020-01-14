@@ -1230,21 +1230,6 @@
               <FileType>8</FileType>
               <FilePath>..\common\Decoder_p.cpp</FilePath>
             </File>
-            <File>
-              <FileName>Transceiver.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\Transceiver.h</FilePath>
-            </File>
-            <File>
-              <FileName>Transceiver.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\common\Transceiver.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Transceiver_p.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\common\Transceiver_p.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1494,6 +1479,11 @@
               <FileName>HAL_DAC2_stm.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_DAC2_stm.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_FSMC_stm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_FSMC_stm.cpp</FilePath>
             </File>
           </Files>
         </Group>

@@ -62,6 +62,8 @@ struct HAL_DAC2
 
 struct HAL_FSMC
 {
+    /// Функции взаимодействия с альтерой
+
     static void Init();
     static void WriteToFPGA8(uint8 *address, uint8 value);
     static void WriteToFPGA16(uint8 *address, uint16 value);
@@ -72,15 +74,37 @@ struct HAL_FSMC
     /// Читать данные с установленного адреса
     static uint8 ReadData0();
     static uint8 ReadData1();
+
+    /// Функции взаимодействия с панелью
+
+    static void SendToPanel(uint8 byte);
+    static void SendToPanel(uint8 byte0, uint8 byte1);
+    static void SendToPanel(uint8 *data, uint size);
+
+    static bool Receive();
+
+    static bool InteractionWithPanel();
+    
 private:
     /// Первый адрес чтения данных
     static uint8 *addrData0;
     /// Второй адрес чтения данных
     static uint8 *addrData1;
     /// Конфигурировать для работы с альтерой
-    static void Configure();
+    static void ConfigureToFPGA();
     /// Возвращает растяжку для данного адреса
     static float GetStretch(const uint8 *address);
+
+    struct Mode
+    {
+        enum E
+        {
+            FPGA,
+            Panel
+        };
+    };
+
+    static Mode::E mode;
 };
 
 

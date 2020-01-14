@@ -1,8 +1,8 @@
 #include "defines.h"
 #include "common/Command.h"
-#include "common/Transceiver.h"
 #include "Display/Painter.h"
 #include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
 #include "Utils/Buffer.h"
 
 
@@ -15,13 +15,13 @@ void Painter::BeginScene(Color color)
 {
     color.SetAsCurrent();
 
-    Transceiver::Send(Command::Paint_BeginScene);
+    HAL_FSMC::SendToPanel(Command::Paint_BeginScene);
 }
 
 
 void Painter::EndScene()
 {
-    Transceiver::Send(Command::Paint_EndScene);
+    HAL_FSMC::SendToPanel(Command::Paint_EndScene);
 }
 
 
@@ -44,6 +44,6 @@ void Painter::DrawTesterData(uint8 mode, Color color, const uint16 *x, const uin
         *pointer8++ = y[i];
     }
 
-    Transceiver::Send(buffer.data, buffer.Size());
+    HAL_FSMC::SendToPanel(buffer.data, buffer.Size());
 }
 
