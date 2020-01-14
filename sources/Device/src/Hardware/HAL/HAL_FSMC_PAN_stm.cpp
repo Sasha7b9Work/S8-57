@@ -190,6 +190,25 @@ void DataBus::ConfigureToRead()
 }
 
 
+void DataBus::ConfigureToWrite()
+{
+    GPIOD->MODER &= 0x0ffffff0U;        // Настроим пины 14, 15, 0, 1 на запись D0, D1, D2, D3
+    GPIOD->MODER |= 0x50000005U;        // Устанавливаем для этих пинов GPIO_MODE_OUTPUT_PP
+
+    GPIOE->MODER &= 0xffc03fffU;        // Настроим пины 7, 8, 9, 10 на запись D4, D5, D6, D7
+    GPIOE->MODER |= 0x00154000U;        // Устанавливаем для этих пинов GPIO_MODE_OUTPUT_PP
+}
+
+
+void DataBus::Write(uint8 d)
+{
+    //                                                                             биты 0,1                                 биты 2,3
+    GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + static_cast<uint16>((static_cast<int16>(d) & 0x03) << 14) + ((static_cast<uint16>(d & 0x0c)) >> 2);  // Записываем данные в выходные пины
+    //                                                                          Биты 4,5,6,7
+    GPIOE->ODR = (GPIOE->ODR & 0xf87f) + static_cast<uint16>((static_cast<int16>(d) & 0xf0) << 3);
+}
+
+
 uint8 DataBus::Read()
 {
     uint8 result = HAL_PIO::Read(PIN_D7);
@@ -209,23 +228,4 @@ uint8 DataBus::Read()
     result |= HAL_PIO::Read(PIN_D0);
 
     return result;
-}
-
-
-void DataBus::ConfigureToWrite()
-{
-    GPIOD->MODER &= 0x0ffffff0U;        // Настроим пины 14, 15, 0, 1 на запись D0, D1, D2, D3
-    GPIOD->MODER |= 0x50000005U;        // Устанавливаем для этих пинов GPIO_MODE_OUTPUT_PP
-
-    GPIOE->MODER &= 0xffc03fffU;        // Настроим пины 7, 8, 9, 10 на запись D4, D5, D6, D7
-    GPIOE->MODER |= 0x00154000U;        // Устанавливаем для этих пинов GPIO_MODE_OUTPUT_PP
-}
-
-
-void DataBus::Write(uint8 d)
-{
-    //                                                                             биты 0,1                                 биты 2,3
-    GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + static_cast<uint16>((static_cast<int16>(d) & 0x03) << 14) + ((static_cast<uint16>(d & 0x0c)) >> 2);  // Записываем данные в выходные пины
-    //                                                                          Биты 4,5,6,7
-    GPIOE->ODR = (GPIOE->ODR & 0xf87f) + static_cast<uint16>((static_cast<int16>(d) & 0xf0) << 3);
 }
