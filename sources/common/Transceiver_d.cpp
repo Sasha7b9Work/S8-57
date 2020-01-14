@@ -49,6 +49,8 @@ struct Receiver
 
 void Transceiver::Init()
 {
+    HAL_PIO::Init(PIN_CS, HMode::Output_PP, HPull::Down);
+
     HAL_PIO::Init(PIN_MODE0, HMode::Output_PP, HPull::Down);
     HAL_PIO::Init(PIN_MODE1, HMode::Output_PP, HPull::Down);
     HAL_PIO::Init(PIN_READY, HMode::Input, HPull::Down);    // используется для чтения подтверждения из панели
