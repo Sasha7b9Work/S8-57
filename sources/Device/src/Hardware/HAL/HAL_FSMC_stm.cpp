@@ -24,9 +24,6 @@ void HAL_FSMC::Init()
     __HAL_RCC_FMC_CLK_ENABLE();
     __HAL_RCC_GPIOF_CLK_ENABLE();
 
-    HAL_PIO::Init(PIN_PAN0, HMode::Input, HPull::Down);
-    HAL_PIO::Init(PIN_PAN1, HMode::Input, HPull::Down);
-
     // ”станавливаем прив€зку дл€ пинов шины данных
     // GPIOD 14, 15, 0, 1 - D0, D1, D2, D3
     // GPIOE  7, 8, 9, 10 - D4, D5, D6, D7
