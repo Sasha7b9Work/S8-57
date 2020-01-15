@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "common/Decoder_d.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/HAL/HAL_PIO.h"
 #include <stm32f4xx_hal.h>
@@ -76,7 +77,7 @@ void HAL_FSMC::InitPanel()
 
 void HAL_FSMC::ConfigureToReadPanel()
 {
-    mode = Mode::Panel;
+    mode = Mode::PanelRead;
 
     pinWR.Init();
     pinRD.Init();
@@ -87,7 +88,7 @@ void HAL_FSMC::ConfigureToReadPanel()
 
 void HAL_FSMC::ConfigureToWritePanel()
 {
-    mode = Mode::Panel;
+    mode = Mode::PanelWrite;
 
     pinWR.Init();
     pinRD.Init();
@@ -98,19 +99,33 @@ void HAL_FSMC::ConfigureToWritePanel()
 
 bool HAL_FSMC::Receive()
 {
+    if(pinDataPAN.IsPassive())
+    {
+        return false;
+    }
+
     interactionWithPanel = true;
 
-    if(mode != Mode::Panel)
+    if(mode != Mode::PanelRead)
     {
         ConfigureToReadPanel();
     }
 
+    pinRD.SetActive();
+    pinCS.SetActive();
 
+    DDecoder::AddData(DataBus::Read());
 
+    while(pinDataPAN.IsActive())
+    {
+    }
+
+    pinCS.SetPassive();
+    pinRD.SetPassive();
 
     interactionWithPanel = false;
 
-    return false;
+    return true;
 }
 
 
@@ -132,7 +147,7 @@ void HAL_FSMC::SendToPanel(uint8 *data, uint size)
 {
     interactionWithPanel = true;
 
-    if(mode != Mode::Panel)
+    if(mode != Mode::PanelWrite)
     {
         ConfigureToWritePanel();
     }

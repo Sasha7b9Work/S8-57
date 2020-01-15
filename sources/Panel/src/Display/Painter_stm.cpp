@@ -55,7 +55,7 @@ void Painter::EndScene(void)
 
         std::memcpy(buffer + 2, Display::GetBuffer() + sendingString * SIZE_STRING, SIZE_STRING);
 
-        HAL_FSMC::SendToPanel(buffer, SIZE_STRING);
+        HAL_FSMC::SendToDevice(buffer, SIZE_STRING);
 
         sendingString++;
         if (sendingString == 120)
@@ -262,7 +262,7 @@ void Painter::SendRow(int row)
 
     std::memcpy(&data[2], points, 320);
 
-    HAL_FSMC::SendToPanel(data, 322);
+    HAL_FSMC::SendToDevice(data, 322);
 }
 
 

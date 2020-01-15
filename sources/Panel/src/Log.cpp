@@ -80,7 +80,7 @@ static void AddToConsole(const char *text)
         buffer[0] = Command::AddToConsole;
         buffer[1] = static_cast<uint8>(std::strlen(text));
         std::strcpy(reinterpret_cast<char *>(buffer + 1), text);
-        HAL_FSMC::SendToPanel(buffer, std::strlen(text) + 2);
+        HAL_FSMC::SendToDevice(buffer, std::strlen(text) + 2);
 
         std::free(buffer);
     }

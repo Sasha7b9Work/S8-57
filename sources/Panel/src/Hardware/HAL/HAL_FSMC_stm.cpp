@@ -59,9 +59,13 @@ struct InPin
         HAL_GPIO_Init(gpio, &is);
     }
 
-    bool IsActive()  { return HAL_GPIO_ReadPin(gpio, pin) == GPIO_PIN_RESET; }
+    bool IsActive()    { return HAL_GPIO_ReadPin(gpio, pin) == GPIO_PIN_RESET; }
 
-    bool IsPassive() { return HAL_GPIO_ReadPin(gpio, pin) == GPIO_PIN_SET; }
+    bool IsPassive()   { return HAL_GPIO_ReadPin(gpio, pin) == GPIO_PIN_SET; }
+
+    void WaitPassive() { while(IsActive()) { } }
+
+    void WaitActive()  { while(IsPassive()) { } }
 
     GPIO_TypeDef *gpio;
     uint16 pin;
@@ -78,10 +82,6 @@ static InPin  pinCS(CS);
 static InPin  pinWR(WR);
 /// Признак того, что основной МК осуществляет операцию чтения из панели
 static InPin  pinRD(RD);
-
-
-/// Заслать один байт в устройство
-static void SendByte(uint8 data);
 
 
 struct DataBus
@@ -115,56 +115,32 @@ void HAL_FSMC::Init()
 }
 
 
-void HAL_FSMC::SendToPanel(uint8 *data, uint size)
+void HAL_FSMC::SendToDevice(uint8 *data, uint size)
 {
-//    pinData.SetActive();
-//
-//    DataBus::ConfigureToWrite();
-//
-//    do
-//    {
-//        while(pinCS.IsPassive())
-//        {
-//        }
-//
-//        if(pinWR.IsActive())
-//        {
-//            ReceiveByte();
-//        }
-//
-//        if(pinRD.IsActive())
-//        {
-//            DataBus::Write(*data++);
-//
-//            pinReady.SetPassive();
-//
-//            while(pinCS.IsActive())
-//            {
-//            }
-//
-//            size--;
-//
-//            if(size > 0)
-//            {
-//                pinData.SetActive();
-//            }
-//        }
-//
-//    } while(size > 0);
-//
-//    DataBus::ConfigureToRead();
-}
+    pinData.SetActive();
 
+    DataBus::ConfigureToWrite();
 
-static void SendByte(uint8 data)
-{
-    DataBus::Write(data);
-
-    pinReady.SetPassive();
-
-    while(pinCS.IsActive())
+    do
     {
-    }
+        if(pinRD.IsActive())
+        {
+            DataBus::Write(*data++);
+
+            pinReady.SetPassive();
+
+            pinCS.WaitPassive();
+
+            size--;
+
+            if(size > 0)
+            {
+                pinData.SetActive();
+            }
+        }
+    } while(size > 0);
+
+    DataBus::ConfigureToRead();
 }
 
 

@@ -105,7 +105,8 @@ private:
         enum E
         {
             FPGA,
-            Panel
+            PanelRead,
+            PanelWrite
         };
     };
 

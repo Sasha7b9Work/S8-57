@@ -23,7 +23,7 @@ struct HAL_FSMC
 {
     static void Init();
 
-    static void SendToPanel(uint8 *data, uint size);
+    static void SendToDevice(uint8 *data, uint size);
 
     static bool ReceiveByte();
 };

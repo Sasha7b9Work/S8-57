@@ -204,7 +204,7 @@ static void SendCommand(Control control, Control::Action::E action)
         static_cast<uint8>(action)
     };
 
-    HAL_FSMC::SendToPanel(data, 3);
+    HAL_FSMC::SendToDevice(data, 3);
 }   
 
 
