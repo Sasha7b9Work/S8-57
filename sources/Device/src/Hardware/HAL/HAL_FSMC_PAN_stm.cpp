@@ -140,20 +140,31 @@ void HAL_FSMC::SendToPanel(uint8 *data, uint size)
 }
 
 
-static void SendByteToPanel(uint8 byte)
+static void SendByteToPanel(uint8 d)
 {
-    DataBus::Write(byte);               // Выставляем данные на шину
+    //DataBus::Write(byte);               // Выставляем данные на шину
+        //                                                                             биты 0,1                                 биты 2,3
+    GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + static_cast<uint16>((static_cast<int16>(d) & 0x03) << 14) + ((static_cast<uint16>(d & 0x0c)) >> 2);  // Записываем данные в выходные пины
+    //                                                                          Биты 4,5,6,7
+    GPIOE->ODR = (GPIOE->ODR & 0xf87f) + static_cast<uint16>((static_cast<int16>(d) & 0xf0) << 3);
 
-    pinWR.SetActive();                  // Даём сигнал записи
+    //pinWR.SetActive();                  // Даём сигнал записи
+    // HAL_PIO::Reset(PIN_WR);
+    HAL_GPIO_WritePin(GPIOD, GPIO_PIN_5, GPIO_PIN_RESET);
 
     while(pinReadyPAN.IsPassive()) {}   // И ожидаем сигнал панели о том, что она свободна
 
-    pinCS.SetActive();                  // Даём признак того, чта данные выставлены и можно их считывать
+    //pinCS.SetActive();                  // Даём признак того, чта данные выставлены и можно их считывать
+    //HAL_PIO::Reset(PIN_CS);
+    HAL_GPIO_WritePin(GPIOG, GPIO_PIN_12, GPIO_PIN_RESET);
 
     while(pinReadyPAN.IsActive()) {}    // Переключение PIN_PAN_READY в неактивное состояние означает, что панель приняла данные и обрабатывает их
 
-    pinWR.SetPassive();                 // \ Устанавливаем WR и CS в неактивное состояние - элементарный цикл записи окончен
-    pinCS.SetPassive();                 // /
+    //pinWR.SetPassive();                 // \ Устанавливаем WR и CS в неактивное состояние - элементарный цикл записи окончен
+    HAL_GPIO_WritePin(GPIOD, GPIO_PIN_5, GPIO_PIN_SET);
+
+    //pinCS.SetPassive();                 // /
+    HAL_GPIO_WritePin(GPIOG, GPIO_PIN_12, GPIO_PIN_SET);
 }
 
 
