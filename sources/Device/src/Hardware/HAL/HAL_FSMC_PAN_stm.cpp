@@ -69,23 +69,6 @@ void HAL_FSMC::InitPanel()
 }
 
 
-void HAL_FSMC::ConfigureToWritePanel()
-{
-    mode = Mode::PanelWrite;
-
-    pinWR.Init();
-    pinRD.Init();
-
-    // Конфигурируем ШД на запись
-
-    GPIOD->MODER &= 0x0ffffff0U;        // Настроим пины 14, 15, 0, 1 на запись D0, D1, D2, D3
-    GPIOD->MODER |= 0x50000005U;        // Устанавливаем для этих пинов GPIO_MODE_OUTPUT_PP
-
-    GPIOE->MODER &= 0xffc03fffU;        // Настроим пины 7, 8, 9, 10 на запись D4, D5, D6, D7
-    GPIOE->MODER |= 0x00154000U;        // Устанавливаем для этих пинов GPIO_MODE_OUTPUT_PP
-}
-
-
 bool HAL_FSMC::Receive()
 {
     if(pinReadyPAN.IsPassive() || pinDataPAN.IsPassive())
@@ -196,16 +179,22 @@ void HAL_FSMC::SendToPanel(uint8 byte0, uint8 byte1)
 
 void HAL_FSMC::SendToPanel(uint8 *data, uint size)
 {
-    while(Receive())
-    {
-
-    }
-
     interactionWithPanel = true;
 
     if(mode != Mode::PanelWrite)
     {
-        ConfigureToWritePanel();
+        mode = Mode::PanelWrite;
+
+        pinWR.Init();
+        pinRD.Init();
+
+        // Конфигурируем ШД на запись
+
+        GPIOD->MODER &= 0x0ffffff0U;        // Настроим пины 14, 15, 0, 1 на запись D0, D1, D2, D3
+        GPIOD->MODER |= 0x50000005U;        // Устанавливаем для этих пинов GPIO_MODE_OUTPUT_PP
+
+        GPIOE->MODER &= 0xffc03fffU;        // Настроим пины 7, 8, 9, 10 на запись D4, D5, D6, D7
+        GPIOE->MODER |= 0x00154000U;        // Устанавливаем для этих пинов GPIO_MODE_OUTPUT_PP
     }
 
     for(uint i = 0; i < size; i++)
