@@ -2,6 +2,9 @@
 #include "Utils/Queue.h"
 
 
+template class Queue<uint8>;
+
+
 template<typename T>
 Queue<T>::Queue() : pointer(nullptr), iFront(0), iBack(0)
 {

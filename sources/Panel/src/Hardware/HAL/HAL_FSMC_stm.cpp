@@ -2,6 +2,7 @@
 #include "common/Decoder_p.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
+#include "Utils/Queue.h"
 #include <stm32f4xx_hal.h>
 
 
@@ -83,8 +84,13 @@ static InPin  pinWR(WR);
 /// Признак того, что основной МК осуществляет операцию чтения из панели
 static InPin  pinRD(RD);
 
-/// Читает один байт из устройства. Возвращает true, если байт считан
-static bool ReadByte();
+/// Читает один байт из устройства
+static void ReadByte();
+/// Записывает байт в устройстов, если ечть что-то для записи
+static void ReadWrite();
+
+
+static Queue<uint8> queueData;
 
 
 struct DataBus
@@ -118,8 +124,13 @@ void HAL_FSMC::Init()
 }
 
 
-void HAL_FSMC::SendToDevice(uint8 *, uint)
+void HAL_FSMC::SendToDevice(uint8 *data, uint size)
 {
+    while(size > 0)
+    {
+        queueData.Push(*data++);
+    }
+
 //    pinData.SetActive();
 //
 //    DataBus::ConfigureToWrite();
@@ -147,13 +158,19 @@ void HAL_FSMC::SendToDevice(uint8 *, uint)
 }
 
 
-static bool ReadByte()
+void HAL_FSMC::Update()
 {
-    if(pinCS.IsPassive())   // Если CS неактивен - ведущий МК не хочет общаться
+    while(pinCS.IsActive())
     {
-        return false;
-    }
+        ReadByte();
 
+        WriteByte();
+    }
+}
+
+
+static void ReadByte()
+{
     //if(pinWR.IsActive())
     //if(HAL_GPIO_ReadPin(PORT_WR, PIN_WR) == GPIO_PIN_RESET)
     if((PORT_WR->IDR & PIN_WR) == 0)
@@ -175,19 +192,12 @@ static bool ReadByte()
 
         //pinReady.SetActive();
         PORT_READY->BSRR = PIN_READY << 16;
-
-        return true;
     }
-
-    return false;
 }
 
-
-void HAL_FSMC::Update()
+static void WriteByte()
 {
-    while(ReadByte())
-    {
-    }
+
 }
 
 
