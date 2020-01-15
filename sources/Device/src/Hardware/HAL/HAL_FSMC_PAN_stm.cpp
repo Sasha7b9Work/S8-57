@@ -124,8 +124,7 @@ bool HAL_FSMC::Receive()
 //    pinRD.SetPassive();
 //
 //    interactionWithPanel = false;
-//
-//    return true;
+
     return false;
 }
 

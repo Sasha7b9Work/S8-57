@@ -19,10 +19,8 @@ int main()
     while(1)
     {
         static uint prevTime = 0;
-        
-        while(HAL_FSMC::ReceiveByte())
-        {
-        }
+
+        HAL_FSMC::Update();
 
         if(TIME_MS - prevTime > 2)
         {

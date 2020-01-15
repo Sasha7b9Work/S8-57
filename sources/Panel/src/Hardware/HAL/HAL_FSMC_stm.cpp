@@ -83,6 +83,9 @@ static InPin  pinWR(WR);
 /// Признак того, что основной МК осуществляет операцию чтения из панели
 static InPin  pinRD(RD);
 
+/// Читает один байт из устройства. Возвращает true, если байт считан
+static bool ReadByte();
+
 
 struct DataBus
 {
@@ -144,13 +147,13 @@ void HAL_FSMC::SendToDevice(uint8 *, uint)
 }
 
 
-bool HAL_FSMC::ReceiveByte()
+static bool ReadByte()
 {
     if(pinCS.IsPassive())   // Если CS неактивен - ведущий МК не хочет общаться
     {
         return false;
     }
-        
+
     //if(pinWR.IsActive())
     //if(HAL_GPIO_ReadPin(PORT_WR, PIN_WR) == GPIO_PIN_RESET)
     if((PORT_WR->IDR & PIN_WR) == 0)
@@ -166,7 +169,9 @@ bool HAL_FSMC::ReceiveByte()
 
         //while(pinCS.IsActive());
         //while(HAL_GPIO_ReadPin(PORT_CS, PIN_CS) == GPIO_PIN_RESET) {}
-        while((PORT_CS->IDR & PIN_CS)  == 0) { }
+        while((PORT_CS->IDR & PIN_CS) == 0)
+        {
+        }
 
         //pinReady.SetActive();
         PORT_READY->BSRR = PIN_READY << 16;
@@ -175,6 +180,14 @@ bool HAL_FSMC::ReceiveByte()
     }
 
     return false;
+}
+
+
+void HAL_FSMC::Update()
+{
+    while(ReadByte())
+    {
+    }
 }
 
 

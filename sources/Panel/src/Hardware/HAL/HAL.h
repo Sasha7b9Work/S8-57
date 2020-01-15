@@ -25,5 +25,5 @@ struct HAL_FSMC
 
     static void SendToDevice(uint8 *data, uint size);
 
-    static bool ReceiveByte();
+    static void Update();
 };
