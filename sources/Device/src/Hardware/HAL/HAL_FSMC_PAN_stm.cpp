@@ -63,6 +63,9 @@ static InPin pinDataPAN(PIN_PAN_DATA);
 /// true означает, что шина находится в процессе обмена с панелью и запись по обычной FSMC в альтеру и память запрещена
 static bool interactionWithPanel = false;
 
+/// Записать один байт в панель
+static void SendByte(uint8 byte);
+
 
 void HAL_FSMC::InitPanel()
 {
@@ -143,15 +146,6 @@ void HAL_FSMC::SendToPanel(uint8 byte0, uint8 byte1)
 
 void HAL_FSMC::SendToPanel(uint8 *data, uint size)
 {
-    for(uint i = 0; i < size; i++)
-    {
-        SendByteToPanel(*data++);
-    }
-}
-
-
-void HAL_FSMC::SendByteToPanel(uint8 d)
-{
     interactionWithPanel = true;
 
     if(mode != Mode::PanelWrite)
@@ -159,6 +153,17 @@ void HAL_FSMC::SendByteToPanel(uint8 d)
         ConfigureToWritePanel();
     }
 
+    for(uint i = 0; i < size; i++)
+    {
+        SendByte(*data++);
+    }
+
+    interactionWithPanel = false;
+}
+
+
+static void SendByte(uint8 d)
+{
     //DataBus::Write(byte);               // Выставляем данные на шину
         //                                                                             биты 0,1                                 биты 2,3
     GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + static_cast<uint16>((static_cast<int16>(d) & 0x03) << 14) + ((static_cast<uint16>(d & 0x0c)) >> 2);  // Записываем данные в выходные пины
@@ -192,8 +197,6 @@ void HAL_FSMC::SendByteToPanel(uint8 d)
     //pinCS.SetPassive();                 // /
     //HAL_GPIO_WritePin(GPIOG, GPIO_PIN_12, GPIO_PIN_SET);
     GPIOG->BSRR = GPIO_PIN_12;
-
-    interactionWithPanel = false;
 }
 
 

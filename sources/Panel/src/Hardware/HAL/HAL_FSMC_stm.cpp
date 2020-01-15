@@ -115,7 +115,7 @@ void HAL_FSMC::Init()
 }
 
 
-void HAL_FSMC::SendToDevice(uint8 *data, uint size)
+void HAL_FSMC::SendToDevice(uint8 *, uint)
 {
 //    pinData.SetActive();
 //
