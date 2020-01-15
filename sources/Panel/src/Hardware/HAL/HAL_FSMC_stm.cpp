@@ -95,8 +95,6 @@ struct DataBus
     static void ConfigureToRead();
     /// Прочитать байт с шины данных
     static uint8 Read();
-    /// Сконфигурировать для записи
-    static void ConfigureToWrite();
     /// Записать байт в шину данных
     static void Write(uint8 byte);
 };
@@ -168,7 +166,9 @@ void HAL_FSMC::Update()
 
         if((PORT_RD->IDR & PIN_RD) == 0 && queueData.Size())
         {
-            DataBus::ConfigureToWrite();
+            // Конфигурируем ШД на запись
+            GPIOE->MODER &= 0xffff0000U;
+            GPIOE->MODER |= 0x00005555U;
 
             DataBus::Write(queueData.Front());
 
@@ -206,16 +206,6 @@ void DataBus::ConfigureToRead()
     GPIO_InitTypeDef gpio;
     gpio.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;   // D0...D7
     gpio.Mode = GPIO_MODE_INPUT;
-    gpio.Pull = GPIO_PULLUP;
-    HAL_GPIO_Init(GPIOE, &gpio);
-}
-
-
-void DataBus::ConfigureToWrite()
-{
-    GPIO_InitTypeDef gpio;
-    gpio.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;   // D0...D7
-    gpio.Mode = GPIO_MODE_OUTPUT_PP;
     gpio.Pull = GPIO_PULLUP;
     HAL_GPIO_Init(GPIOE, &gpio);
 }
