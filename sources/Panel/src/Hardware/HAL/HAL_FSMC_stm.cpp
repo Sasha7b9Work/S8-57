@@ -127,13 +127,16 @@ bool HAL_FSMC::Receive()
     {
         uint8 data = DataBus::Read();
 
-        pinReady.SetPassive();
+        //pinReady.SetPassive();
+        //HAL_GPIO_WritePin(PORT_READY, PIN_READY, GPIO_PIN_SET);
+        PORT_READY->BSRR = PIN_READY;
 
         PDecoder::AddData(data);        /// \todo Сейчас недостаток - пока не отработает PDecoder::AddData(), устройство не пойдёт дальше
 
         while(pinCS.IsActive());
 
-        pinReady.SetActive();
+        //pinReady.SetActive();
+        PORT_READY->BSRR = PIN_READY << 16;
 
         return true;
     }
