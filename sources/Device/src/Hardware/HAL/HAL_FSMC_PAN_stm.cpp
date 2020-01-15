@@ -78,8 +78,11 @@ bool HAL_FSMC::Receive()
     {
         mode = Mode::PanelRead;
 
-        pinWR.Init();
-        pinRD.Init();
+        //pinWR.Init();
+        //pinRD.Init();
+        GPIOD->MODER &= 0xfffff0ffU;
+        GPIOD->MODER |= 0x00000500U;
+        GPIOD->BSRR = (GPIO_PIN_5 | GPIO_PIN_4);
 
         // Конфигурируем ШД на чтение
 
