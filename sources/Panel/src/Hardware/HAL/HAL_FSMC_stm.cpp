@@ -87,7 +87,7 @@ static InPin  pinRD(RD);
 /// „итает один байт из устройства
 static void ReadByte();
 /// «аписывает байт в устройстов, если ечть что-то дл€ записи
-static void ReadWrite();
+static void WriteByte();
 
 
 static Queue<uint8> queueData;
@@ -129,32 +129,13 @@ void HAL_FSMC::SendToDevice(uint8 *data, uint size)
     while(size > 0)
     {
         queueData.Push(*data++);
+        size--;
     }
 
-//    pinData.SetActive();
-//
-//    DataBus::ConfigureToWrite();
-//
-//    do
-//    {
-//        if(pinRD.IsActive())
-//        {
-//            DataBus::Write(*data++);
-//
-//            pinReady.SetPassive();
-//
-//            pinCS.WaitPassive();
-//
-//            size--;
-//
-//            if(size > 0)
-//            {
-//                pinData.SetActive();
-//            }
-//        }
-//    } while(size > 0);
-//
-//    DataBus::ConfigureToRead();
+    if(queueData.Size())
+    {
+        pinData.SetActive();
+    }
 }
 
 
@@ -197,7 +178,25 @@ static void ReadByte()
 
 static void WriteByte()
 {
+    if((PORT_RD->IDR & PIN_RD) == 0)
+    {
+        DataBus::ConfigureToWrite();
 
+        DataBus::Write(queueData.Front());
+    
+        pinReady.SetPassive();
+    
+        pinCS.WaitPassive();
+    
+        pinReady.SetActive();
+    
+        if(queueData.Size() == 0)
+        {
+            pinData.SetPassive();
+        }
+
+        DataBus::ConfigureToRead();
+    }
 }
 
 

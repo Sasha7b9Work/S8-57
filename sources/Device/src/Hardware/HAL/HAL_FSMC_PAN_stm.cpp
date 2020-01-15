@@ -101,31 +101,33 @@ void HAL_FSMC::ConfigureToWritePanel()
 
 bool HAL_FSMC::Receive()
 {
-//    if(pinDataPAN.IsPassive())
-//    {
-//        return false;
-//    }
-//
-//    interactionWithPanel = true;
-//
-//    if(mode != Mode::PanelRead)
-//    {
-//        ConfigureToReadPanel();
-//    }
-//
-//    pinRD.SetActive();
-//    pinCS.SetActive();
-//
-//    DDecoder::AddData(DataBus::Read());
-//
-//    pinDataPAN.WaitPassive();
-//
-//    pinCS.SetPassive();
-//    pinRD.SetPassive();
-//
-//    interactionWithPanel = false;
+    if(pinReadyPAN.IsPassive() || pinReadyPAN.IsPassive())
+    {
+        return false;
+    }
+   
+    interactionWithPanel = true;
+    
+    if(mode != Mode::PanelRead)
+    {
+        ConfigureToReadPanel();
+    }
+    
+    pinRD.SetActive();
+    pinCS.SetActive();
+    
+    pinReadyPAN.WaitPassive();
+    
+    uint8 data = DataBus::Read();
 
-    return false;
+    DDecoder::AddData(data);
+    
+    pinRD.SetPassive();
+    pinCS.SetPassive();
+    
+    interactionWithPanel = false;
+
+    return true;
 }
 
 
