@@ -74,21 +74,25 @@ void HAL_FSMC::InitPanel()
 }
 
 
-void HAL_FSMC::ConfigureToPanel(bool forWrite)
+void HAL_FSMC::ConfigureToReadPanel()
 {
     mode = Mode::Panel;
 
     pinWR.Init();
     pinRD.Init();
 
-    if(forWrite)
-    {
-        DataBus::ConfigureToWrite();
-    }
-    else
-    {
-        DataBus::ConfigureToRead();
-    }
+    DataBus::ConfigureToRead();
+}
+
+
+void HAL_FSMC::ConfigureToWritePanel()
+{
+    mode = Mode::Panel;
+
+    pinWR.Init();
+    pinRD.Init();
+
+    DataBus::ConfigureToWrite();
 }
 
 
@@ -98,8 +102,10 @@ bool HAL_FSMC::Receive()
 
     if(mode != Mode::Panel)
     {
-        ConfigureToPanel(false);
+        ConfigureToReadPanel();
     }
+
+
 
 
     interactionWithPanel = false;
@@ -128,7 +134,7 @@ void HAL_FSMC::SendToPanel(uint8 *data, uint size)
 
     if(mode != Mode::Panel)
     {
-        ConfigureToPanel(true);
+        ConfigureToWritePanel();
     }
 
     for(uint i = 0; i < size; i++)

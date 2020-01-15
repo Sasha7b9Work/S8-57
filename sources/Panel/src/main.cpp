@@ -20,7 +20,7 @@ int main()
     {
         static uint prevTime = 0;
         
-        HAL_FSMC::Receive();
+        HAL_FSMC::ReceiveByte();
 
         if(TIME_MS - prevTime > 2)
         {

@@ -25,5 +25,5 @@ struct HAL_FSMC
 
     static void SendToPanel(uint8 *data, uint size);
 
-    static bool Receive();
+    static bool ReceiveByte();
 };

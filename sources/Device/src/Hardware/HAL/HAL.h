@@ -92,8 +92,9 @@ private:
     static uint8 *addrData1;
     /// Конфигурировать для работы с альтерой
     static void ConfigureToFPGA();
-    /// Конфигурировать для работы с панелью. write указаыает на то, для чтения или записи конфигурировать шину данных
-    static void ConfigureToPanel(bool forWrite);
+    /// Конфигурировать для работы с панелью
+    static void ConfigureToWritePanel();
+    static void ConfigureToReadPanel();
     /// Возвращает растяжку для данного адреса
     static float GetStretch(const uint8 *address);
     /// Инициализация пинов панели, которые не изменяют свой режим во время всей работы программы

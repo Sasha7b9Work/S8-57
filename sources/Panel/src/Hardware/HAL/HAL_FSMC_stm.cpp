@@ -80,6 +80,10 @@ static InPin  pinWR(WR);
 static InPin  pinRD(RD);
 
 
+/// Заслать один байт в устройство
+static void SendByte(uint8 data);
+
+
 struct DataBus
 {
     /// Первоначальная инициализация
@@ -110,13 +114,61 @@ void HAL_FSMC::Init()
     DataBus::Init();
 }
 
-void HAL_FSMC::SendToPanel(uint8 *, uint)
-{
 
+void HAL_FSMC::SendToPanel(uint8 *data, uint size)
+{
+//    pinData.SetActive();
+//
+//    DataBus::ConfigureToWrite();
+//
+//    do
+//    {
+//        while(pinCS.IsPassive())
+//        {
+//        }
+//
+//        if(pinWR.IsActive())
+//        {
+//            ReceiveByte();
+//        }
+//
+//        if(pinRD.IsActive())
+//        {
+//            DataBus::Write(*data++);
+//
+//            pinReady.SetPassive();
+//
+//            while(pinCS.IsActive())
+//            {
+//            }
+//
+//            size--;
+//
+//            if(size > 0)
+//            {
+//                pinData.SetActive();
+//            }
+//        }
+//
+//    } while(size > 0);
+//
+//    DataBus::ConfigureToRead();
 }
 
 
-bool HAL_FSMC::Receive()
+static void SendByte(uint8 data)
+{
+    DataBus::Write(data);
+
+    pinReady.SetPassive();
+
+    while(pinCS.IsActive())
+    {
+    }
+}
+
+
+bool HAL_FSMC::ReceiveByte()
 {
     if(pinCS.IsPassive())   // Если CS неактивен - ведущий МК не хочет общаться
     {
