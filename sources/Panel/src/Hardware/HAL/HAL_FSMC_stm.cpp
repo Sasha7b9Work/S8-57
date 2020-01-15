@@ -178,10 +178,6 @@ void HAL_FSMC::Update()
             //pinReady.SetActive();
             PORT_READY->BSRR = PIN_READY << 16;
 
-            int size = queueData.Size();
-
-            size = size;
-
             if(queueData.Size() == 0)
             {
                 pinData.SetPassive();

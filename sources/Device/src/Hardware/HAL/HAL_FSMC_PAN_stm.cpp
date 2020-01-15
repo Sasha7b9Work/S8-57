@@ -37,14 +37,8 @@ struct DataBus
 {
     /// Первоначальная инициализация
     static void Init();
-    /// Сконфигурировать для чтения
-    static void ConfigureToRead();
     /// Прочитать байт с шины данных
     static uint8 Read();
-    /// Сконфигурировать для записи
-    static void ConfigureToWrite();
-    /// Записать байт в шину данных
-    static void Write(uint8 byte);
 };
 
 
@@ -84,7 +78,11 @@ void HAL_FSMC::ConfigureToReadPanel()
     pinWR.Init();
     pinRD.Init();
 
-    DataBus::ConfigureToRead();
+    // Конфигурируем ШД на чтение
+
+    GPIOD->MODER &= 0x0ffffff0U;        // Настроим пины 14, 15, 0, 1 на запись D0, D1, D2, D3
+
+    GPIOE->MODER &= 0xffc03fffU;        // Настроим пины 7, 8, 9, 10 на запись D4, D5, D6, D7
 }
 
 
@@ -95,7 +93,13 @@ void HAL_FSMC::ConfigureToWritePanel()
     pinWR.Init();
     pinRD.Init();
 
-    DataBus::ConfigureToWrite();
+    // Конфигурируем ШД на запись
+
+    GPIOD->MODER &= 0x0ffffff0U;        // Настроим пины 14, 15, 0, 1 на запись D0, D1, D2, D3
+    GPIOD->MODER |= 0x50000005U;        // Устанавливаем для этих пинов GPIO_MODE_OUTPUT_PP
+
+    GPIOE->MODER &= 0xffc03fffU;        // Настроим пины 7, 8, 9, 10 на запись D4, D5, D6, D7
+    GPIOE->MODER |= 0x00154000U;        // Устанавливаем для этих пинов GPIO_MODE_OUTPUT_PP
 }
 
 
@@ -214,47 +218,11 @@ bool HAL_FSMC::InteractionWithPanel()
 
 void DataBus::Init()
 {
-    ConfigureToRead();
-}
+    // Конфигурируем ШД на чтение
 
-
-void DataBus::ConfigureToRead()
-{
-    GPIO_InitTypeDef gpio;
-
-    gpio.Mode = GPIO_MODE_INPUT;
-    gpio.Pull = GPIO_PULLDOWN;
-
-    gpio.Pin = GPIO_PIN_0  |        // D2
-               GPIO_PIN_1  |        // D3
-               GPIO_PIN_14 |        // D0
-               GPIO_PIN_15;         // D1
-    HAL_GPIO_Init(GPIOD, &gpio);
-
-    gpio.Pin = GPIO_PIN_7  |        // D4
-               GPIO_PIN_8  |        // D5
-               GPIO_PIN_9  |        // D6
-               GPIO_PIN_10;         // D7
-    HAL_GPIO_Init(GPIOE, &gpio);
-}
-
-
-void DataBus::ConfigureToWrite()
-{
     GPIOD->MODER &= 0x0ffffff0U;        // Настроим пины 14, 15, 0, 1 на запись D0, D1, D2, D3
-    GPIOD->MODER |= 0x50000005U;        // Устанавливаем для этих пинов GPIO_MODE_OUTPUT_PP
 
     GPIOE->MODER &= 0xffc03fffU;        // Настроим пины 7, 8, 9, 10 на запись D4, D5, D6, D7
-    GPIOE->MODER |= 0x00154000U;        // Устанавливаем для этих пинов GPIO_MODE_OUTPUT_PP
-}
-
-
-void DataBus::Write(uint8 d)
-{
-    //                                                                             биты 0,1                                 биты 2,3
-    GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + static_cast<uint16>((static_cast<int16>(d) & 0x03) << 14) + ((static_cast<uint16>(d & 0x0c)) >> 2);  // Записываем данные в выходные пины
-    //                                                                          Биты 4,5,6,7
-    GPIOE->ODR = (GPIOE->ODR & 0xf87f) + static_cast<uint16>((static_cast<int16>(d) & 0xf0) << 3);
 }
 
 
