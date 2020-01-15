@@ -109,10 +109,17 @@ bool HAL_FSMC::Receive()
         GPIOE->MODER &= 0xffc03fffU;        // Настроим пины 7, 8, 9, 10 на запись D4, D5, D6, D7
     }
     
-    pinRD.SetActive();
-    pinCS.SetActive();
+    //pinRD.SetActive();
+    GPIOD->BSRR = GPIO_PIN_4 << 16;
+
+    //pinCS.SetActive();
+    GPIOG->BSRR = GPIO_PIN_12 << 16;
     
-    pinReadyPAN.WaitPassive();
+    //pinReadyPAN.WaitPassive();
+    //while(pinReadyPAN.IsActive())
+    while((GPIOA->IDR & GPIO_PIN_7) == 0)
+    {
+    }
     
     //                                                 4,5,6,7              2,3                          0,1
     uint8 data = static_cast<uint8>((GPIOE->IDR >> 3) & 0xF0 | (GPIOD->IDR << 2) & 0x0C | (GPIOD->IDR >> 14));
