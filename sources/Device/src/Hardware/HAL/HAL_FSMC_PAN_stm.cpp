@@ -67,7 +67,8 @@ void HAL_FSMC::InitPanel()
 
 bool HAL_FSMC::Receive()
 {
-    if(pinReadyPAN.IsPassive() || pinDataPAN.IsPassive())
+    //if(pinReadyPAN.IsPassive() || pinDataPAN.IsPassive())
+    if((GPIOA->IDR & GPIO_PIN_7) || (GPIOC->IDR & GPIO_PIN_4))
     {
         return false;
     }
