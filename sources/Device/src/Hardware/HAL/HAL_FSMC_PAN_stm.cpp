@@ -101,7 +101,7 @@ void HAL_FSMC::ConfigureToWritePanel()
 
 bool HAL_FSMC::Receive()
 {
-    if(pinReadyPAN.IsPassive() || pinReadyPAN.IsPassive())
+    if(pinReadyPAN.IsPassive() || pinDataPAN.IsPassive())
     {
         return false;
     }
@@ -147,6 +147,11 @@ void HAL_FSMC::SendToPanel(uint8 byte0, uint8 byte1)
 
 void HAL_FSMC::SendToPanel(uint8 *data, uint size)
 {
+    while(Receive())
+    {
+
+    }
+
     interactionWithPanel = true;
 
     if(mode != Mode::PanelWrite)

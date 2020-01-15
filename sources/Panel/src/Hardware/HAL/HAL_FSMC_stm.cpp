@@ -178,7 +178,7 @@ static void ReadByte()
 
 static void WriteByte()
 {
-    if((PORT_RD->IDR & PIN_RD) == 0)
+    if((PORT_RD->IDR & PIN_RD) == 0 && queueData.Size())
     {
         DataBus::ConfigureToWrite();
 
@@ -189,6 +189,10 @@ static void WriteByte()
         pinCS.WaitPassive();
     
         pinReady.SetActive();
+        
+        int size = queueData.Size();
+        
+        size = size;
     
         if(queueData.Size() == 0)
         {
