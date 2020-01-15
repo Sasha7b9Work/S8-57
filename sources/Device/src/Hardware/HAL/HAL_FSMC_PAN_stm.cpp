@@ -22,9 +22,11 @@ struct InPin
 {
     InPin(HPort::E _port, uint16 _pin) : port(_port), pin(_pin) {}
 
-    void Init()      { HAL_PIO::Init(port, pin, HMode::Input, HPull::Up); }
-    bool IsActive()  { return HAL_PIO::Read(port, pin) == 0; };
-    bool IsPassive() { return HAL_PIO::Read(port, pin) == 1; };
+    void Init()        { HAL_PIO::Init(port, pin, HMode::Input, HPull::Up); }
+    bool IsActive()    { return HAL_PIO::Read(port, pin) == 0; };
+    bool IsPassive()   { return HAL_PIO::Read(port, pin) == 1; };
+    void WaitActive()  { while(IsPassive()) { } }
+    void WaitPassive() { while(IsActive()) { } }
 
     HPort::E port;
     uint16 pin;
@@ -116,9 +118,7 @@ bool HAL_FSMC::Receive()
 
     DDecoder::AddData(DataBus::Read());
 
-    while(pinDataPAN.IsActive())
-    {
-    }
+    pinDataPAN.WaitPassive();
 
     pinCS.SetPassive();
     pinRD.SetPassive();
@@ -145,6 +145,10 @@ void HAL_FSMC::SendToPanel(uint8 byte0, uint8 byte1)
 
 void HAL_FSMC::SendToPanel(uint8 *data, uint size)
 {
+    while(Receive())
+    {
+    }
+
     interactionWithPanel = true;
 
     if(mode != Mode::PanelWrite)
