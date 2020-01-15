@@ -94,7 +94,6 @@ private:
     static void ConfigureToFPGA();
     /// Конфигурировать для работы с панелью
     static void ConfigureToWritePanel();
-    static void ConfigureToReadPanel();
     /// Возвращает растяжку для данного адреса
     static float GetStretch(const uint8 *address);
     /// Инициализация пинов панели, которые не изменяют свой режим во время всей работы программы

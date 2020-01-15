@@ -69,21 +69,6 @@ void HAL_FSMC::InitPanel()
 }
 
 
-void HAL_FSMC::ConfigureToReadPanel()
-{
-    mode = Mode::PanelRead;
-
-    pinWR.Init();
-    pinRD.Init();
-
-    // Конфигурируем ШД на чтение
-
-    GPIOD->MODER &= 0x0ffffff0U;        // Настроим пины 14, 15, 0, 1 на запись D0, D1, D2, D3
-
-    GPIOE->MODER &= 0xffc03fffU;        // Настроим пины 7, 8, 9, 10 на запись D4, D5, D6, D7
-}
-
-
 void HAL_FSMC::ConfigureToWritePanel()
 {
     mode = Mode::PanelWrite;
@@ -112,7 +97,16 @@ bool HAL_FSMC::Receive()
     
     if(mode != Mode::PanelRead)
     {
-        ConfigureToReadPanel();
+        mode = Mode::PanelRead;
+
+        pinWR.Init();
+        pinRD.Init();
+
+        // Конфигурируем ШД на чтение
+
+        GPIOD->MODER &= 0x0ffffff0U;        // Настроим пины 14, 15, 0, 1 на запись D0, D1, D2, D3
+
+        GPIOE->MODER &= 0xffc03fffU;        // Настроим пины 7, 8, 9, 10 на запись D4, D5, D6, D7
     }
     
     pinRD.SetActive();
