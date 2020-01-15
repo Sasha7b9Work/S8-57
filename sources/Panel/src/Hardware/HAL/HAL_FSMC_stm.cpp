@@ -172,11 +172,13 @@ void HAL_FSMC::Update()
 
             DataBus::Write(queueData.Front());
 
-            pinReady.SetPassive();
+            //pinReady.SetPassive();
+            PORT_READY->BSRR = PIN_READY;
 
             pinCS.WaitPassive();
 
-            pinReady.SetActive();
+            //pinReady.SetActive();
+            PORT_READY->BSRR = PIN_READY << 16;
 
             int size = queueData.Size();
 
