@@ -84,10 +84,6 @@ static InPin  pinWR(WR);
 /// Признак того, что основной МК осуществляет операцию чтения из панели
 static InPin  pinRD(RD);
 
-/// Записывает байт в устройстов, если ечть что-то для записи
-static void WriteByte();
-
-
 static Queue<uint8> queueData;
 
 
@@ -166,35 +162,31 @@ void HAL_FSMC::Update()
             PORT_READY->BSRR = PIN_READY << 16;
         }
 
-        WriteByte();
-    }
-}
+        // Запись байта в устройсто
 
-
-static void WriteByte()
-{
-    if((PORT_RD->IDR & PIN_RD) == 0 && queueData.Size())
-    {
-        DataBus::ConfigureToWrite();
-
-        DataBus::Write(queueData.Front());
-    
-        pinReady.SetPassive();
-    
-        pinCS.WaitPassive();
-    
-        pinReady.SetActive();
-        
-        int size = queueData.Size();
-        
-        size = size;
-    
-        if(queueData.Size() == 0)
+        if((PORT_RD->IDR & PIN_RD) == 0 && queueData.Size())
         {
-            pinData.SetPassive();
-        }
+            DataBus::ConfigureToWrite();
 
-        DataBus::ConfigureToRead();
+            DataBus::Write(queueData.Front());
+
+            pinReady.SetPassive();
+
+            pinCS.WaitPassive();
+
+            pinReady.SetActive();
+
+            int size = queueData.Size();
+
+            size = size;
+
+            if(queueData.Size() == 0)
+            {
+                pinData.SetPassive();
+            }
+
+            DataBus::ConfigureToRead();
+        }
     }
 }
 
