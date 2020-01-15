@@ -25,8 +25,6 @@ int WorkerLengthText::recvLength = -1;
 
 int DFont::GetLengthText(pString text)
 {
-    return 1;
-
     return WorkerLengthText::Run(text);
 }
 

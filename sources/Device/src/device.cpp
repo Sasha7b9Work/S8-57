@@ -100,8 +100,12 @@ void Device::Update()
     START_MULTI_MEASUREMENT();
     
     Osci::Update();
-    
+
+    uint start = TIME_MS;
+
     Display::Update();
+
+    LOG_WRITE("%d", TIME_MS - start);
 
     Menu::SaveSettings();
     
