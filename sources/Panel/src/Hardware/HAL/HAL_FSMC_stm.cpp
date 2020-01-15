@@ -135,7 +135,9 @@ void HAL_FSMC::SendToDevice(uint8 *data, uint size)
 
 void HAL_FSMC::Update()
 {
-    while(pinCS.IsActive())
+    //while(pinCS.IsActive())
+    //while(HAL_GPIO_ReadPin(PORT_CS, PIN_CS) == GPIO_PIN_RESET)
+    while((PORT_CS->IDR & PIN_CS) == 0)
     {
         // Чтение байта из устройства
 
