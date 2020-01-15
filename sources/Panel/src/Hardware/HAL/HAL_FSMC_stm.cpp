@@ -123,9 +123,11 @@ bool HAL_FSMC::Receive()
         return false;
     }
         
-    if(pinWR.IsActive())
+    //if(pinWR.IsActive())
+    if(HAL_GPIO_ReadPin(PORT_WR, PIN_WR) == GPIO_PIN_RESET)
     {
-        uint8 data = DataBus::Read();
+        //uint8 data = DataBus::Read();
+        uint8 data = (uint8)GPIOE->IDR;
 
         //pinReady.SetPassive();
         //HAL_GPIO_WritePin(PORT_READY, PIN_READY, GPIO_PIN_SET);
