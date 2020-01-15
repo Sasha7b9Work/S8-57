@@ -117,30 +117,30 @@ void HAL_FSMC::Init()
 
 void HAL_FSMC::SendToDevice(uint8 *data, uint size)
 {
-    pinData.SetActive();
-
-    DataBus::ConfigureToWrite();
-
-    do
-    {
-        if(pinRD.IsActive())
-        {
-            DataBus::Write(*data++);
-
-            pinReady.SetPassive();
-
-            pinCS.WaitPassive();
-
-            size--;
-
-            if(size > 0)
-            {
-                pinData.SetActive();
-            }
-        }
-    } while(size > 0);
-
-    DataBus::ConfigureToRead();
+//    pinData.SetActive();
+//
+//    DataBus::ConfigureToWrite();
+//
+//    do
+//    {
+//        if(pinRD.IsActive())
+//        {
+//            DataBus::Write(*data++);
+//
+//            pinReady.SetPassive();
+//
+//            pinCS.WaitPassive();
+//
+//            size--;
+//
+//            if(size > 0)
+//            {
+//                pinData.SetActive();
+//            }
+//        }
+//    } while(size > 0);
+//
+//    DataBus::ConfigureToRead();
 }
 
 
