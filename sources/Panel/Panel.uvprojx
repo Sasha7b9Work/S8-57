@@ -1460,6 +1460,11 @@
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Timer.h</FilePath>
             </File>
+            <File>
+              <FileName>Timer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Timer.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

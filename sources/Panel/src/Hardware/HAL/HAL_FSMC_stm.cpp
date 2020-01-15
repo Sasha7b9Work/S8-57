@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "common/Decoder_p.h"
+#include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include <stm32f4xx_hal.h>
 
@@ -129,6 +130,8 @@ bool HAL_FSMC::Receive()
         pinReady.SetPassive();
 
         PDecoder::AddData(data);
+
+        Timer::PauseOnTime(5);
 
         pinReady.SetActive();
 
