@@ -95,8 +95,6 @@ struct DataBus
     static void ConfigureToRead();
     /// Прочитать байт с шины данных
     static uint8 Read();
-    /// Записать байт в шину данных
-    static void Write(uint8 byte);
 };
 
 
@@ -170,12 +168,14 @@ void HAL_FSMC::Update()
             GPIOE->MODER &= 0xffff0000U;
             GPIOE->MODER |= 0x00005555U;
 
-            DataBus::Write(queueData.Front());
+            // Устанавливаем данные на ШД
+            GPIOE->ODR = (GPIOD->ODR & 0xffff0000) + static_cast<uint16>(queueData.Front());
 
             //pinReady.SetPassive();
             PORT_READY->BSRR = PIN_READY;
 
-            pinCS.WaitPassive();
+            //pinCS.WaitPassive();
+            while(pinCS.IsActive()) { }
 
             //pinReady.SetActive();
             PORT_READY->BSRR = PIN_READY << 16;
@@ -214,16 +214,4 @@ void DataBus::ConfigureToRead()
 uint8 DataBus::Read()
 {
     return (uint8)GPIOE->IDR;
-}
-
-
-void DataBus::Write(uint8 data)
-{
-    static const uint16 pins[8] = { GPIO_PIN_0, GPIO_PIN_1, GPIO_PIN_2, GPIO_PIN_3, GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6, GPIO_PIN_7 };
-
-    for(int i = 0; i < 8; i++)
-    {
-        HAL_GPIO_WritePin(GPIOE, pins[i], static_cast<GPIO_PinState>(data & 0x01));
-        data >>= 1;
-    }
 }
