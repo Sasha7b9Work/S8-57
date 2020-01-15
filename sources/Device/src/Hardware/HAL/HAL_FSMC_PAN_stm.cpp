@@ -37,8 +37,6 @@ struct DataBus
 {
     /// Первоначальная инициализация
     static void Init();
-    /// Прочитать байт с шины данных
-    static uint8 Read();
 };
 
 
@@ -122,7 +120,8 @@ bool HAL_FSMC::Receive()
     
     pinReadyPAN.WaitPassive();
     
-    uint8 data = DataBus::Read();
+    //                                                 4,5,6,7              2,3                          0,1
+    uint8 data = static_cast<uint8>((GPIOE->IDR >> 3) & 0xF0 | (GPIOD->IDR << 2) & 0x0C | (GPIOD->IDR >> 14));
 
     DDecoder::AddData(data);
     
@@ -223,10 +222,4 @@ void DataBus::Init()
     GPIOD->MODER &= 0x0ffffff0U;        // Настроим пины 14, 15, 0, 1 на запись D0, D1, D2, D3
 
     GPIOE->MODER &= 0xffc03fffU;        // Настроим пины 7, 8, 9, 10 на запись D4, D5, D6, D7
-}
-
-
-uint8 DataBus::Read()
-{
-    return (GPIOE->IDR >> 3) & 0xF0 | (GPIOD->IDR << 2) & 0x0C | (GPIOD->IDR >> 14);
 }
