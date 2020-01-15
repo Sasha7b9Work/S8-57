@@ -129,14 +129,9 @@ bool HAL_FSMC::Receive()
 
         pinReady.SetPassive();
 
-        PDecoder::AddData(data);
+        PDecoder::AddData(data);        /// \todo Сейчас недостаток - пока не отработает PDecoder::AddData(), устройство не пойдёт дальше
 
-        volatile int i = 0;
-
-        for(; i < 100; i++)
-        {
-
-        }
+        while(pinCS.IsActive());
 
         pinReady.SetActive();
 
