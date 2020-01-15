@@ -131,7 +131,12 @@ bool HAL_FSMC::Receive()
 
         PDecoder::AddData(data);
 
-        Timer::PauseOnTime(5);
+        volatile int i = 0;
+
+        for(; i < 100; i++)
+        {
+
+        }
 
         pinReady.SetActive();
 

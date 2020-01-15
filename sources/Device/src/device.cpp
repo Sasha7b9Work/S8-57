@@ -98,27 +98,27 @@ bool SetCurrentMode(const Page *page, Device::Mode::E mode)
 void Device::Update()
 {
     START_MULTI_MEASUREMENT();
-
+    
     Osci::Update();
     
     Display::Update();
 
     Menu::SaveSettings();
-
+    
     Recorder::Update();
-
+    
     Tester::Update();
-
+    
     Multimeter::Update();
-
+    
     Menu::Update();
-
+    
     FDrive::Update();
 
     while (HAL_FSMC::Receive()) {};
 
     SCPI::Update();
-
+    
     DDecoder::Update();
 }
 
