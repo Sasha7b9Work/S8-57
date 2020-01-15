@@ -91,10 +91,6 @@ struct DataBus
 {
     /// Первоначальная инициализация
     static void Init();
-    /// Сконфигурировать для чтения
-    static void ConfigureToRead();
-    /// Прочитать байт с шины данных
-    static uint8 Read();
 };
 
 
@@ -191,7 +187,8 @@ void HAL_FSMC::Update()
                 pinData.SetPassive();
             }
 
-            DataBus::ConfigureToRead();
+            // Конфигурируем ШД на чтение
+            GPIOE->MODER &= 0xffff0000U;
         }
     }
 }
@@ -199,21 +196,6 @@ void HAL_FSMC::Update()
 
 void DataBus::Init()
 {
-    ConfigureToRead();
-}
-
-
-void DataBus::ConfigureToRead()
-{
-    GPIO_InitTypeDef gpio;
-    gpio.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;   // D0...D7
-    gpio.Mode = GPIO_MODE_INPUT;
-    gpio.Pull = GPIO_PULLUP;
-    HAL_GPIO_Init(GPIOE, &gpio);
-}
-
-
-uint8 DataBus::Read()
-{
-    return (uint8)GPIOE->IDR;
+    // Конфигурируем ШД на чтение
+    GPIOE->MODER &= 0xffff0000U;
 }
