@@ -228,6 +228,9 @@ void DataBus::Init()
 
 uint8 DataBus::Read()
 {
+    uint16 d = GPIOD->IDR;
+    uint16 e = GPIOE->IDR;
+
     uint8 result = HAL_PIO::Read(PIN_D7);
     result <<= 1;
     result |= HAL_PIO::Read(PIN_D6);
@@ -235,14 +238,11 @@ uint8 DataBus::Read()
     result |= HAL_PIO::Read(PIN_D5);
     result <<= 1;
     result |= HAL_PIO::Read(PIN_D4);
-    result <<= 1;
-    result |= HAL_PIO::Read(PIN_D3);
-    result <<= 1;
-    result |= HAL_PIO::Read(PIN_D2);
-    result <<= 1;
-    result |= HAL_PIO::Read(PIN_D1);
-    result <<= 1;
-    result |= HAL_PIO::Read(PIN_D0);
+    result <<= 4;
+
+    result |= (d << 2) & 0x0C;
+
+    result |= (d >> 14);
 
     return result;
 }
