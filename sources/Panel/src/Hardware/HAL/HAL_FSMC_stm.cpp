@@ -175,7 +175,9 @@ void HAL_FSMC::Update()
             PORT_READY->BSRR = PIN_READY;
 
             //pinCS.WaitPassive();
-            while(pinCS.IsActive()) { }
+            //while(pinCS.IsActive()) { }
+            //while(HAL_GPIO_ReadPin(PORT_CS, PIN_CS) == GPIO_PIN_RESET) { }
+            while((PORT_CS->IDR & PIN_CS) == 0) { }
 
             //pinReady.SetActive();
             PORT_READY->BSRR = PIN_READY << 16;
