@@ -155,7 +155,8 @@ static void SendByteToPanel(uint8 d)
 
     //while(pinReadyPAN.IsPassive()) {}   // И ожидаем сигнал панели о том, что она свободна
     //while(HAL_PIO::Read(PIN_PAN_READY) == 1) {}
-    while(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_7) == GPIO_PIN_SET) {}
+    //while(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_7) == GPIO_PIN_SET) {}
+    while(GPIOA->IDR & GPIO_PIN_7) {}
 
     //pinCS.SetActive();                  // Даём признак того, чта данные выставлены и можно их считывать
     //HAL_PIO::Reset(PIN_CS);
@@ -165,6 +166,7 @@ static void SendByteToPanel(uint8 d)
     //while(pinReadyPAN.IsActive()) {}    // Переключение PIN_PAN_READY в неактивное состояние означает, что панель приняла данные и обрабатывает их
     //while(HAL_PIO::Read(PIN_PAN_READY) == 0) {}
     while(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_7) == GPIO_PIN_RESET) {}
+    //while(GPIOA->IDR & GPIO_PIN_7 == 0) {}
 
     //pinWR.SetPassive();                 // \ Устанавливаем WR и CS в неактивное состояние - элементарный цикл записи окончен
     //HAL_GPIO_WritePin(GPIOD, GPIO_PIN_5, GPIO_PIN_SET);
