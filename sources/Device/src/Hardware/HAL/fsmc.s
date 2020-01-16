@@ -14,29 +14,37 @@ GPIO_PIN_4_5     EQU GPIO_PIN_4 + GPIO_PIN_5
     
     
               AREA |.text|, CODE, READONLY
-S_SendToPanel PROC
-              EXPORT S_SendToPanel [WEAK]
+              
+              EXPORT CycleSend [WEAK]
+CycleSend PROC
+
+;GPIOD->BSRR = GPIO_PIN_5 << 16
+    PUSH {R0-R1, lr}
+    MOV R0, #GPIO_PIN_5 << 16
+    LDR R1, =GPIOD_BSRR
+    STR R0, [R1]
+    POP {R0-R1, pc}
                   
-    IMPORT mode
+;    IMPORT mode
 
 ; mode = Mode::PanelWrite
-    MOVS R1, #2
-    LDR  R3, |mode|
-    STRB R1, [R3]
+;    MOVS R1, #2
+;    LDR  R3, |mode|
+;    STRB R1, [R3]
 
 ; GPIOD->MODER &= 0xfffff0ff
-    LDR R1, =GPIOD
-    BIC R2, R1, #0xf00
-    STR R2, [R1]
+;    LDR R1, =GPIOD
+;    BIC R2, R1, #0xf00
+;    STR R2, [R1]
 
 ; GPIOD->MODER |= 0x500
-    ORR R2, R1, #0x500
-    STR R2, [R1]
+;    ORR R2, R1, #0x500
+;    STR R2, [R1]
     
 ; GPIOD->BSRR = (GPIO_PIN_5 | GPIO_PIN_4)
-    MOVS R3, #GPIO_PIN_4 + GPIO_PIN_5
-    LDR  R1, =GPIOD_BSRR
-    STR  R3, [R1]
+;    MOVS R3, #GPIO_PIN_4 + GPIO_PIN_5
+;    LDR  R1, =GPIOD_BSRR
+;    STR  R3, [R1]
 
               ENDP
               END

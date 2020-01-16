@@ -3,7 +3,6 @@
 #include "Hardware/AT25160N.h"
 #include "Test/Test.h"
 
-
 int main(void)
 {
     Device::Init();
@@ -16,5 +15,4 @@ int main(void)
     {
         Device::Update();
     }
-
 }
