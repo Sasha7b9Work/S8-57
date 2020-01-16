@@ -22,14 +22,15 @@ GPIO_PIN_12     EQU (1 << 12)
               EXPORT CycleSend [WEAK]
 CycleSend PROC
 
-    PUSH {R0-R3, lr}
+    PUSH {R0-R4, lr}
     
     ; R2 - GPIOA->IDR
+    ; R4 - GPIOD->BSRR
     
 ;GPIOD->BSRR = GPIO_PIN_5 << 16
     MOV R0, #GPIO_PIN_5 << 16
-    LDR R1, =GPIOD + SHIFT_BSRR
-    STR R0, [R1]
+    LDR R4, =GPIOD + SHIFT_BSRR
+    STR R0, [R4]
     
 ;while(GPIOA->IDR & GPIO_PIN_7)
 cycle1
@@ -49,7 +50,11 @@ cycle2
     ANDS R3, R3, #GPIO_PIN_7
     BEQ cycle2
     
-    POP {R0-R3, pc}
+;GPIOD->BSSR = GPIO_PIN_5
+    MOV R0, #GPIO_PIN_5
+    STR R0, [R4]
+    
+    POP {R0-R4, pc}
     
     
                   

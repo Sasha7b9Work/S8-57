@@ -206,7 +206,7 @@ void HAL_FSMC::SendToPanel(uint8 *data, uint size)
 
         //pinWR.SetPassive();                 // \ Устанавливаем WR и CS в неактивное состояние - элементарный цикл записи окончен
         //HAL_GPIO_WritePin(GPIOD, GPIO_PIN_5, GPIO_PIN_SET);
-        GPIOD->BSRR = GPIO_PIN_5;
+        //GPIOD->BSRR = GPIO_PIN_5;
 
         //pinCS.SetPassive();                 // /
         //HAL_GPIO_WritePin(GPIOG, GPIO_PIN_12, GPIO_PIN_SET);
