@@ -176,14 +176,13 @@ void HAL_FSMC::SendToPanel(uint8 *data, uint size)
         GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + static_cast<uint16>((static_cast<int16>(d) & 0x03) << 14) + ((static_cast<uint16>(d & 0x0c)) >> 2);  // Записываем данные в выходные пины
         //                                                                          Биты 4,5,6,7
         GPIOE->ODR = (GPIOE->ODR & 0xf87f) + static_cast<uint16>((static_cast<int16>(d) & 0xf0) << 3);
+        
+        CycleSend();
 
         //pinWR.SetActive();                  // Даём сигнал записи
         // HAL_PIO::Reset(PIN_WR);
-        //HAL_GPIO_WritePin(GPIOD, GPIO_PIN_5, GPIO_PIN_RESET);
-        
+        //HAL_GPIO_WritePin(GPIOD, GPIO_PIN_5, GPIO_PIN_RESET);      
         //   GPIOD->BSRR = GPIO_PIN_5 << 16;
-        
-        CycleSend();
         
         //while(pinReadyPAN.IsPassive()) {}   // И ожидаем сигнал панели о том, что она свободна
         //while(HAL_PIO::Read(PIN_PAN_READY) == 1) {}
@@ -210,7 +209,7 @@ void HAL_FSMC::SendToPanel(uint8 *data, uint size)
 
         //pinCS.SetPassive();                 // /
         //HAL_GPIO_WritePin(GPIOG, GPIO_PIN_12, GPIO_PIN_SET);
-        GPIOG->BSRR = GPIO_PIN_12;
+        //GPIOG->BSRR = GPIO_PIN_12;
     }
 
     interactionWithPanel = false;

@@ -23,25 +23,27 @@ GPIO_PIN_12     EQU (1 << 12)
 CycleSend PROC
 
     PUSH {R0-R4, lr}
-    
+
+    ; R1 - GPIOG->BSRR
     ; R2 - GPIOA->IDR
     ; R4 - GPIOD->BSRR
     
+    LDR R1, =GPIOG + SHIFT_BSRR
+    LDR R2, =GPIOA + SHIFT_IDR
+    LDR R4, =GPIOD + SHIFT_BSRR
+
 ;GPIOD->BSRR = GPIO_PIN_5 << 16
     MOV R0, #GPIO_PIN_5 << 16
-    LDR R4, =GPIOD + SHIFT_BSRR
     STR R0, [R4]
     
 ;while(GPIOA->IDR & GPIO_PIN_7)
 cycle1
-    LDR R2, =GPIOA + SHIFT_IDR
     LDR R3, [R2]
     ANDS R3, R3, #GPIO_PIN_7
     BNE   cycle1
     
 ;GPIOG->BSRR = GPIO_PIN_12 << 16
     MOV R0, #GPIO_PIN_12 << 16
-    LDR R1, =GPIOG + SHIFT_BSRR
     STR R0, [R1]
 
 ;while((GPIOA->IDR & GPIO_PIN_7) == 0) {}
@@ -54,9 +56,14 @@ cycle2
     MOV R0, #GPIO_PIN_5
     STR R0, [R4]
     
+;GPIOG->BSSR = GPIO_PIN_12
+    MOV R0, #GPIO_PIN_12
+    STR R0, [R1]
+    
     POP {R0-R4, pc}
     
-    
+    NOP
+
                   
 ;    IMPORT mode
 
