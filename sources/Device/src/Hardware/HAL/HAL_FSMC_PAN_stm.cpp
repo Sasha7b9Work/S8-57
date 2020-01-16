@@ -180,16 +180,17 @@ void HAL_FSMC::SendToPanel(uint8 *data, uint size)
         //pinWR.SetActive();                  // Даём сигнал записи
         // HAL_PIO::Reset(PIN_WR);
         //HAL_GPIO_WritePin(GPIOD, GPIO_PIN_5, GPIO_PIN_RESET);
-        //GPIOD->BSRR = GPIO_PIN_5 << 16;
+        
+        //   GPIOD->BSRR = GPIO_PIN_5 << 16;
         
         CycleSend();
         
         //while(pinReadyPAN.IsPassive()) {}   // И ожидаем сигнал панели о том, что она свободна
         //while(HAL_PIO::Read(PIN_PAN_READY) == 1) {}
         //while(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_7) == GPIO_PIN_SET) {}
-        while(GPIOA->IDR & GPIO_PIN_7)
-        {
-        }
+        //while(GPIOA->IDR & GPIO_PIN_7)
+        //{
+        //}
 
         //pinCS.SetActive();                  // Даём признак того, чта данные выставлены и можно их считывать
         //HAL_PIO::Reset(PIN_CS);
