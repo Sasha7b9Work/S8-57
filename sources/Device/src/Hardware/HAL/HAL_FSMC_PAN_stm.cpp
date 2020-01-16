@@ -195,7 +195,7 @@ void HAL_FSMC::SendToPanel(uint8 *data, uint size)
         //pinCS.SetActive();                  // Даём признак того, чта данные выставлены и можно их считывать
         //HAL_PIO::Reset(PIN_CS);
         //HAL_GPIO_WritePin(GPIOG, GPIO_PIN_12, GPIO_PIN_RESET);
-        GPIOG->BSRR = GPIO_PIN_12 << 16;
+        //GPIOG->BSRR = GPIO_PIN_12 << 16;
 
         //while(pinReadyPAN.IsActive()) {}    // Переключение PIN_PAN_READY в неактивное состояние означает, что панель приняла данные и обрабатывает их
         //while(HAL_PIO::Read(PIN_PAN_READY) == 0) {}
