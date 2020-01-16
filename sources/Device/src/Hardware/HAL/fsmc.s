@@ -24,7 +24,7 @@ GPIO_PIN_7       EQU 0x80
               EXPORT CycleSend [WEAK]
 CycleSend PROC
 
-    PUSH {R0-R1, R4, lr}
+    PUSH {R0-R1, lr}
     
 ;GPIOD->BSRR = GPIO_PIN_5 << 16
     MOV R0, #GPIO_PIN_5 << 16
@@ -33,13 +33,12 @@ CycleSend PROC
     
 ;while(GPIOA->IDR & GPIO_PIN_7)
 cycle1
-    LDR R4, =GPIOA_IDR
-    LDR R4, [R4]
-    AND R4, #GPIO_PIN_7
-    CMP R4, #0
-    BNE  cycle1
+    LDR R0, =GPIOA_IDR
+    LDR R0, [R0]
+    ANDS R0, R0, #GPIO_PIN_7
+    BNE   cycle1
     
-    POP {R0-R1, R4, pc}
+    POP {R0-R1, pc}
                   
 ;    IMPORT mode
 
