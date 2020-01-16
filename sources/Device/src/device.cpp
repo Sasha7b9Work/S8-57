@@ -101,11 +101,7 @@ void Device::Update()
     
     Osci::Update();
 
-    uint start = TIME_MS;
-
     Display::Update();
-
-    LOG_WRITE("%d", TIME_MS - start);
 
     Menu::SaveSettings();
     
