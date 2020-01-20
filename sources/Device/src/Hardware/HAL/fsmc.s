@@ -17,11 +17,11 @@ GPIO_PIN_4_5     EQU GPIO_PIN_4 + GPIO_PIN_5
 S_SendToPanel PROC
               EXPORT S_SendToPanel [WEAK]
                   
-    IMPORT mode
+;    IMPORT mode
 
 ; mode = Mode::PanelWrite
     MOVS R1, #2
-    LDR  R3, |mode|
+;    LDR  R3, |mode|
     STRB R1, [R3]
 
 ; GPIOD->MODER &= 0xfffff0ff
