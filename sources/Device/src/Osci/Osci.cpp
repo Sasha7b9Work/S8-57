@@ -145,6 +145,15 @@ bool Osci::ProcessFlagReady()
 
             FPGA::ReadData();
 
+            if(HAL_FSMC::TestRAM())
+            {
+                LOG_WRITE("RAM is OK");
+            }
+            else
+            {
+                LOG_WRITE("RAM is FAIL");
+            }
+
             if(TrigStartMode::IsSingle())
             {
                 needStop = true;

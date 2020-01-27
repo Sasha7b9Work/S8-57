@@ -100,8 +100,12 @@ bool HAL_FSMC::Receive()
     
     //pinReadyPAN.WaitPassive();
     //while(pinReadyPAN.IsActive())
-    while((GPIOA->IDR & GPIO_PIN_7) == 0)
+
+    volatile uint val = GPIOA->IDR;
+
+    while((val & GPIO_PIN_7) == 0)
     {
+        val = GPIOA->IDR;
     }
     
     //                                                 4,5,6,7              2,3                          0,1
