@@ -124,7 +124,7 @@ void HAL_FSMC::InitRAM()
     __HAL_RCC_GPIOG_CLK_ENABLE();
 
     GPIO_InitTypeDef is =
-    {//    A16          A17           A18 
+    {//     A16           A17           A18 
         GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13,
         GPIO_MODE_AF_PP,
         GPIO_PULLUP,
@@ -139,8 +139,8 @@ void HAL_FSMC::InitRAM()
 
     HAL_GPIO_Init(GPIOG, &is);
 
-    //           A8            A9
-    is.Pin = GPIO_PIN_14 | GPIO_PIN_15;
+    //           A6            A7          A8            A9
+    is.Pin = GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
 
     HAL_GPIO_Init(GPIOF, &is);
 
@@ -382,14 +382,14 @@ float HAL_FSMC::TestRAM1()
 
     for(int i = 0; i < SIZE; i++)
     {
-        uint8 data = static_cast<uint8>(std::rand());
+//        uint8 data = static_cast<uint8>(std::rand());
 
-        *address = data;
-
-        if(*address != data)
-        {
-            bad++;
-        }
+        *address = static_cast<uint8>(i);
+//
+//        if(*address != data)
+//        {
+//            bad++;
+//        }
 
         address++;
     }

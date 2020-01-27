@@ -15,7 +15,8 @@ int main(void)
   
     while (1)
     {
-        Device::Update();
-    }
+        //Device::Update();
 
+        HAL_FSMC::TestRAM1();
+    }
 }
