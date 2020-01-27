@@ -10,6 +10,7 @@
 #include "Osci/Osci.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/AutoMeasurements.h"
+#include "Utils/Values.h"
 
 
 int    Osci::addShift = 0;
@@ -144,14 +145,8 @@ bool Osci::ProcessFlagReady()
 
             FPGA::ReadData();
 
-            if(HAL_FSMC::TestRAM())
-            {
-                LOG_WRITE("RAM is OK");
-            }
-            else
-            {
-                LOG_WRITE("RAM is FAIL");
-            }
+            LOG_WRITE("%f", HAL_FSMC::TestRAM1());
+            LOG_WRITE("%f", HAL_FSMC::TestRAM2());
 
             if(TrigStartMode::IsSingle())
             {

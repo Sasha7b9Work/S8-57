@@ -169,13 +169,13 @@ void HAL_FSMC::InitRAM()
 
     static const FMC_NORSRAM_TimingTypeDef sramTiming =
     {
-        3,                 // FSMC_AddressSetupTime
-        3,                 // FSMC_AddressHoldTime
-        5,                 // FSMC_DataSetupTime   При значении 9 32кБ записываются в RAM за 1000мкс. Уменьшение
+        0,                 // FSMC_AddressSetupTime
+        0,                 // FSMC_AddressHoldTime
+        3,                 // FSMC_DataSetupTime   При значении 9 32кБ записываются в RAM за 1000мкс. Уменьшение
                            // на одну единцу уменьшает этот параметр на 90 мкс. Если 3 - 32кБ запишутся за 460 мкс.
-        5,                 // FSMC_BusTurnAroundDuration
+        0,                 // FSMC_BusTurnAroundDuration
         0,                 // FSMC_CLKDivision
-        5,                 // FSMC_DataLatency
+        0,                 // FSMC_DataLatency
         FMC_ACCESS_MODE_C  // FSMC_AccessMode
     };
 
@@ -367,38 +367,68 @@ void HAL_FSMC::ReadFromRAM(uint8 *buffer, uint size, uint address)
 }
 
 
-bool HAL_FSMC::TestRAM()
+float HAL_FSMC::TestRAM1()
 {
-#define SIZE 128
-
-    for(int i = 0; i < 10; i++)
+    if(mode != Mode::FPGA)
     {
-        uint8 bufferIN[SIZE];
-        uint8 bufferOUT[SIZE];
-        std::memset(bufferOUT, 0, SIZE);
+        ConfigureToFPGA();
+    }
 
-        for(int x = 0; x < SIZE; x++)
+    int SIZE = 1024 * 512;
+
+    int bad = 0;
+
+    uint8 *address = reinterpret_cast<uint8 *>(NOR_MEMORY_ADRESS3);
+
+    for(int i = 0; i < SIZE; i++)
+    {
+        uint8 data = static_cast<uint8>(std::rand());
+
+        *address = data;
+
+        if(*address != data)
         {
-            bufferIN[x] = static_cast<uint8>(x);
+            bad++;
         }
 
-        uint address = std::rand() % (400 * 1024);
+        address++;
+    }
 
-        WriteToRAM(bufferIN, SIZE, address);
+    return bad * 100.0F / SIZE;
+}
 
-        ReadFromRAM(bufferOUT, SIZE, address);
 
-        for(int z = 0; z < SIZE; z++)
+float HAL_FSMC::TestRAM2()
+{
+#define SIZE 1024
+
+    int bad = 0;
+
+    uint8 bufferIN[SIZE];
+    uint8 bufferOUT[SIZE];
+    std::memset(bufferOUT, 0, SIZE);
+
+    for(int x = 0; x < SIZE; x++)
+    {
+        bufferIN[x] = static_cast<uint8>(std::rand());
+    }
+
+    uint address = std::rand() % (500 * 1024);
+
+    WriteToRAM(bufferIN, SIZE, address);
+
+    ReadFromRAM(bufferOUT, SIZE, address);
+
+    for(int z = 0; z < SIZE; z++)
+    {
+        uint8 in = bufferIN[z];
+        uint8 out = bufferOUT[z];
+
+        if(in != out)
         {
-            uint8 in = bufferIN[z];
-            uint8 out = bufferOUT[z];
-            
-            if(in != out)
-            {
-                return false;
-            }
+            bad++;
         }
     }
 
-    return true;
+    return (bad * 100.0F) / SIZE;
 }

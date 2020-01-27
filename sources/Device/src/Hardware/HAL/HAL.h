@@ -78,7 +78,10 @@ struct HAL_FSMC
     /// ************* Функции взаимодействия с памятью ****************
     static void WriteToRAM(uint8 *buffer, uint size, uint address);
     static void ReadFromRAM(uint8 *buffer, uint size, uint address);
-    static bool TestRAM();
+    /// Возвращает сколько процентов данных считанных правильно.
+    static float TestRAM1();
+    static float TestRAM2();
+
 
     /// ************* Функции взаимодействия с панелью ****************
 
