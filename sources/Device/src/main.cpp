@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "device.h"
 #include "Hardware/AT25160N.h"
+#include "Hardware/HAL/HAL.h"
 #include "Test/Test.h"
 
 

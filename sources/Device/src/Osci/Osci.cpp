@@ -22,7 +22,6 @@ void Osci::Init()
     Stop();
 
     RAM::Init();
-    ExtRAM::Init();
     FPGA::LoadRegUPR();
     Range::LoadBoth();
     RShift(Chan::A).Load();

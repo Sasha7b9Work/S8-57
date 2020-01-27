@@ -144,6 +144,8 @@ void HAL_FSMC::InitRAM()
 
     HAL_GPIO_Init(GPIOF, &is);
 
+//    HAL_PIO::Init(HPort::_G, HPin::_10, )
+
     static SRAM_HandleTypeDef gSramHandle =
     {
         FMC_NORSRAM_DEVICE,
