@@ -145,9 +145,6 @@ bool Osci::ProcessFlagReady()
 
             FPGA::ReadData();
 
-            LOG_WRITE("%f", HAL_FSMC::TestRAM1());
-            LOG_WRITE("%f", HAL_FSMC::TestRAM2());
-
             if(TrigStartMode::IsSingle())
             {
                 needStop = true;

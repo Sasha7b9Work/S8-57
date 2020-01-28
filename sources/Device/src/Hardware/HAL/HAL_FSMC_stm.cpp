@@ -382,14 +382,14 @@ float HAL_FSMC::TestRAM1()
 
     for(int i = 0; i < SIZE; i++)
     {
-//        uint8 data = static_cast<uint8>(std::rand());
-
         *address = static_cast<uint8>(i);
-//
-//        if(*address != data)
-//        {
-//            bad++;
-//        }
+
+        uint8 out = *address;
+
+        if(out != static_cast<uint8>(i))
+        {
+            bad++;
+        }
 
         address++;
     }
@@ -421,8 +421,8 @@ float HAL_FSMC::TestRAM2()
 
     for(int z = 0; z < SIZE; z++)
     {
-        uint8 in = bufferIN[z];
-        uint8 out = bufferOUT[z];
+        volatile uint8 in = bufferIN[z];
+        volatile uint8 out = bufferOUT[z];
 
         if(in != out)
         {
