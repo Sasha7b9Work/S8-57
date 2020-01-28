@@ -32,11 +32,36 @@ void HAL_FSMC::Init()
     // GPIOD 14, 15, 0, 1 - D0, D1, D2, D3
     // GPIOE  7, 8, 9, 10 - D4, D5, D6, D7
 
-    GPIOD->PUPDR &= 0x0ffffff0U;     // Обнуляем пины 15, 14, 1, 0
-    GPIOD->PUPDR |= 0xa000000aU;     // Устанавливаем для этих пинов GPIO_PULLDOWN
+//    GPIOD->PUPDR &= 0x0ffffff0U;     // Обнуляем пины 15, 14, 1, 0
+//    GPIOD->PUPDR |= 0xa000000aU;     // Устанавливаем для этих пинов GPIO_PULLDOWN
+//
+//    GPIOE->PUPDR &= 0xffc03fffU;     // Обнуляем пины 7, 8, 9, 10
+//    GPIOE->PUPDR |= 0x00268000U;     // Устанавливаем для этих пинов GPIO_PULLDOWN
+//
+//        //               D4           D5           D6           D7
+//    //isGPIO.Pin = GPIO _PIN_7 | GPIO _PIN_8 | GPIO _PIN_9 | GPIO _PIN_10;
+//    //HAL_GPIO_Init(GPIOE, &isGPIO);
+//
+//    GPIOE->OSPEEDR |= HEX_FROM_2(003f, 8000);
+//
+//    GPIOE->OTYPER &= HEX_FROM_2(ffc0, 3fff);
+//
+//    GPIOE->PUPDR &= HEX_FROM_2(ffc0, 3fff);
+//    GPIOE->PUPDR |= HEX_FROM_2(003a, 8fff);
 
-    GPIOE->PUPDR &= 0xffc03fffU;     // Обнуляем пины 7, 8, 9, 10
-    GPIOE->PUPDR |= 0x00268000U;     // Устанавливаем для этих пинов GPIO_PULLDOWN
+    GPIO_InitTypeDef is =
+    {//     D2           D3           D0            D1
+        GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_14 | GPIO_PIN_15,
+        GPIO_MODE_AF_PP,
+        GPIO_PULLUP,
+        GPIO_SPEED_FREQ_VERY_HIGH,
+        GPIO_AF12_FMC
+    };
+
+    HAL_GPIO_Init(GPIOD, &is);
+
+    is.Pin = GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10;
+    HAL_GPIO_Init(GPIOE, &is);
 
     // Настроим адресные выводы для ПЛИС
 
@@ -57,16 +82,6 @@ void HAL_FSMC::Init()
     GPIOF->PUPDR &= HEX_FROM_2(ffff, f000);
     GPIOF->PUPDR |= HEX_FROM_2(0000, 0aaa);     // Устанавливаем pull-down
 
-    //               D4           D5           D6           D7
-    //isGPIO.Pin = GPIO _PIN_7 | GPIO _PIN_8 | GPIO _PIN_9 | GPIO _PIN_10;
-    //HAL_GPIO_Init(GPIOE, &isGPIO);
-
-    GPIOE->OSPEEDR |= HEX_FROM_2(003f, 8000);
-
-    GPIOE->OTYPER &= HEX_FROM_2(ffc0, 3fff);
-
-    GPIOE->PUPDR &= HEX_FROM_2(ffc0, 3fff);
-    GPIOE->PUPDR |= HEX_FROM_2(003a, 8fff);
 
     static SRAM_HandleTypeDef gSramHandle =
     {
