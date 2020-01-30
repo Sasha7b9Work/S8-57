@@ -136,3 +136,5 @@ struct StructPIN
     HPort::E port;
     uint16   pin;
 };
+
+
