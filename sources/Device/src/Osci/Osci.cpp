@@ -10,6 +10,7 @@
 #include "Osci/Osci.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/AutoMeasurements.h"
+#include "Utils/Values.h"
 
 
 int    Osci::addShift = 0;
@@ -22,7 +23,6 @@ void Osci::Init()
     Stop();
 
     RAM::Init();
-    ExtRAM::Init();
     FPGA::LoadRegUPR();
     Range::LoadBoth();
     RShift(Chan::A).Load();

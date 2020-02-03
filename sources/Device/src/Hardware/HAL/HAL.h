@@ -62,7 +62,7 @@ struct HAL_DAC2
 
 struct HAL_FSMC
 {
-    /// Функции взаимодействия с альтерой
+    /// *********** Функции взаимодействия с альтерой ****************
 
     static void Init();
     static void WriteToFPGA8(uint8 *address, uint8 value);
@@ -75,7 +75,15 @@ struct HAL_FSMC
     static uint8 ReadData0();
     static uint8 ReadData1();
 
-    /// Функции взаимодействия с панелью
+    /// ************* Функции взаимодействия с памятью ****************
+    static void WriteToRAM(uint8 *buffer, uint size, uint address);
+    static void ReadFromRAM(uint8 *buffer, uint size, uint address);
+    /// Возвращает сколько процентов данных считанных правильно.
+    static float TestRAM1();
+    static float TestRAM2();
+
+
+    /// ************* Функции взаимодействия с панелью ****************
 
     static void SendToPanel(uint8 byte);
     static void SendToPanel(uint8 byte0, uint8 byte1);
@@ -96,6 +104,9 @@ private:
     static float GetStretch(const uint8 *address);
     /// Инициализация пинов панели, которые не изменяют свой режим во время всей работы программы
     static void InitPanel();
+
+    static void InitRAM();
+
 
     struct Mode
     {
