@@ -961,24 +961,24 @@
           <GroupName>Hardware/Memory</GroupName>
           <Files>
             <File>
-              <FileName>ExtendedRAM.h</FileName>
+              <FileName>ExtRAM.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Memory\ExtendedRAM.h</FilePath>
+              <FilePath>.\src\Hardware\Memory\ExtRAM.h</FilePath>
             </File>
             <File>
-              <FileName>ExtendedRAM.cpp</FileName>
+              <FileName>ExtRAM.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Memory\ExtendedRAM.cpp</FilePath>
+              <FilePath>.\src\Hardware\Memory\ExtRAM.cpp</FilePath>
             </File>
             <File>
-              <FileName>Heap.h</FileName>
+              <FileName>IntRAM.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Memory\Heap.h</FilePath>
+              <FilePath>.\src\Hardware\Memory\IntRAM.h</FilePath>
             </File>
             <File>
-              <FileName>Heap.cpp</FileName>
+              <FileName>IntRAM.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Memory\Heap.cpp</FilePath>
+              <FilePath>.\src\Hardware\Memory\IntRAM.cpp</FilePath>
             </File>
             <File>
               <FileName>RAM.h</FileName>

@@ -159,7 +159,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Hardware\HAL\HAL_FSMC_stm.cpp</Filename>
+          <Filename>.\src\Hardware\HAL\HAL_FSMC_stm.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\src/Hardware/HAL/HAL_FSMC_stm.cpp\467</Expression>
         </Bp>
@@ -1585,7 +1585,7 @@
 
   <Group>
     <GroupName>Hardware/Memory</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1596,8 +1596,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Hardware\Memory\ExtendedRAM.h</PathWithFileName>
-      <FilenameWithoutPath>ExtendedRAM.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Hardware\Memory\ExtRAM.h</PathWithFileName>
+      <FilenameWithoutPath>ExtRAM.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1608,8 +1608,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Hardware\Memory\ExtendedRAM.cpp</PathWithFileName>
-      <FilenameWithoutPath>ExtendedRAM.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Hardware\Memory\ExtRAM.cpp</PathWithFileName>
+      <FilenameWithoutPath>ExtRAM.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1620,8 +1620,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Hardware\Memory\Heap.h</PathWithFileName>
-      <FilenameWithoutPath>Heap.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Hardware\Memory\IntRAM.h</PathWithFileName>
+      <FilenameWithoutPath>IntRAM.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1632,8 +1632,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Hardware\Memory\Heap.cpp</PathWithFileName>
-      <FilenameWithoutPath>Heap.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Hardware\Memory\IntRAM.cpp</PathWithFileName>
+      <FilenameWithoutPath>IntRAM.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

@@ -168,9 +168,9 @@ source_group(Hardware\\HAL      FILES   ../../Device/src/Hardware/HAL/HAL.h
                                                      src/Hardware/HAL/HAL_win.cpp)
 source_group(Hardware\\Memory   FILES   ../../Device/src/Hardware/Memory/ExtendedRAM.h
                                         ../../Device/src/Hardware/Memory/ExtendedRAM.cpp
-                                        ../../Device/src/Hardware/Memory/Heap.h
-                                        ../../Device/src/Hardware/Memory/Heap.cpp
                                                      src/Hardware/Memory/Memory_win.cpp
+                                        ../../Device/src/Hardware/Memory/IntRAM.h
+                                        ../../Device/src/Hardware/Memory/IntRAM.cpp
                                         ../../Device/src/Hardware/Memory/RAM.h
                                         ../../Device/src/Hardware/Memory/RAM_old.cpp
                                         ../../Device/src/Hardware/Memory/Reader.h
@@ -317,8 +317,8 @@ file(GLOB SOURCES   ../../common/_VS/*
                     
                     ../../Device/src/Hardware/Memory/ExtendedRAM.h
                     ../../Device/src/Hardware/Memory/ExtendedRAM.cpp
-                    ../../Device/src/Hardware/Memory/Heap.h
-                    ../../Device/src/Hardware/Memory/Heap.cpp
+                    ../../Device/src/Hardware/Memory/IntRAM.h
+                    ../../Device/src/Hardware/Memory/IntRAM.cpp
                                  src/Hardware/Memory/Memory_win.cpp
                     ../../Device/src/Hardware/Memory/RAM.h
                     ../../Device/src/Hardware/Memory/RAM_old.cpp

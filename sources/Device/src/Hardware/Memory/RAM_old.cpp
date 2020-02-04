@@ -4,7 +4,7 @@
 
 #include "defines.h"
 #include "Hardware/Timer.h"
-#include "Hardware/Memory/Heap.h"
+#include "Hardware/Memory/IntRAM.h"
 #include "Hardware/Memory/RAM.h"
 #include "Osci/DataSettings.h"
 #include "Osci/Osci.h"
@@ -13,8 +13,8 @@
 #include <cstdlib>
 
 
-#define BEGIN reinterpret_cast<uint>(Heap::BeginStorageRAM())
-#define END   reinterpret_cast<uint>(Heap::EndStorageRAM())
+#define BEGIN reinterpret_cast<uint>(IntRAM::BeginStorageRAM())
+#define END   reinterpret_cast<uint>(IntRAM::EndStorageRAM())
 
 
 int16 RAM::currentSignal = 0;

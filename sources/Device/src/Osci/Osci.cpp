@@ -5,7 +5,7 @@
 #include "FPGA/FPGA.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
-#include "Hardware/Memory/ExtendedRAM.h"
+#include "Hardware/Memory/ExtRAM.h"
 #include "Hardware/Memory/RAM.h"
 #include "Osci/Osci.h"
 #include "Osci/Display/DisplayOsci.h"

@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Hardware/Memory/Heap.h"
+#include "Hardware/Memory/IntRAM.h"
 #include "Menu/Pages/Include/PageMemory.h"
 #include "Osci/DataSettings.h"
 
@@ -10,13 +10,13 @@ static uint8 buffer[SIZE_BUFFER];
 static const uint SIZE_STORAGE_RAM = SIZE_BUFFER;
 
 
-uint8 *Heap::BeginStorageRAM()
+uint8 *IntRAM::BeginStorageRAM()
 {
     return buffer;
 }
 
 
-uint8 *Heap::EndStorageRAM()
+uint8 *IntRAM::EndStorageRAM()
 {
     return BeginStorageRAM() + SIZE_STORAGE_RAM;
 }

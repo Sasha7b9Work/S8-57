@@ -1,7 +1,7 @@
 #pragma once
 
 
-class Heap
+class IntRAM
 {
 public:
     /// Ќачало хранилища RAM, где хран€тс€ считанные сигналы

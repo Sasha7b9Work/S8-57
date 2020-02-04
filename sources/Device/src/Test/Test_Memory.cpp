@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Osci/DataSettings.h"
-#include "Hardware/Memory/Heap.h"
+#include "Hardware/Memory/IntRAM.h"
 #include "Hardware/Memory/RAM.h"
 #include "Hardware/Memory/ROM.h"
 #include "Hardware/Memory/Sector.h"

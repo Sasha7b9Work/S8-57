@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Hardware/Memory/Heap.h"
+#include "Hardware/Memory/IntRAM.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Memory/ROM.h"
