@@ -1,3 +1,7 @@
+/*
+    «десь работа с пам€тью на макете, где не было внешней RAM
+*/
+
 #include "defines.h"
 #include "Hardware/Timer.h"
 #include "Hardware/Memory/Heap.h"

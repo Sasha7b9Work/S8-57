@@ -172,7 +172,7 @@ source_group(Hardware\\Memory   FILES   ../../Device/src/Hardware/Memory/Extende
                                         ../../Device/src/Hardware/Memory/Heap.cpp
                                                      src/Hardware/Memory/Memory_win.cpp
                                         ../../Device/src/Hardware/Memory/RAM.h
-                                        ../../Device/src/Hardware/Memory/RAM.cpp
+                                        ../../Device/src/Hardware/Memory/RAM_old.cpp
                                         ../../Device/src/Hardware/Memory/Reader.h
                                         ../../Device/src/Hardware/Memory/Reader.cpp
                                         ../../Device/src/Hardware/Memory/ROM.h
@@ -321,7 +321,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Hardware/Memory/Heap.cpp
                                  src/Hardware/Memory/Memory_win.cpp
                     ../../Device/src/Hardware/Memory/RAM.h
-                    ../../Device/src/Hardware/Memory/RAM.cpp
+                    ../../Device/src/Hardware/Memory/RAM_old.cpp
                     ../../Device/src/Hardware/Memory/Reader.h
                     ../../Device/src/Hardware/Memory/Reader.cpp
                     ../../Device/src/Hardware/Memory/ROM.h
