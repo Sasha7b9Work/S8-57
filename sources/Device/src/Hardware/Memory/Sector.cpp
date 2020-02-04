@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Memory/Sector.h"
-#include "Data/DataSettings.h"
+#include "Osci/DataSettings.h"
 
 
 const DataSettings *PacketROM::UnPack() const

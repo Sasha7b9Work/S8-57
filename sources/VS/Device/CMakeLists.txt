@@ -53,7 +53,6 @@ source_group(_VS\\HAL                                   REGULAR_EXPRESSION ../co
 source_group(_VS\\HAL\\Legacy                           REGULAR_EXPRESSION ../common/_VS/HAL/Legacy/*)
 source_group(_VS\\USBD                                  REGULAR_EXPRESSION ../common/_VS/USBD/*)
 source_group(_VS\\USBH                                  REGULAR_EXPRESSION ../common/_VS/USBH/*)
-source_group(Data                                       REGULAR_EXPRESSION src/Data/*)
 source_group(FlashDrive                                 REGULAR_EXPRESSION src/FlashDrive/*)
 source_group(GUI                                        REGULAR_EXPRESSION src/GUI/*)
 source_group(GUI\\Dialogs                               REGULAR_EXPRESSION src/GUI/Dialogs/*)
@@ -169,9 +168,13 @@ source_group(Hardware\\HAL      FILES   ../../Device/src/Hardware/HAL/HAL.h
                                                      src/Hardware/HAL/HAL_win.cpp)
 source_group(Hardware\\Memory   FILES   ../../Device/src/Hardware/Memory/ExtendedRAM.h
                                         ../../Device/src/Hardware/Memory/ExtendedRAM.cpp
+                                        ../../Device/src/Hardware/Memory/Heap.h
+                                        ../../Device/src/Hardware/Memory/Heap.cpp
                                                      src/Hardware/Memory/Memory_win.cpp
                                         ../../Device/src/Hardware/Memory/RAM.h
                                         ../../Device/src/Hardware/Memory/RAM.cpp
+                                        ../../Device/src/Hardware/Memory/Reader.h
+                                        ../../Device/src/Hardware/Memory/Reader.cpp
                                         ../../Device/src/Hardware/Memory/ROM.h
                                         ../../Device/src/Hardware/Memory/ROM.cpp
                                         ../../Device/src/Hardware/Memory/ROM_Data.cpp
@@ -179,6 +182,8 @@ source_group(Hardware\\Memory   FILES   ../../Device/src/Hardware/Memory/Extende
                                         ../../Device/src/Hardware/Memory/Sector.cpp
                                                      src/Hardware/Memory/Sector_win.cpp)
 source_group(Osci               FILES   ../../Device/src/Osci/AveragerOsci.cpp
+                                        ../../Device/src/Osci/DataSettings.h
+                                        ../../Device/src/Osci/DataSettings.cpp
                                         ../../Device/src/Osci/FreqMeter.h
                                         ../../Device/src/Osci/FreqMeter.cpp
                                         ../../Device/src/Osci/Osci.h
@@ -312,9 +317,13 @@ file(GLOB SOURCES   ../../common/_VS/*
                     
                     ../../Device/src/Hardware/Memory/ExtendedRAM.h
                     ../../Device/src/Hardware/Memory/ExtendedRAM.cpp
+                    ../../Device/src/Hardware/Memory/Heap.h
+                    ../../Device/src/Hardware/Memory/Heap.cpp
                                  src/Hardware/Memory/Memory_win.cpp
                     ../../Device/src/Hardware/Memory/RAM.h
                     ../../Device/src/Hardware/Memory/RAM.cpp
+                    ../../Device/src/Hardware/Memory/Reader.h
+                    ../../Device/src/Hardware/Memory/Reader.cpp
                     ../../Device/src/Hardware/Memory/ROM.h
                     ../../Device/src/Hardware/Memory/ROM.cpp
                     ../../Device/src/Hardware/Memory/ROM_Data.cpp
@@ -323,6 +332,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                                  src/Hardware/Memory/Sector_win.cpp
                     
                     ../../Device/src/Keyboard/*
+
                     ../../Device/src/Menu/*
                     ../../Device/src/Menu/Pages/*
                     ../../Device/src/Menu/Pages/Include/*
@@ -336,8 +346,12 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Menu/Pages/PageService/*
                     ../../Device/src/Menu/Pages/PageService/PageDebug/*
                     ../../Device/src/Menu/Pages/PageTrig/*
+
                     ../../Device/src/Multimeter/*
+
                     ../../Device/src/Osci/AveragerOsci.cpp
+                    ../../Device/src/Osci/DataSettings.h
+                    ../../Device/src/Osci/DataSettings.cpp
                     ../../Device/src/Osci/FreqMeter.h
                     ../../Device/src/Osci/FreqMeter.cpp
                     ../../Device/src/Osci/Osci.h

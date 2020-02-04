@@ -1,10 +1,10 @@
 #include "defines.h"
-#include "Data/DataSettings.h"
 #include "FlashDrive/FileManager.h"
 #include "FlashDrive/FlashDrive.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Menu/Menu.h"
+#include "Osci/DataSettings.h"
 #include "usbh_diskio.h"
 
 

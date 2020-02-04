@@ -1,7 +1,7 @@
 #include "defines.h"
-#include "Data/DataSettings.h"
-#include "Data/Heap.h"
+#include "Hardware/Memory/Heap.h"
 #include "Menu/Pages/Include/PageMemory.h"
+#include "Osci/DataSettings.h"
 
 
 static const uint SIZE_BUFFER = 112 * 1024;

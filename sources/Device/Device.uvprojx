@@ -468,41 +468,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Data</GroupName>
-          <Files>
-            <File>
-              <FileName>DataSettings.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Data\DataSettings.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DataSettings.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Data\DataSettings.h</FilePath>
-            </File>
-            <File>
-              <FileName>Heap.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Data\Heap.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Heap.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Data\Heap.h</FilePath>
-            </File>
-            <File>
-              <FileName>Reader.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Data\Reader.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Reader.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Data\Reader.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Display</GroupName>
           <Files>
             <File>
@@ -1006,6 +971,16 @@
               <FilePath>.\src\Hardware\Memory\ExtendedRAM.cpp</FilePath>
             </File>
             <File>
+              <FileName>Heap.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Memory\Heap.h</FilePath>
+            </File>
+            <File>
+              <FileName>Heap.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Memory\Heap.cpp</FilePath>
+            </File>
+            <File>
               <FileName>RAM.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Memory\RAM.h</FilePath>
@@ -1014,6 +989,16 @@
               <FileName>RAM.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\Memory\RAM.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Reader.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\Memory\Reader.h</FilePath>
+            </File>
+            <File>
+              <FileName>Reader.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Memory\Reader.cpp</FilePath>
             </File>
             <File>
               <FileName>ROM.h</FileName>
@@ -1536,24 +1521,24 @@
           <GroupName>Osci</GroupName>
           <Files>
             <File>
-              <FileName>Osci.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\Osci.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Osci.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Osci\Osci.h</FilePath>
-            </File>
-            <File>
               <FileName>AveragerOsci.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\AveragerOsci.cpp</FilePath>
             </File>
             <File>
-              <FileName>SettingsOsci.cpp</FileName>
+              <FileName>DataSettings.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Osci\DataSettings.h</FilePath>
+            </File>
+            <File>
+              <FileName>DataSettings.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Osci\SettingsOsci.cpp</FilePath>
+              <FilePath>.\src\Osci\DataSettings.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FreqMeter.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Osci\FreqMeter.h</FilePath>
             </File>
             <File>
               <FileName>FreqMeter.cpp</FileName>
@@ -1561,9 +1546,19 @@
               <FilePath>.\src\Osci\FreqMeter.cpp</FilePath>
             </File>
             <File>
-              <FileName>FreqMeter.h</FileName>
+              <FileName>Osci.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Osci\FreqMeter.h</FilePath>
+              <FilePath>.\src\Osci\Osci.h</FilePath>
+            </File>
+            <File>
+              <FileName>Osci.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Osci.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SettingsOsci.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\SettingsOsci.cpp</FilePath>
             </File>
           </Files>
         </Group>

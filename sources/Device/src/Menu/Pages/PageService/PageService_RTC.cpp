@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Data/DataSettings.h"
+#include "Osci/DataSettings.h"
 #include "Display/Painter.h"
 #include "Display/Primitives.h"
 #include "Display/Symbols.h"

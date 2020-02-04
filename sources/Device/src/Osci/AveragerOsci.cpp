@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Osci.h"
-#include "Data/Reader.h"
+#include "Hardware/Memory/Reader.h"
 #include "Display/Grid.h"
 #include "Display/Primitives.h"
 #include "FPGA/FPGA.h"

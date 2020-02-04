@@ -1,8 +1,8 @@
 #include "defines.h"
-#include "Data/DataSettings.h"
-#include "Data/Heap.h"
 #include "Hardware/Timer.h"
+#include "Hardware/Memory/Heap.h"
 #include "Hardware/Memory/RAM.h"
+#include "Osci/DataSettings.h"
 #include "Osci/Osci.h"
 #include "Utils/Math.h"
 #include <cstring>

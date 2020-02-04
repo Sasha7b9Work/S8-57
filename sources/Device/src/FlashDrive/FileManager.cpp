@@ -1,6 +1,5 @@
 #include "defines.h"
 #include "common/Display/Font/Font_d.h"
-#include "Data/DataSettings.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Display/Primitives.h"
@@ -9,6 +8,7 @@
 #include "Hardware/Beeper.h"
 #include "Hardware/HAL/HAL.h"
 #include "Menu/Menu.h"
+#include "Osci/DataSettings.h"
 #include "Utils/Math.h"
 #include "Utils/Values.h"
 #include <cstring>

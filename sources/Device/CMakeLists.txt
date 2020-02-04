@@ -43,7 +43,6 @@ source_group(doc                                     REGULAR_EXPRESSION ../doc/*
 source_group(_VS                                     REGULAR_EXPRESSION ../common/_VS/*)
 source_group(_VS\\std_includes                       REGULAR_EXPRESSION ../common/_VS/std_includes/*)
 source_group(src                                     REGULAR_EXPRESSION src/*)
-source_group(Data                                    REGULAR_EXPRESSION src/Data/*)
 source_group(Display                                 REGULAR_EXPRESSION src/Display/*)
 source_group(Display\\Font                           REGULAR_EXPRESSION ../common/Display/Font/*)
 source_group(FlashDrive                              REGULAR_EXPRESSION src/FlashDrive/*)
@@ -89,7 +88,6 @@ file(GLOB SOURCES   ../common/Command.h
                     ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc_ex.h
                     
                     ../doc/*
-                    src/Data/*
                     src/Display/*
                     ../common/Display/Font/*
                     src/FlashDrive/*

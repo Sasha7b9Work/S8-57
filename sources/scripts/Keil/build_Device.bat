@@ -7,7 +7,7 @@ if %BUILD_STATUS%==0 goto Exit
 
 echo ERROR!!! Device    failed!!!
 rem "c:\Program Files\Notepad++\notepad++.exe" -multiInst -alwaysOnTop ..\..\Device\Device.out -n1000 -x0 -y0
-type ..\..\Device\Device57.out
+type ..\..\Device\Device.out
 
 :Exit
 

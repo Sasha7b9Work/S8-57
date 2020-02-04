@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Data/Reader.h"
+#include "Hardware/Memory/Reader.h"
 #include "FPGA/FPGA.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/AutoMeasurements.h"
