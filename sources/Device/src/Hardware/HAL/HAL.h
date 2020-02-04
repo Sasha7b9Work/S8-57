@@ -78,10 +78,11 @@ struct HAL_FSMC
     /// ************* Функции взаимодействия с памятью ****************
     static void WriteToRAM(uint8 *buffer, uint size, uint address);
     static void ReadFromRAM(uint8 *buffer, uint size, uint address);
-    /// Возвращает сколько процентов данных считанных правильно.
+    /// Возвращает сколько процентов данных считанных неправильно.
     static float TestRAM1();
     static float TestRAM2();
-
+    /// Возвращает время в секундах, которое занимает запись/чтение sizekB килобайт во внешнюю память. Возвращает -1, если произошла ошибка
+    static float TestTimeRAM(uint sizekB);
 
     /// ************* Функции взаимодействия с панелью ****************
 
@@ -104,9 +105,10 @@ private:
     static float GetStretch(const uint8 *address);
     /// Инициализация пинов панели, которые не изменяют свой режим во время всей работы программы
     static void InitPanel();
-
+    /// Настроить FSMC для работы с внешней RAM
     static void InitRAM();
-
+    /// Тест скорости записи/чтение 1кБ внешней RAM
+    static float TestTime1kB(uint address);
 
     struct Mode
     {

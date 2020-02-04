@@ -73,7 +73,7 @@
         <LExpSel>0</LExpSel>
       </OPTXL>
       <OPTFL>
-        <tvExp>1</tvExp>
+        <tvExp>0</tvExp>
         <tvExpOptDlg>0</tvExpOptDlg>
         <IsCurrentTarget>1</IsCurrentTarget>
       </OPTFL>
@@ -118,7 +118,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGUARM</Key>
-          <Name>„ф6</Name>
+          <Name>/</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -150,18 +150,18 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>410</LineNumber>
+          <LineNumber>467</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134489932</Address>
+          <Address>134495640</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\Hardware\HAL\HAL_FSMC_stm.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\Hardware\HAL\HAL_FSMC_stm.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\\src/Hardware/HAL/HAL_FSMC_stm.cpp\410</Expression>
+          <Expression>\\S8_57\src/Hardware/HAL/HAL_FSMC_stm.cpp\467</Expression>
         </Bp>
       </Breakpoint>
       <MemoryWindow1>

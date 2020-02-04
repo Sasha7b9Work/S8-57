@@ -28,27 +28,6 @@ void HAL_FSMC::Init()
     __HAL_RCC_FMC_CLK_ENABLE();
     __HAL_RCC_GPIOF_CLK_ENABLE();
 
-    // Устанавливаем привязку для пинов шины данных
-    // GPIOD 14, 15, 0, 1 - D0, D1, D2, D3
-    // GPIOE  7, 8, 9, 10 - D4, D5, D6, D7
-
-//    GPIOD->PUPDR &= 0x0ffffff0U;     // Обнуляем пины 15, 14, 1, 0
-//    GPIOD->PUPDR |= 0xa000000aU;     // Устанавливаем для этих пинов GPIO_PULLDOWN
-//
-//    GPIOE->PUPDR &= 0xffc03fffU;     // Обнуляем пины 7, 8, 9, 10
-//    GPIOE->PUPDR |= 0x00268000U;     // Устанавливаем для этих пинов GPIO_PULLDOWN
-//
-//        //               D4           D5           D6           D7
-//    //isGPIO.Pin = GPIO _PIN_7 | GPIO _PIN_8 | GPIO _PIN_9 | GPIO _PIN_10;
-//    //HAL_GPIO_Init(GPIOE, &isGPIO);
-//
-//    GPIOE->OSPEEDR |= HEX_FROM_2(003f, 8000);
-//
-//    GPIOE->OTYPER &= HEX_FROM_2(ffc0, 3fff);
-//
-//    GPIOE->PUPDR &= HEX_FROM_2(ffc0, 3fff);
-//    GPIOE->PUPDR |= HEX_FROM_2(003a, 8fff);
-
     GPIO_InitTypeDef is =
     {//     D2           D3           D0            D1
         GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_14 | GPIO_PIN_15,
@@ -194,16 +173,9 @@ void HAL_FSMC::InitRAM()
         FMC_ACCESS_MODE_C  // FSMC_AccessMode
     };
 
-    SRAM_HandleTypeDef *hsram = &gSramHandle;
-    FMC_NORSRAM_TimingTypeDef *Timing = const_cast<FMC_NORSRAM_TimingTypeDef *>(&sramTiming);
+    FMC_NORSRAM_TimingTypeDef *timing = const_cast<FMC_NORSRAM_TimingTypeDef *>(&sramTiming);
 
-    FMC_NORSRAM_Init(hsram->Instance, &(hsram->Init));
-
-    FMC_NORSRAM_Timing_Init(hsram->Instance, Timing, hsram->Init.NSBank);
-
-    hsram->Extended->BWTR[hsram->Init.NSBank] = 0x0FFFFFFFU;
-
-    __FMC_NORSRAM_ENABLE(hsram->Instance, hsram->Init.NSBank);
+    HAL_SRAM_Init(&gSramHandle, timing, timing);
 }
 
 
@@ -446,4 +418,56 @@ float HAL_FSMC::TestRAM2()
     }
 
     return (bad * 100.0F) / SIZE;
+}
+
+
+float HAL_FSMC::TestTimeRAM(uint sizekB)
+{
+    float result = 0;
+
+    for(uint i = 0; i < sizekB; i++)
+    {
+        float time = TestTime1kB(i * 1024);
+
+        if(time == -1.0F)
+        {
+            return -1.0F;
+        }
+
+        result += time;
+    }
+
+    return result;
+}
+
+
+float HAL_FSMC::TestTime1kB(uint address)
+{
+#define SIZE_BUFFER 1024
+
+    uint8 data[SIZE_BUFFER];
+    uint8 out[SIZE_BUFFER];
+
+    for(int i = 0; i < SIZE_BUFFER; i++)
+    {
+        data[i] = static_cast<uint8>(std::rand());
+    }
+
+    uint start = Timer::TimeUS();
+
+    WriteToRAM(data, SIZE_BUFFER, address);
+
+    ReadFromRAM(out, SIZE_BUFFER, address);
+
+    float time = (Timer::TimeUS() - start) / 1e6F;
+
+    for(int i = 0; i < SIZE_BUFFER; i++)
+    {
+        if(data[i] != out[i])
+        {
+            return -1.0F;
+        }
+    }
+
+    return time;
 }
