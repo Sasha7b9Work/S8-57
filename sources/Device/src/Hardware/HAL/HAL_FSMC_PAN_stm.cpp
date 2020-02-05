@@ -65,7 +65,7 @@ void HAL_BUS::InitPanel()
 }
 
 
-bool HAL_BUS::Receive()
+bool HAL_BUS::Panel::Receive()
 {
     //if(pinReadyPAN.IsPassive() || pinDataPAN.IsPassive())
     if((GPIOA->IDR & GPIO_PIN_7) || (GPIOC->IDR & GPIO_PIN_4))
@@ -125,17 +125,17 @@ bool HAL_BUS::Receive()
 }
 
 
-void HAL_BUS::SendToPanel(uint8 byte)
+void HAL_BUS::Panel::Send(uint8 byte)
 {
-    SendToPanel(&byte, 1);
+    Send(&byte, 1);
 }
 
 
-void HAL_BUS::SendToPanel(uint8 byte0, uint8 byte1)
+void HAL_BUS::Panel::Send(uint8 byte0, uint8 byte1)
 {
     uint8 buffer[2] = { byte0, byte1 };
     
-    SendToPanel(buffer, 2);
+    Send(buffer, 2);
 }
 
 #ifdef __cplusplus
@@ -148,7 +148,7 @@ extern void CycleSend(void);
 }
 #endif
 
-void HAL_BUS::SendToPanel(uint8 *data, uint size)
+void HAL_BUS::Panel::Send(uint8 *data, uint size)
 {
     interactionWithPanel = true;
 
@@ -221,7 +221,7 @@ void HAL_BUS::SendToPanel(uint8 *data, uint size)
 }
 
 
-bool HAL_BUS::InteractionWithPanel()
+bool HAL_BUS::Panel::InInteraction()
 {
     return interactionWithPanel;
 }

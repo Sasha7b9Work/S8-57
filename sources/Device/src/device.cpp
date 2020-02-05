@@ -115,7 +115,7 @@ void Device::Update()
     
     FDrive::Update();
 
-    while (HAL_BUS::Receive()) {};
+    while (HAL_BUS::Panel::Receive()) {};
 
     SCPI::Update();
     

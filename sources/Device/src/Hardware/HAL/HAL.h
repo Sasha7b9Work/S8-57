@@ -62,6 +62,15 @@ struct HAL_DAC2
 
 struct HAL_BUS
 {
+    struct Panel
+    {
+        static void Send(uint8 byte);
+        static void Send(uint8 byte0, uint8 byte1);
+        static void Send(uint8 *data, uint size);
+        static bool Receive();
+        static bool InInteraction();
+    };
+
     /// *********** Функции взаимодействия с альтерой ****************
     static void Init();
     static void WriteToFPGA8(uint8 *address, uint8 value);
@@ -76,13 +85,6 @@ struct HAL_BUS
 
     /// ************* Функции взаимодействия с панелью ****************
 
-    static void SendToPanel(uint8 byte);
-    static void SendToPanel(uint8 byte0, uint8 byte1);
-    static void SendToPanel(uint8 *data, uint size);
-
-    static bool Receive();
-
-    static bool InteractionWithPanel();
     /// Возвращает растяжку для данного адреса
     static float GetStretch(const uint8 *address);
     /// Конфигурировать для работы по шине FSMC с альтерой и памятью

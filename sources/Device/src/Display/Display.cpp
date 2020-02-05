@@ -193,7 +193,7 @@ void Display::Message::Func()
 
     if (waitKey)
     {
-        while (HAL_BUS::Receive()) {};
+        while (HAL_BUS::Panel::Receive()) {};
 
         DDecoder::Update();
 
@@ -433,11 +433,11 @@ static void ReadRow(uint8 row)
 {
     numRow = -1;
 
-    HAL_BUS::SendToPanel(Command::Screen, row);
+    HAL_BUS::Panel::Send(Command::Screen, row);
 
     while (numRow == -1)
     {
-        HAL_BUS::Receive();
+        HAL_BUS::Panel::Receive();
         DDecoder::Update();
     }
 }
@@ -451,5 +451,5 @@ void Display::SaveRow(int row)
 
 void Display::LoadBrightness()
 {
-    HAL_BUS::SendToPanel(Command::Display_Brightness, static_cast<uint8>(set.disp.brightness + 10));
+    HAL_BUS::Panel::Send(Command::Display_Brightness, static_cast<uint8>(set.disp.brightness + 10));
 }

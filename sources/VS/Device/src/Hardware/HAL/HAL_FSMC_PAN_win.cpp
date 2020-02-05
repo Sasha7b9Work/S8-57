@@ -24,7 +24,7 @@ void HAL_BUS::Init()
 }
 
 
-void HAL_BUS::SendToPanel(uint8 *data, uint num)
+void HAL_BUS::Panel::Send(uint8 *data, uint num)
 {
     if(data == nullptr)
     {
@@ -64,13 +64,13 @@ void HAL_BUS::SendToPanel(uint8 *data, uint num)
 }
 
 
-void HAL_BUS::SendToPanel(uint8)
+void HAL_BUS::Panel::Send(uint8)
 {
 
 }
 
 
-bool HAL_BUS::Receive()
+bool HAL_BUS::Panel::Receive()
 {
     Osci::ReadPointP2P();
 
@@ -78,15 +78,15 @@ bool HAL_BUS::Receive()
 }
 
 
-void HAL_BUS::SendToPanel(uint8 byte0, uint8 byte1)
+void HAL_BUS::Panel::Send(uint8 byte0, uint8 byte1)
 {
     uint8 data[2] = { byte0, byte1 };
 
-    SendToPanel(data, 2);
+    Send(data, 2);
 }
 
 
-bool HAL_BUS::InteractionWithPanel()
+bool HAL_BUS::Panel::InInteraction()
 {
     return false;
 }

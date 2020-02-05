@@ -25,8 +25,10 @@ struct HAL
 
 struct HAL_BUS
 {
-    static void SendToPanel(uint8 byte0, uint8 byte1);
-    static void SendToPanel(uint8 *data, uint size);
-
-    static bool Receive();
+    struct Panel
+    {
+        static void Send(uint8 byte0, uint8 byte1);
+        static void Send(uint8 *data, uint size);
+        static bool Receive();
+    };
 };
