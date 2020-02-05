@@ -28,8 +28,8 @@ void FPGA::ForcedStart()
         stop = (1 << BIT_TRIG_ENABLED);     // устанавливаем признак того, что процесс чтения данных бесконечен
     }
 
-    HAL_BUS::WriteToFPGA8(WR::TRIG, static_cast<uint8>(value++ | stop));
-    HAL_BUS::WriteToFPGA8(WR::TRIG, static_cast<uint8>((value % 2) | stop));
+    HAL_BUS::FPGA::Write8(WR::TRIG, static_cast<uint8>(value++ | stop));
+    HAL_BUS::FPGA::Write8(WR::TRIG, static_cast<uint8>((value % 2) | stop));
 
     forcedStart = true;
 }
@@ -41,7 +41,7 @@ uint16 FPGA::ReadLastRecord(Chan::E ch)
 
     if (Chan(ch).IsA())
     {
-        address = static_cast<uint16>(HAL_BUS::ReadFromFPGA(RD::LAST_RECORD_LO) + ((HAL_BUS::ReadFromFPGA(RD::LAST_RECORD_HI)) << 8));
+        address = static_cast<uint16>(HAL_BUS::FPGA::Read(RD::LAST_RECORD_LO) + ((HAL_BUS::FPGA::Read(RD::LAST_RECORD_HI)) << 8));
     }
 
     return address;
@@ -136,7 +136,7 @@ void FPGA::ReadData()
 
 void FPGA::GiveStart(uint16 pr, uint16 po)
 {
-    HAL_BUS::WriteToFPGA16(WR::PRED_LO, pr);
-    HAL_BUS::WriteToFPGA16(WR::POST_LO, po);
-    HAL_BUS::WriteToFPGA8(WR::START, 0xff);
+    HAL_BUS::FPGA::Write16(WR::PRED_LO, pr);
+    HAL_BUS::FPGA::Write16(WR::POST_LO, po);
+    HAL_BUS::FPGA::Write8(WR::START, 0xff);
 }

@@ -113,8 +113,8 @@ void Calibrator::Balance(Chan::E ch, Range::E range)
         {
             if (HAL_PIO::Read(PIN_P2P))
             {
-                HAL_BUS::SetAddrData(addr);
-                sum += HAL_BUS::ReadData0();
+                HAL_BUS::FPGA::SetAddrData(addr);
+                sum += HAL_BUS::FPGA::ReadA0();
                 numPoints++;
             }
         }
@@ -149,8 +149,8 @@ float Calibrator::FindStretchK(Chan::E ch)
     {
         if (!HAL_BUS::Panel::InInteraction())
         {
-            HAL_BUS::SetAddrData(addr);
-            uint8 d = HAL_BUS::ReadData0();
+            HAL_BUS::FPGA::SetAddrData(addr);
+            uint8 d = HAL_BUS::FPGA::ReadA0();
 
             if (d > VALUE::MAX - 32)
             {

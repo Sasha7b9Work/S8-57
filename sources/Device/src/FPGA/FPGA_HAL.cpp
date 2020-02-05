@@ -33,7 +33,7 @@ void FPGA::LoadRegUPR()
 
     data |= mask[Calibrator::Mode()];
 
-    HAL_BUS::WriteToFPGA8(WR::UPR, data);
+    HAL_BUS::FPGA::Write8(WR::UPR, data);
 }
 
 

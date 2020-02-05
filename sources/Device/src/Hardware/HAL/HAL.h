@@ -62,6 +62,10 @@ struct HAL_DAC2
 
 struct HAL_BUS
 {
+    static void Init();
+    /// Конфигурировать для работы по шине FSMC с альтерой и памятью
+    static void ConfigureToFSMC();
+
     struct Panel
     {
         static void Send(uint8 byte);
@@ -73,30 +77,26 @@ struct HAL_BUS
         static void Init();
     };
 
-    /// *********** Функции взаимодействия с альтерой ****************
-    static void Init();
-    static void WriteToFPGA8(uint8 *address, uint8 value);
-    static void WriteToFPGA16(uint8 *address, uint16 value);
-    static uint8 ReadFromFPGA(const uint8 *address);
+    struct FPGA
+    {
+        static void Write8(uint8 *address, uint8 value);
+        static void Write16(uint8 *address, uint16 value);
+        static uint8 Read(const uint8 *address);
+        /// Установить адрес для чтения данных
+        static void SetAddrData(uint8 *address0, uint8 *address1 = nullptr);
+        /// Читать данные с установленного адреса
+        static uint8 ReadA0();
+        static uint8 ReadA1();
+        /// Возвращает растяжку для данного адреса
+        static float GetStretch(const uint8 *address);
+    private:
+        /// Первый адрес чтения данных
+        static uint8 *addrData0;
+        /// Второй адрес чтения данных
+        static uint8 *addrData1;
+    };
 
-    /// Установить адрес для чтения данных
-    static void SetAddrData(uint8 *address0, uint8 *address1 = nullptr);
-    /// Читать данные с установленного адреса
-    static uint8 ReadData0();
-    static uint8 ReadData1();
-
-    /// ************* Функции взаимодействия с панелью ****************
-
-    /// Возвращает растяжку для данного адреса
-    static float GetStretch(const uint8 *address);
-    /// Конфигурировать для работы по шине FSMC с альтерой и памятью
-    static void ConfigureToFSMC();
 private:
-    /// Первый адрес чтения данных
-    static uint8 *addrData0;
-    /// Второй адрес чтения данных
-    static uint8 *addrData1;
-
     /// Настроить FSMC для работы с внешней RAM
     static void InitRAM();
 

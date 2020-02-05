@@ -126,8 +126,8 @@ void TShift::LoadReal()
     FPGA::post = static_cast<uint16>(~(FPGA::post + 1));
     FPGA::pred = static_cast<uint16>(~(FPGA::pred + 3));
 
-    HAL_BUS::WriteToFPGA16(WR::PRED_LO, FPGA::post);
-    HAL_BUS::WriteToFPGA16(WR::POST_LO, FPGA::pred);
+    HAL_BUS::FPGA::Write16(WR::PRED_LO, FPGA::post);
+    HAL_BUS::FPGA::Write16(WR::POST_LO, FPGA::pred);
 }
 
 
@@ -154,8 +154,8 @@ void TShift::LoadRandomize()
     FPGA::post = static_cast<uint16>(~(FPGA::post + 1));
     FPGA::pred = static_cast<uint16>(~(FPGA::pred));
 
-    HAL_BUS::WriteToFPGA16(WR::PRED_LO, FPGA::pred);
-    HAL_BUS::WriteToFPGA16(WR::POST_LO, FPGA::post);
+    HAL_BUS::FPGA::Write16(WR::PRED_LO, FPGA::pred);
+    HAL_BUS::FPGA::Write16(WR::POST_LO, FPGA::post);
 
     Osci::addShift = static_cast<int>(TShift() % k);
 

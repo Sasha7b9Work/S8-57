@@ -40,8 +40,8 @@ static char buffer[11] = {'0', '0', '0', '0', '0', '0', '0', 0, 0, 0, 0};
 void FreqMeter::Init()
 {
     LoadSettings();
-    HAL_BUS::WriteToFPGA8(WR::RESET_COUNTER_FREQ, 1);
-    HAL_BUS::WriteToFPGA8(WR::RESET_COUNTER_PERIOD, 1);
+    HAL_BUS::FPGA::Write8(WR::RESET_COUNTER_FREQ, 1);
+    HAL_BUS::FPGA::Write8(WR::RESET_COUNTER_PERIOD, 1);
     freqActual.word = 0;
     periodActual.word = 0;
 }
@@ -82,7 +82,7 @@ void FreqMeter::LoadSettings()
         _SET_BIT(data, 2);
     }
 
-    HAL_BUS::WriteToFPGA8(WR::FREQMETER, data);
+    HAL_BUS::FPGA::Write8(WR::FREQMETER, data);
 }
 
 
@@ -95,7 +95,7 @@ void FreqMeter::LoadSettings()
 void FreqMeter::LoadFreqSettings()
 {
     LoadSettings();
-    HAL_BUS::WriteToFPGA8(WR::RESET_COUNTER_FREQ, 1);
+    HAL_BUS::FPGA::Write8(WR::RESET_COUNTER_FREQ, 1);
     freqActual.word = 0;
     timeStartMeasureFreq = 0;
 }
@@ -104,7 +104,7 @@ void FreqMeter::LoadFreqSettings()
 void FreqMeter::LoadPeriodSettings()
 {
     LoadSettings();
-    HAL_BUS::WriteToFPGA8(WR::RESET_COUNTER_PERIOD, 1);
+    HAL_BUS::FPGA::Write8(WR::RESET_COUNTER_PERIOD, 1);
     periodActual.word = 0;
     timeStartMeasurePeriod = 0;
 }

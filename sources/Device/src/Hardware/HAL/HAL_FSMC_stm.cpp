@@ -17,8 +17,8 @@
 //#define ADDR_DISPLAY    ((uint8 *)NOR_MEMORY_ADRESS4)
 
 
-uint8 *HAL_BUS::addrData0 = nullptr;
-uint8 *HAL_BUS::addrData1 = nullptr;
+uint8 *HAL_BUS::FPGA::addrData0 = nullptr;
+uint8 *HAL_BUS::FPGA::addrData1 = nullptr;
 
 
 HAL_BUS::Mode::E HAL_BUS::mode = HAL_BUS::Mode::FSMC;
@@ -229,7 +229,7 @@ void HAL_BUS::ConfigureToFSMC()
 }
 
 
-void HAL_BUS::WriteToFPGA16(uint8 *address, uint16 value)
+void HAL_BUS::FPGA::Write16(uint8 *address, uint16 value)
 {
     if(mode != Mode::FSMC)
     {
@@ -243,7 +243,7 @@ void HAL_BUS::WriteToFPGA16(uint8 *address, uint16 value)
 }
 
 
-void HAL_BUS::WriteToFPGA8(uint8 *address, uint8 value)
+void HAL_BUS::FPGA::Write8(uint8 *address, uint8 value)
 {
     if(mode != Mode::FSMC)
     {
@@ -254,7 +254,7 @@ void HAL_BUS::WriteToFPGA8(uint8 *address, uint8 value)
 }
 
 
-uint8 HAL_BUS::ReadFromFPGA(const uint8 *address)
+uint8 HAL_BUS::FPGA::Read(const uint8 *address)
 {
     if(mode != Mode::FSMC)
     {
@@ -265,7 +265,7 @@ uint8 HAL_BUS::ReadFromFPGA(const uint8 *address)
 }
 
 
-void HAL_BUS::SetAddrData(uint8 *address0, uint8 *address1)
+void HAL_BUS::FPGA::SetAddrData(uint8 *address0, uint8 *address1)
 {
     addrData0 = address0;
     addrData1 = address1;
@@ -277,7 +277,7 @@ void HAL_BUS::SetAddrData(uint8 *address0, uint8 *address1)
 }
 
 
-uint8 HAL_BUS::ReadData0()
+uint8 HAL_BUS::FPGA::ReadA0()
 {
     int delta = VALUE::AVE - static_cast<int>(*addrData0);
 
@@ -289,7 +289,7 @@ uint8 HAL_BUS::ReadData0()
 }
 
 
-uint8 HAL_BUS::ReadData1()
+uint8 HAL_BUS::FPGA::ReadA1()
 {
     int delta = VALUE::AVE - static_cast<int>(*addrData1);
 
@@ -301,7 +301,7 @@ uint8 HAL_BUS::ReadData1()
 }
 
 
-float HAL_BUS::GetStretch(const uint8 *address)
+float HAL_BUS::FPGA::GetStretch(const uint8 *address)
 {
     if (StretchADC::IsDisabled())
     {

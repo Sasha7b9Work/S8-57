@@ -6,21 +6,21 @@
 #include "Utils/Math.h"
 
 
-uint8 *HAL_BUS::addrData0 = nullptr;
-uint8 *HAL_BUS::addrData1 = nullptr;
+uint8 *HAL_BUS::FPGA::addrData0 = nullptr;
+uint8 *HAL_BUS::FPGA::addrData1 = nullptr;
 
 
-void HAL_BUS::WriteToFPGA8(uint8 *, uint8)
+void HAL_BUS::FPGA::Write8(uint8 *, uint8)
 {
 }
 
 
-void HAL_BUS::WriteToFPGA16(uint8 *, uint16)
+void HAL_BUS::FPGA::Write16(uint8 *, uint16)
 {
 }
 
 
-uint8 HAL_BUS::ReadFromFPGA(const uint8 *address)
+uint8 HAL_BUS::FPGA::Read(const uint8 *address)
 {
     if (address == RD::DATA_A || (address == RD::DATA_A + 1) ||
         address == RD::DATA_B || (address == RD::DATA_B + 1))
@@ -32,14 +32,14 @@ uint8 HAL_BUS::ReadFromFPGA(const uint8 *address)
 }
 
 
-void HAL_BUS::SetAddrData(uint8 *address0, uint8 *address1)
+void HAL_BUS::FPGA::SetAddrData(uint8 *address0, uint8 *address1)
 {
     addrData0 = address0;
     addrData1 = address1;
 }
 
 
-uint8 HAL_BUS::ReadData0()
+uint8 HAL_BUS::FPGA::ReadA0()
 {
     static uint prevTime = TIME_MS;
 
@@ -55,7 +55,7 @@ uint8 HAL_BUS::ReadData0()
 }
 
 
-uint8 HAL_BUS::ReadData1()
+uint8 HAL_BUS::FPGA::ReadA1()
 {
     return VALUE::AVE;
 }
