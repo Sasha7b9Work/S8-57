@@ -76,8 +76,6 @@ struct HAL_BUS
     static uint8 ReadData1();
 
     /// ************* Функции взаимодействия с памятью ****************
-    /// Первый байт внешней памяти
-    static uint8 *BeginRAM();
     /// Записывает во внешнюю память по адресу address данные buffer, size кратен 4
     static void WriteToRAM(uint8 *buffer, uint size, uint8 *address);
     /// Читает из внешней памяти address в буфер buffer данные, size кратен 4

@@ -2,6 +2,7 @@
 #include "FPGA/TypesFPGA.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
+#include "Hardware/Memory/ExtRAM.h"
 #include "Menu/Pages/Include/DebugPage.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
@@ -386,7 +387,7 @@ float HAL_BUS::TestRAM2()
         bufferIN[x] = static_cast<uint8>(std::rand());
     }
 
-    uint8 *address = BeginRAM() + (std::rand() % (500 * 1024));
+    uint8 *address = ExtRAM::Begin() + (std::rand() % (500 * 1024));
 
     WriteToRAM(bufferIN, SIZE, address);
 
@@ -413,7 +414,7 @@ float HAL_BUS::TestTimeRAM(uint sizekB)
 
     for(uint i = 0; i < sizekB; i++)
     {
-        float time = TestTime1kB(BeginRAM() + i * 1024);
+        float time = TestTime1kB(ExtRAM::Begin() + i * 1024);
 
         if(time == -1.0F)
         {
@@ -456,10 +457,4 @@ float HAL_BUS::TestTime1kB(uint8 *address)
     }
 
     return time;
-}
-
-
-uint8 *HAL_BUS::BeginRAM()
-{
-    return reinterpret_cast<uint8 *>(NOR_MEMORY_ADRESS3);
 }
