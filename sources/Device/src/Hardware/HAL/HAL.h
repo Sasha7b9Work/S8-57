@@ -79,10 +79,11 @@ struct HAL_BUS
     {
         /// Записывает во внешнюю память по адресу address данные buffer, size кратен 4
         static void Write(uint8 *buffer, uint size, uint8 *address);
+        /// Читает из внешней памяти address в буфер buffer данные, size кратен 4
+        static void Read(uint8 *buffer, uint size, uint8 *address);
+
     };
 
-    /// Читает из внешней памяти address в буфер buffer данные, size кратен 4
-    static void ReadFromRAM(uint8 *buffer, uint size, uint8 *address);
     /// Возвращает сколько процентов данных считанных неправильно.
     static float TestRAM1();
     static float TestRAM2();

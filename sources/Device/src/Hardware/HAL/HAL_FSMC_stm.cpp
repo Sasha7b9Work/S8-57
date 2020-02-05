@@ -330,7 +330,7 @@ void HAL_BUS::RAM::Write(uint8 *buffer, uint size, uint8 *address)
 }
 
 
-void HAL_BUS::ReadFromRAM(uint8 *buffer, uint size, uint8 *address)
+void HAL_BUS::RAM::Read(uint8 *buffer, uint size, uint8 *address)
 {
     if(mode != Mode::FPGA)
     {
@@ -391,7 +391,7 @@ float HAL_BUS::TestRAM2()
 
     RAM::Write(bufferIN, SIZE, address);
 
-    ReadFromRAM(bufferOUT, SIZE, address);
+    RAM::Read(bufferOUT, SIZE, address);
 
     for(int z = 0; z < SIZE; z++)
     {
@@ -444,7 +444,7 @@ float HAL_BUS::TestTime1kB(uint8 *address)
 
     RAM::Write(data, SIZE_BUFFER, address);
 
-    ReadFromRAM(out, SIZE_BUFFER, address);
+    RAM::Read(out, SIZE_BUFFER, address);
 
     float time = (Timer::TimeUS() - start) / 1e6F;
 
