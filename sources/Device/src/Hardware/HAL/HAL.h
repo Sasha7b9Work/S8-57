@@ -69,6 +69,8 @@ struct HAL_BUS
         static void Send(uint8 *data, uint size);
         static bool Receive();
         static bool InInteraction();
+        /// Инициализация пинов панели, которые не изменяют свой режим во время всей работы программы
+        static void Init();
     };
 
     /// *********** Функции взаимодействия с альтерой ****************
@@ -94,8 +96,7 @@ private:
     static uint8 *addrData0;
     /// Второй адрес чтения данных
     static uint8 *addrData1;
-    /// Инициализация пинов панели, которые не изменяют свой режим во время всей работы программы
-    static void InitPanel();
+
     /// Настроить FSMC для работы с внешней RAM
     static void InitRAM();
 

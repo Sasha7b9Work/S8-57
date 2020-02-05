@@ -107,7 +107,7 @@ void HAL_BUS::Init()
 
     __FMC_NORSRAM_ENABLE(hsram->Instance, hsram->Init.NSBank);
 
-    InitPanel();
+    Panel::Init();
 
     InitRAM();
 }
