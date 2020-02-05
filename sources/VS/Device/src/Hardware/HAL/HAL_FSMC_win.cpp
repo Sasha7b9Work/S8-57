@@ -59,3 +59,9 @@ uint8 HAL_BUS::FPGA::ReadA1()
 {
     return VALUE::AVE;
 }
+
+
+void HAL_BUS::ConfigureToFSMC()
+{
+
+}
