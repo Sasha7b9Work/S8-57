@@ -986,9 +986,9 @@
               <FilePath>.\src\Hardware\Memory\RAM.h</FilePath>
             </File>
             <File>
-              <FileName>RAM_old.cpp</FileName>
+              <FileName>RAM.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Memory\RAM_old.cpp</FilePath>
+              <FilePath>.\src\Hardware\Memory\RAM.cpp</FilePath>
             </File>
             <File>
               <FileName>Reader.h</FileName>

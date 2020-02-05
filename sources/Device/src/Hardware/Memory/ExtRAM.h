@@ -4,5 +4,4 @@
 class ExtRAM
 {
 public:
-    static void Init();
 };

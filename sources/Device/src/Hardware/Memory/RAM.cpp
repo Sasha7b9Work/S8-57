@@ -13,8 +13,12 @@
 #include <cstdlib>
 
 
+//#ifdef OLD_VERSION
+
 #define BEGIN reinterpret_cast<uint>(IntRAM::BeginStorageRAM())
 #define END   reinterpret_cast<uint>(IntRAM::EndStorageRAM())
+
+//#endif
 
 
 int16 RAM::currentSignal = 0;
