@@ -21,7 +21,7 @@ uint8 *HAL_BUS::addrData0 = nullptr;
 uint8 *HAL_BUS::addrData1 = nullptr;
 
 
-HAL_BUS::Mode::E HAL_BUS::mode = HAL_BUS::Mode::FPGA;
+HAL_BUS::Mode::E HAL_BUS::mode = HAL_BUS::Mode::FSMC;
 
 
 void HAL_BUS::Init()
@@ -182,12 +182,12 @@ void HAL_BUS::InitRAM()
 
 void HAL_BUS::ConfigureToFSMC()
 {
-    if(mode == Mode::FPGA)
+    if(mode == Mode::FSMC)
     {
         return;
     }
 
-    mode = Mode::FPGA;
+    mode = Mode::FSMC;
 
     static const GPIO_InitTypeDef isGPIO =
     {   //    NOE          NWE          NE1
@@ -231,7 +231,7 @@ void HAL_BUS::ConfigureToFSMC()
 
 void HAL_BUS::WriteToFPGA16(uint8 *address, uint16 value)
 {
-    if(mode != Mode::FPGA)
+    if(mode != Mode::FSMC)
     {
         ConfigureToFSMC();
     }
@@ -245,7 +245,7 @@ void HAL_BUS::WriteToFPGA16(uint8 *address, uint16 value)
 
 void HAL_BUS::WriteToFPGA8(uint8 *address, uint8 value)
 {
-    if(mode != Mode::FPGA)
+    if(mode != Mode::FSMC)
     {
         ConfigureToFSMC();
     }
@@ -256,7 +256,7 @@ void HAL_BUS::WriteToFPGA8(uint8 *address, uint8 value)
 
 uint8 HAL_BUS::ReadFromFPGA(const uint8 *address)
 {
-    if(mode != Mode::FPGA)
+    if(mode != Mode::FSMC)
     {
         ConfigureToFSMC();
     }
@@ -270,7 +270,7 @@ void HAL_BUS::SetAddrData(uint8 *address0, uint8 *address1)
     addrData0 = address0;
     addrData1 = address1;
 
-    if(mode != Mode::FPGA)
+    if(mode != Mode::FSMC)
     {
         ConfigureToFSMC();
     }

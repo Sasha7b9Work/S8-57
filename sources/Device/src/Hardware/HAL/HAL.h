@@ -101,7 +101,7 @@ private:
     {
         enum E
         {
-            FPGA,
+            FSMC,
             PanelRead,
             PanelWrite
         };
