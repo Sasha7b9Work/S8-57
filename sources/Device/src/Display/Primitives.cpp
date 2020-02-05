@@ -662,7 +662,7 @@ void DashedVLine::Draw(int x, int y0)
 {
     if (deltaStart < 0 || deltaStart >= (deltaFill + deltaEmpty))
     {
-        LOG_ERROR("Неправильный аргумент deltaStart = %d", deltaStart);
+        //LOG_ERROR("Неправильный аргумент deltaStart = %d", deltaStart);
         return;
     }
     int y = y0;
@@ -696,7 +696,7 @@ void DashedHLine::Draw(int x0, int y)
 {
     if (deltaStart < 0 || deltaStart >= (deltaFill + deltaEmpty))
     {
-        LOG_ERROR("Неправильный аргумент deltaStart = %d", deltaStart);
+        //LOG_ERROR("Неправильный аргумент deltaStart = %d", deltaStart);
         return;
     }
 

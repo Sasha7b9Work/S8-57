@@ -46,6 +46,8 @@ DEF_GRAPH_BUTTON( bPrev,                                                        
 
 static void OnOpenClose_RAM(bool enter)
 {
+    RAM::canTrace = true;
+
     if (enter)
     {
         RUN_FPGA_BEFORE_SB = Osci::IsRunning() ? 1U : 0U;

@@ -225,29 +225,29 @@ void FrameP2P::AddPeakDetPoint(Chan::E ch, uint16 point)
 
 void DataSettings::Log() const
 {
-    if (enableA)
-    {
-        uint8 *data = dataA;
-        LOG_WRITE("A: %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X",
-            data[ 0], data[ 1], data[ 2], data[ 3], data[ 4], data[ 5], data[ 6], data[ 7], data[ 8], data[ 9],
-            data[10], data[11], data[12], data[13], data[14], data[15], data[16], data[17], data[18], data[19]);
-    }
-    else
-    {
-        LOG_WRITE("A: откл");
-    }
-
-    if (enableB)
-    {
-        uint8 *data = dataB;
-        LOG_WRITE("B: %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X",
-            data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9],
-            data[10], data[11], data[12], data[13], data[14], data[15], data[16], data[17], data[18], data[19]);
-    }
-    else
-    {
-        LOG_WRITE("B: откл");
-    }
+//    if (enableA)
+//    {
+//        uint8 *data = dataA;
+//        LOG_WRITE("A: %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X",
+//            data[ 0], data[ 1], data[ 2], data[ 3], data[ 4], data[ 5], data[ 6], data[ 7], data[ 8], data[ 9],
+//            data[10], data[11], data[12], data[13], data[14], data[15], data[16], data[17], data[18], data[19]);
+//    }
+//    else
+//    {
+//        LOG_WRITE("A: откл");
+//    }
+//
+//    if (enableB)
+//    {
+//        uint8 *data = dataB;
+//        LOG_WRITE("B: %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X",
+//            data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9],
+//            data[10], data[11], data[12], data[13], data[14], data[15], data[16], data[17], data[18], data[19]);
+//    }
+//    else
+//    {
+//        LOG_WRITE("B: откл");
+//    }
 }
 
 

@@ -16,7 +16,7 @@ Utils::Averager<T>::Averager(uint _size) : buffer(nullptr), size(_size), numELem
 
     if (buffer == nullptr)
     {
-        LOG_ERROR("Недостаточно памяти");
+//        LOG_ERROR("Недостаточно памяти");
     }
 }
 

@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include "Menu/Pages/Include/DebugPage.h"
 #include "Menu/Pages/Include/PageService.h"
 #include "SCPI/ChannelsSCPI.h"
@@ -166,10 +167,6 @@ static void ProcessHelp(const StructSCPI *strct, String msg)
             SCPI::SendAnswer(strct->hint);
             strct->funcHint(&message);
             SCPI::SendAnswer("");
-        }
-        else
-        {
-            LOG_ERROR("—юда мы не можем попасть");
         }
 
         strct++;

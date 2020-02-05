@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include "device.h"
 #include "Osci/DataSettings.h"
 #include "Hardware/Memory/Reader.h"
@@ -47,7 +48,9 @@ void Osci::DeInit()
 
 void Osci::Start(bool button)
 {
+    LOG_ERROR("%d", RAM::NumberDatas());
     funcStart(button);
+    LOG_ERROR("%d", RAM::NumberDatas());
 }
 
 

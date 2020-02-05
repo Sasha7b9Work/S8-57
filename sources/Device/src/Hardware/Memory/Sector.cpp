@@ -119,28 +119,28 @@ uint PacketROM::GetPackedSize(const DataSettings *ds)
 
 void PacketROM::Log() const
 {
-    const DataSettings *ds = UnPack();
-
-    int numInROM = ds ? static_cast<int>(ds->numInROM) : -1;
-    uint address = Address();
-    int numSector = Sector::Number(Address());
-    PacketROM *next = Next();
-
-    LOG_WRITE("PacketROM : data %d, address 0x%x(sector %d), next 0x%x(sector %d)",
-        numInROM,
-        address,
-        numSector,
-        next,
-        Sector::Number(reinterpret_cast<uint>(Next())));
-
-    if (ds)
-    {
-        ds->Log();
-    }
-    else
-    {
-        LOG_WRITE("Пакет стёрт либо пуст");
-    }
+//    const DataSettings *ds = UnPack();
+//
+//    int numInROM = ds ? static_cast<int>(ds->numInROM) : -1;
+//    uint address = Address();
+//    int numSector = Sector::Number(Address());
+//    PacketROM *next = Next();
+//
+//    LOG_WRITE("PacketROM : data %d, address 0x%x(sector %d), next 0x%x(sector %d)",
+//        numInROM,
+//        address,
+//        numSector,
+//        next,
+//        Sector::Number(reinterpret_cast<uint>(Next())));
+//
+//    if (ds)
+//    {
+//        ds->Log();
+//    }
+//    else
+//    {
+//        LOG_WRITE("Пакет стёрт либо пуст");
+//    }
 }
 
 
@@ -447,25 +447,25 @@ int NumberPacket(const PacketROM *packet)
 
 void Sector::Log() const
 {
-    LOG_WRITE("    Сектор %d адрес 0x%x, размер 0x%x", number, address, size);
-    LOG_WRITE("             #   адрес  размер  следующий");
-
-    PacketROM *packet = reinterpret_cast<PacketROM *>(address);
-
-    static int counter = 0;
-    counter = 0;
-
-    while (packet)
-    {
-        LOG_WRITE("%2d : %6s %2d 0x%x 0x%4x 0x%x",
-            counter,
-            TypePacket(packet),
-            NumberPacket(packet),
-            packet->Address(),
-            packet->Size(),
-            packet->Next());
-
-        packet = packet->Next();
-        counter++;
-    }
+//    LOG_WRITE("    Сектор %d адрес 0x%x, размер 0x%x", number, address, size);
+//    LOG_WRITE("             #   адрес  размер  следующий");
+//
+//    PacketROM *packet = reinterpret_cast<PacketROM *>(address);
+//
+//    static int counter = 0;
+//    counter = 0;
+//
+//    while (packet)
+//    {
+//        LOG_WRITE("%2d : %6s %2d 0x%x 0x%4x 0x%x",
+//            counter,
+//            TypePacket(packet),
+//            NumberPacket(packet),
+//            packet->Address(),
+//            packet->Size(),
+//            packet->Next());
+//
+//        packet = packet->Next();
+//        counter++;
+//    }
 }

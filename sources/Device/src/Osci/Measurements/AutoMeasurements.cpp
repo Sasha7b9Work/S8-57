@@ -447,7 +447,6 @@ int CalculatePeriodAccurately(Chan::E ch)
 
     if (sums == 0)
     {
-        LOG_ERROR("Нет памяти");
         return 0;
     }
 
@@ -1209,7 +1208,6 @@ void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase)
     uint8 *signedData = static_cast<uint8 *>(std::malloc(static_cast<uint>(numPoints) / 2U));
     if (signedData == 0)
     {
-        LOG_ERROR("Нет памяти");
         return;
     }
     int numSignedPoints = 0;
@@ -1326,10 +1324,6 @@ String Measure::GetStringMeasure(Chan::E ch, char* buffer, int lenBuf)
         if (len + 1 <= lenBuf)
         {
             std::strcat(buffer, text);
-        }
-        else
-        {
-            LOG_ERROR("Буфер слишком мал");
         }
     }
     else

@@ -52,10 +52,6 @@ Color DisplayTester::ColorForStep(int _step)
     {
         return colors[_step];
     }
-    else
-    {
-        LOG_ERROR("Неправильный шаг");
-    }
 
     return Color::FILL;
 }

@@ -87,7 +87,7 @@ static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
         min = 0xffff;
         max = 0;
 
-        LOG_WRITE("Новые ворота %d %d", static_cast<uint16>(minGate), static_cast<uint16>(maxGate - 50));
+        //LOG_WRITE("Новые ворота %d %d", static_cast<uint16>(minGate), static_cast<uint16>(maxGate - 50));
     }
 
     *eMin = static_cast<uint16>(minGate);      // -V519 // -V2004

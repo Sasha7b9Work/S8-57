@@ -290,10 +290,6 @@ pString Tester::Scale::ToString() const // -V2506
     {
         return names[value];
     }
-    else
-    {
-        LOG_ERROR("Массив не заполнен");
-    }
 
     return 0;
 }

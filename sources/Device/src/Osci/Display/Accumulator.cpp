@@ -22,7 +22,7 @@ void DisplayOsci::Accumulator::NextFrame()
     {
         static uint prevFrame = 0;
 
-        LOG_WRITE("%d", CurrentFrame());
+//        LOG_WRITE("%d", CurrentFrame());
 
         if (CurrentFrame() == prevFrame)
         {

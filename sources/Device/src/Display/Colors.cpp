@@ -84,11 +84,11 @@ static bool WriteFlashColor();
 static void WriteToDisplay(Color color);
 
 
-void Color::Log(Color color)
+void Color::Log(Color)
 {
 #define colorVal (COLOR(color.value))
 
-    LOG_WRITE("Color %d R=%d, G=%d, B=%d", color.value, R_FROM_COLOR(colorVal), G_FROM_COLOR(colorVal), B_FROM_COLOR(colorVal));
+    //LOG_WRITE("Color %d R=%d, G=%d, B=%d", color.value, R_FROM_COLOR(colorVal), G_FROM_COLOR(colorVal), B_FROM_COLOR(colorVal));
 }
 
 

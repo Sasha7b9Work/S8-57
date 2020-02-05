@@ -50,10 +50,6 @@ ENumSignalsInSec::E Tables::ENumSignalsInSecToENUM(int numSignalsInSec)
     {
         return ENumSignalsInSec::_25;
     }
-    else
-    {
-        LOG_ERROR("");
-    }
 
     return ENumSignalsInSec::_1;
 }
@@ -79,11 +75,6 @@ const char *Tables_RangeNameFromValue(Range::E range)
     };
 
     pString name = names[range].name;
-
-    if (name == 0)
-    {
-        LOG_ERROR("Нет имени");
-    }
 
     return name;
 }

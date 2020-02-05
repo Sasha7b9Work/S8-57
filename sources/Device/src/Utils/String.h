@@ -1,5 +1,6 @@
 #pragma once
 #include "Display/Colors.h"
+#include "Utils/String.h"
 
 
 struct TypeConversionString
@@ -27,7 +28,7 @@ public:
     /// Отобразить текст на экране в заданнх координатах
     int Draw(int x, int y, Color color = Color::NUMBER) const;
 
-    static const char * const ERROR;
+    static const char * const _ERROR;
 
     void Free();
 

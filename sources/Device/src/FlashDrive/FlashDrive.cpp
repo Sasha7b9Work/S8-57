@@ -81,7 +81,7 @@ void FDrive::Mount()
     Menu::ChangeStateFlashDrive();
     if (f_mount(&USBDISKFatFs, static_cast<TCHAR const*>(USBDISKPath), 0) != FR_OK)
     {
-        LOG_ERROR("Не могу примонтировать диск");
+//        LOG_ERROR("Не могу примонтировать диск");
     }
 }
 
@@ -100,10 +100,6 @@ void FDrive::Init()
         USBH_StatusTypeDef res = USBH_Init(&hUSB_Host, USBH_UserProcess, 0);
         res = USBH_RegisterClass(&hUSB_Host, USBH_MSC_CLASS);
         res = USBH_Start(&hUSB_Host);
-    }
-    else
-    {
-        LOG_ERROR("Can not %s", __FUNCTION__);
     }
 }
 

@@ -432,10 +432,6 @@ void DisplayFreqMeter::DrawPeriod(int x, int _y)
     {
         per *= 1e-3F;
     }
-    else
-    {
-        LOG_ERROR("Здесь мы никогда не должны оказаться");
-    }
 
     Frequency freq(1.0F / per);
 
@@ -654,7 +650,6 @@ pString DisplayFreqMeter::FreqSetToString(const BitSet32 *fr)
         break;
     case FreqMeter::TimeCounting::Count:
     default:
-        LOG_ERROR("");
         break;
     }
 

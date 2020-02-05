@@ -3,6 +3,7 @@
 #include "SCPI/HeadSCPI.h"
 #include "SCPI/SCPI.h"
 #include "Utils/Buffer.h"
+#include "Utils/String.h"
 #include "Utils/StringUtils.h"
 #include <cstring>
 
@@ -80,10 +81,6 @@ static const char *Process(const char *buffer, const StructSCPI strct[]) //-V250
             else if (strct->IsLeaf())
             {
                 return ProcessLeaf(end, strct);
-            }
-            else
-            {
-                LOG_WRITE("—юда мы попасть ну никак не можем");
             }
         }
 

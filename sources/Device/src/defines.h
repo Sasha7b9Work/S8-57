@@ -250,9 +250,6 @@ extern volatile BitField gBF;   ///< @brief Структура сделана volatile, потому ч
                                 ///< переменная изменит своё состояние (каковое изменение происходит из прерывания, ясен перец)).
 
 
-#include "log.h"
-
-
 #define INTERRUPT_BEGIN extern "C" {
 #define INTERRUPT_END   }
 

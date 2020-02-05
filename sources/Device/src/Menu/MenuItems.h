@@ -1,6 +1,7 @@
 #pragma once
 #include "Display/Display.h"
 #include "Display/Colors.h"
+#include "Utils/String.h"
 #include "MenuItemsDefs.h"
 
 

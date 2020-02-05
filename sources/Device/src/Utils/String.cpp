@@ -7,7 +7,7 @@
 #include <cstdarg>
 
 
-const char * const String::ERROR = "---.---";
+const char * const String::_ERROR = "---.---";
 
 
 String::String() : buffer(nullptr)
@@ -179,10 +179,7 @@ bool String::Allocate(uint size)
     {
         return true;
     }
-    else
-    {
-        LOG_ERROR("Не хватает памяти");
-    }
+
     return false;
 }
 

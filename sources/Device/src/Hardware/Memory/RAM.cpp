@@ -33,6 +33,9 @@ Packet *RAM::oldest = reinterpret_cast<Packet *>(BEGIN);
 Packet *RAM::newest = nullptr;
 
 
+#define TRACE_OLDEST oldest->Trace(__LINE__)
+
+
 /// «аписывает по адресу dest. ¬озвращает адрес первого байта после записи
 static uint *WriteToRAM(uint *dest, const void *src, uint size)
 {
@@ -46,10 +49,23 @@ static uint *WriteToRAM(uint *dest, const void *src, uint size)
 }
 
 
+bool RAM::canTrace = false;
+
+
 struct Packet
 {
     /// јдрес следующего пакета, более "свежего". ≈сли addrNext == 0x00000000, следующего пакета нет, этот пакет самый новый
     uint addrNewest;
+
+    void Trace(uint)
+    {
+        if(addrNewest == 0 && RAM::canTrace)
+        {
+            addrNewest = addrNewest;
+        }
+
+        //LOG_WRITE("%d %x", line, addrNewest);
+    }
 
     /// ”паковать данные по адресу this. ¬озвращает указатель на пакет, следующий за ним
     void Pack(const DataSettings *ds)
@@ -138,6 +154,7 @@ struct Packet
 void RAM::Init()
 {
     oldest = reinterpret_cast<Packet *>(BEGIN);
+    TRACE_OLDEST;
     newest = nullptr;
 }
 

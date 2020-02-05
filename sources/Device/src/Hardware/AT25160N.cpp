@@ -98,7 +98,7 @@ void AT25160N::Test()
         if(data[i] != out[i])
         {
             testIsOk = false;
-            LOG_WRITE("ошибка на %d-м элементе", i);
+            //LOG_WRITE("ошибка на %d-м элементе", i);
             break;
         }
     }
@@ -107,7 +107,7 @@ void AT25160N::Test()
 
     if(testIsOk)
     {
-        LOG_WRITE("Test is OK!!!");
+        //LOG_WRITE("Test is OK!!!");
     }
     else
     {
