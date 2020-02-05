@@ -17,6 +17,6 @@ int main(void)
     {
         Device::Update();
 
-        LOG_WRITE("test %f", ExtRAM::TestTime(512) * 1000);
+        //LOG_WRITE("test %f", ExtRAM::TestTime(512) * 1000);
     }
 }

@@ -4,21 +4,29 @@
 
 #include "defines.h"
 #include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
+#include "Hardware/Memory/ExtRAM.h"
 #include "Hardware/Memory/IntRAM.h"
 #include "Hardware/Memory/RAM.h"
 #include "Osci/DataSettings.h"
 #include "Osci/Osci.h"
+#include "Utils/Debug.h"
 #include "Utils/Math.h"
 #include <cstring>
 #include <cstdlib>
 
 
-//#ifdef OLD_VERSION
+#ifdef OLD_VERSION
 
 #define BEGIN reinterpret_cast<uint>(IntRAM::BeginStorageRAM())
 #define END   reinterpret_cast<uint>(IntRAM::EndStorageRAM())
 
-//#endif
+#else
+
+#define BEGIN reinterpret_cast<uint>(ExtRAM::Begin())
+#define END   reinterpret_cast<uint>(ExtRAM::End())
+
+#endif
 
 
 int16 RAM::currentSignal = 0;
@@ -29,6 +37,8 @@ Packet *RAM::newest = nullptr;
 /// Записывает по адресу dest. Возвращает адрес первого байта после записи
 static uint *WriteToRAM(uint *dest, const void *src, uint size)
 {
+    HAL_BUS::ConfigureToFSMC();
+    
     uint8 *address = reinterpret_cast<uint8 *>(dest);
 
     std::memcpy(address, src, size);
@@ -196,25 +206,38 @@ DataSettings *RAM::Get(uint numFromEnd)
 
 uint RAM::NumberDatas()
 {
+    DEBUG_POINT;
+
     if (newest == nullptr)
     {
         return 0;
     }
+
+    DEBUG_POINT;
 
     if (oldest == nullptr)
     {
         return 1;
     }
 
+    DEBUG_POINT;
+
     uint result = 0;
 
     Packet *packet = oldest;
 
+    DEBUG_POINT;
+
     while (packet != nullptr)
     {
+        DEBUG_POINT;
         result++;
+        DEBUG_POINT;
         packet = reinterpret_cast<Packet *>(packet->addrNewest);
+        DEBUG_POINT;
     }
+
+    DEBUG_POINT;
 
     return result;
 }
