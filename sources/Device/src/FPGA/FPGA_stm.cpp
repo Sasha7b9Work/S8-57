@@ -231,15 +231,19 @@ bool FPGA::ReadDataChannel(Chan::E ch, uint8 *data)
         }
         else
         {
+            float stretch = HAL_BUS::GetStretch(a1);
+
+            Buffer buffer(numPoints);
+
             for(uint i = 0; i < numPoints; i++)
             {
                 int delta = VALUE::AVE - static_cast<int>(*a1);
 
-                uint8 result = static_cast<uint8>(VALUE::AVE - static_cast<int>(delta * HAL_BUS::GetStretch(a1)));
+                uint8 result = static_cast<uint8>(VALUE::AVE - static_cast<int>(delta * stretch));
 
-                Math::Limitation(&result, VALUE::MIN, VALUE::MAX);
-
-                p[i] = result;
+                if(result < VALUE::MIN)      { p[i] = VALUE::MIN; }
+                else if(result > VALUE::MAX) { p[i] = VALUE::MAX; }
+                else                         { p[i] = result;     }
             }
         }
     }
