@@ -16,7 +16,5 @@ int main(void)
     while (1)
     {
         Device::Update();
-
-        LOG_WRITE("%d кЅ за %d мс", 512, (uint)(HAL_BUS::TestTimeRAM(512) * 1000));
     }
 }

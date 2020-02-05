@@ -1,9 +1,12 @@
 #include "defines.h"
 #include "FPGA/AD9286.h"
 #include "FPGA/FPGA.h"
+#include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Osci.h"
 #include "Settings/Settings.h"
+#include "Utils/Buffer.h"
+#include "Utils/Math.h"
 #include <cstring>
 
 
@@ -180,6 +183,8 @@ bool FPGA::ReadDataChannelRand(Chan::E ch, uint8 *addr, uint8 *data)
 
 bool FPGA::ReadDataChannel(Chan::E ch, uint8 *data)
 {
+    uint start = Timer::TimeUS();
+
     uint numPoints = ENumPointsFPGA::PointsInChannel();
 
     if (addrRead == 0xffff)
@@ -226,16 +231,20 @@ bool FPGA::ReadDataChannel(Chan::E ch, uint8 *data)
         }
         else
         {
-            for (uint i = 0; i < numPoints / 4U; ++i)   // -V112
+            for(uint i = 0; i < numPoints; i++)
             {
-                *p++ = HAL_BUS::ReadData1();
-                *p++ = HAL_BUS::ReadData1();
-                *p++ = HAL_BUS::ReadData1();
-                *p++ = HAL_BUS::ReadData1();
-                numberReads += 4;
+                int delta = VALUE::AVE - static_cast<int>(*a1);
+
+                uint8 result = static_cast<uint8>(VALUE::AVE - static_cast<int>(delta * HAL_BUS::GetStretch(a1)));
+
+                Math::Limitation(&result, VALUE::MIN, VALUE::MAX);
+
+                p[i] = result;
             }
         }
     }
+
+    LOG_WRITE("время чтения %d", Timer::TimeUS() - start);
 
     return true;
 }

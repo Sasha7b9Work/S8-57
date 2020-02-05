@@ -287,7 +287,7 @@ uint8 HAL_BUS::ReadData1()
 {
     int delta = VALUE::AVE - static_cast<int>(*addrData1);
 
-    uint8 result = static_cast<uint8>(VALUE::AVE - static_cast<int>(delta * GetStretch(addrData0)));
+    uint8 result = static_cast<uint8>(VALUE::AVE - static_cast<int>(delta * GetStretch(addrData1)));
 
     Math::Limitation(&result, VALUE::MIN, VALUE::MAX);
 

@@ -97,16 +97,15 @@ struct HAL_BUS
     static bool Receive();
 
     static bool InteractionWithPanel();
-    
+    /// Возвращает растяжку для данного адреса
+    static float GetStretch(const uint8 *address);
+    /// Конфигурировать для работы по шине FSMC с альтерой и памятью
+    static void ConfigureToFSMC();
 private:
     /// Первый адрес чтения данных
     static uint8 *addrData0;
     /// Второй адрес чтения данных
     static uint8 *addrData1;
-    /// Конфигурировать для работы по шине FSMC с альтерой и памятью
-    static void ConfigureToFSMC();
-    /// Возвращает растяжку для данного адреса
-    static float GetStretch(const uint8 *address);
     /// Инициализация пинов панели, которые не изменяют свой режим во время всей работы программы
     static void InitPanel();
     /// Настроить FSMC для работы с внешней RAM
