@@ -76,8 +76,10 @@ struct HAL_FSMC
     static uint8 ReadData1();
 
     /// ************* Функции взаимодействия с памятью ****************
-    static void WriteToRAM(uint8 *buffer, uint size, uint address);
-    static void ReadFromRAM(uint8 *buffer, uint size, uint address);
+    /// Первый байт внешней памяти
+    static uint8 *BeginRAM();
+    static void WriteToRAM(uint8 *buffer, uint size, uint8 *address);
+    static void ReadFromRAM(uint8 *buffer, uint size, uint8 *address);
     /// Возвращает сколько процентов данных считанных неправильно.
     static float TestRAM1();
     static float TestRAM2();
@@ -108,7 +110,7 @@ private:
     /// Настроить FSMC для работы с внешней RAM
     static void InitRAM();
     /// Тест скорости записи/чтение 1кБ внешней RAM
-    static float TestTime1kB(uint address);
+    static float TestTime1kB(uint8 *address);
 
     struct Mode
     {

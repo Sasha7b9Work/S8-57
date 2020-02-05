@@ -11,9 +11,9 @@
 
 
 #define ADDR_ALTERA1    ((uint8 *)NOR_MEMORY_ADRESS1)
-#define ADDR_ALTERA2    ((uint8 *)NOR_MEMORY_ADRESS2)
-#define ADDR_ALTERA3    ((uint8 *)NOR_MEMORY_ADRESS3)
-#define ADDR_DISPLAY    ((uint8 *)NOR_MEMORY_ADRESS4)
+//#define ADDR_ALTERA2    ((uint8 *)NOR_MEMORY_ADRESS2)
+//#define ADDR_ALTERA3    ((uint8 *)NOR_MEMORY_ADRESS3)
+//#define ADDR_DISPLAY    ((uint8 *)NOR_MEMORY_ADRESS4)
 
 
 uint8 *HAL_FSMC::addrData0 = nullptr;
@@ -320,36 +320,34 @@ float HAL_FSMC::GetStretch(const uint8 *address)
 }
 
 
-void HAL_FSMC::WriteToRAM(uint8 *buffer, uint size, uint address)
+void HAL_FSMC::WriteToRAM(uint8 *buffer, uint size, uint8 *address)
 {
     if(mode != Mode::FPGA)
     {
         ConfigureToFPGA();
     }
 
-    for(uint i = 0; i < size; i++)
+    uint8 *end = address + size;
+
+    while(address < end)
     {
-        uint8 *addr = reinterpret_cast<uint8 *>(NOR_MEMORY_ADRESS3 + address);
-        *addr = *buffer;
-        buffer++;
-        address++;
+        *address++ = *buffer++;
     }
 }
 
 
-void HAL_FSMC::ReadFromRAM(uint8 *buffer, uint size, uint address)
+void HAL_FSMC::ReadFromRAM(uint8 *buffer, uint size, uint8 *address)
 {
     if(mode != Mode::FPGA)
     {
         ConfigureToFPGA();
     }
 
-    for(uint i = 0; i < size; i++)
+    uint8 *end = address + size;
+
+    while(address < end)
     {
-        uint8 *addr = reinterpret_cast<uint8 *>(NOR_MEMORY_ADRESS3 + address);
-        *buffer = *addr;
-        buffer++;
-        address++;
+        *buffer++ = *address++;
     }
 }
 
@@ -400,7 +398,7 @@ float HAL_FSMC::TestRAM2()
         bufferIN[x] = static_cast<uint8>(std::rand());
     }
 
-    uint address = std::rand() % (500 * 1024);
+    uint8 *address = BeginRAM() + (std::rand() % (500 * 1024));
 
     WriteToRAM(bufferIN, SIZE, address);
 
@@ -427,7 +425,7 @@ float HAL_FSMC::TestTimeRAM(uint sizekB)
 
     for(uint i = 0; i < sizekB; i++)
     {
-        float time = TestTime1kB(i * 1024);
+        float time = TestTime1kB(BeginRAM() + i * 1024);
 
         if(time == -1.0F)
         {
@@ -441,7 +439,7 @@ float HAL_FSMC::TestTimeRAM(uint sizekB)
 }
 
 
-float HAL_FSMC::TestTime1kB(uint address)
+float HAL_FSMC::TestTime1kB(uint8 *address)
 {
 #define SIZE_BUFFER 1024
 
@@ -470,4 +468,10 @@ float HAL_FSMC::TestTime1kB(uint address)
     }
 
     return time;
+}
+
+
+uint8 *HAL_FSMC::BeginRAM()
+{
+    return reinterpret_cast<uint8 *>(NOR_MEMORY_ADRESS3);
 }
