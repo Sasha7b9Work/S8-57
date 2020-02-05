@@ -319,7 +319,7 @@ float HAL_BUS::GetStretch(const uint8 *address)
 }
 
 
-void HAL_BUS::WriteToRAM(uint8 *buffer, uint size, uint8 *address)
+void HAL_BUS::RAM::Write(uint8 *buffer, uint size, uint8 *address)
 {
     if(mode != Mode::FPGA)
     {
@@ -389,7 +389,7 @@ float HAL_BUS::TestRAM2()
 
     uint8 *address = ExtRAM::Begin() + (std::rand() % (500 * 1024));
 
-    WriteToRAM(bufferIN, SIZE, address);
+    RAM::Write(bufferIN, SIZE, address);
 
     ReadFromRAM(bufferOUT, SIZE, address);
 
@@ -442,7 +442,7 @@ float HAL_BUS::TestTime1kB(uint8 *address)
 
     uint start = Timer::TimeUS();
 
-    WriteToRAM(data, SIZE_BUFFER, address);
+    RAM::Write(data, SIZE_BUFFER, address);
 
     ReadFromRAM(out, SIZE_BUFFER, address);
 

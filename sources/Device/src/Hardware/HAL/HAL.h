@@ -63,7 +63,6 @@ struct HAL_DAC2
 struct HAL_BUS
 {
     /// *********** Функции взаимодействия с альтерой ****************
-
     static void Init();
     static void WriteToFPGA8(uint8 *address, uint8 value);
     static void WriteToFPGA16(uint8 *address, uint16 value);
@@ -76,8 +75,12 @@ struct HAL_BUS
     static uint8 ReadData1();
 
     /// ************* Функции взаимодействия с памятью ****************
-    /// Записывает во внешнюю память по адресу address данные buffer, size кратен 4
-    static void WriteToRAM(uint8 *buffer, uint size, uint8 *address);
+    struct RAM
+    {
+        /// Записывает во внешнюю память по адресу address данные buffer, size кратен 4
+        static void Write(uint8 *buffer, uint size, uint8 *address);
+    };
+
     /// Читает из внешней памяти address в буфер buffer данные, size кратен 4
     static void ReadFromRAM(uint8 *buffer, uint size, uint8 *address);
     /// Возвращает сколько процентов данных считанных неправильно.
