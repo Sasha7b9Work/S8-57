@@ -80,11 +80,11 @@ void Recorder::ReadPoint()
     {
         if (StorageRecorder::CurrentRecord()->FreeMemory() > 4)
         {
-            HAL_FSMC::SetAddrData(RD::DATA_A, RD::DATA_A + 1);
-            BitSet16 dataA(HAL_FSMC::ReadData0(), HAL_FSMC::ReadData1());
+            HAL_BUS::SetAddrData(RD::DATA_A, RD::DATA_A + 1);
+            BitSet16 dataA(HAL_BUS::ReadData0(), HAL_BUS::ReadData1());
 
-            HAL_FSMC::SetAddrData(RD::DATA_B, RD::DATA_B + 1);
-            BitSet16 dataB(HAL_FSMC::ReadData0(), HAL_FSMC::ReadData1());
+            HAL_BUS::SetAddrData(RD::DATA_B, RD::DATA_B + 1);
+            BitSet16 dataB(HAL_BUS::ReadData0(), HAL_BUS::ReadData1());
 
             StorageRecorder::CurrentRecord()->AddPoint(dataA, dataB);
         }
@@ -267,7 +267,7 @@ void Recorder::ScaleX::Load()
         BIN_U8(01011110)   // -V2501  // 10s
     };
 
-    HAL_FSMC::WriteToFPGA8(WR::TBASE, values[Ref()]);
+    HAL_BUS::WriteToFPGA8(WR::TBASE, values[Ref()]);
 
     if (Recorder::IsRunning())
     {

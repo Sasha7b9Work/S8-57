@@ -15,13 +15,13 @@ void Painter::BeginScene(Color color)
 {
     color.SetAsCurrent();
 
-    HAL_FSMC::SendToPanel(Command::Paint_BeginScene);
+    HAL_BUS::SendToPanel(Command::Paint_BeginScene);
 }
 
 
 void Painter::EndScene()
 {
-    HAL_FSMC::SendToPanel(Command::Paint_EndScene);
+    HAL_BUS::SendToPanel(Command::Paint_EndScene);
 }
 
 
@@ -44,6 +44,6 @@ void Painter::DrawTesterData(uint8 mode, Color color, const uint16 *x, const uin
         *pointer8++ = y[i];
     }
 
-    HAL_FSMC::SendToPanel(buffer.data, buffer.Size());
+    HAL_BUS::SendToPanel(buffer.data, buffer.Size());
 }
 

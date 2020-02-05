@@ -55,7 +55,7 @@ static InPin pinDataPAN(PIN_PAN_DATA);
 /// true означает, что шина находится в процессе обмена с панелью и запись по обычной FSMC в альтеру и память запрещена
 static bool interactionWithPanel = false;
 
-void HAL_FSMC::InitPanel()
+void HAL_BUS::InitPanel()
 {
     pinReadyPAN.Init();
     pinDataPAN.Init();
@@ -65,7 +65,7 @@ void HAL_FSMC::InitPanel()
 }
 
 
-bool HAL_FSMC::Receive()
+bool HAL_BUS::Receive()
 {
     //if(pinReadyPAN.IsPassive() || pinDataPAN.IsPassive())
     if((GPIOA->IDR & GPIO_PIN_7) || (GPIOC->IDR & GPIO_PIN_4))
@@ -125,13 +125,13 @@ bool HAL_FSMC::Receive()
 }
 
 
-void HAL_FSMC::SendToPanel(uint8 byte)
+void HAL_BUS::SendToPanel(uint8 byte)
 {
     SendToPanel(&byte, 1);
 }
 
 
-void HAL_FSMC::SendToPanel(uint8 byte0, uint8 byte1)
+void HAL_BUS::SendToPanel(uint8 byte0, uint8 byte1)
 {
     uint8 buffer[2] = { byte0, byte1 };
     
@@ -148,7 +148,7 @@ extern void CycleSend(void);
 }
 #endif
 
-void HAL_FSMC::SendToPanel(uint8 *data, uint size)
+void HAL_BUS::SendToPanel(uint8 *data, uint size)
 {
     interactionWithPanel = true;
 
@@ -221,7 +221,7 @@ void HAL_FSMC::SendToPanel(uint8 *data, uint size)
 }
 
 
-bool HAL_FSMC::InteractionWithPanel()
+bool HAL_BUS::InteractionWithPanel()
 {
     return interactionWithPanel;
 }

@@ -304,7 +304,7 @@ static void WriteToDisplay(Color color)
     {
         lastColor = color;
 
-        HAL_FSMC::SendToPanel(Command::Paint_SetColor, lastColor.value);
+        HAL_BUS::SendToPanel(Command::Paint_SetColor, lastColor.value);
     }
 }
 
@@ -323,7 +323,7 @@ void Color::LoadValueRGB()
         static_cast<uint8>(rgb >> 24)
     };
 
-    HAL_FSMC::SendToPanel(buffer, 6);
+    HAL_BUS::SendToPanel(buffer, 6);
 }
 
 

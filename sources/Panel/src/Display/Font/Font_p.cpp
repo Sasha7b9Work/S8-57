@@ -37,7 +37,7 @@ void PFont::SendLengthText(const char *text)
 
     uint8 data[2] = { Command::Text_Length, length };
 
-    HAL_FSMC::SendToDevice(data, 2);
+    HAL_BUS::SendToDevice(data, 2);
 }
 
 

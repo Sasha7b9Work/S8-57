@@ -2,19 +2,19 @@
 #include "Hardware/HAL/HAL.h"
 
 
-void HAL_FSMC::SendToPanel(uint8, uint8)
+void HAL_BUS::SendToPanel(uint8, uint8)
 {
     
 }
 
 
-void HAL_FSMC::SendToPanel(uint8 *, uint)
+void HAL_BUS::SendToPanel(uint8 *, uint)
 {
     
 }
 
 
-bool HAL_FSMC::Receive()
+bool HAL_BUS::Receive()
 {
     return false;
 }

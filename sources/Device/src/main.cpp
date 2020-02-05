@@ -17,6 +17,6 @@ int main(void)
     {
         Device::Update();
 
-        LOG_WRITE("%d кЅ за %d мс", 512, (uint)(HAL_FSMC::TestTimeRAM(512) * 1000));
+        LOG_WRITE("%d кЅ за %d мс", 512, (uint)(HAL_BUS::TestTimeRAM(512) * 1000));
     }
 }

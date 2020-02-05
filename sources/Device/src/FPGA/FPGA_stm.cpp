@@ -148,7 +148,7 @@ bool FPGA::ReadDataChannelRand(Chan::E ch, uint8 *addr, uint8 *data)
 
     uint8 *last = &dataRand[ch][ENumPointsFPGA::PointsInChannel()];
 
-    HAL_FSMC::SetAddrData(addr);
+    HAL_BUS::SetAddrData(addr);
 
     if (ENumAverage() > 1)
     {
@@ -156,7 +156,7 @@ bool FPGA::ReadDataChannelRand(Chan::E ch, uint8 *addr, uint8 *data)
 
         while (dataRead < last)
         {
-            *dataRead = HAL_FSMC::ReadData0();
+            *dataRead = HAL_BUS::ReadData0();
             *dataPointer = *dataRead;
 
             dataRead += step;
@@ -167,7 +167,7 @@ bool FPGA::ReadDataChannelRand(Chan::E ch, uint8 *addr, uint8 *data)
     {
         while (dataRead < last)
         {
-            *dataRead = HAL_FSMC::ReadData0();
+            *dataRead = HAL_BUS::ReadData0();
             dataRead += step;
         }
 
@@ -194,14 +194,14 @@ bool FPGA::ReadDataChannel(Chan::E ch, uint8 *data)
         addrRead = static_cast<uint16>(ReadLastRecord(ch) - static_cast<int>(numPoints) / k);
     }
 
-    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, static_cast<uint16>(addrRead));
-    HAL_FSMC::WriteToFPGA8(WR::START_ADDR, 0xff);
+    HAL_BUS::WriteToFPGA16(WR::PRED_LO, static_cast<uint16>(addrRead));
+    HAL_BUS::WriteToFPGA8(WR::START_ADDR, 0xff);
 
 
     uint8 *a0 = Chan(ch).IsA() ? RD::DATA_A : RD::DATA_B;  // -V566
     uint8 *a1 = a0 + 1;
 
-    HAL_FSMC::SetAddrData(a0, a1);
+    HAL_BUS::SetAddrData(a0, a1);
 
     int numberReads = 0;
 
@@ -213,25 +213,25 @@ bool FPGA::ReadDataChannel(Chan::E ch, uint8 *data)
     {
         uint8 *p = data;
 
-        *p = HAL_FSMC::ReadData0();    // Первая точка почему-то неправильная читается. Просто откидываем её.
-        *p = HAL_FSMC::ReadData1();    // -V519
+        *p = HAL_BUS::ReadData0();    // Первая точка почему-то неправильная читается. Просто откидываем её.
+        *p = HAL_BUS::ReadData1();    // -V519
 
         if (PeakDetMode().IsEnabled())
         {
             for (uint i = 0; i < numPoints; i++)
             {
-                *p++ = HAL_FSMC::ReadData0();
-                *p++ = HAL_FSMC::ReadData1();
+                *p++ = HAL_BUS::ReadData0();
+                *p++ = HAL_BUS::ReadData1();
             }
         }
         else
         {
             for (uint i = 0; i < numPoints / 4U; ++i)   // -V112
             {
-                *p++ = HAL_FSMC::ReadData1();
-                *p++ = HAL_FSMC::ReadData1();
-                *p++ = HAL_FSMC::ReadData1();
-                *p++ = HAL_FSMC::ReadData1();
+                *p++ = HAL_BUS::ReadData1();
+                *p++ = HAL_BUS::ReadData1();
+                *p++ = HAL_BUS::ReadData1();
+                *p++ = HAL_BUS::ReadData1();
                 numberReads += 4;
             }
         }

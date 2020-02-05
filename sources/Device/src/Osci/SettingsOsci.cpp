@@ -149,15 +149,15 @@ static uint8 ValueForRange(Chan::E ch);
 
 void Osci::LoadHoldfOff()
 {
-    HAL_FSMC::WriteToFPGA8(WR::TRIG_HOLD_ENABLE, set.trig.holdOffEnabled ? 1U : 0U);
+    HAL_BUS::WriteToFPGA8(WR::TRIG_HOLD_ENABLE, set.trig.holdOffEnabled ? 1U : 0U);
 
     uint value = static_cast<uint>(0 - set.trig.holdOff + 1);
 
     BitSet32 bs(value);
 
-    HAL_FSMC::WriteToFPGA8(WR::TRIG_HOLD_VALUE_LOW, bs.byte0);
-    HAL_FSMC::WriteToFPGA8(WR::TRIG_HOLD_VALUE_MID, bs.byte1);
-    HAL_FSMC::WriteToFPGA8(WR::TRIG_HOLD_VALUE_HI, bs.byte2);
+    HAL_BUS::WriteToFPGA8(WR::TRIG_HOLD_VALUE_LOW, bs.byte0);
+    HAL_BUS::WriteToFPGA8(WR::TRIG_HOLD_VALUE_MID, bs.byte1);
+    HAL_BUS::WriteToFPGA8(WR::TRIG_HOLD_VALUE_HI, bs.byte2);
 }
 
 
@@ -287,7 +287,7 @@ void TBase::Set(TBase::E base)
 
     FPGA::ClearDataRand();
 
-    HAL_FSMC::WriteToFPGA8(WR::TBASE, values[TBase()]);
+    HAL_BUS::WriteToFPGA8(WR::TBASE, values[TBase()]);
 
     TShift().Load();
 

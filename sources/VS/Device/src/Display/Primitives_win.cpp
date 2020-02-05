@@ -39,7 +39,7 @@ void Rectangle::Draw(int x, int y, Color color)
     color.SetAsCurrent();
 
     memDC.DrawRectangle({ x, y, width + 1, height + 1 });
-    HAL_FSMC::SendToPanel(nullptr, 0);                            // Это нужно лишь для того, чтобы регистратор читал точки
+    HAL_BUS::SendToPanel(nullptr, 0);                            // Это нужно лишь для того, чтобы регистратор читал точки
 }
 
 

@@ -60,7 +60,7 @@ struct HAL_DAC2
 };
 
 
-struct HAL_FSMC
+struct HAL_BUS
 {
     /// *********** Функции взаимодействия с альтерой ****************
 

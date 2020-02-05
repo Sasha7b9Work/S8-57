@@ -18,13 +18,13 @@ wxColour colorDraw;
 extern wxMemoryDC memDC;
 
 
-void HAL_FSMC::Init()
+void HAL_BUS::Init()
 {
 
 }
 
 
-void HAL_FSMC::SendToPanel(uint8 *data, uint num)
+void HAL_BUS::SendToPanel(uint8 *data, uint num)
 {
     if(data == nullptr)
     {
@@ -64,13 +64,13 @@ void HAL_FSMC::SendToPanel(uint8 *data, uint num)
 }
 
 
-void HAL_FSMC::SendToPanel(uint8)
+void HAL_BUS::SendToPanel(uint8)
 {
 
 }
 
 
-bool HAL_FSMC::Receive()
+bool HAL_BUS::Receive()
 {
     Osci::ReadPointP2P();
 
@@ -78,7 +78,7 @@ bool HAL_FSMC::Receive()
 }
 
 
-void HAL_FSMC::SendToPanel(uint8 byte0, uint8 byte1)
+void HAL_BUS::SendToPanel(uint8 byte0, uint8 byte1)
 {
     uint8 data[2] = { byte0, byte1 };
 
@@ -86,7 +86,7 @@ void HAL_FSMC::SendToPanel(uint8 byte0, uint8 byte1)
 }
 
 
-bool HAL_FSMC::InteractionWithPanel()
+bool HAL_BUS::InteractionWithPanel()
 {
     return false;
 }

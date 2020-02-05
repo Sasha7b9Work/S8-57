@@ -94,7 +94,7 @@ struct DataBus
 };
 
 
-void HAL_FSMC::Init()
+void HAL_BUS::Init()
 {
     pinReady.Init();
     pinReady.SetActive();
@@ -110,7 +110,7 @@ void HAL_FSMC::Init()
 }
 
 
-void HAL_FSMC::SendToDevice(uint8 *data, uint size)
+void HAL_BUS::SendToDevice(uint8 *data, uint size)
 {
     while(size > 0)
     {
@@ -125,7 +125,7 @@ void HAL_FSMC::SendToDevice(uint8 *data, uint size)
 }
 
 
-void HAL_FSMC::Update()
+void HAL_BUS::Update()
 {
     //while(pinCS.IsActive())
     //while(HAL_GPIO_ReadPin(PORT_CS, PIN_CS) == GPIO_PIN_RESET)

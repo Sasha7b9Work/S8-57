@@ -45,7 +45,7 @@ int WorkerLengthText::Run(pString text)
 
         std::memcpy(buffer + 2, text, lenText);
 
-        HAL_FSMC::SendToPanel(buffer, size);
+        HAL_BUS::SendToPanel(buffer, size);
 
         delete[] buffer;
 
@@ -53,7 +53,7 @@ int WorkerLengthText::Run(pString text)
 
         while(recvLength == -1)
         {
-            HAL_FSMC::Receive();
+            HAL_BUS::Receive();
             DDecoder::Update();
 
             if(TIME_MS - start > 10)        /// \todo временный костыль. Надо разобраться, почему тут зависает
@@ -79,7 +79,7 @@ static void SendTypeFontToPanel(DTypeFont::E type)
 
     if (prevType != type)
     {
-        HAL_FSMC::SendToPanel(Command::Paint_SetFont, static_cast<uint8>(type));
+        HAL_BUS::SendToPanel(Command::Paint_SetFont, static_cast<uint8>(type));
         prevType = type;
     }
 }
@@ -140,7 +140,7 @@ void DFont::Pop()
 void DFont::SetSpacing(int _spacing)
 {
     spacing = _spacing;
-    HAL_FSMC::SendToPanel(Command::Paint_SetTextSpacing, static_cast<uint8>(spacing));
+    HAL_BUS::SendToPanel(Command::Paint_SetTextSpacing, static_cast<uint8>(spacing));
 }
 
 int DFont::GetSpacing()
@@ -151,7 +151,7 @@ int DFont::GetSpacing()
 
 void DFont::SetMinWidth(uint8 width)
 {
-    HAL_FSMC::SendToPanel(Command::Paint_SetMinWidthFont, width);
+    HAL_BUS::SendToPanel(Command::Paint_SetMinWidthFont, width);
 }
 
 

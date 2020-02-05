@@ -115,7 +115,7 @@ void Device::Update()
     
     FDrive::Update();
 
-    while (HAL_FSMC::Receive()) {};
+    while (HAL_BUS::Receive()) {};
 
     SCPI::Update();
     

@@ -16,14 +16,14 @@
 //#define ADDR_DISPLAY    ((uint8 *)NOR_MEMORY_ADRESS4)
 
 
-uint8 *HAL_FSMC::addrData0 = nullptr;
-uint8 *HAL_FSMC::addrData1 = nullptr;
+uint8 *HAL_BUS::addrData0 = nullptr;
+uint8 *HAL_BUS::addrData1 = nullptr;
 
 
-HAL_FSMC::Mode::E HAL_FSMC::mode = HAL_FSMC::Mode::FPGA;
+HAL_BUS::Mode::E HAL_BUS::mode = HAL_BUS::Mode::FPGA;
 
 
-void HAL_FSMC::Init()
+void HAL_BUS::Init()
 {
     __HAL_RCC_FMC_CLK_ENABLE();
     __HAL_RCC_GPIOF_CLK_ENABLE();
@@ -112,7 +112,7 @@ void HAL_FSMC::Init()
 }
 
 
-void HAL_FSMC::InitRAM()
+void HAL_BUS::InitRAM()
 {
     __HAL_RCC_GPIOD_CLK_ENABLE();
     __HAL_RCC_GPIOG_CLK_ENABLE();
@@ -179,7 +179,7 @@ void HAL_FSMC::InitRAM()
 }
 
 
-void HAL_FSMC::ConfigureToFPGA()
+void HAL_BUS::ConfigureToFPGA()
 {
     mode = Mode::FPGA;
 
@@ -225,7 +225,7 @@ void HAL_FSMC::ConfigureToFPGA()
 }
 
 
-void HAL_FSMC::WriteToFPGA16(uint8 *address, uint16 value)
+void HAL_BUS::WriteToFPGA16(uint8 *address, uint16 value)
 {
     if(mode != Mode::FPGA)
     {
@@ -239,7 +239,7 @@ void HAL_FSMC::WriteToFPGA16(uint8 *address, uint16 value)
 }
 
 
-void HAL_FSMC::WriteToFPGA8(uint8 *address, uint8 value)
+void HAL_BUS::WriteToFPGA8(uint8 *address, uint8 value)
 {
     if(mode != Mode::FPGA)
     {
@@ -250,7 +250,7 @@ void HAL_FSMC::WriteToFPGA8(uint8 *address, uint8 value)
 }
 
 
-uint8 HAL_FSMC::ReadFromFPGA(const uint8 *address)
+uint8 HAL_BUS::ReadFromFPGA(const uint8 *address)
 {
     if(mode != Mode::FPGA)
     {
@@ -261,7 +261,7 @@ uint8 HAL_FSMC::ReadFromFPGA(const uint8 *address)
 }
 
 
-void HAL_FSMC::SetAddrData(uint8 *address0, uint8 *address1)
+void HAL_BUS::SetAddrData(uint8 *address0, uint8 *address1)
 {
     addrData0 = address0;
     addrData1 = address1;
@@ -273,7 +273,7 @@ void HAL_FSMC::SetAddrData(uint8 *address0, uint8 *address1)
 }
 
 
-uint8 HAL_FSMC::ReadData0()
+uint8 HAL_BUS::ReadData0()
 {
     int delta = VALUE::AVE - static_cast<int>(*addrData0);
 
@@ -285,7 +285,7 @@ uint8 HAL_FSMC::ReadData0()
 }
 
 
-uint8 HAL_FSMC::ReadData1()
+uint8 HAL_BUS::ReadData1()
 {
     int delta = VALUE::AVE - static_cast<int>(*addrData1);
 
@@ -297,7 +297,7 @@ uint8 HAL_FSMC::ReadData1()
 }
 
 
-float HAL_FSMC::GetStretch(const uint8 *address)
+float HAL_BUS::GetStretch(const uint8 *address)
 {
     if (StretchADC::IsDisabled())
     {
@@ -320,7 +320,7 @@ float HAL_FSMC::GetStretch(const uint8 *address)
 }
 
 
-void HAL_FSMC::WriteToRAM(uint8 *buffer, uint size, uint8 *address)
+void HAL_BUS::WriteToRAM(uint8 *buffer, uint size, uint8 *address)
 {
     if(mode != Mode::FPGA)
     {
@@ -336,7 +336,7 @@ void HAL_FSMC::WriteToRAM(uint8 *buffer, uint size, uint8 *address)
 }
 
 
-void HAL_FSMC::ReadFromRAM(uint8 *buffer, uint size, uint8 *address)
+void HAL_BUS::ReadFromRAM(uint8 *buffer, uint size, uint8 *address)
 {
     if(mode != Mode::FPGA)
     {
@@ -352,7 +352,7 @@ void HAL_FSMC::ReadFromRAM(uint8 *buffer, uint size, uint8 *address)
 }
 
 
-float HAL_FSMC::TestRAM1()
+float HAL_BUS::TestRAM1()
 {
     if(mode != Mode::FPGA)
     {
@@ -383,7 +383,7 @@ float HAL_FSMC::TestRAM1()
 }
 
 
-float HAL_FSMC::TestRAM2()
+float HAL_BUS::TestRAM2()
 {
 #define SIZE 1024
 
@@ -419,7 +419,7 @@ float HAL_FSMC::TestRAM2()
 }
 
 
-float HAL_FSMC::TestTimeRAM(uint sizekB)
+float HAL_BUS::TestTimeRAM(uint sizekB)
 {
     float result = 0;
 
@@ -439,7 +439,7 @@ float HAL_FSMC::TestTimeRAM(uint sizekB)
 }
 
 
-float HAL_FSMC::TestTime1kB(uint8 *address)
+float HAL_BUS::TestTime1kB(uint8 *address)
 {
 #define SIZE_BUFFER 1024
 
@@ -471,7 +471,7 @@ float HAL_FSMC::TestTime1kB(uint8 *address)
 }
 
 
-uint8 *HAL_FSMC::BeginRAM()
+uint8 *HAL_BUS::BeginRAM()
 {
     return reinterpret_cast<uint8 *>(NOR_MEMORY_ADRESS3);
 }

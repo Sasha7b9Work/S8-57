@@ -6,7 +6,7 @@
 
 void FPGA::ReadFlag()
 {
-    flag.flag = static_cast<uint16>(HAL_FSMC::ReadFromFPGA(RD::FLAG_LO) | (HAL_FSMC::ReadFromFPGA(RD::FLAG_HI) << 8));
+    flag.flag = static_cast<uint16>(HAL_BUS::ReadFromFPGA(RD::FLAG_LO) | (HAL_BUS::ReadFromFPGA(RD::FLAG_HI) << 8));
 
     if (flag.TrigReady() && !forcedStart)
     {

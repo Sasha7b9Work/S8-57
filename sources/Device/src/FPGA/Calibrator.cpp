@@ -109,12 +109,12 @@ void Calibrator::Balance(Chan::E ch, Range::E range)
 
     while (numPoints < 100)
     {
-        if (!HAL_FSMC::InteractionWithPanel())
+        if (!HAL_BUS::InteractionWithPanel())
         {
             if (HAL_PIO::Read(PIN_P2P))
             {
-                HAL_FSMC::SetAddrData(addr);
-                sum += HAL_FSMC::ReadData0();
+                HAL_BUS::SetAddrData(addr);
+                sum += HAL_BUS::ReadData0();
                 numPoints++;
             }
         }
@@ -147,10 +147,10 @@ float Calibrator::FindStretchK(Chan::E ch)
 
     for (int i = 0; i < 300; i++)
     {
-        if (!HAL_FSMC::InteractionWithPanel())
+        if (!HAL_BUS::InteractionWithPanel())
         {
-            HAL_FSMC::SetAddrData(addr);
-            uint8 d = HAL_FSMC::ReadData0();
+            HAL_BUS::SetAddrData(addr);
+            uint8 d = HAL_BUS::ReadData0();
 
             if (d > VALUE::MAX - 32)
             {

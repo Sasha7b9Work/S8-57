@@ -41,22 +41,22 @@ bool ContextTester::Read(uint16 *dataA, uint8 *dataB)
 
     uint16 aRead = (uint16)(FPGA::ReadLastRecord(Chan::A) - TESTER_NUM_POINTS);
 
-    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, aRead);             // Указываем адрес, с которого будем читать данные
-    HAL_FSMC::WriteToFPGA8(WR::START_ADDR, 0xff);            // И даём команду ПЛИС, чтобы чтение начиналось с него
+    HAL_BUS::WriteToFPGA16(WR::PRED_LO, aRead);             // Указываем адрес, с которого будем читать данные
+    HAL_BUS::WriteToFPGA8(WR::START_ADDR, 0xff);            // И даём команду ПЛИС, чтобы чтение начиналось с него
 
-    HAL_FSMC::SetAddrData(RD::DATA_A + 1, RD::DATA_B + 1);
+    HAL_BUS::SetAddrData(RD::DATA_A + 1, RD::DATA_B + 1);
 
     for (int i = 0; i < TESTER_NUM_POINTS; i++)         // Читаем данные первого канала
     {
-        *dataA++ = HAL_FSMC::ReadData0();
+        *dataA++ = HAL_BUS::ReadData0();
     }
 
-    HAL_FSMC::WriteToFPGA16(WR::PRED_LO, aRead);             // Указываем адрес, с котонрого будем читать данные
-    HAL_FSMC::WriteToFPGA8(WR::START_ADDR, 0xff);            // И даём команду ПЛИС, чтобы чтение начиналось с него
+    HAL_BUS::WriteToFPGA16(WR::PRED_LO, aRead);             // Указываем адрес, с котонрого будем читать данные
+    HAL_BUS::WriteToFPGA8(WR::START_ADDR, 0xff);            // И даём команду ПЛИС, чтобы чтение начиналось с него
 
     for (int i = 0; i < TESTER_NUM_POINTS; i++)         // Читаем данные второго канала
     {
-        *dataB++ = HAL_FSMC::ReadData1();
+        *dataB++ = HAL_BUS::ReadData1();
     }
 
     return true;

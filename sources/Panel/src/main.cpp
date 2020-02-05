@@ -20,7 +20,7 @@ int main()
     {
         static uint prevTime = 0;
 
-        HAL_FSMC::Update();
+        HAL_BUS::Update();
 
         if(TIME_MS - prevTime > 2)
         {
