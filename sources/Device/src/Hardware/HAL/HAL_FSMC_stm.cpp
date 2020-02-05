@@ -179,7 +179,7 @@ void HAL_BUS::InitRAM()
 }
 
 
-void HAL_BUS::ConfigureToFPGA()
+void HAL_BUS::ConfigureToFSMC()
 {
     mode = Mode::FPGA;
 
@@ -229,7 +229,7 @@ void HAL_BUS::WriteToFPGA16(uint8 *address, uint16 value)
 {
     if(mode != Mode::FPGA)
     {
-        ConfigureToFPGA();
+        ConfigureToFSMC();
     }
 
     PAUSE_ON_TICKS(100);    /// \todo Без этой строки замедлен вывод при включённой оптимизации и TBase >= 0.5мс
@@ -243,7 +243,7 @@ void HAL_BUS::WriteToFPGA8(uint8 *address, uint8 value)
 {
     if(mode != Mode::FPGA)
     {
-        ConfigureToFPGA();
+        ConfigureToFSMC();
     }
 
     *address = value;
@@ -254,7 +254,7 @@ uint8 HAL_BUS::ReadFromFPGA(const uint8 *address)
 {
     if(mode != Mode::FPGA)
     {
-        ConfigureToFPGA();
+        ConfigureToFSMC();
     }
 
     return *address;
@@ -268,7 +268,7 @@ void HAL_BUS::SetAddrData(uint8 *address0, uint8 *address1)
 
     if(mode != Mode::FPGA)
     {
-        ConfigureToFPGA();
+        ConfigureToFSMC();
     }
 }
 
@@ -324,7 +324,7 @@ void HAL_BUS::WriteToRAM(uint8 *buffer, uint size, uint8 *address)
 {
     if(mode != Mode::FPGA)
     {
-        ConfigureToFPGA();
+        ConfigureToFSMC();
     }
 
     uint8 *end = address + size;
@@ -340,7 +340,7 @@ void HAL_BUS::ReadFromRAM(uint8 *buffer, uint size, uint8 *address)
 {
     if(mode != Mode::FPGA)
     {
-        ConfigureToFPGA();
+        ConfigureToFSMC();
     }
 
     uint8 *end = address + size;
@@ -356,7 +356,7 @@ float HAL_BUS::TestRAM1()
 {
     if(mode != Mode::FPGA)
     {
-        ConfigureToFPGA();
+        ConfigureToFSMC();
     }
 
     int SIZE = 1024 * 512;
