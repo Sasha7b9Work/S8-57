@@ -183,8 +183,6 @@ bool FPGA::ReadDataChannelRand(Chan::E ch, uint8 *addr, uint8 *data)
 
 bool FPGA::ReadDataChannel(Chan::E ch, uint8 *data)
 {
-    uint start = Timer::TimeUS();
-
     uint numPoints = ENumPointsFPGA::PointsInChannel();
 
     if (addrRead == 0xffff)
@@ -245,8 +243,6 @@ bool FPGA::ReadDataChannel(Chan::E ch, uint8 *data)
             }
         }
     }
-
-    LOG_WRITE("время чтения %d", Timer::TimeUS() - start);
 
     return true;
 }
