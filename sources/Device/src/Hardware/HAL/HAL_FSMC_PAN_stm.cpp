@@ -55,7 +55,7 @@ static InPin pinDataPAN(PIN_PAN_DATA);
 /// true означает, что шина находится в процессе обмена с панелью и запись по обычной FSMC в альтеру и память запрещена
 static bool interactionWithPanel = false;
 
-void HAL_BUS::Panel::Init()
+void HAL_BUS::InitPanel()
 {
     pinReadyPAN.Init();
     pinDataPAN.Init();

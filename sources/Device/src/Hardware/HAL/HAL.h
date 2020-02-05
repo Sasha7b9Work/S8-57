@@ -73,8 +73,6 @@ struct HAL_BUS
         static void Send(uint8 *data, uint size);
         static bool Receive();
         static bool InInteraction();
-        /// »нициализаци€ пинов панели, которые не измен€ют свой режим во врем€ всей работы программы
-        static void Init();
     };
 
     struct FPGA
@@ -99,6 +97,8 @@ struct HAL_BUS
 private:
     /// Ќастроить FSMC дл€ работы с внешней RAM
     static void InitRAM();
+    /// »нициализаци€ пинов панели, которые не измен€ют свой режим во врем€ всей работы программы
+    static void InitPanel();
 
     struct Mode
     {
