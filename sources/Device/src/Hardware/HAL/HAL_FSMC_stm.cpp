@@ -318,41 +318,25 @@ float HAL_BUS::GetStretch(const uint8 *address)
 }
 
 
-void HAL_BUS::WriteToRAMmult4(uint8 *buffer, uint size, uint8 *address)
+void HAL_BUS::WriteToRAM(uint8 *buffer, uint size, uint8 *address)
 {
     if(mode != Mode::FPGA)
     {
         ConfigureToFSMC();
     }
 
-    uint8 *end = address + size;
-
-    while(address < end)
-    {
-        *address++ = *buffer++;
-        *address++ = *buffer++;
-        *address++ = *buffer++;
-        *address++ = *buffer++;
-    }
+    std::memcpy(address, buffer, size);
 }
 
 
-void HAL_BUS::ReadFromRAMmult4(uint8 *buffer, uint size, uint8 *address)
+void HAL_BUS::ReadFromRAM(uint8 *buffer, uint size, uint8 *address)
 {
     if(mode != Mode::FPGA)
     {
         ConfigureToFSMC();
     }
 
-    uint8 *end = address + size;
-
-    while(address < end)
-    {
-        *buffer++ = *address++;
-        *buffer++ = *address++;
-        *buffer++ = *address++;
-        *buffer++ = *address++;
-    }
+    std::memcpy(buffer, address, size);
 }
 
 
@@ -404,9 +388,9 @@ float HAL_BUS::TestRAM2()
 
     uint8 *address = BeginRAM() + (std::rand() % (500 * 1024));
 
-    WriteToRAMmult4(bufferIN, SIZE, address);
+    WriteToRAM(bufferIN, SIZE, address);
 
-    ReadFromRAMmult4(bufferOUT, SIZE, address);
+    ReadFromRAM(bufferOUT, SIZE, address);
 
     for(int z = 0; z < SIZE; z++)
     {
@@ -457,9 +441,9 @@ float HAL_BUS::TestTime1kB(uint8 *address)
 
     uint start = Timer::TimeUS();
 
-    WriteToRAMmult4(data, SIZE_BUFFER, address);
+    WriteToRAM(data, SIZE_BUFFER, address);
 
-    ReadFromRAMmult4(out, SIZE_BUFFER, address);
+    ReadFromRAM(out, SIZE_BUFFER, address);
 
     float time = (Timer::TimeUS() - start) / 1e6F;
 
