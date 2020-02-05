@@ -341,7 +341,7 @@ void HAL_BUS::RAM::Read(uint8 *buffer, uint size, uint8 *address)
 }
 
 
-float HAL_BUS::TestRAM1()
+float HAL_BUS::RAM::Test1()
 {
     if(mode != Mode::FPGA)
     {
@@ -372,7 +372,7 @@ float HAL_BUS::TestRAM1()
 }
 
 
-float HAL_BUS::TestRAM2()
+float HAL_BUS::RAM::Test2()
 {
 #define SIZE 1024
 
@@ -389,9 +389,9 @@ float HAL_BUS::TestRAM2()
 
     uint8 *address = ExtRAM::Begin() + (std::rand() % (500 * 1024));
 
-    RAM::Write(bufferIN, SIZE, address);
+    Write(bufferIN, SIZE, address);
 
-    RAM::Read(bufferOUT, SIZE, address);
+    Read(bufferOUT, SIZE, address);
 
     for(int z = 0; z < SIZE; z++)
     {
@@ -408,7 +408,7 @@ float HAL_BUS::TestRAM2()
 }
 
 
-float HAL_BUS::TestTimeRAM(uint sizekB)
+float HAL_BUS::RAM::TestTime(uint sizekB)
 {
     float result = 0;
 
