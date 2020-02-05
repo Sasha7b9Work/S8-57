@@ -191,12 +191,10 @@ void HAL_BUS::ConfigureToFSMC()
         GPIO_SPEED_FREQ_VERY_HIGH,
         GPIO_AF12_FMC
     };
-
+    
     /// \todo Здесь не довеедно - не хотит, почему-то
-
+    
     HAL_GPIO_Init(GPIOD, const_cast<GPIO_InitTypeDef *>(&isGPIO));
-
-    //uint startTime = TIME_TICKS;
 
     // Инициализируем GPIOD 0, 1, 4, 5, 7, 14, 15 - D2, D3, NOE, NWE, NE1, D0, D1
 
@@ -320,7 +318,7 @@ float HAL_BUS::GetStretch(const uint8 *address)
 }
 
 
-void HAL_BUS::WriteToRAM(uint8 *buffer, uint size, uint8 *address)
+void HAL_BUS::WriteToRAMmult4(uint8 *buffer, uint size, uint8 *address)
 {
     if(mode != Mode::FPGA)
     {
@@ -332,11 +330,14 @@ void HAL_BUS::WriteToRAM(uint8 *buffer, uint size, uint8 *address)
     while(address < end)
     {
         *address++ = *buffer++;
+        *address++ = *buffer++;
+        *address++ = *buffer++;
+        *address++ = *buffer++;
     }
 }
 
 
-void HAL_BUS::ReadFromRAM(uint8 *buffer, uint size, uint8 *address)
+void HAL_BUS::ReadFromRAMmult4(uint8 *buffer, uint size, uint8 *address)
 {
     if(mode != Mode::FPGA)
     {
@@ -347,6 +348,9 @@ void HAL_BUS::ReadFromRAM(uint8 *buffer, uint size, uint8 *address)
 
     while(address < end)
     {
+        *buffer++ = *address++;
+        *buffer++ = *address++;
+        *buffer++ = *address++;
         *buffer++ = *address++;
     }
 }
@@ -400,9 +404,9 @@ float HAL_BUS::TestRAM2()
 
     uint8 *address = BeginRAM() + (std::rand() % (500 * 1024));
 
-    WriteToRAM(bufferIN, SIZE, address);
+    WriteToRAMmult4(bufferIN, SIZE, address);
 
-    ReadFromRAM(bufferOUT, SIZE, address);
+    ReadFromRAMmult4(bufferOUT, SIZE, address);
 
     for(int z = 0; z < SIZE; z++)
     {
@@ -453,9 +457,9 @@ float HAL_BUS::TestTime1kB(uint8 *address)
 
     uint start = Timer::TimeUS();
 
-    WriteToRAM(data, SIZE_BUFFER, address);
+    WriteToRAMmult4(data, SIZE_BUFFER, address);
 
-    ReadFromRAM(out, SIZE_BUFFER, address);
+    ReadFromRAMmult4(out, SIZE_BUFFER, address);
 
     float time = (Timer::TimeUS() - start) / 1e6F;
 
