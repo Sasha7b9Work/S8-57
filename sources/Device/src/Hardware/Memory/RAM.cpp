@@ -10,7 +10,6 @@
 #include "Hardware/Memory/RAM.h"
 #include "Osci/DataSettings.h"
 #include "Osci/Osci.h"
-#include "Utils/Debug.h"
 #include "Utils/Math.h"
 #include <cstring>
 #include <cstdlib>
@@ -206,38 +205,25 @@ DataSettings *RAM::Get(uint numFromEnd)
 
 uint RAM::NumberDatas()
 {
-    DEBUG_POINT;
-
     if (newest == nullptr)
     {
         return 0;
     }
-
-    DEBUG_POINT;
 
     if (oldest == nullptr)
     {
         return 1;
     }
 
-    DEBUG_POINT;
-
     uint result = 0;
 
     Packet *packet = oldest;
 
-    DEBUG_POINT;
-
     while (packet != nullptr)
     {
-        DEBUG_POINT;
         result++;
-        DEBUG_POINT;
         packet = reinterpret_cast<Packet *>(packet->addrNewest);
-        DEBUG_POINT;
     }
-
-    DEBUG_POINT;
 
     return result;
 }
