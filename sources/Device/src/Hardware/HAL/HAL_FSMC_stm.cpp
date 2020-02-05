@@ -182,6 +182,11 @@ void HAL_BUS::InitRAM()
 
 void HAL_BUS::ConfigureToFSMC()
 {
+    if(mode == Mode::FPGA)
+    {
+        return;
+    }
+
     mode = Mode::FPGA;
 
     static const GPIO_InitTypeDef isGPIO =
@@ -319,17 +324,6 @@ float HAL_BUS::GetStretch(const uint8 *address)
 }
 
 
-void HAL_BUS::RAM::Write(uint8 *buffer, uint size, uint8 *address)
-{
-    if(mode != Mode::FPGA)
-    {
-        ConfigureToFSMC();
-    }
-
-    std::memcpy(address, buffer, size);
-}
-
-
 void HAL_BUS::RAM::Read(uint8 *buffer, uint size, uint8 *address)
 {
     if(mode != Mode::FPGA)
@@ -389,7 +383,7 @@ float HAL_BUS::RAM::Test2()
 
     uint8 *address = ExtRAM::Begin() + (std::rand() % (500 * 1024));
 
-    Write(bufferIN, SIZE, address);
+    ExtRAM::Write(bufferIN, SIZE, address);
 
     Read(bufferOUT, SIZE, address);
 
@@ -442,7 +436,7 @@ float HAL_BUS::TestTime1kB(uint8 *address)
 
     uint start = Timer::TimeUS();
 
-    RAM::Write(data, SIZE_BUFFER, address);
+    ExtRAM::Write(data, SIZE_BUFFER, address);
 
     RAM::Read(out, SIZE_BUFFER, address);
 

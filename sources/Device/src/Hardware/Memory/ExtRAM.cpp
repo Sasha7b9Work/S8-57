@@ -1,6 +1,8 @@
 #include "defines.h"
+#include "Hardware/HAL/HAL.h"
 #include "Hardware/HAL/HAL_PIO.h"
 #include "Hardware/Memory/ExtRAM.h"
+#include <cstring>
 
 
 uint8 *ExtRAM::Begin()
@@ -12,4 +14,12 @@ uint8 *ExtRAM::Begin()
 uint8 *ExtRAM::End()
 {
     return Begin() + 512 * 1024;
+}
+
+
+void ExtRAM::Write(uint8 *buffer, uint size, uint8 *address)
+{
+    HAL_BUS::ConfigureToFSMC();
+
+    std::memcpy(address, buffer, size);
 }
