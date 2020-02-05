@@ -208,8 +208,6 @@ bool FPGA::ReadDataChannel(Chan::E ch, uint8 *data)
 
     HAL_BUS::SetAddrData(a0, a1);
 
-    int numberReads = 0;
-
     if (Osci::InModeRandomizer())
     {
         return ReadDataChannelRand(ch, a1, data);
