@@ -231,6 +231,8 @@ void HAL_BUS::ConfigureToFSMC()
 
 void HAL_BUS::FPGA::Write16(uint8 *address, uint16 value)
 {
+    int prev = RAM::NumberDatas();
+
     if(mode != Mode::FSMC)
     {
         ConfigureToFSMC();
@@ -240,6 +242,8 @@ void HAL_BUS::FPGA::Write16(uint8 *address, uint16 value)
 
     *address = static_cast<uint8>(value);
     *(address + 1) = static_cast<uint8>(value >> 8);
+
+
 }
 
 
