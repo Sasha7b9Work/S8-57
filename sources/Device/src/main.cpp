@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "device.h"
 #include "Hardware/AT25160N.h"
-#include "Hardware/HAL/HAL.h"
+#include "Hardware/Memory/ExtRAM.h"
 #include "Test/Test.h"
 
 
@@ -17,6 +17,6 @@ int main(void)
     {
         Device::Update();
 
-        LOG_WRITE("test %f", HAL_BUS::RAM::TestTime(512) * 1000);
+        LOG_WRITE("test %f", ExtRAM::TestTime(512) * 1000);
     }
 }
