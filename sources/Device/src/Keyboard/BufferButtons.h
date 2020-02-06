@@ -12,4 +12,6 @@ struct BufferButtons
     static bool IsEmpty();
 
     static void Clear() { while (!IsEmpty()) { Extract(); } }
+    /// ¬озвращает количество миллисекунд, прошедщих после последнего событи€ клавиатуры
+    static uint TimeAfterControlMS();
 };

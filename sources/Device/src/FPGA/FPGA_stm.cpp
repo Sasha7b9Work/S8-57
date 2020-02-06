@@ -4,6 +4,7 @@
 #include "FPGA/FPGA.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
+#include "Keyboard/BufferButtons.h"
 #include "Osci/Osci.h"
 #include "Settings/Settings.h"
 #include "Utils/Buffer.h"
@@ -35,14 +36,14 @@ void FPGA::Init()
 }
 
 
-static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
+static void CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
 {
     static float minGate = 0.0F;
     static float maxGate = 0.0F;
 
     if (rand < 500 || rand > 4000)
     {
-        return false;
+        return;
     }
 
     static int numElements = 0;
@@ -52,10 +53,27 @@ static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
 
     numElements++;
 
-    bool retValue = true;
-
     min.Add(rand);
     max.Add(rand);
+
+#define TIME_WAIT 5000
+
+    if(TIME_MS > TIME_WAIT)
+    {
+        if(BufferButtons::TimeAfterControlMS() < TIME_WAIT)
+        {
+            if(minGate == 0.0F)
+            {
+                *eMin = min.Get();
+                *eMax = max.Get();
+            }
+            else
+            {
+                *eMin = static_cast<uint16>(minGate);
+                *eMax = static_cast<uint16>(maxGate);
+            }
+        }
+    }
 
     if (minGate == 0.0F)    // -V550 //-V2550 //-V550
     {
@@ -63,7 +81,7 @@ static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
         *eMax = max.Get();
         if (numElements < numberMeasuresForGates)
         {
-            return true;
+            return;
         }
         minGate = min.Get();
         maxGate = max.Get();
@@ -84,15 +102,11 @@ static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
         LOG_WRITE("Новые ворота %d %d", static_cast<uint16>(minGate), static_cast<uint16>(maxGate));
     }
 
-    *eMin = static_cast<uint16>(minGate);   // -V519 // -V2004
-    *eMax = static_cast<uint16>(maxGate);   // -V519 // -V2004
-
-    if (rand < *eMin || rand > *eMax)
+    if (rand >= *eMin || rand <= *eMax)
     {
-        return false;
+        *eMin = static_cast<uint16>(minGate);   // -V519 // -V2004
+        *eMax = static_cast<uint16>(maxGate);   // -V519 // -V2004
     }
-
-    return retValue;
 }
 
 
@@ -101,10 +115,7 @@ int FPGA::CalculateShift()
     uint16 min = 0;
     uint16 max = 0;
 
-    if (!CalculateGate(valueADC, &min, &max))
-    {
-        return NULL_TSHIFT;
-    }
+    CalculateGate(valueADC, &min, &max);
 
     int deltaMAX = set.dbg.nrst.enum_gate_max * 10;
     int deltaMIN = set.dbg.nrst.enum_gate_min * 10;

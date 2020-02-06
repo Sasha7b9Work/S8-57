@@ -107,4 +107,6 @@ struct Keyboard
     static void Unlock();
     /// Возвращает true, если кнопка не заблокирована
     static bool KeyIsActive(Key::E key);
+    /// Возвращает количество миллисекнуд, прошедших после нажатия последней кнопки
+    static uint TimeAfterControlMS();
 };

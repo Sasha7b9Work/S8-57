@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "BufferButtons.h"
 #include "Hardware/Beeper.h"
+#include "Hardware/Timer.h"
 #include "Menu/Pages/Include/PageFunction.h"
 
 
@@ -14,10 +15,14 @@ static KeyEvent prevPushEvent;
 static int end;
 /// Позиция первого значащего события в буфере.
 static int start;
+/// Возвращает время
+static uint timeLastControl = 0xFFFFFFFF;
 
 
 void BufferButtons::Push(KeyEvent event)
 {
+    timeLastControl = TIME_MS;
+
     if ((event.key == prevPushEvent.key) &&             // Если отпущена кнпока, которая раньше прислала "длинное" нажатие,
         prevPushEvent.IsLong() &&
         event.IsRelease())
@@ -62,3 +67,8 @@ bool BufferButtons::IsEmpty()
     return end == 0;
 }
 
+
+uint BufferButtons::TimeAfterControlMS()
+{
+    return TIME_MS - timeLastControl;
+}

@@ -13,6 +13,7 @@
 #include "Menu/MenuItems.h"
 #include "Recorder/Recorder.h"
 #include "SCPI/SCPI.h"
+#include "Utils/Debug.h"
 #include <cstdlib>
 
 
@@ -98,28 +99,52 @@ bool SetCurrentMode(const Page *page, Device::Mode::E mode)
 void Device::Update()
 {
     START_MULTI_MEASUREMENT();
-    
+ 
+    DEBUG_POINT;
+
     Osci::Update();
+
+    DEBUG_POINT;
 
     Display::Update();
 
+    DEBUG_POINT;
+
     Menu::SaveSettings();
+
+    DEBUG_POINT;
     
     Recorder::Update();
+
+    DEBUG_POINT;
     
     Tester::Update();
+
+    DEBUG_POINT;
     
     Multimeter::Update();
+
+    DEBUG_POINT;
     
     Menu::Update();
+
+    DEBUG_POINT;
     
     FDrive::Update();
 
+    DEBUG_POINT;
+
     while (HAL_BUS::Panel::Receive()) {};
 
+    DEBUG_POINT;
+
     SCPI::Update();
+
+    DEBUG_POINT;
     
     DDecoder::Update();
+
+    DEBUG_POINT;
 }
 
 

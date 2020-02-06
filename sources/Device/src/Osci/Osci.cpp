@@ -9,6 +9,7 @@
 #include "Osci/Osci.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/AutoMeasurements.h"
+#include "Utils/Debug.h"
 #include "Utils/Values.h"
 #include <cstring>
 
@@ -64,25 +65,34 @@ void Osci::Restart()
 
 void Osci::Update()
 {
+    DEBUG_POINT;
+
     if(!Device::InModeOsci())
     {
+        DEBUG_POINT;
         return;
     }
 
+    DEBUG_POINT;
     if(FPGA::IsRunning())
     {
+        DEBUG_POINT;
         UpdateFPGA();
     };
 
+    DEBUG_POINT;
     Reader::ReadDataFromRAM();
 
+    DEBUG_POINT;
     AutoMeasurements::SetData();
 }
 
 
 void Osci::Stop()
 {
+    DEBUG_POINT;
     funcStop();
+    DEBUG_POINT;
 }
 
 
@@ -94,20 +104,30 @@ bool Osci::IsRunning()
 
 void Osci::UpdateFPGA()
 {
+    DEBUG_POINT;
+
     uint number = (Osci::InModeRandomizer()) ? TBase().RandK() : 1;
+
+    DEBUG_POINT;
 
     for (uint i = 0; i < number; i++)
     {
+        DEBUG_POINT;
         FPGA::ReadFlag();
     
+        DEBUG_POINT;
         ProcessFlagPred();
 
+        DEBUG_POINT;
         if(ProcessFlagReady())
         {
+            DEBUG_POINT;
             Osci::Stop();
+            DEBUG_POINT;
             break;
         }
     }
+    DEBUG_POINT;
 }
 
 
@@ -135,29 +155,39 @@ void Osci::ProcessFlagPred()
 
 bool Osci::ProcessFlagReady()
 {
+    DEBUG_POINT;
     bool needStop = false;
+    DEBUG_POINT;
 
     if(FPGA::flag.DataReady())
     {
+        DEBUG_POINT;
         if(CanReadData())
         {
+            DEBUG_POINT;
             Timer::PauseOnTicks(5 * 90 * 20);
+            DEBUG_POINT;
 
             FPGA::ReadData();
+            DEBUG_POINT;
 
             if(TrigStartMode::IsSingle())
             {
+                DEBUG_POINT;
                 needStop = true;
                 Trig::pulse = false;
             }
             else
             {
+                DEBUG_POINT;
                 Timer::PauseOnTicks(5 * 90 * 20);
+                DEBUG_POINT;
                 Osci::Start(false);
+                DEBUG_POINT;
             }
         }
     }
-
+    DEBUG_POINT;
     return needStop;
 }
 
@@ -346,7 +376,9 @@ void Osci::StartP2P(bool button)
 
 void Osci::StopNormal()
 {
+    DEBUG_POINT;
     FPGA::isRunning = false;
+    DEBUG_POINT;
 }
 
 

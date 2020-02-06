@@ -10,6 +10,7 @@
 #include "Hardware/Memory/RAM.h"
 #include "Osci/DataSettings.h"
 #include "Osci/Osci.h"
+#include "Utils/Debug.h"
 #include "Utils/Math.h"
 #include <cstring>
 #include <cstdlib>
@@ -161,11 +162,12 @@ void RAM::Init()
 
 DataSettings *RAM::PrepareForNewData()
 {
+    DEBUG_POINT;
     if(Osci::InModeRandomizer() && NumberDatas())
     {
         return Get();
     }
-
+    DEBUG_POINT;
     if(FrameP2P::IsCorrect())
     {
         FrameP2P::ds = nullptr;
@@ -176,7 +178,7 @@ DataSettings *RAM::PrepareForNewData()
 
         return result;
     }
-
+    DEBUG_POINT;
     DataSettings ds;
 
     ds.Fill();
@@ -185,6 +187,7 @@ DataSettings *RAM::PrepareForNewData()
 
     uint address = AllocateMemoryForPacket(&ds);         // Ќаходим адрес дл€ записи нового пакета
 
+    DEBUG_POINT;
     if (newest)
     {
         newest->addrNewest = address;                   // ”казываем его в качестве адреса следующего пакета дл€ предыдущего
@@ -198,6 +201,7 @@ DataSettings *RAM::PrepareForNewData()
 
     result->timeMS = TIME_MS;
 
+    DEBUG_POINT;
     return result;
 }
 
