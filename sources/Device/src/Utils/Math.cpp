@@ -595,3 +595,31 @@ float Math::RandFloat(float min, float max)
     float scale = range / RAND_MAX;
     return min + scale * std::rand();
 }
+
+
+void Min2::Add(uint16 value)
+{
+    if(value < lessMin)
+    {
+        moreMin = lessMin;
+        lessMin = value;
+    }
+    else if(value < moreMin)
+    {
+        moreMin = value;
+    }
+}
+
+
+void Max2::Add(uint16 value)
+{
+    if(value > moreMax)
+    {
+        lessMax = moreMax;
+        moreMax = value;
+    }
+    else if(value > lessMax)
+    {
+        lessMax = value;
+    }
+}

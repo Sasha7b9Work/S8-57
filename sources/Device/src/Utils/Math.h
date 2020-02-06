@@ -97,3 +97,34 @@ namespace Math
     /// ѕрибавить к *value term и ограничить, если результат выходит за границы [min, max]
     template<class T> void AdditionThisLimitation(T *value, int term, T min, T max);
 };
+
+
+
+// —труктура принимает в себ€ значени€ и сохран€ет два наименьших из них.
+// ¬озвращает то, которое больше
+struct Min2
+{
+    Min2() { Reset(); }
+    void Add(uint16 value);
+    void Reset() { moreMin = 0xFFFF; lessMin = 0xFFFF; }
+    uint16 Get() const { return moreMin; }
+
+private:
+    uint16 moreMin;    // Ѕольшее меньшее
+    uint16 lessMin;    // ћеньшее меньшее
+};
+
+
+// —труктура принимает в себ€ значени€ и сохран€ет два наибольших из них.
+// ¬озвращает то, которое меньше
+struct Max2
+{
+    Max2() { Reset(); }
+    void Reset() { moreMax = 0; lessMax = 0; }
+    void Add(uint16 value);
+    uint16 Get() const { return lessMax; }
+
+private:
+    uint16 moreMax;
+    uint16 lessMax;
+};

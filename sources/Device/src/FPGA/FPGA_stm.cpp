@@ -47,45 +47,40 @@ static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
     }
 
     static int numElements = 0;
-    static uint16 min = 0xffff;
-    static uint16 max = 0;
+
+    static Min2 min;
+    static Max2 max;
 
     numElements++;
 
     bool retValue = true;
 
-    if (rand < min)
-    {
-        min = rand;
-    }
-    if (rand > max)
-    {
-        max = rand;
-    }
+    min.Add(rand);
+    max.Add(rand);
 
     if (minGate == 0.0F)    // -V550 //-V2550 //-V550
     {
-        *eMin = min;
-        *eMax = max;
+        *eMin = min.Get();
+        *eMax = max.Get();
         if (numElements < numberMeasuresForGates)
         {
             return true;
         }
-        minGate = min;
-        maxGate = max;
+        minGate = min.Get();
+        maxGate = max.Get();
         numElements = 0;
-        min = 0xffff;
-        max = 0;
+        min.Reset();
+        max.Reset();
     }
 
     if (numElements >= numberMeasuresForGates)
     {
-        minGate = 0.8F * minGate + min * 0.2F;
-        maxGate = 0.8F * maxGate + max * 0.2F;
+        minGate = 0.8F * minGate + min.Get() * 0.2F;
+        maxGate = 0.8F * maxGate + max.Get() * 0.2F;
 
         numElements = 0;
-        min = 0xffff;
-        max = 0;
+        min.Reset();
+        max.Reset();
 
         //LOG_WRITE("Новые ворота %d %d", static_cast<uint16>(minGate), static_cast<uint16>(maxGate - 50));
     }
