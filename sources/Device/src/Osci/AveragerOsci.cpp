@@ -19,6 +19,8 @@ void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, uint size)
         Для этого нужно завести битовый массив, в котором отмечать те точки, которые считаны в данной итерации.
     */
 
+    dataNew = RAM::Get()->Data(ch);
+
     uint16 numAve = static_cast<uint16>(ENumAverage());
 
     uint8 *_new = const_cast<uint8 *>(dataNew);

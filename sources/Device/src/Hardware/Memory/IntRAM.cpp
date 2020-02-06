@@ -10,13 +10,13 @@ static uint8 buffer[SIZE_BUFFER];
 static const uint SIZE_STORAGE_RAM = SIZE_BUFFER;
 
 
-uint8 *IntRAM::BeginStorageRAM()
+uint8 *IntRAM::Begin()
 {
     return buffer;
 }
 
 
-uint8 *IntRAM::EndStorageRAM()
+uint8 *IntRAM::End()
 {
-    return BeginStorageRAM() + SIZE_STORAGE_RAM;
+    return Begin() + SIZE_STORAGE_RAM;
 }

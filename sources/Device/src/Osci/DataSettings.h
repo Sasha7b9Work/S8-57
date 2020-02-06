@@ -72,6 +72,7 @@ public:
     bool Equals(const DataSettings &ds) const;
     bool EqualsCurrentSettings() const;
     void Log() const;
+    uint8 *Data(Chan::E ch) { return ch == Chan::A ? dataA : dataB; }
 };
 
 
