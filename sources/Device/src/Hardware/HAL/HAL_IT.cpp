@@ -1,4 +1,3 @@
-#include <stm32f4xx_hal.h>
 #include "defines.h"
 #include "log.h"
 #include "Hardware/Beeper.h"
@@ -10,6 +9,7 @@
 #include "Utils/Debug.h"
 #include "Display/Painter.h"
 #include "Hardware/HAL/HAL.h"
+#include <stm32f4xx_hal.h>
 
 
 INTERRUPT_BEGIN

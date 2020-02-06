@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "device.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/HAL/HAL.h"
@@ -137,15 +136,7 @@ void FPGA::ReadData()
 
 void FPGA::GiveStart(uint16 pr, uint16 po)
 {
-    uint prev = RAM::NumberDatas();
-
     HAL_BUS::FPGA::Write16(WR::PRED_LO, pr);
-
-    if(prev != RAM::NumberDatas())
-    {
-        LOG_ERROR("%d %d", prev, RAM::NumberDatas());
-    }
-
     HAL_BUS::FPGA::Write16(WR::POST_LO, po);
     HAL_BUS::FPGA::Write8(WR::START, 0xff);
 }

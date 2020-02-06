@@ -1,6 +1,6 @@
 #include "defines.h"
-#include "common/Command.h"
 #include "log.h"
+#include "common/Command.h"
 #include "Hardware/HAL/HAL.h"
 #include <Display/Display.h>
 #include <Hardware/CPU.h>

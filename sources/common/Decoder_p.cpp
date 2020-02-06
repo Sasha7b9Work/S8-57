@@ -1,4 +1,3 @@
-#include "log.h"
 #include "structs.h"
 #include "Decoder_p.h"
 #include "Display/Display.h"
@@ -104,10 +103,6 @@ void PDecoder::AddData(uint8 data)
         if (data < Command::Count)
         {
             curFunc = command[data].func;
-            if (curFunc == 0)
-            {
-                LOG_ERROR("Не обнаржен обработчик");
-            }
         }
         else
         {

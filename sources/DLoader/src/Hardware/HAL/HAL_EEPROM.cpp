@@ -1,7 +1,6 @@
 #include "defines.h"
 #include "HAL.h"
 #include <stm32f4xx_hal.h>
-#include "log.h"
 
 
 
@@ -83,8 +82,6 @@ static uint GetSector(uint startAddress)
             return i;
         }
     }
-
-    LOG_ERROR("Неправильный адрес");
 
     return 24;
 }

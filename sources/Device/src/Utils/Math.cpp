@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "Math.h"
 #include "Settings/Settings.h"
 #include <cmath>
@@ -384,7 +383,6 @@ int Math::DigitsInIntPart(float value)
 {
     if (value == std::numeric_limits<float>::infinity())
     {
-        LOG_ERROR("Nan value %f", value);
         return 2;
     }
 

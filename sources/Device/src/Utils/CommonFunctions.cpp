@@ -14,7 +14,6 @@ void CF::LogBufferU8_HEX(const uint8 *buffer, int num)
 
     if (message == nullptr)
     {
-        LOG_WRITE("Нет памяти");
         return;
     }
 

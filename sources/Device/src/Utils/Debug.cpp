@@ -1,6 +1,6 @@
 #include "defines.h"
-#include "debug.h"
 #include "log.h"
+#include "debug.h"
 #include "Hardware/Timer.h"
 
 

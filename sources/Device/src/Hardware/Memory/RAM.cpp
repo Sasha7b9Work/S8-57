@@ -232,6 +232,8 @@ uint RAM::NumberDatas()
         return 1;
     }
 
+    HAL_BUS::ConfigureToFSMC();
+
     uint result = 0;
 
     Packet *packet = oldest;

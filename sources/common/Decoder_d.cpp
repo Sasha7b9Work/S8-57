@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "Decoder_d.h"
 #ifdef DEVICE
 #include "Menu/Menu.h"
@@ -23,10 +22,6 @@ void DDecoder::AddData(uint8 data)
     if (pointer < SIZE_BUFFER)
     {
         buffer[pointer++] = data;
-    }
-    else
-    {
-        LOG_WRITE("Нет места в приёмном буфере");
     }
 }
 
@@ -89,10 +84,6 @@ void DDecoder::RunStep(uint8 data)
         if (data < Command::Count)
         {
             curFunc = commands[data].func;
-            if (curFunc == 0)
-            {
-                LOG_ERROR("Нет обработчика");
-            }
         }
         else
         {
@@ -218,7 +209,6 @@ bool DDecoder::AddToConsole(uint8 data)
 
     if (recvSymbols == allSymbols)
     {
-        LOG_WRITE(text);
         std::free(text);
     }
 

@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "device.h"
 #include "Osci/DataSettings.h"
 #include "Hardware/Memory/Reader.h"
@@ -48,14 +47,7 @@ void Osci::DeInit()
 
 void Osci::Start(bool button)
 {
-    uint prev = RAM::NumberDatas();
-
     funcStart(button);
-
-    if(prev != RAM::NumberDatas())
-    {
-        LOG_ERROR("изменилось %d %d", prev, RAM::NumberDatas());
-    }
 }
 
 
@@ -89,13 +81,7 @@ void Osci::Update()
 
 void Osci::Stop()
 {
-    uint prev = RAM::NumberDatas();
     funcStop();
-
-    if(prev != RAM::NumberDatas())
-    {
-        LOG_ERROR("%d %d", prev, RAM::NumberDatas());
-    }
 }
 
 
@@ -334,14 +320,7 @@ void Osci::StartNormal(bool)
 
     FrameP2P::Prepare();
 
-    uint prev = RAM::NumberDatas();
-
     FPGA::GiveStart(FPGA::pred, FPGA::post);
-
-    if(prev != RAM::NumberDatas())
-    {
-        LOG_ERROR("%d %d", prev, RAM::NumberDatas());
-    }
 
     FPGA::isRunning = true;
 }
@@ -349,8 +328,6 @@ void Osci::StartNormal(bool)
 
 void Osci::StartP2P(bool button)
 {
-    uint prev = RAM::NumberDatas();
-
     FPGA::forcedStart = false;
     FPGA::addrRead = 0xffff;
 
@@ -363,11 +340,6 @@ void Osci::StartP2P(bool button)
     }
 
     FPGA::isRunning = true;
-
-    if(prev != RAM::NumberDatas())
-    {
-        LOG_ERROR("%d %d", prev, RAM::NumberDatas());
-    }
 }
 
 
