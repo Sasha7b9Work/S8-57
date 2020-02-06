@@ -84,7 +84,7 @@ private:
 
 struct AveragerOsci
 {
-    static void Process(Chan::E ch, const uint8 *dataNew, uint size);
+    static void Process(Chan::E ch, const uint8 *newData, uint size);
     static void SettingChanged();
     static void Draw();
 };
