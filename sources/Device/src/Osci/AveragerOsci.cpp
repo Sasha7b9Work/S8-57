@@ -19,20 +19,9 @@ void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, uint size)
         ƒл€ этого нужно завести битовый массив, в котором отмечать те точки, которые считаны в данной итерации.
     */
 
-    uint16 numAve = static_cast<uint16>(ENumAverage().Number());
+    uint16 numAve = static_cast<uint16>(ENumAverage());
 
-    uint index = 0;
-    uint step = 1;
-
-    if (Osci::InModeRandomizer())
-    {
-        Osci::StructReadRand str = Osci::GetInfoForReadRand();
-
-        index = str.posFirst;
-        step = str.step;
-    }
-
-    uint8 *_new = const_cast<uint8 *>(dataNew) + index;
+    uint8 *_new = const_cast<uint8 *>(dataNew);
     uint16 *av = AVE_DATA(ch);
 
     /// \todo «десь неправильно - места в AVE_DATA слишком мало дл€ 8к * 16биты
@@ -50,23 +39,23 @@ void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, uint size)
         }
         else
         {
-            for (uint i = index; i < size; i += step)
+            for (uint i = 0; i < size; i++)
             {
                 av[i] += *_new;
 
-                _new += step;
+                _new++;
             }
         }
     }
     else
     {
-        for (uint i = index; i < size; i += step)
+        for (uint i = 0; i < size; i++)
         {
             av[i] = static_cast<uint16>(av[i] - (av[i] >> numAve) + *_new);
 
             *_new = static_cast<uint8>(av[i] >> numAve);
 
-            _new += step;
+            _new++;
         }
     }
 
