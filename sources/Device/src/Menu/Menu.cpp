@@ -3,6 +3,8 @@
 #include "Display/Primitives.h"
 #include "FlashDrive/FlashDrive.h"
 #include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
+#include "Hardware/Memory/RAM.h"
 #include "Keyboard/BufferButtons.h"
 #include "Keyboard/HandlersKeys.h"
 #include "Menu/Menu.h"
@@ -38,6 +40,8 @@ void Menu::Update()
 
         Handlers::Process(event);                   // То обрабатываем его
     }
+
+    HAL_BUS::ConfigureToFSMC();
 }
 
 

@@ -15,7 +15,7 @@ volatile static uint timeStartMS = 0;
 /// Время предыдущей точки профилировщика
 volatile static uint timePrevMS = 0;
 
-
+void *Debug::packet = nullptr;
 const char *Debug::file = 0;
 int   Debug::line = 0;
 

@@ -101,11 +101,8 @@ bool HAL_BUS::Panel::Receive()
     //pinReadyPAN.WaitPassive();
     //while(pinReadyPAN.IsActive())
 
-    volatile uint val = GPIOA->IDR;
-
-    while((val & GPIO_PIN_7) == 0)
+    while((GPIOA->IDR & GPIO_PIN_7) == 0)
     {
-        val = GPIOA->IDR;
     }
     
     //                                                 4,5,6,7              2,3                          0,1

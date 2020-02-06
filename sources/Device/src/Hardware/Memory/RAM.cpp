@@ -58,6 +58,11 @@ struct Packet
     /// јдрес следующего пакета, более "свежего". ≈сли addrNext == 0x00000000, следующего пакета нет, этот пакет самый новый
     uint addrNewest;
 
+    bool IsValid()
+    {
+        return (uint8*)this >= ExtRAM::Begin() && (uint8*)this < ExtRAM::End();
+    }
+
     void Trace(uint)
     {
         if(addrNewest == 0 && RAM::canTrace)
@@ -162,12 +167,11 @@ void RAM::Init()
 
 DataSettings *RAM::PrepareForNewData()
 {
-    DEBUG_POINT;
     if(Osci::InModeRandomizer() && NumberDatas())
     {
         return Get();
     }
-    DEBUG_POINT;
+
     if(FrameP2P::IsCorrect())
     {
         FrameP2P::ds = nullptr;
@@ -178,7 +182,7 @@ DataSettings *RAM::PrepareForNewData()
 
         return result;
     }
-    DEBUG_POINT;
+
     DataSettings ds;
 
     ds.Fill();
@@ -187,7 +191,6 @@ DataSettings *RAM::PrepareForNewData()
 
     uint address = AllocateMemoryForPacket(&ds);         // Ќаходим адрес дл€ записи нового пакета
 
-    DEBUG_POINT;
     if (newest)
     {
         newest->addrNewest = address;                   // ”казываем его в качестве адреса следующего пакета дл€ предыдущего
@@ -201,7 +204,6 @@ DataSettings *RAM::PrepareForNewData()
 
     result->timeMS = TIME_MS;
 
-    DEBUG_POINT;
     return result;
 }
 
@@ -231,6 +233,8 @@ DataSettings *RAM::Get(uint numFromEnd)
 
 uint RAM::NumberDatas()
 {
+    HAL_BUS::ConfigureToFSMC();
+
     if (newest == nullptr)
     {
         return 0;
@@ -241,15 +245,27 @@ uint RAM::NumberDatas()
         return 1;
     }
 
-    HAL_BUS::ConfigureToFSMC();
-
     uint result = 0;
 
     Packet *packet = oldest;
 
+    Packet *prevPacket = nullptr;
+    
     while (packet != nullptr)
     {
         result++;
+
+        if(!packet->IsValid())
+        {
+            result = result;
+        }
+
+        DEBUG_POINT;
+        
+        uint address = packet->addrNewest;
+        address = address;
+        DEBUG_POINT;
+        prevPacket = packet;
         packet = reinterpret_cast<Packet *>(packet->addrNewest);
     }
 

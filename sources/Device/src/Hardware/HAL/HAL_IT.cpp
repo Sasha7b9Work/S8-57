@@ -1,7 +1,6 @@
 #include "defines.h"
 #include "log.h"
 #include "Hardware/Beeper.h"
-#include "Utils/Debug.h"
 #include "FlashDrive/FlashDrive.h"      
 #include "FPGA/FPGA.h"
 #include "Hardware/Timer.h"
@@ -20,6 +19,7 @@ void HardFault_Handler()
 {
     __IO const char *file = Debug::file;
     __IO int line = Debug::line;
+    __IO void *packet = Debug::packet;
     
     LOG_WRITE_AND_SHOW("%s %d", file, line);
 
@@ -27,6 +27,7 @@ void HardFault_Handler()
     {
         file = file;    // -V570
         line = line;    // -V570
+        packet = packet;
     }
 }
 

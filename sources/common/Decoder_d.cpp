@@ -2,7 +2,6 @@
 #include "Decoder_d.h"
 #ifdef DEVICE
 #include "Menu/Menu.h"
-#include "Utils/Debug.h"
 #endif
 #include "Display/Display.h"
 #include "Display/Painter.h"

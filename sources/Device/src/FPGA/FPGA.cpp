@@ -5,7 +5,6 @@
 #include "Hardware/Memory/RAM.h"
 #include "Settings/Settings.h"
 #include "Recorder/Recorder.h"
-#include "Utils/Debug.h"
 #include <cstring>
 
 
@@ -89,58 +88,41 @@ bool FPGA::IsRunning()
 
 void FPGA::ReadData()
 {
-    DEBUG_POINT;
     Osci::Stop();
-    DEBUG_POINT;
 
     DataSettings *ds = RAM::PrepareForNewData();
 
-    DEBUG_POINT;
     if (ReadDataChannel(Chan::A, ds->dataA))
     {
-        DEBUG_POINT;
         if (ReadDataChannel(Chan::B, ds->dataB))
         {
-            DEBUG_POINT;
         }
         else
         {
-            DEBUG_POINT;
             return;
         }
     }
 
     if (ENumAverage() != ENumAverage::_1)               // Если включено усреднение
     {
-        DEBUG_POINT;
         DataSettings *last = RAM::Get(0);
-        DEBUG_POINT;
         DataSettings *prev = RAM::Get(1);
 
-        DEBUG_POINT;
         if (prev && last)
         {
-            DEBUG_POINT;
             if (last->Equals(*prev))
             {
-                DEBUG_POINT;
                 if (ENABLED_A(last))
                 {
-                    DEBUG_POINT;
                     AveragerOsci::Process(Chan::A, last->dataA, last->BytesInChannel());
-                    DEBUG_POINT;
                 }
-                DEBUG_POINT;
                 if (ENABLED_B(last))
                 {
-                    DEBUG_POINT;
                     AveragerOsci::Process(Chan::B, last->dataB, last->BytesInChannel());
-                    DEBUG_POINT;
                 }
             }
         }
     }
-    DEBUG_POINT;
 }
 
 
