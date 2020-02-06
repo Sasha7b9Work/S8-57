@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include "FPGA/AD9286.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/Timer.h"
@@ -6,6 +7,7 @@
 #include "Osci/Osci.h"
 #include "Settings/Settings.h"
 #include "Utils/Buffer.h"
+#include "Utils/Debug.h"
 #include "Utils/Math.h"
 #include <cstring>
 
@@ -82,11 +84,11 @@ static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
         min.Reset();
         max.Reset();
 
-        //LOG_WRITE("Новые ворота %d %d", static_cast<uint16>(minGate), static_cast<uint16>(maxGate - 50));
+        LOG_WRITE("Новые ворота %d %d", static_cast<uint16>(minGate), static_cast<uint16>(maxGate));
     }
 
-    *eMin = static_cast<uint16>(minGate);      // -V519 // -V2004
-    *eMax = static_cast<uint16>(maxGate - 50); // -V519 // -V2004
+    *eMin = static_cast<uint16>(minGate);   // -V519 // -V2004
+    *eMax = static_cast<uint16>(maxGate);   // -V519 // -V2004
 
     if (rand < *eMin || rand > *eMax)
     {
@@ -117,7 +119,6 @@ int FPGA::CalculateShift()
 
     if (Osci::InModeRandomizer())
     {
-
         float tin = static_cast<float>(valueADC - min + deltaMIN) / (max - deltaMAX - (min + deltaMIN));
         int retValue = static_cast<int>(tin * TBase().RandK());
 
@@ -130,6 +131,11 @@ int FPGA::CalculateShift()
 
 bool FPGA::ReadDataChannelRand(Chan::E ch, uint8 *addr, uint8 *data)
 {
+    static uint startFrame = 0;
+    static uint timeForFrame = 0;
+
+    uint start = Timer::TimeUS();
+
     int Tsm = CalculateShift();
 
     if (Tsm == NULL_TSHIFT)
@@ -148,6 +154,8 @@ bool FPGA::ReadDataChannelRand(Chan::E ch, uint8 *addr, uint8 *data)
 
     HAL_BUS::FPGA::SetAddrData(addr);
 
+    uint p1 = 0xFFFFFFFF, p2 = 0xFFFFFFFF;
+
     if (ENumAverage() > 1)
     {
         uint8 *dataPointer = &data[infoRead.posFirst];              // Указатель в переданном массиве
@@ -163,13 +171,30 @@ bool FPGA::ReadDataChannelRand(Chan::E ch, uint8 *addr, uint8 *data)
     }
     else
     {
+        Debug::StartProfiling();
+
         while (dataRead < last)
         {
             *dataRead = HAL_BUS::FPGA::ReadA0();
             dataRead += step;
         }
 
+        p1 = Debug::PointProfiling();
+
         std::memcpy(data, &dataRand[ch][0], ENumPointsFPGA::PointsInChannel());
+
+        p2 = Debug::PointProfiling();
+    }
+
+    timeForFrame += Timer::TimeUS() - start;
+
+    if(Timer::TimeMS() >= startFrame + 1000)
+    {
+        LOG_WRITE("время чтения за секунду - %d mc", timeForFrame / 1000);
+        timeForFrame = 0;
+        startFrame = Timer::TimeMS();
+        LOG_WRITE(" ");
+        LOG_WRITE("%d %d", p1, p2);
     }
 
     return true;

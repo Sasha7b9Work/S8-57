@@ -12,10 +12,10 @@
 namespace Debug
 {
     void StartProfiling();
-    void PointProfiling(char *name);
+    uint PointProfiling();
 
-    void _StartProfilingMS();
-    uint _PointProfilingMS(const char *file, int line);
+    void StartProfilingMS();
+    uint PointProfilingMS(const char *file, int line);
 
     void ClearTimeCounter();
     void StartIncreaseCounter();

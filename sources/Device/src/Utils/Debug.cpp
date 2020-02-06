@@ -6,6 +6,7 @@
 
 
 static uint timeStart;
+static uint timePrev;
 static uint timeCounter;
 static uint timeStartCounter;
 
@@ -14,19 +15,20 @@ volatile static uint timeStartMS = 0;
 /// Время предыдущей точки профилировщика
 volatile static uint timePrevMS = 0;
 
+
 const char *Debug::file = 0;
 int   Debug::line = 0;
 
 
 
-void Debug::_StartProfilingMS()
+void Debug::StartProfilingMS()
 {
     timeStartMS = TIME_MS;
     timePrevMS = TIME_MS; //-V656
 }
 
 
-uint Debug::_PointProfilingMS(const char *_file, int _line)
+uint Debug::PointProfilingMS(const char *_file, int _line)
 {
     uint delta = TIME_MS - timePrevMS;
     LOG_WRITE("%s %d %d", _file, _line, delta);
@@ -39,12 +41,15 @@ uint Debug::_PointProfilingMS(const char *_file, int _line)
 void Debug::StartProfiling()
 {
     timeStart = TIME_US;
+    timePrev = timeStart;
 }
 
 
-void Debug::PointProfiling(char *name)
+uint Debug::PointProfiling()
 {
-    LOG_WRITE("%s %d", name, TIME_US - timeStart);
+    uint result = TIME_US - timePrev;
+    timePrev = TIME_US;
+    return result;
 }
 
 
