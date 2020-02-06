@@ -13,8 +13,6 @@ uint16 FPGA::valueADC = 0;
 uint16 FPGA::post = static_cast<uint16>(~(512));
 uint16 FPGA::pred = static_cast<uint16>(~(512));
 
-uint8 dataRand[Chan::Count][ENumPointsFPGA::MAX_NUM];    ///< Здесь будут данные рандомизатора
-
 bool          FPGA::isRunning = false;
 
 
@@ -85,12 +83,6 @@ void FPGA::SetValueADC(uint16 value)
 bool FPGA::IsRunning()
 {
     return isRunning;
-}
-
-
-void FPGA::ClearDataRand()
-{
-    std::memset(dataRand, 0, ENumPointsFPGA::MAX_NUM * 2 * sizeof(uint8));  // -V512
 }
 
 

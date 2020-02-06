@@ -12,8 +12,6 @@
 #include <cstring>
 
 
-extern uint8 dataRand[Chan::Count][ENumPointsFPGA::MAX_NUM];
-
 uint16 FPGA::addrRead = 0xffff;
 
 volatile static int numberMeasuresForGates = 10000;
@@ -129,7 +127,7 @@ int FPGA::CalculateShift()
 }
 
 
-bool FPGA::ReadDataChannelRand(Chan::E ch, uint8 *addr, uint8 *data)
+bool FPGA::ReadDataChannelRand(uint8 *addr, uint8 *data)
 {
     static uint startFrame = 0;
     static uint timeForFrame = 0;
@@ -140,7 +138,6 @@ bool FPGA::ReadDataChannelRand(Chan::E ch, uint8 *addr, uint8 *data)
 
     if (Tsm == NULL_TSHIFT)
     {
-        std::memcpy(data, &dataRand[ch][0], ENumPointsFPGA::PointsInChannel());
         return false;
     }
 
@@ -148,9 +145,9 @@ bool FPGA::ReadDataChannelRand(Chan::E ch, uint8 *addr, uint8 *data)
 
     uint step = infoRead.step;
 
-    uint8 *dataRead = &dataRand[ch][infoRead.posFirst];
+    uint8 *dataRead = data;
 
-    uint8 *last = &dataRand[ch][ENumPointsFPGA::PointsInChannel()];
+    uint8 *last = data + ENumPointsFPGA::PointsInChannel();
 
     HAL_BUS::FPGA::SetAddrData(addr);
 
@@ -178,12 +175,6 @@ bool FPGA::ReadDataChannelRand(Chan::E ch, uint8 *addr, uint8 *data)
             *dataRead = HAL_BUS::FPGA::ReadA0();
             dataRead += step;
         }
-
-        p1 = Debug::PointProfiling();
-
-        std::memcpy(data, &dataRand[ch][0], ENumPointsFPGA::PointsInChannel());
-
-        p2 = Debug::PointProfiling();
     }
 
     timeForFrame += Timer::TimeUS() - start;
@@ -228,7 +219,7 @@ bool FPGA::ReadDataChannel(Chan::E ch, uint8 *data)
 
     if (Osci::InModeRandomizer())
     {
-        return ReadDataChannelRand(ch, a1, data);
+        return ReadDataChannelRand(a1, data);
     }
     else
     {

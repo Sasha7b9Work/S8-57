@@ -65,13 +65,11 @@ private:
 
     static bool ReadDataChannel(Chan::E ch, uint8 *data);
 
-    static void ClearDataRand();
-
     static void LoadRegUPR();
 
     static void ReadFlag();
 
-    static bool ReadDataChannelRand(Chan::E ch, uint8 *address, uint8 *data);
+    static bool ReadDataChannelRand(uint8 *address, uint8 *data);
 
     static int CalculateShift();
 
