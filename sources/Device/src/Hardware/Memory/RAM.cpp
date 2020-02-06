@@ -161,6 +161,11 @@ void RAM::Init()
 
 DataSettings *RAM::PrepareForNewData()
 {
+    if(Osci::InModeRandomizer() && NumberDatas())
+    {
+        return Get();
+    }
+
     if(FrameP2P::IsCorrect())
     {
         FrameP2P::ds = nullptr;

@@ -33,6 +33,8 @@ struct Osci
     static void ChangedTrigStartMode();
     /// Эту функцию нужно вызывать при изменении TBase
     static void ChangedTBase();
+    /// Очистка данных рандомизатора при переключении режимов
+    static void ClearDataRand();
 
     static int addShift;
 

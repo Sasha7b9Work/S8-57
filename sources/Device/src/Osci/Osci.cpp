@@ -10,6 +10,7 @@
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/AutoMeasurements.h"
 #include "Utils/Values.h"
+#include <cstring>
 
 
 int    Osci::addShift = 0;
@@ -419,4 +420,13 @@ void Osci::InputController::Write(HPort::E portCS, uint16 pinCS, uint16 value)
     }
 
     HAL_PIO::Set(portCS, pinCS);
+}
+
+
+void Osci::ClearDataRand()
+{
+    DataSettings *ds = RAM::Get();
+
+    std::memset(ds->Data(Chan::A), VALUE::NONE, ds->PointsInChannel());
+    std::memset(ds->Data(Chan::B), VALUE::NONE, ds->PointsInChannel());
 }

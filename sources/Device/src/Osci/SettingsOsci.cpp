@@ -285,6 +285,8 @@ void TBase::Set(TBase::E base)
         BIN_U8(01011110)   // -V2501  // 10s     100M    2Hz
     };
 
+    Osci::ClearDataRand();
+
     HAL_BUS::FPGA::Write8(WR::TBASE, values[TBase()]);
 
     TShift().Load();

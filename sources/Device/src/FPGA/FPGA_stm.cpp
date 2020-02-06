@@ -7,7 +7,6 @@
 #include "Osci/Osci.h"
 #include "Settings/Settings.h"
 #include "Utils/Buffer.h"
-#include "Utils/Debug.h"
 #include "Utils/Math.h"
 #include <cstring>
 
@@ -129,11 +128,6 @@ int FPGA::CalculateShift()
 
 bool FPGA::ReadDataChannelRand(uint8 *addr, uint8 *data)
 {
-    static uint startFrame = 0;
-    static uint timeForFrame = 0;
-
-    uint start = Timer::TimeUS();
-
     int Tsm = CalculateShift();
 
     if (Tsm == NULL_TSHIFT)
@@ -145,13 +139,11 @@ bool FPGA::ReadDataChannelRand(uint8 *addr, uint8 *data)
 
     uint step = infoRead.step;
 
-    uint8 *dataRead = data;
+    uint8 *dataRead = data + infoRead.posFirst;
 
     uint8 *last = data + ENumPointsFPGA::PointsInChannel();
 
     HAL_BUS::FPGA::SetAddrData(addr);
-
-    uint p1 = 0xFFFFFFFF, p2 = 0xFFFFFFFF;
 
     if (ENumAverage() > 1)
     {
@@ -168,24 +160,11 @@ bool FPGA::ReadDataChannelRand(uint8 *addr, uint8 *data)
     }
     else
     {
-        Debug::StartProfiling();
-
         while (dataRead < last)
         {
             *dataRead = HAL_BUS::FPGA::ReadA0();
             dataRead += step;
         }
-    }
-
-    timeForFrame += Timer::TimeUS() - start;
-
-    if(Timer::TimeMS() >= startFrame + 1000)
-    {
-        LOG_WRITE("время чтения за секунду - %d mc", timeForFrame / 1000);
-        timeForFrame = 0;
-        startFrame = Timer::TimeMS();
-        LOG_WRITE(" ");
-        LOG_WRITE("%d %d", p1, p2);
     }
 
     return true;
