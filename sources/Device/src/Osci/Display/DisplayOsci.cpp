@@ -41,8 +41,6 @@ void DisplayOsci::Update()
 
     TShift().Draw();
 
-    AveragerOsci::Draw();
-    
     RShift::DrawBoth();
     
     TrigLevel().Draw();
