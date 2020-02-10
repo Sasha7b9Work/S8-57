@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "Log.h"
 #include "Display/Colors.h"
 #include "Display/Painter.h"
 #include "Utils/Math.h"
@@ -72,11 +71,11 @@ Color Color::GRID(COLOR_GRID);
 
 
 
-void Color::Log(Color color)
+void Color::Log(Color)
 {
-#define colorVal (COLOR(color.value))
+//#define colorVal (COLOR(color.value))
 
-    LOG_WRITE("Color %d R=%d, G=%d, B=%d", color.value, R_FROM_COLOR(colorVal), G_FROM_COLOR(colorVal), B_FROM_COLOR(colorVal));
+//    LOG_WRITE("Color %d R=%d, G=%d, B=%d", color.value, R_FROM_COLOR(colorVal), G_FROM_COLOR(colorVal), B_FROM_COLOR(colorVal));
 }
 
 

@@ -1,20 +1,10 @@
 #include "defines.h"
-#include "Log.h"
 #include "Painter.h"
 #include "Display/Colors.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Utils/Math.h"
-
 #include "Painter_common.h"
-
-
-/** @addtogroup Display
-*   @{
-*   @addtogroup Painter
-*   @{
-*/
-
 
 
 void Painter::DrawVPointLine(int x, int y, int delta, int count)
@@ -41,7 +31,7 @@ void Painter::DrawDashedHLine(int y, int x0, int x1, int deltaFill, int deltaEmp
 {
     if (deltaStart < 0 || deltaStart >= (deltaFill + deltaEmpty))
     {
-        LOG_ERROR_TRACE("Неправильный аргумент deltaStart = %d", deltaStart);
+//        LOG_ERROR_TRACE("Неправильный аргумент deltaStart = %d", deltaStart);
         return;
     }
     int x = x0;
@@ -66,7 +56,7 @@ void Painter::DrawDashedVLine(int x, int y0, int y1, int deltaFill, int deltaEmt
 {
     if (deltaStart < 0 || deltaStart >= (deltaFill + deltaEmtpy))
     {
-        LOG_ERROR_TRACE("Неправильный аргумент deltaStart = %d", deltaStart);
+//        LOG_ERROR_TRACE("Неправильный аргумент deltaStart = %d", deltaStart);
         return;
     }
     int y = y0;
@@ -91,7 +81,3 @@ Color Painter::GetColor()
 {
     return currentColor;
 }
-
-
-/** @} @}
-*/
