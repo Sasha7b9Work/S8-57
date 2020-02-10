@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include "Osci.h"
 #include "Hardware/Memory/Reader.h"
 #include "Display/Grid.h"
@@ -12,44 +13,75 @@
 static uint16 numSignals[2] = { 0, 0 };
 
 
+#define AVERAGE(shift)                                                  \
+    for(uint i = 0; i < size; i++)                                      \
+    {                                                                   \
+        av[i] = static_cast<uint16>(av[i] - (av[i] >> shift) + *_new);  \
+        *_new = static_cast<uint8>(av[i] >> shift);                     \
+        _new++;                                                         \
+    }
+
+
 void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, uint size)
 {
     uint8 *_new = const_cast<uint8 *>(dataNew);
     uint16 *av = AVE_DATA(ch);
 
-    if (numSignals[ch] < ENumAverage().Number())
+    uint16 shift = static_cast<uint16>(ENumAverage());
+
+    uint16 count = numSignals[ch];
+
+    if (count < ENumAverage().Number())
     {
-        if (numSignals[ch] == 0)
+        if(ch == Chan::A)     { LOG_WRITE("точка 1");  }
+
+        if (count == 0)
         {
-            std::memset(AVE_DATA(ch), 0, static_cast<uint>(size) * 2);
+            if(ch == Chan::A) { LOG_WRITE("точка 2");  }
 
             for (uint i = 0; i < size; i++)
             {
                 av[i] = dataNew[i];
             }
         }
-        else
+        else if(count == 1)
         {
-            for (uint i = 0; i < size; i++)
-            {
-                av[i] += *_new;
+            if(ch == Chan::A) { LOG_WRITE("точка 3"); }
 
-                _new++;
-            }
+            AVERAGE(1);
+        }
+        else if(count < 4)
+        {
+            AVERAGE(2);
+        }
+        else if(count < 8)
+        {
+            AVERAGE(3);
+        }
+        else if(count < 16)
+        {
+            AVERAGE(4);
+        }
+        else if(count < 32)
+        {
+            AVERAGE(5);
+        }
+        else if(count < 64)
+        {
+            AVERAGE(6);
+        }
+        else if(count < 128)
+        {
+            AVERAGE(7);
+        }
+        else if(count < 256)
+        {
+            AVERAGE(8);
         }
     }
     else
     {
-        uint16 shiftBits = static_cast<uint16>(ENumAverage());
-
-        for (uint i = 0; i < size; i++)
-        {
-            av[i] = static_cast<uint16>(av[i] - (av[i] >> shiftBits) + *_new);
-
-            *_new = static_cast<uint8>(av[i] >> shiftBits);
-
-            _new++;
-        }
+        AVERAGE(shift);
     }
 
     if (numSignals[ch] < NUM_AVE_MAX + 10)
