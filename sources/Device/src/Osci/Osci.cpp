@@ -115,11 +115,6 @@ void Osci::ProcessFlagPred()
 {
     if(FPGA::flag.Pred() && !FPGA::forcedStart)
     {
-        if(!FPGA::flag.TrigReady())
-        {
-            Trig::pulse = false;
-        }
-
         if(InModeP2P() && !FrameP2P::IsCorrect())
         {
             return;
