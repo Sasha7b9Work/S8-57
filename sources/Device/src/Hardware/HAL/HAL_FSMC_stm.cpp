@@ -24,43 +24,53 @@ uint8 *HAL_BUS::FPGA::addrData1 = nullptr;
 HAL_BUS::Mode::E HAL_BUS::mode = HAL_BUS::Mode::FSMC;
 
 
+static GPIO_InitTypeDef is =
+{
+    GPIO_PIN_0,
+    GPIO_MODE_AF_PP,
+    GPIO_PULLUP,
+    GPIO_SPEED_FREQ_VERY_HIGH,
+    GPIO_AF12_FMC
+};
+
+
 void HAL_BUS::Init()
 {
     __HAL_RCC_FMC_CLK_ENABLE();
     __HAL_RCC_GPIOF_CLK_ENABLE();
 
-    GPIO_InitTypeDef is =
-    {//     D2           D3           D0            D1
-        GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_14 | GPIO_PIN_15,
+    //           D2           D3           D0            D1
+    is.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_14 | GPIO_PIN_15;
+    HAL_GPIO_Init(GPIOD, &is);
+
+    //           D4           D5           D6           D7
+    is.Pin = GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10;
+    HAL_GPIO_Init(GPIOE, &is);
+
+    //           A0           A1           A2           A3           A4           A5           A6            A7            A8            A9
+    is.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
+    HAL_GPIO_Init(GPIOF, &is);
+
+    //           A10          A11         A12           A13          A14         A15           NE3
+    is.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_10;
+    HAL_GPIO_Init(GPIOG, &is);
+
+    //           A16          A17            A18
+    is.Pin = GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13;
+    HAL_GPIO_Init(GPIOD, &is);
+
+    static const GPIO_InitTypeDef isGPIO =
+    {   //    NOE          NWE          NE1
+        GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_7,
         GPIO_MODE_AF_PP,
         GPIO_PULLUP,
         GPIO_SPEED_FREQ_VERY_HIGH,
         GPIO_AF12_FMC
     };
 
-    HAL_GPIO_Init(GPIOD, &is);
+    /// \todo Здесь не довеедно - не хотит, почему-то
 
-    is.Pin = GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10;
-    HAL_GPIO_Init(GPIOE, &is);
-
-    // Настроим адресные выводы для ПЛИС
-
-    //               A0           A1           A2           A3           A4           A5
-    //isGPIO.Pin = GPIO _PIN_0 | GPIO _PIN_1 | GPIO _PIN_2 | GPIO _PIN_3 | GPIO _PIN_4 | GPIO _PIN_5;
-    //HAL_GPIO_Init(GPIOF, &isGPIO);
-
-    GPIOF->AFR[0] &= HEX_FROM_2(ff00, 0000);
-    GPIOF->AFR[0] |= HEX_FROM_2(00cc, cccc);    // Устанавливаем GPIO_AF12_FMC
-
-    GPIOF->MODER &= HEX_FROM_2(ffff, f000);
-    GPIOF->MODER |= HEX_FROM_2(0000, 0aaa);     // Устанавливаем Alternate function mode
-
-    GPIOF->OSPEEDR |= HEX_FROM_2(0000, 0fff);   // Устанавливаем very high speed
-
-    GPIOF->OTYPER &= HEX_FROM_2(ffff, c000);    // Устанавливаем output push-pull
-
-    GPIOF->PUPDR &= HEX_FROM_2(ffff, f000);
-    GPIOF->PUPDR |= HEX_FROM_2(0000, 0aaa);     // Устанавливаем pull-down
+    HAL_GPIO_Init(GPIOD, const_cast<GPIO_InitTypeDef *>(&isGPIO));
 
 
     static SRAM_HandleTypeDef gSramHandle =
@@ -118,28 +128,17 @@ void HAL_BUS::InitRAM()
     __HAL_RCC_GPIOD_CLK_ENABLE();
     __HAL_RCC_GPIOG_CLK_ENABLE();
 
-    GPIO_InitTypeDef is =
-    {//     A16           A17           A18 
-        GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13,
-        GPIO_MODE_AF_PP,
-        GPIO_PULLUP,
-        GPIO_SPEED_FREQ_VERY_HIGH,
-        GPIO_AF12_FMC
-    };
-
+    //           A16           A17           A18 
+    is.Pin = GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13;
     HAL_GPIO_Init(GPIOD, &is);
 
     //           A10          A11         A12           A13          A14         A15           NE3
     is.Pin =  GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_10;
-
     HAL_GPIO_Init(GPIOG, &is);
 
     //           A6            A7          A8            A9
     is.Pin = GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
-
     HAL_GPIO_Init(GPIOF, &is);
-
-//    HAL_PIO::Init(HPort::_G, HPin::_10, )
 
     static SRAM_HandleTypeDef gSramHandle =
     {
@@ -189,43 +188,17 @@ void HAL_BUS::ConfigureToFSMC()
 
     mode = Mode::FSMC;
 
-    static const GPIO_InitTypeDef isGPIO =
-    {   //    NOE          NWE          NE1
-        GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_7,
-        GPIO_MODE_AF_PP,
-        GPIO_PULLUP,
-        GPIO_SPEED_FREQ_VERY_HIGH,
-        GPIO_AF12_FMC
-    };
-    
-    /// \todo Здесь не довеедно - не хотит, почему-то
-    
-    HAL_GPIO_Init(GPIOD, const_cast<GPIO_InitTypeDef *>(&isGPIO));
+    //           NOE          NWE          NE1
+    is.Pin = GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_7;   
+    HAL_GPIO_Init(GPIOD, &is);
 
-    // Инициализируем GPIOD 0, 1, 4, 5, 7, 14, 15 - D2, D3, NOE, NWE, NE1, D0, D1
+    //           D2           D3           D0            D1
+    is.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_14 | GPIO_PIN_15;
+    HAL_GPIO_Init(GPIOD, &is);
 
-    // Инициализируем GPIOD 0, 1, 4, 5 - D2, D3, NOE, NWE
-    GPIOD->AFR[0] &= HEX_FROM_2(ffff, ff00);
-    GPIOD->AFR[0] |= HEX_FROM_2(0000, 00cc);
-
-    GPIOD->MODER &= HEX_FROM_2(ffff, fff0);
-    GPIOD->MODER |= HEX_FROM_2(0000, 000a);
-
-    // Инициализируем GPIOD 14, 15 - D0, D1
-    GPIOD->AFR[1] &= HEX_FROM_2(00ff, ffff);    // PIN_14, PIN_15
-    GPIOD->AFR[1] |= HEX_FROM_2(cc00, 0000);    // GPIO_AF12_FMC
-
-    GPIOD->MODER &= HEX_FROM_2(0fff, ffff);
-    GPIOD->MODER |= HEX_FROM_2(a000, 0000);     // Alternate function mode
-
-    // Инициализируем GPIOE 7...8 - D4...D7
-    GPIOE->AFR[0] &= HEX_FROM_2(0fff, ffff);
-    GPIOE->AFR[0] |= HEX_FROM_2(c000, 0000);
-    GPIOE->AFR[1] &= HEX_FROM_2(ffff, f000);
-    GPIOE->AFR[1] |= HEX_FROM_2(0000, 0ccc);    // GPIO_AF12_FMC
-
-    GPIOE->MODER &= HEX_FROM_2(ffc0, 3fff);
-    GPIOE->MODER |= HEX_FROM_2(002a, 8fff);     // Alternate function mode
+    //           D4           D5           D6           D7
+    is.Pin = GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10;
+    HAL_GPIO_Init(GPIOE, &is);
 }
 
 
