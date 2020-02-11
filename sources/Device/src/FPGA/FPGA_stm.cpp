@@ -26,6 +26,10 @@ private:
     float maxGate;
     // Здесь хранятся два наименьших и два наибольших значения из всех подаваемых в функцию Calculate
     MinMax2 m;
+    // Пересчитать значения ворот
+    void RecalculateGates();
+
+    void CalculateWithoutGates(uint16 *min, uint16 *max);
 };
 
 
@@ -38,21 +42,11 @@ bool Gates::Calculate(uint16 value, uint16 *min, uint16 *max)
 
     m.Add(value);
 
-    if(TIME_MS > TIME_WAIT)
+    if((TIME_MS > TIME_WAIT) && (BufferButtons::TimeAfterControlMS() < TIME_WAIT))
     {
-        if(BufferButtons::TimeAfterControlMS() < TIME_WAIT)
-        {
-            if(minGate == 0.0F)
-            {
-                *min = m.Min();
-                *max = m.Max();
-            }
-            else
-            {
-                *min = static_cast<uint16>(minGate);
-                *max = static_cast<uint16>(maxGate);
-            }
-        }
+        CalculateWithoutGates(min, max);
+
+        return true;
     }
 
     if(minGate == 0.0F)
@@ -70,22 +64,43 @@ bool Gates::Calculate(uint16 value, uint16 *min, uint16 *max)
 
     if(m.Count() >= numberMeasuresForGates)
     {
-        minGate = 0.8F * minGate + m.Min() * 0.2F;
-        maxGate = 0.8F * maxGate + m.Max() * 0.2F;
+        RecalculateGates();
 
         m.Reset();
-
-        static uint timePrev = 0;
-
-        LOG_WRITE("Новые ворота %d %d  время %d", static_cast<uint16>(minGate), static_cast<uint16>(maxGate), (TIME_MS - timePrev) / 1000);
-
-        timePrev = TIME_MS;
     }
 
     *min = static_cast<uint16>(minGate);
     *max = static_cast<uint16>(maxGate);
 
     return (value >= *min) && (value <= *max);
+}
+
+
+void Gates::RecalculateGates()
+{
+    minGate = 0.8F * minGate + m.Min() * 0.2F;
+    maxGate = 0.8F * maxGate + m.Max() * 0.2F;
+
+    static uint timePrev = 0;
+
+    LOG_WRITE("Новые ворота %d %d  время %d", static_cast<uint16>(minGate), static_cast<uint16>(maxGate), (TIME_MS - timePrev) / 1000);
+
+    timePrev = TIME_MS;
+}
+
+
+void Gates::CalculateWithoutGates(uint16 *min, uint16 *max)
+{
+    if(minGate == 0.0F)
+    {
+        *min = m.Min();
+        *max = m.Max();
+    }
+    else
+    {
+        *min = static_cast<uint16>(minGate);
+        *max = static_cast<uint16>(maxGate);
+    }
 }
 
 
