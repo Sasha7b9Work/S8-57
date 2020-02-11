@@ -16,15 +16,15 @@ uint16 FPGA::addrRead = 0xffff;
 
 struct Gates
 {
-    Gates() : minGate(0.0F), maxGate(0.0F), numElements(0) { }
-    bool Calculate(uint16 rand, uint16 *min, uint16 *max);
+    Gates() : minGate(0.0F), maxGate(0.0F), numValues(0) { }
+    bool Calculate(uint16 value, uint16 *min, uint16 *max);
 
 private:
     static const int numberMeasuresForGates = 10000;
     static const uint TIME_WAIT = 3000;
     float minGate;
     float maxGate;
-    int numElements;
+    int numValues;
     // Здесь хранятся два наименьших значения из переданных в Calculate() rand
     Min2 minValues;
     // Здесь хранятся два наибольших значения из переданных в Calculate() rand
@@ -32,17 +32,17 @@ private:
 };
 
 
-bool Gates::Calculate(uint16 rand, uint16 *min, uint16 *max)
+bool Gates::Calculate(uint16 value, uint16 *min, uint16 *max)
 {
-    if(rand < 250 || rand > 4000)
+    if(value < 250 || value > 4000)
     {
         return false;
     }
 
-    numElements++;
+    numValues++;
 
-    minValues.Add(rand);
-    maxValues.Add(rand);
+    minValues.Add(value);
+    maxValues.Add(value);
 
     if(TIME_MS > TIME_WAIT)
     {
@@ -65,23 +65,23 @@ bool Gates::Calculate(uint16 rand, uint16 *min, uint16 *max)
     {
         *min = minValues.Get();
         *max = maxValues.Get();
-        if(numElements < numberMeasuresForGates)
+        if(numValues < numberMeasuresForGates)
         {
             return true;
         }
         minGate = minValues.Get();
         maxGate = maxValues.Get();
-        numElements = 0;
+        numValues = 0;
         minValues.Reset();
         maxValues.Reset();
     }
 
-    if(numElements >= numberMeasuresForGates)
+    if(numValues >= numberMeasuresForGates)
     {
         minGate = 0.8F * minGate + minValues.Get() * 0.2F;
         maxGate = 0.8F * maxGate + maxValues.Get() * 0.2F;
 
-        numElements = 0;
+        numValues = 0;
 
         minValues.Reset();
         maxValues.Reset();
@@ -96,7 +96,7 @@ bool Gates::Calculate(uint16 rand, uint16 *min, uint16 *max)
     *min = static_cast<uint16>(minGate);
     *max = static_cast<uint16>(maxGate);
 
-    return (rand >= *min) && (rand <= *max);
+    return (value >= *min) && (value <= *max);
 }
 
 
