@@ -13,8 +13,91 @@
 
 uint16 FPGA::addrRead = 0xffff;
 
-volatile static int numberMeasuresForGates = 10000;
 
+struct Gates
+{
+    Gates() : minGate(0.0F), maxGate(0.0F), numElements(0) { }
+    bool Calculate(uint16 rand, uint16 *min, uint16 *max);
+
+private:
+    static const int numberMeasuresForGates = 10000;
+    static const uint TIME_WAIT = 3000;
+    float minGate;
+    float maxGate;
+    int numElements;
+    // Здесь хранятся два наименьших значения из переданных в Calculate() rand
+    Min2 minValues;
+    // Здесь хранятся два наибольших значения из переданных в Calculate() rand
+    Max2 maxValues;
+};
+
+
+bool Gates::Calculate(uint16 rand, uint16 *min, uint16 *max)
+{
+    if(rand < 250 || rand > 4000)
+    {
+        return false;
+    }
+
+    numElements++;
+
+    minValues.Add(rand);
+    maxValues.Add(rand);
+
+    if(TIME_MS > TIME_WAIT)
+    {
+        if(BufferButtons::TimeAfterControlMS() < TIME_WAIT)
+        {
+            if(minGate == 0.0F)
+            {
+                *min = minValues.Get();
+                *max = maxValues.Get();
+            }
+            else
+            {
+                *min = static_cast<uint16>(minGate);
+                *max = static_cast<uint16>(maxGate);
+            }
+        }
+    }
+
+    if(minGate == 0.0F)
+    {
+        *min = minValues.Get();
+        *max = maxValues.Get();
+        if(numElements < numberMeasuresForGates)
+        {
+            return true;
+        }
+        minGate = minValues.Get();
+        maxGate = maxValues.Get();
+        numElements = 0;
+        minValues.Reset();
+        maxValues.Reset();
+    }
+
+    if(numElements >= numberMeasuresForGates)
+    {
+        minGate = 0.8F * minGate + minValues.Get() * 0.2F;
+        maxGate = 0.8F * maxGate + maxValues.Get() * 0.2F;
+
+        numElements = 0;
+
+        minValues.Reset();
+        maxValues.Reset();
+
+        static uint timePrev = 0;
+
+        LOG_WRITE("Новые ворота %d %d  время %d", static_cast<uint16>(minGate), static_cast<uint16>(maxGate), (TIME_MS - timePrev) / 1000);
+
+        timePrev = TIME_MS;
+    }
+
+    *min = static_cast<uint16>(minGate);
+    *max = static_cast<uint16>(maxGate);
+
+    return (rand >= *min) && (rand <= *max);
+}
 
 
 void FPGA::Init()
@@ -35,96 +118,14 @@ void FPGA::Init()
 }
 
 
-static bool CalculateGate(uint16 rand, uint16 *eMin, uint16 *eMax)
-{
-    static float minGate = 0.0F;
-    static float maxGate = 0.0F;
-
-    if (rand < 250 || rand > 4000)
-    {
-        return false;
-    }
-
-    static int numElements = 0;
-
-    static Min2 min;
-    static Max2 max;
-
-    numElements++;
-
-    min.Add(rand);
-    max.Add(rand);
-
-#define TIME_WAIT 3000
-
-    if(TIME_MS > TIME_WAIT)
-    {
-        if(BufferButtons::TimeAfterControlMS() < TIME_WAIT)
-        {
-            if(minGate == 0.0F)
-            {
-                *eMin = min.Get();
-                *eMax = max.Get();
-            }
-            else
-            {
-                *eMin = static_cast<uint16>(minGate);
-                *eMax = static_cast<uint16>(maxGate);
-            }
-
-            return true;
-        }
-    }
-
-    if (minGate == 0.0F)    // -V550 //-V2550 //-V550
-    {
-        *eMin = min.Get();
-        *eMax = max.Get();
-        if (numElements < numberMeasuresForGates)
-        {
-            return true;
-        }
-        minGate = min.Get();
-        maxGate = max.Get();
-        numElements = 0;
-        min.Reset();
-        max.Reset();
-    }
-
-    if (numElements >= numberMeasuresForGates)
-    {
-        minGate = 0.8F * minGate + min.Get() * 0.2F;
-        maxGate = 0.8F * maxGate + max.Get() * 0.2F;
-
-        numElements = 0;
-        min.Reset();
-        max.Reset();
-
-        static uint timePrev = 0;
-
-        LOG_WRITE("Новые ворота %d %d  время %d", static_cast<uint16>(minGate), static_cast<uint16>(maxGate), (TIME_MS - timePrev) / 1000);
-
-        timePrev = TIME_MS;
-    }
-
-    *eMin = static_cast<uint16>(minGate);   // -V519 // -V2004
-    *eMax = static_cast<uint16>(maxGate);   // -V519 // -V2004
-
-    if (rand < *eMin || rand > *eMax)
-    {
-        return false;
-    }
-
-    return true;
-}
-
-
 int FPGA::CalculateShift()
 {
     uint16 min = 0;
     uint16 max = 0;
 
-    if(!CalculateGate(valueADC, &min, &max))
+    static Gates gates;
+
+    if(!gates.Calculate(valueADC, &min, &max))
     {
         return NULL_TSHIFT;
     }

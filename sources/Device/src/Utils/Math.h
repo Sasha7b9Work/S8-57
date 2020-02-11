@@ -107,6 +107,7 @@ struct Min2
     Min2() { Reset(); }
     void Add(uint16 value);
     void Reset() { moreMin = 0xFFFF; lessMin = 0xFFFF; }
+    // Из двух хранимых минимиальных значений возвращает то, которое больше (не крайнее)
     uint16 Get() const { return moreMin; }
 
 private:
@@ -122,6 +123,7 @@ struct Max2
     Max2() { Reset(); }
     void Reset() { moreMax = 0; lessMax = 0; }
     void Add(uint16 value);
+    // Из двух хранимых максимальных значений возвращает то, которое меньше (не крайнее)
     uint16 Get() const { return lessMax; }
 
 private:
