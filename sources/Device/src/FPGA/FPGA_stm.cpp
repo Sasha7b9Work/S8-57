@@ -6,10 +6,9 @@
 #include "Hardware/HAL/HAL.h"
 #include "Keyboard/BufferButtons.h"
 #include "Osci/Osci.h"
-#include "Settings/Settings.h"
+#include "Settings/SettingsNRST.h"
 #include "Utils/Buffer.h"
 #include "Utils/Math.h"
-#include <cstring>
 
 
 uint16 FPGA::addrRead = 0xffff;
@@ -130,8 +129,8 @@ int FPGA::CalculateShift()
         return NULL_TSHIFT;
     }
 
-    int deltaMAX = set.dbg.nrst.enum_gate_max * 10;
-    int deltaMIN = set.dbg.nrst.enum_gate_min * 10;
+    int deltaMAX = setNRST.enum_gate_max * 10;
+    int deltaMIN = setNRST.enum_gate_min * 10;
 
     if (FPGA::valueADC > max - deltaMAX || valueADC < min + deltaMIN)
     {

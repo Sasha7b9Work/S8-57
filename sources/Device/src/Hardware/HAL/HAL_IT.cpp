@@ -27,7 +27,7 @@ void HardFault_Handler()
     {
         file = file;    // -V570
         line = line;    // -V570
-        packet = packet;
+        packet = packet; //-V570
     }
 }
 

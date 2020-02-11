@@ -1,17 +1,18 @@
 #include "defines.h"
 #include "Menu/Pages/Include/DebugPage.h"
-#include "Settings/Settings.h"
+//#include "Settings/Settings.h"
+#include "Settings/SettingsNRST.h"
 
 
 ShiftADC &ShiftADC::Ref()
 {
-    return set.dbg.nrst.shiftADC;
+    return setNRST.shiftADC;
 }
 
 
 StretchADC &StretchADC::Ref()
 {
-    return set.dbg.nrst.stretchADC;
+    return setNRST.stretchADC;
 }
 
 
@@ -23,8 +24,8 @@ static void Draw_Balance_Mode(int, int)
 {
     int8 shift[2][3] =
     {
-        {0, set.ch[Chan::A].balanceShiftADC, static_cast<int8>(BalanceADC::Value(Chan::A))},
-        {0, set.ch[Chan::B].balanceShiftADC, static_cast<int8>(BalanceADC::Value(Chan::B))}
+        {0, setNRST.balanceShiftADC[Chan::A], static_cast<int8>(BalanceADC::Value(Chan::A))},
+        {0, setNRST.balanceShiftADC[Chan::B], static_cast<int8>(BalanceADC::Value(Chan::B))}
     };
 
     shiftADCA = shift[Chan::A][BalanceADC::Ref().value];

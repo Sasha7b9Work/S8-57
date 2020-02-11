@@ -1,11 +1,11 @@
 #include "defines.h"
 #include "device.h"
 #include "FPGA/FPGA.h"
-#include "FPGA/MathFPGA.h"
 #include "Hardware/HAL/HAL.h"
+#include "Osci/Osci.h"
 #include "Osci/Display/DisplayOsci.h"
-#include "Recorder/Recorder.h"
 #include "Settings/Settings.h"
+#include "Settings/SettingsNRST.h"
 #include "Utils/Math.h"
 #include "Utils/Values.h"
 

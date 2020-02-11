@@ -1,8 +1,7 @@
 #include "defines.h"
-#include "FPGA/FPGA.h"
-#include "Menu/MenuItems.h"
+#include "Menu/Pages/Include/DebugPage.h"
 #include "Menu/Pages/Include/PageService.h"
-#include "Settings/Settings.h"
+#include "Settings/SettingsNRST.h"
 
 
 DEF_CHOICE_16( gGateMax,                                                                                                                           //--- Œ“À¿ƒ ¿ - –¿Õƒ-“Œ– - ¬ÓÓÚ‡ ‚Âı ---
@@ -24,7 +23,7 @@ DEF_CHOICE_16( gGateMax,                                                        
     "130",
     "140",
     "150",
-    set.dbg.nrst.enum_gate_max, &PageDebug::PageRand::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    setNRST.enum_gate_max, &PageDebug::PageRand::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -48,7 +47,7 @@ DEF_CHOICE_16( gGateMin,                                                        
     "130",
     "140",
     "150",
-    set.dbg.nrst.enum_gate_min, &PageDebug::PageRand::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    setNRST.enum_gate_min, &PageDebug::PageRand::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

@@ -2,13 +2,9 @@
 #include "FPGA/TypesFPGA.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
-#include "Hardware/Memory/ExtRAM.h"
-#include "Menu/Pages/Include/DebugPage.h"
-#include "Settings/Settings.h"
+#include "Settings/SettingsNRST.h"
 #include "Utils/Math.h"
 #include <stm32f4xx_hal.h>
-#include <cstdlib>
-#include <cstring>
 
 
 #define ADDR_ALTERA1    ((uint8 *)NOR_MEMORY_ADRESS1)

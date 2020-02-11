@@ -3,6 +3,7 @@
 #include "FPGA/TypesFPGA.h"
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Osci.h"
+#include "Settings/SettingsNRST.h"
 #include <cmath>
 #include <cstring>
 
@@ -52,7 +53,7 @@ bool Calibrator::Calibrate(Chan::E ch)
 
 bool Calibrator::Balance(Chan::E ch, bool showHint)
 {
-    Settings old = set;
+    SettingsNRST old = setNRST;
 
     ShiftADC::SetDisabled();
 
@@ -76,9 +77,9 @@ bool Calibrator::Balance(Chan::E ch, bool showHint)
         Balance(ch, static_cast<Range::E>(range));
     }
 
-    std::memcpy(&old.dbg.nrst.shiftADC.shift[ch][0], &ShiftADC::Ref().shift[ch][0], sizeof(ShiftADC::Ref().shift[ch][0]) * Range::Count);
+    std::memcpy(&old.shiftADC.shift[ch][0], &ShiftADC::Ref().shift[ch][0], sizeof(ShiftADC::Ref().shift[ch][0]) * Range::Count);
 
-    set = old;
+    setNRST = old;
 
     Osci::Init();
 
@@ -185,7 +186,7 @@ float Calibrator::FindStretchK(Chan::E ch)
 
 bool Calibrator::Stretch(Chan::E ch)
 {
-    Settings old = set;
+    SettingsNRST old = setNRST;
 
     ShiftADC::SetReal();
     StretchADC::SetDisabled();
@@ -202,10 +203,10 @@ bool Calibrator::Stretch(Chan::E ch)
 
     if (k > 0.0F)
     {
-        old.dbg.nrst.stretchADC.stretch[ch] = k;
+        old.stretchADC.stretch[ch] = k;
     }
 
-    set = old;
+    setNRST = old;
 
     Osci::Init();
 

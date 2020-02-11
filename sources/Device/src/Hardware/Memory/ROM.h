@@ -17,6 +17,13 @@ struct ROM
         static bool Load();
     };
 
+    struct Debug
+    {
+        static void Save();
+
+        static void Load();
+    };
+
     /// Функция для сохранения/восстановления данных
     struct Data
     {

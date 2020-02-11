@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Settings/Settings.h"
-
+#include "Settings/SettingsNRST.h"
 
 
 const Settings Settings::defaultSettings =
@@ -47,7 +47,6 @@ const Settings Settings::defaultSettings =
             Range::_500mV,                  // range
             ModeCouple::DC,                 // couple
             true,                           // enabled
-            0,                              // balanceShiftADC
             Bandwidth::Full,                // bandwidth
             false,                          // inverse
             Divider::_1                     // divider
@@ -57,7 +56,6 @@ const Settings Settings::defaultSettings =
             Range::_500mV,                  // range
             ModeCouple::DC,                 // couple
             true,                           // enabled
-            0,                              // balanceShiftADC
             Bandwidth::Full,                // bandwidth
             false,                          // inverse
             Divider::_1                     // divider
@@ -232,17 +230,6 @@ const Settings Settings::defaultSettings =
         0,                          // pretriggered
         false,                      // ShowStats
         false,                      // runTest
-        false,                      // showBattery
-        // Несбрасываемые настройки калибровки
-        {
-            0,                                      // numAveForRand
-            0,                                      // numSmoothForRand
-            0,                                      // correctionTime
-            0,                                      // enum_gate_max
-            0,                                      // enum_gate_min
-            { BalanceADC::Disabled, {0, 0} },       // balanceADC
-            { ShiftADC::Disable,    {{0}, {0}} },   // shiftADC
-            { StretchADC::Disabled, {1.0F, 1.0F} }  // stretchADCtype
-        }
+        false                       // showBattery
     }
 };

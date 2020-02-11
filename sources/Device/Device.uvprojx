@@ -1686,9 +1686,19 @@
           <GroupName>Settings</GroupName>
           <Files>
             <File>
+              <FileName>Settings.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Settings\Settings.h</FilePath>
+            </File>
+            <File>
               <FileName>Settings.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Settings\Settings.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Settings_default.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Settings\Settings_default.cpp</FilePath>
             </File>
             <File>
               <FileName>Settings_stm.cpp</FileName>
@@ -1696,14 +1706,14 @@
               <FilePath>.\src\Settings\Settings_stm.cpp</FilePath>
             </File>
             <File>
-              <FileName>Settings.h</FileName>
+              <FileName>SettingsNRST.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Settings\Settings.h</FilePath>
+              <FilePath>.\src\Settings\SettingsNRST.h</FilePath>
             </File>
             <File>
-              <FileName>Settings_default.cpp</FileName>
+              <FileName>SettingsNRST.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Settings\Settings_default.cpp</FilePath>
+              <FilePath>.\src\Settings\SettingsNRST.cpp</FilePath>
             </File>
             <File>
               <FileName>SettingsOsci.h</FileName>

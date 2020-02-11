@@ -1,0 +1,85 @@
+#pragma once
+
+
+/// \brief Тип балансировки АЦП каналов.
+/// Дело в том, что уровни АЦП не совпадают из-за отличия характеристик ( ? ), поэтому мы вводим дополнительное смещение для одного из АЦП канала.
+#pragma pack(push, 1)
+struct BalanceADC
+{
+    enum E
+    {
+        Disabled,   ///< Балансировка выключена.
+        Settings,   ///< Используются значения балансировки, которые получены автоматически.
+        Hand        ///< Используются значения балансировки, заданные вручную.
+    } value;
+    static BalanceADC &Ref();
+    static bool IsHand()            { return Ref().value == Hand; }
+    static int16 &Value(Chan::E ch) { return Ref().balance[ch];   }
+    int16  balance[Chan::Count];                    ///< Значение дополнительного смещения АЦП для ручной балансировки.
+};
+
+/// Тип растяжки АЦП
+struct StretchADC
+{
+    enum E
+    {
+        Disabled,
+        Real,
+        Hand,
+        Count
+    } value;
+    static StretchADC &Ref();
+    static StretchADC::E Type()    { return Ref().value;               }
+    static void SetDisabled()      { Ref().value = Disabled;           }
+    static void SetReal()          { Ref().value = Real;               }
+    static bool IsDisabled()       { return (Ref().value == Disabled); }
+    static bool IsReal()           { return (Ref().value == Real);     }
+    static bool IsHand()           { return (Ref().value == Hand);     }
+    static float Value(Chan::E ch) { return Ref().stretch[ch];         }
+    float  stretch[Chan::Count];            ///< Хранится в целом виде, чтобы получить реальный коэффициент, нужно разделить на 1000 и прибавить единицу.
+};
+
+
+/// Дополнительное смещение АЦП
+struct ShiftADC
+{
+    enum E
+    {
+        Disable,    ///< Дополнительное смещение не учитывется
+        Real,       ///< Принимается дополнительное смещение, рассчитанное прик калибровке
+        Count
+    } value;
+    static ShiftADC &Ref();
+    static void SetDisabled()                               { Ref().value = Disable;                        };
+    static void SetReal()                                   { Ref().value = Real;                           };
+    static bool IsReal()                                    { return Ref().value == Real;                   };
+    static void Set(Chan::E ch, Range::E range, int8 value) { Ref().shift[ch][range] = value;               }
+    static int8 Value(Chan::E ch, Range::E range)           { return IsReal() ? Ref().shift[ch][range] : 0; };
+    int8  shift[Chan::Count][Range::Count];        ///< Добавочное смещение, которое пишется сюда при калибровке и балансировке
+};
+
+#pragma pack(pop)
+
+
+// Здесь хранятся настройки, которые определяются при калибровке и не перезаписываются при выключении прибора
+
+struct SettingsNRST
+{
+    uint        size;                           ///< Размер структуры. За одно при загрузке из памяти можно определить, что структура пуста - здесь будет значение 0xFFFFFFFF
+    int8        balanceShiftADC[Chan::Count];   ///< Добавочное смещение для балансировки АЦП
+    int16       numAveForRand;                  ///< По скольким измерениям усреднять сигнал в режиме рандомизатора.
+    int16       numSmoothForRand;               ///< Число точек для скользящего фильта в рандомизаторе.
+    int16       correctionTime;                 ///< Коэффициент коррекции времени.
+    int16       enum_gate_max;                  ///< Ограничение ворот в рандомизаторе сверху
+    int16       enum_gate_min;                  ///< Ограничение ворот в рандомизаторе снизу
+    BalanceADC  balanceADC;                     ///< Тип балансировки.
+    ShiftADC    shiftADC;                       ///< Тип учитываемого при установке дополнительного смещения
+    StretchADC  stretchADC;                     ///< Тип растяжки канала.
+    // Инициализация при включении. Проиходит определние наличия настроек в ROM и их загрузка в случае, если настройки есть. Если настроек нету - инициализация значениями по умолчанию
+    void Init();
+    // Сохранение настроек в ROM. Происходит только если настройки в setNRST не совпадают с хранящимися в ROM
+    void Save();
+};
+
+
+extern SettingsNRST setNRST;

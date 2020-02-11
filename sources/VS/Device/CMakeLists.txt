@@ -199,13 +199,14 @@ source_group(Recorder           FILES   ../../Device/src/Recorder/DisplayRecorde
                                                      src/Recorder/Recorder_win.cpp
                                         ../../Device/src/Recorder/StorageRecorder.h
                                         ../../Device/src/Recorder/StorageRecorder.cpp)
-source_group(Settings           FILES   ../../Device/src/Settings/Settings.cpp
-                                        ../../Device/src/Settings/Settings.h
-                                                     src/Settings/Settings_win.cpp
+source_group(Settings           FILES   ../../Device/src/Settings/Settings.h
+                                        ../../Device/src/Settings/Settings.cpp
                                         ../../Device/src/Settings/Settings_default.cpp
+                                        ../../Device/src/Settings/SettingsNRST.h
+                                        ../../Device/src/Settings/SettingsNRST.cpp
+                                                     src/Settings/Settings_win.cpp
                                         ../../Device/src/Settings/SettingsOsci.h
-                                        ../../Device/src/Settings/SettingsOsci.cpp
-                                        ../../Device/src/Settings/SettingsTransformation.cpp)
+                                        ../../Device/src/Settings/SettingsOsci.cpp)
 
 file(GLOB SOURCES   ../../common/_VS/*
                     ../../common/_VS/CMSIS/*
@@ -372,13 +373,14 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Recorder/StorageRecorder.h
                     ../../Device/src/Recorder/StorageRecorder.cpp
                     
-                    ../../Device/src/Settings/Settings.cpp
                     ../../Device/src/Settings/Settings.h
-                                 src/Settings/Settings_win.cpp
+                    ../../Device/src/Settings/Settings.cpp
                     ../../Device/src/Settings/Settings_default.cpp
+                    ../../Device/src/Settings/SettingsNRST.h
+                    ../../Device/src/Settings/SettingsNRST.cpp
+                                 src/Settings/Settings_win.cpp
                     ../../Device/src/Settings/SettingsOsci.h
                     ../../Device/src/Settings/SettingsOsci.cpp
-                    ../../Device/src/Settings/SettingsTransformation.cpp
                     
 					../../Device/src/Test/*
                     ../../Device/src/Tester/*

@@ -10,7 +10,6 @@
 #include "Hardware/Memory/RAM.h"
 #include "Osci/DataSettings.h"
 #include "Osci/Osci.h"
-#include "Utils/Debug.h"
 #include "Utils/Math.h"
 #include <cstring>
 #include <cstdlib>
@@ -32,9 +31,6 @@
 int16 RAM::currentSignal = 0;
 Packet *RAM::oldest = reinterpret_cast<Packet *>(BEGIN);
 Packet *RAM::newest = nullptr;
-
-
-#define TRACE_OLDEST oldest->Trace(__LINE__)
 
 
 /// Записывает по адресу dest. Возвращает адрес первого байта после записи
@@ -67,7 +63,7 @@ struct Packet
     {
         if(addrNewest == 0 && RAM::canTrace)
         {
-            addrNewest = addrNewest;
+            addrNewest = addrNewest; //-V570
         }
 
         //LOG_WRITE("%d %x", line, addrNewest);
@@ -160,7 +156,6 @@ struct Packet
 void RAM::Init()
 {
     oldest = reinterpret_cast<Packet *>(BEGIN);
-    TRACE_OLDEST;
     newest = nullptr;
 }
 
@@ -249,23 +244,9 @@ uint RAM::NumberDatas()
 
     Packet *packet = oldest;
 
-    Packet *prevPacket = nullptr;
-    
     while (packet != nullptr)
     {
-        result++;
-
-        if(!packet->IsValid())
-        {
-            result = result;
-        }
-
-        DEBUG_POINT;
-        
-        uint address = packet->addrNewest;
-        address = address;
-        DEBUG_POINT;
-        prevPacket = packet;
+        result++;       
         packet = reinterpret_cast<Packet *>(packet->addrNewest);
     }
 

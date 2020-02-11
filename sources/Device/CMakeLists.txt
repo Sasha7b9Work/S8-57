@@ -116,7 +116,7 @@ file(GLOB SOURCES   ../common/Command.h
                     src/Recorder/*
                     src/SCPI/*
                     src/Settings/*
-					src/Test/*
+                    src/Test/*
                     src/Tester/*
                     src/Utils/*
                     src/*

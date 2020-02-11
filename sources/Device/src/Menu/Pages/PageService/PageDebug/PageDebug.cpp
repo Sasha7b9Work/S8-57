@@ -1,24 +1,15 @@
 #include "defines.h"
-#include "Hardware/Memory/Reader.h"
-#include "Display/Primitives.h"
-#include "Display/Grid.h"
-#include "Display/Symbols.h"
 #include "Display/Painter.h"
+#include "Display/Primitives.h"
 #include "FlashDrive/FlashDrive.h"
-#include "FPGA/FPGA.h"
-#include "Hardware/Memory/ROM.h"
-#include "Hardware/Beeper.h"
-#include "Menu/Menu.h"
-#include "Menu/Pages/Include/PageService.h"
-#include "Utils/CommonFunctions.h"
-#include "Utils/Math.h"
-#include "Utils/StringUtils.h"
-#include <cstdio>
+#include "Menu/Pages/Include/DebugPage.h"
+#include "Settings/Settings.h"
+#include "Settings/SettingsNRST.h"
 
 
 BalanceADC &BalanceADC::Ref()
 {
-    return set.dbg.nrst.balanceADC;
+    return setNRST.balanceADC;
 }
 
 
@@ -91,9 +82,9 @@ static void DebugShowSetInfo_Draw()
 
     y += dY * 3;
 
-    DRAW_FORMAT("correctionTime : %d", set.dbg.nrst.correctionTime); //-V2528
+    DRAW_FORMAT("correctionTime : %d", setNRST.correctionTime); //-V2528
     DRAW_FORMAT2("balanceADC : %d %d", BalanceADC::Value(Chan::A), BalanceADC::Value(Chan::B)); //-V2528
-    DRAW_FORMAT("numAveForRand : %d", set.dbg.nrst.numAveForRand); //-V2528
+    DRAW_FORMAT("numAveForRand : %d", setNRST.numAveForRand); //-V2528
 
     pString s[3] = {"выключено", "настроено автоматически", "задано вручную"};
     DRAW_FORMAT("balanceADCtype : %s", (BalanceADC::Ref().value < 3 ? s[BalanceADC::Ref().value] : "!!! неправильное значение !!!")); //-V547 //-V2528
@@ -110,7 +101,7 @@ static void DebugShowSetInfo_Draw()
 
 #define DRAW_STRETCH(name) DRAW_FORMAT2(#name " : %d %d", set.nrst_##name[0], set.nrst_##name[1])
 
-    DRAW_FORMAT("numSmoothForRand : %d", set.dbg.nrst.numSmoothForRand); //-V2528
+    DRAW_FORMAT("numSmoothForRand : %d", setNRST.numSmoothForRand); //-V2528
 
     Menu::Draw();
     Painter::EndScene();
