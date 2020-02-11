@@ -16,7 +16,7 @@ uint16 FPGA::addrRead = 0xffff;
 
 struct Gates
 {
-    Gates() : minGate(0.0F), maxGate(0.0F), numValues(0) { }
+    Gates() : minGate(0.0F), maxGate(0.0F) { }
     bool Calculate(uint16 value, uint16 *min, uint16 *max);
 
 private:
@@ -24,11 +24,8 @@ private:
     static const uint TIME_WAIT = 3000;
     float minGate;
     float maxGate;
-    int numValues;
-    // Здесь хранятся два наименьших значения из переданных в Calculate() rand
-    Min2 minValues;
-    // Здесь хранятся два наибольших значения из переданных в Calculate() rand
-    Max2 maxValues;
+    // Здесь хранятся два наименьших и два наибольших значения из всех подаваемых в функцию Calculate
+    MinMax2 m;
 };
 
 
@@ -39,10 +36,7 @@ bool Gates::Calculate(uint16 value, uint16 *min, uint16 *max)
         return false;
     }
 
-    numValues++;
-
-    minValues.Add(value);
-    maxValues.Add(value);
+    m.Add(value);
 
     if(TIME_MS > TIME_WAIT)
     {
@@ -50,8 +44,8 @@ bool Gates::Calculate(uint16 value, uint16 *min, uint16 *max)
         {
             if(minGate == 0.0F)
             {
-                *min = minValues.Get();
-                *max = maxValues.Get();
+                *min = m.Min();
+                *max = m.Max();
             }
             else
             {
@@ -63,28 +57,23 @@ bool Gates::Calculate(uint16 value, uint16 *min, uint16 *max)
 
     if(minGate == 0.0F)
     {
-        *min = minValues.Get();
-        *max = maxValues.Get();
-        if(numValues < numberMeasuresForGates)
+        *min = m.Min();
+        *max = m.Max();
+        if(m.Count() < numberMeasuresForGates)
         {
             return true;
         }
-        minGate = minValues.Get();
-        maxGate = maxValues.Get();
-        numValues = 0;
-        minValues.Reset();
-        maxValues.Reset();
+        minGate = m.Min();
+        maxGate = m.Max();
+        m.Reset();
     }
 
-    if(numValues >= numberMeasuresForGates)
+    if(m.Count() >= numberMeasuresForGates)
     {
-        minGate = 0.8F * minGate + minValues.Get() * 0.2F;
-        maxGate = 0.8F * maxGate + maxValues.Get() * 0.2F;
+        minGate = 0.8F * minGate + m.Min() * 0.2F;
+        maxGate = 0.8F * maxGate + m.Max() * 0.2F;
 
-        numValues = 0;
-
-        minValues.Reset();
-        maxValues.Reset();
+        m.Reset();
 
         static uint timePrev = 0;
 

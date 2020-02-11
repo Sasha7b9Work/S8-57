@@ -130,3 +130,23 @@ private:
     uint16 moreMax;
     uint16 lessMax;
 };
+
+
+// —труктура хранит два наименьших значени€ и два наибольших из последовательности, подаваемой ей в функцию Add
+
+struct MinMax2
+{
+    MinMax2()              { Reset(); }
+    void Add(uint16 value) { min.Add(value); max.Add(value); count++; }
+    void Reset()           { min.Reset(); max.Reset(); count = 0; }
+    uint16 Min()           { return min.Get(); }
+    uint16 Max()           { return max.Get(); }
+    int Count()            { return count; }
+
+private:
+    Min2 min;
+    Max2 max;
+
+    int count;
+};
+
