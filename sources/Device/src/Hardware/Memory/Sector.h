@@ -53,8 +53,8 @@ struct Sector
         _00_BOOT_1,     // \ Загрузчик
         _01_BOOT_2,     // /
         _02,
-        _03,
-        _04_NRST,       // Несбрасываемые настройки
+        _03_NRST_1,     // \ Несбрасываемые настройки
+        _04_NRST_2,     // / 
         _05_FIRM_1,     // \ 
         _06_FIRM_2,     // | Основная прошивка
         _07_FIRM_3,     // /
@@ -107,6 +107,8 @@ struct Sector
     const PacketROM *GetFirstPacketWithData() const;
     /// Возвращает номер сектора, которому принадлежит address
     static int Number(uint address);
+    /// Возвращает ссылку на сектор, которому принадлежит данный адрес
+    static const Sector &Get(uint address);
 
     void Log() const;
 private:
