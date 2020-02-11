@@ -178,6 +178,7 @@ source_group(Hardware\\Memory   FILES   ../../Device/src/Hardware/Memory/ExtRAM.
                                         ../../Device/src/Hardware/Memory/ROM.h
                                         ../../Device/src/Hardware/Memory/ROM.cpp
                                         ../../Device/src/Hardware/Memory/ROM_Data.cpp
+                                        ../../Device/src/Hardware/Memory/ROM_NRST.cpp
                                         ../../Device/src/Hardware/Memory/Sector.h
                                         ../../Device/src/Hardware/Memory/Sector.cpp
                                                      src/Hardware/Memory/Sector_win.cpp)
@@ -328,6 +329,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Hardware/Memory/ROM.h
                     ../../Device/src/Hardware/Memory/ROM.cpp
                     ../../Device/src/Hardware/Memory/ROM_Data.cpp
+                    ../../Device/src/Hardware/Memory/ROM_NRST.cpp
                     ../../Device/src/Hardware/Memory/Sector.h
                     ../../Device/src/Hardware/Memory/Sector.cpp
                                  src/Hardware/Memory/Sector_win.cpp

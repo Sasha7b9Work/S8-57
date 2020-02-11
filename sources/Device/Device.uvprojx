@@ -1016,6 +1016,11 @@
               <FilePath>.\src\Hardware\Memory\ROM_Data.cpp</FilePath>
             </File>
             <File>
+              <FileName>ROM_NRST.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\Memory\ROM_NRST.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Sector.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Memory\Sector.h</FilePath>

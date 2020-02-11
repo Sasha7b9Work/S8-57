@@ -3,6 +3,7 @@
 
 
 struct DataSettings;
+struct SettingsNRST;
 
 
 struct ROM
@@ -17,20 +18,22 @@ struct ROM
         static bool Load();
     };
 
-    struct Debug
+    // Функции для сохранения/загрузки несбрасываемых калибровочных настроек
+    struct NRST
     {
-        static void Save();
-
-        static void Load();
+        // Возвращает указатель на хранящиеся в ROM несбрасываемые настройки. nullptr в случае, если настроек там нет
+        static SettingsNRST *GetSaved();
+        // Сохраняет настройки из адреса nrst в ROM
+        static void Save(SettingsNRST *nrst);
     };
 
-    /// Функция для сохранения/восстановления данных
+    // Функция для сохранения/восстановления данных
     struct Data
     {
         static const uint MAX_NUM_SAVED_WAVES = 23; ///< \brief Число сохраняемых во внутреннем ППЗУ измерений. Пока ограничено количеством квадратиков, которые можно 
                                                     ///< вывести в одну линию внизу сетки.
 
-        /// Если даннные есть, соответствующий элемент массива равен true.
+        // Если даннные есть, соответствующий элемент массива равен true.
         static void GetInfo(bool existData[MAX_NUM_SAVED_WAVES]);
 
         static void Save(uint numInROM, const DataSettings *ds);
