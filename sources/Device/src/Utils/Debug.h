@@ -2,7 +2,7 @@
 
 
 // Хорошо использовать для трассировке, если потом в HardFault_Handler() отслеживать эти переменные
-#define DEBUG_POINT Debug::line = __LINE__; Debug::file = __FILE__; Debug::packet = packet;
+#define DEBUG_POINT Debug::line = __LINE__; Debug::file = __FILE__;
 
 #define START_PROFILING() Debug::_StartProfilingMS();
 #define POINT_PROFILING() Debug::_PointProfilingMS(__FILE__, __LINE__)
@@ -23,6 +23,4 @@ namespace Debug
 
     extern int line;
     extern const char *file;
-
-    extern void *packet;
 };

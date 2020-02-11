@@ -19,7 +19,6 @@ void HardFault_Handler()
 {
     __IO const char *file = Debug::file;
     __IO int line = Debug::line;
-    __IO void *packet = Debug::packet;
     
     LOG_WRITE_AND_SHOW("%s %d", file, line);
 
@@ -27,7 +26,6 @@ void HardFault_Handler()
     {
         file = file;    // -V570
         line = line;    // -V570
-        packet = packet; //-V570
     }
 }
 

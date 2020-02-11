@@ -89,7 +89,7 @@ DEF_CHOICE_2( cSample,                                                          
     ,
     "–еальное врем€",
     "Ёквивалентна€",
-    SampleType::Ref(), &PageTime::self, IsActive_Sample, 0, 0
+    SampleType::Ref(), &PageTime::self, IsActive_Sample, Choice::Changed, Choice::AfterDraw
 )
 
 
