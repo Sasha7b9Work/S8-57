@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "device.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/HAL/HAL.h"
@@ -97,13 +96,6 @@ void FPGA::ReadData()
     {
         if (ReadDataChannel(Chan::B, ds->dataB))
         {
-            for(uint i = 0; i < ds->BytesInChannel(); i++)
-            {
-                if(ds->dataB[i] < VALUE::AVE - 20)
-                {
-                    LOG_WRITE("%d - 0x%x", i, ds->dataB[i]);
-                }
-            }
         }
         else
         {
