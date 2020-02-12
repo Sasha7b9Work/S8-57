@@ -2,6 +2,7 @@
 #include "device.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/HAL/HAL.h"
+#include "Hardware/Memory/RAM.h"
 #include "Osci/Osci.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Settings/Settings.h"
@@ -103,6 +104,16 @@ void RShift::Load(bool force)
     Osci::InputController::Write(PIN_SPI3_CS1, static_cast<uint16>(mask[ch] | (shift << 2)));
 
     Osci::Restart();
+
+    if(Osci::InModeRandomizer())
+    {
+        DataSettings *ds = RAM::Get();
+
+        if(ds)
+        {
+            ds->Fill();
+        }
+    }
 }
 
 
