@@ -79,11 +79,8 @@ bool HAL_BUS::Panel::Receive()
     {
         mode = Mode::PanelRead;
 
-        //pinWR.Init();
-        //pinRD.Init();
-        GPIOD->MODER &= 0xfffff0ffU;
-        GPIOD->MODER |= 0x00000500U;
-        GPIOD->BSRR = (GPIO_PIN_5 | GPIO_PIN_4);
+        pinWR.Init();
+        pinRD.Init();
 
         // Конфигурируем ШД на чтение
 
@@ -92,14 +89,12 @@ bool HAL_BUS::Panel::Receive()
         GPIOE->MODER &= 0xffc03fffU;        // Настроим пины 7, 8, 9, 10 на запись D4, D5, D6, D7
     }
     
-    //pinRD.SetActive();
-    GPIOD->BSRR = GPIO_PIN_4 << 16;
+    pinRD.SetActive();
 
-    //pinCS.SetActive();
-    GPIOG->BSRR = GPIO_PIN_12 << 16;
+    pinCS.SetActive();
     
-    //pinReadyPAN.WaitPassive();
-    //while(pinReadyPAN.IsActive())
+    pinReadyPAN.WaitPassive();
+    while(pinReadyPAN.IsActive()) {};
     
     uint8 data = 0;
 
@@ -142,16 +137,6 @@ void HAL_BUS::Panel::Send(uint8 byte0, uint8 byte1)
     
     Send(buffer, 2);
 }
-
-//#ifdef __cplusplus
-//extern "C" {
-//#endif
-
-//extern void CycleSend(void);
-    
-//#ifdef __cplusplus
-//}
-//#endif
 
 void HAL_BUS::Panel::Send(uint8 *data, uint size)
 {
