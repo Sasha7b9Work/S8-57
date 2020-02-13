@@ -100,16 +100,16 @@ bool HAL_BUS::Panel::Receive()
 
     pinCS.SetActive();
     
-    //pinReadyPAN.WaitPassive();
-
+    uint8 data = 0;
+    
     while(pinReadyPAN.IsActive())
     {
-    }
-
-    while(pinReadyPAN.IsActive()) {};
+        if(pinDataPAN.IsPassive())
+        {
+            goto exit;
+        }
+    };
     
-    uint8 data = 0;
-
     while((GPIOA->IDR & GPIO_PIN_7) == 0)
     {
         if(pinDataPAN.IsPassive())

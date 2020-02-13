@@ -3,6 +3,9 @@
 */
 
 #include "defines.h"
+#include "log.h"
+#include "Display/Console.h"
+#include "Display/Painter.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Memory/ExtRAM.h"
@@ -279,16 +282,16 @@ uint RAM::NumberDatas()
     return result;
 }
 
-bool RAM::IsValid()
+void RAM::VerifyOnValid()
 {
     if(newest == nullptr)
     {
-        return 0;
+        return;
     }
 
     if(oldest == nullptr)
     {
-        return 1;
+        return;
     }
 
     Packet *packet = oldest;
@@ -297,13 +300,18 @@ bool RAM::IsValid()
     {
         uint8 *addrNext = reinterpret_cast<uint8 *>(packet->addrNewest);
 
-        if(addrNext < ExtRAM::Begin() || addrNext >= ExtRAM::End())
+        if(addrNext && (addrNext < ExtRAM::Begin() || addrNext >= ExtRAM::End()))
         {
-            return false;
+            Painter::BeginScene(Color::BLACK);
+            Color::WHITE.SetAsCurrent();
+            LOG_ERROR("Ошибка памяти");
+            Console::Draw();
+            Painter::EndScene();
+            while(true)  { }
         }
+        
+        packet = reinterpret_cast<Packet *>(addrNext);
     }
-
-    return true;
 }
 
 uint RAM::AllocateMemoryForPacket(const DataSettings *ds)
