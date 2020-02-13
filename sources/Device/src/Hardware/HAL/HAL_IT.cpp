@@ -17,15 +17,17 @@ INTERRUPT_BEGIN
 
 void HardFault_Handler()
 {
-    __IO const char *file = Debug::file;
-    __IO int line = Debug::line;
+    __IO const char *file0 = Debug::file[0];
+    __IO const char *file1 = Debug::file[1];
+    __IO int line0 = Debug::line[0];
+    __IO int line1 = Debug::line[1];
     
-    LOG_WRITE_AND_SHOW("%s %d", file, line);
-
-    while (1)           // -V776
+    while (1)
     {
-        file = file;    // -V570
-        line = line;    // -V570
+        file0 = file0;
+        file1 = file1;
+        line0 = line0;
+        line1 = line1;
     }
 }
 

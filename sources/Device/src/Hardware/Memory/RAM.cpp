@@ -10,6 +10,7 @@
 #include "Hardware/Memory/RAM.h"
 #include "Osci/DataSettings.h"
 #include "Osci/Osci.h"
+#include "Utils/Debug.h"
 #include "Utils/Math.h"
 #include <cstring>
 #include <cstdlib>
@@ -228,27 +229,52 @@ DataSettings *RAM::Get(uint numFromEnd)
 
 uint RAM::NumberDatas()
 {
+    DEBUG_POINT(1);
+
     HAL_BUS::ConfigureToFSMC();
+
+    DEBUG_POINT(1);
 
     if (newest == nullptr)
     {
+        DEBUG_POINT(1);
+
         return 0;
     }
 
+    DEBUG_POINT(1);
+
     if (oldest == nullptr)
     {
+        DEBUG_POINT(1);
+
         return 1;
     }
 
+    DEBUG_POINT(1);
+
     uint result = 0;
+
+    DEBUG_POINT(1);
 
     Packet *packet = oldest;
 
+    DEBUG_POINT(1);
+
     while (packet != nullptr)
     {
-        result++;       
+        DEBUG_POINT(1);
+
+        result++;
+
+        DEBUG_POINT(1);
+
         packet = reinterpret_cast<Packet *>(packet->addrNewest);
+
+        DEBUG_POINT(1);
     }
+
+    DEBUG_POINT(1);
 
     return result;
 }
