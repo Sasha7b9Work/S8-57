@@ -10,7 +10,6 @@
 #include "Menu/Menu.h"
 #include "Menu/Pages/Include/PageMemory.h"
 #include "Settings/Settings.h"
-#include "Utils/Debug.h"
 #include <cstdio>
 
 
@@ -22,50 +21,27 @@ const char *Menu::stringForHint = nullptr;
 
 void Menu::Update()
 {
-//    DEBUG_POINT;
-
     while(!BufferButtons::IsEmpty())                // Если есть события клавиатуры
     {
-//        DEBUG_POINT;
-
         timeLastKeyboardEvent = TIME_MS;            // то сохраняем время последнего нажатия, чтобы знать, когда сохранить настройки
-
-//        DEBUG_POINT;
 
         KeyEvent event = BufferButtons::Extract();  // Извлекаем очередное событие
 
-//        DEBUG_POINT;
-
         if (!Keyboard::KeyIsActive(event.key))      // Если кнопка не разрешена для обработки сейчас:
         {
-//            DEBUG_POINT;
             continue;                               // Перехдим к следующей
         }
 
-//        DEBUG_POINT;
-
         if (HINT_MODE_ENABLED)                      // Если всклюён режим подсказок
         {
-//            DEBUG_POINT;
-
             ProcessButtonForHint(event.key);        // то выводим подсказку для соответствующей кнопки
-//            DEBUG_POINT;
-
             continue;                               // и переходим к следующей кнопке
         }
 
-//        DEBUG_POINT;
-
         Handlers::Process(event);                   // То обрабатываем его
-
-//        DEBUG_POINT;
     }
 
-//    DEBUG_POINT;
-
     HAL_BUS::ConfigureToFSMC();
-
-//    DEBUG_POINT;
 }
 
 

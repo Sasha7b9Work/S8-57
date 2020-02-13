@@ -9,7 +9,6 @@
 #include "Osci/Osci.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/AutoMeasurements.h"
-#include "Utils/Debug.h"
 #include "Utils/Values.h"
 #include <cstring>
 
@@ -26,13 +25,12 @@ void Osci::Init()
     RAM::Init();
     FPGA::LoadRegUPR();
     Range::LoadBoth();
-    RShift(Chan::A).Set(0);
     RShift(Chan::A).Load();
     RShift(Chan::B).Load();
     TrigInput::Load();
     TrigLevel().Load();
     TrigPolarity().Load();
-    TBase::Set(TBase::_2ns);
+    TBase::Set();
     TShift().Load();
     FPGA::LoadCalibratorMode();
     LoadHoldfOff();
@@ -66,30 +64,19 @@ void Osci::Restart()
 
 void Osci::Update()
 {
-    DEBUG_POINT;
     if(!Device::InModeOsci())
     {
-        DEBUG_POINT;
         return;
     }
 
-    DEBUG_POINT;
-
     if(FPGA::IsRunning())
     {
-        DEBUG_POINT;
-
         UpdateFPGA();
     };
 
-    DEBUG_POINT;
-
     Reader::ReadDataFromRAM();
 
-    DEBUG_POINT;
     AutoMeasurements::SetData();
-
-    DEBUG_POINT;
 }
 
 
