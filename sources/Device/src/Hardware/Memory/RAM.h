@@ -1,6 +1,9 @@
 #pragma once
 
 
+#define VALIDATE_RAM RAM::IsValid();
+
+
 struct DataSettings;
 struct FrameP2P;
 struct Packet;
@@ -24,6 +27,8 @@ public:
     static uint NumberDatas();
     /// Возвращает true, если настройки последнего сохранённого сигнала соответствуют текущим
     static bool LastSettingsEqualsCurrent();
+
+    static bool IsValid();
 
 private:
     /// Указатель на самый старый записанный пакет. Он будет стёрт первым

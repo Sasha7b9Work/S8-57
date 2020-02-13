@@ -279,6 +279,33 @@ uint RAM::NumberDatas()
     return result;
 }
 
+bool RAM::IsValid()
+{
+    if(newest == nullptr)
+    {
+        return 0;
+    }
+
+    if(oldest == nullptr)
+    {
+        return 1;
+    }
+
+    Packet *packet = oldest;
+
+    while(packet != nullptr)
+    {
+        uint8 *addrNext = reinterpret_cast<uint8 *>(packet->addrNewest);
+
+        if(addrNext < ExtRAM::Begin() || addrNext >= ExtRAM::End())
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 uint RAM::AllocateMemoryForPacket(const DataSettings *ds)
 {
     if (newest == nullptr)                                                  // ≈щЄ нет ни одной записи

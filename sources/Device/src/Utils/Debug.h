@@ -7,7 +7,7 @@
 
 
 
-#define DEBUG_POINT(x) Debug::line[x] = __LINE__; Debug::file[x] = __FILE__;
+#define DEBUG_POINT(x) Debug::line[x] = __LINE__; Debug::file[x] = __FILE__;   VALIDATE_RAM;
 #define DEBUG_POINT_0 DEBUG_POINT(0)
 
 
