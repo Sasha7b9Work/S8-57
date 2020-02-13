@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "common/Decoder_p.h"
+#include "Hardware/Keyboard.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Utils/Queue.h"

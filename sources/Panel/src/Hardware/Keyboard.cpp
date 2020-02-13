@@ -195,7 +195,7 @@ void Keyboard::Update()
 }
 
 
-static void SendCommand(Control control, Control::Action::E action)
+void Keyboard::SendCommand(Control control, Control::Action::E action)
 {
     uint8 data[3] =
     {

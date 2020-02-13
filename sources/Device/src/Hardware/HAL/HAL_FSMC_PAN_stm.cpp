@@ -100,15 +100,23 @@ bool HAL_BUS::Panel::Receive()
     
     //pinReadyPAN.WaitPassive();
     //while(pinReadyPAN.IsActive())
+    
+    uint8 data = 0;
 
     while((GPIOA->IDR & GPIO_PIN_7) == 0)
     {
+        if(pinDataPAN.IsPassive())
+        {
+            goto exit;
+        }
     }
     
     //                                                 4,5,6,7              2,3                          0,1
-    uint8 data = static_cast<uint8>((GPIOE->IDR >> 3) & 0xF0 | (GPIOD->IDR << 2) & 0x0C | (GPIOD->IDR >> 14));
+    data = static_cast<uint8>((GPIOE->IDR >> 3) & 0xF0 | (GPIOD->IDR << 2) & 0x0C | (GPIOD->IDR >> 14));
 
     DDecoder::AddData(data);
+    
+exit:
     
     //pinRD.SetPassive();
     GPIOD->BSRR = GPIO_PIN_4;

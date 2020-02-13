@@ -14,4 +14,6 @@ struct Keyboard
     static const int NUM_SL = 8;
     /// Возращает имя органа управления
     static const char *ControlName(Control control);
+
+    static void SendCommand(Control control, Control::Action::E action);
 };
