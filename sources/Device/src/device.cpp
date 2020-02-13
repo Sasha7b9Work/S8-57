@@ -102,7 +102,7 @@ void Device::Update()
 
     DEBUG_POINT(0);
  
-    Osci::Update();
+    //Osci::Update();
 
     DEBUG_POINT(0);
 
@@ -114,11 +114,11 @@ void Device::Update()
 
     DEBUG_POINT(0);
     
-    Recorder::Update();
+    //Recorder::Update();
 
     DEBUG_POINT(0);
     
-    Tester::Update();
+    //Tester::Update();
 
     DEBUG_POINT(0);
     

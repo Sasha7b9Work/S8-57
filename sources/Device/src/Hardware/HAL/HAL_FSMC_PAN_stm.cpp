@@ -26,7 +26,14 @@ struct InPin
     bool IsActive()    { return HAL_PIO::Read(port, pin) == 0; };
     bool IsPassive()   { return HAL_PIO::Read(port, pin) == 1; };
     void WaitActive()  { while(IsPassive()) { } }
-    void WaitPassive() { while(IsActive()) { } }
+    //void WaitPassive()
+    //{
+    //    static int counter = 0;
+    //    while(IsActive()) 
+    //    {
+    //        counter++;
+    //    }
+    //}
 
     HPort::E port;
     uint16 pin;
@@ -93,7 +100,12 @@ bool HAL_BUS::Panel::Receive()
 
     pinCS.SetActive();
     
-    pinReadyPAN.WaitPassive();
+    //pinReadyPAN.WaitPassive();
+
+    while(pinReadyPAN.IsActive())
+    {
+    }
+
     while(pinReadyPAN.IsActive()) {};
     
     uint8 data = 0;

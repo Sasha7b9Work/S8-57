@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "FPGA/TypesFPGA.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/HAL/HAL_PIO.h"
@@ -148,4 +149,60 @@ float ExtRAM::TestTime1kB(uint8 *address)
     }
 
     return time;
+}
+
+
+uint8 *RandRD()
+{
+    return RD::DATA_A + (std::rand() % 25);
+}
+
+
+uint8 *RandWR()
+{
+    return WR::START + (std::rand() % 19);
+}
+
+
+bool ExtRAM::Test3(int *num)
+{
+    uint8 *array1 = Begin();
+
+    uint8 *array2 = Begin() + 256 * 1024;
+
+    HAL_BUS::ConfigureToFSMC();
+
+    for(int i = 0; i < 256 * 1024; i++)
+    {
+        //array1[i] = array2[i] = static_cast<uint8>(std::rand());
+
+        array1[i] = array2[i] = static_cast<uint8>(std::rand());
+
+        *RandWR() = *RandRD();
+
+        if(array1[i] != array2[i])
+        {
+            *num = i;
+            return false;
+        }
+    }
+
+    array1 = Begin();
+    array2 = Begin() + 256 * 1024;
+    
+    for(int i = 0; i < 256 * 1024; i++)
+    {
+        *RandWR() = *RandRD();
+
+        uint8 data1 = *array1++;
+        uint8 data2 = *array2++;
+        
+        if(data1 != data2)
+        {
+            *num = i;
+            return false;
+        }
+    }
+
+    return true;
 }

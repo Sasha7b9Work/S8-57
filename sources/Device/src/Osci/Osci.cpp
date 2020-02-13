@@ -9,6 +9,7 @@
 #include "Osci/Osci.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/AutoMeasurements.h"
+#include "Utils/Debug.h"
 #include "Utils/Values.h"
 #include <cstring>
 
@@ -64,19 +65,33 @@ void Osci::Restart()
 
 void Osci::Update()
 {
+    DEBUG_POINT_0;
+
     if(!Device::InModeOsci())
     {
+        DEBUG_POINT_0;
+
         return;
     }
 
+    DEBUG_POINT_0;
+
     if(FPGA::IsRunning())
     {
+        DEBUG_POINT_0;
+
         UpdateFPGA();
     };
 
+    DEBUG_POINT_0;
+
     Reader::ReadDataFromRAM();
 
+    DEBUG_POINT_0;
+
     AutoMeasurements::SetData();
+
+    DEBUG_POINT_0;
 }
 
 
