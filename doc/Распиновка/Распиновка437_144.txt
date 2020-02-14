@@ -137,7 +137,7 @@ USART3
 | 8  | AD5      | MD5      | 59  |      ||  4 |      |
 | 9  | AD6      | MD6      | 60  |      ||  5 |      |
 | 10 | AD7      | MD7      | 61  |      || 38 |      |
-| Х  | FL_DISP  | FL_DISP  | 136 | PB6  || Х  |      |   не используется
+| Х  | FL_DISP  | FL_DISP  | 136 | PB6  || Х  |      |  --- отсутствует ---
 | 12 | WR       | WR       | 119 | PD5  || 86 | PD5  | FL_0
 | 13 | RD       | RD       | 118 | PD4  || 85 | PD4  | CONNECT - не используется для связи
 | 14 | CS_DISP  | CS_DISP  | 127 | PG12 ||  7 | PC13 | READY_DISP

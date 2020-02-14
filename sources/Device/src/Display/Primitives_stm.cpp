@@ -21,7 +21,7 @@ void Region::Fill(int x, int y, Color color)
         static_cast<uint8>(height)
     };
 
-    HAL_BUS::Panel::Send(buffer, 7);
+    HAL_BUS::PANEL::Send(buffer, 7);
 }
 
 
@@ -40,7 +40,7 @@ void Rectangle::Draw(int x, int y, Color color)
         static_cast<uint8>(height)
     };
 
-    HAL_BUS::Panel::Send(buffer, 7);
+    HAL_BUS::PANEL::Send(buffer, 7);
 }
 
 
@@ -61,7 +61,7 @@ void HLine::Draw(int x, int y, Color color)
         static_cast<uint8>(x1 >> 8)
     };
 
-    HAL_BUS::Panel::Send(buffer, 6);
+    HAL_BUS::PANEL::Send(buffer, 6);
 }
 
 
@@ -81,7 +81,7 @@ void VLine::Draw(int x, int y, Color color)
         static_cast<uint8>(y1)
     };
 
-    HAL_BUS::Panel::Send(buffer, 5);
+    HAL_BUS::PANEL::Send(buffer, 5);
 }
 
 
@@ -97,7 +97,7 @@ void Pixel::Draw(int x, int y, Color color)
         static_cast<uint8>(y)
     };
 
-    HAL_BUS::Panel::Send(buffer, 4);
+    HAL_BUS::PANEL::Send(buffer, 4);
 }
 
 
@@ -116,7 +116,7 @@ void Line::Draw(Color color)
         static_cast<uint8>(y1)
     };
 
-    HAL_BUS::Panel::Send(buffer, 7);
+    HAL_BUS::PANEL::Send(buffer, 7);
 }
 
 
@@ -135,7 +135,7 @@ int Text::DrawSmall(int x, int y, Color color)
 
     std::memcpy(&buffer.data[5], static_cast<void *>(const_cast<char *>(text)), std::strlen(text));
 
-    HAL_BUS::Panel::Send(buffer.data, sizeBuffer);
+    HAL_BUS::PANEL::Send(buffer.data, sizeBuffer);
 
     return x + DFont::GetLengthText(text) + 1;
 }
@@ -161,7 +161,7 @@ void MultiHPointLine::Draw(int x, Color color)
         buffer[2] = static_cast<uint8>(x >> 8);
         buffer[3] = y[i];
 
-        HAL_BUS::Panel::Send(buffer, 6);
+        HAL_BUS::PANEL::Send(buffer, 6);
     }
 }
 
@@ -188,6 +188,6 @@ void MultiVPointLine::Draw(int y0, Color color)
         buffer[2] = static_cast<uint8>(x >> 8);
         buffer[3] = static_cast<uint8>(y0);
 
-        HAL_BUS::Panel::Send(buffer, 6);
+        HAL_BUS::PANEL::Send(buffer, 6);
     }
 }

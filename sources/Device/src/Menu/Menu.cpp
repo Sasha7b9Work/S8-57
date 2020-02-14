@@ -40,8 +40,6 @@ void Menu::Update()
 
         Handlers::Process(event);                   // То обрабатываем его
     }
-
-    HAL_BUS::ConfigureToFSMC();
 }
 
 

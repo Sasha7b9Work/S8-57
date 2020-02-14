@@ -150,18 +150,18 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>31</LineNumber>
+          <LineNumber>131</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
+          <Address>134488598</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>.\src\Hardware\HAL\HAL_IT.cpp</Filename>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\src\Hardware\HAL\HAL_FSMC_PAN_stm.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\\S8_57\src/Hardware/HAL/HAL_FSMC_PAN_stm.cpp\131</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>

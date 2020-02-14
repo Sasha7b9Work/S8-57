@@ -21,24 +21,18 @@ uint8 *ExtRAM::End()
 
 void ExtRAM::Write(uint8 *buffer, uint size, uint8 *address)
 {
-    HAL_BUS::ConfigureToFSMC();
-
     std::memcpy(address, buffer, size);
 }
 
 
 void ExtRAM::Read(uint8 *buffer, uint size, uint8 *address)
 {
-    HAL_BUS::ConfigureToFSMC();
-
     std::memcpy(buffer, address, size);
 }
 
 
 float ExtRAM::Test1()
 {
-    HAL_BUS::ConfigureToFSMC();
-
     int SIZE = 1024 * 512;
 
     int bad = 0;

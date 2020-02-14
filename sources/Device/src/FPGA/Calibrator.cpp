@@ -110,7 +110,7 @@ void Calibrator::Balance(Chan::E ch, Range::E range)
 
     while (numPoints < 100)
     {
-        if (!HAL_BUS::Panel::InInteraction())
+        if (!HAL_BUS::PANEL::InInteraction())
         {
             if (HAL_PIO::Read(PIN_P2P))
             {
@@ -148,7 +148,7 @@ float Calibrator::FindStretchK(Chan::E ch)
 
     for (int i = 0; i < 300; i++)
     {
-        if (!HAL_BUS::Panel::InInteraction())
+        if (!HAL_BUS::PANEL::InInteraction())
         {
             HAL_BUS::FPGA::SetAddrData(addr);
             uint8 d = HAL_BUS::FPGA::ReadA0();

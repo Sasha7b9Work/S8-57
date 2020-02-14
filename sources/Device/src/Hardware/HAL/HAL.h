@@ -63,15 +63,13 @@ struct HAL_DAC2
 struct HAL_BUS
 {
     static void Init();
-    /// Конфигурировать для работы по шине FSMC с альтерой и памятью
-    static void ConfigureToFSMC();
 
-    struct Panel
+    struct PANEL
     {
         static void Send(uint8 byte);
         static void Send(uint8 byte0, uint8 byte1);
         static void Send(uint8 *data, uint size);
-        static bool Receive();
+        static void Receive();
         static bool InInteraction();
     };
 
@@ -95,22 +93,12 @@ struct HAL_BUS
     };
 
 private:
+
+    static void InitFPGA();
     /// Настроить FSMC для работы с внешней RAM
     static void InitRAM();
     /// Инициализация пинов панели, которые не изменяют свой режим во время всей работы программы
-    static void InitPanel();
-
-    struct Mode
-    {
-        enum E
-        {
-            FSMC,
-            PanelRead,
-            PanelWrite
-        };
-    };
-
-    static Mode::E mode;
+    static void InitPANEL();
 };
 
 

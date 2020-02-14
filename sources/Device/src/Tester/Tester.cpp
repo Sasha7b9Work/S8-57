@@ -154,7 +154,7 @@ void Tester::ProcessStep()
        |<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|                  */
 
 
-    if (HAL_BUS::Panel::InInteraction() || Timer::IsBusy())
+    if (HAL_BUS::PANEL::InInteraction() || Timer::IsBusy())
     {
         return;
     }

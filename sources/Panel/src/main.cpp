@@ -26,32 +26,6 @@ int main()
         {
             Keyboard::Update();
             prevTime = TIME_MS;
-
-//            static int delta = -1;
-//            static int distance = 0;
-//            static int counter = 0;
-//            counter++;
-//
-//            if((counter % 10) == 0)
-//            {
-//                Keyboard::SendCommand(delta < 0 ? Control::B_RShiftLessA : Control::B_RShiftMoreA, Control::Action::Press);
-//                for(int i = 0; i < 16; i++)
-//                {
-//                    Keyboard::SendCommand(delta < 0 ? Control::B_RShiftLessA : Control::B_RShiftMoreA, Control::Action::Repeat);
-//                }
-//                Keyboard::SendCommand(delta < 0 ? Control::B_RShiftLessA : Control::B_RShiftMoreA, Control::Action::Release);
-//            
-//                distance += delta;
-//            
-//                if(distance < -50)
-//                {
-//                    delta = 1;
-//                }
-//                else if(distance > 50)
-//                {
-//                    delta = -1;
-//                }
-//            }
         }
     }
 }
