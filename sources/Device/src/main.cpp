@@ -13,6 +13,8 @@ int main(void)
     
     Test::Run();
   
+    ExtRAM::Test4::Prepare();
+
     while (1)
     {
         Device::Update();

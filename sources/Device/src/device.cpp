@@ -7,6 +7,7 @@
 #include "FPGA/FPGA.h"
 #include "Hardware/Battery.h"
 #include "Hardware/Beeper.h"
+#include "Hardware/Memory/ExtRAM.h"
 #include "Hardware/Memory/RAM.h"
 #include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
@@ -102,54 +103,37 @@ void Device::Update()
 {
     START_MULTI_MEASUREMENT();
 
-    VALIDATE_RAM;
+    TEST_RAM;
 
     Osci::Update();
 
-    VALIDATE_RAM;
+    TEST_RAM;
 
     Display::Update();
 
-    VALIDATE_RAM;
+    TEST_RAM;
 
     Menu::SaveSettings();
 
-    VALIDATE_RAM;
+    TEST_RAM;
     
     Recorder::Update();
-
-    VALIDATE_RAM;
     
     Tester::Update();
-
-    VALIDATE_RAM;
     
     Multimeter::Update();
-
-    VALIDATE_RAM;
     
     Menu::Update();
-
-    VALIDATE_RAM;
    
-    //FDrive::Update();
-
-    VALIDATE_RAM;
+    FDrive::Update();
 
     while (HAL_BUS::Panel::Receive())
     {
-        VALIDATE_RAM;
     };
-
-    VALIDATE_RAM;
 
     SCPI::Update();
 
-    VALIDATE_RAM;
-
     DDecoder::Update();
-
-    VALIDATE_RAM;
 }
 
 

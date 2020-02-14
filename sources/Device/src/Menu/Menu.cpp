@@ -38,8 +38,6 @@ void Menu::Update()
             DEBUG_MESSAGE("неправильный тип");
         }
 
-        continue;
-
         if (!Keyboard::KeyIsActive(event.key))      // Если кнопка не разрешена для обработки сейчас:
         {
             continue;                               // Перехдим к следующей

@@ -1,7 +1,10 @@
 #pragma once
+#include "Hardware/Memory/ExtRAM.h"
 
 
 #define VALIDATE_RAM ::RAM::VerifyOnValid(__FILE__, __LINE__);
+
+#define TEST_RAM VALIDATE_RAM; TEST_EXT_RAM
 
 
 struct DataSettings;

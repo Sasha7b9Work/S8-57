@@ -27,7 +27,7 @@
 #else
 
 #define BEGIN reinterpret_cast<uint>(ExtRAM::Begin())
-#define END   reinterpret_cast<uint>(ExtRAM::End())
+#define END   reinterpret_cast<uint>(ExtRAM::Begin() + 128 * 1024)
 
 #endif
 

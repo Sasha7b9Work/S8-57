@@ -1,6 +1,9 @@
 #pragma once
 
 
+#define TEST_EXT_RAM ExtRAM::Test4::Validate(__FILE__, __LINE__)
+
+
 class ExtRAM
 {
 public:
@@ -21,4 +24,11 @@ public:
     static float TestTime(uint sizekB);
     /// Тест скорости записи/чтение 1кБ внешней RAM
     static float TestTime1kB(uint8 *address);
+
+    struct Test4
+    {
+        static void Prepare();
+        static void Validate(const char *file, int line);
+        static bool prepared;
+    };
 };

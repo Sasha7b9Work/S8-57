@@ -1,4 +1,7 @@
 #include "defines.h"
+#include "log.h"
+#include "Display/Console.h"
+#include "Display/Painter.h"
 #include "FPGA/TypesFPGA.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
@@ -205,4 +208,53 @@ bool ExtRAM::Test3(int *num)
     }
 
     return true;
+}
+
+
+bool ExtRAM::Test4::prepared = false;
+
+
+void ExtRAM::Test4::Prepare()
+{
+    HAL_BUS::ConfigureToFSMC();
+
+    uint8 *data = Begin() + 128 * 1024;
+
+    for(int i = 0; i < 3 * 128 * 1024; i++)
+    {
+        data[i] = static_cast<uint8>(i);
+    }
+
+    prepared = true;
+}
+
+
+void ExtRAM::Test4::Validate(const char *file, int line)
+{
+    if(!prepared)
+    {
+        return;
+    }
+
+    HAL_BUS::ConfigureToFSMC();
+
+    uint8 *data = Begin() + 128 * 1024;
+
+    for(int i = 0; i < 3 * 128 * 1024; i++)
+    {
+        if(data[i] != static_cast<uint8>(i))
+        {
+            Painter::BeginScene(Color::BLACK);
+            Color::WHITE.SetAsCurrent();
+            LOG_WRITE("Ошибка %d памяти %s %d", i, file, line);
+            Console::DisableAdding();
+            Console::Draw();
+            Painter::EndScene();
+            while(true)
+            {
+            }
+        }
+    }
+
+    LOG_WRITE("Память из ОК %s : %d", file, line);
 }
