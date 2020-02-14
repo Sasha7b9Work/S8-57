@@ -103,20 +103,12 @@ void Device::Update()
 {
     START_MULTI_MEASUREMENT();
 
-    TEST_RAM;
-
     Osci::Update();
-
-    TEST_RAM;
 
     Display::Update();
 
-    TEST_RAM;
-
     Menu::SaveSettings();
 
-    TEST_RAM;
-    
     Recorder::Update();
     
     Tester::Update();

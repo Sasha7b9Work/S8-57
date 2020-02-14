@@ -31,11 +31,11 @@ void Menu::Update()
 
         if(event.key > Key::Count)
         {
-            DEBUG_MESSAGE("неправильный код кнопки");
+//            DEBUG_MESSAGE("неправильный код кнопки");
         }
         if(event.type > TypePress::Count)
         {
-            DEBUG_MESSAGE("неправильный тип");
+//            DEBUG_MESSAGE("неправильный тип");
         }
 
         if (!Keyboard::KeyIsActive(event.key))      // Если кнопка не разрешена для обработки сейчас:

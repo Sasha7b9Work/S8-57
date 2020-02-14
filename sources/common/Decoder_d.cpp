@@ -64,7 +64,7 @@ void DDecoder::Update()
 
 static bool EmptyFunc(uint8)
 {
-    DEBUG_TRACE;
+//    DEBUG_TRACE;
     return true;
 }
 
@@ -93,7 +93,7 @@ void DDecoder::RunStep(uint8 data)
             }
             else if(size == 3)
             {
-                LOG_WRITE("Команда %d %d %d", com[0], com[1], com[2]);
+                //LOG_WRITE("Команда %d %d %d", com[0], com[1], com[2]);
             }
             else
             {
@@ -147,21 +147,11 @@ void DDecoder::RunStep(uint8 data)
     {
         if (data < Command::Count)
         {
-//            DEBUG_TRACE;
             curFunc = commands[data].func;
-//            DEBUG_TRACE;
         }
         else
         {
-            DEBUG_MESSAGE("Нет такой функции");
-            LOG_WRITE("Нет такой функции");
-            while(true)
-            {
-
-            };
-            DEBUG_TRACE;
             FinishCommand(__FUNCTION__, __LINE__);
-            DEBUG_TRACE;
             return;
         }
     }
@@ -170,21 +160,16 @@ void DDecoder::RunStep(uint8 data)
     {
         if (curFunc(data))
         {
-            VALIDATE_RAM;
             FinishCommand(__FUNCTION__, __LINE__);
-            VALIDATE_RAM;
         }
         else
         {
-//            DEBUG_TRACE;
             ++step;
         }
     }
     else
     {
-        DEBUG_TRACE;
         FinishCommand(__FUNCTION__, __LINE__);
-        DEBUG_TRACE;
     }
 }
 
@@ -234,40 +219,29 @@ void DDecoder::SetBufferForScreenRow(uint8 *_pixels)
 
 bool DDecoder::FuncScreen(uint8 data)
 {
-    DEBUG_TRACE;
     static int numString = 0;
 
     if (step == 0)
     {
-        DEBUG_TRACE;
         return false;
     }
 
-    DEBUG_TRACE;
     if (step == 1)
     {
-        DEBUG_TRACE;
         numString = data;
         return false;
     }
 
-    DEBUG_TRACE;
     if (step < 321)
     {
-        DEBUG_TRACE;
         pixels[step - 2] = data;
-        DEBUG_TRACE;
         return false;
     }
 
-    DEBUG_TRACE;
     if (step == 321)
     {
-        DEBUG_TRACE;
         Display::SaveRow(numString);
     }
-
-    DEBUG_TRACE;
 
     return true;
 }
@@ -292,7 +266,6 @@ bool DDecoder::FuncLengthText(uint8 data)
 
 bool DDecoder::AddToConsole(uint8 data)
 {
-    DEBUG_TRACE;
     static char *text = nullptr;        // Здесь будет храниться принятая строка
 
     static uint8 allSymbols = 0;        // Количество символов в строке без учёта завершающего нуля
@@ -319,7 +292,6 @@ bool DDecoder::AddToConsole(uint8 data)
         std::free(text);
     }
 
-    DEBUG_TRACE;
     return (recvSymbols == allSymbols);
 }
 

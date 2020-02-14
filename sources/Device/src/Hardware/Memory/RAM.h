@@ -2,9 +2,11 @@
 #include "Hardware/Memory/ExtRAM.h"
 
 
-#define VALIDATE_RAM ::RAM::VerifyOnValid(__FILE__, __LINE__);
+//#define VALIDATE_RAM_ ::RAM::VerifyOnValid(__FILE__, __LINE__);
+//#define VALIDATE_RAM
 
-#define TEST_RAM VALIDATE_RAM; TEST_EXT_RAM
+//#define TEST_RAM VALIDATE_RAM_; TEST_EXT_RAM_
+//#define TEST_RAM
 
 
 struct DataSettings;

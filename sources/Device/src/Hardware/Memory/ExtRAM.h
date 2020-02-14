@@ -1,7 +1,7 @@
 #pragma once
 
 
-#define TEST_EXT_RAM ExtRAM::Test4::Validate(__FILE__, __LINE__)
+//#define TEST_EXT_RAM_ ExtRAM::Test4::Validate(__FILE__, __LINE__)
 
 
 class ExtRAM
