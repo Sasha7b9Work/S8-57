@@ -13,6 +13,8 @@ struct Console
     /// Эту фнукцию надо вызвыть, когда пользователь изменяет максимальное количество строк в консоли
     static void OnChanged_MaxStringsInConsole();
 
+    static void DisableAdding();
+
 private:
     static CHAR_BUF2(buffer, 33, 100);
     /// true означает, что идёт процесс вывода консоли и добавлять в неё новые строки нельзя (это происходит, когда добавление идёт из прерывания)

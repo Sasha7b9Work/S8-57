@@ -232,57 +232,33 @@ DataSettings *RAM::Get(uint numFromEnd)
 
 uint RAM::NumberDatas()
 {
-    DEBUG_POINT(1);
-
     HAL_BUS::ConfigureToFSMC();
-
-    DEBUG_POINT(1);
 
     if (newest == nullptr)
     {
-        DEBUG_POINT(1);
-
         return 0;
     }
 
-    DEBUG_POINT(1);
-
     if (oldest == nullptr)
     {
-        DEBUG_POINT(1);
-
         return 1;
     }
 
-    DEBUG_POINT(1);
-
     uint result = 0;
-
-    DEBUG_POINT(1);
 
     Packet *packet = oldest;
 
-    DEBUG_POINT(1);
-
     while (packet != nullptr)
     {
-        DEBUG_POINT(1);
-
         result++;
 
-        DEBUG_POINT(1);
-
         packet = reinterpret_cast<Packet *>(packet->addrNewest);
-
-        DEBUG_POINT(1);
     }
-
-    DEBUG_POINT(1);
 
     return result;
 }
 
-void RAM::VerifyOnValid()
+void RAM::VerifyOnValid(char *file, int line)
 {
     if(newest == nullptr)
     {
@@ -304,10 +280,15 @@ void RAM::VerifyOnValid()
         {
             Painter::BeginScene(Color::BLACK);
             Color::WHITE.SetAsCurrent();
-            LOG_ERROR("Ошибка памяти");
+            LOG_WRITE("Ошибка памяти %s %d", file, line);
+            Console::DisableAdding();
             Console::Draw();
             Painter::EndScene();
-            while(true)  { }
+            while(true)
+            {
+                uint8 data = *addrNext;
+                data = data;
+            }
         }
         
         packet = reinterpret_cast<Packet *>(addrNext);

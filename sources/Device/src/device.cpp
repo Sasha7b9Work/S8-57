@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include "device.h"
 #include "common/Decoder_d.h"
 #include "Display/Console.h"
@@ -101,51 +102,54 @@ void Device::Update()
 {
     START_MULTI_MEASUREMENT();
 
-    DEBUG_POINT(0);
- 
+    VALIDATE_RAM;
+
     Osci::Update();
 
-    DEBUG_POINT(0);
+    VALIDATE_RAM;
 
     Display::Update();
 
-    DEBUG_POINT(0);
+    VALIDATE_RAM;
 
     Menu::SaveSettings();
 
-    DEBUG_POINT(0);
+    VALIDATE_RAM;
     
     Recorder::Update();
 
-    DEBUG_POINT(0);
+    VALIDATE_RAM;
     
     Tester::Update();
 
-    DEBUG_POINT(0);
+    VALIDATE_RAM;
     
     Multimeter::Update();
 
-    DEBUG_POINT(0);
+    VALIDATE_RAM;
     
     Menu::Update();
 
-    DEBUG_POINT(0);
-    
-    FDrive::Update();
+    VALIDATE_RAM;
+   
+    //FDrive::Update();
 
-    DEBUG_POINT(0);
+    VALIDATE_RAM;
 
-    while (HAL_BUS::Panel::Receive()) {};
+    while (HAL_BUS::Panel::Receive())
+    {
+        VALIDATE_RAM;
+    };
 
-    DEBUG_POINT(0);
+    VALIDATE_RAM;
 
     SCPI::Update();
 
-    DEBUG_POINT(0);
+    VALIDATE_RAM;
 
     DDecoder::Update();
 
-    DEBUG_POINT(0);
+    VALIDATE_RAM;
 }
 
 

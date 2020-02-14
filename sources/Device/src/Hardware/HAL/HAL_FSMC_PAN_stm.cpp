@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include "common/Decoder_d.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/HAL/HAL_PIO.h"
@@ -106,6 +107,7 @@ bool HAL_BUS::Panel::Receive()
     {
         if(pinDataPAN.IsPassive())
         {
+            LOG_ERROR("Неравильный выход");
             goto exit;
         }
     };
@@ -114,6 +116,7 @@ bool HAL_BUS::Panel::Receive()
     {
         if(pinDataPAN.IsPassive())
         {
+            LOG_ERROR("Неправильный выход");
             goto exit;
         }
     }

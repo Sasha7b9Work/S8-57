@@ -5,6 +5,7 @@
 #include "Hardware/Memory/RAM.h"
 #include "Settings/Settings.h"
 #include "Recorder/Recorder.h"
+#include "Utils/Debug.h"
 #include <cstring>
 
 

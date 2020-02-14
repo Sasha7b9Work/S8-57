@@ -3,8 +3,10 @@
 #include "FlashDrive/FlashDrive.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
+#include "Hardware/Memory/RAM.h"
 #include "Menu/Menu.h"
 #include "Osci/DataSettings.h"
+#include "Utils/Debug.h"
 #include "usbh_diskio.h"
 
 

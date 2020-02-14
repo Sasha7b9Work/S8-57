@@ -65,33 +65,19 @@ void Osci::Restart()
 
 void Osci::Update()
 {
-    DEBUG_POINT_0;
-
     if(!Device::InModeOsci())
     {
-        DEBUG_POINT_0;
-
         return;
     }
 
-    DEBUG_POINT_0;
-
     if(FPGA::IsRunning())
     {
-        DEBUG_POINT_0;
-
         UpdateFPGA();
     };
 
-    DEBUG_POINT_0;
-
     Reader::ReadDataFromRAM();
 
-    DEBUG_POINT_0;
-
     AutoMeasurements::SetData();
-
-    DEBUG_POINT_0;
 }
 
 

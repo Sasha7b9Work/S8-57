@@ -6,6 +6,7 @@
 #include "Hardware/Memory/ROM.h"
 #include "Osci/Osci.h"
 #include "Settings/Settings.h"
+#include "Utils/Debug.h"
 
 
 /// Это пространство CCM-памяти

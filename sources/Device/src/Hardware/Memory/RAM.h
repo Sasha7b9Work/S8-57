@@ -1,7 +1,7 @@
 #pragma once
 
 
-#define VALIDATE_RAM RAM::VerifyOnValid();
+#define VALIDATE_RAM ::RAM::VerifyOnValid(__FILE__, __LINE__);
 
 
 struct DataSettings;
@@ -28,7 +28,7 @@ public:
     /// Возвращает true, если настройки последнего сохранённого сигнала соответствуют текущим
     static bool LastSettingsEqualsCurrent();
 
-    static void VerifyOnValid();
+    static void VerifyOnValid(char *file, int line);
 
 private:
     /// Указатель на самый старый записанный пакет. Он будет стёрт первым
