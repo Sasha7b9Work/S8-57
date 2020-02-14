@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "device.h"
 #include "Display/Primitives.h"
 #include "FlashDrive/FlashDrive.h"
@@ -11,7 +10,6 @@
 #include "Menu/Menu.h"
 #include "Menu/Pages/Include/PageMemory.h"
 #include "Settings/Settings.h"
-#include "Utils/Debug.h"
 #include <cstdio>
 
 
@@ -28,15 +26,6 @@ void Menu::Update()
         timeLastKeyboardEvent = TIME_MS;            // то сохран€ем врем€ последнего нажати€, чтобы знать, когда сохранить настройки
 
         KeyEvent event = BufferButtons::Extract();  // »звлекаем очередное событие
-
-        if(event.key > Key::Count)
-        {
-//            DEBUG_MESSAGE("неправильный код кнопки");
-        }
-        if(event.type > TypePress::Count)
-        {
-//            DEBUG_MESSAGE("неправильный тип");
-        }
 
         if (!Keyboard::KeyIsActive(event.key))      // ≈сли кнопка не разрешена дл€ обработки сейчас:
         {

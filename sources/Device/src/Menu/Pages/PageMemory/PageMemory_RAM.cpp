@@ -6,7 +6,6 @@
 #include "Menu/MenuItems.h"
 #include "Osci/Osci.h"
 #include "Settings/Settings.h"
-#include "Utils/Debug.h"
 #include "Utils/Math.h"
 #include "Utils/Values.h"
 

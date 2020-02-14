@@ -132,7 +132,6 @@ void HAL_BUS::Update()
     //while(HAL_GPIO_ReadPin(PORT_CS, PIN_CS) == GPIO_PIN_RESET)
     while((PORT_CS->IDR & PIN_CS) == 0)
     {
-        pinReady.SetActive();
         // Чтение байта из устройства
 
         //if(pinWR.IsActive())

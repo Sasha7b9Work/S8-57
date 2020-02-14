@@ -19,20 +19,15 @@ void HardFault_Handler()
 {
     __IO const char *file0 = Debug::file[0];
     __IO const char *file1 = Debug::file[1];
-    __IO const char *file2 = Debug::file[2];
     __IO int line0 = Debug::line[0];
     __IO int line1 = Debug::line[1];
-    __IO int line2 = Debug::line[2];
     
     while (1)
     {
         file0 = file0;
         file1 = file1;
-        file2 = file2;
-       
         line0 = line0;
         line1 = line1;
-        line2 = line2;
     }
 }
 

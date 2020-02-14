@@ -9,7 +9,6 @@
 #include "Osci/Osci.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/AutoMeasurements.h"
-#include "Utils/Debug.h"
 #include "Utils/Values.h"
 #include <cstring>
 

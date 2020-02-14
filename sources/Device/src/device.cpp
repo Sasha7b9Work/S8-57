@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "device.h"
 #include "common/Decoder_d.h"
 #include "Display/Console.h"
@@ -7,8 +6,6 @@
 #include "FPGA/FPGA.h"
 #include "Hardware/Battery.h"
 #include "Hardware/Beeper.h"
-#include "Hardware/Memory/ExtRAM.h"
-#include "Hardware/Memory/RAM.h"
 #include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
 #include "Hardware/HAL/HAL.h"
@@ -103,29 +100,51 @@ void Device::Update()
 {
     START_MULTI_MEASUREMENT();
 
+    DEBUG_POINT(0);
+ 
     Osci::Update();
+
+    DEBUG_POINT(0);
 
     Display::Update();
 
+    DEBUG_POINT(0);
+
     Menu::SaveSettings();
 
+    DEBUG_POINT(0);
+    
     Recorder::Update();
+
+    DEBUG_POINT(0);
     
     Tester::Update();
+
+    DEBUG_POINT(0);
     
     Multimeter::Update();
+
+    DEBUG_POINT(0);
     
     Menu::Update();
-   
+
+    DEBUG_POINT(0);
+    
     FDrive::Update();
 
-    while (HAL_BUS::Panel::Receive())
-    {
-    };
+    DEBUG_POINT(0);
+
+    while (HAL_BUS::Panel::Receive()) {};
+
+    DEBUG_POINT(0);
 
     SCPI::Update();
 
+    DEBUG_POINT(0);
+
     DDecoder::Update();
+
+    DEBUG_POINT(0);
 }
 
 

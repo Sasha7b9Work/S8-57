@@ -30,7 +30,7 @@ private:
 
     static void RunStep(uint8 data);
     /// Эту функцию надо вызывать после выполнения последнего шага
-    static void FinishCommand(const char *func, int line);
+    static void FinishCommand();
     /// Добавляет текстовую строку в консоль
     static bool AddToConsole(uint8);
 

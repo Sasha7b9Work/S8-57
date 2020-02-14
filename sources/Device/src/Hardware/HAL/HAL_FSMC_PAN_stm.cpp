@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "common/Decoder_d.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/HAL/HAL_PIO.h"
@@ -27,14 +26,7 @@ struct InPin
     bool IsActive()    { return HAL_PIO::Read(port, pin) == 0; };
     bool IsPassive()   { return HAL_PIO::Read(port, pin) == 1; };
     void WaitActive()  { while(IsPassive()) { } }
-    //void WaitPassive()
-    //{
-    //    static int counter = 0;
-    //    while(IsActive()) 
-    //    {
-    //        counter++;
-    //    }
-    //}
+    void WaitPassive() { while(IsActive()) { } }
 
     HPort::E port;
     uint16 pin;
@@ -101,22 +93,15 @@ bool HAL_BUS::Panel::Receive()
 
     pinCS.SetActive();
     
+    pinReadyPAN.WaitPassive();
+    while(pinReadyPAN.IsActive()) {};
+    
     uint8 data = 0;
-    
-    while(pinReadyPAN.IsActive())
-    {
-        if(pinDataPAN.IsPassive())
-        {
-            LOG_ERROR("Неравильный выход");
-            goto exit;
-        }
-    };
-    
+
     while((GPIOA->IDR & GPIO_PIN_7) == 0)
     {
         if(pinDataPAN.IsPassive())
         {
-            LOG_ERROR("Неправильный выход");
             goto exit;
         }
     }

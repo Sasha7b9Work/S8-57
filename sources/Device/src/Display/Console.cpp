@@ -65,21 +65,8 @@ void Console::DeleteFirstString()
 }
 
 
-static bool disabledAdding = false;
-
-void Console::DisableAdding()
-{
-    disabledAdding = true;
-}
-
 void Console::AddString(char *string)
 {
-    if(disabledAdding)
-    {
-        return;
-    }
-
-
     /// \todo Мы пропускаем некоторые строки. Сделать отложенное добавление
 
     //if (!IsBusy())      // Страхуемся на предмет того, что сейчас не происходит вывод консоли в другом потоке

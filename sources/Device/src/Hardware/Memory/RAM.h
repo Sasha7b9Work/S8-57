@@ -1,12 +1,4 @@
 #pragma once
-#include "Hardware/Memory/ExtRAM.h"
-
-
-//#define VALIDATE_RAM_ ::RAM::VerifyOnValid(__FILE__, __LINE__);
-//#define VALIDATE_RAM
-
-//#define TEST_RAM VALIDATE_RAM_; TEST_EXT_RAM_
-//#define TEST_RAM
 
 
 struct DataSettings;
@@ -32,8 +24,6 @@ public:
     static uint NumberDatas();
     /// Возвращает true, если настройки последнего сохранённого сигнала соответствуют текущим
     static bool LastSettingsEqualsCurrent();
-
-    static void VerifyOnValid(char *file, int line);
 
 private:
     /// Указатель на самый старый записанный пакет. Он будет стёрт первым

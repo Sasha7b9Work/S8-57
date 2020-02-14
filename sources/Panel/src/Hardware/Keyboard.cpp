@@ -63,6 +63,8 @@ static uint prevRepeat = 0;
 static uint prevPause = 0;
 
 
+static void SendCommand(Control control, Control::Action::E action);
+
 static uint TimeBetweenRepeats(uint time);
 /// При обнаружении нажатия кнопки сюда записывается время нажатия
 static uint timePress[Keyboard::NUM_RL][Keyboard::NUM_SL];

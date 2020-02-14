@@ -3,9 +3,6 @@
 */
 
 #include "defines.h"
-#include "log.h"
-#include "Display/Console.h"
-#include "Display/Painter.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Memory/ExtRAM.h"
@@ -27,7 +24,7 @@
 #else
 
 #define BEGIN reinterpret_cast<uint>(ExtRAM::Begin())
-#define END   reinterpret_cast<uint>(ExtRAM::Begin() + 128 * 1024)
+#define END   reinterpret_cast<uint>(ExtRAM::End())
 
 #endif
 
@@ -232,67 +229,54 @@ DataSettings *RAM::Get(uint numFromEnd)
 
 uint RAM::NumberDatas()
 {
+    DEBUG_POINT(1);
+
     HAL_BUS::ConfigureToFSMC();
+
+    DEBUG_POINT(1);
 
     if (newest == nullptr)
     {
+        DEBUG_POINT(1);
+
         return 0;
     }
 
+    DEBUG_POINT(1);
+
     if (oldest == nullptr)
     {
+        DEBUG_POINT(1);
+
         return 1;
     }
 
+    DEBUG_POINT(1);
+
     uint result = 0;
 
+    DEBUG_POINT(1);
+
     Packet *packet = oldest;
+
+    DEBUG_POINT(1);
 
     while (packet != nullptr)
     {
+        DEBUG_POINT(1);
+
         result++;
 
+        DEBUG_POINT(1);
+
         packet = reinterpret_cast<Packet *>(packet->addrNewest);
+
+        DEBUG_POINT(1);
     }
+
+    DEBUG_POINT(1);
 
     return result;
-}
-
-void RAM::VerifyOnValid(char *file, int line)
-{
-    if(newest == nullptr)
-    {
-        return;
-    }
-
-    if(oldest == nullptr)
-    {
-        return;
-    }
-
-    Packet *packet = oldest;
-
-    while(packet != nullptr)
-    {
-        uint8 *addrNext = reinterpret_cast<uint8 *>(packet->addrNewest);
-
-        if(addrNext && (addrNext < ExtRAM::Begin() || addrNext >= ExtRAM::End()))
-        {
-            Painter::BeginScene(Color::BLACK);
-            Color::WHITE.SetAsCurrent();
-            LOG_WRITE("Ошибка памяти %s %d", file, line);
-            Console::DisableAdding();
-            Console::Draw();
-            Painter::EndScene();
-            while(true)
-            {
-                uint8 data = *addrNext;
-                data = data;
-            }
-        }
-        
-        packet = reinterpret_cast<Packet *>(addrNext);
-    }
 }
 
 uint RAM::AllocateMemoryForPacket(const DataSettings *ds)
