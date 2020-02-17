@@ -105,10 +105,6 @@ struct HPin
 #define PIN_D1          HPort::_D, HPin::_15
 #define PIN_D2          HPort::_D, HPin::_0
 #define PIN_D3          HPort::_D, HPin::_1
-#define PIN_D4          HPort::_E, HPin::_7
-#define PIN_D5          HPort::_E, HPin::_8
-#define PIN_D6          HPort::_E, HPin::_9
-#define PIN_D7          HPort::_E, HPin::_10
 
 #define PIN_PCD_VBUS    HPort::_A, HPin::_9
 #define PIN_PCD_DP      HPort::_A, HPin::_12

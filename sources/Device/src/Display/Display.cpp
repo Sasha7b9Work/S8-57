@@ -193,7 +193,7 @@ void Display::Message::Func()
 
     if (waitKey)
     {
-        while (HAL_BUS::Panel::Receive()) {};
+        HAL_BUS::Panel::Receive();
 
         DDecoder::Update();
 
