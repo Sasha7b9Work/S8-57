@@ -304,7 +304,7 @@ static void WriteToDisplay(Color color)
     {
         lastColor = color;
 
-        HAL_BUS::PANEL::Send(Command::Paint_SetColor, lastColor.value);
+        HAL_BUS::Panel::Send(Command::Paint_SetColor, lastColor.value);
     }
 }
 
@@ -323,7 +323,7 @@ void Color::LoadValueRGB()
         static_cast<uint8>(rgb >> 24)
     };
 
-    HAL_BUS::PANEL::Send(buffer, 6);
+    HAL_BUS::Panel::Send(buffer, 6);
 }
 
 

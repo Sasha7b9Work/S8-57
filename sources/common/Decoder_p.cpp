@@ -66,8 +66,6 @@ static void FinishCommand();
 
 void PDecoder::AddData(uint8 data)
 {
-
-    return;
     static const struct StructFunc
     {
         pFuncBU8 func;

@@ -10,6 +10,7 @@
 #include "Hardware/Memory/RAM.h"
 #include "Osci/DataSettings.h"
 #include "Osci/Osci.h"
+#include "Utils/Debug.h"
 #include "Utils/Math.h"
 #include <cstring>
 #include <cstdlib>
@@ -36,6 +37,8 @@ Packet *RAM::newest = nullptr;
 /// Записывает по адресу dest. Возвращает адрес первого байта после записи
 static uint *WriteToRAM(uint *dest, const void *src, uint size)
 {
+    HAL_BUS::ConfigureToFSMC();
+    
     uint8 *address = reinterpret_cast<uint8 *>(dest);
 
     std::memcpy(address, src, size);
@@ -226,24 +229,52 @@ DataSettings *RAM::Get(uint numFromEnd)
 
 uint RAM::NumberDatas()
 {
+    DEBUG_POINT(1);
+
+    HAL_BUS::ConfigureToFSMC();
+
+    DEBUG_POINT(1);
+
     if (newest == nullptr)
     {
+        DEBUG_POINT(1);
+
         return 0;
     }
 
+    DEBUG_POINT(1);
+
     if (oldest == nullptr)
     {
+        DEBUG_POINT(1);
+
         return 1;
     }
+
+    DEBUG_POINT(1);
+
     uint result = 0;
+
+    DEBUG_POINT(1);
 
     Packet *packet = oldest;
 
+    DEBUG_POINT(1);
+
     while (packet != nullptr)
     {
+        DEBUG_POINT(1);
+
         result++;
+
+        DEBUG_POINT(1);
+
         packet = reinterpret_cast<Packet *>(packet->addrNewest);
+
+        DEBUG_POINT(1);
     }
+
+    DEBUG_POINT(1);
 
     return result;
 }

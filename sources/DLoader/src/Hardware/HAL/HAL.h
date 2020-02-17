@@ -25,7 +25,7 @@ struct HAL
 
 struct HAL_BUS
 {
-    struct PANEL
+    struct Panel
     {
         static void Send(uint8 byte0, uint8 byte1);
         static void Send(uint8 *data, uint size);

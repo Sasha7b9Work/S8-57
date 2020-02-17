@@ -17,28 +17,26 @@ uint8 *HAL_BUS::FPGA::addrData0 = nullptr;
 uint8 *HAL_BUS::FPGA::addrData1 = nullptr;
 
 
+HAL_BUS::Mode::E HAL_BUS::mode = HAL_BUS::Mode::FSMC;
+
+
+static GPIO_InitTypeDef is =
+{
+    GPIO_PIN_0,
+    GPIO_MODE_AF_PP,
+    GPIO_PULLUP,
+    GPIO_SPEED_FREQ_VERY_HIGH,
+    GPIO_AF12_FMC
+};
+
+
 void HAL_BUS::Init()
 {
     __HAL_RCC_FMC_CLK_ENABLE();
+    __HAL_RCC_GPIOF_CLK_ENABLE();
 
-    static GPIO_InitTypeDef is =
-    {
-        GPIO_PIN_0,
-        GPIO_MODE_AF_PP,
-        GPIO_PULLUP,
-        GPIO_SPEED_FREQ_VERY_HIGH,
-        GPIO_AF12_FMC
-    };
-
-    is.Pin = GPIO_PIN_7;        // NE1 - FPGA
-    HAL_GPIO_Init(GPIOD, &is);
-
-    is.Pin = GPIO_PIN_10 |      // NE3 - RAM
-             GPIO_PIN_12;       // NE4 - PANEL
-    HAL_GPIO_Init(GPIOG, &is);
-
-    //           NOE          NWE          D0            D1            D3           D2    
-    is.Pin = GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_14 | GPIO_PIN_15 | GPIO_PIN_1 | GPIO_PIN_0;
+    //           D2           D3           D0            D1
+    is.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_14 | GPIO_PIN_15;
     HAL_GPIO_Init(GPIOD, &is);
 
     //           D4           D5           D6           D7
@@ -49,24 +47,28 @@ void HAL_BUS::Init()
     is.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
     HAL_GPIO_Init(GPIOF, &is);
 
-    //           A10          A11         A12           A13          A14         A15
-    is.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5;
+    //           A10          A11         A12           A13          A14         A15           NE3
+    is.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_10;
     HAL_GPIO_Init(GPIOG, &is);
 
-    //           A16           A17           A18
+    //           A16          A17            A18
     is.Pin = GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13;
     HAL_GPIO_Init(GPIOD, &is);
 
-    InitFPGA();
+    static const GPIO_InitTypeDef isGPIO =
+    {   //    NOE          NWE          NE1
+        GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_7,
+        GPIO_MODE_AF_PP,
+        GPIO_PULLUP,
+        GPIO_SPEED_FREQ_VERY_HIGH,
+        GPIO_AF12_FMC
+    };
 
-    InitPANEL();
+    /// \todo Здесь не довеедно - не хотит, почему-то
 
-    InitRAM();
-}
+    HAL_GPIO_Init(GPIOD, const_cast<GPIO_InitTypeDef *>(&isGPIO));
 
 
-void HAL_BUS::InitFPGA()
-{
     static SRAM_HandleTypeDef gSramHandle =
     {
         FMC_NORSRAM_DEVICE,
@@ -110,12 +112,31 @@ void HAL_BUS::InitFPGA()
     hsram->Extended->BWTR[hsram->Init.NSBank] = 0x0FFFFFFFU;
 
     __FMC_NORSRAM_ENABLE(hsram->Instance, hsram->Init.NSBank);
+
+    InitPanel();
+
+    InitRAM();
 }
 
 
 void HAL_BUS::InitRAM()
 {
-    static SRAM_HandleTypeDef handleSRAM =
+    __HAL_RCC_GPIOD_CLK_ENABLE();
+    __HAL_RCC_GPIOG_CLK_ENABLE();
+
+    //           A16           A17           A18 
+    is.Pin = GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13;
+    HAL_GPIO_Init(GPIOD, &is);
+
+    //           A10          A11         A12           A13          A14         A15           NE3
+    is.Pin =  GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_10;
+    HAL_GPIO_Init(GPIOG, &is);
+
+    //           A6            A7          A8            A9
+    is.Pin = GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
+    HAL_GPIO_Init(GPIOF, &is);
+
+    static SRAM_HandleTypeDef gSramHandle =
     {
         FMC_NORSRAM_DEVICE,
         FMC_NORSRAM_EXTENDED_DEVICE,
@@ -150,27 +171,67 @@ void HAL_BUS::InitRAM()
 
     FMC_NORSRAM_TimingTypeDef *timing = const_cast<FMC_NORSRAM_TimingTypeDef *>(&sramTiming);
 
-    HAL_SRAM_Init(&handleSRAM, timing, timing);
+    HAL_SRAM_Init(&gSramHandle, timing, timing);
+}
+
+
+void HAL_BUS::ConfigureToFSMC()
+{
+    if(mode == Mode::FSMC)
+    {
+        return;
+    }
+
+    mode = Mode::FSMC;
+
+    //           NOE          NWE          NE1
+    is.Pin = GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_7;   
+    HAL_GPIO_Init(GPIOD, &is);
+
+    //           D2           D3           D0            D1
+    is.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_14 | GPIO_PIN_15;
+    HAL_GPIO_Init(GPIOD, &is);
+
+    //           D4           D5           D6           D7
+    is.Pin = GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10;
+    HAL_GPIO_Init(GPIOE, &is);
 }
 
 
 void HAL_BUS::FPGA::Write16(uint8 *address, uint16 value)
 {
+    if(mode != Mode::FSMC)
+    {
+        ConfigureToFSMC();
+    }
+
     PAUSE_ON_TICKS(100);    /// \todo Без этой строки замедлен вывод при включённой оптимизации и TBase >= 0.5мс
 
     *address = static_cast<uint8>(value);
     *(address + 1) = static_cast<uint8>(value >> 8);
+
+
 }
 
 
 void HAL_BUS::FPGA::Write8(uint8 *address, uint8 value)
 {
+    if(mode != Mode::FSMC)
+    {
+        ConfigureToFSMC();
+    }
+
     *address = value;
 }
 
 
 uint8 HAL_BUS::FPGA::Read(const uint8 *address)
 {
+    if(mode != Mode::FSMC)
+    {
+        ConfigureToFSMC();
+    }
+
     return *address;
 }
 
@@ -179,6 +240,11 @@ void HAL_BUS::FPGA::SetAddrData(uint8 *address0, uint8 *address1)
 {
     addrData0 = address0;
     addrData1 = address1;
+
+    if(mode != Mode::FSMC)
+    {
+        ConfigureToFSMC();
+    }
 }
 
 

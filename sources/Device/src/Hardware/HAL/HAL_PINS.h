@@ -93,8 +93,8 @@ struct HPin
 #define PIN_HCD_DM      HPort::_B, HPin::_14
 #define PIN_HCD_DP      HPort::_B, HPin::_15
 
-#define PIN_READY_WR    HPort::_A, HPin::_7     /* Пин готовности панели к записи в неё */
-#define PIN_READY_RD    HPort::_C, HPin::_4     /* Пин готовности панели к чтению из неё */
+#define PIN_PAN_READY   HPort::_A, HPin::_7
+#define PIN_PAN_DATA    HPort::_C, HPin::_4
 #define PIN_CS          HPort::_G, HPin::_12
 #define PIN_WR          HPort::_D, HPin::_5
 #define PIN_RD          HPort::_D, HPin::_4
