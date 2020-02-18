@@ -145,7 +145,7 @@ void HAL_BUS::SendToDevice(uint8 *data, uint size)
         size--;
     }
 
-    pinSendReady.SetActive();
+//    pinSendReady.SetActive();
 }
 
 
@@ -153,7 +153,7 @@ void HAL_BUS::Update()
 {
     pinReadReady.SetActive();   // Если мы оказались в этой точке, значит, готовы к приёму данных
 
-    if(pinCS.IsPassive())       // Если панель начала транзакцию
+    if(pinCS.IsActive())       // Если панель начала транзакцию
     {
         if(pinType.IsLow())     // То анализируем тип транзакции
         {
@@ -169,12 +169,16 @@ void HAL_BUS::Update()
 
 void HAL_BUS::TransmitData()
 {
-
+    // Сюда попадаем, когда ЦП уже начал транзакцию
 }
 
 
 void HAL_BUS::ReceiveData()
 {
+    // Сюда попадаем, когда ЦП уже начал транзакцию
+
+    pinConfPanel.Init();
+
 
 }
 
