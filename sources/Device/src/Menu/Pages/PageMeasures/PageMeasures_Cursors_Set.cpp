@@ -321,7 +321,7 @@ bool PageCursorsMeasures::Set::HandlerKey(const KeyEvent &event) //-V2506
 
     if (type == TypePress::Release || type == TypePress::Long)
     {
-        return true;
+        return false;
     }
 
     float value = event.IsIncrease() ? 1.0F : -1.0F;
@@ -342,6 +342,8 @@ bool PageCursorsMeasures::Set::HandlerKey(const KeyEvent &event) //-V2506
             SetShiftCursPosU(CursorsSource(), 1, value);
         }
         UpdateCursorsForLook();
+        
+        return true;
     }
     else if(CursorsActive::IsT() && (event.IsLeft() || event.IsRight()))
     {
@@ -359,6 +361,8 @@ bool PageCursorsMeasures::Set::HandlerKey(const KeyEvent &event) //-V2506
             SetShiftCursPosT(CursorsSource(), 1, value);
         }
         UpdateCursorsForLook();
+        
+        return true;
     }
     else
     {
@@ -367,7 +371,7 @@ bool PageCursorsMeasures::Set::HandlerKey(const KeyEvent &event) //-V2506
 
     Beeper::RegulatorShiftRotate();
 
-    return true;
+    return false;
 }
 
 static bool IsActive_Set()

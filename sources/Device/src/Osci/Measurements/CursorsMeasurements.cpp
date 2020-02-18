@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include "Display/Grid.h"
 #include "Display/Primitives.h"
 #include "FPGA/FPGA.h"
@@ -26,7 +27,7 @@ float CursorsMeasurements::PosU(Chan::E ch, int numCur)
 
 bool CursorsMeasurements::NecessaryDraw()
 {
-    return (CursorsControl::IsDisabledU() || CursorsControl::IsDisabledT()) &&
+    return (!CursorsControl::IsDisabledU() || !CursorsControl::IsDisabledT()) &&
         (set.curs.showCursors || (Menu::OpenedItem() == PageCursorsMeasures::Set::self));
 }
 
@@ -73,8 +74,8 @@ void CursorsMeasurements::Draw()
 
     if (NecessaryDraw())
     {
-        bool bothCursors = CursorsControl::IsDisabledT() &&
-                           CursorsControl::IsDisabledU();  // Признак того, что включены и вертикальные и горизонтальные курсоры - надо нарисовать 
+        bool bothCursors = !CursorsControl::IsDisabledT() &&
+                           !CursorsControl::IsDisabledU();  // Признак того, что включены и вертикальные и горизонтальные курсоры - надо нарисовать 
                                                                                            // квадраты в местах пересечения
 
         int x0 = -1;
@@ -93,12 +94,12 @@ void CursorsMeasurements::Draw()
             Rectangle(4, 4).Draw(x1 - 2, y1 - 2);
         }
 
-        if (CursorsControl::IsDisabledT())
+        if (!CursorsControl::IsDisabledT())
         {
             DrawVertical(static_cast<int>(CursorsMeasurements::PosT(source, 0)), y0);
             DrawVertical(static_cast<int>(CursorsMeasurements::PosT(source, 1)), y1);
         }
-        if (CursorsControl::IsDisabledU())
+        if (!CursorsControl::IsDisabledU())
         {
             DrawHorizontal(static_cast<int>(set.curs.posCurU[source][0]), x0);
             DrawHorizontal(static_cast<int>(set.curs.posCurU[source][1]), x1);
