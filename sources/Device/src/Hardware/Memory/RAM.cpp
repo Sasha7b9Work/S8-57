@@ -164,11 +164,19 @@ void RAM::Init()
 }
 
 
+DataSettings *RAM::PrepareForNewDataRandomize()
+{
+
+
+    return Get();
+}
+
+
 DataSettings *RAM::PrepareForNewData()
 {
     if(Osci::InModeRandomizer() && NumberDatas())
     {
-        return Get();
+        return PrepareForNewDataRandomize();
     }
 
     if(FrameP2P::IsCorrect())
