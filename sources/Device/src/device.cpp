@@ -13,7 +13,6 @@
 #include "Menu/MenuItems.h"
 #include "Recorder/Recorder.h"
 #include "SCPI/SCPI.h"
-#include "Utils/Debug.h"
 #include <cstdlib>
 
 
@@ -100,51 +99,27 @@ void Device::Update()
 {
     START_MULTI_MEASUREMENT();
 
-    DEBUG_POINT(0);
- 
     Osci::Update();
-
-    DEBUG_POINT(0);
 
     Display::Update();
 
-    DEBUG_POINT(0);
-
     Menu::SaveSettings();
-
-    DEBUG_POINT(0);
     
     Recorder::Update();
-
-    DEBUG_POINT(0);
     
     Tester::Update();
-
-    DEBUG_POINT(0);
     
     Multimeter::Update();
-
-    DEBUG_POINT(0);
     
     Menu::Update();
-
-    DEBUG_POINT(0);
     
     FDrive::Update();
 
-    DEBUG_POINT(0);
-
     while (HAL_BUS::Panel::Receive()) {};
-
-    DEBUG_POINT(0);
 
     SCPI::Update();
 
-    DEBUG_POINT(0);
-
     DDecoder::Update();
-
-    DEBUG_POINT(0);
 }
 
 
