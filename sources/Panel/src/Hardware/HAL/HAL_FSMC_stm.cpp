@@ -159,13 +159,9 @@ void HAL_BUS::Update()
 
             pinReady.SetPassive();
 
-            //pinCS.WaitPassive();
-            //while(pinCS.IsActive()) { }
-            //while(HAL_GPIO_ReadPin(PORT_CS, PIN_CS) == GPIO_PIN_RESET) { }
-            while((PORT_CS->IDR & PIN_CS) == 0) { }
+            pinCS.WaitPassive();
 
-            //pinReady.SetActive();
-            PORT_READY->BSRR = PIN_READY << 16;
+            pinReady.SetActive();
 
             if(queueData.Size() == 0)
             {
