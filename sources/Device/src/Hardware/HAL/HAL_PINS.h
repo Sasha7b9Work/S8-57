@@ -93,18 +93,20 @@ struct HPin
 #define PIN_HCD_DM      HPort::_B, HPin::_14
 #define PIN_HCD_DP      HPort::_B, HPin::_15
 
-#define PIN_READ_READY  HPort::_A, HPin::_7
-#define PIN_SEND_READY  HPort::_C, HPin::_4
+#define PIN_PAN_READY   HPort::_A, HPin::_7
+#define PIN_PAN_DATA    HPort::_C, HPin::_4
 #define PIN_CS          HPort::_G, HPin::_12
-#define PIN_TYPE        HPort::_E, HPin::_7
-#define PIN_CONF_PANEL  HPort::_E, HPin::_8
-#define PIN_NIBBLE      HPort::_E, HPin::_9
-#define PIN_CONF_CPU    HPort::_E, HPin::_10
+#define PIN_WR          HPort::_D, HPin::_5
+#define PIN_RD          HPort::_D, HPin::_4
 
 #define PIN_D0          HPort::_D, HPin::_14
 #define PIN_D1          HPort::_D, HPin::_15
 #define PIN_D2          HPort::_D, HPin::_0
 #define PIN_D3          HPort::_D, HPin::_1
+#define PIN_D4          HPort::_E, HPin::_7
+#define PIN_D5          HPort::_E, HPin::_8
+#define PIN_D6          HPort::_E, HPin::_9
+#define PIN_D7          HPort::_E, HPin::_10
 
 #define PIN_PCD_VBUS    HPort::_A, HPin::_9
 #define PIN_PCD_DP      HPort::_A, HPin::_12

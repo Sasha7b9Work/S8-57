@@ -134,7 +134,7 @@ void Device::Update()
 
     DEBUG_POINT(0);
 
-    HAL_BUS::Panel::Receive();
+    while (HAL_BUS::Panel::Receive()) {};
 
     DEBUG_POINT(0);
 

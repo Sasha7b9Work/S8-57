@@ -26,10 +26,4 @@ struct HAL_BUS
     static void SendToDevice(uint8 *data, uint size);
 
     static void Update();
-
-private:
-    // Послать имеющиеся данные в ЦП
-    static void TransmitData();
-    // Принять данные от ЦП
-    static void ReceiveData();
 };

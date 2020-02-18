@@ -3,6 +3,9 @@
 */
 
 #include "defines.h"
+#include "log.h"
+#include "Display/Console.h"
+#include "Display/Painter.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Memory/ExtRAM.h"
@@ -10,7 +13,7 @@
 #include "Hardware/Memory/RAM.h"
 #include "Osci/DataSettings.h"
 #include "Osci/Osci.h"
-#include "Utils/Debug.h"
+//#include "Utils/Debug.h"
 #include "Utils/Math.h"
 #include <cstring>
 #include <cstdlib>
@@ -229,52 +232,34 @@ DataSettings *RAM::Get(uint numFromEnd)
 
 uint RAM::NumberDatas()
 {
-    DEBUG_POINT(1);
-
     HAL_BUS::ConfigureToFSMC();
-
-    DEBUG_POINT(1);
 
     if (newest == nullptr)
     {
-        DEBUG_POINT(1);
-
         return 0;
     }
 
-    DEBUG_POINT(1);
-
     if (oldest == nullptr)
     {
-        DEBUG_POINT(1);
-
         return 1;
     }
 
-    DEBUG_POINT(1);
-
     uint result = 0;
-
-    DEBUG_POINT(1);
 
     Packet *packet = oldest;
 
-    DEBUG_POINT(1);
-
     while (packet != nullptr)
     {
-        DEBUG_POINT(1);
-
         result++;
-
-        DEBUG_POINT(1);
 
         packet = reinterpret_cast<Packet *>(packet->addrNewest);
 
-        DEBUG_POINT(1);
+        if(packet != nullptr && !packet->IsValid())     /// \todo Времення затычка. Нужно разобраться, почему память портится и исправить
+        {
+            LOG_WRITE("invalid packet 0x%x", packet);
+            break;
+        }
     }
-
-    DEBUG_POINT(1);
 
     return result;
 }
