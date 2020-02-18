@@ -148,7 +148,7 @@ void HAL_BUS::Update()
 
         // Запись байта в устройсто
 
-        if((PORT_RD->IDR & PIN_RD) == 0 && queueData.Size())
+        if(pinRD.IsActive() && queueData.Size())
         {
             // Конфигурируем ШД на запись
             GPIOE->MODER &= 0xffff0000U;
@@ -157,8 +157,7 @@ void HAL_BUS::Update()
             // Устанавливаем данные на ШД
             GPIOE->ODR = (GPIOD->ODR & 0xffff0000) + static_cast<uint16>(queueData.Front());
 
-            //pinReady.SetPassive();
-            PORT_READY->BSRR = PIN_READY;
+            pinReady.SetPassive();
 
             //pinCS.WaitPassive();
             //while(pinCS.IsActive()) { }
