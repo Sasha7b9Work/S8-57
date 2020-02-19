@@ -164,21 +164,8 @@ void RAM::Init()
 }
 
 
-DataSettings *RAM::PrepareForNewDataRandomize()
-{
-
-
-    return Get();
-}
-
-
 DataSettings *RAM::PrepareForNewData()
 {
-    if(Osci::InModeRandomizer() && NumberDatas())
-    {
-        return PrepareForNewDataRandomize();
-    }
-
     if(FrameP2P::IsCorrect())
     {
         FrameP2P::ds = nullptr;
@@ -210,6 +197,11 @@ DataSettings *RAM::PrepareForNewData()
     DataSettings *result = Get();
 
     result->timeMS = TIME_MS;
+
+    if(Osci::InModeRandomizer() && NumberDatas())
+    {
+        result->CopyDataFrom(Get(1));
+    }
 
     return result;
 }

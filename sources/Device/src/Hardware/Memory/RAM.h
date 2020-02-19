@@ -36,6 +36,4 @@ private:
     static void RemoveOldest();
     // Освободить size байт памяти с начала буфера
     static void AllocateMemoryFromBegin(uint size);
-    // Подготовить место для новых данных режима рандомизатора
-    static DataSettings *PrepareForNewDataRandomize();
 };

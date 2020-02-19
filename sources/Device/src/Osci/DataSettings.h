@@ -61,18 +61,19 @@ public:
     uint        numInROM    : 5;    ///< Номер данных в памяти ROM
     uint        notUsed     : 7;
     PackedTime  time;
-    /// Заполняет структуру в соответствии с текущими настройками
+    // Заполняет структуру в соответствии с текущими настройками
     void Fill();
-    /// Возвращает размер занимаемый данными одного канала
+    // Возвращает размер занимаемый данными одного канала
     uint BytesInChannel() const;
-    /// Количество отсчётов на канал
+    // Количество отсчётов на канал
     uint PointsInChannel() const;
-    /// Возвращает требуемое количество памяти для хранения данных каналов
+    // Возвращает требуемое количество памяти для хранения данных каналов
     uint NeedMemoryForData() const;
     bool Equals(const DataSettings &ds) const;
     bool EqualsCurrentSettings() const;
-    void Log() const;
     uint8 *Data(Chan::E ch) { return ch == Chan::A ? dataA : dataB; }
+    // Копировать данные из source с проверкой безопасности
+    void CopyDataFrom(DataSettings *source);
 };
 
 
