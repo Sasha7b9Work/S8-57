@@ -2,15 +2,19 @@
 
 
 // Хорошо использовать для трассировке, если потом в HardFault_Handler() отслеживать эти переменные
-#define START_PROFILING  Debug::StartProfilingMS();
-#define POINT_PROFILING  Debug::PointProfilingMS(__FILE__, __LINE__)
+
+#define START_PROFILING_US  Debug::StartProfiling()
+#define POINT_PROFILING_US  Debug::PointProfiling(__FILE__, __LINE__)
+
+#define START_PROFILING_MS  Debug::StartProfilingMS()
+#define POINT_PROFILING_MS  Debug::PointProfilingMS(__FILE__, __LINE__)
 
 //#define DEBUG_POINT(x) Debug::line[x] = __LINE__; Debug::file[x] = __FILE__;
 
 namespace Debug
 {
     void StartProfiling();
-    uint PointProfiling();
+    uint PointProfiling(const char *file, int line);
 
     void StartProfilingMS();
     uint PointProfilingMS(const char *file, int line);

@@ -99,21 +99,11 @@ bool SetCurrentMode(const Page *page, Device::Mode::E mode)
 
 void Device::Update()
 {
-    uint start = TIME_MS;
-
-    LOG_WRITE("");
-
     START_MULTI_MEASUREMENT();
-
-    START_PROFILING;
 
     Osci::Update();
 
-    POINT_PROFILING;
-
     Display::Update();
-
-    POINT_PROFILING;
 
     Menu::SaveSettings();
     
@@ -132,8 +122,6 @@ void Device::Update()
     SCPI::Update();
 
     DDecoder::Update();
-
-    LOG_WRITE("Полное время %d ms", TIME_MS - start);
 }
 
 

@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include "device.h"
 #include "Osci/DataSettings.h"
 #include "Hardware/Memory/Reader.h"
@@ -9,6 +10,7 @@
 #include "Osci/Osci.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/AutoMeasurements.h"
+#include "Utils/Debug.h"
 #include "Utils/Values.h"
 #include <cstring>
 
@@ -64,19 +66,27 @@ void Osci::Restart()
 
 void Osci::Update()
 {
+    LOG_WRITE("");
+
     if(!Device::InModeOsci())
     {
         return;
     }
+
+    START_PROFILING_US;
 
     if(FPGA::IsRunning())
     {
         UpdateFPGA();
     };
 
+    POINT_PROFILING_US;
+
     Reader::ReadDataFromRAM();
 
     AutoMeasurements::SetData();
+
+    POINT_PROFILING_US;
 }
 
 
