@@ -98,17 +98,23 @@ void Osci::UpdateFPGA()
 {
     uint number = (Osci::InModeRandomizer()) ? TBase().RandK() : 1;
 
+    START_PROFILING_US;
+
     for (uint i = 0; i < number; i++)
     {
         FPGA::ReadFlag();
     
         ProcessFlagPred();
 
+        POINT_PROFILING_US;
+
         if(ProcessFlagReady())
         {
             Osci::Stop();
             break;
         }
+
+        POINT_PROFILING_US;
     }
 }
 
@@ -132,8 +138,6 @@ void Osci::ProcessFlagPred()
 
 bool Osci::ProcessFlagReady()
 {
-    uint start = TIME_US;
-
     bool needStop = false;
 
     if(FPGA::flag.DataReady())
@@ -156,8 +160,6 @@ bool Osci::ProcessFlagReady()
             }
         }
     }
-
-    LOG_WRITE("Время %d мкс", TIME_US - start);
 
     return needStop;
 }

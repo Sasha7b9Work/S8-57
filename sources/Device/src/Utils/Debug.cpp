@@ -37,18 +37,19 @@ uint Debug::PointProfilingMS(const char *_file, int _line)
 }
 
 
-void Debug::StartProfiling()
+void Debug::StartProfilingUS()
 {
     timeStart = TIME_US;
     timePrev = timeStart;
 }
 
 
-uint Debug::PointProfiling()
+uint Debug::PointProfilingUS(const char *_file, int _line)
 {
-    uint result = TIME_US - timePrev;
+    uint delta = TIME_US - timePrev;
+    LOG_WRITE("%s:%d - %d us", _file, _line, delta);
     timePrev = TIME_US;
-    return result;
+    return delta;
 }
 
 
