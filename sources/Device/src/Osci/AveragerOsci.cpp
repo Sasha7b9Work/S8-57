@@ -31,8 +31,11 @@ void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, uint size)
         {
             for(uint i = 0; i < size; i++)
             {
-                av[i] += dataNew[i];
-                *_new++ = static_cast<uint8>(av[i] / (numSignals[ch] + 1));
+                if(dataNew[i] != VALUE::NONE)
+                {
+                    av[i] += dataNew[i];
+                    *_new++ = static_cast<uint8>(av[i] / (numSignals[ch] + 1));
+                }
             }
         }
     }

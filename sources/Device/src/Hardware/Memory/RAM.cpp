@@ -207,7 +207,10 @@ DataSettings *RAM::PrepareForNewData()
 
     if(Osci::InModeRandomizer() && NumberDatas())
     {
-        result->CopyDataFrom(Get(1));
+        if(result->IsEquals(*Get(1)))
+        {
+            result->CopyDataFrom(Get(1));
+        }
 
         needNewFrame = false;
     }

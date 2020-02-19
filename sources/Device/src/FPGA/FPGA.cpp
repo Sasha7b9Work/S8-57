@@ -110,7 +110,7 @@ void FPGA::ReadData()
 
         if (prev && last)
         {
-            if (last->Equals(*prev))
+            if (last->IsEquals(*prev))
             {
                 if (ENABLED_A(last))
                 {

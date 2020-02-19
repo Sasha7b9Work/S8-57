@@ -69,7 +69,7 @@ public:
     uint PointsInChannel() const;
     // Возвращает требуемое количество памяти для хранения данных каналов
     uint NeedMemoryForData() const;
-    bool Equals(const DataSettings &ds) const;
+    bool IsEquals(const DataSettings &ds) const;
     bool EqualsCurrentSettings() const;
     uint8 *Data(Chan::E ch) { return ch == Chan::A ? dataA : dataB; }
     // Копировать данные из source с проверкой безопасности

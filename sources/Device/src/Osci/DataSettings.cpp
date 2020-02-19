@@ -42,7 +42,7 @@ void DataSettings::Fill()
 }
 
 
-bool DataSettings::Equals(const DataSettings &ds) const
+bool DataSettings::IsEquals(const DataSettings &ds) const
 {
     return
         RANGE_A(this) == Lval_RANGE_A(&ds) &&
@@ -61,7 +61,7 @@ bool DataSettings::EqualsCurrentSettings() const
 {
     DataSettings ds;
     ds.Fill();
-    return (this->Equals(ds));
+    return (this->IsEquals(ds));
 }
 
 
