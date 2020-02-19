@@ -66,27 +66,19 @@ void Osci::Restart()
 
 void Osci::Update()
 {
-    LOG_WRITE("");
-
     if(!Device::InModeOsci())
     {
         return;
     }
-
-    START_PROFILING_US;
 
     if(FPGA::IsRunning())
     {
         UpdateFPGA();
     };
 
-    POINT_PROFILING_US;
-
     Reader::ReadDataFromRAM();
 
     AutoMeasurements::SetData();
-
-    POINT_PROFILING_US;
 }
 
 
@@ -106,10 +98,10 @@ void Osci::UpdateFPGA()
 {
     uint number = (Osci::InModeRandomizer()) ? TBase().RandK() : 1;
 
-    for (uint i = 0; i < number; i++)
+    for(uint i = 0; i < number; i++)
     {
         FPGA::ReadFlag();
-    
+
         ProcessFlagPred();
 
         if(ProcessFlagReady())
@@ -148,7 +140,11 @@ bool Osci::ProcessFlagReady()
         {
             Timer::PauseOnTicks(5 * 90 * 20);
 
+            START_PROFILING_US;
+
             FPGA::ReadData();
+
+            POINT_PROFILING_US;
 
             if(TrigStartMode::IsSingle())
             {
