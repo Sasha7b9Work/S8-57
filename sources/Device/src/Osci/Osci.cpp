@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include "device.h"
 #include "Osci/DataSettings.h"
 #include "Hardware/Memory/Reader.h"
@@ -9,6 +10,7 @@
 #include "Osci/Osci.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/AutoMeasurements.h"
+#include "Utils/Debug.h"
 #include "Utils/Values.h"
 #include <cstring>
 
@@ -130,6 +132,8 @@ void Osci::ProcessFlagPred()
 
 bool Osci::ProcessFlagReady()
 {
+    uint start = TIME_US;
+
     bool needStop = false;
 
     if(FPGA::flag.DataReady())
@@ -152,6 +156,8 @@ bool Osci::ProcessFlagReady()
             }
         }
     }
+
+    LOG_WRITE("Время %d мкс", TIME_US - start);
 
     return needStop;
 }
