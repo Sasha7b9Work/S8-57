@@ -6,6 +6,7 @@
 #include "FPGA/FPGA.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
+#include "Hardware/Memory/IntRAM.h"
 #include "Hardware/Memory/RAM.h"
 #include "Osci/Osci.h"
 #include "Osci/Display/DisplayOsci.h"
@@ -49,6 +50,12 @@ void Osci::DeInit()
 
 void Osci::Start(bool button)
 {
+    if(InModeRandomizer())
+    {
+        std::memset(IntRAM::ReadRand(Chan::A), VALUE::NONE, FPGA::MAX_NUM_POINTS);
+        std::memset(IntRAM::ReadRand(Chan::B), VALUE::NONE, FPGA::MAX_NUM_POINTS);
+    }
+
     funcStart(button);
 }
 

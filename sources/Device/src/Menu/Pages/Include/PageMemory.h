@@ -95,7 +95,6 @@ struct ENumPointsFPGA
     operator ENumPointsFPGA::E() { return Ref(); }
     static uint BytesInChannel() { uint result = PointsInChannel(); if (PeakDetMode().IsEnabled()) { result *= 2; } return result; };
     static uint PointsInChannel() { return ENUM_TO_REL_POINTS(Ref()); };
-    static const uint MAX_NUM = 8192;
 };
 
 

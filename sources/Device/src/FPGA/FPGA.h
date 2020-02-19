@@ -51,6 +51,8 @@ struct FPGA
 
     static FlagFPGA flag;
 
+    static const int MAX_NUM_POINTS = 8 * 1024;
+
 private:
 
     static void Init();
