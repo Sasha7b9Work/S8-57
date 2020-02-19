@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include "device.h"
 #include "common/Decoder_d.h"
 #include "Display/Console.h"
@@ -13,6 +14,7 @@
 #include "Menu/MenuItems.h"
 #include "Recorder/Recorder.h"
 #include "SCPI/SCPI.h"
+#include "Utils/Debug.h"
 #include <cstdlib>
 
 
@@ -97,11 +99,21 @@ bool SetCurrentMode(const Page *page, Device::Mode::E mode)
 
 void Device::Update()
 {
+    uint start = TIME_MS;
+
+    LOG_WRITE("");
+
     START_MULTI_MEASUREMENT();
+
+    START_PROFILING;
 
     Osci::Update();
 
+    POINT_PROFILING;
+
     Display::Update();
+
+    POINT_PROFILING;
 
     Menu::SaveSettings();
     
@@ -120,6 +132,8 @@ void Device::Update()
     SCPI::Update();
 
     DDecoder::Update();
+
+    LOG_WRITE("Полное время %d ms", TIME_MS - start);
 }
 
 
