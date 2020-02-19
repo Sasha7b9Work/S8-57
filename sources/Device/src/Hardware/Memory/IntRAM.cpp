@@ -9,31 +9,26 @@
     от начала |
        0      | усреднение 1-го канала
        16k    | усреднение 2-го канала
-       32k    |
+       32k    | чтение рандомизатора 1-го канала
+       40k    | чтение нандомизатора 2-го канала
+       48k    |
 */
 
 
 static const uint SIZE_BUFFER = 112 * 1024;
 static uint8 buffer[SIZE_BUFFER];
 
-static const uint SIZE_STORAGE_RAM = SIZE_BUFFER;
-
-
-uint8 *IntRAM::Begin()
-{
-    return buffer;
-}
-
-
-uint8 *IntRAM::End()
-{
-    return Begin() + SIZE_STORAGE_RAM;
-}
+static uint16 *const ave[2] = { reinterpret_cast<uint16 *>(buffer), reinterpret_cast<uint16 *>(buffer + 16 * 1024) };
+static uint8 *const rand[2] = { buffer + 32 * 1024, buffer + 40 * 1024 };
 
 
 uint16 *IntRAM::Averager16k(Chan::E ch)
 {
-    uint8 *result = (ch == Chan::A) ? Begin() : (Begin() + 16 * 1024);
+    return ave[ch];
+}
 
-    return reinterpret_cast<uint16 *>(result);
+
+uint8 *IntRAM::ReadRand(Chan::E ch)
+{
+    return rand[ch];
 }
