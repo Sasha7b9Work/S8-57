@@ -14,7 +14,6 @@
 #include "Menu/MenuItems.h"
 #include "Recorder/Recorder.h"
 #include "SCPI/SCPI.h"
-#include "Utils/Debug.h"
 #include <cstdlib>
 
 

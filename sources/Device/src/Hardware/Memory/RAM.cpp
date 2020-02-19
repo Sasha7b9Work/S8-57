@@ -13,7 +13,6 @@
 #include "Hardware/Memory/RAM.h"
 #include "Osci/DataSettings.h"
 #include "Osci/Osci.h"
-//#include "Utils/Debug.h"
 #include "Utils/Math.h"
 #include <cstring>
 #include <cstdlib>
@@ -35,6 +34,9 @@
 int16 RAM::currentSignal = 0;
 Packet *RAM::oldest = reinterpret_cast<Packet *>(BEGIN);
 Packet *RAM::newest = nullptr;
+
+
+bool RAM::needNewFrame = true;
 
 
 /// Записывает по адресу dest. Возвращает адрес первого байта после записи
@@ -166,6 +168,11 @@ void RAM::Init()
 
 DataSettings *RAM::PrepareForNewData()
 {
+    if(Osci::InModeRandomizer() && NumberDatas() && !needNewFrame)
+    {
+        return Get();
+    }
+
     if(FrameP2P::IsCorrect())
     {
         FrameP2P::ds = nullptr;
@@ -201,6 +208,8 @@ DataSettings *RAM::PrepareForNewData()
     if(Osci::InModeRandomizer() && NumberDatas())
     {
         result->CopyDataFrom(Get(1));
+
+        needNewFrame = false;
     }
 
     return result;

@@ -10,7 +10,6 @@
 #include "Osci/Osci.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/AutoMeasurements.h"
-#include "Utils/Debug.h"
 #include "Utils/Values.h"
 #include <cstring>
 
@@ -98,7 +97,7 @@ void Osci::UpdateFPGA()
 {
     uint number = (Osci::InModeRandomizer()) ? TBase().RandK() : 1;
 
-    START_PROFILING_US;
+    RAM::NewFrameForRandomize();
 
     for (uint i = 0; i < number; i++)
     {
@@ -106,15 +105,11 @@ void Osci::UpdateFPGA()
     
         ProcessFlagPred();
 
-        POINT_PROFILING_US;
-
         if(ProcessFlagReady())
         {
             Osci::Stop();
             break;
         }
-
-        POINT_PROFILING_US;
     }
 }
 
