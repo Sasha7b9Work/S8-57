@@ -55,8 +55,8 @@ struct Osci
     // Очистка данных рандомизатора при переключении режимов
     static void ClearDataRand();
 
-
-    static void SetValueADC(uint16 value);
+    // Значение, считанное из handleADC
+    static uint16 valueADC;
 
     
     static int addShift;
@@ -124,9 +124,6 @@ private:
 
     // Здесь хранится адрес, начиная с которого будем читать данные по каналам. Если addrRead == 0xffff, то адрес вначале нужно считать
     static uint16 addrRead;
-
-    // Значение, считанное из handleADC
-    static uint16 valueADC;
 };
 
 

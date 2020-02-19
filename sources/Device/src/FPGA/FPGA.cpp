@@ -77,12 +77,6 @@ void FPGA::Reset()
 }
 
 
-void Osci::SetValueADC(uint16 value)
-{
-    valueADC = value;
-}
-
-
 bool FPGA::IsRunning()
 {
     return isRunning;
