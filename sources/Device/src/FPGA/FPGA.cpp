@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Log.h"
 #include "device.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/HAL/HAL.h"
@@ -85,25 +86,6 @@ void Osci::SetValueADC(uint16 value)
 bool FPGA::IsRunning()
 {
     return isRunning;
-}
-
-
-void Randomizer::Read()
-{
-    FPGA::ReadFlag();
-
-    Osci::ProcessFlagPred();
-
-    if(FPGA::flag.DataReady())
-    {
-        Timer::PauseOnTicks(5 * 90 * 20);
-
-        Osci::ReadDataChannel(Chan::A, IntRAM::ReadRand(Chan::A));
-
-        Osci::ReadDataChannel(Chan::B, IntRAM::ReadRand(Chan::B));
-
-        Osci::Start(false);
-    }
 }
 
 

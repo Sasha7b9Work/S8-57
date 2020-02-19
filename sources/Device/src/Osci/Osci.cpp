@@ -52,8 +52,8 @@ void Osci::Start(bool button)
 {
     if(InModeRandomizer())
     {
-        std::memset(IntRAM::ReadRand(Chan::A), VALUE::NONE, FPGA::MAX_NUM_POINTS);
-        std::memset(IntRAM::ReadRand(Chan::B), VALUE::NONE, FPGA::MAX_NUM_POINTS);
+        std::memset(IntRAM::DataRand(Chan::A), VALUE::NONE, FPGA::MAX_NUM_POINTS);
+        std::memset(IntRAM::DataRand(Chan::B), VALUE::NONE, FPGA::MAX_NUM_POINTS);
     }
 
     funcStart(button);
@@ -446,7 +446,10 @@ void Osci::ReadData()
 
     DataSettings *ds = RAM::PrepareForNewData();
 
-
+    if(InModeRandomizer())
+    {
+        Randomizer::MoveReadedData(ds);
+    }
 
     if(ReadDataChannel(Chan::A, ds->dataA))
     {
@@ -478,5 +481,52 @@ void Osci::ReadData()
                 }
             }
         }
+    }
+}
+
+
+void Randomizer::MoveReadedDataChannel(DataSettings *ds, Chan::E ch)
+{
+    if(ENABLED(ds, ch))
+    {
+        uint numPoints = ds->BytesInChannel();
+
+        uint8 *in = IntRAM::DataRand(ch);
+        uint8 *out = ds->Data(ch);
+
+        for(uint i = 0; i < numPoints; i++)
+        {
+            if(in[i] != VALUE::NONE)
+            {
+                out[i] = in[i];
+                in[i] = VALUE::NONE;
+            }
+        }
+    }
+}
+
+
+void Randomizer::MoveReadedData(DataSettings *ds)
+{
+    MoveReadedDataChannel(ds, Chan::A);
+    MoveReadedDataChannel(ds, Chan::B);
+}
+
+
+void Randomizer::Read()
+{
+    FPGA::ReadFlag();
+
+    Osci::ProcessFlagPred();
+
+    if(FPGA::flag.DataReady())
+    {
+        Timer::PauseOnTicks(5 * 90 * 20);
+
+        Osci::ReadDataChannel(Chan::A, IntRAM::DataRand(Chan::A));
+
+        Osci::ReadDataChannel(Chan::B, IntRAM::DataRand(Chan::B));
+
+        Osci::funcStart(false);
     }
 }

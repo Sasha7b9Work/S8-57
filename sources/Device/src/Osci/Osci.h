@@ -142,4 +142,9 @@ struct Randomizer
 {
     // Эту функцию нужно пстоянно вызывать во время выполнения программы для чтения точек рандомизатора, если мы находимся в режиме рандомизатора
     static void Read();
+    // Перемещает считанные данные из временного хранилища в место, указанное ds
+    static void MoveReadedData(DataSettings *ds);
+
+private:
+    static void MoveReadedDataChannel(DataSettings *ds, Chan::E ch);
 };
