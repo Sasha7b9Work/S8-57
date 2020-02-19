@@ -30,10 +30,6 @@ public:
     static void Save();
     static void Reset();
 
-    void SetData(uint8 data[1024]);
-    /// Сохраняет значение перечислимого типа. Возвращает адрес первой свободной ячейки (туда надо записывать следующее значение)
-    void SaveEnum16(uint8 name, uint8 value);
-
     /// Настройки по умолчанию
     static const Settings defaultSettings;
 

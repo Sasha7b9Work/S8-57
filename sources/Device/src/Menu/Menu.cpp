@@ -10,6 +10,7 @@
 #include "Menu/Menu.h"
 #include "Menu/Pages/Include/PageMemory.h"
 #include "Settings/Settings.h"
+#include "Settings/SettingsNRST.h"
 #include <cstdio>
 
 
@@ -419,6 +420,8 @@ void Menu::SaveSettings()
         {
             Settings::Save();
         }
+
+        setNRST.Save();
     }
 }
 
