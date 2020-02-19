@@ -4,12 +4,12 @@
 #include "Menu/Pages/Include/PageMemory.h"
 
 
-extern const DataSettings *pDS;     ///< Указатель на настройки текущего рисуемого сигнала. Обращаться к нему следует через макрос DS.
-extern uint8 *dataOUT[2];           ///< Считанные данные второго канала
+extern const DataSettings *pDS;     // Указатель на настройки текущего рисуемого сигнала. Обращаться к нему следует через макрос DS.
+extern uint8 *dataOUT[2];           // Считанные данные второго канала
 extern uint8 *dataIN[2];
 extern uint16 *ave[2];
 
-#define DS          pDS             ///< Указатель на настройки текущего рисуемого сигнала.
+#define DS          pDS             // Указатель на настройки текущего рисуемого сигнала.
 
 #define IN(ch)  (dataIN[static_cast<int>(ch)])
 #define IN_A    IN(Chan::A)
@@ -41,14 +41,14 @@ extern uint16 *ave[2];
 #define BYTES_IN_CHANNEL_DS    (BYTES_IN_CHANNEL(DS))
 
 
-/// В этой структуре будут храниться точки, подготовленные для вывода на экран
+// В этой структуре будут храниться точки, подготовленные для вывода на экран
 struct StructDataDrawing
 {
-    uint8       data[Chan::Count][281 * 2];    ///< Данные обоих каналов. Точек в два раза больше, чем на экране, для пикового детектора
-    bool        needDraw[Chan::Count];         ///< Если true, то канал 1 надо рисовать
+    uint8       data[Chan::Count][281 * 2];    // Данные обоих каналов. Точек в два раза больше, чем на экране, для пикового детектора
+    bool        needDraw[Chan::Count];         // Если true, то канал 1 надо рисовать
     uint8       notUsed0[2];
-    int         posBreak;                      ///< Позиция в координатах сетки, на которой нужно рисовать линию разрыва поточечного вывода
-    ModeWork::E forMode;                       ///< Для какого режима считываются данные
+    int         posBreak;                      // Позиция в координатах сетки, на которой нужно рисовать линию разрыва поточечного вывода
+    ModeWork::E forMode;                       // Для какого режима считываются данные
     uint8       notUsed1[3];
 };
 
@@ -57,11 +57,11 @@ struct StructDataDrawing
 class Reader
 {
 public:
-    /// Читает данные из хранилища
+    // Читает данные из хранилища
     static void ReadDataFromRAM();
 
     static void ReadDataFromROM();
 private:
-    /// Поиск уровня синхронизации, если установлен автоматический режим поиска
+    // Поиск уровня синхронизации, если установлен автоматический режим поиска
     static void FindTrigLevelIfNeed();
 };

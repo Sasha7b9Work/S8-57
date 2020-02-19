@@ -8,15 +8,15 @@
 #include "Settings/Settings.h"
 
 
-/// Это пространство CCM-памяти
+// Это пространство CCM-памяти
 static uint8 ccm[4][16 * 1024] __attribute__((section("CCM_DATA")));
-/// Это указатели на считанные данные
+// Это указатели на считанные данные
 uint8 *dataIN[2] = { nullptr, nullptr };
-/// Это указатели на данные, пересчитанные и готовые к выводу
+// Это указатели на данные, пересчитанные и готовые к выводу
 uint8 *dataOUT[2] = { ccm[0], ccm[1] };
-/// 
-uint16 *ave[2] = { reinterpret_cast<uint16 *>(IntRAM::Begin()), reinterpret_cast<uint16 *>(IntRAM::Begin() + (16 * 1024)) };
-/// Указатель на настройки считанных данных
+// 
+uint16 *ave[2] = { IntRAM::Averager16k(Chan::A), IntRAM::Averager16k(Chan::B) };
+// Указатель на настройки считанных данных
 const DataSettings *pDS = nullptr;
 
 FrameP2P *frameP2P = nullptr;
