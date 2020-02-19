@@ -2,7 +2,9 @@
 #include "device.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/HAL/HAL.h"
+#include "Hardware/Memory/IntRAM.h"
 #include "Hardware/Memory/RAM.h"
+#include "Hardware/Timer.h"
 #include "Settings/Settings.h"
 #include "Recorder/Recorder.h"
 #include <cstring>
@@ -83,6 +85,27 @@ void FPGA::SetValueADC(uint16 value)
 bool FPGA::IsRunning()
 {
     return isRunning;
+}
+
+
+void Osci::ReadRand()
+{
+    FPGA::ReadFlag();
+
+    ProcessFlagPred();
+
+    if(!FPGA::flag.DataReady())
+    {
+        return;
+    }
+
+    Timer::PauseOnTicks(5 * 90 * 20);
+
+    FPGA::ReadDataChannel(Chan::A, IntRAM::ReadRand(Chan::A));
+
+    FPGA::ReadDataChannel(Chan::B, IntRAM::ReadRand(Chan::B));
+
+    Osci::Start(false);
 }
 
 

@@ -128,6 +128,10 @@ exit:
     {
         Osci::ReadPointP2P();
     }
+    else if(Osci::InModeRandomizer())
+    {
+        Osci::ReadRand();
+    }
 #endif
 
     return true;

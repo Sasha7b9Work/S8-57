@@ -42,19 +42,21 @@ struct FPGA
     friend struct Osci;
 
     static bool IsRunning();
-    /// Включить/выключить калибратор.
+    // Включить/выключить калибратор.
     static void LoadCalibratorMode();
 
     static void SetValueADC(uint16 value);
 
     static void GiveStart(uint16 pred, uint16 post);
 
+    static FlagFPGA flag;
+
 private:
 
     static void Init();
 
     static void OnPressStart();
-    /// Принудительный запуск синхронизации
+    // Принудительный запуск синхронизации
     static void ForcedStart();
 
     static void Reset();
@@ -75,14 +77,12 @@ private:
 
     static uint16 post;
     static uint16 pred;
-    /// Значение, считанное из handleADC
+    // Значение, считанное из handleADC
     static uint16 valueADC;
 
     static bool isRunning;
-
-    static FlagFPGA flag;
-    /// Здесь хранится адрес, начиная с которого будем читать данные по каналам. Если addrRead == 0xffff, то адрес вначале нужно считать
+    // Здесь хранится адрес, начиная с которого будем читать данные по каналам. Если addrRead == 0xffff, то адрес вначале нужно считать
     static uint16 addrRead;
-    /// True, если дан принудительный запуск
+    // True, если дан принудительный запуск
     static bool forcedStart;
 };

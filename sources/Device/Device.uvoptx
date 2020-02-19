@@ -164,7 +164,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Settings\SettingsNRST.cpp</Filename>
+          <Filename>.\src\Settings\SettingsNRST.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\src/Settings/SettingsNRST.cpp\28</Expression>
         </Bp>
@@ -180,7 +180,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Settings\SettingsNRST.cpp</Filename>
+          <Filename>.\src\Settings\SettingsNRST.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\src/Settings/SettingsNRST.cpp\50</Expression>
         </Bp>
