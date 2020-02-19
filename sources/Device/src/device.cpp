@@ -14,6 +14,7 @@
 #include "Menu/MenuItems.h"
 #include "Recorder/Recorder.h"
 #include "SCPI/SCPI.h"
+#include "Settings/SettingsNRST.h"
 #include <cstdlib>
 
 
@@ -49,6 +50,8 @@ void Device::Init()
     FPGA::Init();
 
     Settings::Load();
+
+    setNRST.Init();
 
     Display::Init();
 

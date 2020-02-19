@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include "HAL_PIO.h"
 #include <stm32f4xx_hal.h>
 
@@ -115,7 +116,9 @@ void HAL_PIO::Write(const StructPIN &pin, int state)
 
 uint8 HAL_PIO::Read(HPort::E port, uint16 pin)
 {
-    return static_cast<uint8>(HAL_GPIO_ReadPin(PORT(port), pin));
+    uint8 result = static_cast<uint8>(HAL_GPIO_ReadPin(PORT(port), pin));
+
+    return result;
 }
 
 

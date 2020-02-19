@@ -3,6 +3,9 @@
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/HAL/HAL_PIO.h"
 #include <stm32f4xx_hal.h>
+#ifdef DEVICE
+#include "Osci/Osci.h"
+#endif
 
 
 struct OutPin
@@ -119,6 +122,13 @@ exit:
     GPIOG->BSRR = GPIO_PIN_12;
     
     interactionWithPanel = false;
+
+#ifdef DEVICE
+    if(Osci::InModeP2P())
+    {
+        Osci::ReadPointP2P();
+    }
+#endif
 
     return true;
 }
