@@ -94,18 +94,16 @@ void Osci::ReadRand()
 
     ProcessFlagPred();
 
-    if(!FPGA::flag.DataReady())
+    if(FPGA::flag.DataReady())
     {
-        return;
+        Timer::PauseOnTicks(5 * 90 * 20);
+
+        FPGA::ReadDataChannel(Chan::A, IntRAM::ReadRand(Chan::A));
+
+        FPGA::ReadDataChannel(Chan::B, IntRAM::ReadRand(Chan::B));
+
+        Osci::Start(false);
     }
-
-    Timer::PauseOnTicks(5 * 90 * 20);
-
-    FPGA::ReadDataChannel(Chan::A, IntRAM::ReadRand(Chan::A));
-
-    FPGA::ReadDataChannel(Chan::B, IntRAM::ReadRand(Chan::B));
-
-    Osci::Start(false);
 }
 
 
