@@ -2,6 +2,7 @@
 #include "FPGA/ContextTester.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/HAL/HAL.h"
+#include "Osci/Osci.h"
 #include "Settings/Settings.h"
 #include "Hardware/Timer.h"
 
@@ -39,7 +40,7 @@ bool ContextTester::Read(uint16 *dataA, uint8 *dataB)
         }
     }
 
-    uint16 aRead = (uint16)(FPGA::ReadLastRecord(Chan::A) - TESTER_NUM_POINTS);
+    uint16 aRead = (uint16)(Osci::ReadLastRecord(Chan::A) - TESTER_NUM_POINTS);
 
     HAL_BUS::FPGA::Write16(WR::PRED_LO, aRead);         // Указываем адрес, с которого будем читать данные
     HAL_BUS::FPGA::Write8(WR::START_ADDR, 0xff);        // И даём команду ПЛИС, чтобы чтение начиналось с него

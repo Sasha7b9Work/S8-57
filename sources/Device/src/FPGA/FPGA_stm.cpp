@@ -11,7 +11,7 @@
 #include "Utils/Math.h"
 
 
-uint16 FPGA::addrRead = 0xffff;
+uint16 Osci::addrRead = 0xffff;
 
 
 struct Gates
@@ -122,7 +122,7 @@ void FPGA::Init()
 }
 
 
-int FPGA::CalculateShift()
+int Osci::CalculateShift()
 {
     uint16 min = 0;
     uint16 max = 0;
@@ -137,7 +137,7 @@ int FPGA::CalculateShift()
     int deltaMAX = setNRST.enum_gate_max * 10;
     int deltaMIN = setNRST.enum_gate_min * 10;
 
-    if (FPGA::valueADC > max - deltaMAX || valueADC < min + deltaMIN)
+    if (valueADC > max - deltaMAX || valueADC < min + deltaMIN)
     {
         return NULL_TSHIFT;
     }
@@ -154,7 +154,7 @@ int FPGA::CalculateShift()
 }
 
 
-bool FPGA::ReadDataChannelRand(uint8 *addr, uint8 *data)
+bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
 {
     int Tsm = CalculateShift();
 
@@ -199,7 +199,7 @@ bool FPGA::ReadDataChannelRand(uint8 *addr, uint8 *data)
 }
 
 
-bool FPGA::ReadDataChannel(Chan::E ch, uint8 *data)
+bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
 {
     uint numPoints = ENumPointsFPGA::PointsInChannel();
 

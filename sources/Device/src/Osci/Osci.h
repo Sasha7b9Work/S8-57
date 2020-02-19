@@ -5,40 +5,64 @@
 struct Osci
 {
     friend struct Randomizer;
+    friend struct ContextTester;
+
 
     static void Init();
 
+
     static void Update();
+
 
     static void OnPressStart();
 
+
     static void DeInit();
+
     // (Если button == true) - это запуск кнопкой
     static void Start(bool button);
 
+
     static void Stop();
 
+
     static bool IsRunning();
+    
     // Это вызываем в случае изменения настройки
     static void Restart();
+    
     // Возвращает true, если находится в поточечном режиме
     static bool InModeP2P();
+    
     // Возвращает true, если работает в режиме рандомизатора
     static bool InModeRandomizer();
+    
     // Эту функцию надо вызывать при изменении длины памяти. Ну или режима пикового детектора
     static void OnChangedPoints();
+    
     // Эту функцию нужно постоянно вызывать во время выполнения программы для чтения точек поточечного фрейма, если мы находимся в поточечном режиме
     static void ReadPointP2P();
+    
     // Загрузить значение удержания синхронизации
     static void LoadHoldfOff();
+    
     // Эту функцию нужно вызывать при изменении режима запуска
     static void ChangedTrigStartMode();
+    
     // Эту функцию нужно вызывать при изменении TBase
     static void ChangedTBase();
+    
     // Очистка данных рандомизатора при переключении режимов
     static void ClearDataRand();
 
+
+    static void SetValueADC(uint16 value);
+
+    
     static int addShift;
+
+    
+    static void ReadData();
 
     // Структура для хранения информации, необходимой для чтения в режиме рандомизатора
     struct StructReadRand
@@ -46,6 +70,7 @@ struct Osci
         uint step;       ///< Шаг между точками
         uint posFirst;   ///< Позиция первой считанной точки
     };
+    
     // Возвращает данные, необходимые для чтения даннхы в режмиме рандомизатора.
     // Если Tsm == 0, то структура будет использоваться не для чтения данных, а для правильного усредения.
     // В этом случае
@@ -78,10 +103,30 @@ private:
     static void StopSingleP2P();
 
     static void SetFunctionsStartStop();
+
     // В зависимости от состояния флага готовности данных читает данные и возвращает флаг необходимости остановить процесс сбора информации
     static bool ProcessFlagReady();
+
     // Обработать флаг предзапуска
     static void ProcessFlagPred();
+
+    // Читать данные канала в памяить data
+    static bool ReadDataChannel(Chan::E ch, uint8 *data);
+
+
+    static uint16 ReadLastRecord(Chan::E ch);
+
+
+    static bool ReadDataChannelRand(uint8 *address, uint8 *data);
+
+
+    static int CalculateShift();
+
+    // Здесь хранится адрес, начиная с которого будем читать данные по каналам. Если addrRead == 0xffff, то адрес вначале нужно считать
+    static uint16 addrRead;
+
+    // Значение, считанное из handleADC
+    static uint16 valueADC;
 };
 
 

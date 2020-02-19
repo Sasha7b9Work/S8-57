@@ -11,7 +11,7 @@
 
 
 bool   FPGA::forcedStart = false;
-uint16 FPGA::valueADC = 0;
+uint16 Osci::valueADC = 0;
 uint16 FPGA::post = static_cast<uint16>(~(512));
 uint16 FPGA::pred = static_cast<uint16>(~(512));
 
@@ -35,7 +35,7 @@ void FPGA::ForcedStart()
 }
 
 
-uint16 FPGA::ReadLastRecord(Chan::E ch)
+uint16 Osci::ReadLastRecord(Chan::E ch)
 {
     static uint16 address = 0;
 
@@ -76,7 +76,7 @@ void FPGA::Reset()
 }
 
 
-void FPGA::SetValueADC(uint16 value)
+void Osci::SetValueADC(uint16 value)
 {
     valueADC = value;
 }
@@ -98,53 +98,11 @@ void Randomizer::Read()
     {
         Timer::PauseOnTicks(5 * 90 * 20);
 
-        FPGA::ReadDataChannel(Chan::A, IntRAM::ReadRand(Chan::A));
+        Osci::ReadDataChannel(Chan::A, IntRAM::ReadRand(Chan::A));
 
-        FPGA::ReadDataChannel(Chan::B, IntRAM::ReadRand(Chan::B));
+        Osci::ReadDataChannel(Chan::B, IntRAM::ReadRand(Chan::B));
 
         Osci::Start(false);
-    }
-}
-
-
-void FPGA::ReadData()
-{
-    Osci::Stop();
-
-    DataSettings *ds = RAM::PrepareForNewData();
-
-    
-
-    if (ReadDataChannel(Chan::A, ds->dataA))
-    {
-        if (ReadDataChannel(Chan::B, ds->dataB))
-        {
-        }
-        else
-        {
-            return;
-        }
-    }
-
-    if (ENumAverage() != ENumAverage::_1)               // Если включено усреднение
-    {
-        DataSettings *last = RAM::Get(0);
-        DataSettings *prev = RAM::Get(1);
-
-        if (prev && last)
-        {
-            if (last->IsEquals(*prev))
-            {
-                if (ENABLED_A(last))
-                {
-                    AveragerOsci::Process(Chan::A, last->dataA, last->BytesInChannel());
-                }
-                if (ENABLED_B(last))
-                {
-                    AveragerOsci::Process(Chan::B, last->dataB, last->BytesInChannel());
-                }
-            }
-        }
     }
 }
 

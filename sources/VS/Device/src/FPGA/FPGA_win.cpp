@@ -8,7 +8,7 @@
 #include <cstring>
 
 
-uint16 FPGA::addrRead = 0;
+uint16 Osci::addrRead = 0;
 
 
 void FPGA::Init()
@@ -78,7 +78,7 @@ static bool GenerateNormalModeData(Chan::E ch, uint8 *data, uint numBytes)
 }
 
 
-bool FPGA::ReadDataChannel(Chan::E ch, uint8 *data)
+bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
 {
     if (!Chan(ch).IsEnabled())
     {

@@ -148,7 +148,7 @@ bool Osci::ProcessFlagReady()
         {
             Timer::PauseOnTicks(5 * 90 * 20);
 
-            FPGA::ReadData();
+            ReadData();
 
             if(TrigStartMode::IsSingle())
             {
@@ -324,7 +324,7 @@ void Osci::SetFunctionsStartStop()
 void Osci::StartNormal(bool)
 {
     FPGA::forcedStart = false;
-    FPGA::addrRead = 0xffff;
+    addrRead = 0xffff;
 
     FrameP2P::Prepare();
 
@@ -337,7 +337,7 @@ void Osci::StartNormal(bool)
 void Osci::StartP2P(bool button)
 {
     FPGA::forcedStart = false;
-    FPGA::addrRead = 0xffff;
+    addrRead = 0xffff;
 
     FrameP2P::Prepare();
 
@@ -437,4 +437,46 @@ void Osci::ClearDataRand()
 
     std::memset(ds->Data(Chan::A), VALUE::NONE, ds->PointsInChannel());
     std::memset(ds->Data(Chan::B), VALUE::NONE, ds->PointsInChannel());
+}
+
+
+void Osci::ReadData()
+{
+    Osci::Stop();
+
+    DataSettings *ds = RAM::PrepareForNewData();
+
+
+
+    if(ReadDataChannel(Chan::A, ds->dataA))
+    {
+        if(ReadDataChannel(Chan::B, ds->dataB))
+        {
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    if(ENumAverage() != ENumAverage::_1)               // Если включено усреднение
+    {
+        DataSettings *last = RAM::Get(0);
+        DataSettings *prev = RAM::Get(1);
+
+        if(prev && last)
+        {
+            if(last->IsEquals(*prev))
+            {
+                if(ENABLED_A(last))
+                {
+                    AveragerOsci::Process(Chan::A, last->dataA, last->BytesInChannel());
+                }
+                if(ENABLED_B(last))
+                {
+                    AveragerOsci::Process(Chan::B, last->dataB, last->BytesInChannel());
+                }
+            }
+        }
+    }
 }
