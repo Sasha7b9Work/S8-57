@@ -88,11 +88,11 @@ bool FPGA::IsRunning()
 }
 
 
-void Osci::ReadRand()
+void Randomizer::Read()
 {
     FPGA::ReadFlag();
 
-    ProcessFlagPred();
+    Osci::ProcessFlagPred();
 
     if(FPGA::flag.DataReady())
     {
@@ -112,6 +112,8 @@ void FPGA::ReadData()
     Osci::Stop();
 
     DataSettings *ds = RAM::PrepareForNewData();
+
+    
 
     if (ReadDataChannel(Chan::A, ds->dataA))
     {

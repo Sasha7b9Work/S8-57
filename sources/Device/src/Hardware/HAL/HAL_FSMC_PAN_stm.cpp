@@ -130,7 +130,7 @@ exit:
     }
     else if(Osci::InModeRandomizer())
     {
-        Osci::ReadRand();
+        Randomizer::Read();
     }
 #endif
 

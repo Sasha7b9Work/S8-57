@@ -29,6 +29,7 @@ struct FPGA
     friend struct ContextOsci;
     friend struct ContextRecorder;
     friend struct ContextTester;
+    friend struct Randomizer;
 
     friend struct Bandwidth;
     friend struct Device;

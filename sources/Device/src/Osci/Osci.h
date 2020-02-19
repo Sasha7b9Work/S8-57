@@ -4,6 +4,8 @@
 
 struct Osci
 {
+    friend struct Randomizer;
+
     static void Init();
 
     static void Update();
@@ -25,8 +27,6 @@ struct Osci
     static bool InModeRandomizer();
     // Эту функцию надо вызывать при изменении длины памяти. Ну или режима пикового детектора
     static void OnChangedPoints();
-    // Эту функцию нужно пстоянно вызывать во время выполнения программы для чтения точек рандомизатора, если мы находимся в режиме рандомизатора
-    static void ReadRand();
     // Эту функцию нужно постоянно вызывать во время выполнения программы для чтения точек поточечного фрейма, если мы находимся в поточечном режиме
     static void ReadPointP2P();
     // Загрузить значение удержания синхронизации
@@ -84,8 +84,17 @@ private:
     static void ProcessFlagPred();
 };
 
+
 struct AveragerOsci
 {
     static void Process(Chan::E ch, const uint8 *newData, uint size);
     static void SettingChanged();
+};
+
+
+// Вспомогательная структура для функций рандомизатора
+struct Randomizer
+{
+    // Эту функцию нужно пстоянно вызывать во время выполнения программы для чтения точек рандомизатора, если мы находимся в режиме рандомизатора
+    static void Read();
 };
