@@ -142,6 +142,8 @@ struct Randomizer
     // Перемещает считанные данные из временного хранилища в место, указанное ds
     static void MoveReadedData(DataSettings *ds);
 
+
+
 private:
     static void MoveReadedDataChannel(DataSettings *ds, Chan::E ch);
 };

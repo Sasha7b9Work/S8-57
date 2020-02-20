@@ -1,7 +1,7 @@
 #pragma once
 #include "defines.h"
 #include "Hardware/Memory/Sector.h"
-#include "Osci/DataSettings.h"
+#include "Osci/DeviceSettings.h"
 
 
 #define PRIORITY_SOUND_DMA1_STREAM5 5, 0

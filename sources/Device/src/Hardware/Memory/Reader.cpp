@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Osci/DataSettings.h"
+#include "Osci/DeviceSettings.h"
 #include "Hardware/Memory/IntRAM.h"
 #include "Hardware/Memory/Reader.h"
 #include "Hardware/Memory/RAM.h"

@@ -1531,16 +1531,6 @@
               <FilePath>.\src\Osci\AveragerOsci.cpp</FilePath>
             </File>
             <File>
-              <FileName>DataSettings.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Osci\DataSettings.h</FilePath>
-            </File>
-            <File>
-              <FileName>DataSettings.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\DataSettings.cpp</FilePath>
-            </File>
-            <File>
               <FileName>FreqMeter.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Osci\FreqMeter.h</FilePath>
@@ -1564,6 +1554,16 @@
               <FileName>SettingsOsci.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\SettingsOsci.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DeviceSettings.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\DeviceSettings.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DeviceSettings.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Osci\DeviceSettings.h</FilePath>
             </File>
           </Files>
         </Group>

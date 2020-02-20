@@ -1,5 +1,5 @@
 #pragma once
-#include "Osci/DataSettings.h"
+#include "Osci/DeviceSettings.h"
 #include "Hardware/Memory/RAM.h"
 #include "Menu/Pages/Include/PageMemory.h"
 

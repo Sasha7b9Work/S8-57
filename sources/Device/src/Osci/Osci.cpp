@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "log.h"
 #include "device.h"
-#include "Osci/DataSettings.h"
+#include "Osci/DeviceSettings.h"
 #include "Hardware/Memory/Reader.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/Timer.h"
@@ -460,6 +460,11 @@ void Osci::ReadData()
         {
             return;
         }
+    }
+
+    if(InModeRandomizer())
+    {
+
     }
 
     if(ENumAverage() != ENumAverage::_1)               // Если включено усреднение

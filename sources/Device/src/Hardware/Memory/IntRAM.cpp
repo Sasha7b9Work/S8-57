@@ -2,7 +2,7 @@
 #include "FPGA/FPGA.h"
 #include "Hardware/Memory/IntRAM.h"
 #include "Menu/Pages/Include/PageMemory.h"
-#include "Osci/DataSettings.h"
+#include "Osci/DeviceSettings.h"
 
 
 /*

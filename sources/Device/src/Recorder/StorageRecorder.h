@@ -1,5 +1,5 @@
 #pragma once
-#include "Osci/DataSettings.h"
+#include "Osci/DeviceSettings.h"
 
 
 /// Точка на графике

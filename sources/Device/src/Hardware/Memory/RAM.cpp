@@ -11,7 +11,7 @@
 #include "Hardware/Memory/ExtRAM.h"
 #include "Hardware/Memory/IntRAM.h"
 #include "Hardware/Memory/RAM.h"
-#include "Osci/DataSettings.h"
+#include "Osci/DeviceSettings.h"
 #include "Osci/Osci.h"
 #include "Utils/Math.h"
 #include <cstring>

@@ -183,8 +183,8 @@ source_group(Hardware\\Memory   FILES   ../../Device/src/Hardware/Memory/ExtRAM.
                                         ../../Device/src/Hardware/Memory/Sector.cpp
                                                      src/Hardware/Memory/Sector_win.cpp)
 source_group(Osci               FILES   ../../Device/src/Osci/AveragerOsci.cpp
-                                        ../../Device/src/Osci/DataSettings.h
-                                        ../../Device/src/Osci/DataSettings.cpp
+                                        ../../Device/src/Osci/DeviceSettings.h
+                                        ../../Device/src/Osci/DeviceSettings.cpp
                                         ../../Device/src/Osci/FreqMeter.h
                                         ../../Device/src/Osci/FreqMeter.cpp
                                         ../../Device/src/Osci/Osci.h
@@ -353,8 +353,8 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Multimeter/*
 
                     ../../Device/src/Osci/AveragerOsci.cpp
-                    ../../Device/src/Osci/DataSettings.h
-                    ../../Device/src/Osci/DataSettings.cpp
+                    ../../Device/src/Osci/DeviceSettings.h
+                    ../../Device/src/Osci/DeviceSettings.cpp
                     ../../Device/src/Osci/FreqMeter.h
                     ../../Device/src/Osci/FreqMeter.cpp
                     ../../Device/src/Osci/Osci.h
