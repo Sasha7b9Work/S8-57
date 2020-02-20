@@ -189,9 +189,9 @@ source_group(Osci               FILES   ../../Device/src/Osci/AveragerOsci.cpp
                                         ../../Device/src/Osci/FreqMeter.cpp
                                         ../../Device/src/Osci/Osci.h
                                         ../../Device/src/Osci/Osci.cpp
-                                        ../../Device/src/Osci/SettingsOsci.cpp
                                                      src/Osci/Osci_win.h
-                                                     src/Osci/Osci_win.cpp)
+                                                     src/Osci/Osci_win.cpp
+                                        ../../Device/src/Osci/ParametersOsci.cpp)
 source_group(Recorder           FILES   ../../Device/src/Recorder/DisplayRecorder.h
                                         ../../Device/src/Recorder/DisplayRecorder.cpp
                                         ../../Device/src/Recorder/Recorder.h
@@ -206,8 +206,8 @@ source_group(Settings           FILES   ../../Device/src/Settings/Settings.h
                                         ../../Device/src/Settings/SettingsNRST.h
                                         ../../Device/src/Settings/SettingsNRST.cpp
                                                      src/Settings/Settings_win.cpp
-                                        ../../Device/src/Settings/SettingsOsci.h
-                                        ../../Device/src/Settings/SettingsOsci.cpp)
+                                        ../../Device/src/Settings/ParametersOsci.h
+                                        ../../Device/src/Settings/ParametersOsci.cpp)
 
 file(GLOB SOURCES   ../../common/_VS/*
                     ../../common/_VS/CMSIS/*
@@ -359,9 +359,9 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Osci/FreqMeter.cpp
                     ../../Device/src/Osci/Osci.h
                     ../../Device/src/Osci/Osci.cpp
-                    ../../Device/src/Osci/SettingsOsci.cpp
                                  src/Osci/Osci_win.h
                                  src/Osci/Osci_win.cpp
+                    ../../Device/src/Osci/ParametersOsci.cpp
                     ../../Device/src/Osci/Display/*
                     ../../Device/src/Osci/Measurements/*
                     ../../Device/src/SCPI/*
@@ -381,8 +381,8 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Settings/SettingsNRST.h
                     ../../Device/src/Settings/SettingsNRST.cpp
                                  src/Settings/Settings_win.cpp
-                    ../../Device/src/Settings/SettingsOsci.h
-                    ../../Device/src/Settings/SettingsOsci.cpp
+                    ../../Device/src/Settings/ParametersOsci.h
+                    ../../Device/src/Settings/ParametersOsci.cpp
                     
 					../../Device/src/Test/*
                     ../../Device/src/Tester/*

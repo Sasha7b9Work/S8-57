@@ -1,5 +1,5 @@
 #pragma once
-#include "Settings/SettingsOsci.h"
+#include "Settings/ParametersOsci.h"
 
 
 class Buffer;

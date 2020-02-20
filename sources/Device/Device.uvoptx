@@ -2986,18 +2986,6 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Osci\SettingsOsci.cpp</PathWithFileName>
-      <FilenameWithoutPath>SettingsOsci.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>27</GroupNumber>
-      <FileNumber>210</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
       <PathWithFileName>.\src\Osci\DeviceSettings.cpp</PathWithFileName>
       <FilenameWithoutPath>DeviceSettings.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
@@ -3005,13 +2993,25 @@
     </File>
     <File>
       <GroupNumber>27</GroupNumber>
-      <FileNumber>211</FileNumber>
+      <FileNumber>210</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>.\src\Osci\DeviceSettings.h</PathWithFileName>
       <FilenameWithoutPath>DeviceSettings.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>27</GroupNumber>
+      <FileNumber>211</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\Osci\ParametersOsci.cpp</PathWithFileName>
+      <FilenameWithoutPath>ParametersOsci.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -3306,6 +3306,30 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
+      <PathWithFileName>.\src\Settings\ParametersOsci.h</PathWithFileName>
+      <FilenameWithoutPath>ParametersOsci.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>31</GroupNumber>
+      <FileNumber>234</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\src\Settings\ParametersOsci.cpp</PathWithFileName>
+      <FilenameWithoutPath>ParametersOsci.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>31</GroupNumber>
+      <FileNumber>235</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
       <PathWithFileName>.\src\Settings\Settings.h</PathWithFileName>
       <FilenameWithoutPath>Settings.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
@@ -3313,7 +3337,7 @@
     </File>
     <File>
       <GroupNumber>31</GroupNumber>
-      <FileNumber>234</FileNumber>
+      <FileNumber>236</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3325,7 +3349,7 @@
     </File>
     <File>
       <GroupNumber>31</GroupNumber>
-      <FileNumber>235</FileNumber>
+      <FileNumber>237</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3337,7 +3361,7 @@
     </File>
     <File>
       <GroupNumber>31</GroupNumber>
-      <FileNumber>236</FileNumber>
+      <FileNumber>238</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3349,7 +3373,7 @@
     </File>
     <File>
       <GroupNumber>31</GroupNumber>
-      <FileNumber>237</FileNumber>
+      <FileNumber>239</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3361,37 +3385,13 @@
     </File>
     <File>
       <GroupNumber>31</GroupNumber>
-      <FileNumber>238</FileNumber>
+      <FileNumber>240</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>.\src\Settings\SettingsNRST.cpp</PathWithFileName>
       <FilenameWithoutPath>SettingsNRST.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>31</GroupNumber>
-      <FileNumber>239</FileNumber>
-      <FileType>5</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Settings\SettingsOsci.h</PathWithFileName>
-      <FilenameWithoutPath>SettingsOsci.h</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>31</GroupNumber>
-      <FileNumber>240</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Settings\SettingsOsci.cpp</PathWithFileName>
-      <FilenameWithoutPath>SettingsOsci.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

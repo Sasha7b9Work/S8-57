@@ -2,7 +2,7 @@
 #include "Display/Colors.h"
 #include "Menu/MenuItems.h"
 #include "Menu/Menu.h"
-#include "Settings/SettingsOsci.h"
+#include "Settings/ParametersOsci.h"
 
 
 #define NUM_AVE_MAX     256

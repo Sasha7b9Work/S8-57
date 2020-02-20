@@ -1,6 +1,6 @@
 #pragma once
 #include "Menu/MenuItems.h"
-#include "Settings/SettingsOsci.h"
+#include "Settings/ParametersOsci.h"
 
 
 struct SettingsDebug

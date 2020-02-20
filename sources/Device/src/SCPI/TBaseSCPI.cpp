@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "SCPI/TBaseSCPI.h"
-#include "Settings/SettingsOsci.h"
+#include "Settings/ParametersOsci.h"
 
 
 // :TIME:SCALE:

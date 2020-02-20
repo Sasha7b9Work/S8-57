@@ -6,7 +6,7 @@
 #include "Keyboard/Keyboard.h"
 #include "Menu/MenuItems.h"
 #include "Osci/Display/DisplayOsci.h"
-#include "Settings/SettingsOsci.h"
+#include "Settings/ParametersOsci.h"
 
 
 KeyEvent Handlers::event;

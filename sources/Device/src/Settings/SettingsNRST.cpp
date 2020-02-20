@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Hardware/Memory/ROM.h"
-#include "Settings/SettingsOsci.h"
+#include "Settings/ParametersOsci.h"
 #include "Settings/SettingsNRST.h"
 #include <cstring>
 

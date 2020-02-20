@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "Hardware/Timer.h"
 #include "Osci/Osci_win.h"
-#include "Settings/SettingsOsci.h"
+#include "Settings/ParametersOsci.h"
 
 
 bool OsciHAL::ReadyPoint()
