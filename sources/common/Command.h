@@ -31,7 +31,8 @@ struct Command
 /* 19 */    Paint_SetMinWidthFont,  // 19 |   width     |
 /* 20 */    Paint_SetTextSpacing,   // 20 |   0 | 1     |
 /* 21 */    AddToConsole,           // 21 | num symb    |  ..... symbols ....
-/* 22 */    Count
+/* 22 */    Text_Length,            // 22 | num symbols 
+/* 23 */    Count
     };
 };
 
