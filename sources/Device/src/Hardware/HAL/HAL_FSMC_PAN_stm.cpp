@@ -70,8 +70,7 @@ void HAL_BUS::InitPanel()
 
 bool HAL_BUS::Panel::Receive()
 {
-    //if(pinReadyPAN.IsPassive() || pinDataPAN.IsPassive())
-    if((GPIOA->IDR & GPIO_PIN_7) || (GPIOC->IDR & GPIO_PIN_4))
+    if(pinReadyPAN.IsPassive() || pinDataPAN.IsPassive())
     {
         return false;
     }
@@ -96,6 +95,7 @@ bool HAL_BUS::Panel::Receive()
     pinCS.SetActive();
     
     pinReadyPAN.WaitPassive();
+
     while(pinReadyPAN.IsActive()) {};
     
     uint8 data = 0;
@@ -115,11 +115,9 @@ bool HAL_BUS::Panel::Receive()
     
 exit:
     
-    //pinRD.SetPassive();
-    GPIOD->BSRR = GPIO_PIN_4;
+    pinRD.SetPassive();
 
-    //pinCS.SetPassive();
-    GPIOG->BSRR = GPIO_PIN_12;
+    pinCS.SetPassive();
     
     interactionWithPanel = false;
 
