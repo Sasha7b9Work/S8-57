@@ -100,7 +100,7 @@ bool HAL_BUS::Panel::Receive()
     
     uint8 data = 0;
 
-    while((GPIOA->IDR & GPIO_PIN_7) == 0)
+    while(pinReadyPAN.IsActive())
     {
         if(pinDataPAN.IsPassive())
         {
