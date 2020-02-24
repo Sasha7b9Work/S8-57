@@ -130,9 +130,7 @@ void HAL_BUS::Update()
 {
     while(pinCS.IsActive())
     {
-        // Чтение байта из устройства
-
-        if(pinWR.IsActive())
+        if(pinWR.IsActive())                            // Чтение байта из устройства
         {
             //uint8 data = DataBus::Read();
             uint8 data = (uint8)GPIOE->IDR;
@@ -145,10 +143,7 @@ void HAL_BUS::Update()
 
             pinReady.SetActive();
         }
-
-        // Запись байта в устройсто
-
-        if(pinRD.IsActive() && queueData.Size())
+        else if(pinRD.IsActive() && queueData.Size())   // Запись байта в устройсто
         {
             // Конфигурируем ШД на запись
             GPIOE->MODER &= 0xffff0000U;
