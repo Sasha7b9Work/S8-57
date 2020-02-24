@@ -25,7 +25,15 @@ int WorkerLengthText::recvLength = -1;
 
 int DFont::GetLengthText(pString text)
 {
-    return WorkerLengthText::Run(text);
+    int result = 0;
+    char *symbol = const_cast<char *>(text);
+
+    while(*symbol)
+    {
+        result += GetWidth(*symbol) + spacing;
+        symbol++;
+    }
+    return result;
 }
 
 
