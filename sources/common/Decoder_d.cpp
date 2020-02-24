@@ -74,8 +74,7 @@ void DDecoder::RunStep(uint8 data)
         EmptyFunc,      // Paint_HPointLine
         EmptyFunc,      // Paint_SetMonoSpaceFont
         EmptyFunc,      // Paint_SetTextSpacing
-        AddToConsole,   // AddToConsole
-        FuncLengthText  // Text_Length
+        AddToConsole    // AddToConsole
     };
 
     if (step == 0)
@@ -162,22 +161,6 @@ bool DDecoder::FuncScreen(uint8 data)
         Display::SaveRow(numString);
     }
 
-
-    return true;
-}
-
-
-bool DDecoder::FuncLengthText(uint8 data)
-{
-    if(step == 0)
-    {
-        return false;
-    }
-
-    if(step == 1)
-    {
-        WorkerLengthText::SetLength(data);
-    }
 
     return true;
 }

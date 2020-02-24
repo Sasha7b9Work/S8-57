@@ -48,13 +48,3 @@ public:
     /// Возвращает количество пустых пикселей между символами
     static int GetSpacing();
 };
-
-
-struct WorkerLengthText
-{
-    static int Run(pString text);
-    static void SetLength(uint8);
-private:
-    /// Используется для приёма длины текста от панели
-    static int recvLength;
-};

@@ -20,56 +20,9 @@ DTypeFont::E currentFont = DTypeFont::_8;
 static int spacing = 1;
 
 
-int WorkerLengthText::recvLength = -1;
-
-
-int DFont::GetLengthText(pString text)
+int DFont::GetLengthText(pString)
 {
-    return WorkerLengthText::Run(text);
-}
-
-
-int WorkerLengthText::Run(pString text)
-{
-    recvLength = -1;
-
-    uint lenText = std::strlen(text);
-
-    do
-    {
-        uint size = lenText + 2;
-
-        uint8 *buffer = new uint8[size];
-        buffer[0] = Command::Text_Length;
-        buffer[1] = static_cast<uint8>(lenText);
-
-        std::memcpy(buffer + 2, text, lenText);
-
-        HAL_BUS::Panel::Send(buffer, size);
-
-        delete[] buffer;
-
-        uint start = TIME_MS;
-
-        while(recvLength == -1)
-        {
-            HAL_BUS::Panel::Receive();
-            DDecoder::Update();
-
-            if(TIME_MS - start > 10)        /// \todo временный костыль. Надо разобраться, почему тут зависает
-            {
-                break;
-            }
-        }
-    } while(recvLength == -1);
-
-    return recvLength;
-}
-
-
-void WorkerLengthText::SetLength(uint8 l)
-{
-    recvLength = l;
+    return 1;
 }
 
 

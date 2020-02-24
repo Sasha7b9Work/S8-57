@@ -34,8 +34,6 @@ private:
     /// ƒобавл€ет текстовую строку в консоль
     static bool AddToConsole(uint8);
 
-    static bool FuncLengthText(uint8);
-
     static bool FuncScreen(uint8);
 
     static bool ButtonPress(uint8);
