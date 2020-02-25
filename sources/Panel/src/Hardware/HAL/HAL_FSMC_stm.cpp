@@ -142,7 +142,9 @@ void HAL_BUS::Update()
 
             PDecoder::AddData(data);        /// \todo Сейчас недостаток - пока не отработает PDecoder::AddData(), устройство не пойдёт дальше
 
-            while(pinCS.IsActive()) {};
+            //while(pinCS.IsActive()) {};
+            //while(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13) == GPIO_PIN_RESET) { }
+            while((GPIOC->IDR & GPIO_PIN_13) == 0) { }
 
             //pinReady.SetActive();
             GPIOC->BSRR = (uint)GPIO_PIN_14 << 16U;
