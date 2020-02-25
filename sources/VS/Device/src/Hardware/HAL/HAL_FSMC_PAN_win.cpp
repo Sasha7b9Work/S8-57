@@ -41,18 +41,6 @@ void HAL_BUS::Panel::Send(uint8 *data, uint num)
 
         memDC.SetPen(wxPen(colorDraw));
     }
-    else if(*data == Command::Text_Length)
-    {
-        uint size = static_cast<uint>(*(data + 1) + 1);
-
-        char *text = new char[size];
-        std::memcpy(text, data + 2, size - 1);
-        text[size - 1] = '\0';
-
-        WorkerLengthText::SetLength(static_cast<uint8>(PFont::GetLengthText(text)));
-
-        delete[]text;
-    }
     else if(*data == Command::Paint_SetTextSpacing)
     {
         PFont::SetSpacing(*(data + 1));
