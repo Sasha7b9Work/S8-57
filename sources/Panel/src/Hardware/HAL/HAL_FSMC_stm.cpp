@@ -137,13 +137,15 @@ void HAL_BUS::Update()
             //uint8 data = DataBus::Read();
             uint8 data = (uint8)GPIOE->IDR;
 
-            pinReady.SetPassive();
+            //pinReady.SetPassive();
+            GPIOC->BSRR = GPIO_PIN_14;
 
             PDecoder::AddData(data);        /// \todo Сейчас недостаток - пока не отработает PDecoder::AddData(), устройство не пойдёт дальше
 
             while(pinCS.IsActive()) {};
 
-            pinReady.SetActive();
+            //pinReady.SetActive();
+            GPIOC->BSRR = (uint)GPIO_PIN_14 << 16U;
         }
         else if(pinRD.IsActive() && queueData.Size())   // Запись байта в устройсто
         {
