@@ -8,24 +8,6 @@
 
 
 
-extern void CalculateCurrentColor();
-
-
-
-int Painter::DrawTextOnBackground(int x, int y, const char *text, Color colorBackground)
-{
-    int width = PFont::GetLengthText(text);
-    int height = PFont::GetHeight();
-
-    Color colorText(GetColor());
-    SetColor(colorBackground);
-    FillRegion(x - 1, y, width, height);
-    SetColor(colorText);
-
-    return Text::Draw(x, y, text);
-}
-
-
 int Painter::DrawFormatText(int x, int y, char *format, ...)
 {
     char buffer[200];

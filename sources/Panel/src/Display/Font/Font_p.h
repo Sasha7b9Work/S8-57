@@ -30,8 +30,6 @@ struct PFont
     PSymbol symbols[256];
 
 public:
-    static int  GetLengthText(pString text);
-
     /// Устанавливает текущий шрифт. Ранее установленный можно восстановить функцией Pop()
     static void Set(const PTypeFont::E typeFont);
     static PTypeFont::E Current();

@@ -49,8 +49,6 @@ struct Painter
     static void FillRegion(int x, int y, int width, int height);
 
     static uint ReduceBrightness(uint colorValue, float newBrightness);
-    /// Выводит текст на прямоугольнике цвета colorBackgound
-    static int DrawTextOnBackground(int x, int y, const char *text, Color colorBackground);
 
     static int DrawFormatText(int x, int y, char *format, ...);
     /// Пишет строку в позиции x, y

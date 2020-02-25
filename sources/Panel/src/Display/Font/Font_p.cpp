@@ -15,21 +15,6 @@ const PFont *font = &font8;
 PTypeFont::E pushedFont = PTypeFont::_8;
 PTypeFont::E currentFont = PTypeFont::_8;
 
-static int spacing = 1;
-
-
-int PFont::GetLengthText(pString text)
-{
-    int result = 0;
-    char *symbol = const_cast<char *>(text);
-
-    while(*symbol)
-    {
-        result += PFont::GetWidth(*symbol) + spacing;
-        symbol++;
-    }
-    return result;
-}
 
 PTypeFont::E PFont::Current()
 {
