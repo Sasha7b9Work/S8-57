@@ -327,15 +327,15 @@ void Osci::StartNormal(bool)
 }
 
 
-void Osci::StartP2P(bool button)
+void Osci::StartP2P(bool)
 {
     FPGA::forcedStart = false;
     addrRead = 0xffff;
 
-    if(button || TrigStartMode::IsWait())
-    {
+    //if(button || TrigStartMode::IsWait())
+    //{
         FPGA::GiveStart(FPGA::pred, FPGA::post);
-    }
+    //}
 
     FPGA::isRunning = true;
 }
