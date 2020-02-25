@@ -189,9 +189,11 @@ void HAL_BUS::Panel::Send(uint8 *data, uint size)
 
         while(pinReadyPAN.IsActive()) {}    // Переключение PIN_PAN_READY в неактивное состояние означает, что панель приняла данные и обрабатывает их
 
-        pinWR.SetPassive();                 // \ Устанавливаем WR и CS в неактивное состояние - элементарный цикл записи окончен
+        //pinWR.SetPassive();                 // \ Устанавливаем WR и CS в неактивное состояние - элементарный цикл записи окончен
+        GPIOD->BSRR = GPIO_PIN_5;
 
-        pinCS.SetPassive();                 // /
+        //pinCS.SetPassive();                 // /
+        GPIOG->BSRR = GPIO_PIN_12;
     }
 
     interactionWithPanel = false;
