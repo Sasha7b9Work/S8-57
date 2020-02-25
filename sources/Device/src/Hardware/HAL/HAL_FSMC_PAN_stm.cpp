@@ -126,7 +126,7 @@ exit:
 #ifdef DEVICE
     if(Osci::InModeP2P())
     {
-        Osci::ReadPointP2P();
+        Roller::ReadPoint();
     }
     else if(Osci::InModeRandomizer())
     {

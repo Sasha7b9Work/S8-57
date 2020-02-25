@@ -60,7 +60,7 @@ void HAL_BUS::Panel::Send(uint8)
 
 bool HAL_BUS::Panel::Receive()
 {
-    Osci::ReadPointP2P();
+    Roller::ReadPoint();
 
     return false;
 }
