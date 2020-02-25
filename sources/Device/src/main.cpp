@@ -16,7 +16,5 @@ int main(void)
     while (1)
     {
         Device::Update();
-
-        //LOG_WRITE("test %f", ExtRAM::TestTime(512) * 1000);
     }
 }
