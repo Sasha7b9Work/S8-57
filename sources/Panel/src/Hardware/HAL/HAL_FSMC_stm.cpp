@@ -128,9 +128,11 @@ void HAL_BUS::SendToDevice(uint8 *data, uint size)
 
 void HAL_BUS::Update()
 {
-    while(pinCS.IsActive())
+    //while(pinCS.IsActive())
+    while((GPIOC->IDR & GPIO_PIN_13) == 0)
     {
-        if(pinWR.IsActive())                            // Чтение байта из устройства
+        //if(pinWR.IsActive())                            // Чтение байта из устройства
+        if((GPIOD->IDR & GPIO_PIN_5) == 0)
         {
             //uint8 data = DataBus::Read();
             uint8 data = (uint8)GPIOE->IDR;
