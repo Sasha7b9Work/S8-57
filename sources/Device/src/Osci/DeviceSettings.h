@@ -139,32 +139,3 @@ public:
 
 #define ENUM_POINTS(ds)         ((ds)->enumPoints)
 #define BYTES_IN_CHANNEL(ds)    ((uint)(ds)->BytesInChannel())
-
-
-struct FrameP2P
-{
-    static DataSettings *ds;
-    /// Подготовить фрейм для нового цикла чтения
-    static void Prepare();
-    static void AddPoint(const BitSet16 &a, const BitSet16 &b);
-    static void FillScreenBuffer(Buffer *buffer, Chan::E ch);
-    /// true, если данные нужно выводить из поточечного фрейма
-    static bool IsCorrect();
-    /// Позиция раздела в поточечном выводе - в ней нужно нарисовать вертикальную линию
-    static int posSeparate;
-private:
-    /// Количество всех считанных точек в поточечном режиме
-    static uint numBytesP2P;
-    /// Указатель на позицию записываемых данных. В байтах
-    static uint pointerP2P;
-    /// Добавить точки при выключенном пиковом детекторе
-    static void AddNormalPoint(uint8 a, uint8 b);
-    static void AddNormalPoint(Chan::E ch, uint8 point);
-    /// Добавить точки при включённом пиковом детекторе
-    static void AddPeakDetPoint(uint16 a, uint16 b);
-    static void AddPeakDetPoint(Chan::E ch, uint16 point);
-    /// Возвращает количество имеющихся байт канала
-    static uint GetNumberStoredBytes();
-    /// Возвращает значение байта в позиции position
-    static uint8 GetByte(uint position, Chan::E ch);
-};

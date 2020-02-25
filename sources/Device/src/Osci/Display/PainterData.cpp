@@ -28,11 +28,6 @@ void DisplayOsci::PainterData::DrawData()
         func[ModeWork()]();
     }
 
-    if(FrameP2P::IsCorrect())
-    {
-        VLine(Grid::Height()).Draw(Grid::Left() + FrameP2P::posSeparate, Grid::Top(), Color::GRID);
-    }
-    
     DrawSpectrum();
 
     Accumulator::NextFrame();
@@ -259,12 +254,6 @@ void DisplayOsci::PainterData::DrawChannel(Chan::E ch)
     }
 
     Buffer bufferP2P(static_cast<uint>(Grid::Width()));
-
-    if(FrameP2P::IsCorrect())
-    {
-        FrameP2P::FillScreenBuffer(&bufferP2P, ch);
-        data = bufferP2P.data;
-    }
 
     if (DisplayMapping::IsLines())
     {

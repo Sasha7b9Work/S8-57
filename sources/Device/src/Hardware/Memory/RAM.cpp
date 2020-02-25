@@ -173,17 +173,6 @@ DataSettings *RAM::PrepareForNewData()
         return Get();
     }
 
-    if(FrameP2P::IsCorrect())
-    {
-        FrameP2P::ds = nullptr;
-
-        DataSettings *result = Get();
-
-        result->timeMS = TIME_MS;
-
-        return result;
-    }
-
     DataSettings ds;
 
     ds.Fill();

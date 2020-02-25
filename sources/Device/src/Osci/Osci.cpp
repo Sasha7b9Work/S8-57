@@ -125,11 +125,6 @@ void Osci::ProcessFlagPred()
 {
     if(FPGA::flag.Pred() && !FPGA::forcedStart)
     {
-        if(InModeP2P() && !FrameP2P::IsCorrect())
-        {
-            return;
-        }
-
         if(!InModeRandomizer() && TrigStartMode::IsAuto() && FPGA::flag.HoldOff())
         {
             FPGA::ForcedStart();
@@ -169,18 +164,18 @@ bool Osci::ProcessFlagReady()
 
 void Osci::ReadPointP2P()
 {
-    if (FrameP2P::IsCorrect() && FPGA::IsRunning() && HAL_PIO::Read(PIN_P2P))
-    {
-        HAL_BUS::FPGA::SetAddrData(RD::DATA_A, RD::DATA_A + 1);
-        BitSet16 dataA(HAL_BUS::FPGA::ReadA0(), HAL_BUS::FPGA::ReadA1());
-
-        HAL_BUS::FPGA::SetAddrData(RD::DATA_B, RD::DATA_B + 1);
-        BitSet16 dataB(HAL_BUS::FPGA::ReadA0(), HAL_BUS::FPGA::ReadA1());
-
-        LOG_WRITE("—читаны точки");
-
-        FrameP2P::AddPoint(dataA, dataB);
-    }
+//    if (FrameP2P::IsCorrect() && FPGA::IsRunning() && HAL_PIO::Read(PIN_P2P))
+//    {
+//        HAL_BUS::FPGA::SetAddrData(RD::DATA_A, RD::DATA_A + 1);
+//        BitSet16 dataA(HAL_BUS::FPGA::ReadA0(), HAL_BUS::FPGA::ReadA1());
+//
+//        HAL_BUS::FPGA::SetAddrData(RD::DATA_B, RD::DATA_B + 1);
+//        BitSet16 dataB(HAL_BUS::FPGA::ReadA0(), HAL_BUS::FPGA::ReadA1());
+//
+//        LOG_WRITE("—читаны точки");
+//
+//        FrameP2P::AddPoint(dataA, dataB);
+//    }
 }
 
 
@@ -326,8 +321,6 @@ void Osci::StartNormal(bool)
     FPGA::forcedStart = false;
     addrRead = 0xffff;
 
-    FrameP2P::Prepare();
-
     FPGA::GiveStart(FPGA::pred, FPGA::post);
 
     FPGA::isRunning = true;
@@ -339,12 +332,9 @@ void Osci::StartP2P(bool button)
     FPGA::forcedStart = false;
     addrRead = 0xffff;
 
-    FrameP2P::Prepare();
-
     if(button || TrigStartMode::IsWait())
     {
         FPGA::GiveStart(FPGA::pred, FPGA::post);
-        FrameP2P::Prepare();
     }
 
     FPGA::isRunning = true;
