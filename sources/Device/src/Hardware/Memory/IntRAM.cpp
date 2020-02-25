@@ -3,24 +3,26 @@
 #include "Hardware/Memory/IntRAM.h"
 #include "Menu/Pages/Include/PageMemory.h"
 #include "Osci/DeviceSettings.h"
+#include <cstring>
 
 
-/*
-    Смещение  | Использование памяти
-    от начала |
-       0      | усреднение 1-го канала
-       16k    | усреднение 2-го канала
-       32k    | чтение рандомизатора 1-го канала
-       40k    | чтение нандомизатора 2-го канала
-       48k    |
-*/
+static DataSettings ds;
 
 
 static const uint SIZE_BUFFER = 112 * 1024;
 static uint8 buffer[SIZE_BUFFER];
 
-static uint16 *const ave[2] = { reinterpret_cast<uint16 *>(buffer), reinterpret_cast<uint16 *>(buffer + 2 * FPGA::MAX_NUM_POINTS) };
-static uint8 *const rand[2] = { buffer + 32 * 1024, buffer + 40 * 1024 };
+static uint16 *const memAveA = reinterpret_cast<uint16 *>(buffer);                              // 0           = 0k
+static uint16 *const memAveB = reinterpret_cast<uint16 *>(buffer + 2 * FPGA::MAX_NUM_POINTS);   // 2 * 8k      = 16k
+
+static uint8 *const memP2PA = buffer;                                                           // 0           = 0k
+static uint8 *const memP2PB = buffer + 2 * FPGA::MAX_NUM_POINTS;                                // 2 * 8k      = 16k
+
+static uint8 *const memRandA = memP2PB + 2 * FPGA::MAX_NUM_POINTS;                              // 4 * 8k      = 32k
+static uint8 *const memRandB = memRandA + FPGA::MAX_NUM_POINTS;                                 // 4 * 8k + 8k = 40k
+
+static uint16 *const ave[2] = { memAveA, memAveB };
+static uint8 *const rand[2] = { memRandA, memRandB };
 
 
 uint16 *IntRAM::Averager16k(Chan::E ch)
@@ -32,4 +34,18 @@ uint16 *IntRAM::Averager16k(Chan::E ch)
 uint8 *IntRAM::DataRand(Chan::E ch)
 {
     return rand[ch];
+}
+
+
+DataSettings *IntRAM::PrepareForP2P()
+{
+    ds.Fill();
+
+    ds.dataA = ds.enableA ? memP2PA : nullptr;
+    ds.dataB = ds.enableB ? memP2PB : nullptr;
+
+    std::memset(memP2PA, VALUE::NONE, FPGA::MAX_NUM_POINTS);
+    std::memset(memP2PB, VALUE::NONE, FPGA::MAX_NUM_POINTS);
+
+    return &ds;
 }
