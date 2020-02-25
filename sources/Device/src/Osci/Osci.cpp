@@ -334,7 +334,8 @@ void Osci::StartP2P(bool)
 
     //if(button || TrigStartMode::IsWait())
     //{
-        FPGA::GiveStart(FPGA::pred, FPGA::post);
+    Roller::Prepare();
+    FPGA::GiveStart(FPGA::pred, FPGA::post);
     //}
 
     FPGA::isRunning = true;

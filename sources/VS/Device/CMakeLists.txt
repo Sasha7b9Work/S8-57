@@ -189,9 +189,10 @@ source_group(Osci               FILES   ../../Device/src/Osci/AveragerOsci.cpp
                                         ../../Device/src/Osci/FreqMeter.cpp
                                         ../../Device/src/Osci/Osci.h
                                         ../../Device/src/Osci/Osci.cpp
+                                        ../../Device/src/Osci/ParametersOsci.cpp
+                                        ../../Device/src/Osci/Roller.cpp
                                                      src/Osci/Osci_win.h
-                                                     src/Osci/Osci_win.cpp
-                                        ../../Device/src/Osci/ParametersOsci.cpp)
+                                                     src/Osci/Osci_win.cpp)
 source_group(Recorder           FILES   ../../Device/src/Recorder/DisplayRecorder.h
                                         ../../Device/src/Recorder/DisplayRecorder.cpp
                                         ../../Device/src/Recorder/Recorder.h
@@ -359,11 +360,13 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Osci/FreqMeter.cpp
                     ../../Device/src/Osci/Osci.h
                     ../../Device/src/Osci/Osci.cpp
+                    ../../Device/src/Osci/ParametersOsci.cpp
+                    ../../Device/src/Osci/Roller.cpp
                                  src/Osci/Osci_win.h
                                  src/Osci/Osci_win.cpp
-                    ../../Device/src/Osci/ParametersOsci.cpp
                     ../../Device/src/Osci/Display/*
                     ../../Device/src/Osci/Measurements/*
+
                     ../../Device/src/SCPI/*
 
                     ../../Device/src/Recorder/DisplayRecorder.h

@@ -1531,6 +1531,16 @@
               <FilePath>.\src\Osci\AveragerOsci.cpp</FilePath>
             </File>
             <File>
+              <FileName>DeviceSettings.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Osci\DeviceSettings.h</FilePath>
+            </File>
+            <File>
+              <FileName>DeviceSettings.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\DeviceSettings.cpp</FilePath>
+            </File>
+            <File>
               <FileName>FreqMeter.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Osci\FreqMeter.h</FilePath>
@@ -1551,19 +1561,14 @@
               <FilePath>.\src\Osci\Osci.cpp</FilePath>
             </File>
             <File>
-              <FileName>DeviceSettings.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\DeviceSettings.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>DeviceSettings.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Osci\DeviceSettings.h</FilePath>
-            </File>
-            <File>
               <FileName>ParametersOsci.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\ParametersOsci.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Roller.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Roller.cpp</FilePath>
             </File>
           </Files>
         </Group>
