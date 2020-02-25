@@ -187,7 +187,9 @@ void HAL_BUS::Panel::Send(uint8 *data, uint size)
         //pinWR.SetActive();                  // Даём сигнал записи
         GPIOD->BSRR = (uint)GPIO_PIN_5 << 16U;
         
-        while(pinReadyPAN.IsPassive()) {}   // И ожидаем сигнал панели о том, что она свободна
+        //while(pinReadyPAN.IsPassive()) {}   // И ожидаем сигнал панели о том, что она свободна
+        //while(HAL_PIO::Read(HPort::_A, HPin::_7) == 1) { };
+        while(GPIOA->IDR & GPIO_PIN_7) { }
 
         //pinCS.SetActive();                  // Даём признак того, чта данные выставлены и можно их считывать
         GPIOG->BSRR = (uint)GPIO_PIN_12 << 16U;
