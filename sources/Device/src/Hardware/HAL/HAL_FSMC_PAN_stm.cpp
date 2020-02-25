@@ -184,7 +184,8 @@ void HAL_BUS::Panel::Send(uint8 *data, uint size)
         
         while(pinReadyPAN.IsPassive()) {}   // И ожидаем сигнал панели о том, что она свободна
 
-        pinCS.SetActive();                  // Даём признак того, чта данные выставлены и можно их считывать
+        //pinCS.SetActive();                  // Даём признак того, чта данные выставлены и можно их считывать
+        GPIOG->BSRR = (uint)GPIO_PIN_12 << 16U;
 
         while(pinReadyPAN.IsActive()) {}    // Переключение PIN_PAN_READY в неактивное состояние означает, что панель приняла данные и обрабатывает их
 
