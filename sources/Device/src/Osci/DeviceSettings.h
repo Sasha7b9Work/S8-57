@@ -38,6 +38,7 @@ friend struct Packet;
 friend struct TestMemoryStruct;
 friend struct Osci;
 friend class IntRAM;
+friend class Roller;
 
     uint        id;                 ///< —квозной id данных. 1-й номер получают данные, считанные первыми после включени€ прибора и каждые следующие увиличиваютс€ на 1
     uint        timeMS;             ///< ¬рем€ чтени€ данных
