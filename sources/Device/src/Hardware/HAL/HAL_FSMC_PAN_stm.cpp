@@ -179,7 +179,8 @@ void HAL_BUS::Panel::Send(uint8 *data, uint size)
         //                                                                          Биты 4,5,6,7
         GPIOE->ODR = (GPIOE->ODR & 0xf87f) + static_cast<uint16>((static_cast<int16>(d) & 0xf0) << 3);
 
-        pinWR.SetActive();                  // Даём сигнал записи
+        //pinWR.SetActive();                  // Даём сигнал записи
+        GPIOD->BSRR = (uint)GPIO_PIN_5 << 16U;
         
         while(pinReadyPAN.IsPassive()) {}   // И ожидаем сигнал панели о том, что она свободна
 

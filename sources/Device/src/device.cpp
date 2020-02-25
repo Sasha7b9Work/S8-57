@@ -101,6 +101,19 @@ bool SetCurrentMode(const Page *page, Device::Mode::E mode)
 
 void Device::Update()
 {
+    static uint prevFrame = 0;
+
+    static int counter = 0;
+
+    counter++;
+
+    if(TIME_MS - prevFrame >= 1000)
+    {
+        LOG_WRITE("fps = %d", counter);
+        counter = 0;
+        prevFrame = TIME_MS;
+    }
+
     Osci::Update();
 
     Display::Update();
