@@ -15,7 +15,6 @@
 
 
 int    Osci::addShift = 0;
-void (*Osci::funcStart)(bool) = EmptyFuncVB;
 void (*Osci::funcStop)() = EmptyFuncVV;
 
 
@@ -47,7 +46,7 @@ void Osci::DeInit()
 }
 
 
-void Osci::Start(bool button)
+void Osci::Start(bool)
 {
     if(OSCI_IN_MODE_RANDOMIZER)
     {
@@ -55,7 +54,14 @@ void Osci::Start(bool button)
         std::memset(IntRAM::DataRand(Chan::B), VALUE::NONE, FPGA::MAX_NUM_POINTS);
     }
 
-    funcStart(button);
+    FPGA::forcedStart = false;
+    addrRead = 0xffff;
+
+    Roller::Prepare();
+
+    FPGA::GiveStart(FPGA::pred, FPGA::post);
+
+    FPGA::isRunning = true;
 }
 
 
@@ -260,13 +266,6 @@ void Osci::ChangedTrigStartMode()
 
 void Osci::SetFunctionsStartStop()
 {
-    static const pFuncVB start[2][TrigStartMode::Count] =
-    {
-        //  Auto         Wait          Single
-        { StartNormal, StartNormal,  StartNormal    },     // Normal mode
-        { StartP2P,    StartWaitP2P, StartSingleP2P }      // P2P mode
-    };
-
     static const pFuncVV stop[2][TrigStartMode::Count] =
     {
         //  Auto        Wait         Single
@@ -276,35 +275,9 @@ void Osci::SetFunctionsStartStop()
 
     int index = OSCI_IN_MODE_P2P ? 1 : 0;
 
-    funcStart = start[index][TrigStartMode()];
+    //funcStart = start[index][TrigStartMode()];
 
     funcStop = stop[index][TrigStartMode()];
-}
-
-
-void Osci::StartNormal(bool)
-{
-    FPGA::forcedStart = false;
-    addrRead = 0xffff;
-
-    FPGA::GiveStart(FPGA::pred, FPGA::post);
-
-    FPGA::isRunning = true;
-}
-
-
-void Osci::StartP2P(bool)
-{
-    FPGA::forcedStart = false;
-    addrRead = 0xffff;
-
-    //if(button || TrigStartMode::IsWait())
-    //{
-    Roller::Prepare();
-    FPGA::GiveStart(FPGA::pred, FPGA::post);
-    //}
-
-    FPGA::isRunning = true;
 }
 
 
@@ -314,20 +287,9 @@ void Osci::StopNormal()
 }
 
 
-void Osci::StartWaitP2P(bool)
-{
-
-}
-
-
 void Osci::StopWaitP2P()
 {
 
-}
-
-
-void Osci::StartSingleP2P(bool)
-{
 }
 
 
@@ -493,6 +455,6 @@ void Randomizer::Read()
 
         Osci::ReadDataChannel(Chan::B, IntRAM::DataRand(Chan::B));
 
-        Osci::funcStart(false);
+        Osci::Start(false);
     }
 }

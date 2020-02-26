@@ -16,6 +16,11 @@ void         (*Roller::addPoint)(BitSet16, BitSet16);
 
 void Roller::Prepare()
 {
+    if(!OSCI_IN_MODE_P2P)
+    {
+        return;
+    }
+
     ds = IntRAM::PrepareForP2P();
     currentPoint = 0;
 

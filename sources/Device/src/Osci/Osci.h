@@ -85,13 +85,6 @@ private:
 
     static void UpdateFPGA();
 
-    // Функции старта
-    static void (*funcStart)(bool);
-    static void StartNormal(bool button);
-    static void StartP2P(bool button);
-    static void StartWaitP2P(bool button);
-    static void StartSingleP2P(bool button);
-
     // Функции стопа
     static void (*funcStop)();
     static void StopNormal();
