@@ -8,12 +8,13 @@
 
 
 DataSettings *Roller::ds = nullptr;
-int           Roller::currentPoint = 0;
+uint          Roller::currentPoint = 0;
 
 
 void Roller::Prepare()
 {
     ds = IntRAM::PrepareForP2P();
+    currentPoint = 0;
 }
 
 
@@ -46,7 +47,17 @@ void Roller::AddPoint(BitSet16 dataA, BitSet16 dataB)
         ds->dataB[currentPoint * 2 + 1] = dataB.byte1;
     }
 
-    Math::CircleIncrease<int>(&currentPoint, 0, static_cast<int>(ds->PointsInChannel()));
+    Math::CircleIncrease<uint>(&currentPoint, 0, ds->PointsInChannel());
+}
 
-    LOG_WRITE("—читано %d точек", currentPoint);
+
+DataSettings *Roller::GetDS()
+{
+    return ds;
+}
+
+
+bool Roller::NeedDraw()
+{
+    return OSCI_IN_MODE_P2P;
 }

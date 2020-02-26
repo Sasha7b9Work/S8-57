@@ -135,7 +135,7 @@ exit:
 
     volatile bool result = true;
 
-    for(int i = 0; i < 1; i++)          /// \todo Убрать эту античеловечную задержку
+    for(int i = 0; i < 2; i++)          /// \todo Убрать эту античеловечную задержку
     {
         result = true;
     }

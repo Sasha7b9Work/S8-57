@@ -19,6 +19,7 @@ template void  Math::CircleIncrease<int8>(int8 *, int8, int8);
 template void  Math::CircleIncrease<uint8>(uint8 *, uint8, uint8);
 template void  Math::CircleIncrease<int16>(int16 *, int16, int16);
 template void  Math::CircleIncrease<int>(int *, int, int);
+template void  Math::CircleIncrease<uint>(uint *, uint, uint);
 template void  Math::CircleDecrease<int8>(int8 *, int8, int8);
 template void  Math::CircleDecrease<uint8>(uint8 *, uint8, uint8);
 template void  Math::CircleDecrease<int>(int *, int, int);

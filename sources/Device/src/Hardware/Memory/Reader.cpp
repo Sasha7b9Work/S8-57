@@ -30,6 +30,11 @@ void Reader::ReadDataFromRAM()
 
     DS = RAM::Get(ModeWork::IsRAM() ? static_cast<uint>(RAM::currentSignal) : 0U);
 
+    if(Roller::NeedDraw())
+    {
+        DS = Roller::GetDS();
+    }
+
     if (DS)
     {
         if (DS->enableA)
