@@ -473,6 +473,15 @@ void Randomizer::MoveReadedData(DataSettings *ds)
 
 void Randomizer::Read()
 {
+    static uint prevTime = 0;
+
+    if(TIME_MS == prevTime)
+    {
+        return;
+    }
+
+    prevTime = TIME_MS;
+
     FPGA::ReadFlag();
 
     Osci::ProcessFlagPred();
