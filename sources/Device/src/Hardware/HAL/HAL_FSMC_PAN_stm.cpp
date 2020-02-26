@@ -133,9 +133,14 @@ exit:
         Randomizer::Read();
     }
 
-    Timer::PauseOnTicks(1);     /// \todo Разобраться, зачем эта задержка здесь. И убрать
+    volatile bool result = true;
 
-    return true;
+    for(int i = 0; i < 1; i++)          /// \todo Убрать эту античеловечную задержку
+    {
+        result = true;
+    }
+
+    return result;
 }
 
 
