@@ -16,8 +16,11 @@ uint8 *dataIN[2] = { nullptr, nullptr };
 uint8 *dataOUT[2] = { ccm[0], ccm[1] };
 // 
 uint16 *ave[2] = { IntRAM::Averager16k(Chan::A), IntRAM::Averager16k(Chan::B) };
+
+DataSettings ds;
 // ”казатель на настройки считанных данных
 const DataSettings *pDS = nullptr;
+
 
 FrameP2P *frameP2P = nullptr;
 
@@ -45,6 +48,9 @@ void Reader::ReadDataFromRAM()
         {
             IN_B = DS->dataB;
         }
+
+        ds = *DS;
+        DS = &ds;
 
         FindTrigLevelIfNeed();
     }

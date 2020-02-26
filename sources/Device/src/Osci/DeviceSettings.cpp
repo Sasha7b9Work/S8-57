@@ -47,7 +47,8 @@ bool DataSettings::IsEquals(const DataSettings &ds) const
         TSHIFT(this) == TSHIFT(&ds) &&
         TRIGLEV_A(this) == TRIGLEV_A(&ds) &&
         TRIGLEV_B(this) == TRIGLEV_B(&ds) &&
-        ENUM_POINTS(this) == ENUM_POINTS(&ds);
+        ENUM_POINTS(this) == ENUM_POINTS(&ds) &&
+        PEAKDET(this) == PEAKDET(&ds);
 }
 
 

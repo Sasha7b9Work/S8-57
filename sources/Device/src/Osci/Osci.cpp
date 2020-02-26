@@ -50,8 +50,6 @@ void Osci::DeInit()
 
 void Osci::Start(bool button)
 {
-    LOG_WRITE("Äàş ñòàğò");
-
     if(OSCI_IN_MODE_RANDOMIZER)
     {
         std::memset(IntRAM::DataRand(Chan::A), VALUE::NONE, FPGA::MAX_NUM_POINTS);
@@ -92,8 +90,6 @@ void Osci::Update()
 
 void Osci::Stop()
 {
-    LOG_WRITE("Äàş ñòîï");
-
     funcStop();
 }
 
@@ -412,8 +408,6 @@ void Osci::ReadData()
     {
         Randomizer::MoveReadedData(ds);
     }
-
-    LOG_WRITE("×èòàş ôğåéì");
 
     if(ReadDataChannel(Chan::A, ds->dataA))
     {
