@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "defines.h"
 #include "defines.h"
 #include "device.h"
 #include "Test/Test.h"

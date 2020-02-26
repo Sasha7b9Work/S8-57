@@ -1,10 +1,10 @@
 #include "defines.h"
-#include "Osci/DeviceSettings.h"
 #include "Hardware/Memory/IntRAM.h"
-#include "Hardware/Memory/Reader.h"
 #include "Hardware/Memory/RAM.h"
 #include "Hardware/Memory/ROM.h"
+#include "Osci/DeviceSettings.h"
 #include "Osci/Osci.h"
+#include "Osci/Reader.h"
 #include "Settings/Settings.h"
 
 

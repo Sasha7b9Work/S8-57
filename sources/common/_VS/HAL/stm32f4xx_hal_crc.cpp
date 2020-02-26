@@ -1,6 +1,4 @@
-#include "stdafx.h"
 #include <stm32f4xx_hal.h>
-
 
 
 uint32_t HAL_CRC_Calculate(CRC_HandleTypeDef * /*hcrc*/, uint32_t * /*pBuffer*/, uint32_t /*BufferLength*/)

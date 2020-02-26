@@ -2,7 +2,7 @@
 #include "Display/Display.h"
 #include "Display/Grid.h"
 #include "FPGA/FPGA.h"
-#include "Hardware/Memory/Reader.h"
+#include "Osci/Reader.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include <cmath>

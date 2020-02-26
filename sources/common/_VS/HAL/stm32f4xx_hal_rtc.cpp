@@ -1,6 +1,4 @@
-#include "stdafx.h"
 #include <stm32f4xx_hal.h>
-
 
 
 HAL_StatusTypeDef HAL_RTC_GetTime(RTC_HandleTypeDef * /*hrtc*/, RTC_TimeTypeDef * /*sTime*/, uint32_t /*Format*/)

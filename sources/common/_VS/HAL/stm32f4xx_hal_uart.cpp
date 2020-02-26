@@ -1,6 +1,4 @@
-#include "stdafx.h"
 #include "stm32f4xx_hal_uart.h"
-
 
 
 HAL_StatusTypeDef HAL_UART_Receive_IT(UART_HandleTypeDef *, uint8_t *, uint16_t)

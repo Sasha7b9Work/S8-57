@@ -1,6 +1,4 @@
-#include "stdafx.h"
 #include <stm32f4xx_hal.h>
-
 
 
 uint32_t HAL_RCC_GetHCLKFreq(void)

@@ -1,10 +1,9 @@
 #include "defines.h"
-#include "log.h"
-#include "Osci.h"
-#include "Hardware/Memory/Reader.h"
 #include "Display/Grid.h"
 #include "Display/Primitives.h"
 #include "FPGA/FPGA.h"
+#include "Osci/Osci.h"
+#include "Osci/Reader.h"
 #include "Settings/Settings.h"
 #include <cstring>
 

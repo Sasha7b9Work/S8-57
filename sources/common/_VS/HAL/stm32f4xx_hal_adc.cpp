@@ -1,6 +1,4 @@
-#include "stdafx.h"
 #include <stm32f4xx_hal_adc.h>
-
 
 
 extern "C"

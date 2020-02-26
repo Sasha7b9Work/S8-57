@@ -991,16 +991,6 @@
               <FilePath>.\src\Hardware\Memory\RAM.cpp</FilePath>
             </File>
             <File>
-              <FileName>Reader.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Hardware\Memory\Reader.h</FilePath>
-            </File>
-            <File>
-              <FileName>Reader.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\Memory\Reader.cpp</FilePath>
-            </File>
-            <File>
               <FileName>ROM.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Memory\ROM.h</FilePath>
@@ -1564,6 +1554,16 @@
               <FileName>ParametersOsci.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\ParametersOsci.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Reader.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Osci\Reader.h</FilePath>
+            </File>
+            <File>
+              <FileName>Reader.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Reader.cpp</FilePath>
             </File>
             <File>
               <FileName>Roller.cpp</FileName>

@@ -1,9 +1,7 @@
-#include "stdafx.h"
 #include "usbd_def.h"
 
 
 USBD_DescriptorsTypeDef VCP_Desc;
-
 
 
 USBD_StatusTypeDef USBD_Init(USBD_HandleTypeDef * /*pdev*/, USBD_DescriptorsTypeDef * /*pdesc*/, uint8_t /*id*/)

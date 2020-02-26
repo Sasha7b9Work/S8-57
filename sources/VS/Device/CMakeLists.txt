@@ -173,8 +173,6 @@ source_group(Hardware\\Memory   FILES   ../../Device/src/Hardware/Memory/ExtRAM.
                                         ../../Device/src/Hardware/Memory/IntRAM.cpp
                                         ../../Device/src/Hardware/Memory/RAM.h
                                         ../../Device/src/Hardware/Memory/RAM.cpp
-                                        ../../Device/src/Hardware/Memory/Reader.h
-                                        ../../Device/src/Hardware/Memory/Reader.cpp
                                         ../../Device/src/Hardware/Memory/ROM.h
                                         ../../Device/src/Hardware/Memory/ROM.cpp
                                         ../../Device/src/Hardware/Memory/ROM_Data.cpp
@@ -190,6 +188,8 @@ source_group(Osci               FILES   ../../Device/src/Osci/AveragerOsci.cpp
                                         ../../Device/src/Osci/Osci.h
                                         ../../Device/src/Osci/Osci.cpp
                                         ../../Device/src/Osci/ParametersOsci.cpp
+                                        ../../Device/src/Osci/Reader.h
+                                        ../../Device/src/Osci/Reader.cpp
                                         ../../Device/src/Osci/Roller.cpp
                                                      src/Osci/Osci_win.h
                                                      src/Osci/Osci_win.cpp)
@@ -361,6 +361,8 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Osci/Osci.h
                     ../../Device/src/Osci/Osci.cpp
                     ../../Device/src/Osci/ParametersOsci.cpp
+                    ../../Device/src/Osci/Reader.h
+                    ../../Device/src/Osci/Reader.cpp
                     ../../Device/src/Osci/Roller.cpp
                                  src/Osci/Osci_win.h
                                  src/Osci/Osci_win.cpp

@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #ifndef WIN32
 #include "usbd_core.h"
 #include "defines.h"

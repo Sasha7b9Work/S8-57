@@ -1,6 +1,4 @@
-#include "stdafx.h"
 #include <stm32f4xx_hal.h>
-
 
 
 HAL_StatusTypeDef HAL_PCD_Init(PCD_HandleTypeDef * /*hpcd*/)

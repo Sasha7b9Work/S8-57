@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "usbd_def.h"
 #include "usbd_cdc.h"
 

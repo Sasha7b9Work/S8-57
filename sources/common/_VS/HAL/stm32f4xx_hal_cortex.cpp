@@ -1,11 +1,8 @@
-#include "stdafx.h"
 #include "stm32f4xx_hal_cortex.h"
 
 
 extern "C"
 {
-
-    
     void HAL_NVIC_DisableIRQ(IRQn_Type)
     {
     

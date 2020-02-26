@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #ifndef WIN32
 #include "defines.h"
 #include "SCPI/SCPI.h"

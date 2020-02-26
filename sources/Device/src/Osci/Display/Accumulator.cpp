@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Osci/DeviceSettings.h"
-#include "Hardware/Memory/Reader.h"
+#include "Osci/Reader.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Settings/Settings.h"
 

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "defines.h"
 #include "usbh_diskio.h"
 #include "ff_gen_drv.h"
 
