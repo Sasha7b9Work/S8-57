@@ -72,7 +72,7 @@ int TPos::InBytes()
 
 bool PeakDetMode::IsEnabled()
 {
-    return (Ref() == PeakDetMode::Enabled) && (TBase() >= TBase::MIN_PEAK_DET);
+    return ((Ref() == PeakDetMode::Enabled) && (TBase() >= TBase::MIN_PEAK_DET));
 }
 
 

@@ -39,7 +39,7 @@ void DisplayOsci::MemoryWindow::Draw()
 
 static void DrawDataInRect(int x, int y, int width, int height, const uint8 *data, uint length)
 {
-    if (PeakDetMode().IsEnabled())
+    if (PEAKDET_ENABLED(DS))
     {
         length *= 2;
     }

@@ -2,6 +2,7 @@
 #include "Display/Display.h"
 #include "Display/Grid.h"
 #include "FPGA/FPGA.h"
+#include "Hardware/Memory/Reader.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include <cmath>
@@ -87,7 +88,7 @@ void MathFPGA::CalculateFFT(float *dataR, uint numPoints, float *result, float *
     *freq0 = scale * set.fft.posCur[0] * koeff;
     *freq1 = scale * set.fft.posCur[1] * koeff;
 
-    if (PeakDetMode().IsEnabled())
+    if (PEAKDET_ENABLED(DS))
     {
         *freq0 *= 2;
         *freq1 *= 2;

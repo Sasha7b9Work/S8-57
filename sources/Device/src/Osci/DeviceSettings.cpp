@@ -28,16 +28,11 @@ void DataSettings::Fill()
     Lval_COUPLE_B(this)  = ModeCouple(Chan::B);
     TRIGLEV_A(this)      = TrigLevel(Chan::A).Value();
     TRIGLEV_B(this)      = TrigLevel(Chan::B).Value();
-    Lval_PEAKDET(this)   = PeakDetMode();
+    Lval_PEAKDET(this)   = PeakDetMode().IsEnabled() ? PeakDetMode::Enabled : PeakDetMode::Disabled;
     Lval_DIVIDER_A(this) = Divider(Chan::A);
     Lval_DIVIDER_B(this) = Divider(Chan::B);
     TIME_TIME(this)      = HAL_RTC::GetPackedTime();
     ENUM_POINTS(this)    = ENumPointsFPGA();
-
-    if(OSCI_IN_MODE_P2P)
-    {
-        Lval_PEAKDET(this) = PeakDetMode::Enabled;
-    }
 }
 
 

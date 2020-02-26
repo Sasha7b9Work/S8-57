@@ -17,7 +17,7 @@ void FPGA::LoadRegUPR()
 {
     uint8 data = 0;
 
-    if (PeakDetMode().IsEnabled() || Device::InModeRecorder())
+    if (PeakDetMode() == PeakDetMode::Enabled || Device::InModeRecorder() || OSCI_IN_MODE_P2P)
     {
         data |= 1 << BIT_UPR_PEAK;
     }

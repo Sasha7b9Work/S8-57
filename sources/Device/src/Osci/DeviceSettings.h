@@ -134,7 +134,8 @@ public:
 
 #define Lval_PEAKDET(ds)        ((ds)->peackDet)
 #define PEAKDET(ds)             ((PeakDetMode::E)Lval_PEAKDET(ds))
-#define PEAKDET_DISABLED(ds)     (PEAKDET(ds) == PeakDetMode::Disabled)
+#define PEAKDET_DISABLED(ds)    (PEAKDET(ds) == PeakDetMode::Disabled)
+#define PEAKDET_ENABLED(ds)     (PEAKDET(ds) == PeakDetMode::Enabled)
 
 #define Lval_DIVIDER_A(ds)      ((ds)->multiplierA)
 #define Lval_DIVIDER_B(ds)      ((ds)->multiplierB)

@@ -236,7 +236,7 @@ void DisplayOsci::PainterData::DrawChannel(Chan::E ch)
 
     data += SHIFT_IN_MEMORY;
 
-    if (PEAKDET(DS) == PeakDetMode::Enabled)
+    if (PEAKDET_ENABLED(DS))
     {
         data += SHIFT_IN_MEMORY;
     }
@@ -272,7 +272,7 @@ void DisplayOsci::PainterData::DrawModeLines(Chan::E ch, int left, int center, c
 
     int x = left;
 
-    if (PEAKDET(DS) == PeakDetMode::Enabled)
+    if (PEAKDET_ENABLED(DS) == PeakDetMode::Enabled)
     {
         DrawModeLinesPeakDetOn(center, data, scale, x);
     }
@@ -323,7 +323,7 @@ void DisplayOsci::PainterData::DrawModePoints(Chan::E ch, int left, int center, 
 {
     Color::CHAN[ch].SetAsCurrent();
 
-    if (PEAKDET(DS) == PeakDetMode::Enabled)
+    if (PEAKDET_ENABLED(DS))
     {
         DrawModePointsPeakDetOn(center, data, scale, left);
     }
@@ -383,7 +383,7 @@ BitSet64 DisplayOsci::PainterData::BytesOnDisplay()
     retValue.sword0 = SHIFT_IN_MEMORY;
     retValue.sword1 = retValue.sword0 + 281;
 
-    if (PEAKDET(DS) == PeakDetMode::Enabled)
+    if (PEAKDET_ENABLED(DS))
     {
         retValue.sword1 += 281;
     }
