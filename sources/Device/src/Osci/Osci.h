@@ -159,8 +159,10 @@ public:
 
 private:
 
-    // Добавить две очередные считанные точки
-    static void AddPoint(BitSet16 dataA, BitSet16 dataB);
+    // Функция добавления считанной точки
+    static void (*addPoint)(BitSet16, BitSet16);
+    static void AddPointPeakDetEnabled(BitSet16 dataA, BitSet16 dataB);
+    static void AddPointPeakDetDisabled(BitSet16 dataA, BitSet16 dataB);
 
     // Указатель на настройки текущих данных
     static DataSettings *ds;

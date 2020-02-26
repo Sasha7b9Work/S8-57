@@ -9,12 +9,15 @@
 
 DataSettings *Roller::ds = nullptr;
 uint          Roller::currentPoint = 0;
+void         (*Roller::addPoint)(BitSet16, BitSet16);
 
 
 void Roller::Prepare()
 {
     ds = IntRAM::PrepareForP2P();
     currentPoint = 0;
+
+    addPoint = PEAKDET_ENABLED(ds) ? AddPointPeakDetEnabled : AddPointPeakDetDisabled;
 }
 
 
@@ -28,12 +31,12 @@ void Roller::ReadPoint()
         HAL_BUS::FPGA::SetAddrData(RD::DATA_B, RD::DATA_B + 1);
         BitSet16 dataB(HAL_BUS::FPGA::ReadA0(), HAL_BUS::FPGA::ReadA1());
     
-        AddPoint(dataA, dataB);
+        addPoint(dataA, dataB);
     }
 }
 
 
-void Roller::AddPoint(BitSet16 dataA, BitSet16 dataB)
+void Roller::AddPointPeakDetEnabled(BitSet16 dataA, BitSet16 dataB)
 {
     if(ds->dataA)
     {
@@ -47,16 +50,23 @@ void Roller::AddPoint(BitSet16 dataA, BitSet16 dataB)
         ds->dataB[currentPoint * 2 + 1] = dataB.byte1;
     }
 
-    //Math::CircleIncrease<uint>(&currentPoint, 0, ds->PointsInChannel());
+    Math::CircleIncrease<uint>(&currentPoint, 0, ds->PointsInChannel());
+}
 
-    currentPoint++;
 
-    if(currentPoint == ds->PointsInChannel())
+void Roller::AddPointPeakDetDisabled(BitSet16 dataA, BitSet16 dataB)
+{
+    if(ds->dataA)
     {
-        currentPoint = 0;
-
-        LOG_WRITE("Переходи на начало");
+        ds->dataA[currentPoint] = dataA.byte0;
     }
+
+    if(ds->dataB)
+    {
+        ds->dataB[currentPoint] = dataB.byte1;
+    }
+
+    Math::CircleIncrease<uint>(&currentPoint, 0, ds->PointsInChannel());
 }
 
 
