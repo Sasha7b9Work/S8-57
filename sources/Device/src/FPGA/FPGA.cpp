@@ -73,7 +73,7 @@ void FPGA::Reset()
 {
     TShift().Load();
 
-    FPGA::LoadRegUPR();
+    LoadRegUPR();
 }
 
 

@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "log.h"
 #include "FPGA/FPGA.h"
+#include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Memory/IntRAM.h"
 #include "Osci/Osci.h"
@@ -85,7 +86,43 @@ DataSettings *Roller::GetDS()
 
 bool Roller::NeedDraw()
 {
-    return OSCI_IN_MODE_P2P;
+    if(!OSCI_IN_MODE_P2P)
+    {
+        return false;
+    }
+
+    if(RAM::NumberDatas() == 0)
+    {
+        return true;
+    }
+
+    DataSettings *last = RAM::Get(0, true);
+
+    DataSettings current;
+    current.Fill();
+
+    if(!current.IsEquals(*last))
+    {
+//        LOG_WRITE("рисуем точки");
+        return true;
+    }
+    else
+    {
+//        LOG_WRITE("настройки одинаоковые");
+    }
+
+    if(TrigStartMode().IsAuto())
+    {
+        return (TIME_MS - last->timeMS > 1000);
+    }
+    else if(TrigStartMode().IsWait())
+    {
+        return true;
+    }
+    else
+    {
+        return true;
+    }
 }
 
 

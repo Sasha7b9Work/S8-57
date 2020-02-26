@@ -168,6 +168,8 @@ void RAM::Init()
 
 DataSettings *RAM::PrepareForNewData()
 {
+    LOG_FUNC_ENTER();
+
     if(OSCI_IN_MODE_RANDOMIZER && NumberDatas() && !needNewFrame)
     {
         return Get();
@@ -208,7 +210,7 @@ DataSettings *RAM::PrepareForNewData()
 }
 
 
-DataSettings *RAM::Get(uint numFromEnd)
+DataSettings *RAM::Get(uint numFromEnd, bool log)
 {
     uint number = NumberDatas();
     
@@ -227,7 +229,14 @@ DataSettings *RAM::Get(uint numFromEnd)
         counter--;
     }
 
-    return packet->GetDataSettings();
+    DataSettings *result = packet->GetDataSettings();
+
+    if(log)
+    {
+        LOG_WRITE("packet = %x, tbase = %d", packet, result->tBase);
+    }
+
+    return result;
 }
 
 
