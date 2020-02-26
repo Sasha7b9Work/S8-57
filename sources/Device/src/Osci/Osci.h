@@ -2,6 +2,10 @@
 #include "Settings/Settings.h"
 
 
+#define OSCI_IN_MODE_P2P        (TBase() >= TBase::MIN_P2P)
+#define OSCI_IN_MODE_RANDOMIZER (TBase() <= TBase::_50ns)
+
+
 struct Osci
 {
     friend struct Randomizer;
@@ -30,12 +34,6 @@ struct Osci
     
     // Это вызываем в случае изменения настройки
     static void Restart();
-    
-    // Возвращает true, если находится в поточечном режиме
-    static bool InModeP2P();
-    
-    // Возвращает true, если работает в режиме рандомизатора
-    static bool InModeRandomizer();
     
     // Эту функцию надо вызывать при изменении длины памяти. Ну или режима пикового детектора
     static void OnChangedPoints();

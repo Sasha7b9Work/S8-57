@@ -142,7 +142,7 @@ int Osci::CalculateShift()
         return NULL_TSHIFT;
     }
 
-    if (Osci::InModeRandomizer())
+    if (OSCI_IN_MODE_RANDOMIZER)
     {
         float tin = static_cast<float>(valueADC - min + deltaMIN) / (max - deltaMAX - (min + deltaMIN));
         int retValue = static_cast<int>(tin * TBase().RandK());
@@ -207,7 +207,7 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
     {
         uint k = 1;
 
-        if (Osci::InModeRandomizer())
+        if (OSCI_IN_MODE_RANDOMIZER)
         {
             k = TBase().RandK();
         }
@@ -224,7 +224,7 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
 
     HAL_BUS::FPGA::SetAddrData(a0, a1);
 
-    if (Osci::InModeRandomizer())
+    if (OSCI_IN_MODE_RANDOMIZER)
     {
         return ReadDataChannelRand(a1, data);
     }

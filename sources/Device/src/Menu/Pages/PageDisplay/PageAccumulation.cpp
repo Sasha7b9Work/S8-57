@@ -61,7 +61,7 @@ DEF_BUTTON( bClear,                                                             
 
 static bool IsActive_Accum()
 {
-    return !Osci::InModeRandomizer();
+    return !OSCI_IN_MODE_RANDOMIZER;
 }
 
 DEF_PAGE_3( pAccum,                                                                                                                           //--- дхяокеи - мюйнокемхе ---

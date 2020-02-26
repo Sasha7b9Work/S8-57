@@ -168,7 +168,7 @@ void RAM::Init()
 
 DataSettings *RAM::PrepareForNewData()
 {
-    if(Osci::InModeRandomizer() && NumberDatas() && !needNewFrame)
+    if(OSCI_IN_MODE_RANDOMIZER && NumberDatas() && !needNewFrame)
     {
         return Get();
     }
@@ -194,7 +194,7 @@ DataSettings *RAM::PrepareForNewData()
 
     result->timeMS = TIME_MS;
 
-    if(Osci::InModeRandomizer() && NumberDatas())
+    if(OSCI_IN_MODE_RANDOMIZER && NumberDatas())
     {
         if(result->IsEquals(*Get(1)))
         {

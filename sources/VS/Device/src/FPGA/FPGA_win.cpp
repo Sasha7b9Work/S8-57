@@ -87,11 +87,11 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
 
     uint numPoints = ENumPointsFPGA::PointsInChannel();
 
-    if (Osci::InModeP2P())
+    if (OSCI_IN_MODE_P2P)
     {
 
     }
-    else if (Osci::InModeRandomizer())
+    else if (OSCI_IN_MODE_RANDOMIZER)
     {
 
     }

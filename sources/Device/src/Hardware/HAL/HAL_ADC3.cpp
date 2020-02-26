@@ -79,7 +79,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 {
     /// \todo временная затычка. Не в рандомизаторе эта функция вообще не должна вызываться
 
-    if (Osci::InModeRandomizer())
+    if (OSCI_IN_MODE_RANDOMIZER)
     {
         Osci::valueADC = static_cast<uint16>(HAL_ADC_GetValue(hadc));
     }

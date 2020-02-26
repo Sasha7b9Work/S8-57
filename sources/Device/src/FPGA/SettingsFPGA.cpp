@@ -105,7 +105,7 @@ void RShift::Load(bool force)
 
     Osci::Restart();
 
-    if(Osci::InModeRandomizer())
+    if(OSCI_IN_MODE_RANDOMIZER)
     {
         DataSettings *ds = RAM::Get();
 
@@ -179,7 +179,7 @@ void TShift::LoadRandomize()
 
 void TShift::Load()
 {
-    if (Osci::InModeRandomizer())
+    if (OSCI_IN_MODE_RANDOMIZER)
     {
         LoadRandomize();
     }

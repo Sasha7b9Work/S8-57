@@ -50,7 +50,7 @@ void Osci::DeInit()
 
 void Osci::Start(bool button)
 {
-    if(InModeRandomizer())
+    if(OSCI_IN_MODE_RANDOMIZER)
     {
         std::memset(IntRAM::DataRand(Chan::A), VALUE::NONE, FPGA::MAX_NUM_POINTS);
         std::memset(IntRAM::DataRand(Chan::B), VALUE::NONE, FPGA::MAX_NUM_POINTS);
@@ -102,7 +102,7 @@ bool Osci::IsRunning()
 
 void Osci::UpdateFPGA()
 {
-    uint number = (Osci::InModeRandomizer()) ? TBase().RandK() : 1;
+    uint number = OSCI_IN_MODE_RANDOMIZER ? TBase().RandK() : 1;
 
     RAM::NewFrameForRandomize();
 
@@ -125,7 +125,7 @@ void Osci::ProcessFlagPred()
 {
     if(FPGA::flag.Pred() && !FPGA::forcedStart)
     {
-        if(!InModeRandomizer() && TrigStartMode::IsAuto() && FPGA::flag.HoldOff())
+        if(!OSCI_IN_MODE_RANDOMIZER && TrigStartMode::IsAuto() && FPGA::flag.HoldOff())
         {
             FPGA::ForcedStart();
         }
@@ -159,18 +159,6 @@ bool Osci::ProcessFlagReady()
     }
 
     return needStop;
-}
-
-
-bool Osci::InModeP2P()
-{
-    return (TBase() >= TBase::MIN_P2P);
-}
-
-
-bool Osci::InModeRandomizer()
-{
-    return (TBase() <= TBase::_50ns);
 }
 
 
@@ -254,7 +242,7 @@ void Osci::ChangedTrigStartMode()
     }
 
     // ≈лси находимс€ в режиме рандомизатора
-    if(Osci::InModeRandomizer())
+    if(OSCI_IN_MODE_RANDOMIZER)
     {
         // и переключаемс€ на одиночный режим запуска, то надо сохранить имеющийс€ тип выборки, чтобы восстановить при возвращении в режим 
         // рандомизатора автоматический или ждущий
@@ -266,10 +254,6 @@ void Osci::ChangedTrigStartMode()
         else if(TrigStartMode::IsAuto())    // »наче восстановим ранее сохранЄнный
         {
             SampleType().Set(set.time.sampleTypeOld);
-        }
-        else
-        {
-            // нет действий
         }
     }
 }
@@ -291,7 +275,7 @@ void Osci::SetFunctionsStartStop()
         { StopNormal, StopWaitP2P, StopSingleP2P }         // P2P mode
     };
 
-    int index = InModeP2P() ? 1 : 0;
+    int index = OSCI_IN_MODE_P2P ? 1 : 0;
 
     funcStart = start[index][TrigStartMode()];
 
@@ -420,7 +404,7 @@ void Osci::ReadData()
 
     DataSettings *ds = RAM::PrepareForNewData();
 
-    if(InModeRandomizer())
+    if(OSCI_IN_MODE_RANDOMIZER)
     {
         Randomizer::MoveReadedData(ds);
     }
@@ -434,11 +418,6 @@ void Osci::ReadData()
         {
             return;
         }
-    }
-
-    if(InModeRandomizer())
-    {
-
     }
 
     if(ENumAverage() != ENumAverage::_1)               // ≈сли включено усреднение

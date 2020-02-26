@@ -123,6 +123,17 @@ exit:
     
     interactionWithPanel = false;
 
+#ifdef DEVICE
+    if(OSCI_IN_MODE_P2P)
+    {
+        Roller::ReadPoint();
+    }
+    else if(OSCI_IN_MODE_RANDOMIZER)
+    {
+        Randomizer::Read();
+    }
+#endif
+
     return true;
 }
 
@@ -196,15 +207,16 @@ void HAL_BUS::Panel::Send(uint8 *data, uint size)
     interactionWithPanel = false;
 
 #ifdef DEVICE
-    if(Osci::InModeP2P())
+    if(OSCI_IN_MODE_P2P)
     {
         Roller::ReadPoint();
     }
-    else if(Osci::InModeRandomizer())
+    else if(OSCI_IN_MODE_RANDOMIZER)
     {
         Randomizer::Read();
     }
 #endif
+
 }
 
 
