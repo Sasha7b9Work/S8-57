@@ -1,5 +1,6 @@
 #pragma once
 #include "Settings/Settings.h"
+#include "Utils/Buffer.h"
 
 
 #define OSCI_IN_MODE_P2P        (set.time.base >= TBase::MIN_P2P)
@@ -156,6 +157,9 @@ public:
 
     // Возвращает указатель на данные, которые нужно рисовать
     static DataSettings *GetDS();
+
+    // Заполняет buffer точками для отрисовки. width - ширина окна для отрисовки
+    static void FillScreenBuffer(Chan::E ch, Buffer &buffer, int width);
 
 private:
 

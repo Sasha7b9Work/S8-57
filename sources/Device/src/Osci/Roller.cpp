@@ -4,7 +4,9 @@
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Memory/IntRAM.h"
 #include "Osci/Osci.h"
+#include "Osci/Reader.h"
 #include "Utils/Math.h"
+#include <cstring>
 
 
 DataSettings *Roller::ds = nullptr;
@@ -79,4 +81,29 @@ DataSettings *Roller::GetDS()
 bool Roller::NeedDraw()
 {
     return OSCI_IN_MODE_P2P;
+}
+
+
+void Roller::FillScreenBuffer(Chan::E ch, Buffer &buffer, int width)
+{
+    uint numBytes = currentPoint;
+
+    if(PEAKDET_ENABLED(ds))
+    {
+        width *= 2;
+        numBytes *= 2;
+    }
+
+    buffer.Realloc(static_cast<uint>(width));
+    std::memset(buffer.data, VALUE::NONE, static_cast<uint>(width));
+
+    uint position = 0;
+    uint8 *in = ds->Data(ch);
+    uint8 *out = buffer.data;
+
+    for(uint i = 0; i < numBytes; i++)
+    {
+        out[position] = in[i];
+        Math::CircleIncrease<uint>(&position, 0, static_cast<uint>(width));
+    }
 }
