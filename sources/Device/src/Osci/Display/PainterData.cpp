@@ -236,7 +236,7 @@ void DisplayOsci::PainterData::DrawChannel(Chan::E ch)
 
     data += SHIFT_IN_MEMORY;
 
-    if (PeakDetMode().IsEnabled())
+    if (PEAKDET(DS) == PeakDetMode::Enabled)
     {
         data += SHIFT_IN_MEMORY;
     }
@@ -383,7 +383,7 @@ BitSet64 DisplayOsci::PainterData::BytesOnDisplay()
     retValue.sword0 = SHIFT_IN_MEMORY;
     retValue.sword1 = retValue.sword0 + 281;
 
-    if (PeakDetMode().IsEnabled())
+    if (PEAKDET(DS) == PeakDetMode::Enabled)
     {
         retValue.sword1 += 281;
     }
