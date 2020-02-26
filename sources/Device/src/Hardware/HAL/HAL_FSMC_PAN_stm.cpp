@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "common/Decoder_d.h"
+#include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/HAL/HAL_PIO.h"
 #include <stm32f4xx_hal.h>
@@ -131,6 +132,8 @@ exit:
     {
         Randomizer::Read();
     }
+
+    Timer::PauseOnTicks(1);     /// \todo Разобраться, зачем эта задержка здесь. И убрать
 
     return true;
 }

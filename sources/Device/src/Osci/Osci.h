@@ -2,8 +2,8 @@
 #include "Settings/Settings.h"
 
 
-#define OSCI_IN_MODE_P2P        (TBase() >= TBase::MIN_P2P)
-#define OSCI_IN_MODE_RANDOMIZER (TBase() <= TBase::_50ns)
+#define OSCI_IN_MODE_P2P        (set.time.base >= TBase::MIN_P2P)
+#define OSCI_IN_MODE_RANDOMIZER (set.time.base <= TBase::_50ns)
 
 
 struct Osci
