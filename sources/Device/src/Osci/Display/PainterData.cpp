@@ -272,7 +272,7 @@ void DisplayOsci::PainterData::DrawModeLines(Chan::E ch, int left, int center, c
 
     int x = left;
 
-    if (PeakDetMode().IsEnabled())
+    if (PEAKDET(DS) == PeakDetMode::Enabled)
     {
         DrawModeLinesPeakDetOn(center, data, scale, x);
     }
@@ -323,7 +323,7 @@ void DisplayOsci::PainterData::DrawModePoints(Chan::E ch, int left, int center, 
 {
     Color::CHAN[ch].SetAsCurrent();
 
-    if (PeakDetMode().IsEnabled())
+    if (PEAKDET(DS) == PeakDetMode::Enabled)
     {
         DrawModePointsPeakDetOn(center, data, scale, left);
     }

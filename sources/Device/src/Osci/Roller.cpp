@@ -47,7 +47,16 @@ void Roller::AddPoint(BitSet16 dataA, BitSet16 dataB)
         ds->dataB[currentPoint * 2 + 1] = dataB.byte1;
     }
 
-    Math::CircleIncrease<uint>(&currentPoint, 0, ds->PointsInChannel());
+    //Math::CircleIncrease<uint>(&currentPoint, 0, ds->PointsInChannel());
+
+    currentPoint++;
+
+    if(currentPoint == ds->PointsInChannel())
+    {
+        currentPoint = 0;
+
+        LOG_WRITE("Переходи на начало");
+    }
 }
 
 

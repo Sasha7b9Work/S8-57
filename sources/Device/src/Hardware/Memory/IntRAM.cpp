@@ -44,8 +44,8 @@ DataSettings *IntRAM::PrepareForP2P()
     ds.dataA = ds.enableA ? memP2PA : nullptr;
     ds.dataB = ds.enableB ? memP2PB : nullptr;
 
-    std::memset(memP2PA, VALUE::NONE, FPGA::MAX_NUM_POINTS);
-    std::memset(memP2PB, VALUE::NONE, FPGA::MAX_NUM_POINTS);
+    std::memset(memP2PA, VALUE::NONE, 2 * FPGA::MAX_NUM_POINTS);
+    std::memset(memP2PB, VALUE::NONE, 2 * FPGA::MAX_NUM_POINTS);
 
     return &ds;
 }

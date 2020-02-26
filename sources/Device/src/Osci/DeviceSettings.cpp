@@ -33,6 +33,11 @@ void DataSettings::Fill()
     Lval_DIVIDER_B(this) = Divider(Chan::B);
     TIME_TIME(this)      = HAL_RTC::GetPackedTime();
     ENUM_POINTS(this)    = ENumPointsFPGA();
+
+    if(OSCI_IN_MODE_P2P)
+    {
+        Lval_PEAKDET(this) = PeakDetMode::Enabled;
+    }
 }
 
 
