@@ -63,7 +63,7 @@ uint DataSettings::BytesInChannel() const
 {
     uint result = ENUM_TO_REL_POINTS(ENUM_POINTS(this));
 
-    if (PEAKDET(this) == PeakDetMode::Enabled)
+    if (PEAKDET_ENABLED(this))
     {
         result *= 2;
     }

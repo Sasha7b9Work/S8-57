@@ -272,7 +272,7 @@ void DisplayOsci::PainterData::DrawModeLines(Chan::E ch, int left, int center, c
 
     int x = left;
 
-    if (PEAKDET_ENABLED(DS) == PeakDetMode::Enabled)
+    if (PEAKDET_ENABLED(DS))
     {
         DrawModeLinesPeakDetOn(center, data, scale, x);
     }
