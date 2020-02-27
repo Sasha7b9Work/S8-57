@@ -46,6 +46,7 @@ void Recorder::Init()
     Recorder::ScaleX::Load();
     TShift().Load();
     Osci::LoadHoldfOff();
+    StorageRecorder::Init();
 
     running = false;
 

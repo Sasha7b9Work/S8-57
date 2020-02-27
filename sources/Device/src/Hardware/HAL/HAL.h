@@ -9,6 +9,9 @@
 #define ERROR_HANDLER()            ::HAL::ErrorHandler(__FILE__, __LINE__)
 
 
+#define HAL_BUS_CONFIGURE_TO_FSMC if(HAL_BUS::mode != HAL_BUS::Mode::FSMC) { HAL_BUS::ConfigureToFSMC(); }
+
+
 struct HAL_RTC
 {
     static void Init();
@@ -94,12 +97,6 @@ struct HAL_BUS
         static uint8 *addrData1;
     };
 
-private:
-    /// Настроить FSMC для работы с внешней RAM
-    static void InitRAM();
-    /// Инициализация пинов панели, которые не изменяют свой режим во время всей работы программы
-    static void InitPanel();
-
     struct Mode
     {
         enum E
@@ -111,6 +108,12 @@ private:
     };
 
     static Mode::E mode;
+
+private:
+    /// Настроить FSMC для работы с внешней RAM
+    static void InitRAM();
+    /// Инициализация пинов панели, которые не изменяют свой режим во время всей работы программы
+    static void InitPanel();
 };
 
 

@@ -2,7 +2,7 @@
 #include "Osci/DeviceSettings.h"
 
 
-/// Точка на графике
+// Точка на графике
 struct Point
 {
     Point(BitSet16 dataA, BitSet16 dataB)
@@ -19,36 +19,47 @@ private:
 };
 
 
-/// Описывает данные регистратора - цельную запись точек
+// Описывает данные регистратора - цельную запись точек
 struct Record
 {
     Record() : start(nullptr), numPoints(0), pointer(0) {} //-V730
 
     void SetDataAddress(uint16 *addressMC);
-    /// Добавление считаной точки
+
+    // Добавление считаной точки
     void AddPoint(BitSet16 dataA, BitSet16 dataB);
-    /// Число точек в регистрограмме
+
+    // Число точек в регистрограмме
     uint NumPoints();
-    /// Получить точку в позиции position
+
+    // Получить точку в позиции position
     Point GetPoint(uint position, uint maxPoints);
-    /// Получить следующую точку
+
+    // Получить следующую точку
     Point NextPoint(uint maxPoints);
-    /// Время записи первой точки
+
+    // Время записи первой точки
     PackedTime timeStart;
-    /// Возвращает размер свободной памяти
+
+    // Возвращает размер свободной памяти
     int FreeMemory();
 private:
-    /// Указатель на буфер данных - фактически адрес первой сохранённой точки
+    
+    // Указатель на буфер данных - фактически адрес первой сохранённой точки
     Point *start;
-    /// Количество сохранённых точек
+    
+    // Количество сохранённых точек
     uint numPoints;
-    /// Указатель на последние считаннные данные
+    
+    // Указатель на последние считаннные данные
     uint pointer;
 };
 
 
 struct StorageRecorder
 {
+    static void Init();
+
     static void CreateNewRecord();
 
     static Record *CurrentRecord();

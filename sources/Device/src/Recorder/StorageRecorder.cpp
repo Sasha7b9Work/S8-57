@@ -88,3 +88,7 @@ Point Point::CreateEmpty()
 }
 
 
+void StorageRecorder::Init()
+{
+
+}

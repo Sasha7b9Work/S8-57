@@ -1,8 +1,9 @@
 #pragma once
 
 
-struct Recorder
+class Recorder
 {
+public:
     static bool IsEnabledA();
 
     static bool IsEnabledB();

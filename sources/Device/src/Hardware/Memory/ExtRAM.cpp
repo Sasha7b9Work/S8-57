@@ -21,7 +21,7 @@ uint8 *ExtRAM::End()
 
 void ExtRAM::Write(uint8 *buffer, uint size, uint8 *address)
 {
-    HAL_BUS::ConfigureToFSMC();
+    HAL_BUS_CONFIGURE_TO_FSMC;
 
     std::memcpy(address, buffer, size);
 }
@@ -29,7 +29,7 @@ void ExtRAM::Write(uint8 *buffer, uint size, uint8 *address)
 
 void ExtRAM::Read(uint8 *buffer, uint size, uint8 *address)
 {
-    HAL_BUS::ConfigureToFSMC();
+    HAL_BUS_CONFIGURE_TO_FSMC;
 
     std::memcpy(buffer, address, size);
 }
