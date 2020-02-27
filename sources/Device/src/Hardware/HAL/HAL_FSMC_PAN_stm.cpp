@@ -195,13 +195,21 @@ void HAL_BUS::Panel::Send(uint8 *data, uint size)
         
         //while(pinReadyPAN.IsPassive()) {}   // И ожидаем сигнал панели о том, что она свободна
         //while(HAL_PIO::Read(HPort::_A, HPin::_7) == 1) { };
-        while(GPIOA->IDR & GPIO_PIN_7) { }
+        volatile uint state = GPIOA->IDR & GPIO_PIN_7;
+        while(state)
+        {
+            state = GPIOA->IDR & GPIO_PIN_7;
+        }
 
         //pinCS.SetActive();                  // Даём признак того, чта данные выставлены и можно их считывать
         GPIOG->BSRR = (uint)GPIO_PIN_12 << 16U;
 
         //while(pinReadyPAN.IsActive()) {}    // Переключение PIN_PAN_READY в неактивное состояние означает, что панель приняла данные и обрабатывает их
-        while((GPIOA->IDR & GPIO_PIN_7) == 0) { }
+        state = GPIOA->IDR & GPIO_PIN_7;
+        while(state == 0)
+        {
+            state = GPIOA->IDR & GPIO_PIN_7;
+        }
 
         //pinWR.SetPassive();                 // \ Устанавливаем WR и CS в неактивное состояние - элементарный цикл записи окончен
         GPIOD->BSRR = GPIO_PIN_5;

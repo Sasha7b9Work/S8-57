@@ -23,10 +23,10 @@ void HardFault_Handler()
     
     while (1)
     {
-        file0 = file0;
-        file1 = file1;
-        line0 = line0;
-        line1 = line1;
+        file0 = file0; //-V570
+        file1 = file1; //-V570
+        line0 = line0; //-V570
+        line1 = line1; //-V570
     }
 }
 

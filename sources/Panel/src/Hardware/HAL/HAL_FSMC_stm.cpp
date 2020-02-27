@@ -144,7 +144,11 @@ void HAL_BUS::Update()
 
             //while(pinCS.IsActive()) {};
             //while(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13) == GPIO_PIN_RESET) { }
-            while((GPIOC->IDR & GPIO_PIN_13) == 0) { }
+            volatile uint state = GPIOC->IDR & GPIO_PIN_13;
+            while(state == 0)
+            {
+                state = GPIOC->IDR & GPIO_PIN_13;
+            }
 
             //pinReady.SetActive();
             GPIOC->BSRR = (uint)GPIO_PIN_14 << 16U;
