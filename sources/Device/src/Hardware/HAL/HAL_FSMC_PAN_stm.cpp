@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Device.h"
 #include "common/Decoder_d.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
@@ -124,6 +125,10 @@ exit:
     
     interactionWithPanel = false;
 
+    ///
+    /// \todo Если убрать отсюда эти чтения, то нужно делать задержку, потому что без такой задержки зависает
+    /// 
+
     if(OSCI_IN_MODE_P2P)
     {
         Roller::ReadPoint();
@@ -132,15 +137,12 @@ exit:
     {
         Randomizer::Read();
     }
-
-    volatile bool result = true;
-
-    for(int i = 0; i < 2; i++)          /// \todo Убрать эту античеловечную задержку
+    else if(Device::InModeRecorder())
     {
-        result = true;
+        Recorder::ReadPoint();
     }
 
-    return result;
+    return true;
 }
 
 
@@ -227,6 +229,10 @@ void HAL_BUS::Panel::Send(uint8 *data, uint size)
     else if(OSCI_IN_MODE_RANDOMIZER)
     {
         Randomizer::Read();
+    }
+    else if(Device::InModeRecorder())
+    {
+        Recorder::ReadPoint();
     }
 }
 
