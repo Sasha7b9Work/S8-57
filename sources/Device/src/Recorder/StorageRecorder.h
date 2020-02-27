@@ -22,9 +22,17 @@ private:
 // Описывает данные регистратора - цельную запись точек
 struct Record
 {
-    Record() : start(nullptr), numPoints(0), pointer(0) {} //-V730
+    // Время записи первой точки
+    PackedTime timeStart;
 
-    void SetDataAddress(uint16 *addressMC);
+    // Здесь иточники данных.
+    // бит 0 - канал 1; бит 1 - канал 2; бит 2 - датчик. Именно в таком порядке расположены точки соответствующих источников в хранилище после структуры Record
+    uint8 bitMaskSources;
+
+    // Число сохранённых точек
+    uint numPoints;
+
+    void Init();
 
     // Добавление считаной точки
     void AddPoint(BitSet16 dataA, BitSet16 dataB);
@@ -32,35 +40,19 @@ struct Record
     // Число точек в регистрограмме
     uint NumPoints();
 
-    // Получить точку в позиции position
-    Point GetPoint(uint position, uint maxPoints);
-
-    // Получить следующую точку
-    Point NextPoint(uint maxPoints);
-
-    // Время записи первой точки
-    PackedTime timeStart;
-
     // Возвращает размер свободной памяти
     int FreeMemory();
-private:
-    
-    // Указатель на буфер данных - фактически адрес первой сохранённой точки
-    Point *start;
-    
-    // Количество сохранённых точек
-    uint numPoints;
-    
-    // Указатель на последние считаннные данные
-    uint pointer;
 };
 
 
 struct StorageRecorder
 {
+    // Инициализация после перехода в режим "РЕГИСТРАТОР"
     static void Init();
 
+    // Создаёт новую запись для хранения данных в хранилище
     static void CreateNewRecord();
 
+    // Возвращает указатель на текущую запись
     static Record *CurrentRecord();
 };

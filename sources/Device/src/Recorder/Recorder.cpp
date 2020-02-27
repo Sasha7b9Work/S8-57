@@ -99,6 +99,11 @@ void Recorder::ReadPoint()
 
 void Recorder::Start()
 {
+    StorageRecorder::CreateNewRecord();
+
+    FPGA::GiveStart(0, 0);
+
+    running = true;
 }
 
 

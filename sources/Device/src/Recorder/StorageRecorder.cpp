@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Memory/ExtRAM.h"
@@ -18,48 +19,22 @@ int Record::FreeMemory()
 }
 
 
-void Record::AddPoint(BitSet16, BitSet16)
+void Record::AddPoint(BitSet16 dataA, BitSet16 dataB)
 {
+    LOG_WRITE("добавлена точка %d %d %d %d", dataA.byte0, dataA.byte1, dataB.byte0, dataB.byte1);
 }
 
 
 Record *StorageRecorder::CurrentRecord()
 {
-    return nullptr;
+    static Record record;
+
+    return &record;
 }
 
 
 void StorageRecorder::CreateNewRecord()
 {
-}
-
-
-void Record::SetDataAddress(uint16 *address)
-{
-    start = reinterpret_cast<Point *>(address);
-    numPoints = 0;
-    pointer = MAX_UINT;
-}
-
-
-Point Record::GetPoint(uint position, uint maxPoints)
-{
-    pointer = position - 1;
-
-    return NextPoint(maxPoints);
-}
-
-
-Point Record::NextPoint(uint maxPoints)
-{
-    pointer++;
-
-    if (pointer >= maxPoints)
-    {
-        return Point::CreateEmpty();
-    }
-
-    return Point(start[pointer]);
 }
 
 
