@@ -168,7 +168,7 @@ void Handlers::ChangeTShift(int delta)
 
     TShift().Change(delta);
 
-    if ((TShift() == 0) && event.IsRepeat())   // Если новое пожение смещения - ноль, то включаем торможение
+    if ((set.time.shift == 0) && event.IsRepeat())   // Если новое пожение смещения - ноль, то включаем торможение
     {
         timeStartBrake = TIME_MS;
     }

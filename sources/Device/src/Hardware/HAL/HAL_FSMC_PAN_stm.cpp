@@ -129,17 +129,17 @@ exit:
     /// \todo Если убрать отсюда эти чтения, то нужно делать задержку, потому что без такой задержки зависает
     /// 
 
-    if(OSCI_IN_MODE_P2P)
+    if(Device::InModeRecorder())
+    {
+        Recorder::ReadPoint();
+    }
+    else if(OSCI_IN_MODE_P2P)
     {
         Roller::ReadPoint();
     }
     else if(OSCI_IN_MODE_RANDOMIZER)
     {
         Randomizer::Read();
-    }
-    else if(Device::InModeRecorder())
-    {
-        Recorder::ReadPoint();
     }
 
     return true;
@@ -222,17 +222,17 @@ void HAL_BUS::Panel::Send(uint8 *data, uint size)
 
     interactionWithPanel = false;
 
-    if(OSCI_IN_MODE_P2P)
+    if(Device::InModeRecorder())
+    {
+        Recorder::ReadPoint();
+    }
+    else if(OSCI_IN_MODE_P2P)
     {
         Roller::ReadPoint();
     }
     else if(OSCI_IN_MODE_RANDOMIZER)
     {
         Randomizer::Read();
-    }
-    else if(Device::InModeRecorder())
-    {
-        Recorder::ReadPoint();
     }
 }
 

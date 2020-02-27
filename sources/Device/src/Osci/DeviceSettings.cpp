@@ -22,7 +22,7 @@ void DataSettings::Fill()
     RSHIFT_A(this)       = RShift(Chan::A);
     RSHIFT_B(this)       = RShift(Chan::B);
     Lval_TBASE(this)     = TBase();
-    TSHIFT(this)         = TShift();
+    TSHIFT(this)         = set.time.shift;
     Lval_COUPLE_A(this)  = ModeCouple(Chan::A);
     Lval_COUPLE_B(this)  = ModeCouple(Chan::B);
     TRIGLEV_A(this)      = TrigLevel(Chan::A).Value();

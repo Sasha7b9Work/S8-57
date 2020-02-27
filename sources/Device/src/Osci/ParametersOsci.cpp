@@ -816,12 +816,6 @@ void TShift::Set(int tShift)
 }
 
 
-TShift::operator int()
-{
-    return set.time.shift;
-}
-
-
 void TShift::Reset() const
 {
     TShift::Set(0);
@@ -830,7 +824,7 @@ void TShift::Reset() const
 
 void TShift::Draw() const
 {
-    int x = TPos().PosX() - TShift();
+    int x = TPos().PosX() - set.time.shift;
 
     if (x < Grid::Left())
     {

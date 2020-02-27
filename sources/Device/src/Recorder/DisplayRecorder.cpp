@@ -17,7 +17,7 @@
 /// С этой точки начинается вывод
 static int startPoint = -1;
 
-static uint16 posCursor[2] = { 100, 220 };
+//static uint16 posCursor[2] = { 100, 220 };
 
 
 /// Изобразить установленные настройки

@@ -234,8 +234,6 @@ struct TShift
 {
     static void Set(int);
 
-    operator int();
-
     static int Min();
     static int Max();
 
