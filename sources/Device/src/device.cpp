@@ -108,8 +108,6 @@ void Device::Update()
 
     Menu::SaveSettings();
     
-    Recorder::Update();
-    
     Tester::Update();
     
     Multimeter::Update();

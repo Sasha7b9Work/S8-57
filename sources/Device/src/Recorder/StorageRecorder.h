@@ -2,46 +2,34 @@
 #include "Osci/DeviceSettings.h"
 
 
-// Точка на графике
-struct Point
-{
-    Point(BitSet16 dataA, BitSet16 dataB)
-    {
-        data[Chan::A] = dataA;
-        data[Chan::B] = dataB;
-    }
-    static Point CreateEmpty();
-    bool IsEmpty();
-    int Min(Chan::E ch);
-    int Max(Chan::E ch);
-private:
-    BitSet16 data[2];
-};
-
-
 // Описывает данные регистратора - цельную запись точек
 struct Record
 {
-    // Время записи первой точки
-    PackedTime timeStart;
+    PackedTime timeStart;   // Время записи первой точки
+    uint numPoints;         // Число сохранённых точек
+    uint8 sources;          // Здесь иточники данных.
+                            // бит 0 - канал 1; бит 1 - канал 2; бит 2 - датчик. Именно в таком порядке расположены точки соответствующих источников в хранилище после структуры Record
+    uint8 bytesOnPoint;     // Сколько байт нужно на одну точку всех источников
 
-    // Здесь иточники данных.
-    // бит 0 - канал 1; бит 1 - канал 2; бит 2 - датчик. Именно в таком порядке расположены точки соответствующих источников в хранилище после структуры Record
-    uint8 bitMaskSources;
-
-    // Число сохранённых точек
-    uint numPoints;
-
+    // Инициализировать структуру перед стартом записи
     void Init();
 
     // Добавление считаной точки
     void AddPoint(BitSet16 dataA, BitSet16 dataB);
 
     // Число точек в регистрограмме
-    uint NumPoints();
+    uint NumPoints() const;
 
-    // Возвращает размер свободной памяти
-    int FreeMemory();
+    // Возвращает размер свободной памяти, доступной для хранения новых данных
+    uint FreeMemory() const;
+
+    // Возвращает true, если запись корретна
+    bool IsValid() const;
+
+    // Возвращает адерс первого следующего за записью байта
+    const uint8 *End() const;
+
+    const uint8 *Begin() const;
 };
 
 
@@ -55,4 +43,7 @@ struct StorageRecorder
 
     // Возвращает указатель на текущую запись
     static Record *CurrentRecord();
+
+    // Возвращает количество сохранённых записей. 0 - последняя, 1 - предпоследняя. Если идёт запись, то в 0-ую заппсь добавляются новые данные
+    static uint NumRecords();
 };

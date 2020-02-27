@@ -69,12 +69,6 @@ void Recorder::DeInit()
 }
 
 
-void Recorder::Update()
-{
-
-}
-
-
 void Recorder::ReadPoint()
 {
     if (IsRunning() && HAL_PIO::Read(PIN_P2P))

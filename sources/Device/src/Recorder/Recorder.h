@@ -14,8 +14,6 @@ public:
 
     static void DeInit();
 
-    static void Update();
-
     static void OnPressStart();
 
     static void Start();
