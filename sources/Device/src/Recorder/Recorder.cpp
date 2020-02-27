@@ -98,19 +98,6 @@ void Recorder::ReadPoint()
 
 void Recorder::Start()
 {
-    Text("Подготовка к записи").DrawInCenterBoundedRect(85, 100, 150, 50, Color::FILL);
-    Painter::EndScene();
-
-    RShift(Chan::A).Set(0);
-    RShift(Chan::B).Set(0);
-
-    SECTOR(Sector::_17_RECORDER_1).Erase();
-
-    StorageRecorder::CreateNewRecord();
-
-    FPGA::GiveStart(0, 0);
-
-    running = true;
 }
 
 

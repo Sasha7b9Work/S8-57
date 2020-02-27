@@ -7,26 +7,6 @@
 
 
 
-/// Обёртка для Heap()
-struct Stack
-{
-    static Record record;
-
-    static void Push(const Record &_record)
-    {
-        record = _record;
-        record.SetDataAddress((uint16 *)SECTOR(Sector::_17_RECORDER_1).address);
-    }
-
-    static Record *Top()
-    {
-        return &record;
-    }
-};
-
-Record Stack::record;
-
-
 uint Record::NumPoints()
 {
     return numPoints;
@@ -39,26 +19,19 @@ int Record::FreeMemory()
 }
 
 
-void Record::AddPoint(BitSet16 dataA, BitSet16 dataB)
+void Record::AddPoint(BitSet16, BitSet16)
 {
-    BitSet32 bs(dataA.halfWord, dataB.halfWord);
-
-    HAL_ROM::WriteBufferBytes(SECTOR(Sector::_17_RECORDER_1).address + numPoints * sizeof(Point), &bs, sizeof(BitSet32));
-
-    numPoints++;
 }
 
 
 Record *StorageRecorder::CurrentRecord()
 {
-    return Stack::Top();
+    return nullptr;
 }
 
 
 void StorageRecorder::CreateNewRecord()
 {
-    Record record;
-    Stack::Push(record);
 }
 
 
