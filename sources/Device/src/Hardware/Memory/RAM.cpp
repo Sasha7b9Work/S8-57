@@ -231,9 +231,19 @@ DataSettings *RAM::Get(uint numFromEnd, bool log)
 
     DataSettings *result = packet->GetDataSettings();
 
+    if(TBase().Ref() != (TBase::E)result->tBase)
+    {
+        LOG_WRITE("текущее %d, хранимое %d", TBase().Ref(), result->tBase);
+    }
+
+    if((int)TShift() != result->tShift)
+    {
+        LOG_WRITE("текущее %d, хранимое %d", (int)TShift(), result->tShift);
+    }
+
     if(log)
     {
-        LOG_WRITE("packet = %x, tbase = %d", packet, result->tBase);
+        //LOG_WRITE("packet = %x, tbase = %d", packet, result->tBase);
     }
 
     return result;
@@ -264,11 +274,11 @@ uint RAM::NumberDatas()
 
         packet = reinterpret_cast<Packet *>(packet->addrNewest);
 
-        if(packet != nullptr && !packet->IsValid())     /// \todo ¬ременн€ затычка. Ќужно разобратьс€, почему пам€ть портитс€ и исправить
-        {
-            LOG_WRITE("invalid packet 0x%x", packet);
-            break;
-        }
+//        if(packet != nullptr && !packet->IsValid())     /// \todo ¬ременн€ затычка. Ќужно разобратьс€, почему пам€ть портитс€ и исправить
+//        {
+//            LOG_WRITE("invalid packet 0x%x", packet);
+//            break;
+//        }
     }
 
     return result;
