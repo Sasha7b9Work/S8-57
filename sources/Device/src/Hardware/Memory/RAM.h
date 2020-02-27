@@ -22,7 +22,7 @@ public:
     static DataSettings *PrepareForNewData();
 
     // Считать информацию о num с конца сохранённых данных. 0 - последние данные, 1 - предпоследние
-    static DataSettings *Get(uint num = 0, bool log = false);
+    static DataSettings *Get(uint num = 0);
 
     // Возвращает количество записей в памяти
     static uint NumberDatas();

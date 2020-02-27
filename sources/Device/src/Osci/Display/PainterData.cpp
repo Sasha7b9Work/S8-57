@@ -254,10 +254,11 @@ void DisplayOsci::PainterData::DrawChannel(Chan::E ch)
     }
 
     Buffer bufferP2P;
+    int posSeparator = 0;
 
     if(Roller::NeedDraw())
     {
-        Roller::FillScreenBuffer(ch, bufferP2P, Grid::Width());
+        posSeparator = Roller::FillScreenBuffer(ch, bufferP2P, Grid::Width());
         data = bufferP2P.data;
     }
 
@@ -268,6 +269,11 @@ void DisplayOsci::PainterData::DrawChannel(Chan::E ch)
     else
     {
         DrawModePoints(ch, left, center, data, scale);
+    }
+
+    if(posSeparator > 0)
+    {
+        VLine(Grid::Height()).Draw(Grid::Left() + posSeparator, Grid::Top(), Color::GRID);
     }
 }
 

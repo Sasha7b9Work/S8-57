@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "Hardware/Memory/IntRAM.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
@@ -36,13 +35,8 @@ void DataSettings::Fill()
 }
 
 
-bool DataSettings::IsEquals(const DataSettings &ds, bool log) const
+bool DataSettings::IsEquals(const DataSettings &ds) const
 {
-    if(log)
-    {
-        LOG_WRITE("%d %d", TBASE(this), TBASE(&ds));
-    }
-
     return
         RANGE_A(this) == Lval_RANGE_A(&ds) &&
         RANGE_B(this) == Lval_RANGE_B(&ds) &&

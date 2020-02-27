@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "device.h"
 #include "common/Decoder_d.h"
 #include "Display/Console.h"

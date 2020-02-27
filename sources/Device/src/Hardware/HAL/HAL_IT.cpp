@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "Hardware/Beeper.h"
 #include "FlashDrive/FlashDrive.h"      
 #include "FPGA/FPGA.h"

@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "HAL_PIO.h"
 #include <stm32f4xx_hal.h>
 

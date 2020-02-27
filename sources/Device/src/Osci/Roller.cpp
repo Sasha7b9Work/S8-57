@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
@@ -96,19 +95,11 @@ bool Roller::NeedDraw()
         return true;
     }
 
-    DataSettings *last = RAM::Get(0, true);
+    DataSettings *last = RAM::Get(0);
 
-    DataSettings current;
-    current.Fill();
-
-    if(!current.IsEquals(*last))
+    if(!last->IsEquals(*ds))
     {
-//        LOG_WRITE("рисуем точки");
         return true;
-    }
-    else
-    {
-//        LOG_WRITE("настройки одинаоковые");
     }
 
     if(TrigStartMode().IsAuto())
@@ -126,7 +117,7 @@ bool Roller::NeedDraw()
 }
 
 
-void Roller::FillScreenBuffer(Chan::E ch, Buffer &buffer, int width)
+int Roller::FillScreenBuffer(Chan::E ch, Buffer &buffer, int width)
 {
     uint numBytes = currentPoint;
 
@@ -148,4 +139,6 @@ void Roller::FillScreenBuffer(Chan::E ch, Buffer &buffer, int width)
         out[position] = in[i];
         Math::CircleIncrease<uint>(&position, 0, static_cast<uint>(width));
     }
+
+    return static_cast<int>(PEAKDET_ENABLED(ds) ? (position / 2 - 1) : (position - 1));
 }

@@ -3,7 +3,6 @@
 */
 
 #include "defines.h"
-#include "log.h"
 #include "Display/Console.h"
 #include "Display/Painter.h"
 #include "Hardware/Timer.h"
@@ -168,8 +167,6 @@ void RAM::Init()
 
 DataSettings *RAM::PrepareForNewData()
 {
-    LOG_FUNC_ENTER();
-
     if(OSCI_IN_MODE_RANDOMIZER && NumberDatas() && !needNewFrame)
     {
         return Get();
@@ -210,7 +207,7 @@ DataSettings *RAM::PrepareForNewData()
 }
 
 
-DataSettings *RAM::Get(uint numFromEnd, bool log)
+DataSettings *RAM::Get(uint numFromEnd)
 {
     uint number = NumberDatas();
     
@@ -229,24 +226,7 @@ DataSettings *RAM::Get(uint numFromEnd, bool log)
         counter--;
     }
 
-    DataSettings *result = packet->GetDataSettings();
-
-    if(TBase().Ref() != (TBase::E)result->tBase)
-    {
-        LOG_WRITE("текущее %d, хранимое %d", TBase().Ref(), result->tBase);
-    }
-
-    if((int)TShift() != result->tShift)
-    {
-        LOG_WRITE("текущее %d, хранимое %d", (int)TShift(), result->tShift);
-    }
-
-    if(log)
-    {
-        //LOG_WRITE("packet = %x, tbase = %d", packet, result->tBase);
-    }
-
-    return result;
+    return packet->GetDataSettings();
 }
 
 

@@ -351,11 +351,14 @@ void Osci::InputController::Write(HPort::E portCS, uint16 pinCS, uint16 value)
 
 void Osci::ClearDataRand()
 {
-    DataSettings *ds = RAM::Get();
-    ds->Fill();
+    if(OSCI_IN_MODE_RANDOMIZER)
+    {
+        DataSettings *ds = RAM::Get();
+        ds->Fill();
 
-    std::memset(ds->Data(Chan::A), VALUE::NONE, ds->PointsInChannel());
-    std::memset(ds->Data(Chan::B), VALUE::NONE, ds->PointsInChannel());
+        std::memset(ds->Data(Chan::A), VALUE::NONE, ds->PointsInChannel());
+        std::memset(ds->Data(Chan::B), VALUE::NONE, ds->PointsInChannel());
+    }
 }
 
 

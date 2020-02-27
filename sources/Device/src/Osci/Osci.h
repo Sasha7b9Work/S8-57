@@ -151,8 +151,8 @@ public:
     // Возвращает указатель на данные, которые нужно рисовать
     static DataSettings *GetDS();
 
-    // Заполняет buffer точками для отрисовки. width - ширина окна для отрисовки
-    static void FillScreenBuffer(Chan::E ch, Buffer &buffer, int width);
+    // Заполняет buffer точками для отрисовки. width - ширина окна для отрисовки. Возвращает позицию, в которой нужно рисовать разделитель
+    static int FillScreenBuffer(Chan::E ch, Buffer &buffer, int width);
 
 private:
 

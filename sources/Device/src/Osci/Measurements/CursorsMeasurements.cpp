@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "Display/Grid.h"
 #include "Display/Primitives.h"
 #include "FPGA/FPGA.h"
