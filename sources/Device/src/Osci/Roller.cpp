@@ -106,13 +106,9 @@ bool Roller::NeedDraw()
     {
         return (TIME_MS - last->timeMS > 1000);
     }
-    else if(TrigStartMode().IsWait())
-    {
-        return true;
-    }
     else
     {
-        return true;
+        return !last->IsEquals(*ds);
     }
 }
 
