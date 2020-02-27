@@ -73,7 +73,7 @@ void Recorder::ReadPoint()
 {
     if (IsRunning() && HAL_PIO::Read(PIN_P2P))
     {
-        if (StorageRecorder::CurrentRecord()->FreeMemory() > 4)
+        if (StorageRecorder::LastRecord()->FreeMemory() > 4)
         {
             HAL_BUS::FPGA::SetAddrData(RD::DATA_A, RD::DATA_A + 1);
             BitSet16 dataA(HAL_BUS::FPGA::ReadA0(), HAL_BUS::FPGA::ReadA1());
@@ -81,7 +81,7 @@ void Recorder::ReadPoint()
             HAL_BUS::FPGA::SetAddrData(RD::DATA_B, RD::DATA_B + 1);
             BitSet16 dataB(HAL_BUS::FPGA::ReadA0(), HAL_BUS::FPGA::ReadA1());
 
-            StorageRecorder::CurrentRecord()->AddPoint(dataA, dataB);
+            StorageRecorder::LastRecord()->AddPoint(dataA, dataB);
         }
         else
         {

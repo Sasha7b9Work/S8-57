@@ -27,9 +27,9 @@ struct Record
     bool IsValid() const;
 
     // Возвращает адерс первого следующего за записью байта
-    const uint8 *End() const;
+    uint8 *End() const;
 
-    const uint8 *Begin() const;
+    uint8 *Begin() const;
 };
 
 
@@ -39,10 +39,10 @@ struct StorageRecorder
     static void Init();
 
     // Создаёт новую запись для хранения данных в хранилище
-    static void CreateNewRecord();
+    static bool CreateNewRecord();
 
     // Возвращает указатель на текущую запись
-    static Record *CurrentRecord();
+    static Record *LastRecord();
 
     // Возвращает количество сохранённых записей. 0 - последняя, 1 - предпоследняя. Если идёт запись, то в 0-ую заппсь добавляются новые данные
     static uint NumRecords();

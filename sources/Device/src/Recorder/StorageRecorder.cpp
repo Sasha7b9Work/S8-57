@@ -7,6 +7,10 @@
 #include "Settings/Settings.h"
 
 
+// Последняя запись. Если идёт запись, то именно в неё.
+static Record *last = nullptr;
+
+
 uint Record::NumPoints() const
 {
     return numPoints;
@@ -52,13 +56,13 @@ uint Record::FreeMemory() const
 }
 
 
-const uint8 *Record::Begin() const
+uint8 *Record::Begin() const
 {
-    return reinterpret_cast<const uint8 *>(this);
+    return reinterpret_cast<uint8 *>(const_cast<Record *>(this));
 }
 
 
-const uint8 *Record::End() const
+uint8 *Record::End() const
 {
     if(!IsValid())
     {
@@ -71,12 +75,7 @@ const uint8 *Record::End() const
 
 bool Record::IsValid() const
 {
-    if(Begin() < ExtRAM::Begin() || End() > ExtRAM::End())
-    {
-        return false;
-    }
-
-    if(timeStart.year == 0 || sources == 0 || bytesOnPoint < 2)
+    if(Begin() < ExtRAM::Begin() || (End() + 1024) > ExtRAM::End())
     {
         return false;
     }
@@ -85,23 +84,40 @@ bool Record::IsValid() const
 }
 
 
-Record *StorageRecorder::CurrentRecord()
+Record *StorageRecorder::LastRecord()
 {
-    static Record record;
-
-    return &record;
+    return last;
 }
 
 
-void StorageRecorder::CreateNewRecord()
+bool StorageRecorder::CreateNewRecord()
 {
+    if(last)
+    {
+        Record *next = reinterpret_cast<Record *>(last->End());
 
+        if(!next->IsValid())
+        {
+            return false;
+        }
+
+        last = next;
+    }
+    else
+    {
+        last = reinterpret_cast<Record *>(ExtRAM::Begin());
+    }
+
+    last->Init();
+
+    return true;
 }
 
 
 void StorageRecorder::Init()
 {
     ExtRAM::Fill();
+    last = nullptr;
 }
 
 

@@ -237,12 +237,12 @@ static void DrawMemoryWindow()
 {
     static int prevNumPoints = 0;
 
-    if (Menu::OpenedItem() != PageRecorder::Show::self || StorageRecorder::CurrentRecord()->NumPoints() == 0)
+    if (Menu::OpenedItem() != PageRecorder::Show::self || StorageRecorder::LastRecord()->NumPoints() == 0)
     {
         return;
     }
 
-    int numPoints = static_cast<int>(StorageRecorder::CurrentRecord()->NumPoints());
+    int numPoints = static_cast<int>(StorageRecorder::LastRecord()->NumPoints());
 
     if (prevNumPoints != numPoints)
     {
@@ -276,7 +276,7 @@ static void DrawMemoryWindow()
 
 void DisplayRecorder::MoveLeft()
 {
-    if (StorageRecorder::CurrentRecord()->NumPoints() < 321)
+    if (StorageRecorder::LastRecord()->NumPoints() < 321)
     {
         return;
     }
@@ -291,15 +291,15 @@ void DisplayRecorder::MoveLeft()
 
 void DisplayRecorder::MoveRight()
 {
-    if (StorageRecorder::CurrentRecord()->NumPoints() < 321)
+    if (StorageRecorder::LastRecord()->NumPoints() < 321)
     {
         return;
     }
 
     startPoint += 320;
-    if (startPoint > static_cast<int>(StorageRecorder::CurrentRecord()->NumPoints() - 320))
+    if (startPoint > static_cast<int>(StorageRecorder::LastRecord()->NumPoints() - 320))
     {
-        startPoint = static_cast<int>(StorageRecorder::CurrentRecord()->NumPoints() - 320);
+        startPoint = static_cast<int>(StorageRecorder::LastRecord()->NumPoints() - 320);
     }
 }
 
