@@ -10,6 +10,9 @@ uint8 *HAL_BUS::FPGA::addrData0 = nullptr;
 uint8 *HAL_BUS::FPGA::addrData1 = nullptr;
 
 
+HAL_BUS::Mode::E HAL_BUS::mode = HAL_BUS::Mode::FSMC;
+
+
 void HAL_BUS::FPGA::Write8(uint8 *, uint8)
 {
 }

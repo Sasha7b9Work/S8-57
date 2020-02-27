@@ -167,7 +167,7 @@ source_group(Hardware\\HAL      FILES   ../../Device/src/Hardware/HAL/HAL.h
                                         ../../Device/src/Hardware/HAL/HAL_USART3.cpp
                                                      src/Hardware/HAL/HAL_win.cpp)
 source_group(Hardware\\Memory   FILES   ../../Device/src/Hardware/Memory/ExtRAM.h
-                                                     src/Hardware/Memory/ExtRAM_win.cpp
+                                        ../../Device/src/Hardware/Memory/ExtRAM.cpp
                                                      src/Hardware/Memory/Memory_win.cpp
                                         ../../Device/src/Hardware/Memory/IntRAM.h
                                         ../../Device/src/Hardware/Memory/IntRAM.cpp
@@ -319,7 +319,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Hardware/HAL/HAL_USART3.cpp
                     
                     ../../Device/src/Hardware/Memory/ExtRAM.h
-                                 src/Hardware/Memory/ExtRAM_win.cpp
+                    ../../Device/src/Hardware/Memory/ExtRAM.cpp
                     ../../Device/src/Hardware/Memory/IntRAM.h
                     ../../Device/src/Hardware/Memory/IntRAM.cpp
                                  src/Hardware/Memory/Memory_win.cpp

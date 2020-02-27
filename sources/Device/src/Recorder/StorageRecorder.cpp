@@ -1,8 +1,7 @@
 #include "defines.h"
-#include "Hardware/Memory/IntRAM.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
-#include "Hardware/Memory/ROM.h"
+#include "Hardware/Memory/ExtRAM.h"
 #include "Recorder/StorageRecorder.h"
 
 
@@ -90,5 +89,5 @@ Point Point::CreateEmpty()
 
 void StorageRecorder::Init()
 {
-
+    ExtRAM::Fill();
 }
