@@ -81,7 +81,7 @@ void Recorder::ReadPoint()
             HAL_BUS::FPGA::SetAddrData(RD::DATA_B, RD::DATA_B + 1);
             BitSet16 dataB(HAL_BUS::FPGA::ReadA0(), HAL_BUS::FPGA::ReadA1());
 
-            StorageRecorder::LastRecord()->AddPoint(dataA, dataB);
+            StorageRecorder::LastRecord()->AddPoints(dataA, dataB);
         }
         else
         {

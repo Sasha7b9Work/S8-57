@@ -11,15 +11,114 @@
 static Record *last = nullptr;
 
 
+#define EXIST_A      (sources & (1 << 0))
+#define EXIST_B      (sources & (1 << 1))
+#define EXIST_A_OR_B (sources & (1 << 3))
+#define EXIST_SENS   (sources & (1 << 2))
+
+
+void PointFloat::Prepare()
+{
+    min = 1.0F;
+    max = -1.0F;
+}
+
+
+bool PointFloat::IsEmpty() const
+{
+    return (min > max);
+}
+
+
+void PointFloat::Add(float value)
+{
+    if(IsEmpty())
+    {
+        min = value;
+        max = value;
+    }
+    else if(value < min)
+    {
+        min = value;
+    }
+    else if(value > max)
+    {
+        max = value;
+    }
+}
+
+
 uint Record::NumPoints() const
 {
     return numPoints;
 }
 
 
-void Record::AddPoint(BitSet16 dataA, BitSet16 dataB)
+void Record::AddPoints(BitSet16 dataA, BitSet16 dataB)
 {
-    LOG_WRITE("добавлена точка %d %d %d %d", dataA.byte0, dataA.byte1, dataB.byte0, dataB.byte1);
+    HAL_BUS_CONFIGURE_TO_FSMC;
+
+    if(EXIST_A)
+    {
+        *ValueA(numPoints) = dataA;
+    }
+
+    if(EXIST_B)
+    {
+        *ValueB(numPoints) = dataB;
+    }
+
+    numPoints++;
+
+    ValueSensor(numPoints)->Prepare();
+}
+
+
+void Record::AddPoint(float value)
+{
+    HAL_BUS_CONFIGURE_TO_FSMC;
+
+    if(EXIST_SENS)
+    {
+        ValueSensor(numPoints)->Add(value);
+
+        // Теперь интерполируем отсутствующие точки
+
+        for(uint i = numPoints; i < 0xFFFFFFFF; i--)
+        {
+
+        }
+    }
+}
+
+
+BitSet16 *Record::ValueA(uint number)
+{
+    return reinterpret_cast<BitSet16 *>(AddressPoints(number));
+}
+
+
+BitSet16 *Record::ValueB(uint number)
+{
+    return reinterpret_cast<BitSet16 *>(AddressPoints(number) + offsetB);
+}
+
+
+PointFloat *Record::ValueSensor(uint number)
+{
+    return reinterpret_cast<PointFloat *>(AddressPoints(number) + offsetSensor);
+}
+
+
+uint8 *Record::BeginData()
+{
+    return reinterpret_cast<uint8 *>(this) + sizeof(Record);
+}
+
+
+uint8 *Record::AddressPoints(uint number)
+{
+    return BeginData() + bytesOnPoint * number;
 }
 
 
@@ -29,24 +128,33 @@ void Record::Init()
     numPoints = 0;
     sources = 0;
     bytesOnPoint = 0;
+    offsetB = 0;
+    offsetSensor = 0;
 
     if(set.rec.enA)
     {
-        _SET_BIT(sources, 0);
+        sources |= (1 << 0);
         bytesOnPoint += 2;
+
+        offsetB = sizeof(BitSet16);
+        offsetSensor = sizeof(BitSet16);
     }
 
     if(set.rec.enB)
     {
-        _SET_BIT(sources, 1);
+        sources |= (1 << 1);
         bytesOnPoint += 2;
+
+        offsetSensor += sizeof(BitSet16);
     }
 
     if(set.rec.enSensor)
     {
-        _SET_BIT(sources, 2);
+        sources |= (1 << 2);
         bytesOnPoint += sizeof(float) * 2;      // Каждая точка датчика требует 2 значения типа float - минимальное и максимальное
     }
+
+    ValueSensor(0)->Prepare();
 }
 
 
@@ -64,10 +172,7 @@ uint8 *Record::Begin() const
 
 uint8 *Record::End() const
 {
-    if(!IsValid())
-    {
-        return nullptr;
-    }
+    HAL_BUS_CONFIGURE_TO_FSMC;
 
     return Begin() + sizeof(*this) + bytesOnPoint * numPoints;
 }
@@ -75,6 +180,8 @@ uint8 *Record::End() const
 
 bool Record::IsValid() const
 {
+    HAL_BUS_CONFIGURE_TO_FSMC;
+
     if(Begin() < ExtRAM::Begin() || (End() + 1024) > ExtRAM::End())
     {
         return false;
@@ -92,6 +199,8 @@ Record *StorageRecorder::LastRecord()
 
 bool StorageRecorder::CreateNewRecord()
 {
+    HAL_BUS_CONFIGURE_TO_FSMC;
+
     if(last)
     {
         Record *next = reinterpret_cast<Record *>(last->End());
@@ -123,6 +232,8 @@ void StorageRecorder::Init()
 
 uint StorageRecorder::NumRecords()
 {
+    HAL_BUS_CONFIGURE_TO_FSMC;
+
     const Record *record = reinterpret_cast<Record *>(ExtRAM::Begin());
 
     uint result = 0;

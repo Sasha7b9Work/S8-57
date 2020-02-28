@@ -2,20 +2,40 @@
 #include "Osci/DeviceSettings.h"
 
 
+struct PointFloat
+{
+    float min;
+    float max;
+
+    // Подготавливает точку к записи
+    void Prepare();
+
+    bool IsEmpty() const;
+
+    void Add(float value);
+};
+
+
 // Описывает данные регистратора - цельную запись точек
 struct Record
 {
-    PackedTime timeStart;   // Время записи первой точки
-    uint numPoints;         // Число сохранённых точек
-    uint8 sources;          // Здесь иточники данных.
-                            // бит 0 - канал 1; бит 1 - канал 2; бит 2 - датчик. Именно в таком порядке расположены точки соответствующих источников в хранилище после структуры Record
-    uint8 bytesOnPoint;     // Сколько байт нужно на одну точку всех источников
+    PackedTime timeStart;       // Время записи первой точки
+    uint       numPoints;       // Число сохранённых точек
+    uint8      sources;         // Здесь иточники данных.
+                                // бит 0 - канал 1; бит 1 - канал 2; бит 2 - датчик. Именно в таком порядке расположены точки соответствующих источников в хранилище после структуры Record
+    uint8      bytesOnPoint;    // Сколько байт нужно на одну точку всех источников
+
+    uint8      offsetB;         // Смещение отсчётов канала B
+    uint8      offsetSensor;    // Смещение отсчётов датчика
 
     // Инициализировать структуру перед стартом записи
     void Init();
 
     // Добавление считаной точки
-    void AddPoint(BitSet16 dataA, BitSet16 dataB);
+    void AddPoints(BitSet16 dataA, BitSet16 dataB);
+
+    // Добавление точки датчика в запись
+    void AddPoint(float value);
 
     // Число точек в регистрограмме
     uint NumPoints() const;
@@ -30,6 +50,18 @@ struct Record
     uint8 *End() const;
 
     uint8 *Begin() const;
+
+private:
+    
+    BitSet16 *ValueA(uint number);          // Указатель на точку number канала A
+    BitSet16 *ValueB(uint number);          // Указатель на точку number канала B
+    PointFloat *ValueSensor(uint number);    // Указатель на точку number датчика
+
+    // С этого адреса начинаются данные
+    uint8 *BeginData();
+
+    // Указатель на начало данных точки в позиции number
+    uint8 *AddressPoints(uint number);
 };
 
 
