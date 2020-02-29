@@ -32,7 +32,7 @@ bool PointFloat::IsEmpty() const
 
 void PointFloat::Add(float value)
 {
-    if(IsEmpty())
+    if(min > max)
     {
         min = value;
         max = value;
@@ -48,7 +48,7 @@ void PointFloat::Add(float value)
 }
 
 
-uint Record::NumPoints() const
+int Record::NumPoints() const
 {
     return numPoints;
 }
@@ -84,27 +84,55 @@ void Record::AddPoint(float value)
 
         // Теперь интерполируем отсутствующие точки
 
-        for(uint i = numPoints; i < 0xFFFFFFFF; i--)
-        {
+        int i = numPoints - 1;
 
+        for(; i >= 0; i--)
+        {
+            if (!ValueSensor(i)->IsEmpty())
+            {
+                break;
+            }
+        }
+
+        if (numPoints - i > 1)
+        {
+            Interpolate(i, numPoints);
         }
     }
 }
 
 
-BitSet16 *Record::ValueA(uint number)
+void Record::Interpolate(int num1, int num2)
+{
+    PointFloat *point1 = ValueSensor(num1);
+    PointFloat *point2 = ValueSensor(num2);
+
+    float dMIN = (point2->min - point1->min) / (num2 - num1);
+    float dMAX = (point2->max - point2->min) / (num2 - num1);
+
+    for (int i = num1 + 1; i < num2; i++)
+    {
+        PointFloat *prev = ValueSensor(i - 1);
+        PointFloat *point = ValueSensor(i);
+        point->max = prev->max + dMAX;
+        point->min = prev->min + dMIN;
+    }
+}
+
+
+BitSet16 *Record::ValueA(int number)
 {
     return reinterpret_cast<BitSet16 *>(AddressPoints(number));
 }
 
 
-BitSet16 *Record::ValueB(uint number)
+BitSet16 *Record::ValueB(int number)
 {
     return reinterpret_cast<BitSet16 *>(AddressPoints(number) + offsetB);
 }
 
 
-PointFloat *Record::ValueSensor(uint number)
+PointFloat *Record::ValueSensor(int number)
 {
     return reinterpret_cast<PointFloat *>(AddressPoints(number) + offsetSensor);
 }
@@ -116,7 +144,7 @@ uint8 *Record::BeginData()
 }
 
 
-uint8 *Record::AddressPoints(uint number)
+uint8 *Record::AddressPoints(int number)
 {
     return BeginData() + bytesOnPoint * number;
 }

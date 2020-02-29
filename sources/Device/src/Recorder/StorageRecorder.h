@@ -20,7 +20,7 @@ struct PointFloat
 struct Record
 {
     PackedTime timeStart;       // Время записи первой точки
-    uint       numPoints;       // Число сохранённых точек
+    int        numPoints;       // Число сохранённых точек
     uint8      sources;         // Здесь иточники данных.
                                 // бит 0 - канал 1; бит 1 - канал 2; бит 2 - датчик. Именно в таком порядке расположены точки соответствующих источников в хранилище после структуры Record
     uint8      bytesOnPoint;    // Сколько байт нужно на одну точку всех источников
@@ -38,7 +38,7 @@ struct Record
     void AddPoint(float value);
 
     // Число точек в регистрограмме
-    uint NumPoints() const;
+    int NumPoints() const;
 
     // Возвращает размер свободной памяти, доступной для хранения новых данных
     uint FreeMemory() const;
@@ -53,15 +53,18 @@ struct Record
 
 private:
     
-    BitSet16 *ValueA(uint number);          // Указатель на точку number канала A
-    BitSet16 *ValueB(uint number);          // Указатель на точку number канала B
-    PointFloat *ValueSensor(uint number);    // Указатель на точку number датчика
+    BitSet16 *ValueA(int number);          // Указатель на точку number канала A
+    BitSet16 *ValueB(int number);          // Указатель на точку number канала B
+    PointFloat *ValueSensor(int number);    // Указатель на точку number датчика
 
     // С этого адреса начинаются данные
     uint8 *BeginData();
 
     // Указатель на начало данных точки в позиции number
-    uint8 *AddressPoints(uint number);
+    uint8 *AddressPoints(int number);
+
+    // Интерполировать точки между позициями num1 и num2
+    void Interpolate(int num1, int num2);
 };
 
 
