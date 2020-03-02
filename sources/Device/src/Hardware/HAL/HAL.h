@@ -1,5 +1,4 @@
 #pragma once
-#include "defines.h"
 #include "Hardware/Memory/Sector.h"
 #include "Osci/DeviceSettings.h"
 

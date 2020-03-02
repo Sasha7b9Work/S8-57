@@ -1,6 +1,4 @@
 #include "defines.h"
-#include "log.h"
-#include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Memory/ExtRAM.h"
 #include "Recorder/StorageRecorder.h"

@@ -1,5 +1,4 @@
 #pragma once
-#include "defines.h"
 #include <usbd_def.h>
 
 

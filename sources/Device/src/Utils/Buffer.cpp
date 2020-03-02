@@ -1,3 +1,4 @@
+#include "defines.h"
 #include "log.h"
 #include "Buffer.h"
 #include <cstdlib>

@@ -3,15 +3,11 @@
 #include "Display/Painter.h"
 #include "Display/Primitives.h"
 #include "Display/Warnings.h"
-#include "FPGA/FPGA.h"
 #include "Menu/Menu.h"
-#include "Recorder/Recorder.h"
+#include "Menu/Pages/Include/PageRecorder.h"
 #include "Recorder/DisplayRecorder.h"
 #include "Recorder/StorageRecorder.h"
 #include "Settings/Settings.h"
-#include "Utils/Values.h"
-#include <cstring>
-#include <cmath>
 
 
 /// С этой точки начинается вывод
