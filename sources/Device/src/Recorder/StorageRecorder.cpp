@@ -3,6 +3,7 @@
 #include "Hardware/Memory/ExtRAM.h"
 #include "Recorder/StorageRecorder.h"
 #include "Settings/Settings.h"
+#include <cstring>
 
 
 // Последняя запись. Если идёт запись, то именно в неё.
@@ -56,6 +57,11 @@ void Record::AddPoints(BitSet16 dataA, BitSet16 dataB)
 {
     HAL_BUS_CONFIGURE_TO_FSMC;
 
+    if(maxPoints)
+    {
+        DeleteOldPoints();
+    }
+
     if(EXIST_A)
     {
         *ValueA(numPoints) = dataA;
@@ -69,6 +75,23 @@ void Record::AddPoints(BitSet16 dataA, BitSet16 dataB)
     numPoints++;
 
     ValueSensor(numPoints)->Prepare();
+}
+
+
+void Record::DeleteOldPoints()
+{
+    if(maxPoints == 0 || numPoints < maxPoints)
+    {
+        return;
+    }
+
+    uint numBytes = bytesOnPoint * static_cast<uint>(numPoints - 1);      // Столько байт будем перемещать
+
+    uint8 *dest = BeginData();
+
+    uint8 *src = dest + bytesOnPoint;
+
+    std::memmove(dest, src, numBytes);
 }
 
 
@@ -150,6 +173,7 @@ uint8 *Record::AddressPoints(int number)
 
 void Record::Init()
 {
+    maxPoints = 0;
     timeStart = HAL_RTC::GetPackedTime();
     numPoints = 0;
     sources = 0;

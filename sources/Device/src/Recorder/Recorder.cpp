@@ -46,9 +46,9 @@ void Recorder::Init()
 
     running = false;
 
-    Stop();
-
     initialized = true;
+
+    FPGA::GiveStart(0, 0);
 }
 
 
@@ -67,7 +67,7 @@ void Recorder::DeInit()
 
 void Recorder::ReadPoint()
 {
-    if (IsRunning() && HAL_PIO::Read(PIN_P2P))
+    if (HAL_PIO::Read(PIN_P2P))
     {
         if (StorageRecorder::LastRecord()->FreeMemory() > 4)
         {
@@ -90,8 +90,6 @@ void Recorder::ReadPoint()
 void Recorder::Start()
 {
     StorageRecorder::CreateNewRecord();
-
-    FPGA::GiveStart(0, 0);
 
     running = true;
 }
