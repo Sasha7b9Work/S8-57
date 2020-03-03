@@ -10,6 +10,8 @@
 // Последняя запись. Если идёт запись, то именно в неё.
 static Record *last = nullptr;
 
+static PointFloat empty = { 1.0F, -1.0F };
+
 
 #define EXIST_A      (sources & (1 << 0))
 #define EXIST_B      (sources & (1 << 1))
@@ -158,7 +160,7 @@ BitSet16 *Record::ValueB(int number)
 
 PointFloat *Record::ValueSensor(int number)
 {
-    return reinterpret_cast<PointFloat *>(AddressPoints(number) + offsetSensor);
+    return EXIST_SENS ? reinterpret_cast<PointFloat *>(AddressPoints(number) + offsetSensor) : &empty;
 }
 
 

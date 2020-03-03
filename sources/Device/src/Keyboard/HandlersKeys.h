@@ -57,5 +57,3 @@ private:
     static void OnTShift();    // Key::TShiftLess, Key::TShiftMore
     static void OnFX();        // Key::F1, Key::F2, Key::F3, Key::F4, Key::F5
 };
-
-
