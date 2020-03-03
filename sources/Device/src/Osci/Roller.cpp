@@ -11,6 +11,7 @@
 
 DataSettings *Roller::ds = nullptr;
 uint          Roller::currentPoint = 0;
+uint          Roller::firstOnDisplay = static_cast<uint>(-1);
 void         (*Roller::addPoint)(BitSet16, BitSet16);
 
 
@@ -23,6 +24,7 @@ void Roller::Prepare()
 
     ds = IntRAM::PrepareForP2P();
     currentPoint = 0;
+    firstOnDisplay = static_cast<uint>(-1);
 
     addPoint = PEAKDET_ENABLED(ds) ? AddPointPeakDetEnabled : AddPointPeakDetDisabled;
 }
@@ -123,6 +125,15 @@ int Roller::FillScreenBuffer(Chan::E ch, Buffer &buffer, int width)
         numBytes *= 2;
     }
 
+    if(firstOnDisplay == static_cast<uint>(-1))
+    {
+        firstOnDisplay = currentPoint;
+        if(PEAKDET_ENABLED(ds))
+        {
+            firstOnDisplay *= 2;
+        }
+    }
+
     buffer.Realloc(static_cast<uint>(width));
     std::memset(buffer.data, VALUE::NONE, static_cast<uint>(width));
 
@@ -130,7 +141,7 @@ int Roller::FillScreenBuffer(Chan::E ch, Buffer &buffer, int width)
     uint8 *in = ds->Data(ch);
     uint8 *out = buffer.data;
 
-    for(uint i = 0; i < numBytes; i++)
+    for(uint i = firstOnDisplay; i < numBytes; i++)
     {
         out[position] = in[i];
         Math::CircleIncrease<uint>(&position, 0, static_cast<uint>(width));

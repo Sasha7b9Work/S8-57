@@ -7,13 +7,13 @@ class Buffer;
 
 struct PackedTime
 {
-    unsigned hours : 5;
-    unsigned minutes : 6;
-    unsigned seconds : 6;
-    unsigned year : 7;
-    unsigned month : 4;
+    unsigned hours    : 5;
+    unsigned minutes  : 6;
+    unsigned seconds  : 6;
+    unsigned year     : 7;
+    unsigned month    : 4;
     unsigned notUsed0 : 4;
-    unsigned day : 5;
+    unsigned day      : 5;
     unsigned notUsed1 : 27;
     PackedTime(uint h = 11, uint m = 11, uint s = 11, uint d = 11, uint mo = 11, uint y = 11) :
         hours(h), minutes(m), seconds(s), year(y), month(mo), notUsed0(0), day(d), notUsed1(0) {};
