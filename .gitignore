@@ -21,6 +21,9 @@ doc/doxygen/S8-57/*
 sources/Device/DebugConfig/*
 sources/Device/Listings/*
 sources/Device/Objects/*
+sources/DeviceLoader/DebugConfig/*
+sources/DeviceLoader/Listings/*
+sources/DeviceLoader/Objects/*
 sources/DLoader/DebugConfig/*
 sources/DLoader/Listings/*
 sources/DLoader/Objects/*

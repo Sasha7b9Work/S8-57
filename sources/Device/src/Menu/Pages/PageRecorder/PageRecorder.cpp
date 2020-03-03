@@ -1,8 +1,10 @@
 #include "defines.h"
 #include "Device.h"
+#include "FlashDrive/FlashDrive.h"
 #include "Menu/MenuItems.h"
 #include "Settings/Settings.h"
 #include "Recorder/Recorder.h"
+#include "Recorder/Sensor.h"
 
 
 static bool IsActive_Destination()
@@ -62,9 +64,20 @@ DEF_GRAPH_BUTTON_HINTS_2( bStart,                                               
 
 
 
-static void OnOpenClose_Recorder(bool enter)
+static void OnOpenClose_Recorder(bool open)
 {
-    Device::SetMode(enter ? Device::Mode::Recorder : Device::Mode::Osci);
+    Device::SetMode(open ? Device::Mode::Recorder : Device::Mode::Osci);
+
+    if(open)
+    {
+        FDrive::DeInit();
+        Sensor::Init();
+    }
+    else
+    {
+        Sensor::DeInit();
+        FDrive::Init();
+    }
 }
 
 DEF_PAGE_4( pRecorder,                                                                                                                                        //--- ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– ---

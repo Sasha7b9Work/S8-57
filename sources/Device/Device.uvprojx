@@ -1661,14 +1661,9 @@
           <GroupName>Recorder</GroupName>
           <Files>
             <File>
-              <FileName>Recorder.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Recorder\Recorder.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Recorder.h</FileName>
+              <FileName>DisplayRecorder.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Recorder\Recorder.h</FilePath>
+              <FilePath>.\src\Recorder\DisplayRecorder.h</FilePath>
             </File>
             <File>
               <FileName>DisplayRecorder.cpp</FileName>
@@ -1676,19 +1671,34 @@
               <FilePath>.\src\Recorder\DisplayRecorder.cpp</FilePath>
             </File>
             <File>
-              <FileName>DisplayRecorder.h</FileName>
+              <FileName>Recorder.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Recorder\DisplayRecorder.h</FilePath>
+              <FilePath>.\src\Recorder\Recorder.h</FilePath>
             </File>
             <File>
-              <FileName>StorageRecorder.cpp</FileName>
+              <FileName>Recorder.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Recorder\StorageRecorder.cpp</FilePath>
+              <FilePath>.\src\Recorder\Recorder.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Sensor.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Recorder\Sensor.h</FilePath>
+            </File>
+            <File>
+              <FileName>Sensor.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Recorder\Sensor.cpp</FilePath>
             </File>
             <File>
               <FileName>StorageRecorder.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Recorder\StorageRecorder.h</FilePath>
+            </File>
+            <File>
+              <FileName>StorageRecorder.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Recorder\StorageRecorder.cpp</FilePath>
             </File>
           </Files>
         </Group>

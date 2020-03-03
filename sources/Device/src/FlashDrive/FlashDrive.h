@@ -30,6 +30,8 @@ class FDrive
 {
 public:
     static void Init();
+
+    static void DeInit();
     
     static void Update();
     
