@@ -56,6 +56,9 @@ struct FPGA
 
     static const int MAX_NUM_POINTS = 8 * 1024;
 
+    // Принудительный запуск синхронизации
+    static void ForcedStart();
+
 private:
 
 
@@ -64,9 +67,6 @@ private:
 
     static void OnPressStart();
     
-    // Принудительный запуск синхронизации
-    static void ForcedStart();
-
 
     static void Reset();
 

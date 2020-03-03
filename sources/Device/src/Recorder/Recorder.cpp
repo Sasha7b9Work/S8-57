@@ -54,6 +54,8 @@ void Recorder::Init()
     StorageRecorder::LastRecord()->maxPoints = 320;
 
     FPGA::GiveStart(0, 0);
+
+    FPGA::ForcedStart();
 }
 
 
