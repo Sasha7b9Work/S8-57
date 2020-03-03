@@ -208,10 +208,6 @@ void DisplayRecorder::DrawChannel(Record *record, Chan::E ch)
         return;
     }
 
-    Color::FILL.SetAsCurrent();
-
-    HAL_BUS_SET_MODE_FSMC;
-
     typedef Point16 *(Record::*funcValue)(int);
 
     funcValue funcs[2] = { &Record::ValueA, &Record::ValueB };
@@ -227,7 +223,7 @@ void DisplayRecorder::DrawChannel(Record *record, Chan::E ch)
             int min = Y(point->min);
             int max = Y(point->max);
 
-            VLine(max - min).Draw(x, min, Color::CHAN[Chan::A]);
+            VLine(max - min).Draw(x, min, Color::CHAN[ch]);
 
             HAL_BUS_SET_MODE_FSMC;
         }

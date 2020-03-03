@@ -89,18 +89,18 @@ void Record::AddPoints(BitSet16 dataA, BitSet16 dataB)
 
 void Record::DeleteOldPoints()
 {
-    if(maxPoints == 0 || numPoints < maxPoints)
+    if(numPoints == maxPoints)
     {
-        return;
+        uint numBytes = bytesOnPoint * static_cast<uint>(numPoints - 1);      // Столько байт будем перемещать
+
+        uint8 *dest = BeginData();
+
+        uint8 *src = dest + bytesOnPoint;
+
+        std::memmove(dest, src, numBytes);
+
+        numPoints--;
     }
-
-    uint numBytes = bytesOnPoint * static_cast<uint>(numPoints - 1);      // Столько байт будем перемещать
-
-    uint8 *dest = BeginData();
-
-    uint8 *src = dest + bytesOnPoint;
-
-    std::memmove(dest, src, numBytes);
 }
 
 
