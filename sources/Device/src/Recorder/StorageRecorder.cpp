@@ -19,6 +19,12 @@ static PointFloat empty = { 1.0F, -1.0F };
 #define EXIST_SENS   (sources & (1 << 2))
 
 
+Point16 *Point16::Next(Record *record) const
+{
+    return const_cast<Point16 *>(reinterpret_cast<const Point16 *>(reinterpret_cast<const uint8 *>(this) + record->bytesOnPoint));
+}
+
+
 void PointFloat::Prepare()
 {
     min = 1.0F;
@@ -146,15 +152,15 @@ void Record::Interpolate(int num1, int num2)
 }
 
 
-BitSet16 *Record::ValueA(int number)
+Point16 *Record::ValueA(int number)
 {
-    return reinterpret_cast<BitSet16 *>(AddressPoints(number));
+    return reinterpret_cast<Point16 *>(AddressPoints(number));
 }
 
 
-BitSet16 *Record::ValueB(int number)
+Point16 *Record::ValueB(int number)
 {
-    return reinterpret_cast<BitSet16 *>(AddressPoints(number) + offsetB);
+    return reinterpret_cast<Point16 *>(AddressPoints(number) + offsetB);
 }
 
 

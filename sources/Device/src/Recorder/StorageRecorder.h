@@ -2,6 +2,22 @@
 #include "Osci/DeviceSettings.h"
 
 
+struct Record;
+
+
+struct Point16
+{
+    uint8 min;
+    uint8 max;
+
+    Point16(BitSet16 p) : min(p.byte0), max(p.byte1) { }
+
+    bool IsEmpty() const { return (min == 255) && (max == 0); };
+
+    Point16 *Next(Record *record) const;
+};
+
+
 struct PointFloat
 {
     float min;
@@ -47,17 +63,23 @@ struct Record
     // Возвращает true, если запись корретна
     bool IsValid() const;
 
-    // Возвращает адерс первого следующего за записью байта
+    // Возвращает адерс первого после записи (вместе с данными) байта
     uint8 *End() const;
 
+    // Адрес начала записи
     uint8 *Begin() const;
+
+    // Указатель на точку number канала A
+    Point16 *ValueA(int number);
+
+    // Указатель на точку number канала B
+    Point16 *ValueB(int number);
+
+    // Указатель на точку number датчика
+    PointFloat *ValueSensor(int number);
 
 private:
     
-    BitSet16 *ValueA(int number);          // Указатель на точку number канала A
-    BitSet16 *ValueB(int number);          // Указатель на точку number канала B
-    PointFloat *ValueSensor(int number);    // Указатель на точку number датчика
-
     // С этого адреса начинаются данные
     uint8 *BeginData();
 
