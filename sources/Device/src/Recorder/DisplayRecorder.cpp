@@ -3,6 +3,7 @@
 #include "Display/Painter.h"
 #include "Display/Primitives.h"
 #include "Display/Warnings.h"
+#include "Hardware/HAL/HAL.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Include/PageRecorder.h"
 #include "Recorder/DisplayRecorder.h"
@@ -179,6 +180,8 @@ void DisplayRecorder::DrawCursors()
 
 void DisplayRecorder::DrawData(Record *record)
 {
+    HAL_BUS_CONFIGURE_TO_FSMC;
+
     if(record->sources & 0x01)
     {
         DrawChannel(record, Chan::A);
@@ -207,8 +210,6 @@ void DisplayRecorder::DrawChannel(Record *record, Chan::E ch)
 
     Color::FILL.SetAsCurrent();
 
-    int x = 0;
-
     typedef Point16 *(Record::*funcValue)(int);
 
     funcValue funcs[2] = { &Record::ValueA, &Record::ValueB };
@@ -217,7 +218,7 @@ void DisplayRecorder::DrawChannel(Record *record, Chan::E ch)
 
     Point16 *point = (record->*func)(numPoints < 320 ? 0 : (numPoints - 320));
 
-    do
+    for(int x = 0; x < 320; x++)
     {
         if(!point->IsEmpty())
         {
@@ -228,9 +229,7 @@ void DisplayRecorder::DrawChannel(Record *record, Chan::E ch)
         }
 
         point = point->Next(record);
-
-        x++;
-    } while(x < 320);
+    };
 
     DrawCursors();
 }
