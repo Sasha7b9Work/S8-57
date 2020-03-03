@@ -3,6 +3,7 @@
 #include "FPGA/ContextRecorder.h"
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Osci.h"
+#include "Recorder/DisplayRecorder.h"
 #include "Recorder/Recorder.h"
 #include "Recorder/StorageRecorder.h"
 #include "Settings/Settings.h"
@@ -71,7 +72,7 @@ void Recorder::DeInit()
 
 void Recorder::ReadPoint()
 {
-    if (HAL_PIO::Read(PIN_P2P))
+    if(HAL_PIO::Read(PIN_P2P))
     {
         if (StorageRecorder::LastRecord()->FreeMemory() > 4)
         {

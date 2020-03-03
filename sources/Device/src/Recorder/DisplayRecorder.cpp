@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Display/Primitives.h"
@@ -14,10 +15,11 @@
 #include <cstring>
 
 
-// С этой точки начинается вывод
-static int startPoint = -1;
+int DisplayRecorder::startPoint = -1;
 
-static uint16 posCursor[2] = { 100, 220 };
+uint16 DisplayRecorder::posCursor[2] = { 100, 220 };
+
+bool DisplayRecorder::inProcessUpdate = false;
 
 
 void DisplayRecorder::Update()
@@ -26,7 +28,13 @@ void DisplayRecorder::Update()
 
     Grid::Draw();
 
+    inProcessUpdate = true;
+
     DrawData(StorageRecorder::LastRecord());
+
+    inProcessUpdate = false;
+
+    StorageRecorder::LastRecord()->AddMissingPoints();
 
     DrawSettings(289, 0);
 
@@ -319,4 +327,10 @@ void DisplayRecorder::MoveCursorLeft()
 
 void DisplayRecorder::MoveCursorRight()
 {
+}
+
+
+bool DisplayRecorder::InProcessUpdate()
+{
+    return inProcessUpdate;
 }

@@ -10,11 +10,41 @@ struct Point16
     uint8 min;
     uint8 max;
 
+    Point16() : min(255), max(0) { }
+
     Point16(BitSet16 p) : min(p.byte0), max(p.byte1) { }
 
     bool IsEmpty() const { return (min == 255) && (max == 0); };
 
     Point16 *Next(Record *record) const;
+
+    void Erase() { min = 255; max = 0; }
+
+    BitSet16 ToBitSet16() { return BitSet16(min, max); }
+};
+
+
+// Здесь хранятся точки, которые были пропущены во время вывода на дисплей
+struct BufferMissingPoints
+{
+    // Возвращает количество хранящихся точек
+    static int Size() { return last - first; };
+
+    // Ложит две точки в буфер
+    static void Push(BitSet16 a, BitSet16 b);
+
+    // Извлекает точки из буфера
+    static void Pop(BitSet16 *a, BitSet16 *b);
+
+private:
+    // Здесь сохраняются пропущенные точки
+    static BitSet16 points[2][10];
+
+    // Индекс "запоследней" точки
+    static int last;
+
+    // Индекс первой точки
+    static int first;
 };
 
 
@@ -50,6 +80,9 @@ struct Record
 
     // Добавление считаной точки
     void AddPoints(BitSet16 dataA, BitSet16 dataB);
+
+    // Добавить точки, которые были пропущены во время рисования
+    void AddMissingPoints();
 
     // Добавление точки датчика в запись
     void AddPoint(float value);

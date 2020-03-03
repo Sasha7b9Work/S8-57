@@ -2,9 +2,17 @@
 #include "log.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Memory/ExtRAM.h"
+#include "Recorder/DisplayRecorder.h"
 #include "Recorder/StorageRecorder.h"
 #include "Settings/Settings.h"
 #include <cstring>
+
+
+BitSet16 BufferMissingPoints::points[2][10];
+
+int BufferMissingPoints::last = 0;
+
+int BufferMissingPoints::first = 0;
 
 
 // Последняя запись. Если идёт запись, то именно в неё.
@@ -12,11 +20,30 @@ static Record *last = nullptr;
 
 static PointFloat empty = { 1.0F, -1.0F };
 
-
 #define EXIST_A      (sources & (1 << 0))
 #define EXIST_B      (sources & (1 << 1))
 #define EXIST_A_OR_B (sources & (1 << 3))
 #define EXIST_SENS   (sources & (1 << 2))
+
+
+void BufferMissingPoints::Push(BitSet16 a, BitSet16 b)
+{
+    points[0][last] = a;
+    points[1][last] = b;
+    last++;
+}
+
+void BufferMissingPoints::Pop(BitSet16 *a, BitSet16 *b)
+{
+    *a = points[0][first];
+    *b = points[1][first];
+    first++;
+
+    if(last == first)
+    {
+        last = first = 0;
+    }
+}
 
 
 Point16 *Point16::Next(Record *record) const
@@ -64,6 +91,13 @@ int Record::NumPoints() const
 
 void Record::AddPoints(BitSet16 dataA, BitSet16 dataB)
 {
+    if(DisplayRecorder::InProcessUpdate())
+    {
+        BufferMissingPoints::Push(dataA, dataB);
+
+        return;
+    }
+
     HAL_BUS_CONFIGURE_TO_FSMC;
 
     if(maxPoints)
@@ -84,6 +118,20 @@ void Record::AddPoints(BitSet16 dataA, BitSet16 dataB)
     numPoints++;
 
     ValueSensor(numPoints)->Prepare();
+}
+
+
+void Record::AddMissingPoints()
+{
+    while(BufferMissingPoints::Size())
+    {
+        BitSet16 a;
+        BitSet16 b;
+
+        BufferMissingPoints::Pop(&a, &b);
+
+        AddPoints(a, b);
+    }
 }
 
 
