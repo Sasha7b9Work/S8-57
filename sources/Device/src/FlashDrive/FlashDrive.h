@@ -4,11 +4,6 @@
 
 
 
-/** @defgroup FlashDrive
- *  @brief Работа с флешкой
- *  @{
- */
-
 #define SIZE_FLASH_TEMP_BUFFER 512
 typedef struct
 {
@@ -62,8 +57,10 @@ public:
     static USBH_HandleTypeDef hUSB_Host;
 
     static HCD_HandleTypeDef handleHCD;
+
+private:
+
+    static bool isConnected;
+
+    static void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id);
 };
-
-
-/** @}
- */

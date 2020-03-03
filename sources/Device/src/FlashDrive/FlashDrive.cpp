@@ -22,7 +22,8 @@ USBH_HandleTypeDef FDrive::hUSB_Host;
 HCD_HandleTypeDef  FDrive::handleHCD;
 static FATFS USBDISKFatFs;
 static char USBDISKPath[4]; // -V112
-static bool gFlashDriveIsConnected = false;
+
+bool FDrive::isConnected = false;
 
 
 
@@ -31,7 +32,7 @@ static void SetTimeForFile(const char *nameFile);
 
 
 
-static void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
+void FDrive::USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
 {
     switch(id)
     {
@@ -63,7 +64,7 @@ static void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
             break;
 
         case HOST_USER_DISCONNECTION:
-            gFlashDriveIsConnected = false;
+            isConnected = false;
             Menu::ChangeStateFlashDrive();
             break;
 
@@ -88,7 +89,7 @@ void FDrive::Mount()
 
 bool FDrive::IsConnected()
 {
-    return gFlashDriveIsConnected;
+    return isConnected;
 }
 
 
@@ -125,7 +126,7 @@ void FDrive::Update()
         }
         else
         {
-            gFlashDriveIsConnected = true;
+            isConnected = true;
             FileManager::Init();
             Menu::ChangeStateFlashDrive();
         }
