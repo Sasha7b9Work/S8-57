@@ -15,6 +15,12 @@ USBH_StatusTypeDef  USBH_Init(USBH_HandleTypeDef * /*phost*/, void(* /*pUsrFunc*
 }
 
 
+USBH_StatusTypeDef USBH_DeInit(USBH_HandleTypeDef * /*phost*/)
+{
+    return USBH_OK;
+}
+
+
 USBH_StatusTypeDef  USBH_RegisterClass(USBH_HandleTypeDef * /*phost*/, USBH_ClassTypeDef * /*pclass*/)
 {
     return USBH_OK;
@@ -22,6 +28,12 @@ USBH_StatusTypeDef  USBH_RegisterClass(USBH_HandleTypeDef * /*phost*/, USBH_Clas
 
 
 USBH_StatusTypeDef  USBH_Start(USBH_HandleTypeDef * /*phost*/)
+{
+    return USBH_OK;
+}
+
+
+USBH_StatusTypeDef USBH_Stop(USBH_HandleTypeDef * /*phost*/)
 {
     return USBH_OK;
 }

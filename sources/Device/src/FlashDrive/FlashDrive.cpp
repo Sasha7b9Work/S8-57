@@ -8,23 +8,14 @@
 #include "usbh_diskio.h"
 
 
-#define NEED_MOUNT (bf.needToMoundFlash)
-
-
-static struct BitFieldFlashDrive
-{
-    uint needToMoundFlash : 1;  ///< Установленное в 1 значение означает, что подсоединена флешка. Надо её монтировать.
-    uint notUsed          : 31;
-} bf = {0, 0};
-
-
 USBH_HandleTypeDef FDrive::hUSB_Host;
 HCD_HandleTypeDef  FDrive::handleHCD;
 static FATFS USBDISKFatFs;
 static char USBDISKPath[4]; // -V112
 
-bool FDrive::isConnected = false;
 
+bool FDrive::isConnected = false;
+bool FDrive::needMount = false;
 
 
 /// Устанавливает текущее время для файла nameFile
@@ -40,7 +31,7 @@ void FDrive::USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
             break;
 
         case HOST_USER_CLASS_ACTIVE:
-            NEED_MOUNT = 1;
+            needMount = 1;
 
             /*
             if (f_mount(&USBDISKFatFs, (TCHAR const*)USBDISKPath, 1) != FR_OK)
@@ -107,16 +98,18 @@ void FDrive::Init()
 
 void FDrive::DeInit()
 {
-
+    USBH_Stop(&hUSB_Host);
+    USBH_DeInit(&hUSB_Host);
+    FATFS_UnLinkDriver(USBDISKPath);
 }
 
 
 void FDrive::Update()
 {
-    if (NEED_MOUNT)      // Если обнаружено физическое подключение внешнего диска
+    if (needMount)      // Если обнаружено физическое подключение внешнего диска
     {
         uint timeStart = TIME_MS;
-        NEED_MOUNT = 0;
+        needMount = 0;
 
         Display::Message::Show("Обнаружено запоминающее устройство", false);
 

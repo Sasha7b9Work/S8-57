@@ -15,3 +15,4 @@ struct Diskio_drvTypeDef
 #include "ff.h"
 
 uint8_t FATFS_LinkDriver(const Diskio_drvTypeDef *drv, char *path);
+uint8_t FATFS_UnLinkDriver(char *path);
