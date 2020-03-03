@@ -16,15 +16,6 @@ static int startPoint = -1;
 //static uint16 posCursor[2] = { 100, 220 };
 
 
-/// Изобразить установленные настройки
-static void DrawSettings(int x, int y);
-/// Отобразить данные
-static void DrawData();
-
-static void DrawMemoryWindow();
-
-
-
 void DisplayRecorder::Update()
 {
     Painter::BeginScene(Color::BLACK);
@@ -47,7 +38,7 @@ void DisplayRecorder::Update()
 }
 
 
-static void DrawSettings(int x, int y)
+void DisplayRecorder::DrawSettings(int x, int y)
 {
     if (Menu::OpenedItem() != PageRecorder::self)
     {
@@ -181,7 +172,7 @@ static void DrawSettings(int x, int y)
 //}
 
 
-static void DrawData()
+void DisplayRecorder::DrawData()
 {
 //    Record *record = StorageRecorder::CurrentRecord();
 //
@@ -229,7 +220,7 @@ static void DrawData()
 }
 
 
-static void DrawMemoryWindow()
+void DisplayRecorder::DrawMemoryWindow()
 {
     static int prevNumPoints = 0;
 

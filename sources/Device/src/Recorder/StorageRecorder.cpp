@@ -60,7 +60,7 @@ void Record::AddPoints(BitSet16 dataA, BitSet16 dataB)
 {
     HAL_BUS_CONFIGURE_TO_FSMC;
 
-    LOG_WRITE("Добавяю точки %d %d , %d %d", dataA.byte0, dataA.byte1, dataB.byte0, dataB.byte1);
+//    LOG_WRITE("Добавяю точки %d %d , %d %d", dataA.byte0, dataA.byte1, dataB.byte0, dataB.byte1);
 
     if(maxPoints)
     {
