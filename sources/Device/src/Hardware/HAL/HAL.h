@@ -8,7 +8,8 @@
 #define ERROR_HANDLER()            ::HAL::ErrorHandler(__FILE__, __LINE__)
 
 
-#define HAL_BUS_CONFIGURE_TO_FSMC if(HAL_BUS::mode != HAL_BUS::Mode::FSMC) { HAL_BUS::ConfigureToFSMC(); }
+#define HAL_BUS_SET_MODE_FSMC     HAL_BUS::ConfigureToFSMC()
+#define HAL_BUS_CONFIGURE_TO_FSMC if(HAL_BUS::mode != HAL_BUS::Mode::FSMC) { HAL_BUS_SET_MODE_FSMC; }
 
 
 struct HAL_RTC
