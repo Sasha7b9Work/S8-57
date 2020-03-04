@@ -93,13 +93,11 @@ typedef struct
 {
     const char          *Name;
     uint8_t              ClassCode;
-    /*
     USBH_StatusTypeDef(*Init)        (struct _USBH_HandleTypeDef *phost);
     USBH_StatusTypeDef(*DeInit)      (struct _USBH_HandleTypeDef *phost);
     USBH_StatusTypeDef(*Requests)    (struct _USBH_HandleTypeDef *phost);
     USBH_StatusTypeDef(*BgndProcess) (struct _USBH_HandleTypeDef *phost);
     USBH_StatusTypeDef(*SOFProcess) (struct _USBH_HandleTypeDef *phost);
-    */
     void*                pData;
 } USBH_ClassTypeDef;
 

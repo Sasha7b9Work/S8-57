@@ -2,16 +2,17 @@ cmake_minimum_required(VERSION 3.0)
 
 project (Device)
 
-include_directories(../common/_VS
+include_directories(..
+                    ../common/_VS
                     ../common/_VS/std_includes
                     ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc
                     ../common/libs/STM32Cube_F4/Drivers/CMSIS/Device/ST/STM32F4xx/Include
                     ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFs/src
                     ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Inc
+                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Inc
                     ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc
                     ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
                     ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
-                    ../
                     src
                     src/Hardware/HAL
                     src/Hardware/FatFS
@@ -34,6 +35,17 @@ add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for me
 add_compile_options(/wd26812)   #The enum type %type% is unscoped. Prefer 'enum class' over 'enum' (Enum.3)
 
 
+set_source_files_properties(../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Src/usbh_cdc.c 
+                            ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc.c
+                            ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c
+                            ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_scsi.c
+                            ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.c
+                            ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.c
+                            ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c
+                            ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.c
+    PROPERTIES HEADER_FILE_ONLY TRUE)
+
+
 source_group(common                                  FILES ../common/Command.h
                                                            ../common/Decoder_d.h
                                                            ../common/Decoder_d.cpp
@@ -42,7 +54,6 @@ source_group(common                                  FILES ../common/Command.h
 source_group(doc                                     REGULAR_EXPRESSION ../doc/*)
 source_group(_VS                                     REGULAR_EXPRESSION ../common/_VS/*)
 source_group(_VS\\std_includes                       REGULAR_EXPRESSION ../common/_VS/std_includes/*)
-source_group(_VS\\USBH                               REGULAR_EXPRESSION ../common/_VS/USBH/*)
 source_group(src                                     REGULAR_EXPRESSION src/*)
 source_group(Display                                 REGULAR_EXPRESSION src/Display/*)
 source_group(Display\\Font                           REGULAR_EXPRESSION ../common/Display/Font/*)
@@ -77,12 +88,27 @@ source_group(Test                                    REGULAR_EXPRESSION src/Test
 source_group(Tester                                  REGULAR_EXPRESSION src/Tester/*)
 source_group(ThirdParty\\HAL                         FILES ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc.h
                                                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc_ex.h)
+source_group(ThirdParty\\USBH                        FILES ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Inc/usbh_cdc.h
+                                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Src/usbh_cdc.c
+                                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc/usbh_msc.h
+                                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc.c
+                                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc/usbh_msc_bot.h
+                                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c
+                                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc/usbh_msc_scsi.h
+                                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_scsi.c
+                                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_core.h
+                                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.c
+                                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_ctlreq.h
+                                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.c
+                                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_ioreq.h
+                                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c
+                                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_pipes.h
+                                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.c)
 source_group(Utils                                   REGULAR_EXPRESSION src/Utils/*)
 
 
 file(GLOB SOURCES   ../common/_VS/*
                     ../common/_VS/std_includes/*
-                    ../common/_VS/USBH/*
 
                     ../common/Command.h
                     ../common/Decoder_d.h
@@ -92,6 +118,22 @@ file(GLOB SOURCES   ../common/_VS/*
                     
                     ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc.h
                     ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc_ex.h
+                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Inc/usbh_cdc.h
+                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Src/usbh_cdc.c
+                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc/usbh_msc.h
+                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc.c
+                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc/usbh_msc_bot.h
+                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c
+                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc/usbh_msc_scsi.h
+                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_scsi.c
+                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_core.h
+                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.c
+                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_ctlreq.h
+                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.c
+                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_ioreq.h
+                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c
+                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_pipes.h
+                    ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.c
                     
                     ../doc/*
                     src/Display/*

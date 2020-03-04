@@ -4759,49 +4759,37 @@
 
   <Group>
     <GroupName>ThirdParty/USBH</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>39</GroupNumber>
       <FileNumber>352</FileNumber>
-      <FileType>1</FileType>
+      <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Src\usbh_msc.c</PathWithFileName>
-      <FilenameWithoutPath>usbh_msc.c</FilenameWithoutPath>
+      <PathWithFileName>..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Class\CDC\Inc\usbh_cdc.h</PathWithFileName>
+      <FilenameWithoutPath>usbh_cdc.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>39</GroupNumber>
       <FileNumber>353</FileNumber>
-      <FileType>5</FileType>
+      <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc\usbh_msc.h</PathWithFileName>
-      <FilenameWithoutPath>usbh_msc.h</FilenameWithoutPath>
+      <PathWithFileName>..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Class\CDC\Src\usbh_cdc.c</PathWithFileName>
+      <FilenameWithoutPath>usbh_cdc.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>39</GroupNumber>
       <FileNumber>354</FileNumber>
-      <FileType>1</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_core.c</PathWithFileName>
-      <FilenameWithoutPath>usbh_core.c</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>39</GroupNumber>
-      <FileNumber>355</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -4813,25 +4801,37 @@
     </File>
     <File>
       <GroupNumber>39</GroupNumber>
-      <FileNumber>356</FileNumber>
+      <FileNumber>355</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_ctlreq.c</PathWithFileName>
-      <FilenameWithoutPath>usbh_ctlreq.c</FilenameWithoutPath>
+      <PathWithFileName>..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_core.c</PathWithFileName>
+      <FilenameWithoutPath>usbh_core.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>39</GroupNumber>
-      <FileNumber>357</FileNumber>
+      <FileNumber>356</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Core\Inc\usbh_ctlreq.h</PathWithFileName>
       <FilenameWithoutPath>usbh_ctlreq.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>39</GroupNumber>
+      <FileNumber>357</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_ctlreq.c</PathWithFileName>
+      <FilenameWithoutPath>usbh_ctlreq.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -4862,54 +4862,42 @@
     <File>
       <GroupNumber>39</GroupNumber>
       <FileNumber>360</FileNumber>
-      <FileType>1</FileType>
+      <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_pipes.c</PathWithFileName>
-      <FilenameWithoutPath>usbh_pipes.c</FilenameWithoutPath>
+      <PathWithFileName>..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc\usbh_msc.h</PathWithFileName>
+      <FilenameWithoutPath>usbh_msc.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>39</GroupNumber>
       <FileNumber>361</FileNumber>
-      <FileType>5</FileType>
+      <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Core\Inc\usbh_pipes.h</PathWithFileName>
-      <FilenameWithoutPath>usbh_pipes.h</FilenameWithoutPath>
+      <PathWithFileName>..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Src\usbh_msc.c</PathWithFileName>
+      <FilenameWithoutPath>usbh_msc.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>39</GroupNumber>
       <FileNumber>362</FileNumber>
-      <FileType>1</FileType>
+      <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Src\usbh_msc_scsi.c</PathWithFileName>
-      <FilenameWithoutPath>usbh_msc_scsi.c</FilenameWithoutPath>
+      <PathWithFileName>..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc\usbh_msc_bot.h</PathWithFileName>
+      <FilenameWithoutPath>usbh_msc_bot.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>39</GroupNumber>
       <FileNumber>363</FileNumber>
-      <FileType>5</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc\usbh_msc_scsi.h</PathWithFileName>
-      <FilenameWithoutPath>usbh_msc_scsi.h</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>39</GroupNumber>
-      <FileNumber>364</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -4921,13 +4909,49 @@
     </File>
     <File>
       <GroupNumber>39</GroupNumber>
-      <FileNumber>365</FileNumber>
+      <FileNumber>364</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc\usbh_msc_bot.h</PathWithFileName>
-      <FilenameWithoutPath>usbh_msc_bot.h</FilenameWithoutPath>
+      <PathWithFileName>..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc\usbh_msc_scsi.h</PathWithFileName>
+      <FilenameWithoutPath>usbh_msc_scsi.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>39</GroupNumber>
+      <FileNumber>365</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Src\usbh_msc_scsi.c</PathWithFileName>
+      <FilenameWithoutPath>usbh_msc_scsi.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>39</GroupNumber>
+      <FileNumber>366</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Core\Inc\usbh_pipes.h</PathWithFileName>
+      <FilenameWithoutPath>usbh_pipes.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>39</GroupNumber>
+      <FileNumber>367</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_pipes.c</PathWithFileName>
+      <FilenameWithoutPath>usbh_pipes.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
