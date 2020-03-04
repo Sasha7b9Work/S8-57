@@ -1,8 +1,6 @@
 #pragma once
 #include "Hardware/Memory/Sector.h"
 #include "Osci/DeviceSettings.h"
-#include "usbh_def.h"
-#include <ff.h>
 
 
 #define PRIORITY_SOUND_DMA1_STREAM5 5, 0
@@ -12,6 +10,10 @@
 
 #define HAL_BUS_SET_MODE_FSMC     HAL_BUS::ConfigureToFSMC()
 #define HAL_BUS_CONFIGURE_TO_FSMC if(HAL_BUS::mode != HAL_BUS::Mode::FSMC) { HAL_BUS_SET_MODE_FSMC; }
+
+
+typedef struct _USBH_HandleTypeDef USBH_HandleTypeDef;
+typedef struct __HCD_HandleTypeDef HCD_HandleTypeDef;
 
 
 struct HAL_RTC
@@ -125,7 +127,7 @@ struct HAL_HCD
 
     static void InitUSBH_LL(USBH_HandleTypeDef *phost);
 
-    static HCD_HandleTypeDef handle;
+    static HCD_HandleTypeDef &handle;
 };
 
 

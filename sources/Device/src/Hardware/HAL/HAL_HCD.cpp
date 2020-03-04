@@ -2,9 +2,13 @@
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/HAL/HAL_PIO.h"
 #include <stm32f4xx_hal.h>
+#include <usbh_core.h>
+#include <usbh_def.h>
 
 
-HCD_HandleTypeDef  HAL_HCD::handle;
+HCD_HandleTypeDef handleHCD;
+
+HCD_HandleTypeDef  &HAL_HCD::handle = handleHCD;
 
 
 void HAL_HCD::Init()
@@ -36,7 +40,7 @@ void HAL_HCD::InitUSBH_LL(USBH_HandleTypeDef *phost)
     handle.Init.use_external_vbus = 0;
 
     handle.pData = phost;
-    phost->pData = &handle;
+    phost->pData = &handleHCD;
     HAL_HCD_Init(&handle);
     USBH_LL_SetTimer(phost, HAL_HCD_GetCurrentFrame(&handle));
 }

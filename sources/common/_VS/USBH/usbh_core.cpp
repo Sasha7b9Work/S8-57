@@ -37,3 +37,8 @@ USBH_StatusTypeDef USBH_Stop(USBH_HandleTypeDef * /*phost*/)
 {
     return USBH_OK;
 }
+
+void  USBH_LL_SetTimer(USBH_HandleTypeDef *phost, uint32_t time)
+{
+    phost->Timer = time;
+}

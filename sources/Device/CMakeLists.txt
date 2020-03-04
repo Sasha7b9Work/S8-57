@@ -42,6 +42,7 @@ source_group(common                                  FILES ../common/Command.h
 source_group(doc                                     REGULAR_EXPRESSION ../doc/*)
 source_group(_VS                                     REGULAR_EXPRESSION ../common/_VS/*)
 source_group(_VS\\std_includes                       REGULAR_EXPRESSION ../common/_VS/std_includes/*)
+source_group(_VS\\USBH                               REGULAR_EXPRESSION ../common/_VS/USBH/*)
 source_group(src                                     REGULAR_EXPRESSION src/*)
 source_group(Display                                 REGULAR_EXPRESSION src/Display/*)
 source_group(Display\\Font                           REGULAR_EXPRESSION ../common/Display/Font/*)
@@ -79,7 +80,11 @@ source_group(ThirdParty\\HAL                         FILES ../common/libs/STM32C
 source_group(Utils                                   REGULAR_EXPRESSION src/Utils/*)
 
 
-file(GLOB SOURCES   ../common/Command.h
+file(GLOB SOURCES   ../common/_VS/*
+                    ../common/_VS/std_includes/*
+                    ../common/_VS/USBH/*
+
+                    ../common/Command.h
                     ../common/Decoder_d.h
                     ../common/Decoder_d.cpp
                     ../common/Message.h
