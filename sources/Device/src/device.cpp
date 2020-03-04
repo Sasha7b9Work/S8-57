@@ -110,7 +110,7 @@ void Device::Update()
     
     Tester::Update();
 
-    Recorder::Update();
+    //Recorder::Update();
     
     Multimeter::Update();
     

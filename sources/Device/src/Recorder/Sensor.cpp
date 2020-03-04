@@ -20,9 +20,16 @@ static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8 id);
 
 void Sensor::Init()
 {
-    USBH_Init(&handle, USBH_UserProcess, 0);
-    USBH_RegisterClass(&handle, USBH_CDC_CLASS);
-    USBH_Start(&handle);
+    LOG_FUNC_ENTER();
+
+    USBH_StatusTypeDef res = USBH_Init(&handle, USBH_UserProcess, 0);
+    LOG_WRITE("1 = %d", res);
+
+    res = USBH_RegisterClass(&handle, USBH_CDC_CLASS);
+    LOG_WRITE("2 = %d", res);
+
+    res = USBH_Start(&handle);
+    LOG_WRITE("3 = %d", res);
 }
 
 
@@ -41,6 +48,8 @@ void Sensor::Update()
 
 void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
 {
+    LOG_WRITE("USBH_UserProcess(%d)", id);
+
     switch(id)
     {
     case HOST_USER_SELECT_CONFIGURATION:
