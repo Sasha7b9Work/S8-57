@@ -119,6 +119,17 @@ USBH_URBStateTypeDef USBH_LL_GetURBState(USBH_HandleTypeDef *phost, uint8_t pipe
 
 USBH_StatusTypeDef USBH_LL_DriverVBUS(USBH_HandleTypeDef *, uint8_t)
 {
+/*
+    if(state == 0)
+    {
+        HAL_GPIO_WritePin(GPIOC, GPIO_PIN_0, GPIO_PIN_SET);
+    }
+    else
+    {
+        HAL_GPIO_WritePin(GPIOC, GPIO_PIN_0, GPIO_PIN_RESET);
+    }
+*/
+
     HAL_Delay(200);
     return USBH_OK;
 }
@@ -156,18 +167,17 @@ uint8_t USBH_LL_GetToggle(USBH_HandleTypeDef *, uint8_t pipe)
 
 void USBH_Delay(uint32_t Delay)
 {
-    Timer::PauseOnTime(Delay);  
+    HAL_Delay(Delay);  
 }
 
-#if (USBH_DEBUG_LEVEL > 1)
 
-/*
-void USBH_UsrLog(char *format, ...) {
+void HAL_HCD_PortEnabled_Callback(HCD_HandleTypeDef *hhcd)
+{
+    USBH_LL_PortEnabled((USBH_HandleTypeDef *)hhcd->pData);
 }
 
-void USBH_ErrLog(char *format, ...) {
+
+void HAL_HCD_PortDisabled_Callback(HCD_HandleTypeDef *hhcd)
+{
+    USBH_LL_PortDisabled((USBH_HandleTypeDef *)hhcd->pData);
 }
-void USBH_DbgLog(char *format, ...) {
-}
-*/
-#endif
