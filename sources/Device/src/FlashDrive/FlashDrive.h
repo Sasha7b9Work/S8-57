@@ -54,7 +54,7 @@ public:
     
     static bool AppendStringToFile(const char *string);
     
-    static USBH_HandleTypeDef hUSB_Host;
+    static USBH_HandleTypeDef handle;
 
 private:
 

@@ -8,7 +8,7 @@
 #include "usbh_diskio.h"
 
 
-USBH_HandleTypeDef FDrive::hUSB_Host;
+USBH_HandleTypeDef FDrive::handle;
 static FATFS USBDISKFatFs;
 static char USBDISKPath[4]; // -V112
 
@@ -88,17 +88,17 @@ void FDrive::Init()
 {
     if(FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == FR_OK)    // -V2001
     {
-        USBH_StatusTypeDef res = USBH_Init(&hUSB_Host, USBH_UserProcess, 0);
-        res = USBH_RegisterClass(&hUSB_Host, USBH_MSC_CLASS);
-        res = USBH_Start(&hUSB_Host);
+        USBH_Init(&handle, USBH_UserProcess, 0);
+        USBH_RegisterClass(&handle, USBH_MSC_CLASS);
+        USBH_Start(&handle);
     }
 }
 
 
 void FDrive::DeInit()
 {
-    USBH_Stop(&hUSB_Host);
-    USBH_DeInit(&hUSB_Host);
+    USBH_Stop(&handle);
+    USBH_DeInit(&handle);
     FATFS_UnLinkDriver(USBDISKPath);
 }
 
@@ -130,7 +130,7 @@ void FDrive::Update()
     }
     else
     {
-        USBH_Process(&hUSB_Host);
+        USBH_Process(&handle);
     }
 }
 
