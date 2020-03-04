@@ -4,6 +4,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifndef   __STATIC_INLINE
+#define __STATIC_INLINE                        static inline
+#endif
+
+
 #define USBD_LPM_ENABLED 0
 #define USE_RTOS         0U
 
@@ -14,6 +19,7 @@
 #define USBD_SUPPORT_USER_STRING              0
 #define USBD_SELF_POWERED                     1
 #define USBD_DEBUG_LEVEL                      0
+#define USBD_CLASS_BOS_ENABLED                0U
  
 #define USBD_malloc               malloc
 #define USBD_free                 free
