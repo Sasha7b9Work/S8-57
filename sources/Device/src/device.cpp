@@ -109,6 +109,8 @@ void Device::Update()
     Menu::SaveSettings();
     
     Tester::Update();
+
+    Recorder::Update();
     
     Multimeter::Update();
     
