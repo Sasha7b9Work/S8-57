@@ -1,25 +1,26 @@
 #pragma once
 #include <ff.h>
-#include "usbh_def.h"
 
+
+typedef struct _USBH_HandleTypeDef USBH_HandleTypeDef;
 
 
 #define SIZE_FLASH_TEMP_BUFFER 512
-typedef struct
+struct StructForWrite
 {
     uint8   tempBuffer[SIZE_FLASH_TEMP_BUFFER];
     int     sizeData;
     FIL     fileObj;
     char    name[255];
     uint8   notUsed0;
-} StructForWrite;
+};
 
-typedef struct
+struct StructForReadDir
 {
     char nameDir[_MAX_LFN + 1];
     FILINFO fno;
     DIR dir;
-} StructForReadDir;
+};
 
 class FDrive
 {
@@ -54,7 +55,7 @@ public:
     
     static bool AppendStringToFile(const char *string);
     
-    static USBH_HandleTypeDef handle;
+    static USBH_HandleTypeDef &handle;
 
 private:
 

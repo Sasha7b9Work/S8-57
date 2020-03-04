@@ -6,7 +6,7 @@
 #include <usbh_def.h>
 
 
-HCD_HandleTypeDef handleHCD;
+static HCD_HandleTypeDef handleHCD;
 
 HCD_HandleTypeDef  &HAL_HCD::handle = handleHCD;
 

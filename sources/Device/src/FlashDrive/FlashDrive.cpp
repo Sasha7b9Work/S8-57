@@ -8,7 +8,8 @@
 #include "usbh_diskio.h"
 
 
-USBH_HandleTypeDef FDrive::handle;
+static USBH_HandleTypeDef handleUSBH;
+USBH_HandleTypeDef &FDrive::handle = handleUSBH;
 static FATFS USBDISKFatFs;
 static char USBDISKPath[4]; // -V112
 
