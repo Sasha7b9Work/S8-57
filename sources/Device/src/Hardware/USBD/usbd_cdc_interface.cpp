@@ -1,14 +1,11 @@
-#ifndef WIN32
 #include "defines.h"
 #include "SCPI/SCPI.h"
 #include "Log.h"
 #include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
 #include <usbd_cdc.h>
-#endif
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static USBD_CDC_LineCodingTypeDef LineCoding =
 {
     115200, /* baud rate*/
@@ -36,7 +33,6 @@ USBD_CDC_ItfTypeDef USBD_CDC_fops =
 };
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static void SetAttributeConnected()
 {
     VCP::cableUSBisConnected = true;
@@ -44,7 +40,6 @@ static void SetAttributeConnected()
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 static int8_t CDC_Itf_Init()
 {
     USBD_CDC_SetRxBuffer((USBD_HandleTypeDef *)VCP::HandleUSBD(), UserRxBuffer);
@@ -54,7 +49,6 @@ static int8_t CDC_Itf_Init()
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 static int8_t CDC_Itf_DeInit()
 {
     VCP::cableUSBisConnected = false;
@@ -64,7 +58,6 @@ static int8_t CDC_Itf_DeInit()
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 static int8_t CDC_Itf_Control (uint8 cmd, uint8* pbuf, uint16)
 { 
     switch (cmd)
@@ -124,7 +117,6 @@ static int8_t CDC_Itf_Control (uint8 cmd, uint8* pbuf, uint16)
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------
 static int8_t CDC_Itf_Receive(uint8 *buffer, uint *length)
 {
     SCPI::AppendNewData(reinterpret_cast<const char *>(buffer), *length);
