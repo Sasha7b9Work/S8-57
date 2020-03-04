@@ -3,7 +3,6 @@
 #include "Log.h"
 #include "Display/Display.h"
 #include <stm32f4xx_hal.h>
-#include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
 #include "Settings/Settings.h"
 
@@ -280,7 +279,21 @@ uint32_t USBD_LL_GetRxDataSize(USBD_HandleTypeDef *pdev, uint8_t  ep_addr)
 }
 
 
+USBD_StatusTypeDef USBD_LL_Transmit(USBD_HandleTypeDef *pdev, uint8_t ep_addr, uint8_t *pbuf, uint32_t size)
+{
+    HAL_PCD_EP_Transmit((PCD_HandleTypeDef *)pdev->pData, ep_addr, pbuf, size);
+    return USBD_OK;
+}
+
+
+USBD_StatusTypeDef USBD_LL_PrepareReceive(USBD_HandleTypeDef *pdev, uint8_t ep_addr, uint8_t *pbuf, uint32_t size)
+{
+    HAL_PCD_EP_Receive((PCD_HandleTypeDef *)pdev->pData, ep_addr, pbuf, size);
+    return USBD_OK;
+}
+
+
 void  USBD_LL_Delay(uint32_t Delay)
 {
-    Timer::PauseOnTime(Delay);
+    HAL_Delay(Delay);
 }
