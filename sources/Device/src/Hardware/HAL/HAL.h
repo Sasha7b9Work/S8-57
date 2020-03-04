@@ -1,6 +1,8 @@
 #pragma once
 #include "Hardware/Memory/Sector.h"
 #include "Osci/DeviceSettings.h"
+#include "usbh_def.h"
+#include <ff.h>
 
 
 #define PRIORITY_SOUND_DMA1_STREAM5 5, 0
@@ -120,6 +122,10 @@ private:
 struct HAL_HCD
 {
     static void Init();
+
+    static void InitUSBH_LL(USBH_HandleTypeDef *phost);
+
+    static HCD_HandleTypeDef handle;
 };
 
 

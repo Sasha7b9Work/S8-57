@@ -4,6 +4,9 @@
 #include <stm32f4xx_hal.h>
 
 
+HCD_HandleTypeDef  HAL_HCD::handle;
+
+
 void HAL_HCD::Init()
 {
     __GPIOB_CLK_ENABLE();
@@ -17,4 +20,23 @@ void HAL_HCD::Init()
     HAL_NVIC_SetPriority(OTG_HS_IRQn, 5, 1);
 
     HAL_NVIC_EnableIRQ(OTG_HS_IRQn);
+}
+
+
+void HAL_HCD::InitUSBH_LL(USBH_HandleTypeDef *phost)
+{
+    handle.Instance = USB_OTG_HS;
+    handle.Init.speed = HCD_SPEED_HIGH;
+    handle.Init.Host_channels = 12;
+    handle.Init.dma_enable = 0;
+    handle.Init.low_power_enable = 0;
+    handle.Init.phy_itface = HCD_PHY_EMBEDDED;
+    handle.Init.Sof_enable = 0;
+    handle.Init.vbus_sensing_enable = 0;
+    handle.Init.use_external_vbus = 0;
+
+    handle.pData = phost;
+    phost->pData = &handle;
+    HAL_HCD_Init(&handle);
+    USBH_LL_SetTimer(phost, HAL_HCD_GetCurrentFrame(&handle));
 }

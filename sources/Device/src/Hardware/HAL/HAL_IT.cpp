@@ -1,11 +1,7 @@
 #include "defines.h"
-#include "Hardware/Beeper.h"
-#include "FlashDrive/FlashDrive.h"      
-#include "FPGA/FPGA.h"
 #include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
 #include "Utils/Debug.h"
-#include "Display/Painter.h"
 #include "Hardware/HAL/HAL.h"
 #include <stm32f4xx_hal.h>
 
@@ -68,7 +64,7 @@ void OTG_FS_IRQHandler()
 // Флешка
 void OTG_HS_IRQHandler()
 {
-    HAL_HCD_IRQHandler(&FDrive::handleHCD);
+    HAL_HCD_IRQHandler(&HAL_HCD::handle);
 }
 
 

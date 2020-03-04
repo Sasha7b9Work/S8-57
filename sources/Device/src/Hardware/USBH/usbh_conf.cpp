@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "FlashDrive/FlashDrive.h"
 #include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
 #include "usbh_core.h"
 
 
@@ -26,22 +27,9 @@ void HAL_HCD_HC_NotifyURBChange_Callback(HCD_HandleTypeDef *, uint8_t, HCD_URBSt
 }
 
 USBH_StatusTypeDef USBH_LL_Init(USBH_HandleTypeDef *phost)
-{  
-    FDrive::handleHCD.Instance = USB_OTG_HS;
-    FDrive::handleHCD.Init.speed = HCD_SPEED_HIGH;
-    FDrive::handleHCD.Init.Host_channels = 12; 
-    FDrive::handleHCD.Init.dma_enable = 0;
-    FDrive::handleHCD.Init.low_power_enable = 0;
-    FDrive::handleHCD.Init.phy_itface = HCD_PHY_EMBEDDED; 
-    FDrive::handleHCD.Init.Sof_enable = 0;
-    FDrive::handleHCD.Init.vbus_sensing_enable = 0;
-    FDrive::handleHCD.Init.use_external_vbus = 0;  
+{
+    HAL_HCD::InitUSBH_LL(phost);
 
-    FDrive::handleHCD.pData = phost;
-    phost->pData = &FDrive::handleHCD;
-    HAL_HCD_Init(&FDrive::handleHCD);
-    USBH_LL_SetTimer(phost, HAL_HCD_GetCurrentFrame(&FDrive::handleHCD));
-  
     return USBH_OK;
 }
 
@@ -138,13 +126,13 @@ USBH_StatusTypeDef USBH_LL_DriverVBUS(USBH_HandleTypeDef *, uint8_t)
 
 USBH_StatusTypeDef USBH_LL_SetToggle(USBH_HandleTypeDef *, uint8_t pipe, uint8_t toggle)   
 {
-    if(FDrive::handleHCD.hc[pipe].ep_is_in)
+    if(HAL_HCD::handle.hc[pipe].ep_is_in)
     {
-        FDrive::handleHCD.hc[pipe].toggle_in = toggle;
+        HAL_HCD::handle.hc[pipe].toggle_in = toggle;
     }
     else
     {
-        FDrive::handleHCD.hc[pipe].toggle_out = toggle;
+        HAL_HCD::handle.hc[pipe].toggle_out = toggle;
     }
     return USBH_OK; 
 }
@@ -154,13 +142,13 @@ uint8_t USBH_LL_GetToggle(USBH_HandleTypeDef *, uint8_t pipe)
 {
     uint8_t toggle = 0;
   
-    if(FDrive::handleHCD.hc[pipe].ep_is_in)
+    if(HAL_HCD::handle.hc[pipe].ep_is_in)
     {
-        toggle = FDrive::handleHCD.hc[pipe].toggle_in;
+        toggle = HAL_HCD::handle.hc[pipe].toggle_in;
     }
     else
     {
-        toggle = FDrive::handleHCD.hc[pipe].toggle_out;
+        toggle = HAL_HCD::handle.hc[pipe].toggle_out;
     }
     return toggle; 
 }

@@ -9,7 +9,6 @@
 
 
 USBH_HandleTypeDef FDrive::hUSB_Host;
-HCD_HandleTypeDef  FDrive::handleHCD;
 static FATFS USBDISKFatFs;
 static char USBDISKPath[4]; // -V112
 
