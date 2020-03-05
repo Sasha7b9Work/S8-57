@@ -174,13 +174,13 @@ void USBH_Delay(uint32_t Delay)
 }
 
 
-void HAL_HCD_PortEnabled_Callback(HCD_HandleTypeDef *hhcd)
+void HAL_HCD_PortEnabled_Callback(HCD_HandleTypeDef *)
 {
-    USBH_LL_PortEnabled((USBH_HandleTypeDef *)hhcd->pData);
+    //USBH_LL_PortEnabled((USBH_HandleTypeDef *)hhcd->pData);
 }
 
 
-void HAL_HCD_PortDisabled_Callback(HCD_HandleTypeDef *hhcd)
+void HAL_HCD_PortDisabled_Callback(HCD_HandleTypeDef *)
 {
-    USBH_LL_PortDisabled((USBH_HandleTypeDef *)hhcd->pData);
+    //USBH_LL_PortDisabled((USBH_HandleTypeDef *)hhcd->pData);
 }

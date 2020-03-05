@@ -1085,11 +1085,6 @@
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\USBH\usbh_diskio.h</FilePath>
             </File>
-            <File>
-              <FileName>usbh.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\USBH\usbh.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
