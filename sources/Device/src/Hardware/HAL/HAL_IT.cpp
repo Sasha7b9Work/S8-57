@@ -1,9 +1,13 @@
 #include "defines.h"
+#include "log.h"
 #include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
 #include "Utils/Debug.h"
 #include "Hardware/HAL/HAL.h"
 #include <stm32f4xx_hal.h>
+
+
+extern HCD_HandleTypeDef handleHCD;
 
 
 INTERRUPT_BEGIN
@@ -64,7 +68,28 @@ void OTG_FS_IRQHandler()
 // Флешка
 void OTG_HS_IRQHandler()
 {
-    HAL_HCD_IRQHandler(&HAL_HCD::handle);
+//    static uint startFrame = 0;
+//
+//    static uint counterTicks = 0;
+//
+//    uint start = TIME_TICKS;
+//
+//    HAL_HCD_IRQHandler(&HAL_HCD::handle);
+//
+//    uint end = TIME_TICKS;
+//
+//    counterTicks += (end - start);
+//
+//    if(TIME_MS - startFrame >= 1000)
+//    {
+//        LOG_WRITE("мс на прерывание за секунду %d", counterTicks / 1000 / 90);
+//        counterTicks = 0;
+//        startFrame = TIME_MS;
+//        Timer::StartMultiMeasurement();
+//    }
+
+
+    HAL_HCD_IRQHandler(&handleHCD);
 }
 
 

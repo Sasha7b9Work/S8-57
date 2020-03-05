@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "log.h"
+#include "Hardware/Timer.h"
 #include "Recorder/Sensor.h"
 #include <usbh_cdc.h>
 #include <usbh_core.h>
@@ -77,6 +78,8 @@ void USBH_CDC_ReceiveCallback(USBH_HandleTypeDef *)
     uint16 size = USBH_CDC_GetLastReceivedDataSize(&handle);
 
     bufferRX[size] = 0;
+
+    LOG_WRITE("%s", bufferRX);
 
     USBH_CDC_Receive(&handle, bufferRX, RX_BUFF_SIZE);
 }

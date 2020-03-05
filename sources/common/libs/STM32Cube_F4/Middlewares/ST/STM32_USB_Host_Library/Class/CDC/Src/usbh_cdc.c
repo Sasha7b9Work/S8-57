@@ -102,25 +102,25 @@ EndBSPDependencies */
 * @{
 */
 
-static USBH_StatusTypeDef USBH_CDC_InterfaceInit(USBH_HandleTypeDef *phost);
+USBH_StatusTypeDef USBH_CDC_InterfaceInit(USBH_HandleTypeDef *phost);
 
-static USBH_StatusTypeDef USBH_CDC_InterfaceDeInit(USBH_HandleTypeDef *phost);
+USBH_StatusTypeDef USBH_CDC_InterfaceDeInit(USBH_HandleTypeDef *phost);
 
-static USBH_StatusTypeDef USBH_CDC_Process(USBH_HandleTypeDef *phost);
+USBH_StatusTypeDef USBH_CDC_Process(USBH_HandleTypeDef *phost);
 
-static USBH_StatusTypeDef USBH_CDC_SOFProcess(USBH_HandleTypeDef *phost);
+USBH_StatusTypeDef USBH_CDC_SOFProcess(USBH_HandleTypeDef *phost);
 
-static USBH_StatusTypeDef USBH_CDC_ClassRequest(USBH_HandleTypeDef *phost);
+USBH_StatusTypeDef USBH_CDC_ClassRequest(USBH_HandleTypeDef *phost);
 
-static USBH_StatusTypeDef GetLineCoding(USBH_HandleTypeDef *phost,
+USBH_StatusTypeDef GetLineCoding(USBH_HandleTypeDef *phost,
                                         CDC_LineCodingTypeDef *linecoding);
 
-static USBH_StatusTypeDef SetLineCoding(USBH_HandleTypeDef *phost,
+USBH_StatusTypeDef SetLineCoding(USBH_HandleTypeDef *phost,
                                         CDC_LineCodingTypeDef *linecoding);
 
-static void CDC_ProcessTransmission(USBH_HandleTypeDef *phost);
+void CDC_ProcessTransmission(USBH_HandleTypeDef *phost);
 
-static void CDC_ProcessReception(USBH_HandleTypeDef *phost);
+void CDC_ProcessReception(USBH_HandleTypeDef *phost);
 
 USBH_ClassTypeDef  CDC_Class =
 {
@@ -330,90 +330,6 @@ static USBH_StatusTypeDef USBH_CDC_ClassRequest(USBH_HandleTypeDef *phost)
 
 
 /**
-  * @brief  USBH_CDC_Process
-  *         The function is for managing state machine for CDC data transfers
-  * @param  phost: Host handle
-  * @retval USBH Status
-  */
-static USBH_StatusTypeDef USBH_CDC_Process(USBH_HandleTypeDef *phost)
-{
-  USBH_StatusTypeDef status = USBH_BUSY;
-  USBH_StatusTypeDef req_status = USBH_OK;
-  CDC_HandleTypeDef *CDC_Handle = (CDC_HandleTypeDef *) phost->pActiveClass->pData;
-
-  switch (CDC_Handle->state)
-  {
-
-    case CDC_IDLE_STATE:
-      status = USBH_OK;
-      break;
-
-    case CDC_SET_LINE_CODING_STATE:
-      req_status = SetLineCoding(phost, CDC_Handle->pUserLineCoding);
-
-      if (req_status == USBH_OK)
-      {
-        CDC_Handle->state = CDC_GET_LAST_LINE_CODING_STATE;
-      }
-
-      else
-      {
-        if (req_status != USBH_BUSY)
-        {
-          CDC_Handle->state = CDC_ERROR_STATE;
-        }
-      }
-      break;
-
-
-    case CDC_GET_LAST_LINE_CODING_STATE:
-      req_status = GetLineCoding(phost, &(CDC_Handle->LineCoding));
-
-      if (req_status == USBH_OK)
-      {
-        CDC_Handle->state = CDC_IDLE_STATE;
-
-        if ((CDC_Handle->LineCoding.b.bCharFormat == CDC_Handle->pUserLineCoding->b.bCharFormat) &&
-            (CDC_Handle->LineCoding.b.bDataBits == CDC_Handle->pUserLineCoding->b.bDataBits) &&
-            (CDC_Handle->LineCoding.b.bParityType == CDC_Handle->pUserLineCoding->b.bParityType) &&
-            (CDC_Handle->LineCoding.b.dwDTERate == CDC_Handle->pUserLineCoding->b.dwDTERate))
-        {
-          USBH_CDC_LineCodingChanged(phost);
-        }
-      }
-      else
-      {
-        if (req_status != USBH_BUSY)
-        {
-          CDC_Handle->state = CDC_ERROR_STATE;
-        }
-      }
-      break;
-
-    case CDC_TRANSFER_DATA:
-      CDC_ProcessTransmission(phost);
-      CDC_ProcessReception(phost);
-      break;
-
-    case CDC_ERROR_STATE:
-      req_status = USBH_ClrFeature(phost, 0x00U);
-
-      if (req_status == USBH_OK)
-      {
-        /*Change the state to waiting*/
-        CDC_Handle->state = CDC_IDLE_STATE;
-      }
-      break;
-
-    default:
-      break;
-
-  }
-
-  return status;
-}
-
-/**
   * @brief  USBH_CDC_SOFProcess
   *         The function is for managing SOF callback
   * @param  phost: Host handle
@@ -454,7 +370,7 @@ USBH_StatusTypeDef  USBH_CDC_Stop(USBH_HandleTypeDef *phost)
   * @param  pdev: Selected device
   * @retval USBH_StatusTypeDef : USB ctl xfer status
   */
-static USBH_StatusTypeDef GetLineCoding(USBH_HandleTypeDef *phost, CDC_LineCodingTypeDef *linecoding)
+USBH_StatusTypeDef GetLineCoding(USBH_HandleTypeDef *phost, CDC_LineCodingTypeDef *linecoding)
 {
 
   phost->Control.setup.b.bmRequestType = USB_D2H | USB_REQ_TYPE_CLASS | \
@@ -477,7 +393,7 @@ static USBH_StatusTypeDef GetLineCoding(USBH_HandleTypeDef *phost, CDC_LineCodin
   * @param  pdev: Selected device
   * @retval USBH_StatusTypeDef : USB ctl xfer status
   */
-static USBH_StatusTypeDef SetLineCoding(USBH_HandleTypeDef *phost,
+USBH_StatusTypeDef SetLineCoding(USBH_HandleTypeDef *phost,
                                         CDC_LineCodingTypeDef *linecoding)
 {
   phost->Control.setup.b.bmRequestType = USB_H2D | USB_REQ_TYPE_CLASS |
@@ -630,7 +546,7 @@ USBH_StatusTypeDef  USBH_CDC_Receive(USBH_HandleTypeDef *phost, uint8_t *pbuff, 
 *  @param  pdev: Selected device
 * @retval None
 */
-static void CDC_ProcessTransmission(USBH_HandleTypeDef *phost)
+void CDC_ProcessTransmission(USBH_HandleTypeDef *phost)
 {
   CDC_HandleTypeDef *CDC_Handle = (CDC_HandleTypeDef *) phost->pActiveClass->pData;
   USBH_URBStateTypeDef URB_Status = USBH_URB_IDLE;
@@ -716,68 +632,7 @@ static void CDC_ProcessTransmission(USBH_HandleTypeDef *phost)
       break;
   }
 }
-/**
-* @brief  This function responsible for reception of data from the device
-*  @param  pdev: Selected device
-* @retval None
-*/
 
-static void CDC_ProcessReception(USBH_HandleTypeDef *phost)
-{
-  CDC_HandleTypeDef *CDC_Handle = (CDC_HandleTypeDef *) phost->pActiveClass->pData;
-  USBH_URBStateTypeDef URB_Status = USBH_URB_IDLE;
-  uint32_t length;
-
-  switch (CDC_Handle->data_rx_state)
-  {
-
-    case CDC_RECEIVE_DATA:
-
-      USBH_BulkReceiveData(phost,
-                           CDC_Handle->pRxData,
-                           CDC_Handle->DataItf.InEpSize,
-                           CDC_Handle->DataItf.InPipe);
-
-      CDC_Handle->data_rx_state = CDC_RECEIVE_DATA_WAIT;
-
-      break;
-
-    case CDC_RECEIVE_DATA_WAIT:
-
-      URB_Status = USBH_LL_GetURBState(phost, CDC_Handle->DataItf.InPipe);
-
-      /*Check the status done for reception*/
-      if (URB_Status == USBH_URB_DONE)
-      {
-        length = USBH_LL_GetLastXferSize(phost, CDC_Handle->DataItf.InPipe);
-
-        if (((CDC_Handle->RxDataLength - length) > 0U) && (length > CDC_Handle->DataItf.InEpSize))
-        {
-          CDC_Handle->RxDataLength -= length ;
-          CDC_Handle->pRxData += length;
-          CDC_Handle->data_rx_state = CDC_RECEIVE_DATA;
-        }
-        else
-        {
-          CDC_Handle->data_rx_state = CDC_IDLE;
-          USBH_CDC_ReceiveCallback(phost);
-        }
-
-#if (USBH_USE_OS == 1U)
-        phost->os_msg = (uint32_t)USBH_CLASS_EVENT;
-#if (osCMSIS < 0x20000U)
-        (void)osMessagePut(phost->os_event, phost->os_msg, 0U);
-#else
-        (void)osMessageQueuePut(phost->os_event, &phost->os_msg, 0U, NULL);
-#endif
-#endif
-      }
-      break;
-
-    default:
-      break;
-  }
-}
 
 /**
 * @brief  The function informs user that data have been received

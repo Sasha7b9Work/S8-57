@@ -13,7 +13,6 @@
 
 
 typedef struct _USBH_HandleTypeDef USBH_HandleTypeDef;
-typedef struct __HCD_HandleTypeDef HCD_HandleTypeDef;
 
 
 struct HAL_RTC
@@ -126,8 +125,6 @@ struct HAL_HCD
     static void Init();
 
     static void InitUSBH_LL(USBH_HandleTypeDef *phost);
-
-    static HCD_HandleTypeDef &handle;
 };
 
 

@@ -6,9 +6,7 @@
 #include <usbh_def.h>
 
 
-static HCD_HandleTypeDef handleHCD;
-
-HCD_HandleTypeDef  &HAL_HCD::handle = handleHCD;
+HCD_HandleTypeDef handleHCD;
 
 
 void HAL_HCD::Init()
@@ -21,7 +19,7 @@ void HAL_HCD::Init()
     HAL_PIO::Init(PIN_HCD_DM, HMode::AF_PP, HPull::No, HSpeed::High, HAlternate::AF12_OTG_HS_FS);
     HAL_PIO::Init(PIN_HCD_DP, HMode::AF_PP, HPull::No, HSpeed::High, HAlternate::AF12_OTG_HS_FS);
 
-    HAL_NVIC_SetPriority(OTG_HS_IRQn, 5, 1);
+    HAL_NVIC_SetPriority(OTG_HS_IRQn, 15, 15);
 
     HAL_NVIC_EnableIRQ(OTG_HS_IRQn);
 }
@@ -29,18 +27,18 @@ void HAL_HCD::Init()
 
 void HAL_HCD::InitUSBH_LL(USBH_HandleTypeDef *phost)
 {
-    handle.Instance = USB_OTG_HS;
-    handle.Init.speed = HCD_SPEED_HIGH;
-    handle.Init.Host_channels = 12;
-    handle.Init.dma_enable = 0;
-    handle.Init.low_power_enable = 0;
-    handle.Init.phy_itface = HCD_PHY_EMBEDDED;
-    handle.Init.Sof_enable = 0;
-    handle.Init.vbus_sensing_enable = 0;
-    handle.Init.use_external_vbus = 0;
+    handleHCD.Instance = USB_OTG_HS;
+    handleHCD.Init.speed = HCD_SPEED_HIGH;
+    handleHCD.Init.Host_channels = 12;
+    handleHCD.Init.dma_enable = 0;
+    handleHCD.Init.low_power_enable = 0;
+    handleHCD.Init.phy_itface = HCD_PHY_EMBEDDED;
+    handleHCD.Init.Sof_enable = 0;
+    handleHCD.Init.vbus_sensing_enable = 0;
+    handleHCD.Init.use_external_vbus = 0;
 
-    handle.pData = phost;
+    handleHCD.pData = phost;
     phost->pData = &handleHCD;
-    HAL_HCD_Init(&handle);
-    USBH_LL_SetTimer(phost, HAL_HCD_GetCurrentFrame(&handle));
+    HAL_HCD_Init(&handleHCD);
+    USBH_LL_SetTimer(phost, HAL_HCD_GetCurrentFrame(&handleHCD));
 }

@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include "device.h"
 #include "common/Decoder_d.h"
 #include "Display/Console.h"
@@ -63,7 +64,9 @@ void Device::Init()
 
     Multimeter::Init();
 
-    FDrive::Init();
+    //FDrive::Init();
+
+    Sensor::Init();
 
     SetCurrentMode();
 }
@@ -101,7 +104,10 @@ bool SetCurrentMode(const Page *page, Device::Mode::E mode)
 
 void Device::Update()
 {
-    Timer::StartMultiMeasurement();
+    static uint startFrame = 0;
+    static uint counter = 0;
+
+    counter++;
 
     Osci::Update();
 
@@ -111,11 +117,13 @@ void Device::Update()
    
     Tester::Update();
 
-    Recorder::Update();
+    //Recorder::Update();
    
     Multimeter::Update();
        
-    FDrive::Update();
+    //FDrive::Update();
+
+    Sensor::Update();
 
     while (HAL_BUS::Panel::Receive()) {};
 
@@ -124,6 +132,13 @@ void Device::Update()
     DDecoder::Update();
 
     Menu::Update();
+
+    if(TIME_MS - startFrame >= 1000)
+    {
+        LOG_WRITE("FPS = %d", counter);
+        counter = 0;
+        startFrame = TIME_MS;
+    }
 }
 
 

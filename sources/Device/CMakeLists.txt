@@ -36,6 +36,7 @@ add_compile_options(/wd26812)   #The enum type %type% is unscoped. Prefer 'enum 
 
 
 set_source_files_properties(../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_hcd.c
+                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c
                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Src/usbh_cdc.c 
                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc.c
                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c
@@ -90,7 +91,9 @@ source_group(Tester                                  REGULAR_EXPRESSION src/Test
 source_group(ThirdParty\\HAL                         FILES ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_hcd.h
                                                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_hcd.c
                                                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc.h
-                                                           ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc_ex.h)
+                                                           ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc_ex.h
+                                                           ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.h
+                                                           ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c)
 source_group(ThirdParty\\USBH                        FILES ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Inc/usbh_cdc.h
                                                            ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Src/usbh_cdc.c
                                                            ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc/usbh_msc.h
@@ -123,6 +126,8 @@ file(GLOB SOURCES   ../common/_VS/*
                     ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_hcd.c
                     ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc.h
                     ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc_ex.h
+                    ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.h
+                    ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c
                     ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Inc/usbh_cdc.h
                     ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Src/usbh_cdc.c
                     ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc/usbh_msc.h
