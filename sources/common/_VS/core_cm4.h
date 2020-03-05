@@ -20,8 +20,19 @@ struct SysTickStruct
 inline void NVIC_SystemReset(void) {};
 
 
+#define SCB_SHCSR_MEMFAULTENA_Msk 0
+#define MPU_CTRL_ENABLE_Msk 0
+
+
 extern struct structSCB
 {
     unsigned VTOR;
+    unsigned SHCSR;
 } *SCB;
+
+
+extern struct structMPU
+{
+    unsigned CTRL;
+} *MPU;
 

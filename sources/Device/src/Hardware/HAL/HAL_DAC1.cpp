@@ -32,7 +32,7 @@ void HAL_DAC1::Init()
             DMA_MBURST_SINGLE,
             DMA_PBURST_SINGLE
         },
-        HAL_UNLOCKED, HAL_DMA_STATE_RESET, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+        HAL_UNLOCKED, HAL_DMA_STATE_RESET, 0, 0, 0, 0, 0, 0, 0, 0
     };
 
     HAL_DMA_Init(&hdmaDAC1);
