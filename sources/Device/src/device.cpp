@@ -12,6 +12,7 @@
 #include "Keyboard/BufferButtons.h"
 #include "Menu/MenuItems.h"
 #include "Recorder/Recorder.h"
+#include "Recorder/Sensor.h"
 #include "SCPI/SCPI.h"
 #include "Settings/SettingsNRST.h"
 #include <cstdlib>
@@ -107,15 +108,13 @@ void Device::Update()
     Display::Update();
 
     Menu::SaveSettings();
-    
+   
     Tester::Update();
 
     Recorder::Update();
-    
+   
     Multimeter::Update();
-    
-    Menu::Update();
-    
+       
     FDrive::Update();
 
     while (HAL_BUS::Panel::Receive()) {};
@@ -123,6 +122,8 @@ void Device::Update()
     SCPI::Update();
 
     DDecoder::Update();
+
+    Menu::Update();
 }
 
 

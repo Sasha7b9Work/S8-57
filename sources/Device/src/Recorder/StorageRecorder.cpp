@@ -8,7 +8,7 @@
 #include <cstring>
 
 
-BitSet16 BufferMissingPoints::points[2][10];
+BitSet16 BufferMissingPoints::points[2][256];
 
 int BufferMissingPoints::last = 0;
 
@@ -139,7 +139,7 @@ void Record::DeleteOldPoints()
 {
     if(numPoints == maxPoints)
     {
-        uint numBytes = bytesOnPoint * static_cast<uint>(numPoints - 1);      // Столько байт будем перемещать
+        uint numBytes = bytesOnPoint * static_cast<uint>(numPoints - 1);      // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
         uint8 *dest = BeginData();
 

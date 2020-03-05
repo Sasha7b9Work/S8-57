@@ -38,7 +38,7 @@ struct BufferMissingPoints
 
 private:
     // Здесь сохраняются пропущенные точки
-    static BitSet16 points[2][10];
+    static BitSet16 points[2][256];
 
     // Индекс "запоследней" точки
     static int last;
@@ -122,7 +122,7 @@ private:
     // Интерполировать точки между позициями num1 и num2
     void Interpolate(int num1, int num2);
 
-    // Удаляет точки, если необходимо
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     void DeleteOldPoints();
 };
 

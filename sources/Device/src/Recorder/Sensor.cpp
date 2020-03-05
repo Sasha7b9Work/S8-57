@@ -20,16 +20,11 @@ static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8 id);
 
 void Sensor::Init()
 {
-    LOG_FUNC_ENTER();
+    USBH_Init(&handle, USBH_UserProcess, 0);
 
-    USBH_StatusTypeDef res = USBH_Init(&handle, USBH_UserProcess, 0);
-    LOG_WRITE("1 = %d", res);
+    USBH_RegisterClass(&handle, USBH_CDC_CLASS);
 
-    res = USBH_RegisterClass(&handle, USBH_CDC_CLASS);
-    LOG_WRITE("2 = %d", res);
-
-    res = USBH_Start(&handle);
-    LOG_WRITE("3 = %d", res);
+    USBH_Start(&handle);
 }
 
 
@@ -63,7 +58,6 @@ void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
     case HOST_USER_CLASS_ACTIVE:
         if(requestForReceive == 0)
         {
-            std::memset(bufferRX, 0, RX_BUFF_SIZE);
             USBH_CDC_Receive(&handle, bufferRX, RX_BUFF_SIZE);
             requestForReceive = 1;
         }
@@ -84,7 +78,11 @@ void USBH_CDC_ReceiveCallback(USBH_HandleTypeDef *)
 
     bufferRX[size] = 0;
 
-    LOG_WRITE("%s", bufferRX);
-
     USBH_CDC_Receive(&handle, bufferRX, RX_BUFF_SIZE);
+}
+
+
+bool Sensor::IsActive()
+{
+    return requestForReceive == 1;
 }
