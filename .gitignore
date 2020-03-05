@@ -7,6 +7,7 @@
 *.tmp
 *.uvguix.*
 *.uvgui.*
+*.chm
 
 JLinkLog.txt
 JLinkSettings.ini
