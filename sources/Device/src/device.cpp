@@ -64,7 +64,7 @@ void Device::Init()
 
     Multimeter::Init();
 
-    //FDrive::Init();
+    FDrive::Init();
 
     Sensor::Init();
 
@@ -117,11 +117,11 @@ void Device::Update()
    
     Tester::Update();
 
-    //Recorder::Update();
+    Recorder::Update();
    
     Multimeter::Update();
        
-    //FDrive::Update();
+    FDrive::Update();
 
     Sensor::Update();
 
