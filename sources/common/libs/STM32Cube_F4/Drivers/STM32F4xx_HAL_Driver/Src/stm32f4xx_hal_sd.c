@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f4xx_hal_sd.c
   * @author  MCD Application Team
-  * @version V1.4.1
-  * @date    09-October-2015
+  * @version V1.0.0
+  * @date    18-February-2014
   * @brief   SD card HAL module driver.
   *          This file provides firmware functions to manage the following 
   *          functionalities of the Secure Digital (SD) peripheral:
@@ -30,14 +30,14 @@
     It is used as follows:
  
     (#)Initialize the SDIO low level resources by implement the HAL_SD_MspInit() API:
-        (##) Enable the SDIO interface clock using __HAL_RCC_SDIO_CLK_ENABLE(); 
+        (##) Enable the SDIO interface clock using __SDIO_CLK_ENABLE(); 
         (##) SDIO pins configuration for SD card
-            (+++) Enable the clock for the SDIO GPIOs using the functions __HAL_RCC_GPIOx_CLK_ENABLE();   
+            (+++) Enable the clock for the SDIO GPIOs using the functions __GPIOx_CLK_ENABLE();   
             (+++) Configure these SDIO pins as alternate function pull-up using HAL_GPIO_Init()
                   and according to your pin assignment;
         (##) DMA Configuration if you need to use DMA process (HAL_SD_ReadBlocks_DMA()
              and HAL_SD_WriteBlocks_DMA() APIs).
-            (+++) Enable the DMAx interface clock using __HAL_RCC_DMAx_CLK_ENABLE(); 
+            (+++) Enable the DMAx interface clock using __DMAx_CLK_ENABLE(); 
             (+++) Configure the DMA using the function HAL_DMA_Init() with predeclared and filled. 
         (##) NVIC configuration if you need to use interrupt process when using DMA transfer.
             (+++) Configure the SDIO and DMA interrupt priorities using functions
@@ -54,7 +54,7 @@
   ================================================    
   [..]
     To initialize the SD Card, use the HAL_SD_Init() function.  It Initializes 
-    the SD Card and put it into Standby State (Ready for data transfer). 
+    the SD Card and put it into StandBy State (Ready for data transfer). 
     This function provide the following operations:
   
     (#) Apply the SD Card initialization process at 400KHz and check the SD Card 
@@ -76,6 +76,10 @@
     (#) Configure the SD Card Data transfer frequency. By Default, the card transfer 
         frequency is set to 24MHz. You can change or adapt this frequency by adjusting 
         the "ClockDiv" field.
+        The SD Card frequency (SDIO_CK) is computed as follows:
+
+           SDIO_CK = SDIOCLK / (ClockDiv + 2) 
+
         In transfer mode and according to the SD Card standard, make sure that the 
         SDIO_CK frequency doesn't exceed 25MHz and 50MHz in High-speed mode switch.
         To be able to use a frequency higher than 24MHz, you should use the SDIO 
@@ -90,14 +94,14 @@
   ==============================
   [..] 
     (+) You can read from SD card in polling mode by using function HAL_SD_ReadBlocks(). 
-        This function support only 512-bytes block length (the block size should be 
-        chosen as 512 bytes).
+        This function support only 512-byte block length (the block size should be 
+        chosen as 512 byte).
         You can choose either one block read operation or multiple block read operation 
         by adjusting the "NumberOfBlocks" parameter.
 
     (+) You can read from SD card in DMA mode by using function HAL_SD_ReadBlocks_DMA().
-        This function support only 512-bytes block length (the block size should be 
-        chosen as 512 bytes).
+        This function support only 512-byte block length (the block size should be 
+        chosen as 512 byte).
         You can choose either one block read operation or multiple block read operation 
         by adjusting the "NumberOfBlocks" parameter.
         After this, you have to call the function HAL_SD_CheckReadOperation(), to insure
@@ -107,13 +111,13 @@
   =============================== 
   [..] 
     (+) You can write to SD card in polling mode by using function HAL_SD_WriteBlocks(). 
-        This function support only 512-bytes block length (the block size should be 
-        chosen as 512 bytes).
+        This function support only 512-byte block length (the block size should be 
+        chosen as 512 byte).
         You can choose either one block read operation or multiple block read operation 
         by adjusting the "NumberOfBlocks" parameter.
 
     (+) You can write to SD card in DMA mode by using function HAL_SD_WriteBlocks_DMA().
-        This function support only 512-bytes block length (the block size should be 
+        This function support only 512-byte block length (the block size should be 
         chosen as 512 byte).
         You can choose either one block read operation or multiple block read operation 
         by adjusting the "NumberOfBlocks" parameter.
@@ -133,7 +137,7 @@
   ==================================
   [..]
     Below the list of most used macros in SD HAL driver.
-
+       
     (+) __HAL_SD_SDIO_ENABLE : Enable the SD device
     (+) __HAL_SD_SDIO_DISABLE : Disable the SD device
     (+) __HAL_SD_SDIO_DMA_ENABLE: Enable the SDIO DMA transfer
@@ -149,7 +153,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -179,36 +183,24 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
 
-#ifdef HAL_SD_MODULE_ENABLED
-#if defined(STM32F405xx) || defined(STM32F415xx) || defined(STM32F407xx) || defined(STM32F417xx) || \
-    defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) || \
-    defined(STM32F401xC) || defined(STM32F401xE) || defined(STM32F411xE) || defined(STM32F446xx) || \
-    defined(STM32F469xx) || defined(STM32F479xx) 
 /** @addtogroup STM32F4xx_HAL_Driver
   * @{
   */
 
-/** @addtogroup SD 
+/** @defgroup SD
+  * @brief SD HAL module driver
   * @{
   */
+
+#ifdef HAL_SD_MODULE_ENABLED
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-/** @addtogroup SD_Private_Defines
-  * @{
-  */
-/** 
-  * @brief  SDIO Data block size 
-  */ 
-#define DATA_BLOCK_SIZE                  ((uint32_t)(9 << 4))
-/** 
-  * @brief  SDIO Static flags, Timeout, FIFO Address  
-  */
-#define SDIO_STATIC_FLAGS               ((uint32_t)(SDIO_FLAG_CCRCFAIL | SDIO_FLAG_DCRCFAIL | SDIO_FLAG_CTIMEOUT |\
-                                                    SDIO_FLAG_DTIMEOUT | SDIO_FLAG_TXUNDERR | SDIO_FLAG_RXOVERR  |\
-                                                    SDIO_FLAG_CMDREND  | SDIO_FLAG_CMDSENT  | SDIO_FLAG_DATAEND  |\
-                                                    SDIO_FLAG_DBCKEND))  
 
+/** 
+  * @brief  SDIO Static flags, TimeOut, FIFO Address  
+  */
+#define SDIO_STATIC_FLAGS               ((uint32_t)0x000005FF)
 #define SDIO_CMD0TIMEOUT                ((uint32_t)0x00010000)
 
 /** 
@@ -228,7 +220,7 @@
 #define SD_OCR_GENERAL_UNKNOWN_ERROR    ((uint32_t)0x00080000)
 #define SD_OCR_STREAM_READ_UNDERRUN     ((uint32_t)0x00040000)
 #define SD_OCR_STREAM_WRITE_OVERRUN     ((uint32_t)0x00020000)
-#define SD_OCR_CID_CSD_OVERWRITE       ((uint32_t)0x00010000)
+#define SD_OCR_CID_CSD_OVERWRIETE       ((uint32_t)0x00010000)
 #define SD_OCR_WP_ERASE_SKIP            ((uint32_t)0x00008000)
 #define SD_OCR_CARD_ECC_DISABLED        ((uint32_t)0x00004000)
 #define SD_OCR_ERASE_RESET              ((uint32_t)0x00002000)
@@ -277,16 +269,11 @@
   */
 #define SD_SDIO_SEND_IF_COND            ((uint32_t)SD_CMD_HS_SEND_EXT_CSD)
 
-/**
-  * @}
-  */
   
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
-/** @addtogroup SD_Private_Functions_Prototypes
-  * @{
-  */
+/* Private functions ---------------------------------------------------------*/
 static HAL_SD_ErrorTypedef SD_Initialize_Cards(SD_HandleTypeDef *hsd);
 static HAL_SD_ErrorTypedef SD_Select_Deselect(SD_HandleTypeDef *hsd, uint64_t addr);
 static HAL_SD_ErrorTypedef SD_PowerON(SD_HandleTypeDef *hsd); 
@@ -307,18 +294,15 @@ static void SD_DMA_RxCplt(DMA_HandleTypeDef *hdma);
 static void SD_DMA_RxError(DMA_HandleTypeDef *hdma);
 static void SD_DMA_TxCplt(DMA_HandleTypeDef *hdma);
 static void SD_DMA_TxError(DMA_HandleTypeDef *hdma);
-/**
-  * @}
-  */
-/* Exported functions --------------------------------------------------------*/
-/** @addtogroup SD_Exported_Functions
+
+/** @defgroup SD_Private_Functions
   * @{
   */
 
-/** @addtogroup SD_Exported_Functions_Group1
- *  @brief   Initialization and de-initialization functions 
+/** @defgroup SD_Group1 Initialization and de-initialization functions 
+ *  @brief    Initialization and Configuration functions 
  *
-@verbatim  
+@verbatim    
   ==============================================================================
           ##### Initialization and de-initialization functions #####
   ==============================================================================
@@ -340,54 +324,52 @@ static void SD_DMA_TxError(DMA_HandleTypeDef *hdma);
   */
 HAL_SD_ErrorTypedef HAL_SD_Init(SD_HandleTypeDef *hsd, HAL_SD_CardInfoTypedef *SDCardInfo)
 { 
-  __IO HAL_SD_ErrorTypedef errorstate = SD_OK;
-  SD_InitTypeDef tmpinit;
+  __IO HAL_SD_ErrorTypedef errorState = SD_OK;
+  SD_InitTypeDef tmpInit;
   
-  /* Allocate lock resource and initialize it */
-  hsd->Lock = HAL_UNLOCKED;
   /* Initialize the low level hardware (MSP) */
   HAL_SD_MspInit(hsd);
   
   /* Default SDIO peripheral configuration for SD card initialization */
-  tmpinit.ClockEdge           = SDIO_CLOCK_EDGE_RISING;
-  tmpinit.ClockBypass         = SDIO_CLOCK_BYPASS_DISABLE;
-  tmpinit.ClockPowerSave      = SDIO_CLOCK_POWER_SAVE_DISABLE;
-  tmpinit.BusWide             = SDIO_BUS_WIDE_1B;
-  tmpinit.HardwareFlowControl = SDIO_HARDWARE_FLOW_CONTROL_DISABLE;
-  tmpinit.ClockDiv            = SDIO_INIT_CLK_DIV;
+  tmpInit.ClockEdge           = SDIO_CLOCK_EDGE_RISING;
+  tmpInit.ClockBypass         = SDIO_CLOCK_BYPASS_DISABLE;
+  tmpInit.ClockPowerSave      = SDIO_CLOCK_POWER_SAVE_DISABLE;
+  tmpInit.BusWide             = SDIO_BUS_WIDE_1B;
+  tmpInit.HardwareFlowControl = SDIO_HARDWARE_FLOW_CONTROL_DISABLE;
+  tmpInit.ClockDiv            = SDIO_INIT_CLK_DIV;
   
   /* Initialize SDIO peripheral interface with default configuration */
-  SDIO_Init(hsd->Instance, tmpinit);
+  SDIO_Init(hsd->Instance, tmpInit);
   
   /* Identify card operating voltage */
-  errorstate = SD_PowerON(hsd); 
+  errorState = SD_PowerON(hsd); 
   
-  if(errorstate != SD_OK)     
+  if(errorState != SD_OK)     
   {
-    return errorstate;
+    return errorState;
   }
   
   /* Initialize the present SDIO card(s) and put them in idle state */
-  errorstate = SD_Initialize_Cards(hsd);
+  errorState = SD_Initialize_Cards(hsd);
   
-  if (errorstate != SD_OK)
+  if (errorState != SD_OK)
   {
-    return errorstate;
+    return errorState;
   }
   
   /* Read CSD/CID MSD registers */
-  errorstate = HAL_SD_Get_CardInfo(hsd, SDCardInfo);
+  errorState = HAL_SD_Get_CardInfo(hsd, SDCardInfo);
   
-  if (errorstate == SD_OK)
+  if (errorState == SD_OK)
   {
     /* Select the Card */
-    errorstate = SD_Select_Deselect(hsd, (uint32_t)(((uint32_t)SDCardInfo->RCA) << 16));
+    errorState = SD_Select_Deselect(hsd, (uint32_t)(((uint32_t)SDCardInfo->RCA) << 16));
   }
   
   /* Configure SDIO peripheral interface */
   SDIO_Init(hsd->Instance, hsd->Init);   
   
-  return errorstate;
+  return errorState;
 }
 
 /**
@@ -436,7 +418,7 @@ __weak void HAL_SD_MspDeInit(SD_HandleTypeDef *hsd)
   * @}
   */
 
-/** @addtogroup SD_Exported_Functions_Group2
+/** @defgroup SD_Group2 IO operation functions 
  *  @brief   Data transfer functions 
  *
 @verbatim   
@@ -458,15 +440,15 @@ __weak void HAL_SD_MspDeInit(SD_HandleTypeDef *hsd)
   * @param  pReadBuffer: pointer to the buffer that will contain the received data
   * @param  ReadAddr: Address from where data is to be read  
   * @param  BlockSize: SD card Data block size 
-  * @note   BlockSize must be 512 bytes.
+  *          This parameter should be 512
   * @param  NumberOfBlocks: Number of SD blocks to read   
   * @retval SD Card error state
   */
 HAL_SD_ErrorTypedef HAL_SD_ReadBlocks(SD_HandleTypeDef *hsd, uint32_t *pReadBuffer, uint64_t ReadAddr, uint32_t BlockSize, uint32_t NumberOfBlocks)
 {
-  SDIO_CmdInitTypeDef  sdio_cmdinitstructure;
-  SDIO_DataInitTypeDef sdio_datainitstructure;
-  HAL_SD_ErrorTypedef errorstate = SD_OK;
+  SDIO_CmdInitTypeDef  SDIO_CmdInitStructure;
+  SDIO_DataInitTypeDef SDIO_DataInitStructure;
+  HAL_SD_ErrorTypedef errorState = SD_OK;
   uint32_t count = 0, *tempbuff = (uint32_t *)pReadBuffer;
   
   /* Initialize data control register */
@@ -479,61 +461,57 @@ HAL_SD_ErrorTypedef HAL_SD_ReadBlocks(SD_HandleTypeDef *hsd, uint32_t *pReadBuff
   }
   
   /* Set Block Size for Card */ 
-  sdio_cmdinitstructure.Argument         = (uint32_t) BlockSize;
-  sdio_cmdinitstructure.CmdIndex         = SD_CMD_SET_BLOCKLEN;
-  sdio_cmdinitstructure.Response         = SDIO_RESPONSE_SHORT;
-  sdio_cmdinitstructure.WaitForInterrupt = SDIO_WAIT_NO;
-  sdio_cmdinitstructure.CPSM             = SDIO_CPSM_ENABLE;
-  SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+  SDIO_CmdInitStructure.Argument         = (uint32_t) BlockSize;
+  SDIO_CmdInitStructure.CmdIndex         = SD_CMD_SET_BLOCKLEN;
+  SDIO_CmdInitStructure.Response         = SDIO_RESPONSE_SHORT;
+  SDIO_CmdInitStructure.WaitForInterrupt = SDIO_WAIT_NO;
+  SDIO_CmdInitStructure.CPSM             = SDIO_CPSM_ENABLE;
+  SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
   
   /* Check for error conditions */
-  errorstate = SD_CmdResp1Error(hsd, SD_CMD_SET_BLOCKLEN);
+  errorState = SD_CmdResp1Error(hsd, SD_CMD_SET_BLOCKLEN);
   
-  if (errorstate != SD_OK)
+  if (errorState != SD_OK)
   {
-    return errorstate;
+    return errorState;
   }
   
   /* Configure the SD DPSM (Data Path State Machine) */
-  sdio_datainitstructure.DataTimeOut   = SD_DATATIMEOUT;
-  sdio_datainitstructure.DataLength    = NumberOfBlocks * BlockSize;
-  sdio_datainitstructure.DataBlockSize = DATA_BLOCK_SIZE;
-  sdio_datainitstructure.TransferDir   = SDIO_TRANSFER_DIR_TO_SDIO;
-  sdio_datainitstructure.TransferMode  = SDIO_TRANSFER_MODE_BLOCK;
-  sdio_datainitstructure.DPSM          = SDIO_DPSM_ENABLE;
-  SDIO_DataConfig(hsd->Instance, &sdio_datainitstructure);
+  SDIO_DataInitStructure.DataTimeOut   = SD_DATATIMEOUT;
+  SDIO_DataInitStructure.DataLength    = NumberOfBlocks * BlockSize;
+  SDIO_DataInitStructure.DataBlockSize = (uint32_t)(9 << 4);
+  SDIO_DataInitStructure.TransferDir   = SDIO_TRANSFER_DIR_TO_SDIO;
+  SDIO_DataInitStructure.TransferMode  = SDIO_TRANSFER_MODE_BLOCK;
+  SDIO_DataInitStructure.DPSM          = SDIO_DPSM_ENABLE;
+  SDIO_DataConfig(hsd->Instance, &SDIO_DataInitStructure);
   
   if(NumberOfBlocks > 1)
   {
     /* Send CMD18 READ_MULT_BLOCK with argument data address */
-    sdio_cmdinitstructure.CmdIndex = SD_CMD_READ_MULT_BLOCK;
+    SDIO_CmdInitStructure.CmdIndex = SD_CMD_READ_MULT_BLOCK;
   }
   else
   {
     /* Send CMD17 READ_SINGLE_BLOCK */
-    sdio_cmdinitstructure.CmdIndex = SD_CMD_READ_SINGLE_BLOCK;    
+    SDIO_CmdInitStructure.CmdIndex = SD_CMD_READ_SINGLE_BLOCK;    
   }
   
-  sdio_cmdinitstructure.Argument         = (uint32_t)ReadAddr;
-  SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+  SDIO_CmdInitStructure.Argument         = (uint32_t)ReadAddr;
+  SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
   
   /* Read block(s) in polling mode */
   if(NumberOfBlocks > 1)
   {
     /* Check for error conditions */
-    errorstate = SD_CmdResp1Error(hsd, SD_CMD_READ_MULT_BLOCK);
+    errorState = SD_CmdResp1Error(hsd, SD_CMD_READ_MULT_BLOCK);
     
-    if (errorstate != SD_OK)
+    if (errorState != SD_OK)
     {
-      return errorstate;
+      return errorState;
     }
     
     /* Poll on SDIO flags */
-#ifdef SDIO_STA_STBITERR
     while(!__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_RXOVERR | SDIO_FLAG_DCRCFAIL | SDIO_FLAG_DTIMEOUT | SDIO_FLAG_DATAEND | SDIO_FLAG_STBITERR))
-#else /* SDIO_STA_STBITERR not defined */
-    while(!__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_RXOVERR | SDIO_FLAG_DCRCFAIL | SDIO_FLAG_DTIMEOUT | SDIO_FLAG_DATAEND))
-#endif /* SDIO_STA_STBITERR */
     {
       if (__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_RXFIFOHF))
       {
@@ -550,19 +528,15 @@ HAL_SD_ErrorTypedef HAL_SD_ReadBlocks(SD_HandleTypeDef *hsd, uint32_t *pReadBuff
   else
   {
     /* Check for error conditions */
-    errorstate = SD_CmdResp1Error(hsd, SD_CMD_READ_SINGLE_BLOCK); 
+    errorState = SD_CmdResp1Error(hsd, SD_CMD_READ_SINGLE_BLOCK); 
     
-    if (errorstate != SD_OK)
+    if (errorState != SD_OK)
     {
-      return errorstate;
+      return errorState;
     }    
     
     /* In case of single block transfer, no need of stop transfer at all */
-#ifdef SDIO_STA_STBITERR
     while(!__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_RXOVERR | SDIO_FLAG_DCRCFAIL | SDIO_FLAG_DTIMEOUT | SDIO_FLAG_DBCKEND | SDIO_FLAG_STBITERR))
-#else /* SDIO_STA_STBITERR not defined */
-    while(!__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_RXOVERR | SDIO_FLAG_DCRCFAIL | SDIO_FLAG_DTIMEOUT | SDIO_FLAG_DBCKEND))      
-#endif /* SDIO_STA_STBITERR */
     {
       if (__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_RXFIFOHF))
       {
@@ -574,7 +548,7 @@ HAL_SD_ErrorTypedef HAL_SD_ReadBlocks(SD_HandleTypeDef *hsd, uint32_t *pReadBuff
         
         tempbuff += 8;
       }
-    }
+    }   
   }
   
   /* Send stop transmission command in case of multiblock read */
@@ -585,7 +559,7 @@ HAL_SD_ErrorTypedef HAL_SD_ReadBlocks(SD_HandleTypeDef *hsd, uint32_t *pReadBuff
         (hsd->CardType == HIGH_CAPACITY_SD_CARD))
     {
       /* Send stop transmission command */
-      errorstate = HAL_SD_StopTransfer(hsd);
+      errorState = HAL_SD_StopTransfer(hsd);
     }
   }
   
@@ -594,39 +568,33 @@ HAL_SD_ErrorTypedef HAL_SD_ReadBlocks(SD_HandleTypeDef *hsd, uint32_t *pReadBuff
   {
     __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_DTIMEOUT);
     
-    errorstate = SD_DATA_TIMEOUT;
+    errorState = SD_DATA_TIMEOUT;
     
-    return errorstate;
+    return errorState;
   }
   else if (__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_DCRCFAIL))
   {
     __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_DCRCFAIL);
     
-    errorstate = SD_DATA_CRC_FAIL;
+    errorState = SD_DATA_CRC_FAIL;
     
-    return errorstate;
+    return errorState;
   }
   else if (__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_RXOVERR))
   {
     __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_RXOVERR);
     
-    errorstate = SD_RX_OVERRUN;
+    errorState = SD_RX_OVERRUN;
     
-    return errorstate;
+    return errorState;
   }
-#ifdef SDIO_STA_STBITERR
   else if (__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_STBITERR))
   {
     __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_STBITERR);
     
-    errorstate = SD_START_BIT_ERR;
+    errorState = SD_START_BIT_ERR;
     
-    return errorstate;
-  }
-#endif /* SDIO_STA_STBITERR */ 
-  else
-  {
-    /* No error flag set */
+    return errorState;
   }
   
   count = SD_DATATIMEOUT;
@@ -642,7 +610,7 @@ HAL_SD_ErrorTypedef HAL_SD_ReadBlocks(SD_HandleTypeDef *hsd, uint32_t *pReadBuff
   /* Clear all the static flags */
   __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_STATIC_FLAGS);
   
-  return errorstate;
+  return errorState;
 }
 
 /**
@@ -652,16 +620,16 @@ HAL_SD_ErrorTypedef HAL_SD_ReadBlocks(SD_HandleTypeDef *hsd, uint32_t *pReadBuff
   * @param  pWriteBuffer: pointer to the buffer that will contain the data to transmit
   * @param  WriteAddr: Address from where data is to be written 
   * @param  BlockSize: SD card Data block size 
-  * @note   BlockSize must be 512 bytes.
+  *          This parameter should be 512.
   * @param  NumberOfBlocks: Number of SD blocks to write 
   * @retval SD Card error state
   */
 HAL_SD_ErrorTypedef HAL_SD_WriteBlocks(SD_HandleTypeDef *hsd, uint32_t *pWriteBuffer, uint64_t WriteAddr, uint32_t BlockSize, uint32_t NumberOfBlocks)
 {
-  SDIO_CmdInitTypeDef sdio_cmdinitstructure;
-  SDIO_DataInitTypeDef sdio_datainitstructure;
-  HAL_SD_ErrorTypedef errorstate = SD_OK;
-  uint32_t totalnumberofbytes = 0, bytestransferred = 0, count = 0, restwords = 0;
+  SDIO_CmdInitTypeDef SDIO_CmdInitStructure;
+  SDIO_DataInitTypeDef SDIO_DataInitStructure;
+  HAL_SD_ErrorTypedef errorState = SD_OK;
+  uint32_t TotalNumberOfBytes = 0, bytestransferred = 0, count = 0, restwords = 0;
   uint32_t *tempbuff = (uint32_t *)pWriteBuffer;
   uint8_t cardstate  = 0;
   
@@ -675,76 +643,72 @@ HAL_SD_ErrorTypedef HAL_SD_WriteBlocks(SD_HandleTypeDef *hsd, uint32_t *pWriteBu
   }
   
   /* Set Block Size for Card */ 
-  sdio_cmdinitstructure.Argument         = (uint32_t)BlockSize;
-  sdio_cmdinitstructure.CmdIndex         = SD_CMD_SET_BLOCKLEN;
-  sdio_cmdinitstructure.Response         = SDIO_RESPONSE_SHORT;
-  sdio_cmdinitstructure.WaitForInterrupt = SDIO_WAIT_NO;
-  sdio_cmdinitstructure.CPSM             = SDIO_CPSM_ENABLE;
-  SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+  SDIO_CmdInitStructure.Argument         = (uint32_t)BlockSize;
+  SDIO_CmdInitStructure.CmdIndex         = SD_CMD_SET_BLOCKLEN;
+  SDIO_CmdInitStructure.Response         = SDIO_RESPONSE_SHORT;
+  SDIO_CmdInitStructure.WaitForInterrupt = SDIO_WAIT_NO;
+  SDIO_CmdInitStructure.CPSM             = SDIO_CPSM_ENABLE;
+  SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
   
   /* Check for error conditions */
-  errorstate = SD_CmdResp1Error(hsd, SD_CMD_SET_BLOCKLEN);
+  errorState = SD_CmdResp1Error(hsd, SD_CMD_SET_BLOCKLEN);
   
-  if (errorstate != SD_OK)
+  if (errorState != SD_OK)
   {
-    return errorstate;
+    return errorState;
   }
   
   if(NumberOfBlocks > 1)
   {
     /* Send CMD25 WRITE_MULT_BLOCK with argument data address */
-    sdio_cmdinitstructure.CmdIndex = SD_CMD_WRITE_MULT_BLOCK;
+    SDIO_CmdInitStructure.CmdIndex = SD_CMD_WRITE_MULT_BLOCK;
   }
   else
   {
     /* Send CMD24 WRITE_SINGLE_BLOCK */
-    sdio_cmdinitstructure.CmdIndex = SD_CMD_WRITE_SINGLE_BLOCK;
+    SDIO_CmdInitStructure.CmdIndex = SD_CMD_WRITE_SINGLE_BLOCK;
   }
   
-  sdio_cmdinitstructure.Argument         = (uint32_t)WriteAddr;
-  SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+  SDIO_CmdInitStructure.Argument         = (uint32_t)WriteAddr;
+  SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
   
   /* Check for error conditions */
   if(NumberOfBlocks > 1)
   {
-    errorstate = SD_CmdResp1Error(hsd, SD_CMD_WRITE_MULT_BLOCK);
+    errorState = SD_CmdResp1Error(hsd, SD_CMD_WRITE_MULT_BLOCK);
   }
   else
   {
-    errorstate = SD_CmdResp1Error(hsd, SD_CMD_WRITE_SINGLE_BLOCK);
+    errorState = SD_CmdResp1Error(hsd, SD_CMD_WRITE_SINGLE_BLOCK);
   }  
   
-  if (errorstate != SD_OK)
+  if (errorState != SD_OK)
   {
-    return errorstate;
+    return errorState;
   }
   
   /* Set total number of bytes to write */
-  totalnumberofbytes = NumberOfBlocks * BlockSize;
+  TotalNumberOfBytes = NumberOfBlocks * BlockSize;
   
   /* Configure the SD DPSM (Data Path State Machine) */ 
-  sdio_datainitstructure.DataTimeOut   = SD_DATATIMEOUT;
-  sdio_datainitstructure.DataLength    = NumberOfBlocks * BlockSize;
-  sdio_datainitstructure.DataBlockSize = SDIO_DATABLOCK_SIZE_512B;
-  sdio_datainitstructure.TransferDir   = SDIO_TRANSFER_DIR_TO_CARD;
-  sdio_datainitstructure.TransferMode  = SDIO_TRANSFER_MODE_BLOCK;
-  sdio_datainitstructure.DPSM          = SDIO_DPSM_ENABLE;
-  SDIO_DataConfig(hsd->Instance, &sdio_datainitstructure);
+  SDIO_DataInitStructure.DataTimeOut   = SD_DATATIMEOUT;
+  SDIO_DataInitStructure.DataLength    = NumberOfBlocks * BlockSize;
+  SDIO_DataInitStructure.DataBlockSize = SDIO_DATABLOCK_SIZE_512B;
+  SDIO_DataInitStructure.TransferDir   = SDIO_TRANSFER_DIR_TO_CARD;
+  SDIO_DataInitStructure.TransferMode  = SDIO_TRANSFER_MODE_BLOCK;
+  SDIO_DataInitStructure.DPSM          = SDIO_DPSM_ENABLE;
+  SDIO_DataConfig(hsd->Instance, &SDIO_DataInitStructure);
   
   /* Write block(s) in polling mode */
   if(NumberOfBlocks > 1)
   {
-#ifdef SDIO_STA_STBITERR
     while(!__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_TXUNDERR | SDIO_FLAG_DCRCFAIL | SDIO_FLAG_DTIMEOUT | SDIO_FLAG_DATAEND | SDIO_FLAG_STBITERR))
-#else /* SDIO_STA_STBITERR not defined */
-    while(!__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_TXUNDERR | SDIO_FLAG_DCRCFAIL | SDIO_FLAG_DTIMEOUT | SDIO_FLAG_DATAEND))
-#endif /* SDIO_STA_STBITERR */     
     {
       if (__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_TXFIFOHE))
       {
-        if ((totalnumberofbytes - bytestransferred) < 32)
+        if ((TotalNumberOfBytes - bytestransferred) < 32)
         {
-          restwords = ((totalnumberofbytes - bytestransferred) % 4 == 0) ? ((totalnumberofbytes - bytestransferred) / 4) : (( totalnumberofbytes -  bytestransferred) / 4 + 1);
+          restwords = ((TotalNumberOfBytes - bytestransferred) % 4 == 0) ? ((TotalNumberOfBytes - bytestransferred) / 4) : (( TotalNumberOfBytes -  bytestransferred) / 4 + 1);
           
           /* Write data to SDIO Tx FIFO */
           for (count = 0; count < restwords; count++)
@@ -770,18 +734,14 @@ HAL_SD_ErrorTypedef HAL_SD_WriteBlocks(SD_HandleTypeDef *hsd, uint32_t *pWriteBu
   }
   else
   {
-    /* In case of single data block transfer no need of stop command at all */
-#ifdef SDIO_STA_STBITERR
+    /* In case of single data block transfer no need of stop command at all */ 
     while(!__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_TXUNDERR | SDIO_FLAG_DCRCFAIL | SDIO_FLAG_DTIMEOUT | SDIO_FLAG_DBCKEND | SDIO_FLAG_STBITERR))
-#else /* SDIO_STA_STBITERR not defined */
-    while(!__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_TXUNDERR | SDIO_FLAG_DCRCFAIL | SDIO_FLAG_DTIMEOUT | SDIO_FLAG_DBCKEND))
-#endif /* SDIO_STA_STBITERR */
     {
       if (__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_TXFIFOHE))
       {
-        if ((totalnumberofbytes - bytestransferred) < 32)
+        if ((TotalNumberOfBytes - bytestransferred) < 32)
         {
-          restwords = ((totalnumberofbytes - bytestransferred) % 4 == 0) ? ((totalnumberofbytes - bytestransferred) / 4) : (( totalnumberofbytes -  bytestransferred) / 4 + 1);
+          restwords = ((TotalNumberOfBytes - bytestransferred) % 4 == 0) ? ((TotalNumberOfBytes - bytestransferred) / 4) : (( TotalNumberOfBytes -  bytestransferred) / 4 + 1);
           
           /* Write data to SDIO Tx FIFO */
           for (count = 0; count < restwords; count++)
@@ -813,7 +773,7 @@ HAL_SD_ErrorTypedef HAL_SD_WriteBlocks(SD_HandleTypeDef *hsd, uint32_t *pWriteBu
       (hsd->CardType == HIGH_CAPACITY_SD_CARD))
     {
       /* Send stop transmission command */
-      errorstate = HAL_SD_StopTransfer(hsd);
+      errorState = HAL_SD_StopTransfer(hsd);
     }
   }
   
@@ -822,53 +782,47 @@ HAL_SD_ErrorTypedef HAL_SD_WriteBlocks(SD_HandleTypeDef *hsd, uint32_t *pWriteBu
   {
     __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_DTIMEOUT);
     
-    errorstate = SD_DATA_TIMEOUT;
+    errorState = SD_DATA_TIMEOUT;
     
-    return errorstate;
+    return errorState;
   }
   else if (__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_DCRCFAIL))
   {
     __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_DCRCFAIL);
     
-    errorstate = SD_DATA_CRC_FAIL;
+    errorState = SD_DATA_CRC_FAIL;
     
-    return errorstate;
+    return errorState;
   }
   else if (__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_TXUNDERR))
   {
     __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_TXUNDERR);
     
-    errorstate = SD_TX_UNDERRUN;
+    errorState = SD_TX_UNDERRUN;
     
-    return errorstate;
+    return errorState;
   }
-#ifdef SDIO_STA_STBITERR
   else if (__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_STBITERR))
   {
     __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_STBITERR);
     
-    errorstate = SD_START_BIT_ERR;
+    errorState = SD_START_BIT_ERR;
     
-    return errorstate;
-  }
-#endif /* SDIO_STA_STBITERR */
-  else
-  {
-    /* No error flag set */
+    return errorState;
   }
   
   /* Clear all the static flags */
   __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_STATIC_FLAGS);
   
   /* Wait till the card is in programming state */
-  errorstate = SD_IsCardProgramming(hsd, &cardstate);
+  errorState = SD_IsCardProgramming(hsd, &cardstate);
   
-  while ((errorstate == SD_OK) && ((cardstate == SD_CARD_PROGRAMMING) || (cardstate == SD_CARD_RECEIVING)))
+  while ((errorState == SD_OK) && ((cardstate == SD_CARD_PROGRAMMING) || (cardstate == SD_CARD_RECEIVING)))
   {
-    errorstate = SD_IsCardProgramming(hsd, &cardstate);
+    errorState = SD_IsCardProgramming(hsd, &cardstate);
   }
   
-  return errorstate;
+  return errorState;
 }
 
 /**
@@ -880,15 +834,15 @@ HAL_SD_ErrorTypedef HAL_SD_WriteBlocks(SD_HandleTypeDef *hsd, uint32_t *pWriteBu
   * @param  pReadBuffer: Pointer to the buffer that will contain the received data
   * @param  ReadAddr: Address from where data is to be read  
   * @param  BlockSize: SD card Data block size 
-  * @note   BlockSize must be 512 bytes.
+  *         This paramater should be 512.
   * @param  NumberOfBlocks: Number of blocks to read.
   * @retval SD Card error state
   */
 HAL_SD_ErrorTypedef HAL_SD_ReadBlocks_DMA(SD_HandleTypeDef *hsd, uint32_t *pReadBuffer, uint64_t ReadAddr, uint32_t BlockSize, uint32_t NumberOfBlocks)
 {
-  SDIO_CmdInitTypeDef sdio_cmdinitstructure;
-  SDIO_DataInitTypeDef sdio_datainitstructure;
-  HAL_SD_ErrorTypedef errorstate = SD_OK;
+  SDIO_CmdInitTypeDef SDIO_CmdInitStructure;
+  SDIO_DataInitTypeDef SDIO_DataInitStructure;
+  HAL_SD_ErrorTypedef errorState = SD_OK;
   
   /* Initialize data control register */
   hsd->Instance->DCTRL = 0;
@@ -909,18 +863,11 @@ HAL_SD_ErrorTypedef HAL_SD_ReadBlocks_DMA(SD_HandleTypeDef *hsd, uint32_t *pRead
   }
   
   /* Enable transfer interrupts */
-#ifdef SDIO_STA_STBITERR
   __HAL_SD_SDIO_ENABLE_IT(hsd, (SDIO_IT_DCRCFAIL |\
                                 SDIO_IT_DTIMEOUT |\
                                 SDIO_IT_DATAEND  |\
                                 SDIO_IT_RXOVERR  |\
                                 SDIO_IT_STBITERR));
-#else /* SDIO_STA_STBITERR not defined */
-  __HAL_SD_SDIO_ENABLE_IT(hsd, (SDIO_IT_DCRCFAIL |\
-                                SDIO_IT_DTIMEOUT |\
-                                SDIO_IT_DATAEND  |\
-                                SDIO_IT_RXOVERR));
-#endif /* SDIO_STA_STBITERR */
   
   /* Enable SDIO DMA transfer */
   __HAL_SD_SDIO_DMA_ENABLE();
@@ -930,7 +877,7 @@ HAL_SD_ErrorTypedef HAL_SD_ReadBlocks_DMA(SD_HandleTypeDef *hsd, uint32_t *pRead
   hsd->hdmarx->XferErrorCallback = SD_DMA_RxError;
   
   /* Enable the DMA Stream */
-  HAL_DMA_Start_IT(hsd->hdmarx, (uint32_t)&hsd->Instance->FIFO, (uint32_t)pReadBuffer, (uint32_t)(BlockSize * NumberOfBlocks)/4);
+  HAL_DMA_Start_IT(hsd->hdmarx, (uint32_t)SDIO_FIFO_ADDRESS, (uint32_t)pReadBuffer, (uint32_t)(BlockSize * NumberOfBlocks));
   
   if (hsd->CardType == HIGH_CAPACITY_SD_CARD)
   {
@@ -939,59 +886,59 @@ HAL_SD_ErrorTypedef HAL_SD_ReadBlocks_DMA(SD_HandleTypeDef *hsd, uint32_t *pRead
   }
   
   /* Set Block Size for Card */ 
-  sdio_cmdinitstructure.Argument         = (uint32_t)BlockSize;
-  sdio_cmdinitstructure.CmdIndex         = SD_CMD_SET_BLOCKLEN;
-  sdio_cmdinitstructure.Response         = SDIO_RESPONSE_SHORT;
-  sdio_cmdinitstructure.WaitForInterrupt = SDIO_WAIT_NO;
-  sdio_cmdinitstructure.CPSM             = SDIO_CPSM_ENABLE;
-  SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+  SDIO_CmdInitStructure.Argument         = (uint32_t)BlockSize;
+  SDIO_CmdInitStructure.CmdIndex         = SD_CMD_SET_BLOCKLEN;
+  SDIO_CmdInitStructure.Response         = SDIO_RESPONSE_SHORT;
+  SDIO_CmdInitStructure.WaitForInterrupt = SDIO_WAIT_NO;
+  SDIO_CmdInitStructure.CPSM             = SDIO_CPSM_ENABLE;
+  SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
   
   /* Check for error conditions */
-  errorstate = SD_CmdResp1Error(hsd, SD_CMD_SET_BLOCKLEN);
+  errorState = SD_CmdResp1Error(hsd, SD_CMD_SET_BLOCKLEN);
   
-  if (errorstate != SD_OK)
+  if (errorState != SD_OK)
   {
-    return errorstate;
+    return errorState;
   }
   
   /* Configure the SD DPSM (Data Path State Machine) */ 
-  sdio_datainitstructure.DataTimeOut   = SD_DATATIMEOUT;
-  sdio_datainitstructure.DataLength    = BlockSize * NumberOfBlocks;
-  sdio_datainitstructure.DataBlockSize = SDIO_DATABLOCK_SIZE_512B;
-  sdio_datainitstructure.TransferDir   = SDIO_TRANSFER_DIR_TO_SDIO;
-  sdio_datainitstructure.TransferMode  = SDIO_TRANSFER_MODE_BLOCK;
-  sdio_datainitstructure.DPSM          = SDIO_DPSM_ENABLE;
-  SDIO_DataConfig(hsd->Instance, &sdio_datainitstructure);
+  SDIO_DataInitStructure.DataTimeOut   = SD_DATATIMEOUT;
+  SDIO_DataInitStructure.DataLength    = BlockSize * NumberOfBlocks;
+  SDIO_DataInitStructure.DataBlockSize = SDIO_DATABLOCK_SIZE_512B;
+  SDIO_DataInitStructure.TransferDir   = SDIO_TRANSFER_DIR_TO_SDIO;
+  SDIO_DataInitStructure.TransferMode  = SDIO_TRANSFER_MODE_BLOCK;
+  SDIO_DataInitStructure.DPSM          = SDIO_DPSM_ENABLE;
+  SDIO_DataConfig(hsd->Instance, &SDIO_DataInitStructure);
   
   /* Check number of blocks command */
   if(NumberOfBlocks > 1)
   {
     /* Send CMD18 READ_MULT_BLOCK with argument data address */
-    sdio_cmdinitstructure.CmdIndex = SD_CMD_READ_MULT_BLOCK;
+    SDIO_CmdInitStructure.CmdIndex = SD_CMD_READ_MULT_BLOCK;
   }
   else
   {
     /* Send CMD17 READ_SINGLE_BLOCK */
-    sdio_cmdinitstructure.CmdIndex = SD_CMD_READ_SINGLE_BLOCK;
+    SDIO_CmdInitStructure.CmdIndex = SD_CMD_READ_SINGLE_BLOCK;
   }
   
-  sdio_cmdinitstructure.Argument = (uint32_t)ReadAddr;
-  SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+  SDIO_CmdInitStructure.Argument         = (uint32_t)ReadAddr;
+  SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
   
   /* Check for error conditions */
   if(NumberOfBlocks > 1)
   {
-    errorstate = SD_CmdResp1Error(hsd, SD_CMD_READ_MULT_BLOCK);
+    errorState = SD_CmdResp1Error(hsd, SD_CMD_READ_MULT_BLOCK);
   }
   else
   {
-    errorstate = SD_CmdResp1Error(hsd, SD_CMD_READ_SINGLE_BLOCK);
+    errorState = SD_CmdResp1Error(hsd, SD_CMD_READ_SINGLE_BLOCK);
   }
   
   /* Update the SD transfer error in SD handle */
-  hsd->SdTransferErr = errorstate;
+  hsd->SdTransferErr = errorState;
   
-  return errorstate;
+  return errorState;
 }
 
 
@@ -1004,15 +951,15 @@ HAL_SD_ErrorTypedef HAL_SD_ReadBlocks_DMA(SD_HandleTypeDef *hsd, uint32_t *pRead
   * @param  pWriteBuffer: pointer to the buffer that will contain the data to transmit
   * @param  WriteAddr: Address from where data is to be read   
   * @param  BlockSize: the SD card Data block size 
-  * @note   BlockSize must be 512 bytes.
+  *          This parameter should be 512.
   * @param  NumberOfBlocks: Number of blocks to write
   * @retval SD Card error state
   */
 HAL_SD_ErrorTypedef HAL_SD_WriteBlocks_DMA(SD_HandleTypeDef *hsd, uint32_t *pWriteBuffer, uint64_t WriteAddr, uint32_t BlockSize, uint32_t NumberOfBlocks)
 {
-  SDIO_CmdInitTypeDef sdio_cmdinitstructure;
-  SDIO_DataInitTypeDef sdio_datainitstructure;
-  HAL_SD_ErrorTypedef errorstate = SD_OK;
+  SDIO_CmdInitTypeDef SDIO_CmdInitStructure;
+  SDIO_DataInitTypeDef SDIO_DataInitStructure;
+  HAL_SD_ErrorTypedef errorState = SD_OK;
   
   /* Initialize data control register */
   hsd->Instance->DCTRL = 0;
@@ -1033,25 +980,18 @@ HAL_SD_ErrorTypedef HAL_SD_WriteBlocks_DMA(SD_HandleTypeDef *hsd, uint32_t *pWri
   }  
   
   /* Enable transfer interrupts */
-#ifdef SDIO_STA_STBITERR
   __HAL_SD_SDIO_ENABLE_IT(hsd, (SDIO_IT_DCRCFAIL |\
                                 SDIO_IT_DTIMEOUT |\
                                 SDIO_IT_DATAEND  |\
                                 SDIO_IT_TXUNDERR |\
-                                SDIO_IT_STBITERR));
-#else /* SDIO_STA_STBITERR not defined */
-  __HAL_SD_SDIO_ENABLE_IT(hsd, (SDIO_IT_DCRCFAIL |\
-                                SDIO_IT_DTIMEOUT |\
-                                SDIO_IT_DATAEND  |\
-                                SDIO_IT_TXUNDERR));
-#endif /* SDIO_STA_STBITERR */
+                                SDIO_IT_STBITERR)); 
   
   /* Configure DMA user callbacks */
   hsd->hdmatx->XferCpltCallback  = SD_DMA_TxCplt;
   hsd->hdmatx->XferErrorCallback = SD_DMA_TxError;
   
   /* Enable the DMA Stream */
-  HAL_DMA_Start_IT(hsd->hdmatx, (uint32_t)pWriteBuffer, (uint32_t)&hsd->Instance->FIFO, (uint32_t)(BlockSize * NumberOfBlocks)/4);
+  HAL_DMA_Start_IT(hsd->hdmatx, (uint32_t)pWriteBuffer, (uint32_t)SDIO_FIFO_ADDRESS, (uint32_t)(BlockSize * NumberOfBlocks));
 
   /* Enable SDIO DMA transfer */
   __HAL_SD_SDIO_DMA_ENABLE();
@@ -1063,63 +1003,63 @@ HAL_SD_ErrorTypedef HAL_SD_WriteBlocks_DMA(SD_HandleTypeDef *hsd, uint32_t *pWri
   }
 
   /* Set Block Size for Card */ 
-  sdio_cmdinitstructure.Argument         = (uint32_t)BlockSize;
-  sdio_cmdinitstructure.CmdIndex         = SD_CMD_SET_BLOCKLEN;
-  sdio_cmdinitstructure.Response         = SDIO_RESPONSE_SHORT;
-  sdio_cmdinitstructure.WaitForInterrupt = SDIO_WAIT_NO;
-  sdio_cmdinitstructure.CPSM             = SDIO_CPSM_ENABLE;
-  SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+  SDIO_CmdInitStructure.Argument         = (uint32_t)BlockSize;
+  SDIO_CmdInitStructure.CmdIndex         = SD_CMD_SET_BLOCKLEN;
+  SDIO_CmdInitStructure.Response         = SDIO_RESPONSE_SHORT;
+  SDIO_CmdInitStructure.WaitForInterrupt = SDIO_WAIT_NO;
+  SDIO_CmdInitStructure.CPSM             = SDIO_CPSM_ENABLE;
+  SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
 
   /* Check for error conditions */
-  errorstate = SD_CmdResp1Error(hsd, SD_CMD_SET_BLOCKLEN);
+  errorState = SD_CmdResp1Error(hsd, SD_CMD_SET_BLOCKLEN);
 
-  if (errorstate != SD_OK)
+  if (errorState != SD_OK)
   {
-    return errorstate;
+    return errorState;
   }
   
   /* Check number of blocks command */
   if(NumberOfBlocks <= 1)
   {
     /* Send CMD24 WRITE_SINGLE_BLOCK */
-    sdio_cmdinitstructure.CmdIndex = SD_CMD_WRITE_SINGLE_BLOCK;
+    SDIO_CmdInitStructure.CmdIndex = SD_CMD_WRITE_SINGLE_BLOCK;
   }
   else
   {
     /* Send CMD25 WRITE_MULT_BLOCK with argument data address */
-    sdio_cmdinitstructure.CmdIndex = SD_CMD_WRITE_MULT_BLOCK;
+    SDIO_CmdInitStructure.CmdIndex = SD_CMD_WRITE_MULT_BLOCK;
   }
   
-  sdio_cmdinitstructure.Argument         = (uint32_t)WriteAddr;
-  SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+  SDIO_CmdInitStructure.Argument         = (uint32_t)WriteAddr;
+  SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
 
   /* Check for error conditions */
   if(NumberOfBlocks > 1)
   {
-    errorstate = SD_CmdResp1Error(hsd, SD_CMD_WRITE_MULT_BLOCK);
+    errorState = SD_CmdResp1Error(hsd, SD_CMD_WRITE_MULT_BLOCK);
   }
   else
   {
-    errorstate = SD_CmdResp1Error(hsd, SD_CMD_WRITE_SINGLE_BLOCK);
+    errorState = SD_CmdResp1Error(hsd, SD_CMD_WRITE_SINGLE_BLOCK);
   }
   
-  if (errorstate != SD_OK)
+  if (errorState != SD_OK)
   {
-    return errorstate;
+    return errorState;
   }
   
   /* Configure the SD DPSM (Data Path State Machine) */ 
-  sdio_datainitstructure.DataTimeOut   = SD_DATATIMEOUT;
-  sdio_datainitstructure.DataLength    = BlockSize * NumberOfBlocks;
-  sdio_datainitstructure.DataBlockSize = SDIO_DATABLOCK_SIZE_512B;
-  sdio_datainitstructure.TransferDir   = SDIO_TRANSFER_DIR_TO_CARD;
-  sdio_datainitstructure.TransferMode  = SDIO_TRANSFER_MODE_BLOCK;
-  sdio_datainitstructure.DPSM          = SDIO_DPSM_ENABLE;
-  SDIO_DataConfig(hsd->Instance, &sdio_datainitstructure);
+  SDIO_DataInitStructure.DataTimeOut   = SD_DATATIMEOUT;
+  SDIO_DataInitStructure.DataLength    = BlockSize * NumberOfBlocks;
+  SDIO_DataInitStructure.DataBlockSize = SDIO_DATABLOCK_SIZE_512B;
+  SDIO_DataInitStructure.TransferDir   = SDIO_TRANSFER_DIR_TO_CARD;
+  SDIO_DataInitStructure.TransferMode  = SDIO_TRANSFER_MODE_BLOCK;
+  SDIO_DataInitStructure.DPSM          = SDIO_DPSM_ENABLE;
+  SDIO_DataConfig(hsd->Instance, &SDIO_DataInitStructure);
   
-  hsd->SdTransferErr = errorstate;
+  hsd->SdTransferErr = errorState;
   
-  return errorstate;
+  return errorState;
 }
 
 /**
@@ -1133,7 +1073,7 @@ HAL_SD_ErrorTypedef HAL_SD_WriteBlocks_DMA(SD_HandleTypeDef *hsd, uint32_t *pWri
   */
 HAL_SD_ErrorTypedef HAL_SD_CheckReadOperation(SD_HandleTypeDef *hsd, uint32_t Timeout)
 {
-  HAL_SD_ErrorTypedef errorstate = SD_OK;
+  HAL_SD_ErrorTypedef errorState = SD_OK;
   uint32_t timeout = Timeout;
   uint32_t tmp1, tmp2;
   HAL_SD_ErrorTypedef tmp3;
@@ -1162,12 +1102,12 @@ HAL_SD_ErrorTypedef HAL_SD_CheckReadOperation(SD_HandleTypeDef *hsd, uint32_t Ti
   /* Send stop command in multiblock read */
   if (hsd->SdOperation == SD_READ_MULTIPLE_BLOCK)
   {
-    errorstate = HAL_SD_StopTransfer(hsd);
+    errorState = HAL_SD_StopTransfer(hsd);
   }
   
-  if ((timeout == 0) && (errorstate == SD_OK))
+  if ((timeout == 0) && (errorState == SD_OK))
   {
-    errorstate = SD_DATA_TIMEOUT;
+    errorState = SD_DATA_TIMEOUT;
   }
   
   /* Clear all the static flags */
@@ -1179,7 +1119,7 @@ HAL_SD_ErrorTypedef HAL_SD_CheckReadOperation(SD_HandleTypeDef *hsd, uint32_t Ti
     return (HAL_SD_ErrorTypedef)(hsd->SdTransferErr);
   }
   
-  return errorstate;
+  return errorState;
 }
 
 /**
@@ -1193,7 +1133,7 @@ HAL_SD_ErrorTypedef HAL_SD_CheckReadOperation(SD_HandleTypeDef *hsd, uint32_t Ti
   */
 HAL_SD_ErrorTypedef HAL_SD_CheckWriteOperation(SD_HandleTypeDef *hsd, uint32_t Timeout)
 {
-  HAL_SD_ErrorTypedef errorstate = SD_OK;
+  HAL_SD_ErrorTypedef errorState = SD_OK;
   uint32_t timeout = Timeout;
   uint32_t tmp1, tmp2;
   HAL_SD_ErrorTypedef tmp3;
@@ -1222,12 +1162,12 @@ HAL_SD_ErrorTypedef HAL_SD_CheckWriteOperation(SD_HandleTypeDef *hsd, uint32_t T
   /* Send stop command in multiblock write */
   if (hsd->SdOperation == SD_WRITE_MULTIPLE_BLOCK)
   {
-    errorstate = HAL_SD_StopTransfer(hsd);
+    errorState = HAL_SD_StopTransfer(hsd);
   }
   
-  if ((timeout == 0) && (errorstate == SD_OK))
+  if ((timeout == 0) && (errorState == SD_OK))
   {
-    errorstate = SD_DATA_TIMEOUT;
+    errorState = SD_DATA_TIMEOUT;
   }
   
   /* Clear all the static flags */
@@ -1244,7 +1184,7 @@ HAL_SD_ErrorTypedef HAL_SD_CheckWriteOperation(SD_HandleTypeDef *hsd, uint32_t T
   {    
   }
 
-  return errorstate; 
+  return errorState; 
 }
 
 /**
@@ -1256,8 +1196,8 @@ HAL_SD_ErrorTypedef HAL_SD_CheckWriteOperation(SD_HandleTypeDef *hsd, uint32_t T
   */
 HAL_SD_ErrorTypedef HAL_SD_Erase(SD_HandleTypeDef *hsd, uint64_t startaddr, uint64_t endaddr)
 {
-  HAL_SD_ErrorTypedef errorstate = SD_OK;
-  SDIO_CmdInitTypeDef sdio_cmdinitstructure;
+  HAL_SD_ErrorTypedef errorState = SD_OK;
+  SDIO_CmdInitTypeDef SDIO_CmdInitStructure;
   
   uint32_t delay         = 0;
   __IO uint32_t maxdelay = 0;
@@ -1266,9 +1206,9 @@ HAL_SD_ErrorTypedef HAL_SD_Erase(SD_HandleTypeDef *hsd, uint64_t startaddr, uint
   /* Check if the card command class supports erase command */
   if (((hsd->CSD[1] >> 20) & SD_CCCC_ERASE) == 0)
   {
-    errorstate = SD_REQUEST_NOT_APPLICABLE;
+    errorState = SD_REQUEST_NOT_APPLICABLE;
     
-    return errorstate;
+    return errorState;
   }
   
   /* Get max delay value */
@@ -1276,9 +1216,9 @@ HAL_SD_ErrorTypedef HAL_SD_Erase(SD_HandleTypeDef *hsd, uint64_t startaddr, uint
   
   if((SDIO_GetResponse(SDIO_RESP1) & SD_CARD_LOCKED) == SD_CARD_LOCKED)
   {
-    errorstate = SD_LOCK_UNLOCK_FAILED;
+    errorState = SD_LOCK_UNLOCK_FAILED;
     
-    return errorstate;
+    return errorState;
   }
   
   /* Get start and end block for high capacity cards */
@@ -1293,64 +1233,64 @@ HAL_SD_ErrorTypedef HAL_SD_Erase(SD_HandleTypeDef *hsd, uint64_t startaddr, uint
     (hsd->CardType == HIGH_CAPACITY_SD_CARD))
   {
     /* Send CMD32 SD_ERASE_GRP_START with argument as addr  */
-    sdio_cmdinitstructure.Argument         =(uint32_t)startaddr;
-    sdio_cmdinitstructure.CmdIndex         = SD_CMD_SD_ERASE_GRP_START;
-    sdio_cmdinitstructure.Response         = SDIO_RESPONSE_SHORT;
-    sdio_cmdinitstructure.WaitForInterrupt = SDIO_WAIT_NO;
-    sdio_cmdinitstructure.CPSM             = SDIO_CPSM_ENABLE;
-    SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+    SDIO_CmdInitStructure.Argument         =(uint32_t)startaddr;
+    SDIO_CmdInitStructure.CmdIndex         = SD_CMD_SD_ERASE_GRP_START;
+    SDIO_CmdInitStructure.Response         = SDIO_RESPONSE_SHORT;
+    SDIO_CmdInitStructure.WaitForInterrupt = SDIO_WAIT_NO;
+    SDIO_CmdInitStructure.CPSM             = SDIO_CPSM_ENABLE;
+    SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
     
     /* Check for error conditions */
-    errorstate = SD_CmdResp1Error(hsd, SD_CMD_SD_ERASE_GRP_START);
+    errorState = SD_CmdResp1Error(hsd, SD_CMD_SD_ERASE_GRP_START);
     
-    if (errorstate != SD_OK)
+    if (errorState != SD_OK)
     {
-      return errorstate;
+      return errorState;
     }
     
     /* Send CMD33 SD_ERASE_GRP_END with argument as addr  */
-    sdio_cmdinitstructure.Argument         = (uint32_t)endaddr;
-    sdio_cmdinitstructure.CmdIndex         = SD_CMD_SD_ERASE_GRP_END;
-    SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+    SDIO_CmdInitStructure.Argument         = (uint32_t)endaddr;
+    SDIO_CmdInitStructure.CmdIndex         = SD_CMD_SD_ERASE_GRP_END;
+    SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
     
     /* Check for error conditions */
-    errorstate = SD_CmdResp1Error(hsd, SD_CMD_SD_ERASE_GRP_END);
+    errorState = SD_CmdResp1Error(hsd, SD_CMD_SD_ERASE_GRP_END);
     
-    if (errorstate != SD_OK)
+    if (errorState != SD_OK)
     {
-      return errorstate;
+      return errorState;
     }
   }
   
   /* Send CMD38 ERASE */
-  sdio_cmdinitstructure.Argument         = 0;
-  sdio_cmdinitstructure.CmdIndex         = SD_CMD_ERASE;
-  SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+  SDIO_CmdInitStructure.Argument         = 0;
+  SDIO_CmdInitStructure.CmdIndex         = SD_CMD_ERASE;
+  SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
   
   /* Check for error conditions */
-  errorstate = SD_CmdResp1Error(hsd, SD_CMD_ERASE);
+  errorState = SD_CmdResp1Error(hsd, SD_CMD_ERASE);
   
-  if (errorstate != SD_OK)
+  if (errorState != SD_OK)
   {
-    return errorstate;
+    return errorState;
   }
   
   for (; delay < maxdelay; delay++)
   {
   }
   
-  /* Wait until the card is in programming state */
-  errorstate = SD_IsCardProgramming(hsd, &cardstate);
+  /* Wait untill the card is in programming state */
+  errorState = SD_IsCardProgramming(hsd, &cardstate);
   
   delay = SD_DATATIMEOUT;
   
-  while ((delay > 0) && (errorstate == SD_OK) && ((cardstate == SD_CARD_PROGRAMMING) || (cardstate == SD_CARD_RECEIVING)))
+  while ((delay > 0) && (errorState == SD_OK) && ((cardstate == SD_CARD_PROGRAMMING) || (cardstate == SD_CARD_RECEIVING)))
   {
-    errorstate = SD_IsCardProgramming(hsd, &cardstate);
+    errorState = SD_IsCardProgramming(hsd, &cardstate);
     delay--;
   }
   
-  return errorstate;
+  return errorState;
 }
 
 /**
@@ -1406,7 +1346,6 @@ void HAL_SD_IRQHandler(SD_HandleTypeDef *hsd)
     
     HAL_SD_XferErrorCallback(hsd);
   }
-#ifdef SDIO_STA_STBITERR
   else if (__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_IT_STBITERR))
   {
     __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_STBITERR);
@@ -1415,22 +1354,11 @@ void HAL_SD_IRQHandler(SD_HandleTypeDef *hsd)
     
     HAL_SD_XferErrorCallback(hsd);
   }
-#endif /* SDIO_STA_STBITERR */
-  else
-  {
-    /* No error flag set */
-  }
 
   /* Disable all SDIO peripheral interrupt sources */
-#ifdef SDIO_STA_STBITERR
   __HAL_SD_SDIO_DISABLE_IT(hsd, SDIO_IT_DCRCFAIL | SDIO_IT_DTIMEOUT | SDIO_IT_DATAEND  |\
                                 SDIO_IT_TXFIFOHE | SDIO_IT_RXFIFOHF | SDIO_IT_TXUNDERR |\
-                                SDIO_IT_RXOVERR  | SDIO_IT_STBITERR);
-#else /* SDIO_STA_STBITERR not defined */
-  __HAL_SD_SDIO_DISABLE_IT(hsd, SDIO_IT_DCRCFAIL | SDIO_IT_DTIMEOUT | SDIO_IT_DATAEND  |\
-                                SDIO_IT_TXFIFOHE | SDIO_IT_RXFIFOHF | SDIO_IT_TXUNDERR |\
-                                SDIO_IT_RXOVERR);
-#endif /* SDIO_STA_STBITERR */
+                                SDIO_IT_RXOVERR  | SDIO_IT_STBITERR);                               
 }
 
 
@@ -1460,8 +1388,7 @@ __weak void HAL_SD_XferErrorCallback(SD_HandleTypeDef *hsd)
 
 /**
   * @brief  SD Transfer complete Rx callback in non blocking mode.
-  * @param  hdma: pointer to a DMA_HandleTypeDef structure that contains
-  *                the configuration information for the specified DMA module.
+  * @param  hdma: DMA handle 
   * @retval None
   */
 __weak void HAL_SD_DMA_RxCpltCallback(DMA_HandleTypeDef *hdma)
@@ -1473,8 +1400,7 @@ __weak void HAL_SD_DMA_RxCpltCallback(DMA_HandleTypeDef *hdma)
 
 /**
   * @brief  SD DMA transfer complete Rx error callback.
-  * @param  hdma: pointer to a DMA_HandleTypeDef structure that contains
-  *                the configuration information for the specified DMA module.
+  * @param  hdma: DMA handle 
   * @retval None
   */
 __weak void HAL_SD_DMA_RxErrorCallback(DMA_HandleTypeDef *hdma)
@@ -1486,8 +1412,7 @@ __weak void HAL_SD_DMA_RxErrorCallback(DMA_HandleTypeDef *hdma)
 
 /**
   * @brief  SD Transfer complete Tx callback in non blocking mode.
-  * @param  hdma: pointer to a DMA_HandleTypeDef structure that contains
-  *                the configuration information for the specified DMA module.
+  * @param  hdma: DMA handle 
   * @retval None
   */
 __weak void HAL_SD_DMA_TxCpltCallback(DMA_HandleTypeDef *hdma)
@@ -1499,8 +1424,7 @@ __weak void HAL_SD_DMA_TxCpltCallback(DMA_HandleTypeDef *hdma)
 
 /**
   * @brief  SD DMA transfer complete error Tx callback.
-  * @param  hdma: pointer to a DMA_HandleTypeDef structure that contains
-  *                the configuration information for the specified DMA module.
+  * @param  hdma: DMA handle 
   * @retval None
   */
 __weak void HAL_SD_DMA_TxErrorCallback(DMA_HandleTypeDef *hdma)
@@ -1514,7 +1438,7 @@ __weak void HAL_SD_DMA_TxErrorCallback(DMA_HandleTypeDef *hdma)
   * @}
   */
 
-/** @addtogroup SD_Exported_Functions_Group3
+/** @defgroup SD_Group3 Peripheral Control functions 
  *  @brief   management functions 
  *
 @verbatim   
@@ -1538,7 +1462,7 @@ __weak void HAL_SD_DMA_TxErrorCallback(DMA_HandleTypeDef *hdma)
   */
 HAL_SD_ErrorTypedef HAL_SD_Get_CardInfo(SD_HandleTypeDef *hsd, HAL_SD_CardInfoTypedef *pCardInfo)
 {
-  HAL_SD_ErrorTypedef errorstate = SD_OK;
+  HAL_SD_ErrorTypedef errorState = SD_OK;
   uint32_t tmp = 0;
   
   pCardInfo->CardType = (uint8_t)(hsd->CardType);
@@ -1627,13 +1551,8 @@ HAL_SD_ErrorTypedef HAL_SD_Get_CardInfo(SD_HandleTypeDef *hsd, HAL_SD_CardInfoTy
     /* Byte 10 */
     tmp = (uint8_t)((hsd->CSD[2] & 0x0000FF00) >> 8);
     
-    pCardInfo->CardCapacity = (uint64_t)((((uint64_t)pCardInfo->SD_csd.DeviceSize + 1)) * 512 * 1024);
+    pCardInfo->CardCapacity  = ((pCardInfo->SD_csd.DeviceSize + 1)) * 512 * 1024;
     pCardInfo->CardBlockSize = 512;    
-  }
-  else
-  {
-    /* Not supported card type */
-    errorstate = SD_ERROR;
   }
     
   pCardInfo->SD_csd.EraseGrSize = (tmp & 0x40) >> 6;
@@ -1738,7 +1657,7 @@ HAL_SD_ErrorTypedef HAL_SD_Get_CardInfo(SD_HandleTypeDef *hsd, HAL_SD_CardInfoTy
   pCardInfo->SD_cid.CID_CRC   = (tmp & 0xFE) >> 1;
   pCardInfo->SD_cid.Reserved2 = 1;
   
-  return errorstate;
+  return errorState;
 }
 
 /**
@@ -1754,51 +1673,64 @@ HAL_SD_ErrorTypedef HAL_SD_Get_CardInfo(SD_HandleTypeDef *hsd, HAL_SD_CardInfoTy
   */
 HAL_SD_ErrorTypedef HAL_SD_WideBusOperation_Config(SD_HandleTypeDef *hsd, uint32_t WideMode)
 {
-  HAL_SD_ErrorTypedef errorstate = SD_OK;
-  SDIO_InitTypeDef tmpinit;
+  HAL_SD_ErrorTypedef errorState = SD_OK;
+  SDIO_InitTypeDef Init;
   
   /* MMC Card does not support this feature */
   if (hsd->CardType == MULTIMEDIA_CARD)
   {
-    errorstate = SD_UNSUPPORTED_FEATURE;
+    errorState = SD_UNSUPPORTED_FEATURE;
     
-    return errorstate;
+    return errorState;
   }
   else if ((hsd->CardType == STD_CAPACITY_SD_CARD_V1_1) || (hsd->CardType == STD_CAPACITY_SD_CARD_V2_0) ||\
     (hsd->CardType == HIGH_CAPACITY_SD_CARD))
   {
     if (WideMode == SDIO_BUS_WIDE_8B)
     {
-      errorstate = SD_UNSUPPORTED_FEATURE;
+      errorState = SD_UNSUPPORTED_FEATURE;
+      
+      return errorState;
     }
     else if (WideMode == SDIO_BUS_WIDE_4B)
     {
-      errorstate = SD_WideBus_Enable(hsd);
-    }
-    else if (WideMode == SDIO_BUS_WIDE_1B)
-    {
-      errorstate = SD_WideBus_Disable(hsd);
+      errorState = SD_WideBus_Enable(hsd);
+      
+      if (errorState == SD_OK)
+      {
+        /* Configure the SDIO peripheral */
+        Init.ClockEdge           = SDIO_CLOCK_EDGE_RISING;
+        Init.ClockBypass         = SDIO_CLOCK_BYPASS_DISABLE;
+        Init.ClockPowerSave      = SDIO_CLOCK_POWER_SAVE_DISABLE;
+        Init.BusWide             = SDIO_BUS_WIDE_4B;
+        Init.HardwareFlowControl = SDIO_HARDWARE_FLOW_CONTROL_DISABLE;
+        Init.ClockDiv            = SDIO_TRANSFER_CLK_DIV;
+        
+        /* Configure SDIO peripheral interface */
+        SDIO_Init(hsd->Instance, Init);
+      }
     }
     else
     {
-      /* WideMode is not a valid argument*/
-      errorstate = SD_INVALID_PARAMETER;
-    }
+      errorState = SD_WideBus_Disable(hsd);
       
-    if (errorstate == SD_OK)
-    {
-      /* Configure the SDIO peripheral */
-      tmpinit.ClockEdge           = hsd->Init.ClockEdge;
-      tmpinit.ClockBypass         = hsd->Init.ClockBypass;
-      tmpinit.ClockPowerSave      = hsd->Init.ClockPowerSave;
-      tmpinit.BusWide             = WideMode;
-      tmpinit.HardwareFlowControl = hsd->Init.HardwareFlowControl;
-      tmpinit.ClockDiv            = hsd->Init.ClockDiv;
-      SDIO_Init(hsd->Instance, tmpinit);
+      if (errorState == SD_OK)
+      {
+        /* Configure the SDIO peripheral */
+        Init.ClockEdge           = SDIO_CLOCK_EDGE_RISING;
+        Init.ClockBypass         = SDIO_CLOCK_BYPASS_DISABLE;
+        Init.ClockPowerSave      = SDIO_CLOCK_POWER_SAVE_DISABLE;
+        Init.BusWide             = SDIO_BUS_WIDE_1B;
+        Init.HardwareFlowControl = SDIO_HARDWARE_FLOW_CONTROL_DISABLE;
+        Init.ClockDiv            = SDIO_TRANSFER_CLK_DIV;
+        
+        /* Configure SDIO peripheral interface */
+        SDIO_Init(hsd->Instance, Init);
+      }
     }
   }
   
-  return errorstate;
+  return errorState;
 }
 
 /**
@@ -1808,21 +1740,21 @@ HAL_SD_ErrorTypedef HAL_SD_WideBusOperation_Config(SD_HandleTypeDef *hsd, uint32
   */
 HAL_SD_ErrorTypedef HAL_SD_StopTransfer(SD_HandleTypeDef *hsd)
 {
-  SDIO_CmdInitTypeDef sdio_cmdinitstructure;
-  HAL_SD_ErrorTypedef errorstate = SD_OK;
+  SDIO_CmdInitTypeDef SDIO_CmdInitStructure;
+  HAL_SD_ErrorTypedef errorState = SD_OK;
   
   /* Send CMD12 STOP_TRANSMISSION  */
-  sdio_cmdinitstructure.Argument         = 0;
-  sdio_cmdinitstructure.CmdIndex         = SD_CMD_STOP_TRANSMISSION;
-  sdio_cmdinitstructure.Response         = SDIO_RESPONSE_SHORT;
-  sdio_cmdinitstructure.WaitForInterrupt = SDIO_WAIT_NO;
-  sdio_cmdinitstructure.CPSM             = SDIO_CPSM_ENABLE;
-  SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+  SDIO_CmdInitStructure.Argument         = 0;
+  SDIO_CmdInitStructure.CmdIndex         = SD_CMD_STOP_TRANSMISSION;
+  SDIO_CmdInitStructure.Response         = SDIO_RESPONSE_SHORT;
+  SDIO_CmdInitStructure.WaitForInterrupt = SDIO_WAIT_NO;
+  SDIO_CmdInitStructure.CPSM             = SDIO_CPSM_ENABLE;
+  SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
   
   /* Check for error conditions */
-  errorstate = SD_CmdResp1Error(hsd, SD_CMD_STOP_TRANSMISSION);
+  errorState = SD_CmdResp1Error(hsd, SD_CMD_STOP_TRANSMISSION);
   
-  return errorstate;
+  return errorState;
 }
 
 /**
@@ -1835,9 +1767,9 @@ HAL_SD_ErrorTypedef HAL_SD_StopTransfer(SD_HandleTypeDef *hsd)
   */
 HAL_SD_ErrorTypedef HAL_SD_HighSpeed (SD_HandleTypeDef *hsd)
 {
-  HAL_SD_ErrorTypedef errorstate = SD_OK;
-  SDIO_CmdInitTypeDef sdio_cmdinitstructure;
-  SDIO_DataInitTypeDef sdio_datainitstructure;
+  HAL_SD_ErrorTypedef errorState = SD_OK;
+  SDIO_CmdInitTypeDef SDIO_CmdInitStructure;
+  SDIO_DataInitTypeDef SDIO_DataInitStructure;
   
   uint8_t SD_hs[64]  = {0};
   uint32_t SD_scr[2] = {0, 0};
@@ -1848,11 +1780,11 @@ HAL_SD_ErrorTypedef HAL_SD_HighSpeed (SD_HandleTypeDef *hsd)
   hsd->Instance->DCTRL = 0;
   
   /* Get SCR Register */
-  errorstate = SD_FindSCR(hsd, SD_scr);
+  errorState = SD_FindSCR(hsd, SD_scr);
   
-  if (errorstate != SD_OK)
+  if (errorState != SD_OK)
   {
-    return errorstate;
+    return errorState;
   }
   
   /* Test the Version supported by the card*/ 
@@ -1861,47 +1793,44 @@ HAL_SD_ErrorTypedef HAL_SD_HighSpeed (SD_HandleTypeDef *hsd)
   if (SD_SPEC != SD_ALLZERO)
   {
     /* Set Block Size for Card */
-    sdio_cmdinitstructure.Argument         = (uint32_t)64;
-    sdio_cmdinitstructure.CmdIndex         = SD_CMD_SET_BLOCKLEN;
-    sdio_cmdinitstructure.Response         = SDIO_RESPONSE_SHORT;
-    sdio_cmdinitstructure.WaitForInterrupt = SDIO_WAIT_NO;
-    sdio_cmdinitstructure.CPSM             = SDIO_CPSM_ENABLE;
-    SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+    SDIO_CmdInitStructure.Argument         = (uint32_t)64;
+    SDIO_CmdInitStructure.CmdIndex         = SD_CMD_SET_BLOCKLEN;
+    SDIO_CmdInitStructure.Response         = SDIO_RESPONSE_SHORT;
+    SDIO_CmdInitStructure.WaitForInterrupt = SDIO_WAIT_NO;
+    SDIO_CmdInitStructure.CPSM             = SDIO_CPSM_ENABLE;
+    SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
     
     /* Check for error conditions */
-    errorstate = SD_CmdResp1Error(hsd, SD_CMD_SET_BLOCKLEN);
+    errorState = SD_CmdResp1Error(hsd, SD_CMD_SET_BLOCKLEN);
     
-    if (errorstate != SD_OK)
+    if (errorState != SD_OK)
     {
-      return errorstate;
+      return errorState;
     }
     
     /* Configure the SD DPSM (Data Path State Machine) */
-    sdio_datainitstructure.DataTimeOut   = SD_DATATIMEOUT;
-    sdio_datainitstructure.DataLength    = 64;
-    sdio_datainitstructure.DataBlockSize = SDIO_DATABLOCK_SIZE_64B ;
-    sdio_datainitstructure.TransferDir   = SDIO_TRANSFER_DIR_TO_SDIO;
-    sdio_datainitstructure.TransferMode  = SDIO_TRANSFER_MODE_BLOCK;
-    sdio_datainitstructure.DPSM          = SDIO_DPSM_ENABLE;
-    SDIO_DataConfig(hsd->Instance, &sdio_datainitstructure);
+    SDIO_DataInitStructure.DataTimeOut   = SD_DATATIMEOUT;
+    SDIO_DataInitStructure.DataLength    = 64;
+    SDIO_DataInitStructure.DataBlockSize = SDIO_DATABLOCK_SIZE_64B ;
+    SDIO_DataInitStructure.TransferDir   = SDIO_TRANSFER_DIR_TO_SDIO;
+    SDIO_DataInitStructure.TransferMode  = SDIO_TRANSFER_MODE_BLOCK;
+    SDIO_DataInitStructure.DPSM          = SDIO_DPSM_ENABLE;
+    SDIO_DataConfig(hsd->Instance, &SDIO_DataInitStructure);
     
     /* Send CMD6 switch mode */
-    sdio_cmdinitstructure.Argument         = 0x80FFFF01;
-    sdio_cmdinitstructure.CmdIndex         = SD_CMD_HS_SWITCH;
-    SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure); 
+    SDIO_CmdInitStructure.Argument         = 0x80FFFF01;
+    SDIO_CmdInitStructure.CmdIndex         = SD_CMD_HS_SWITCH;
+    SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure); 
     
     /* Check for error conditions */
-    errorstate = SD_CmdResp1Error(hsd, SD_CMD_HS_SWITCH);
+    errorState = SD_CmdResp1Error(hsd, SD_CMD_HS_SWITCH);
     
-    if (errorstate != SD_OK)
+    if (errorState != SD_OK)
     {
-      return errorstate;
+      return errorState;
     }
-#ifdef SDIO_STA_STBITERR        
+        
     while(!__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_RXOVERR | SDIO_FLAG_DCRCFAIL | SDIO_FLAG_DTIMEOUT | SDIO_FLAG_DBCKEND | SDIO_FLAG_STBITERR))
-#else /* SDIO_STA_STBITERR */
-    while(!__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_RXOVERR | SDIO_FLAG_DCRCFAIL | SDIO_FLAG_DTIMEOUT | SDIO_FLAG_DBCKEND))      
-#endif /* SDIO_STA_STBITERR */
     {
       if (__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_RXFIFOHF))
       {
@@ -1918,39 +1847,33 @@ HAL_SD_ErrorTypedef HAL_SD_HighSpeed (SD_HandleTypeDef *hsd)
     {
       __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_DTIMEOUT);
       
-      errorstate = SD_DATA_TIMEOUT;
+      errorState = SD_DATA_TIMEOUT;
       
-      return errorstate;
+      return errorState;
     }
     else if (__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_DCRCFAIL))
     {
       __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_DCRCFAIL);
       
-      errorstate = SD_DATA_CRC_FAIL;
+      errorState = SD_DATA_CRC_FAIL;
       
-      return errorstate;
+      return errorState;
     }
     else if (__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_RXOVERR))
     {
       __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_RXOVERR);
       
-      errorstate = SD_RX_OVERRUN;
+      errorState = SD_RX_OVERRUN;
       
-      return errorstate;
+      return errorState;
     }
-#ifdef SDIO_STA_STBITERR
     else if (__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_STBITERR))
     {
       __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_STBITERR);
       
-      errorstate = SD_START_BIT_ERR;
+      errorState = SD_START_BIT_ERR;
       
-      return errorstate;
-    }
-#endif /* SDIO_STA_STBITERR */
-    else
-    {
-      /* No error flag set */
+      return errorState;
     }
     
     count = SD_DATATIMEOUT;
@@ -1968,18 +1891,18 @@ HAL_SD_ErrorTypedef HAL_SD_HighSpeed (SD_HandleTypeDef *hsd)
     /* Test if the switch mode HS is ok */
     if ((SD_hs[13]& 2) != 2)
     {
-      errorstate = SD_UNSUPPORTED_FEATURE;
+      errorState = SD_UNSUPPORTED_FEATURE;
     } 
   }
   
-  return errorstate;
+  return errorState;
 }
 
 /**
   * @}
   */
 
-/** @addtogroup SD_Exported_Functions_Group4
+/** @defgroup SD_Group4 Peripheral State functions 
  *  @brief   Peripheral State functions 
  *
 @verbatim   
@@ -2003,76 +1926,72 @@ HAL_SD_ErrorTypedef HAL_SD_HighSpeed (SD_HandleTypeDef *hsd)
   */
 HAL_SD_ErrorTypedef HAL_SD_SendSDStatus(SD_HandleTypeDef *hsd, uint32_t *pSDstatus)
 {
-  SDIO_CmdInitTypeDef  sdio_cmdinitstructure;
-  SDIO_DataInitTypeDef sdio_datainitstructure;
-  HAL_SD_ErrorTypedef errorstate = SD_OK;
+  SDIO_CmdInitTypeDef  SDIO_CmdInitStructure;
+  SDIO_DataInitTypeDef SDIO_DataInitStructure;
+  HAL_SD_ErrorTypedef errorState = SD_OK;
   uint32_t count = 0;
   
   /* Check SD response */
   if ((SDIO_GetResponse(SDIO_RESP1) & SD_CARD_LOCKED) == SD_CARD_LOCKED)
   {
-    errorstate = SD_LOCK_UNLOCK_FAILED;
+    errorState = SD_LOCK_UNLOCK_FAILED;
     
-    return errorstate;
+    return errorState;
   }
   
   /* Set block size for card if it is not equal to current block size for card */
-  sdio_cmdinitstructure.Argument         = 64;
-  sdio_cmdinitstructure.CmdIndex         = SD_CMD_SET_BLOCKLEN;
-  sdio_cmdinitstructure.Response         = SDIO_RESPONSE_SHORT;
-  sdio_cmdinitstructure.WaitForInterrupt = SDIO_WAIT_NO;
-  sdio_cmdinitstructure.CPSM             = SDIO_CPSM_ENABLE;
-  SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+  SDIO_CmdInitStructure.Argument         = 64;
+  SDIO_CmdInitStructure.CmdIndex         = SD_CMD_SET_BLOCKLEN;
+  SDIO_CmdInitStructure.Response         = SDIO_RESPONSE_SHORT;
+  SDIO_CmdInitStructure.WaitForInterrupt = SDIO_WAIT_NO;
+  SDIO_CmdInitStructure.CPSM             = SDIO_CPSM_ENABLE;
+  SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
   
   /* Check for error conditions */
-  errorstate = SD_CmdResp1Error(hsd, SD_CMD_SET_BLOCKLEN);
+  errorState = SD_CmdResp1Error(hsd, SD_CMD_SET_BLOCKLEN);
   
-  if (errorstate != SD_OK)
+  if (errorState != SD_OK)
   {
-    return errorstate;
+    return errorState;
   }
   
   /* Send CMD55 */
-  sdio_cmdinitstructure.Argument         = (uint32_t)(hsd->RCA << 16);
-  sdio_cmdinitstructure.CmdIndex         = SD_CMD_APP_CMD;
-  SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+  SDIO_CmdInitStructure.Argument         = (uint32_t)(hsd->RCA << 16);
+  SDIO_CmdInitStructure.CmdIndex         = SD_CMD_APP_CMD;
+  SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
   
   /* Check for error conditions */
-  errorstate = SD_CmdResp1Error(hsd, SD_CMD_APP_CMD);
+  errorState = SD_CmdResp1Error(hsd, SD_CMD_APP_CMD);
   
-  if (errorstate != SD_OK)
+  if (errorState != SD_OK)
   {
-    return errorstate;
+    return errorState;
   }
   
   /* Configure the SD DPSM (Data Path State Machine) */ 
-  sdio_datainitstructure.DataTimeOut   = SD_DATATIMEOUT;
-  sdio_datainitstructure.DataLength    = 64;
-  sdio_datainitstructure.DataBlockSize = SDIO_DATABLOCK_SIZE_64B;
-  sdio_datainitstructure.TransferDir   = SDIO_TRANSFER_DIR_TO_SDIO;
-  sdio_datainitstructure.TransferMode  = SDIO_TRANSFER_MODE_BLOCK;
-  sdio_datainitstructure.DPSM          = SDIO_DPSM_ENABLE;
-  SDIO_DataConfig(hsd->Instance, &sdio_datainitstructure);
+  SDIO_DataInitStructure.DataTimeOut   = SD_DATATIMEOUT;
+  SDIO_DataInitStructure.DataLength    = 64;
+  SDIO_DataInitStructure.DataBlockSize = SDIO_DATABLOCK_SIZE_64B;
+  SDIO_DataInitStructure.TransferDir   = SDIO_TRANSFER_DIR_TO_SDIO;
+  SDIO_DataInitStructure.TransferMode  = SDIO_TRANSFER_MODE_BLOCK;
+  SDIO_DataInitStructure.DPSM          = SDIO_DPSM_ENABLE;
+  SDIO_DataConfig(hsd->Instance, &SDIO_DataInitStructure);
   
-  /* Send ACMD13 (SD_APP_STATUS)  with argument as card's RCA */
-  sdio_cmdinitstructure.Argument         = 0;
-  sdio_cmdinitstructure.CmdIndex         = SD_CMD_SD_APP_STATUS;
-  SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+  /* Send ACMD13 (SD_APP_STAUS)  with argument as card's RCA */
+  SDIO_CmdInitStructure.Argument         = 0;
+  SDIO_CmdInitStructure.CmdIndex         = SD_CMD_SD_APP_STAUS;
+  SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
   
   /* Check for error conditions */
-  errorstate = SD_CmdResp1Error(hsd, SD_CMD_SD_APP_STATUS);
+  errorState = SD_CmdResp1Error(hsd, SD_CMD_SD_APP_STAUS);
   
-  if (errorstate != SD_OK)
+  if (errorState != SD_OK)
   {
-    return errorstate;
+    return errorState;
   }
   
   /* Get status data */
-#ifdef SDIO_STA_STBITERR 
   while(!__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_RXOVERR | SDIO_FLAG_DCRCFAIL | SDIO_FLAG_DTIMEOUT | SDIO_FLAG_DBCKEND | SDIO_FLAG_STBITERR))
-#else /* SDIO_STA_STBITERR not defined */
-  while(!__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_RXOVERR | SDIO_FLAG_DCRCFAIL | SDIO_FLAG_DTIMEOUT | SDIO_FLAG_DBCKEND))    
-#endif /* SDIO_STA_STBITERR */
   {
     if (__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_RXFIFOHF))
     {
@@ -2089,40 +2008,34 @@ HAL_SD_ErrorTypedef HAL_SD_SendSDStatus(SD_HandleTypeDef *hsd, uint32_t *pSDstat
   {
     __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_DTIMEOUT);
     
-    errorstate = SD_DATA_TIMEOUT;
+    errorState = SD_DATA_TIMEOUT;
     
-    return errorstate;
+    return errorState;
   }
   else if (__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_DCRCFAIL))
   {
     __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_DCRCFAIL);
     
-    errorstate = SD_DATA_CRC_FAIL;
+    errorState = SD_DATA_CRC_FAIL;
     
-    return errorstate;
+    return errorState;
   }
   else if (__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_RXOVERR))
   {
     __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_RXOVERR);
     
-    errorstate = SD_RX_OVERRUN;
+    errorState = SD_RX_OVERRUN;
     
-    return errorstate;
+    return errorState;
   }
-#ifdef SDIO_STA_STBITERR
   else if (__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_STBITERR))
   {
     __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_STBITERR);
     
-    errorstate = SD_START_BIT_ERR;
+    errorState = SD_START_BIT_ERR;
     
-    return errorstate;
+    return errorState;
   }
-#endif /* SDIO_STA_STBITERR */
-  else
-  {
-    /* No error flag set */
-  }  
   
   count = SD_DATATIMEOUT;
   while ((__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_RXDAVL)) && (count > 0))
@@ -2135,7 +2048,7 @@ HAL_SD_ErrorTypedef HAL_SD_SendSDStatus(SD_HandleTypeDef *hsd, uint32_t *pSDstat
   /* Clear all the static status flags*/
   __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_STATIC_FLAGS);
   
-  return errorstate;
+  return errorState;
 }
 
 /**
@@ -2174,97 +2087,87 @@ HAL_SD_TransferStateTypedef HAL_SD_GetStatus(SD_HandleTypeDef *hsd)
   */
 HAL_SD_ErrorTypedef HAL_SD_GetCardStatus(SD_HandleTypeDef *hsd, HAL_SD_CardStatusTypedef *pCardStatus)
 {
-  HAL_SD_ErrorTypedef errorstate = SD_OK;
+  HAL_SD_ErrorTypedef errorState = SD_OK;
   uint32_t tmp = 0;
-  uint32_t sd_status[16];
+  uint32_t SD_STATUS[16];
   
-  errorstate = HAL_SD_SendSDStatus(hsd, sd_status);
+  errorState = HAL_SD_SendSDStatus(hsd, SD_STATUS);
   
-  if (errorstate  != SD_OK)
+  if (errorState  != SD_OK)
   {
-    return errorstate;
+    return errorState;
   }
   
   /* Byte 0 */
-  tmp = (sd_status[0] & 0xC0) >> 6;
+  tmp = (SD_STATUS[0] & 0xC0) >> 6;
   pCardStatus->DAT_BUS_WIDTH = (uint8_t)tmp;
   
   /* Byte 0 */
-  tmp = (sd_status[0] & 0x20) >> 5;
+  tmp = (SD_STATUS[0] & 0x20) >> 5;
   pCardStatus->SECURED_MODE = (uint8_t)tmp;
   
   /* Byte 2 */
-  tmp = (sd_status[2] & 0xFF);
+  tmp = (SD_STATUS[2] & 0xFF);
   pCardStatus->SD_CARD_TYPE = (uint8_t)(tmp << 8);
   
   /* Byte 3 */
-  tmp = (sd_status[3] & 0xFF);
+  tmp = (SD_STATUS[3] & 0xFF);
   pCardStatus->SD_CARD_TYPE |= (uint8_t)tmp;
   
   /* Byte 4 */
-  tmp = (sd_status[4] & 0xFF);
+  tmp = (SD_STATUS[4] & 0xFF);
   pCardStatus->SIZE_OF_PROTECTED_AREA = (uint8_t)(tmp << 24);
   
   /* Byte 5 */
-  tmp = (sd_status[5] & 0xFF);
+  tmp = (SD_STATUS[5] & 0xFF);
   pCardStatus->SIZE_OF_PROTECTED_AREA |= (uint8_t)(tmp << 16);
   
   /* Byte 6 */
-  tmp = (sd_status[6] & 0xFF);
+  tmp = (SD_STATUS[6] & 0xFF);
   pCardStatus->SIZE_OF_PROTECTED_AREA |= (uint8_t)(tmp << 8);
   
   /* Byte 7 */
-  tmp = (sd_status[7] & 0xFF);
+  tmp = (SD_STATUS[7] & 0xFF);
   pCardStatus->SIZE_OF_PROTECTED_AREA |= (uint8_t)tmp;
   
   /* Byte 8 */
-  tmp = (sd_status[8] & 0xFF);
+  tmp = (SD_STATUS[8] & 0xFF);
   pCardStatus->SPEED_CLASS = (uint8_t)tmp;
   
   /* Byte 9 */
-  tmp = (sd_status[9] & 0xFF);
+  tmp = (SD_STATUS[9] & 0xFF);
   pCardStatus->PERFORMANCE_MOVE = (uint8_t)tmp;
   
   /* Byte 10 */
-  tmp = (sd_status[10] & 0xF0) >> 4;
+  tmp = (SD_STATUS[10] & 0xF0) >> 4;
   pCardStatus->AU_SIZE = (uint8_t)tmp;
   
   /* Byte 11 */
-  tmp = (sd_status[11] & 0xFF);
+  tmp = (SD_STATUS[11] & 0xFF);
   pCardStatus->ERASE_SIZE = (uint8_t)(tmp << 8);
   
   /* Byte 12 */
-  tmp = (sd_status[12] & 0xFF);
+  tmp = (SD_STATUS[12] & 0xFF);
   pCardStatus->ERASE_SIZE |= (uint8_t)tmp;
   
   /* Byte 13 */
-  tmp = (sd_status[13] & 0xFC) >> 2;
+  tmp = (SD_STATUS[13] & 0xFC) >> 2;
   pCardStatus->ERASE_TIMEOUT = (uint8_t)tmp;
   
   /* Byte 13 */
-  tmp = (sd_status[13] & 0x3);
+  tmp = (SD_STATUS[13] & 0x3);
   pCardStatus->ERASE_OFFSET = (uint8_t)tmp;
   
-  return errorstate;
+  return errorState;
 }
          
 /**
   * @}
   */
-  
-/**
-  * @}
-  */
 
-/* Private function ----------------------------------------------------------*/  
-/** @addtogroup SD_Private_Functions
-  * @{
-  */
-  
 /**
   * @brief  SD DMA transfer complete Rx callback.
-  * @param  hdma: pointer to a DMA_HandleTypeDef structure that contains
-  *                the configuration information for the specified DMA module.
+  * @param  hdma: DMA handle 
   * @retval None
   */
 static void SD_DMA_RxCplt(DMA_HandleTypeDef *hdma)
@@ -2279,17 +2182,13 @@ static void SD_DMA_RxCplt(DMA_HandleTypeDef *hdma)
   {
   }
   
-  /* Disable the DMA channel */
-  HAL_DMA_Abort(hdma);
-
   /* Transfer complete user callback */
   HAL_SD_DMA_RxCpltCallback(hsd->hdmarx);   
 }
 
 /**
   * @brief  SD DMA transfer Error Rx callback.
-  * @param  hdma: pointer to a DMA_HandleTypeDef structure that contains
-  *                the configuration information for the specified DMA module.
+  * @param  hdma: DMA handle 
   * @retval None
   */
 static void SD_DMA_RxError(DMA_HandleTypeDef *hdma)
@@ -2302,8 +2201,7 @@ static void SD_DMA_RxError(DMA_HandleTypeDef *hdma)
 
 /**
   * @brief  SD DMA transfer complete Tx callback.
-  * @param  hdma: pointer to a DMA_HandleTypeDef structure that contains
-  *                the configuration information for the specified DMA module.
+  * @param  hdma: DMA handle 
   * @retval None
   */
 static void SD_DMA_TxCplt(DMA_HandleTypeDef *hdma)
@@ -2317,18 +2215,14 @@ static void SD_DMA_TxCplt(DMA_HandleTypeDef *hdma)
   while(hsd->SdTransferCplt == 0)
   {
   }
- 
-  /* Disable the DMA channel */
-  HAL_DMA_Abort(hdma);
-
+  
   /* Transfer complete user callback */
   HAL_SD_DMA_TxCpltCallback(hsd->hdmatx);  
 }
 
 /**
   * @brief  SD DMA transfer Error Tx callback.
-  * @param  hdma: pointer to a DMA_HandleTypeDef structure that contains
-  *                the configuration information for the specified DMA module.
+  * @param  hdma: DMA handle 
   * @retval None
   */
 static void SD_DMA_TxError(DMA_HandleTypeDef *hdma)
@@ -2366,33 +2260,33 @@ static HAL_SD_CardStateTypedef SD_GetState(SD_HandleTypeDef *hsd)
   */
 static HAL_SD_ErrorTypedef SD_Initialize_Cards(SD_HandleTypeDef *hsd)
 {
-  SDIO_CmdInitTypeDef sdio_cmdinitstructure; 
-  HAL_SD_ErrorTypedef errorstate = SD_OK;
+  SDIO_CmdInitTypeDef SDIO_CmdInitStructure; 
+  HAL_SD_ErrorTypedef errorState = SD_OK;
   uint16_t sd_rca = 1;
   
   if(SDIO_GetPowerState(hsd->Instance) == 0) /* Power off */
   {
-    errorstate = SD_REQUEST_NOT_APPLICABLE;
+    errorState = SD_REQUEST_NOT_APPLICABLE;
     
-    return errorstate;
+    return errorState;
   }
   
   if(hsd->CardType != SECURE_DIGITAL_IO_CARD)
   {
     /* Send CMD2 ALL_SEND_CID */
-    sdio_cmdinitstructure.Argument         = 0;
-    sdio_cmdinitstructure.CmdIndex         = SD_CMD_ALL_SEND_CID;
-    sdio_cmdinitstructure.Response         = SDIO_RESPONSE_LONG;
-    sdio_cmdinitstructure.WaitForInterrupt = SDIO_WAIT_NO;
-    sdio_cmdinitstructure.CPSM             = SDIO_CPSM_ENABLE;
-    SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+    SDIO_CmdInitStructure.Argument         = 0;
+    SDIO_CmdInitStructure.CmdIndex         = SD_CMD_ALL_SEND_CID;
+    SDIO_CmdInitStructure.Response         = SDIO_RESPONSE_LONG;
+    SDIO_CmdInitStructure.WaitForInterrupt = SDIO_WAIT_NO;
+    SDIO_CmdInitStructure.CPSM             = SDIO_CPSM_ENABLE;
+    SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
     
     /* Check for error conditions */
-    errorstate = SD_CmdResp2Error(hsd);
+    errorState = SD_CmdResp2Error(hsd);
     
-    if(errorstate != SD_OK)
+    if(errorState != SD_OK)
     {
-      return errorstate;
+      return errorState;
     }
     
     /* Get Card identification number data */
@@ -2407,16 +2301,16 @@ static HAL_SD_ErrorTypedef SD_Initialize_Cards(SD_HandleTypeDef *hsd)
   {
     /* Send CMD3 SET_REL_ADDR with argument 0 */
     /* SD Card publishes its RCA. */
-    sdio_cmdinitstructure.CmdIndex         = SD_CMD_SET_REL_ADDR;
-    sdio_cmdinitstructure.Response         = SDIO_RESPONSE_SHORT;
-    SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+    SDIO_CmdInitStructure.CmdIndex         = SD_CMD_SET_REL_ADDR;
+    SDIO_CmdInitStructure.Response         = SDIO_RESPONSE_SHORT;
+    SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
     
     /* Check for error conditions */
-    errorstate = SD_CmdResp6Error(hsd, SD_CMD_SET_REL_ADDR, &sd_rca);
+    errorState = SD_CmdResp6Error(hsd, SD_CMD_SET_REL_ADDR, &sd_rca);
     
-    if(errorstate != SD_OK)
+    if(errorState != SD_OK)
     {
-      return errorstate;
+      return errorState;
     }
   }
   
@@ -2426,17 +2320,17 @@ static HAL_SD_ErrorTypedef SD_Initialize_Cards(SD_HandleTypeDef *hsd)
     hsd->RCA = sd_rca;
     
     /* Send CMD9 SEND_CSD with argument as card's RCA */
-    sdio_cmdinitstructure.Argument         = (uint32_t)(hsd->RCA << 16);
-    sdio_cmdinitstructure.CmdIndex         = SD_CMD_SEND_CSD;
-    sdio_cmdinitstructure.Response         = SDIO_RESPONSE_LONG;
-    SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+    SDIO_CmdInitStructure.Argument         = (uint32_t)(hsd->RCA << 16);
+    SDIO_CmdInitStructure.CmdIndex         = SD_CMD_SEND_CSD;
+    SDIO_CmdInitStructure.Response         = SDIO_RESPONSE_LONG;
+    SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
     
     /* Check for error conditions */
-    errorstate = SD_CmdResp2Error(hsd);
+    errorState = SD_CmdResp2Error(hsd);
     
-    if(errorstate != SD_OK)
+    if(errorState != SD_OK)
     {
-      return errorstate;
+      return errorState;
     }
     
     /* Get Card Specific Data */
@@ -2447,32 +2341,32 @@ static HAL_SD_ErrorTypedef SD_Initialize_Cards(SD_HandleTypeDef *hsd)
   }
   
   /* All cards are initialized */
-  return errorstate;
+  return errorState;
 }
 
 /**
-  * @brief  Selects of Deselects the corresponding card.
+  * @brief  Selects od Deselects the corresponding card.
   * @param  hsd: SD handle
   * @param  addr: Address of the card to be selected  
   * @retval SD Card error state
   */
 static HAL_SD_ErrorTypedef SD_Select_Deselect(SD_HandleTypeDef *hsd, uint64_t addr)
 {
-  SDIO_CmdInitTypeDef sdio_cmdinitstructure;
-  HAL_SD_ErrorTypedef errorstate = SD_OK;
+  SDIO_CmdInitTypeDef SDIO_CmdInitStructure;
+  HAL_SD_ErrorTypedef errorState = SD_OK;
   
   /* Send CMD7 SDIO_SEL_DESEL_CARD */
-  sdio_cmdinitstructure.Argument         = (uint32_t)addr;
-  sdio_cmdinitstructure.CmdIndex         = SD_CMD_SEL_DESEL_CARD;
-  sdio_cmdinitstructure.Response         = SDIO_RESPONSE_SHORT;
-  sdio_cmdinitstructure.WaitForInterrupt = SDIO_WAIT_NO;
-  sdio_cmdinitstructure.CPSM             = SDIO_CPSM_ENABLE;
-  SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+  SDIO_CmdInitStructure.Argument         = (uint32_t)addr;
+  SDIO_CmdInitStructure.CmdIndex         = SD_CMD_SEL_DESEL_CARD;
+  SDIO_CmdInitStructure.Response         = SDIO_RESPONSE_SHORT;
+  SDIO_CmdInitStructure.WaitForInterrupt = SDIO_WAIT_NO;
+  SDIO_CmdInitStructure.CPSM             = SDIO_CPSM_ENABLE;
+  SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
   
   /* Check for error conditions */
-  errorstate = SD_CmdResp1Error(hsd, SD_CMD_SEL_DESEL_CARD);
+  errorState = SD_CmdResp1Error(hsd, SD_CMD_SEL_DESEL_CARD);
   
-  return errorstate;
+  return errorState;
 }
 
 /**
@@ -2484,10 +2378,10 @@ static HAL_SD_ErrorTypedef SD_Select_Deselect(SD_HandleTypeDef *hsd, uint64_t ad
   */
 static HAL_SD_ErrorTypedef SD_PowerON(SD_HandleTypeDef *hsd)
 {
-  SDIO_CmdInitTypeDef sdio_cmdinitstructure; 
-  __IO HAL_SD_ErrorTypedef errorstate = SD_OK; 
+  SDIO_CmdInitTypeDef SDIO_CmdInitStructure; 
+  __IO HAL_SD_ErrorTypedef errorState = SD_OK; 
   uint32_t response = 0, count = 0, validvoltage = 0;
-  uint32_t sdtype = SD_STD_CAPACITY;
+  uint32_t SDType = SD_STD_CAPACITY;
   
   /* Power ON Sequence -------------------------------------------------------*/
   /* Disable SDIO Clock */
@@ -2496,29 +2390,25 @@ static HAL_SD_ErrorTypedef SD_PowerON(SD_HandleTypeDef *hsd)
   /* Set Power State to ON */
   SDIO_PowerState_ON(hsd->Instance);
   
-  /* 1ms: required power up waiting time before starting the SD initialization 
-     sequence */
-  HAL_Delay(1);
-  
   /* Enable SDIO Clock */
   __HAL_SD_SDIO_ENABLE();
   
   /* CMD0: GO_IDLE_STATE -----------------------------------------------------*/
   /* No CMD response required */
-  sdio_cmdinitstructure.Argument         = 0;
-  sdio_cmdinitstructure.CmdIndex         = SD_CMD_GO_IDLE_STATE;
-  sdio_cmdinitstructure.Response         = SDIO_RESPONSE_NO;
-  sdio_cmdinitstructure.WaitForInterrupt = SDIO_WAIT_NO;
-  sdio_cmdinitstructure.CPSM             = SDIO_CPSM_ENABLE;
-  SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+  SDIO_CmdInitStructure.Argument         = 0;
+  SDIO_CmdInitStructure.CmdIndex         = SD_CMD_GO_IDLE_STATE;
+  SDIO_CmdInitStructure.Response         = SDIO_RESPONSE_NO;
+  SDIO_CmdInitStructure.WaitForInterrupt = SDIO_WAIT_NO;
+  SDIO_CmdInitStructure.CPSM             = SDIO_CPSM_ENABLE;
+  SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
   
   /* Check for error conditions */
-  errorstate = SD_CmdError(hsd);
+  errorState = SD_CmdError(hsd);
   
-  if(errorstate != SD_OK)
+  if(errorState != SD_OK)
   {
-    /* CMD Response Timeout (wait for CMDSENT flag) */
-    return errorstate;
+    /* CMD Response TimeOut (wait for CMDSENT flag) */
+    return errorState;
   }
   
   /* CMD8: SEND_IF_COND ------------------------------------------------------*/
@@ -2527,33 +2417,33 @@ static HAL_SD_ErrorTypedef SD_PowerON(SD_HandleTypeDef *hsd)
   - [11:8]: Supply Voltage (VHS) 0x1 (Range: 2.7-3.6 V)
   - [7:0]: Check Pattern (recommended 0xAA) */
   /* CMD Response: R7 */
-  sdio_cmdinitstructure.Argument         = SD_CHECK_PATTERN;
-  sdio_cmdinitstructure.CmdIndex         = SD_SDIO_SEND_IF_COND;
-  sdio_cmdinitstructure.Response         = SDIO_RESPONSE_SHORT;
-  SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+  SDIO_CmdInitStructure.Argument         = SD_CHECK_PATTERN;
+  SDIO_CmdInitStructure.CmdIndex         = SD_SDIO_SEND_IF_COND;
+  SDIO_CmdInitStructure.Response         = SDIO_RESPONSE_SHORT;
+  SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
   
   /* Check for error conditions */ 
-  errorstate = SD_CmdResp7Error(hsd);
+  errorState = SD_CmdResp7Error(hsd);
   
-  if (errorstate == SD_OK)
+  if (errorState == SD_OK)
   {
     /* SD Card 2.0 */
     hsd->CardType = STD_CAPACITY_SD_CARD_V2_0; 
-    sdtype        = SD_HIGH_CAPACITY;
+    SDType        = SD_HIGH_CAPACITY;
   }
   
   /* Send CMD55 */
-  sdio_cmdinitstructure.Argument         = 0;
-  sdio_cmdinitstructure.CmdIndex         = SD_CMD_APP_CMD;
-  SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+  SDIO_CmdInitStructure.Argument         = 0;
+  SDIO_CmdInitStructure.CmdIndex         = SD_CMD_APP_CMD;
+  SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
   
   /* Check for error conditions */
-  errorstate = SD_CmdResp1Error(hsd, SD_CMD_APP_CMD);
+  errorState = SD_CmdResp1Error(hsd, SD_CMD_APP_CMD);
   
-  /* If errorstate is Command Timeout, it is a MMC card */
-  /* If errorstate is SD_OK it is a SD card: SD card 2.0 (voltage range mismatch)
+  /* If errorState is Command TimeOut, it is a MMC card */
+  /* If errorState is SD_OK it is a SD card: SD card 2.0 (voltage range mismatch)
      or SD card 1.x */
-  if(errorstate == SD_OK)
+  if(errorState == SD_OK)
   {
     /* SD CARD */
     /* Send ACMD41 SD_APP_OP_COND with Argument 0x80100000 */
@@ -2561,35 +2451,35 @@ static HAL_SD_ErrorTypedef SD_PowerON(SD_HandleTypeDef *hsd)
     {
       
       /* SEND CMD55 APP_CMD with RCA as 0 */
-      sdio_cmdinitstructure.Argument         = 0;
-      sdio_cmdinitstructure.CmdIndex         = SD_CMD_APP_CMD;
-      sdio_cmdinitstructure.Response         = SDIO_RESPONSE_SHORT;
-      sdio_cmdinitstructure.WaitForInterrupt = SDIO_WAIT_NO;
-      sdio_cmdinitstructure.CPSM             = SDIO_CPSM_ENABLE;
-      SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+      SDIO_CmdInitStructure.Argument         = 0;
+      SDIO_CmdInitStructure.CmdIndex         = SD_CMD_APP_CMD;
+      SDIO_CmdInitStructure.Response         = SDIO_RESPONSE_SHORT;
+      SDIO_CmdInitStructure.WaitForInterrupt = SDIO_WAIT_NO;
+      SDIO_CmdInitStructure.CPSM             = SDIO_CPSM_ENABLE;
+      SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
       
       /* Check for error conditions */
-      errorstate = SD_CmdResp1Error(hsd, SD_CMD_APP_CMD);
+      errorState = SD_CmdResp1Error(hsd, SD_CMD_APP_CMD);
       
-      if(errorstate != SD_OK)
+      if(errorState != SD_OK)
       {
-        return errorstate;
+        return errorState;
       }
       
       /* Send CMD41 */
-      sdio_cmdinitstructure.Argument         = SD_VOLTAGE_WINDOW_SD | sdtype;
-      sdio_cmdinitstructure.CmdIndex         = SD_CMD_SD_APP_OP_COND;
-      sdio_cmdinitstructure.Response         = SDIO_RESPONSE_SHORT;
-      sdio_cmdinitstructure.WaitForInterrupt = SDIO_WAIT_NO;
-      sdio_cmdinitstructure.CPSM             = SDIO_CPSM_ENABLE;
-      SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+      SDIO_CmdInitStructure.Argument         = SD_VOLTAGE_WINDOW_SD | SDType;
+      SDIO_CmdInitStructure.CmdIndex         = SD_CMD_SD_APP_OP_COND;
+      SDIO_CmdInitStructure.Response         = SDIO_RESPONSE_SHORT;
+      SDIO_CmdInitStructure.WaitForInterrupt = SDIO_WAIT_NO;
+      SDIO_CmdInitStructure.CPSM             = SDIO_CPSM_ENABLE;
+      SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
       
       /* Check for error conditions */
-      errorstate = SD_CmdResp3Error(hsd);
+      errorState = SD_CmdResp3Error(hsd);
       
-      if(errorstate != SD_OK)
+      if(errorState != SD_OK)
       {
-        return errorstate;
+        return errorState;
       }
       
       /* Get command response */
@@ -2603,9 +2493,9 @@ static HAL_SD_ErrorTypedef SD_PowerON(SD_HandleTypeDef *hsd)
     
     if(count >= SD_MAX_VOLT_TRIAL)
     {
-      errorstate = SD_INVALID_VOLTRANGE;
+      errorState = SD_INVALID_VOLTRANGE;
       
-      return errorstate;
+      return errorState;
     }
     
     if((response & SD_HIGH_CAPACITY) == SD_HIGH_CAPACITY) /* (response &= SD_HIGH_CAPACITY) */
@@ -2615,7 +2505,7 @@ static HAL_SD_ErrorTypedef SD_PowerON(SD_HandleTypeDef *hsd)
     
   } /* else MMC Card */
   
-  return errorstate;
+  return errorState;
 }
 
 /**
@@ -2625,12 +2515,12 @@ static HAL_SD_ErrorTypedef SD_PowerON(SD_HandleTypeDef *hsd)
   */
 static HAL_SD_ErrorTypedef SD_PowerOFF(SD_HandleTypeDef *hsd)
 {
-  HAL_SD_ErrorTypedef errorstate = SD_OK;
+  HAL_SD_ErrorTypedef errorState = SD_OK;
   
   /* Set Power State to OFF */
   SDIO_PowerState_OFF(hsd->Instance);
   
-  return errorstate;
+  return errorState;
 }
 
 /**
@@ -2642,36 +2532,36 @@ static HAL_SD_ErrorTypedef SD_PowerOFF(SD_HandleTypeDef *hsd)
   */
 static HAL_SD_ErrorTypedef SD_SendStatus(SD_HandleTypeDef *hsd, uint32_t *pCardStatus)
 {
-  SDIO_CmdInitTypeDef sdio_cmdinitstructure;
-  HAL_SD_ErrorTypedef errorstate = SD_OK;
+  SDIO_CmdInitTypeDef SDIO_CmdInitStructure;
+  HAL_SD_ErrorTypedef errorState = SD_OK;
   
   if(pCardStatus == NULL)
   {
-    errorstate = SD_INVALID_PARAMETER;
+    errorState = SD_INVALID_PARAMETER;
     
-    return errorstate;
+    return errorState;
   }
   
   /* Send Status command */
-  sdio_cmdinitstructure.Argument         = (uint32_t)(hsd->RCA << 16);
-  sdio_cmdinitstructure.CmdIndex         = SD_CMD_SEND_STATUS;
-  sdio_cmdinitstructure.Response         = SDIO_RESPONSE_SHORT;
-  sdio_cmdinitstructure.WaitForInterrupt = SDIO_WAIT_NO;
-  sdio_cmdinitstructure.CPSM             = SDIO_CPSM_ENABLE;
-  SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+  SDIO_CmdInitStructure.Argument         = (uint32_t)(hsd->RCA << 16);
+  SDIO_CmdInitStructure.CmdIndex         = SD_CMD_SEND_STATUS;
+  SDIO_CmdInitStructure.Response         = SDIO_RESPONSE_SHORT;
+  SDIO_CmdInitStructure.WaitForInterrupt = SDIO_WAIT_NO;
+  SDIO_CmdInitStructure.CPSM             = SDIO_CPSM_ENABLE;
+  SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
   
   /* Check for error conditions */
-  errorstate = SD_CmdResp1Error(hsd, SD_CMD_SEND_STATUS);
+  errorState = SD_CmdResp1Error(hsd, SD_CMD_SEND_STATUS);
   
-  if(errorstate != SD_OK)
+  if(errorState != SD_OK)
   {
-    return errorstate;
+    return errorState;
   }
   
   /* Get SD card status */
   *pCardStatus = SDIO_GetResponse(SDIO_RESP1);
   
-  return errorstate;
+  return errorState;
 }
 
 /**
@@ -2681,7 +2571,7 @@ static HAL_SD_ErrorTypedef SD_SendStatus(SD_HandleTypeDef *hsd, uint32_t *pCardS
   */
 static HAL_SD_ErrorTypedef SD_CmdError(SD_HandleTypeDef *hsd)
 {
-  HAL_SD_ErrorTypedef errorstate = SD_OK;
+  HAL_SD_ErrorTypedef errorState = SD_OK;
   uint32_t timeout, tmp;
   
   timeout = SDIO_CMD0TIMEOUT;
@@ -2696,14 +2586,14 @@ static HAL_SD_ErrorTypedef SD_CmdError(SD_HandleTypeDef *hsd)
   
   if(timeout == 0)
   {
-    errorstate = SD_CMD_RSP_TIMEOUT;
-    return errorstate;
+    errorState = SD_CMD_RSP_TIMEOUT;
+    return errorState;
   }
   
   /* Clear all the static flags */
   __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_STATIC_FLAGS);
   
-  return errorstate;
+  return errorState;
 }
 
 /**
@@ -2713,7 +2603,7 @@ static HAL_SD_ErrorTypedef SD_CmdError(SD_HandleTypeDef *hsd)
   */
 static HAL_SD_ErrorTypedef SD_CmdResp7Error(SD_HandleTypeDef *hsd)
 {
-  HAL_SD_ErrorTypedef errorstate = SD_ERROR;
+  HAL_SD_ErrorTypedef errorState = SD_ERROR;
   uint32_t timeout = SDIO_CMD0TIMEOUT, tmp;
   
   tmp = __HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_CCRCFAIL | SDIO_FLAG_CMDREND | SDIO_FLAG_CTIMEOUT); 
@@ -2729,24 +2619,24 @@ static HAL_SD_ErrorTypedef SD_CmdResp7Error(SD_HandleTypeDef *hsd)
   if((timeout == 0) || tmp)
   {
     /* Card is not V2.0 compliant or card does not support the set voltage range */
-    errorstate = SD_CMD_RSP_TIMEOUT;
+    errorState = SD_CMD_RSP_TIMEOUT;
     
     __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_CTIMEOUT);
     
-    return errorstate;
+    return errorState;
   }
   
   if(__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_CMDREND))
   {
     /* Card is SD V2.0 compliant */
-    errorstate = SD_OK;
+    errorState = SD_OK;
     
     __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_CMDREND);
     
-    return errorstate;
+    return errorState;
   }
   
-  return errorstate;
+  return errorState;
 }
 
 /**
@@ -2757,8 +2647,8 @@ static HAL_SD_ErrorTypedef SD_CmdResp7Error(SD_HandleTypeDef *hsd)
   */
 static HAL_SD_ErrorTypedef SD_CmdResp1Error(SD_HandleTypeDef *hsd, uint8_t SD_CMD)
 {
-  HAL_SD_ErrorTypedef errorstate = SD_OK;
-  uint32_t response_r1;
+  HAL_SD_ErrorTypedef errorState = SD_OK;
+  uint32_t response_R1;
   
   while(!__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_CCRCFAIL | SDIO_FLAG_CMDREND | SDIO_FLAG_CTIMEOUT))
   {
@@ -2766,136 +2656,136 @@ static HAL_SD_ErrorTypedef SD_CmdResp1Error(SD_HandleTypeDef *hsd, uint8_t SD_CM
   
   if(__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_CTIMEOUT))
   {
-    errorstate = SD_CMD_RSP_TIMEOUT;
+    errorState = SD_CMD_RSP_TIMEOUT;
     
     __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_CTIMEOUT);
     
-    return errorstate;
+    return errorState;
   }
   else if(__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_CCRCFAIL))
   {
-    errorstate = SD_CMD_CRC_FAIL;
+    errorState = SD_CMD_CRC_FAIL;
     
     __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_CCRCFAIL);
     
-    return errorstate;
+    return errorState;
   }
   
   /* Check response received is of desired command */
   if(SDIO_GetCommandResponse(hsd->Instance) != SD_CMD)
   {
-    errorstate = SD_ILLEGAL_CMD;
+    errorState = SD_ILLEGAL_CMD;
     
-    return errorstate;
+    return errorState;
   }
   
   /* Clear all the static flags */
   __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_STATIC_FLAGS);
   
   /* We have received response, retrieve it for analysis  */
-  response_r1 = SDIO_GetResponse(SDIO_RESP1);
+  response_R1 = SDIO_GetResponse(SDIO_RESP1);
   
-  if((response_r1 & SD_OCR_ERRORBITS) == SD_ALLZERO)
+  if((response_R1 & SD_OCR_ERRORBITS) == SD_ALLZERO)
   {
-    return errorstate;
+    return errorState;
   }
   
-  if((response_r1 & SD_OCR_ADDR_OUT_OF_RANGE) == SD_OCR_ADDR_OUT_OF_RANGE)
+  if((response_R1 & SD_OCR_ADDR_OUT_OF_RANGE) == SD_OCR_ADDR_OUT_OF_RANGE)
   {
     return(SD_ADDR_OUT_OF_RANGE);
   }
   
-  if((response_r1 & SD_OCR_ADDR_MISALIGNED) == SD_OCR_ADDR_MISALIGNED)
+  if((response_R1 & SD_OCR_ADDR_MISALIGNED) == SD_OCR_ADDR_MISALIGNED)
   {
     return(SD_ADDR_MISALIGNED);
   }
   
-  if((response_r1 & SD_OCR_BLOCK_LEN_ERR) == SD_OCR_BLOCK_LEN_ERR)
+  if((response_R1 & SD_OCR_BLOCK_LEN_ERR) == SD_OCR_BLOCK_LEN_ERR)
   {
     return(SD_BLOCK_LEN_ERR);
   }
   
-  if((response_r1 & SD_OCR_ERASE_SEQ_ERR) == SD_OCR_ERASE_SEQ_ERR)
+  if((response_R1 & SD_OCR_ERASE_SEQ_ERR) == SD_OCR_ERASE_SEQ_ERR)
   {
     return(SD_ERASE_SEQ_ERR);
   }
   
-  if((response_r1 & SD_OCR_BAD_ERASE_PARAM) == SD_OCR_BAD_ERASE_PARAM)
+  if((response_R1 & SD_OCR_BAD_ERASE_PARAM) == SD_OCR_BAD_ERASE_PARAM)
   {
     return(SD_BAD_ERASE_PARAM);
   }
   
-  if((response_r1 & SD_OCR_WRITE_PROT_VIOLATION) == SD_OCR_WRITE_PROT_VIOLATION)
+  if((response_R1 & SD_OCR_WRITE_PROT_VIOLATION) == SD_OCR_WRITE_PROT_VIOLATION)
   {
     return(SD_WRITE_PROT_VIOLATION);
   }
   
-  if((response_r1 & SD_OCR_LOCK_UNLOCK_FAILED) == SD_OCR_LOCK_UNLOCK_FAILED)
+  if((response_R1 & SD_OCR_LOCK_UNLOCK_FAILED) == SD_OCR_LOCK_UNLOCK_FAILED)
   {
     return(SD_LOCK_UNLOCK_FAILED);
   }
   
-  if((response_r1 & SD_OCR_COM_CRC_FAILED) == SD_OCR_COM_CRC_FAILED)
+  if((response_R1 & SD_OCR_COM_CRC_FAILED) == SD_OCR_COM_CRC_FAILED)
   {
     return(SD_COM_CRC_FAILED);
   }
   
-  if((response_r1 & SD_OCR_ILLEGAL_CMD) == SD_OCR_ILLEGAL_CMD)
+  if((response_R1 & SD_OCR_ILLEGAL_CMD) == SD_OCR_ILLEGAL_CMD)
   {
     return(SD_ILLEGAL_CMD);
   }
   
-  if((response_r1 & SD_OCR_CARD_ECC_FAILED) == SD_OCR_CARD_ECC_FAILED)
+  if((response_R1 & SD_OCR_CARD_ECC_FAILED) == SD_OCR_CARD_ECC_FAILED)
   {
     return(SD_CARD_ECC_FAILED);
   }
   
-  if((response_r1 & SD_OCR_CC_ERROR) == SD_OCR_CC_ERROR)
+  if((response_R1 & SD_OCR_CC_ERROR) == SD_OCR_CC_ERROR)
   {
     return(SD_CC_ERROR);
   }
   
-  if((response_r1 & SD_OCR_GENERAL_UNKNOWN_ERROR) == SD_OCR_GENERAL_UNKNOWN_ERROR)
+  if((response_R1 & SD_OCR_GENERAL_UNKNOWN_ERROR) == SD_OCR_GENERAL_UNKNOWN_ERROR)
   {
     return(SD_GENERAL_UNKNOWN_ERROR);
   }
   
-  if((response_r1 & SD_OCR_STREAM_READ_UNDERRUN) == SD_OCR_STREAM_READ_UNDERRUN)
+  if((response_R1 & SD_OCR_STREAM_READ_UNDERRUN) == SD_OCR_STREAM_READ_UNDERRUN)
   {
     return(SD_STREAM_READ_UNDERRUN);
   }
   
-  if((response_r1 & SD_OCR_STREAM_WRITE_OVERRUN) == SD_OCR_STREAM_WRITE_OVERRUN)
+  if((response_R1 & SD_OCR_STREAM_WRITE_OVERRUN) == SD_OCR_STREAM_WRITE_OVERRUN)
   {
     return(SD_STREAM_WRITE_OVERRUN);
   }
   
-  if((response_r1 & SD_OCR_CID_CSD_OVERWRITE) == SD_OCR_CID_CSD_OVERWRITE)
+  if((response_R1 & SD_OCR_CID_CSD_OVERWRIETE) == SD_OCR_CID_CSD_OVERWRIETE)
   {
     return(SD_CID_CSD_OVERWRITE);
   }
   
-  if((response_r1 & SD_OCR_WP_ERASE_SKIP) == SD_OCR_WP_ERASE_SKIP)
+  if((response_R1 & SD_OCR_WP_ERASE_SKIP) == SD_OCR_WP_ERASE_SKIP)
   {
     return(SD_WP_ERASE_SKIP);
   }
   
-  if((response_r1 & SD_OCR_CARD_ECC_DISABLED) == SD_OCR_CARD_ECC_DISABLED)
+  if((response_R1 & SD_OCR_CARD_ECC_DISABLED) == SD_OCR_CARD_ECC_DISABLED)
   {
     return(SD_CARD_ECC_DISABLED);
   }
   
-  if((response_r1 & SD_OCR_ERASE_RESET) == SD_OCR_ERASE_RESET)
+  if((response_R1 & SD_OCR_ERASE_RESET) == SD_OCR_ERASE_RESET)
   {
     return(SD_ERASE_RESET);
   }
   
-  if((response_r1 & SD_OCR_AKE_SEQ_ERROR) == SD_OCR_AKE_SEQ_ERROR)
+  if((response_R1 & SD_OCR_AKE_SEQ_ERROR) == SD_OCR_AKE_SEQ_ERROR)
   {
     return(SD_AKE_SEQ_ERROR);
   }
   
-  return errorstate;
+  return errorState;
 }
 
 /**
@@ -2905,7 +2795,7 @@ static HAL_SD_ErrorTypedef SD_CmdResp1Error(SD_HandleTypeDef *hsd, uint8_t SD_CM
   */
 static HAL_SD_ErrorTypedef SD_CmdResp3Error(SD_HandleTypeDef *hsd)
 {
-  HAL_SD_ErrorTypedef errorstate = SD_OK;
+  HAL_SD_ErrorTypedef errorState = SD_OK;
   
   while (!__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_CCRCFAIL | SDIO_FLAG_CMDREND | SDIO_FLAG_CTIMEOUT))
   {
@@ -2913,17 +2803,17 @@ static HAL_SD_ErrorTypedef SD_CmdResp3Error(SD_HandleTypeDef *hsd)
   
   if (__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_CTIMEOUT))
   {
-    errorstate = SD_CMD_RSP_TIMEOUT;
+    errorState = SD_CMD_RSP_TIMEOUT;
     
     __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_CTIMEOUT);
     
-    return errorstate;
+    return errorState;
   }
   
   /* Clear all the static flags */
   __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_STATIC_FLAGS);
   
-  return errorstate;
+  return errorState;
 }
 
 /**
@@ -2933,7 +2823,7 @@ static HAL_SD_ErrorTypedef SD_CmdResp3Error(SD_HandleTypeDef *hsd)
   */
 static HAL_SD_ErrorTypedef SD_CmdResp2Error(SD_HandleTypeDef *hsd)
 {
-  HAL_SD_ErrorTypedef errorstate = SD_OK;
+  HAL_SD_ErrorTypedef errorState = SD_OK;
   
   while (!__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_CCRCFAIL | SDIO_FLAG_CMDREND | SDIO_FLAG_CTIMEOUT))
   {
@@ -2941,29 +2831,25 @@ static HAL_SD_ErrorTypedef SD_CmdResp2Error(SD_HandleTypeDef *hsd)
     
   if (__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_CTIMEOUT))
   {
-    errorstate = SD_CMD_RSP_TIMEOUT;
+    errorState = SD_CMD_RSP_TIMEOUT;
     
     __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_CTIMEOUT);
     
-    return errorstate;
+    return errorState;
   }
   else if (__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_CCRCFAIL))
   {
-    errorstate = SD_CMD_CRC_FAIL;
+    errorState = SD_CMD_CRC_FAIL;
     
     __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_CCRCFAIL);
     
-    return errorstate;
-  }
-  else
-  {
-    /* No error flag set */
+    return errorState;
   }
   
   /* Clear all the static flags */
   __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_STATIC_FLAGS);
   
-  return errorstate;
+  return errorState;
 }
 
 /**
@@ -2976,8 +2862,8 @@ static HAL_SD_ErrorTypedef SD_CmdResp2Error(SD_HandleTypeDef *hsd)
   */
 static HAL_SD_ErrorTypedef SD_CmdResp6Error(SD_HandleTypeDef *hsd, uint8_t SD_CMD, uint16_t *pRCA)
 {
-  HAL_SD_ErrorTypedef errorstate = SD_OK;
-  uint32_t response_r1;
+  HAL_SD_ErrorTypedef errorState = SD_OK;
+  uint32_t response_R1;
   
   while(!__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_CCRCFAIL | SDIO_FLAG_CMDREND | SDIO_FLAG_CTIMEOUT))
   {
@@ -2985,62 +2871,58 @@ static HAL_SD_ErrorTypedef SD_CmdResp6Error(SD_HandleTypeDef *hsd, uint8_t SD_CM
   
   if(__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_CTIMEOUT))
   {
-    errorstate = SD_CMD_RSP_TIMEOUT;
+    errorState = SD_CMD_RSP_TIMEOUT;
     
     __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_CTIMEOUT);
     
-    return errorstate;
+    return errorState;
   }
   else if(__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_CCRCFAIL))
   {
-    errorstate = SD_CMD_CRC_FAIL;
+    errorState = SD_CMD_CRC_FAIL;
     
     __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_CCRCFAIL);
     
-    return errorstate;
-  }
-  else
-  {
-    /* No error flag set */
+    return errorState;
   }
   
   /* Check response received is of desired command */
   if(SDIO_GetCommandResponse(hsd->Instance) != SD_CMD)
   {
-    errorstate = SD_ILLEGAL_CMD;
+    errorState = SD_ILLEGAL_CMD;
     
-    return errorstate;
+    return errorState;
   }
   
   /* Clear all the static flags */
   __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_STATIC_FLAGS);
   
   /* We have received response, retrieve it.  */
-  response_r1 = SDIO_GetResponse(SDIO_RESP1);
+  response_R1 = SDIO_GetResponse(SDIO_RESP1);
   
-  if((response_r1 & (SD_R6_GENERAL_UNKNOWN_ERROR | SD_R6_ILLEGAL_CMD | SD_R6_COM_CRC_FAILED)) == SD_ALLZERO)
+  if((response_R1 & (SD_R6_GENERAL_UNKNOWN_ERROR | SD_R6_ILLEGAL_CMD | SD_R6_COM_CRC_FAILED)) == SD_ALLZERO)
   {
-    *pRCA = (uint16_t) (response_r1 >> 16);
+    *pRCA = (uint16_t) (response_R1 >> 16);
     
-    return errorstate;
+    return errorState;
   }
   
-  if((response_r1 & SD_R6_GENERAL_UNKNOWN_ERROR) == SD_R6_GENERAL_UNKNOWN_ERROR)
+  if((response_R1 & SD_R6_GENERAL_UNKNOWN_ERROR) == SD_R6_GENERAL_UNKNOWN_ERROR)
   {
     return(SD_GENERAL_UNKNOWN_ERROR);
   }
   
-  if((response_r1 & SD_R6_ILLEGAL_CMD) == SD_R6_ILLEGAL_CMD)
+  if((response_R1 & SD_R6_ILLEGAL_CMD) == SD_R6_ILLEGAL_CMD)
   {
     return(SD_ILLEGAL_CMD);
   }
   
-  if((response_r1 & SD_R6_COM_CRC_FAILED) == SD_R6_COM_CRC_FAILED)
+  if((response_R1 & SD_R6_COM_CRC_FAILED) == SD_R6_COM_CRC_FAILED)
   {
     return(SD_COM_CRC_FAILED);
   }
   
-  return errorstate;
+  return errorState;
 }
 
 /**
@@ -3050,65 +2932,65 @@ static HAL_SD_ErrorTypedef SD_CmdResp6Error(SD_HandleTypeDef *hsd, uint8_t SD_CM
   */
 static HAL_SD_ErrorTypedef SD_WideBus_Enable(SD_HandleTypeDef *hsd)
 {
-  SDIO_CmdInitTypeDef sdio_cmdinitstructure;
-  HAL_SD_ErrorTypedef errorstate = SD_OK;
+  SDIO_CmdInitTypeDef SDIO_CmdInitStructure;
+  HAL_SD_ErrorTypedef errorState = SD_OK;
   
   uint32_t scr[2] = {0, 0};
   
   if((SDIO_GetResponse(SDIO_RESP1) & SD_CARD_LOCKED) == SD_CARD_LOCKED)
   {
-    errorstate = SD_LOCK_UNLOCK_FAILED;
+    errorState = SD_LOCK_UNLOCK_FAILED;
     
-    return errorstate;
+    return errorState;
   }
   
   /* Get SCR Register */
-  errorstate = SD_FindSCR(hsd, scr);
+  errorState = SD_FindSCR(hsd, scr);
   
-  if(errorstate != SD_OK)
+  if(errorState != SD_OK)
   {
-    return errorstate;
+    return errorState;
   }
   
   /* If requested card supports wide bus operation */
   if((scr[1] & SD_WIDE_BUS_SUPPORT) != SD_ALLZERO)
   {
     /* Send CMD55 APP_CMD with argument as card's RCA.*/
-    sdio_cmdinitstructure.Argument         = (uint32_t)(hsd->RCA << 16);
-    sdio_cmdinitstructure.CmdIndex         = SD_CMD_APP_CMD;
-    sdio_cmdinitstructure.Response         = SDIO_RESPONSE_SHORT;
-    sdio_cmdinitstructure.WaitForInterrupt = SDIO_WAIT_NO;
-    sdio_cmdinitstructure.CPSM             = SDIO_CPSM_ENABLE;
-    SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+    SDIO_CmdInitStructure.Argument         = (uint32_t)(hsd->RCA << 16);
+    SDIO_CmdInitStructure.CmdIndex         = SD_CMD_APP_CMD;
+    SDIO_CmdInitStructure.Response         = SDIO_RESPONSE_SHORT;
+    SDIO_CmdInitStructure.WaitForInterrupt = SDIO_WAIT_NO;
+    SDIO_CmdInitStructure.CPSM             = SDIO_CPSM_ENABLE;
+    SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
     
     /* Check for error conditions */
-    errorstate = SD_CmdResp1Error(hsd, SD_CMD_APP_CMD);
+    errorState = SD_CmdResp1Error(hsd, SD_CMD_APP_CMD);
     
-    if(errorstate != SD_OK)
+    if(errorState != SD_OK)
     {
-      return errorstate;
+      return errorState;
     }
     
     /* Send ACMD6 APP_CMD with argument as 2 for wide bus mode */
-    sdio_cmdinitstructure.Argument         = 2;
-    sdio_cmdinitstructure.CmdIndex         = SD_CMD_APP_SD_SET_BUSWIDTH;
-    SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+    SDIO_CmdInitStructure.Argument         = 2;
+    SDIO_CmdInitStructure.CmdIndex         = SD_CMD_APP_SD_SET_BUSWIDTH;
+    SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
     
     /* Check for error conditions */
-    errorstate = SD_CmdResp1Error(hsd, SD_CMD_APP_SD_SET_BUSWIDTH);
+    errorState = SD_CmdResp1Error(hsd, SD_CMD_APP_SD_SET_BUSWIDTH);
     
-    if(errorstate != SD_OK)
+    if(errorState != SD_OK)
     {
-      return errorstate;
+      return errorState;
     }
     
-    return errorstate;
+    return errorState;
   }
   else
   {
-    errorstate = SD_REQUEST_NOT_APPLICABLE;
+    errorState = SD_REQUEST_NOT_APPLICABLE;
     
-    return errorstate;
+    return errorState;
   }
 }   
 
@@ -3119,65 +3001,65 @@ static HAL_SD_ErrorTypedef SD_WideBus_Enable(SD_HandleTypeDef *hsd)
   */
 static HAL_SD_ErrorTypedef SD_WideBus_Disable(SD_HandleTypeDef *hsd)
 {
-  SDIO_CmdInitTypeDef sdio_cmdinitstructure;
-  HAL_SD_ErrorTypedef errorstate = SD_OK;
+  SDIO_CmdInitTypeDef SDIO_CmdInitStructure;
+  HAL_SD_ErrorTypedef errorState = SD_OK;
   
   uint32_t scr[2] = {0, 0};
   
   if((SDIO_GetResponse(SDIO_RESP1) & SD_CARD_LOCKED) == SD_CARD_LOCKED)
   {
-    errorstate = SD_LOCK_UNLOCK_FAILED;
+    errorState = SD_LOCK_UNLOCK_FAILED;
     
-    return errorstate;
+    return errorState;
   }
   
   /* Get SCR Register */
-  errorstate = SD_FindSCR(hsd, scr);
+  errorState = SD_FindSCR(hsd, scr);
   
-  if(errorstate != SD_OK)
+  if(errorState != SD_OK)
   {
-    return errorstate;
+    return errorState;
   }
   
   /* If requested card supports 1 bit mode operation */
   if((scr[1] & SD_SINGLE_BUS_SUPPORT) != SD_ALLZERO)
   {
     /* Send CMD55 APP_CMD with argument as card's RCA */
-    sdio_cmdinitstructure.Argument         = (uint32_t)(hsd->RCA << 16);
-    sdio_cmdinitstructure.CmdIndex         = SD_CMD_APP_CMD;
-    sdio_cmdinitstructure.Response         = SDIO_RESPONSE_SHORT;
-    sdio_cmdinitstructure.WaitForInterrupt = SDIO_WAIT_NO;
-    sdio_cmdinitstructure.CPSM             = SDIO_CPSM_ENABLE;
-    SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+    SDIO_CmdInitStructure.Argument         = (uint32_t)(hsd->RCA << 16);
+    SDIO_CmdInitStructure.CmdIndex         = SD_CMD_APP_CMD;
+    SDIO_CmdInitStructure.Response         = SDIO_RESPONSE_SHORT;
+    SDIO_CmdInitStructure.WaitForInterrupt = SDIO_WAIT_NO;
+    SDIO_CmdInitStructure.CPSM             = SDIO_CPSM_ENABLE;
+    SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
     
     /* Check for error conditions */
-    errorstate = SD_CmdResp1Error(hsd, SD_CMD_APP_CMD);
+    errorState = SD_CmdResp1Error(hsd, SD_CMD_APP_CMD);
     
-    if(errorstate != SD_OK)
+    if(errorState != SD_OK)
     {
-      return errorstate;
+      return errorState;
     }
     
     /* Send ACMD6 APP_CMD with argument as 0 for single bus mode */
-    sdio_cmdinitstructure.Argument         = 0;
-    sdio_cmdinitstructure.CmdIndex         = SD_CMD_APP_SD_SET_BUSWIDTH;
-    SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+    SDIO_CmdInitStructure.Argument         = 0;
+    SDIO_CmdInitStructure.CmdIndex         = SD_CMD_APP_SD_SET_BUSWIDTH;
+    SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
     
     /* Check for error conditions */
-    errorstate = SD_CmdResp1Error(hsd, SD_CMD_APP_SD_SET_BUSWIDTH);
+    errorState = SD_CmdResp1Error(hsd, SD_CMD_APP_SD_SET_BUSWIDTH);
     
-    if(errorstate != SD_OK)
+    if(errorState != SD_OK)
     {
-      return errorstate;
+      return errorState;
     }
     
-    return errorstate;
+    return errorState;
   }
   else
   {
-    errorstate = SD_REQUEST_NOT_APPLICABLE;
+    errorState = SD_REQUEST_NOT_APPLICABLE;
     
-    return errorstate;
+    return errorState;
   }
 }
   
@@ -3190,66 +3072,63 @@ static HAL_SD_ErrorTypedef SD_WideBus_Disable(SD_HandleTypeDef *hsd)
   */
 static HAL_SD_ErrorTypedef SD_FindSCR(SD_HandleTypeDef *hsd, uint32_t *pSCR)
 {
-  SDIO_CmdInitTypeDef  sdio_cmdinitstructure;
-  SDIO_DataInitTypeDef sdio_datainitstructure;
-  HAL_SD_ErrorTypedef errorstate = SD_OK;
+  SDIO_CmdInitTypeDef  SDIO_CmdInitStructure;
+  SDIO_DataInitTypeDef SDIO_DataInitStructure;
+  HAL_SD_ErrorTypedef errorState = SD_OK;
   uint32_t index = 0;
   uint32_t tempscr[2] = {0, 0};
   
   /* Set Block Size To 8 Bytes */
   /* Send CMD55 APP_CMD with argument as card's RCA */
-  sdio_cmdinitstructure.Argument         = (uint32_t)8;
-  sdio_cmdinitstructure.CmdIndex         = SD_CMD_SET_BLOCKLEN;
-  sdio_cmdinitstructure.Response         = SDIO_RESPONSE_SHORT;
-  sdio_cmdinitstructure.WaitForInterrupt = SDIO_WAIT_NO;
-  sdio_cmdinitstructure.CPSM             = SDIO_CPSM_ENABLE;
-  SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+  SDIO_CmdInitStructure.Argument         = (uint32_t)8;
+  SDIO_CmdInitStructure.CmdIndex         = SD_CMD_SET_BLOCKLEN;
+  SDIO_CmdInitStructure.Response         = SDIO_RESPONSE_SHORT;
+  SDIO_CmdInitStructure.WaitForInterrupt = SDIO_WAIT_NO;
+  SDIO_CmdInitStructure.CPSM             = SDIO_CPSM_ENABLE;
+  SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
   
   /* Check for error conditions */
-  errorstate = SD_CmdResp1Error(hsd, SD_CMD_SET_BLOCKLEN);
+  errorState = SD_CmdResp1Error(hsd, SD_CMD_SET_BLOCKLEN);
   
-  if(errorstate != SD_OK)
+  if(errorState != SD_OK)
   {
-    return errorstate;
+    return errorState;
   }
   
   /* Send CMD55 APP_CMD with argument as card's RCA */
-  sdio_cmdinitstructure.Argument         = (uint32_t)((hsd->RCA) << 16);
-  sdio_cmdinitstructure.CmdIndex         = SD_CMD_APP_CMD;
-  SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+  SDIO_CmdInitStructure.Argument         = (uint32_t)((hsd->RCA) << 16);
+  SDIO_CmdInitStructure.CmdIndex         = SD_CMD_APP_CMD;
+  SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
   
   /* Check for error conditions */
-  errorstate = SD_CmdResp1Error(hsd, SD_CMD_APP_CMD);
+  errorState = SD_CmdResp1Error(hsd, SD_CMD_APP_CMD);
   
-  if(errorstate != SD_OK)
+  if(errorState != SD_OK)
   {
-    return errorstate;
+    return errorState;
   }
-  sdio_datainitstructure.DataTimeOut   = SD_DATATIMEOUT;
-  sdio_datainitstructure.DataLength    = 8;
-  sdio_datainitstructure.DataBlockSize = SDIO_DATABLOCK_SIZE_8B;
-  sdio_datainitstructure.TransferDir   = SDIO_TRANSFER_DIR_TO_SDIO;
-  sdio_datainitstructure.TransferMode  = SDIO_TRANSFER_MODE_BLOCK;
-  sdio_datainitstructure.DPSM          = SDIO_DPSM_ENABLE;
-  SDIO_DataConfig(hsd->Instance, &sdio_datainitstructure);
+  SDIO_DataInitStructure.DataTimeOut   = SD_DATATIMEOUT;
+  SDIO_DataInitStructure.DataLength    = 8;
+  SDIO_DataInitStructure.DataBlockSize = SDIO_DATABLOCK_SIZE_8B;
+  SDIO_DataInitStructure.TransferDir   = SDIO_TRANSFER_DIR_TO_SDIO;
+  SDIO_DataInitStructure.TransferMode  = SDIO_TRANSFER_MODE_BLOCK;
+  SDIO_DataInitStructure.DPSM          = SDIO_DPSM_ENABLE;
+  SDIO_DataConfig(hsd->Instance, &SDIO_DataInitStructure);
   
   /* Send ACMD51 SD_APP_SEND_SCR with argument as 0 */
-  sdio_cmdinitstructure.Argument         = 0;
-  sdio_cmdinitstructure.CmdIndex         = SD_CMD_SD_APP_SEND_SCR;
-  SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+  SDIO_CmdInitStructure.Argument         = 0;
+  SDIO_CmdInitStructure.CmdIndex         = SD_CMD_SD_APP_SEND_SCR;
+  SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
   
   /* Check for error conditions */
-  errorstate = SD_CmdResp1Error(hsd, SD_CMD_SD_APP_SEND_SCR);
+  errorState = SD_CmdResp1Error(hsd, SD_CMD_SD_APP_SEND_SCR);
   
-  if(errorstate != SD_OK)
+  if(errorState != SD_OK)
   {
-    return errorstate;
+    return errorState;
   }
-#ifdef SDIO_STA_STBITERR  
+  
   while(!__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_RXOVERR | SDIO_FLAG_DCRCFAIL | SDIO_FLAG_DTIMEOUT | SDIO_FLAG_DBCKEND | SDIO_FLAG_STBITERR))
-#else /* SDIO_STA_STBITERR not defined */
-  while(!__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_RXOVERR | SDIO_FLAG_DCRCFAIL | SDIO_FLAG_DTIMEOUT | SDIO_FLAG_DBCKEND))
-#endif /* SDIO_STA_STBITERR */
   {
     if(__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_RXDAVL))
     {
@@ -3262,39 +3141,33 @@ static HAL_SD_ErrorTypedef SD_FindSCR(SD_HandleTypeDef *hsd, uint32_t *pSCR)
   {
     __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_DTIMEOUT);
     
-    errorstate = SD_DATA_TIMEOUT;
+    errorState = SD_DATA_TIMEOUT;
     
-    return errorstate;
+    return errorState;
   }
   else if(__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_DCRCFAIL))
   {
     __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_DCRCFAIL);
     
-    errorstate = SD_DATA_CRC_FAIL;
+    errorState = SD_DATA_CRC_FAIL;
     
-    return errorstate;
+    return errorState;
   }
   else if(__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_RXOVERR))
   {
     __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_RXOVERR);
     
-    errorstate = SD_RX_OVERRUN;
+    errorState = SD_RX_OVERRUN;
     
-    return errorstate;
+    return errorState;
   }
-#ifdef SDIO_STA_STBITERR
   else if(__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_STBITERR))
   {
     __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_STBITERR);
     
-    errorstate = SD_START_BIT_ERR;
+    errorState = SD_START_BIT_ERR;
     
-    return errorstate;
-  }
-#endif /* SDIO_STA_STBITERR */
-  else
-  {
-    /* No error flag set */
+    return errorState;
   }
   
   /* Clear all the static flags */
@@ -3306,7 +3179,7 @@ static HAL_SD_ErrorTypedef SD_FindSCR(SD_HandleTypeDef *hsd, uint32_t *pSCR)
   *(pSCR) = ((tempscr[1] & SD_0TO7BITS) << 24)  | ((tempscr[1] & SD_8TO15BITS) << 8) |\
     ((tempscr[1] & SD_16TO23BITS) >> 8) | ((tempscr[1] & SD_24TO31BITS) >> 24);
   
-  return errorstate;
+  return errorState;
 }
 
 /**
@@ -3317,16 +3190,16 @@ static HAL_SD_ErrorTypedef SD_FindSCR(SD_HandleTypeDef *hsd, uint32_t *pSCR)
   */
 static HAL_SD_ErrorTypedef SD_IsCardProgramming(SD_HandleTypeDef *hsd, uint8_t *pStatus)
 {
-  SDIO_CmdInitTypeDef sdio_cmdinitstructure;
-  HAL_SD_ErrorTypedef errorstate = SD_OK;
+  SDIO_CmdInitTypeDef SDIO_CmdInitStructure;
+  HAL_SD_ErrorTypedef errorState = SD_OK;
   __IO uint32_t responseR1 = 0;
   
-  sdio_cmdinitstructure.Argument         = (uint32_t)(hsd->RCA << 16);
-  sdio_cmdinitstructure.CmdIndex         = SD_CMD_SEND_STATUS;
-  sdio_cmdinitstructure.Response         = SDIO_RESPONSE_SHORT;
-  sdio_cmdinitstructure.WaitForInterrupt = SDIO_WAIT_NO;
-  sdio_cmdinitstructure.CPSM             = SDIO_CPSM_ENABLE;
-  SDIO_SendCommand(hsd->Instance, &sdio_cmdinitstructure);
+  SDIO_CmdInitStructure.Argument         = (uint32_t)(hsd->RCA << 16);
+  SDIO_CmdInitStructure.CmdIndex         = SD_CMD_SEND_STATUS;
+  SDIO_CmdInitStructure.Response         = SDIO_RESPONSE_SHORT;
+  SDIO_CmdInitStructure.WaitForInterrupt = SDIO_WAIT_NO;
+  SDIO_CmdInitStructure.CPSM             = SDIO_CPSM_ENABLE;
+  SDIO_SendCommand(hsd->Instance, &SDIO_CmdInitStructure);
   
   while(!__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_CCRCFAIL | SDIO_FLAG_CMDREND | SDIO_FLAG_CTIMEOUT))
   {
@@ -3334,31 +3207,27 @@ static HAL_SD_ErrorTypedef SD_IsCardProgramming(SD_HandleTypeDef *hsd, uint8_t *
   
   if(__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_CTIMEOUT))
   {
-    errorstate = SD_CMD_RSP_TIMEOUT;
+    errorState = SD_CMD_RSP_TIMEOUT;
     
     __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_CTIMEOUT);
     
-    return errorstate;
+    return errorState;
   }
   else if(__HAL_SD_SDIO_GET_FLAG(hsd, SDIO_FLAG_CCRCFAIL))
   {
-    errorstate = SD_CMD_CRC_FAIL;
+    errorState = SD_CMD_CRC_FAIL;
     
     __HAL_SD_SDIO_CLEAR_FLAG(hsd, SDIO_FLAG_CCRCFAIL);
     
-    return errorstate;
-  }
-  else
-  {
-    /* No error flag set */
+    return errorState;
   }
   
   /* Check response received is of desired command */
   if((uint32_t)SDIO_GetCommandResponse(hsd->Instance) != SD_CMD_SEND_STATUS)
   {
-    errorstate = SD_ILLEGAL_CMD;
+    errorState = SD_ILLEGAL_CMD;
     
-    return errorstate;
+    return errorState;
   }
   
   /* Clear all the static flags */
@@ -3373,7 +3242,7 @@ static HAL_SD_ErrorTypedef SD_IsCardProgramming(SD_HandleTypeDef *hsd, uint8_t *
   
   if((responseR1 & SD_OCR_ERRORBITS) == SD_ALLZERO)
   {
-    return errorstate;
+    return errorState;
   }
   
   if((responseR1 & SD_OCR_ADDR_OUT_OF_RANGE) == SD_OCR_ADDR_OUT_OF_RANGE)
@@ -3446,7 +3315,7 @@ static HAL_SD_ErrorTypedef SD_IsCardProgramming(SD_HandleTypeDef *hsd, uint8_t *
     return(SD_STREAM_WRITE_OVERRUN);
   }
   
-  if((responseR1 & SD_OCR_CID_CSD_OVERWRITE) == SD_OCR_CID_CSD_OVERWRITE)
+  if((responseR1 & SD_OCR_CID_CSD_OVERWRIETE) == SD_OCR_CID_CSD_OVERWRIETE)
   {
     return(SD_CID_CSD_OVERWRITE);
   }
@@ -3471,16 +3340,14 @@ static HAL_SD_ErrorTypedef SD_IsCardProgramming(SD_HandleTypeDef *hsd, uint8_t *
     return(SD_AKE_SEQ_ERROR);
   }
   
-  return errorstate;
+  return errorState;
 }   
 
 /**
   * @}
   */
-#endif /* STM32F405xx || STM32F415xx || STM32F407xx || STM32F417xx || STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx ||
-          STM32F401xC || STM32F401xE || STM32F411xE || STM32F446xx || STM32F469xx || STM32F479xx  */
-#endif /* HAL_SD_MODULE_ENABLED */
 
+#endif /* HAL_SD_MODULE_ENABLED */
 /**
   * @}
   */

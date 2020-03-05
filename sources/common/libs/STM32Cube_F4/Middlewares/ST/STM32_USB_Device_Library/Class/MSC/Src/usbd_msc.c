@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    usbd_msc.c
+  * @file    usbd_msc_core.c
   * @author  MCD Application Team
-  * @version V2.4.1
-  * @date    19-June-2015
+  * @version V2.0.0
+  * @date    18-February-2014
   * @brief   This file provides all the MSC core functions.
   *
   * @verbatim
@@ -23,7 +23,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -44,7 +44,7 @@
 #include "usbd_msc.h"
 
 
-/** @addtogroup STM32_USB_DEVICE_LIBRARY
+/** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
   * @{
   */
 
@@ -363,7 +363,7 @@ uint8_t  USBD_MSC_DeInit (USBD_HandleTypeDef *pdev,
                   MSC_EPIN_ADDR);
   
   
-    /* De-Init the BOT layer */
+    /* D-Init the BOT layer */
   MSC_BOT_DeInit(pdev);
   
   /* Free MSC Class Resources */
@@ -383,7 +383,7 @@ uint8_t  USBD_MSC_DeInit (USBD_HandleTypeDef *pdev,
 */
 uint8_t  USBD_MSC_Setup (USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *req)
 {
-  USBD_MSC_BOT_HandleTypeDef     *hmsc = (USBD_MSC_BOT_HandleTypeDef*) pdev->pClassData;
+  USBD_MSC_BOT_HandleTypeDef     *hmsc = pdev->pClassData;
   
   switch (req->bmRequest & USB_REQ_TYPE_MASK)
   {
@@ -448,7 +448,7 @@ uint8_t  USBD_MSC_Setup (USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *req)
       /* Flush the FIFO and Clear the stall status */    
       USBD_LL_FlushEP(pdev, (uint8_t)req->wIndex);
       
-      /* Reactivate the EP */      
+      /* Re-activate the EP */      
       USBD_LL_CloseEP (pdev , (uint8_t)req->wIndex);
       if((((uint8_t)req->wIndex) & 0x80) == 0x80)
       {

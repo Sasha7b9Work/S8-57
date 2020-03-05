@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    usbh_hid_mouse.c 
   * @author  MCD Application Team
-  * @version V3.2.2
-  * @date    07-July-2015
+  * @version V3.0.0
+  * @date    18-February-2014
   * @brief   This file is the application layer for USB Host HID Mouse Handling.                  
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -175,7 +175,7 @@ static const HID_Report_ItemTypedef prop_y={
   */
 USBH_StatusTypeDef USBH_HID_MouseInit(USBH_HandleTypeDef *phost)
 {
-  HID_HandleTypeDef *HID_Handle =  (HID_HandleTypeDef *) phost->pActiveClass->pData;
+  HID_HandleTypeDef *HID_Handle =  phost->pActiveClass->pData;
 
   mouse_info.x=0;
   mouse_info.y=0;
@@ -221,7 +221,7 @@ HID_MOUSE_Info_TypeDef *USBH_HID_GetMouseInfo(USBH_HandleTypeDef *phost)
   */
 static USBH_StatusTypeDef USBH_HID_MouseDecode(USBH_HandleTypeDef *phost)
 {
-  HID_HandleTypeDef *HID_Handle = (HID_HandleTypeDef *) phost->pActiveClass->pData;
+  HID_HandleTypeDef *HID_Handle =  phost->pActiveClass->pData;
   
   if(HID_Handle->length == 0)
   {

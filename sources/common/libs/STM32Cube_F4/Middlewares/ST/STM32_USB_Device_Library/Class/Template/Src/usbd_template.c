@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbd_template.c
   * @author  MCD Application Team
-  * @version V2.4.1
-  * @date    19-June-2015
+  * @version V2.0.0
+  * @date    18-February-2014
   * @brief   This file provides the HID core functions.
   *
   * @verbatim
@@ -26,7 +26,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -49,7 +49,7 @@
 #include "usbd_ctlreq.h"
 
 
-/** @addtogroup STM32_USB_DEVICE_LIBRARY
+/** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
   * @{
   */
 
@@ -159,7 +159,7 @@ static uint8_t USBD_TEMPLATE_CfgDesc[USB_TEMPLATE_CONFIG_DESC_SIZ] =
   0x01,         /*bNumInterfaces: 1 interface*/
   0x01,         /*bConfigurationValue: Configuration value*/
   0x02,         /*iConfiguration: Index of string descriptor describing the configuration*/
-  0xC0,         /*bmAttributes: bus powered and Supports Remote Wakeup */
+  0xC0,         /*bmAttributes: bus powered and Supprts Remote Wakeup */
   0x32,         /*MaxPower 100 mA: this current is used for detecting Vbus*/
   /* 09 */
   

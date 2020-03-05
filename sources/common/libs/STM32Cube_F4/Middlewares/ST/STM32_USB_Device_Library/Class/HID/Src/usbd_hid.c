@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbd_hid.c
   * @author  MCD Application Team
-  * @version V2.4.1
-  * @date    19-June-2015
+  * @version V2.0.0
+  * @date    18-February-2014
   * @brief   This file provides the HID core functions.
   *
   * @verbatim
@@ -17,7 +17,7 @@
   *             - The Boot Interface Subclass
   *             - The Mouse protocol
   *             - Usage Page : Generic Desktop
-  *             - Usage : Joystick
+  *             - Usage : Joystick)
   *             - Collection : Application 
   *      
   * @note     In HS mode and when the DMA is used, all variables and data structures
@@ -29,7 +29,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -52,7 +52,7 @@
 #include "usbd_ctlreq.h"
 
 
-/** @addtogroup STM32_USB_DEVICE_LIBRARY
+/** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
   * @{
   */
 
@@ -180,7 +180,7 @@ __ALIGN_BEGIN static uint8_t USBD_HID_CfgDesc[USB_HID_CONFIG_DESC_SIZ]  __ALIGN_
   0x03,          /*bmAttributes: Interrupt endpoint*/
   HID_EPIN_SIZE, /*wMaxPacketSize: 4 Byte max */
   0x00,
-  HID_FS_BINTERVAL,          /*bInterval: Polling Interval (10 ms)*/
+  0x0A,          /*bInterval: Polling Interval (10 ms)*/
   /* 34 */
 } ;
 
@@ -315,7 +315,7 @@ static uint8_t  USBD_HID_DeInit (USBD_HandleTypeDef *pdev,
 {
   /* Close HID EPs */
   USBD_LL_CloseEP(pdev,
-                  HID_EPIN_ADDR);
+                  HID_EPIN_SIZE);
   
   /* FRee allocated memory */
   if(pdev->pClassData != NULL)
@@ -339,7 +339,7 @@ static uint8_t  USBD_HID_Setup (USBD_HandleTypeDef *pdev,
 {
   uint16_t len = 0;
   uint8_t  *pbuf = NULL;
-  USBD_HID_HandleTypeDef     *hhid = (USBD_HID_HandleTypeDef*) pdev->pClassData;
+  USBD_HID_HandleTypeDef     *hhid = pdev->pClassData;
   
   switch (req->bmRequest & USB_REQ_TYPE_MASK)
   {
@@ -420,7 +420,7 @@ uint8_t USBD_HID_SendReport     (USBD_HandleTypeDef  *pdev,
                                  uint8_t *report,
                                  uint16_t len)
 {
-  USBD_HID_HandleTypeDef     *hhid = (USBD_HID_HandleTypeDef*)pdev->pClassData;
+  USBD_HID_HandleTypeDef     *hhid = pdev->pClassData;
   
   if (pdev->dev_state == USBD_STATE_CONFIGURED )
   {
@@ -437,34 +437,6 @@ uint8_t USBD_HID_SendReport     (USBD_HandleTypeDef  *pdev,
 }
 
 /**
-  * @brief  USBD_HID_GetPollingInterval 
-  *         return polling interval from endpoint descriptor
-  * @param  pdev: device instance
-  * @retval polling interval
-  */
-uint32_t USBD_HID_GetPollingInterval (USBD_HandleTypeDef *pdev)
-{
-  uint32_t polling_interval = 0;
-
-  /* HIGH-speed endpoints */
-  if(pdev->dev_speed == USBD_SPEED_HIGH)
-  {
-   /* Sets the data transfer polling interval for high speed transfers. 
-    Values between 1..16 are allowed. Values correspond to interval 
-    of 2 ^ (bInterval-1). This option (8 ms, corresponds to HID_HS_BINTERVAL */
-    polling_interval = (((1 <<(HID_HS_BINTERVAL - 1)))/8);
-  }
-  else   /* LOW and FULL-speed endpoints */
-  {
-    /* Sets the data transfer polling interval for low and full 
-    speed transfers */
-    polling_interval =  HID_FS_BINTERVAL;
-  }
-  
-  return ((uint32_t)(polling_interval));
-}
-
-/**
   * @brief  USBD_HID_GetCfgDesc 
   *         return configuration descriptor
   * @param  speed : current device speed
@@ -475,6 +447,18 @@ static uint8_t  *USBD_HID_GetCfgDesc (uint16_t *length)
 {
   *length = sizeof (USBD_HID_CfgDesc);
   return USBD_HID_CfgDesc;
+}
+
+/**
+* @brief  DeviceQualifierDescriptor 
+*         return Device Qualifier descriptor
+* @param  length : pointer data length
+* @retval pointer to descriptor buffer
+*/
+uint8_t  *USBD_HID_DeviceQualifierDescriptor (uint16_t *length)
+{
+  *length = sizeof (USBD_HID_DeviceQualifierDesc);
+  return USBD_HID_DeviceQualifierDesc;
 }
 
 

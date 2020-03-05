@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    usbh_hid_mouse.h 
   * @author  MCD Application Team
-  * @version V3.2.2
-  * @date    07-July-2015
+  * @version V3.0.0
+  * @date    18-February-2014
   * @brief   This file contains all the prototypes for the usbh_hid_mouse.c
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -25,13 +25,10 @@
   ******************************************************************************
   */ 
 
+
 /* Define to prevent recursive  ----------------------------------------------*/
 #ifndef __USBH_HID_MOUSE_H
 #define __USBH_HID_MOUSE_H
-
-#ifdef __cplusplus
- extern "C" {
-#endif
 
 /* Includes ------------------------------------------------------------------*/
 #include "usbh_hid.h"
@@ -49,7 +46,7 @@
   */
 
 /** @defgroup USBH_HID_MOUSE
-  * @brief This file is the Header file for usbh_hid_mouse.c
+  * @brief This file is the Header file for USBH_HID_MOUSE.c
   * @{
   */ 
 
@@ -100,10 +97,6 @@ HID_MOUSE_Info_TypeDef *USBH_HID_GetMouseInfo(USBH_HandleTypeDef *phost);
 /**
   * @}
   */ 
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* __USBH_HID_MOUSE_H */
 

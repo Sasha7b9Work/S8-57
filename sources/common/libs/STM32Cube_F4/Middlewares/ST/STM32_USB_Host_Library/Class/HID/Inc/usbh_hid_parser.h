@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    usbh_hid_parser.c 
   * @author  MCD Application Team
-  * @version V3.2.2
-  * @date    07-July-2015
+  * @version V3.0.0
+  * @date    18-February-2014
   * @brief   This file is the header file of the usbh_hid_parser.c        
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -23,15 +23,9 @@
   * limitations under the License.
   *
   ******************************************************************************
-  */
-
-/* Define to prevent recursive -----------------------------------------------*/ 
-#ifndef __USBH_HID_PARSER_H
-#define __USBH_HID_PARSER_H
-
-#ifdef __cplusplus
- extern "C" {
-#endif
+  */ 
+#ifndef _HID_PARSER_H_
+#define _HID_PARSER_H_
 
 /* Includes ------------------------------------------------------------------*/
 #include "usbh_hid.h"
@@ -50,7 +44,7 @@
   */
   
 /** @defgroup USBH_HID_PARSER
-  * @brief This file is the Header file for usbh_hid_parser.c
+  * @brief This file is the Header file for USBH_HID_PARSER.c
   * @{
   */ 
 
@@ -82,11 +76,7 @@ uint32_t HID_WriteItem(HID_Report_ItemTypedef *ri, uint32_t value, uint8_t ndx);
   * @}
   */ 
 
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* __USBH_HID_PARSER_H */
+#endif /* _HID_PARSER_H_ */
 
 /**
   * @}

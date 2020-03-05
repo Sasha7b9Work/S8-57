@@ -1,14 +1,14 @@
 /**
   ******************************************************************************
-  * @file    usbd_msc.h
+  * @file    usbd_msc_core.h
   * @author  MCD Application Team
-  * @version V2.4.1
-  * @date    19-June-2015
-  * @brief   Header for the usbd_msc.c file
+  * @version V2.0.0
+  * @date    18-February-2014
+  * @brief   header for the usbd_msc_core.c file
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -26,14 +26,9 @@
   */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __USBD_MSC_H
-#define __USBD_MSC_H
+#ifndef _USB_MSC_CORE_H_
+#define _USB_MSC_CORE_H_
 
-#ifdef __cplusplus
- extern "C" {
-#endif
-
-/* Includes ------------------------------------------------------------------*/
 #include  "usbd_msc_bot.h"
 #include  "usbd_msc_scsi.h"
 #include  "usbd_ioreq.h"
@@ -43,7 +38,7 @@
   */
   
 /** @defgroup USBD_MSC
-  * @brief This file is the Header file for usbd_msc.c
+  * @brief This file is the Header file for USBD_msc.c
   * @{
   */ 
 
@@ -108,7 +103,6 @@ USBD_MSC_BOT_HandleTypeDef;
 
 /* Structure for MSC process */
 extern USBD_ClassTypeDef  USBD_MSC;
-#define USBD_MSC_CLASS    &USBD_MSC
 
 uint8_t  USBD_MSC_RegisterStorage  (USBD_HandleTypeDef   *pdev, 
                                     USBD_StorageTypeDef *fops);
@@ -119,12 +113,7 @@ uint8_t  USBD_MSC_RegisterStorage  (USBD_HandleTypeDef   *pdev,
 /**
   * @}
   */ 
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif  /* __USBD_MSC_H */
+#endif  // _USB_MSC_CORE_H_
 /**
   * @}
   */ 

@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    usbh_msc_scsi.c 
   * @author  MCD Application Team
-  * @version V3.2.2
-  * @date    07-July-2015
+  * @version V3.0.0
+  * @date    18-February-2014
   * @brief   This file implements the SCSI commands
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -105,7 +105,7 @@ USBH_StatusTypeDef USBH_MSC_SCSI_TestUnitReady (USBH_HandleTypeDef *phost,
                                                 uint8_t lun)
 {
   USBH_StatusTypeDef    error = USBH_FAIL ;
-  MSC_HandleTypeDef *MSC_Handle =  (MSC_HandleTypeDef *) phost->pActiveClass->pData;
+  MSC_HandleTypeDef *MSC_Handle =  phost->pActiveClass->pData;
   
   switch(MSC_Handle->hbot.cmd_state)
   {
@@ -148,7 +148,7 @@ USBH_StatusTypeDef USBH_MSC_SCSI_ReadCapacity (USBH_HandleTypeDef *phost,
                                                SCSI_CapacityTypeDef *capacity)
 {
   USBH_StatusTypeDef    error = USBH_BUSY ;
-  MSC_HandleTypeDef *MSC_Handle =  (MSC_HandleTypeDef *) phost->pActiveClass->pData;
+  MSC_HandleTypeDef *MSC_Handle =  phost->pActiveClass->pData;
   
   switch(MSC_Handle->hbot.cmd_state)
   {
@@ -204,7 +204,7 @@ USBH_StatusTypeDef USBH_MSC_SCSI_Inquiry (USBH_HandleTypeDef *phost,
                                                SCSI_StdInquiryDataTypeDef *inquiry)
 {
   USBH_StatusTypeDef    error = USBH_FAIL ;
-  MSC_HandleTypeDef *MSC_Handle =  (MSC_HandleTypeDef *) phost->pActiveClass->pData;
+  MSC_HandleTypeDef *MSC_Handle =  phost->pActiveClass->pData;
   switch(MSC_Handle->hbot.cmd_state)
   {
   case BOT_CMD_SEND:  
@@ -266,7 +266,7 @@ USBH_StatusTypeDef USBH_MSC_SCSI_RequestSense (USBH_HandleTypeDef *phost,
                                                SCSI_SenseTypeDef *sense_data)
 {
   USBH_StatusTypeDef    error = USBH_FAIL ;
-  MSC_HandleTypeDef *MSC_Handle =  (MSC_HandleTypeDef *) phost->pActiveClass->pData;
+  MSC_HandleTypeDef *MSC_Handle =  phost->pActiveClass->pData;
   
   switch(MSC_Handle->hbot.cmd_state)
   {
@@ -328,7 +328,7 @@ USBH_StatusTypeDef USBH_MSC_SCSI_Write(USBH_HandleTypeDef *phost,
 {
   USBH_StatusTypeDef    error = USBH_FAIL ;
 
-  MSC_HandleTypeDef *MSC_Handle =  (MSC_HandleTypeDef *) phost->pActiveClass->pData;
+  MSC_HandleTypeDef *MSC_Handle =  phost->pActiveClass->pData;
   
   switch(MSC_Handle->hbot.cmd_state)
   {
@@ -349,7 +349,7 @@ USBH_StatusTypeDef USBH_MSC_SCSI_Write(USBH_HandleTypeDef *phost,
     MSC_Handle->hbot.cbw.field.CB[5]  = (((uint8_t*)&address)[0]);
     
     
-    /*Transfer length */
+    /*Tranfer length */
     MSC_Handle->hbot.cbw.field.CB[7]  = (((uint8_t *)&length)[1]) ; 
     MSC_Handle->hbot.cbw.field.CB[8]  = (((uint8_t *)&length)[0]) ; 
 
@@ -388,7 +388,7 @@ USBH_StatusTypeDef USBH_MSC_SCSI_Read(USBH_HandleTypeDef *phost,
                                      uint32_t length)
 {
   USBH_StatusTypeDef    error = USBH_FAIL ;
-  MSC_HandleTypeDef *MSC_Handle = (MSC_HandleTypeDef *) phost->pActiveClass->pData;
+  MSC_HandleTypeDef *MSC_Handle =  phost->pActiveClass->pData;
   
   switch(MSC_Handle->hbot.cmd_state)
   {
@@ -409,7 +409,7 @@ USBH_StatusTypeDef USBH_MSC_SCSI_Read(USBH_HandleTypeDef *phost,
     MSC_Handle->hbot.cbw.field.CB[5]  = (((uint8_t*)&address)[0]);
     
     
-    /*Transfer length */
+    /*Tranfer length */
     MSC_Handle->hbot.cbw.field.CB[7]  = (((uint8_t *)&length)[1]) ; 
     MSC_Handle->hbot.cbw.field.CB[8]  = (((uint8_t *)&length)[0]) ; 
 

@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    usbh_cdc.h
   * @author  MCD Application Team
-  * @version V3.2.2
-  * @date    07-July-2015
+  * @version V3.0.0
+  * @date    18-February-2014
   * @brief   This file contains all the prototypes for the usbh_cdc.c
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -26,12 +26,8 @@
   */ 
 
 /* Define to prevent recursive  ----------------------------------------------*/
-#ifndef __USBH_CDC_H
-#define __USBH_CDC_H
-
-#ifdef __cplusplus
- extern "C" {
-#endif
+#ifndef __USBH_CDC_CORE_H
+#define __USBH_CDC_CORE_H
 
 /* Includes ------------------------------------------------------------------*/
 #include "usbh_core.h"
@@ -50,7 +46,7 @@
 */
 
 /** @defgroup USBH_CDC_CORE
-* @brief This file is the Header file for usbh_core.c
+* @brief This file is the Header file for USBH_CDC_CORE.c
 * @{
 */ 
 
@@ -64,7 +60,7 @@
 /*Data Interface Class Codes*/
 #define DATA_INTERFACE_CLASS_CODE                               0x0A
 
-/*Communication sub class codes*/
+/*Communcation sub class codes*/
 #define RESERVED                                                0x00
 #define DIRECT_LINE_CONTROL_MODEL                               0x01
 #define ABSTRACT_CONTROL_MODEL                                  0x02
@@ -431,11 +427,8 @@ void USBH_CDC_ReceiveCallback(USBH_HandleTypeDef *phost);
 * @}
 */ 
 
-#ifdef __cplusplus
-}
-#endif
 
-#endif /* __USBH_CDC_H */
+#endif /* __USBH_CDC_CORE_H */
 
 /**
 * @}

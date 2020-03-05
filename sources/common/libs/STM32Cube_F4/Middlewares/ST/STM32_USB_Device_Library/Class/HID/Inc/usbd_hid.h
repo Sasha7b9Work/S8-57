@@ -1,14 +1,14 @@
 /**
   ******************************************************************************
-  * @file    usbd_hid.h
+  * @file    usbd_hid_core.h
   * @author  MCD Application Team
-  * @version V2.4.1
-  * @date    19-June-2015
-  * @brief   Header file for the usbd_hid_core.c file.
+  * @version V2.0.0
+  * @date    18-February-2014
+  * @brief   header file for the usbd_hid_core.c file.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -23,25 +23,21 @@
   * limitations under the License.
   *
   ******************************************************************************
-  */
-
-/* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __USB_HID_H
-#define __USB_HID_H
-
-#ifdef __cplusplus
- extern "C" {
-#endif
+  */ 
 
 /* Includes ------------------------------------------------------------------*/
+
+#ifndef __USB_HID_CORE_H_
+#define __USB_HID_CORE_H_
+
 #include  "usbd_ioreq.h"
 
-/** @addtogroup STM32_USB_DEVICE_LIBRARY
+/** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
   * @{
   */
   
 /** @defgroup USBD_HID
-  * @brief This file is the Header file for usbd_hid.c
+  * @brief This file is the Header file for USBD_msc.c
   * @{
   */ 
 
@@ -59,9 +55,6 @@
 #define HID_DESCRIPTOR_TYPE           0x21
 #define HID_REPORT_DESC               0x22
 
-#define HID_HS_BINTERVAL               0x07
-#define HID_FS_BINTERVAL               0x0A
-#define HID_POLLING_INTERVAL           0x0A
 
 #define HID_REQ_SET_PROTOCOL          0x0B
 #define HID_REQ_GET_PROTOCOL          0x03
@@ -114,7 +107,6 @@ USBD_HID_HandleTypeDef;
   */ 
 
 extern USBD_ClassTypeDef  USBD_HID;
-#define USBD_HID_CLASS    &USBD_HID
 /**
   * @}
   */ 
@@ -126,17 +118,13 @@ uint8_t USBD_HID_SendReport (USBD_HandleTypeDef *pdev,
                                  uint8_t *report,
                                  uint16_t len);
 
-uint32_t USBD_HID_GetPollingInterval (USBD_HandleTypeDef *pdev);
+uint8_t  *USBD_HID_DeviceQualifierDescriptor (uint16_t *length);
 
 /**
   * @}
   */ 
 
-#ifdef __cplusplus
-}
-#endif
-
-#endif  /* __USB_HID_H */
+#endif  // __USB_HID_CORE_H_
 /**
   * @}
   */ 

@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    usbd_msc_scsi.h
   * @author  MCD Application Team
-  * @version V2.4.1
-  * @date    19-June-2015
-  * @brief   Header for the usbd_msc_scsi.c file
+  * @version V2.0.0
+  * @date    18-February-2014
+  * @brief   header for the usbd_msc_scsi.c file
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -29,14 +29,10 @@
 #ifndef __USBD_MSC_SCSI_H
 #define __USBD_MSC_SCSI_H
 
-#ifdef __cplusplus
- extern "C" {
-#endif
-
 /* Includes ------------------------------------------------------------------*/
 #include "usbd_def.h"
 
-/** @addtogroup STM32_USB_DEVICE_LIBRARY
+/** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
   * @{
   */
   
@@ -49,7 +45,7 @@
   * @{
   */ 
 
-#define SENSE_LIST_DEEPTH                           4
+#define SENSE_LIST_DEEPTH                          4
 
 /* SCSI Commands */
 #define SCSI_FORMAT_UNIT                            0x04
@@ -92,10 +88,10 @@
 #define DATA_PROTECT                                7
 #define BLANK_CHECK                                 8
 #define VENDOR_SPECIFIC                             9
-#define COPY_ABORTED                                10
-#define ABORTED_COMMAND                             11
-#define VOLUME_OVERFLOW                             13
-#define MISCOMPARE                                  14
+#define COPY_ABORTED                               10
+#define ABORTED_COMMAND                            11
+#define VOLUME_OVERFLOW                            13
+#define MISCOMPARE                                 14
 
 
 #define INVALID_CDB                                 0x20
@@ -179,10 +175,6 @@ void   SCSI_SenseCode(USBD_HandleTypeDef  *pdev,
 /**
   * @}
   */ 
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* __USBD_MSC_SCSI_H */
 /**

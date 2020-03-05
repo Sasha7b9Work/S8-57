@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    usbh_hid_keybd.h
   * @author  MCD Application Team
-  * @version V3.2.2
-  * @date    07-July-2015
+  * @version V3.0.0
+  * @date    18-February-2014
   * @brief   This file contains all the prototypes for the usbh_hid_keybd.c
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -29,10 +29,6 @@
 #ifndef __USBH_HID_KEYBD_H
 #define __USBH_HID_KEYBD_H
 
-#ifdef __cplusplus
- extern "C" {
-#endif
-
 /* Includes ------------------------------------------------------------------*/
 #include "usbh_hid.h"
 #include "usbh_hid_keybd.h"
@@ -50,7 +46,7 @@
   */
   
 /** @defgroup USBH_HID_KEYBD
-  * @brief This file is the Header file for usbh_hid_keybd.c
+  * @brief This file is the Header file for USBH_HID_KEYBD.c
   * @{
   */ 
 
@@ -300,10 +296,6 @@ uint8_t USBH_HID_GetASCIICode(HID_KEYBD_Info_TypeDef *info);
 /**
   * @}
   */ 
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* __USBH_HID_KEYBD_H */
 

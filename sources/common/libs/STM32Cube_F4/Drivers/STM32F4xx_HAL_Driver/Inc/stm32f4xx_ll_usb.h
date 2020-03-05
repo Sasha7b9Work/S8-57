@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    stm32f4xx_ll_usb.h
   * @author  MCD Application Team
-  * @version V1.4.1
-  * @date    09-October-2015
+  * @version V1.0.0
+  * @date    18-February-2014
   * @brief   Header file of USB Core HAL module.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -42,10 +42,7 @@
 #ifdef __cplusplus
  extern "C" {
 #endif
-#if defined(STM32F405xx) || defined(STM32F415xx) || defined(STM32F407xx) || defined(STM32F417xx) || \
-    defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) || \
-    defined(STM32F401xC) || defined(STM32F401xE) || defined(STM32F411xE) || defined(STM32F446xx) || \
-    defined(STM32F469xx) || defined(STM32F479xx) 
+
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal_def.h"
 
@@ -125,11 +122,7 @@ typedef struct
                                 
   uint32_t Sof_enable;           /*!< Enable or disable the output of the SOF signal.                        */     
                                
-  uint32_t low_power_enable;     /*!< Enable or disable the low power mode.                                  */
-  
-  uint32_t lpm_enable;           /*!< Enable or disable Link Power Management.                               */
-
-  uint32_t battery_charging_enable; /*!< Enable or disable Battery charging.                                 */
+  uint32_t low_power_enable;     /*!< Enable or disable the low power mode.                                  */     
                           
   uint32_t vbus_sensing_enable;  /*!< Enable or disable the VBUS Sensing feature.                            */ 
 
@@ -231,11 +224,11 @@ typedef struct
   
 /* Exported constants --------------------------------------------------------*/
 
-/** @defgroup PCD_Exported_Constants PCD Exported Constants
+/** @defgroup PCD_Exported_Constants
   * @{
   */
 
-/** @defgroup USB_Core_Mode_ USB Core Mode
+/** @defgroup USB_Core_Mode_
   * @{
   */
 #define USB_OTG_MODE_DEVICE                    0
@@ -245,7 +238,7 @@ typedef struct
   * @}
   */
 
-/** @defgroup USB_Core_Speed_   USB Core Speed
+/** @defgroup USB_Core_Speed_
   * @{
   */  
 #define USB_OTG_SPEED_HIGH                     0
@@ -256,7 +249,7 @@ typedef struct
   * @}
   */
   
-/** @defgroup USB_Core_PHY_   USB Core PHY
+/** @defgroup USB_Core_PHY_
   * @{
   */   
 #define USB_OTG_ULPI_PHY                       1
@@ -265,7 +258,7 @@ typedef struct
   * @}
   */
   
-/** @defgroup USB_Core_MPS_   USB Core MPS
+/** @defgroup USB_Core_MPS_
   * @{
   */
 #define USB_OTG_HS_MAX_PACKET_SIZE           512
@@ -275,7 +268,7 @@ typedef struct
   * @}
   */
 
-/** @defgroup USB_Core_Phy_Frequency_   USB Core Phy Frequency
+/** @defgroup USB_Core_Phy_Frequency_
   * @{
   */
 #define DSTS_ENUMSPD_HS_PHY_30MHZ_OR_60MHZ     (0 << 1)
@@ -286,7 +279,7 @@ typedef struct
   * @}
   */
   
-/** @defgroup USB_CORE_Frame_Interval_   USB CORE Frame Interval
+/** @defgroup USB_CORE_Frame_Interval_
   * @{
   */  
 #define DCFG_FRAME_INTERVAL_80                 0
@@ -297,7 +290,7 @@ typedef struct
   * @}
   */
 
-/** @defgroup USB_EP0_MPS_  USB EP0 MPS
+/** @defgroup USB_EP0_MPS_
   * @{
   */
 #define DEP0CTL_MPS_64                         0
@@ -308,7 +301,7 @@ typedef struct
   * @}
   */
 
-/** @defgroup USB_EP_Speed_  USB EP Speed
+/** @defgroup USB_EP_Speed_
   * @{
   */
 #define EP_SPEED_LOW                           0
@@ -318,7 +311,7 @@ typedef struct
   * @}
   */
 
-/** @defgroup USB_EP_Type_  USB EP Type
+/** @defgroup USB_EP_Type_
   * @{
   */
 #define EP_TYPE_CTRL                           0
@@ -330,7 +323,7 @@ typedef struct
   * @}
   */
 
-/** @defgroup USB_STS_Defines_   USB STS Defines
+/** @defgroup USB_STS_Defines_
   * @{
   */
 #define STS_GOUT_NAK                           1
@@ -342,7 +335,7 @@ typedef struct
   * @}
   */
 
-/** @defgroup HCFG_SPEED_Defines_   HCFG SPEED Defines
+/** @defgroup HCFG_SPEED_Defines_
   * @{
   */  
 #define HCFG_30_60_MHZ                         0
@@ -352,7 +345,7 @@ typedef struct
   * @}
   */
     
-/** @defgroup HPRT0_PRTSPD_SPEED_Defines_  HPRT0 PRTSPD SPEED Defines
+/** @defgroup HPRT0_PRTSPD_SPEED_Defines_
   * @{
   */    
 #define HPRT0_PRTSPD_HIGH_SPEED                0
@@ -387,9 +380,7 @@ typedef struct
 
 #define USBx_HOST       ((USB_OTG_HostTypeDef *)((uint32_t )USBx + USB_OTG_HOST_BASE))  
 #define USBx_HC(i)      ((USB_OTG_HostChannelTypeDef *)((uint32_t)USBx + USB_OTG_HOST_CHANNEL_BASE + (i)*USB_OTG_HOST_CHANNEL_SIZE))
-/**
-  * @}
-  */
+
 /* Exported macro ------------------------------------------------------------*/
 #define USB_MASK_INTERRUPT(__INSTANCE__, __INTERRUPT__)     ((__INSTANCE__)->GINTMSK &= ~(__INTERRUPT__))
 #define USB_UNMASK_INTERRUPT(__INSTANCE__, __INTERRUPT__)   ((__INSTANCE__)->GINTMSK |= (__INTERRUPT__))
@@ -457,8 +448,7 @@ HAL_StatusTypeDef USB_StopHost(USB_OTG_GlobalTypeDef *USBx);
 /**
   * @}
   */
-#endif /* STM32F405xx || STM32F415xx || STM32F407xx || STM32F417xx || STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx ||
-          STM32F401xC || STM32F401xE || STM32F411xE || STM32F446xx || STM32F469xx || STM32F479xx  */
+  
 #ifdef __cplusplus
 }
 #endif

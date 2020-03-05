@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    usbd_dfu_media_template.c
   * @author  MCD Application Team
-  * @version V2.4.1
-  * @date    19-June-2015
+  * @version V2.0.0
+  * @date    18-February-2014
   * @brief   Memory management layer
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -59,7 +59,7 @@ USBD_DFU_MediaTypeDef USBD_DFU_MEDIA_Template_fops =
   * @brief  MEM_If_Init
   *         Memory initialization routine.
   * @param  None
-  * @retval 0 if operation is successful, MAL_FAIL else.
+  * @retval 0 if operation is successeful, MAL_FAIL else.
   */
 uint16_t MEM_If_Init(void)
 { 
@@ -70,7 +70,7 @@ uint16_t MEM_If_Init(void)
   * @brief  MEM_If_DeInit
   *         Memory deinitialization routine.
   * @param  None
-  * @retval 0 if operation is successful, MAL_FAIL else.
+  * @retval 0 if operation is successeful, MAL_FAIL else.
   */
 uint16_t MEM_If_DeInit(void)
 { 
@@ -81,7 +81,7 @@ uint16_t MEM_If_DeInit(void)
   * @brief  MEM_If_Erase
   *         Erase sector.
   * @param  Add: Address of sector to be erased.
-  * @retval 0 if operation is successful, MAL_FAIL else.
+  * @retval 0 if operation is successeful, MAL_FAIL else.
   */
 uint16_t MEM_If_Erase(uint32_t Add)
 {
@@ -93,7 +93,7 @@ uint16_t MEM_If_Erase(uint32_t Add)
   *         Memory write routine.
   * @param  Add: Address to be written to.
   * @param  Len: Number of data to be written (in bytes).
-  * @retval 0 if operation is successful, MAL_FAIL else.
+  * @retval 0 if operation is successeful, MAL_FAIL else.
   */
 uint16_t MEM_If_Write(uint8_t *src, uint8_t *dest, uint32_t Len)
 {
@@ -105,7 +105,7 @@ uint16_t MEM_If_Write(uint8_t *src, uint8_t *dest, uint32_t Len)
   *         Memory read routine.
   * @param  Add: Address to be read from.
   * @param  Len: Number of data to be read (in bytes).
-  * @retval Pointer to the physical address where data should be read.
+  * @retval Pointer to the phyisical address where data should be read.
   */
 uint8_t *MEM_If_Read (uint8_t *src, uint8_t *dest, uint32_t Len)
 {
@@ -118,7 +118,7 @@ uint8_t *MEM_If_Read (uint8_t *src, uint8_t *dest, uint32_t Len)
   *         Memory read routine.
   * @param  Add: Address to be read from.
   * @param  cmd: Number of data to be read (in bytes).
-  * @retval Pointer to the physical address where data should be read.
+  * @retval Pointer to the phyisical address where data should be read.
   */
 uint16_t MEM_If_GetStatus (uint32_t Add, uint8_t Cmd, uint8_t *buffer)
 {

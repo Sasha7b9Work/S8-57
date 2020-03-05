@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    usbd_msc_storage.h
   * @author  MCD Application Team
-  * @version V2.4.1
-  * @date    19-June-2015
-  * @brief   Header file for the usbd_msc_storage.c file
+  * @version V2.0.0
+  * @date    18-February-2014
+  * @brief   header file for the usbd_msc_storage.c file
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -26,22 +26,19 @@
   */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __USBD_MSC_STORAGE_H
-#define __USBD_MSC_STORAGE_H
 
-#ifdef __cplusplus
- extern "C" {
-#endif
+#ifndef __USBD_MSC_STORAGE_H_
+#define __USBD_MSC_STORAGE_H_
 
 /* Includes ------------------------------------------------------------------*/
 #include "usbd_msc.h"
 
-/** @addtogroup STM32_USB_DEVICE_LIBRARY
+/** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
   * @{
   */
   
 /** @defgroup USBD_STORAGE
-  * @brief header file for the usbd_msc_storage.c file
+  * @brief header file for the USBD_STORAGE.c file
   * @{
   */ 
 
@@ -89,11 +86,7 @@ extern USBD_StorageTypeDef  USBD_MSC_Template_fops;
   * @}
   */ 
 
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* __USBD_MSC_STORAGE_H */
+#endif /* __USBD_MSC_STORAGE_H_ */
 
 /**
   * @}

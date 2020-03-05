@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f4xx_hal_crc.c
   * @author  MCD Application Team
-  * @version V1.4.1
-  * @date    09-October-2015
+  * @version V1.0.0
+  * @date    18-February-2014
   * @brief   CRC HAL module driver.
   *          This file provides firmware functions to manage the following 
   *          functionalities of the Cyclic Redundancy Check (CRC) peripheral:
@@ -18,7 +18,7 @@
     [..]
       The CRC HAL driver can be used as follows:
 
-      (#) Enable CRC AHB clock using __HAL_RCC_CRC_CLK_ENABLE();
+      (#) Enable CRC AHB clock using __CRC_CLK_ENABLE();
 
       (#) Use HAL_CRC_Accumulate() function to compute the CRC value of 
           a 32-bit data buffer using combination of the previous CRC value
@@ -32,7 +32,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -66,7 +66,8 @@
   * @{
   */
 
-/** @addtogroup CRC 
+/** @defgroup CRC 
+  * @brief CRC HAL module driver.
   * @{
   */
 
@@ -78,16 +79,15 @@
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
-/* Exported functions --------------------------------------------------------*/
 
-/** @addtogroup CRC_Exported_Functions
+/** @defgroup CRC_Private_Functions
   * @{
   */
 
-/** @addtogroup CRC_Exported_Functions_Group1
- *  @brief   Initialization and de-initialization functions 
+/** @defgroup CRC_Group1 Initialization and de-initialization functions 
+ *  @brief    Initialization and Configuration functions. 
  *
-@verbatim     
+@verbatim    
   ==============================================================================
             ##### Initialization and de-initialization functions #####
   ==============================================================================
@@ -105,8 +105,7 @@
 /**
   * @brief  Initializes the CRC according to the specified
   *         parameters in the CRC_InitTypeDef and creates the associated handle.
-  * @param  hcrc: pointer to a CRC_HandleTypeDef structure that contains
-  *         the configuration information for CRC
+  * @param  hcrc: CRC handle
   * @retval HAL status
   */
 HAL_StatusTypeDef HAL_CRC_Init(CRC_HandleTypeDef *hcrc)
@@ -122,8 +121,6 @@ HAL_StatusTypeDef HAL_CRC_Init(CRC_HandleTypeDef *hcrc)
 
   if(hcrc->State == HAL_CRC_STATE_RESET)
   {
-    /* Allocate lock resource and initialize it */
-    hcrc->Lock = HAL_UNLOCKED;
     /* Init the low level hardware */
     HAL_CRC_MspInit(hcrc);
   }
@@ -140,8 +137,7 @@ HAL_StatusTypeDef HAL_CRC_Init(CRC_HandleTypeDef *hcrc)
 
 /**
   * @brief  DeInitializes the CRC peripheral.
-  * @param  hcrc: pointer to a CRC_HandleTypeDef structure that contains
-  *         the configuration information for CRC
+  * @param  hcrc: CRC handle
   * @retval HAL status
   */
 HAL_StatusTypeDef HAL_CRC_DeInit(CRC_HandleTypeDef *hcrc)
@@ -173,8 +169,7 @@ HAL_StatusTypeDef HAL_CRC_DeInit(CRC_HandleTypeDef *hcrc)
 
 /**
   * @brief  Initializes the CRC MSP.
-  * @param  hcrc: pointer to a CRC_HandleTypeDef structure that contains
-  *         the configuration information for CRC
+  * @param  hcrc: CRC handle
   * @retval None
   */
 __weak void HAL_CRC_MspInit(CRC_HandleTypeDef *hcrc)
@@ -186,8 +181,7 @@ __weak void HAL_CRC_MspInit(CRC_HandleTypeDef *hcrc)
 
 /**
   * @brief  DeInitializes the CRC MSP.
-  * @param  hcrc: pointer to a CRC_HandleTypeDef structure that contains
-  *         the configuration information for CRC
+  * @param  hcrc: CRC handle
   * @retval None
   */
 __weak void HAL_CRC_MspDeInit(CRC_HandleTypeDef *hcrc)
@@ -199,12 +193,12 @@ __weak void HAL_CRC_MspDeInit(CRC_HandleTypeDef *hcrc)
 
 /**
   * @}
-  */ 
+  */
 
-/** @addtogroup CRC_Exported_Functions_Group2
- *  @brief   Peripheral Control functions 
+/** @defgroup CRC_Group2 Peripheral Control functions 
+ *  @brief    management functions. 
  *
-@verbatim  
+@verbatim   
   ==============================================================================
                       ##### Peripheral Control functions #####
   ==============================================================================  
@@ -221,8 +215,7 @@ __weak void HAL_CRC_MspDeInit(CRC_HandleTypeDef *hcrc)
 /**
   * @brief  Computes the 32-bit CRC of 32-bit data buffer using combination
   *         of the previous CRC value and the new one.
-  * @param  hcrc: pointer to a CRC_HandleTypeDef structure that contains
-  *         the configuration information for CRC
+  * @param  hcrc: CRC handle
   * @param  pBuffer: pointer to the buffer containing the data to be computed
   * @param  BufferLength: length of the buffer to be computed
   * @retval 32-bit CRC
@@ -256,8 +249,7 @@ uint32_t HAL_CRC_Accumulate(CRC_HandleTypeDef *hcrc, uint32_t pBuffer[], uint32_
 /**
   * @brief  Computes the 32-bit CRC of 32-bit data buffer independently
   *         of the previous CRC value.
-  * @param  hcrc: pointer to a CRC_HandleTypeDef structure that contains
-  *         the configuration information for CRC
+  * @param  hcrc: CRC handle
   * @param  pBuffer: Pointer to the buffer containing the data to be computed
   * @param  BufferLength: Length of the buffer to be computed
   * @retval 32-bit CRC
@@ -293,11 +285,10 @@ uint32_t HAL_CRC_Calculate(CRC_HandleTypeDef *hcrc, uint32_t pBuffer[], uint32_t
 
 /**
   * @}
-  */ 
+  */
 
-  
-/** @addtogroup CRC_Exported_Functions_Group3
- *  @brief   Peripheral State functions 
+/** @defgroup CRC_Group3 Peripheral State functions 
+ *  @brief    Peripheral State functions. 
  *
 @verbatim   
   ==============================================================================
@@ -313,8 +304,7 @@ uint32_t HAL_CRC_Calculate(CRC_HandleTypeDef *hcrc, uint32_t pBuffer[], uint32_t
 
 /**
   * @brief  Returns the CRC state.
-  * @param  hcrc: pointer to a CRC_HandleTypeDef structure that contains
-  *         the configuration information for CRC
+  * @param  hcrc: CRC handle
   * @retval HAL state
   */
 HAL_CRC_StateTypeDef HAL_CRC_GetState(CRC_HandleTypeDef *hcrc)

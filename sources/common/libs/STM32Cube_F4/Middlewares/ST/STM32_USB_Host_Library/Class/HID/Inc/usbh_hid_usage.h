@@ -1,14 +1,14 @@
 /**
   ******************************************************************************
-  * @file    usbh_hid_usage.c 
+  * @file    usbh_hid_keybd.c 
   * @author  MCD Application Team
-  * @version V3.2.2
-  * @date    07-July-2015
+  * @version V3.0.0
+  * @date    18-February-2014
   * @brief   This file contain the USAGE page codes              
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -23,14 +23,9 @@
   * limitations under the License.
   *
   ******************************************************************************
-  */
-/* Define to prevent recursive  ----------------------------------------------*/
-#ifndef __USDH_HID_USAGE_H
-#define __USDH_HID_USAGE_H
-
-#ifdef __cplusplus
- extern "C" {
-#endif
+  */ 
+#ifndef _HID_USAGE_H_
+#define _HID_USAGE_H_
 
 /** @addtogroup USBH_LIB
   * @{
@@ -45,7 +40,7 @@
   */
   
 /** @defgroup USBH_HID_USAGE
-  * @brief This file is the Header file for usbh_hid_usage.c
+  * @brief This file is the Header file for USBH_HID_USAGE.c
   * @{
   */ 
 
@@ -94,7 +89,7 @@
 #define HID_USAGE_PAGE_ARCADE     uint16_t (0x91)   /* Arcade Page */
 
 /****************************************************/
-/* Usage definitions for the "Generic Desktop" page */
+/* Usage definitions for the "Generic Decktop" page */
 /****************************************************/
 #define HID_USAGE_UNDEFINED     uint16_t (0x00)   /* Undefined */
 #define HID_USAGE_POINTER       uint16_t (0x01)   /* Pointer (Physical Collection) */
@@ -176,11 +171,7 @@
   * @}
   */ 
 
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* __USDH_HID_USAGE_H */
+#endif /* _HID_USAGE_H_ */
 
 /**
   * @}

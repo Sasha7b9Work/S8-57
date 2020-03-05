@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    usbd_customhid.c
+  * @file    usbd_hid.c
   * @author  MCD Application Team
-  * @version V2.4.1
-  * @date    19-June-2015
+  * @version V2.0.0
+  * @date    18-February-2014
   * @brief   This file provides the CUSTOM_HID core functions.
   *
   * @verbatim
@@ -15,8 +15,9 @@
   *           for Human Interface Devices (CUSTOM_HID) Version 1.11 Jun 27, 2001".
   *           This driver implements the following aspects of the specification:
   *             - The Boot Interface Subclass
+  *             - The Mouse protocol
   *             - Usage Page : Generic Desktop
-  *             - Usage : Vendor
+  *             - Usage : Joystick)
   *             - Collection : Application 
   *      
   * @note     In HS mode and when the DMA is used, all variables and data structures
@@ -28,7 +29,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -51,7 +52,7 @@
 #include "usbd_ctlreq.h"
 
 
-/** @addtogroup STM32_USB_DEVICE_LIBRARY
+/** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
   * @{
   */
 
@@ -84,6 +85,10 @@
 /**
   * @}
   */ 
+uint8_t Report_buf[2];
+extern uint8_t PrevXferDone;
+uint32_t flag = 0;
+uint8_t USBD_CUSTOM_HID_Report_ID=0;
 /** @defgroup USBD_CUSTOM_HID_Private_FunctionPrototypes
   * @{
   */
@@ -162,12 +167,12 @@ __ALIGN_BEGIN static uint8_t USBD_CUSTOM_HID_CfgDesc[USB_CUSTOM_HID_CONFIG_DESC_
   /* 18 */
   0x09,         /*bLength: CUSTOM_HID Descriptor size*/
   CUSTOM_HID_DESCRIPTOR_TYPE, /*bDescriptorType: CUSTOM_HID*/
-  0x11,         /*bCUSTOM_HIDUSTOM_HID: CUSTOM_HID Class Spec release number*/
+  0x11,         /*bcdCUSTOM_HID: CUSTOM_HID Class Spec release number*/
   0x01,
   0x00,         /*bCountryCode: Hardware target country*/
   0x01,         /*bNumDescriptors: Number of CUSTOM_HID class descriptors to follow*/
   0x22,         /*bDescriptorType*/
-  USBD_CUSTOM_HID_REPORT_DESC_SIZE,/*wItemLength: Total length of Report descriptor*/
+  CUSTOM_HID_REPORT_DESC_SIZE,/*wItemLength: Total length of Report descriptor*/
   0x00,
   /******************** Descriptor of Custom HID endpoints ********************/
   /* 27 */
@@ -197,12 +202,12 @@ __ALIGN_BEGIN static uint8_t USBD_CUSTOM_HID_Desc[USB_CUSTOM_HID_DESC_SIZ] __ALI
   /* 18 */
   0x09,         /*bLength: CUSTOM_HID Descriptor size*/
   CUSTOM_HID_DESCRIPTOR_TYPE, /*bDescriptorType: CUSTOM_HID*/
-  0x11,         /*bCUSTOM_HIDUSTOM_HID: CUSTOM_HID Class Spec release number*/
+  0x11,         /*bcdCUSTOM_HID: CUSTOM_HID Class Spec release number*/
   0x01,
   0x00,         /*bCountryCode: Hardware target country*/
   0x01,         /*bNumDescriptors: Number of CUSTOM_HID class descriptors to follow*/
   0x22,         /*bDescriptorType*/
-  USBD_CUSTOM_HID_REPORT_DESC_SIZE,/*wItemLength: Total length of Report descriptor*/
+  CUSTOM_HID_REPORT_DESC_SIZE,/*wItemLength: Total length of Report descriptor*/
   0x00,
 };
 
@@ -220,6 +225,125 @@ __ALIGN_BEGIN static uint8_t USBD_CUSTOM_HID_DeviceQualifierDesc[USB_LEN_DEV_QUA
   0x01,
   0x00,
 };
+
+
+__ALIGN_BEGIN static uint8_t CUSTOM_HID_ReportDesc[CUSTOM_HID_REPORT_DESC_SIZE] __ALIGN_END =
+{
+  0x06, 0xFF, 0x00,      /* USAGE_PAGE (Vendor Page: 0xFF00) */                       
+  0x09, 0x01,            /* USAGE (Demo Kit)               */    
+  0xa1, 0x01,            /* COLLECTION (Application)       */            
+  /* 6 */
+  
+  /* Led 1 */        
+  0x85, 0x01,            /*     REPORT_ID (1)		     */
+  0x09, 0x01,            /*     USAGE (LED 1)	             */
+  0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */          
+  0x25, 0x01,            /*     LOGICAL_MAXIMUM (1)        */           
+  0x75, 0x08,            /*     REPORT_SIZE (8)            */        
+  0x95, 0x01,            /*     REPORT_COUNT (1)           */       
+  0xB1, 0x82,             /*    FEATURE (Data,Var,Abs,Vol) */     
+  
+  0x85, 0x01,            /*     REPORT_ID (1)              */
+  0x09, 0x01,            /*     USAGE (LED 1)              */
+  0x91, 0x82,            /*     OUTPUT (Data,Var,Abs,Vol)  */
+  /* 26 */
+  
+  /* Led 2 */
+  0x85, 0x02,            /*     REPORT_ID 2		     */
+  0x09, 0x02,            /*     USAGE (LED 2)	             */
+  0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */          
+  0x25, 0x01,            /*     LOGICAL_MAXIMUM (1)        */           
+  0x75, 0x08,            /*     REPORT_SIZE (8)            */        
+  0x95, 0x01,            /*     REPORT_COUNT (1)           */       
+  0xB1, 0x82,             /*    FEATURE (Data,Var,Abs,Vol) */     
+  
+  0x85, 0x02,            /*     REPORT_ID (2)              */
+  0x09, 0x02,            /*     USAGE (LED 2)              */
+  0x91, 0x82,            /*     OUTPUT (Data,Var,Abs,Vol)  */
+  /* 46 */
+  
+  /* Led 3 */        
+  0x85, 0x03,            /*     REPORT_ID (3)		     */
+  0x09, 0x03,            /*     USAGE (LED 3)	             */
+  0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */          
+  0x25, 0x01,            /*     LOGICAL_MAXIMUM (1)        */           
+  0x75, 0x08,            /*     REPORT_SIZE (8)            */        
+  0x95, 0x01,            /*     REPORT_COUNT (1)           */       
+  0xB1, 0x82,             /*    FEATURE (Data,Var,Abs,Vol) */     
+  
+  0x85, 0x03,            /*     REPORT_ID (3)              */
+  0x09, 0x03,            /*     USAGE (LED 3)              */
+  0x91, 0x82,            /*     OUTPUT (Data,Var,Abs,Vol)  */
+  /* 66 */
+  
+  /* Led 4 */
+  0x85, 0x04,            /*     REPORT_ID 4)		     */
+  0x09, 0x04,            /*     USAGE (LED 4)	             */
+  0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */          
+  0x25, 0x01,            /*     LOGICAL_MAXIMUM (1)        */           
+  0x75, 0x08,            /*     REPORT_SIZE (8)            */        
+  0x95, 0x01,            /*     REPORT_COUNT (1)           */       
+  0xB1, 0x82,            /*     FEATURE (Data,Var,Abs,Vol) */     
+  
+  0x85, 0x04,            /*     REPORT_ID (4)              */
+  0x09, 0x04,            /*     USAGE (LED 4)              */
+  0x91, 0x82,            /*     OUTPUT (Data,Var,Abs,Vol)  */
+  /* 86 */
+  
+  /* key Push Button */  
+  0x85, 0x05,            /*     REPORT_ID (5)              */
+  0x09, 0x05,            /*     USAGE (Push Button)        */      
+  0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */      
+  0x25, 0x01,            /*     LOGICAL_MAXIMUM (1)        */      
+  0x75, 0x01,            /*     REPORT_SIZE (1)            */  
+  0x81, 0x82,            /*     INPUT (Data,Var,Abs,Vol)   */   
+  
+  0x09, 0x05,            /*     USAGE (Push Button)        */               
+  0x75, 0x01,            /*     REPORT_SIZE (1)            */           
+  0xb1, 0x82,            /*     FEATURE (Data,Var,Abs,Vol) */  
+  
+  0x75, 0x07,            /*     REPORT_SIZE (7)            */           
+  0x81, 0x83,            /*     INPUT (Cnst,Var,Abs,Vol)   */                    
+  0x85, 0x05,            /*     REPORT_ID (2)              */         
+  
+  0x75, 0x07,            /*     REPORT_SIZE (7)            */           
+  0xb1, 0x83,            /*     FEATURE (Cnst,Var,Abs,Vol) */                      
+  /* 114 */
+  
+  /* Tamper Push Button */  
+  0x85, 0x06,            /*     REPORT_ID (6)              */
+  0x09, 0x06,            /*     USAGE (Tamper Push Button) */      
+  0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */      
+  0x25, 0x01,            /*     LOGICAL_MAXIMUM (1)        */      
+  0x75, 0x01,            /*     REPORT_SIZE (1)            */  
+  0x81, 0x82,            /*     INPUT (Data,Var,Abs,Vol)   */   
+  
+  0x09, 0x06,            /*     USAGE (Tamper Push Button) */               
+  0x75, 0x01,            /*     REPORT_SIZE (1)            */           
+  0xb1, 0x82,            /*     FEATURE (Data,Var,Abs,Vol) */  
+  
+  0x75, 0x07,            /*     REPORT_SIZE (7)            */           
+  0x81, 0x83,            /*     INPUT (Cnst,Var,Abs,Vol)   */                    
+  0x85, 0x06,            /*     REPORT_ID (6)              */         
+  
+  0x75, 0x07,            /*     REPORT_SIZE (7)            */           
+  0xb1, 0x83,            /*     FEATURE (Cnst,Var,Abs,Vol) */  
+  /* 142 */
+  
+  /* ADC IN */
+  0x85, 0x07,            /*     REPORT_ID (7)              */         
+  0x09, 0x07,            /*     USAGE (ADC IN)             */          
+  0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */               
+  0x26, 0xff, 0x00,      /*     LOGICAL_MAXIMUM (255)      */                 
+  0x75, 0x08,            /*     REPORT_SIZE (8)            */           
+  0x81, 0x82,            /*     INPUT (Data,Var,Abs,Vol)   */                    
+  0x85, 0x07,            /*     REPORT_ID (7)              */                 
+  0x09, 0x07,            /*     USAGE (ADC in)             */                     
+  0xb1, 0x82,            /*     FEATURE (Data,Var,Abs,Vol) */                                 
+  /* 161 */
+  
+  0xc0 	          /*     END_COLLECTION	             */
+}; 
 
 /**
   * @}
@@ -240,7 +364,7 @@ static uint8_t  USBD_CUSTOM_HID_Init (USBD_HandleTypeDef *pdev,
                                uint8_t cfgidx)
 {
   uint8_t ret = 0;
-  USBD_CUSTOM_HID_HandleTypeDef     *hhid;
+  
   /* Open EP IN */
   USBD_LL_OpenEP(pdev,
                  CUSTOM_HID_EPIN_ADDR,
@@ -261,13 +385,9 @@ static uint8_t  USBD_CUSTOM_HID_Init (USBD_HandleTypeDef *pdev,
   }
   else
   {
-    hhid = (USBD_CUSTOM_HID_HandleTypeDef*) pdev->pClassData;
-      
-    hhid->state = CUSTOM_HID_IDLE;
-    ((USBD_CUSTOM_HID_ItfTypeDef *)pdev->pUserData)->Init();
+    ((USBD_CUSTOM_HID_HandleTypeDef *)pdev->pClassData)->state = CUSTOM_HID_IDLE;
           /* Prepare Out endpoint to receive 1st packet */ 
-    USBD_LL_PrepareReceive(pdev, CUSTOM_HID_EPOUT_ADDR, hhid->Report_buf, 
-                           USBD_CUSTOMHID_OUTREPORT_BUF_SIZE);
+    USBD_LL_PrepareReceive(pdev, CUSTOM_HID_EPOUT_ADDR , Report_buf , 2);
   }
     
   return ret;
@@ -285,16 +405,15 @@ static uint8_t  USBD_CUSTOM_HID_DeInit (USBD_HandleTypeDef *pdev,
 {
   /* Close CUSTOM_HID EP IN */
   USBD_LL_CloseEP(pdev,
-                  CUSTOM_HID_EPIN_ADDR);
+                  CUSTOM_HID_EPIN_SIZE);
   
   /* Close CUSTOM_HID EP OUT */
   USBD_LL_CloseEP(pdev,
-                  CUSTOM_HID_EPOUT_ADDR);
+                  CUSTOM_HID_EPOUT_SIZE);
   
   /* FRee allocated memory */
   if(pdev->pClassData != NULL)
   {
-    ((USBD_CUSTOM_HID_ItfTypeDef *)pdev->pUserData)->DeInit();
     USBD_free(pdev->pClassData);
     pdev->pClassData = NULL;
   }
@@ -311,9 +430,10 @@ static uint8_t  USBD_CUSTOM_HID_DeInit (USBD_HandleTypeDef *pdev,
 static uint8_t  USBD_CUSTOM_HID_Setup (USBD_HandleTypeDef *pdev, 
                                 USBD_SetupReqTypedef *req)
 {
+  uint8_t USBD_CUSTOM_HID_Report_LENGTH=0;
   uint16_t len = 0;
   uint8_t  *pbuf = NULL;
-  USBD_CUSTOM_HID_HandleTypeDef     *hhid = (USBD_CUSTOM_HID_HandleTypeDef*)pdev->pClassData;
+  USBD_CUSTOM_HID_HandleTypeDef     *hhid = pdev->pClassData;
 
   switch (req->bmRequest & USB_REQ_TYPE_MASK)
   {
@@ -343,8 +463,10 @@ static uint8_t  USBD_CUSTOM_HID_Setup (USBD_HandleTypeDef *pdev,
       break;      
     
     case CUSTOM_HID_REQ_SET_REPORT:
-      hhid->IsReportAvailable = 1;
-      USBD_CtlPrepareRx (pdev, hhid->Report_buf, (uint8_t)(req->wLength));
+      flag = 1;
+      USBD_CUSTOM_HID_Report_ID = (uint8_t)(req->wValue);
+      USBD_CUSTOM_HID_Report_LENGTH = (uint8_t)(req->wLength);
+      USBD_CtlPrepareRx (pdev, Report_buf, USBD_CUSTOM_HID_Report_LENGTH);
       
       break;
     default:
@@ -359,8 +481,8 @@ static uint8_t  USBD_CUSTOM_HID_Setup (USBD_HandleTypeDef *pdev,
     case USB_REQ_GET_DESCRIPTOR: 
       if( req->wValue >> 8 == CUSTOM_HID_REPORT_DESC)
       {
-        len = MIN(USBD_CUSTOM_HID_REPORT_DESC_SIZE , req->wLength);
-        pbuf =  ((USBD_CUSTOM_HID_ItfTypeDef *)pdev->pUserData)->pReport;
+        len = MIN(CUSTOM_HID_REPORT_DESC_SIZE , req->wLength);
+        pbuf = CUSTOM_HID_ReportDesc;
       }
       else if( req->wValue >> 8 == CUSTOM_HID_DESCRIPTOR_TYPE)
       {
@@ -399,7 +521,7 @@ uint8_t USBD_CUSTOM_HID_SendReport     (USBD_HandleTypeDef  *pdev,
                                  uint8_t *report,
                                  uint16_t len)
 {
-  USBD_CUSTOM_HID_HandleTypeDef     *hhid = (USBD_CUSTOM_HID_HandleTypeDef*)pdev->pClassData;
+  USBD_CUSTOM_HID_HandleTypeDef     *hhid = pdev->pClassData;
   
   if (pdev->dev_state == USBD_STATE_CONFIGURED )
   {
@@ -442,7 +564,8 @@ static uint8_t  USBD_CUSTOM_HID_DataIn (USBD_HandleTypeDef *pdev,
   /* Ensure that the FIFO is empty before a new transfer, this condition could 
   be caused by  a new transfer before the end of the previous transfer */
   ((USBD_CUSTOM_HID_HandleTypeDef *)pdev->pClassData)->state = CUSTOM_HID_IDLE;
-
+  
+  if (epnum == 1) PrevXferDone = 1;
   return USBD_OK;
 }
 
@@ -456,15 +579,7 @@ static uint8_t  USBD_CUSTOM_HID_DataIn (USBD_HandleTypeDef *pdev,
 static uint8_t  USBD_CUSTOM_HID_DataOut (USBD_HandleTypeDef *pdev, 
                               uint8_t epnum)
 {
-  
-  USBD_CUSTOM_HID_HandleTypeDef     *hhid = (USBD_CUSTOM_HID_HandleTypeDef*)pdev->pClassData;  
-  
-  ((USBD_CUSTOM_HID_ItfTypeDef *)pdev->pUserData)->OutEvent(hhid->Report_buf[0], 
-                                                            hhid->Report_buf[1]);
-    
-  USBD_LL_PrepareReceive(pdev, CUSTOM_HID_EPOUT_ADDR , hhid->Report_buf, 
-                         USBD_CUSTOMHID_OUTREPORT_BUF_SIZE);
-
+  USBD_HID_DataOutCallback(pdev, epnum);
   return USBD_OK;
 }
 
@@ -476,15 +591,7 @@ static uint8_t  USBD_CUSTOM_HID_DataOut (USBD_HandleTypeDef *pdev,
   */
 uint8_t USBD_CUSTOM_HID_EP0_RxReady(USBD_HandleTypeDef *pdev)
 {
-  USBD_CUSTOM_HID_HandleTypeDef     *hhid = (USBD_CUSTOM_HID_HandleTypeDef*)pdev->pClassData;  
-
-  if (hhid->IsReportAvailable == 1)
-  {
-    ((USBD_CUSTOM_HID_ItfTypeDef *)pdev->pUserData)->OutEvent(hhid->Report_buf[0], 
-                                                              hhid->Report_buf[1]);
-    hhid->IsReportAvailable = 0;      
-  }
-
+  USBD_HID_EP0_DataOutCallback(pdev);
   return USBD_OK;
 }
 
@@ -501,23 +608,18 @@ static uint8_t  *USBD_CUSTOM_HID_GetDeviceQualifierDesc (uint16_t *length)
 }
 
 /**
-* @brief  USBD_CUSTOM_HID_RegisterInterface
+  * @brief  The function is a callback about HID OUT Data events
   * @param  pdev: device instance
-  * @param  fops: CUSTOMHID Interface callback
-  * @retval status
+  * @param  epnum: endpoint index
   */
-uint8_t  USBD_CUSTOM_HID_RegisterInterface  (USBD_HandleTypeDef   *pdev, 
-                                             USBD_CUSTOM_HID_ItfTypeDef *fops)
+__weak void USBD_HID_DataOutCallback(USBD_HandleTypeDef *pdev, uint8_t epnum)
 {
-  uint8_t  ret = USBD_FAIL;
   
-  if(fops != NULL)
-  {
-    pdev->pUserData= fops;
-    ret = USBD_OK;    
-  }
+}
+
+__weak void USBD_HID_EP0_DataOutCallback(USBD_HandleTypeDef *pdev)
+{
   
-  return ret;
 }
 /**
   * @}

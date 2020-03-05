@@ -1,14 +1,14 @@
 /**
   ******************************************************************************
-  * @file    usbh_conf_template.h
+  * @file    USBH_conf.h
   * @author  MCD Application Team
-  * @version V3.2.2
-  * @date    07-July-2015
-  * @brief   Header file for usbh_conf_template.c
+  * @version V3.0.0
+  * @date    18-February-2014
+  * @brief   General low level driver configuration
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -26,18 +26,15 @@
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __USBH_CONF_TEMPLATE_H
-#define __USBH_CONF_TEMPLATE_H
+#ifndef __USBH_CONF__H__
+#define __USBH_CONF__H__
 
-#ifdef __cplusplus
- extern "C" {
-#endif
-
-/* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+/* Includes ------------------------------------------------------------------*/
 
 /** @addtogroup USBH_OTG_DRIVER
   * @{
@@ -139,11 +136,8 @@
   * @}
   */ 
 
-#ifdef __cplusplus
-}
-#endif
 
-#endif /* __USBH_CONF_TEMPLATE_H */
+#endif //__USBH_CONF__H__
 
 
 /**

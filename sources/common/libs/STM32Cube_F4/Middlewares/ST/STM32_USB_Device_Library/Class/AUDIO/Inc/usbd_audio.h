@@ -1,14 +1,14 @@
 /**
   ******************************************************************************
-  * @file    usbd_audio.h
+  * @file    usbd_audio_core.h
   * @author  MCD Application Team
-  * @version V2.4.1
-  * @date    19-June-2015
-  * @brief   header file for the usbd_audio.c file.
+  * @version V2.0.0
+  * @date    18-February-2014
+  * @brief   header file for the usbd_audio_core.c file.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -23,25 +23,21 @@
   * limitations under the License.
   *
   ******************************************************************************
-  */
- 
-/* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __USB_AUDIO_H
-#define __USB_AUDIO_H
-
-#ifdef __cplusplus
- extern "C" {
-#endif
+  */ 
 
 /* Includes ------------------------------------------------------------------*/
+
+#ifndef __USB_AUDIO_CORE_H_
+#define __USB_AUDIO_CORE_H_
+
 #include  "usbd_ioreq.h"
 
-/** @addtogroup STM32_USB_DEVICE_LIBRARY
+/** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
   * @{
   */
   
 /** @defgroup USBD_AUDIO
-  * @brief This file is the Header file for usbd_audio.c
+  * @brief This file is the Header file for USBD_msc.c
   * @{
   */ 
 
@@ -96,11 +92,11 @@
     
 /* Number of sub-packets in the audio transfer buffer. You can modify this value but always make sure
   that it is an even number and higher than 3 */
-#define AUDIO_OUT_PACKET_NUM                          80
+#define AUDIO_OUT_PACKET_NUM                            80
 /* Total size of the audio transfer buffer */
-#define AUDIO_TOTAL_BUF_SIZE                          ((uint32_t)(AUDIO_OUT_PACKET * AUDIO_OUT_PACKET_NUM))
+#define AUDIO_TOTAL_BUF_SIZE                           ((uint32_t)(AUDIO_OUT_PACKET * AUDIO_OUT_PACKET_NUM))
     
-    /* Audio Commands enumeration */
+    /* Audio Commands enmueration */
 typedef enum
 {
   AUDIO_CMD_START = 1,
@@ -178,7 +174,6 @@ typedef struct
   */ 
 
 extern USBD_ClassTypeDef  USBD_AUDIO;
-#define USBD_AUDIO_CLASS    &USBD_AUDIO
 /**
   * @}
   */ 
@@ -194,11 +189,7 @@ void  USBD_AUDIO_Sync (USBD_HandleTypeDef *pdev, AUDIO_OffsetTypeDef offset);
   * @}
   */ 
 
-#ifdef __cplusplus
-}
-#endif
-
-#endif  /* __USB_AUDIO_H */
+#endif  // __USB_AUDIO_CORE_H_
 /**
   * @}
   */ 

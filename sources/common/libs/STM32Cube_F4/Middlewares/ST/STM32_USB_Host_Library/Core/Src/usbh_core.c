@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    usbh_core.c 
   * @author  MCD Application Team
-  * @version V3.2.2
-  * @date    07-July-2015
+  * @version V3.0.0
+  * @date    18-February-2014
   * @brief   This file implements the functions for the core state machine process
   *          the enumeration and the control transfer process
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@
   */
 
 /** @defgroup USBH_CORE 
-  * @brief This file handles the basic enumeration when a device is connected 
+  * @brief TThis file handles the basic enumaration when a device is connected 
   *          to the host.
   * @{
   */ 
@@ -121,11 +121,7 @@ USBH_StatusTypeDef  USBH_Init(USBH_HandleTypeDef *phost, void (*pUsrFunc)(USBH_H
   phost->os_event = osMessageCreate (osMessageQ(USBH_Queue), NULL); 
   
   /*Create USB Host Task */
-#if defined (USBH_PROCESS_STACK_SIZE)
-  osThreadDef(USBH_Thread, USBH_Process_OS, USBH_PROCESS_PRIO, 0, USBH_PROCESS_STACK_SIZE);
-#else
   osThreadDef(USBH_Thread, USBH_Process_OS, USBH_PROCESS_PRIO, 0, 8 * configMINIMAL_STACK_SIZE);
-#endif  
   phost->thread = osThreadCreate (osThread(USBH_Thread), phost);
 #endif  
   
@@ -204,7 +200,7 @@ USBH_StatusTypeDef  USBH_RegisterClass(USBH_HandleTypeDef *phost, USBH_ClassType
   {
     if(phost->ClassNumber < USBH_MAX_NUM_SUPPORTED_CLASS)
     {
-      /* link the class to the USB Host handle */
+      /* link the class tgo the USB Host handle */
       phost->pClass[phost->ClassNumber++] = pclass;
       status = USBH_OK;
     }
@@ -280,6 +276,11 @@ uint8_t  USBH_FindInterface(USBH_HandleTypeDef *phost, uint8_t Class, uint8_t Su
   pif = (USBH_InterfaceDescTypeDef *)0;
   pcfg = &phost->device.CfgDesc;  
   
+  if((pif->bInterfaceClass == 0xFF) &&(pif->bInterfaceSubClass == 0xFF) && (pif->bInterfaceProtocol == 0xFF))
+  {
+    return 0xFF;
+  }
+  
   while (if_ix < USBH_MAX_NUM_INTERFACES)
   {
     pif = &pcfg->Itf_Desc[if_ix];
@@ -299,7 +300,7 @@ uint8_t  USBH_FindInterface(USBH_HandleTypeDef *phost, uint8_t Class, uint8_t Su
   *         Find the interface index for a specific class interface and alternate setting number.
   * @param  phost: Host Handle
   * @param  interface_number: interface number
-  * @param  alt_settings    : alternate setting number
+  * @param  alt_settings    : alaternate setting number
   * @retval interface index in the configuration structure
   * @note : (1)interface index 0xFF means interface index not found
   */
@@ -551,7 +552,8 @@ USBH_StatusTypeDef  USBH_Process(USBH_HandleTypeDef *phost)
     break;    
     
   case HOST_CLASS_REQUEST:  
-    /* process class standard control requests state machine */
+    /* process class standard contol requests state machine */ 
+    
     if(phost->pActiveClass != NULL)
     {
       status = phost->pActiveClass->Requests(phost);
@@ -828,6 +830,7 @@ USBH_StatusTypeDef  USBH_LL_Connect  (USBH_HandleTypeDef *phost)
   if(phost->gState == HOST_IDLE )
   {
     phost->device.is_connected = 1;
+    phost->gState = HOST_IDLE ;
     
     if(phost->pUser != NULL)
     {    
@@ -847,7 +850,7 @@ USBH_StatusTypeDef  USBH_LL_Connect  (USBH_HandleTypeDef *phost)
 
 /**
   * @brief  USBH_LL_Disconnect 
-  *         Handle USB Host disconnection event
+  *         Handle USB Host disconnexion event
   * @param  phost: Host Handle
   * @retval USBH_Status
   */

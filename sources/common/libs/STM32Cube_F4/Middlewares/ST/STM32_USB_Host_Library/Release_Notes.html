@@ -4,11 +4,6 @@
 
 
 
-
-
-
-
-
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 <link rel="File-List" href="Release_Notes_for_STM32F2xx_StdPeriph_Driver_files/filelist.xml">
 <link rel="Edit-Time-Data" href="Release_Notes_for_STM32F2xx_StdPeriph_Driver_files/editdata.mso"><!--[if !mso]>
@@ -886,8 +881,7 @@ ul
 </xml><![endif]--><!--[if gte mso 9]><xml>
  <o:shapelayout v:ext="edit">
   <o:idmap v:ext="edit" data="1"/>
- </o:shapelayout></xml><![endif]--><meta content="MCD Application Team" name="author"></head>
-<body style="" link="blue" vlink="blue">
+ </o:shapelayout></xml><![endif]--><meta content="MCD Application Team" name="author"></head><body style="" link="blue" vlink="blue">
 
 <div class="WordSection1">
 
@@ -908,7 +902,7 @@ ul
     <td style="padding: 1.5pt;">
     <h1 style="margin-bottom: 0.25in; text-align: center;" align="center"><span style="font-size: 20pt; font-family: &quot;Verdana&quot;,&quot;sans-serif&quot;; color: rgb(51, 102, 255);">Release Notes for STM32 USB Host Library</span><span style="font-size: 20pt; font-family: &quot;Verdana&quot;,&quot;sans-serif&quot;;"><o:p></o:p></span></h1>
     <p class="MsoNormal" style="text-align: center;" align="center"><span style="font-size: 10pt; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; color: black;">Copyright
-    2015 STMicroelectronics</span><span style="color: black;"><u1:p></u1:p><o:p></o:p></span></p>
+    2014 STMicroelectronics</span><span style="color: black;"><u1:p></u1:p><o:p></o:p></span></p>
     <p class="MsoNormal" style="text-align: center;" align="center"><span style="font-size: 10pt; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; color: black;"><img style="border: 0px solid ; width: 86px; height: 65px;" alt="" id="_x0000_i1026" src="../../../_htmresc/st_logo.png"></span><span style="font-size: 10pt;"><o:p></o:p></span></p>
     </td>
    </tr>
@@ -917,224 +911,9 @@ ul
   <table class="MsoNormalTable" style="width: 675pt;" border="0" cellpadding="0" width="900">
    <tbody><tr style="">
     <td style="padding: 0in;" valign="top">
-    <h2 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;"><a name="History"></a><span style="font-size: 12pt; color: white;">Update History</span></h2><h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 180px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V3.2.2 / 07-July-2015<br>
-</span></h3>
-
-
-
-
-
-
-
-
+    <h2 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><a name="History"></a><span style="font-size: 12pt; color: white;">Update History</span></h2>
             
-            
-            
-            
-            
-            
-            
-            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
-Changes</span></u></b><u><span style="font-size: 10pt; font-family: Verdana; color: black;"><o:p></o:p></span></u></p>
-
-
-
-
-
-
-
-
-
-
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            <ul style="margin-top: 0cm;" type="square"><li><span style="font-size: 10pt; font-family: Verdana;">MSC Class</span></li><ul><li><span style="font-size: 10pt; font-family: Verdana;">usbh_msc.c</span></li><ul><li><span style="font-size: 10pt; font-family: Verdana;">Fix MSC Get Ready Delay issue</span></li></ul></ul></ul><h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 180px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V3.2.1 / 26-June-2015<br>
-</span></h3>
-
-
-
-
-
-
-
-
-            
-            
-            
-            
-            
-            
-            
-            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
-Changes</span></u></b><u><span style="font-size: 10pt; font-family: Verdana; color: black;"><o:p></o:p></span></u></p>
-
-
-
-
-
-
-
-
-
-
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            <ul style="margin-top: 0cm;" type="square">
-<li><span style="font-size: 10pt; font-family: Verdana;">Core driver</span></li>
-              <ul>
-                <li><span style="font-size: 10pt; font-family: Verdana;">usbh_def.h:
-update USBH_MAX_PIPES_NBR literal definition to be conditioned by
-#ifndef directive, to allow application code to change its value (i.e.
-in the compiler preprocessor) <br>
-</span></li>
-              </ul>
-              <li><span style="font-size: 10pt; font-family: Verdana;">MSC Class</span></li>
-              <ul>
-                <li><span style="font-size: 10pt; font-family: Verdana;">usbh_msc.c</span></li>
-                <ul>
-                  <li><span style="font-size: 10pt; font-family: Verdana;">Update USBH_MSC_GetMaxLUN() to&nbsp; return the correct number of supported LUNs (was returning 0xFF)</span></li>
-                  <li><span style="font-size: 10pt; font-family: Verdana;">Fix timeout calculation issue</span></li>
-                </ul>
-
-              </ul>
-              <ul>
-                <li><span style="font-size: 10pt; font-family: Verdana;">usbh_msc.h:
-update MAX_SUPPORTED_LUN literal definition to be conditioned by
-#ifndef directive, to allow application code to change its value
-(i.e.in the compiler preprocessor)</span></li>
-              </ul>
-              <li><span style="font-size: 10pt; font-family: Verdana;">HID Class</span></li>
-              <ul>
-                <li><span style="font-size: 10pt; font-family: Verdana;">usbh_hid.h: fix HID's handle “timer” type to uint32_t instead of uint16_t</span></li></ul>
-              <li><span style="font-size: 10pt; font-family: Verdana;">MTP Class</span></li>
-              <ul>
-                <li><span style="font-size: 10pt; font-family: Verdana;">usbh_mtp.c : Fix timeout calculation issue</span></li>
-
-              
-              </ul>
-
-            </ul>
-
-            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 180px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V3.2.0 / 04-November-2014<br>
-</span></h3>
-
-
-
-
-
-
-
-            
-            
-            
-            
-            
-            
-            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
-Changes</span></u></b><u><span style="font-size: 10pt; font-family: Verdana; color: black;"><o:p></o:p></span></u></p>
-
-
-
-
-
-
-
-
-
-            
-            
-            
-            
-            
-            
-            
-            
-            <ul style="margin-top: 0cm;" type="square">
-<li><span style="font-size: 10pt; font-family: Verdana;">Update all drivers to be C++ compliant<br>
-</span></li>
-              <li><span style="font-size: 10pt; font-family: Verdana;">Core driver</span></li>
-              <ul>
-                <li><span style="font-size: 10pt; font-family: Verdana;">usbh_core.c: remove </span><span style="font-size: 10pt; font-family: Verdana;">HOST_IDLE state in <span style="font-style: italic;">USBH_LL_Connect()</span> function<br>
-                  </span></li>
-              </ul>
-              <li><span style="font-size: 10pt; font-family: Verdana;">MSC class</span></li>
-              <ul>
-                <li><span style="font-size: 10pt; font-family: Verdana;">Update to manage correctly older USB Keys that do not support GetMaxLun request</span></li>
-              </ul>
-<li><span style="font-size: 10pt; font-family: Verdana;">Miscellaneous source code comments update</span></li>
-            </ul>
-
-            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 180px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V3.1.0 / 19-June-2014</span></h3>
-
-
-
-            
-            
-            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
-Changes</span></u></b><u><span style="font-size: 10pt; font-family: Verdana; color: black;"><o:p></o:p></span></u></p>
-
-
-
-
-
-            
-            
-            
-            
-            <ul style="margin-top: 0cm;" type="square">
-              <li><span style="font-size: 10pt; font-family: Verdana;">Core driver</span></li>
-              <ul>
-                <li><span style="font-size: 10pt; font-family: Verdana;">Add a new define <span style="font-style: italic;">USBH_PROCESS_STACK_SIZE</span> in the <span style="font-style: italic;">usbh_conf.h</span>
-file to change the default internal USB host process stack. Note that
-by omitting this define, the default stack size (2KB) is used</span><br>
-                  <span style="font-size: 10pt; font-family: Verdana;"></span></li>
-                <li><span style="font-size: 10pt; font-family: Verdana;">Add a user callback to handle unrecoverable error case in the application</span></li>
-              </ul>
-              <ul>
-                <li><span style="font-size: 10pt; font-family: Verdana;">Remove the wrong check on the interface descriptor index in the <span style="font-style: italic;">USBH_FindInterface()</span> function<br>
-                  </span></li>
-              </ul>
-              <li><span style="font-size: 10pt; font-family: Verdana;">All classes</span></li>
-              <ul>
-<li><span style="font-size: 10pt; font-family: Verdana;">Update class description in files comment by adding reference to the used USB </span><span style="font-size: 10pt; font-family: Verdana;">class </span><span style="font-size: 10pt; font-family: Verdana;">specification revision</span></li>
-              </ul>
-              <li><span style="font-size: 10pt; font-family: Verdana;">Audio, CDC and MTP classes</span><br>
-                <span style="font-size: 10pt; font-family: Verdana;"></span></li>
-              <ul>
-                <li><span style="font-size: 10pt; font-family: Verdana;">Add full RTOS support by handling state transitions through OS messages</span><br>
-                  <span style="font-size: 10pt; font-family: Verdana;"></span></li>
-              </ul>
-              <li><span style="font-size: 10pt; font-family: Verdana;">HID class</span></li>
-              <ul>
-                <li><span style="font-size: 10pt; font-family: Verdana;">Add new API <span style="font-style: italic;">USBH_HID_GetPollInterval() </span>to allow user to retrieve the needed poll time (interval between two <span style="font-style: italic;">USBD_HID_SendReport()</span>)</span></li>
-              </ul>
-              <li><span style="font-size: 10pt; font-family: Verdana;">Audio class</span></li>
-              <ul>
-                <li><span style="font-size: 10pt; font-family: Verdana;">Add a new weak callback <span style="font-style: italic;">USBH_AUDIO_BufferEmptyCallback()</span> to indicate the end of audio data processing on the user buffer</span></li>
-              </ul>
-              <li><span style="font-size: 10pt; font-family: Verdana;">MSC class</span></li>
-              <ul>
-<li><span style="font-size: 10pt; font-family: Verdana;">Return mass storage device capacity in Bytes in the user log message instead of MBytes</span></li>
-              </ul>
-            </ul>
-            
-
-            
-            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 180px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V3.0.0 / 18-February-2014</span></h3>
+            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 180px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V3.0.0 / 18-February-2014</span></h3>
 
 
             
@@ -1154,17 +933,17 @@ modified vs. V2.1.0, and thus the 2 versions are not compatible.<br>
 </span></li>
               <li style="font-weight: bold;"><span style="font-size: 10pt; font-family: Verdana;">This version has to be used only with </span><span style="font-size: 10pt; font-family: Verdana;">STM32Cube</span><span style="font-size: 10pt; font-family: Verdana;"> based development</span></li>
 </ul>
-<h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 200px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V2.1.0 / 19-March-2012<o:p></o:p></span></h3>
+<h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 200px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V2.1.0 / 19-March-2012<o:p></o:p></span></h3>
             <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
 Changes<o:p></o:p></span></u></b></p>
 
-            <ul style="margin-top: 0cm;" type="square"><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Official support of </span><span style="font-size: 10pt; font-family: Verdana;"><span style="font-weight: bold; font-style: italic;">STM32F4xx</span> devices</span></li><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">All source files: license disclaimer text update and add link to the License file on ST Internet</span></li><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Add ISR structure to link the low level driver to the Host library</span></li><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Change length parameter in the I/O operations to handle large amount of data</span></li><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Enhance the configuration descriptor parsing method to take into account multi interface devices</span></li><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">HID class</span></li><ul><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Remove blocking even frame synchronization loop</span></li></ul><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">MSC class</span></li><ul><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Handle correctly the BOT transfer with length &lt; max length</span></li></ul><ul><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Handle multi sector length data in the FAT FS interface</span></li></ul><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Miscellaneous bug fix<br></span></li></ul><h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 171px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V2.0.0 / 22-July-2011 <o:p></o:p></span></h3><p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
+            <ul style="margin-top: 0cm;" type="square"><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Official support of </span><span style="font-size: 10pt; font-family: Verdana;"><span style="font-weight: bold; font-style: italic;">STM32F4xx</span> devices</span></li><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">All source files: license disclaimer text update and add link to the License file on ST Internet</span></li><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Add ISR structure to link the low level driver to the Host library</span></li><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Change length parameter in the I/O operations to handle large amount of data</span></li><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Enhance the configuration descriptor parsing method to take into account multi interface devices</span></li><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">HID class</span></li><ul><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Remove blocking even frame synchronization loop</span></li></ul><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">MSC class</span></li><ul><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Handle correctly the BOT transfer with length &lt; max length</span></li></ul><ul><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Handle multi sector length data in the FAT FS interface</span></li></ul><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Miscellaneous bug fix<br></span></li></ul><h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 171px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V2.0.0 / 22-July-2011 <o:p></o:p></span></h3><p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
 Changes<o:p></o:p></span></u></b></p>
 <ul style="margin-top: 0cm;" type="square"><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Second official version supporting STM32F105/7 and STM32F2xx devices</span></li><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Add support for <span style="font-weight: bold; font-style: italic;">STM32F2xx</span> devices</span><span style="font-size: 10pt; font-family: Verdana;"></span></li><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Add multi interface feature</span><span style="font-size: 10pt; font-family: Verdana;"></span></li><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Add dynamic configuration parsing</span></li><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Add
 USBH_DeAllocate_AllChannel function in the Host channel management
 layer to clean up channels allocation table when de-initializing the
-library</span></li><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Change the core layer to stop correctly the host core and free all allocated channels</span></li><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Add usbh_conf.h file in the application layer to customize some user parameters</span></li></ul><span style="font-size: 10pt; font-family: Verdana;"><br></span><h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 171px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V1.0.0&nbsp;- 11/29/2010<o:p></o:p></span></h3>
-<ul style="margin-top: 0cm;" type="square"><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Created&nbsp;</span></li></ul><h2 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;"><a name="License"></a><span style="font-size: 12pt; color: white;">License<o:p></o:p></span></h2>
+library</span></li><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Change the core layer to stop correctly the host core and free all allocated channels</span></li><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Add usbh_conf.h file in the application layer to customize some user parameters</span></li></ul><span style="font-size: 10pt; font-family: Verdana;"><br></span><h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 171px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V1.0.0&nbsp;- 11/29/2010<o:p></o:p></span></h3>
+<ul style="margin-top: 0cm;" type="square"><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Created&nbsp;</span></li></ul><h2 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><a name="License"></a><span style="font-size: 12pt; color: white;">License<o:p></o:p></span></h2>
     <p class="MsoNormal"><span style="font-size: 10pt; font-family: &quot;Verdana&quot;,&quot;sans-serif&quot;; color: black;">Licensed under MCD-ST Liberty SW License Agreement V2, (the "License"); You may not use this&nbsp;</span><span style="font-size: 10pt; font-family: &quot;Verdana&quot;,&quot;sans-serif&quot;; color: black;">package</span><span style="font-size: 10pt; font-family: &quot;Verdana&quot;,&quot;sans-serif&quot;; color: black;"> except in compliance with the License. You may obtain a copy of the License at:<br><br></span></p><div style="text-align: center;"><span style="font-size: 10pt; font-family: &quot;Verdana&quot;,&quot;sans-serif&quot;; color: black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a target="_blank" href="http://www.st.com/software_license_agreement_liberty_v2">http://www.st.com/software_license_agreement_liberty_v2</a></span><br><span style="font-size: 10pt; font-family: &quot;Verdana&quot;,&quot;sans-serif&quot;; color: black;"></span></div><span style="font-size: 10pt; font-family: &quot;Verdana&quot;,&quot;sans-serif&quot;; color: black;"><br>Unless
 required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS, <br>WITHOUT

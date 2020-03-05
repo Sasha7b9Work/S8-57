@@ -2,43 +2,31 @@
   ******************************************************************************
   * @file    usbd_dfu.c
   * @author  MCD Application Team
-  * @version V2.4.1
-  * @date    19-June-2015
-  * @brief   This file provides the DFU core functions.
+  * @version V2.0.0
+  * @date    18-February-2014
+  * @brief   This file provides the HID core functions.
   *
   * @verbatim
   *      
   *          ===================================================================      
-  *                                DFU Class Driver Description
-  *          =================================================================== 
-  *           This driver manages the DFU class V1.1 following the "Device Class Specification for 
-  *           Device Firmware Upgrade Version 1.1 Aug 5, 2004".
-  *           This driver implements the following aspects of the specification:
-  *             - Device descriptor management
-  *             - Configuration descriptor management
-  *             - Enumeration as DFU device (in DFU mode only)
-  *             - Requests management (supporting ST DFU sub-protocol)
-  *             - Memory operations management (Download/Upload/Erase/Detach/GetState/GetStatus)
-  *             - DFU state machine implementation.
+  *                                DFU Class  Description
+  *          ===================================================================
   *          
-  *           @note
-  *            ST DFU sub-protocol is compliant with DFU protocol and use sub-requests to manage
-  *            memory addressing, commands processing, specific memories operations (ie. Erase) ...
-  *            As required by the DFU specification, only endpoint 0 is used in this application.
-  *            Other endpoints and functions may be added to the application (ie. DFU ...)
-  * 
-  *           These aspects may be enriched or modified for a specific user application.
-  *          
-  *           This driver doesn't implement the following aspects of the specification 
-  *           (but it is possible to manage these features with some modifications on this driver):
-  *             - Manifestation Tolerant mode
+  *
+  *
+  *
+  *           
+  *      
+  * @note     In HS mode and when the DMA is used, all variables and data structures
+  *           dealing with the DMA during the transaction process should be 32-bit aligned.
+  *           
   *      
   *  @endverbatim
   *
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -61,7 +49,7 @@
 #include "usbd_ctlreq.h"
 
 
-/** @addtogroup STM32_USB_DEVICE_LIBRARY
+/** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
   * @{
   */
 
@@ -297,7 +285,7 @@ static uint8_t  USBD_DFU_Init (USBD_HandleTypeDef *pdev,
   }
   else
   {
-    hdfu = (USBD_DFU_HandleTypeDef*) pdev->pClassData;
+    hdfu = pdev->pClassData;
     
     hdfu->alt_setting = 0;
     hdfu->data_ptr = USBD_DFU_APP_DEFAULT_ADD;
@@ -325,7 +313,7 @@ static uint8_t  USBD_DFU_Init (USBD_HandleTypeDef *pdev,
 
 /**
   * @brief  USBD_DFU_Init
-  *         De-Initialize the DFU layer
+  *         DeInitialize the DFU layer
   * @param  pdev: device instance
   * @param  cfgidx: Configuration index
   * @retval status
@@ -334,7 +322,7 @@ static uint8_t  USBD_DFU_DeInit (USBD_HandleTypeDef *pdev,
                                  uint8_t cfgidx)
 {
   USBD_DFU_HandleTypeDef   *hdfu;
-  hdfu = (USBD_DFU_HandleTypeDef*) pdev->pClassData;
+  hdfu = pdev->pClassData;
   
   hdfu->wblock_num = 0;
   hdfu->wlength = 0;
@@ -370,7 +358,7 @@ static uint8_t  USBD_DFU_Setup (USBD_HandleTypeDef *pdev,
   uint8_t ret = USBD_OK;
   USBD_DFU_HandleTypeDef   *hdfu;
   
-  hdfu = (USBD_DFU_HandleTypeDef*) pdev->pClassData;
+  hdfu = pdev->pClassData;
   
   switch (req->bmRequest & USB_REQ_TYPE_MASK)
   {
@@ -505,7 +493,7 @@ static uint8_t  USBD_DFU_EP0_TxReady (USBD_HandleTypeDef *pdev)
  USBD_SetupReqTypedef     req; 
  USBD_DFU_HandleTypeDef   *hdfu;
  
- hdfu = (USBD_DFU_HandleTypeDef*) pdev->pClassData;
+ hdfu = pdev->pClassData;
   
   if (hdfu->dev_state == DFU_STATE_DNLOAD_BUSY)
   {
@@ -558,7 +546,7 @@ static uint8_t  USBD_DFU_EP0_TxReady (USBD_HandleTypeDef *pdev)
         return USBD_FAIL;
       }      
     }
-    /* Reset the global length and block number */
+    /* Reset the global lenght and block number */
     hdfu->wlength = 0;
     hdfu->wblock_num = 0;
     
@@ -695,7 +683,7 @@ static void DFU_Detach(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *req)
 {
  USBD_DFU_HandleTypeDef   *hdfu;
  
- hdfu = (USBD_DFU_HandleTypeDef*) pdev->pClassData;
+ hdfu = pdev->pClassData;
  
   if (hdfu->dev_state == DFU_STATE_IDLE || hdfu->dev_state == DFU_STATE_DNLOAD_SYNC
       || hdfu->dev_state == DFU_STATE_DNLOAD_IDLE || hdfu->dev_state == DFU_STATE_MANIFEST_SYNC
@@ -738,7 +726,7 @@ static void DFU_Download(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *req)
 {
  USBD_DFU_HandleTypeDef   *hdfu;
  
- hdfu = (USBD_DFU_HandleTypeDef*) pdev->pClassData;
+ hdfu = pdev->pClassData;
  
   /* Data setup request */
   if (req->wLength > 0)
@@ -797,7 +785,7 @@ static void DFU_Upload(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *req)
 {
  USBD_DFU_HandleTypeDef   *hdfu;
  
- hdfu = (USBD_DFU_HandleTypeDef*) pdev->pClassData;
+ hdfu = pdev->pClassData;
  
   uint8_t *phaddr = NULL;
   uint32_t addr = 0;
@@ -807,7 +795,7 @@ static void DFU_Upload(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *req)
   {
     if ((hdfu->dev_state == DFU_STATE_IDLE) || (hdfu->dev_state == DFU_STATE_UPLOAD_IDLE))
     {
-      /* Update the global length and block number */
+      /* Update the global langth and block number */
       hdfu->wblock_num = req->wValue;
       hdfu->wlength = req->wLength;
       
@@ -895,7 +883,7 @@ static void DFU_GetStatus(USBD_HandleTypeDef *pdev)
 {
  USBD_DFU_HandleTypeDef   *hdfu;
  
- hdfu = (USBD_DFU_HandleTypeDef*) pdev->pClassData;
+ hdfu = pdev->pClassData;
  
   switch (hdfu->dev_state)
   {
@@ -971,7 +959,7 @@ static void DFU_ClearStatus(USBD_HandleTypeDef *pdev)
 {
  USBD_DFU_HandleTypeDef   *hdfu;
  
- hdfu = (USBD_DFU_HandleTypeDef*) pdev->pClassData;
+ hdfu = pdev->pClassData;
  
   if (hdfu->dev_state == DFU_STATE_ERROR)
   {
@@ -1005,7 +993,7 @@ static void DFU_GetState(USBD_HandleTypeDef *pdev)
 {
  USBD_DFU_HandleTypeDef   *hdfu;
  
- hdfu = (USBD_DFU_HandleTypeDef*) pdev->pClassData;
+ hdfu = pdev->pClassData;
  
   /* Return the current state of the DFU interface */
   USBD_CtlSendData (pdev, 
@@ -1023,7 +1011,7 @@ static void DFU_Abort(USBD_HandleTypeDef *pdev)
 {
  USBD_DFU_HandleTypeDef   *hdfu;
  
- hdfu = (USBD_DFU_HandleTypeDef*) pdev->pClassData;
+ hdfu = pdev->pClassData;
  
   if (hdfu->dev_state == DFU_STATE_IDLE || hdfu->dev_state == DFU_STATE_DNLOAD_SYNC
       || hdfu->dev_state == DFU_STATE_DNLOAD_IDLE || hdfu->dev_state == DFU_STATE_MANIFEST_SYNC
@@ -1052,7 +1040,7 @@ void DFU_Leave(USBD_HandleTypeDef *pdev)
 {
  USBD_DFU_HandleTypeDef   *hdfu;
  
- hdfu = (USBD_DFU_HandleTypeDef*) pdev->pClassData;
+ hdfu = pdev->pClassData;
  
  hdfu->manif_state = DFU_MANIFEST_COMPLETE;
 

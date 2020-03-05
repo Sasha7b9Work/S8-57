@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbh_hid.c
   * @author  MCD Application Team
-  * @version V3.2.2
-  * @date    07-July-2015
+  * @version V3.0.0
+  * @date    18-February-2014
   * @brief   This file is the HID Layer Handlers for USB Host HID class.
   *
   * @verbatim
@@ -11,7 +11,7 @@
   *          ===================================================================      
   *                                HID Class  Description
   *          =================================================================== 
-  *           This module manages the HID class V1.11 following the "Device Class Definition
+  *           This module manages the MSC class V1.11 following the "Device Class Definition
   *           for Human Interface Devices (HID) Version 1.11 Jun 27, 2001".
   *           This driver implements the following aspects of the specification:
   *             - The Boot Interface Subclass
@@ -22,7 +22,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -155,10 +155,10 @@ static USBH_StatusTypeDef USBH_HID_InterfaceInit (USBH_HandleTypeDef *phost)
   {
     USBH_SelectInterface (phost, interface);
     phost->pActiveClass->pData = (HID_HandleTypeDef *)USBH_malloc (sizeof(HID_HandleTypeDef));
-    HID_Handle =  (HID_HandleTypeDef *) phost->pActiveClass->pData; 
+    HID_Handle =  phost->pActiveClass->pData; 
     HID_Handle->state = HID_ERROR;
     
-    /*Decode Bootclass Protocol: Mouse or Keyboard*/
+    /*Decode Bootclass Protocl: Mouse or Keyboard*/
     if(phost->device.CfgDesc.Itf_Desc[phost->device.current_interface].bInterfaceProtocol == HID_KEYBRD_BOOT_CODE)
     {
       USBH_UsrLog ("KeyBoard device found!"); 
@@ -247,7 +247,7 @@ static USBH_StatusTypeDef USBH_HID_InterfaceInit (USBH_HandleTypeDef *phost)
   */
 USBH_StatusTypeDef USBH_HID_InterfaceDeInit (USBH_HandleTypeDef *phost )
 {	
-  HID_HandleTypeDef *HID_Handle =  (HID_HandleTypeDef *) phost->pActiveClass->pData; 
+  HID_HandleTypeDef *HID_Handle =  phost->pActiveClass->pData; 
   
   if(HID_Handle->InPipe != 0x00)
   {   
@@ -283,7 +283,7 @@ static USBH_StatusTypeDef USBH_HID_ClassRequest(USBH_HandleTypeDef *phost)
   
   USBH_StatusTypeDef status         = USBH_BUSY;
   USBH_StatusTypeDef classReqStatus = USBH_BUSY;
-  HID_HandleTypeDef *HID_Handle =  (HID_HandleTypeDef *) phost->pActiveClass->pData; 
+  HID_HandleTypeDef *HID_Handle =  phost->pActiveClass->pData; 
 
   /* Switch HID state machine */
   switch (HID_Handle->ctl_state)
@@ -306,7 +306,7 @@ static USBH_StatusTypeDef USBH_HID_ClassRequest(USBH_HandleTypeDef *phost)
     /* Get Report Desc */ 
     if (USBH_HID_GetHIDReportDescriptor(phost, HID_Handle->HID_Desc.wItemLength) == USBH_OK)
     {
-      /* The descriptor is available in phost->device.Data */
+      /* The decriptor is available in phost->device.Data */
 
       HID_Handle->ctl_state = HID_REQ_SET_IDLE;
     }
@@ -357,7 +357,7 @@ static USBH_StatusTypeDef USBH_HID_ClassRequest(USBH_HandleTypeDef *phost)
 static USBH_StatusTypeDef USBH_HID_Process(USBH_HandleTypeDef *phost)
 {
   USBH_StatusTypeDef status = USBH_OK;
-  HID_HandleTypeDef *HID_Handle =  (HID_HandleTypeDef *) phost->pActiveClass->pData;
+  HID_HandleTypeDef *HID_Handle =  phost->pActiveClass->pData;
   
   switch (HID_Handle->state)
   {
@@ -444,7 +444,7 @@ static USBH_StatusTypeDef USBH_HID_Process(USBH_HandleTypeDef *phost)
   */
 static USBH_StatusTypeDef USBH_HID_SOFProcess(USBH_HandleTypeDef *phost)
 {
-  HID_HandleTypeDef *HID_Handle =  (HID_HandleTypeDef *) phost->pActiveClass->pData;
+  HID_HandleTypeDef *HID_Handle =  phost->pActiveClass->pData;
   
   if(HID_Handle->state == HID_POLL)
   {
@@ -517,7 +517,7 @@ USBH_StatusTypeDef USBH_HID_GetHIDDescriptor (USBH_HandleTypeDef *phost,
   *         Set Idle State. 
   * @param  phost: Host handle
   * @param  duration: Duration for HID Idle request
-  * @param  reportId : Targeted report ID for Set Idle request
+  * @param  reportId : Targetted report ID for Set Idle request
   * @retval USBH Status
   */
 USBH_StatusTypeDef USBH_HID_SetIdle (USBH_HandleTypeDef *phost,
@@ -544,7 +544,7 @@ USBH_StatusTypeDef USBH_HID_SetIdle (USBH_HandleTypeDef *phost,
   *         Issues Set Report 
   * @param  phost: Host handle
   * @param  reportType  : Report type to be sent
-  * @param  reportId    : Targeted report ID for Set Report request
+  * @param  reportId    : Targetted report ID for Set Report request
   * @param  reportBuff  : Report Buffer
   * @param  reportLen   : Length of data report to be send
   * @retval USBH Status
@@ -575,7 +575,7 @@ USBH_StatusTypeDef USBH_HID_SetReport (USBH_HandleTypeDef *phost,
   *         retreive Set Report 
   * @param  phost: Host handle
   * @param  reportType  : Report type to be sent
-  * @param  reportId    : Targeted report ID for Set Report request
+  * @param  reportId    : Targetted report ID for Set Report request
   * @param  reportBuff  : Report Buffer
   * @param  reportLen   : Length of data report to be send
   * @retval USBH Status
@@ -671,30 +671,6 @@ HID_TypeTypeDef USBH_HID_GetDeviceType(USBH_HandleTypeDef *phost)
   return type;
 }
 
-
-/**
-  * @brief  USBH_HID_GetPollInterval
-  *         Return HID device poll time
-  * @param  phost: Host handle
-  * @retval poll time (ms)
-  */
-uint8_t USBH_HID_GetPollInterval(USBH_HandleTypeDef *phost)
-{
-  HID_HandleTypeDef *HID_Handle =  (HID_HandleTypeDef *) phost->pActiveClass->pData;
-    
-    if((phost->gState == HOST_CLASS_REQUEST) ||
-       (phost->gState == HOST_INPUT) ||
-         (phost->gState == HOST_SET_CONFIGURATION) ||
-           (phost->gState == HOST_CHECK_CLASS) ||           
-             ((phost->gState == HOST_CLASS)))
-  {
-    return (HID_Handle->poll);
-  }
-  else
-  {
-    return 0;
-  }
-}
 /**
   * @brief  fifo_init
   *         Initialize FIFO.
@@ -724,7 +700,7 @@ uint16_t  fifo_read(FIFO_TypeDef * f, void * buf, uint16_t  nbytes)
 {
   uint16_t  i;
   uint8_t * p;
-  p = (uint8_t*) buf;
+  p = buf;
   
   if(f->lock == 0)
   {
@@ -762,7 +738,7 @@ uint16_t  fifo_write(FIFO_TypeDef * f, const void * buf, uint16_t  nbytes)
 {
   uint16_t  i;
   const uint8_t * p;
-  p = (const uint8_t*) buf;
+  p = buf;
   if(f->lock == 0)
   {
     f->lock = 1;

@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    usb_bsp.c
   * @author  MCD Application Team
-  * @version V3.2.2
-  * @date    07-July-2015
+  * @version V3.0.0
+  * @date    18-February-2014
   * @brief   This file implements the board support package for the USB host library
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -84,7 +84,7 @@ USBH_StatusTypeDef  USBH_LL_Stop (USBH_HandleTypeDef *phost)
   */
 USBH_SpeedTypeDef USBH_LL_GetSpeed  (USBH_HandleTypeDef *phost)
 {
-  USBH_SpeedTypeDef speed = USBH_SPEED_FULL;
+  USBH_SpeedTypeDef speed = 0;
     
 
   return  speed;
@@ -104,14 +104,14 @@ USBH_StatusTypeDef USBH_LL_ResetPort (USBH_HandleTypeDef *phost)
 
 /**
   * @brief  USBH_LL_GetLastXferSize 
-  *         Return the last transferred packet size.
+  *         Return the last transfered packet size.
   * @param  phost: Host handle
   * @param  pipe: Pipe index   
   * @retval Packet Size
   */
 uint32_t USBH_LL_GetLastXferSize  (USBH_HandleTypeDef *phost, uint8_t pipe)  
 {
-   return 0; 
+
 }
 
 /**
@@ -147,9 +147,8 @@ USBH_StatusTypeDef   USBH_LL_OpenPipe (USBH_HandleTypeDef *phost,
   */
 USBH_StatusTypeDef   USBH_LL_ClosePipe   (USBH_HandleTypeDef *phost, uint8_t pipe)   
 {
-  return USBH_OK; 
-}
 
+}
 /**
   * @brief  USBH_LL_SubmitURB 
   *         Submit a new URB to the low level driver.
@@ -163,7 +162,7 @@ USBH_StatusTypeDef   USBH_LL_ClosePipe   (USBH_HandleTypeDef *phost, uint8_t pip
   * @param  ep_type : Endpoint Type
   *          This parameter can be one of the these values:
   *            @arg EP_TYPE_CTRL: Control type
-  *            @arg EP_TYPE_ISOC: Isochronous type
+  *            @arg EP_TYPE_ISOC: Isochrounous type
   *            @arg EP_TYPE_BULK: Bulk type
   *            @arg EP_TYPE_INTR: Interrupt type
   * @param  token : Endpoint Type
@@ -209,7 +208,7 @@ USBH_StatusTypeDef   USBH_LL_SubmitURB  (USBH_HandleTypeDef *phost,
   */
 USBH_URBStateTypeDef  USBH_LL_GetURBState (USBH_HandleTypeDef *phost, uint8_t pipe) 
 {
-  return USBH_URB_IDLE; 
+
 }
 
 /**

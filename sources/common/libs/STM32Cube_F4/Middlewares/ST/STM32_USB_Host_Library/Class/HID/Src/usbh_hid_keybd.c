@@ -2,15 +2,15 @@
   ******************************************************************************
   * @file    usbh_hid_keybd.c 
   * @author  MCD Application Team
-  * @version V3.2.2
-  * @date    07-July-2015
+  * @version V3.0.0
+  * @date    18-February-2014
   * @brief   This file is the application layer for USB Host HID Keyboard handling
   *          QWERTY and AZERTY Keyboard are supported as per the selection in 
   *          usbh_hid_keybd.h              
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -315,7 +315,7 @@ static  const  uint8_t  HID_KEYBRD_Codes[] = {
 USBH_StatusTypeDef USBH_HID_KeybdInit(USBH_HandleTypeDef *phost)
 {
   uint32_t x;
-  HID_HandleTypeDef *HID_Handle =  (HID_HandleTypeDef *) phost->pActiveClass->pData;  
+  HID_HandleTypeDef *HID_Handle =  phost->pActiveClass->pData;  
     
   keybd_info.lctrl=keybd_info.lshift= 0;
   keybd_info.lalt=keybd_info.lgui= 0;
@@ -366,7 +366,7 @@ static USBH_StatusTypeDef USBH_HID_KeybdDecode(USBH_HandleTypeDef *phost)
 {
   uint8_t x;
   
-  HID_HandleTypeDef *HID_Handle =  (HID_HandleTypeDef *) phost->pActiveClass->pData;
+  HID_HandleTypeDef *HID_Handle =  phost->pActiveClass->pData;
   if(HID_Handle->length == 0)
   {
     return USBH_FAIL;

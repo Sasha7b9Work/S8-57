@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f4xx_hal_adc_ex.c
   * @author  MCD Application Team
-  * @version V1.4.1
-  * @date    09-October-2015
+  * @version V1.0.0
+  * @date    18-February-2014
   * @brief   This file provides firmware functions to manage the following 
   *          functionalities of the ADC extension peripheral:
   *           + Extended features functions
@@ -14,31 +14,32 @@
   ==============================================================================
     [..]
     (#)Initialize the ADC low level resources by implementing the HAL_ADC_MspInit():
-       (##) Enable the ADC interface clock using __HAL_RCC_ADC_CLK_ENABLE()
+       (##) Enable the ADC interface clock using __ADC_CLK_ENABLE()
        (##) ADC pins configuration
              (+++) Enable the clock for the ADC GPIOs using the following function:
-                   __HAL_RCC_GPIOx_CLK_ENABLE()  
+                   __GPIOx_CLK_ENABLE()  
              (+++) Configure these ADC pins in analog mode using HAL_GPIO_Init() 
        (##) In case of using interrupts (e.g. HAL_ADC_Start_IT())
              (+++) Configure the ADC interrupt priority using HAL_NVIC_SetPriority()
              (+++) Enable the ADC IRQ handler using HAL_NVIC_EnableIRQ()
              (+++) In ADC IRQ handler, call HAL_ADC_IRQHandler()
       (##) In case of using DMA to control data transfer (e.g. HAL_ADC_Start_DMA())
-             (+++) Enable the DMAx interface clock using __HAL_RCC_DMAx_CLK_ENABLE()
-             (+++) Configure and enable two DMA streams stream for managing data
+             (++) Enable the DMAx interface clock using __DMAx_CLK_ENABLE()
+             (++) Configure and enable two DMA streams stream for managing data
                  transfer from peripheral to memory (output stream)
-             (+++) Associate the initialized DMA handle to the ADC DMA handle
+             (++) Associate the initilalized DMA handle to the CRYP DMA handle
                  using  __HAL_LINKDMA()
-             (+++) Configure the priority and enable the NVIC for the transfer complete
+             (++) Configure the priority and enable the NVIC for the transfer complete
                  interrupt on the two DMA Streams. The output stream should have higher
-                 priority than the input stream.                  
+                 priority than the input stream.
+                       
      (#) Configure the ADC Prescaler, conversion resolution and data alignment 
          using the HAL_ADC_Init() function. 
   
      (#) Configure the ADC Injected channels group features, use HAL_ADC_Init()
          and HAL_ADC_ConfigChannel() functions.
          
-     (#) Three operation modes are available within this driver :     
+     (#) Three mode of operations are available within this driver :     
   
      *** Polling mode IO operation ***
      =================================
@@ -65,7 +66,7 @@
      ==============================
      [..]    
        (+) Start the ADC peripheral using HAL_ADCEx_InjectedStart_DMA(), at this stage the user specify the length 
-           of data to be transferred at each end of conversion 
+           of data to be transfered at each end of conversion 
        (+) At The end of data transfer ba HAL_ADCEx_InjectedConvCpltCallback() function is executed and user can 
             add his own code by customization of function pointer HAL_ADCEx_InjectedConvCpltCallback 
        (+) In case of transfer Error, HAL_ADCEx_InjectedErrorCallback() function is executed and user can 
@@ -78,7 +79,7 @@
        (+) Select the Multi mode ADC regular channels features (dual or triple mode)  
           and configure the DMA mode using HAL_ADCEx_MultiModeConfigChannel() functions. 
        (+) Start the ADC peripheral using HAL_ADCEx_MultiModeStart_DMA(), at this stage the user specify the length 
-           of data to be transferred at each end of conversion           
+           of data to be transfered at each end of conversion           
        (+) Read the ADCs converted values using the HAL_ADCEx_MultiModeGetValue() function.
   
   
@@ -86,7 +87,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -120,7 +121,7 @@
   * @{
   */
 
-/** @defgroup ADCEx ADCEx
+/** @defgroup ADCEx 
   * @brief ADC Extended driver modules
   * @{
   */ 
@@ -131,25 +132,19 @@
 /* Private define ------------------------------------------------------------*/ 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-/** @addtogroup ADCEx_Private_Functions
-  * @{
-  */
 /* Private function prototypes -----------------------------------------------*/
 static void ADC_MultiModeDMAConvCplt(DMA_HandleTypeDef *hdma);
 static void ADC_MultiModeDMAError(DMA_HandleTypeDef *hdma);
 static void ADC_MultiModeDMAHalfConvCplt(DMA_HandleTypeDef *hdma); 
-/**
-  * @}
-  */
+/* Private functions ---------------------------------------------------------*/
 
-/* Exported functions --------------------------------------------------------*/
-/** @defgroup ADCEx_Exported_Functions ADC Exported Functions
+/** @defgroup ADCEx_Private_Functions
   * @{
-  */
+  */ 
 
-/** @defgroup ADCEx_Exported_Functions_Group1  Extended features functions 
-  *  @brief    Extended features functions  
-  *
+/** @defgroup ADCEx_Group1 Extended features functions 
+ *  @brief    Extended features functions  
+ *
 @verbatim   
  ===============================================================================
                  ##### Extended features functions #####
@@ -176,8 +171,7 @@ static void ADC_MultiModeDMAHalfConvCplt(DMA_HandleTypeDef *hdma);
   */
 HAL_StatusTypeDef HAL_ADCEx_InjectedStart(ADC_HandleTypeDef* hadc)
 {
-  __IO uint32_t counter = 0;
-  uint32_t tmp1 = 0, tmp2 = 0;
+  uint32_t i = 0, tmp1 = 0, tmp2 = 0;
   
   /* Process locked */
   __HAL_LOCK(hadc);
@@ -201,12 +195,10 @@ HAL_StatusTypeDef HAL_ADCEx_InjectedStart(ADC_HandleTypeDef* hadc)
     /* Enable the Peripheral */
     __HAL_ADC_ENABLE(hadc);
     
-    /* Delay for temperature sensor stabilization time */
-    /* Compute number of CPU cycles to wait for */
-    counter = (ADC_STAB_DELAY_US * (SystemCoreClock / 1000000));
-    while(counter != 0)
+    /* Delay inserted to wait during Tstab time the ADC's stabilazation */
+    for(; i <= 540; i++)
     {
-      counter--;
+      __NOP();
     }
   }
   
@@ -248,8 +240,7 @@ HAL_StatusTypeDef HAL_ADCEx_InjectedStart(ADC_HandleTypeDef* hadc)
   */
 HAL_StatusTypeDef HAL_ADCEx_InjectedStart_IT(ADC_HandleTypeDef* hadc)
 {
-  __IO uint32_t counter = 0;
-  uint32_t tmp1 = 0, tmp2 =0;
+  uint32_t i = 0, tmp1 = 0, tmp2 =0;
   
   /* Process locked */
   __HAL_LOCK(hadc);
@@ -276,12 +267,10 @@ HAL_StatusTypeDef HAL_ADCEx_InjectedStart_IT(ADC_HandleTypeDef* hadc)
     /* Enable the Peripheral */
     __HAL_ADC_ENABLE(hadc);
     
-    /* Delay for temperature sensor stabilization time */
-    /* Compute number of CPU cycles to wait for */
-    counter = (ADC_STAB_DELAY_US * (SystemCoreClock / 1000000));
-    while(counter != 0)
+    /* Delay inserted to wait during Tstab time the ADC's stabilazation */
+    for(; i <= 540; i++)
     {
-      counter--;
+      __NOP();
     }
   }
   
@@ -350,10 +339,10 @@ HAL_StatusTypeDef HAL_ADCEx_InjectedStop(ADC_HandleTypeDef* hadc)
   */
 HAL_StatusTypeDef HAL_ADCEx_InjectedPollForConversion(ADC_HandleTypeDef* hadc, uint32_t Timeout)
 {
-  uint32_t tickstart = 0;
-
-  /* Get tick */ 
-  tickstart = HAL_GetTick();
+  uint32_t timeout;
+ 
+  /* Get timeout */
+  timeout = HAL_GetTick() + Timeout;  
 
   /* Check End of conversion flag */
   while(!(__HAL_ADC_GET_FLAG(hadc, ADC_FLAG_JEOC)))
@@ -361,7 +350,7 @@ HAL_StatusTypeDef HAL_ADCEx_InjectedPollForConversion(ADC_HandleTypeDef* hadc, u
     /* Check for the Timeout */
     if(Timeout != HAL_MAX_DELAY)
     {
-      if((Timeout == 0)||((HAL_GetTick() - tickstart ) > Timeout))
+      if(HAL_GetTick() >= timeout)
       {
         hadc->State= HAL_ADC_STATE_TIMEOUT;
         /* Process unlocked */
@@ -404,7 +393,7 @@ HAL_StatusTypeDef HAL_ADCEx_InjectedStop_IT(ADC_HandleTypeDef* hadc)
   /* Disable the ADC end of conversion interrupt for injected group */
   __HAL_ADC_DISABLE_IT(hadc, ADC_CR1_JEOCIE);
   
-  /* Enable the Peripheral */
+  /* Enable the Periphral */
   __HAL_ADC_DISABLE(hadc);
   
   /* Change ADC state */
@@ -420,10 +409,10 @@ HAL_StatusTypeDef HAL_ADCEx_InjectedStop_IT(ADC_HandleTypeDef* hadc)
   *         the configuration information for the specified ADC.
   * @param  InjectedRank: the ADC injected rank.
   *          This parameter can be one of the following values:
-  *            @arg ADC_INJECTED_RANK_1: Injected Channel1 selected
-  *            @arg ADC_INJECTED_RANK_2: Injected Channel2 selected
-  *            @arg ADC_INJECTED_RANK_3: Injected Channel3 selected
-  *            @arg ADC_INJECTED_RANK_4: Injected Channel4 selected
+  *            @arg ADC_InjectedChannel_1: Injected Channel1 selected
+  *            @arg ADC_InjectedChannel_2: Injected Channel2 selected
+  *            @arg ADC_InjectedChannel_3: Injected Channel3 selected
+  *            @arg ADC_InjectedChannel_4: Injected Channel4 selected
   * @retval None
   */
 uint32_t HAL_ADCEx_InjectedGetValue(ADC_HandleTypeDef* hadc, uint32_t InjectedRank)
@@ -474,11 +463,11 @@ uint32_t HAL_ADCEx_InjectedGetValue(ADC_HandleTypeDef* hadc, uint32_t InjectedRa
   *         the configuration information for the specified ADC.
   * @param  pData:   Pointer to buffer in which transferred from ADC peripheral to memory will be stored. 
   * @param  Length:  The length of data to be transferred from ADC peripheral to memory.  
-  * @retval HAL status
+  * @retval None
   */
 HAL_StatusTypeDef HAL_ADCEx_MultiModeStart_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Length)
 {
-  __IO uint32_t counter = 0;
+  uint16_t counter = 0;
   
   /* Check the parameters */
   assert_param(IS_FUNCTIONAL_STATE(hadc->Init.ContinuousConvMode));
@@ -524,17 +513,15 @@ HAL_StatusTypeDef HAL_ADCEx_MultiModeStart_DMA(ADC_HandleTypeDef* hadc, uint32_t
     /* Enable the Peripheral */
     __HAL_ADC_ENABLE(hadc);
     
-    /* Delay for temperature sensor stabilization time */
-    /* Compute number of CPU cycles to wait for */
-    counter = (ADC_STAB_DELAY_US * (SystemCoreClock / 1000000));
-    while(counter != 0)
+    /* Delay inserted to wait during Tstab time the ADC's stabilazation */
+    for(; counter <= 540; counter++)
     {
-      counter--;
+      __NOP();
     }
   }
   
   /* if no external trigger present enable software conversion of regular channels */
-  if((hadc->Instance->CR2 & ADC_CR2_EXTEN) == RESET) 
+  if (hadc->Init.ExternalTrigConvEdge == ADC_EXTERNALTRIGCONVEDGE_NONE)
   {
     /* Enable the selected ADC software conversion for regular group */
     hadc->Instance->CR2 |= (uint32_t)ADC_CR2_SWSTART;
@@ -551,7 +538,7 @@ HAL_StatusTypeDef HAL_ADCEx_MultiModeStart_DMA(ADC_HandleTypeDef* hadc, uint32_t
   * @brief  Disables ADC DMA (multi-ADC mode) and disables ADC peripheral    
   * @param  hadc: pointer to a ADC_HandleTypeDef structure that contains
   *         the configuration information for the specified ADC.
-  * @retval HAL status
+  * @retval None
   */
 HAL_StatusTypeDef HAL_ADCEx_MultiModeStop_DMA(ADC_HandleTypeDef* hadc)
 {
@@ -626,19 +613,15 @@ HAL_StatusTypeDef HAL_ADCEx_InjectedConfigChannel(ADC_HandleTypeDef* hadc, ADC_I
   assert_param(IS_ADC_INJECTED_RANK(sConfigInjected->InjectedRank));
   assert_param(IS_ADC_SAMPLE_TIME(sConfigInjected->InjectedSamplingTime));
   assert_param(IS_ADC_EXT_INJEC_TRIG(sConfigInjected->ExternalTrigInjecConv));
+  assert_param(IS_ADC_EXT_INJEC_TRIG_EDGE(sConfigInjected->ExternalTrigInjecConvEdge));
   assert_param(IS_ADC_INJECTED_LENGTH(sConfigInjected->InjectedNbrOfConversion));
   assert_param(IS_FUNCTIONAL_STATE(sConfigInjected->AutoInjectedConv));
   assert_param(IS_FUNCTIONAL_STATE(sConfigInjected->InjectedDiscontinuousConvMode));
 
 #ifdef USE_FULL_ASSERT
-  tmp = ADC_GET_RESOLUTION(hadc);
+  tmp = __HAL_ADC_GET_RESOLUTION(hadc);
   assert_param(IS_ADC_RANGE(tmp, sConfigInjected->InjectedOffset));
 #endif /* USE_FULL_ASSERT  */
-
-  if(sConfigInjected->ExternalTrigInjecConvEdge != ADC_INJECTED_SOFTWARE_START)
-  {
-    assert_param(IS_ADC_EXT_INJEC_TRIG_EDGE(sConfigInjected->ExternalTrigInjecConvEdge));
-  }
 
   /* Process locked */
   __HAL_LOCK(hadc);
@@ -647,53 +630,39 @@ HAL_StatusTypeDef HAL_ADCEx_InjectedConfigChannel(ADC_HandleTypeDef* hadc, ADC_I
   if (sConfigInjected->InjectedChannel > ADC_CHANNEL_9)
   {
     /* Clear the old sample time */
-    hadc->Instance->SMPR1 &= ~ADC_SMPR1(ADC_SMPR1_SMP10, sConfigInjected->InjectedChannel);
+    hadc->Instance->SMPR1 &= ~__HAL_ADC_SMPR1(ADC_SMPR1_SMP10, sConfigInjected->InjectedChannel);
     
     /* Set the new sample time */
-    hadc->Instance->SMPR1 |= ADC_SMPR1(sConfigInjected->InjectedSamplingTime, sConfigInjected->InjectedChannel);
+    hadc->Instance->SMPR1 |= __HAL_ADC_SMPR1(sConfigInjected->InjectedSamplingTime, sConfigInjected->InjectedChannel);
   }
   else /* ADC_Channel include in ADC_Channel_[0..9] */
   {
     /* Clear the old sample time */
-    hadc->Instance->SMPR2 &= ~ADC_SMPR2(ADC_SMPR2_SMP0, sConfigInjected->InjectedChannel);
+    hadc->Instance->SMPR2 &= ~__HAL_ADC_SMPR2(ADC_SMPR2_SMP0, sConfigInjected->InjectedChannel);
     
     /* Set the new sample time */
-    hadc->Instance->SMPR2 |= ADC_SMPR2(sConfigInjected->InjectedSamplingTime, sConfigInjected->InjectedChannel);
+    hadc->Instance->SMPR2 |= __HAL_ADC_SMPR2(sConfigInjected->InjectedSamplingTime, sConfigInjected->InjectedChannel);
   }
   
   /*---------------------------- ADCx JSQR Configuration -----------------*/
   hadc->Instance->JSQR &= ~(ADC_JSQR_JL);
-  hadc->Instance->JSQR |=  ADC_SQR1(sConfigInjected->InjectedNbrOfConversion);
+  hadc->Instance->JSQR |=  __HAL_ADC_SQR1(sConfigInjected->InjectedNbrOfConversion);
   
   /* Rank configuration */
   
   /* Clear the old SQx bits for the selected rank */
-  hadc->Instance->JSQR &= ~ADC_JSQR(ADC_JSQR_JSQ1, sConfigInjected->InjectedRank,sConfigInjected->InjectedNbrOfConversion);
+  hadc->Instance->JSQR &= ~__HAL_ADC_JSQR(ADC_JSQR_JSQ1, sConfigInjected->InjectedRank,sConfigInjected->InjectedNbrOfConversion);
    
   /* Set the SQx bits for the selected rank */
-  hadc->Instance->JSQR |= ADC_JSQR(sConfigInjected->InjectedChannel, sConfigInjected->InjectedRank,sConfigInjected->InjectedNbrOfConversion);
+  hadc->Instance->JSQR |= __HAL_ADC_JSQR(sConfigInjected->InjectedChannel, sConfigInjected->InjectedRank,sConfigInjected->InjectedNbrOfConversion);
 
-  /* Enable external trigger if trigger selection is different of software  */
-  /* start.                                                                 */
-  /* Note: This configuration keeps the hardware feature of parameter       */
-  /*       ExternalTrigConvEdge "trigger edge none" equivalent to           */
-  /*       software start.                                                  */ 
-  if(sConfigInjected->ExternalTrigInjecConv != ADC_INJECTED_SOFTWARE_START)
-  {  
-    /* Select external trigger to start conversion */
-    hadc->Instance->CR2 &= ~(ADC_CR2_JEXTSEL);
-    hadc->Instance->CR2 |=  sConfigInjected->ExternalTrigInjecConv;
-    
-    /* Select external trigger polarity */
-    hadc->Instance->CR2 &= ~(ADC_CR2_JEXTEN);
-    hadc->Instance->CR2 |= sConfigInjected->ExternalTrigInjecConvEdge;
-  }
-  else
-  {
-    /* Reset the external trigger */
-    hadc->Instance->CR2 &= ~(ADC_CR2_JEXTSEL);
-    hadc->Instance->CR2 &= ~(ADC_CR2_JEXTEN);  
-  }
+  /* Select external trigger to start conversion */
+  hadc->Instance->CR2 &= ~(ADC_CR2_JEXTSEL);
+  hadc->Instance->CR2 |=  sConfigInjected->ExternalTrigInjecConv;
+  
+  /* Select external trigger polarity */
+  hadc->Instance->CR2 &= ~(ADC_CR2_JEXTEN);
+  hadc->Instance->CR2 |= sConfigInjected->ExternalTrigInjecConvEdge;
   
   if (sConfigInjected->AutoInjectedConv != DISABLE)
   {
@@ -805,8 +774,7 @@ HAL_StatusTypeDef HAL_ADCEx_MultiModeConfigChannel(ADC_HandleTypeDef* hadc, ADC_
 
   /**
   * @brief  DMA transfer complete callback. 
-  * @param  hdma: pointer to a DMA_HandleTypeDef structure that contains
-  *                the configuration information for the specified DMA module.
+  * @param  hdma: pointer to DMA handle.
   * @retval None
   */
 static void ADC_MultiModeDMAConvCplt(DMA_HandleTypeDef *hdma)   
@@ -830,8 +798,7 @@ static void ADC_MultiModeDMAConvCplt(DMA_HandleTypeDef *hdma)
 
 /**
   * @brief  DMA half transfer complete callback. 
-  * @param  hdma: pointer to a DMA_HandleTypeDef structure that contains
-  *                the configuration information for the specified DMA module.
+  * @param  hdma: pointer to DMA handle.
   * @retval None
   */
 static void ADC_MultiModeDMAHalfConvCplt(DMA_HandleTypeDef *hdma)   
@@ -843,8 +810,7 @@ static void ADC_MultiModeDMAHalfConvCplt(DMA_HandleTypeDef *hdma)
 
 /**
   * @brief  DMA error callback 
-  * @param  hdma: pointer to a DMA_HandleTypeDef structure that contains
-  *                the configuration information for the specified DMA module.
+  * @param  hdma: pointer to DMA handle.
   * @retval None
   */
 static void ADC_MultiModeDMAError(DMA_HandleTypeDef *hdma)   

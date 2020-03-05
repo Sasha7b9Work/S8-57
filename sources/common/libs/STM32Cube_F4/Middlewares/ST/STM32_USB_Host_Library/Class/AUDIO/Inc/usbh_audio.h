@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    usbh_audio.h
   * @author  MCD Application Team
-  * @version V3.2.2
-  * @date    07-July-2015
+  * @version V3.0.0
+  * @date    18-February-2014
   * @brief   This file contains all the prototypes for the usbh_audio.c
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -28,10 +28,6 @@
 /* Define to prevent recursive  ----------------------------------------------*/
 #ifndef __USBH_AUDIO_H
 #define __USBH_AUDIO_H
-
-#ifdef __cplusplus
- extern "C" {
-#endif
 
 /* Includes ------------------------------------------------------------------*/
 #include "usbh_core.h"
@@ -248,9 +244,6 @@ AUDIO_InterfaceControlPropTypeDef;
 #define MICROPHONE_SUPPORTED               0x02
 #define HEADSET_SUPPORTED                  0x03
 
-#define AUDIO_MAX_SAMFREQ_NBR              5
-#define AUDIO_MAX_INTERFACE_NBR            5
-#define AUDIO_MAX_CONTROLS_NBR             5
 
 /*Class-Specific AS(Audio Streaming) Interface Descriptor*/
 typedef struct
@@ -267,7 +260,7 @@ AUDIO_ASGeneralDescTypeDef;
 /*Class-Specific AS(Audio Streaming) Format Type Descriptor*/
 typedef struct
 {
-  uint8_t bLength;
+  uint8_t bLength;    /*At to be deside*/
   uint8_t bDescriptorType;
   uint8_t bDescriptorSubtype;
   uint8_t bFormatType;
@@ -275,7 +268,7 @@ typedef struct
   uint8_t bSubframeSize;
   uint8_t bBitResolution;
   uint8_t bSamFreqType;
-  uint8_t tSamFreq[AUDIO_MAX_SAMFREQ_NBR][3];
+  uint8_t tSamFreq[][3];
 }
 AUDIO_ASFormatTypeDescTypeDef;
 
@@ -297,7 +290,7 @@ typedef struct
   uint8_t  bcdADC[2];                  
   uint8_t  wTotalLength[2];            
   uint8_t  bInCollection;           
-  uint8_t  baInterfaceNr[AUDIO_MAX_INTERFACE_NBR];         
+  uint8_t  baInterfaceNr[];         
 } 
 AUDIO_HeaderDescTypeDef;
 
@@ -340,7 +333,7 @@ typedef struct
   uint8_t  bUnitID;                                        
   uint8_t  bSourceID;                                      
   uint8_t  bControlSize;                                   
-  uint8_t  bmaControls[AUDIO_MAX_CONTROLS_NBR][2];                                                                 
+  uint8_t bmaControls[][2];                                                                 
 }
 AUDIO_FeatureDescTypeDef;
 
@@ -562,16 +555,10 @@ USBH_StatusTypeDef USBH_AUDIO_ChangeOutBuffer (USBH_HandleTypeDef *phost, uint8_
 int32_t            USBH_AUDIO_GetOutOffset (USBH_HandleTypeDef *phost);
 
 void        USBH_AUDIO_FrequencySet(USBH_HandleTypeDef *phost);
-
-#define     USBH_AUDIO_FrequencySetCallback   USBH_AUDIO_FrequencySet
-void        USBH_AUDIO_BufferEmptyCallback(USBH_HandleTypeDef *phost);
 /**
   * @}
   */ 
 
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* __USBH_AUDIO_H */
 

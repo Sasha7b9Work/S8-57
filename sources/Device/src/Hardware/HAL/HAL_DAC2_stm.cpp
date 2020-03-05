@@ -29,16 +29,16 @@ void HAL_DAC2::Init()
     configDAC.DAC_Trigger = DAC_TRIGGER_NONE;
     configDAC.DAC_OutputBuffer = DAC_OUTPUTBUFFER_DISABLE;
 
-    if (HAL_DAC_ConfigChannel(&handle, &configDAC, DAC1_CHANNEL_2) != HAL_OK)
+    if (HAL_DAC_ConfigChannel(&handle, &configDAC, DAC_CHANNEL_2) != HAL_OK)
     {
         ERROR_HANDLER();
     }
-    HAL_DAC_SetValue(&handle, DAC1_CHANNEL_2, DAC_ALIGN_8B_R, 0);
-    HAL_DAC_Start(&handle, DAC1_CHANNEL_2);
+    HAL_DAC_SetValue(&handle, DAC_CHANNEL_2, DAC_ALIGN_8B_R, 0);
+    HAL_DAC_Start(&handle, DAC_CHANNEL_2);
 }
 
 
 void HAL_DAC2::SetValue(uint value)
 {
-    HAL_DAC_SetValue(&handle, DAC1_CHANNEL_2, DAC_ALIGN_8B_R, value);
+    HAL_DAC_SetValue(&handle, DAC_CHANNEL_2, DAC_ALIGN_8B_R, value);
 }

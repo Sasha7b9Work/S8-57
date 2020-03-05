@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    usbh_def.h
   * @author  MCD Application Team
-  * @version V3.2.2
-  * @date    07-July-2015
+  * @version V3.0.0
+  * @date    18-February-2014
   * @brief   Definitions used in the USB host library
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -23,18 +23,7 @@
   * limitations under the License.
   *
   ******************************************************************************
-  */
- 
-/* Define to prevent recursive  ----------------------------------------------*/
-#ifndef  USBH_DEF_H
-#define  USBH_DEF_H
-
-#ifdef __cplusplus
- extern "C" {
-#endif
-
-/* Includes ------------------------------------------------------------------*/
-#include "usbh_conf.h"
+  */ 
 
 /** @addtogroup USBH_LIB
   * @{
@@ -49,8 +38,13 @@
   * @{
   */ 
 
+#ifndef  USBH_DEF_H
+#define  USBH_DEF_H
+
+#include "usbh_conf.h"
+
 #ifndef NULL
-#define NULL  0
+#define NULL ((void *)0)
 #endif
 
 #ifndef FALSE
@@ -58,7 +52,7 @@
 #endif
 
 #ifndef TRUE
-#define TRUE  1
+#define TRUE 1
 #endif
 
 
@@ -176,9 +170,9 @@
 #define  USB_EP_DIR_IN                                  0x80
 #define  USB_EP_DIR_MSK                                 0x80  
 
-#ifndef USBH_MAX_PIPES_NBR
- #define USBH_MAX_PIPES_NBR                             15                                                
-#endif /* USBH_MAX_PIPES_NBR */
+#define USBH_MAX_PIPES_NBR                              15                                                
+
+
 
 #define USBH_DEVICE_ADDRESS_DEFAULT                     0
 #define USBH_MAX_ERROR_COUNT                            2
@@ -480,11 +474,7 @@ typedef struct _USBH_HandleTypeDef
   #endif /* __packed */
 #endif /* __GNUC__ */
 
-#ifdef __cplusplus
-}
 #endif
-
-#endif /* USBH_DEF_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 

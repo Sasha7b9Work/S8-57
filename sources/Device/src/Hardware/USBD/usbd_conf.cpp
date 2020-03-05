@@ -156,16 +156,16 @@ USBD_StatusTypeDef  USBD_LL_Init (USBD_HandleTypeDef *pdev)
         handlePCD->Init.phy_itface = PCD_PHY_EMBEDDED;
         handlePCD->Init.Sof_enable = DISABLE;
         handlePCD->Init.low_power_enable = DISABLE;
-        handlePCD->Init.lpm_enable = DISABLE;
+//        handlePCD->Init.lpm_enable = DISABLE;
         handlePCD->Init.vbus_sensing_enable = ENABLE;
         handlePCD->Init.use_dedicated_ep1 = DISABLE;
     
         // Initialize LL Driver
         HAL_PCD_Init(handlePCD);
     
-        HAL_PCDEx_SetRxFiFo(handlePCD, 0x80);
-        HAL_PCDEx_SetTxFiFo(handlePCD, 0, 0x40);
-        HAL_PCDEx_SetTxFiFo(handlePCD, 1, 0x80); 
+//        HAL_PCDEx_SetRxFiFo(handlePCD, 0x80);
+//        HAL_PCDEx_SetTxFiFo(handlePCD, 0, 0x40);
+//        HAL_PCDEx_SetTxFiFo(handlePCD, 1, 0x80); 
     }
 
     return USBD_OK;

@@ -30,17 +30,17 @@ void HAL_ADC1::Init()
 
     handle.Instance = ADC1;
     handle.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
-    handle.Init.Resolution = ADC_RESOLUTION_12B;
+    handle.Init.Resolution = ADC_RESOLUTION12b;
     handle.Init.DataAlign = ADC_DATAALIGN_RIGHT;
     handle.Init.ScanConvMode = DISABLE;
-    handle.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
+    handle.Init.EOCSelection = DISABLE;
     handle.Init.ContinuousConvMode = DISABLE;
     handle.Init.DMAContinuousRequests = DISABLE;
     handle.Init.NbrOfConversion = 1;
     handle.Init.DiscontinuousConvMode = DISABLE;
     handle.Init.NbrOfDiscConversion = 0;
     handle.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;  // Программный запуск преобразования вручную
-    handle.Init.ExternalTrigConv = ADC_SOFTWARE_START;
+    handle.Init.ExternalTrigConv = ADC_EXTERNALTRIGCONV_T1_CC1;
 
     if (HAL_ADC_Init(&handle) != HAL_OK)
     {

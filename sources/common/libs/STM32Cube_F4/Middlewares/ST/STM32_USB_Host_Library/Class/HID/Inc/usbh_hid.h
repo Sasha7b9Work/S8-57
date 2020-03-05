@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    usbh_hid.h
   * @author  MCD Application Team
-  * @version V3.2.2
-  * @date    07-July-2015
+  * @version V3.0.0
+  * @date    18-February-2014
   * @brief   This file contains all the prototypes for the usbh_hid.c
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -29,10 +29,6 @@
 #ifndef __USBH_HID_H
 #define __USBH_HID_H
 
-#ifdef __cplusplus
- extern "C" {
-#endif
-
 /* Includes ------------------------------------------------------------------*/
 #include "usbh_core.h"
 #include "usbh_hid_mouse.h"
@@ -51,7 +47,7 @@
   */
   
 /** @defgroup USBH_HID_CORE
-  * @brief This file is the Header file for usbh_hid.c
+  * @brief This file is the Header file for USBH_HID_CORE.c
   * @{
   */ 
 
@@ -60,11 +56,11 @@
   * @{
   */ 
 
-#define HID_MIN_POLL                                10
-#define HID_REPORT_SIZE                             16    
-#define HID_MAX_USAGE                               10
-#define HID_MAX_NBR_REPORT_FMT                      10 
-#define HID_QUEUE_SIZE                              10    
+#define HID_MIN_POLL                10
+#define HID_REPORT_SIZE             16    
+#define HID_MAX_USAGE               10
+#define HID_MAX_NBR_REPORT_FMT      10 
+#define HID_QUEUE_SIZE              10    
     
 #define  HID_ITEM_LONG                              0xFE
                                                                        
@@ -226,7 +222,7 @@ typedef struct _HID_Process
   uint16_t             length;
   uint8_t              ep_addr;
   uint16_t             poll; 
-  uint32_t             timer;
+  uint16_t             timer;
   uint8_t              DataReady;
   HID_DescTypeDef      HID_Desc;  
   USBH_StatusTypeDef  ( * Init)(USBH_HandleTypeDef *phost);
@@ -313,8 +309,6 @@ void USBH_HID_EventCallback(USBH_HandleTypeDef *phost);
 
 HID_TypeTypeDef USBH_HID_GetDeviceType(USBH_HandleTypeDef *phost);
 
-uint8_t USBH_HID_GetPollInterval(USBH_HandleTypeDef *phost);
-
 void fifo_init(FIFO_TypeDef * f, uint8_t * buf, uint16_t size);
 
 uint16_t  fifo_read(FIFO_TypeDef * f, void * buf, uint16_t  nbytes);
@@ -325,9 +319,6 @@ uint16_t  fifo_write(FIFO_TypeDef * f, const void * buf, uint16_t  nbytes);
   * @}
   */ 
 
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* __USBH_HID_H */
 

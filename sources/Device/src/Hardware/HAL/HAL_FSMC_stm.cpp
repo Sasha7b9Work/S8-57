@@ -25,7 +25,7 @@ static GPIO_InitTypeDef is =
     GPIO_PIN_0,
     GPIO_MODE_AF_PP,
     GPIO_PULLUP,
-    GPIO_SPEED_FREQ_VERY_HIGH,
+    GPIO_SPEED_FAST,
     GPIO_AF12_FMC
 };
 

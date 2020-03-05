@@ -2,39 +2,21 @@
   ******************************************************************************
   * @file    usbd_audio.c
   * @author  MCD Application Team
-  * @version V2.4.1
-  * @date    19-June-2015
-  * @brief   This file provides the Audio core functions.
+  * @version V2.0.0
+  * @date    18-February-2014
+  * @brief   This file provides the HID core functions.
   *
   * @verbatim
   *      
   *          ===================================================================      
   *                                AUDIO Class  Description
   *          ===================================================================
- *           This driver manages the Audio Class 1.0 following the "USB Device Class Definition for
-  *           Audio Devices V1.0 Mar 18, 98".
-  *           This driver implements the following aspects of the specification:
-  *             - Device descriptor management
-  *             - Configuration descriptor management
-  *             - Standard AC Interface Descriptor management
-  *             - 1 Audio Streaming Interface (with single channel, PCM, Stereo mode)
-  *             - 1 Audio Streaming Endpoint
-  *             - 1 Audio Terminal Input (1 channel)
-  *             - Audio Class-Specific AC Interfaces
-  *             - Audio Class-Specific AS Interfaces
-  *             - AudioControl Requests: only SET_CUR and GET_CUR requests are supported (for Mute)
-  *             - Audio Feature Unit (limited to Mute control)
-  *             - Audio Synchronization type: Asynchronous
-  *             - Single fixed audio sampling rate (configurable in usbd_conf.h file)
-  *          The current audio class version supports the following audio features:
-  *             - Pulse Coded Modulation (PCM) format
-  *             - sampling rate: 48KHz. 
-  *             - Bit resolution: 16
-  *             - Number of channels: 2
-  *             - No volume control
-  *             - Mute/Unmute capability
-  *             - Asynchronous Endpoints 
   *          
+  *
+  *
+  *
+  *           
+  *      
   * @note     In HS mode and when the DMA is used, all variables and data structures
   *           dealing with the DMA during the transaction process should be 32-bit aligned.
   *           
@@ -44,7 +26,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -67,7 +49,7 @@
 #include "usbd_ctlreq.h"
 
 
-/** @addtogroup STM32_USB_DEVICE_LIBRARY
+/** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
   * @{
   */
 
@@ -369,7 +351,7 @@ static uint8_t  USBD_AUDIO_Init (USBD_HandleTypeDef *pdev,
   }
   else
   {
-    haudio = (USBD_AUDIO_HandleTypeDef*) pdev->pClassData;
+    haudio = pdev->pClassData;
     haudio->alt_setting = 0;
     haudio->offset = AUDIO_OFFSET_UNKNOWN;
     haudio->wr_ptr = 0; 
@@ -431,7 +413,7 @@ static uint8_t  USBD_AUDIO_Setup (USBD_HandleTypeDef *pdev,
   uint16_t len;
   uint8_t *pbuf;
   uint8_t ret = USBD_OK;
-  haudio = (USBD_AUDIO_HandleTypeDef*) pdev->pClassData;
+  haudio = pdev->pClassData;
   
   switch (req->bmRequest & USB_REQ_TYPE_MASK)
   {
@@ -470,7 +452,7 @@ static uint8_t  USBD_AUDIO_Setup (USBD_HandleTypeDef *pdev,
       
     case USB_REQ_GET_INTERFACE :
       USBD_CtlSendData (pdev,
-                        (uint8_t *)&(haudio->alt_setting),
+                        (uint8_t *)haudio->alt_setting,
                         1);
       break;
       
@@ -532,7 +514,7 @@ static uint8_t  USBD_AUDIO_DataIn (USBD_HandleTypeDef *pdev,
 static uint8_t  USBD_AUDIO_EP0_RxReady (USBD_HandleTypeDef *pdev)
 {
   USBD_AUDIO_HandleTypeDef   *haudio;
-  haudio = (USBD_AUDIO_HandleTypeDef*) pdev->pClassData;
+  haudio = pdev->pClassData;
   
   if (haudio->control.cmd == AUDIO_REQ_SET_CUR)
   {/* In this driver, to simplify code, only SET_CUR request is managed */
@@ -579,7 +561,7 @@ void  USBD_AUDIO_Sync (USBD_HandleTypeDef *pdev, AUDIO_OffsetTypeDef offset)
 {
   int8_t shift = 0;
   USBD_AUDIO_HandleTypeDef   *haudio;
-  haudio = (USBD_AUDIO_HandleTypeDef*) pdev->pClassData;
+  haudio = pdev->pClassData;
   
   haudio->offset =  offset; 
   
@@ -626,8 +608,16 @@ void  USBD_AUDIO_Sync (USBD_HandleTypeDef *pdev, AUDIO_OffsetTypeDef offset)
                                                          AUDIO_CMD_PLAY); 
       haudio->offset = AUDIO_OFFSET_NONE;           
   }
+  else if (haudio->offset == AUDIO_OFFSET_HALF)
+  {
+    
+    ((USBD_AUDIO_ItfTypeDef *)pdev->pUserData)->AudioCmd(&haudio->buffer[AUDIO_TOTAL_BUF_SIZE/2],
+                                                         AUDIO_TOTAL_BUF_SIZE/2 - shift,
+                                                         AUDIO_CMD_PLAY); 
+      haudio->offset = AUDIO_OFFSET_NONE;  
+      
+  }  
 }
-
 /**
   * @brief  USBD_AUDIO_IsoINIncomplete
   *         handle data ISO IN Incomplete event
@@ -663,7 +653,7 @@ static uint8_t  USBD_AUDIO_DataOut (USBD_HandleTypeDef *pdev,
                               uint8_t epnum)
 {
   USBD_AUDIO_HandleTypeDef   *haudio;
-  haudio = (USBD_AUDIO_HandleTypeDef*) pdev->pClassData;
+  haudio = pdev->pClassData;
   
   if (epnum == AUDIO_OUT_EP)
   {
@@ -713,7 +703,7 @@ static uint8_t  USBD_AUDIO_DataOut (USBD_HandleTypeDef *pdev,
 static void AUDIO_REQ_GetCurrent(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *req)
 {  
   USBD_AUDIO_HandleTypeDef   *haudio;
-  haudio = (USBD_AUDIO_HandleTypeDef*) pdev->pClassData;
+  haudio = pdev->pClassData;
   
   memset(haudio->control.data, 0, 64);
   /* Send the current mute state */
@@ -732,7 +722,7 @@ static void AUDIO_REQ_GetCurrent(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef 
 static void AUDIO_REQ_SetCurrent(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *req)
 { 
   USBD_AUDIO_HandleTypeDef   *haudio;
-  haudio = (USBD_AUDIO_HandleTypeDef*) pdev->pClassData;
+  haudio = pdev->pClassData;
   
   if (req->wLength)
   {
