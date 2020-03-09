@@ -53,7 +53,8 @@ bool Calibrator::Calibrate(Chan::E ch)
 
 bool Calibrator::Balance(Chan::E ch, bool showHint)
 {
-    SettingsNRST old = setNRST;
+    SettingsNRST oldNRST = setNRST;
+    Settings old = set;
 
     ShiftADC::SetDisabled();
 
@@ -77,9 +78,10 @@ bool Calibrator::Balance(Chan::E ch, bool showHint)
         Balance(ch, static_cast<Range::E>(range));
     }
 
-    std::memcpy(&old.shiftADC.shift[ch][0], &ShiftADC::Ref().shift[ch][0], sizeof(ShiftADC::Ref().shift[ch][0]) * Range::Count);
+    std::memcpy(&oldNRST.shiftADC.shift[ch][0], &ShiftADC::Ref().shift[ch][0], sizeof(ShiftADC::Ref().shift[ch][0]) * Range::Count);
 
-    setNRST = old;
+    setNRST = oldNRST;
+    set = old;
 
     Osci::Init();
 

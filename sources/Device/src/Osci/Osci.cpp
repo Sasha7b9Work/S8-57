@@ -207,7 +207,7 @@ Osci::StructReadRand Osci::GetInfoForReadRand(int Tsm, const uint8 *address)
     {
         result.step = TBase().RandK();
 
-        int index = Tsm - addShift;
+        int index = Tsm;
 
         while (index < 0)
         {

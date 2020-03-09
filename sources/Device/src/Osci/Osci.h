@@ -54,7 +54,7 @@ struct Osci
     // Значение, считанное из handleADC
     static uint16 valueADC;
 
-    
+    // Дополнительное смещение точек в рандомизаторе
     static int addShift;
 
     

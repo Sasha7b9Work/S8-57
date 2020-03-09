@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include "device.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/HAL/HAL.h"
@@ -161,6 +162,8 @@ void TShift::LoadRandomize()
         Pred = 0;
     }
     FPGA::pred = static_cast<uint16>(Pred);
+
+    LOG_WRITE("pred = %d, post = %d", FPGA::pred, FPGA::post + 1);
 
     FPGA::post = static_cast<uint16>(~(FPGA::post + 1));
     FPGA::pred = static_cast<uint16>(~(FPGA::pred));
