@@ -99,6 +99,14 @@ void ADC_IRQHandler(void)
 }
 
 
+static uint16 ReadADC3()
+{
+    HAL_ADC_Start(&handlePoll);
+    HAL_ADC_PollForConversion(&handlePoll, 1);
+    return static_cast<uint16>(ADC3->DR);
+}
+
+
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef*)
 {
     /// \todo временная затычка. Не в рандомизаторе эта функция вообще не должна вызываться
@@ -110,21 +118,23 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef*)
 //        HAL_ADC_Stop_IT(&handleIT);
 //        HAL_ADC_Start_IT(&handleIT);
 
-        uint start = TIME_US;
+//        uint start = TIME_US;
 
         uint16 val1 = static_cast<uint16>(ADC3->DR);
         
         HAL_ADC_Stop_IT(&handleIT);
-        
+
         HAL_ADC_Init(&handlePoll);
 
-        HAL_ADC_Start(&handlePoll);
-        
-        HAL_ADC_PollForConversion(&handlePoll, 10);
-        
-        uint16 val2 = static_cast<uint16>(ADC3->DR);
-        
-        Osci::valueADC = (uint16)(((float)val1 + val2 + 0.5F) / 2.0F);
+        uint16 val2 = ReadADC3();
+
+        uint16 val3 = ReadADC3();
+
+        uint16 val4 = ReadADC3();
+
+//        uint16 val5 = ReadADC3();
+       
+        Osci::valueADC = (uint16)((val1 + val2 + val3 + val4) / 4.0F + 0.5F);
         
         HAL_ADC_Init(&handleIT);
 
@@ -132,13 +142,12 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef*)
 
         static int counter = 0;
 
-        if(counter > 1000)
+        if(counter > 5000)
         {
-            uint time = TIME_US - start;
+            //uint time = TIME_US - start;
 
-            LOG_WRITE("1 = %d, 2 = %d, adc = %d", val1, val2, Osci::valueADC);
+            LOG_WRITE("1 = %d, 2 = %d, 3 = %d, 4 = %d, adc = %d", val1, val2, val3, val4, Osci::valueADC);
             counter = 0;
-            LOG_WRITE("время %d мкс", time);
         }
 
         counter++;
