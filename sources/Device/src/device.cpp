@@ -104,11 +104,6 @@ bool SetCurrentMode(const Page *page, Device::Mode::E mode)
 
 void Device::Update()
 {
-    static uint startFrame = 0;
-    static uint counter = 0;
-
-    counter++;
-
     Osci::Update();
 
     Display::Update();
@@ -132,13 +127,6 @@ void Device::Update()
     DDecoder::Update();
 
     Menu::Update();
-
-    if(TIME_MS - startFrame >= 1000)
-    {
-        LOG_WRITE("FPS = %d", counter);
-        counter = 0;
-        startFrame = TIME_MS;
-    }
 }
 
 
