@@ -1,52 +1,14 @@
+#include <stm32f4xx_hal.h>
 #include "defines.h"
-#include "log.h"
 #include "FPGA/FPGA.h"
-#include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Settings/Settings.h"
 #include "Osci/Osci.h"
-#include <stm32f4xx_hal.h>
 
 
 
-static ADC_HandleTypeDef handleIT =
-{
-    ADC3,
-    {
-        ADC_CLOCKPRESCALER_PCLK_DIV2,       // ClockPrescaler
-        ADC_RESOLUTION12b,                  // Resolution
-        ADC_DATAALIGN_RIGHT,                // DataAlign
-        DISABLE,                            // ScanConvMode
-        ENABLE,                             // EOCSelection
-        DISABLE,                            // ContinuousConvMode
-        1,                                  // NbrOfConversion
-        DISABLE,                            // DiscontinuousConvMode
-        0,                                  // NbrOfDiscConversion
-        ADC_EXTERNALTRIGCONV_Ext_IT11,      // ExternalTrigConv
-        ADC_EXTERNALTRIGCONVEDGE_RISING,    // ExternalTrigConvEdge
-        DISABLE                             // DMAContinuousRequests
-    }
-};
+static ADC_HandleTypeDef handle;
 
-
-static ADC_HandleTypeDef handlePoll =
-{
-    ADC3,
-    {
-        ADC_CLOCKPRESCALER_PCLK_DIV2,       // ClockPrescaler
-        ADC_RESOLUTION12b,                  // Resolution
-        ADC_DATAALIGN_RIGHT,                // DataAlign
-        DISABLE,                            // ScanConvMode
-        DISABLE,                            // EOCSelection
-        DISABLE,                            // ContinuousConvMode
-        1,                                  // NbrOfConversion
-        DISABLE,                            // DiscontinuousConvMode
-        0,                                  // NbrOfDiscConversion
-        ADC_EXTERNALTRIGCONV_T1_CC1,        // ExternalTrigConv
-        ADC_EXTERNALTRIGCONVEDGE_NONE,      // ExternalTrigConvEdge
-        DISABLE                             // DMAContinuousRequests
-    }
-};
 
 
 void HAL_ADC3::Init()
@@ -67,7 +29,21 @@ void HAL_ADC3::Init()
     HAL_NVIC_SetPriority(ADC_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(ADC_IRQn);
 
-    if (HAL_ADC_Init(&handleIT) != HAL_OK)
+    handle.Instance = ADC3;
+    handle.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
+    handle.Init.Resolution = ADC_RESOLUTION12b;
+    handle.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+    handle.Init.ScanConvMode = DISABLE;
+    handle.Init.EOCSelection = ENABLE;
+    handle.Init.ContinuousConvMode = DISABLE;
+    handle.Init.DMAContinuousRequests = DISABLE;
+    handle.Init.NbrOfConversion = 1;
+    handle.Init.DiscontinuousConvMode = DISABLE;
+    handle.Init.NbrOfDiscConversion = 0;
+    handle.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_RISING;
+    handle.Init.ExternalTrigConv = ADC_EXTERNALTRIGCONV_Ext_IT11;
+
+    if (HAL_ADC_Init(&handle) != HAL_OK)
     {
         ERROR_HANDLER();
     }
@@ -78,12 +54,12 @@ void HAL_ADC3::Init()
     sConfig.SamplingTime = ADC_SAMPLETIME_28CYCLES;
     sConfig.Offset = 0;
 
-    if (HAL_ADC_ConfigChannel(&handleIT, &sConfig) != HAL_OK)
+    if (HAL_ADC_ConfigChannel(&handle, &sConfig) != HAL_OK)
     {
         ERROR_HANDLER();
     }
 
-    if (HAL_ADC_Start_IT(&handleIT) != HAL_OK)
+    if (HAL_ADC_Start_IT(&handle) != HAL_OK)
     {
         ERROR_HANDLER();
     }
@@ -95,62 +71,17 @@ INTERRUPT_BEGIN
 
 void ADC_IRQHandler(void)
 {
-    HAL_ADC_IRQHandler(&handleIT);
+    HAL_ADC_IRQHandler(&handle);
 }
 
 
-static uint16 ReadADC3()
-{
-    HAL_ADC_Start(&handlePoll);
-    HAL_ADC_PollForConversion(&handlePoll, 1);
-    return static_cast<uint16>(ADC3->DR);
-}
-
-
-void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef*)
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 {
     /// \todo временная затычка. Не в рандомизаторе эта функция вообще не должна вызываться
 
     if (OSCI_IN_MODE_RANDOMIZER)
     {
-//        Osci::valueADC = static_cast<uint16>(HAL_ADC_GetValue(&handleIT));
-//
-//        HAL_ADC_Stop_IT(&handleIT);
-//        HAL_ADC_Start_IT(&handleIT);
-
-//        uint start = TIME_US;
-
-        uint16 val1 = static_cast<uint16>(ADC3->DR);
-        
-        HAL_ADC_Stop_IT(&handleIT);
-
-        HAL_ADC_Init(&handlePoll);
-
-        uint16 val2 = ReadADC3();
-
-        uint16 val3 = ReadADC3();
-
-        uint16 val4 = ReadADC3();
-
-//        uint16 val5 = ReadADC3();
-       
-        Osci::valueADC = (uint16)((val1 + val2 + val3 + val4) / 4.0F + 0.5F);
-        
-        HAL_ADC_Init(&handleIT);
-
-        HAL_ADC_Start_IT(&handleIT);
-
-        static int counter = 0;
-
-        if(counter > 5000)
-        {
-            //uint time = TIME_US - start;
-
-            LOG_WRITE("1 = %d, 2 = %d, 3 = %d, 4 = %d, adc = %d", val1, val2, val3, val4, Osci::valueADC);
-            counter = 0;
-        }
-
-        counter++;
+        Osci::valueADC = static_cast<uint16>(HAL_ADC_GetValue(hadc));
     }
 }
 

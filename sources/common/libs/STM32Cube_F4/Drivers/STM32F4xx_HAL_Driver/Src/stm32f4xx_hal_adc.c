@@ -454,7 +454,7 @@ HAL_StatusTypeDef HAL_ADC_Start(ADC_HandleTypeDef* hadc)
     
     /* Delay for ADC stabilization time */
     /* Compute number of CPU cycles to wait for */
-    counter = (ADC_STAB_DELAY_US * (SystemCoreClock / 10000000U));
+    counter = (ADC_STAB_DELAY_US * (SystemCoreClock / 1000000U));
     while(counter != 0U)
     {
       counter--;
