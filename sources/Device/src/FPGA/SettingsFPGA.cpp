@@ -157,11 +157,12 @@ void TShift::LoadRandomize()
 
     int Pred = static_cast<int>(ENumPointsFPGA::PointsInChannel()) / static_cast<int>(k) - static_cast<int>(FPGA::post);
 
-    if (Pred < 0)
+    if (Pred < 5)
     {
-        Pred = 0;
+        Pred = 5;
     }
-    FPGA::pred = static_cast<uint16>(Pred);
+
+    FPGA::pred = Pred;
 
     LOG_WRITE("pred = %d, post = %d", FPGA::pred, FPGA::post + 1);
 
