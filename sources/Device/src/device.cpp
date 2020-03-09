@@ -104,6 +104,8 @@ bool SetCurrentMode(const Page *page, Device::Mode::E mode)
 
 void Device::Update()
 {
+    Timer::StartMultiMeasurement();
+
     Osci::Update();
 
     Display::Update();
