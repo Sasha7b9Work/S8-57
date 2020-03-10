@@ -1586,11 +1586,6 @@
               <FilePath>.\src\Osci\Display\Accumulator.cpp</FilePath>
             </File>
             <File>
-              <FileName>BottomPart.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\Display\BottomPart.cpp</FilePath>
-            </File>
-            <File>
               <FileName>DisplayOsci.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Osci\Display\DisplayOsci.h</FilePath>

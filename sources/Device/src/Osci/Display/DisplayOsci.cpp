@@ -3,6 +3,9 @@
 #include "Display/Painter.h"
 #include "Display/Primitives.h"
 #include "Display/Warnings.h"
+#include "FlashDrive/FlashDrive.h"
+#include "Hardware/Battery.h"
+#include "Hardware/VCP.h"
 #include "Menu/Menu.h"
 #include "Osci/Osci.h"
 #include "Osci/FreqMeter.h"
@@ -85,4 +88,32 @@ void DisplayOsci::DrawScaleLine(int x, bool forTrigLev)
 void DisplayOsci::SetFlagRedraw()
 {
     needRedraw = true;
+}
+
+
+void DisplayOsci::BottomPart::Draw(int x0, int y0)
+{
+    DFont::Set(DTypeFont::_UGO2);
+
+    // Флешка
+    if(FDrive::IsConnected())
+    {
+    }
+
+    if(VCP::connectedToUSB || VCP::cableUSBisConnected)
+    {
+        Char(SymbolUGO2::USB).Draw4SymbolsInRect(x0 + 72, y0 + 2, VCP::connectedToUSB ? Color::WHITE : Color::FLASH_01);
+    }
+
+    Color::FILL.SetAsCurrent();
+    // Пиковый детектор
+    if(PeakDetMode().IsEnabled())
+    {
+        Char('\x12').Draw(x0 + 38, y0 + 11);
+        Char('\x13').Draw(x0 + 46, y0 + 11);
+    }
+
+    Battery::Draw(x0, y0);
+
+    VLine(18).Draw(x0, y0 + 1, Color::FILL);
 }
