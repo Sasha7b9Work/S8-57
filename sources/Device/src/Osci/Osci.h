@@ -161,6 +161,9 @@ private:
     static void AddPointPeakDetEnabled(BitSet16 dataA, BitSet16 dataB);
     static void AddPointPeakDetDisabled(BitSet16 dataA, BitSet16 dataB);
 
+    // Возвращает true, если данный фрейм выводится впервые
+    static bool FirstDrawThisFrame();
+
     // Указатель на настройки текущих данных
     static DataSettings *ds;
 

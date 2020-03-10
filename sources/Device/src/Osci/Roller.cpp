@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
@@ -115,6 +116,12 @@ bool Roller::NeedDraw()
 }
 
 
+bool Roller::FirstDrawThisFrame()
+{
+    return firstOnDisplay == static_cast<uint>(-1);
+}
+
+
 int Roller::FillScreenBuffer(Chan::E ch, Buffer &buffer, int width)
 {
     uint numBytes = currentPoint;
@@ -125,7 +132,7 @@ int Roller::FillScreenBuffer(Chan::E ch, Buffer &buffer, int width)
         numBytes *= 2;
     }
 
-    if(firstOnDisplay == static_cast<uint>(-1))
+    if(FirstDrawThisFrame())
     {
         firstOnDisplay = currentPoint;
         if(PEAKDET_ENABLED(ds))
@@ -144,7 +151,7 @@ int Roller::FillScreenBuffer(Chan::E ch, Buffer &buffer, int width)
     for(uint i = firstOnDisplay; i < numBytes; i++)
     {
         out[position] = in[i];
-        Math::CircleIncrease<uint>(&position, 0, static_cast<uint>(width));
+        Math::CircleIncrease<uint>(&position, 0, static_cast<uint>(width - 1));
     }
 
     return static_cast<int>(PEAKDET_ENABLED(ds) ? (position / 2 - 1) : (position - 1));

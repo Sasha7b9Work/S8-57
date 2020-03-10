@@ -70,7 +70,7 @@ static void OnPress_BalanceA()
 }
 
 DEF_BUTTON( bBalanceA,                                                                                                                                      //--- КАНАЛ 1 - Балансировать ---
-    "Балансировка",
+    "Баланс",
     "",
     &PageChannelA::self, Item::Active, OnPress_BalanceA
 )
@@ -153,7 +153,7 @@ static void OnPress_BalanceB()
 }
 
 DEF_BUTTON( bBalanceB,                                                                                                                                       //--- КАНАЛ 2 - Балансировка ---
-    "Балансировка",
+    "Баланс",
     "",
     &PageChannelB::self, Item::Active, OnPress_BalanceB
 )
