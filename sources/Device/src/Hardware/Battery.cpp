@@ -12,9 +12,6 @@ const float Battery::MAX_ADC_REL = static_cast<float>((1 << 12) - 1);
 /// Напряжение, соответствующее MAX_ADC_REL
 const float Battery::MAX_ADC_ABS = 2.91F;
 
-const float Battery::VOLTAGE_100_PERCENTS = 8.1F;
-const float Battery::VOLTAGE_0_PERCENTS = 6.0F;
-
 
 void Battery::Init()
 {
@@ -40,15 +37,15 @@ float Battery::GetVoltagePOW()
 
 float Battery::CalculatePercents(float volts)
 {
-    if (volts >= VOLTAGE_100_PERCENTS)
+    if (volts >= Voltage100())
     {
         return 100.0F;
     }
-    else if (volts > VOLTAGE_0_PERCENTS)
+    else if (volts > Voltage0())
     {
-        volts -= VOLTAGE_0_PERCENTS;
+        volts -= Voltage0();
 
-        return volts / (VOLTAGE_100_PERCENTS - VOLTAGE_0_PERCENTS) * 100.0F;
+        return volts / (Voltage100() - Voltage0()) * 100.0F;
     }
     else
     {
@@ -75,10 +72,6 @@ void Battery::DrawUGO(int x, int y, float percents)
 void Battery::Draw(int x, int y)
 {
     float akk = GetVoltageAKK();
-
-    float pow = GetVoltagePOW();
-
-    LOG_WRITE("pow = %f", pow);
 
     float percents = CalculatePercents(akk);
 
@@ -110,13 +103,13 @@ float Battery::BatADC_ToVoltage(uint value)
 }
 
 
-float Battery::Voltage100(float)
+float Battery::Voltage100()
 {
-    return 0.0F;
+    return GetVoltagePOW() > 8.0F ? 8.1F : 7.8F;
 }
 
 
-float Battery::Voltage0(float)
+float Battery::Voltage0()
 {
-    return 0.0F;
+    return GetVoltagePOW() > 8.0F ? 6.0F : 6.0F;
 }

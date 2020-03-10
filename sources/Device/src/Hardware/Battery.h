@@ -30,16 +30,12 @@ private:
     static void DrawUGO(int x, int y, float procents);
 
     // Значения, соответствующие 100% и 0%, для текущих напряжения аккумуляторов akk и источника заряда pow
-    static float Voltage100(float pow);
-    static float Voltage0(float pow);
+    static float Voltage100();
+    static float Voltage0();
 
     // Максимальное значение, которое возможно считать с АЦП
     static const float MAX_ADC_REL;
     
     // Напряжение, соответствующее MAX_ADC_REL
     static const float MAX_ADC_ABS;
-
-    static const float VOLTAGE_100_PERCENTS;
-
-    static const float VOLTAGE_0_PERCENTS;
 };
