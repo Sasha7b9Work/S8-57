@@ -22,27 +22,19 @@ void Battery::Init()
 }
 
 
-float Battery::GetVoltageAKK(uint *adc)
+float Battery::GetVoltageAKK()
 {
-    static Utils::AroundAverager<float> averager(4);
+    uint akk = HAL_ADC1::ReadValueAKK();
 
-    *adc = HAL_ADC1::ReadValueAKK();
-
-    averager.Push(static_cast<float>(*adc));
-
-    return BatADC_ToVoltage(static_cast<float>(*adc));
+    return BatADC_ToVoltage(akk);
 }
 
 
-float Battery::GetVoltagePOW(uint *adc)
+float Battery::GetVoltagePOW()
 {
-    static Utils::AroundAverager<float> averager(4);
+    uint pow = HAL_ADC1::ReadValuePOW();
 
-    *adc = HAL_ADC1::ReadValuePOW();
-
-    averager.Push(static_cast<float>(*adc));
-
-    return PowerADC_ToVoltage(averager.Value());
+    return PowerADC_ToVoltage(pow);
 }
 
 
@@ -82,13 +74,11 @@ void Battery::DrawUGO(int x, int y, float percents)
 
 void Battery::Draw(int x, int y)
 {
-    uint akkADC = 0;
-    float akk = GetVoltageAKK(&akkADC);
+    float akk = GetVoltageAKK();
 
-    uint powADC = 0;
-    float pow = GetVoltagePOW(&powADC);
+    float pow = GetVoltagePOW();
 
-    //LOG_WRITE("pow = %f", pow);
+    LOG_WRITE("pow = %f", pow);
 
     float percents = CalculatePercents(akk);
 
@@ -104,7 +94,7 @@ void Battery::Draw(int x, int y)
 }
 
 
-float Battery::PowerADC_ToVoltage(float value)
+float Battery::PowerADC_ToVoltage(uint value)
 {
     const float k = 124.0F / 24.0F;
 
@@ -112,9 +102,21 @@ float Battery::PowerADC_ToVoltage(float value)
 }
 
 
-float Battery::BatADC_ToVoltage(float value)
+float Battery::BatADC_ToVoltage(uint value)
 {
     const float k = 101.1F / 26.1F;
 
     return (value / MAX_ADC_REL) * MAX_ADC_ABS * k;
+}
+
+
+float Battery::Voltage100(float)
+{
+    return 0.0F;
+}
+
+
+float Battery::Voltage0(float)
+{
+    return 0.0F;
 }

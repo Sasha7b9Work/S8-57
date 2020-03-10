@@ -12,16 +12,16 @@ public:
 private:
     
     // Получить значение напряжения батареи
-    static float GetVoltageAKK(uint *adc);
+    static float GetVoltageAKK();
     
     // Получить значение напряжения источника зарядного напряжения
-    static float GetVoltagePOW(uint *adc);
+    static float GetVoltagePOW();
     
     // Перевод считанного значения ЦАП источника в вольты
-    static float PowerADC_ToVoltage(float value);
+    static float PowerADC_ToVoltage(uint value);
     
     // Перевод считанного значения ЦАП батареи в вольты
-    static float BatADC_ToVoltage(float value);
+    static float BatADC_ToVoltage(uint value);
     
     // Рассчитать процент отставшегося заряда
     static float CalculatePercents(float volts);
@@ -29,8 +29,9 @@ private:
     // Отобразить заряд батареи в графическом виде
     static void DrawUGO(int x, int y, float procents);
 
-    // Значение, соответствующее 100%, для текущих напряжения аккумуляторов akk и источника заряда pow
-    static float Voltage100(float akk, float pow);
+    // Значения, соответствующие 100% и 0%, для текущих напряжения аккумуляторов akk и источника заряда pow
+    static float Voltage100(float pow);
+    static float Voltage0(float pow);
 
     // Максимальное значение, которое возможно считать с АЦП
     static const float MAX_ADC_REL;
