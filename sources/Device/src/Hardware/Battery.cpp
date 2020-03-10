@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include "Display/Primitives.h"
 #include "Hardware/Battery.h"
 #include "Hardware/HAL/HAL.h"
@@ -11,8 +12,7 @@ const float Battery::MAX_ADC_REL = static_cast<float>((1 << 12) - 1);
 /// Напряжение, соответствующее MAX_ADC_REL
 const float Battery::MAX_ADC_ABS = 2.91F;
 
-const float Battery::VOLTAGE_100_PERCENTS = 8.2F;
-
+const float Battery::VOLTAGE_100_PERCENTS = 8.1F;
 const float Battery::VOLTAGE_0_PERCENTS = 6.0F;
 
 
@@ -24,7 +24,7 @@ void Battery::Init()
 
 float Battery::GetVoltageAKK(uint *adc)
 {
-    static Utils::AroundAverager<float> averager(32);
+    static Utils::AroundAverager<float> averager(4);
 
     *adc = HAL_ADC1::ReadValueAKK();
 
@@ -36,7 +36,7 @@ float Battery::GetVoltageAKK(uint *adc)
 
 float Battery::GetVoltagePOW(uint *adc)
 {
-    static Utils::AroundAverager<float> averager(32);
+    static Utils::AroundAverager<float> averager(4);
 
     *adc = HAL_ADC1::ReadValuePOW();
 
@@ -85,13 +85,12 @@ void Battery::Draw(int x, int y)
     uint akkADC = 0;
     float akk = GetVoltageAKK(&akkADC);
 
-    //uint powADC = 0;
-    //float pow = GetVoltagePOW(&powADC);
+    uint powADC = 0;
+    float pow = GetVoltagePOW(&powADC);
+
+    LOG_WRITE("pow = %f", pow);
 
     float percents = CalculatePercents(akk);
-
-    //Text(String("%1.2f В", akk)).Draw(x + 8, y, Color::FILL);
-    //Text("Test").Draw(x + 8, y, Color::FILL);
 
     DrawUGO(x + 1, y + 9, percents);
 
