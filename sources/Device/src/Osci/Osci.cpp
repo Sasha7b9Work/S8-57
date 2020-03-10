@@ -439,7 +439,7 @@ void Randomizer::Read()
 {
     static uint prevTime = 0;
 
-    if(TIME_MS == prevTime)
+    if(TIME_MS == prevTime || set.time.base > TBase::_20ns)
     {
         return;
     }
