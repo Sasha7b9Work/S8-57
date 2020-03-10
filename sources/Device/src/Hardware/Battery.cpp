@@ -88,7 +88,7 @@ void Battery::Draw(int x, int y)
     uint powADC = 0;
     float pow = GetVoltagePOW(&powADC);
 
-    LOG_WRITE("pow = %f", pow);
+    //LOG_WRITE("pow = %f", pow);
 
     float percents = CalculatePercents(akk);
 

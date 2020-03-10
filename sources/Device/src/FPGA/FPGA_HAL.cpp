@@ -29,7 +29,10 @@ void FPGA::LoadRegUPR()
         (0)
     };
 
-    data |= 1;
+    if(OSCI_IN_MODE_RANDOMIZER)
+    {
+        data |= 1;
+    }
 
     data |= mask[Calibrator::Mode()];
 
