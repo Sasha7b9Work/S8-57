@@ -859,3 +859,21 @@ void TShift::DrawRight() const
     Char(Symbol8::RSHIFT_NORMAL).Draw(Grid::Right() - 7, Grid::Top(), Color::BACK);
     Char(Symbol8::TSHIFT_RIGHT).Draw(Grid::Right() - 7, Grid::Top(), Color::FILL);
 }
+
+
+bool Chan::IsEnabled()
+{
+    return Ref().enabled;
+}
+
+
+bool Chan::IsInversed()
+{
+    return Ref().inverse;
+}
+
+
+SettingsChannel &Chan::Ref()
+{
+    return set.ch[ch];
+}

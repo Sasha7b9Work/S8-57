@@ -1,7 +1,6 @@
 #pragma once
 #include "Menu/MenuItems.h"
 #include "Recorder/Recorder.h"
-#include "Settings/ParametersOsci.h"
 
 
 struct SettingsRecorder

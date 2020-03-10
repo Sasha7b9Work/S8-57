@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "log.h"
+#include "Osci/ParametersOsci.h"
 #include "SCPI/ChannelsSCPI.h"
-#include "Settings/ParametersOsci.h"
 #include <cstdlib>
 #include <cstring>
 

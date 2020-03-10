@@ -1,5 +1,5 @@
 #pragma once
-#include "Settings/ParametersOsci.h"
+#include "Osci/ParametersOsci.h"
 
 
 #define SHIFT_IN_MEMORY     DisplayOsci::PainterData::FirstPointOnScreen()

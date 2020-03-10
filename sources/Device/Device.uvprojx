@@ -1551,6 +1551,11 @@
               <FilePath>.\src\Osci\Osci.cpp</FilePath>
             </File>
             <File>
+              <FileName>ParametersOsci.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Osci\ParametersOsci.h</FilePath>
+            </File>
+            <File>
               <FileName>ParametersOsci.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\ParametersOsci.cpp</FilePath>
@@ -1705,16 +1710,6 @@
         <Group>
           <GroupName>Settings</GroupName>
           <Files>
-            <File>
-              <FileName>ParametersOsci.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Settings\ParametersOsci.h</FilePath>
-            </File>
-            <File>
-              <FileName>ParametersOsci.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Settings\ParametersOsci.cpp</FilePath>
-            </File>
             <File>
               <FileName>Settings.h</FileName>
               <FileType>5</FileType>

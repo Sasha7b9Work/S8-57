@@ -1,5 +1,4 @@
 #pragma once
-#include "Settings/ParametersOsci.h"
 
 
 struct WR
