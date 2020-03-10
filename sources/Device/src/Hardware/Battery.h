@@ -21,7 +21,7 @@ private:
     static float PowerADC_ToVoltage(uint value);
     
     // Перевод считанного значения ЦАП батареи в вольты
-    static float BatADC_ToVoltage(uint value);
+    static float BatADC_ToVoltage(float value);
     
     // Рассчитать процент отставшегося заряда
     static float CalculatePercents(float volts);
