@@ -5,19 +5,7 @@
 #include "Hardware/Memory/Sector.h"
 
 
-/// ¬озвращает адрес первого свободного байта в секторе настроек
-static uint FirstFreeAddressForSettings();
-/// \brief ¬озвращает адрес сохранЄнных настроек или 0, если настройки не сохран€лись. fromEnd указывает, какие настройки от конца
-/// нужно загружать - 0 - последние, 1 - предпоследние и так далее
-static uint AddressSavedSettings(int fromEnd);
-
-static void ReadBytes(uint address, void *data, uint size);
-
-static uint ReadDoubleWord(uint address);
-
-
 #define READ_BYTE(address)      (*((uint8 *)address))
-
 
 
 void ROM::Settings::Save()
@@ -59,7 +47,7 @@ void ROM::Settings::Save()
 }
 
 
-static uint FirstFreeAddressForSettings() //-V2506
+uint ROM::Settings::FirstFreeAddressForSettings() //-V2506
 {
     uint address = ADDR_SECTOR(Sector::_10_SETTINGS_1);
 
@@ -80,7 +68,7 @@ static uint FirstFreeAddressForSettings() //-V2506
 }
 
 
-static uint AddressSavedSettings(int)
+uint ROM::Settings::AddressSavedSettings(int)
 {
     uint addrPrev = 0;
 
@@ -104,7 +92,7 @@ static uint AddressSavedSettings(int)
 }
 
 
-static void ReadBytes(uint address, void *data, uint size)
+void ROM::Settings::ReadBytes(uint address, void *data, uint size)
 {
     uint8 *buffer = static_cast<uint8 *>(data);
 
@@ -128,7 +116,7 @@ bool OTP::SaveSerialNumber(char *servialNumber)
 }
 
 
-static uint ReadDoubleWord(uint address)
+uint ROM::Settings::ReadDoubleWord(uint address)
 {
     return *(reinterpret_cast<uint *>(address));
 }

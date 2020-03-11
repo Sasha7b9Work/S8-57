@@ -16,6 +16,17 @@ struct ROM
         static void Save();
 
         static bool Load();
+
+        // Возвращает адрес первого свободного байта в секторе настроек
+        static uint FirstFreeAddressForSettings();
+
+        // \brief Возвращает адрес сохранённых настроек или 0, если настройки не сохранялись. fromEnd указывает, какие настройки от конца
+        // нужно загружать - 0 - последние, 1 - предпоследние и так далее
+        static uint AddressSavedSettings(int fromEnd);
+
+        static void ReadBytes(uint address, void *data, uint size);
+
+        static uint ReadDoubleWord(uint address);
     };
 
     // Функции для сохранения/загрузки несбрасываемых калибровочных настроек
