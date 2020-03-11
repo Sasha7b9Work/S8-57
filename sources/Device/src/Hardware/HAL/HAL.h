@@ -15,6 +15,18 @@
 typedef struct _USBH_HandleTypeDef USBH_HandleTypeDef;
 
 
+struct HAL
+{
+    static void Init();
+
+    static void ErrorHandler(const char *, int);
+
+    static void Delay(uint timeMS);
+
+    static uint TimeMS();
+};
+
+
 struct HAL_RTC
 {
     static void Init();
@@ -199,16 +211,3 @@ struct HAL_USART3
     static void Transmit(void *buffer, uint size, uint timeout);
     static void StartReceiveIT(void *buffer, uint size);
 };
-
-
-struct HAL
-{
-    static void Init();
-
-    static void ErrorHandler(const char *, int);
-
-    static void Delay(uint timeMS);
-
-    static uint TimeMS();
-};
-

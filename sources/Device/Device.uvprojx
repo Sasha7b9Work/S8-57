@@ -781,6 +781,16 @@
               <FilePath>.\src\Hardware\Beeper.cpp</FilePath>
             </File>
             <File>
+              <FileName>PowerSwitch.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\PowerSwitch.h</FilePath>
+            </File>
+            <File>
+              <FileName>PowerSwitch.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\PowerSwitch.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Timer.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\Timer.h</FilePath>

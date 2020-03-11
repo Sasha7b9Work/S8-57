@@ -66,6 +66,8 @@ struct HPin
 #define PIN_TESTER_PNP  HPort::_A, HPin::_6
 #endif
 
+#define PIN_POWER       HPort::_E, HPin::_2
+
 #define PIN_A1          HPort::_D, HPin::_10
 #define PIN_LFS         HPort::_G, HPin::_6
 

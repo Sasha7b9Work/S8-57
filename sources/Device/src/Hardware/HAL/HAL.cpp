@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Hardware/PowerSwitch.h"
 #include "Hardware/HAL/HAL.h"
 #include <stm32f4xx_hal.h>
 
@@ -39,6 +40,8 @@ void HAL::Init()
     RCC->AHB1ENR |= RCC_AHB1ENR_GPIOJEN;
 
     SystemClockConfig();
+
+    PowerSwitch::Init();
 
     HAL_CRC32::Init();
 
