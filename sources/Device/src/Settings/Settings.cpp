@@ -1,5 +1,7 @@
 #include "defines.h"
-#include "Settings.h"
+#include "Hardware/HAL/HAL.h"
+#include "Settings/Settings.h"
+
 
 
 Settings set = Settings::defaultSettings;
@@ -15,5 +17,5 @@ uint Settings::CalcWriteCRC32()
 {
     uint8 *buffer = reinterpret_cast<uint8 *>(this);
 
-    return HAL_CRC32::Calculate8bit(buffer + 2 * sizeof(uint), sizeof(*this) - 2 * sizeof(uint);
+    return HAL_CRC32::Calculate8bit(buffer + 2 * sizeof(uint), sizeof(*this) - 2 * sizeof(uint));
 }

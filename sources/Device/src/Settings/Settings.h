@@ -31,13 +31,13 @@ public:
     static void Reset();
 
     // Рассчитать и записать контрольную сумму
-    static uint CalcWriteCRC32();
+    uint CalcWriteCRC32();
 
     // Настройки по умолчанию
     static const Settings defaultSettings;
 
-    uint                    number;        // Размер данной структуры в байтах
-    uint                    crc32;         // \brief Контрольная сумма данной структуры с хранящимися в ней настройками
+    uint                    crc32;        // Размер данной структуры в байтах
+    uint                    number;       // \brief Контрольная сумма данной структуры с хранящимися в ней настройками
 
     SettingsMenu            menu;
     SettingsDisplay         disp;
