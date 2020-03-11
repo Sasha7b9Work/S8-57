@@ -12,31 +12,6 @@
 #define WRSR    BIN_U8(00000001)        ///< Write Status Register
 
 
-/// Разрешить запись
-static void SetWriteLatch();
-/// Запретить запись
-static void ResetWriteLatch();
-/// Читать регистр статуса
-static uint8 ReadStatusRegister();
-/// Записать регистр статуса
-static void WriteStatusRegister(uint8 data);
-/// Записывает size байт, начиная с адреса address
-static void WriteData(uint address, uint8 *data, uint size);
-/// Посылает порцию буфера по данному адресу. Порция не может быть больше 32 байт
-static void Write32BytesOrLess(uint address, const uint8 *data, uint size);
-/// Читает size байт, начиная с адреса address
-static void ReadData(uint address, uint8 *data, uint size);
-
-/// Записывает байт в микросхему
-static void WriteByte(uint8 byte);
-/// Читает байт из микросхемы
-static uint8 ReadByte();
-
-/// Ожидает, пока не закончится внутреннй цикл записи
-static void WaitFinishWrite();
-
-
-
 void AT25160N::Init()
 {
     //__HAL_RCC_GPIOB_CLK_ENABLE();
@@ -116,7 +91,7 @@ void AT25160N::Test()
 }
 
 
-static void WriteData(uint address, uint8 *data, uint size)
+void AT25160N::WriteData(uint address, uint8 *data, uint size)
 {
     while(1)
     {
@@ -133,7 +108,7 @@ static void WriteData(uint address, uint8 *data, uint size)
 }
 
 
-static void Write32BytesOrLess(uint address, const uint8 * /*data*/, uint size)
+void AT25160N::Write32BytesOrLess(uint address, const uint8 * /*data*/, uint size)
 {
     WaitFinishWrite();
 
@@ -167,7 +142,7 @@ static void Write32BytesOrLess(uint address, const uint8 * /*data*/, uint size)
 }
 
 
-static void SetWriteLatch()
+void AT25160N::SetWriteLatch()
 {
     HAL_PIO::Reset(PIN_AT2516_CS);
     WriteByte(WREN); //-V2501
@@ -175,7 +150,7 @@ static void SetWriteLatch()
 }
 
 
-static void ResetWriteLatch()
+void AT25160N::ResetWriteLatch()
 {
     WaitFinishWrite();
 
@@ -185,7 +160,7 @@ static void ResetWriteLatch()
 }
 
 
-static uint8 ReadStatusRegister()
+uint8 AT25160N::ReadStatusRegister()
 {
     HAL_PIO::Reset(PIN_AT2516_CS);
     WriteByte(RDSR); //-V2501
@@ -195,7 +170,7 @@ static uint8 ReadStatusRegister()
 }
 
 
-static void WriteStatusRegister(uint8 data)
+void AT25160N::WriteStatusRegister(uint8 data)
 {
     WaitFinishWrite();
 
@@ -206,7 +181,7 @@ static void WriteStatusRegister(uint8 data)
 }
 
 
-static void WaitFinishWrite()
+void AT25160N::WaitFinishWrite()
 {
     while (_GET_BIT(ReadStatusRegister(), 0))
     {
@@ -227,7 +202,7 @@ void AT25160N::Load(Settings &)
 }
 
 
-static void WriteByte(uint8 byte)
+void AT25160N::WriteByte(uint8 byte)
 {
     for(int bit = 7; bit >= 0; bit--)
     {
@@ -242,7 +217,7 @@ static void WriteByte(uint8 byte)
 }
 
 
-static uint8 ReadByte()
+uint8 AT25160N::ReadByte()
 {
     uint8 retValue = 0;
 
@@ -261,7 +236,7 @@ static uint8 ReadByte()
 }
 
 
-static void ReadData(uint address, uint8 *data, uint size)
+void AT25160N::ReadData(uint address, uint8 *data, uint size)
 {
     WaitFinishWrite();
 
