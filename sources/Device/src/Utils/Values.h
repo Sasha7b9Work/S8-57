@@ -8,15 +8,19 @@ class Hex
 {
 public:
     Hex(uint v) : value(v) {};
-    /// Преобразует значение в текстовую строку в шестнадцатиричном виде. depth задаёт разрядность числа - 8, 16 или 32 бит.
+    
+    // Преобразует значение в текстовую строку в шестнадцатиричном виде. depth задаёт разрядность числа - 8, 16 или 32 бит.
     char* ToHex(int depth, char bufferOut[9]) const;
-    /// Преобразует значение в текстовую строку в двоичном виде. depth задаёт разрядность числа - 8, 16 или 32 бит.
+    
+    // Преобразует значение в текстовую строку в двоичном виде. depth задаёт разрядность числа - 8, 16 или 32 бит.
     char* ToBin(int depth, char bufferOut[36]) const;
-    /// Возвращает символ в позиции pos от последнего (младшего)
+    
+    // Возвращает символ в позиции pos от последнего (младшего)
     char DigitInPosition(int pos) const;
 
     void Set(uint v) { value = v; };
-    /// Возвращает число десятичных разрядов.
+    
+    // Возвращает число десятичных разрядов.
     int NumDigits() const;
 
     operator uint() const { return value; };
@@ -66,7 +70,8 @@ class Frequency
 {
 public:
     Frequency(float v) : value(v) {};
-    /// Преобразует freq герц в текстовую строку. При этом число количество цифр в строке равно numDigits
+    
+    // Преобразует freq герц в текстовую строку. При этом число количество цифр в строке равно numDigits
     char* ToStringAccuracy(char bufferOut[20], int numDigits) const;
 
     String ToString() const;

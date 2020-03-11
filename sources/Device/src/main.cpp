@@ -9,9 +9,11 @@ int main(void)
 {
     Device::Init();
 
-    AT25160N::Init();
+//    AT25160N::Init();
+
+//    AT25160N::Test();
     
-    Test::Run();
+//    Test::Run();
   
     while (1)
     {
