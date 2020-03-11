@@ -413,7 +413,7 @@ void Handlers::ShowHidePage(const Page *page)
     }
     else
     {
-        Menu::mainPage = page;
+        Menu::SetMainPage(page);
 
         if (!Menu::IsShown())
         {

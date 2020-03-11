@@ -8,6 +8,7 @@ struct PageName
 {
     enum E
     {
+        None,
         ///  ¿Õ¿À 1
         ChannelA,
         ///  ¿Õ¿À 2

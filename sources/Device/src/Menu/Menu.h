@@ -5,9 +5,10 @@
 
 struct SettingsMenu
 {
-    bool    show;                               ///< Если true, то нужно показывать текущую страницу
-    int8    posActItem[PageName::Count];        ///< \brief Позиция активного пункта. bit7 == 1 - item is opened, 0x7f - нет активного пункта.
-    int8    currentSubPage[PageName::Count];    ///< Номер текущей подстраницы.
+    bool        show;                               // Если true, то нужно показывать текущую страницу
+    int8        posActItem[PageName::Count];        // \brief Позиция активного пункта. bit7 == 1 - item is opened, 0x7f - нет активного пункта.
+    int8        currentSubPage[PageName::Count];    // Номер текущей подстраницы.
+    PageName::E mainPage;                           // Имя текущей главной страницы
 };
 
 
@@ -54,10 +55,13 @@ struct Menu
     static int Y0();
 
     static const Item *ItemUnderFunctionalKey(Key::E key);
-    
-    // Текущая главная страница
-    static const Page *mainPage;
 
+    // Возвращает указаетль на страницу с именем name
+    static Page *PageFromName(PageName::E name);
+
+    // Устанавливает текущую главную страницу
+    static void SetMainPage(const Page *page);
+   
     struct Title
     {
         static const int HEIGHT = 9;
@@ -65,6 +69,9 @@ struct Menu
     };
 
 private:
+
+    // Возвращает указатель на текущую главную страницу
+    static const Page *GetMainPage();
     
     // Последний открытый контрол на дереве странице page
     static Item *LastOpened(Page *page);

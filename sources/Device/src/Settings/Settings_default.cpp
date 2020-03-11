@@ -19,7 +19,8 @@ const Settings Settings::defaultSettings =
             0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f,
             0x7f, 0x7f
         },
-        {}                                      // menu_currentSubPage[Page_NumPages];
+        {},                                     // menu_currentSubPage[Page_NumPages];
+        PageName::None
     },
 
     // Ìåíş ÄÈÑÏËÅÉ

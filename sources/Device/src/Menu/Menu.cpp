@@ -16,8 +16,22 @@
 
 Item *Menu::itemHint = nullptr;
 uint Menu::timeLastKeyboardEvent = MAX_UINT;
-const Page *Menu::mainPage = nullptr;
 const char *Menu::stringForHint = nullptr;
+
+
+static const Page *const pages[] =
+{
+    PageFunction::self,
+    PageMeasures::self,
+    PageMemory::self,
+    PageDisplay::self,
+    PageService::self,
+    PageTime::self,
+    PageTrig::self,
+    PageChannelA::self,
+    PageChannelB::self,
+    nullptr
+};
 
 
 void Menu::Update()
@@ -176,7 +190,7 @@ void Menu::Hide()
 
 bool Menu::IsShown()
 {
-    return set.menu.show && mainPage != nullptr;
+    return set.menu.show && GetMainPage() != nullptr;
 }
 
 
@@ -191,7 +205,7 @@ void Menu::ClosePage(Page *page)
         keeper->SetPosActItem(0x7f);
     }
 
-    if (page == Menu::mainPage)    
+    if (page == GetMainPage())
     {
         Menu::Hide();
     }
@@ -247,7 +261,7 @@ void Menu::CloseOpenedItem()
 
 Item *Menu::OpenedItem()
 {
-    return LastOpened(const_cast<Page *>(Menu::mainPage));
+    return LastOpened(const_cast<Page *>(GetMainPage()));
 }
 
 
@@ -476,4 +490,34 @@ void Menu::CloseAllBadOpenedPages()
 int8 &Menu::Position::ActItem(PageName::E name)
 {
     return set.menu.posActItem[name];
+}
+
+
+Page *Menu::PageFromName(PageName::E name)
+{
+    for(int i = 0; true; i++)
+    {
+        if(pages[i] == nullptr)
+        {
+            break;
+        }
+        else if(pages[i]->GetName() == name)
+        {
+            return const_cast<Page *>(pages[i]);
+        }
+    }
+
+    return nullptr;
+}
+
+
+void Menu::SetMainPage(const Page *page)
+{
+    set.menu.mainPage = page->GetName();
+}
+
+
+const Page *Menu::GetMainPage()
+{
+    return PageFromName(set.menu.mainPage);
 }
