@@ -58,7 +58,9 @@ struct HAL_ADC3
 struct HAL_CRC32
 {
     static void Init();
-    static uint Calculate(uint address, uint size);
+
+    // Расчитывает контрольную сумму последовательности байт из buffer. Если size не кратно четырём, последние байты не участвуют в вычислении контрольной суммы
+    static uint Calculate8bit(uint8 *buffer, uint size);
 };
 
 

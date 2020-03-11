@@ -4,7 +4,9 @@
 class PowerSwitch
 {
 public:
+    // Инициализация
     static void Init();
-    static void Off();
-private:
+
+    // Выключение в случае необходимости
+    static void OffIfNeed();
 };

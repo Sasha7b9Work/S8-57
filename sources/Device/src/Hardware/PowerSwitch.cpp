@@ -1,6 +1,10 @@
 #include "defines.h"
+#include "device.h"
+#include "Hardware/Battery.h"
 #include "Hardware/PowerSwitch.h"
 #include "Hardware/HAL/HAL_PIO.h"
+#include "Settings/Settings.h"
+#include "Settings/SettingsNRST.h"
 
 
 void PowerSwitch::Init()
@@ -10,7 +14,17 @@ void PowerSwitch::Init()
 }
 
 
-void PowerSwitch::Off()
+void PowerSwitch::OffIfNeed()
 {
-    HAL_PIO::Reset(PIN_POWER);
+    if(Battery::GetVoltageAKK() < 5.0F)
+    {
+        if(!Device::InModeTester())
+        {
+            Settings::Save();
+        }
+
+        setNRST.Save();
+
+        HAL_PIO::Reset(PIN_POWER);
+    }
 }

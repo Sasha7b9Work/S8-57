@@ -49,8 +49,6 @@ struct Menu
 
     static void SetItemForHint(const Item *item);
 
-    static void SaveSettings();
-    
     // С какоей позиции Y рисовать меню. Позиция берётся без учёта заголовка
     static int Y0();
 
@@ -96,10 +94,7 @@ private:
     
     // Итем, для которого нужно выводить подсказку
     static Item *itemHint;
-    
-    // Нужно для того, чтобы периодически сохранять настройки
-    static uint timeLastKeyboardEvent;
-    
+      
     // Строка подсказки, которую надо выводить в случае включённого режима подсказок.
     static const char *stringForHint;
 };

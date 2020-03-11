@@ -205,7 +205,11 @@ void Handlers::OnFX()
 {
     if (Menu::IsShown())
     {
-        Menu::ItemUnderFunctionalKey(event.key)->HandlerFX(event.type);
+        const Item *underKey = Menu::ItemUnderFunctionalKey(event.key);
+
+        //Item *opened = Menu::OpenedItem();
+
+        underKey->HandlerFX(event.type);
     }
 }
 

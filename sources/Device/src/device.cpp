@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "device.h"
 #include "common/Decoder_d.h"
 #include "Display/Console.h"
@@ -7,6 +6,7 @@
 #include "FPGA/FPGA.h"
 #include "Hardware/Battery.h"
 #include "Hardware/Beeper.h"
+#include "Hardware/PowerSwitch.h"
 #include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
 #include "Hardware/HAL/HAL.h"
@@ -108,8 +108,6 @@ void Device::Update()
 
     Display::Update();
 
-    Menu::SaveSettings();
-   
     Tester::Update();
 
     Recorder::Update();
@@ -127,6 +125,8 @@ void Device::Update()
     DDecoder::Update();
 
     Menu::Update();
+
+    PowerSwitch::OffIfNeed();
 }
 
 

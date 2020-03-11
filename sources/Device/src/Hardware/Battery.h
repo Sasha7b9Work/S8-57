@@ -9,10 +9,10 @@ public:
 
     static void Draw(int x, int y);
 
-private:
-    
     // Получить значение напряжения батареи
     static float GetVoltageAKK();
+
+private:   
     
     // Получить значение напряжения источника зарядного напряжения
     static float GetVoltagePOW();

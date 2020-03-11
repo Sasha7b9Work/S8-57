@@ -15,7 +15,6 @@
 
 
 Item *Menu::itemHint = nullptr;
-uint Menu::timeLastKeyboardEvent = MAX_UINT;
 const char *Menu::stringForHint = nullptr;
 
 
@@ -38,8 +37,6 @@ void Menu::Update()
 {
     while(!BufferButtons::IsEmpty())                // ≈сли есть событи€ клавиатуры
     {
-        timeLastKeyboardEvent = TIME_MS;            // то сохран€ем врем€ последнего нажати€, чтобы знать, когда сохранить настройки
-
         KeyEvent event = BufferButtons::Extract();  // »звлекаем очередное событие
 
         if (!Keyboard::KeyIsActive(event.key))      // ≈сли кнопка не разрешена дл€ обработки сейчас:
@@ -422,21 +419,6 @@ void Menu::SetItemForHint(const Item *item)
 {
     stringForHint = nullptr;
     itemHint = const_cast<Item *>(item);
-}
-
-
-void Menu::SaveSettings()
-{
-    if((timeLastKeyboardEvent != MAX_UINT) && (TIME_MS - timeLastKeyboardEvent > 5000))
-    {
-        timeLastKeyboardEvent = MAX_UINT;
-        if(!Device::InModeTester())
-        {
-            Settings::Save();
-        }
-
-        setNRST.Save();
-    }
 }
 
 

@@ -88,8 +88,16 @@ static uint AddressSavedSettings(int)
 
     while (ReadDoubleWord(address) != MAX_UINT)
     {
+        if(address < ADDR_SECTOR(Sector::_10_SETTINGS_1) || address > ADDR_SECTOR(Sector::_10_SETTINGS_1) + 128 * 1024)
+        {
+            address = address;
+        }
+
         addrPrev = address;
-        address += ReadDoubleWord(address);
+        
+        uint offset = ReadDoubleWord(address);
+        
+        address += offset;
     }
 
     return addrPrev;
@@ -128,8 +136,11 @@ static uint ReadDoubleWord(uint address)
 
 bool ROM::Settings::Load()
 {
-    uint address = AddressSavedSettings(0);
+    uint size = sizeof(set);
+    size = size;
 
+    uint address = AddressSavedSettings(0);
+    
     if (address && ReadDoubleWord(address) == sizeof(set))
     {
         ReadBytes(address, &set, ReadDoubleWord(address));

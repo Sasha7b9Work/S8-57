@@ -33,8 +33,8 @@ public:
     /// Настройки по умолчанию
     static const Settings defaultSettings;
 
-    uint                    size;           ///< Размер данной структуры в байтах
-    uint                    crc32;          ///< \brief Контрольная сумма данной структуры с хранящимися в ней настройками
+    uint                    size;           // Размер данной структуры в байтах
+    uint                    crc32;         // \brief Контрольная сумма данной структуры с хранящимися в ней настройками
 
     SettingsMenu            menu;
     SettingsDisplay         disp;

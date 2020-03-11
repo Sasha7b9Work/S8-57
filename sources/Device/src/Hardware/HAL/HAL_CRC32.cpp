@@ -15,7 +15,12 @@ void HAL_CRC32::Init()
 }
 
 
-uint HAL_CRC32::Calculate(uint address, uint size)
+uint HAL_CRC32::Calculate8bit(uint8 *buffer, uint size)
 {
-    return HAL_CRC_Calculate(&handle, reinterpret_cast<uint *>(address), size);
+    if((size % 4) != 0)
+    {
+        size -= (size % 4);
+    }
+
+    return HAL_CRC_Calculate(&handle, reinterpret_cast<uint *>(buffer), size / 4);
 }
