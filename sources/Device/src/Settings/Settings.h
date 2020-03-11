@@ -30,10 +30,13 @@ public:
     static void Save();
     static void Reset();
 
-    /// Настройки по умолчанию
+    // Рассчитать и записать контрольную сумму
+    static uint CalcWriteCRC32();
+
+    // Настройки по умолчанию
     static const Settings defaultSettings;
 
-    uint                    size;           // Размер данной структуры в байтах
+    uint                    number;        // Размер данной структуры в байтах
     uint                    crc32;         // \brief Контрольная сумма данной структуры с хранящимися в ней настройками
 
     SettingsMenu            menu;
@@ -52,6 +55,7 @@ public:
     SettingsRecorder        rec;
     SettingsService         serv;
     SettingsDebug           dbg;
+    uint notDeleted;                // Эту переменную удалять нельзя. Нужна для корректного расчёта контрольной суммы
 };
 #pragma pack(pop)
 

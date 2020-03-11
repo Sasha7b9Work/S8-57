@@ -184,22 +184,6 @@
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\src/Hardware/Memory/ROM.cpp\93</Expression>
         </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
-          <LineNumber>144</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134466092</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Hardware\Memory\ROM.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\S8_57\src/Hardware/Memory/ROM.cpp\144</Expression>
-        </Bp>
       </Breakpoint>
       <WatchWindow1>
         <Ww>

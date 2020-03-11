@@ -81,11 +81,13 @@ struct Sector
     uint address;
 
     uint size;
-    /// јдрес первого байта за сектором
+    
+    // јдрес первого байта за сектором
     uint End() const;
 
     void Erase() const;
-    /// true означает, что в сектор не записан ни один пакет
+    
+    // true означает, что в сектор не записан ни один пакет
     bool ExistPackets() const;
 
     const PacketROM *FirstFreePacket() const;
@@ -95,20 +97,28 @@ struct Sector
     const DataSettings *ReadData(uint numInROM) const;
 
     const PacketROM *DeleteData(uint numInROM) const;
-    /// ѕолучить информацию о сохранЄннх в секторе данных
+    
+    // ѕолучить информацию о сохранЄннх в секторе данных
     void GetDataInfo(bool existData[ROM::Data::MAX_NUM_SAVED_WAVES]) const;
-    /// ¬озвращает указатель на первый пакет
+    
+    // ¬озвращает указатель на первый пакет
     const PacketROM *FirstPacket() const;
 
     const PacketROM *FindValidPacket(uint numInROM) const;
-    /// ¬озвращает количество байт, занимаемых стЄртыми пакетами
+    
+    // ¬озвращает количество байт, занимаемых стЄртыми пакетами
     uint GetNumberWornBytes() const;
-    /// ¬озвращает указатель на первый пакет с данными из сектора sector и nullptr, если данных в секторе нет
+    
+    // ¬озвращает указатель на первый пакет с данными из сектора sector и nullptr, если данных в секторе нет
     const PacketROM *GetFirstPacketWithData() const;
-    /// ¬озвращает номер сектора, которому принадлежит address
+    
+    // ¬озвращает номер сектора, которому принадлежит address
     static int Number(uint address);
-    /// ¬озвращает ссылку на сектор, которому принадлежит данный адрес
+    
+    // ¬озвращает ссылку на сектор, которому принадлежит данный адрес
     static const Sector &Get(uint address);
+
+    static const Sector &Get(Sector::E number);
 
     void Log() const;
 private:

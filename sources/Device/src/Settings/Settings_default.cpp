@@ -232,5 +232,6 @@ const Settings Settings::defaultSettings =
         false,                      // ShowStats
         false,                      // runTest
         false                       // showBattery
-    }
+    },
+    0
 };

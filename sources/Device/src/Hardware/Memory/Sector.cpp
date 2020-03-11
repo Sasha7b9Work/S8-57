@@ -413,6 +413,12 @@ const Sector &Sector::Get(uint address)
 }
 
 
+const Sector &Sector::Get(Sector::E number)
+{
+    return HAL_ROM::sectors[number];
+}
+
+
 char *TypePacket(const PacketROM *packet)
 {
     if (packet == nullptr)

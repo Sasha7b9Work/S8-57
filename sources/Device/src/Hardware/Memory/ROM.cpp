@@ -5,102 +5,57 @@
 #include "Hardware/Memory/Sector.h"
 
 
-#define READ_BYTE(address)      (*((uint8 *)address))
+#define READ_BYTE(address)  (*((uint8 *)address))
+#define SIZE_RECORD         512                      // –азмер одной записи
+
+
+class Record;
+
+struct SectorSet
+{
+    Record *FirstRecord();
+    Sector sector;
+};
+
+
+static SectorSet sectorFirst = { Sector::Get(Sector::_10_SETTINGS_1) };
+static SectorSet sectorSecond = { Sector::Get(Sector::_11_SETTINGS_2) };
+
+
+class Record
+{
+public:
+    Record *Next();
+    SectorSet &
+    Settings set;
+};
+
+
+// ¬озвращает указатель на последнюю сохранЄнную запись
+static Record *LastRecord();
 
 
 void ROM::Settings::Save()
 {
-    /*
-        јлгоритм нахождени€ первого свободного слова
-        1. текущий адрес = (uint*)ADDR_SECTOR_SETTINGS_1.
-        2. —мотрим, что записано по текущему адресу
-        2. ≈сли там 0xffffffff, то это первое свободное слово - выходим.
-        3. ѕрибавл€ем к текущему адресу значение *((uint*)ADDR_SECTOR_SETTINGS_1).
-        4. ѕереходим к 2
-    */
-    /*
-        1. «аписываем в Settings.size значение sizeof(Settings)
-        2. Ќаходим адрес первого свободного байта (алгоритм выше)
-        3. Ќаходим размер_свободной_пам€ти = ADDR_SECTOR_SETTINGS_1 + (128 * 1024) - адрес_первого_свободного_слова
-        4. ≈сли размер_свободной_пам€ти > размер_структуры_настроек, то сохран€ем по найденному адресу структуру Settings и выходим.
-        5. »наче стираем сектор настроек и записываем в его начало структуру Settings
-    */
+    Record *record = sectorFirst.FirstRecord();         // јдрес дл€ записи настроек
 
-    /// \todo ќдного сектора дл€ хранени€ настроек недостаточно, потому что после стирани€ может отключитьс€ питание и тогда сотрутс€ все настройки
+    Record *last = LastRecord();                        // ”казатель на последние сохранЄнные настройки
 
-    set.size = sizeof(set);
-
-    uint address = FirstFreeAddressForSettings();
-
-    uint freeMemory = END_SECTOR(Sector::_10_SETTINGS_1) - address;
-
-    if((address == MAX_UINT) || (freeMemory <= sizeof(Settings)) || (address < ADDR_SECTOR(Sector::_10_SETTINGS_1)))
+    if(last)
     {
-        SECTOR(Sector::_10_SETTINGS_1).Erase();
+        Record *record = last->Next();                  // Ќаходим адрес следующей за last записью в том же секторе
 
-        address = ADDR_SECTOR(Sector::_10_SETTINGS_1);
-    }
-
-    set.size = sizeof(set);
-
-    HAL_ROM::WriteBufferBytes(address, &set, sizeof(set));
-}
-
-
-uint ROM::Settings::FirstFreeAddressForSettings() //-V2506
-{
-    uint address = ADDR_SECTOR(Sector::_10_SETTINGS_1);
-
-    do
-    {
-        uint value = ReadDoubleWord(address);
-
-        if (value == MAX_UINT)              // Ёто условие означает, что по этому адресу ещЄ ничего не записывалось, иначе здесь был бы записан
-        {                                   // размер структуры (Settings), чьим первым байтом €вл€лось бы это слово
-            return address;
-        }
-
-        address += value;                   // ѕереходим на первый свободный байт за структурой
-
-    } while (address < END_SECTOR(Sector::_10_SETTINGS_1));
-    
-    return MAX_UINT;        // ¬ообще-то до этой точки дойти никак не может. ≈сли мы оказались здесь, произошла ошибка
-}
-
-
-uint ROM::Settings::AddressSavedSettings(int)
-{
-    uint addrPrev = 0;
-
-    uint address = ADDR_SECTOR(Sector::_10_SETTINGS_1);
-
-    while (ReadDoubleWord(address) != MAX_UINT)
-    {
-        if(address < ADDR_SECTOR(Sector::_10_SETTINGS_1) || address > ADDR_SECTOR(Sector::_10_SETTINGS_1) + 128 * 1024)
+        if(!record)                                     // ≈сли запись найти не удалось
         {
-            address = address;
+
         }
-
-        addrPrev = address;
-        
-        uint offset = ReadDoubleWord(address);
-        
-        address += offset;
     }
 
-    return addrPrev;
+    set.number = record->set.number + 1;                // ≈сли запись пуста€, то номер будет равен 0 = 0xFFFFFFFF + 1
+    set.crc32 = set.CalcWriteCRC32();
+    HAL_ROM::WriteBufferBytes(reinterpret_cast<uint>(record), &set, sizeof(set));
 }
 
-
-void ROM::Settings::ReadBytes(uint address, void *data, uint size)
-{
-    uint8 *buffer = static_cast<uint8 *>(data);
-
-    for (uint i = 0; i < size; i++)
-    {
-        buffer[i] = READ_BYTE(address++);
-    }
-}
 
 String OTP::GetSerialNumber(int *freeForWrite)
 {
@@ -116,24 +71,7 @@ bool OTP::SaveSerialNumber(char *servialNumber)
 }
 
 
-uint ROM::Settings::ReadDoubleWord(uint address)
-{
-    return *(reinterpret_cast<uint *>(address));
-}
-
-
 bool ROM::Settings::Load()
 {
-    uint size = sizeof(set);
-    size = size;
-
-    uint address = AddressSavedSettings(0);
-    
-    if (address && ReadDoubleWord(address) == sizeof(set))
-    {
-        ReadBytes(address, &set, ReadDoubleWord(address));
-        return true;
-    }
-
     return false;
 }
