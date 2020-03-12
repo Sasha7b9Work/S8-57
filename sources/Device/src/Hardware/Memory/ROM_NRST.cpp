@@ -159,3 +159,10 @@ Packet *Packet::Next()
 
     return reinterpret_cast<Packet *>(Begin() + size);
 }
+
+
+void ROM::NRST::Erase()
+{
+    sector1.sector.Erase();
+    sector2.sector.Erase();
+}
