@@ -282,10 +282,10 @@ ENumSignalsInSec::E &ENumSignalsInSec::Ref()
 }
 
 
-ENumSmoothing::E &ENumSmoothing::Ref()
+uint ENumSmoothing::ToNumber()
 {
-    return set.disp.enumSmoothing;
-}
+    return static_cast<uint>(set.disp.enumSmoothing + 1);
+};
 
 
 void Display::SaveScreenToDrive()

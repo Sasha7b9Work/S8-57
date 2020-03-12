@@ -116,8 +116,7 @@ struct ENumSmoothing
         _9points,
         _10points
     };
-    static ENumSmoothing::E &Ref();
-    static uint ToNumber() { return static_cast<uint>(Ref() + 1); };
+    static uint ToNumber();
 };
 
 /// Ограничение FPS.
