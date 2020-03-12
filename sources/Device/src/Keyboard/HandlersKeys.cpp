@@ -38,10 +38,7 @@ static void ChangeTBase(int delta);
 static void ChangeRShift(Chan::E ch, int16 delta);
 
 // Обработчики нажатия кнопок
-static void OnArrow();     // Key::Left, Key::Up, Key::Right, Key::Down
-static void OnEnter();     // Key::Enter
 static void OnTime();      // Key::Time
-static void OnStart();     // Key::Start
 static void OnFunction();  // Key::Function
 static void OnService();   // Key::Service
 static void OnMeasures();  // Key::Measure
@@ -50,6 +47,10 @@ static void OnMemory();    // Key::Memory
 static void OnChannelA();  // Key::ChannelA
 static void OnChannelB();  // Key::ChannelB
 static void OnTrig();      // Key::Trig
+
+static void OnArrow();     // Key::Left, Key::Up, Key::Right, Key::Down
+static void OnEnter();     // Key::Enter
+static void OnStart();     // Key::Start
 static void OnTrigLev();   // Key::TrigLevLess, Key::TrigLevMore
 static void OnRangeA();    // Key::RangeLessA, Key::RangeMoreA
 static void OnRangeB();    // Key::RangeLessB, Key::RangeMoreB
@@ -58,6 +59,9 @@ static void OnRShiftB();   // Key::RShiftLessB, Key::RShiftMoreB
 static void OnTBase();     // Key::TBaseLess, Key::TBase::More
 static void OnTShift();    // Key::TShiftLess, Key::TShiftMore
 static void OnFX();        // Key::F1, Key::F2, Key::F3, Key::F4, Key::F5
+
+// Общая функция при нажатии на кнопку со страницей
+static void CommonButtonPage(const Page *page);
 
 
 void Handlers::Process(KeyEvent e)
@@ -91,10 +95,10 @@ void Handlers::Process(KeyEvent e)
         {OnTShift,   OnTShift,    Empty,       Empty},       // TShiftLess 
         {OnTrigLev,  OnTrigLev,   Empty,       Empty},       // TrigLevMore
         {OnTrigLev,  OnTrigLev,   Empty,       Empty},       // TrigLevLess
-        {OnArrow,    OnArrow,     OnArrow,     OnArrow},     // Left       
-        {OnArrow,    OnArrow,     OnArrow,     OnArrow},     // Right      
-        {OnArrow,    OnArrow,     OnArrow,     OnArrow},     // Up         
-        {OnArrow,    OnArrow,     OnArrow,     OnArrow},     // Down       
+        {OnArrow,    OnArrow,     OnArrow,     OnArrow},     // Left
+        {OnArrow,    OnArrow,     OnArrow,     OnArrow},     // Right
+        {OnArrow,    OnArrow,     OnArrow,     OnArrow},     // Up
+        {OnArrow,    OnArrow,     OnArrow,     OnArrow},     // Down
         {Empty,      Empty,       OnEnter,     OnEnter},     // Enter      
         {OnFX,       Empty,       OnFX,        OnFX},        // F1
         {OnFX,       Empty,       OnFX,        OnFX},        // F2
@@ -281,10 +285,6 @@ static void OnArrow()
     {
         openedItem->HandlerKey(event);
     }
-    else
-    {
-        // здесь ничего
-    }
 }
 
 
@@ -330,10 +330,6 @@ static void OnEnter()
     {
         return Menu::IsShown() ? Menu::Hide() : Menu::Show();
     }
-    else
-    {
-        // здесь ничего
-    }
 }
 
 
@@ -347,15 +343,13 @@ static void OnChannelA()
 {
     if (event.IsRelease())
     {
+        CommonButtonPage(PageChannelA::self);
+
         ShowHidePage(PageChannelA::self);
     }
     else if (event.IsLong())
     {
         RShift(Chan::A).Set(0);
-    }
-    else
-    {
-        // здесь ничего
     }
 }
 
@@ -364,27 +358,29 @@ static void OnChannelB()
 {
     if (event.IsRelease())
     {
+        CommonButtonPage(PageChannelB::self);
+
         ShowHidePage(PageChannelB::self);
     }
     else if (event.IsLong())
     {
         RShift(Chan::B).Set(0);
     }
-    else
-    {
-        // здесь ничего
-    }
 }
 
 
 static void OnFunction()
 {
+    CommonButtonPage(PageFunction::self);
+
     ShowHidePage(PageFunction::self);
 }
 
 
 static void OnMeasures()
 {
+    CommonButtonPage(PageMeasures::self);
+
     ShowHidePage(PageMeasures::self);
 }
 
@@ -397,6 +393,8 @@ static void OnMemory()
     }
     else
     {
+        CommonButtonPage(PageMemory::self);
+
         ShowHidePage(PageMemory::self);
     }
 }
@@ -404,12 +402,16 @@ static void OnMemory()
 
 static void OnService()
 {
+    CommonButtonPage(PageService::self);
+
     ShowHidePage(PageService::self);
 }
 
 
 static void OnTime()
 {
+    CommonButtonPage(PageTime::self);
+
     if (event.IsRelease())
     {
         ShowHidePage(PageTime::self);
@@ -417,10 +419,6 @@ static void OnTime()
     else if (event.IsLong())
     {
         TShift().Reset();
-    }
-    else
-    {
-        // здесь ничего
     }
 }
 
@@ -442,21 +440,21 @@ static void OnTrig()
 {
     if (event.IsRelease())
     {
+        CommonButtonPage(PageTrig::self);
+
         ShowHidePage(PageTrig::self);
     }
     else if (event.IsLong())
     {
         TrigLevel().Set(0);
     }
-    else
-    {
-        // здесь ничего
-    }
 }
 
 
 static void OnDisplay()
 {
+    CommonButtonPage(PageDisplay::self);
+
     ShowHidePage(PageDisplay::self);
 }
 
@@ -474,6 +472,18 @@ static void ShowHidePage(const Page *page)
         if (!Menu::IsShown())
         {
             Menu::Show();
+        }
+    }
+}
+
+
+static void CommonButtonPage(const Page *page)
+{
+    if(Menu::GetMainPage() != page)
+    {
+        if(!Menu::OpenedItem()->IsPage())
+        {
+            Menu::CloseOpenedItem();
         }
     }
 }

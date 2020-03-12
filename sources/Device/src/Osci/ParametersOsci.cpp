@@ -289,6 +289,8 @@ void TBase::Set(TBase::E base)
 
     HAL_BUS::FPGA::Write8(WR::TBASE, values[TBase()]);
 
+    FPGA::LoadRegUPR();
+
     TShift().Load();
 
     Bandwidth(Chan::A).Load();

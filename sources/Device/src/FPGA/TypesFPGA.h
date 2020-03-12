@@ -10,14 +10,14 @@ struct WR
     static uint8 *POST_LO;      ///< Послезапуск
     static uint8 *POST_HI;
 
-    static uint8 *UPR;                  ///< Управление
-#define BIT_UPR_RAND            0       ///< Вкл. рандомизатор
-#define BIT_UPR_PEAK            1       ///< Пиковый детектор
-#define BIT_UPR_CALIBR_AC_DC    2       ///< Калибратор AC/DC
-#define BIT_UPR_CALIBR_ZERO     3       ///< Калибратор 0/4В
+    static uint8 *UPR;                      ///< Управление
+#define BIT_UPR_RAND            0           ///< Вкл. рандомизатор
+#define BIT_UPR_PEAK            1           ///< Пиковый детектор
+#define BIT_UPR_CALIBR_AC_DC    2           ///< Калибратор AC/DC
+#define BIT_UPR_CALIBR_ZERO     3           ///< Калибратор 0/4В
 
-    static uint8 *FREQMETER;    ///< Управление частотомером
-    static uint8 *TRIG;         ///< Управление синхронизацией/запуском
+    static uint8 *FREQMETER;                ///< Управление частотомером
+    static uint8 *TRIG;                     ///< Управление синхронизацией/запуском
 #define BIT_TRIG_POLARITY       0           ///< Управление полярностью синхронизации
 #define BIT_TRIG_ENABLED        1           ///< Бит включения сихронизации. 0 - вкл, 1 - выкл
 

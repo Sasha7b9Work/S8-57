@@ -45,6 +45,9 @@ struct Menu
 
     static Page *OpenedPage();
 
+    // Возвращает указатель на текущую главную страницу
+    static const Page *GetMainPage();
+
     static void CloseOpenedItem();
 
     static void SetItemForHint(const Item *item);
@@ -67,10 +70,7 @@ struct Menu
     };
 
 private:
-
-    // Возвращает указатель на текущую главную страницу
-    static const Page *GetMainPage();
-    
+   
     // Последний открытый контрол на дереве странице page
     static Item *LastOpened(Page *page);
     
