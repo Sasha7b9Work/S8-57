@@ -19,7 +19,6 @@ const char *Debug::file[10] = { 0 };
 int   Debug::line[10] = { 0 };
 
 
-
 void Debug::StartProfilingMS()
 {
     timeStartMS = TIME_MS;
@@ -29,11 +28,11 @@ void Debug::StartProfilingMS()
 
 uint Debug::PointProfilingMS(const char *_file, int _line)
 {
-    uint delta = TIME_MS - timePrevMS;
-    LOG_WRITE("%s %d %d", _file, _line, delta);
+    uint d = TIME_MS - timePrevMS;
+    LOG_WRITE("%s %d %d", _file, _line, d);
     timePrevMS = TIME_MS;
 
-    return delta;
+    return d;
 }
 
 
@@ -46,10 +45,10 @@ void Debug::StartProfilingUS()
 
 uint Debug::PointProfilingUS(const char *_file, int _line)
 {
-    uint delta = TIME_US - timePrev;
-    LOG_WRITE("%s:%d - %d us", _file, _line, delta);
+    uint d = TIME_US - timePrev;
+    LOG_WRITE("%s:%d - %d us", _file, _line, d);
     timePrev = TIME_US;
-    return delta;
+    return d;
 }
 
 

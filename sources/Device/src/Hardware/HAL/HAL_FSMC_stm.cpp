@@ -3,6 +3,7 @@
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Settings/SettingsNRST.h"
+#include "Utils/Debug.h"
 #include "Utils/Math.h"
 #include <stm32f4xx_hal.h>
 
@@ -264,15 +265,13 @@ float HAL_BUS::FPGA::GetStretch(const uint8 *address)
 
     static const float *stretchs[4] =
     {
-        &StretchADC::Ref().stretch[Chan::A],
-        &StretchADC::Ref().stretch[Chan::A],
-        &StretchADC::Ref().stretch[Chan::B],
-        &StretchADC::Ref().stretch[Chan::B]
+        &setNRST.stretchADC.stretch[Chan::A],
+        &setNRST.stretchADC.stretch[Chan::A],
+        &setNRST.stretchADC.stretch[Chan::B],
+        &setNRST.stretchADC.stretch[Chan::B]
     };
 
     int delta = address - RD::DATA_A;
 
-    float result = *stretchs[delta];
-
-    return result;
+    return *stretchs[delta];
 }

@@ -4,7 +4,6 @@
 
 /// \brief Тип балансировки АЦП каналов.
 /// Дело в том, что уровни АЦП не совпадают из-за отличия характеристик ( ? ), поэтому мы вводим дополнительное смещение для одного из АЦП канала.
-#pragma pack(push, 1)
 struct BalanceADC
 {
     enum E
@@ -85,8 +84,6 @@ struct SettingsNRST
 
     bool operator!=(const SettingsNRST &rhs);
 };
-
-#pragma pack(pop)
 
 
 extern SettingsNRST setNRST;
