@@ -65,10 +65,7 @@ void Sector::Erase() const
 
     uint error = 0;
 
-    if (HAL_FLASHEx_Erase(&isFLASH, &error) != HAL_OK)
-    {
-        ERROR_HANDLER();
-    }
+    HAL_FLASHEx_Erase(&isFLASH, &error);
 
     HAL_FLASH_Lock();
 }
@@ -82,11 +79,24 @@ void HAL_ROM::WriteBytes(uint address, const uint8 *data, uint size)
 
     for (uint i = 0; i < size; i++)
     {
-        if (HAL_FLASH_Program(TYPEPROGRAM_BYTE, address, data[i]) != HAL_OK)
-        {
-            ERROR_HANDLER();
-        }
-        ++address;
+        HAL_FLASH_Program(TYPEPROGRAM_BYTE, address, data[i]);
+        address++;
+    }
+
+    HAL_FLASH_Lock();
+}
+
+
+void HAL_ROM::Fill(uint address, uint8 value, uint size)
+{
+    CLEAR_FLASH_FLAGS;
+
+    HAL_FLASH_Unlock();
+
+    for(uint i = 0; i < size; i++)
+    {
+        HAL_FLASH_Program(TYPEPROGRAM_BYTE, address, value);
+        address++;
     }
 
     HAL_FLASH_Lock();

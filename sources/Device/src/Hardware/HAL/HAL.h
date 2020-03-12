@@ -173,6 +173,7 @@ struct HAL_ROM
 
     static void WriteBytes(uint address, const uint8 *data, uint size);
     static void WriteBufferBytes(uint address, const void *data, uint size);
+    static void Fill(uint address, uint8 value, uint size);
 };
 
 

@@ -56,3 +56,13 @@ void HAL_ROM::WriteBytes(uint address, const uint8 *buffer, uint size)
         buffer++;
     }
 }
+
+
+void HAL_ROM::Fill(uint address, uint8 value, uint size)
+{
+    for(uint i = 0; i < size; i++)
+    {
+        *reinterpret_cast<uint8 *>(address) = value;
+        address++;
+    }
+}
