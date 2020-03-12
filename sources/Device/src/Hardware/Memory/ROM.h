@@ -13,6 +13,8 @@ struct ROM
     // Функция для сохранения/восстановления настроек
     struct Settings
     {
+        static void Erase();
+
         static void Save();
 
         static bool Load();

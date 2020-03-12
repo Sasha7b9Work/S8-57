@@ -8,6 +8,8 @@ static CRC_HandleTypeDef handle = { CRC };
 
 void HAL_CRC32::Init()
 {
+    __HAL_RCC_CRC_CLK_ENABLE();
+
     if (HAL_CRC_Init(&handle) != HAL_OK)
     {
         ERROR_HANDLER();

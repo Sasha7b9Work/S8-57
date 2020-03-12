@@ -80,6 +80,13 @@ public:
 static Record *LastSaved();
 
 
+void ROM::Settings::Erase()
+{
+    sectorFirst.sector.Erase();
+    sectorSecond.sector.Erase();
+}
+
+
 void ROM::Settings::Save()
 {
     Record *record = nullptr;
@@ -92,8 +99,8 @@ void ROM::Settings::Save()
 
         if(!record)
         {
-            SectorSet *sector = record->GetAnotherSector();
-
+            SectorSet *sector = lastSaved->GetAnotherSector();
+            
             record = sector->FirstFree();
 
             if(!record)
@@ -109,8 +116,9 @@ void ROM::Settings::Save()
         record = sectorFirst.FirstFree();
     }
 
-    set.number = record->set.number + 1;                // ≈сли запись пуста€, то номер будет равен 0 = 0xFFFFFFFF + 1
+    set.number = lastSaved ? (lastSaved->set.number + 1) : 0;                // ≈сли запись пуста€, то номер будет равен 0 = 0xFFFFFFFF + 1
     set.crc32 = set.CalcWriteCRC32();
+
     HAL_ROM::WriteBufferBytes(reinterpret_cast<uint>(record), &set, sizeof(set));
 }
 
@@ -151,7 +159,7 @@ bool OTP::SaveSerialNumber(char *servialNumber)
 static Record *LastSaved()
 {
     Record *saved1 = sectorFirst.LastSaved();
-    Record *saved2 = sectorFirst.LastSaved();
+    Record *saved2 = sectorSecond.LastSaved();
 
     if (saved1 && saved2)
     {
@@ -180,7 +188,11 @@ Record *Record::NextFree()
 
 Record *Record::Next()
 {
-    return (this + 1);
+    uint8 *addressThis = reinterpret_cast<uint8 *>(this);
+
+    uint8 *addressNext = addressThis + SIZE_RECORD;
+
+    return reinterpret_cast<Record *>(addressNext);
 }
 
 
@@ -244,7 +256,7 @@ void Record::Erase()
 
 Record *SectorSet::FirstRecord()
 {
-    return reinterpret_cast<Record *>(&sector);
+    return reinterpret_cast<Record *>(sector.address);
 }
 
 
