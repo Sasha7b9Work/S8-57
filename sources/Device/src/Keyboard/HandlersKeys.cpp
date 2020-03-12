@@ -205,11 +205,16 @@ void Handlers::OnFX()
 {
     if (Menu::IsShown())
     {
-        const Item *underKey = Menu::ItemUnderFunctionalKey(event.key);
+        const Item *underKey = Menu::ItemUnderFunctionalKey(event.key);     // Находим элемент меню, соответствующий нажатой кнопке
 
-        //Item *opened = Menu::OpenedItem();
-
-        underKey->HandlerFX(event.type);
+        if((underKey == &Item::empty && !Menu::OpenedItem()->IsPage()) && (event.IsRelease() || event.IsLong()) )
+        {
+            Menu::CloseOpenedItem();
+        }
+        else
+        {
+            underKey->HandlerFX(event.type);
+        }
     }
 }
 
