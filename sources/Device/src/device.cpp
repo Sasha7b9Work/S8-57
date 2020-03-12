@@ -66,7 +66,7 @@ void Device::Init()
 
     FDrive::Init();
 
-    Sensor::Init();
+    //Sensor::Init();
 
     SetCurrentMode();
 }
@@ -116,7 +116,7 @@ void Device::Update()
        
     FDrive::Update();
 
-    Sensor::Update();
+    //Sensor::Update();
 
     while (HAL_BUS::Panel::Receive()) {};
 
@@ -126,7 +126,7 @@ void Device::Update()
 
     Menu::Update();
 
-    //PowerSwitch::OffIfNeed();
+    PowerSwitch::OffIfNeed();
 }
 
 

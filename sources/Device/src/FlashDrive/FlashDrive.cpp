@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "FlashDrive/FileManager.h"
 #include "FlashDrive/FlashDrive.h"
 #include "Hardware/Timer.h"
@@ -26,8 +25,6 @@ static void SetTimeForFile(const char *nameFile);
 
 void FDrive::USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
 {
-    LOG_WRITE("FDrive::USBH_UserProcess(%d)", id);
-
     switch(id)
     {
         case HOST_USER_SELECT_CONFIGURATION:
