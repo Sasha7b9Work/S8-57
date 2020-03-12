@@ -50,6 +50,8 @@ void Device::Init()
 
     FPGA::Init();
 
+    ROM::Init();
+
     Settings::Load();
 
     setNRST.Init();

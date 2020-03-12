@@ -10,14 +10,19 @@ struct ROM
 {
 	static const uint SIZE = 2 * 1024 * 1024;
 
+    static void Init();
+
     // Функция для сохранения/восстановления настроек
     struct Settings
     {
-        static void Erase();
+        // Проверяет память и устраняет найденные ошибки
+        static void CheckMemory();
 
         static void Save();
 
         static bool Load();
+
+        static void Erase();
     };
 
     // Функции для сохранения/загрузки несбрасываемых калибровочных настроек

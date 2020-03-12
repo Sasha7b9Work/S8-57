@@ -12,6 +12,10 @@
 
 class Record;
 
+/*
+    В каждом секторе расположено (128 * 1024 / SIZE_RECORD) записей
+*/
+
 struct SectorSet
 {
     // Возвращает адрес первой записи (фактически, начало сектора)
@@ -29,17 +33,12 @@ struct SectorSet
     // Возвращает true, если запись record принадлежит этому сектору
     bool Belong(Record *record);
 
+    // Проверить и исправить найденные ошибки
+    void CheckAndCorrect();
+
     Sector sector;
 };
 
-
-static SectorSet sectorFirst = { Sector::Get(Sector::_10_SETTINGS_1) };
-static SectorSet sectorSecond = { Sector::Get(Sector::_11_SETTINGS_2) };
-
-
-/*
-    В каждом секторе расположено (128 * 1024 / SIZE_RECORD) записей
-*/
 
 class Record
 {
@@ -54,6 +53,9 @@ public:
     // Возвращает true, если запись свободна (в неё ещё ничего не сохраняли, первый байты 0xFFFFFFFF)
     bool IsFree();
 
+    // Возвращает true, если в записи что-то записано (первые байты не равны 0xFFFFFFFF и 0x00000000). Без учёта контрольных сумм
+    bool IsSaved();
+
     // Стереть запись. Заполняет запись нулями. Это нужно делать с повреждёнными записями (с теми, в которых не совпадают контрольные суммы)
     void Erase();
 
@@ -62,9 +64,6 @@ public:
     // 2 - Запись стёрта (первый байты 0x00000000)
     // 3 - Запись хранит настройки и контрольные суммы совпадают
     bool IsCorrect();
-
-    // Возвращает true, если в записи что-то записано (первые байты не равны 0xFFFFFFFF и 0x00000000). Без учёта контрольных сумм
-    bool IsSaved();
 
     // Возвращает сектор, которому принадлежит данная запись
     SectorSet *GetSector();
@@ -76,8 +75,18 @@ public:
 };
 
 
+static SectorSet sectorFirst = { Sector::Get(Sector::_10_SETTINGS_1) };
+static SectorSet sectorSecond = { Sector::Get(Sector::_11_SETTINGS_2) };
+
+
 // Возвращает указатель на последнюю сохранённую запись
 static Record *LastSaved();
+
+
+void ROM::Init()
+{
+    ROM::Settings::CheckMemory();
+}
 
 
 void ROM::Settings::Erase()
@@ -127,18 +136,19 @@ bool ROM::Settings::Load()
 {
     Record *record = LastSaved();
 
-    while(record && !record->IsCorrect())
-    {
-        record->Erase();
-        record = LastSaved();
-    }
-
     if(record)
     {
         std::memcpy(&set, &record->set, sizeof(record->set));
     }
 
     return (record != nullptr);
+}
+
+
+void ROM::Settings::CheckMemory()
+{
+    sectorFirst.CheckAndCorrect();
+    sectorSecond.CheckAndCorrect();
 }
 
 
@@ -337,4 +347,20 @@ Record *SectorSet::FirstFree()
     }
 
     return nullptr;
+}
+
+
+void SectorSet::CheckAndCorrect()
+{
+    Record *record = FirstRecord();
+
+    while (Belong(record))
+    {
+        if (!record->IsCorrect())
+        {
+            record->Erase();
+        }
+
+        record = record->Next();
+    }
 }
