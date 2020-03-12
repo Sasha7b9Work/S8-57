@@ -155,6 +155,11 @@ void TShift::LoadRandomize()
 
     FPGA::post = static_cast<uint16>((set.time.shift - TShift().Min() - GetK()) / k);
 
+    if(set.time.shift - GetK() < TShift().Min())
+    {
+        FPGA::post = 0;
+    }
+
     int Pred = static_cast<int>(ENumPointsFPGA::PointsInChannel()) / static_cast<int>(k) - static_cast<int>(FPGA::post);
 
     if (Pred < 5)
