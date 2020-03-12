@@ -71,6 +71,9 @@ public:
     // ¬озвращает указатель на другой сектор
     SectorSet *GetAnotherSector();
 
+    // ¬озвращает указатель на первое слово записи
+    uint *FirstDowbleWord();
+
     Settings set;
 };
 
@@ -252,9 +255,35 @@ bool Record::IsSaved()
 
 bool Record::IsCorrect()
 {
-    return (set.crc32 == 0xFFFFFFFF) ||
-        (set.crc32 == 0x00000000) ||
-        set.crc32 == set.CalcWriteCRC32();
+    uint *start = FirstDowbleWord();
+    uint *end = FirstDowbleWord() + SIZE_RECORD / 4;
+
+    if (set.crc32 == 0xFFFFFFFF)
+    {
+        for (uint *address = start + 1; address < end; address++)
+        {
+            if (*address != 0xFFFFFFFF)
+            {
+                return false;
+            }
+
+            return true;
+        }
+    }
+    else if (set.crc32 == 0x00000000)
+    {
+        for (uint *address = start + 1; address < end; address++)
+        {
+            if (*address != 0x00000000)
+            {
+                return false;
+            }
+
+            return true;
+        }
+    }
+    
+    return (set.crc32 == set.CalcWriteCRC32());
 }
 
 
