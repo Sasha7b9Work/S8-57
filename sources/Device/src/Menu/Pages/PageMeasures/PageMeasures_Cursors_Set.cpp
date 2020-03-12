@@ -326,7 +326,7 @@ bool PageCursorsMeasures::Set::HandlerKey(const KeyEvent &event) //-V2506
 
     float value = event.IsIncrease() ? 1.0F : -1.0F;
 
-    if (CursorsActive::IsU() && (event.IsUp() || event.IsDown()))
+    if (CursorsActive::IsU() && (event.IsArrowUp() || event.IsArrowDown()))
     {
         if (CursorsMovement::IsPercents())
         {
@@ -345,7 +345,7 @@ bool PageCursorsMeasures::Set::HandlerKey(const KeyEvent &event) //-V2506
         
         return true;
     }
-    else if(CursorsActive::IsT() && (event.IsLeft() || event.IsRight()))
+    else if(CursorsActive::IsT() && (event.IsArrowLeft() || event.IsArrowRight()))
     {
         if (CursorsMovement::IsPercents())
         {

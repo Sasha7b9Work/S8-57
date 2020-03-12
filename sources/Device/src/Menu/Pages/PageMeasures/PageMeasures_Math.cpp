@@ -201,7 +201,7 @@ static bool HandlerKey_Function(const KeyEvent &event) // -V2506
         return false;
     }
 
-    int delta = (event.IsUp() || event.IsRight()) ? 1 : -1;
+    int delta = (event.IsArrowUp() || event.IsArrowRight()) ? 1 : -1;
 
     if (ModeRegSet::IsRShift())
     {

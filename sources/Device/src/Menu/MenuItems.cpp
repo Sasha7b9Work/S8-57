@@ -339,12 +339,12 @@ bool Page::HandlerKey(const KeyEvent &event)
     }
     else if (event.IsPress())
     {
-        if (event.IsLeft())
+        if (event.IsArrowLeft())
         {
             ChangeSubPage(-1);
             result = true;
         }
-        else if (event.IsRight())
+        else if (event.IsArrowRight())
         {
             ChangeSubPage(1);
             result = true;
@@ -623,7 +623,7 @@ void Governor::ChangeValue(int16 delta)
 
 bool Governor::HandlerKey(const KeyEvent &event)
 {
-    if (event.IsLeft())
+    if (event.IsArrowLeft())
     {
         if (event.IsPress())
         {
@@ -632,7 +632,7 @@ bool Governor::HandlerKey(const KeyEvent &event)
             return true;
         }
     }
-    else if (event.IsRight())
+    else if (event.IsArrowRight())
     {
         if (event.IsPress())
         {
@@ -641,11 +641,11 @@ bool Governor::HandlerKey(const KeyEvent &event)
             return true;
         }
     }
-    else if (event.IsUp() || event.IsDown())
+    else if (event.IsArrowUp() || event.IsArrowDown())
     {
         if (event.IsPress() || event.IsRepeat())
         {
-            ChangeValue(event.IsUp() ? 1 : -1);
+            ChangeValue(event.IsArrowUp() ? 1 : -1);
 
             return true;
         }
@@ -705,7 +705,7 @@ bool Choice::HandlerKey(const KeyEvent &event)
 
     if (event.IsPress())
     {
-        int delta = (event.IsDown() || event.IsRight()) ? 1 : -1;
+        int delta = (event.IsArrowDown() || event.IsArrowRight()) ? 1 : -1;
 
         ChangeIndex(Menu::IsShown() ? delta : -delta);
 
@@ -980,13 +980,13 @@ bool GovernorColor::HandlerKey(const KeyEvent &event)
 
     ColorType *ct = OwnData()->ct;
 
-    if (event.IsLeft())
+    if (event.IsArrowLeft())
     {
         Math::CircleIncrease<int8>(&ct->currentField, 0, 3);
 
         return true;
     }
-    else if (event.IsRight())
+    else if (event.IsArrowRight())
     {
         Math::CircleDecrease<int8>(&ct->currentField, 0, 3);
 
@@ -994,13 +994,13 @@ bool GovernorColor::HandlerKey(const KeyEvent &event)
     }
     else if (ct->currentField == 0)       // €ркость
     {
-        if (event.IsUp())
+        if (event.IsArrowUp())
         {
             ct->BrightnessChange(1);
 
             return true;
         }
-        else if (event.IsDown())
+        else if (event.IsArrowDown())
         {
             ct->BrightnessChange(-1);
 
@@ -1013,13 +1013,13 @@ bool GovernorColor::HandlerKey(const KeyEvent &event)
     }
     else
     {
-        if (event.IsUp())
+        if (event.IsArrowUp())
         {
             ct->ComponentChange(1);
 
             return true;
         }
-        else if (event.IsDown())
+        else if (event.IsArrowDown())
         {
             ct->ComponentChange(-1);
 

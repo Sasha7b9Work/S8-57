@@ -208,22 +208,22 @@ static bool HandlerKey_Set(const KeyEvent &event)
 {
     if (event.IsRelease())
     {
-        if (event.IsLeft())
+        if (event.IsArrowLeft())
         {
             OnPress_SetLeft();
             return true;
         }
-        else if (event.IsRight())
+        else if (event.IsArrowRight())
         {
             OnPress_SetRight();
             return true;
         }
-        else if (event.IsUp())
+        else if (event.IsArrowUp())
         {
             OnPress_SetUp();
             return true;
         }
-        else if (event.IsDown())
+        else if (event.IsArrowDown())
         {
             OnPress_SetDown();
             return true;

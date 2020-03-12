@@ -12,5 +12,8 @@ typedef struct
 }CRC_HandleTypeDef;
 
 
+#define __HAL_RCC_CRC_CLK_ENABLE()
+
+
 HAL_StatusTypeDef HAL_CRC_Init(CRC_HandleTypeDef *hcrc);
 uint32_t HAL_CRC_Calculate(CRC_HandleTypeDef *hcrc, uint32_t *pBuffer, uint32_t BufferLength);
