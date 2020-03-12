@@ -126,7 +126,7 @@ void Device::Update()
 
     Menu::Update();
 
-    PowerSwitch::OffIfNeed();
+    //PowerSwitch::OffIfNeed();
 }
 
 

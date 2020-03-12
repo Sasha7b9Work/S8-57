@@ -6,18 +6,23 @@
 #include "Osci/Osci.h"
 #include "Osci/Reader.h"
 #include "Settings/Settings.h"
+#include <cstring>
 
 
 // Это пространство CCM-памяти
-static uint8 ccm[4][16 * 1024] __attribute__((section("CCM_DATA")));
+static uint8 ccm[8][8 * 1024] __attribute__((section("CCM_DATA")));
+
 // Это указатели на считанные данные
-uint8 *dataIN[2] = { nullptr, nullptr };
+uint8 *dataIN[2] = { ccm[0], ccm[1] };
+
 // Это указатели на данные, пересчитанные и готовые к выводу
-uint8 *dataOUT[2] = { ccm[0], ccm[1] };
+uint8 *dataOUT[2] = { ccm[2], ccm[3] };
+
 // 
 uint16 *ave[2] = { IntRAM::Averager16k(Chan::A), IntRAM::Averager16k(Chan::B) };
 
 DataSettings ds;
+
 // Указатель на настройки считанных данных
 const DataSettings *pDS = nullptr;
 
@@ -27,8 +32,6 @@ FrameP2P *frameP2P = nullptr;
 
 void Reader::ReadDataFromRAM()
 {
-    IN_A = nullptr;
-    IN_B = nullptr;
     DS = nullptr;
 
     DS = RAM::Get(ModeWork::IsRAM() ? static_cast<uint>(RAM::currentSignal) : 0U);
@@ -42,11 +45,11 @@ void Reader::ReadDataFromRAM()
     {
         if (DS->enableA)
         {
-            IN_A = DS->dataA;
+            std::memcpy(IN_A, DS->dataA, 8 * 1024);
         }
         if (DS->enableB)
         {
-            IN_B = DS->dataB;
+            std::memcpy(IN_B, DS->dataB, 8 * 1024);
         }
 
         ds = *DS;
@@ -59,8 +62,6 @@ void Reader::ReadDataFromRAM()
 
 void Reader::ReadDataFromROM()
 {
-    IN_A = nullptr;
-    IN_B = nullptr;
     DS = nullptr;
 
     DS = ROM::Data::Read(NUM_ROM_SIGNAL);
@@ -69,11 +70,11 @@ void Reader::ReadDataFromROM()
     {
         if (DS->enableA)
         {
-            IN_A = DS->dataA;
+            std::memcpy(IN_A, DS->dataA, 8 * 1024);
         }
         if (DS->enableB)
         {
-            IN_B = DS->dataB;
+            std::memcpy(IN_B, DS->dataB, 8 * 1024);
         }
     }
 }
