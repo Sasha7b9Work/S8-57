@@ -34,9 +34,6 @@ add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially thr
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 add_compile_options(/wd26812)   # The enum type %type% is unscoped. Prefer 'enum class' over 'enum' (Enum.3)
 
-set_source_files_properties(src/Display/_Display.cpp
-    PROPERTIES HEADER_FILE_ONLY TRUE)
-
 
 source_group(src                    FILES src/main.h
                                           src/main.cpp

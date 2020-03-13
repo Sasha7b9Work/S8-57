@@ -38,14 +38,7 @@ int main()
     Timer::PauseOnTime(250);
     
     Display::Init();
-
-
-    while(true)
-    {
-        Display::Update();
-    }
-
-    
+   
     ms->state = State_Start;
 
     Timer::SetAndEnable(kTemp, Display::Update, 10);
