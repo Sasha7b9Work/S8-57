@@ -28,15 +28,26 @@ void Display::Init()
         Color(i).LoadValueRGB();
     }
 
-    Painter::Init();
-
     LoadBrightness();
 }
 
 
 void Display::Update()
 {
+    static int x = 0;
+    static int y = 0;
 
+    Painter::BeginScene(Color::WHITE);
+
+    Region(20, 20).Fill(x++, y++, Color::BLACK);
+
+    if(x > 100)
+    {
+        x = 0;
+        y = 0;
+    }
+
+    Painter::EndScene();
 }
 
 

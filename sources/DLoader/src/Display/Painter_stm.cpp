@@ -6,11 +6,6 @@
 #include "Utils/Buffer.h"
 
 
-void Painter::Init()
-{
-}
-
-
 void Painter::BeginScene(Color color)
 {
     color.SetAsCurrent();
