@@ -23,7 +23,7 @@ typedef struct
 
 static HCD_HandleTypeDef handleHCD;
 
-USBH_HandleTypeDef CPU::FDrive::handleUSBH;
+static USBH_HandleTypeDef handleUSBH;
 
 
 
@@ -35,6 +35,12 @@ static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8 id);
 void *CPU::FDrive::GetHandleHCD()
 {
     return &handleHCD;
+}
+
+
+void *CPU::FDrive::GetHandleUSBH()
+{
+    return &handleUSBH;
 }
 
 

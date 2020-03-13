@@ -57,7 +57,7 @@ DSTATUS USBH_status(BYTE lun)
 {
     DRESULT res = RES_ERROR;
 
-    if(USBH_MSC_UnitIsReady(&CPU::FDrive::handleUSBH, lun))
+    if(USBH_MSC_UnitIsReady(reinterpret_cast<USBH_HandleTypeDef *>(CPU::FDrive::GetHandleUSBH()), lun))
     {
         res = RES_OK;
     }
@@ -78,13 +78,15 @@ DRESULT USBH_read(BYTE lun, BYTE *buff, DWORD sector, UINT count)
     DRESULT res = RES_ERROR;
     MSC_LUNTypeDef info;
 
-    if(USBH_MSC_Read(&CPU::FDrive::handleUSBH, lun, sector, buff, count) == USBH_OK)
+    USBH_HandleTypeDef *handleUSBH = reinterpret_cast<USBH_HandleTypeDef *>(CPU::FDrive::GetHandleUSBH());
+
+    if(USBH_MSC_Read(handleUSBH, lun, sector, buff, count) == USBH_OK)
     {
         res = RES_OK;
     }
     else
     {
-        USBH_MSC_GetLUNInfo(&CPU::FDrive::handleUSBH, lun, &info);
+        USBH_MSC_GetLUNInfo(handleUSBH, lun, &info);
 
         switch(info.sense.asc)
         {
@@ -114,13 +116,15 @@ DRESULT USBH_write(BYTE lun, const BYTE *buff, DWORD sector, UINT count)
     DRESULT res = RES_ERROR;
     MSC_LUNTypeDef info;
 
-    if(USBH_MSC_Write(&CPU::FDrive::handleUSBH, lun, sector, const_cast<BYTE *>(buff), count) == USBH_OK)
+    USBH_HandleTypeDef *handleUSBH = reinterpret_cast<USBH_HandleTypeDef *>(CPU::FDrive::GetHandleUSBH());
+
+    if(USBH_MSC_Write(handleUSBH, lun, sector, const_cast<BYTE *>(buff), count) == USBH_OK)
     {
         res = RES_OK;
     }
     else
     {
-        USBH_MSC_GetLUNInfo(&CPU::FDrive::handleUSBH, lun, &info);
+        USBH_MSC_GetLUNInfo(handleUSBH, lun, &info);
 
         switch(info.sense.asc)
         {
@@ -155,6 +159,8 @@ DRESULT USBH_ioctl(BYTE lun, BYTE cmd, void *buff)
     DRESULT res = RES_ERROR;
     MSC_LUNTypeDef info;
 
+    USBH_HandleTypeDef *handleUSBH = reinterpret_cast<USBH_HandleTypeDef *>(CPU::FDrive::GetHandleUSBH());
+
     switch(cmd)
     {
         /* Make sure that no pending write process */
@@ -164,7 +170,7 @@ DRESULT USBH_ioctl(BYTE lun, BYTE cmd, void *buff)
 
         /* Get number of sectors on the disk (DWORD) */
     case GET_SECTOR_COUNT:
-        if(USBH_MSC_GetLUNInfo(&CPU::FDrive::handleUSBH, lun, &info) == USBH_OK)
+        if(USBH_MSC_GetLUNInfo(handleUSBH, lun, &info) == USBH_OK)
         {
             *static_cast<DWORD *>(buff) = info.capacity.block_nbr; //-V525
             res = RES_OK;
@@ -173,7 +179,7 @@ DRESULT USBH_ioctl(BYTE lun, BYTE cmd, void *buff)
 
         /* Get R/W sector size (WORD) */
     case GET_SECTOR_SIZE:
-        if(USBH_MSC_GetLUNInfo(&CPU::FDrive::handleUSBH, lun, &info) == USBH_OK) //-V1037
+        if(USBH_MSC_GetLUNInfo(handleUSBH, lun, &info) == USBH_OK) //-V1037
         {
             *static_cast<DWORD *>(buff) = info.capacity.block_size;
             res = RES_OK;
@@ -183,7 +189,7 @@ DRESULT USBH_ioctl(BYTE lun, BYTE cmd, void *buff)
         /* Get erase block size in unit of sector (DWORD) */
     case GET_BLOCK_SIZE:
 
-        if(USBH_MSC_GetLUNInfo(&CPU::FDrive::handleUSBH, lun, &info) == USBH_OK)
+        if(USBH_MSC_GetLUNInfo(handleUSBH, lun, &info) == USBH_OK)
         {
             *static_cast<DWORD *>(buff) = info.capacity.block_size;
             res = RES_OK;

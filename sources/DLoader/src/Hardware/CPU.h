@@ -108,7 +108,7 @@ public:
 
         static void *GetHandleHCD();
 
-        static USBH_HandleTypeDef  handleUSBH;
+        static void *GetHandleUSBH();
     };
 
 private:
