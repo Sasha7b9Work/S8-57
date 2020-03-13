@@ -1,5 +1,7 @@
 #pragma once
-#include "main.h"
+
+
+#define TIME_WAIT   5000    // Время работы заставки
 
 
 struct State

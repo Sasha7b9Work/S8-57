@@ -4,7 +4,6 @@
 #include "Display/Painter.h"
 #include "Display/Primitives.h"
 #include "FlashDrive/FlashDrive.h"
-#include "main.h"
 #include "common/Display/Font/Font_d.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"

@@ -14,12 +14,13 @@
     Далее выполняется переход по адресу, указанному в 0x0802004 (второе 32х-битное слово в таблице векторов, расположенной по адресу 0x0802000)
 */
 
-#include "main.h"
 #include "Display/Display.h"
 #include "FlashDrive/FlashDrive.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 
+
+#define MAIN_PROGRAM_START_ADDRESS  (uint)0x8020000
 
 
 typedef void(*pFunction)();

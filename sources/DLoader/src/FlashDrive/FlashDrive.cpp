@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "main.h"
 #include "FlashDrive/FlashDrive.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
