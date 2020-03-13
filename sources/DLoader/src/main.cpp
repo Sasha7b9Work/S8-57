@@ -14,16 +14,12 @@
     Далее выполняется переход по адресу, указанному в 0x0802004 (второе 32х-битное слово в таблице векторов, расположенной по адресу 0x0802000)
 */
 
-#include "defines.h"
-#include <ff.h>
 #include "main.h"
+#include "Display/Display.h"
 #include "FlashDrive/FlashDrive.h"
 #include "Hardware/CPU.h"
-#include "Hardware/HAL/HAL.h"
-#include "Settings/Settings.h"
-#include "Display/Painter.h"
-#include "Display/Display.h"
 #include "Hardware/Timer.h"
+#include "Settings/Settings.h"
 
 
 

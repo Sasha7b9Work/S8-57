@@ -1,18 +1,11 @@
 #include "defines.h"
-#include <ctype.h>
-#include <usbh_def.h>
-#include <ff_gen_drv.h>
-#include <usbh_diskio.h>
-#include <usbh_core.h>
-#include <usbh_msc.h>
-#include "defines.h"
-#include "FlashDrive/FlashDrive.h"
-#include "ffconf.h"
 #include "main.h"
+#include "FlashDrive/FlashDrive.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/HAL/HAL_PIO.h"
+#include <usbh_diskio.h>
 
 
 #define FILE_FIRMWARE "S8-57.bin"
