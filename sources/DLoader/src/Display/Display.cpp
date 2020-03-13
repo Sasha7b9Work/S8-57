@@ -23,12 +23,17 @@ enum TypeWelcomeScreen
 };
 
 
+static bool   isRun;
+static float  value;
+static float  direction;
+static uint   timePrev;
 
 
 static void DrawProgressBar(uint dT);
 static void DrawBigMNIPI();
 static int RandValue(int min, int max);
 static void InitPoints();
+
 
 struct Vector
 {
@@ -55,10 +60,10 @@ static TypeWelcomeScreen typeScreen = TypeWelcomeScreen_Wave;
 
 void Display::Init()
 {
-    ms->display.value = 0.0F;
-    ms->display.isRun = false;
-    ms->display.timePrev = 0;
-    ms->display.direction = 10.0F;
+    value = 0.0F;
+    isRun = false;
+    timePrev = 0;
+    direction = 10.0F;
 
     for(uint8 i = 0; i < Color::NUMBER.value; i++)
     {
@@ -84,10 +89,10 @@ static void DrawButton(int x, int y, const char *text)
 
 void Display::Update()
 {
-    ms->display.isRun = true;
+    isRun = true;
 
-    uint dT = TIME_MS - ms->display.timePrev;
-    ms->display.timePrev = TIME_MS;
+    uint dT = TIME_MS - timePrev;
+    timePrev = TIME_MS;
 
     Painter::BeginScene(Color::BLACK);
 
@@ -134,7 +139,7 @@ void Display::Update()
     }
 
     Painter::EndScene();
-    ms->display.isRun = false;
+    isRun = false;
 }
 
 
@@ -146,19 +151,19 @@ void DrawProgressBar(uint dT)
     const int X = 10;
     const int Y = 200;
     
-    float step = dT / ms->display.direction;
+    float step = dT / direction;
 
-    ms->display.value += step;
+    value += step;
 
-    if (ms->display.direction > 0.0F && ms->display.value > WIDTH)
+    if (direction > 0.0F && value > WIDTH)
     {
-        ms->display.direction = -ms->display.direction;
-        ms->display.value -= step;
+        direction = -direction;
+        value -= step;
     }
-    else if (ms->display.direction < 0.0F && ms->display.value < 0)
+    else if (direction < 0.0F && value < 0)
     {
-        ms->display.direction = -ms->display.direction;
-        ms->display.value -= step;
+        direction = -direction;
+        value -= step;
     }
     else
     {
@@ -173,14 +178,14 @@ void DrawProgressBar(uint dT)
     Text("Подождите...").DrawInCenterRect(X, y0 + 2 * dH, WIDTH, 10);
 
     Rectangle(WIDTH, HEIGHT).Draw(X, Y);
-    Region(static_cast<int>(ms->display.value), HEIGHT).Fill(X, Y);
+    Region(static_cast<int>(value), HEIGHT).Fill(X, Y);
 }
 
 
 
 bool Display::IsRun()
 {
-    return ms->display.isRun;
+    return isRun;
 }
 
 
@@ -233,9 +238,9 @@ static void DrawBigMNIPI()
 
 static int RandValue(int min, int max)
 {
-    int value = static_cast<int>(std::rand() % (max - min + 1));
+    int val = static_cast<int>(std::rand() % (max - min + 1));
 
-    return value + min;
+    return val + min;
 }
 
 
