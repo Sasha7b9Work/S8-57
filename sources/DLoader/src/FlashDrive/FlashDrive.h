@@ -26,6 +26,8 @@ public:
 
     static void *GetHandleUSBH();
 
+    static float PercentsUpdated();
+
     class LL_
     {
     public:

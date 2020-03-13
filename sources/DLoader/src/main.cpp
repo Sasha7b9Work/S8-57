@@ -31,7 +31,6 @@ MainStruct *ms; //-V707
 int main()
 {
     ms = static_cast<MainStruct *>(malloc(sizeof(MainStruct)));
-    ms->percentUpdate = 0.0F; //-V522
    
     CPU::Init();
 

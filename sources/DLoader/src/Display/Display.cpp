@@ -3,6 +3,7 @@
 #include "Display.h"
 #include "Display/Painter.h"
 #include "Display/Primitives.h"
+#include "FlashDrive/FlashDrive.h"
 #include "main.h"
 #include "common/Display/Font/Font_d.h"
 #include "Hardware/Timer.h"
@@ -126,7 +127,7 @@ void Display::Update()
 
         int height = 30;
         int fullWidth = 280;
-        int width = static_cast<int>(fullWidth * ms->percentUpdate);
+        int width = static_cast<int>(fullWidth * FDrive::PercentsUpdated());
 
         Region(width, height).Fill(20, 130);
         Rectangle(fullWidth, height).Draw(20, 130);

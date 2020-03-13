@@ -25,6 +25,9 @@ static HCD_HandleTypeDef handleHCD;
 
 static USBH_HandleTypeDef handleUSBH;
 
+// Сколько процентов файла переписано
+static float percentsUpdate = 0.0F;
+
 
 static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, StructForReadDir *s);
 static bool GetNextNameFile(char *nameFileOut, StructForReadDir *s);
@@ -396,8 +399,14 @@ void Upgrade()
         size -= readedBytes;
         address += static_cast<uint>(readedBytes);
 
-        ms->percentUpdate = 1.0F - static_cast<float>(size) / fullSize;
+        percentsUpdate = 1.0F - static_cast<float>(size) / fullSize;
     }
 
     FDrive::CloseOpenedFile();
+}
+
+
+float FDrive::PercentsUpdated()
+{
+    return percentsUpdate;
 }
