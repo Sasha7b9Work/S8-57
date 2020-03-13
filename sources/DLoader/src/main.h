@@ -16,17 +16,19 @@
 #define TIME_WAIT   5000    // Время работы заставки
 
 
-typedef enum
+struct State
 {
-    State_Start,
-    State_Mount,            // Монтирование флешки
-
-    State_WrongFlash,       // Флешка есть, но прочитать нельзя
-    State_RequestAction,    // Что делать - апгрейдить или нет
-    State_NotFile,          // Если диск примонтирован, но обновления на нём нету
-    State_Upgrade,          // Процесс апгрейда
-    State_Ok                // Обновление удачно завершено
-} State;
+    enum E
+    {
+        Start,
+        Mount,            // Монтирование флешки
+        WrongFlash,       // Флешка есть, но прочитать нельзя
+        RequestAction,    // Что делать - апгрейдить или нет
+        NotFile,          // Если диск примонтирован, но обновления на нём нету
+        Upgrade,          // Процесс апгрейда
+        Ok                // Обновление удачно завершено
+    };
+};
 
 typedef enum
 {
@@ -59,7 +61,7 @@ typedef struct
     FlashDrive  drive;
     DisplayStr  display;
     float       percentUpdate;
-    State       state;
+    State::E    state;
     uint8       notUsed[3];
 } MainStruct;
 

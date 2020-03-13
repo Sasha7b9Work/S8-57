@@ -95,7 +95,7 @@ void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
 
     case HOST_USER_CONNECTION:
         ms->drive.connection++;
-        ms->state = State_Mount;
+        ms->state = State::Mount;
         f_mount(NULL, static_cast<TCHAR const *>(""), 0);
         break;
 
@@ -119,13 +119,13 @@ void FDrive::AttemptUpdate()
     }
 
     if((ms->drive.connection && ms->drive.active == 0) ||  // Если флеша подключена, но в активное состояние почему-то не перешла
-        (ms->drive.active && ms->state != State_Mount))     // или перешла в активное состояние, по почему-то не запустился процесс монтирования
+        (ms->drive.active && ms->state != State::Mount))     // или перешла в активное состояние, по почему-то не запустился процесс монтирования
     {
         free(ms);
         NVIC_SystemReset();
     }
 
-    if(ms->state == State_Mount)                           // Это означает, что диск удачно примонтирован //-V774
+    if(ms->state == State::Mount)                           // Это означает, что диск удачно примонтирован //-V774
     {
         if(FileExist(FILE_CLEAR))
         {
@@ -138,10 +138,10 @@ void FDrive::AttemptUpdate()
         }
         else
         {
-            ms->state = State_NotFile;
+            ms->state = State::NotFile;
         }
     }
-    else if(ms->state == State_WrongFlash) // Диск не удалось примонтировать //-V774
+    else if(ms->state == State::WrongFlash) // Диск не удалось примонтировать //-V774
     {
         Timer::PauseOnTime(5000);
     }
@@ -164,7 +164,7 @@ static bool Process()
         }
         else
         {
-            ms->state = State_WrongFlash;
+            ms->state = State::WrongFlash;
             return false;
         }
     }
