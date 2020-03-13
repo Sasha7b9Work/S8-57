@@ -48,6 +48,7 @@ source_group(common                 FILES ../common/Decoder_d.h
                                           ../common/Decoder_d.cpp)
 source_group(Display                REGULAR_EXPRESSION src/Display/*)
 source_group(Display\\Font          REGULAR_EXPRESSION ../common/Display/Font/*)
+source_group(FlashDrive             REGULAR_EXPRESSION src/FlashDrive/*)
 source_group(Hardware               REGULAR_EXPRESSION src/Hardware/*)
 source_group(Hardware\\HAL          REGULAR_EXPRESSION src/Hardware/HAL/*)
 source_group(Hardware\\stm32        REGULAR_EXPRESSION src/Hardware/stm32/*)
@@ -69,6 +70,7 @@ file(GLOB SOURCES   ../common/Decoder_d.h
                     src/libs/USBH/*
                     src/Display/*
                     ../common/Display/Font/*
+                    src/FlashDrive/*
                     src/Hardware/*
                     src/Hardware/HAL/*
                     src/Hardware/stm32/*

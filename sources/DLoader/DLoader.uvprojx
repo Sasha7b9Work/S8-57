@@ -778,6 +778,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>FlashDrive</GroupName>
+          <Files>
+            <File>
+              <FileName>FlashDrive.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FlashDrive\FlashDrive.h</FilePath>
+            </File>
+            <File>
+              <FileName>FlashDrive.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FlashDrive\FlashDrive.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Hardware</GroupName>
           <Files>
             <File>
@@ -799,11 +814,6 @@
               <FileName>CPU_FLASH.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\CPU_FLASH.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>CPU_FlashDrive.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\CPU_FlashDrive.cpp</FilePath>
             </File>
             <File>
               <FileName>CPU_It.cpp</FileName>

@@ -43,13 +43,16 @@ public:
     public:
 
         static void Update();
-        /// Передать даннные в мк панели управления.
+        
+        // Передать даннные в мк панели управления.
         static void TransmitData(uint16 data);
-        /// В отлюченном режиме панель лишь обновляет состояние переменной pressedButton, не выполняя больше никаких действий.
+        
+        // В отлюченном режиме панель лишь обновляет состояние переменной pressedButton, не выполняя больше никаких действий.
         static void Disable();
 
         static void Enable();
-        /// Ожидать нажатие клавиши.
+        
+        // Ожидать нажатие клавиши.
         static PanelButton WaitPressingButton();
 
         static bool ProcessingCommandFromPIC(uint16 command);
@@ -61,62 +64,23 @@ public:
         static void SPI_IRQHandler();
     };
 
-    //---------------------------
+
     class FLASH_
     {
     public:
         static const uint ADDR_SECTOR_PROGRAM_0 = (static_cast<uint>(0x08020000));   // Адрес первого сектора с программой
 
-        /// Очищает сектора, предназначенные для записи прошивки.
+        // Очищает сектора, предназначенные для записи прошивки.
         static void Prepare();
-        /// Записать буфер, на который указывает указатель data, размером size, по адресу address.
+        
+        // Записать буфер, на который указывает указатель data, размером size, по адресу address.
         static void WriteData(uint address, uint8 *data, int size);
-    };
-
-
-    class FDrive
-    {
-    friend class CPU;
-        
-    public:
-        static void Init();
-
-    public:
-        static bool Update();
-
-        static bool FileExist(const char *fileName);
-        
-        // Открывает файл для чтения. Возвращает размер файла
-        static int OpenFileForRead(const char *fileName);
-        
-        // Считывает из открытого файла numBytes байт. Возвращает число реально считанных байт
-        static int ReadFromFile(int numBytes, uint8 *buffer);
-
-        static void CloseOpenedFile();
-
-        static void HCD_IRQHandler();
-
-        class LL_
-        {
-        public:
-            static void InitHCD(void *phost);
-
-            static void SetToggle(uint8 pipe, uint8 toggle);
-
-            static uint8 GetToggle(uint8 pipe);
-        };
-
-        static void *GetHandleHCD();
-
-        static void *GetHandleUSBH();
     };
 
 private:
     static void EnablePeriphery();
 
     static void InitHardware();
-
-    static void InitFSMC();
 };
 
 

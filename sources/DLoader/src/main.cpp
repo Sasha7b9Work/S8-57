@@ -17,6 +17,7 @@
 #include "defines.h"
 #include <ff.h>
 #include "main.h"
+#include "FlashDrive/FlashDrive.h"
 #include "Hardware/CPU.h"
 #include "Hardware/HAL/HAL.h"
 #include "Settings/Settings.h"
@@ -64,15 +65,15 @@ int main()
 
     uint timeStart = TIME_MS;
 
-    CPU::FDrive::Init();
+    FDrive::Init();
     
-    bool update = CPU::FDrive::Update();
+    bool update = FDrive::Update();
     
     uint time = TIME_MS - timeStart;
 
-    while (TIME_MS - timeStart < TIME_WAIT && !CPU::FDrive::Update())
+    while (TIME_MS - timeStart < TIME_WAIT && !FDrive::Update())
     {
-        update = CPU::FDrive::Update();
+        update = FDrive::Update();
         time = TIME_MS - timeStart;
     }
 
@@ -85,12 +86,12 @@ int main()
 
     if (ms->state == State_Mount)                           // Это означает, что диск удачно примонтирован //-V774
     {
-        if (CPU::FDrive::FileExist(FILE_CLEAR))
+        if (FDrive::FileExist(FILE_CLEAR))
         {
             EraseSettings();
         }
 
-        if (CPU::FDrive::FileExist(FILE_FIRMWARE))                    // Если на диске обнаружена прошивка
+        if (FDrive::FileExist(FILE_FIRMWARE))                    // Если на диске обнаружена прошивка
         {
             Upgrade();
         }
@@ -141,13 +142,13 @@ void Upgrade()
     
     CPU::FLASH_::Prepare();
     
-    int size = CPU::FDrive::OpenFileForRead(FILE_FIRMWARE);
+    int size = FDrive::OpenFileForRead(FILE_FIRMWARE);
     int fullSize = size;
     uint address = CPU::FLASH_::ADDR_SECTOR_PROGRAM_0;
 
     while (size)
     {
-        int readedBytes = CPU::FDrive::ReadFromFile(sizeSector, buffer);
+        int readedBytes = FDrive::ReadFromFile(sizeSector, buffer);
         CPU::FLASH_::WriteData(address, buffer, readedBytes);
         size -= readedBytes;
         address += static_cast<uint>(readedBytes);
@@ -155,7 +156,7 @@ void Upgrade()
         ms->percentUpdate = 1.0F - static_cast<float>(size) / fullSize;
     }
     
-    CPU::FDrive::CloseOpenedFile();
+    FDrive::CloseOpenedFile();
 }
 
 

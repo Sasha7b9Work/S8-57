@@ -1,6 +1,7 @@
 #include "defines.h"
 #include <usbh_core.h>
 #include <stm32f4xx.h>
+#include "FlashDrive/FlashDrive.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
 
@@ -33,7 +34,7 @@ extern "C" {
     //---------------------------
     void OTG_HS_IRQHandler()
     {
-        HAL_HCD_IRQHandler(reinterpret_cast<HCD_HandleTypeDef *>(CPU::FDrive::GetHandleHCD()));
+        HAL_HCD_IRQHandler(reinterpret_cast<HCD_HandleTypeDef *>(FDrive::GetHandleHCD()));
     }
 
 #ifdef __cplusplus
