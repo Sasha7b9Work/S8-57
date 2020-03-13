@@ -28,6 +28,9 @@ static USBH_HandleTypeDef handleUSBH;
 // Сколько процентов файла переписано
 static float percentsUpdate = 0.0F;
 
+// Состояние флешки
+static State::E state = State::Start;
+
 
 static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, StructForReadDir *s);
 static bool GetNextNameFile(char *nameFileOut, StructForReadDir *s);
@@ -98,7 +101,7 @@ void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
 
     case HOST_USER_CONNECTION:
         ms->drive.connection++;
-        ms->state = State::Mount;
+        state = State::Mount;
         f_mount(NULL, static_cast<TCHAR const *>(""), 0);
         break;
 
@@ -122,13 +125,13 @@ void FDrive::AttemptUpdate()
     }
 
     if((ms->drive.connection && ms->drive.active == 0) ||  // Если флеша подключена, но в активное состояние почему-то не перешла
-        (ms->drive.active && ms->state != State::Mount))     // или перешла в активное состояние, по почему-то не запустился процесс монтирования
+        (ms->drive.active && state != State::Mount))     // или перешла в активное состояние, по почему-то не запустился процесс монтирования
     {
         free(ms);
         NVIC_SystemReset();
     }
 
-    if(ms->state == State::Mount)                           // Это означает, что диск удачно примонтирован //-V774
+    if(state == State::Mount)                           // Это означает, что диск удачно примонтирован //-V774
     {
         if(FileExist(FILE_CLEAR))
         {
@@ -141,17 +144,15 @@ void FDrive::AttemptUpdate()
         }
         else
         {
-            ms->state = State::NotFile;
+            state = State::NotFile;
         }
     }
-    else if(ms->state == State::WrongFlash) // Диск не удалось примонтировать //-V774
+    else if(state == State::WrongFlash) // Диск не удалось примонтировать //-V774
     {
         Timer::PauseOnTime(5000);
     }
-    else
-    {
-        // здесь ничего
-    }
+
+    state = State::Ok;
 }
 
 
@@ -167,7 +168,7 @@ static bool Process()
         }
         else
         {
-            ms->state = State::WrongFlash;
+            state = State::WrongFlash;
             return false;
         }
     }
@@ -409,4 +410,10 @@ void Upgrade()
 float FDrive::PercentsUpdated()
 {
     return percentsUpdate;
+}
+
+
+State::E FDrive::State()
+{
+    return state;
 }

@@ -60,7 +60,6 @@ typedef struct
 {
     FlashDrive  drive;
     DisplayStr  display;
-    State::E    state;
     uint8       notUsed[3];
 } MainStruct;
 

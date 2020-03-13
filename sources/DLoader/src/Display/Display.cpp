@@ -93,7 +93,7 @@ void Display::Update()
 
     Color::WHITE.SetAsCurrent();
 
-    if (ms->state == State::Start || ms->state == State::Ok)
+    if (FDrive::State() == State::Start || FDrive::State() == State::Ok)
     {
         Painter::BeginScene(Color::BACK);
         Rectangle(319, 239).Draw(0, 0, Color::FILL);
@@ -103,16 +103,16 @@ void Display::Update()
         Text("Разработчики: e-mail: mnipi-24(@)tut.by, тел. 8-017-237-22-15").DrawInCenterRect(0, 220, 320, 20);
         Painter::EndScene();
     }
-    else if (ms->state == State::Mount)
+    else if (FDrive::State() == State::Mount)
     {
         DrawProgressBar(dT);
     }
-    else if (ms->state == State::WrongFlash)
+    else if (FDrive::State() == State::WrongFlash)
     {
         Text("НЕ УДАЛОСЬ ПРОЧИТАТЬ ДИСК").DrawInCenterRect(0, 0, 320, 200, Color::FLASH_10);
         Text("УБЕДИТЕСЬ, ЧТО ФАЙЛОВАЯ СИСТЕМА FAT32").DrawInCenterRect(0, 20, 320, 200, Color::WHITE);
     }
-    else if (ms->state == State::RequestAction)
+    else if (FDrive::State() == State::RequestAction)
     {
         Text("Обнаружено программное обеспечение").DrawInCenterRect(0, 0, 320, 200);
         Text("Установить его?").DrawInCenterRect(0, 20, 320, 200);
@@ -120,7 +120,7 @@ void Display::Update()
         DrawButton(290, 55, "ДА");
         DrawButton(290, 195, "НЕТ");
     }
-    else if (ms->state == State::Upgrade)
+    else if (FDrive::State() == State::Upgrade)
     {
         Text("Подождите завершения").DrawInCenterRect(0, 0, 320, 190);
         Text("установки программного обеспечения").DrawInCenterRect(0, 0, 320, 220);
@@ -131,10 +131,6 @@ void Display::Update()
 
         Region(width, height).Fill(20, 130);
         Rectangle(fullWidth, height).Draw(20, 130);
-    }
-    else
-    {
-        // ничего нет
     }
 
     Painter::EndScene();

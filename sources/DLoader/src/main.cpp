@@ -38,15 +38,11 @@ int main()
     
     Display::Init();
    
-    ms->state = State::Start;
-
     Timer::SetAndEnable(kTemp, Display::Update, 10);
 
     FDrive::Init();
 
     FDrive::AttemptUpdate();
-    
-    ms->state = State::Ok; //-V774 //-V519
     
     Timer::Disable(kTemp);
 

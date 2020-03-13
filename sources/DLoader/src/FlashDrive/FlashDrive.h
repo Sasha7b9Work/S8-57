@@ -28,6 +28,8 @@ public:
 
     static float PercentsUpdated();
 
+    static State::E State();
+
     class LL_
     {
     public:
