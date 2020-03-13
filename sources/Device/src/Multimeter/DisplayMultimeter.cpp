@@ -137,10 +137,6 @@ static int GetRange()
     {
         return Multimeter::RangeResistance();
     }
-    else
-    {
-        // здесь ничего
-    }
 
     return 0;
 }

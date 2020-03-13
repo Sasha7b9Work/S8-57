@@ -335,10 +335,6 @@ char SU::ToUpper(char symbol)
     {
         return static_cast<char>(s - 0x20);
     }
-    else
-    {
-        // здесь ничего
-    }
 
     return symbol;
 }
@@ -355,10 +351,6 @@ char SU::ToLower(char symbol)
     else if(s >= 0xc0 && s < 0xE0)
     {
         return static_cast<char>(s + 0x20);
-    }
-    else
-    {
-        // здесь ничего
     }
 
     return symbol;

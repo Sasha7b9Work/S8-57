@@ -98,10 +98,6 @@ void Measure::ChangeActive(int delta)
             row = 0;
         }
     }
-    else
-    {
-        // здесь ничего
-    }
 
     SetActive(row, col);
 }

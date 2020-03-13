@@ -71,10 +71,6 @@ void Item::HandlerFX(TypePress::E type) const
     {
         pressedItem = nullptr;
     }
-    else
-    {
-        // здесь ничего
-    }
 }
 
 
@@ -295,10 +291,6 @@ void Page::HandlerFX(TypePress::E type) const
         }
         Open(!IsOpened());
     }
-    else
-    {
-        // здесь ничего
-    }
 }
 
 
@@ -348,10 +340,6 @@ bool Page::HandlerKey(const KeyEvent &event)
         {
             ChangeSubPage(1);
             result = true;
-        }
-        else
-        {
-            // здесь ничего
         }
     }
     else
@@ -415,10 +403,6 @@ void Page::ChangeSubPage(int delta)
     {
         Beeper::RegulatorSwitchRotate();
         SetCurrentSubPage(CurrentSubPage() - 1);
-    }
-    else
-    {
-        // здесь ничего не делаем
     }
 }
 
@@ -498,10 +482,6 @@ void Governor::HandlerFX(TypePress::E type) const
         }
         Open(!IsOpened());
     }
-    else
-    {
-        // здесь ничего
-    }
 }
 
 
@@ -551,10 +531,6 @@ float Governor::Step() const
                 delta = 0.0F;
                 tsGovernor.address = 0;
             }
-            else
-            {
-                // здесь ничего
-            }
         }
         else if (tsGovernor.dir == INCREASE)
         {
@@ -569,10 +545,6 @@ float Governor::Step() const
                 OwnData()->handlerChange();
                 delta = 0.0F;
                 tsGovernor.address = 0;
-            }
-            else
-            {
-                // здесь ничего
             }
         }
         else
@@ -742,10 +714,6 @@ void Choice::HandlerFX(TypePress::E type) const
             SetCurrent(true);
         }
         Open(!IsOpened());
-    }
-    else
-    {
-        // здесь ничего
     }
 }
 
@@ -964,10 +932,6 @@ void GovernorColor::HandlerFX(TypePress::E type) const
         }
         Open(!IsOpened());
     }
-    else
-    {
-        // здесь ничего
-    }
 }
 
 
@@ -1006,10 +970,6 @@ bool GovernorColor::HandlerKey(const KeyEvent &event)
 
             return true;
         }
-        else
-        {
-            // здесь ничего
-        }
     }
     else
     {
@@ -1024,10 +984,6 @@ bool GovernorColor::HandlerKey(const KeyEvent &event)
             ct->ComponentChange(-1);
 
             return true;
-        }
-        else
-        {
-            // здесь ничего
         }
     }
 

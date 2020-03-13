@@ -439,10 +439,6 @@ static int8 *BreakWord(char *word)
         int8 lenghts[] = { 4, 3, 4, 5, 3, 0 };
         std::memcpy(lengthSyllables, lenghts, 6);
     }
-    else
-    {
-        // здесь ничего не делаем
-    }
 
     return lengthSyllables;
 }

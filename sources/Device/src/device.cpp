@@ -186,10 +186,6 @@ void Device::SetMode(Mode::E mode)
             Keyboard::Unlock();
             Recorder::Init();
         }
-        else
-        {
-            // здесь ничего нету - все варианты проверены
-        }
     }
 }
 

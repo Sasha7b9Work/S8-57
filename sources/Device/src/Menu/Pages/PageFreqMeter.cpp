@@ -126,8 +126,4 @@ void PageFreqMeter::Init()
         items[2] = const_cast<Choice *>(&cFreqClc);
         items[3] = const_cast<Choice *>(&cNumPeriods);
     }
-    else
-    {
-        // здесь ничего
-    }
 }

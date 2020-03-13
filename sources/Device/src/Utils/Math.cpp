@@ -279,10 +279,6 @@ void Math::CalculateMathFunction(float *dataAandResult, const float *dataB, int 
             dataAandResult++;
         }
     }
-    else
-    {
-        // здесь ничего
-    }
 }
 
 

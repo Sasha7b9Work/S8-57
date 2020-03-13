@@ -196,10 +196,6 @@ void PageMultimeter::OnChanged_Mode(bool)
     {
         items[1] = nullptr;
     }
-    else
-    {
-        // здесь ничего
-    }
 
     Multimeter::ChangeMode();
 }

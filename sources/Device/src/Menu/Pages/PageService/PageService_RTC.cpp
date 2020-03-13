@@ -228,10 +228,6 @@ static bool HandlerKey_Set(const KeyEvent &event)
             OnPress_SetDown();
             return true;
         }
-        else
-        {
-            // здесь ничего
-        }
     }
 
     if (event.key == Key::Enter ||

@@ -102,9 +102,6 @@ void Display::Update()
         Painter::BeginScene(Color::BACK);
         Rectangle(319, 239).Draw(0, 0, Color::FILL);
         DrawBigMNIPI();
-        Text("Для получения помощи нажмите и удерживайте кнопку ПОМОЩЬ").DrawInCenterRect(0, 180, 320, 20, Color::WHITE);
-        Text("Отдел маркетинга: тел./факс. 8-017-237-23-40").DrawInCenterRect(0, 205, 320, 20);
-        Text("Разработчики: e-mail: mnipi-24(@)tut.by, тел. 8-017-237-22-15").DrawInCenterRect(0, 220, 320, 20);
         Painter::EndScene();
     }
     else if (FDrive::State() == State::Mount)
@@ -163,10 +160,6 @@ void DrawProgressBar(uint dT)
     {
         direction = -direction;
         value -= step;
-    }
-    else
-    {
-        // ничего нет
     }
 
     int dH = 15;

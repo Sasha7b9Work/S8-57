@@ -248,10 +248,6 @@ static bool ProcessTest(const StructSCPI strct[]) //-V2504
                 return false;
             }
         }
-        else
-        {
-            // здесь ничего не нужно делать
-        }
 
         strct++;
     }

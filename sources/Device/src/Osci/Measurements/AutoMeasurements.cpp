@@ -514,10 +514,6 @@ int CalculatePeriodAccurately(Chan::E ch)
                 {
                     maxDelta = nextDelta;
                 }
-                else
-                {
-                    // здесь ничего не делаем
-                }
             }
 
             if(maxDelta < delta)
@@ -817,10 +813,6 @@ float CalculateMinSteadyRel(Chan::E ch)
                             --numSums;
                             ++numDeleted; //-V127
                         }
-                        else
-                        {
-                            // здесь ничего менять не нужно
-                        }
                     }
                 }
                 min[static_cast<int>(ch)] = (numDeleted > numMin / 2.0F) ? CalculateMinRel(ch) : static_cast<float>(sum) / numSums;
@@ -901,10 +893,6 @@ float CalculateMaxSteadyRel(Chan::E ch)
                             sum -= d;
                             numSums--;
                             numDeleted++; //-V127
-                        }
-                        else
-                        {
-                            // здесь ничего делать не нужно
                         }
                     }
                 }
@@ -1380,10 +1368,6 @@ static float Divide(float val1, float val2)
     else if(isnan(result))
     {
         result = Float::ERROR;
-    }
-    else
-    {
-        // здесь ничего
     }
 
     return result;

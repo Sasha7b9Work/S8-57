@@ -65,10 +65,6 @@ static bool HandlerKey_PageShow(const KeyEvent &event)
             DisplayRecorder::MoveCursorRight();
             return true;
         }
-        else
-        {
-            // здесь ничего не надо
-        }
     }
 
     return false;

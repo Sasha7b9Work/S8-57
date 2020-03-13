@@ -444,10 +444,6 @@ static char *FloatToString(float value, bool alwaysSign, int numDigits, char buf
     {
         *pBuffer++ = '+';
     }
-    else
-    {
-        // здесь ничего не делаем
-    }
     
     char format[10] = "%4.2f\0\0";
     

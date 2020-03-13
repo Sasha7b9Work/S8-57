@@ -637,10 +637,6 @@ int16 RShift::ToRel(float rShiftAbs, Range::E range)
     {
         retValue = MAX;
     }
-    else
-    {
-        // здесь ничего делать не нужно
-    }
 
     return retValue;
 }
@@ -759,10 +755,6 @@ void VALUE::PointsFromVoltage(const float *voltage, int numPoints, Range::E rang
         {
             points[i] = 255;
             continue;
-        }
-        else
-        {
-            // здесь ничего не делаем
         }
 
         points[i] = static_cast<uint8>(value);

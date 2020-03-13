@@ -520,10 +520,6 @@ pString DisplayFreqMeter::FreqSetToString(const BitSet32 *fr)
     {
         return OVERFLOW_STRING;
     }
-    else
-    {
-        // здесь ничего не делаем
-    }
 
     Hex value(fr->word);
 
@@ -850,10 +846,6 @@ void ProgressBarFreqMeter::Draw(int x, int y)
     else if (FreqMeter::ModeView::IsPeriod() && FreqMeter::timeStartMeasurePeriod != 0)
     {
 
-    }
-    else
-    {
-        // здесь ничего
     }
 }
 

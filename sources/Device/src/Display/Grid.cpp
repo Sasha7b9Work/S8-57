@@ -375,10 +375,6 @@ static int DeltaVforLineGrid()
         {
             result = MeasuresSource::IsBoth() ? 54 : 68;
         }
-        else
-        {
-            // здесь ничего
-        }
     }
 
     return result;
@@ -398,10 +394,6 @@ static int DeltaHforLineGrid()
         else if (MeasuresOnDisplay() == MeasuresOnDisplay::_6_2)
         {
             result = 83;
-        }
-        else
-        {
-            // здесь ничего
         }
     }
 
