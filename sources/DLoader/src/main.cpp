@@ -47,7 +47,6 @@ void Upgrade();
 
 int main()
 {
-    /*
     ms = static_cast<MainStruct *>(malloc(sizeof(MainStruct)));
     ms->percentUpdate = 0.0F; //-V522
    
@@ -120,7 +119,6 @@ int main()
     CPU::DeInit();
 
     free(ms);
-    */
 
     __disable_irq();
     // Теперь переходим на основную программу

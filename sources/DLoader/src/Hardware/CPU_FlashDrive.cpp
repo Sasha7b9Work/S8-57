@@ -21,7 +21,7 @@ typedef struct
     DIR dir;
 } StructForReadDir;
 
-HCD_HandleTypeDef CPU::FDrive::handleHCD;
+static HCD_HandleTypeDef handleHCD;
 
 USBH_HandleTypeDef CPU::FDrive::handleUSBH;
 
@@ -30,6 +30,12 @@ USBH_HandleTypeDef CPU::FDrive::handleUSBH;
 static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, StructForReadDir *s);
 static bool GetNextNameFile(char *nameFileOut, StructForReadDir *s);
 static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8 id);
+
+
+void *CPU::FDrive::GetHandleHCD()
+{
+    return &handleHCD;
+}
 
 
 void CPU::FDrive::Init()
@@ -259,38 +265,38 @@ void CPU::FDrive::CloseOpenedFile()
 }
 
 
-void CPU::FDrive::LL_::InitHCD(USBH_HandleTypeDef *phost)
+void CPU::FDrive::LL_::InitHCD(void *host)
 {
-    /* Set the LL driver parameters */
-    FDrive::handleHCD.Instance = USB_OTG_HS;
-    FDrive::handleHCD.Init.speed = HCD_SPEED_HIGH;
-    FDrive::handleHCD.Init.Host_channels = 12;
-    FDrive::handleHCD.Init.dma_enable = 0;
-    FDrive::handleHCD.Init.low_power_enable = 0;
-    FDrive::handleHCD.Init.phy_itface = HCD_PHY_EMBEDDED;
-    FDrive::handleHCD.Init.Sof_enable = 0;
-    FDrive::handleHCD.Init.vbus_sensing_enable = 0;
-    FDrive::handleHCD.Init.use_external_vbus = 0;
+    USBH_HandleTypeDef *phost = static_cast<USBH_HandleTypeDef *>(host);
 
-    /* Link the driver to the stack */
-    FDrive::handleHCD.pData = phost;
-    phost->pData = &FDrive::handleHCD;
-    /* Initialize the LL driver */
-    HAL_HCD_Init(&FDrive::handleHCD);
+    handleHCD.Instance = USB_OTG_HS;
+    handleHCD.Init.speed = HCD_SPEED_HIGH;
+    handleHCD.Init.Host_channels = 12;
+    handleHCD.Init.dma_enable = 0;
+    handleHCD.Init.low_power_enable = 0;
+    handleHCD.Init.phy_itface = HCD_PHY_EMBEDDED;
+    handleHCD.Init.Sof_enable = 0;
+    handleHCD.Init.vbus_sensing_enable = 0;
+    handleHCD.Init.use_external_vbus = 0;
 
-    USBH_LL_SetTimer(phost, HAL_HCD_GetCurrentFrame(&FDrive::handleHCD));
+    handleHCD.pData = phost;
+    phost->pData = &handleHCD;
+
+    HAL_HCD_Init(&handleHCD);
+
+    USBH_LL_SetTimer(phost, HAL_HCD_GetCurrentFrame(&handleHCD));
 }
 
 
 void CPU::FDrive::LL_::SetToggle(uint8 pipe, uint8 toggle)
 {
-    if (FDrive::handleHCD.hc[pipe].ep_is_in)
+    if (handleHCD.hc[pipe].ep_is_in)
     {
-        FDrive::handleHCD.hc[pipe].toggle_in = toggle;
+        handleHCD.hc[pipe].toggle_in = toggle;
     }
     else
     {
-        FDrive::handleHCD.hc[pipe].toggle_out = toggle;
+        handleHCD.hc[pipe].toggle_out = toggle;
     }
 }
 
@@ -299,13 +305,13 @@ uint8 CPU::FDrive::LL_::GetToggle(uint8 pipe)
 {
     uint8 toggle = 0;
 
-    if (FDrive::handleHCD.hc[pipe].ep_is_in)
+    if (handleHCD.hc[pipe].ep_is_in)
     {
-        toggle = FDrive::handleHCD.hc[pipe].toggle_in;
+        toggle = handleHCD.hc[pipe].toggle_in;
     }
     else
     {
-        toggle = FDrive::handleHCD.hc[pipe].toggle_out;
+        toggle = handleHCD.hc[pipe].toggle_out;
     }
     return toggle;
 }

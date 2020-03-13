@@ -33,7 +33,7 @@ extern "C" {
     //---------------------------
     void OTG_HS_IRQHandler()
     {
-        HAL_HCD_IRQHandler(&CPU::FDrive::handleHCD);
+        HAL_HCD_IRQHandler(reinterpret_cast<HCD_HandleTypeDef *>(CPU::FDrive::GetHandleHCD()));
     }
 
 #ifdef __cplusplus
