@@ -2,6 +2,21 @@
 #include "main.h"
 
 
+struct State
+{
+    enum E
+    {
+        Start,
+        Mount,            // Монтирование флешки
+        WrongFlash,       // Флешка есть, но прочитать нельзя
+        RequestAction,    // Что делать - апгрейдить или нет
+        NotFile,          // Если диск примонтирован, но обновления на нём нету
+        Upgrade,          // Процесс апгрейда
+        Ok                // Обновление удачно завершено
+    };
+};
+
+
 class FDrive
 {
     friend class CPU;

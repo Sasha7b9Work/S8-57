@@ -13,13 +13,23 @@
 #define FILE_CLEAR "clear.txt"
 
 
-typedef struct
+struct StructForReadDir
 {
     char nameDir[_MAX_LFN + 1];
     char lfn[(_MAX_LFN + 1)];
     FILINFO fno;
     DIR dir;
-} StructForReadDir;
+};
+
+
+struct StateDisk
+{
+    enum E
+    {
+        Idle,
+        Start
+    };
+};
 
 static HCD_HandleTypeDef handleHCD;
 
@@ -30,6 +40,13 @@ static float percentsUpdate = 0.0F;
 
 // Состояние флешки
 static State::E state = State::Start;
+
+static FATFS        USBDISKFatFS;
+static char         USBDISKPath[4];
+static StateDisk::E stateDisk;
+static FIL          file;
+static int          connection;
+static int          active;
 
 
 static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, StructForReadDir *s);
@@ -70,11 +87,11 @@ void FDrive::Init()
 
     HAL_NVIC_EnableIRQ(OTG_HS_IRQn);
 
-    ms->drive.state = StateDisk_Idle;
-    ms->drive.connection = 0;
-    ms->drive.active = 0;
+    stateDisk = StateDisk::Idle;
+    connection = 0;
+    active = 0;
 
-    if(FATFS_LinkDriver(&USBH_Driver, ms->drive.USBDISKPath) == FR_OK) //-V2001
+    if(FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == FR_OK) //-V2001
     {
         USBH_StatusTypeDef res = USBH_Init(&handleUSBH, USBH_UserProcess, 0);
         res = USBH_RegisterClass(&handleUSBH, USBH_MSC_CLASS);
@@ -92,15 +109,15 @@ void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
         break;
 
     case HOST_USER_CLASS_ACTIVE:
-        ms->drive.active++;
-        ms->drive.state = StateDisk_Start;
+        active++;
+        stateDisk = StateDisk::Start;
         break;
 
     case HOST_USER_CLASS_SELECTED:
         break;
 
     case HOST_USER_CONNECTION:
-        ms->drive.connection++;
+        connection++;
         state = State::Mount;
         f_mount(NULL, static_cast<TCHAR const *>(""), 0);
         break;
@@ -124,10 +141,9 @@ void FDrive::AttemptUpdate()
     {
     }
 
-    if((ms->drive.connection && ms->drive.active == 0) ||  // Если флеша подключена, но в активное состояние почему-то не перешла
-        (ms->drive.active && state != State::Mount))     // или перешла в активное состояние, по почему-то не запустился процесс монтирования
+    if((connection && active == 0) ||  // Если флеша подключена, но в активное состояние почему-то не перешла
+        (active && state != State::Mount))     // или перешла в активное состояние, по почему-то не запустился процесс монтирования
     {
-        free(ms);
         NVIC_SystemReset();
     }
 
@@ -160,9 +176,9 @@ void FDrive::AttemptUpdate()
 static bool Process()
 {
     USBH_Process(&handleUSBH);
-    if(ms->drive.state == StateDisk_Start)
+    if(stateDisk == StateDisk::Start)
     {
-        if(f_mount(&(ms->drive.USBDISKFatFS), static_cast<TCHAR const *>(ms->drive.USBDISKPath), 0) == FR_OK)
+        if(f_mount(&(USBDISKFatFS), static_cast<TCHAR const *>(USBDISKPath), 0) == FR_OK)
         {
             return true;
         }
@@ -191,22 +207,22 @@ static void ToLower(char *str)
 bool FDrive::FileExist(const char *fileName)
 {
     char nameFile[255];
-    char file[255];
-    strcpy(file, fileName);
-    ToLower(file);
+    char f[255];
+    strcpy(f, fileName);
+    ToLower(f);
     StructForReadDir strd;
 
     if(GetNameFile("\\", 0, nameFile, &strd))
     {
         ToLower(nameFile);
-        if(strcmp(file, nameFile) == 0)
+        if(strcmp(f, nameFile) == 0)
         {
             return true;
         }
         while(GetNextNameFile(nameFile, &strd))
         {
             ToLower(nameFile);
-            if(strcmp(file, nameFile) == 0)
+            if(strcmp(f, nameFile) == 0)
             {
                 return true;
             }
@@ -299,9 +315,9 @@ static bool GetNextNameFile(char *nameFileOut, StructForReadDir *s)
 
 int FDrive::OpenFileForRead(const char *fileName)
 {
-    if(f_open(&ms->drive.file, fileName, FA_READ) == FR_OK)
+    if(f_open(&file, fileName, FA_READ) == FR_OK)
     {
-        return (int)f_size(&ms->drive.file);
+        return (int)f_size(&file);
     }
     return -1;
 }
@@ -310,7 +326,7 @@ int FDrive::OpenFileForRead(const char *fileName)
 int FDrive::ReadFromFile(int numBytes, uint8 *buffer)
 {
     uint readed = 0;
-    if(f_read(&ms->drive.file, buffer, static_cast<UINT>(numBytes), &readed) == FR_OK)
+    if(f_read(&file, buffer, static_cast<UINT>(numBytes), &readed) == FR_OK)
     {
         return static_cast<int>(readed);
     }
@@ -320,7 +336,7 @@ int FDrive::ReadFromFile(int numBytes, uint8 *buffer)
 
 void FDrive::CloseOpenedFile()
 {
-    f_close(&ms->drive.file);
+    f_close(&file);
 }
 
 

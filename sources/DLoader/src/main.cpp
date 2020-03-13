@@ -25,13 +25,8 @@
 typedef void(*pFunction)();
 
 
-MainStruct *ms; //-V707
-
-
 int main()
 {
-    ms = static_cast<MainStruct *>(malloc(sizeof(MainStruct)));
-   
     CPU::Init();
 
     Timer::PauseOnTime(250);
@@ -51,8 +46,6 @@ int main()
     }
     
     CPU::DeInit();
-
-    free(ms);
 
     __disable_irq();
     // Теперь переходим на основную программу
