@@ -253,34 +253,40 @@ bool Record::IsSaved()
 }
 
 
+uint *Record::FirstDowbleWord()
+{
+    return reinterpret_cast<uint *>(&set.crc32);
+}
+
+
 bool Record::IsCorrect()
 {
-    uint *start = FirstDowbleWord();
+    uint *start = FirstDowbleWord() + 1;
     uint *end = FirstDowbleWord() + SIZE_RECORD / 4;
 
     if (set.crc32 == 0xFFFFFFFF)
     {
-        for (uint *address = start + 1; address < end; address++)
+        for (uint *address = start; address < end; address++)
         {
             if (*address != 0xFFFFFFFF)
             {
                 return false;
             }
-
-            return true;
         }
+
+        return true;
     }
     else if (set.crc32 == 0x00000000)
     {
-        for (uint *address = start + 1; address < end; address++)
+        for (uint *address = start; address < end; address++)
         {
             if (*address != 0x00000000)
             {
                 return false;
             }
-
-            return true;
         }
+
+        return true;
     }
     
     return (set.crc32 == set.CalcWriteCRC32());

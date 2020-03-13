@@ -29,6 +29,8 @@ void HardFault_Handler()
         line0 = line0; //-V570
         line1 = line1; //-V570
         line2 = line2;
+
+        NVIC_SystemReset();
     }
 }
 

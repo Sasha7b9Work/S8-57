@@ -7,7 +7,8 @@
 struct Tester
 {
     static const int NUM_STEPS = 5;
-    /// Инициализация аппаратной части
+    
+    // Инициализация аппаратной части
     static void Init();
 
     void DeInit();
@@ -21,14 +22,16 @@ struct Tester
     static void Update();
 
     static void ProcessStep();
-    /// Загружает полярность из Settings
+    
+    // Загружает полярность из Settings
     static void LoadPolarity();
-    /// Устанавливает шаг изменения напряжения в соотвествии с настройками Settings
+    
+    // Устанавливает шаг изменения напряжения в соотвествии с настройками Settings
     static void LoadStep();
 
     static int16 DeltaRShiftA();
 
-    /// Масштаб
+    // Масштаб
     struct Scale
     {
         enum E
@@ -53,7 +56,7 @@ struct Tester
         pString ToString() const;
     };
 
-    /// Смещение
+    // Смещение
     struct Shift
     {
         Shift(int16 rShift, Chan::E _ch) : shift(rShift), ch(_ch) {};
@@ -63,7 +66,7 @@ struct Tester
         Chan::E ch;
     };
 
-    /// Чем будем управлять в тестер-компоненте - напряжением или током
+    // Чем будем управлять в тестер-компоненте - напряжением или током
     struct Control
     {
         enum E
@@ -136,15 +139,20 @@ struct Tester
     };
 
 private:
-    /// Текущий шаг
+    
+    // Текущий шаг
     static int step;
-    /// Шаг изменения напряжения
+    
+    // Шаг изменения напряжения
     static float stepU;
-    /// Установленное в true значение означает, что вклюён режим тестера
+    
+    // Установленное в true значение означает, что вклюён режим тестера
     static bool enabled;
-    /// Считать данные очередной ступеньки
+    
+    // Считать данные очередной ступеньки
     static void ReadData();
-    /// Пересчитать точки для засылки отрисовки
+    
+    // Пересчитать точки для засылки отрисовки
     static void RecountPoints(uint16 *x, uint8 *y);
 };
 
@@ -152,20 +160,27 @@ private:
 struct DisplayTester
 {
     static void Update();
-    /// Устанавливает точки для рисования, соответствующие шагу numStep
+    
+    // Устанавливает точки для рисования, соответствующие шагу numStep
     static void SetPoints(int numStep, const uint16 dx[TESTER_NUM_POINTS], const uint8 dy[TESTER_NUM_POINTS]);
 
 private:
-    /// Если true, то шаг готов для вывода
+    
+    // Если true, то шаг готов для вывода
     static bool ready[Tester::NUM_STEPS];
-    /// Написать легенду изображения
+    
+    // Написать легенду изображения
     static void DrawLegend(int x, int y);
-    /// Отображает параметры одного канала
+    
+    // Отображает параметры одного канала
     static void DrawParametersChannel(Chan::E ch, int x, int y);
-    /// Возвращает цвет, которым нужно рисовать соответствующую "ступеньку"
+    
+    // Возвращает цвет, которым нужно рисовать соответствующую "ступеньку"
     static Color ColorForStep(int step);
-    /// Рисовать данные ступеньки numStep
+    
+    // Рисовать данные ступеньки numStep
     static void DrawData(int step);
-    /// Возвращает числовое значение величины соответствующей "ступеньки"
+    
+    // Возвращает числовое значение величины соответствующей "ступеньки"
     static String ValueForStep(int step);
 };

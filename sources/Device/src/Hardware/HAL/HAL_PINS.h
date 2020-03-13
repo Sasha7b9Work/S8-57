@@ -66,6 +66,9 @@ struct HPin
 #define PIN_TESTER_PNP  HPort::_A, HPin::_6
 #endif
 
+#define PIN_TESTER_STR  HPort::_C, HPin::_9
+#define PIN_TESTER_DAC  HPort::_A, HPin::_5
+
 #define PIN_POWER       HPort::_E, HPin::_2
 
 #define PIN_A1          HPort::_D, HPin::_10
@@ -89,8 +92,6 @@ struct HPin
 #define PIN_CS_RAM      HPort::_G, HPin::_10
 
 #define PIN_DAC1        HPort::_A, HPin::_4
-
-#define PIN_DAC2        HPort::_A, HPin::_5
 
 #define PIN_HCD_DM      HPort::_B, HPin::_14
 #define PIN_HCD_DP      HPort::_B, HPin::_15
@@ -125,9 +126,6 @@ struct HPin
 #define PIN_SPI4_SCK    HPort::_E, HPin::_12
 #define PIN_SPI4_MISO   HPort::_E, HPin::_13
 #define PIN_SPI4_MOSI   HPort::_E, HPin::_14
-
-#define PIN_TESTER_STR  HPort::_C, HPin::_9
-#define PIN_TESTER_DAC  HPort::_A, HPin::_5
 
 #define PIN_USART3_TX   HPort::_D, HPin::_8
 #define PIN_USART3_RX   HPort::_D, HPin::_9

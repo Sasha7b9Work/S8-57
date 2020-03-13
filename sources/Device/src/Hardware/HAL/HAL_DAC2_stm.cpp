@@ -18,7 +18,7 @@ void HAL_DAC2::Init()
 
     HAL_NVIC_SetPriority(EXTI9_5_IRQn, 2, 0);
 
-    HAL_PIO::Init(PIN_DAC2, HMode::Analog, HPull::No);
+    HAL_PIO::Init(PIN_TESTER_DAC, HMode::Analog, HPull::No);
 
     if (HAL_DAC_Init(&handle) != HAL_OK)
     {
