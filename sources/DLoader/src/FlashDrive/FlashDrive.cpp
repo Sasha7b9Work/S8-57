@@ -6,6 +6,7 @@
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/HAL/HAL_PIO.h"
 #include <usbh_diskio.h>
+#include <ctype.h>
 
 
 #define FILE_FIRMWARE "S8-57.bin"
