@@ -821,9 +821,14 @@
               <FilePath>.\src\Hardware\HAL\HAL_EEPROM.cpp</FilePath>
             </File>
             <File>
-              <FileName>HAL_FSMC.cpp</FileName>
+              <FileName>HAL_FSMC_PAN_stm.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_FSMC.cpp</FilePath>
+              <FilePath>.\src\Hardware\HAL\HAL_FSMC_PAN_stm.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_FSMC_stm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\HAL\HAL_FSMC_stm.cpp</FilePath>
             </File>
             <File>
               <FileName>HAL_PIO.cpp</FileName>
