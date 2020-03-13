@@ -19,7 +19,6 @@
 #include "FlashDrive/FlashDrive.h"
 #include "Hardware/CPU.h"
 #include "Hardware/Timer.h"
-#include "Settings/Settings.h"
 
 
 
@@ -35,8 +34,6 @@ int main()
     ms->percentUpdate = 0.0F; //-V522
    
     CPU::Init();
-
-    Settings::Load();
 
     Timer::PauseOnTime(250);
     

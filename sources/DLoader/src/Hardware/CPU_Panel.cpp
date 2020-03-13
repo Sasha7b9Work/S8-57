@@ -1,4 +1,5 @@
 #include <usbh_core.h>
+#include "defines.h"
 #include "Hardware/Controls.h"
 #include "Display/Display.h"
 #include "Hardware/CPU.h"

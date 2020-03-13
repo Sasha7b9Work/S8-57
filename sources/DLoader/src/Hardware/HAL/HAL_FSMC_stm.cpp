@@ -1,7 +1,6 @@
 #include "defines.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
-#include "Utils/Debug.h"
 #include "Utils/Math.h"
 #include <stm32f4xx_hal.h>
 

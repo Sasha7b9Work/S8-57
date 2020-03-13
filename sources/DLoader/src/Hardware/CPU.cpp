@@ -4,6 +4,7 @@
 #include <usbh_core.h>
 #include "CPU.h"
 #include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
 
 
 
@@ -50,4 +51,6 @@ void CPU::EnablePeriphery()
 void CPU::InitHardware()
 {
    Timer::Init();
+
+   HAL::Init();
 }

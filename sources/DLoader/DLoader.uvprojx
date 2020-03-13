@@ -676,9 +676,9 @@
           <GroupName>Display</GroupName>
           <Files>
             <File>
-              <FileName>Colors.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\Colors.h</FilePath>
+              <FileName>AdvancedFont_d.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\AdvancedFont_d.cpp</FilePath>
             </File>
             <File>
               <FileName>Colors.cpp</FileName>
@@ -686,9 +686,9 @@
               <FilePath>.\src\Display\Colors.cpp</FilePath>
             </File>
             <File>
-              <FileName>Display.h</FileName>
+              <FileName>Colors.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\Display.h</FilePath>
+              <FilePath>.\src\Display\Colors.h</FilePath>
             </File>
             <File>
               <FileName>Display.cpp</FileName>
@@ -696,9 +696,9 @@
               <FilePath>.\src\Display\Display.cpp</FilePath>
             </File>
             <File>
-              <FileName>DisplayTypes.h</FileName>
+              <FileName>Display.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Display\DisplayTypes.h</FilePath>
+              <FilePath>.\src\Display\Display.h</FilePath>
             </File>
             <File>
               <FileName>Painter.h</FileName>
@@ -706,14 +706,24 @@
               <FilePath>.\src\Display\Painter.h</FilePath>
             </File>
             <File>
-              <FileName>Painter.cpp</FileName>
+              <FileName>Painter_stm.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Display\Painter.cpp</FilePath>
+              <FilePath>.\src\Display\Painter_stm.cpp</FilePath>
             </File>
             <File>
-              <FileName>PainterText.cpp</FileName>
+              <FileName>Primitives.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Display\PainterText.cpp</FilePath>
+              <FilePath>.\src\Display\Primitives.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Primitives.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\Primitives.h</FilePath>
+            </File>
+            <File>
+              <FileName>Primitives_stm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\Primitives_stm.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -734,11 +744,6 @@
               <FileName>font8.inc</FileName>
               <FileType>5</FileType>
               <FilePath>..\common\Display\Font\font8.inc</FilePath>
-            </File>
-            <File>
-              <FileName>AdvancedFont_d.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\AdvancedFont_d.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -893,42 +898,37 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Settings</GroupName>
-          <Files>
-            <File>
-              <FileName>Settings.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Settings\Settings.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Settings.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Settings\Settings.h</FilePath>
-            </File>
-            <File>
-              <FileName>SettingsDisplay.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Settings\SettingsDisplay.h</FilePath>
-            </File>
-            <File>
-              <FileName>SettingsTypes.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Settings\SettingsTypes.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Utils</GroupName>
           <Files>
+            <File>
+              <FileName>Buffer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Buffer.h</FilePath>
+            </File>
+            <File>
+              <FileName>Buffer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Buffer.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Math.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Math.h</FilePath>
+            </File>
             <File>
               <FileName>Math.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Utils\Math.cpp</FilePath>
             </File>
             <File>
-              <FileName>Math.h</FileName>
+              <FileName>String.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Utils\Math.h</FilePath>
+              <FilePath>.\src\Utils\String.h</FilePath>
+            </File>
+            <File>
+              <FileName>String.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\String.cpp</FilePath>
             </File>
           </Files>
         </Group>

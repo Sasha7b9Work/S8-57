@@ -135,33 +135,8 @@ void DDecoder::SetBufferForScreenRow(uint8 *_pixels)
 }
 
 
-bool DDecoder::FuncScreen(uint8 data)
+bool DDecoder::FuncScreen(uint8)
 {
-    static int numString = 0;
-
-    if (step == 0)
-    {
-        return false;
-    }
-
-    if (step == 1)
-    {
-        numString = data;
-        return false;
-    }
-
-    if (step < 321)
-    {
-        pixels[step - 2] = data;
-        return false;
-    }
-
-    if (step == 321)
-    {
-        Display::SaveRow(numString);
-    }
-
-
     return true;
 }
 

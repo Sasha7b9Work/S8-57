@@ -32,7 +32,10 @@ add_compile_options(/wd4514)    # 'function' : unreferenced inline function has 
 add_compile_options(/wd4820)    # 'xxx': '4' bytes padding added after data member 'yyy'
 add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially throwing function passed to extern C function under -EHc.
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-add_compile_options(/wd26812)   #The enum type %type% is unscoped. Prefer 'enum class' over 'enum' (Enum.3)
+add_compile_options(/wd26812)   # The enum type %type% is unscoped. Prefer 'enum class' over 'enum' (Enum.3)
+
+set_source_files_properties(src/Display/_Display.cpp
+    PROPERTIES HEADER_FILE_ONLY TRUE)
 
 
 source_group(src                    FILES src/main.h
@@ -44,7 +47,8 @@ source_group(libs\\CMSIS            REGULAR_EXPRESSION src/libs/CMSIS/*)
 source_group(libs\\FatFS            REGULAR_EXPRESSION src/libs/FatFS/*)
 source_group(libs\\HAL              REGULAR_EXPRESSION src/libs/HAL/*)
 source_group(libs\\USBH             REGULAR_EXPRESSION src/libs/USBH/*)
-source_group(common                 FILES ../common/Decoder_d.h
+source_group(common                 FILES ../common/Command.h
+                                          ../common/Decoder_d.h
                                           ../common/Decoder_d.cpp)
 source_group(Display                REGULAR_EXPRESSION src/Display/*)
 source_group(Display\\Font          FILES ../common/Display/Font/Font_d.h
@@ -57,10 +61,10 @@ source_group(Hardware\\HAL          REGULAR_EXPRESSION src/Hardware/HAL/*)
 source_group(Hardware\\stm32        REGULAR_EXPRESSION src/Hardware/stm32/*)
 source_group(Hardware\\stm32\\4XX   REGULAR_EXPRESSION src/Hardware/stm32/4XX/*)
 source_group(Keyboard               REGULAR_EXPRESSION src/Keyboard/*)
-source_group(Settings               REGULAR_EXPRESSION src/Settings/*)
 source_group(Utils                  REGULAR_EXPRESSION src/Utils/*)
 
-file(GLOB SOURCES   ../common/Decoder_d.h
+file(GLOB SOURCES   ../common/Command.h
+                    ../common/Decoder_d.h
                     ../common/Decoder_d.cpp
                     src/main.h
                     src/main.cpp
@@ -82,7 +86,6 @@ file(GLOB SOURCES   ../common/Decoder_d.h
                     src/Hardware/stm32/*
                     src/Hardware/stm32/4XX/*
                     src/Keyboard/*
-                    src/Settings/*
                     src/Utils/*)
 
 add_library(DLoader ${SOURCES})

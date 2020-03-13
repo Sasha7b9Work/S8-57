@@ -1,6 +1,5 @@
 #include "defines.h"
 #include "Math.h"
-#include "Settings/Settings.h"
 #include <math.h>
 #include <cstdlib>
 #include <cstring>
