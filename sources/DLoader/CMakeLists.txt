@@ -75,7 +75,8 @@ file(GLOB SOURCES   ../common/Decoder_d.h
                     ../common/Display/Font/Font_d.h
                     ../common/Display/Font/Font_d.cpp
                     ../common/Display/Font/font8.inc
-                    src/Display/AdvancedFont_d.cppsrc/FlashDrive/*
+                    src/Display/AdvancedFont_d.cpp
+                    src/FlashDrive/*
                     src/Hardware/*
                     src/Hardware/HAL/*
                     src/Hardware/stm32/*

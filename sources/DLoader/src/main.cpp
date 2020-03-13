@@ -27,23 +27,10 @@
 
 
 
-#define FILE_FIRMWARE "S8-57.bin"
-#define FILE_CLEAR "clear.txt"
-
-
 typedef void(*pFunction)();
 
 
-
 MainStruct *ms; //-V707
-
-
-
-/// Стереть настройки
-void EraseSettings();
-/// Записать в EEPROM файл с прошивкой с флешки
-void Upgrade();
-
 
 
 int main()
@@ -63,52 +50,10 @@ int main()
 
     Timer::SetAndEnable(kTemp, Display::Update, 10);
 
-    uint timeStart = TIME_MS;
-
     FDrive::Init();
+
+    FDrive::AttemptUpdate();
     
-    bool update = FDrive::Update();
-    
-    uint time = TIME_MS - timeStart;
-
-    while (TIME_MS - timeStart < TIME_WAIT && !FDrive::Update())
-    {
-        update = FDrive::Update();
-        time = TIME_MS - timeStart;
-    }
-
-    if ((ms->drive.connection && ms->drive.active == 0) ||  // Если флеша подключена, но в активное состояние почему-то не перешла
-        (ms->drive.active && ms->state != State_Mount))     // или перешла в активное состояние, по почему-то не запустился процесс монтирования
-    {
-        free(ms);
-        NVIC_SystemReset();
-    }
-
-    if (ms->state == State_Mount)                           // Это означает, что диск удачно примонтирован //-V774
-    {
-        if (FDrive::FileExist(FILE_CLEAR))
-        {
-            EraseSettings();
-        }
-
-        if (FDrive::FileExist(FILE_FIRMWARE))                    // Если на диске обнаружена прошивка
-        {
-            Upgrade();
-        }
-        else
-        {
-            ms->state = State_NotFile;
-        }
-    }
-    else if (ms->state == State_WrongFlash) // Диск не удалось примонтировать //-V774
-    {
-        Timer::PauseOnTime(5000);
-    }
-    else
-    {
-        // здесь ничего
-    }
-
     ms->state = State_Ok; //-V774 //-V519
     
     Timer::Disable(kTemp);
@@ -130,37 +75,4 @@ int main()
     JumpToApplication();
 
     return 0;
-}
-
-
-
-void Upgrade()
-{
-#define sizeSector (1 * 1024)
-    
-    uint8 buffer[sizeSector];
-    
-    CPU::FLASH_::Prepare();
-    
-    int size = FDrive::OpenFileForRead(FILE_FIRMWARE);
-    int fullSize = size;
-    uint address = CPU::FLASH_::ADDR_SECTOR_PROGRAM_0;
-
-    while (size)
-    {
-        int readedBytes = FDrive::ReadFromFile(sizeSector, buffer);
-        CPU::FLASH_::WriteData(address, buffer, readedBytes);
-        size -= readedBytes;
-        address += static_cast<uint>(readedBytes);
-
-        ms->percentUpdate = 1.0F - static_cast<float>(size) / fullSize;
-    }
-    
-    FDrive::CloseOpenedFile();
-}
-
-
-void EraseSettings()
-{
-    HAL_EEPROM::EraseSector(0x080C0000);
 }

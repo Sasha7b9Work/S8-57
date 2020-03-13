@@ -1,5 +1,6 @@
 #pragma once
 #include "defines.h"
+#include <ff.h>
 
 // Key configuration
 #define KEY_START_ADDRESS   (uint)0x0

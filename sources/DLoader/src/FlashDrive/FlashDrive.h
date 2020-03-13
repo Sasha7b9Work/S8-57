@@ -1,4 +1,5 @@
 #pragma once
+#include "main.h"
 
 
 class FDrive
@@ -8,8 +9,8 @@ class FDrive
 public:
     static void Init();
 
-public:
-    static bool Update();
+    // Сделать попытку обновления
+    static void AttemptUpdate();
 
     static bool FileExist(const char *fileName);
 
@@ -21,7 +22,9 @@ public:
 
     static void CloseOpenedFile();
 
-    static void HCD_IRQHandler();
+    static void *GetHandleHCD();
+
+    static void *GetHandleUSBH();
 
     class LL_
     {
@@ -32,8 +35,4 @@ public:
 
         static uint8 GetToggle(uint8 pipe);
     };
-
-    static void *GetHandleHCD();
-
-    static void *GetHandleUSBH();
 };
