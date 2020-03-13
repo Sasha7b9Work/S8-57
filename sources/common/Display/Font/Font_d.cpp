@@ -1,17 +1,24 @@
 #include "defines.h"
+#include "Font_d.h"
 #include "AdvancedFont_d.h"
 #include "common/Command.h"
 #include "common/Decoder_d.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "font8.inc"
+#ifndef LOADER
 #include "font5.inc"
 #include "fontUGO.inc"
 #include "fontUGO2.inc"
+#endif
 #include <cstring>
 
 
+#ifdef LOADER
+const DFont *fonts[DTypeFont::Count] = {&font8, &font8, &font8, &font8, nullptr};
+#else
 const DFont *fonts[DTypeFont::Count] = {&font5, &font8, &fontUGO, &fontUGO2, nullptr};
+#endif
 const DFont *font = &font8;
 
 DTypeFont::E pushedFont = DTypeFont::_8;
@@ -61,16 +68,22 @@ void DFont::Set(const DTypeFont::E typeFont)
         switch (typeFont)
         {
         case DTypeFont::_5:
+#ifndef LOADER
             font = &font5;
+#endif
             break;
         case DTypeFont::_8:
             font = &font8;
             break;
         case DTypeFont::_UGO:
+#ifndef LOADER
             font = &fontUGO;
+#endif
             break;
         case DTypeFont::_UGO2:
+#ifndef LOADER
             font = &fontUGO2;
+#endif
             break;
         case DTypeFont::_GOST28:
         case DTypeFont::_GOST72bold:

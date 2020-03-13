@@ -721,16 +721,6 @@
           <GroupName>Display/Font</GroupName>
           <Files>
             <File>
-              <FileName>AdvancedFont_d.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\Display\Font\AdvancedFont_d.h</FilePath>
-            </File>
-            <File>
-              <FileName>AdvancedFont_d.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\common\Display\Font\AdvancedFont_d.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Font_d.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\common\Display\Font\Font_d.cpp</FilePath>
@@ -741,39 +731,14 @@
               <FilePath>..\common\Display\Font\Font_d.h</FilePath>
             </File>
             <File>
-              <FileName>font5.inc</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\Display\Font\font5.inc</FilePath>
-            </File>
-            <File>
               <FileName>font8.inc</FileName>
               <FileType>5</FileType>
               <FilePath>..\common\Display\Font\font8.inc</FilePath>
             </File>
             <File>
-              <FileName>fontUGO.inc</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\Display\Font\fontUGO.inc</FilePath>
-            </File>
-            <File>
-              <FileName>fontUGO2.inc</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\Display\Font\fontUGO2.inc</FilePath>
-            </File>
-            <File>
-              <FileName>fontGOST72bold.inc</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\Display\Font\fontGOST72bold.inc</FilePath>
-            </File>
-            <File>
-              <FileName>fontGOST28.inc</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\Display\Font\fontGOST28.inc</FilePath>
-            </File>
-            <File>
-              <FileName>fontOMEGA72.inc</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\Display\Font\fontOMEGA72.inc</FilePath>
+              <FileName>AdvancedFont_d.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\AdvancedFont_d.cpp</FilePath>
             </File>
           </Files>
         </Group>

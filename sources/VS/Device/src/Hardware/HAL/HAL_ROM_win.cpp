@@ -16,7 +16,7 @@ const Sector HAL_ROM::sectors[Sector::Count] =
 {
     { Sector::_00_BOOT_1,     reinterpret_cast<uint>(&eeprom[0]),                     _16K },
     { Sector::_01_BOOT_2,     reinterpret_cast<uint>(&eeprom[_16K]),                  _16K },
-    { Sector::_02,            reinterpret_cast<uint>(&eeprom[_16K * 2]),              _16K },
+    { Sector::_02_BOOT_3,     reinterpret_cast<uint>(&eeprom[_16K * 2]),              _16K },
     { Sector::_03_NRST_1,     reinterpret_cast<uint>(&eeprom[_16K * 3]),              _16K },
     { Sector::_04_NRST_2,     reinterpret_cast<uint>(&eeprom[_16K * 4]),              _64K },
     { Sector::_05_FIRM_1,     reinterpret_cast<uint>(&eeprom[_128K]),                 _128K },
