@@ -139,6 +139,7 @@ void Recorder::OnPressStart()
     if(!IsEnabledA() && !IsEnabledB() && !IsEnabledSensor())
     {
         Display::ShowWarning("Ќужно выбрать хот€ бы один источник записи");
+        return;
     }
 
     if (Menu::OpenedItem() == const_cast<Page *>(PageRecorder::self))
