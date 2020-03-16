@@ -140,7 +140,7 @@ void Recorder::OnPressStart()
         }
         else
         {
-            static const Key::E keys[] = { Key::F4, Key::Start, Key::None };
+            static const Key::E keys[] = { Key::F5, Key::Start, Key::None };
             Start();
             Keyboard::Lock(keys);
         }

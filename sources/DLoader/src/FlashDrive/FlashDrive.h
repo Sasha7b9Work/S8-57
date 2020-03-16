@@ -1,7 +1,7 @@
 #pragma once
 
 
-#define TIME_WAIT   5000    // Время работы заставки
+#define TIME_WAIT   5    // Время работы заставки
 
 
 struct State
