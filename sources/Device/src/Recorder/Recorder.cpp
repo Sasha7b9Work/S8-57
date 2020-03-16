@@ -131,6 +131,11 @@ static void RestoreOsciSettings()
 
 void Recorder::OnPressStart()
 {
+    if(Menu::OpenedPage() != PageRecorder::self)
+    {
+        return;
+    }
+
     if(!IsEnabledA() && !IsEnabledB() && !IsEnabledSensor())
     {
         Display::ShowWarning("Ќужно выбрать хот€ бы один источник записи");

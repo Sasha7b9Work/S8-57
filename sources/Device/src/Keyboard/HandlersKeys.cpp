@@ -429,6 +429,10 @@ static void OnStart()
     {
         Tester::StartStop();
     }
+    else if(Device::InModeRecorder())
+    {
+        Recorder::OnPressStart();
+    }
     else
     {
         Osci::OnPressStart();
