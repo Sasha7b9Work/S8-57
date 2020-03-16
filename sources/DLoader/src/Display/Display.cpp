@@ -29,8 +29,8 @@ static uint   timePrev;
 
 
 static void DrawProgressBar(uint dT);
-static void DrawBigMNIPI();
-static int RandValue(int min, int max);
+//static void DrawBigMNIPI();
+//static int RandValue(int min, int max);
 static void InitPoints();
 
 
@@ -48,7 +48,7 @@ struct Vector
 static int numPoints = 0;
 static Vector array[7000] __attribute__ ((section("CCM_DATA")));
 
-static TypeWelcomeScreen typeScreen = TypeWelcomeScreen_Wave;
+//static TypeWelcomeScreen typeScreen = TypeWelcomeScreen_Wave;
 
 #define VAGUE (typeScreen == TypeWelcomeScreen_Vague)
 #define WAVE (typeScreen == TypeWelcomeScreen_Wave)
@@ -101,7 +101,7 @@ void Display::Update()
     {
         Painter::BeginScene(Color::BACK);
         Rectangle(319, 239).Draw(0, 0, Color::FILL);
-        DrawBigMNIPI();
+        //DrawBigMNIPI();
         Painter::EndScene();
     }
     else if (FDrive::State() == State::Mount)
@@ -181,7 +181,7 @@ bool Display::IsRun()
 }
 
 
-
+/*
 static void DrawBigMNIPI()
 {
     static uint startTime = 0;
@@ -226,14 +226,16 @@ static void DrawBigMNIPI()
         }
     }
 }
+*/
 
-
+/*
 static int RandValue(int min, int max)
 {
     int val = static_cast<int>(std::rand() % (max - min + 1));
 
     return val + min;
 }
+*/
 
 
 static int DrawBigCharInBuffer(int eX, int eY, int size, uint8 symbol, uint8 buffer[320][240])

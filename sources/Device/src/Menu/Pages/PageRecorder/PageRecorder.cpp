@@ -42,22 +42,10 @@ static void Draw_StartStop(int x, int y)
     Recorder::IsRunning() ? Draw_Stop(x, y) : Draw_Start(x, y);
 }
 
-static void OnPress_Start()
-{
-    if (IsActive_Start())
-    {
-        Recorder::OnPressStart();
-    }
-    else
-    {
-        Display::ShowWarning("Нужно выбрать хотя бы один источник записи");
-    }
-}
-
 DEF_GRAPH_BUTTON_HINTS_2( bStart,                                                                                                                 //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПУСК/СТОП ---
     "Пуск",
     "Запуск/останов процесса регистрации",
-    &PageRecorder::self, IsActive_Start, OnPress_Start, Draw_StartStop,
+    &PageRecorder::self, IsActive_Start, Recorder::OnPressStart, Draw_StartStop,
     Draw_Start, "Запуск",
     Draw_Stop, "Останов"
 )
