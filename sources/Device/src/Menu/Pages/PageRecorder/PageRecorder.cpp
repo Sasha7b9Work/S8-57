@@ -80,12 +80,13 @@ static void OnOpenClose_Recorder(bool open)
     }
 }
 
-DEF_PAGE_4( pRecorder,                                                                                                                                        //--- ФУНКЦИЯ - РЕГИСТРАТОР ---
+DEF_PAGE_5( pRecorder,                                                                                                                                        //--- ФУНКЦИЯ - РЕГИСТРАТОР ---
     "РЕГИСТРАТОР",
     "Запись и воспроизведение сигналов входов и датчиков",
     PageRecorder::Source::self,
-    &cTypeMemory,
     PageRecorder::Show::self,
+    &Item::empty,
+    &Item::empty,
     &bStart,
     PageName::Recorder, &PageFunction::self, Item::Active, Page::NormalTitle, OnOpenClose_Recorder, Page::BeforeDraw, Page::HandlerKeyEvent
 )
