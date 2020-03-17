@@ -970,11 +970,6 @@
               <FileType>2</FileType>
               <FilePath>.\src\Hardware\HAL\fsmc.s</FilePath>
             </File>
-            <File>
-              <FileName>HAL_TIM5.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Hardware\HAL\HAL_TIM5.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>

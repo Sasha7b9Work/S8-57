@@ -216,13 +216,6 @@ struct HAL_TIM3
 };
 
 
-// Используется для IWDG
-struct HAL_TIM5
-{
-    static void Init();
-};
-
-
 struct HAL_USART3
 {
     static void Init(pFuncVV recvCallback);

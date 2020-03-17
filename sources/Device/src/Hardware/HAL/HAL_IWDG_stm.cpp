@@ -3,7 +3,7 @@
 #include <stm32f4xx_hal.h>
 
 
-extern TIM_HandleTypeDef  inputCaptureHandleTIM;
+static TIM_HandleTypeDef  inputCaptureHandleTIM;
 static IWDG_HandleTypeDef handleIWDG;
 
 
@@ -20,7 +20,11 @@ static uint GetLSIFrequency();
 
 void HAL_IWDG::Init()
 {
-    HAL_TIM5::Init();
+    __HAL_RCC_TIM5_CLK_ENABLE();
+
+    HAL_NVIC_SetPriority(TIM5_IRQn, 0, 0);
+
+    HAL_NVIC_EnableIRQ(TIM5_IRQn);
     
     if(__HAL_RCC_GET_FLAG(RCC_FLAG_IWDGRST) != RESET)
     {
@@ -163,6 +167,12 @@ void EXTI15_10_IRQHandler(void)
     will be generated with an infinite loop and when the WWDG counter falls to 63
     the WWDG reset occurs */
     *(__IO uint32_t *) 0xA0002000 = 0xFF;
+}
+
+
+void TIM5_IRQHandler(void)
+{
+    HAL_TIM_IRQHandler(&inputCaptureHandleTIM);
 }
 
 
