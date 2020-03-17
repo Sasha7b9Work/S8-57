@@ -156,6 +156,7 @@ source_group(Hardware\\HAL      FILES   ../../Device/src/Hardware/HAL/HAL.h
                                                      src/Hardware/HAL/HAL_DAC2_win.cpp
                                                      src/Hardware/HAL/HAL_FSMC_win.cpp
                                                      src/Hardware/HAL/HAL_FSMC_PAN_win.cpp
+                                                     src/Hardware/HAL/HAL_IWDG_win.cpp
                                         ../../Device/src/Hardware/HAL/HAL_MSP.cpp
                                         ../../Device/src/Hardware/HAL/HAL_NVIC.cpp
                                         ../../Device/src/Hardware/HAL/HAL_OTP.cpp
@@ -312,6 +313,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                                  src/Hardware/HAL/HAL_DAC2_win.cpp
                                  src/Hardware/HAL/HAL_FSMC_win.cpp
                                  src/Hardware/HAL/HAL_FSMC_PAN_win.cpp
+                                 src/Hardware/HAL/HAL_IWDG_win.cpp
                     ../../Device/src/Hardware/HAL/HAL_MSP.cpp
                     ../../Device/src/Hardware/HAL/HAL_NVIC.cpp
                     ../../Device/src/Hardware/HAL/HAL_OTP.cpp
