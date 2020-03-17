@@ -161,6 +161,8 @@ void HAL_BUS::Panel::Send(uint8 byte0, uint8 byte1)
 
 void HAL_BUS::Panel::Send(uint8 *data, uint size)
 {
+    HAL_IWDG_REFRESH;
+
     if(!(GPIOA->IDR & GPIO_PIN_7) && !(GPIOC->IDR & GPIO_PIN_4))
     {
         while(Receive()) { }
@@ -239,6 +241,8 @@ void HAL_BUS::Panel::Send(uint8 *data, uint size)
 
 bool HAL_BUS::Panel::InInteraction()
 {
+    HAL_IWDG_REFRESH;
+
     return interactionWithPanel;
 }
 
