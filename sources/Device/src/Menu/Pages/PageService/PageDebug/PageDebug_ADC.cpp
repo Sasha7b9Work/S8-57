@@ -104,7 +104,7 @@ static int16 stretchB;
 
 void PageDebug::PageADC::PageStretch::OnChanged_Mode(bool)
 {
-    if (StretchADC::IsDisabled())
+    if (StretchADC::TypeIsDisabled())
     {
     }
     else
@@ -117,7 +117,7 @@ void PageDebug::PageADC::PageStretch::OnChanged_Mode(bool)
 
 static bool IsActive_StretchAB()
 {
-    return StretchADC::IsHand();
+    return StretchADC::TypeIsHand();
 }
 
 static void OnChanged_Stretch_A()

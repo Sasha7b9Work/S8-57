@@ -21,7 +21,7 @@ struct BalanceADC
 /// Тип растяжки АЦП
 struct StretchADC
 {
-    enum E
+    enum Type
     {
         Disabled,
         Real,
@@ -29,14 +29,14 @@ struct StretchADC
         Count
     } value;
     static StretchADC &Ref();
-    static StretchADC::E Type()    { return Ref().value;               }
-    static void SetDisabled()      { Ref().value = Disabled;           }
-    static void SetReal()          { Ref().value = Real;               }
-    static bool IsDisabled()       { return (Ref().value == Disabled); }
-    static bool IsReal()           { return (Ref().value == Real);     }
-    static bool IsHand()           { return (Ref().value == Hand);     }
-    static float Value(Chan::E ch) { return Ref().stretch[ch];         }
-    float  stretch[Chan::Count];            ///< Хранится в целом виде, чтобы получить реальный коэффициент, нужно разделить на 1000 и прибавить единицу.
+    static StretchADC::Type GetType() { return Ref().value;               }
+    static void SetTypeDisabled()     { Ref().value = Disabled;           }
+    static void SetTypeReal()         { Ref().value = Real;               }
+    static bool TypeIsDisabled()      { return (Ref().value == Disabled); }
+    static bool TypeIsReal()          { return (Ref().value == Real);     }
+    static bool TypeIsHand()          { return (Ref().value == Hand);     }
+    static float Value(Chan::E ch)    { return Ref().stretch[ch];         }
+    float  stretch[Chan::Count];                                             // Хранится в целом виде, чтобы получить реальный коэффициент, нужно разделить на 1000 и прибавить единицу.
 };
 
 
