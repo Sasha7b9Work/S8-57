@@ -49,6 +49,7 @@ public:
     const DataItem *data;
     
     Item(const DataItem * const data = nullptr);
+    virtual ~Item() { };
     /// Количество пунктов меню, умещающиееся на экране
     static const int NUM_ON_DISPLAY = 5;
     /// Возвращает true, если кнопка, соответствующая элементу меню item, находится в нажатом положении

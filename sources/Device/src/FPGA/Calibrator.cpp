@@ -10,7 +10,7 @@
 
 void Calibrator::Calibrate()
 {
-    StretchADC::SetReal();
+    TypeStretchADC::SetReal();
     ShiftADC::SetReal();
 
     if (!Calibrate(Chan::A))
@@ -189,7 +189,7 @@ bool Calibrator::Stretch(Chan::E ch)
     SettingsNRST old = setNRST;
 
     ShiftADC::SetReal();
-    StretchADC::SetDisabled();
+    TypeStretchADC::SetDisabled();
 
     ModeCouple(ch).SetAC();
     RShift(ch).Set(0);
@@ -222,13 +222,13 @@ Calibrator::Mode::E &Calibrator::Mode::Ref()
 
 void Calibrator::NormalExit()
 {
-    StretchADC::SetReal();
+    TypeStretchADC::SetReal();
     ShiftADC::SetReal();
 }
 
 
 void Calibrator::BadExit()
 {
-    StretchADC::SetDisabled();
+    TypeStretchADC::SetDisabled();
     ShiftADC::SetDisabled();
 }
