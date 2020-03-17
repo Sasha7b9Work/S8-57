@@ -11,7 +11,7 @@
 void Calibrator::Calibrate()
 {
     StretchADC::SetTypeReal();
-    ShiftADC::SetReal();
+    ShiftADC::SetTypeReal();
 
     if (!Calibrate(Chan::A))
     {
@@ -55,7 +55,7 @@ bool Calibrator::Balance(Chan::E ch, bool showHint)
 {
     SettingsNRST old = setNRST;
 
-    ShiftADC::SetDisabled();
+    ShiftADC::SetTypeDisabled();
 
     static const pString messages[Chan::Count] =
     {
@@ -77,7 +77,7 @@ bool Calibrator::Balance(Chan::E ch, bool showHint)
         Balance(ch, static_cast<Range::E>(range));
     }
 
-    std::memcpy(&old.shiftADC.shift[ch][0], &ShiftADC::Ref().shift[ch][0], sizeof(ShiftADC::Ref().shift[ch][0]) * Range::Count);
+    std::memcpy(&old.shiftADC.value[ch][0], &setNRST.shiftADC.value[ch][0], sizeof(setNRST.shiftADC.value[ch][0]) * Range::Count);
 
     setNRST = old;
 
@@ -125,11 +125,11 @@ void Calibrator::Balance(Chan::E ch, Range::E range)
 
     if (delta > 0.0F)
     {
-        ShiftADC::Set(ch, range, static_cast<int8>(delta * 200.0F / 125.0F + 0.5F));
+        ShiftADC::SetValue(ch, range, static_cast<int8>(delta * 200.0F / 125.0F + 0.5F));
     }
     else
     {
-        ShiftADC::Set(ch, range, static_cast<int8>(delta * 200.0F / 125.0F - 0.5F));
+        ShiftADC::SetValue(ch, range, static_cast<int8>(delta * 200.0F / 125.0F - 0.5F));
     }
 }
 
@@ -188,7 +188,7 @@ bool Calibrator::Stretch(Chan::E ch)
 {
     SettingsNRST old = setNRST;
 
-    ShiftADC::SetReal();
+    ShiftADC::SetTypeReal();
     StretchADC::SetTypeDisabled();
 
     ModeCouple(ch).SetAC();
@@ -223,12 +223,12 @@ Calibrator::Mode::E &Calibrator::Mode::Ref()
 void Calibrator::NormalExit()
 {
     StretchADC::SetTypeReal();
-    ShiftADC::SetReal();
+    ShiftADC::SetTypeReal();
 }
 
 
 void Calibrator::BadExit()
 {
     StretchADC::SetTypeDisabled();
-    ShiftADC::SetDisabled();
+    ShiftADC::SetTypeDisabled();
 }

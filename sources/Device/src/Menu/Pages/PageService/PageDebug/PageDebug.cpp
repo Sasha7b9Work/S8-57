@@ -75,7 +75,7 @@ static void DebugShowSetInfo_Draw()
     {
         for (int range = 0; range < Range::Count; ++range)
         {
-            String("%d", ShiftADC::Value(static_cast<Chan::E>(ch), static_cast<Range::E>(range))).Draw(x + range * 20, y + dY * ddY);
+            String("%d", ShiftADC::GetValue(static_cast<Chan::E>(ch), static_cast<Range::E>(range))).Draw(x + range * 20, y + dY * ddY);
         }
         ddY++;
     }

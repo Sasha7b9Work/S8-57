@@ -43,17 +43,16 @@ struct ShiftADC
 {
     enum E
     {
-        Disable,    ///< Дополнительное смещение не учитывется
-        Real,       ///< Принимается дополнительное смещение, рассчитанное прик калибровке
+        Disabled,   // Дополнительное смещение не учитывется
+        Real,       // Принимается дополнительное смещение, рассчитанное прик калибровке
         Count
-    } value;
-    static ShiftADC &Ref();
-    static void SetDisabled()                               { Ref().value = Disable;                        };
-    static void SetReal()                                   { Ref().value = Real;                           };
-    static bool IsReal()                                    { return Ref().value == Real;                   };
-    static void Set(Chan::E ch, Range::E range, int8 value) { Ref().shift[ch][range] = value;               }
-    static int8 Value(Chan::E ch, Range::E range)           { return IsReal() ? Ref().shift[ch][range] : 0; };
-    int8  shift[Chan::Count][Range::Count];        ///< Добавочное смещение, которое пишется сюда при калибровке и балансировке
+    } type;
+    static void SetTypeDisabled();
+    static void SetTypeReal();
+    static bool TypeIsReal();
+    static void SetValue(Chan::E ch, Range::E range, int8 value);
+    static int8 GetValue(Chan::E ch, Range::E range);
+    int8  value[Chan::Count][Range::Count];        ///< Добавочное смещение, которое пишется сюда при калибровке и балансировке
 };
 
 

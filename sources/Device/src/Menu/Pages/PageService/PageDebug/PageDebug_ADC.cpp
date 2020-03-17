@@ -1,13 +1,31 @@
 #include "defines.h"
 #include "Menu/Pages/Include/DebugPage.h"
-//#include "Settings/Settings.h"
 #include "Settings/SettingsNRST.h"
 
 
-ShiftADC &ShiftADC::Ref()
+void ShiftADC::SetTypeReal()
 {
-    return setNRST.shiftADC;
+    setNRST.shiftADC.type = ShiftADC::Real;
 }
+
+
+void ShiftADC::SetTypeDisabled()
+{
+    setNRST.shiftADC.type = ShiftADC::Disabled;
+}
+
+
+void ShiftADC::SetValue(Chan::E ch, Range::E range, int8 value)
+{
+    setNRST.shiftADC.value[ch][range] = value;
+}
+
+
+int8 ShiftADC::GetValue(Chan::E ch, Range::E range)
+{
+    return setNRST.shiftADC.value[ch][range];
+}
+
 
 void StretchADC::SetTypeReal()
 {
@@ -198,7 +216,7 @@ DEF_CHOICE_2(cAddRShift,
     "",
     DISABLE_RU,
     "׀ואכüםûי",
-    ShiftADC::Ref(), &PageDebug::PageADC::PageShift::self, Item::Active, OnChanged_ShiftType, Choice::AfterDraw
+    setNRST.shiftADC.type, &PageDebug::PageADC::PageShift::self, Item::Active, OnChanged_ShiftType, Choice::AfterDraw
 )
 
 
