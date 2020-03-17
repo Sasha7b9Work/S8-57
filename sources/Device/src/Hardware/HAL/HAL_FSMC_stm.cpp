@@ -258,7 +258,7 @@ uint8 HAL_BUS::FPGA::ReadA1()
 
 float HAL_BUS::FPGA::GetStretch(const uint8 *address)
 {
-    if (TypeStretchADC::IsDisabled())
+    if (StretchADC::IsDisabled())
     {
         return 1.0F;
     }

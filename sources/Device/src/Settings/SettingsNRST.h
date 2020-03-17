@@ -19,7 +19,7 @@ struct BalanceADC
 };
 
 /// Тип растяжки АЦП
-struct TypeStretchADC
+struct StretchADC
 {
     enum E
     {
@@ -28,8 +28,8 @@ struct TypeStretchADC
         Hand,
         Count
     } value;
-    static TypeStretchADC &Ref();
-    static TypeStretchADC::E Type()    { return Ref().value;               }
+    static StretchADC &Ref();
+    static StretchADC::E Type()    { return Ref().value;               }
     static void SetDisabled()      { Ref().value = Disabled;           }
     static void SetReal()          { Ref().value = Real;               }
     static bool IsDisabled()       { return (Ref().value == Disabled); }
@@ -67,16 +67,16 @@ struct SettingsNRST
         ВНИМАНИЕ !!! Для корректной работы нельзя уменьшать размер этой структуры
     */
 
-    uint           size;                           ///< Размер структуры. За одно при загрузке из памяти можно определить, что структура пуста - здесь будет значение 0xFFFFFFFF
-    int8           balanceShiftADC[Chan::Count];   ///< Добавочное смещение для балансировки АЦП
-    int16          numAveForRand;                  ///< По скольким измерениям усреднять сигнал в режиме рандомизатора.
-    int16          numSmoothForRand;               ///< Число точек для скользящего фильта в рандомизаторе.
-    int16          correctionTime;                 ///< Коэффициент коррекции времени.
-    int16          enum_gate_max;                  ///< Ограничение ворот в рандомизаторе сверху
-    int16          enum_gate_min;                  ///< Ограничение ворот в рандомизаторе снизу
-    BalanceADC     balanceADC;                     ///< Тип балансировки.
-    ShiftADC       shiftADC;                       ///< Тип учитываемого при установке дополнительного смещения
-    TypeStretchADC stretchADC;                     ///< Тип растяжки канала.
+    uint           size;                           // Размер структуры. За одно при загрузке из памяти можно определить, что структура пуста - здесь будет значение 0xFFFFFFFF
+    int8           balanceShiftADC[Chan::Count];   // Добавочное смещение для балансировки АЦП
+    int16          numAveForRand;                  // По скольким измерениям усреднять сигнал в режиме рандомизатора.
+    int16          numSmoothForRand;               // Число точек для скользящего фильта в рандомизаторе.
+    int16          correctionTime;                 // Коэффициент коррекции времени.
+    int16          enum_gate_max;                  // Ограничение ворот в рандомизаторе сверху
+    int16          enum_gate_min;                  // Ограничение ворот в рандомизаторе снизу
+    BalanceADC     balanceADC;                     // Тип балансировки.
+    ShiftADC       shiftADC;                       // Тип учитываемого при установке дополнительного смещения
+    StretchADC     stretchADC;                     // Тип растяжки канала.
     // Инициализация при включении. Проиходит определние наличия настроек в ROM и их загрузка в случае, если настройки есть. Если настроек нету - инициализация значениями по умолчанию
     void Init();
     // Сохранение настроек в ROM. Происходит только если настройки в setNRST не совпадают с хранящимися в ROM
