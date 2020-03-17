@@ -9,10 +9,39 @@ ShiftADC &ShiftADC::Ref()
     return setNRST.shiftADC;
 }
 
-
-StretchADC &StretchADC::Ref()
+void StretchADC::SetTypeReal()
 {
-    return setNRST.stretchADC;
+    setNRST.stretchADC.type = StretchADC::Real;
+}
+
+
+void StretchADC::SetTypeDisabled()
+{
+    setNRST.stretchADC.type = StretchADC::Disabled;
+}
+
+
+bool StretchADC::TypeIsDisabled()
+{
+    return (setNRST.stretchADC.type == StretchADC::Disabled);
+}
+
+
+float StretchADC::GetValue(Chan::E ch)
+{
+    return setNRST.stretchADC.value[ch];
+}
+
+
+void StretchADC::SetValue(Chan::E ch, float value)
+{
+    setNRST.stretchADC.value[ch] = value;
+}
+
+
+bool StretchADC::TypeIsHand()
+{
+    return (setNRST.stretchADC.type == StretchADC::Hand);
 }
 
 
@@ -94,7 +123,7 @@ DEF_CHOICE_2(cStretch_Mode,                                                     
     "",
     DISABLE_RU,
     "׀ואכüםûי",
-    StretchADC::Ref(), &PageDebug::PageADC::PageStretch::self, Item::Active, PageDebug::PageADC::PageStretch::OnChanged_Mode, Choice::AfterDraw
+    setNRST.stretchADC.type, &PageDebug::PageADC::PageStretch::self, Item::Active, PageDebug::PageADC::PageStretch::OnChanged_Mode, Choice::AfterDraw
 )
 
 
@@ -109,8 +138,8 @@ void PageDebug::PageADC::PageStretch::OnChanged_Mode(bool)
     }
     else
     {
-        stretchA = static_cast<int16>(StretchADC::Value(Chan::A));
-        stretchB = static_cast<int16>(StretchADC::Value(Chan::B));
+        stretchA = static_cast<int16>(StretchADC::GetValue(Chan::A));
+        stretchB = static_cast<int16>(StretchADC::GetValue(Chan::B));
     }
 }
 

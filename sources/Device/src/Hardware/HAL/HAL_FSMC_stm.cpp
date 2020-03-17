@@ -265,10 +265,10 @@ float HAL_BUS::FPGA::GetStretch(const uint8 *address)
 
     static const float *stretchs[4] =
     {
-        &setNRST.stretchADC.stretch[Chan::A],
-        &setNRST.stretchADC.stretch[Chan::A],
-        &setNRST.stretchADC.stretch[Chan::B],
-        &setNRST.stretchADC.stretch[Chan::B]
+        &setNRST.stretchADC.value[Chan::A],
+        &setNRST.stretchADC.value[Chan::A],
+        &setNRST.stretchADC.value[Chan::B],
+        &setNRST.stretchADC.value[Chan::B]
     };
 
     int delta = address - RD::DATA_A;

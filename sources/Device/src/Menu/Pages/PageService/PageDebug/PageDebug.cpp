@@ -94,7 +94,7 @@ static void DebugShowSetInfo_Draw()
 
     for (int ch = 0; ch < 2; ch++)
     {
-        String("%f", StretchADC::Value(static_cast<Chan::E>(ch))).Draw(x, y + dY * ch);
+        String("%f", StretchADC::GetValue(static_cast<Chan::E>(ch))).Draw(x, y + dY * ch);
     }
 
     y += dY;

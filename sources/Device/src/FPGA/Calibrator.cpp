@@ -203,7 +203,7 @@ bool Calibrator::Stretch(Chan::E ch)
 
     if (k > 0.0F)
     {
-        old.stretchADC.stretch[ch] = k;
+        old.stretchADC.value[ch] = k;
     }
 
     setNRST = old;

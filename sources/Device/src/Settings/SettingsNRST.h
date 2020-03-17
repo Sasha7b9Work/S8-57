@@ -27,16 +27,14 @@ struct StretchADC
         Real,
         Hand,
         Count
-    } value;
-    static StretchADC &Ref();
-    static StretchADC::Type GetType() { return Ref().value;               }
-    static void SetTypeDisabled()     { Ref().value = Disabled;           }
-    static void SetTypeReal()         { Ref().value = Real;               }
-    static bool TypeIsDisabled()      { return (Ref().value == Disabled); }
-    static bool TypeIsReal()          { return (Ref().value == Real);     }
-    static bool TypeIsHand()          { return (Ref().value == Hand);     }
-    static float Value(Chan::E ch)    { return Ref().stretch[ch];         }
-    float  stretch[Chan::Count];                                             // Хранится в целом виде, чтобы получить реальный коэффициент, нужно разделить на 1000 и прибавить единицу.
+    } type;
+    static void SetTypeDisabled();
+    static void SetTypeReal();
+    static bool TypeIsDisabled();
+    static bool TypeIsHand();
+    static float GetValue(Chan::E ch);
+    static void SetValue(Chan::E ch, float value);
+    float  value[Chan::Count];                                             // Хранится в целом виде, чтобы получить реальный коэффициент, нужно разделить на 1000 и прибавить единицу.
 };
 
 
