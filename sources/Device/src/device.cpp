@@ -108,7 +108,7 @@ void Device::Update()
 {
     Timer::StartMultiMeasurement();
 
-    HAL_IWDG::Refresh();
+    HAL_IWDG_REFRESH;
 
     Osci::Update();
 

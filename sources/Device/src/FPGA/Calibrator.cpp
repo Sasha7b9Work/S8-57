@@ -25,10 +25,6 @@ void Calibrator::Calibrate()
 
         return BadExit();
     }
-    else
-    {
-        // больше ничего делать не нужно
-    }
 
     Display::Message::ShowAndWaitKey("Калибровка успешно завершена", true);
 

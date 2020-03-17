@@ -18,7 +18,7 @@ struct BalanceADC
     int16  balance[Chan::Count];                    ///< Значение дополнительного смещения АЦП для ручной балансировки.
 };
 
-/// Тип растяжки АЦП
+// Тип растяжки АЦП
 struct StretchADC
 {
     enum Type
@@ -38,7 +38,7 @@ struct StretchADC
 };
 
 
-/// Дополнительное смещение АЦП
+// Дополнительное смещение АЦП
 struct ShiftADC
 {
     enum E
@@ -49,10 +49,9 @@ struct ShiftADC
     } type;
     static void SetTypeDisabled();
     static void SetTypeReal();
-    static bool TypeIsReal();
     static void SetValue(Chan::E ch, Range::E range, int8 value);
     static int8 GetValue(Chan::E ch, Range::E range);
-    int8  value[Chan::Count][Range::Count];        ///< Добавочное смещение, которое пишется сюда при калибровке и балансировке
+    int8  value[Chan::Count][Range::Count];        // Добавочное смещение, которое пишется сюда при калибровке и балансировке
 };
 
 

@@ -52,12 +52,6 @@ void HAL_IWDG::Init()
 }
 
 
-void HAL_IWDG::Refresh()
-{
-    HAL_IWDG_Refresh(&handleIWDG);
-}
-
-
 static uint GetLSIFrequency()
 {
     uint32_t pclk1 = 0, latency = 0;

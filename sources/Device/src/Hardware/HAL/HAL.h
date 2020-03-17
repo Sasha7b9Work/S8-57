@@ -11,6 +11,12 @@
 #define HAL_BUS_SET_MODE_FSMC     HAL_BUS::ConfigureToFSMC()
 #define HAL_BUS_CONFIGURE_TO_FSMC if(HAL_BUS::mode != HAL_BUS::Mode::FSMC) { HAL_BUS_SET_MODE_FSMC; }
 
+#ifdef GUI
+#define HAL_IWDG_REFRESH
+#else
+#define HAL_IWDG_REFRESH (*(reinterpret_cast<uint *>(0x40003000U)) = IWDG_KEY_RELOAD)
+#endif
+
 
 typedef struct _USBH_HandleTypeDef USBH_HandleTypeDef;
 
@@ -145,8 +151,6 @@ struct HAL_HCD
 struct HAL_IWDG
 {
     static void Init();
-
-    static void Refresh();
 };
 
 

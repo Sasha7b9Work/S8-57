@@ -6,8 +6,3 @@
 void HAL_IWDG::Init()
 {
 }
-
-
-void HAL_IWDG::Refresh()
-{
-}
