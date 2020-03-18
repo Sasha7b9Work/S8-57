@@ -27,39 +27,39 @@ int8 ExtraShift::GetValue(Chan::E ch, Range::E range)
 }
 
 
-void StretchADC::SetTypeReal()
+void ExtraStretch::SetTypeReal()
 {
-    setNRST.stretchADC.type = StretchADC::Real;
+    setNRST.exStretch.type = ExtraStretch::Real;
 }
 
 
-void StretchADC::SetTypeDisabled()
+void ExtraStretch::SetTypeDisabled()
 {
-    setNRST.stretchADC.type = StretchADC::Disabled;
+    setNRST.exStretch.type = ExtraStretch::Disabled;
 }
 
 
-bool StretchADC::TypeIsDisabled()
+bool ExtraStretch::TypeIsDisabled()
 {
-    return (setNRST.stretchADC.type == StretchADC::Disabled);
+    return (setNRST.exStretch.type == ExtraStretch::Disabled);
 }
 
 
-float StretchADC::GetValue(Chan::E ch)
+float ExtraStretch::GetValue(Chan::E ch)
 {
-    return setNRST.stretchADC.value[ch];
+    return setNRST.exStretch.value[ch];
 }
 
 
-void StretchADC::SetValue(Chan::E ch, float value)
+void ExtraStretch::SetValue(Chan::E ch, float value)
 {
-    setNRST.stretchADC.value[ch] = value;
+    setNRST.exStretch.value[ch] = value;
 }
 
 
-bool StretchADC::TypeIsHand()
+bool ExtraStretch::TypeIsHand()
 {
-    return (setNRST.stretchADC.type == StretchADC::Hand);
+    return (setNRST.exStretch.type == ExtraStretch::Hand);
 }
 
 
@@ -141,7 +141,7 @@ DEF_CHOICE_2(cStretch_Mode,                                                     
     "",
     DISABLE_RU,
     "׀ואכüםûי",
-    setNRST.stretchADC.type, &PageDebug::PageADC::PageStretch::self, Item::Active, PageDebug::PageADC::PageStretch::OnChanged_Mode, Choice::AfterDraw
+    setNRST.exStretch.type, &PageDebug::PageADC::PageStretch::self, Item::Active, PageDebug::PageADC::PageStretch::OnChanged_Mode, Choice::AfterDraw
 )
 
 
@@ -151,20 +151,20 @@ static int16 stretchB;
 
 void PageDebug::PageADC::PageStretch::OnChanged_Mode(bool)
 {
-    if (StretchADC::TypeIsDisabled())
+    if (ExtraStretch::TypeIsDisabled())
     {
     }
     else
     {
-        stretchA = static_cast<int16>(StretchADC::GetValue(Chan::A));
-        stretchB = static_cast<int16>(StretchADC::GetValue(Chan::B));
+        stretchA = static_cast<int16>(ExtraStretch::GetValue(Chan::A));
+        stretchB = static_cast<int16>(ExtraStretch::GetValue(Chan::B));
     }
 }
 
 
 static bool IsActive_StretchAB()
 {
-    return StretchADC::TypeIsHand();
+    return ExtraStretch::TypeIsHand();
 }
 
 static void OnChanged_Stretch_A()

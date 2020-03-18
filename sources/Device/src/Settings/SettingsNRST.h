@@ -19,7 +19,7 @@ struct BalanceADC
 };
 
 // Тип растяжки АЦП
-struct StretchADC
+struct ExtraStretch
 {
     enum Type
     {
@@ -70,9 +70,9 @@ struct SettingsNRST
     int16          correctionTime;                 // Коэффициент коррекции времени.
     int16          enum_gate_max;                  // Ограничение ворот в рандомизаторе сверху
     int16          enum_gate_min;                  // Ограничение ворот в рандомизаторе снизу
-    BalanceADC     balanceADC;                     // Тип балансировки.
+    BalanceADC     balanceADC;                     // Балансировка АЦП
     ExtraShift     exShift;                        // Дополнительное смещение
-    StretchADC     stretchADC;                     // Тип растяжки канала.
+    ExtraStretch   exStretch;                      // Дополнительная растяжка по каналу
     // Инициализация при включении. Проиходит определние наличия настроек в ROM и их загрузка в случае, если настройки есть. Если настроек нету - инициализация значениями по умолчанию
     void Init();
     // Сохранение настроек в ROM. Происходит только если настройки в setNRST не совпадают с хранящимися в ROM
