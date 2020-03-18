@@ -18,8 +18,5 @@ struct Calibrator
             DC,
             GND
         };
-        Mode() {}
-        static Mode::E &Ref();
-        operator Mode::E() { return Ref(); }
     };
 };

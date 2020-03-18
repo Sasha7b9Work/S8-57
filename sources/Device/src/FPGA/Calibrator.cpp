@@ -227,12 +227,6 @@ static bool StretchChannel(Chan::E ch)
 }
 
 
-Calibrator::Mode::E &Calibrator::Mode::Ref()
-{
-    return set.serv.calibratorMode;
-}
-
-
 static void NormalExit()
 {
     ExtraStretch::SetTypeReal();
