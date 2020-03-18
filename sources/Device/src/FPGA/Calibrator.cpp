@@ -8,18 +8,35 @@
 #include <cstring>
 
 
+// Откалибровать канал Ch
+static bool CalibrateChannel(Chan::E ch);
+
+// Балансировать канал на одном диапазоне
+static void BalanceRange(Chan::E ch, Range::E range);
+
+// "Растянуть" канал
+static bool StretchChannel(Chan::E ch);
+
+// Найти коэффициент растяжки канала
+static float FindStretchChannel(Chan::E ch);
+
+static void NormalExit();
+
+static void BadExit();
+
+
 void Calibrator::Calibrate()
 {
     ExtraStretch::SetTypeReal();
     ExtraShift::SetTypeReal();
 
-    if (!Calibrate(Chan::A))
+    if (!CalibrateChannel(Chan::A))
     {
         Display::Message::ShowAndWaitKey("Калибровка канала 1 не прошла", true);
 
         return BadExit();
     }
-    else if (!Calibrate(Chan::B))
+    else if (!CalibrateChannel(Chan::B))
     {
         Display::Message::ShowAndWaitKey("Калибровка канала 2 не прошла", true);
 
@@ -32,14 +49,14 @@ void Calibrator::Calibrate()
 }
 
 
-bool Calibrator::Calibrate(Chan::E ch)
+static bool CalibrateChannel(Chan::E ch)
 {
     Display::Message::ShowAndWaitKey(ch == Chan::A ?  "Подключите встроенный калибратор ко входу 1 и нажмите любую кнопку" :
                                                       "Подключите встроенный калибратор ко входу 2 и нажмите любую кнопку", true);
 
     Display::Message::Show(ch == Chan::A ? "Калибрую канал 1" : "Калибрую канал 2", true);
 
-    bool result = Balance(ch, false) && Stretch(ch);
+    bool result = Calibrator::BalanceChannel(ch, false) && StretchChannel(ch);
 
     Display::Message::Hide();
 
@@ -47,7 +64,7 @@ bool Calibrator::Calibrate(Chan::E ch)
 }
 
 
-bool Calibrator::Balance(Chan::E ch, bool showHint)
+bool Calibrator::BalanceChannel(Chan::E ch, bool showHint)
 {
     SettingsNRST old = setNRST;
 
@@ -70,7 +87,7 @@ bool Calibrator::Balance(Chan::E ch, bool showHint)
 
     for (int range = 0; range < Range::Count; range++)
     {
-        Balance(ch, static_cast<Range::E>(range));
+        BalanceRange(ch, static_cast<Range::E>(range));
     }
 
     std::memcpy(&old.exShift.value[ch][0], &setNRST.exShift.value[ch][0], sizeof(setNRST.exShift.value[ch][0]) * Range::Count);
@@ -88,7 +105,7 @@ bool Calibrator::Balance(Chan::E ch, bool showHint)
 }
 
 
-void Calibrator::Balance(Chan::E ch, Range::E range)
+static void BalanceRange(Chan::E ch, Range::E range)
 {
     Osci::Stop();
 
@@ -130,7 +147,7 @@ void Calibrator::Balance(Chan::E ch, Range::E range)
 }
 
 
-float Calibrator::FindStretchK(Chan::E ch)
+static float FindStretchChannel(Chan::E ch)
 {
     Osci::Stop();
 
@@ -180,7 +197,7 @@ float Calibrator::FindStretchK(Chan::E ch)
 }
 
 
-bool Calibrator::Stretch(Chan::E ch)
+static bool StretchChannel(Chan::E ch)
 {
     SettingsNRST old = setNRST;
 
@@ -195,7 +212,7 @@ bool Calibrator::Stretch(Chan::E ch)
     TrigSource::Set(ch);
     TrigLevel(ch).Set(0);
 
-    float k = FindStretchK(ch);
+    float k = FindStretchChannel(ch);
 
     if (k > 0.0F)
     {
@@ -216,14 +233,14 @@ Calibrator::Mode::E &Calibrator::Mode::Ref()
 }
 
 
-void Calibrator::NormalExit()
+static void NormalExit()
 {
     ExtraStretch::SetTypeReal();
     ExtraShift::SetTypeReal();
 }
 
 
-void Calibrator::BadExit()
+static void BadExit()
 {
     ExtraStretch::SetTypeDisabled();
     ExtraShift::SetTypeDisabled();

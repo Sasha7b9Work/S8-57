@@ -60,7 +60,7 @@ DEF_CHOICE_2( cBandwidthA,                                                      
 
 static void Balance(Chan::E ch)
 {
-    Calibrator::Balance(ch);
+    Calibrator::BalanceChannel(ch);
 }
 
 
