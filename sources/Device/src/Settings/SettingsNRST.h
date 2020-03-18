@@ -39,7 +39,7 @@ struct StretchADC
 
 
 // Дополнительное смещение АЦП
-struct ShiftADC
+struct ExtraShift
 {
     enum E
     {
@@ -71,7 +71,7 @@ struct SettingsNRST
     int16          enum_gate_max;                  // Ограничение ворот в рандомизаторе сверху
     int16          enum_gate_min;                  // Ограничение ворот в рандомизаторе снизу
     BalanceADC     balanceADC;                     // Тип балансировки.
-    ShiftADC       shiftADC;                       // Тип учитываемого при установке дополнительного смещения
+    ExtraShift     exShift;                        // Дополнительное смещение
     StretchADC     stretchADC;                     // Тип растяжки канала.
     // Инициализация при включении. Проиходит определние наличия настроек в ROM и их загрузка в случае, если настройки есть. Если настроек нету - инициализация значениями по умолчанию
     void Init();

@@ -3,27 +3,27 @@
 #include "Settings/SettingsNRST.h"
 
 
-void ShiftADC::SetTypeReal()
+void ExtraShift::SetTypeReal()
 {
-    setNRST.shiftADC.type = ShiftADC::Real;
+    setNRST.exShift.type = ExtraShift::Real;
 }
 
 
-void ShiftADC::SetTypeDisabled()
+void ExtraShift::SetTypeDisabled()
 {
-    setNRST.shiftADC.type = ShiftADC::Disabled;
+    setNRST.exShift.type = ExtraShift::Disabled;
 }
 
 
-void ShiftADC::SetValue(Chan::E ch, Range::E range, int8 value)
+void ExtraShift::SetValue(Chan::E ch, Range::E range, int8 value)
 {
-    setNRST.shiftADC.value[ch][range] = value;
+    setNRST.exShift.value[ch][range] = value;
 }
 
 
-int8 ShiftADC::GetValue(Chan::E ch, Range::E range)
+int8 ExtraShift::GetValue(Chan::E ch, Range::E range)
 {
-    return setNRST.shiftADC.value[ch][range];
+    return setNRST.exShift.value[ch][range];
 }
 
 
@@ -216,7 +216,7 @@ DEF_CHOICE_2(cAddRShift,
     "",
     DISABLE_RU,
     "׀ואכüםûי",
-    setNRST.shiftADC.type, &PageDebug::PageADC::PageShift::self, Item::Active, OnChanged_ShiftType, Choice::AfterDraw
+    setNRST.exShift.type, &PageDebug::PageADC::PageShift::self, Item::Active, OnChanged_ShiftType, Choice::AfterDraw
 )
 
 

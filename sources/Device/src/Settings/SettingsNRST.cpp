@@ -17,7 +17,7 @@ static const SettingsNRST defaultNRST =
     0,                                       // enum_gate_max
     0,                                       // enum_gate_min
     { BalanceADC::Disabled, {0,    0}    },  // balanceADC
-    { ShiftADC::Disabled,    {{0},  {0}}  }, // shiftADC
+    { ExtraShift::Disabled,    {{0},  {0}}  }, // shiftADC
     { StretchADC::Disabled, {1.0F, 1.0F} }   // stretchADCtype
 };
 
