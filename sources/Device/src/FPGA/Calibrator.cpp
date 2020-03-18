@@ -147,6 +147,36 @@ static void BalanceRange(Chan::E ch, Range::E range)
 }
 
 
+static bool StretchChannel(Chan::E ch)
+{
+    SettingsNRST old = setNRST;
+
+    ExtraShift::SetTypeReal();
+    ExtraStretch::SetTypeDisabled();
+
+    ModeCouple(ch).SetAC();
+    RShift(ch).Set(0);
+    Range(ch).Set500mV();
+    TBase::Set200us();
+    TShift::Set(0);
+    TrigSource::Set(ch);
+    TrigLevel(ch).Set(0);
+
+    float k = FindStretchChannel(ch);
+
+    if (k > 0.0F)
+    {
+        old.exStretch.value[ch] = k;
+    }
+
+    setNRST = old;
+
+    Osci::Init();
+
+    return (k > 0.0F);
+}
+
+
 static float FindStretchChannel(Chan::E ch)
 {
     Osci::Stop();
@@ -194,36 +224,6 @@ static float FindStretchChannel(Chan::E ch)
     float delta = max - min;
 
     return (patternDELTA / delta);
-}
-
-
-static bool StretchChannel(Chan::E ch)
-{
-    SettingsNRST old = setNRST;
-
-    ExtraShift::SetTypeReal();
-    ExtraStretch::SetTypeDisabled();
-
-    ModeCouple(ch).SetAC();
-    RShift(ch).Set(0);
-    Range(ch).Set500mV();
-    TBase::Set200us();
-    TShift::Set(0);
-    TrigSource::Set(ch);
-    TrigLevel(ch).Set(0);
-
-    float k = FindStretchChannel(ch);
-
-    if (k > 0.0F)
-    {
-        old.exStretch.value[ch] = k;
-    }
-
-    setNRST = old;
-
-    Osci::Init();
-
-    return (k > 0.0F);
 }
 
 
