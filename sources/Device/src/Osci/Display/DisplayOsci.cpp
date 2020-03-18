@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "common/Display/Font/Font_d.h"
 #include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Display/Primitives.h"
@@ -23,6 +24,8 @@ static bool needRedraw = false;
 
 void DisplayOsci::Update()
 {
+    DFont::SetSpacing(1);
+
     if (needRedraw)
     {
         Painter::BeginScene(Color::BACK);

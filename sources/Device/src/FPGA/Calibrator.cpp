@@ -204,20 +204,42 @@ static float FindStretchChannel(Chan::E ch)
 
     HAL_BUS::FPGA::SetAddrData(a0, a1);
 
-    Buffer buffer(NUM_POINTS);
+    uint8 data = *a0;
+    data = *a1;
 
-    buffer.data[0] = HAL_BUS::FPGA::ReadA0();
-    buffer.data[0] = HAL_BUS::FPGA::ReadA1();
+    int sumMIN = 0;
+    int sumMAX = 0;
+    int numMIN = 0;
+    int numMAX = 0;
 
     for(uint i = 0; i < NUM_POINTS; i++)
     {
-        buffer.data[i] = HAL_BUS::FPGA::ReadA1();
+        data = *a1;
+
+        if(data < VALUE::MIN + 64)
+        {
+            sumMIN += data;
+            numMIN++;
+        }
+        else if(data > VALUE::MAX - 64)
+        {
+            sumMAX += data;
+            numMAX++;
+        }
+        else
+        {
+            return -1.0F;
+        }
     }
 
-    uint8 *data = buffer.data;
-    data = data;
+    float patternDelta = (VALUE::MAX - VALUE::MIN) / 10.0F * 8.0F;    // Образцоввая разница между минимальным и максимальным значениями - ровно на 8 клеток из десяти
 
-    return 1.0F;
+    float min = static_cast<float>(sumMIN) / numMIN;
+    float max = static_cast<float>(sumMAX) / numMAX;
+
+    float delta = max - min;
+
+    return patternDelta / delta;
 }
 
 
