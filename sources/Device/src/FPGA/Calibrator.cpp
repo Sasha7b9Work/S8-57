@@ -1,6 +1,8 @@
 #include "defines.h"
 #include "FPGA/Calibrator.h"
+#include "FPGA/FPGA.h"
 #include "FPGA/TypesFPGA.h"
+#include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Osci.h"
 #include "Settings/SettingsNRST.h"
@@ -162,6 +164,7 @@ static bool StretchChannel(Chan::E ch)
     TrigSource::Set(ch);
     TrigLevel(ch).Set(0);
 
+
     float k = FindStretchChannel(ch);
 
     if (k > 0.0F)
@@ -179,51 +182,42 @@ static bool StretchChannel(Chan::E ch)
 
 static float FindStretchChannel(Chan::E ch)
 {
-    Osci::Stop();
+#define NUM_POINTS 300
+    
+    Timer::PauseOnTime(500);
 
-    float sumMIN = 0.0F;
-    float sumMAX = 0.0F;
-
-    int numMIN = 0;
-    int numMAX = 0;
-
-    uint8 *addr = ((ch == Chan::A) ? RD::DATA_A : RD::DATA_B) + 1;
-
-    for (int i = 0; i < 300; i++)
+    FPGA::GiveStart(static_cast<uint16>(~(1)), static_cast<uint16>(~(NUM_POINTS + 100)));
+    
+    do 
     {
-        if (!HAL_BUS::Panel::InInteraction())
-        {
-            HAL_BUS::FPGA::SetAddrData(addr);
-            uint8 d = HAL_BUS::FPGA::ReadA0();
+        FPGA::ReadFlag();
 
-            if (d > VALUE::MAX - 32)
-            {
-                sumMAX += d;
-                numMAX++;
-            }
-            else if (d < VALUE::MIN + 32)
-            {
-                sumMIN += d;
-                numMIN++;
-            }
-            else
-            {
-                return -1.0F;
-            }
-        }
+    } while (!FPGA::flag.DataReady());
+
+    uint16 addrRead = static_cast<uint16>(Osci::ReadLastRecord(ch) - NUM_POINTS - 50);
+
+    HAL_BUS::FPGA::Write16(WR::PRED_LO, addrRead);
+    HAL_BUS::FPGA::Write8(WR::START_ADDR, 0xff);
+
+    uint8 *a0 = Chan(ch).IsA() ? RD::DATA_A : RD::DATA_B;
+    uint8 *a1 = a0 + 1;
+
+    HAL_BUS::FPGA::SetAddrData(a0, a1);
+
+    Buffer buffer(NUM_POINTS);
+
+    buffer.data[0] = HAL_BUS::FPGA::ReadA0();
+    buffer.data[0] = HAL_BUS::FPGA::ReadA1();
+
+    for(uint i = 0; i < NUM_POINTS; i++)
+    {
+        buffer.data[i] = HAL_BUS::FPGA::ReadA1();
     }
 
-    static const float pointsInPixel = (VALUE::MAX - VALUE::MIN) / 200.0F;  // Столько пикселей на экране занимает одна точка сигнала по вертикали
+    uint8 *data = buffer.data;
+    data = data;
 
-    float patternMIN = VALUE::MIN + pointsInPixel * 20;
-    float patternMAX = VALUE::MAX - pointsInPixel * 20;
-    float patternDELTA = patternMAX - patternMIN;
-
-    float min = sumMIN / numMIN;
-    float max = sumMAX / numMAX;
-    float delta = max - min;
-
-    return (patternDELTA / delta);
+    return 1.0F;
 }
 
 

@@ -121,6 +121,7 @@ struct Range
 
     void Set(E range);
     void Set500mV() { Set(_500mV); }
+    void Set1V()    { Set(_1V); }
     void Set2V()    { Set(_2V); }
 
     operator Range::E();

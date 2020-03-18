@@ -59,6 +59,8 @@ struct FPGA
     // Принудительный запуск синхронизации
     static void ForcedStart();
 
+    static void ReadFlag();
+
 private:
 
 
@@ -72,9 +74,6 @@ private:
 
 
     static void LoadRegUPR();
-
-
-    static void ReadFlag();
 
 
     static uint16 post;

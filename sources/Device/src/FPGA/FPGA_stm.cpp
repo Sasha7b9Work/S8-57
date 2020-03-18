@@ -247,8 +247,6 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
         {
             float stretch = HAL_BUS::FPGA::GetStretch(a1);
 
-            Buffer buffer(numPoints);
-
             for(uint i = 0; i < numPoints; i++)
             {
                 int delta = VALUE::AVE - static_cast<int>(*a1);

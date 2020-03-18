@@ -2,8 +2,9 @@
 #include "Osci/ParametersOsci.h"
 
 
-struct Calibrator
+class Calibrator
 {
+public:
     // Запускает процедуру калибровки
     static void Calibrate();
     

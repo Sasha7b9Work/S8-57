@@ -79,6 +79,8 @@ struct Osci
         static void Write(HPort::E port, uint16 pin, uint16 value);
     };
 
+    static uint16 ReadLastRecord(Chan::E ch);
+
 private:
     // Возвращает true, если уже можно читать данные
     static bool CanReadData();
@@ -101,9 +103,6 @@ private:
 
     // Читать данные канала в памяить data
     static bool ReadDataChannel(Chan::E ch, uint8 *data);
-
-
-    static uint16 ReadLastRecord(Chan::E ch);
 
 
     static bool ReadDataChannelRand(uint8 *address, uint8 *data);
