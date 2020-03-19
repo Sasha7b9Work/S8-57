@@ -131,7 +131,7 @@ void Tester::Disable() // -V2506
 
     HAL_PIO::Set(PIN_TESTER_ON);
 
-    oldSet.test.control = Control();
+    oldSet.test.control = set.test.control;
     oldSet.test.polarity = set.test.polarity;
     oldSet.test.stepU = set.test.stepU;
     oldSet.test.stepI = set.test.stepI;
@@ -265,11 +265,11 @@ void Tester::LoadPolarity()
 void Tester::LoadStep()
 {
     // ”станавливаем управление напр€жением или током
-    HAL_PIO::Write(PIN_TESTER_U, Control::IsVoltage() ? 1 : 0);
+    HAL_PIO::Write(PIN_TESTER_U, (set.test.control == Tester::Control::Voltage) ? 1 : 0);
 
-    HAL_PIO::Write(PIN_TESTER_I, Control::IsVoltage() ? 0 : 1);
+    HAL_PIO::Write(PIN_TESTER_I, (set.test.control == Tester::Control::Voltage) ? 0 : 1);
 
-    if (Control::IsVoltage())
+    if (set.test.control == Tester::Control::Voltage)
     {
         stepU =  255.0F / 3 * ((set.test.stepU == Tester::StepU::_500mV) ? 2 : 0.4F) / 5;
     }
@@ -325,12 +325,6 @@ String Tester::Shift::ToString(Scale::E scale) // -V2506
     float shiftAbs = RShift::ToAbs(shift, static_cast<Range::E>(scale)) * 1e-3F;
 
     return Current(shiftAbs).ToString();
-}
-
-
-Tester::Control::E &Tester::Control::Ref()
-{
-    return set.test.control;
 }
 
 

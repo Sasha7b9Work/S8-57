@@ -34,7 +34,7 @@ DEF_CHOICE_2( cControl,                                                         
     "Тип испытательного воздействия",
     "Напряжение",
     "Ток",
-    Tester::Control::Ref(), &PageTester::self, Item::Active, PageTester::OnChanged_Control, Choice::AfterDraw
+    set.test.control, &PageTester::self, Item::Active, PageTester::OnChanged_Control, Choice::AfterDraw
 )
 
 
@@ -117,7 +117,7 @@ void PageTester::OnChanged_Control(bool)
 
     Item **items = const_cast<Item **>(page->OwnData()->items);
 
-    if (Tester::Control::IsVoltage())
+    if (set.test.control == Tester::Control::Voltage)
     {
         items[1] = const_cast<Choice *>(&cStepU);
         items[2] = const_cast<Choice *>(&cConductivity);

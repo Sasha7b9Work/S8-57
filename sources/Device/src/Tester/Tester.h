@@ -75,10 +75,6 @@ public:
             Voltage,
             Current
         };
-
-        static Control::E &Ref();
-        operator Control::E()   { return Ref(); }
-        static bool IsVoltage() { return Ref() == Voltage; }
     };
 
     struct Polarity
