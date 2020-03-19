@@ -16,7 +16,7 @@ DEF_CHOICE_2( cPolarity,                                                        
     "ѕол€рность испытательного воздействи€",
     "+",
     "-",
-    Tester::Polarity::Ref(), &PageTester::self, Item::Active, OnChanged_Polarity, Choice::AfterDraw
+    set.test.polarity, &PageTester::self, Item::Active, OnChanged_Polarity, Choice::AfterDraw
 )
 
 
@@ -25,7 +25,7 @@ DEF_CHOICE_2( cConductivity,                                                    
     "“ип проводимости бипол€рного транзистора",
     "n-p-n",
     "p-n-p",
-    Tester::Polarity::Ref(), &PageTester::self, Item::Active, OnChanged_Polarity, Choice::AfterDraw
+    set.test.polarity, &PageTester::self, Item::Active, OnChanged_Polarity, Choice::AfterDraw
 )
 
 

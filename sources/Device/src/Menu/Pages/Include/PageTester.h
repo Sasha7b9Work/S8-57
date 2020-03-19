@@ -4,7 +4,7 @@
 struct SettingsTester
 {
     Tester::Control::E  control;
-    Tester::Polarity::E polarity;
+    Tester::Polarity::E polarity;       // Полярность управляющего воздействия
     Tester::StepU::E    stepU;          // Выбранный шаг изменения напряжения
     Tester::StepI::E    stepI;          // Выбранный шаг изменения тока
     ENumAverage::E      enumAverage;    // Количество усреднений

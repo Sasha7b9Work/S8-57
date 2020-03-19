@@ -132,7 +132,7 @@ void Tester::Disable() // -V2506
     HAL_PIO::Set(PIN_TESTER_ON);
 
     oldSet.test.control = Control();
-    oldSet.test.polarity = Polarity();
+    oldSet.test.polarity = set.test.polarity;
     oldSet.test.stepU = set.test.stepU;
     oldSet.test.stepI = set.test.stepI;
 
@@ -258,7 +258,7 @@ static void RecountPoints(uint16 *x, uint8 *y)
 void Tester::LoadPolarity()
 {
     // ”станавливаем пол€рность
-    HAL_PIO::Write(PIN_TESTER_PNP, Polarity::IsPositive() ? 1 : 0);
+    HAL_PIO::Write(PIN_TESTER_PNP, (set.test.polarity == Tester::Polarity::Positive) ? 1 : 0);
 }
 
 
@@ -331,12 +331,6 @@ String Tester::Shift::ToString(Scale::E scale) // -V2506
 Tester::Control::E &Tester::Control::Ref()
 {
     return set.test.control;
-}
-
-
-Tester::Polarity::E &Tester::Polarity::Ref()
-{
-    return set.test.polarity;
 }
 
 
