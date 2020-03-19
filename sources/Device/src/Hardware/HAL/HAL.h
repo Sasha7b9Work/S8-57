@@ -58,8 +58,6 @@ private:
 struct HAL_ADC3
 {
     static void Init();
-
-    static void ReadValue();
 };
 
 
@@ -78,7 +76,6 @@ struct HAL_DAC1
     static void StartDMA(void *points, uint numPoints);
     static void StopDMA();
     static void ConfigTIM7(uint16 prescaler, uint16 period);
-    static void *handleChannelDMA;
 };
 
 

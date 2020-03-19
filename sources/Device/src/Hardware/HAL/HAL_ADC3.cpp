@@ -66,7 +66,23 @@ void HAL_ADC3::Init()
 }
 
 
-void HAL_ADC3::ReadValue()
+INTERRUPT_BEGIN
+
+
+void ADC_IRQHandler(void)
 {
-    Osci::valueADC = static_cast<uint16>(HAL_ADC_GetValue(&handle));
+    HAL_ADC_IRQHandler(&handle);
 }
+
+
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
+{
+    /// \todo временная затычка. Не в рандомизаторе эта функция вообще не должна вызываться
+
+    if (OSCI_IN_MODE_RANDOMIZER)
+    {
+        Osci::valueADC = static_cast<uint16>(HAL_ADC_GetValue(hadc));
+    }
+}
+
+INTERRUPT_END
