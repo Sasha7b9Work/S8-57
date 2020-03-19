@@ -6,6 +6,8 @@
 
 static DAC_HandleTypeDef handle = { DAC };
 
+void *HAL_DAC1::handleChannelDMA = nullptr;
+
 
 void HAL_DAC1::Init()
 {
@@ -54,6 +56,8 @@ void HAL_DAC1::Init()
     HAL_DAC_Init(&handle);
 
     HAL_DAC_ConfigChannel(&handle, &config, DAC_CHANNEL_1);
+
+    handleChannelDMA = handle.DMA_Handle1;
 }
 
 
@@ -93,14 +97,3 @@ void HAL_DAC1::ConfigTIM7(uint16 prescaler, uint16 period)
     HAL_TIM_Base_Stop(&htim);
     HAL_TIM_Base_Start(&htim);
 }
-
-
-INTERRUPT_BEGIN
-
-
-void DMA1_Stream5_IRQHandler()
-{
-    HAL_DMA_IRQHandler(handle.DMA_Handle1);
-}
-
-INTERRUPT_END

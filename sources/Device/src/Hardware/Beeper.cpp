@@ -124,10 +124,6 @@ static void SetWave()
     {
         CalculateTriangle();
     }
-    else
-    {
-        // больше нет видов волн
-    }
 }
 
 
