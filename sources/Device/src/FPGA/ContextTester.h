@@ -7,5 +7,5 @@ struct ContextTester
     /// Запустить цикл чтения для тестер-компонента. В течение time секунд должно быть считано numPoints точек
     /// Если возвращает false - старт не прошёл
     static void Start();
-    static bool Read(uint16 *dataA, uint8 *dataB);
+    static void Read(uint16 *dataA, uint8 *dataB);
 };

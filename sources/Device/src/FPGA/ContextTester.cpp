@@ -24,20 +24,8 @@ void ContextTester::Start()
     FPGA::ForcedStart();
 }
 
-bool ContextTester::Read(uint16 *dataA, uint8 *dataB)
+void ContextTester::Read(uint16 *dataA, uint8 *dataB)
 {
-    uint start = TIME_MS;
-    FPGA::flag.flag = 0;
-    while (!FPGA::flag.DataReady())         // Ждём флага готовности данных
-    {
-        FPGA::ReadFlag();
-
-        if (TIME_MS - start > 200)           /// \todo Временная затычка. Надо сделать так, чтобы такие ситуации были исключены. Сбои происходят, во время
-        {                                   /// нажатия кнопок
-            return false;
-        }
-    }
-
     uint16 aRead = (uint16)(Osci::ReadLastRecord(Chan::A) - TESTER_NUM_POINTS);
 
     HAL_BUS::FPGA::Write16(WR::PRED_LO, aRead);         // Указываем адрес, с которого будем читать данные
@@ -57,6 +45,4 @@ bool ContextTester::Read(uint16 *dataA, uint8 *dataB)
     {
         *dataB++ = HAL_BUS::FPGA::ReadA1();
     }
-
-    return true;
 }

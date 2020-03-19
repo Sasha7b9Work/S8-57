@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "log.h"
+#include "FPGA/FPGA.h"
 #include "FPGA/ContextTester.h"
 #include "FPGA/MathFPGA.h"
 #include "Hardware/Timer.h"
@@ -165,10 +166,19 @@ void Tester::ProcessStep()
         HAL_DAC2::SetValue(static_cast<uint>(stepU * step / 2));
         // Запускаем ПЛИС для записи необходимого количества точек. Набор будет производиться в течение 2.5 мс (длительсность одного такта)
         ContextTester::Start();
+        FPGA::flag.flag = 0;
     }
     else
     {
-        ReadData();
+        FPGA::ReadFlag();
+        if(FPGA::flag.DataReady())
+        {
+            ReadData();
+        }
+        else
+        {
+            return;
+        }
     }
 
     ++step;
@@ -187,16 +197,11 @@ void Tester::ReadData()
     uint16 *x = &dataX[halfStep][0];
     uint8 *y = &dataY[halfStep][0];
 
-    if(ContextTester::Read(x, y))
-    {
-        RecountPoints(x, y);
+    ContextTester::Read(x, y);
 
-        DisplayTester::SetPoints(halfStep, x, y);
-    }
-    else
-    {
-        LOG_WRITE("Точки не считаны");
-    }
+    RecountPoints(x, y);
+
+    DisplayTester::SetPoints(halfStep, x, y);
 }
 
 
