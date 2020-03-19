@@ -114,10 +114,6 @@ public:
             _100mV,
             _500mV
         };
-        StepU() {}
-        static StepU::E &Ref();
-        operator StepU::E()   { return Ref(); }
-        static bool Is500mV() { return Ref() == _500mV; }
     };
 
 

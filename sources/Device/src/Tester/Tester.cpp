@@ -133,7 +133,7 @@ void Tester::Disable() // -V2506
 
     oldSet.test.control = Control();
     oldSet.test.polarity = Polarity();
-    oldSet.test.stepU = StepU();
+    oldSet.test.stepU = set.test.stepU;
     oldSet.test.stepI = StepI();
 
     set = oldSet;
@@ -271,7 +271,7 @@ void Tester::LoadStep()
 
     if (Control::IsVoltage())
     {
-        stepU =  255.0F / 3 * (StepU::Is500mV() ? 2 : 0.4F) / 5;
+        stepU =  255.0F / 3 * ((set.test.stepU == Tester::StepU::_500mV) ? 2 : 0.4F) / 5;
     }
     else
     {
@@ -337,12 +337,6 @@ Tester::Control::E &Tester::Control::Ref()
 Tester::Polarity::E &Tester::Polarity::Ref()
 {
     return set.test.polarity;
-}
-
-
-Tester::StepU::E &Tester::StepU::Ref()
-{
-    return set.test.stepU;
 }
 
 

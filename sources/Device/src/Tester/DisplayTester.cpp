@@ -113,7 +113,7 @@ String DisplayTester::ValueForStep(int step)
 
     if (Tester::Control::IsVoltage())
     {
-        return String(valuesU[Tester::StepU()][step]);
+        return String(valuesU[set.test.stepU][step]);
     }
 
     static pString valuesI[2][5] =

@@ -5,7 +5,7 @@ struct SettingsTester
 {
     Tester::Control::E  control;
     Tester::Polarity::E polarity;
-    Tester::StepU::E    stepU;
+    Tester::StepU::E    stepU;          // Выбранный шаг изменения напряжения
     Tester::StepI::E    stepI;
     ENumAverage::E      enumAverage;    // Количество усреднений
     Tester::ViewMode::E viewMode;       // Режим отображения кривых
