@@ -12,7 +12,7 @@ void ContextTester::OnPressStart()
     FPGA::OnPressStart();
 }
 
-bool ContextTester::Start()
+void ContextTester::Start()
 {
     // У нас двенадцать делений. На двенадцать делений должно приходиться не менее 2.5 мс
     // 2.5мс / 12дел = 0.2 мс/дел = 10мкс/тчк
@@ -22,8 +22,6 @@ bool ContextTester::Start()
     FPGA::GiveStart(static_cast<uint16>(~(400)), static_cast<uint16>(~(1)));
 
     FPGA::ForcedStart();
-
-    return true;
 }
 
 bool ContextTester::Read(uint16 *dataA, uint8 *dataB)
@@ -34,7 +32,7 @@ bool ContextTester::Read(uint16 *dataA, uint8 *dataB)
     {
         FPGA::ReadFlag();
 
-        if (TIME_MS - start > 20)           /// \todo Временная затычка. Надо сделать так, чтобы такие ситуации были исключены. Сбои происходят, во время
+        if (TIME_MS - start > 200)           /// \todo Временная затычка. Надо сделать так, чтобы такие ситуации были исключены. Сбои происходят, во время
         {                                   /// нажатия кнопок
             return false;
         }

@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include "FPGA/ContextTester.h"
 #include "FPGA/MathFPGA.h"
 #include "Hardware/Timer.h"
@@ -144,7 +145,7 @@ void Tester::StartStop()
 
 void Tester::ProcessStep()
 {
-                                                                                                                                                  /*
+                                                                                                                                                /*
        |-----|     |-----|     |-----|     |-----|     |-----|     |-----|     |-----|     |-----|     |-----|     |-----|     |---
        |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |
     ___|     |_____|     |_____|     |_____|     |_____|     |_____|     |_____|     |_____|     |_____|     |_____|     |_____|
@@ -163,10 +164,7 @@ void Tester::ProcessStep()
     {
         HAL_DAC2::SetValue(static_cast<uint>(stepU * step / 2));
         // Запускаем ПЛИС для записи необходимого количества точек. Набор будет производиться в течение 2.5 мс (длительсность одного такта)
-        if (!ContextTester::Start())
-        {
-            return;
-        }
+        ContextTester::Start();
     }
     else
     {
@@ -194,6 +192,10 @@ void Tester::ReadData()
         RecountPoints(x, y);
 
         DisplayTester::SetPoints(halfStep, x, y);
+    }
+    else
+    {
+        LOG_WRITE("Точки не считаны");
     }
 }
 
@@ -248,17 +250,6 @@ void Tester::LoadStep()
     }
 }
 
-INTERRUPT_BEGIN
-
-void HAL_GPIO_EXTI_Callback(uint16 pin)
-{
-    if (pin == HPin::_9)      // Прерывание от тестер-компонента
-    {
-        Tester::ProcessStep();
-    }
-}
-
-INTERRUPT_END
 
 pString Tester::Scale::ToString() const // -V2506
 {

@@ -2,8 +2,10 @@
 #include "log.h"
 #include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
-#include "Utils/Debug.h"
 #include "Hardware/HAL/HAL.h"
+#include "Hardware/HAL/HAL_PINS.h"
+#include "Tester/Tester.h"
+#include "Utils/Debug.h"
 #include <stm32f4xx_hal.h>
 
 
@@ -137,6 +139,14 @@ void DebugMon_Handler(void)
 
 void PendSV_Handler(void)
 {
+}
+
+void HAL_GPIO_EXTI_Callback(uint16 pin)
+{
+    if(pin == HPin::_9)      // Прерывание от тестер-компонента
+    {
+        Tester::ProcessStep();
+    }
 }
 
 INTERRUPT_END
