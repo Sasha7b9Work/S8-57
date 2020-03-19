@@ -691,16 +691,6 @@
               <FilePath>.\src\FPGA\ContextRecorder.cpp</FilePath>
             </File>
             <File>
-              <FileName>ContextTester.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\FPGA\ContextTester.h</FilePath>
-            </File>
-            <File>
-              <FileName>ContextTester.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\FPGA\ContextTester.cpp</FilePath>
-            </File>
-            <File>
               <FileName>FPGA.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\FPGA\FPGA.h</FilePath>

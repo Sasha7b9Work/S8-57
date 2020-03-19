@@ -4,8 +4,9 @@
 #include "Menu/Pages/Include/PageDisplay.h"
 
 
-struct Tester
+class Tester
 {
+public:
     static const int NUM_STEPS = 5;
     
     // Инициализация аппаратной части

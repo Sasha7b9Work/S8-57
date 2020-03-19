@@ -28,7 +28,6 @@ struct FPGA
     friend struct ContextFreqMeter;
     friend struct ContextOsci;
     friend struct ContextRecorder;
-    friend struct ContextTester;
     friend struct Randomizer;
 
     friend struct Bandwidth;
@@ -41,6 +40,8 @@ struct FPGA
     friend struct TShift;
     friend struct TrigLevel;
     friend struct Osci;
+
+    friend class Tester;
 
     static bool IsRunning();
 

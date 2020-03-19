@@ -1,7 +1,6 @@
 #include "defines.h"
 #include "log.h"
 #include "FPGA/FPGA.h"
-#include "FPGA/ContextTester.h"
 #include "FPGA/MathFPGA.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
@@ -20,6 +19,13 @@ bool Tester::enabled = false;
 
 static uint16 dataX[Tester::NUM_STEPS][TESTER_NUM_POINTS];  /// \todo Сделать так, чтобы при включении тестер-компонента необходимая память бралась из Heap.cpp
 static uint8  dataY[Tester::NUM_STEPS][TESTER_NUM_POINTS];
+
+// Читать данные с ПЛИС
+static void ReadFPGA(uint16 *dataA, uint8 *dataB);
+
+// Запустить цикл чтения для тестер-компонента. В течение time секунд должно быть считано numPoints точек
+// Если возвращает false - старт не прошёл
+static void StartFPGA();
 
 
 void Tester::Init()
@@ -125,7 +131,7 @@ void Tester::Disable() // -V2506
 
     Osci::Init();
 
-    ContextTester::OnPressStart();
+    FPGA::OnPressStart();
 }
 
 
@@ -165,7 +171,7 @@ void Tester::ProcessStep()
     {
         HAL_DAC2::SetValue(static_cast<uint>(stepU * step / 2));
         // Запускаем ПЛИС для записи необходимого количества точек. Набор будет производиться в течение 2.5 мс (длительсность одного такта)
-        ContextTester::Start();
+        StartFPGA();
         FPGA::flag.flag = 0;
     }
     else
@@ -197,7 +203,7 @@ void Tester::ReadData()
     uint16 *x = &dataX[halfStep][0];
     uint8 *y = &dataY[halfStep][0];
 
-    ContextTester::Read(x, y);
+    ReadFPGA(x, y);
 
     RecountPoints(x, y);
 
@@ -337,4 +343,41 @@ Tester::ViewMode::E &Tester::ViewMode::Ref()
 ENumAverage::E &Tester::ENUMAverage::Ref()
 {
     return set.test.enumAverage;
+}
+
+
+static void ReadFPGA(uint16 *dataA, uint8 *dataB)
+{
+    uint16 aRead = (uint16)(Osci::ReadLastRecord(Chan::A) - TESTER_NUM_POINTS);
+
+    HAL_BUS::FPGA::Write16(WR::PRED_LO, aRead);         // Указываем адрес, с которого будем читать данные
+    HAL_BUS::FPGA::Write8(WR::START_ADDR, 0xff);        // И даём команду ПЛИС, чтобы чтение начиналось с него
+
+    HAL_BUS::FPGA::SetAddrData(RD::DATA_A + 1, RD::DATA_B + 1);
+
+    for(int i = 0; i < TESTER_NUM_POINTS; i++)         // Читаем данные первого канала
+    {
+        *dataA++ = HAL_BUS::FPGA::ReadA0();
+    }
+
+    HAL_BUS::FPGA::Write16(WR::PRED_LO, aRead);         // Указываем адрес, с котонрого будем читать данные
+    HAL_BUS::FPGA::Write8(WR::START_ADDR, 0xff);        // И даём команду ПЛИС, чтобы чтение начиналось с него
+
+    for(int i = 0; i < TESTER_NUM_POINTS; i++)         // Читаем данные второго канала
+    {
+        *dataB++ = HAL_BUS::FPGA::ReadA1();
+    }
+}
+
+
+static void StartFPGA()
+{
+    // У нас двенадцать делений. На двенадцать делений должно приходиться не менее 2.5 мс
+    // 2.5мс / 12дел = 0.2 мс/дел = 10мкс/тчк
+
+    TBase::Set500us();
+
+    FPGA::GiveStart(static_cast<uint16>(~(400)), static_cast<uint16>(~(1)));
+
+    FPGA::ForcedStart();
 }
