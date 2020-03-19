@@ -134,7 +134,7 @@ void Tester::Disable() // -V2506
     oldSet.test.control = Control();
     oldSet.test.polarity = Polarity();
     oldSet.test.stepU = set.test.stepU;
-    oldSet.test.stepI = StepI();
+    oldSet.test.stepI = set.test.stepI;
 
     set = oldSet;
     //set.Save();
@@ -275,7 +275,7 @@ void Tester::LoadStep()
     }
     else
     {
-        stepU = 255.0F / 3 * (StepI::Is20mA() ? 2 : 0.4F) / 5;
+        stepU = 255.0F / 3 * ((set.test.stepI == Tester::StepI::_20mA) ? 2 : 0.4F) / 5;
     }
 }
 
@@ -337,12 +337,6 @@ Tester::Control::E &Tester::Control::Ref()
 Tester::Polarity::E &Tester::Polarity::Ref()
 {
     return set.test.polarity;
-}
-
-
-Tester::StepI::E &Tester::StepI::Ref()
-{
-    return set.test.stepI;
 }
 
 

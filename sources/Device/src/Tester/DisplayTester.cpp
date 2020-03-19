@@ -122,7 +122,7 @@ String DisplayTester::ValueForStep(int step)
         {"0 לךְ", "20 לךְ", "40 לךְ", "60 לךְ", "80 לךְ"}
     };
 
-    return String(valuesI[Tester::StepI()][step]);
+    return String(valuesI[set.test.stepI][step]);
 }
 
 

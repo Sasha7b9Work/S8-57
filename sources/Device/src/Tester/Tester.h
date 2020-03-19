@@ -100,11 +100,6 @@ public:
             _4mA,
             _20mA
         };
-
-        StepI() {};
-        static StepI::E &Ref();
-        operator StepI::E()  { return Ref(); }
-        static bool Is20mA() { return Ref() == _20mA; }
     };
 
     struct StepU

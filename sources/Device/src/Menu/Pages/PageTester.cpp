@@ -57,7 +57,7 @@ DEF_CHOICE_2( cStepI,
     "Ўаг исптытательного тока",
     "4 мкј",
     "20 мкј",
-    Tester::StepI::Ref(), &PageTester::self, Item::Active, OnChanged_Step, Choice::AfterDraw
+    set.test.stepI, &PageTester::self, Item::Active, OnChanged_Step, Choice::AfterDraw
 )
 
 
