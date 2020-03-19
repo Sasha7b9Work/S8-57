@@ -10,12 +10,16 @@
 #include "Utils/Values.h"
 
 
+// Текущий шаг
+static int step = 0;
+
+// Шаг изменения напряжения
+static float stepU = 0.0F;
+
+// Установленное в true значение означает, что вклюён режим тестера
+static bool enabled = false;
+
 static Settings oldSet = Settings::defaultSettings;
-
-
-int Tester::step = 0;
-float Tester::stepU = 0.0F;
-bool Tester::enabled = false;
 
 static uint16 dataX[Tester::NUM_STEPS][TESTER_NUM_POINTS];  /// \todo Сделать так, чтобы при включении тестер-компонента необходимая память бралась из Heap.cpp
 static uint8  dataY[Tester::NUM_STEPS][TESTER_NUM_POINTS];
@@ -26,6 +30,12 @@ static void ReadFPGA(uint16 *dataA, uint8 *dataB);
 // Запустить цикл чтения для тестер-компонента. В течение time секунд должно быть считано numPoints точек
 // Если возвращает false - старт не прошёл
 static void StartFPGA();
+
+// Считать данные очередной ступеньки
+static void ReadData();
+
+// Пересчитать точки для засылки отрисовки
+static void RecountPoints(uint16 *x, uint8 *y);
 
 
 void Tester::Init()
@@ -176,13 +186,21 @@ void Tester::ProcessStep()
     }
     else
     {
+        static int countRead = 0;               // Счётчик попыток чтений
+        countRead++;
+
         FPGA::ReadFlag();
         if(FPGA::flag.DataReady())
         {
             ReadData();
+            countRead = 0;
         }
         else
         {
+            if(countRead > 1)
+            {
+                step--;
+            }
             return;
         }
     }
@@ -196,7 +214,7 @@ void Tester::ProcessStep()
 }
 
 
-void Tester::ReadData()
+static void ReadData()
 {
     int halfStep = step / 2;
 
@@ -211,7 +229,7 @@ void Tester::ReadData()
 }
 
 
-void Tester::RecountPoints(uint16 *x, uint8 *y)
+static void RecountPoints(uint16 *x, uint8 *y)
 {
     static const float scaleX = 332.0F / 240.0F;
     static const float scaleY = 249.0F / 255.0F;

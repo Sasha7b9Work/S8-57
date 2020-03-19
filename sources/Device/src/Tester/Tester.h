@@ -138,23 +138,6 @@ public:
         static ENumAverage::E &Ref();
         operator ENumAverage::E() { return Ref(); }
     };
-
-private:
-    
-    // Текущий шаг
-    static int step;
-    
-    // Шаг изменения напряжения
-    static float stepU;
-    
-    // Установленное в true значение означает, что вклюён режим тестера
-    static bool enabled;
-    
-    // Считать данные очередной ступеньки
-    static void ReadData();
-    
-    // Пересчитать точки для засылки отрисовки
-    static void RecountPoints(uint16 *x, uint8 *y);
 };
 
 
