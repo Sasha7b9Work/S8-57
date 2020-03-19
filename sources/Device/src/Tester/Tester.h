@@ -132,12 +132,6 @@ public:
         static ViewMode::E &Ref();
         operator ViewMode::E() { return Ref(); }
     };
-
-    struct ENUMAverage
-    {
-        static ENumAverage::E &Ref();
-        operator ENumAverage::E() { return Ref(); }
-    };
 };
 
 

@@ -358,12 +358,6 @@ Tester::ViewMode::E &Tester::ViewMode::Ref()
 }
 
 
-ENumAverage::E &Tester::ENUMAverage::Ref()
-{
-    return set.test.enumAverage;
-}
-
-
 static void ReadFPGA(uint16 *dataA, uint8 *dataB)
 {
     uint16 aRead = (uint16)(Osci::ReadLastRecord(Chan::A) - TESTER_NUM_POINTS);
