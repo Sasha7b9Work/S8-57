@@ -128,9 +128,6 @@ public:
             Lines,
             Points
         };
-
-        static ViewMode::E &Ref();
-        operator ViewMode::E() { return Ref(); }
     };
 };
 

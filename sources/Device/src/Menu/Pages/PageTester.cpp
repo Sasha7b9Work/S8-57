@@ -66,7 +66,7 @@ DEF_CHOICE_2( cViewMode,
     "",
     "Линии",
     "Точки",
-    Tester::ViewMode::Ref(), &PageTester::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.test.viewMode, &PageTester::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

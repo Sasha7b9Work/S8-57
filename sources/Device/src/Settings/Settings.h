@@ -50,7 +50,7 @@ public:
     SettingsMath            math;
     SettingsFFT             fft;
     SettingsFreqMeter       freq;
-    SettingsTester          test;
+    SettingsTester          test;   // Настройки тестера компонентов
     SettingsMultimeter      mult;
     SettingsRecorder        rec;
     SettingsService         serv;

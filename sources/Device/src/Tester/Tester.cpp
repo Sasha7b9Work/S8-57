@@ -352,12 +352,6 @@ Tester::StepI::E &Tester::StepI::Ref()
 }
 
 
-Tester::ViewMode::E &Tester::ViewMode::Ref()
-{
-    return set.test.viewMode;
-}
-
-
 static void ReadFPGA(uint16 *dataA, uint8 *dataB)
 {
     uint16 aRead = (uint16)(Osci::ReadLastRecord(Chan::A) - TESTER_NUM_POINTS);
