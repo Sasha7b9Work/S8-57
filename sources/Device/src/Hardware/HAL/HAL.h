@@ -58,6 +58,8 @@ private:
 struct HAL_ADC3
 {
     static void Init();
+
+    static void ReadValue();
 };
 
 

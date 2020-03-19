@@ -2,8 +2,9 @@
 #include "log.h"
 #include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
-#include "Utils/Debug.h"
 #include "Hardware/HAL/HAL.h"
+#include "Osci/Osci.h"
+#include "Utils/Debug.h"
 #include <stm32f4xx_hal.h>
 
 
@@ -137,6 +138,23 @@ void DebugMon_Handler(void)
 
 void PendSV_Handler(void)
 {
+}
+
+
+void ADC_IRQHandler(void)
+{
+    HAL_ADC_IRQHandler(nullptr);
+}
+
+
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *)
+{
+    /// \todo временная затычка. Не в рандомизаторе эта функция вообще не должна вызываться
+
+    if(OSCI_IN_MODE_RANDOMIZER)
+    {
+        HAL_ADC3::ReadValue();
+    }
 }
 
 INTERRUPT_END
