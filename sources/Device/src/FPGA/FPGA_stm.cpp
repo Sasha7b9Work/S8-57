@@ -251,11 +251,11 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
             {
                 int delta = VALUE::AVE - static_cast<int>(*a1);
 
-                uint8 result = static_cast<uint8>(VALUE::AVE - static_cast<int>(delta * stretch));
+                int result = static_cast<int>(VALUE::AVE - static_cast<int>(delta * stretch));
 
                 if(result < VALUE::MIN)      { p[i] = VALUE::MIN; }
                 else if(result > VALUE::MAX) { p[i] = VALUE::MAX; }
-                else                         { p[i] = result;     }
+                else                         { p[i] = static_cast<uint8>(result); }
             }
         }
     }

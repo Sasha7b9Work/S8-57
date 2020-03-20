@@ -237,9 +237,7 @@ static float FindStretchChannel(Chan::E ch)
     float min = static_cast<float>(sumMIN) / numMIN;
     float max = static_cast<float>(sumMAX) / numMAX;
 
-    float delta = max - min;
-
-    return patternDelta / delta;
+    return patternDelta / (max - min);
 }
 
 
