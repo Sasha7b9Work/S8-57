@@ -59,6 +59,12 @@ void SettingsNRST::Save()
 }
 
 
+void SettingsNRST::Reset()
+{
+    setNRST = defaultNRST;
+}
+
+
 bool SettingsNRST::operator!=(const SettingsNRST &rhs)
 {
     return std::memcmp(this, &rhs, sizeof(*this)) != 0;

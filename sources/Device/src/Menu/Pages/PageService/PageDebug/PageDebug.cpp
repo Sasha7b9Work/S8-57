@@ -160,10 +160,23 @@ static void OnPress_SaveFirmware()
     Display::ShowWarning("Прошивка сохранена");
 }
 
-DEF_BUTTON( bSaveFirmware,                                                                                                                                 //--- ОТЛАДКА - Сохр. прошивку ---
+DEF_BUTTON(bSaveFirmware,                                                                                                                                 //--- ОТЛАДКА - Сохр. прошивку ---
     "Сохр. прошивку",
     "Сохранение прошивки - секторов 5, 6, 7 общим объёмом 3 х 128 кБ, где хранится программа",
     &PageDebug::self, IsActive_SaveFirmware, OnPress_SaveFirmware
+)
+
+
+static void OnPress_ResetNRTS()
+{
+    setNRST.Reset();
+}
+
+
+DEF_BUTTON( bResetNRST,
+    "Сброс",
+    "Сброс калибровочных настроек",
+    &PageDebug::self, Button::Active(), OnPress_ResetNRTS
 )
 
 

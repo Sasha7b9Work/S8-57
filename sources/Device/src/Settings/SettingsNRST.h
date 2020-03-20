@@ -78,6 +78,8 @@ struct SettingsNRST
     // Сохранение настроек в ROM. Происходит только если настройки в setNRST не совпадают с хранящимися в ROM
     void Save();
 
+    void Reset();
+
     bool operator!=(const SettingsNRST &rhs);
 };
 
