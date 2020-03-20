@@ -176,7 +176,7 @@ static void OnPress_ResetNRTS()
 DEF_BUTTON( bResetNRST,
     "Сброс",
     "Сброс калибровочных настроек",
-    &PageDebug::self, Button::Active(), OnPress_ResetNRTS
+    &PageDebug::self, Button::Active, OnPress_ResetNRTS
 )
 
 
@@ -239,7 +239,7 @@ DEF_PAGE_2( pSerialNumber,                                                      
 const Page * const PageDebug::PageSerialNumber::self = static_cast<const Page *>(&pSerialNumber);
 
 
-DEF_PAGE_7( pDebug,                                                                                                                                                         //--- ОТЛАДКА ---
+DEF_PAGE_8( pDebug,                                                                                                                                                         //--- ОТЛАДКА ---
     "ОТЛАДКА",
     "",
     PageDebug::PageConsole::self,
@@ -247,6 +247,7 @@ DEF_PAGE_7( pDebug,                                                             
     PageDebug::PageRand::self,
     &cStats,
     &cBattery,
+    &bResetNRST,
     &bSaveFirmware,
     PageDebug::PageTests::self,
     PageName::Debug,
