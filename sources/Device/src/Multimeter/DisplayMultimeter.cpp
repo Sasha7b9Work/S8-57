@@ -232,19 +232,6 @@ void DisplayMultimeter::SetMeasure(const uint8 buf[13])
 
     std::memcpy(outBuffer, buf + 1, 7); //-V512
 
-    if(meas == Multimeter::Measure::VoltageDC)
-    {
-        static uint timeBegin = 0;
-        static int counter = 0;
-
-        if(TIME_MS - timeBegin > 1000)
-        {
-            counter++;
-        }
-
-        outBuffer[0] = (counter % 2) ? '-' : '+';
-    }
-
     funcs[meas].func(reinterpret_cast<const char *>(buf));
 
     received = true;
