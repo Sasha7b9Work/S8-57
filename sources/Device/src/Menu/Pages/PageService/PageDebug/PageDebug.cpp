@@ -180,6 +180,20 @@ DEF_BUTTON( bResetNRST,
 )
 
 
+static void OnPress_SaveSettings()
+{
+    set.Save();
+    setNRST.Save();
+}
+
+
+DEF_BUTTON( bSaveSettings,
+    "Сохр настр",
+    "Сохранение настроек",
+    &PageDebug::self, Button::Active, OnPress_SaveSettings
+)
+
+
 static void OnPress_SerialNumber_Change()
 {
     Color::ChangeFlash(true);
@@ -239,7 +253,7 @@ DEF_PAGE_2( pSerialNumber,                                                      
 const Page * const PageDebug::PageSerialNumber::self = static_cast<const Page *>(&pSerialNumber);
 
 
-DEF_PAGE_8( pDebug,                                                                                                                                                         //--- ОТЛАДКА ---
+DEF_PAGE_9( pDebug,                                                                                                                                                         //--- ОТЛАДКА ---
     "ОТЛАДКА",
     "",
     PageDebug::PageConsole::self,
@@ -250,6 +264,7 @@ DEF_PAGE_8( pDebug,                                                             
     &bResetNRST,
     &bSaveFirmware,
     PageDebug::PageTests::self,
+    &bSaveSettings,
     PageName::Debug,
     &PageService::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
