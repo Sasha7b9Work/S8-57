@@ -21,8 +21,9 @@
 #define SYMBOL_OMEGA '\x01'
 
 
-/// Данные для вывода.
-static char outBuffer[15];
+static char outBuffer[15];      // Данные для вывода.
+static bool received = false;
+
 
 static void PrepareBell(const char *);
 static void PrepareConstantVoltage(const char *);
@@ -32,7 +33,11 @@ static void PrepareVariableCurrent(const char *);
 static void PrepareResistance(const char *);
 static void PrepareTestDiode(const char *);
 
-static bool received = false;
+// Отрисовать значение измерения
+static void DrawSymbols();
+
+// Нарисовать дополнительные изображения на экране, если в этом есть необходимость
+static void DrawGraphics();
 
 
 static char Symbol(uint i)
@@ -101,13 +106,13 @@ static void DrawSymbols()
 
     DFont::SetSpacing(5);
 
-    if(outBuffer[8] == '\x01')
+    if(outBuffer[8] == SYMBOL_OMEGA)
     {
         x = Text(String(outBuffer[7])).Draw(120, 125);
 
         DFont::Set(DTypeFont::_OMEGA72);
 
-        Text(String('\x01')).Draw(x + 5, 130);
+        Text(String(SYMBOL_OMEGA)).Draw(x + 5, 130);
 
         DFont::Set(DTypeFont::_GOST72bold);
     }
@@ -120,6 +125,30 @@ static void DrawSymbols()
 }
 
 
+static void DrawGraphics()
+{
+    int x0 = 10;
+    int y0 = 10;
+
+    if(Multimeter::Measure().IsTestDiode())
+    {
+        int edge = 50;
+        int delta = edge / 2;
+        int length = 2 * edge;
+
+        int startX = x0 + 115;
+        int endX = startX + length;
+        int startY = y0 + 150;
+
+        HLine(length).Draw(startX, startY, Color::FILL);
+        VLine(edge).Draw(startX + delta, startY - edge / 2);
+        VLine(edge).Draw(endX - delta, startY - edge / 2);
+        Line(startX + delta, startY - edge / 2, endX - delta, startY).Draw();
+        Line(startX + delta, startY + edge / 2, endX - delta, startY).Draw();
+    }
+}
+
+
 static void DrawMeasure()
 {
     Color color = received ? Color::FILL : Color::GRAY_50;
@@ -129,6 +158,8 @@ static void DrawMeasure()
     color.SetAsCurrent();
     
     DrawSymbols();
+
+    DrawGraphics();
 
     DFont::Set(DTypeFont::_8);
 }
@@ -192,20 +223,20 @@ void DisplayMultimeter::ChangedMode()
     
     static const pString suffix[Multimeter::Measure::Count][4] =
     {
-        {"V=", "V=", "V="},
-        {"V\x7e", "V\x7e", "V\x7e"},
-        {"mA=", "A="},
-        {"mA\x7e", "A\x7e"},
-        {"k\x01", "k\x01", "k\x01", "M\x01"},
-        {"V="},
-        {"k\x01"}
+        {"V=", "V=", "V="},                     // U=
+        {"V\x7e", "V\x7e", "V\x7e"},            // U~
+        {"mA=", "A="},                          // I=
+        {"mA\x7e", "A\x7e"},                    // I~
+        {"k\x01", "k\x01", "k\x01", "M\x01"},   // R
+        {"  ", "  ", "  ", "  "},               // VD
+        {"k\x01"}                               // Прозвонка
     };
 
     outBuffer[position[Multimeter::Measure()][GetRange()]] = '.';
     
     std::strcpy(&outBuffer[7], suffix[Multimeter::Measure()][GetRange()]);
     
-    if(Multimeter::Measure().IsResistance() || Multimeter::Measure::IsTestDiode())
+    if(Multimeter::Measure().IsResistance())
     {
         outBuffer[8] = SYMBOL_OMEGA;
     }
@@ -249,7 +280,7 @@ void DisplayMultimeter::SetMeasure(const uint8 buf[13])
 
 static void PrepareTestDiode(const char *)
 {
-    std::strcpy(outBuffer + 7, "V=");
+    std::strcpy(outBuffer + 7, "  ");
 }
 
 
