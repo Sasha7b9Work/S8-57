@@ -161,7 +161,6 @@ void Beeper::Bell::On()
     {
         Beeper::WaitForCompletion();
 
-
         frequency = 2000.0F;
         amplitude = 1.0F;
         typeWave = TypeWave::Sine;

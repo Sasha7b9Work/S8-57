@@ -65,12 +65,13 @@ struct Multimeter
         }
         /// Получить код измерения из принятого буфера
         static Measure::E GetCode(const char buffer[13]);
-        static bool IsVoltageDC()  { return Ref() == VoltageDC; }
-        static bool IsVoltageAC()  { return Ref() == VoltageAC; }
+        static bool IsVoltageDC()  { return Ref() == VoltageDC;  }
+        static bool IsVoltageAC()  { return Ref() == VoltageAC;  }
         static bool IsResistance() { return Ref() == Resistance; }
-        static bool IsCurrentDC()  { return Ref() == CurrentDC; }
-        static bool IsCurrentAC()  { return Ref() == CurrentAC; }
-        static bool IsTestDiode()  { return Ref() == TestDiode; }
+        static bool IsCurrentDC()  { return Ref() == CurrentDC;  }
+        static bool IsCurrentAC()  { return Ref() == CurrentAC;  }
+        static bool IsTestDiode()  { return Ref() == TestDiode;  }
+        static bool IsBell()       { return Ref() == Bell;       }
     };
 
     /// Предел имзерения постоянного напряжения

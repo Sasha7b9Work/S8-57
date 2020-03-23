@@ -146,6 +146,18 @@ static void DrawGraphics()
         Line(startX + delta, startY - edge / 2, endX - delta, startY).Draw();
         Line(startX + delta, startY + edge / 2, endX - delta, startY).Draw();
     }
+    else if(Multimeter::Measure().IsBell())
+    {
+        int edge = 16;
+
+        int x = x0 + 150;
+        int y = y0 + 135;
+
+        Rectangle(edge, edge).Draw(x, y, Color::FILL);
+        Line(x + edge, y, x + edge * 2, y - edge).Draw();
+        Line(x + edge, y + edge, x + edge * 2, y + edge * 2).Draw();
+        VLine(3 * edge).Draw(x + edge * 2, y - edge);
+    }
 }
 
 
@@ -229,7 +241,7 @@ void DisplayMultimeter::ChangedMode()
         {"mA\x7e", "A\x7e"},                    // I~
         {"k\x01", "k\x01", "k\x01", "M\x01"},   // R
         {"  ", "  ", "  ", "  "},               // VD
-        {"k\x01"}                               // Прозвонка
+        {"  ", "  ", "  ", "  "}                // Прозвонка
     };
 
     outBuffer[position[Multimeter::Measure()][GetRange()]] = '.';
@@ -323,8 +335,7 @@ static bool ResistanceLess100()
 
 static void PrepareBell(const char *)
 {
-    outBuffer[7] = 'k';
-    outBuffer[8] = SYMBOL_OMEGA;
+    std::strcpy(outBuffer + 7, "  ");
 
     if (ResistanceLess100())
     {
