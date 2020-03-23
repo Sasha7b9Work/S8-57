@@ -127,28 +127,9 @@ static void ChangeRShift(Chan::E ch, int16 delta)
 {
     if (!Device::InModeRecorder())
     {
-        static bool stop[Chan::Count] = { false, false };      // Признак того, что смещение изменять не нужно - оно равно нулю и прошло мало времени
-        static uint timeStop[Chan::Count] = { 0, 0 };          // Время устновки признака stop
+        RShift(ch).Change(delta);
 
-        if (stop[ch])
-        {
-            if (TIME_MS - timeStop[ch] > 500)
-            {
-                stop[ch] = false;
-            }
-        }
-        else
-        {
-            RShift(ch).Change(delta);
-
-            if (RShift(ch) == 0)
-            {
-                stop[ch] = true;
-                timeStop[ch] = TIME_MS;
-            }
-
-            DisplayOsci::SetFlagRedraw();
-        }
+        DisplayOsci::SetFlagRedraw();
     }
 }
 
@@ -202,26 +183,7 @@ static void OnChangeParameterTime(pFuncVI func, int delta)
 
 static void ChangeTShift(int delta)
 {
-    static int prevDelta = 0;               // Предыдущее направление перемещения
-    static uint timeStartBrake = 0;         // Время начала торможения
-
-    if (event.IsRepeat() &&                 // Если смещаемся не однокртаным нажатием кнопки
-        (prevDelta == delta) &&             // В том же направлении, что и в прошлый раз
-        (timeStartBrake != 0) &&            // И "тормоз" включён
-        (TIME_MS - timeStartBrake < 500))   // и прошло ещё мало времени
-    {
-        return;                             // то ничего не делаем
-    }
-
-    prevDelta = delta;
-    timeStartBrake = 0;
-
     TShift().Change(delta);
-
-    if ((set.time.shift == 0) && event.IsRepeat())   // Если новое пожение смещения - ноль, то включаем торможение
-    {
-        timeStartBrake = TIME_MS;
-    }
 }
 
 
