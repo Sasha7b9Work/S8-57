@@ -255,10 +255,17 @@ const Page * const PageMultimeter::Calibration::self = static_cast<const Page *>
 
 void PageMultimeter::DecodePassword(const KeyEvent &event)
 {
-#define NUM_SYMBOLS 8
-    /// Пароль
-    static const Key::E password[NUM_SYMBOLS] = { Key::F2, Key::F2, Key::F3, Key::F3, Key::F4, Key::F4, Key::F5, Key::F5 };
-    /// Число совпавших символов
+#define NUM_SYMBOLS 10
+    // Пароль
+    static const Key::E password[NUM_SYMBOLS] =
+    {
+        Key::Function, Key::Function,
+        Key::Measure,  Key::Measure,
+        Key::Memory,   Key::Memory,
+        Key::Display,  Key::Display,
+        Key::Service,  Key::Service
+    };
+    // Число совпавших символов
     static int charsMatch = 0;
 
 
