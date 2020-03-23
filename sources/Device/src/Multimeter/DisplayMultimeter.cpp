@@ -2,6 +2,7 @@
 #include "Display/Painter.h"
 #include "Display/Primitives.h"
 #include "Hardware/Beeper.h"
+#include "Hardware/Timer.h"
 #include "Menu/Menu.h"
 #include "Multimeter/Multimeter.h"
 #include "Settings/Settings.h"
@@ -33,11 +34,32 @@ static char Symbol(uint i)
 
 static void DrawChar(uint numSymbol, int x)
 {
-    static const int y = 35;
-    
+    int y = 35;
+
     char symbols[2] = {Symbol(numSymbol), 0};
+
+    if(symbols[0] == '-')
+    {
+        y -= 10;
+
+        Pixel().Draw(x, y + 42);
+
+    }
+    else if(symbols[0] == '+')
+    {
+        y -= 9;
+    }
     
     Text(symbols).Draw(x, y);
+
+    if(symbols[0] == '-')
+    {
+        Region(5, 5).Fill(x + 31, y + 41, Color::BACK);
+        Pixel().Draw(x + 30, y + 41);
+        Pixel().Draw(x + 30, y + 46);
+    }
+
+    Color::FILL.SetAsCurrent();
 }
 
 
@@ -209,6 +231,19 @@ void DisplayMultimeter::SetMeasure(const uint8 buf[13])
     }
 
     std::memcpy(outBuffer, buf + 1, 7); //-V512
+
+    if(meas == Multimeter::Measure::VoltageDC)
+    {
+        static uint timeBegin = 0;
+        static int counter = 0;
+
+        if(TIME_MS - timeBegin > 1000)
+        {
+            counter++;
+        }
+
+        outBuffer[0] = (counter % 2) ? '-' : '+';
+    }
 
     funcs[meas].func(reinterpret_cast<const char *>(buf));
 
