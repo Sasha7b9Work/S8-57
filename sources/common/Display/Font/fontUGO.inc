@@ -1,4 +1,8 @@
+#ifdef PANEL
+const PFont fontUGO = {
+#else
 const DFont fontUGO = {
+#endif
 	8, {
 /*0*/		{ 0, { 0,	0,	0,	0,	0,	0,	0,	0	} },	
 /*1*/		{ 0, { 0,	0,	0,	0,	0,	0,	0,	0	} },	

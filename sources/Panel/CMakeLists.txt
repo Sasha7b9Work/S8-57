@@ -8,7 +8,8 @@ include_directories(..
                     src
                     ../common/_VS/HAL
                     src/libs/HAL
-                    ../common/_VS/CMSIS)
+                    ../common/_VS/CMSIS
+                    ../common/Display/Font)
                     
 add_definitions(-DSTM32F429xx -DPANEL)
 

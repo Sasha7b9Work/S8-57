@@ -1,4 +1,8 @@
+#ifdef PANEL
+const PFont font8 = {
+#else
 const DFont font8 = {
+#endif
 	8, {
 /*0*/		{ 0, { 0,	0,	0,	0,	0,	0,	0,	0	} },	
 /*1*/		{ 0, { 0,	0,	0,	0,	0,	0,	0,	0	} },	

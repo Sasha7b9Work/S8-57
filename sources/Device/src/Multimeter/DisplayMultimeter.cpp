@@ -9,6 +9,15 @@
 #include <cstring>
 
 
+/*
+    Шрифт для отрисовки в режиме мультиметра
+
+    Имя - GOST
+
+    Размер - 
+*/
+
+
 #define SYMBOL_OMEGA '\x01'
 
 
