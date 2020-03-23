@@ -19,7 +19,7 @@ static void OnChange_VoltageDC(bool active)
 }
 
 DEF_CHOICE_3( cRangesVoltageDC,                                                                                                                                 //--- МУЛЬТИМЕТР - Предел ---
-    "Предел",
+    "Диапазон",
     "Диапазон измерения",
     "2 В",
     "20 В",
@@ -42,7 +42,7 @@ static void OnChange_VoltageAC(bool active)
 }
 
 DEF_CHOICE_3( cRangesVoltageAC,                                                                                                                                 //--- МУЛЬТИМЕТР - Предел ---
-    "Предел",
+    "Диапазон",
     "Диапазон измерения",
     "2 В",
     "20 В",
@@ -61,7 +61,7 @@ static void OnChange_CurrentDC(bool active)
 }
 
 DEF_CHOICE_2( cRangesCurrentDC,
-    "Предел",
+    "Диапазон",
     "Диапазон измерения",
     "20мА",
     "2А",
@@ -78,7 +78,7 @@ static void OnChange_CurrentAC(bool active)
 }
 
 DEF_CHOICE_2( cRangesCurrentAC,
-    "Предел",
+    "Диапазон",
     "Диапазон измерения",
     "20мА",
     "2А",
@@ -100,7 +100,7 @@ static void OnChange_Resistance(bool active)
 }
 
 DEF_CHOICE_4( cRangesResistance,                                                                                                                                //--- Мультиметр - Предел ---
-    "Предел",
+    "Диапазон",
     "Диапазон измерения",
     "2 кОм",
     "20 кОм",
