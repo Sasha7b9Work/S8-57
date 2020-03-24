@@ -137,6 +137,10 @@ exit:
     {
         Roller::ReadPoint();
     }
+    else
+    {
+        Timer::PauseOnTicks(10);
+    }
 
     return true;
 }
