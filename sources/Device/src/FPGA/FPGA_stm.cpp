@@ -11,9 +11,6 @@
 #include "Utils/Math.h"
 
 
-uint16 Osci::addrRead = 0xffff;
-
-
 struct Gates
 {
     Gates() : minGate(0.0F), maxGate(0.0F) { }
@@ -31,6 +28,12 @@ private:
 
     void CalculateWithoutGates(uint16 *min, uint16 *max);
 };
+
+
+static Gates gates; // "Ворота" рандомизатора
+
+
+uint16 Osci::addrRead = 0xffff;
 
 
 bool Gates::Calculate(uint16 value, uint16 *min, uint16 *max)
@@ -126,8 +129,6 @@ int Osci::CalculateShift()
 {
     uint16 min = 0;
     uint16 max = 0;
-
-    static Gates gates;
 
     if(!gates.Calculate(valueADC, &min, &max))
     {

@@ -95,8 +95,8 @@ static void InterpolateSegment(Segment *segment)
         return;
     }
 
-    float before = *(segment->start - 1);    // Значение перед "пустым" сегментом
-    float after = *(segment->end);       // Значение после "пустого" сегмента
+    float before = *(segment->start - 1);               // Значение перед "пустым" сегментом
+    float after = *(segment->end);                      // Значение после "пустого" сегмента
 
     int numTicks = segment->end - segment->start + 2;   // На столько отрезков разбит наш сегмент
 
