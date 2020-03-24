@@ -135,7 +135,7 @@ int Osci::CalculateShift()
         return NULL_TSHIFT;
     }
 
-    if ((valueADC > max - setNRST.enumGameMax) || (valueADC < min + setNRST.enumGameMin))
+    if ((valueADC > max - setNRST.enumGameMax * 10) || (valueADC < min + setNRST.enumGameMin * 10))
     {
         return NULL_TSHIFT;
     }
@@ -143,9 +143,7 @@ int Osci::CalculateShift()
     if (OSCI_IN_MODE_RANDOMIZER)
     {
         float tin = static_cast<float>(valueADC - min) / (max - min);
-        int retValue = static_cast<int>(tin * TBase().RandK());
-
-        return retValue;
+        return static_cast<int>(tin * TBase().RandK());
     }
 
     return NULL_TSHIFT;
