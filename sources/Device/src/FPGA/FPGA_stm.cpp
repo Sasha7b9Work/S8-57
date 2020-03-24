@@ -48,14 +48,18 @@ struct Shift
     // Возвращает данные, необходимые для чтения даннхы в режмиме рандомизатора.
     // Если Tsm == 0, то структура будет использоваться не для чтения данных, а для правильного усредения.
     StructReadRand GetInfoForReadRand(int Tsm = Shift::NULL, const uint8 *address = nullptr);
+
+private:
+    static StructReadRand structRand;
 };
 
 
 static Gates gates; // "Ворота" рандомизатора
-
 static Shift shift;
 
 uint16 Osci::addrRead = 0xffff;
+
+StructReadRand Shift::structRand = { 0, 0 };
 
 
 bool Gates::Calculate(uint16 value, uint16 *min, uint16 *max)
@@ -284,23 +288,21 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
 
 StructReadRand Shift::GetInfoForReadRand(int Tsm, const uint8 *address)
 {
-    static StructReadRand result = { 0, 0 };
-
     if(Tsm != Shift::NULL)
     {
-        result.step = TBase().RandK();
+        structRand.step = TBase().RandK();
 
         int index = Tsm - Osci::addShift;
 
         while(index < 0)
         {
-            index += result.step;
+            index += structRand.step;
             volatile uint8 d = *address;
             d = d;
         }
 
-        result.posFirst = static_cast<uint>(index);
+        structRand.posFirst = static_cast<uint>(index);
     }
 
-    return result;
+    return structRand;
 }
