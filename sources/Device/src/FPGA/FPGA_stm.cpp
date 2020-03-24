@@ -32,6 +32,9 @@ private:
 
 struct Shift
 {
+    static const int NULL = 1000000;
+    static const int FALL_OUT = 1000001;
+
     int Calculate();
 };
 
@@ -53,7 +56,7 @@ struct StructReadRand
 // Возвращает данные, необходимые для чтения даннхы в режмиме рандомизатора.
 // Если Tsm == 0, то структура будет использоваться не для чтения данных, а для правильного усредения.
 // В этом случае
-static StructReadRand GetInfoForReadRand(int Tsm = Osci::NULL_TSHIFT, const uint8 *address = nullptr);
+static StructReadRand GetInfoForReadRand(int Tsm = Shift::NULL, const uint8 *address = nullptr);
 
 
 
@@ -153,12 +156,12 @@ int Shift::Calculate()
 
     if(!gates.Calculate(Osci::valueADC, &min, &max))
     {
-        return Osci::NULL_TSHIFT;
+        return NULL;
     }
 
     if ((Osci::valueADC > max - setNRST.enumGameMax * 10) || (Osci::valueADC < min + setNRST.enumGameMin * 10))
     {
-        return Osci::NULL_TSHIFT;
+        return NULL;
     }
 
     if (OSCI_IN_MODE_RANDOMIZER)
@@ -167,7 +170,7 @@ int Shift::Calculate()
         return static_cast<int>(tin * TBase().RandK());
     }
 
-    return Osci::NULL_TSHIFT;
+    return NULL;
 }
 
 
@@ -175,7 +178,7 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
 {
     int Tsm = shift.Calculate();
 
-    if (Tsm == NULL_TSHIFT)
+    if (Tsm == Shift::NULL)
     {
         return false;
     }
@@ -285,7 +288,7 @@ StructReadRand GetInfoForReadRand(int Tsm, const uint8 *address)
 {
     static StructReadRand result = { 0, 0 };
 
-    if(Tsm != Osci::NULL_TSHIFT)
+    if(Tsm != Shift::NULL)
     {
         result.step = TBase().RandK();
 

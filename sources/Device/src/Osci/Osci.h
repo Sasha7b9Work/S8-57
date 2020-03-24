@@ -12,27 +12,18 @@ struct Osci
     friend struct Randomizer;
     friend struct ContextTester;
 
-    static const int NULL_TSHIFT = 1000000;
-    static const int FALL_OUT_TSHIFT = 1000001;
-
-
     static void Init();
-
 
     static void Update();
 
-
     static void OnPressStart();
-
 
     static void DeInit();
 
     // (Если button == true) - это запуск кнопкой
     static void Start(bool button);
 
-
     static void Stop();
-
 
     static bool IsRunning();
     
@@ -56,10 +47,8 @@ struct Osci
 
     // Значение, считанное из handleADC
     static uint16 valueADC;
-
     
     static int addShift;
-
     
     static void ReadData();
 
