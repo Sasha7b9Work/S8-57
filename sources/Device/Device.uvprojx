@@ -1791,19 +1791,14 @@
           <GroupName>Utils</GroupName>
           <Files>
             <File>
-              <FileName>Averager.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\Averager.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Averager.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Averager.h</FilePath>
             </File>
             <File>
-              <FileName>Buffer.cpp</FileName>
+              <FileName>Averager.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Utils\Buffer.cpp</FilePath>
+              <FilePath>.\src\Utils\Averager.cpp</FilePath>
             </File>
             <File>
               <FileName>Buffer.h</FileName>
@@ -1811,9 +1806,9 @@
               <FilePath>.\src\Utils\Buffer.h</FilePath>
             </File>
             <File>
-              <FileName>CommonFunctions.cpp</FileName>
+              <FileName>Buffer.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Utils\CommonFunctions.cpp</FilePath>
+              <FilePath>.\src\Utils\Buffer.cpp</FilePath>
             </File>
             <File>
               <FileName>CommonFunctions.h</FileName>
@@ -1821,9 +1816,9 @@
               <FilePath>.\src\Utils\CommonFunctions.h</FilePath>
             </File>
             <File>
-              <FileName>Debug.cpp</FileName>
+              <FileName>CommonFunctions.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Utils\Debug.cpp</FilePath>
+              <FilePath>.\src\Utils\CommonFunctions.cpp</FilePath>
             </File>
             <File>
               <FileName>Debug.h</FileName>
@@ -1831,9 +1826,29 @@
               <FilePath>.\src\Utils\Debug.h</FilePath>
             </File>
             <File>
-              <FileName>Math.cpp</FileName>
+              <FileName>Debug.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Utils\Math.cpp</FilePath>
+              <FilePath>.\src\Utils\Debug.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Exceptions.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Exceptions.h</FilePath>
+            </File>
+            <File>
+              <FileName>Exceptions.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Exceptions.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Interpolator.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Interpolator.h</FilePath>
+            </File>
+            <File>
+              <FileName>Interpolator.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Interpolator.cpp</FilePath>
             </File>
             <File>
               <FileName>Math.h</FileName>
@@ -1841,9 +1856,19 @@
               <FilePath>.\src\Utils\Math.h</FilePath>
             </File>
             <File>
-              <FileName>Smoother.cpp</FileName>
+              <FileName>Math.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Utils\Smoother.cpp</FilePath>
+              <FilePath>.\src\Utils\Math.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Queue.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Utils\Queue.h</FilePath>
+            </File>
+            <File>
+              <FileName>Queue.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Queue.cpp</FilePath>
             </File>
             <File>
               <FileName>Smoother.h</FileName>
@@ -1851,14 +1876,19 @@
               <FilePath>.\src\Utils\Smoother.h</FilePath>
             </File>
             <File>
-              <FileName>Stack.cpp</FileName>
+              <FileName>Smoother.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Utils\Stack.cpp</FilePath>
+              <FilePath>.\src\Utils\Smoother.cpp</FilePath>
             </File>
             <File>
               <FileName>Stack.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Stack.h</FilePath>
+            </File>
+            <File>
+              <FileName>Stack.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Utils\Stack.cpp</FilePath>
             </File>
             <File>
               <FileName>String.cpp</FileName>
@@ -1899,16 +1929,6 @@
               <FileName>Values.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Values.h</FilePath>
-            </File>
-            <File>
-              <FileName>Queue.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\Queue.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Queue.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\Queue.h</FilePath>
             </File>
           </Files>
         </Group>

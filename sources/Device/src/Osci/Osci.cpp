@@ -10,6 +10,7 @@
 #include "Osci/Reader.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/AutoMeasurements.h"
+#include "Utils/Interpolator.h"
 #include "Utils/Values.h"
 #include <cstring>
 
@@ -407,6 +408,16 @@ void Osci::ReadData()
 }
 
 
+void Randomizer::MoveReadedData(DataSettings *ds)
+{
+    MoveReadedDataChannel(ds, Chan::A);
+    MoveReadedDataChannel(ds, Chan::B);
+
+    InterpolateDataChannel(ds, Chan::A);
+    InterpolateDataChannel(ds, Chan::B);
+}
+
+
 void Randomizer::MoveReadedDataChannel(DataSettings *ds, Chan::E ch)
 {
     if(ENABLED(ds, ch))
@@ -428,8 +439,36 @@ void Randomizer::MoveReadedDataChannel(DataSettings *ds, Chan::E ch)
 }
 
 
-void Randomizer::MoveReadedData(DataSettings *ds)
+void Randomizer::InterpolateDataChannel(DataSettings *ds, Chan::E ch)
 {
-    MoveReadedDataChannel(ds, Chan::A);
-    MoveReadedDataChannel(ds, Chan::B);
+    if(!ENABLED(ds, ch))
+    {
+        return;
+    }
+
+    uint numPoints = ds->BytesInChannel();                  // Число байт в канале
+
+    uint8 *data = ds->Data(ch);
+
+    uint numReaded = 0;                                     // Число реально считанных точек
+
+    for(uint i = 0; i < numPoints; i++)
+    {
+        if(data[i] != VALUE::NONE)
+        {
+            numReaded++;
+        }
+
+        if(numReaded >= numPoints / 2)
+        {
+            break;
+        }
+    }
+
+    if(numReaded < numPoints / 2 || numReaded == numPoints) // Если считано менее половины точек, то просто выходим
+    {
+        return;
+    }
+
+    Interpolator::Run(data, numPoints);
 }
