@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Log.h"
+#include "log.h"
 #include "device.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/HAL/HAL.h"

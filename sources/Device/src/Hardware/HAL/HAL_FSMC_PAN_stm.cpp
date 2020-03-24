@@ -137,10 +137,6 @@ exit:
     {
         Roller::ReadPoint();
     }
-    else if(OSCI_IN_MODE_RANDOMIZER)
-    {
-        Randomizer::Read();
-    }
 
     return true;
 }
@@ -231,10 +227,6 @@ void HAL_BUS::Panel::Send(uint8 *data, uint size)
     else if(OSCI_IN_MODE_P2P)
     {
         Roller::ReadPoint();
-    }
-    else if(OSCI_IN_MODE_RANDOMIZER)
-    {
-        Randomizer::Read();
     }
 }
 

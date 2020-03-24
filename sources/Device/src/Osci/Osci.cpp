@@ -433,31 +433,3 @@ void Randomizer::MoveReadedData(DataSettings *ds)
     MoveReadedDataChannel(ds, Chan::A);
     MoveReadedDataChannel(ds, Chan::B);
 }
-
-
-void Randomizer::Read()
-{
-    static uint prevTime = 0;
-
-    if(TIME_MS == prevTime || set.time.base > TBase::_20ns)
-    {
-        return;
-    }
-
-    prevTime = TIME_MS;
-
-    FPGA::ReadFlag();
-
-    Osci::ProcessFlagPred();
-
-    if(FPGA::flag.DataReady())
-    {
-        Timer::PauseOnTicks(5 * 90 * 20);
-
-        Osci::ReadDataChannel(Chan::A, IntRAM::DataRand(Chan::A));
-
-        Osci::ReadDataChannel(Chan::B, IntRAM::DataRand(Chan::B));
-
-        Osci::Start(false);
-    }
-}
