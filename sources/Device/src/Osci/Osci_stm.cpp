@@ -14,7 +14,7 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
 
         if(OSCI_IN_MODE_RANDOMIZER)
         {
-            k = TBase().RandK();
+            k = TBase::ShiftK();
         }
 
         addrRead = static_cast<uint16>(ReadLastRecord(ch) - static_cast<int>(numPoints) / k);

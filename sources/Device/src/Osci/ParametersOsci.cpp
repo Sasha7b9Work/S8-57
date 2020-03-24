@@ -784,7 +784,7 @@ Range::operator Range::E()
 }
 
 
-uint TBase::RandK() const
+uint TBase::ShiftK()
 {
     return Kr[TBase()];
 }

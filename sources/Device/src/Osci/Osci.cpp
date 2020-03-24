@@ -8,7 +8,6 @@
 #include "Hardware/Memory/RAM.h"
 #include "Keyboard/BufferButtons.h"
 #include "Osci/DeviceSettings.h"
-#include "Osci/Interpolator.h"
 #include "Osci/Osci.h"
 #include "Osci/Reader.h"
 #include "Osci/Display/DisplayOsci.h"
@@ -44,6 +43,9 @@ struct Shift
 private:
     static StructReadRand structRand;
 };
+
+
+#include "Osci/Interpolator.h"
 
 
 struct Gates
@@ -165,7 +167,7 @@ bool Osci::IsRunning()
 
 void Osci::UpdateFPGA()
 {
-    uint number = OSCI_IN_MODE_RANDOMIZER ? TBase().RandK() : 1;
+    uint number = OSCI_IN_MODE_RANDOMIZER ? TBase::ShiftK() : 1;
 
     RAM::NewFrameForRandomize();
 
@@ -570,7 +572,7 @@ int Shift::Calculate()
     if(OSCI_IN_MODE_RANDOMIZER)
     {
         float tin = static_cast<float>(Osci::valueADC - min) / (max - min);
-        return static_cast<int>(tin * TBase().RandK());
+        return static_cast<int>(tin * TBase::ShiftK());
     }
 
     return NULL;
@@ -581,7 +583,7 @@ StructReadRand Shift::GetInfoForReadRand(int Tsm, const uint8 *address)
 {
     if(Tsm != Shift::NULL)
     {
-        structRand.step = TBase().RandK();
+        structRand.step = TBase::ShiftK();
 
         int index = Tsm - Osci::addShift;
 
