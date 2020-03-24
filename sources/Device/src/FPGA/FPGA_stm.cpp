@@ -135,7 +135,7 @@ int Osci::CalculateShift()
         return NULL_TSHIFT;
     }
 
-    if (valueADC > max || valueADC < min)
+    if ((valueADC > max - setNRST.enumGameMax) || (valueADC < min + setNRST.enumGameMin))
     {
         return NULL_TSHIFT;
     }
