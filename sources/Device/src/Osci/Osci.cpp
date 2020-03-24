@@ -1,18 +1,75 @@
 #include "defines.h"
+#include "log.h"
 #include "device.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Memory/IntRAM.h"
 #include "Hardware/Memory/RAM.h"
+#include "Keyboard/BufferButtons.h"
 #include "Osci/DeviceSettings.h"
 #include "Osci/Interpolator.h"
 #include "Osci/Osci.h"
 #include "Osci/Reader.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/AutoMeasurements.h"
+#include "Settings/SettingsNRST.h"
+#include "Utils/Math.h"
 #include "Utils/Values.h"
 #include <cstring>
+
+
+#undef NULL
+
+
+// Структура для хранения информации, необходимой для чтения в режиме рандомизатора
+struct StructReadRand
+{
+    uint step;       ///< Шаг между точками
+    uint posFirst;   ///< Позиция первой считанной точки
+};
+
+
+struct Shift
+{
+    static const int NULL = 1000000;
+    static const int FALL_OUT = 1000001;
+
+    int Calculate();
+
+    // Возвращает данные, необходимые для чтения даннхы в режмиме рандомизатора.
+    // Если Tsm == 0, то структура будет использоваться не для чтения данных, а для правильного усредения.
+    StructReadRand GetInfoForReadRand(int Tsm = Shift::NULL, const uint8 *address = nullptr);
+
+private:
+    static StructReadRand structRand;
+};
+
+
+struct Gates
+{
+    Gates() : minGate(0.0F), maxGate(0.0F)
+    {
+    }
+    bool Calculate(uint16 value, uint16 *min, uint16 *max);
+
+private:
+    static const int numberMeasuresForGates = 10000;
+    static const uint TIME_WAIT = 3000;
+    float minGate;
+    float maxGate;
+    // Здесь хранятся два наименьших и два наибольших значения из всех подаваемых в функцию Calculate
+    MinMax2 m;
+    // Пересчитать значения ворот
+    void RecalculateGates();
+
+    void CalculateWithoutGates(uint16 *min, uint16 *max);
+};
+
+
+static Gates gates; // "Ворота" рандомизатора
+static Shift shift;
+StructReadRand Shift::structRand = { 0, 0 };
 
 
 int    Osci::addShift = 0;
@@ -447,4 +504,167 @@ void Randomizer::InterpolateDataChannel(DataSettings *ds, Chan::E ch)
     }
 
     Interpolator::Run(data, numPoints);
+}
+
+
+bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
+{
+    int Tsm = shift.Calculate();
+
+    if(Tsm == Shift::NULL)
+    {
+        return false;
+    }
+
+    StructReadRand infoRead = shift.GetInfoForReadRand(Tsm, addr);
+
+    uint step = infoRead.step;
+
+    uint8 *dataRead = data + infoRead.posFirst;
+
+    uint8 *last = data + ENumPointsFPGA::PointsInChannel();
+
+    HAL_BUS::FPGA::SetAddrData(addr);
+
+    if(ENumAverage() > 1)
+    {
+        uint8 *dataPointer = &data[infoRead.posFirst];              // Указатель в переданном массиве
+
+        while(dataRead < last)
+        {
+            *dataRead = HAL_BUS::FPGA::ReadA0();
+            *dataPointer = *dataRead;
+
+            dataRead += step;
+            dataPointer += step;
+        }
+    }
+    else
+    {
+        while(dataRead < last)
+        {
+            *dataRead = HAL_BUS::FPGA::ReadA0();
+            dataRead += step;
+        }
+    }
+
+    return true;
+}
+
+
+int Shift::Calculate()
+{
+    uint16 min = 0;
+    uint16 max = 0;
+
+    if(!gates.Calculate(Osci::valueADC, &min, &max))
+    {
+        return NULL;
+    }
+
+    if((Osci::valueADC > max - setNRST.enumGameMax * 10) || (Osci::valueADC < min + setNRST.enumGameMin * 10))
+    {
+        return NULL;
+    }
+
+    if(OSCI_IN_MODE_RANDOMIZER)
+    {
+        float tin = static_cast<float>(Osci::valueADC - min) / (max - min);
+        return static_cast<int>(tin * TBase().RandK());
+    }
+
+    return NULL;
+}
+
+
+StructReadRand Shift::GetInfoForReadRand(int Tsm, const uint8 *address)
+{
+    if(Tsm != Shift::NULL)
+    {
+        structRand.step = TBase().RandK();
+
+        int index = Tsm - Osci::addShift;
+
+        while(index < 0)
+        {
+            index += structRand.step;
+            volatile uint8 d = *address;
+            d = d;
+        }
+
+        structRand.posFirst = static_cast<uint>(index);
+    }
+
+    return structRand;
+}
+
+
+bool Gates::Calculate(uint16 value, uint16 *min, uint16 *max)
+{
+    if(value < 250 || value > 4000)
+    {
+        return false;
+    }
+
+    m.Add(value);
+
+    if((TIME_MS > TIME_WAIT) && (BufferButtons::TimeAfterControlMS() < TIME_WAIT))
+    {
+        CalculateWithoutGates(min, max);
+
+        return true;
+    }
+
+    if(minGate == 0.0F)
+    {
+        *min = m.Min();
+        *max = m.Max();
+        if(m.Count() < numberMeasuresForGates)
+        {
+            return true;
+        }
+        minGate = m.Min();
+        maxGate = m.Max();
+        m.Reset();
+    }
+
+    if(m.Count() >= numberMeasuresForGates)
+    {
+        RecalculateGates();
+
+        m.Reset();
+    }
+
+    *min = static_cast<uint16>(minGate);
+    *max = static_cast<uint16>(maxGate);
+
+    return (value >= *min) && (value <= *max);
+}
+
+
+void Gates::RecalculateGates()
+{
+    minGate = 0.8F * minGate + m.Min() * 0.2F;
+    maxGate = 0.8F * maxGate + m.Max() * 0.2F;
+
+    static uint timePrev = 0;
+
+    LOG_WRITE("Новые ворота %d %d  время %d", static_cast<uint16>(minGate), static_cast<uint16>(maxGate), (TIME_MS - timePrev) / 1000);
+
+    timePrev = TIME_MS;
+}
+
+
+void Gates::CalculateWithoutGates(uint16 *min, uint16 *max)
+{
+    if(minGate == 0.0F)
+    {
+        *min = m.Min();
+        *max = m.Max();
+    }
+    else
+    {
+        *min = static_cast<uint16>(minGate);
+        *max = static_cast<uint16>(maxGate);
+    }
 }

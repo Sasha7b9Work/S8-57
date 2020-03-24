@@ -1556,6 +1556,11 @@
               <FilePath>.\src\Osci\Osci.cpp</FilePath>
             </File>
             <File>
+              <FileName>Osci_stm.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Osci_stm.cpp</FilePath>
+            </File>
+            <File>
               <FileName>ParametersOsci.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Osci\ParametersOsci.h</FilePath>

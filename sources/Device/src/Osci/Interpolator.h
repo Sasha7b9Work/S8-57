@@ -109,7 +109,7 @@ static void InterpolateSegment(Segment *segment)
 
     float delta = (after - before) / numTicks;
 
-    for(int tick = 0; tick < numTicks - 2; tick++)
+    for(int tick = 0; tick < numTicks - 1; tick++)
     {
         float value = before + delta * (tick + 1);
 
