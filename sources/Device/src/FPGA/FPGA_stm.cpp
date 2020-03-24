@@ -30,7 +30,15 @@ private:
 };
 
 
+struct Shift
+{
+    int Calculate();
+};
+
+
 static Gates gates; // "Ворота" рандомизатора
+
+static Shift shift;
 
 
 uint16 Osci::addrRead = 0xffff;
@@ -125,34 +133,34 @@ void FPGA::Init()
 }
 
 
-int Osci::CalculateShift()
+int Shift::Calculate()
 {
     uint16 min = 0;
     uint16 max = 0;
 
-    if(!gates.Calculate(valueADC, &min, &max))
+    if(!gates.Calculate(Osci::valueADC, &min, &max))
     {
-        return NULL_TSHIFT;
+        return Osci::NULL_TSHIFT;
     }
 
-    if ((valueADC > max - setNRST.enumGameMax * 10) || (valueADC < min + setNRST.enumGameMin * 10))
+    if ((Osci::valueADC > max - setNRST.enumGameMax * 10) || (Osci::valueADC < min + setNRST.enumGameMin * 10))
     {
-        return NULL_TSHIFT;
+        return Osci::NULL_TSHIFT;
     }
 
     if (OSCI_IN_MODE_RANDOMIZER)
     {
-        float tin = static_cast<float>(valueADC - min) / (max - min);
+        float tin = static_cast<float>(Osci::valueADC - min) / (max - min);
         return static_cast<int>(tin * TBase().RandK());
     }
 
-    return NULL_TSHIFT;
+    return Osci::NULL_TSHIFT;
 }
 
 
 bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
 {
-    int Tsm = CalculateShift();
+    int Tsm = shift.Calculate();
 
     if (Tsm == NULL_TSHIFT)
     {

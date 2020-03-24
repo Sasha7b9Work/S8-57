@@ -13,6 +13,7 @@ struct Osci
     friend struct ContextTester;
 
     static const int NULL_TSHIFT = 1000000;
+    static const int FALL_OUT_TSHIFT = 1000001;
 
 
     static void Init();
@@ -106,11 +107,7 @@ private:
     // Читать данные канала в памяить data
     static bool ReadDataChannel(Chan::E ch, uint8 *data);
 
-
     static bool ReadDataChannelRand(uint8 *address, uint8 *data);
-
-
-    static int CalculateShift();
 
     // Здесь хранится адрес, начиная с которого будем читать данные по каналам. Если addrRead == 0xffff, то адрес вначале нужно считать
     static uint16 addrRead;
