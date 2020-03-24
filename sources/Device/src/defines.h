@@ -100,9 +100,6 @@ void EmptyFuncVB(bool);
 
 #define SAFE_FREE(x) if(x) free(x); (x) = 0;
 
-#define NULL_TSHIFT 1000000
-
-
 union BitSet16 //-V2514
 {
     uint16 halfWord;

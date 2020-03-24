@@ -12,6 +12,8 @@ struct Osci
     friend struct Randomizer;
     friend struct ContextTester;
 
+    static const int NULL_TSHIFT = 1000000;
+
 
     static void Init();
 
