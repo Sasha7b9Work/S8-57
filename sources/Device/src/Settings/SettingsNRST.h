@@ -68,8 +68,8 @@ struct SettingsNRST
     int16          numAveForRand;                  // По скольким измерениям усреднять сигнал в режиме рандомизатора.
     int16          numSmoothForRand;               // Число точек для скользящего фильта в рандомизаторе.
     int16          correctionTime;                 // Коэффициент коррекции времени.
-    int16          enum_gate_max;                  // Ограничение ворот в рандомизаторе сверху
-    int16          enum_gate_min;                  // Ограничение ворот в рандомизаторе снизу
+    int16          enumGameMax;                    // Ограничение ворот в рандомизаторе сверху
+    int16          enumGameMin;                    // Ограничение ворот в рандомизаторе снизу
     BalanceADC     balanceADC;                     // Балансировка АЦП
     ExtraShift     exShift;                        // Дополнительное смещение
     ExtraStretch   exStretch;                      // Дополнительная растяжка по каналу

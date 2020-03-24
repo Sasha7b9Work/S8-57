@@ -135,17 +135,14 @@ int Osci::CalculateShift()
         return NULL_TSHIFT;
     }
 
-    int deltaMAX = setNRST.enum_gate_max * 10;
-    int deltaMIN = setNRST.enum_gate_min * 10;
-
-    if (valueADC > max - deltaMAX || valueADC < min + deltaMIN)
+    if (valueADC > max || valueADC < min)
     {
         return NULL_TSHIFT;
     }
 
     if (OSCI_IN_MODE_RANDOMIZER)
     {
-        float tin = static_cast<float>(valueADC - min + deltaMIN) / (max - deltaMAX - (min + deltaMIN));
+        float tin = static_cast<float>(valueADC - min) / (max - min);
         int retValue = static_cast<int>(tin * TBase().RandK());
 
         return retValue;
@@ -164,7 +161,7 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
         return false;
     }
 
-    Osci::StructReadRand infoRead = Osci::GetInfoForReadRand(Tsm, addr);
+    StructReadRand infoRead = GetInfoForReadRand(Tsm, addr);
 
     uint step = infoRead.step;
 
