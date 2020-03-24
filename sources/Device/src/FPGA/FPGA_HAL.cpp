@@ -29,7 +29,7 @@ void FPGA::LoadRegUPR()
         (0)
     };
 
-    if(OSCI_IN_MODE_RANDOMIZER)
+    if(Device::InModeOsci() && OSCI_IN_MODE_RANDOMIZER)
     {
         data |= 1;
     }
