@@ -200,30 +200,6 @@ void Osci::OnChangedPoints()
 }
 
 
-Osci::StructReadRand Osci::GetInfoForReadRand(int Tsm, const uint8 *address)
-{
-    static StructReadRand result = { 0, 0 };
-
-    if (Tsm != NULL_TSHIFT)
-    {
-        result.step = TBase().RandK();
-
-        int index = Tsm - addShift;
-
-        while (index < 0)
-        {
-            index += result.step;
-            volatile uint8 d = *address;
-            d = d;
-        }
-
-        result.posFirst = static_cast<uint>(index);
-    }
-
-    return result;
-}
-
-
 void Osci::OnPressStart()
 {
     return IsRunning() ? Stop() : Start(true);

@@ -63,18 +63,6 @@ struct Osci
     
     static void ReadData();
 
-    // Структура для хранения информации, необходимой для чтения в режиме рандомизатора
-    struct StructReadRand
-    {
-        uint step;       ///< Шаг между точками
-        uint posFirst;   ///< Позиция первой считанной точки
-    };
-    
-    // Возвращает данные, необходимые для чтения даннхы в режмиме рандомизатора.
-    // Если Tsm == 0, то структура будет использоваться не для чтения данных, а для правильного усредения.
-    // В этом случае
-    static StructReadRand GetInfoForReadRand(int Tsm = NULL_TSHIFT, const uint8 *address = nullptr);
-
     // Управитель входными цепями
     struct InputController
     {
