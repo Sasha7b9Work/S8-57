@@ -1,6 +1,13 @@
+#pragma once
 #include "defines.h"
 #include "FPGA/FPGA.h"
-#include "Utils/Interpolator.h"
+
+
+class Interpolator
+{
+public:
+    static void Run(uint8 *data, uint num);
+};
 
 
 static uint8 *begin = nullptr;  // Начало обрабатываемых данных
@@ -102,7 +109,7 @@ static void InterpolateSegment(Segment *segment)
 
     float delta = (after - before) / numTicks;
 
-    for(int tick = 0; tick < numTicks - 1; tick++)
+    for(int tick = 0; tick < numTicks - 2; tick++)
     {
         float value = before + delta * (tick + 1);
 

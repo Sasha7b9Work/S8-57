@@ -1580,6 +1580,11 @@
               <FileType>8</FileType>
               <FilePath>.\src\Osci\Roller.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Interpolator.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Osci\Interpolator.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1839,16 +1844,6 @@
               <FileName>Exceptions.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Utils\Exceptions.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Interpolator.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Utils\Interpolator.h</FilePath>
-            </File>
-            <File>
-              <FileName>Interpolator.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\Interpolator.cpp</FilePath>
             </File>
             <File>
               <FileName>Math.h</FileName>

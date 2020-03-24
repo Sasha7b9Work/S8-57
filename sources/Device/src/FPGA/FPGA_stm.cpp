@@ -180,7 +180,7 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
 
             dataRead += step;
             dataPointer += step;
-        }
+        }   
     }
     else
     {

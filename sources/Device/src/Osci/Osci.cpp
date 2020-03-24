@@ -6,11 +6,11 @@
 #include "Hardware/Memory/IntRAM.h"
 #include "Hardware/Memory/RAM.h"
 #include "Osci/DeviceSettings.h"
+#include "Osci/Interpolator.h"
 #include "Osci/Osci.h"
 #include "Osci/Reader.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/AutoMeasurements.h"
-#include "Utils/Interpolator.h"
 #include "Utils/Values.h"
 #include <cstring>
 
