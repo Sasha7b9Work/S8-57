@@ -21,7 +21,7 @@ void DataSettings::Fill()
     Lval_RANGE_B(this)   = Range(Chan::B);
     RSHIFT_A(this)       = RShift(Chan::A);
     RSHIFT_B(this)       = RShift(Chan::B);
-    Lval_TBASE(this)     = TBase();
+    Lval_TBASE(this)     = set.time.base;
     TSHIFT(this)         = set.time.shift;
     Lval_COUPLE_A(this)  = ModeCouple(Chan::A);
     Lval_COUPLE_B(this)  = ModeCouple(Chan::B);

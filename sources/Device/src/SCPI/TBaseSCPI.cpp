@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Osci/ParametersOsci.h"
 #include "SCPI/TBaseSCPI.h"
+#include "Settings/Settings.h"
 
 
 // :TIME:SCALE:
@@ -54,7 +55,7 @@ const StructSCPI SCPI::tBase[] =
 
 static const char *FuncScale(const char *buffer)
 {
-    SCPI_REQUEST(SCPI::SendAnswer(tBaseNames[TBase()]));
+    SCPI_REQUEST(SCPI::SendAnswer(tBaseNames[set.time.base]));
 
     SCPI_PROCESS_ARRAY(tBaseNames, TBase::Set(static_cast<TBase::E>(i)));
 }

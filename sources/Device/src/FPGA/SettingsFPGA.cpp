@@ -301,7 +301,7 @@ String TShift::ToString(const TBase::E _base) const
 
     if(tBase == TBase::Count)
     {
-        tBase = TBase();
+        tBase = set.time.base;
     }
 
     return Time(TShift::ToAbs(set.time.shift, tBase)).ToString(true);
@@ -357,7 +357,7 @@ pString TBase::Name() const
         "10ñ"
     };
 
-    return names[TBase()];
+    return names[set.time.base];
 }
 
 

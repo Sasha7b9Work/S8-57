@@ -45,7 +45,7 @@ String CursorsMeasurements::Voltage(Chan::E source, int numCur)
 
 String CursorsMeasurements::Time(Chan::E source, int numCur)
 {
-    float time = MathFPGA::TimeCursor(CursorsMeasurements::PosT(source, numCur), TBase());
+    float time = MathFPGA::TimeCursor(CursorsMeasurements::PosT(source, numCur), set.time.base);
 
     return ::Time(time).ToString(true);
 }
