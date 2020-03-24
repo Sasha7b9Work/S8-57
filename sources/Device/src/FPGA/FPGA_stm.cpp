@@ -30,12 +30,24 @@ private:
 };
 
 
+// Структура для хранения информации, необходимой для чтения в режиме рандомизатора
+struct StructReadRand
+{
+    uint step;       ///< Шаг между точками
+    uint posFirst;   ///< Позиция первой считанной точки
+};
+
+
 struct Shift
 {
     static const int NULL = 1000000;
     static const int FALL_OUT = 1000001;
 
     int Calculate();
+
+    // Возвращает данные, необходимые для чтения даннхы в режмиме рандомизатора.
+    // Если Tsm == 0, то структура будет использоваться не для чтения данных, а для правильного усредения.
+    StructReadRand GetInfoForReadRand(int Tsm = Shift::NULL, const uint8 *address = nullptr);
 };
 
 
@@ -44,20 +56,6 @@ static Gates gates; // "Ворота" рандомизатора
 static Shift shift;
 
 uint16 Osci::addrRead = 0xffff;
-
-
-// Структура для хранения информации, необходимой для чтения в режиме рандомизатора
-struct StructReadRand
-{
-    uint step;       ///< Шаг между точками
-    uint posFirst;   ///< Позиция первой считанной точки
-};
-
-// Возвращает данные, необходимые для чтения даннхы в режмиме рандомизатора.
-// Если Tsm == 0, то структура будет использоваться не для чтения данных, а для правильного усредения.
-// В этом случае
-static StructReadRand GetInfoForReadRand(int Tsm = Shift::NULL, const uint8 *address = nullptr);
-
 
 
 bool Gates::Calculate(uint16 value, uint16 *min, uint16 *max)
@@ -183,7 +181,7 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
         return false;
     }
 
-    StructReadRand infoRead = GetInfoForReadRand(Tsm, addr);
+    StructReadRand infoRead = shift.GetInfoForReadRand(Tsm, addr);
 
     uint step = infoRead.step;
 
@@ -274,7 +272,7 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
                 int result = static_cast<int>(VALUE::AVE - static_cast<int>(delta * stretch));
 
                 if(result < VALUE::MIN)      { p[i] = VALUE::MIN; }
-                else if(result > VALUE::MAX) { p[i] = VALUE::MAX; }
+                else if(result > VALUE::MAX) { p[i] = VALUE::MAX; }     
                 else                         { p[i] = static_cast<uint8>(result); }
             }
         }
@@ -284,7 +282,7 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
 }
 
 
-StructReadRand GetInfoForReadRand(int Tsm, const uint8 *address)
+StructReadRand Shift::GetInfoForReadRand(int Tsm, const uint8 *address)
 {
     static StructReadRand result = { 0, 0 };
 
