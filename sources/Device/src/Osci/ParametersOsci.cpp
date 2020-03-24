@@ -20,8 +20,8 @@
 #endif
 
 
-//                                           2нс 5нс 10нс 20нс 50нс
-static const uint Kr[TBase::Count] = { 50, 20, 10,  5,   2 };
+//                                    2нс 5нс 10нс 20нс 50нс
+static const int Kr[TBase::Count] = { 50, 20, 10,  5,   2 };
 
 
 
@@ -784,7 +784,7 @@ Range::operator Range::E()
 }
 
 
-uint TBase::ShiftK()
+int TBase::ShiftK()
 {
     return Kr[set.time.base];
 }

@@ -10,7 +10,7 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
 
     if(addrRead == 0xffff)
     {
-        uint k = 1;
+        int k = 1;
 
         if(OSCI_IN_MODE_RANDOMIZER)
         {

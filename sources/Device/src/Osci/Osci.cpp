@@ -24,8 +24,8 @@
 // Структура для хранения информации, необходимой для чтения в режиме рандомизатора
 struct StructReadRand
 {
-    uint step;       ///< Шаг между точками
-    uint posFirst;   ///< Позиция первой считанной точки
+    int step;       // Шаг между точками
+    int posFirst;   // Позиция первой считанной точки
 };
 
 
@@ -39,6 +39,9 @@ struct Shift
     // Возвращает данные, необходимые для чтения даннхы в режмиме рандомизатора.
     // Если Tsm == 0, то структура будет использоваться не для чтения данных, а для правильного усредения.
     StructReadRand GetInfoForReadRand(int Tsm = Shift::NULL, const uint8 *address = nullptr);
+
+    // Возвращает true, если в данной позиции точка не может быть считана с АЦП и её нужно рассчитывать программно
+    bool Missed(int pos);
 
 private:
     static StructReadRand structRand;
@@ -167,11 +170,11 @@ bool Osci::IsRunning()
 
 void Osci::UpdateFPGA()
 {
-    uint number = OSCI_IN_MODE_RANDOMIZER ? TBase::ShiftK() : 1;
+    int number = OSCI_IN_MODE_RANDOMIZER ? TBase::ShiftK() : 1;
 
     RAM::NewFrameForRandomize();
 
-    for (uint i = 0; i < number; i++)
+    for (int i = 0; i < number; i++)
     {
         FPGA::ReadFlag();
     
@@ -520,7 +523,7 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
 
     StructReadRand infoRead = shift.GetInfoForReadRand(Tsm, addr);
 
-    uint step = infoRead.step;
+    int step = infoRead.step;
 
     uint8 *dataRead = data + infoRead.posFirst;
 
@@ -594,7 +597,7 @@ StructReadRand Shift::GetInfoForReadRand(int Tsm, const uint8 *address)
             d = d;
         }
 
-        structRand.posFirst = static_cast<uint>(index);
+        structRand.posFirst = index;
     }
 
     return structRand;

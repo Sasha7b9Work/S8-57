@@ -87,7 +87,7 @@ struct TBase
     static const E MIN_PEAK_DET = _200ns;
 
     // Расстояние между точками в режиме рандомизатора
-    static uint ShiftK();
+    static int ShiftK();
 
     // Время между точками
     static float TimePoint(TBase::E base);
