@@ -18,9 +18,6 @@
 #include <cstring>
 
 
-#undef NULL
-
-
 // Структура для хранения информации, необходимой для чтения в режиме рандомизатора
 struct StructReadRand
 {
@@ -34,21 +31,20 @@ struct ShiftPoint
 {
     enum E
     {
-        NULL,
-        READED
+        FAIL,           // Смещение рассчитать не удалось, точки считывать не надо
+        READED,         // Нормально считанная точка
+        INTERPOLATED    // Точку нужно рассчитывать исходя из соседних
     } type;
 
     int shift;
 
-    ShiftPoint(E t = NULL, int s = 0) : type(t), shift(s) { }
+    ShiftPoint(E t = FAIL, int s = 0) : type(t), shift(s) { }
 };
 
 
 // Структура для работы со смщещениями точек в рандомизаторе
 struct RandShift
 {
-    void Clear();
-
     ShiftPoint Calculate();
 
     // Возвращает данные, необходимые для чтения даннхы в режмиме рандомизатора.
@@ -149,8 +145,6 @@ void Osci::Restart()
         Stop();
         Start(true);
     }
-
-    randShift.Clear();
 }
 
 
@@ -496,7 +490,7 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
 {
     ShiftPoint Tsm = randShift.Calculate();
 
-    if(Tsm.type == ShiftPoint::NULL)
+    if(Tsm.type == ShiftPoint::FAIL)
     {
         return false;
     }
@@ -558,23 +552,26 @@ ShiftPoint RandShift::Calculate()
 
     if(!gates.Calculate(Osci::valueADC, &min, &max))
     {
-        result.type = ShiftPoint::NULL;
+        result.type = ShiftPoint::FAIL;
         return result;
     }
 
-    if(Osci::valueADC > max || Osci::valueADC < min)
+    if(set.time.base >= TBase::_10ns)
     {
-        result.type = ShiftPoint::NULL;
-        return result;
+        if((Osci::valueADC > max - setNRST.enumGameMax * 10) || (Osci::valueADC < min + setNRST.enumGameMin))
+        {
+            result.type = ShiftPoint::FAIL;
+            return result;
+        }
     }
-
-//    if((Osci::valueADC > max - setNRST.enumGameMax * 10) || (Osci::valueADC < min + setNRST.enumGameMin * 10))
-//    {
-//        //result.type = ShiftPoint::INTERPOLATED;
-//        result.type = ShiftPoint::NULL;
-//        numNULL++;
-//        return result;
-//    }
+    else
+    {
+        if(Osci::valueADC > max || Osci::valueADC < min)
+        {
+            result.type = ShiftPoint::FAIL;
+            return result;
+        }
+    }
 
 
     float tin = static_cast<float>(Osci::valueADC - min) / (max - min);
@@ -585,15 +582,9 @@ ShiftPoint RandShift::Calculate()
 }
 
 
-void RandShift::Clear()
-{
-    //std::memset(points, ShiftPoint::INTERPOLATED, 50);
-}
-
-
 StructReadRand RandShift::GetInfoForReadRand(ShiftPoint Tsm, const uint8 *address)
 {
-    if(Tsm.type != ShiftPoint::NULL)
+    if(Tsm.type != ShiftPoint::FAIL)
     {
         structRand.step = TBase::DeltaPoint();
 
