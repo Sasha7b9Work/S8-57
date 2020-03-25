@@ -29,16 +29,29 @@ struct StructReadRand
 };
 
 
+// 
+struct ShiftPoint
+{
+    enum E
+    {
+        NULL,
+        INTERPOLATED,
+        READED
+    } type;
+
+    int shift;
+
+    ShiftPoint(E t = NULL, int s = 0) : type(t), shift(s) { }
+};
+
+
 struct Shift
 {
-    static const int NULL = 1000000;
-    static const int FALL_OUT = 1000001;
-
-    int Calculate();
+    ShiftPoint Calculate();
 
     // Возвращает данные, необходимые для чтения даннхы в режмиме рандомизатора.
     // Если Tsm == 0, то структура будет использоваться не для чтения данных, а для правильного усредения.
-    StructReadRand GetInfoForReadRand(int Tsm = Shift::NULL, const uint8 *address = nullptr);
+    StructReadRand GetInfoForReadRand(ShiftPoint Tsm, const uint8 *address = nullptr);
 
     // Возвращает true, если в данной позиции точка не может быть считана с АЦП и её нужно рассчитывать программно
     bool Missed(int pos);
@@ -514,9 +527,9 @@ void Randomizer::InterpolateDataChannel(DataSettings *ds, Chan::E ch)
 
 bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
 {
-    int Tsm = shift.Calculate();
+    ShiftPoint Tsm = shift.Calculate();
 
-    if(Tsm == Shift::NULL)
+    if(Tsm.type == ShiftPoint::NULL)
     {
         return false;
     }
@@ -557,38 +570,45 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
 }
 
 
-int Shift::Calculate()
+ShiftPoint Shift::Calculate()
 {
+    ShiftPoint result(ShiftPoint::READED, 0);
+
     uint16 min = 0;
     uint16 max = 0;
 
     if(!gates.Calculate(Osci::valueADC, &min, &max))
     {
-        return NULL;
+        result.type = ShiftPoint::NULL;
+        return result;
     }
 
     if((Osci::valueADC > max - setNRST.enumGameMax * 10) || (Osci::valueADC < min + setNRST.enumGameMin * 10))
     {
-        return NULL;
+        result.type = ShiftPoint::NULL;
+        return result;
     }
 
     if(OSCI_IN_MODE_RANDOMIZER)
     {
         float tin = static_cast<float>(Osci::valueADC - min) / (max - min);
-        return static_cast<int>(tin * TBase::ShiftK());
+        result.shift = static_cast<int>(tin * TBase::ShiftK());
+        return result;
     }
 
-    return NULL;
+    result.type = ShiftPoint::NULL;
+
+    return result;
 }
 
 
-StructReadRand Shift::GetInfoForReadRand(int Tsm, const uint8 *address)
+StructReadRand Shift::GetInfoForReadRand(ShiftPoint Tsm, const uint8 *address)
 {
-    if(Tsm != Shift::NULL)
+    if(Tsm.type != ShiftPoint::NULL)
     {
         structRand.step = TBase::ShiftK();
 
-        int index = Tsm - Osci::addShift;
+        int index = Tsm.shift - Osci::addShift;
 
         while(index < 0)
         {
