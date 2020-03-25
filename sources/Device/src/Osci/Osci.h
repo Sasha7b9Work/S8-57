@@ -101,6 +101,14 @@ struct AveragerOsci
 // Вспомогательная структура для функций рандомизатора
 struct Randomizer
 {
+    // Перемещает считанные данные из временного хранилища в место, указанное ds
+    static void MoveReadedData(DataSettings *ds);
+
+private:
+
+    // Перемещает считанные данные канала ch из временного хранилища в место, указанное ds
+    static void MoveReadedDataChannel(DataSettings *ds, Chan::E ch);
+
     // Интерполировать дянные канала ch
     static void InterpolateDataChannel(DataSettings *ds, Chan::E ch);
 };

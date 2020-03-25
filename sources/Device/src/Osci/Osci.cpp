@@ -129,6 +129,12 @@ void Osci::DeInit()
 
 void Osci::Start(bool)
 {
+    if(OSCI_IN_MODE_RANDOMIZER)
+    {
+        std::memset(IntRAM::DataRand(Chan::A), VALUE::NONE, FPGA::MAX_NUM_POINTS);
+        std::memset(IntRAM::DataRand(Chan::B), VALUE::NONE, FPGA::MAX_NUM_POINTS);
+    }
+
     FPGA::forcedStart = false;
     addrRead = 0xffff;
 
@@ -421,6 +427,11 @@ void Osci::ReadData()
 
     DataSettings *ds = RAM::PrepareForNewData();
 
+    if(OSCI_IN_MODE_RANDOMIZER)
+    {
+        Randomizer::MoveReadedData(ds);
+    }
+
     if(ReadDataChannel(Chan::A, ds->dataA))
     {
         if(ReadDataChannel(Chan::B, ds->dataB))
@@ -449,6 +460,37 @@ void Osci::ReadData()
                 {
                     AveragerOsci::Process(Chan::B, last->dataB, last->BytesInChannel());
                 }
+            }
+        }
+    }
+}
+
+
+void Randomizer::MoveReadedData(DataSettings *ds)
+{
+    MoveReadedDataChannel(ds, Chan::A);
+    MoveReadedDataChannel(ds, Chan::B);
+
+    InterpolateDataChannel(ds, Chan::A);
+    InterpolateDataChannel(ds, Chan::B);
+}
+
+
+void Randomizer::MoveReadedDataChannel(DataSettings *ds, Chan::E ch)
+{
+    if(ENABLED(ds, ch))
+    {
+        uint numPoints = ds->BytesInChannel();
+
+        uint8 *in = IntRAM::DataRand(ch);
+        uint8 *out = ds->Data(ch);
+
+        for(uint i = 0; i < numPoints; i++)
+        {
+            if(in[i] != VALUE::NONE)
+            {
+                out[i] = in[i];
+                in[i] = VALUE::NONE;
             }
         }
     }
