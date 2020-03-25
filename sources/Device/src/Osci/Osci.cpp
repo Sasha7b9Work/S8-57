@@ -544,6 +544,11 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
 
     StructReadRand infoRead = randShift.GetInfoForReadRand(Tsm, addr);
 
+    if(Tsm.type == ShiftPoint::INTERPOLATED)
+    {
+        return false;
+    }
+
     int step = infoRead.step;
 
     uint8 *dataRead = data + infoRead.posFirst;
@@ -632,6 +637,8 @@ StructReadRand RandShift::GetInfoForReadRand(ShiftPoint Tsm, const uint8 *addres
         }
 
         structRand.posFirst = index;
+
+        points[index] = Tsm.type;
     }
 
     return structRand;
