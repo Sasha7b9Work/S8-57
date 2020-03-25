@@ -407,6 +407,9 @@ void Osci::ClearDataRand()
 
         std::memset(ds->Data(Chan::A), VALUE::NONE, ds->PointsInChannel());
         std::memset(ds->Data(Chan::B), VALUE::NONE, ds->PointsInChannel());
+
+        std::memset(IntRAM::DataRand(Chan::A), VALUE::NONE, ds->PointsInChannel());
+        std::memset(IntRAM::DataRand(Chan::B), VALUE::NONE, ds->PointsInChannel());
     }
 }
 
@@ -511,13 +514,7 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
 
         while(dataRead < last)
         {
-            *dataRead = HAL_BUS::FPGA::ReadA0();
-            
-            if(*dataRead == VALUE::NONE)
-            {
-                *dataRead = *dataRead;
-            }
-            
+            *dataRead = HAL_BUS::FPGA::ReadA0();           
             *dataPointer = *dataRead;
 
             dataRead += step;
@@ -529,13 +526,7 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
         while(dataRead < last)
         {
             *dataRead = HAL_BUS::FPGA::ReadA0();
-            
-            if(*dataRead == VALUE::NONE)
-            {
-                *dataRead = *dataRead;
-            }
-            
-            dataRead += step;
+             dataRead += step;
         }
     }
 
@@ -556,21 +547,10 @@ ShiftPoint RandShift::Calculate()
         return result;
     }
 
-    if(set.time.base >= TBase::_10ns)
+    if((Osci::valueADC > max - setNRST.enumGameMax * 10) || (Osci::valueADC < min + setNRST.enumGameMin * 10))
     {
-        if((Osci::valueADC > max - setNRST.enumGameMax * 10) || (Osci::valueADC < min + setNRST.enumGameMin * 10))
-        {
-            result.type = ShiftPoint::FAIL;
-            return result;
-        }
-    }
-    else
-    {
-        if(Osci::valueADC > max || Osci::valueADC < min)
-        {
-            result.type = ShiftPoint::FAIL;
-            return result;
-        }
+        result.type = ShiftPoint::FAIL;
+        return result;
     }
 
 
