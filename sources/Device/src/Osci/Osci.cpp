@@ -558,7 +558,7 @@ ShiftPoint RandShift::Calculate()
 
     if(set.time.base >= TBase::_10ns)
     {
-        if((Osci::valueADC > max - setNRST.enumGameMax * 10) || (Osci::valueADC < min + setNRST.enumGameMin))
+        if((Osci::valueADC > max - setNRST.enumGameMax * 10) || (Osci::valueADC < min + setNRST.enumGameMin * 10))
         {
             result.type = ShiftPoint::FAIL;
             return result;
