@@ -64,12 +64,10 @@ struct Osci
     // Обработать флаг предзапуска
     static void ProcessFlagPred();
 
-    // В зависимости от состояния флага готовности данных читает данные и возвращает флаг необходимости остановить процесс сбора информации
-    static bool ProcessFlagReady();
-
-private:
     // Возвращает true, если уже можно читать данные
     static bool CanReadData();
+
+private:
 
     // Функции стопа
     static void (*funcStop)();

@@ -21,12 +21,6 @@
 #undef NULL
 
 
-static int readedDatas = 0; // Количество произведённых чтений данных
-static int num0 = 0;        // Количество точек со смещением 0
-static int num1 = 0;        // Количество точек со смещением 1
-static int num2 = 0;        // Количество точек со смещением 2
-
-
 // Структура для хранения информации, необходимой для чтения в режиме рандомизатора
 struct StructReadRand
 {
@@ -103,6 +97,9 @@ void (*Osci::funcStop)() = EmptyFuncVV;
 
 static void UpdateFPGA();
 
+// В зависимости от состояния флага готовности данных читает данные и возвращает флаг необходимости остановить процесс сбора информации
+static bool ProcessFlagReady();
+
 
 void Osci::Init()
 {
@@ -159,8 +156,6 @@ void Osci::Restart()
 
 void Osci::Update()
 {
-    static uint timeBegin = TIME_MS;
-
     if(!Device::InModeOsci())
     {
         return;
@@ -174,16 +169,6 @@ void Osci::Update()
     Reader::ReadDataFromRAM();
 
     AutoMeasurements::SetData();
-
-    if(TIME_MS - timeBegin >= 1000)
-    {
-        LOG_WRITE("чтений %d, 0 - %d, 1 - %d, 2 - %d");
-        timeBegin = TIME_MS;
-        readedDatas = 0;
-        num0 = 0;
-        num1 = 0;
-        num2 = 0;
-    }
 }
 
 
@@ -199,7 +184,7 @@ static void UpdateFPGA()
 
         Osci::ProcessFlagPred();
 
-        if(Osci::ProcessFlagReady())
+        if(ProcessFlagReady())
         {
             Osci::Stop();
             break;
@@ -208,17 +193,17 @@ static void UpdateFPGA()
 }
 
 
-bool Osci::ProcessFlagReady()
+static bool ProcessFlagReady()
 {
     bool needStop = false;
 
     if(FPGA::flag.DataReady())
     {
-        if(CanReadData())
+        if(Osci::CanReadData())
         {
             Timer::PauseOnTicks(5 * 90 * 20);
 
-            ReadData();
+            Osci::ReadData();
 
             if(TrigStartMode::IsSingle())
             {
@@ -577,21 +562,24 @@ ShiftPoint RandShift::Calculate()
         return result;
     }
 
-    if((Osci::valueADC > max - setNRST.enumGameMax * 10) || (Osci::valueADC < min + setNRST.enumGameMin * 10))
+    if(Osci::valueADC > max || Osci::valueADC < min)
     {
-        //result.type = ShiftPoint::INTERPOLATED;
         result.type = ShiftPoint::NULL;
         return result;
     }
 
-    if(OSCI_IN_MODE_RANDOMIZER)
-    {
-        float tin = static_cast<float>(Osci::valueADC - min) / (max - min);
-        result.shift = static_cast<int>(tin * (TBase::DeltaPoint() - 1));
-        return result;
-    }
+//    if((Osci::valueADC > max - setNRST.enumGameMax * 10) || (Osci::valueADC < min + setNRST.enumGameMin * 10))
+//    {
+//        //result.type = ShiftPoint::INTERPOLATED;
+//        result.type = ShiftPoint::NULL;
+//        numNULL++;
+//        return result;
+//    }
 
-    result.type = ShiftPoint::NULL;
+
+    float tin = static_cast<float>(Osci::valueADC - min) / (max - min);
+
+    result.shift = static_cast<int>(tin * TBase::DeltaPoint());
 
     return result;
 }
