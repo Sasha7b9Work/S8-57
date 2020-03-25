@@ -145,13 +145,13 @@ void TShift::LoadReal()
 
 static int GetK()
 {
-    return (-TShift::Min()) % TBase::ShiftK();
+    return (-TShift::Min()) % TBase::DeltaPoint();
 }
 
 
 void TShift::LoadRandomize()
 {
-    int k = TBase::ShiftK();
+    int k = TBase::DeltaPoint();
 
     FPGA::post = static_cast<uint16>((set.time.shift - TShift().Min() - GetK()) / k);
 

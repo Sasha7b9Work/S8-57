@@ -20,8 +20,8 @@
 #endif
 
 
-//                                    2нс 5нс 10нс 20нс 50нс
-static const int Kr[TBase::Count] = { 50, 20, 10,  5,   2 };
+//                                            2нс 5нс 10нс 20нс 50нс
+static const int deltaPoint[TBase::Count] = { 50, 20, 10,  5,   2 };
 
 
 
@@ -772,9 +772,9 @@ void Range::Set(Chan::E ch, E range)
 }
 
 
-int TBase::ShiftK()
+int TBase::DeltaPoint()
 {
-    return Kr[set.time.base];
+    return deltaPoint[set.time.base];
 }
 
 

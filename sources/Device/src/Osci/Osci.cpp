@@ -57,7 +57,7 @@ struct RandShift
     StructReadRand GetInfoForReadRand(ShiftPoint Tsm, const uint8 *address = nullptr);
 
     // Возвращает true, если в данной позиции точка не может быть считана с АЦП и её нужно рассчитывать программно
-    bool Missed(int pos);
+    bool Interpolated(int pos);
 
 private:
     static StructReadRand structRand;
@@ -191,7 +191,7 @@ bool Osci::IsRunning()
 
 void Osci::UpdateFPGA()
 {
-    int number = OSCI_IN_MODE_RANDOMIZER ? TBase::ShiftK() : 1;
+    int number = OSCI_IN_MODE_RANDOMIZER ? TBase::DeltaPoint() : 1;
 
     RAM::NewFrameForRandomize();
 
@@ -605,7 +605,7 @@ ShiftPoint RandShift::Calculate()
     if(OSCI_IN_MODE_RANDOMIZER)
     {
         float tin = static_cast<float>(Osci::valueADC - min) / (max - min);
-        result.shift = static_cast<int>(tin * TBase::ShiftK());
+        result.shift = static_cast<int>(tin * TBase::DeltaPoint());
         return result;
     }
 
@@ -625,7 +625,7 @@ StructReadRand RandShift::GetInfoForReadRand(ShiftPoint Tsm, const uint8 *addres
 {
     if(Tsm.type != ShiftPoint::NULL)
     {
-        structRand.step = TBase::ShiftK();
+        structRand.step = TBase::DeltaPoint();
 
         int index = Tsm.shift - Osci::addShift;
 
@@ -642,6 +642,12 @@ StructReadRand RandShift::GetInfoForReadRand(ShiftPoint Tsm, const uint8 *addres
     }
 
     return structRand;
+}
+
+
+bool RandShift::Interpolated(int pos)
+{
+    return ((pos - structRand.posFirst) % structRand.step) == 0;
 }
 
 
