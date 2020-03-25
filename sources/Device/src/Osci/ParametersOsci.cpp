@@ -194,7 +194,7 @@ void TBase::Change(int delta)
 }
 
 
-pString TBase::ToString() const
+pString TBase::ToString()
 {
     /// Структура для описания диапазона масштаба по времени.
     static const struct StructTBase

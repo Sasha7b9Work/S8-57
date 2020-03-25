@@ -69,14 +69,14 @@ struct TBase
 
     pString Name() const;
 
-    pString ToString() const;
+    static pString ToString();
 
     static void Set(E v = Count);
     static void Set200us() { Set(_200us); }
     static void Set500us() { Set(_500us); }
     static void Set100ms() { Set(_100ms); }
 
-    void Change(int delta);
+    static void Change(int delta);
 
     // С этого значения должен включаться режим поточечного вывода
     static const E MIN_P2P = _10ms;
@@ -89,6 +89,9 @@ struct TBase
 
     // Время между точками
     static float TimePoint(TBase::E base);
+
+private:
+    TBase() {};
 };
 
 

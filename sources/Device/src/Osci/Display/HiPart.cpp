@@ -123,7 +123,7 @@ static int DrawMainParameters(int _x, int _y)
     const int SIZE = 100;
     char buffer[SIZE] = { 0 };
 
-    std::snprintf(buffer, SIZE, "ð\xa5%s", TBase().ToString());
+    std::snprintf(buffer, SIZE, "ð\xa5%s", TBase::ToString());
 
     String(buffer).Draw(x, y0, Color::FILL);
 

@@ -195,7 +195,7 @@ static void OnTShift()
 
 static void ChangeTBase(int delta)
 {
-    TBase().Change(delta);
+    TBase::Change(delta);
 }
 
 
