@@ -167,7 +167,7 @@ void TBase::Change(int delta)
 
     if (delta > 0)
     {
-        ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&TBase::Ref()), static_cast<uint8>(TBase::Count - 1));
+        ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&set.time.base), static_cast<uint8>(TBase::Count - 1));
     }
     else
     {
@@ -178,7 +178,7 @@ void TBase::Change(int delta)
             return;													// и выходим
         }
 
-        ::Math::LimitationDecrease<uint8>(reinterpret_cast<uint8 *>(&TBase::Ref()), 0);
+        ::Math::LimitationDecrease<uint8>(reinterpret_cast<uint8 *>(&set.time.base), 0);
     }
 
     if (old == set.time.base)
@@ -247,7 +247,7 @@ void TBase::Set(TBase::E base)
 {
     if (base != Count)
     {
-        Ref() = base;
+        set.time.base = base;
     }
 
 

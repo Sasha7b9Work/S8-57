@@ -315,12 +315,6 @@ String RShift::ToString(int16 rShiftRel, Range::E range, int8 _divider)
 }
 
 
-TBase::E &TBase::Ref()
-{
-    return set.time.base;
-}
-
-
 pString TBase::Name() const
 {
     static pString names[TBase::Count] =

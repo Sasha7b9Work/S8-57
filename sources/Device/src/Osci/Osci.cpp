@@ -47,6 +47,8 @@ struct ShiftPoint
 
 struct Shift
 {
+    void Clear();
+
     ShiftPoint Calculate();
 
     // Возвращает данные, необходимые для чтения даннхы в режмиме рандомизатора.
@@ -58,6 +60,9 @@ struct Shift
 
 private:
     static StructReadRand structRand;
+
+    //На основании данных из этого массива будет производиться определение того, нужна интерполяция точки или нет
+    ShiftPoint::E points[50];
 };
 
 
@@ -585,7 +590,7 @@ ShiftPoint Shift::Calculate()
 
     if((Osci::valueADC > max - setNRST.enumGameMax * 10) || (Osci::valueADC < min + setNRST.enumGameMin * 10))
     {
-        result.type = ShiftPoint::NULL;
+        result.type = ShiftPoint::INTERPOLATED;
         return result;
     }
 
@@ -599,6 +604,12 @@ ShiftPoint Shift::Calculate()
     result.type = ShiftPoint::NULL;
 
     return result;
+}
+
+
+void Shift::Clear()
+{
+    std::memset(points, ShiftPoint::INTERPOLATED, 50);
 }
 
 

@@ -67,8 +67,6 @@ struct TBase
         Count
     };
 
-    static TBase::E &Ref();
-
     pString Name() const;
 
     pString ToString() const;
