@@ -35,7 +35,6 @@ struct ShiftPoint
     enum E
     {
         NULL,
-        INTERPOLATED,
         READED
     } type;
 
@@ -58,9 +57,6 @@ struct RandShift
 
     // Возвращает true, если в данной позиции точка не может быть считана с АЦП и её нужно рассчитывать программно
     bool Interpolated(int pos);
-
-    //На основании данных из этого массива будет производиться определение того, нужна интерполяция точки или нет
-    ShiftPoint::E points[50];
 
     static StructReadRand structRand;
 };
@@ -97,6 +93,9 @@ static Gates gates; // "Ворота" рандомизатора
 
 int    Osci::addShift = 0;
 void (*Osci::funcStop)() = EmptyFuncVV;
+
+
+static void UpdateFPGA();
 
 
 void Osci::Init()
@@ -170,6 +169,27 @@ void Osci::Update()
 }
 
 
+static void UpdateFPGA()
+{
+    int number = OSCI_IN_MODE_RANDOMIZER ? TBase::DeltaPoint() : 1;
+
+    RAM::NewFrameForRandomize();
+
+    for(int i = 0; i < number; i++)
+    {
+        FPGA::ReadFlag();
+
+        Osci::ProcessFlagPred();
+
+        if(Osci::ProcessFlagReady())
+        {
+            Osci::Stop();
+            break;
+        }
+    }
+}
+
+
 void Osci::Stop()
 {
     funcStop();
@@ -179,27 +199,6 @@ void Osci::Stop()
 bool Osci::IsRunning()
 {
     return FPGA::IsRunning();
-}
-
-
-void Osci::UpdateFPGA()
-{
-    int number = OSCI_IN_MODE_RANDOMIZER ? TBase::DeltaPoint() : 1;
-
-    RAM::NewFrameForRandomize();
-
-    for (int i = 0; i < number; i++)
-    {
-        FPGA::ReadFlag();
-    
-        ProcessFlagPred();
-
-        if(ProcessFlagReady())
-        {
-            Osci::Stop();
-            break;
-        }
-    }
 }
 
 
@@ -501,11 +500,6 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
 
     StructReadRand infoRead = randShift.GetInfoForReadRand(Tsm, addr);
 
-    if(Tsm.type == ShiftPoint::INTERPOLATED)
-    {
-        return false;
-    }
-
     int step = infoRead.step;
 
     uint8 *dataRead = data + infoRead.posFirst;
@@ -567,7 +561,8 @@ ShiftPoint RandShift::Calculate()
 
     if((Osci::valueADC > max - setNRST.enumGameMax * 10) || (Osci::valueADC < min + setNRST.enumGameMin * 10))
     {
-        result.type = ShiftPoint::INTERPOLATED;
+        //result.type = ShiftPoint::INTERPOLATED;
+        result.type = ShiftPoint::NULL;
         return result;
     }
 
@@ -586,7 +581,7 @@ ShiftPoint RandShift::Calculate()
 
 void RandShift::Clear()
 {
-    std::memset(points, ShiftPoint::INTERPOLATED, 50);
+    //std::memset(points, ShiftPoint::INTERPOLATED, 50);
 }
 
 
@@ -606,17 +601,9 @@ StructReadRand RandShift::GetInfoForReadRand(ShiftPoint Tsm, const uint8 *addres
         }
 
         structRand.posFirst = index;
-
-        points[index] = Tsm.type;
     }
 
     return structRand;
-}
-
-
-bool RandShift::Interpolated(int pos)
-{
-    return (points[pos % structRand.step] == ShiftPoint::INTERPOLATED);
 }
 
 

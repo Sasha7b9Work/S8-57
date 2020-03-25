@@ -61,11 +61,15 @@ struct Osci
 
     static uint16 ReadLastRecord(Chan::E ch);
 
+    // Обработать флаг предзапуска
+    static void ProcessFlagPred();
+
+    // В зависимости от состояния флага готовности данных читает данные и возвращает флаг необходимости остановить процесс сбора информации
+    static bool ProcessFlagReady();
+
 private:
     // Возвращает true, если уже можно читать данные
     static bool CanReadData();
-
-    static void UpdateFPGA();
 
     // Функции стопа
     static void (*funcStop)();
@@ -74,12 +78,6 @@ private:
     static void StopSingleP2P();
 
     static void SetFunctionsStartStop();
-
-    // В зависимости от состояния флага готовности данных читает данные и возвращает флаг необходимости остановить процесс сбора информации
-    static bool ProcessFlagReady();
-
-    // Обработать флаг предзапуска
-    static void ProcessFlagPred();
 
     // Читать данные канала в памяить data
     static bool ReadDataChannel(Chan::E ch, uint8 *data);

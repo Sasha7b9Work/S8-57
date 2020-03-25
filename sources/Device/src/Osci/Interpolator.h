@@ -68,13 +68,13 @@ static bool FindEmptySegment(uint8 *start, Segment *segment)
 static uint8 *FindEmptyElement(uint8 * const start)
 {
     uint8 *element = start;
-    ShiftPoint::E *points = randShift.points;
+    //ShiftPoint::E *points = randShift.points;
     int delta = TBase::DeltaPoint();
     int index = (start - begin) % delta;
 
     while(element != end)
     {
-        if((*element == VALUE::NONE) || (points[index] == ShiftPoint::INTERPOLATED))   // Если очередной элемент "пустой"
+        if((*element == VALUE::NONE) /*|| (points[index] == ShiftPoint::INTERPOLATED)*/)   // Если очередной элемент "пустой"
         {
             break;                  // то мы его нашли
         }
@@ -93,16 +93,17 @@ static uint8 *FindEmptyElement(uint8 * const start)
 static uint8 *FindReadedElement(uint8 * const start)
 {
     uint8 *element = start;
-    ShiftPoint::E *points = randShift.points;
+    //ShiftPoint::E *points = randShift.points;
     int delta = TBase::DeltaPoint();
     int index = (start - begin) % delta;
     
     while(element != end)
     {
-        if(points[index] != ShiftPoint::INTERPOLATED)
-        {
-            break;
-        }
+        //if(points[index] != ShiftPoint::INTERPOLATED)
+        //if(true)
+        //{
+        //    break;
+        //}
         element++;
         index++;
         if(index == delta)

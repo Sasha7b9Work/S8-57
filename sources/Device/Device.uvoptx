@@ -164,7 +164,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Osci\Interpolator.h</Filename>
+          <Filename>.\src\Osci\Interpolator.h</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\./src/Osci/Interpolator.h\80</Expression>
         </Bp>
@@ -180,7 +180,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Osci\Interpolator.h</Filename>
+          <Filename>.\src\Osci\Interpolator.h</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\./src/Osci/Interpolator.h\70</Expression>
         </Bp>
@@ -196,7 +196,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Osci\Interpolator.h</Filename>
+          <Filename>.\src\Osci\Interpolator.h</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\./src/Osci/Interpolator.h\66</Expression>
         </Bp>
