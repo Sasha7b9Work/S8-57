@@ -21,6 +21,12 @@
 #undef NULL
 
 
+static int readedDatas = 0; // Количество произведённых чтений данных
+static int num0 = 0;        // Количество точек со смещением 0
+static int num1 = 0;        // Количество точек со смещением 1
+static int num2 = 0;        // Количество точек со смещением 2
+
+
 // Структура для хранения информации, необходимой для чтения в режиме рандомизатора
 struct StructReadRand
 {
@@ -153,6 +159,8 @@ void Osci::Restart()
 
 void Osci::Update()
 {
+    static uint timeBegin = TIME_MS;
+
     if(!Device::InModeOsci())
     {
         return;
@@ -166,6 +174,16 @@ void Osci::Update()
     Reader::ReadDataFromRAM();
 
     AutoMeasurements::SetData();
+
+    if(TIME_MS - timeBegin >= 1000)
+    {
+        LOG_WRITE("чтений %d, 0 - %d, 1 - %d, 2 - %d");
+        timeBegin = TIME_MS;
+        readedDatas = 0;
+        num0 = 0;
+        num1 = 0;
+        num2 = 0;
+    }
 }
 
 
@@ -185,30 +203,6 @@ static void UpdateFPGA()
         {
             Osci::Stop();
             break;
-        }
-    }
-}
-
-
-void Osci::Stop()
-{
-    funcStop();
-}
-
-
-bool Osci::IsRunning()
-{
-    return FPGA::IsRunning();
-}
-
-
-void Osci::ProcessFlagPred()
-{
-    if(FPGA::flag.Pred() && !FPGA::forcedStart)
-    {
-        if(!OSCI_IN_MODE_RANDOMIZER && TrigStartMode::IsAuto() && FPGA::flag.HoldOff())
-        {
-            FPGA::ForcedStart();
         }
     }
 }
@@ -240,6 +234,30 @@ bool Osci::ProcessFlagReady()
     }
 
     return needStop;
+}
+
+
+void Osci::Stop()
+{
+    funcStop();
+}
+
+
+bool Osci::IsRunning()
+{
+    return FPGA::IsRunning();
+}
+
+
+void Osci::ProcessFlagPred()
+{
+    if(FPGA::flag.Pred() && !FPGA::forcedStart)
+    {
+        if(!OSCI_IN_MODE_RANDOMIZER && TrigStartMode::IsAuto() && FPGA::flag.HoldOff())
+        {
+            FPGA::ForcedStart();
+        }
+    }
 }
 
 
