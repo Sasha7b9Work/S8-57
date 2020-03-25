@@ -134,7 +134,7 @@ struct Range
     /// ¬озвращает напр€жение, соответствующее верхней границе сетки
     static float MaxVoltageOnScreen(Range::E range);
 
-    void Change(int16 delta);
+    static void Change(Chan::E ch, int16 delta);
     /// «агружатьс€ эта настройка может только дл€ обоих каналов одновременно
     static void LoadBoth();
 

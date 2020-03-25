@@ -210,7 +210,7 @@ void TShift::Change(const int delta)
 }
 
 
-void Range::Change(int16 delta)
+void Range::Change(Chan::E ch, int16 delta)
 {
     if (Recorder::IsRunning())
     {

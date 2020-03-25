@@ -29,8 +29,6 @@ static void OnChangeParameterTime(pFuncVI, int);
 // Открывает страницу или закрывает меню в зависимости от того, какая страница сейчас раскрыта
 static void ShowHidePage(const Page *page);
 
-static void ChangeRange(Chan::E ch, int16 delta);
-
 static void ChangeRShift(Chan::E ch, int16 delta);
 
 // Обработчики нажатия кнопок
@@ -142,21 +140,15 @@ static void OnRShiftB()
 }
 
 
-static void ChangeRange(Chan::E ch, int16 delta)
-{
-    Range(ch).Change(delta);
-}
-
-
 static void OnRangeA()
 {
-    OnChangeParameterChannel(ChangeRange, Chan::A, (event.key == Key::RangeMoreA) ? 1 : -1);
+    OnChangeParameterChannel(Range::Change, Chan::A, (event.key == Key::RangeMoreA) ? 1 : -1);
 }
 
 
 static void OnRangeB()
 {
-    OnChangeParameterChannel(ChangeRange, Chan::B, (event.key == Key::RangeMoreB) ? 1 : -1);
+    OnChangeParameterChannel(Range::Change, Chan::B, (event.key == Key::RangeMoreB) ? 1 : -1);
 }
 
 
