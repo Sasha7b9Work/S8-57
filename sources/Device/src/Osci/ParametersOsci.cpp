@@ -766,15 +766,9 @@ void Range::Set(Chan::E ch, E range)
 {
     set.disp.SetLastAffectedChannel(ch);
 
-    Ref(ch) = range;
+    set.ch[ch].range = range;
 
     LoadBoth();
-}
-
-
-Range::E &Range::Ref(Chan::E ch)
-{
-    return set.ch[ch].range;
 }
 
 

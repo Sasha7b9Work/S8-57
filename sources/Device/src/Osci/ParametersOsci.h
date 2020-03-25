@@ -115,8 +115,6 @@ struct Range
         Count
     };
 
-    static Range::E &Ref(Chan::E ch);
-
     static void Set(Chan::E ch, E range);
     static void Set500mV(Chan::E ch) { Set(ch, _500mV); }
     static void Set1V(Chan::E ch)    { Set(ch, _1V); }
