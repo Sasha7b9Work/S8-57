@@ -45,7 +45,8 @@ struct ShiftPoint
 };
 
 
-struct Shift
+// Структура для работы со смщещениями точек в рандомизаторе
+struct RandShift
 {
     void Clear();
 
@@ -91,8 +92,8 @@ private:
 
 
 static Gates gates; // "Ворота" рандомизатора
-static Shift shift;
-StructReadRand Shift::structRand = { 0, 0 };
+static RandShift randShift;
+StructReadRand RandShift::structRand = { 0, 0 };
 
 
 int    Osci::addShift = 0;
@@ -153,6 +154,8 @@ void Osci::Restart()
         Stop();
         Start(true);
     }
+
+    randShift.Clear();
 }
 
 
@@ -532,14 +535,14 @@ void Randomizer::InterpolateDataChannel(DataSettings *ds, Chan::E ch)
 
 bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
 {
-    ShiftPoint Tsm = shift.Calculate();
+    ShiftPoint Tsm = randShift.Calculate();
 
     if(Tsm.type == ShiftPoint::NULL)
     {
         return false;
     }
 
-    StructReadRand infoRead = shift.GetInfoForReadRand(Tsm, addr);
+    StructReadRand infoRead = randShift.GetInfoForReadRand(Tsm, addr);
 
     int step = infoRead.step;
 
@@ -575,7 +578,7 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
 }
 
 
-ShiftPoint Shift::Calculate()
+ShiftPoint RandShift::Calculate()
 {
     ShiftPoint result(ShiftPoint::READED, 0);
 
@@ -607,13 +610,13 @@ ShiftPoint Shift::Calculate()
 }
 
 
-void Shift::Clear()
+void RandShift::Clear()
 {
     std::memset(points, ShiftPoint::INTERPOLATED, 50);
 }
 
 
-StructReadRand Shift::GetInfoForReadRand(ShiftPoint Tsm, const uint8 *address)
+StructReadRand RandShift::GetInfoForReadRand(ShiftPoint Tsm, const uint8 *address)
 {
     if(Tsm.type != ShiftPoint::NULL)
     {
