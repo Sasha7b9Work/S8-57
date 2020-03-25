@@ -1472,7 +1472,7 @@ void AutoMeasurements::CountedToCurrentRShift(Chan::E ch, uint numBytes, const u
     Range::E rangeDS = RANGE_DS(ch);
 
     int16 shiftSET = RShift(ch);
-    Range::E rangeSET = Range(ch);
+    Range::E rangeSET = set.ch[ch].range;
 
     if((shiftDS == shiftSET) && (rangeDS == rangeSET))
     {

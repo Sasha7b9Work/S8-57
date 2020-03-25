@@ -114,21 +114,17 @@ struct Range
         _20V,
         Count
     };
-    /// Этот конструктор - чтобы узнать текущее знаечение Range
-    explicit Range(Chan::E _ch) : ch(_ch) {}
 
     static Range::E &Ref(Chan::E ch);
 
-    void Set(E range);
-    void Set500mV() { Set(_500mV); }
-    void Set1V()    { Set(_1V); }
-    void Set2V()    { Set(_2V); }
+    static void Set(Chan::E ch, E range);
+    static void Set500mV(Chan::E ch) { Set(ch, _500mV); }
+    static void Set1V(Chan::E ch)    { Set(ch, _1V); }
+    static void Set2V(Chan::E ch)    { Set(ch, _2V); }
 
-    operator Range::E();
-    
-    pString Name() const;
+    static pString Name(Chan::E ch);
 
-    pString ToString(int8 divider) const;
+    static pString ToString(Chan::E ch, int8 divider);
 
     static pString ToString(Range::E range, int8 divider);
     /// Возвращает напряжение, соответствующее верхней границе сетки
@@ -137,9 +133,6 @@ struct Range
     static void Change(Chan::E ch, int16 delta);
     /// Загружаться эта настройка может только для обоих каналов одновременно
     static void LoadBoth();
-
-private:
-    Chan::E ch;
 };
 
 

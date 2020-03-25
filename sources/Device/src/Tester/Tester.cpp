@@ -92,8 +92,8 @@ void Tester::Enable() // -V2506
     ModeCouple(Chan::A).SetGND();
     ModeCouple(Chan::B).SetGND();
 
-    Range(Chan::A).Set2V();
-    Range(Chan::B).Set2V();
+    Range::Set2V(Chan::A);
+    Range::Set2V(Chan::B);
 
     RShift(Chan::A).Set(0);
     RShift(Chan::B).Set(0);

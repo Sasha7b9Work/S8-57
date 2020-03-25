@@ -54,15 +54,15 @@ static bool GenerateNormalModeData(Chan::E ch, uint8 *data, uint numBytes)
         1.25        //  20 V
     };
 
-    double amplitude = TuneGeneratorDialog::amplitude[ch] / RShift::ToAbs(1, Range(ch)) * 0.6;
+    double amplitude = TuneGeneratorDialog::amplitude[ch] / RShift::ToAbs(1, set.ch[ch].range) * 0.6;
 
     double frequency = TuneGeneratorDialog::frequency[ch] * TShift::ToAbs(1, set.time.base);
 
-    double offset = RShift::ToAbs(RShift(ch), Range(ch)) * kOffset[Range(ch)];
+    double offset = RShift::ToAbs(RShift(ch), set.ch[ch].range) * kOffset[set.ch[ch].range];
 
     if(ModeCouple(ch) == ModeCouple::DC)
     {
-        offset += TuneGeneratorDialog::offset[ch] * kOffset[Range(ch)];
+        offset += TuneGeneratorDialog::offset[ch] * kOffset[set.ch[ch].range];
     }
 
     for (uint i = 0; i < numBytes; i++)

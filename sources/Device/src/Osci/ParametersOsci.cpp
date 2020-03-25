@@ -330,12 +330,12 @@ void Range::LoadBoth()
         BIN_U8(00000011)   // 20V      // -V2501
     };
 
-    uint8 valueA = vals[Range(Chan::A)];
+    uint8 valueA = vals[set.ch[Chan::A].range];
 
     HAL_PIO::Write(PIN_A1, _GET_BIT(valueA, 1));
     HAL_PIO::Write(PIN_A2, _GET_BIT(valueA, 0));
 
-    uint8 valueB = vals[Range(Chan::B)];
+    uint8 valueB = vals[set.ch[Chan::B].range];
 
     HAL_PIO::Write(PIN_A3, _GET_BIT(valueB, 1));
     HAL_PIO::Write(PIN_A4, _GET_BIT(valueB, 0));
@@ -360,9 +360,9 @@ void Range::LoadBoth()
 }
 
 
-pString Range::ToString(int8 _divider) const
+pString Range::ToString(Chan::E ch, int8 _divider)
 {
-    return ranges[Ref(ch)][_divider].name;
+    return ranges[set.ch[ch].range][_divider].name;
 }
 
 
@@ -406,7 +406,7 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
         return datas[ModeCouple::GND];
     }
 
-    return static_cast<uint8>(values[Range(ch)][ch] | datas[couple]);
+    return static_cast<uint8>(values[set.ch[ch].range][ch] | datas[couple]);
 }
 
 
@@ -551,7 +551,7 @@ void Trig::DrawOnGrid()
 
         Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
 
-        float trigLevVal = RShift::ToAbs(TrigLevel().Value(), Range(TrigSource())) * Divider(TrigSource()).ToAbs();
+        float trigLevVal = RShift::ToAbs(TrigLevel().Value(), set.ch[TrigSource()].range) * Divider(TrigSource()).ToAbs();
 
         Voltage voltage(trigLevVal);
 
@@ -762,7 +762,7 @@ void VALUE::PointsFromVoltage(const float *voltage, int numPoints, Range::E rang
 }
 
 
-void Range::Set(E range)
+void Range::Set(Chan::E ch, E range)
 {
     set.disp.SetLastAffectedChannel(ch);
 
@@ -775,12 +775,6 @@ void Range::Set(E range)
 Range::E &Range::Ref(Chan::E ch)
 {
     return set.ch[ch].range;
-}
-
-
-Range::operator Range::E()
-{
-    return Ref(ch);
 }
 
 

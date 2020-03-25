@@ -17,8 +17,8 @@ void DataSettings::Fill()
     Lval_ENABLED_B(this) = ChanB.IsEnabled() ? 1U : 0U;
     INVERSE_A(this)      = ChanA.IsInversed() ? 1U : 0U;
     INVERSE_B(this)      = ChanB.IsInversed() ? 1U : 0U;
-    Lval_RANGE_A(this)   = Range(Chan::A);
-    Lval_RANGE_B(this)   = Range(Chan::B);
+    Lval_RANGE_A(this)   = set.ch[Chan::A].range;
+    Lval_RANGE_B(this)   = set.ch[Chan::B].range;
     RSHIFT_A(this)       = RShift(Chan::A);
     RSHIFT_B(this)       = RShift(Chan::B);
     Lval_TBASE(this)     = set.time.base;

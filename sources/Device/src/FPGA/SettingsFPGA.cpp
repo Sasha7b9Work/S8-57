@@ -70,12 +70,12 @@ static bool NeedLoadRShift(Chan::E ch)
     static Range::E prevRanges[Chan::Count] = { Range::Count, Range::Count };
     static int16 prevShift[Chan::Count] = { -1000, -1000 };
 
-    if((prevShift[ch] == RShift(ch)) && (prevRanges[ch] == Range(ch)))
+    if((prevShift[ch] == RShift(ch)) && (prevRanges[ch] == set.ch[ch].range))
     {
         result = false;
     }
 
-    prevRanges[ch] = Range(ch);
+    prevRanges[ch] = set.ch[ch].range;
     prevShift[ch] = RShift(ch);
 
     return result;
@@ -95,7 +95,7 @@ void RShift::Load(bool force)
 
     int16 shift = RShift(ch) + HARDWARE_ZERO;
 
-    shift += ExtraShift::GetValue(ch, Range(ch));
+    shift += ExtraShift::GetValue(ch, set.ch[ch].range);
 
     if (Chan(ch).IsA() && Device::InModeTester())
     {
@@ -355,7 +355,7 @@ pString TBase::Name() const
 }
 
 
-pString Range::Name() const
+pString Range::Name(Chan::E ch)
 {
     static const struct StructRange
     {
@@ -382,7 +382,7 @@ pString Range::Name() const
         StructRange("20Â")
     };
 
-    return names[Ref(ch)].name;
+    return names[set.ch[ch].range].name;
 };
 
 

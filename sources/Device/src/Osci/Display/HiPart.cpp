@@ -216,7 +216,7 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
 
     bool inverse = Chan(ch).IsInversed();
     //int8 divider = (int8)SET_DIVIDER(ch);
-    Range::E range = Range(ch);
+    Range::E range = set.ch[ch].range;
 
     Color colorDraw = inverse ? Color::WHITE : color;
     if (inverse)
@@ -226,7 +226,7 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
     const int SIZE = 100;
 
     char buffer[SIZE];
-    std::snprintf(buffer, SIZE, "%s\xa5%s\xa5%s", Chan(ch).IsA() ? "1ê" : "2ê", ModeCouple(ch).UGO(), Range(ch).ToString(static_cast<int8>(Divider(ch))));
+    std::snprintf(buffer, SIZE, "%s\xa5%s\xa5%s", Chan(ch).IsA() ? "1ê" : "2ê", ModeCouple(ch).UGO(), Range::ToString(ch, static_cast<int8>(Divider(ch))));
     String(buffer).Draw(x + 1, y, colorDraw);
 
     char bufferTemp[SIZE];
@@ -398,8 +398,8 @@ static void WriteCursors()
             CursorsMeasurements::Voltage(source, 0).Draw(x, y1);
             CursorsMeasurements::Voltage(source, 1).Draw(x, y2);
             x = 49;
-            float pos0 = MathFPGA::VoltageCursor(CursorsMeasurements::PosU(source, 0), Range(source), RShift(source));
-            float pos1 = MathFPGA::VoltageCursor(CursorsMeasurements::PosU(source, 1), Range(source), RShift(source));
+            float pos0 = MathFPGA::VoltageCursor(CursorsMeasurements::PosU(source, 0), set.ch[source].range, RShift(source));
+            float pos1 = MathFPGA::VoltageCursor(CursorsMeasurements::PosU(source, 1), set.ch[source].range, RShift(source));
             float delta = std::fabsf(pos1 - pos0) * Divider(source).ToAbs();
             String(":dU=").Draw(x, y1);
             Voltage(delta).ToString(false).Draw(x + 17, y1);

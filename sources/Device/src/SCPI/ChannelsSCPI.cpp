@@ -2,6 +2,7 @@
 #include "log.h"
 #include "Osci/ParametersOsci.h"
 #include "SCPI/ChannelsSCPI.h"
+#include "Settings/Settings.h"
 #include <cstdlib>
 #include <cstring>
 
@@ -50,9 +51,9 @@ static const char *FuncRange(const char *buffer)
 {
     Chan::E ch = (*(buffer - 7) == '1') ? Chan::A : Chan::B;    // (buffer - 7) указывает на номер канала - 1 или 2
 
-    SCPI_REQUEST(SCPI::SendAnswer(rangeName[Range(ch)]));
+    SCPI_REQUEST(SCPI::SendAnswer(rangeName[set.ch[ch].range]));
 
-    SCPI_PROCESS_ARRAY(rangeName, Range(ch).Set(static_cast<Range::E>(i)))
+    SCPI_PROCESS_ARRAY(rangeName, Range::Set(ch, static_cast<Range::E>(i)))
 }
 
 
@@ -71,7 +72,7 @@ static bool TestRange()
 
         SCPI_APPEND_STRING(commandA);
 
-        if(Range(Chan::A) != range)
+        if(set.ch[Chan::A].range != range)
         {
             SCPI_EXIT_ERROR();
         }
@@ -81,7 +82,7 @@ static bool TestRange()
 
         SCPI_APPEND_STRING(commandB);
 
-        if(Range(Chan::B) != range)
+        if(set.ch[Chan::B].range != range)
         {
             SCPI_EXIT_ERROR();
         }
