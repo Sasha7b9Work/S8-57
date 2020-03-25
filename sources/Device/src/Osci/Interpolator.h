@@ -37,6 +37,8 @@ static uint8 *FindReadedElement(uint8 * const start);
 
 void Interpolator::Run(uint8 *data, uint num)
 {
+    uint start = TIME_US;
+
     begin = data;
     end = begin + num;
 
@@ -48,60 +50,40 @@ void Interpolator::Run(uint8 *data, uint num)
     {
         InterpolateSegment(&segment);
     }
+
+    LOG_WRITE("%d мкс", TIME_US - start);
 }
 
 
 static bool FindEmptySegment(uint8 *start, Segment *segment)
 {
-    volatile ShiftPoint::E *interpolated = randShift.points;
-    
-    for(int i = 0; i < 50; i++)
-    {
-        if(interpolated[i] == ShiftPoint::READED && begin[i] == VALUE::NONE)
-        {
-            begin[i] = VALUE::NONE;
-        }
-    }
-    
     segment->start = FindEmptyElement(start);
 
     segment->end = FindReadedElement(segment->start);
-    
-    volatile int indexStart = segment->start - begin;
-    volatile int indexEnd = segment->end - begin;
-    
-    indexStart = indexStart;
-    indexEnd = indexEnd;
 
-    bool result = (segment->start != end) && (segment->end != end);
-    
-    if(indexStart > 1000)
-    {
-        indexStart = indexStart;
-    }
-    
-    return result;
+    return (segment->start != end) && (segment->end != end);
 }
 
 
 static uint8 *FindEmptyElement(uint8 * const start)
 {
     uint8 *element = start;
-    
-    volatile ShiftPoint::E *interpolated = randShift.points;
-    interpolated = interpolated;
+    ShiftPoint::E *points = randShift.points;
+    int delta = TBase::DeltaPoint();
+    int index = (start - begin) % delta;
 
     while(element != end)
     {
-        uint8 value = *element;
-        
-        int index = element - begin;
-        
-        if((value == VALUE::NONE) || randShift.Interpolated(index))   // Если очередной элемент "пустой"
+        if((*element == VALUE::NONE) || (points[index] == ShiftPoint::INTERPOLATED))   // Если очередной элемент "пустой"
         {
             break;                  // то мы его нашли
         }
         element++;
+        index++;
+        if(index == delta)
+        {
+            index = 0;
+        }
     }
 
     return element;
@@ -111,21 +93,22 @@ static uint8 *FindEmptyElement(uint8 * const start)
 static uint8 *FindReadedElement(uint8 * const start)
 {
     uint8 *element = start;
+    ShiftPoint::E *points = randShift.points;
+    int delta = TBase::DeltaPoint();
+    int index = (start - begin) % delta;
     
-    volatile ShiftPoint::E *interpolated = randShift.points;
-    interpolated = interpolated;
-
     while(element != end)
     {
-        uint8 value = *element;
-        
-        int index = element - begin;
-        
-        if(!randShift.Interpolated(index))
+        if(points[index] != ShiftPoint::INTERPOLATED)
         {
             break;
         }
         element++;
+        index++;
+        if(index == delta)
+        {
+            index = 0;
+        }
     }
 
     return element;

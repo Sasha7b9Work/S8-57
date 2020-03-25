@@ -62,8 +62,6 @@ struct RandShift
     //На основании данных из этого массива будет производиться определение того, нужна интерполяция точки или нет
     ShiftPoint::E points[50];
 
-private:
-    
     static StructReadRand structRand;
 };
 
