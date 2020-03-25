@@ -45,7 +45,7 @@ void DisplayOsci::Update()
 
     TPos().Draw();
 
-    TShift().Draw();
+    TShift::Draw();
 
     RShift::DrawBoth();
     

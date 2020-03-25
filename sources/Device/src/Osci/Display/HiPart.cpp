@@ -129,7 +129,7 @@ static int DrawMainParameters(int _x, int _y)
 
     buffer[0] = 'a';
     buffer[1] = 0;
-    std::snprintf(buffer, SIZE, "\xa5%s", TShift().ToString().c_str());
+    std::snprintf(buffer, SIZE, "\xa5%s", TShift::ToString().c_str());
     String(buffer).Draw(x + 35, y0);
 
     buffer[0] = 0;

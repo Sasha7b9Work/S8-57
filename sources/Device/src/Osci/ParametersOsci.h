@@ -240,28 +240,30 @@ struct TShift
 
     static void Load();
 
-    void Change(const int delta);
+    static void Change(const int delta);
 
-    String ToString(const TBase::E tBase = TBase::Count) const;
+    static String ToString(const TBase::E tBase = TBase::Count);
 
     static float ToAbs(const int shift, const TBase::E tBase);
 
-    void Reset() const;
+    static void Reset();
 
-    void Draw() const;
+    static void Draw();
 
 private:
     static void LoadReal();
 
     static void LoadRandomize();
     /// Нарисовать "нормальное" изображение маркера смещения, когда позиция смещения находится на экране
-    void DrawNormal(const int x, const int y) const;
+    static void DrawNormal(const int x, const int y);
     /// Нарисовать маркер смещения, когда позиция смещения находится за левой границей экрана
-    void DrawLeft() const;
+    static void DrawLeft();
     /// Нарисовать маркер смещения, когда позиция смещения находится за правой границей экрана
-    void DrawRight() const;
+    static void DrawRight();
 
     static const float absStep[TBase::Count];
+
+    TShift() { };
 };
 
 struct Trig

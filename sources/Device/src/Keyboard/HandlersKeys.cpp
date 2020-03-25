@@ -31,8 +31,6 @@ static void ShowHidePage(const Page *page);
 
 static void ChangeRange(Chan::E ch, int16 delta);
 
-static void ChangeTShift(int delta);
-
 static void ChangeRShift(Chan::E ch, int16 delta);
 
 // Обработчики нажатия кнопок
@@ -179,15 +177,9 @@ static void OnChangeParameterTime(pFuncVI func, int delta)
 }
 
 
-static void ChangeTShift(int delta)
-{
-    TShift().Change(delta);
-}
-
-
 static void OnTShift()
 {
-    OnChangeParameterTime(ChangeTShift, (event.key == Key::TShiftMore) ? 1 : -1);
+    OnChangeParameterTime(TShift::Change, (event.key == Key::TShiftMore) ? 1 : -1);
 }
 
 
@@ -372,7 +364,7 @@ static void OnTime()
     }
     else if (event.IsLong())
     {
-        TShift().Reset();
+        TShift::Reset();
     }
 }
 

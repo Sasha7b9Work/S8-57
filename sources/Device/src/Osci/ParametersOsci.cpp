@@ -291,7 +291,7 @@ void TBase::Set(TBase::E base)
 
     FPGA::LoadRegUPR();
 
-    TShift().Load();
+    TShift::Load();
 
     Bandwidth(Chan::A).Load();
     Bandwidth(Chan::B).Load();
@@ -810,13 +810,13 @@ void TShift::Set(int tShift)
 }
 
 
-void TShift::Reset() const
+void TShift::Reset()
 {
     TShift::Set(0);
 }
 
 
-void TShift::Draw() const
+void TShift::Draw()
 {
     int x = TPos().PosX() - set.time.shift;
 
@@ -835,20 +835,20 @@ void TShift::Draw() const
 }
 
 
-void TShift::DrawNormal(const int x, const int y) const
+void TShift::DrawNormal(const int x, const int y)
 {
     Char(Symbol8::TSHIFT_NORMAL_BACK).Draw(x - 3, y, Color::BACK);
     Char(Symbol8::TSHIFT_NORMAL).Draw(x - 3, y, Color::FILL);
 }
 
 
-void TShift::DrawLeft() const
+void TShift::DrawLeft()
 {
     Char(Symbol8::TRIGLEV_NORMAL).Draw(Grid::Left(), Grid::Top(), Color::BACK);
     Char(Symbol8::TSHIFT_LEFT).Draw(Grid::Left(), Grid::Top(), Color::FILL);
 }
 
-void TShift::DrawRight() const
+void TShift::DrawRight()
 {
     Char(Symbol8::RSHIFT_NORMAL).Draw(Grid::Right() - 7, Grid::Top(), Color::BACK);
     Char(Symbol8::TSHIFT_RIGHT).Draw(Grid::Right() - 7, Grid::Top(), Color::FILL);

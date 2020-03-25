@@ -42,7 +42,7 @@ void Recorder::Init()
     Range::LoadBoth();
     TrigInput().Load();
     Recorder::ScaleX::Load();
-    TShift().Load();
+    TShift::Load();
     Osci::LoadHoldfOff();
     StorageRecorder::Init();
 

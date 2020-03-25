@@ -145,7 +145,7 @@ void TShift::LoadReal()
 
 static int GetK()
 {
-    return (-TShift().Min()) % TBase::ShiftK();
+    return (-TShift::Min()) % TBase::ShiftK();
 }
 
 
@@ -295,7 +295,7 @@ int TShift::Max()
 }
 
 
-String TShift::ToString(const TBase::E _base) const
+String TShift::ToString(const TBase::E _base)
 {
     TBase::E tBase = _base;
 

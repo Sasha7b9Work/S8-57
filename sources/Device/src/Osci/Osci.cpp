@@ -112,7 +112,7 @@ void Osci::Init()
     TrigLevel().Load();
     TrigPolarity().Load();
     TBase::Set();
-    TShift().Load();
+    TShift::Load();
     FPGA::LoadCalibratorMode();
     LoadHoldfOff();
     HAL_PIO::Init(PIN_P2P, HMode::Input, HPull::Up);
