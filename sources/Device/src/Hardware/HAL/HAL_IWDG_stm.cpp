@@ -20,6 +20,8 @@ static uint GetLSIFrequency();
 
 void HAL_IWDG::Init()
 {
+    return;
+
     __HAL_RCC_TIM5_CLK_ENABLE();
 
     HAL_NVIC_SetPriority(TIM5_IRQn, 0, 0);
@@ -43,7 +45,7 @@ void HAL_IWDG::Init()
     //                      = freqLSI / 8
 
     handleIWDG.Init.Prescaler = IWDG_PRESCALER_128;
-    handleIWDG.Init.Reload = freqLSI / 16;
+    handleIWDG.Init.Reload = freqLSI / 64;
 
     if(HAL_IWDG_Init(&handleIWDG) != HAL_OK)
     {

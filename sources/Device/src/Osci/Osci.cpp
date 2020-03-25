@@ -59,15 +59,13 @@ struct RandShift
     // Возвращает true, если в данной позиции точка не может быть считана с АЦП и её нужно рассчитывать программно
     bool Interpolated(int pos);
 
-private:
-    static StructReadRand structRand;
-
     //На основании данных из этого массива будет производиться определение того, нужна интерполяция точки или нет
     ShiftPoint::E points[50];
+
+private:
+    
+    static StructReadRand structRand;
 };
-
-
-#include "Osci/Interpolator.h"
 
 
 struct Gates
@@ -91,9 +89,12 @@ private:
 };
 
 
-static Gates gates; // "Ворота" рандомизатора
 static RandShift randShift;
 StructReadRand RandShift::structRand = { 0, 0 };
+
+#include "Osci/Interpolator.h"
+
+static Gates gates; // "Ворота" рандомизатора
 
 
 int    Osci::addShift = 0;
@@ -564,6 +565,12 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
         while(dataRead < last)
         {
             *dataRead = HAL_BUS::FPGA::ReadA0();
+            
+            if(*dataRead == VALUE::NONE)
+            {
+                *dataRead = *dataRead;
+            }
+            
             *dataPointer = *dataRead;
 
             dataRead += step;
@@ -575,6 +582,12 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
         while(dataRead < last)
         {
             *dataRead = HAL_BUS::FPGA::ReadA0();
+            
+            if(*dataRead == VALUE::NONE)
+            {
+                *dataRead = *dataRead;
+            }
+            
             dataRead += step;
         }
     }
@@ -605,7 +618,7 @@ ShiftPoint RandShift::Calculate()
     if(OSCI_IN_MODE_RANDOMIZER)
     {
         float tin = static_cast<float>(Osci::valueADC - min) / (max - min);
-        result.shift = static_cast<int>(tin * TBase::DeltaPoint());
+        result.shift = static_cast<int>(tin * (TBase::DeltaPoint() - 1));
         return result;
     }
 
@@ -647,7 +660,7 @@ StructReadRand RandShift::GetInfoForReadRand(ShiftPoint Tsm, const uint8 *addres
 
 bool RandShift::Interpolated(int pos)
 {
-    return ((pos - structRand.posFirst) % structRand.step) == 0;
+    return (points[pos % structRand.step] == ShiftPoint::INTERPOLATED);
 }
 
 

@@ -53,21 +53,51 @@ void Interpolator::Run(uint8 *data, uint num)
 
 static bool FindEmptySegment(uint8 *start, Segment *segment)
 {
+    volatile ShiftPoint::E *interpolated = randShift.points;
+    
+    for(int i = 0; i < 50; i++)
+    {
+        if(interpolated[i] == ShiftPoint::READED && begin[i] == VALUE::NONE)
+        {
+            begin[i] = VALUE::NONE;
+        }
+    }
+    
     segment->start = FindEmptyElement(start);
 
     segment->end = FindReadedElement(segment->start);
+    
+    volatile int indexStart = segment->start - begin;
+    volatile int indexEnd = segment->end - begin;
+    
+    indexStart = indexStart;
+    indexEnd = indexEnd;
 
-    return (segment->start != end) && (segment->end != end);
+    bool result = (segment->start != end) && (segment->end != end);
+    
+    if(indexStart > 1000)
+    {
+        indexStart = indexStart;
+    }
+    
+    return result;
 }
 
 
 static uint8 *FindEmptyElement(uint8 * const start)
 {
     uint8 *element = start;
+    
+    volatile ShiftPoint::E *interpolated = randShift.points;
+    interpolated = interpolated;
 
     while(element != end)
     {
-        if(*element == VALUE::NONE)   // Если очередной элемент "пустой"
+        uint8 value = *element;
+        
+        int index = element - begin;
+        
+        if((value == VALUE::NONE) || randShift.Interpolated(index))   // Если очередной элемент "пустой"
         {
             break;                  // то мы его нашли
         }
@@ -81,10 +111,17 @@ static uint8 *FindEmptyElement(uint8 * const start)
 static uint8 *FindReadedElement(uint8 * const start)
 {
     uint8 *element = start;
+    
+    volatile ShiftPoint::E *interpolated = randShift.points;
+    interpolated = interpolated;
 
     while(element != end)
     {
-        if(*element != VALUE::NONE)
+        uint8 value = *element;
+        
+        int index = element - begin;
+        
+        if(!randShift.Interpolated(index))
         {
             break;
         }

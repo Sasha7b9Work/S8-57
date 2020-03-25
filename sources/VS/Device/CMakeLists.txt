@@ -187,6 +187,7 @@ source_group(Osci               FILES   ../../Device/src/Osci/AveragerOsci.cpp
                                         ../../Device/src/Osci/DeviceSettings.cpp
                                         ../../Device/src/Osci/FreqMeter.h
                                         ../../Device/src/Osci/FreqMeter.cpp
+                                        ../../Device/src/Osci/Interpolator.h
                                         ../../Device/src/Osci/Osci.h
                                         ../../Device/src/Osci/Osci.cpp
                                         ../../Device/src/Osci/ParametersOsci.h
@@ -365,6 +366,7 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Osci/DeviceSettings.cpp
                     ../../Device/src/Osci/FreqMeter.h
                     ../../Device/src/Osci/FreqMeter.cpp
+                    ../../Device/src/Osci/Interpolator.h
                     ../../Device/src/Osci/Osci.h
                     ../../Device/src/Osci/Osci.cpp
                     ../../Device/src/Osci/ParametersOsci.h
