@@ -37,8 +37,6 @@ static uint8 *FindReadedElement(uint8 * const start);
 
 void Interpolator::Run(uint8 *data, uint num)
 {
-    uint start = TIME_US;
-
     begin = data;
     end = begin + num;
 
@@ -50,8 +48,6 @@ void Interpolator::Run(uint8 *data, uint num)
     {
         InterpolateSegment(&segment);
     }
-
-    LOG_WRITE("%d ìêñ", TIME_US - start);
 }
 
 
