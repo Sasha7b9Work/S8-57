@@ -33,8 +33,6 @@ static void ChangeRange(Chan::E ch, int16 delta);
 
 static void ChangeTShift(int delta);
 
-static void ChangeTBase(int delta);
-
 static void ChangeRShift(Chan::E ch, int16 delta);
 
 // Обработчики нажатия кнопок
@@ -193,12 +191,6 @@ static void OnTShift()
 }
 
 
-static void ChangeTBase(int delta)
-{
-    TBase::Change(delta);
-}
-
-
 static void OnTBase()
 {
     int delta = (event.key == Key::TBaseMore) ? 1 : -1;
@@ -209,7 +201,7 @@ static void OnTBase()
     }
     else
     {
-        OnChangeParameterTime(ChangeTBase, delta);
+        OnChangeParameterTime(TBase::Change, delta);
     }
 }
 
