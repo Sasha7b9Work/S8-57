@@ -49,13 +49,16 @@ static uint8 *FindEmptyElement(uint8 * const start)
 {
     uint8 *element = start;
 
+    uint8 *interpol = IntRAM::DataRand(ChanA) + (start - begin);
+
     while(element != end)
     {
-        if(*element == VALUE::NONE)
+        if(*interpol == VALUE::NONE || *element == VALUE::NONE)
         {
             break;
         }
         element++;
+        interpol++;
     }
 
     return element;
@@ -65,14 +68,16 @@ static uint8 *FindEmptyElement(uint8 * const start)
 static uint8 *FindReadedElement(uint8 * const start)
 {
     uint8 *element = start;
+    uint8 *interpol = IntRAM::DataRand(ChanA) + (start - begin);
     
     while(element != end)
     {
-        if(*element != VALUE::NONE)
+        if(*element != VALUE::NONE && *interpol != VALUE::NONE)
         {
             break;
         }
         element++;
+        interpol++;
     }
 
     return element;

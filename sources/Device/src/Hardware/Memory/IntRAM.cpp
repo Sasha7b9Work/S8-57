@@ -31,7 +31,7 @@ uint16 *IntRAM::Averager16k(Chan::E ch)
 }
 
 
-uint8 *IntRAM::_DataRand(Chan::E ch)
+uint8 *IntRAM::DataRand(Chan::E ch)
 {
     return rand[ch];
 }

@@ -426,6 +426,8 @@ void Osci::ClearDataRand()
 
         std::memset(ds->Data(Chan::A), VALUE::NONE, ds->PointsInChannel());
         std::memset(ds->Data(Chan::B), VALUE::NONE, ds->PointsInChannel());
+
+        std::memset(IntRAM::DataRand(Chan::A), VALUE::NONE, ds->PointsInChannel());
     }
 }
 
@@ -459,6 +461,7 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
     int step = infoRead.step;
 
     uint8 *dataRead = data + infoRead.posFirst;
+    uint8 *interpolated = IntRAM::DataRand(Chan::A) + infoRead.posFirst;
 
     uint8 *last = data + ENumPointsFPGA::PointsInChannel();
 
@@ -468,46 +471,28 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
     {
         uint8 *dataPointer = &data[infoRead.posFirst];              // ”казатель в переданном массиве
 
-        if(Tsm.type == ShiftPoint::INTERPOLATED)
+        while(dataRead < last)
         {
-            while(dataRead < last)
-            {
-                *dataRead = VALUE::NONE;
-                *dataPointer = *dataRead;
+            *dataRead = HAL_BUS::FPGA::ReadA0();
+            *dataPointer = *dataRead;
+            *interpolated = *dataRead;
+            
 
-                dataRead += step;
-                dataPointer += step;
-            }
-        }
-        else
-        {
-            while(dataRead < last)
-            {
-                *dataRead = HAL_BUS::FPGA::ReadA0();
-                *dataPointer = *dataRead;
-
-                dataRead += step;
-                dataPointer += step;
-            }
+            dataRead += step;
+            dataPointer += step;
+            interpolated += step;
         }
     }
     else
     {
-        if(Tsm.type == ShiftPoint::INTERPOLATED)
+        while(dataRead < last)
         {
-            while(dataRead < last)
-            {
-                *dataRead = VALUE::NONE;
-                dataRead += step;
-            }
-        }
-        else
-        {
-            while(dataRead < last)
-            {
-                *dataRead = HAL_BUS::FPGA::ReadA0();
-                dataRead += step;
-            }
+            *dataRead = HAL_BUS::FPGA::ReadA0();
+            *interpolated = *dataRead;
+
+            dataRead += step;
+            interpolated += step;
+
         }
     }
 
@@ -549,7 +534,7 @@ ShiftPoint Gates::CalculateShiftPoint()
 
     if(((Osci::valueADC > max - setNRST.enumGameMax * 10) || (Osci::valueADC < min + setNRST.enumGameMin * 10)) && set.time.base < TBase::_10ns)
     {
-        result.type = ShiftPoint::INTERPOLATED;
+        result.type = ShiftPoint::FAIL;
     }
 
     return result;
