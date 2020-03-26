@@ -26,22 +26,6 @@ struct StructReadRand
 };
 
 
-// 
-struct ShiftPoint
-{
-    enum E
-    {
-        FAIL,           // Смещение рассчитать не удалось, точки считывать не надо
-        READED,         // Нормально считанная точка
-        INTERPOLATED    // Точку нужно рассчитывать исходя из соседних
-    } type;
-
-    int shift;
-
-    ShiftPoint(E t = FAIL, int s = 0) : type(t), shift(s) { }
-};
-
-
 // Структура для работы со смщещениями точек в рандомизаторе
 struct RandShift
 {
@@ -81,8 +65,6 @@ private:
 
 static RandShift randShift;
 StructReadRand RandShift::structRand = { 0, 0 };
-
-#include "Osci/Interpolator.h"
 
 static Gates gates; // "Ворота" рандомизатора
 
@@ -409,7 +391,6 @@ void Osci::ClearDataRand()
         std::memset(ds->Data(Chan::B), VALUE::NONE, ds->PointsInChannel());
 
         std::memset(IntRAM::DataRand(Chan::A), VALUE::NONE, ds->PointsInChannel());
-        std::memset(IntRAM::DataRand(Chan::B), VALUE::NONE, ds->PointsInChannel());
     }
 }
 
@@ -454,41 +435,6 @@ void Osci::ReadData()
 }
 
 
-void Randomizer::InterpolateDataChannel(DataSettings *ds, Chan::E ch)
-{
-    if(!ENABLED(ds, ch))
-    {
-        return;
-    }
-
-    uint numPoints = ds->BytesInChannel();                  // Число байт в канале
-
-    uint8 *data = ds->Data(ch);
-
-    uint numReaded = 0;                                     // Число реально считанных точек
-
-    for(uint i = 0; i < numPoints; i++)
-    {
-        if(data[i] != VALUE::NONE)
-        {
-            numReaded++;
-        }
-
-        if(numReaded >= numPoints / 2)
-        {
-            break;
-        }
-    }
-
-    if(numReaded < numPoints / 2 || numReaded == numPoints) // Если считано менее половины точек, то просто выходим
-    {
-        return;
-    }
-
-    Interpolator::Run(data, numPoints);
-}
-
-
 bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
 {
     ShiftPoint Tsm = randShift.Calculate();
@@ -501,6 +447,21 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
     StructReadRand infoRead = randShift.GetInfoForReadRand(Tsm, addr);
 
     int step = infoRead.step;
+
+    if(Tsm.type == ShiftPoint::INTERPOLATED)
+    {
+        uint8 *interpolated = IntRAM::DataRand(Chan::A) + infoRead.posFirst;
+
+        uint8 *last = IntRAM::DataRand(Chan::A) + ENumPointsFPGA::PointsInChannel();
+
+        while(interpolated < last)
+        {
+            *interpolated = ShiftPoint::INTERPOLATED;
+            interpolated += step;
+        }
+
+        return true;
+    }
 
     uint8 *dataRead = data + infoRead.posFirst;
 
@@ -549,7 +510,7 @@ ShiftPoint RandShift::Calculate()
 
     if((Osci::valueADC > max - setNRST.enumGameMax * 10) || (Osci::valueADC < min + setNRST.enumGameMin * 10))
     {
-        result.type = ShiftPoint::FAIL;
+        result.type = ShiftPoint::INTERPOLATED;
         return result;
     }
 

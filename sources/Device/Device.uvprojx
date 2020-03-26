@@ -1566,6 +1566,11 @@
               <FilePath>.\src\Osci\ParametersOsci.h</FilePath>
             </File>
             <File>
+              <FileName>Randomizer.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Randomizer.cpp</FilePath>
+            </File>
+            <File>
               <FileName>ParametersOsci.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\ParametersOsci.cpp</FilePath>
@@ -1584,11 +1589,6 @@
               <FileName>Roller.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\Roller.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Interpolator.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Osci\Interpolator.h</FilePath>
             </File>
           </Files>
         </Group>

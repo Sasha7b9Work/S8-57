@@ -98,7 +98,7 @@ struct AveragerOsci
 struct Randomizer
 {
     // Интерполировать дянные канала ch
-    static void InterpolateDataChannel(DataSettings *ds, Chan::E ch);
+    static void InterpolateData(uint8 *data, uint size);
 };
 
 
@@ -138,4 +138,22 @@ private:
 
     // С этой точки следует начинать отрисовку текущего поточечного фрейма. Если firstOnDisplay == -1, то нужно запомнить текущую точку в качестве первой выводимой
     static uint firstOnDisplay;
+};
+
+
+// 
+struct ShiftPoint
+{
+    enum E
+    {
+        FAIL,           // Смещение рассчитать не удалось, точки считывать не надо
+        READED,         // Нормально считанная точка
+        INTERPOLATED    // Точку нужно рассчитывать исходя из соседних
+    } type;
+
+    int shift;
+
+    ShiftPoint(E t = FAIL, int s = 0) : type(t), shift(s)
+    {
+    }
 };

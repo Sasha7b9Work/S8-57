@@ -31,7 +31,14 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
 
     if(OSCI_IN_MODE_RANDOMIZER)
     {
-        return ReadDataChannelRand(a1, data);
+        bool result = ReadDataChannelRand(a1, data);
+
+        if(result)
+        {
+            Randomizer::InterpolateData(data, numPoints);
+        }
+
+        return result;
     }
     else
     {

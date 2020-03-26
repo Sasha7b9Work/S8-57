@@ -164,7 +164,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\Osci\Interpolator.h</Filename>
+          <Filename>D:\Projects\stm32\S8-57\sources\Device\src\Osci\Interpolator.h</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\./src/Osci/Interpolator.h\80</Expression>
         </Bp>
@@ -180,7 +180,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\Osci\Interpolator.h</Filename>
+          <Filename>D:\Projects\stm32\S8-57\sources\Device\src\Osci\Interpolator.h</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\./src/Osci/Interpolator.h\70</Expression>
         </Bp>
@@ -196,7 +196,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\Osci\Interpolator.h</Filename>
+          <Filename>D:\Projects\stm32\S8-57\sources\Device\src\Osci\Interpolator.h</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\./src/Osci/Interpolator.h\66</Expression>
         </Bp>
@@ -2919,7 +2919,7 @@
 
   <Group>
     <GroupName>Osci</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -3038,6 +3038,18 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
+      <PathWithFileName>.\src\Osci\Randomizer.cpp</PathWithFileName>
+      <FilenameWithoutPath>Randomizer.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>27</GroupNumber>
+      <FileNumber>213</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
       <PathWithFileName>.\src\Osci\ParametersOsci.cpp</PathWithFileName>
       <FilenameWithoutPath>ParametersOsci.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
@@ -3045,7 +3057,7 @@
     </File>
     <File>
       <GroupNumber>27</GroupNumber>
-      <FileNumber>213</FileNumber>
+      <FileNumber>214</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3057,7 +3069,7 @@
     </File>
     <File>
       <GroupNumber>27</GroupNumber>
-      <FileNumber>214</FileNumber>
+      <FileNumber>215</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -3069,25 +3081,13 @@
     </File>
     <File>
       <GroupNumber>27</GroupNumber>
-      <FileNumber>215</FileNumber>
+      <FileNumber>216</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>.\src\Osci\Roller.cpp</PathWithFileName>
       <FilenameWithoutPath>Roller.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>27</GroupNumber>
-      <FileNumber>216</FileNumber>
-      <FileType>5</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Osci\Interpolator.h</PathWithFileName>
-      <FilenameWithoutPath>Interpolator.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
