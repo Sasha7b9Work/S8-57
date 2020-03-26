@@ -1,5 +1,7 @@
 #include "defines.h"
+#include "log.h"
 #include "FPGA/TypesFPGA.h"
+#include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Osci.h"
 
@@ -31,14 +33,7 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
 
     if(OSCI_IN_MODE_RANDOMIZER)
     {
-        bool result = ReadDataChannelRand(a1, data);
-
-        if(result)
-        {
-            Randomizer::InterpolateData(data, numPoints);
-        }
-
-        return result;
+        return ReadDataChannelRand(a1, data);
     }
     else
     {

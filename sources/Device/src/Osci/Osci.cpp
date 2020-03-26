@@ -167,6 +167,11 @@ static void UpdateFPGA()
             break;
         }
     }
+
+    if(OSCI_IN_MODE_RANDOMIZER)
+    {
+        Interpolator::Run(RAM::Get());
+    }
 }
 
 
@@ -386,8 +391,6 @@ void Osci::ClearDataRand()
 
         std::memset(ds->Data(Chan::A), VALUE::NONE, ds->PointsInChannel());
         std::memset(ds->Data(Chan::B), VALUE::NONE, ds->PointsInChannel());
-
-        std::memset(IntRAM::DataRand(Chan::A), VALUE::NONE, ds->PointsInChannel());
     }
 }
 
@@ -445,21 +448,6 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
 
     int step = infoRead.step;
 
-    if(Tsm.type == ShiftPoint::INTERPOLATED)
-    {
-        uint8 *interpolated = IntRAM::DataRand(Chan::A) + infoRead.posFirst;
-
-        uint8 *last = IntRAM::DataRand(Chan::A) + ENumPointsFPGA::PointsInChannel();
-
-        while(interpolated < last)
-        {
-            *interpolated = ShiftPoint::INTERPOLATED;
-            interpolated += step;
-        }
-
-        return false;
-    }
-
     uint8 *dataRead = data + infoRead.posFirst;
 
     uint8 *last = data + ENumPointsFPGA::PointsInChannel();
@@ -472,7 +460,8 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
 
         while(dataRead < last)
         {
-            *dataRead = HAL_BUS::FPGA::ReadA0();           
+            uint8 d = (Tsm.type == ShiftPoint::INTERPOLATED) ? VALUE::NONE : HAL_BUS::FPGA::ReadA0();
+            *dataRead = d;
             *dataPointer = *dataRead;
 
             dataRead += step;
@@ -481,10 +470,21 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
     }
     else
     {
-        while(dataRead < last)
+        if(Tsm.type == ShiftPoint::INTERPOLATED)
         {
-            *dataRead = HAL_BUS::FPGA::ReadA0();
-             dataRead += step;
+            while(dataRead < last)
+            {
+                *dataRead = VALUE::NONE;
+                dataRead += step;
+            }
+        }
+        else
+        {
+            while(dataRead < last)
+            {
+                *dataRead = HAL_BUS::FPGA::ReadA0();
+                dataRead += step;
+            }
         }
     }
 

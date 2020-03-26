@@ -94,11 +94,11 @@ struct AveragerOsci
 };
 
 
-// Вспомогательная структура для функций рандомизатора
-struct Randomizer
+
+class Interpolator
 {
-    // Интерполировать дянные канала ch
-    static void InterpolateData(uint8 *data, uint size);
+public:
+    static void Run(DataSettings *ds);
 };
 
 

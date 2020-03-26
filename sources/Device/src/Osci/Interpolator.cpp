@@ -3,14 +3,8 @@
 #include "FPGA/FPGA.h"
 #include "Hardware/Memory/IntRAM.h"
 #include "Hardware/Timer.h"
+#include "Osci/DeviceSettings.h"
 #include "Osci/Osci.h"
-
-
-class Interpolator
-{
-public:
-    static void Run(uint8 *data, uint num);
-};
 
 
 static uint8 *begin = nullptr;  // Начало обрабатываемых данных
@@ -25,6 +19,9 @@ struct Segment
 };
 
 
+// Интерполировать данные одного канала
+static void InterpolateChannel(uint8 *data, uint size);
+
 // Находит первый пустой сегмент (т.е. в котором находятся толдько "пустые" элементы), начиная с элемента с адресом start
 static bool FindEmptySegment(uint8 *start, Segment *segment);
 
@@ -36,26 +33,6 @@ static uint8 *FindEmptyElement(uint8 * const start);
 
 // Найти первый "непустой" элемент данных. Возвращает end, если такого элемента нет
 static uint8 *FindReadedElement(uint8 * const start);
-
-
-void Interpolator::Run(uint8 *data, uint num)
-{
-//    uint start = TIME_US;
-
-    begin = data;
-    end = begin + num;
-
-    Segment segment;
-
-    segment.end = begin;
-
-    while(FindEmptySegment(segment.end, &segment))
-    {
-        InterpolateSegment(&segment);
-    }
-
-//    LOG_WRITE("%d мкс", TIME_US - start);
-}
 
 
 static bool FindEmptySegment(uint8 *start, Segment *segment)
@@ -71,16 +48,14 @@ static bool FindEmptySegment(uint8 *start, Segment *segment)
 static uint8 *FindEmptyElement(uint8 * const start)
 {
     uint8 *element = start;
-    uint8 *interpolated = IntRAM::DataRand(Chan::A) + (start - begin);
 
     while(element != end)
     {
-        if((*element == VALUE::NONE) || (*interpolated == ShiftPoint::INTERPOLATED))
+        if(*element == VALUE::NONE)
         {
             break;
         }
         element++;
-        interpolated++;
     }
 
     return element;
@@ -90,16 +65,14 @@ static uint8 *FindEmptyElement(uint8 * const start)
 static uint8 *FindReadedElement(uint8 * const start)
 {
     uint8 *element = start;
-    uint8 *interpolated = IntRAM::DataRand(Chan::A) + (start - begin);
     
     while(element != end)
     {
-        if((*element != VALUE::NONE) && (*interpolated != ShiftPoint::INTERPOLATED))
+        if(*element != VALUE::NONE)
         {
             break;
         }
         element++;
-        interpolated++;
     }
 
     return element;
@@ -129,38 +102,48 @@ static void InterpolateSegment(Segment *segment)
 }
 
 
-void Randomizer::InterpolateData(uint8 *data, uint size)
+void Interpolator::Run(DataSettings *ds)
+{
+    if(ds->enableA)
+    {
+        InterpolateChannel(ds->dataA, ds->BytesInChannel());
+    }
+    if(ds->enableB)
+    {
+        InterpolateChannel(ds->dataB, ds->BytesInChannel());
+    }
+}
+
+
+static void InterpolateChannel(uint8 *data, uint size)
 {
     uint readed = 0;                                     // Число реально считанных точек
+    uint8 *pointer = data;
+    uint8 *last = pointer + size;
+    uint halfSize = size / 2;
 
-    for(uint i = 0; i < size; i++)
+    while(pointer < last)
     {
-        if(data[i] != VALUE::NONE)
+        if(*pointer++ != VALUE::NONE)
         {
             readed++;
         }
 
-        if(readed >= size / 2)
+        if(readed > halfSize)
         {
+            begin = data;
+            end = begin + size;
+
+            Segment segment;
+
+            segment.end = begin;
+
+            while(FindEmptySegment(segment.end, &segment))
+            {
+                InterpolateSegment(&segment);
+            }
+
             break;
         }
     }
-
-    uint8 *interpolated = IntRAM::DataRand(Chan::A);
-
-    for(uint i = 0; i < size; i++)
-    {
-        if(*interpolated == ShiftPoint::INTERPOLATED)
-        {
-            Interpolator::Run(data, size);
-            return;
-        }
-    }
-
-    if(readed < size / 2 || readed == size) // Если считано менее половины точек, то просто выходим
-    {
-        return;
-    }
-
-    Interpolator::Run(data, size);
 }

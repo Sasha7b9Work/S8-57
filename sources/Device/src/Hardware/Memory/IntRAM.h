@@ -9,7 +9,7 @@ public:
     static uint16 *Averager16k(Chan::E ch);
 
     // Память для чтения канала в режиме рандомизатора
-    static uint8 *DataRand(Chan::E ch);
+    static uint8 *_DataRand(Chan::E ch);
 
     // Указатель на данные поточечного фрейма
     static DataSettings *PrepareForP2P();

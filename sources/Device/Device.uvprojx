@@ -1546,6 +1546,11 @@
               <FilePath>.\src\Osci\FreqMeter.cpp</FilePath>
             </File>
             <File>
+              <FileName>Interpolator.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Interpolator.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Osci.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Osci\Osci.h</FilePath>
@@ -1564,11 +1569,6 @@
               <FileName>ParametersOsci.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Osci\ParametersOsci.h</FilePath>
-            </File>
-            <File>
-              <FileName>Randomizer.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\Randomizer.cpp</FilePath>
             </File>
             <File>
               <FileName>ParametersOsci.cpp</FileName>
