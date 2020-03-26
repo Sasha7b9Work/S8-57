@@ -155,6 +155,15 @@ static void UpdateFPGA()
 
     RAM::NewFrameForRandomize();
 
+    uint lastID = 0;
+
+    DataSettings *ds = RAM::Get();
+
+    if(ds)
+    {
+        lastID = ds->id;
+    }
+
     for(int i = 0; i < number; i++)
     {
         FPGA::ReadFlag();
@@ -171,6 +180,32 @@ static void UpdateFPGA()
     if(OSCI_IN_MODE_RANDOMIZER)
     {
         Interpolator::Run(RAM::Get());
+    }
+
+    ds = RAM::Get();
+
+    if(ds && ds->id != lastID)
+    {
+        if(ENumAverage() != ENumAverage::_1)               // Если включено усреднение
+        {
+            DataSettings *last = RAM::Get(0);
+            DataSettings *prev = RAM::Get(1);
+
+            if(prev && last)
+            {
+                if(last->IsEquals(*prev))
+                {
+                    if(ENABLED_A(last))
+                    {
+                        AveragerOsci::Process(Chan::A, last->dataA, last->BytesInChannel());
+                    }
+                    if(ENABLED_B(last))
+                    {
+                        AveragerOsci::Process(Chan::B, last->dataB, last->BytesInChannel());
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -405,31 +440,6 @@ void Osci::ReadData()
     {
         if(ReadDataChannel(Chan::B, ds->dataB))
         {
-        }
-        else
-        {
-            return;
-        }
-    }
-
-    if(ENumAverage() != ENumAverage::_1)               // Если включено усреднение
-    {
-        DataSettings *last = RAM::Get(0);
-        DataSettings *prev = RAM::Get(1);
-
-        if(prev && last)
-        {
-            if(last->IsEquals(*prev))
-            {
-                if(ENABLED_A(last))
-                {
-                    AveragerOsci::Process(Chan::A, last->dataA, last->BytesInChannel());
-                }
-                if(ENABLED_B(last))
-                {
-                    AveragerOsci::Process(Chan::B, last->dataB, last->BytesInChannel());
-                }
-            }
         }
     }
 }
