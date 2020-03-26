@@ -126,6 +126,8 @@ void Osci::Restart()
         Stop();
         Start(true);
     }
+
+    ClearDataRand();
 }
 
 
@@ -503,16 +505,33 @@ ShiftPoint Gates::CalculateShiftPoint()
         return result;
     }
 
-    if(((Osci::valueADC > max - setNRST.enumGameMax * 10) || (Osci::valueADC < min + setNRST.enumGameMin * 10)))
+    if((Osci::valueADC > max - setNRST.enumGameMax * 10) || (Osci::valueADC < min + setNRST.enumGameMin * 10))
     {
-        result.type = ShiftPoint::FAIL;
-        return result;
+        if(set.time.base > TBase::_5ns)
+        {
+            result.type = ShiftPoint::FAIL;
+            return result;
+        }
+        else
+        {
+            result.type = ShiftPoint::INTERPOLATED;
+            return result;
+        }
     }
 
 
     float tin = static_cast<float>(Osci::valueADC - min) / (max - min);
 
     result.shift = static_cast<int>(tin * TBase::DeltaPoint());
+
+    if(result.shift < 0)
+    {
+        result.shift = 0;
+    }
+    else if(result.shift >= TBase::DeltaPoint())
+    {
+        result.shift = TBase::DeltaPoint() - 1;
+    }
 
     return result;
 }

@@ -1,7 +1,14 @@
 #include "defines.h"
 #include "Menu/Pages/Include/DebugPage.h"
 #include "Menu/Pages/Include/PageService.h"
+#include "Osci/Osci.h"
 #include "Settings/SettingsNRST.h"
+
+
+static void OnChanged_Gates(bool)
+{
+    Osci::ClearDataRand();
+}
 
 
 DEF_CHOICE_16( gGateMax,                                                                                                                           //--- Œ“À¿ƒ ¿ - –¿Õƒ-“Œ– - ¬ÓÓÚ‡ ‚Âı ---
@@ -23,7 +30,7 @@ DEF_CHOICE_16( gGateMax,                                                        
     "130",
     "140",
     "150",
-    setNRST.enumGameMax, &PageDebug::PageRand::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    setNRST.enumGameMax, &PageDebug::PageRand::self, Item::Active, OnChanged_Gates, Choice::AfterDraw
 )
 
 
@@ -47,7 +54,7 @@ DEF_CHOICE_16( gGateMin,                                                        
     "130",
     "140",
     "150",
-    setNRST.enumGameMin, &PageDebug::PageRand::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    setNRST.enumGameMin, &PageDebug::PageRand::self, Item::Active, OnChanged_Gates, Choice::AfterDraw
 )
 
 
