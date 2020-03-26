@@ -458,14 +458,27 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
     {
         uint8 *dataPointer = &data[infoRead.posFirst];              // ”казатель в переданном массиве
 
-        while(dataRead < last)
+        if(Tsm.type == ShiftPoint::INTERPOLATED)
         {
-            uint8 d = (Tsm.type == ShiftPoint::INTERPOLATED) ? VALUE::NONE : HAL_BUS::FPGA::ReadA0();
-            *dataRead = d;
-            *dataPointer = *dataRead;
+            while(dataRead < last)
+            {
+                *dataRead = VALUE::NONE;
+                *dataPointer = *dataRead;
 
-            dataRead += step;
-            dataPointer += step;
+                dataRead += step;
+                dataPointer += step;
+            }
+        }
+        else
+        {
+            while(dataRead < last)
+            {
+                *dataRead = HAL_BUS::FPGA::ReadA0();
+                *dataPointer = *dataRead;
+
+                dataRead += step;
+                dataPointer += step;
+            }
         }
     }
     else
