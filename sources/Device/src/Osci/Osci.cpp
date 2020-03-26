@@ -371,10 +371,6 @@ void Osci::InputController::Write(HPort::E portCS, uint16 pinCS, uint16 value)
             HAL_PIO::Reset(PIN_SPI3_SCK);
         }
     }
-    else
-    {
-        // нет действий
-    }
 
     HAL_PIO::Set(portCS, pinCS);
 }
@@ -460,7 +456,7 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
             interpolated += step;
         }
 
-        return true;
+        return false;
     }
 
     uint8 *dataRead = data + infoRead.posFirst;
@@ -508,9 +504,9 @@ ShiftPoint RandShift::Calculate()
         return result;
     }
 
-    if((Osci::valueADC > max - setNRST.enumGameMax * 10) || (Osci::valueADC < min + setNRST.enumGameMin * 10))
+    if(((Osci::valueADC > max - setNRST.enumGameMax * 10) || (Osci::valueADC < min + setNRST.enumGameMin * 10)))
     {
-        result.type = ShiftPoint::INTERPOLATED;
+        result.type = ShiftPoint::FAIL;
         return result;
     }
 
@@ -593,11 +589,11 @@ void Gates::RecalculateGates()
     minGate = 0.8F * minGate + m.Min() * 0.2F;
     maxGate = 0.8F * maxGate + m.Max() * 0.2F;
 
-    static uint timePrev = 0;
+//    static uint timePrev = 0;
 
-    LOG_WRITE("Новые ворота %d %d  время %d", static_cast<uint16>(minGate), static_cast<uint16>(maxGate), (TIME_MS - timePrev) / 1000);
+    //LOG_WRITE("Новые ворота %d %d  время %d", static_cast<uint16>(minGate), static_cast<uint16>(maxGate), (TIME_MS - timePrev) / 1000);
 
-    timePrev = TIME_MS;
+//    timePrev = TIME_MS;
 }
 
 

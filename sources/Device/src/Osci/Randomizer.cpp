@@ -146,6 +146,17 @@ void Randomizer::InterpolateData(uint8 *data, uint size)
         }
     }
 
+    uint8 *interpolated = IntRAM::DataRand(Chan::A);
+
+    for(uint i = 0; i < size; i++)
+    {
+        if(*interpolated == ShiftPoint::INTERPOLATED)
+        {
+            Interpolator::Run(data, size);
+            return;
+        }
+    }
+
     if(readed < size / 2 || readed == size) // Если считано менее половины точек, то просто выходим
     {
         return;
