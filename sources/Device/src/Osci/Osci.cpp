@@ -29,8 +29,6 @@ struct StructReadRand
 // Структура для работы со смщещениями точек в рандомизаторе
 struct RandShift
 {
-    ShiftPoint Calculate();
-
     // Возвращает данные, необходимые для чтения даннхы в режмиме рандомизатора.
     // Если Tsm == 0, то структура будет использоваться не для чтения данных, а для правильного усредения.
     StructReadRand GetInfoForReadRand(ShiftPoint Tsm, const uint8 *address = nullptr);
@@ -44,10 +42,9 @@ struct RandShift
 
 struct Gates
 {
-    Gates() : minGate(0.0F), maxGate(0.0F)
-    {
-    }
-    bool Calculate(uint16 value, uint16 *min, uint16 *max);
+    Gates() : minGate(0.0F), maxGate(0.0F) { }
+
+    ShiftPoint CalculateShiftPoint();
 
 private:
     static const int numberMeasuresForGates = 10000;
@@ -60,6 +57,8 @@ private:
     void RecalculateGates();
 
     void CalculateWithoutGates(uint16 *min, uint16 *max);
+
+    bool Calculate(uint16 value, uint16 *min, uint16 *max);
 };
 
 
@@ -433,7 +432,7 @@ void Osci::ReadData()
 
 bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
 {
-    ShiftPoint Tsm = randShift.Calculate();
+    ShiftPoint Tsm = gates.CalculateShiftPoint();
 
     if(Tsm.type == ShiftPoint::FAIL)
     {
@@ -491,14 +490,14 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
 }
 
 
-ShiftPoint RandShift::Calculate()
+ShiftPoint Gates::CalculateShiftPoint()
 {
     ShiftPoint result(ShiftPoint::READED, 0);
 
     uint16 min = 0;
     uint16 max = 0;
 
-    if(!gates.Calculate(Osci::valueADC, &min, &max))
+    if(!Calculate(Osci::valueADC, &min, &max))
     {
         result.type = ShiftPoint::FAIL;
         return result;
