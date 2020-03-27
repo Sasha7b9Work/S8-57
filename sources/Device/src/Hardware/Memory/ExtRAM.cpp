@@ -20,7 +20,7 @@ uint8 *ExtRAM::Begin()
 #ifdef GUI
     return ram;
 #else
-    return reinterpret_cast<uint8 *>(0x68000000U);
+    return reinterpret_cast<uint8 *>(0x68000000U); //-V566
 #endif
 }
 
@@ -134,7 +134,7 @@ float ExtRAM::TestTime(uint sizekB)
     {
         float time = TestTime1kB(Begin() + i * 1024);
 
-        if(time == -1.0F)
+        if(time == -1.0F) //-V550
         {
             return -1.0F;
         }

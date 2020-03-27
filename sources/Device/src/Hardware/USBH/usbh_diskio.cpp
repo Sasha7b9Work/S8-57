@@ -55,10 +55,6 @@ DSTATUS USBH_status(BYTE lun)
     {
         res = RES_OK;
     }
-    else
-    {
-        res = RES_ERROR;
-    }
 
     return static_cast<DSTATUS>(res);
 }
@@ -94,7 +90,6 @@ DRESULT USBH_read(BYTE lun, BYTE *buff, DWORD sector, UINT count)
             break;
 
         default:
-            res = RES_ERROR;
             break;
         }
     }
@@ -139,7 +134,6 @@ DRESULT USBH_write(BYTE lun, const BYTE *buff, DWORD sector, UINT count)
             break;
 
         default:
-            res = RES_ERROR;
             break;
         }
     }
@@ -172,25 +166,17 @@ DRESULT USBH_ioctl(BYTE lun, BYTE cmd, void *buff)
     case GET_SECTOR_COUNT:
         if (USBH_MSC_GetLUNInfo(&FDrive::handle, lun, &info) == USBH_OK)
         {
-            *static_cast<DWORD *>(buff) = info.capacity.block_nbr;
+            *static_cast<DWORD *>(buff) = info.capacity.block_nbr; //-V525
             res = RES_OK;
-        }
-        else
-        {
-            res = RES_ERROR;
         }
         break;
 
         /* Get R/W sector size (WORD) */
     case GET_SECTOR_SIZE:
-        if (USBH_MSC_GetLUNInfo(&FDrive::handle, lun, &info) == USBH_OK)
+        if (USBH_MSC_GetLUNInfo(&FDrive::handle, lun, &info) == USBH_OK) //-V1037
         {
             *static_cast<DWORD *>(buff) = info.capacity.block_size;
             res = RES_OK;
-        }
-        else
-        {
-            res = RES_ERROR;
         }
         break;
 
@@ -201,10 +187,6 @@ DRESULT USBH_ioctl(BYTE lun, BYTE cmd, void *buff)
         {
             *static_cast<DWORD *>(buff) = info.capacity.block_size;
             res = RES_OK;
-        }
-        else
-        {
-            res = RES_ERROR;
         }
         break;
 

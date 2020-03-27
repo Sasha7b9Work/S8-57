@@ -157,10 +157,6 @@ void FDrive::AttemptUpdate()
         {
             Upgrade();
         }
-        else
-        {
-            state = State::NotFile;
-        }
     }
     else if(state == State::WrongFlash) // Диск не удалось примонтировать //-V774
     {

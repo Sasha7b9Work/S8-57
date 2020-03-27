@@ -65,7 +65,7 @@ USBH_SpeedTypeDef USBH_LL_GetSpeed(USBH_HandleTypeDef *phost)
         break;
 
     case 1:
-        speed = USBH_SPEED_FULL;
+        speed = USBH_SPEED_FULL; //-V1048
         break;
 
     case 2:
@@ -73,7 +73,7 @@ USBH_SpeedTypeDef USBH_LL_GetSpeed(USBH_HandleTypeDef *phost)
         break;
 
     default:
-        speed = USBH_SPEED_FULL;
+        speed = USBH_SPEED_FULL; //-V1048
         break;
     }
     return speed;

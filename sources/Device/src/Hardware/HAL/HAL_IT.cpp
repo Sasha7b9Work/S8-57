@@ -24,13 +24,13 @@ void HardFault_Handler()
     __IO int line1 = Debug::line[1];
     __IO int line2 = Debug::line[2];
     
-    while (1)
+    while (1) //-V776
     {
         file0 = file0; //-V570
         file1 = file1; //-V570
         line0 = line0; //-V570
         line1 = line1; //-V570
-        line2 = line2;
+        line2 = line2; //-V570
 
         NVIC_SystemReset();
     }

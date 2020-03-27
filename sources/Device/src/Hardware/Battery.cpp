@@ -121,5 +121,5 @@ float Battery::Voltage100()
 
 float Battery::Voltage0()
 {
-    return GetVoltagePOW() > 8.0F ? 6.0F : 6.0F;
+    return GetVoltagePOW() > 8.0F ? 6.0F : 6.0F; //-V583
 }

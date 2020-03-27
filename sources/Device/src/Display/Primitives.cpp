@@ -349,7 +349,7 @@ static bool FindNextTransfer(const char *letters, int8 *lettersInSyllable) //-V2
 
     *lettersInSyllable = static_cast<int8>(std::strlen(letters)); //-V1029
 
-    if (std::strlen(letters) <= 3) //-V2513
+    if (std::strlen(letters) <= 3) //-V2513 //-V1051
     {
         return false;
     }

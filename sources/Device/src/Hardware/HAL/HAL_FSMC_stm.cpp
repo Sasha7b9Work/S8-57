@@ -182,7 +182,7 @@ void HAL_BUS::ConfigureToFSMC()
 
     //           NOE          NWE          NE1
     is.Pin = GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_7;   
-    HAL_GPIO_Init(GPIOD, &is);
+    HAL_GPIO_Init(GPIOD, &is); //-V525
 
     //           D2           D3           D0            D1
     is.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_14 | GPIO_PIN_15;

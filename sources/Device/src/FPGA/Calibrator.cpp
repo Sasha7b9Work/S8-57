@@ -204,8 +204,8 @@ static float FindStretchChannel(Chan::E ch)
 
     HAL_BUS::FPGA::SetAddrData(a0, a1);
 
-    uint8 data = *a0;
-    data = *a1;
+    volatile uint8 data = *a0;
+    data = *a1; //-V519
 
     int sumMIN = 0;
     int sumMAX = 0;

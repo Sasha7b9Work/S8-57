@@ -8,7 +8,7 @@ static IWDG_HandleTypeDef handleIWDG;
 
 
 static uint freqLSI = 0;
-static uint32_t uwMeasurementDone = 0;
+volatile static uint32_t uwMeasurementDone = 0;
 static uint32_t uwCaptureNumber = 0;
 static uint32_t uwPeriodValue = 0;
 
@@ -160,7 +160,7 @@ void EXTI15_10_IRQHandler(void)
     /* As the following address is invalid (not mapped), a Hardfault exception
     will be generated with an infinite loop and when the WWDG counter falls to 63
     the WWDG reset occurs */
-    *(__IO uint32_t *) 0xA0002000 = 0xFF;
+    *(__IO uint32_t *) 0xA0002000 = 0xFF; //-V566
 }
 
 
