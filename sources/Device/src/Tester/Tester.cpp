@@ -29,7 +29,7 @@ static void ReadFPGA(uint16 *dataA, uint8 *dataB);
 
 // Запустить цикл чтения для тестер-компонента. В течение time секунд должно быть считано numPoints точек
 // Если возвращает false - старт не прошёл
-static void StartFPGA();
+static bool StartFPGA();
 
 // Считать данные очередной ступеньки
 static void ReadData();
@@ -351,7 +351,7 @@ static void ReadFPGA(uint16 *dataA, uint8 *dataB)
 }
 
 
-static void StartFPGA()
+static bool StartFPGA()
 {
     // У нас двенадцать делений. На двенадцать делений должно приходиться не менее 2.5 мс
     // 2.5мс / 12дел = 0.2 мс/дел = 10мкс/тчк
@@ -362,10 +362,15 @@ static void StartFPGA()
 
     FPGA::flag.flag = 0;
 
-    while(!FPGA::flag.Pred())
+    for(int i = 0; i < 20; i++)
     {
         FPGA::ReadFlag();
+        if(FPGA::flag.Pred())
+        {
+            FPGA::ForcedStart();
+            return true;
+        }
     }
 
-    FPGA::ForcedStart();
+    return false;
 }
