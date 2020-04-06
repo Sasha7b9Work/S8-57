@@ -563,7 +563,7 @@ StructReadRand RandShift::GetInfoForReadRand(ShiftPoint Tsm, const uint8 *addres
 }
 
 
-bool Gates::Calculate(uint16 value, uint16 *min, uint16 *max)
+bool Gates::Calculate(uint16 value, uint16 *min, uint16 *max) 
 {
     if(value < 250 || value > 4000)
     {
@@ -611,11 +611,12 @@ void Gates::RecalculateGates()
     minGate = 0.8F * minGate + m.Min() * 0.2F;
     maxGate = 0.8F * maxGate + m.Max() * 0.2F;
 
-//    static uint timePrev = 0;
-
-    //LOG_WRITE("Новые ворота %d %d  время %d", static_cast<uint16>(minGate), static_cast<uint16>(maxGate), (TIME_MS - timePrev) / 1000);
-
-//    timePrev = TIME_MS;
+    if(set.dbg.showRandGate)
+    {
+        static uint timePrev = 0;
+        LOG_WRITE("Новые ворота %d %d  время %d", static_cast<uint16>(minGate), static_cast<uint16>(maxGate), (TIME_MS - timePrev) / 1000);
+        timePrev = TIME_MS;
+    }
 }
 
 
