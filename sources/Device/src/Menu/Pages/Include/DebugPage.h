@@ -32,8 +32,6 @@ struct PageDebug
 {
     static const Page *const self;
 
-
-
     struct PageConsole
     {
         static const Page *const self;

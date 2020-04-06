@@ -18,6 +18,8 @@ struct PageService
 
     static void OnPress_ResetSettings();
 
+    static void DecodePassword(const KeyEvent &event);
+
     struct Battery
     {
         static const Page * const self; 

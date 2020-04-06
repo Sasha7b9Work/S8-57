@@ -43,7 +43,7 @@ DEF_CHOICE_4( cSoundVolume,
 )
 
 
-DEF_PAGE_7( pService,                                                                                                                                                        //--- СЕРВИС ---
+DEF_PAGE_7_VAR( pService,                                                                                                                                                        //--- СЕРВИС ---
     "СЕРВИС",
     "Дополнительные настройки, калибровка, поиск сигнала, математические функции",
     &bResetSettings,
@@ -52,8 +52,55 @@ DEF_PAGE_7( pService,                                                           
     &cSoundVolume,
     PageRTC::self,
     PageService::Information::self,
-    PageDebug::self,
+    &Item::empty,
     PageName::Service, nullptr, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
 const Page * const PageService::self = static_cast<const Page *>(&pService);
+
+
+void PageService::DecodePassword(const KeyEvent &event)
+{
+#define NUM_SYMBOLS 10
+
+    static const Key::E password[NUM_SYMBOLS] =
+    {
+        Key::F1, Key::F1,
+        Key::F2, Key::F2,
+        Key::F3, Key::F3,
+        Key::F4, Key::F4,
+        Key::F5, Key::F5
+    };
+
+    // Число совпавших символов
+    static int charsMatch = 0;
+
+    if(Menu::IsShown())
+    {
+        charsMatch = 0;
+        return;
+    }
+
+    if(event.type != TypePress::Release)
+    {
+        return;
+    }
+
+    if(password[charsMatch++] == event.key)
+    {
+        if(charsMatch == NUM_SYMBOLS)
+        {
+            Page *page = const_cast<Page *>(&pService);
+
+            Item **items = const_cast<Item **>(page->OwnData()->items);
+
+            items[6] = const_cast<Page *>(PageDebug::self);
+
+            DISPLAY_SHOW_WARNING("Доступ к меню ОТЛАДКА открыт");
+        }
+    }
+    else
+    {
+        charsMatch = 0;
+    }
+}

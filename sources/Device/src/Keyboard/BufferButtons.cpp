@@ -32,6 +32,8 @@ void BufferButtons::Push(KeyEvent event)
 
     PageMultimeter::DecodePassword(event);
 
+    PageService::DecodePassword(event);
+
     /// \todo На звуке иногда виснет при длительном удержании кнопки смещения. Вызвано ошибками при передаче данных
     Beeper::Beep(event.type);
 

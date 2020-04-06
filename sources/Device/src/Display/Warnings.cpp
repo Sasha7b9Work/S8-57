@@ -93,7 +93,7 @@ bool Warnings::IsShown()
 
 WarningStruct::WarningStruct(const char *msg)
 {
-    message.Set(TypeConversionString::FirstUpper, msg);
+    message.Set(TypeConversionString::None, msg);
     timeStart = TIME_MS;
 }
 

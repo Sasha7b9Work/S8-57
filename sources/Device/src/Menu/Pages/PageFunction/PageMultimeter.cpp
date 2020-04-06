@@ -297,6 +297,8 @@ void PageMultimeter::DecodePassword(const KeyEvent &event)
             items[4] = const_cast<Page *>(PageMultimeter::Calibration::self);
 
             Menu::CloseOpenedItem();
+
+            DISPLAY_SHOW_WARNING("Доступ к калибровке открыт");
         }
     }
     else
