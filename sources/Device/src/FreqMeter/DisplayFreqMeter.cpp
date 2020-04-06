@@ -4,6 +4,7 @@
 #include "Display/Primitives.h"
 #include "FreqMeter/DisplayFreqMeter.h"
 #include "Hardware/Timer.h"
+#include "Settings/Settings.h"
 #include "Utils/StringUtils.h"
 #include "Utils/Values.h"
 #include <cstring>
@@ -391,7 +392,7 @@ pString DisplayFreqMeter::PeriodSetToString(const BitSet32 *pr)
         _period /= 10;
     }
 
-    int order = LowOrder(FreqMeter::FreqClc(), FreqMeter::NumberPeriods());  // В ордер - порядок младшего значащего разряда
+    int order = LowOrder(set.freq.freqClc, FreqMeter::NumberPeriods());  // В ордер - порядок младшего значащего разряда
 
     while(stack.Size() < 6)
     {

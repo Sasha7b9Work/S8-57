@@ -83,10 +83,6 @@ public:
             _100MHz,
             Count
         };
-
-        FreqClc() {};
-        static FreqClc::E &Ref();
-        operator FreqClc::E() { return Ref(); }
     };
 
     /// Количество периодов.
