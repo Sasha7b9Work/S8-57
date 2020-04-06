@@ -10,6 +10,12 @@
 static ADC_HandleTypeDef handle;
 
 
+// Сконфигурировать на чтение по прерыванию
+static void ConfigToIT();
+
+// Сконфигурировать на чтение в ручном режиме
+static void ConfigToHand();
+
 
 void HAL_ADC3::Init()
 {
@@ -29,6 +35,12 @@ void HAL_ADC3::Init()
     HAL_NVIC_SetPriority(ADC_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(ADC_IRQn);
 
+    ConfigToIT();
+}
+
+
+static void ConfigToIT()
+{
     handle.Instance = ADC3;
     handle.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
     handle.Init.Resolution = ADC_RESOLUTION12b;
@@ -43,10 +55,7 @@ void HAL_ADC3::Init()
     handle.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_RISING;
     handle.Init.ExternalTrigConv = ADC_EXTERNALTRIGCONV_Ext_IT11;
 
-    if (HAL_ADC_Init(&handle) != HAL_OK)
-    {
-        ERROR_HANDLER();
-    }
+    HAL_ADC_Init(&handle);
 
     ADC_ChannelConfTypeDef sConfig;
     sConfig.Channel = ADC_CHANNEL_8;
@@ -54,15 +63,15 @@ void HAL_ADC3::Init()
     sConfig.SamplingTime = ADC_SAMPLETIME_28CYCLES;
     sConfig.Offset = 0;
 
-    if (HAL_ADC_ConfigChannel(&handle, &sConfig) != HAL_OK)
-    {
-        ERROR_HANDLER();
-    }
+    HAL_ADC_ConfigChannel(&handle, &sConfig);
 
-    if (HAL_ADC_Start_IT(&handle) != HAL_OK)
-    {
-        ERROR_HANDLER();
-    }
+    HAL_ADC_Start_IT(&handle);
+}
+
+
+static void ConfigToHand()
+{
+
 }
 
 
@@ -81,7 +90,11 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 
     if (OSCI_IN_MODE_RANDOMIZER)
     {
+        ConfigToHand();
+
         Osci::valueADC = static_cast<uint16>(HAL_ADC_GetValue(hadc));
+
+        ConfigToIT();
     }
 }
 
