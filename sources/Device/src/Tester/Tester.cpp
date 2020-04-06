@@ -356,7 +356,8 @@ static bool StartFPGA()
     // У нас двенадцать делений. На двенадцать делений должно приходиться не менее 2.5 мс
     // 2.5мс / 12дел = 0.2 мс/дел = 10мкс/тчк
 
-    TBase::Set500us();
+    //TBase::Set500us();
+    TBase::Set(TBase::_200us);
 
     FPGA::GiveStart(static_cast<uint16>(~(1)), static_cast<uint16>(~(400)));
 

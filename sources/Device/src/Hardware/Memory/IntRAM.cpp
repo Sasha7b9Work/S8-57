@@ -9,7 +9,7 @@
 static DataSettings ds;
 
 
-static const uint SIZE_BUFFER = 112 * 1024;
+static const uint SIZE_BUFFER = 110 * 1024;
 static uint8 buffer[SIZE_BUFFER];
 
 static uint16 *const memAveA = reinterpret_cast<uint16 *>(buffer);                              // 0           = 0k
