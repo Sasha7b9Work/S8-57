@@ -158,11 +158,30 @@ DEF_PAGE_12( pRegisters,                                                        
 const Page * const PageDebug::PageRegisters::self = static_cast<const Page *>(&pRegisters);
 
 
-DEF_PAGE_2( pConsole,                                                                                                                                             //--- ОТЛАДКА - КОНСОЛЬ ---
+DEF_CHOICE_2( cShowGate,
+    "Ворота",
+    "",
+    DISABLE_RU,
+    ENABLE_RU,
+    set.dbg.showRandGate, &PageDebug::PageConsole::self, Item::Active, Choice::Changed, Choice::AfterDraw
+)
+
+DEF_CHOICE_2( cShowPredPost,
+    "Предзапуск",
+    "",
+    DISABLE_RU,
+    ENABLE_RU,
+    set.dbg.showRandPredPost, &PageDebug::PageConsole::self, Item::Active, Choice::Changed, Choice::AfterDraw
+)
+
+
+DEF_PAGE_4( pConsole,                                                                                                                                             //--- ОТЛАДКА - КОНСОЛЬ ---
     "КОНСОЛЬ",
     "Управляет отображением и параметрами отладочной консоли",
     &cShow,
     &gNumStrings,
+    &cShowGate,
+    &cShowPredPost,
     PageName::Debug_Console, &PageDebug::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
