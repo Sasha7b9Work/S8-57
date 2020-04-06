@@ -4,22 +4,34 @@
 
 class FreqMeter
 {
-    friend struct DisplayFreqMeter;
-    friend struct ProgressBarFreqMeter;
 public:
-    /// Инициализация.
+    
+    // Инициализация.
     static void Init();
-    /// Заслать настройки для счётчика частоты
+    
+    // Заслать настройки для счётчика частоты
     static void LoadFreqSettings();
-    /// Заслать настрйки для счётчика периода
+    
+    // Заслать настрйки для счётчика периода
     static void LoadPeriodSettings();
 
     static void Update();
-    /// Возвращает измеренное значение частоты
+    
+    // Возвращает измеренное значение частоты
     static float GetFreq();
 
+    static BitSet32 freqActual;             // Здесь хранится последнее действительное значение частоты. Для вывода в режиме частотомера. 0 означает, что значение выводить не надо
+    static BitSet32 periodActual;           // Здесь хранится последнее действительное значение периода. Для вывода в режиме частотомера. 0 означает, что значение выводить не надо
+    static uint     timeStartMeasureFreq;   // Время начала измерения частоты
+    static uint     timeStartMeasurePeriod; // Время начала измерения периода
+    static uint     lastFreqRead;           // Последнее время разрешшения чтения частоты
+    static uint     lastPeriodRead;         // Последнее время разрешения чтения периода
+    static uint     lastFreqOver;           // Последнее время переполнения частоты
+    static uint     lastPeriodOver;         // Последнее время переполения периода
+
 private:
-    /// Установить состояние лампочек счётчиков в состояние, соответствующее текущему моменту
+    
+    // Установить состояние лампочек счётчиков в состояние, соответствующее текущему моменту
     static void SetStateLamps();
 
     static void SetStateLampFreq();
@@ -35,7 +47,8 @@ private:
     static float FreqSetToFreq(const BitSet32 *fr);
 
     static float PeriodSetToFreq(const BitSet32 *period);   
-    /// Установленное в true значение означает, что частоту нужно считать по счётчику периода
+    
+    // Установленное в true значение означает, что частоту нужно считать по счётчику периода
     static bool readPeriod;
 
     static float prevFreq;
@@ -43,22 +56,6 @@ private:
     static float frequency;
 
     static float period;
-    /// Здесь хранится последнее действительное значение частоты. Для вывода в режиме частотомера. 0 означает, что значение выводить не надо
-    static BitSet32 freqActual;
-    /// Здесь хранится последнее действительное значение периода. Для вывода в режиме частотомера. 0 означает, что значение выводить не надо
-    static BitSet32 periodActual;
-    /// Последнее время разрешшения чтения частоты
-    static uint lastFreqRead;
-    /// Последнее время разрешения чтения периода
-    static uint lastPeriodRead;
-    /// Последнее время переполнения частоты
-    static uint lastFreqOver;
-    /// Последнее время переполения периода
-    static uint lastPeriodOver;
-    /// Время начала измерения частоты
-    static uint timeStartMeasureFreq;
-    /// Время начала измерения периода
-    static uint timeStartMeasurePeriod;
 
 public:
     struct Enabled

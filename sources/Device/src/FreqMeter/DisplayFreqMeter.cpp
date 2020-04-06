@@ -18,6 +18,24 @@
 static char buffer[11] = { '0', '0', '0', '0', '0', '0', '0', 0, 0, 0, 0 };
 
 
+static void DrawFrequency(int x, int _y);
+
+static void DrawPeriod(int x, int y);
+
+static pString FreqSetToString(const BitSet32 *fr);
+
+static pString PeriodSetToString(const BitSet32 *pr);
+
+// Возвращает порядок младшего разряда считанного значения счётчика периода при данных настройках
+static int LowOrder(FreqMeter::FreqClc::E freqCLC, FreqMeter::NumberPeriods::E numPeriods);
+
+// Преобразует 6 разрядов числа, хранящиеся в стеке, в текстовую строку периода. Младший значащий разряд хранится на вершине стека. order - его порядок
+static pString StackToString(Stack<uint> *stack, int order);
+
+// Записывает 6 разрядов из стека stack в буфер buffer. Младший разряд на вершине стека. Точку ставить на point позиции, начиная с buffer[0]
+static void WriteStackToBuffer(Stack<uint> *stack, int point, const char *suffix);
+
+
 void DisplayFreqMeter::Draw()
 {
     /// \todo В этой строке точку ставить не где придётся, а в той позиции, где она стояла последний раз
@@ -63,7 +81,7 @@ void DisplayFreqMeter::Draw()
 }
 
 
-void DisplayFreqMeter::DrawFrequency(int x, int _y)
+static void DrawFrequency(int x, int _y)
 {
     _y += 4;
 
@@ -117,7 +135,7 @@ void DisplayFreqMeter::DrawFrequency(int x, int _y)
 }
 
 
-void DisplayFreqMeter::DrawPeriod(int x, int _y)
+static void DrawPeriod(int x, int _y)
 {
     _y += 4;
 
@@ -170,7 +188,7 @@ void DisplayFreqMeter::DrawPeriod(int x, int _y)
 }
 
 
-pString DisplayFreqMeter::FreqSetToString(const BitSet32 *fr)
+static pString FreqSetToString(const BitSet32 *fr)
 {
     if(fr->word < 2)
     {
@@ -313,7 +331,7 @@ pString DisplayFreqMeter::FreqSetToString(const BitSet32 *fr)
 }
 
 
-int DisplayFreqMeter::LowOrder(FreqMeter::FreqClc::E freqCLC, FreqMeter::NumberPeriods::E numPeriods)
+static int LowOrder(FreqMeter::FreqClc::E freqCLC, FreqMeter::NumberPeriods::E numPeriods)
 {
     /*
         Измеряемое значение | Принимаемое значение | Вывод на экран | последний значащий разряд
@@ -367,7 +385,7 @@ int DisplayFreqMeter::LowOrder(FreqMeter::FreqClc::E freqCLC, FreqMeter::NumberP
 }
 
 
-pString DisplayFreqMeter::PeriodSetToString(const BitSet32 *pr)
+static pString PeriodSetToString(const BitSet32 *pr)
 {
     if(pr->word == 0)
     {
@@ -420,7 +438,7 @@ pString DisplayFreqMeter::PeriodSetToString(const BitSet32 *pr)
 }
 
 
-pString DisplayFreqMeter::StackToString(Stack<uint> *stack, int order)
+static pString StackToString(Stack<uint> *stack, int order)
 {
     static const struct StructOrder
     {
@@ -463,7 +481,7 @@ pString DisplayFreqMeter::StackToString(Stack<uint> *stack, int order)
 }
 
 
-void DisplayFreqMeter::WriteStackToBuffer(Stack<uint> *stack, int point, const char *suffix)
+static void WriteStackToBuffer(Stack<uint> *stack, int point, const char *suffix)
 {
     for(int i = 6; i >= 0; i--)
     {
