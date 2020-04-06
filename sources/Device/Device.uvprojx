@@ -1175,31 +1175,6 @@
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageTime.cpp</FilePath>
             </File>
-            <File>
-              <FileName>PageFFT.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageFFT.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageFreqMeter.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageFreqMeter.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageFunction.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageFunction.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageMultimeter.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageMultimeter.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageTester.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageTester.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -1309,6 +1284,36 @@
               <FileName>PageAccumulation.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageDisplay\PageAccumulation.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Menu/Pages/PageFunction</GroupName>
+          <Files>
+            <File>
+              <FileName>PageFFT.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageFunction\PageFFT.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageFreqMeter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageFunction\PageFreqMeter.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageFunction.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageFunction\PageFunction.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageMultimeter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageFunction\PageMultimeter.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>PageTester.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageFunction\PageTester.cpp</FilePath>
             </File>
           </Files>
         </Group>
