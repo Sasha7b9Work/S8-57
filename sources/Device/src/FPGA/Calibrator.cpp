@@ -68,7 +68,9 @@ static bool CalibrateChannel(Chan::E ch)
 
 bool Calibrator::BalanceChannel(Chan::E ch, bool showHint)
 {
-    SettingsNRST old = setNRST;
+    Settings old = set;
+
+    SettingsNRST oldNRST = setNRST;
 
     ExtraShift::SetTypeDisabled();
 
@@ -92,9 +94,10 @@ bool Calibrator::BalanceChannel(Chan::E ch, bool showHint)
         BalanceRange(ch, static_cast<Range::E>(range));
     }
 
-    std::memcpy(&old.exShift.value[ch][0], &setNRST.exShift.value[ch][0], sizeof(setNRST.exShift.value[ch][0]) * Range::Count);
+    std::memcpy(&oldNRST.exShift.value[ch][0], &setNRST.exShift.value[ch][0], sizeof(setNRST.exShift.value[ch][0]) * Range::Count);
 
-    setNRST = old;
+    setNRST = oldNRST;
+    set = old;
 
     Osci::Init();
 
