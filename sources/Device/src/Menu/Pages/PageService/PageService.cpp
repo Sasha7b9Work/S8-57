@@ -52,7 +52,8 @@ DEF_PAGE_7_VAR( pService,                                                       
     &cSoundVolume,
     PageRTC::self,
     PageService::Information::self,
-    &Item::empty,
+    //&Item::empty,
+    PageDebug::self,
     PageName::Service, nullptr, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
