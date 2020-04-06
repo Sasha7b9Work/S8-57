@@ -357,9 +357,9 @@ static bool StartFPGA()
     // 2.5мс / 12дел = 0.2 мс/дел = 10мкс/тчк
 
     //TBase::Set500us();
-    TBase::Set(TBase::_200us);
+    TBase::Set(TBase::_100us);
 
-    FPGA::GiveStart(static_cast<uint16>(~(1)), static_cast<uint16>(~(400)));
+    FPGA::GiveStart(static_cast<uint16>(~(1)), static_cast<uint16>(~(TESTER_NUM_POINTS + 1)));
 
     FPGA::flag.flag = 0;
 
