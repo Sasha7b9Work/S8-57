@@ -648,6 +648,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>FreqMeter</GroupName>
+          <Files>
+            <File>
+              <FileName>FreqMeter.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FreqMeter\FreqMeter.h</FilePath>
+            </File>
+            <File>
+              <FileName>FreqMeter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FreqMeter\FreqMeter.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>FPGA</GroupName>
           <Files>
             <File>
@@ -1539,16 +1554,6 @@
               <FileName>DeviceSettings.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\DeviceSettings.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>FreqMeter.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Osci\FreqMeter.h</FilePath>
-            </File>
-            <File>
-              <FileName>FreqMeter.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\FreqMeter.cpp</FilePath>
             </File>
             <File>
               <FileName>Interpolator.cpp</FileName>

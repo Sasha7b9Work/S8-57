@@ -64,6 +64,7 @@ source_group(Display                                 REGULAR_EXPRESSION src/Disp
 source_group(Display\\Font                           REGULAR_EXPRESSION ../common/Display/Font/*)
 source_group(FlashDrive                              REGULAR_EXPRESSION src/FlashDrive/*)
 source_group(FPGA                                    REGULAR_EXPRESSION src/FPGA/*)
+source_group(FreqMeter                               REGULAR_EXPRESSION src/FreqMeter/*)
 source_group(Hardware                                REGULAR_EXPRESSION src/Hardware/*)
 source_group(Hardware\\HAL                           REGULAR_EXPRESSION src/Hardware/HAL/*)
 source_group(Hardware\\Memory                        REGULAR_EXPRESSION src/Hardware/Memory/*)
@@ -165,6 +166,7 @@ file(GLOB SOURCES   ../common/_VS/*
                     ../common/Display/Font/*
                     src/FlashDrive/*
                     src/FPGA/*
+                    src/FreqMeter/*
                     src/Hardware/*
                     src/Hardware/HAL/*
                     src/Hardware/Memory/*

@@ -1,6 +1,5 @@
 #include "defines.h"
 #include "Menu/Pages/Include/PageFunction.h"
-#include "Osci/FreqMeter.h"
 #include "Settings/Settings.h"
 
 

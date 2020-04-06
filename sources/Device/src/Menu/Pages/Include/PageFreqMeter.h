@@ -1,5 +1,5 @@
 #pragma once
-#include "Osci/FreqMeter.h"
+#include "FreqMeter/FreqMeter.h"
 
 
 class Page;

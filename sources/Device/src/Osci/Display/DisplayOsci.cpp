@@ -9,7 +9,6 @@
 #include "Hardware/VCP.h"
 #include "Menu/Menu.h"
 #include "Osci/Osci.h"
-#include "Osci/FreqMeter.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/AutoMeasurements.h"
 #include "Osci/Measurements/CursorsMeasurements.h"

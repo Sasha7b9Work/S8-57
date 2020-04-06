@@ -2,7 +2,6 @@
 #include "FPGA/FPGA.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
-#include "Osci/FreqMeter.h"
 
 
 /// Время зажигания лампочки синхронизации

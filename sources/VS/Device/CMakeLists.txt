@@ -54,6 +54,7 @@ source_group(_VS\\HAL\\Legacy                           REGULAR_EXPRESSION ../co
 source_group(_VS\\USBD                                  REGULAR_EXPRESSION ../common/_VS/USBD/*)
 source_group(_VS\\USBH                                  REGULAR_EXPRESSION ../common/_VS/USBH/*)
 source_group(FlashDrive                                 REGULAR_EXPRESSION src/FlashDrive/*)
+source_group(FreqMeter                                  REGULAR_EXPRESSION src/FreqMeter/*)
 source_group(GUI                                        REGULAR_EXPRESSION src/GUI/*)
 source_group(GUI\\Dialogs                               REGULAR_EXPRESSION src/GUI/Dialogs/*)
 source_group(Keyboard                                   REGULAR_EXPRESSION src/Keyboard/*)
@@ -288,6 +289,8 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/FPGA/MathFPGA.cpp
                     ../../Device/src/FPGA/MathFPGA.h
                     ../../Device/src/FPGA/TypesFPGA.h
+                    
+                    ../../Device/src/FreqMeter/*
                     
                                  src/GUI/*
                                  src/GUI/Dialogs/*
