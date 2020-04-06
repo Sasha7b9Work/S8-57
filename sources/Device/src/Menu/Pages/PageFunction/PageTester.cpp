@@ -120,12 +120,12 @@ void PageTester::OnChanged_Control(bool)
     if (set.test.control == Tester::Control::Voltage)
     {
         items[1] = const_cast<Choice *>(&cStepU);
-        items[2] = const_cast<Choice *>(&cConductivity);
+        items[2] = const_cast<Choice *>(&cPolarity);
     }
     else
     {
         items[1] = const_cast<Choice *>(&cStepI);
-        items[2] = const_cast<Choice *>(&cPolarity);
+        items[2] = const_cast<Choice *>(&cConductivity);
     }
 
     Tester::LoadStep();
