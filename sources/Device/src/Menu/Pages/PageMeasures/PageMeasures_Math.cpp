@@ -21,7 +21,7 @@ static void OnPress_Screen()
 
 static void Draw_Screen_Disable(int x, int y)
 {
-    String("¬˚x").Draw(x + 2, y + 5);
+    String("¬˚Í").Draw(x + 2, y + 5);
 }
 
 static void Draw_Screen_Separate(int x, int y)
@@ -201,49 +201,59 @@ static bool HandlerKey_Function(const KeyEvent &event) // -V2506
         return false;
     }
 
-    int delta = (event.IsArrowUp() || event.IsArrowRight()) ? 1 : -1;
+    int delta = 0;
 
-    if (ModeRegSet::IsRShift())
+    if(event.IsArrowUp() || event.IsArrowRight())
     {
-        if (RShift::ChangeMath(delta))
-        {
-            Beeper::RegulatorShiftRotate();
-        }
+        delta = 1;
     }
-    if (ModeRegSet::IsRange())
+    else if(event.IsArrowDown() || event.IsArrowLeft())
     {
-        static int sum = 0;
-        sum -= delta;
-
-        float rShiftAbs = RShift::ToAbs(set.math.rShift, set.math.range);
-
-        if (sum > 2)
-        {
-            if (set.math.range < Range::Count - 1)
-            {
-                set.math.range = static_cast<Range::E>(static_cast<uint8>(set.math.range + 1));  // SET_RANGE_MATH++;
-                set.math.rShift = RShift::ToRel(rShiftAbs, set.math.range);
-                Beeper::RegulatorSwitchRotate();
-            }
-            sum = 0;
-        }
-        else if (sum < -2)
-        {
-            if (set.math.range > 0)
-            {
-                set.math.range = static_cast<Range::E>(static_cast<uint8>(set.math.range - 1));  // SET_RANGE_MATH--;
-                set.math.rShift = RShift::ToRel(rShiftAbs, set.math.range);
-                Beeper::RegulatorSwitchRotate();
-            }
-            sum = 0;
-        }
-        else
-        {
-            // ÌË˜Â„Ó ‰ÂÎ‡Ú¸ ÌÂ ÌÛÊÌÓ
-        }
+        delta = -1;
     }
 
-    return true;
+    if(delta != 0)
+    {
+        if(ModeRegSet::IsRShift())
+        {
+            if(RShift::ChangeMath(delta))
+            {
+                Beeper::RegulatorShiftRotate();
+            }
+        }
+        if(ModeRegSet::IsRange())
+        {
+            static int sum = 0;
+            sum -= delta;
+
+            float rShiftAbs = RShift::ToAbs(set.math.rShift, set.math.range);
+
+            if(sum > 2)
+            {
+                if(set.math.range < Range::Count - 1)
+                {
+                    set.math.range = static_cast<Range::E>(static_cast<uint8>(set.math.range + 1));  // SET_RANGE_MATH++;
+                    set.math.rShift = RShift::ToRel(rShiftAbs, set.math.range);
+                    Beeper::RegulatorSwitchRotate();
+                }
+                sum = 0;
+            }
+            else if(sum < -2)
+            {
+                if(set.math.range > 0)
+                {
+                    set.math.range = static_cast<Range::E>(static_cast<uint8>(set.math.range - 1));  // SET_RANGE_MATH--;
+                    set.math.rShift = RShift::ToRel(rShiftAbs, set.math.range);
+                    Beeper::RegulatorSwitchRotate();
+                }
+                sum = 0;
+            }
+        }
+
+        return true;
+    }
+
+    return false;
 }
 
 DEF_PAGE_5( pMath,                                                                                                                                         //--- —≈–¬»— - ‘”Õ ÷»ﬂ ---
