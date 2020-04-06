@@ -651,6 +651,16 @@
           <GroupName>FreqMeter</GroupName>
           <Files>
             <File>
+              <FileName>DisplayFreqMeter.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FreqMeter\DisplayFreqMeter.h</FilePath>
+            </File>
+            <File>
+              <FileName>DisplayFreqMeter.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\FreqMeter\DisplayFreqMeter.cpp</FilePath>
+            </File>
+            <File>
               <FileName>FreqMeter.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\FreqMeter\FreqMeter.h</FilePath>

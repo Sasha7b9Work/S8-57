@@ -5,6 +5,7 @@
 #include "Display/Primitives.h"
 #include "Display/Warnings.h"
 #include "FlashDrive/FlashDrive.h"
+#include "FreqMeter/DisplayFreqMeter.h"
 #include "Hardware/Battery.h"
 #include "Hardware/VCP.h"
 #include "Menu/Menu.h"
