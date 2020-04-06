@@ -215,6 +215,20 @@ void TShift::Change(const int delta)
 }
 
 
+// Ограничить range для режима тестер-компонента
+static void LimitForTester(Range::E *range)
+{
+    if(*range > Range::_5V)
+    {
+        *range = Range::_5V;
+    }
+    else if(*range < Range::_200mV)
+    {
+        *range = Range::_200mV;
+    }
+}
+
+
 void Range::Change(Chan::E ch, int16 delta)
 {
     if (Recorder::IsRunning())
@@ -232,6 +246,12 @@ void Range::Change(Chan::E ch, int16 delta)
     {
         ::Math::LimitationDecrease<uint8>(reinterpret_cast<uint8 *>(&set.ch[ch].range), 0);  // -V206
     }
+
+    if(Device::InModeTester())
+    {
+        LimitForTester(&set.ch[ch].range);
+    }
+
     Range::LoadBoth();
 
     DisplayOsci::SetFlagRedraw();
