@@ -1,6 +1,7 @@
 #include <stm32f4xx_hal.h>
 #include "defines.h"
 #include "FPGA/FPGA.h"
+#include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Settings/Settings.h"
 #include "Osci/Osci.h"
@@ -8,6 +9,14 @@
 
 
 static ADC_HandleTypeDef handle;
+
+static ADC_ChannelConfTypeDef config =
+{
+    ADC_CHANNEL_8,
+    1,
+    ADC_SAMPLETIME_28CYCLES,
+    0
+};
 
 
 // Сконфигурировать на чтение по прерыванию
@@ -35,35 +44,30 @@ void HAL_ADC3::Init()
     HAL_NVIC_SetPriority(ADC_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(ADC_IRQn);
 
+    handle.Instance = ADC3;
+    handle.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
+    handle.Init.Resolution = ADC_RESOLUTION12b;
+    handle.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+    handle.Init.ScanConvMode = DISABLE;
+    handle.Init.ContinuousConvMode = DISABLE;
+    handle.Init.DMAContinuousRequests = DISABLE;
+    handle.Init.NbrOfConversion = 1;
+    handle.Init.DiscontinuousConvMode = DISABLE;
+    handle.Init.NbrOfDiscConversion = 0;
+
     ConfigToIT();
 }
 
 
 static void ConfigToIT()
 {
-    handle.Instance = ADC3;
-    handle.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
-    handle.Init.Resolution = ADC_RESOLUTION12b;
-    handle.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-    handle.Init.ScanConvMode = DISABLE;
     handle.Init.EOCSelection = ENABLE;
-    handle.Init.ContinuousConvMode = DISABLE;
-    handle.Init.DMAContinuousRequests = DISABLE;
-    handle.Init.NbrOfConversion = 1;
-    handle.Init.DiscontinuousConvMode = DISABLE;
-    handle.Init.NbrOfDiscConversion = 0;
     handle.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_RISING;
     handle.Init.ExternalTrigConv = ADC_EXTERNALTRIGCONV_Ext_IT11;
 
     HAL_ADC_Init(&handle);
 
-    ADC_ChannelConfTypeDef sConfig;
-    sConfig.Channel = ADC_CHANNEL_8;
-    sConfig.Rank = 1;
-    sConfig.SamplingTime = ADC_SAMPLETIME_28CYCLES;
-    sConfig.Offset = 0;
-
-    HAL_ADC_ConfigChannel(&handle, &sConfig);
+    HAL_ADC_ConfigChannel(&handle, &config);
 
     HAL_ADC_Start_IT(&handle);
 }
@@ -71,7 +75,15 @@ static void ConfigToIT()
 
 static void ConfigToHand()
 {
+    handle.Init.EOCSelection = DISABLE;
+    handle.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
+    handle.Init.ExternalTrigConv = ADC_EXTERNALTRIGCONV_T1_CC1;
 
+    HAL_ADC_Init(&handle);
+
+    HAL_ADC_ConfigChannel(&handle, &config);
+
+    HAL_ADC_Start(&handle);
 }
 
 
@@ -88,9 +100,17 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 {
     /// \todo временная затычка. Не в рандомизаторе эта функция вообще не должна вызываться
 
+    uint start = TIME_US;
+
     if (OSCI_IN_MODE_RANDOMIZER)
     {
         ConfigToHand();
+
+        while(TIME_US - start < 5)
+        {
+        }
+
+        HAL_ADC_PollForConversion(&handle, 10);
 
         Osci::valueADC = static_cast<uint16>(HAL_ADC_GetValue(hadc));
 
