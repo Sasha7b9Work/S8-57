@@ -66,7 +66,7 @@ void FreqMeter::LoadSettings()
             BIN_U8(01010000)  //-V2501
         };
 
-        data |= maskTime[TimeCounting()];
+        data |= maskTime[set.freq.timeCounting];
         data |= maskFreqClc[set.freq.freqClc];
         data |= maskPeriod[NumberPeriods()];
     }
@@ -207,7 +207,7 @@ void FreqMeter::ReadPeriod()
 float FreqMeter::FreqSetToFreq(const BitSet32 *fr)
 {
     const float k[3] = {10.0F, 1.0F, 0.1F};
-    return Enabled() ? (fr->word * k[TimeCounting()]) : (fr->word * 10.0F);
+    return Enabled() ? (fr->word * k[set.freq.timeCounting]) : (fr->word * 10.0F);
 }
 
 
@@ -285,12 +285,6 @@ FreqMeter::Enabled::E &FreqMeter::Enabled::Ref()
 FreqMeter::ModeView::E &FreqMeter::ModeView::Ref()
 {
     return set.freq.modeView;
-}
-
-
-FreqMeter::TimeCounting::E &FreqMeter::TimeCounting::Ref()
-{
-    return set.freq.timeCounting;
 }
 
 

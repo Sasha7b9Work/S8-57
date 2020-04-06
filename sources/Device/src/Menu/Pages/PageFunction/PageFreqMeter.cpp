@@ -66,7 +66,7 @@ DEF_CHOICE_3( cTimeF,                                                           
     "100мс",
     "1с",
     "10с",
-    FreqMeter::TimeCounting::Ref(), &PageFreqMeter::self, IsActive_TimeF, OnChanged_TimeF, Choice::AfterDraw
+    set.freq.timeCounting, &PageFreqMeter::self, IsActive_TimeF, OnChanged_TimeF, Choice::AfterDraw
 )
 
 

@@ -127,10 +127,5 @@ public:
             _10s,
             Count
         };
-
-        TimeCounting() {};
-        static TimeCounting::E &Ref();
-        operator TimeCounting::E() { return Ref(); }
-        static bool Is100ms() { return Ref() == _100ms; }
     };
 };

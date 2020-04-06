@@ -230,7 +230,7 @@ pString DisplayFreqMeter::FreqSetToString(const BitSet32 *fr)
     }
 
 
-    switch(FreqMeter::TimeCounting())
+    switch(set.freq.timeCounting)
     {
     case FreqMeter::TimeCounting::_100ms:
 
@@ -487,7 +487,7 @@ void ProgressBarFreqMeter::Draw(int x, int y)
 
         int length = 185;
 
-        float percents = (TIME_MS - FreqMeter::timeStartMeasureFreq) / time[FreqMeter::TimeCounting()];
+        float percents = (TIME_MS - FreqMeter::timeStartMeasureFreq) / time[set.freq.timeCounting];
 
         int width = static_cast<int>(length * percents);
 
@@ -496,7 +496,7 @@ void ProgressBarFreqMeter::Draw(int x, int y)
             width = length;
         }
 
-        if(FreqMeter::TimeCounting::Is100ms() && width > length / 2)
+        if(set.freq.timeCounting == FreqMeter::TimeCounting::_100ms && width > length / 2)
         {
             width = length;
         }
