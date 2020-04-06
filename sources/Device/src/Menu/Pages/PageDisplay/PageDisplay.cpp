@@ -133,7 +133,7 @@ DEF_CHOICE_2( cViewMode,                                                        
 )
 
 
-DEF_PAGE_8( pDisplay,                                                                                                                                                       //--- ДИСПЛЕЙ ---
+DEF_PAGE_7( pDisplay,                                                                                                                                                       //--- ДИСПЛЕЙ ---
     "ДИСПЛЕЙ",
     "Содержит настройки отображения дисплея.",
     &cViewMode,
@@ -142,7 +142,7 @@ DEF_PAGE_8( pDisplay,                                                           
     &cSmoothing,
     &cType,
     &cRefreshFPS,
-    &cScaleYtype,
+//    &cScaleYtype,
     PageDisplay::Settings::self,
     PageName::Display, nullptr, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
