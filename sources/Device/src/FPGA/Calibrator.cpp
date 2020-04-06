@@ -191,6 +191,15 @@ static float FindStretchChannel(Chan::E ch)
 
     FPGA::GiveStart(static_cast<uint16>(~(1)), static_cast<uint16>(~(NUM_POINTS + 100)));
     
+    FPGA::flag.flag = 0;
+
+    while(!FPGA::flag.Pred())
+    {
+        FPGA::ReadFlag();
+    }
+
+    FPGA::ForcedStart();
+
     do 
     {
         FPGA::ReadFlag();
