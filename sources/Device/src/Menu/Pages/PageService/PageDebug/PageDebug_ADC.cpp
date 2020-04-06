@@ -229,10 +229,10 @@ DEF_PAGE_1(pShift,
 )
 
 
-DEF_PAGE_3(pADC,  //-V1027
+DEF_PAGE_2(pADC,  //-V1027
     "¿÷œ",
     "",
-    &pBalance,
+//    &pBalance,
     &pStretch,
     &pShift,
     PageName::Debug_ADC,
