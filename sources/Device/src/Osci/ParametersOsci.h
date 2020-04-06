@@ -82,7 +82,7 @@ struct TBase
     static const E MIN_P2P = _10ms;
     
     // Минимальный масштаб по времени, при котором ещё возможно включение режима пикового детектора
-    static const E MIN_PEAK_DET = _200ns;
+    static const E MIN_PEAK_DET = _5us;
 
     // Расстояние между точками в режиме рандомизатора
     static int DeltaPoint();
