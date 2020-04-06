@@ -19,3 +19,11 @@ uint Settings::CalcWriteCRC32()
 
     return HAL_CRC32::Calculate8bit(buffer + 2 * sizeof(uint), sizeof(*this) - 2 * sizeof(uint));
 }
+
+
+uint8 SettingsService::SoundVolume()
+{
+    static const uint8 volume[4] = { 0, 25, 55, 100 };
+
+    return volume[set.serv.enumVolume];
+}

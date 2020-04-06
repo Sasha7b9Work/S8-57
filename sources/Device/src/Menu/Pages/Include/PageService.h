@@ -5,9 +5,10 @@
 
 struct SettingsService
 {
-    Calibrator::Mode::E calibratorMode;   // Режим работы калибратора.
-    uint8               soundVolume;      // Громкость звука
-    bool                showInfoVoltage;  // Показывать напряжение батареи на экране
+    Calibrator::Mode::E calibratorMode;     // Режим работы калибратора.
+    uint8               enumVolume;         // Громкость звука
+    bool                showInfoVoltage;    // Показывать напряжение батареи на экране
+    uint8               SoundVolume();      // Возвращает значение от 0 (выкл) до 100 (макс)
 };
 
 
