@@ -429,7 +429,7 @@ static pString PeriodSetToString(const BitSet32 *pr)
         _period /= 10;
     }
 
-    int order = LowOrder(set.freq.freqClc, FreqMeter::NumberPeriods());  // В ордер - порядок младшего значащего разряда
+    int order = LowOrder(set.freq.freqClc, set.freq.numberPeriods);  // В ордер - порядок младшего значащего разряда
 
     while(stack.Size() < 6)
     {
