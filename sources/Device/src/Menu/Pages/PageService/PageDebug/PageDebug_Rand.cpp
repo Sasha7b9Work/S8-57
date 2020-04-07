@@ -11,7 +11,7 @@ static void OnChanged_Gates(bool)
 }
 
 
-DEF_CHOICE_16( gGateMax,                                                                                                                           //--- ОТЛАДКА - РАНД-ТОР - Ворота верх ---
+DEF_CHOICE_21( gGateMax,                                                                                                                           //--- ОТЛАДКА - РАНД-ТОР - Ворота верх ---
     "Ворота верх",
     "Устанавливает учитываемое расстояние от максимума ворот для рандомизатора",
     "0",
@@ -30,12 +30,17 @@ DEF_CHOICE_16( gGateMax,                                                        
     "130",
     "140",
     "150",
+    "160",
+    "170",
+    "180",
+    "190",
+    "200",
     setNRST.enumGameMax, &PageDebug::PageRand::self, Item::Active, OnChanged_Gates, Choice::AfterDraw
 )
 
 
 
-DEF_CHOICE_16( gGateMin,                                                                                                                            //--- ОТЛАДКА - РАНД-ТОР - Ворота низ ---
+DEF_CHOICE_21( gGateMin,                                                                                                                            //--- ОТЛАДКА - РАНД-ТОР - Ворота низ ---
     "Ворота низ",
     "Устанавливает учитываемое расстояние от минимума ворот для рандомизатора",
     "0",
@@ -54,6 +59,11 @@ DEF_CHOICE_16( gGateMin,                                                        
     "130",
     "140",
     "150",
+    "160",
+    "170",
+    "180",
+    "190",
+    "200",
     setNRST.enumGameMin, &PageDebug::PageRand::self, Item::Active, OnChanged_Gates, Choice::AfterDraw
 )
 
