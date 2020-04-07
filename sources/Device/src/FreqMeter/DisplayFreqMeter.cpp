@@ -51,9 +51,15 @@ void DisplayFreqMeter::Draw()
     DFont::SetSpacing(1);
 
     int width = 200;
-    int height = 90;
+    int height = (set.freq.modeView == FreqMeter::ModeView::Frequency) ? 90 : 75;
+
     int x = Grid::Left() + (Grid::Width() - width) / 2;
     int y = Grid::Top() + (Grid::Height() / 2 - height) / 2;
+
+    if(set.freq.modeView == FreqMeter::ModeView::Frequency)
+    {
+        y += 7;
+    }
 
 
     Region(width - 2, height - 2).Fill(x + 1, y + 1, Color::BACK);
