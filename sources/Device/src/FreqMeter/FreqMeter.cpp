@@ -83,7 +83,7 @@ void FreqMeter::Update()
 
     if (freqReady)
     {
-        freqActual.Set(*RD::FREQ_BYTE_3, *RD::FREQ_BYTE_2, *RD::FREQ_BYTE_1, *RD::FREQ_BYTE_0);
+        freqActual.word = FPGA::ReadCounterFreq();
 
         lastFreq.Set(freqActual.word);
         
@@ -318,6 +318,19 @@ void FreqMeter::FPGA::ResetCounterFreq()
 void FreqMeter::FPGA::ResetCounterPeriod()
 {
     HAL_BUS::FPGA::Write8(WR::RESET_COUNTER_PERIOD, 1);
+}
+
+
+uint FreqMeter::FPGA::ReadCounterFreq()
+{
+    BitSet32 result(*RD::FREQ_BYTE_3, *RD::FREQ_BYTE_2, *RD::FREQ_BYTE_1, *RD::FREQ_BYTE_0);
+
+    return result.word;
+}
+
+uint FreqMeter::FPGA::ReadCounterPeriod()
+{
+    return 0;
 }
 
 
