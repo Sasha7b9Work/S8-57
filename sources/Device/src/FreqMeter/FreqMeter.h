@@ -31,6 +31,7 @@ public:
 
     struct FPGA
     {
+        static void LoadSettings();
         static void ResetCounterFreq();
         static void ResetCounterPeriod();
     };
@@ -47,8 +48,6 @@ private:
     static void ReadFreq();
 
     static void ReadPeriod();
-
-    static void LoadSettings();
 
     static float FreqSetToFreq(const BitSet32 *fr);
 

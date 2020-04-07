@@ -34,8 +34,7 @@ static float frequency;                     // Значение частоты для встроенного 
 
 void FreqMeter::Init()
 {
-    LoadSettings();
-
+    FPGA::LoadSettings();
     FPGA::ResetCounterFreq();
     FPGA::ResetCounterPeriod();
     
@@ -44,55 +43,11 @@ void FreqMeter::Init()
 }
 
 
-#ifdef WIN32
-#pragma warning(push)
-#pragma warning(disable:4310)   // cast truncates constant value
-#endif
-
-
-
-void FreqMeter::LoadSettings()
-{
-    uint8 data = 0;
-
-    if (set.freq.enabled)
-    {
-        const uint16 maskTime[3] = {0, 1, 2};
-        const uint16 maskFreqClc[4] = {0, (1 << 2), (1 << 3), ((1 << 3) + (1 << 2))};
-
-        static const uint16 maskPeriod[NumberPeriods::Count] =
-        { //        654 - задействованные биты
-            BIN_U8(00000000), //-V2501
-            BIN_U8(00010000), //-V2501
-            BIN_U8(00100000), //-V2501
-            BIN_U8(00110000), //-V2501
-            BIN_U8(01000000), //-V2501 // -V536
-            BIN_U8(01010000)  //-V2501
-        };
-
-        data |= maskTime[set.freq.timeCounting];
-        data |= maskFreqClc[set.freq.freqClc];
-        data |= maskPeriod[set.freq.numberPeriods];
-    }
-    else
-    {
-        _SET_BIT(data, 2);
-    }
-
-    HAL_BUS::FPGA::Write8(WR::FREQMETER, data);
-}
-
-
-#ifdef WIN32
-#pragma warning(pop)
-#endif
-
-
-
 void FreqMeter::LoadFreqSettings()
 {
-    LoadSettings();
-    HAL_BUS::FPGA::Write8(WR::RESET_COUNTER_FREQ, 1);
+    FPGA::LoadSettings();
+    FPGA::ResetCounterFreq();
+
     freqActual.word = 0;
     timeStartMeasureFreq = 0;
 }
@@ -100,8 +55,9 @@ void FreqMeter::LoadFreqSettings()
 
 void FreqMeter::LoadPeriodSettings()
 {
-    LoadSettings();
-    HAL_BUS::FPGA::Write8(WR::RESET_COUNTER_PERIOD, 1);
+    FPGA::LoadSettings();
+    FPGA::ResetCounterPeriod();
+
     periodActual.word = 0;
     timeStartMeasurePeriod = 0;
 }
@@ -363,3 +319,46 @@ void FreqMeter::FPGA::ResetCounterPeriod()
 {
     HAL_BUS::FPGA::Write8(WR::RESET_COUNTER_PERIOD, 1);
 }
+
+
+#ifdef WIN32
+#pragma warning(push)
+#pragma warning(disable:4310)   // cast truncates constant value
+#endif
+
+
+void FreqMeter::FPGA::LoadSettings()
+{
+    uint8 data = 0;
+
+    if(set.freq.enabled)
+    {
+        const uint16 maskTime[3] = { 0, 1, 2 };
+        const uint16 maskFreqClc[4] = { 0, (1 << 2), (1 << 3), ((1 << 3) + (1 << 2)) };
+
+        static const uint16 maskPeriod[NumberPeriods::Count] =
+        { //        654 - задействованные биты
+            BIN_U8(00000000), //-V2501
+            BIN_U8(00010000), //-V2501
+            BIN_U8(00100000), //-V2501
+            BIN_U8(00110000), //-V2501
+            BIN_U8(01000000), //-V2501 // -V536
+            BIN_U8(01010000)  //-V2501
+        };
+
+        data |= maskTime[set.freq.timeCounting];
+        data |= maskFreqClc[set.freq.freqClc];
+        data |= maskPeriod[set.freq.numberPeriods];
+    }
+    else
+    {
+        _SET_BIT(data, 2);
+    }
+
+    HAL_BUS::FPGA::Write8(WR::FREQMETER, data);
+}
+
+
+#ifdef WIN32
+#pragma warning(pop)
+#endif
