@@ -323,14 +323,24 @@ void FreqMeter::FPGA::ResetCounterPeriod()
 
 BitSet32 FreqMeter::FPGA::ReadCounterFreq()
 {
-    BitSet32 result(*RD::FREQ_BYTE_3, *RD::FREQ_BYTE_2, *RD::FREQ_BYTE_1, *RD::FREQ_BYTE_0);
+    BitSet32 result;
+
+    result.byte3 = *RD::FREQ_BYTE_3;
+    result.byte2 = *RD::FREQ_BYTE_2;
+    result.byte1 = *RD::FREQ_BYTE_1;
+    result.byte0 = *RD::FREQ_BYTE_0;
 
     return result;
 }
 
 BitSet32 FreqMeter::FPGA::ReadCounterPeriod()
 {
-    BitSet32 result(*RD::PERIOD_BYTE_3, *RD::PERIOD_BYTE_2, *RD::PERIOD_BYTE_1, *RD::PERIOD_BYTE_0);
+    BitSet32 result;
+
+    result.byte3 = *RD::PERIOD_BYTE_3;
+    result.byte2 = *RD::PERIOD_BYTE_2;
+    result.byte1 = *RD::PERIOD_BYTE_1;
+    result.byte0 = *RD::PERIOD_BYTE_0;
 
     return result;
 }
