@@ -447,6 +447,20 @@ void Osci::ReadData()
 }
 
 
+struct StructLog
+{
+    uint8 pos[10];
+    StructLog()
+    {
+        std::memset(pos, 0, 10);
+    }
+    void Log()
+    {
+        LOG_WRITE("%d%d%d%d%d%d%d%d%d%d", pos[0], pos[1], pos[2], pos[3], pos[4], pos[5], pos[6], pos[7], pos[8], pos[9]);
+    }
+};
+
+
 bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
 {
     ShiftPoint Tsm = gates.CalculateShiftPoint();
@@ -458,9 +472,19 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
 
     StructReadRand infoRead = randShift.GetInfoForReadRand(Tsm, addr);
 
+    static StructLog sl;
+
+    if(infoRead.posFirst < 10)
+    {
+        sl.pos[infoRead.posFirst] = 1;
+    }
+
+    sl.Log();
+
     int step = infoRead.step;
 
     uint8 *dataRead = data + infoRead.posFirst;
+
     uint8 *interpolated = IntRAM::DataRand(Chan::A) + infoRead.posFirst;
 
     uint8 *last = data + ENumPointsFPGA::PointsInChannel();
@@ -547,7 +571,7 @@ StructReadRand RandShift::GetInfoForReadRand(ShiftPoint Tsm, const uint8 *addres
     {
         structRand.step = TBase::DeltaPoint();
 
-        int index = Tsm.shift - Osci::addShift;
+        int index = Tsm.shift - Osci::addShift - structRand.step;
 
         while(index < 0)
         {
