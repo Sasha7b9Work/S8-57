@@ -185,17 +185,16 @@ static void DrawPeriod(int x, int _y)
 
     Text(strPeriod).DrawDigitsMonospace(x + dX, yT, DFont::GetWidth('0'));
 
-    if((std::strcmp(strPeriod, EMPTY_STRING) == 0) || (std::strcmp(strPeriod, OVERFLOW_STRING) == 0))
+    Text strFreq(strPeriod);
+
+    if((std::strcmp(strPeriod, EMPTY_STRING) != 0) && (std::strcmp(strPeriod, OVERFLOW_STRING) != 0))
     {
-        Text(strPeriod).DrawDigitsMonospace(x + dX, yF, DFont::GetWidth('0'));
-        return;
+        float period = ConvertToAbsPeriod(strPeriod);
+
+        strFreq = Frequency(1.0F / period).ToStringAccuracy(strPeriod, 6);
     }
 
-    float period = ConvertToAbsPeriod(strPeriod);
-
-    Frequency freq(1.0F / period);
-
-    Text(freq.ToStringAccuracy(strPeriod, 6)).DrawDigitsMonospace(x + dX, yF, DFont::GetWidth('0'));
+    strFreq.DrawDigitsMonospace(x + dX, yF, DFont::GetWidth('0'));
 }
 
 
