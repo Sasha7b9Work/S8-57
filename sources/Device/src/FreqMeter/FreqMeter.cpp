@@ -142,6 +142,7 @@ void FreqMeter::Update()
         if (readPeriod)
         {
             ReadPeriod();
+            HAL_BUS::FPGA::Write8(WR::RESET_COUNTER_PERIOD, 1);
         }
     }
 
