@@ -82,6 +82,28 @@ void DisplayFreqMeter::Draw()
 }
 
 
+//  онверитерует строку с текстовым значением в абсолютное значение
+static float ConvertFrequencyToAbs(const char *strFreq)
+{
+    float result = SU::StringToFloat(strFreq);
+
+    if(std::strcmp(&strFreq[std::strlen(strFreq) - 3], "ћ√ц") == 0)
+    {
+        result *= 1e6F;
+    }
+    else if(std::strcmp(&strFreq[std::strlen(strFreq) - 3], "к√ц") == 0)
+    {
+        result *= 1e3F;
+    }
+    else if(std::strcmp(&strFreq[std::strlen(strFreq) - 3], "м√ц") == 0)
+    {
+        result *= 1e-3F;
+    }
+
+    return result;
+}
+
+
 static void DrawFrequency(int x, int _y)
 {
     _y += 4;
@@ -108,20 +130,7 @@ static void DrawFrequency(int x, int _y)
 
     Text(strFreq).DrawDigitsMonospace(x + dX, yF, DFont::GetWidth('0'));
 
-    float freq = SU::StringToFloat(strFreq);
-
-    if(std::strcmp(&strFreq[std::strlen(strFreq) - 3], "ћ√ц") == 0)
-    {
-        freq *= 1e6F;
-    }
-    else if(std::strcmp(&strFreq[std::strlen(strFreq) - 3], "к√ц") == 0)
-    {
-        freq *= 1e3F;
-    }
-    else if(std::strcmp(&strFreq[std::strlen(strFreq) - 3], "м√ц") == 0)
-    {
-        freq *= 1e-3F;
-    }
+    float freq = ConvertFrequencyToAbs(strFreq);
 
     Time time(1.0F / freq);
 
@@ -137,7 +146,7 @@ static void DrawFrequency(int x, int _y)
 
 
 //  онверитерует строку с текстовым значением в абсолютное значение
-static float ConvertToAbsPeriod(const char *strPeriod)
+static float ConvertPeriodToAbs(const char *strPeriod)
 {
     float result = SU::StringToFloat(strPeriod);
 
@@ -189,7 +198,7 @@ static void DrawPeriod(int x, int _y)
 
     if((std::strcmp(strPeriod, EMPTY_STRING) != 0) && (std::strcmp(strPeriod, OVERFLOW_STRING) != 0))
     {
-        float period = ConvertToAbsPeriod(strPeriod);
+        float period = ConvertPeriodToAbs(strPeriod);
 
         strFreq = Frequency(1.0F / period).ToStringAccuracy(strPeriod, 6);
     }
