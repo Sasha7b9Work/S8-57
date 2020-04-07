@@ -19,7 +19,7 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
             k = TBase::DeltaPoint();
         }
 
-        addrRead = static_cast<uint16>(ReadLastRecord(ch) - static_cast<int>(numPoints) / k);
+        addrRead = static_cast<uint16>(ReadLastRecord(ch) - static_cast<int>(numPoints) / k - 2);
     }
 
     HAL_BUS::FPGA::Write16(WR::PRED_LO, static_cast<uint16>(addrRead));
