@@ -29,6 +29,12 @@ public:
     static uint     lastFreqOver;           // Последнее время переполнения частоты
     static uint     lastPeriodOver;         // Последнее время переполения периода
 
+    struct FPGA
+    {
+        static void ResetCounterFreq();
+        static void ResetCounterPeriod();
+    };
+
 private:
     
     // Установить состояние лампочек счётчиков в состояние, соответствующее текущему моменту

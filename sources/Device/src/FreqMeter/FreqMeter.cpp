@@ -28,15 +28,17 @@ uint     FreqMeter::timeStartMeasurePeriod = 0;
 
 static bool freqNeedCalculateFromPeriod;    // Установленное в true значение означает, что частоту нужно считать по счётчику периода
 static float prevFreq;
-static float frequency;                     // 
+static float frequency;                     // Значение частоты для встроенного частотомера справа вверху экрана
 
 
 
 void FreqMeter::Init()
 {
     LoadSettings();
-    HAL_BUS::FPGA::Write8(WR::RESET_COUNTER_FREQ, 1);
-    HAL_BUS::FPGA::Write8(WR::RESET_COUNTER_PERIOD, 1);
+
+    FPGA::ResetCounterFreq();
+    FPGA::ResetCounterPeriod();
+    
     freqActual.word = 0;
     periodActual.word = 0;
 }
@@ -348,4 +350,16 @@ void DisplayFreqMeter::DrawDebugInfo()
     {
         Region(size - 2, size - 2).Fill(x + 1, y + 16, Color::FILL);
     }
+}
+
+
+void FreqMeter::FPGA::ResetCounterFreq()
+{
+    HAL_BUS::FPGA::Write8(WR::RESET_COUNTER_FREQ, 1);
+}
+
+
+void FreqMeter::FPGA::ResetCounterPeriod()
+{
+    HAL_BUS::FPGA::Write8(WR::RESET_COUNTER_PERIOD, 1);
 }
