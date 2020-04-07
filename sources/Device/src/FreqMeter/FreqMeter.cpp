@@ -51,7 +51,7 @@ void FreqMeter::LoadSettings()
 {
     uint8 data = 0;
 
-    if (Enabled())
+    if (set.freq.enabled)
     {
         const uint16 maskTime[3] = {0, 1, 2};
         const uint16 maskFreqClc[4] = {0, (1 << 2), (1 << 3), ((1 << 3) + (1 << 2))};
@@ -208,7 +208,7 @@ void FreqMeter::ReadPeriod()
 float FreqMeter::FreqSetToFreq(const BitSet32 *fr)
 {
     const float k[3] = {10.0F, 1.0F, 0.1F};
-    return Enabled() ? (fr->word * k[set.freq.timeCounting]) : (fr->word * 10.0F);
+    return (set.freq.enabled) ? (fr->word * k[set.freq.timeCounting]) : (fr->word * 10.0F);
 }
 
 
@@ -222,7 +222,7 @@ float FreqMeter::PeriodSetToFreq(const BitSet32 *period_)
     const float k[4] = {10e4F, 10e5F, 10e6F, 10e7F};
     const float kP[3] = {1.0F, 10.0F, 100.0F};
 
-    return Enabled() ? (k[set.freq.freqClc] * kP[set.freq.numberPeriods] / static_cast<float>(period_->word)) : (10e5F / static_cast<float>(period_->word));
+    return (set.freq.enabled) ? (k[set.freq.freqClc] * kP[set.freq.numberPeriods] / static_cast<float>(period_->word)) : (10e5F / static_cast<float>(period_->word));
 }
 
 
@@ -274,12 +274,6 @@ void FreqMeter::SetStateLampPeriod()
             timeStartMeasurePeriod = 0;
         }
     }
-}
-
-
-FreqMeter::Enabled::E &FreqMeter::Enabled::Ref()
-{
-    return set.freq.enabled;
 }
 
 

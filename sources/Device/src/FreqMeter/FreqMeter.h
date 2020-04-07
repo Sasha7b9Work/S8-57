@@ -58,16 +58,6 @@ private:
     static float period;
 
 public:
-    struct Enabled
-    {
-        enum E
-        {
-            Off,
-            On
-        };
-        static Enabled::E &Ref();
-        operator bool() { return Ref() == On; }
-    };
 
     /// „астота заполн€ющих импульсов дл€ счЄта частоты.
     struct FreqClc

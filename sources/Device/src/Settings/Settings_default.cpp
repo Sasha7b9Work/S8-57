@@ -162,7 +162,7 @@ const Settings Settings::defaultSettings =
 
     // Настройки частотомера
     {
-        FreqMeter::Enabled::Off,        // enabled
+        0,                              // enabled
         FreqMeter::ModeView::Frequency, // modeView
         FreqMeter::TimeCounting::_1s,   // timeCounting
         FreqMeter::FreqClc::_1MHz,      // freqClc

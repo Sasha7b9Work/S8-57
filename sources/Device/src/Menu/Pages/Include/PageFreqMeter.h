@@ -8,7 +8,7 @@ class Choice;
 
 struct SettingsFreqMeter
 {
-    FreqMeter::Enabled::E        enabled;
+    uint8                        enabled;
     FreqMeter::ModeView::E       modeView;
     FreqMeter::TimeCounting::E   timeCounting;  ///< Время счёта частоты.
     FreqMeter::FreqClc::E        freqClc;       ///< Частота заполнения.
