@@ -17,9 +17,6 @@
 static BitSet32 lastFreq;
 static BitSet32 lastPeriod;
 
-bool     FreqMeter::readPeriod;
-float    FreqMeter::prevFreq;
-float    FreqMeter::frequency;
 BitSet32 FreqMeter::freqActual;
 BitSet32 FreqMeter::periodActual;
 uint     FreqMeter::lastFreqRead;
@@ -28,6 +25,11 @@ uint     FreqMeter::lastFreqOver;
 uint     FreqMeter::lastPeriodOver;
 uint     FreqMeter::timeStartMeasureFreq = 0;
 uint     FreqMeter::timeStartMeasurePeriod = 0;
+
+static bool freqNeedCalculateFromPeriod;    // Установленное в true значение означает, что частоту нужно считать по счётчику периода
+static float prevFreq;
+static float frequency;                     // 
+
 
 
 void FreqMeter::Init()
@@ -127,7 +129,7 @@ void FreqMeter::Update()
 
         lastFreq.Set(freqActual.word);
         
-        if (!readPeriod)
+        if (!freqNeedCalculateFromPeriod)
         {
             ReadFreq();
         }
@@ -139,7 +141,7 @@ void FreqMeter::Update()
 
         lastPeriod.Set(periodActual.word);
 
-        if (readPeriod)
+        if (freqNeedCalculateFromPeriod)
         {
             ReadPeriod();
             HAL_BUS::FPGA::Write8(WR::RESET_COUNTER_PERIOD, 1);
@@ -167,7 +169,7 @@ void FreqMeter::ReadFreq()
 
     if (freqSet.word < 1000)
     {
-        readPeriod = true;
+        freqNeedCalculateFromPeriod = true;
     }
     else
     {
@@ -201,7 +203,7 @@ void FreqMeter::ReadPeriod()
         frequency = fr;
     }
     prevFreq = fr;
-    readPeriod = false;
+    freqNeedCalculateFromPeriod = false;
 }
 
 

@@ -46,16 +46,7 @@ private:
 
     static float FreqSetToFreq(const BitSet32 *fr);
 
-    static float PeriodSetToFreq(const BitSet32 *period);   
-    
-    // Установленное в true значение означает, что частоту нужно считать по счётчику периода
-    static bool readPeriod;
-
-    static float prevFreq;
-
-    static float frequency;
-
-    static float period;
+    static float PeriodSetToFreq(const BitSet32 *period);
 
 public:
 
