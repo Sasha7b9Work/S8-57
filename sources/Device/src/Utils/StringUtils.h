@@ -32,7 +32,7 @@ public:
     /// Возвращает позицию первого символа, который не является цифрой либо точкой
     static int FirstNotNumeral(char *buffer);
     /// Преобразует строку в float. Обрабатываются символы до первого нецифрового символа
-    static float StringToFloat(char *string);
+    static float StringToFloat(const char *string);
 
     static char *ToUpper(char *str, uint size);
 

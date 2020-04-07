@@ -247,7 +247,7 @@ int SU::FirstNotNumeral(char *buffer)
 }
 
 
-float SU::StringToFloat(char *string)
+float SU::StringToFloat(const char *string)
 {
     float result = 0.0F;
 

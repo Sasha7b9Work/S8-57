@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include "common/Display/Font/Font_d.h"
 #include "Display/Grid.h"
 #include "Display/Primitives.h"
@@ -135,6 +136,28 @@ static void DrawFrequency(int x, int _y)
 }
 
 
+// Конверитерует строку с текстовым значением в абсолютное значение
+static float ConvertToAbsPeriod(const char *strPeriod)
+{
+    float result = SU::StringToFloat(strPeriod);
+
+    if(std::strcmp(&strPeriod[std::strlen(strPeriod) - 2], "нс") == 0)
+    {
+        result *= 1e-9F;
+    }
+    else if(std::strcmp(&strPeriod[std::strlen(strPeriod) - 3], "мкс") == 0)
+    {
+        result *= 1e-6F;
+    }
+    else if(std::strcmp(&strPeriod[std::strlen(strPeriod) - 2], "мс") == 0)
+    {
+        result *= 1e-3F;
+    }
+
+    return result;
+}
+
+
 static void DrawPeriod(int x, int _y)
 {
     _y += 4;
@@ -164,25 +187,13 @@ static void DrawPeriod(int x, int _y)
 
     if((std::strcmp(strPeriod, EMPTY_STRING) == 0) || (std::strcmp(strPeriod, OVERFLOW_STRING) == 0))
     {
+        Text(strPeriod).DrawDigitsMonospace(x + dX, yF, DFont::GetWidth('0'));
         return;
     }
 
-    float per = SU::StringToFloat(strPeriod);
+    float period = ConvertToAbsPeriod(strPeriod);
 
-    if(std::strcmp(&strPeriod[std::strlen(strPeriod) - 2], "нс") == 0)
-    {
-        per *= 1e-9F;
-    }
-    else if(std::strcmp(&strPeriod[std::strlen(strPeriod) - 3], "мкс") == 0)
-    {
-        per *= 1e-6F;
-    }
-    else if(std::strcmp(&strPeriod[std::strlen(strPeriod) - 2], "мс") == 0)
-    {
-        per *= 1e-3F;
-    }
-
-    Frequency freq(1.0F / per);
+    Frequency freq(1.0F / period);
 
     Text(freq.ToStringAccuracy(strPeriod, 6)).DrawDigitsMonospace(x + dX, yF, DFont::GetWidth('0'));
 }
