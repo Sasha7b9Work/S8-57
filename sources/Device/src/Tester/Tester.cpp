@@ -268,14 +268,16 @@ void Tester::LoadStep()
 
     HAL_PIO::Write(PIN_TESTER_I, (set.test.control == Tester::Control::Voltage) ? 0 : 1);
 
-    if (set.test.control == Tester::Control::Voltage)
-    {
-        stepU =  255.0F / 3 * ((set.test.stepU == Tester::StepU::_500mV) ? 2 : 0.4F) / 5;
-    }
-    else
-    {
-        stepU = 255.0F / 3 * ((set.test.stepI == Tester::StepI::_20mA) ? 2 : 0.4F) / 5;
-    }
+    stepU = 255.0F / 5;
+
+//    if (set.test.control == Tester::Control::Voltage)
+//    {
+//        stepU =  255.0F / 3 * ((set.test.stepU == Tester::StepU::_500mV) ? 2 : 0.4F) / 5;
+//    }
+//    else
+//    {
+//        stepU = 255.0F / 3 * ((set.test.stepI == Tester::StepI::_20mA) ? 2 : 0.4F) / 5;
+//    }
 }
 
 
