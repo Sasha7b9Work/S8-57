@@ -39,20 +39,20 @@ DEF_CHOICE_2( cModeView,                                                        
     "",
     "Частота",
     "Период",
-    FreqMeter::ModeView::Ref(), &PageFreqMeter::self, IsActive_ModeView, OnChanged_ModeView, Choice::AfterDraw
+    set.freq.modeView, &PageFreqMeter::self, IsActive_ModeView, OnChanged_ModeView, Choice::AfterDraw
 )
 
 
 
 static bool IsActive_SettingsFrequency()
 {
-    return FreqMeter::Enabled() && FreqMeter::ModeView::IsPeriod();
+    return FreqMeter::Enabled() && (set.freq.modeView == FreqMeter::ModeView::Period);
 }
 
 
 static bool IsActive_TimeF()
 {
-    return FreqMeter::Enabled() && FreqMeter::ModeView::IsFrequency();
+    return FreqMeter::Enabled() && (set.freq.modeView == FreqMeter::ModeView::Frequency);
 }
 
 static void OnChanged_TimeF(bool)
@@ -115,12 +115,12 @@ void PageFreqMeter::Init()
 
     Item **items = const_cast<Item **>(page->OwnData()->items);
 
-    if (FreqMeter::ModeView::IsFrequency())
+    if (set.freq.modeView == FreqMeter::ModeView::Frequency)
     {
         items[2] = const_cast<Choice *>(&cTimeF);
         items[3] = &Item::empty;
     }
-    else if (FreqMeter::ModeView::IsPeriod())
+    else if (set.freq.modeView == FreqMeter::ModeView::Period)
     {
         items[2] = const_cast<Choice *>(&cFreqClc);
         items[3] = const_cast<Choice *>(&cNumPeriods);

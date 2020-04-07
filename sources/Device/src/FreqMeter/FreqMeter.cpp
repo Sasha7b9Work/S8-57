@@ -283,12 +283,6 @@ FreqMeter::Enabled::E &FreqMeter::Enabled::Ref()
 }
 
 
-FreqMeter::ModeView::E &FreqMeter::ModeView::Ref()
-{
-    return set.freq.modeView;
-}
-
-
 void DisplayFreqMeter::DrawDebugInfo()
 {
     int width = 50;

@@ -62,7 +62,7 @@ void DisplayFreqMeter::Draw()
     x += 2;
     y += 2;
 
-    if(FreqMeter::ModeView::IsFrequency())
+    if(set.freq.modeView == FreqMeter::ModeView::Frequency)
     {
         DrawFrequencyMode(x, y);
     }
@@ -518,7 +518,8 @@ static void WriteStackToBuffer(Stack<uint> *stack, int point, const char *suffix
 
 void ProgressBarFreqMeter::Draw(int x, int y)
 {
-    if(FreqMeter::ModeView::IsFrequency() && FreqMeter::timeStartMeasureFreq != 0)
+    if((set.freq.modeView == FreqMeter::ModeView::Frequency) && 
+       (FreqMeter::timeStartMeasureFreq != 0))
     {
         static const float time[FreqMeter::TimeCounting::Count] = { 100.0F, 1000.0F, 10000.0F };
 
@@ -540,7 +541,8 @@ void ProgressBarFreqMeter::Draw(int x, int y)
 
         Region(width, 3).Fill(x, y, Color::FILL);
     }
-    else if(FreqMeter::ModeView::IsPeriod() && FreqMeter::timeStartMeasurePeriod != 0)
+    else if((set.freq.modeView == FreqMeter::ModeView::Period) &&
+        (FreqMeter::timeStartMeasurePeriod != 0))
     {
 
     }

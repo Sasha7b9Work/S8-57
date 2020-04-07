@@ -106,9 +106,6 @@ public:
             Period,
             Count
         };
-        static ModeView::E &Ref();
-        static bool IsFrequency() { return Ref() == Frequency; }
-        static bool IsPeriod() { return Ref() == Period; }
     };
 
     /// Время счёта периода.
