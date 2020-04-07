@@ -43,7 +43,7 @@ DEF_CHOICE_4( cSoundVolume,
 )
 
 
-DEF_PAGE_7_VAR( pService,                                                                                                                                                        //--- СЕРВИС ---
+DEF_PAGE_7_VAR( pService,                                                                                                                                                    //--- СЕРВИС ---
     "СЕРВИС",
     "Дополнительные настройки, калибровка, поиск сигнала, математические функции",
     &bResetSettings,

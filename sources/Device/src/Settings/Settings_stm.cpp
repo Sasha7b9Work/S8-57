@@ -17,5 +17,13 @@ void Settings::Load(bool _default)
 
 void Settings::Save()
 {
+    if(Menu::OpenedPage()->IsSubPage(PageService::self))
+    {
+        while(Menu::OpenedPage() != PageService::self)
+        {
+            Menu::CloseOpenedItem();
+        }
+    }
+
     ROM::Settings::Save();
 }
