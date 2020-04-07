@@ -19,9 +19,9 @@
 static char buffer[11] = { '0', '0', '0', '0', '0', '0', '0', 0, 0, 0, 0 };
 
 
-static void DrawFrequency(int x, int _y);
+static void DrawFrequencyMode(int x, int _y);
 
-static void DrawPeriod(int x, int y);
+static void DrawPeriodMode(int x, int y);
 
 static pString FreqSetToString(const BitSet32 *fr);
 
@@ -64,11 +64,11 @@ void DisplayFreqMeter::Draw()
 
     if(FreqMeter::ModeView::IsFrequency())
     {
-        DrawFrequency(x, y);
+        DrawFrequencyMode(x, y);
     }
     else
     {
-        DrawPeriod(x, y);
+        DrawPeriodMode(x, y);
     }
 
     if(false)
@@ -104,7 +104,7 @@ static float ConvertFrequencyToAbs(const char *strFreq)
 }
 
 
-static void DrawFrequency(int x, int _y)
+static void DrawFrequencyMode(int x, int _y)
 {
     _y += 4;
 
@@ -167,7 +167,7 @@ static float ConvertPeriodToAbs(const char *strPeriod)
 }
 
 
-static void DrawPeriod(int x, int _y)
+static void DrawPeriodMode(int x, int _y)
 {
     _y += 4;
 
