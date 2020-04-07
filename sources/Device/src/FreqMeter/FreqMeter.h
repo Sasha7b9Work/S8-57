@@ -34,8 +34,8 @@ public:
         static void LoadSettings();
         static void ResetCounterFreq();
         static void ResetCounterPeriod();
-        static uint ReadCounterFreq();
-        static uint ReadCounterPeriod();
+        static BitSet32 ReadCounterFreq();
+        static BitSet32 ReadCounterPeriod();
     };
 
 private:

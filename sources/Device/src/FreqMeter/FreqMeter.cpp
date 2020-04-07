@@ -83,9 +83,9 @@ void FreqMeter::Update()
 
     if (freqReady)
     {
-        freqActual.word = FPGA::ReadCounterFreq();
+        freqActual = FPGA::ReadCounterFreq();
 
-        lastFreq.Set(freqActual.word);
+        lastFreq = freqActual;
         
         if (!freqNeedCalculateFromPeriod)
         {
@@ -95,7 +95,7 @@ void FreqMeter::Update()
 
     if (periodReady)
     {
-        periodActual.Set(*RD::PERIOD_BYTE_3, *RD::PERIOD_BYTE_2, *RD::PERIOD_BYTE_1, *RD::PERIOD_BYTE_0);
+        periodActual = FPGA::ReadCounterPeriod();
 
         lastPeriod.Set(periodActual.word);
 
@@ -121,7 +121,7 @@ void FreqMeter::Update()
 
 void FreqMeter::ReadFreq()
 {
-    BitSet32 freqSet(*RD::FREQ_BYTE_3, *RD::FREQ_BYTE_2, *RD::FREQ_BYTE_1, *RD::FREQ_BYTE_0);
+    BitSet32 freqSet = FPGA::ReadCounterFreq();
 
     lastFreq.Set(freqSet.word);
 
@@ -147,9 +147,9 @@ void FreqMeter::ReadFreq()
 
 void FreqMeter::ReadPeriod()
 {
-    BitSet32 periodSet(*RD::PERIOD_BYTE_3, *RD::PERIOD_BYTE_2, *RD::PERIOD_BYTE_1, *RD::PERIOD_BYTE_0);
+    BitSet32 periodSet = FPGA::ReadCounterPeriod();
 
-    lastPeriod.Set(periodSet.word);
+    lastPeriod = periodSet;
 
     float fr = PeriodSetToFreq(&periodSet);
     if (fr < prevFreq * 0.9F || fr > prevFreq * 1.1F)
@@ -321,16 +321,18 @@ void FreqMeter::FPGA::ResetCounterPeriod()
 }
 
 
-uint FreqMeter::FPGA::ReadCounterFreq()
+BitSet32 FreqMeter::FPGA::ReadCounterFreq()
 {
     BitSet32 result(*RD::FREQ_BYTE_3, *RD::FREQ_BYTE_2, *RD::FREQ_BYTE_1, *RD::FREQ_BYTE_0);
 
-    return result.word;
+    return result;
 }
 
-uint FreqMeter::FPGA::ReadCounterPeriod()
+BitSet32 FreqMeter::FPGA::ReadCounterPeriod()
 {
-    return 0;
+    BitSet32 result(*RD::PERIOD_BYTE_3, *RD::PERIOD_BYTE_2, *RD::PERIOD_BYTE_1, *RD::PERIOD_BYTE_0);
+
+    return result;
 }
 
 
