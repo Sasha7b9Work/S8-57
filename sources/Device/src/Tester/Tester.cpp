@@ -187,7 +187,10 @@ void Tester::ProcessStep()
     {
         HAL_DAC2::SetValue(static_cast<uint>(stepU * step / 2));
         // Запускаем ПЛИС для записи необходимого количества точек. Набор будет производиться в течение 2.5 мс (длительсность одного такта)
-        StartFPGA();
+        if(!StartFPGA())
+        {
+            return;
+        }
     }
     else
     {
@@ -375,8 +378,6 @@ static bool StartFPGA()
     TBase::Set(TBase::_500us);
 
     FPGA::GiveStart(static_cast<uint16>(~(1)), static_cast<uint16>(~(TESTER_NUM_POINTS + 1)));
-
-    FPGA::flag.flag = 0;
 
     for(int i = 0; i < 20; i++)
     {
