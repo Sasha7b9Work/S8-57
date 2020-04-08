@@ -10,6 +10,9 @@
 #endif
 
 
+static void (*funcAfterInteraction)() = nullptr;      // Эта функция будет вызвана после окончания взаимодействия с панелью
+
+
 struct OutPin
 {
     OutPin(HPort::E _port, uint16 _pin) : port(_port), pin(_pin) {}
@@ -232,6 +235,12 @@ void HAL_BUS::Panel::Send(uint8 *data, uint size)
     {
         Roller::ReadPoint();
     }
+
+    if(funcAfterInteraction)
+    {
+        funcAfterInteraction();
+        funcAfterInteraction = nullptr;
+    }
 }
 
 
@@ -240,6 +249,12 @@ bool HAL_BUS::Panel::InInteraction()
     HAL_IWDG_REFRESH;
 
     return interactionWithPanel;
+}
+
+
+void HAL_BUS::Panel::RunAfterInteraction(void (*func)())
+{
+    funcAfterInteraction = func;
 }
 
 

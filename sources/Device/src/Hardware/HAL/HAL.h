@@ -99,6 +99,7 @@ struct HAL_BUS
         static void Send(uint8 *data, uint size);
         static bool Receive();
         static bool InInteraction();
+        static void RunAfterInteraction(void (*func)());
     };
 
     struct FPGA

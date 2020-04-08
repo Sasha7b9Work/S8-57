@@ -169,10 +169,16 @@ void Tester::ProcessStep()
 
        | step == 0 |  2.5 мс   | step == 2 |  2.5 мс   | step == 4 |  2.5 мс   | step == 6 |  2.5 мс   | step == 8 |  2.5 мс   |
        |     0V    |  чтение   |   1 * dU  |  чтение   |   2 * dU  |  чтение   |   3 * dU  |  чтение   |  4 * dU   |  чтение   |
-       |<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|                  */
+       |<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|<--------->|                */
 
 
-    if (HAL_BUS::Panel::InInteraction() || Timer::IsBusy())
+    if(HAL_BUS::Panel::InInteraction())
+    {
+        HAL_BUS::Panel::RunAfterInteraction(Tester::ProcessStep);
+        return;
+    }
+
+    if (Timer::IsBusy())
     {
         return;
     }
@@ -196,7 +202,7 @@ void Tester::ProcessStep()
         }
         else
         {
-            if(countRead > 1)
+            if(countRead > 10)
             {
                 step--;
             }
