@@ -51,6 +51,7 @@
 
 #define RCC_LSI_OFF                      ((uint8_t)0x00)
 #define RCC_LSI_ON                       ((uint8_t)0x01)
+#define RCC_LSE_ON                       0
 
 #define RCC_RTCCLKSOURCE_NO_CLK          0x00000000U
 #define RCC_RTCCLKSOURCE_LSE             0x00000100U

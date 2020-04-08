@@ -7,20 +7,8 @@
 #define VALUE_FOR_RTC 0x644
 
 
-#define RTC_CLOCK_SOURCE_LSE
-//#define RTC_CLOCK_SOURCE_LSI
-
-
-#ifdef RTC_CLOCK_SOURCE_LSI
-#define RTC_ASYNCH_PREDIV 0x7f
-#define RTC_SYNCH_PREDIV 0x0130
-#endif
-
-#ifdef RTC_CLOCK_SOURCE_LSE
 #define RTC_ASYNCH_PREDIV 0x7f
 #define RTC_SYNCH_PREDIV 0x00ff
-#endif
-
 
 
 static RTC_HandleTypeDef handleRTC =
@@ -43,12 +31,11 @@ void HAL_RTC::Init()
     RCC_OscInitTypeDef        RCC_OscInitStruct;
     RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
 
-    __PWR_CLK_ENABLE();
-    __HAL_RCC_RTC_ENABLE();
+    __HAL_RCC_PWR_CLK_ENABLE();
 
     HAL_PWR_EnableBkUpAccess();
 
-    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_LSE;
+    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSE;
     RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
     RCC_OscInitStruct.LSEState = RCC_LSE_ON;
     RCC_OscInitStruct.LSIState = RCC_LSI_OFF;
@@ -65,8 +52,10 @@ void HAL_RTC::Init()
     {
         ERROR_HANDLER();
     }
+    
+    __HAL_RCC_RTC_ENABLE();
 
-    if(!HAL_RTC_Init(&handleRTC) != HAL_OK)
+    if(HAL_RTC_Init(&handleRTC) != HAL_OK)
     {
         ERROR_HANDLER();
     }
