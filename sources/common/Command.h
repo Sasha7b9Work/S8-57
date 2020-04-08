@@ -36,7 +36,7 @@ struct Command
 };
 
 
-#define TESTER_NUM_POINTS 600
+#define TESTER_NUM_POINTS 115
 
 
 #define SIZE_STRING (320)
