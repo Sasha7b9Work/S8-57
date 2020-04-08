@@ -242,12 +242,12 @@ static void RecountPoints(uint16 *x, uint8 *y)
     for (int i = 0; i < TESTER_NUM_POINTS; i++)
     {
         int X = 255 - x[i] + dX;
-        X = static_cast<int>(x0 + (X - x0) * scaleX);
+        X = static_cast<int>(x0 + (x0 - X) * scaleX);
         LIMITATION(X, 0, 319);
         x[i] = static_cast<uint16>(X);
 
         int Y = y[i] + dY;
-        Y = static_cast<uint8>(y0 + (Y - y0) * scaleY);
+        Y = static_cast<uint8>(y0 + (y0 - Y) * scaleY);
         LIMITATION(Y, 0, 239);
         y[i] = static_cast<uint8>(Y);
     }
