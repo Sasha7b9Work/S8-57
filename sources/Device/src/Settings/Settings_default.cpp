@@ -173,8 +173,8 @@ const Settings Settings::defaultSettings =
     {
         Tester::Control::Voltage,       // control
         Tester::Polarity::Positive,     // polarity
-        Tester::StepU::_100mV,          // stepU
-        Tester::StepI::_4mA,            // stepI
+        Tester::StepU::_600mV,          // stepU
+        Tester::StepI::_4uA,            // stepI
         ENumAverage::_1,                // smooth
         Tester::ViewMode::Lines         // viewMode
     },

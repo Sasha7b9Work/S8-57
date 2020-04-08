@@ -261,6 +261,18 @@ void Tester::LoadPolarity()
 }
 
 
+// Возвращает true, если для данноого режима работы нужна уменьшенная ступенька
+static bool NeedSmallStep()
+{
+    if(set.test.control == Tester::Control::Voltage)
+    {
+        return (set.test.stepU == Tester::StepU::_600mV);
+    }
+
+    return (set.test.stepI == Tester::StepI::_4uA);
+}
+
+
 void Tester::LoadStep()
 {
     // Устанавливаем управление напряжением или током
@@ -270,14 +282,10 @@ void Tester::LoadStep()
 
     stepU = 255.0F / 5;
 
-//    if (set.test.control == Tester::Control::Voltage)
-//    {
-//        stepU =  255.0F / 3 * ((set.test.stepU == Tester::StepU::_500mV) ? 2 : 0.4F) / 5;
-//    }
-//    else
-//    {
-//        stepU = 255.0F / 3 * ((set.test.stepI == Tester::StepI::_20mA) ? 2 : 0.4F) / 5;
-//    }
+    if(NeedSmallStep())
+    {
+        stepU /= 5;
+    }
 }
 
 

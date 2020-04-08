@@ -90,8 +90,8 @@ public:
     {
         enum E
         {
-            _4mA,
-            _20mA
+            _4uA,
+            _20uA
         };
     };
 
@@ -99,8 +99,8 @@ public:
     {
         enum E
         {
-            _100mV,
-            _500mV
+            _600mV,
+            _3V
         };
     };
 
