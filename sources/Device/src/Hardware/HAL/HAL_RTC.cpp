@@ -8,7 +8,7 @@
 
 
 #define RTC_CLOCK_SOURCE_LSE
-// #define RTC_CLOCK_SOURCE_LSI
+//#define RTC_CLOCK_SOURCE_LSI
 
 
 #ifdef RTC_CLOCK_SOURCE_LSI
@@ -43,26 +43,30 @@ void HAL_RTC::Init()
     RCC_OscInitTypeDef        RCC_OscInitStruct;
     RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
 
-    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI;
+    __PWR_CLK_ENABLE();
+    __HAL_RCC_RTC_ENABLE();
+
+    HAL_PWR_EnableBkUpAccess();
+
+    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_LSE;
     RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
-    RCC_OscInitStruct.LSIState = RCC_LSI_ON;
+    RCC_OscInitStruct.LSEState = RCC_LSE_ON;
+    RCC_OscInitStruct.LSIState = RCC_LSI_OFF;
+
     if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
     {
         ERROR_HANDLER();
     }
 
     PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_RTC;
-    PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_LSI;
+    PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
+
     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
     {
         ERROR_HANDLER();
     }
 
-    __HAL_RCC_RTC_ENABLE();
-
-    HAL_StatusTypeDef status = HAL_RTC_Init(&handleRTC);
-
-    if (status != HAL_OK)
+    if(!HAL_RTC_Init(&handleRTC) != HAL_OK)
     {
         ERROR_HANDLER();
     }
