@@ -1350,16 +1350,6 @@
               <FileType>8</FileType>
               <FilePath>.\src\Display\Text_stm.cpp</FilePath>
             </File>
-            <File>
-              <FileName>Smoother.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\Smoother.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Smoother.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\Smoother.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>

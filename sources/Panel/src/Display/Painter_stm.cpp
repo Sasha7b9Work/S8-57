@@ -1,7 +1,7 @@
 #include "defines.h"
-#include "Display/Display.h"
+#include "Display/Averager.h"
 #include "Display/Painter.h"
-#include "Display/Smoother.h"
+#include "Display/Display.h"
 #include "Hardware/LTDC.h"
 #include "Hardware/HAL/HAL.h"
 #include "Utils/Math.h"
@@ -218,14 +218,15 @@ void Painter::DrawTesterData(uint8 mode, Color color, const uint16 _x[TESTER_NUM
 {
     SetColor(color);
 
-    //int step = EXTRACT_STEP(mode);
+    int step = EXTRACT_STEP(mode);
 
     int numAverage = EXTRACT_ENUM_AVERAGE(mode);
    
-    SmootherTester::Run(_x, _y, numAverage);
+    AveragerTester::SetCount(numAverage);
+    AveragerTester::Process(_x, _y, step);
 
-    uint16 *x = SmootherTester::X();
-    uint8 *y = SmootherTester::Y();
+    uint16 *x = AveragerTester::X();
+    uint8 *y = AveragerTester::Y();
     
     if(EXTRACT_MODE_DRAW(mode))
     {
