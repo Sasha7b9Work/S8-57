@@ -232,7 +232,8 @@ void Painter::DrawTesterData(uint8 mode, Color color, const uint16 _x[TESTER_NUM
     {
         for(int i = 1; i < TESTER_NUM_POINTS - 1; i++)
         {
-            *(Display::GetBuffer() + y[i] * BUFFER_WIDTH + x[i]) = currentColor.value;
+            FillRegion(x[i], y[i], 2, 2);
+            //*(Display::GetBuffer() + y[i] * BUFFER_WIDTH + x[i]) = currentColor.value;
         }
     }
     else
