@@ -5,6 +5,7 @@
 #include "Osci/Osci.h"
 #include "Osci/Reader.h"
 #include "Settings/Settings.h"
+#include "Settings/SettingsNRST.h"
 #include <cstring>
 
 
@@ -17,7 +18,19 @@ void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, uint size)
     uint8 *_new = const_cast<uint8 *>(dataNew);
     uint16 *av = AVE_DATA(ch);
 
-    if (numSignals[ch] < ENumAverage().Number())
+    uint16 enumAverages = static_cast<uint16>(set.disp.enumAverage);
+
+    if(OSCI_IN_MODE_RANDOMIZER)
+    {
+        if(setNRST.enumAverageRand > enumAverages)
+        {
+            enumAverages = setNRST.enumAverageRand;
+        }
+    }
+
+    uint16 numAverages = static_cast<uint16>(1 << enumAverages);
+
+    if (numSignals[ch] < numAverages)
     {
         if (numSignals[ch] == 0)
         {
@@ -40,7 +53,7 @@ void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, uint size)
     }
     else
     {
-        uint16 shift = static_cast<uint16>(set.disp.enumAverage);
+        uint16 shift = static_cast<uint16>(enumAverages);
 
         for(uint i = 0; i < size; i++)
         {
