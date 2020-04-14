@@ -62,9 +62,7 @@ struct ENumAverage
         Count
     };
     ENumAverage() {};
-    operator ENumAverage::E() { return Ref(); };
-    int Number()              { return (1 << Ref()); };
-    static ENumAverage::E &Ref();
+    int Number();
     static void Set(ENumAverage::E v);
 };
 

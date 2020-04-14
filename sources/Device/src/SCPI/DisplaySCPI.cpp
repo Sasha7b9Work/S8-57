@@ -89,7 +89,7 @@ static void HintMapping(String *message)
 
 static const char *FuncAverages(const char *buffer)
 {
-    SCPI_REQUEST(SCPI::SendAnswer(averages[ENumAverage()]));
+    SCPI_REQUEST(SCPI::SendAnswer(averages[set.disp.enumAverage]));
 
     SCPI_PROCESS_ARRAY(averages, ENumAverage::Set(static_cast<ENumAverage::E>(i)));
 }

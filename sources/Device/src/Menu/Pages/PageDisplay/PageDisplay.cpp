@@ -22,12 +22,6 @@ ENumMinMax::E &ENumMinMax::Ref()
 }
 
 
-ENumAverage::E &ENumAverage::Ref()
-{
-    return set.disp.enumAverage;
-}
-
-
 ENumAccum::E &ENumAccum::Ref()
 {
     return set.disp.enumAccum;
@@ -48,8 +42,14 @@ TypeGrid::E &TypeGrid::Ref()
 
 void ENumAverage::Set(ENumAverage::E v)
 {
-    Ref() = v;
+    set.disp.enumAverage = v;
     AveragerOsci::SettingChanged();
+}
+
+
+int ENumAverage::Number()
+{
+    return 1 << set.disp.enumAverage;
 }
 
 
@@ -120,7 +120,7 @@ DEF_CHOICE_9( cAverage_Num,                                                     
     "64",
     "128",
     "256",
-    ENumAverage::Ref(), &PageDisplay::self, Item::Active, OnChange_AverageNum, Choice::AfterDraw
+    set.disp.enumAverage, &PageDisplay::self, Item::Active, OnChange_AverageNum, Choice::AfterDraw
 )
 
 

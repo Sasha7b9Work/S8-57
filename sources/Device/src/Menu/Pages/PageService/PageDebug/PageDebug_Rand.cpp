@@ -68,11 +68,23 @@ DEF_CHOICE_21( gGateMin,                                                        
 )
 
 
-DEF_PAGE_2( pRand,                                                                                                                                               //--- ОТЛАДКА - РАНД-ТОР ---
+DEF_CHOICE_4(cAverage,
+    "Усредненеие",
+    "Количество усреднений, которые будут применяться всегда в рандомизаторе",
+    DISABLE_RU,
+    "2",
+    "4",
+    "8",
+    setNRST.enumAverageRand, &PageDebug::PageRand::self, Item::Active, Choice::Changed, Choice::AfterDraw
+)
+
+
+DEF_PAGE_3( pRand,                                                                                                                                               //--- ОТЛАДКА - РАНД-ТОР ---
     "РАНД-ТОР",
     "",
     &gGateMin,
     &gGateMax,
+    &cAverage,
     PageName::Debug_Rand, &PageDebug::self, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 

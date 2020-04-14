@@ -40,7 +40,7 @@ void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, uint size)
     }
     else
     {
-        uint16 shift = static_cast<uint16>(ENumAverage());
+        uint16 shift = static_cast<uint16>(set.disp.enumAverage);
 
         for(uint i = 0; i < size; i++)
         {

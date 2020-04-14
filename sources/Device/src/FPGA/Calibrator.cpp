@@ -25,6 +25,8 @@ static float FindStretchChannel(Chan::E ch);
 
 void Calibrator::Calibrate()
 {
+    Settings old = set;
+
     setNRST.ResetExtraStretch();
     setNRST.ResetExtraShift();
 
@@ -32,12 +34,17 @@ void Calibrator::Calibrate()
     {
         Display::Message::ShowAndWaitKey("Калибровка канала 1 не прошла", true);
     }
-    else if (!CalibrateChannel(Chan::B))
+    
+    if (!CalibrateChannel(Chan::B))
     {
         Display::Message::ShowAndWaitKey("Калибровка канала 2 не прошла", true);
     }
 
-    Display::Message::ShowAndWaitKey("Калибровка успешно завершена", true);
+    Display::Message::ShowAndWaitKey("Калибровка завершена", true);
+
+    set = old;
+
+    Osci::Init();
 }
 
 
