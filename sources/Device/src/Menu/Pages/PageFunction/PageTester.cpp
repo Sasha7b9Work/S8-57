@@ -62,9 +62,9 @@ DEF_CHOICE_2( cStepI,
 
 
 DEF_CHOICE_2( cViewMode,
-    "Рисование",
+    "Отображение",
     "",
-    "Линии",
+    "Вектор",
     "Точки",
     set.test.viewMode, &PageTester::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
