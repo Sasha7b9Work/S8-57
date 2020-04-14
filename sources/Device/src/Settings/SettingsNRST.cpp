@@ -9,16 +9,16 @@ SettingsNRST setNRST;
 
 static const SettingsNRST defaultNRST =
 {
-    0,                                       // size
-    {0, 0},                                  // balanceShiftADC
-    0,                                       // numAveForRand
-    0,                                       // numSmoothForRand
-    0,                                       // correctionTime
-    0,                                       // enum_gate_max
-    0,                                       // enum_gate_min
-    { BalanceADC::Disabled, {0,    0}    },  // balanceADC
-    { ExtraShift::Disabled,    {{0},  {0}}  }, // shiftADC
-    { ExtraStretch::Disabled, {1.0F, 1.0F} }   // stretchADCtype
+    0,                                                                 // size
+    {0, 0},                                                            // balanceShiftADC
+    0,                                                                 // numAveForRand
+    0,                                                                 // numSmoothForRand
+    0,                                                                 // correctionTime
+    0,                                                                 // enum_gate_max
+    0,                                                                 // enum_gate_min
+    { BalanceADC::Disabled, {0,    0}    },                            // balanceADC
+    { ExtraShift::Disabled,    {{0},  {0}}  },                         // shiftADC
+    { {1.0F, 1.0F}, {ExtraStretch::Disabled, ExtraStretch::Disabled} } // stretchADCtype
 };
 
 

@@ -27,14 +27,11 @@ struct ExtraStretch
         Real,
         Hand,
         Count
-    } type;
-    static void SetTypeDisabled();
-    static void SetTypeReal();
-    static bool TypeIsDisabled();
-    static bool TypeIsHand();
+    };
     static float GetValue(Chan::E ch);
     static void SetValue(Chan::E ch, float value);
     float  value[Chan::Count];                                             // Хранится в целом виде, чтобы получить реальный коэффициент, нужно разделить на 1000 и прибавить единицу.
+    Type   type[Chan::Count];
 };
 
 

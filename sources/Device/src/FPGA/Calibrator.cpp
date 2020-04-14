@@ -29,7 +29,9 @@ static void BadExit();
 
 void Calibrator::Calibrate()
 {
-    ExtraStretch::SetTypeReal();
+    setNRST.exStretch.type[ChanA] = ExtraStretch::Real;
+    setNRST.exStretch.type[ChanB] = ExtraStretch::Real;
+
     ExtraShift::SetTypeReal();
 
     if (!CalibrateChannel(Chan::A))
@@ -157,7 +159,9 @@ static bool StretchChannel(Chan::E ch)
     SettingsNRST old = setNRST;
 
     ExtraShift::SetTypeReal();
-    ExtraStretch::SetTypeDisabled();
+
+    setNRST.exStretch.type[ChanA] = ExtraStretch::Disabled;
+    setNRST.exStretch.type[ChanB] = ExtraStretch::Disabled;
 
     ModeCouple(ch).SetAC();
     RShift(ch).Set(0);
@@ -255,13 +259,17 @@ static float FindStretchChannel(Chan::E ch)
 
 static void NormalExit()
 {
-    ExtraStretch::SetTypeReal();
+    setNRST.exStretch.type[ChanA] = ExtraStretch::Real;
+    setNRST.exStretch.type[ChanB] = ExtraStretch::Real;
+
     ExtraShift::SetTypeReal();
 }
 
 
 static void BadExit()
 {
-    ExtraStretch::SetTypeDisabled();
+    setNRST.exStretch.type[ChanA] = ExtraStretch::Disabled;
+    setNRST.exStretch.type[ChanB] = ExtraStretch::Disabled;
+
     ExtraShift::SetTypeDisabled();
 }

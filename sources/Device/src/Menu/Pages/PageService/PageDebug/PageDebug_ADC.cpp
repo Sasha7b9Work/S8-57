@@ -27,24 +27,6 @@ int8 ExtraShift::GetValue(Chan::E ch, Range::E range)
 }
 
 
-void ExtraStretch::SetTypeReal()
-{
-    setNRST.exStretch.type = ExtraStretch::Real;
-}
-
-
-void ExtraStretch::SetTypeDisabled()
-{
-    setNRST.exStretch.type = ExtraStretch::Disabled;
-}
-
-
-bool ExtraStretch::TypeIsDisabled()
-{
-    return (setNRST.exStretch.type == ExtraStretch::Disabled);
-}
-
-
 float ExtraStretch::GetValue(Chan::E ch)
 {
     return setNRST.exStretch.value[ch];
@@ -56,11 +38,6 @@ void ExtraStretch::SetValue(Chan::E ch, float value)
     setNRST.exStretch.value[ch] = value;
 }
 
-
-bool ExtraStretch::TypeIsHand()
-{
-    return (setNRST.exStretch.type == ExtraStretch::Hand);
-}
 
 
 static int16 shiftADCA;
@@ -151,20 +128,27 @@ static int16 stretchB;
 
 void PageDebug::PageADC::PageStretch::OnChanged_Mode(bool)
 {
-    if (ExtraStretch::TypeIsDisabled())
+    if(setNRST.exStretch.type[Chan::A] == ExtraStretch::Disabled)
     {
     }
     else
     {
-        stretchA = static_cast<int16>(ExtraStretch::GetValue(Chan::A));
-        stretchB = static_cast<int16>(ExtraStretch::GetValue(Chan::B));
+        stretchA = static_cast<int16>(ExtraStretch::GetValue(ChanA));
+    }
+
+    if(setNRST.exStretch.type[ChanB] == ExtraStretch::Disabled)
+    {
+    }
+    else
+    {
+        stretchB = static_cast<int16>(ExtraStretch::GetValue(ChanB));
     }
 }
 
 
 static bool IsActive_StretchAB()
 {
-    return ExtraStretch::TypeIsHand();
+    return setNRST.exStretch.type[ChanB] == ExtraStretch::Hand;
 }
 
 static void OnChanged_Stretch_A()

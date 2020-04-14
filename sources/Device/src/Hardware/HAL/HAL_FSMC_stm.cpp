@@ -272,11 +272,6 @@ uint8 HAL_BUS::FPGA::ReadA1()
 
 float HAL_BUS::FPGA::GetStretch(const uint8 *address)
 {
-    if (ExtraStretch::TypeIsDisabled())
-    {
-        return 1.0F;
-    }
-
     static const float *stretchs[4] =
     {
         &setNRST.exStretch.value[Chan::A],
@@ -286,6 +281,21 @@ float HAL_BUS::FPGA::GetStretch(const uint8 *address)
     };
 
     int delta = address - RD::DATA_A;
+
+    if(delta < 2)
+    {
+        if(setNRST.exStretch.type[ChanA] == ExtraStretch::Disabled)
+        {
+            return 1.0F;
+        }
+    }
+    else
+    {
+        if(setNRST.exStretch.type[ChanB] == ExtraStretch::Disabled)
+        {
+            return 1.0F;
+        }
+    }
 
     return *stretchs[delta];
 }
