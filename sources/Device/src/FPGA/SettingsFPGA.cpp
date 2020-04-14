@@ -95,7 +95,7 @@ void RShift::Load(bool force)
 
     int16 shift = RShift(ch) + HARDWARE_ZERO;
 
-    shift += ExtraShift::GetValue(ch, set.ch[ch].range);
+    shift += setNRST.exShift[ch][set.ch[ch].range];
 
     if (Chan(ch).IsA() && Device::InModeTester())
     {

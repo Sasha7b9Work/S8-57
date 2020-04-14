@@ -9,16 +9,15 @@ SettingsNRST setNRST;
 
 static const SettingsNRST defaultNRST =
 {
-    0,                                                                 // size
-    {0, 0},                                                            // balanceShiftADC
-    0,                                                                 // numAveForRand
-    0,                                                                 // numSmoothForRand
-    0,                                                                 // correctionTime
-    0,                                                                 // enum_gate_max
-    0,                                                                 // enum_gate_min
-    { BalanceADC::Disabled, {0,    0}    },                            // balanceADC
-    { ExtraShift::Disabled,    {{0},  {0}}  },                         // shiftADC
-    { {1.0F, 1.0F}, {ExtraStretch::Disabled, ExtraStretch::Disabled} } // stretchADCtype
+    0,                                   // size
+    {0, 0},                              // balanceShiftADC
+    0,                                   // numAveForRand
+    0,                                   // numSmoothForRand
+    0,                                   // correctionTime
+    0,                                   // enum_gate_max
+    0,                                   // enum_gate_min
+    {{0}, {0}},                          // shiftADC
+    {1.0F, 1.0F}                         // stretchADCtype
 };
 
 
@@ -68,4 +67,23 @@ void SettingsNRST::Reset()
 bool SettingsNRST::operator!=(const SettingsNRST &rhs)
 {
     return std::memcmp(this, &rhs, sizeof(*this)) != 0;
+}
+
+
+void SettingsNRST::ResetExtraShift()
+{
+    for(int ch = 0; ch < Chan::Count; ch++)
+    {
+        for(int range = 0; range < Range::Count; range++)
+        {
+            exShift[ch][range] = 0;
+        }
+    }
+}
+
+
+void SettingsNRST::ResetExtraStretch()
+{
+    exStretch[ChanA] = 1.0F;
+    exStretch[ChanB] = 1.0F;
 }

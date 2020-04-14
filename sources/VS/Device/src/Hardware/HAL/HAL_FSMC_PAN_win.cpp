@@ -78,3 +78,9 @@ bool HAL_BUS::Panel::InInteraction()
 {
     return false;
 }
+
+
+void HAL_BUS::Panel::RunAfterInteraction(void (*)())
+{
+//    funcAfterInteraction = func;
+}

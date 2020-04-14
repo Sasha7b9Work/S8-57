@@ -22,34 +22,22 @@ static bool StretchChannel(Chan::E ch);
 // Найти коэффициент растяжки канала
 static float FindStretchChannel(Chan::E ch);
 
-static void NormalExit();
-
-static void BadExit();
-
 
 void Calibrator::Calibrate()
 {
-    setNRST.exStretch.type[ChanA] = ExtraStretch::Real;
-    setNRST.exStretch.type[ChanB] = ExtraStretch::Real;
-
-    ExtraShift::SetTypeReal();
+    setNRST.ResetExtraStretch();
+    setNRST.ResetExtraShift();
 
     if (!CalibrateChannel(Chan::A))
     {
         Display::Message::ShowAndWaitKey("Калибровка канала 1 не прошла", true);
-
-        return BadExit();
     }
     else if (!CalibrateChannel(Chan::B))
     {
         Display::Message::ShowAndWaitKey("Калибровка канала 2 не прошла", true);
-
-        return BadExit();
     }
 
     Display::Message::ShowAndWaitKey("Калибровка успешно завершена", true);
-
-    NormalExit();
 }
 
 
@@ -74,7 +62,7 @@ bool Calibrator::BalanceChannel(Chan::E ch, bool showHint)
 
     SettingsNRST oldNRST = setNRST;
 
-    ExtraShift::SetTypeDisabled();
+    setNRST.ResetExtraShift();
 
     static const pString messages[Chan::Count] =
     {
@@ -96,7 +84,7 @@ bool Calibrator::BalanceChannel(Chan::E ch, bool showHint)
         BalanceRange(ch, static_cast<Range::E>(range));
     }
 
-    std::memcpy(&oldNRST.exShift.value[ch][0], &setNRST.exShift.value[ch][0], sizeof(setNRST.exShift.value[ch][0]) * Range::Count);
+    std::memcpy(&oldNRST.exShift[ch][0], &setNRST.exShift[ch][0], sizeof(setNRST.exShift[ch][0]) * Range::Count);
 
     setNRST = oldNRST;
     set = old;
@@ -145,11 +133,11 @@ static void BalanceRange(Chan::E ch, Range::E range)
 
     if (delta > 0.0F)
     {
-        ExtraShift::SetValue(ch, range, static_cast<int8>(delta * 200.0F / 125.0F + 0.5F));
+        setNRST.exShift[ch][range] = static_cast<int8>(delta * 200.0F / 125.0F + 0.5F);
     }
     else
     {
-        ExtraShift::SetValue(ch, range, static_cast<int8>(delta * 200.0F / 125.0F - 0.5F));
+        setNRST.exShift[ch][range] = static_cast<int8>(delta * 200.0F / 125.0F - 0.5F);
     }
 }
 
@@ -158,10 +146,7 @@ static bool StretchChannel(Chan::E ch)
 {
     SettingsNRST old = setNRST;
 
-    ExtraShift::SetTypeReal();
-
-    setNRST.exStretch.type[ChanA] = ExtraStretch::Disabled;
-    setNRST.exStretch.type[ChanB] = ExtraStretch::Disabled;
+    setNRST.ResetExtraStretch();
 
     ModeCouple(ch).SetAC();
     RShift(ch).Set(0);
@@ -176,7 +161,7 @@ static bool StretchChannel(Chan::E ch)
 
     if (k > 0.0F)
     {
-        old.exStretch.value[ch] = k;
+        old.exStretch[ch] = k;
     }
 
     setNRST = old;
@@ -254,22 +239,4 @@ static float FindStretchChannel(Chan::E ch)
     float max = static_cast<float>(sumMAX) / numMAX;
 
     return patternDelta / (max - min);
-}
-
-
-static void NormalExit()
-{
-    setNRST.exStretch.type[ChanA] = ExtraStretch::Real;
-    setNRST.exStretch.type[ChanB] = ExtraStretch::Real;
-
-    ExtraShift::SetTypeReal();
-}
-
-
-static void BadExit()
-{
-    setNRST.exStretch.type[ChanA] = ExtraStretch::Disabled;
-    setNRST.exStretch.type[ChanB] = ExtraStretch::Disabled;
-
-    ExtraShift::SetTypeDisabled();
 }

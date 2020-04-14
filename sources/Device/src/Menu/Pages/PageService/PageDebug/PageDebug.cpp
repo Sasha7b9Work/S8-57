@@ -7,12 +7,6 @@
 #include "Settings/SettingsNRST.h"
 
 
-BalanceADC &BalanceADC::Ref()
-{
-    return setNRST.balanceADC;
-}
-
-
 /// В этой структуре будут храниться данные серийного номера при открытой странице ppSerialNumer
 typedef struct
 {
@@ -75,7 +69,7 @@ static void DebugShowSetInfo_Draw()
     {
         for (int range = 0; range < Range::Count; ++range)
         {
-            String("%d", ExtraShift::GetValue(static_cast<Chan::E>(ch), static_cast<Range::E>(range))).Draw(x + range * 20, y + dY * ddY);
+            String("%d", setNRST.exShift[ch][range]).Draw(x + range * 20, y + dY * ddY);
         }
         ddY++;
     }
@@ -83,19 +77,17 @@ static void DebugShowSetInfo_Draw()
     y += dY * 3;
 
     DRAW_FORMAT("correctionTime : %d", setNRST.correctionTime); //-V2528
-    DRAW_FORMAT2("balanceADC : %d %d", BalanceADC::Value(Chan::A), BalanceADC::Value(Chan::B)); //-V2528
     DRAW_FORMAT("numAveForRand : %d", setNRST.numAveForRand); //-V2528
 
-    pString s[3] = {"выключено", "настроено автоматически", "задано вручную"};
-    DRAW_FORMAT("balanceADCtype : %s", (BalanceADC::Ref().value < 3 ? s[BalanceADC::Ref().value] : "!!! неправильное значение !!!")); //-V547 //-V2528
-    DRAW_FORMAT("stretchADCtype : %s", (ExtraStretch::Type() < 3 ? s[ExtraStretch::Type()] : "!!! неправильное значение !!!")); //-V547 //-V2528
+//    pString s[3] = {"выключено", "настроено автоматически", "задано вручную"};
+//    DRAW_FORMAT("stretchADCtype : %s", (ExtraStretch::Type() < 3 ? s[ExtraStretch::Type()] : "!!! неправильное значение !!!")); //-V547 //-V2528
 
     x = String("stretchADC :").Draw(x0, INC_Y) + 5; //-V2528
 
-    for (int ch = 0; ch < 2; ch++)
-    {
-        String("%f", ExtraStretch::GetValue(static_cast<Chan::E>(ch))).Draw(x, y + dY * ch);
-    }
+//    for (int ch = 0; ch < 2; ch++)
+//    {
+//        String("%f", ExtraStretch::GetValue(static_cast<Chan::E>(ch))).Draw(x, y + dY * ch);
+//    }
 
     y += dY;
 
