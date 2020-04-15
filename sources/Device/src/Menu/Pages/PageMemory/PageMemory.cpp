@@ -251,9 +251,16 @@ static bool IsActive_Mask()
     return FileNamingMode::IsMask();
 }
 
-static void OnOpenClose_Mask(bool)
+static void OnOpenClose_Mask(bool open)
 {
-    Display::SetAddDrawFunction(DrawSetMask);
+    if(open)
+    {
+        Display::SetAddDrawFunction(DrawSetMask);
+    }
+    else
+    {
+        Display::RemoveAddDrawFunction();
+    }
 }
 
 static void DrawSetMask()
@@ -357,11 +364,16 @@ static void DrawFileMask(int x, int y)
 
 static bool HandlerKey_Mask(const KeyEvent &event)
 {
-    int angle = (event.IsArrowUp() || event.IsArrowRight()) ? 1 : -1;
+    if(event.IsArrowUp() || event.IsArrowRight())
+    {
+        int angle = (event.IsArrowUp() || event.IsArrowRight()) ? 1 : -1;
 
-    OnMemExtSetMaskNameRegSet(angle, Tables::Size() / 4);
+        OnMemExtSetMaskNameRegSet(angle, Tables::Size() / 4);
 
-    return true;
+        return true;
+    }
+
+    return false;
 }
 
 
