@@ -123,6 +123,10 @@ static bool HandlerKey_FFT_Cursors(const KeyEvent &event)
     return false;
 }
 
+DEF_PAGE_0(
+
+)
+
 DEF_PAGE_1( pCursors,                                                                                                                                    //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ ---
     "КУРСОРЫ", 
     "Включает курсоры для измерения параметров спектра",
