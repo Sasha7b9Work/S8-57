@@ -43,6 +43,8 @@ static void ReadRow(uint8 row);
 /// Выполняет функцию, определённую для выполнения после отрисовки
 static void ExecuteFuncAfterUpdateOnce();
 
+static void SaveScreenToFlash();
+
 
 void Display::Init()
 {
@@ -300,7 +302,7 @@ static void CreateFileName(char name[256])
 }
 
 
-void Display::SaveScreenToFlash()
+static void SaveScreenToFlash()
 {
     if(!needSaveScreen)
     {
