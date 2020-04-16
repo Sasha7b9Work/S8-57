@@ -37,9 +37,7 @@ static bool inStateDraw = false;
 
 static pFuncVV funcAfterUpdateOnce = EmptyFunc;
 
-static int numRow = -1;
-
-static void ReadRow(uint8 row);
+static void ReadRow(uint8 row, uint8 pixels[320]);
 /// Выполняет функцию, определённую для выполнения после отрисовки
 static void ExecuteFuncAfterUpdateOnce();
 
@@ -412,11 +410,9 @@ static void SaveScreenToFlash()
 
     uint8 pixels[320];
 
-    DDecoder::SetBufferForScreenRow(pixels);
-
     for (int row = 239; row >= 0; row--)
     {
-        ReadRow(static_cast<uint8>(row));
+        ReadRow(static_cast<uint8>(row), pixels);
 
         FDrive::WriteToFile(pixels, 320, &structForWrite);
     }
@@ -431,23 +427,20 @@ static void SaveScreenToFlash()
 }
 
 
-static void ReadRow(uint8 row)
+static void ReadRow(uint8 row, uint8 pixels[320])
 {
-    numRow = -1;
+    while(DDecoder::Update())                       // Обрабатываем данные, которые приняты на данный момент
+    {
+    }
 
     HAL_BUS::Panel::Send(Command::Screen, row);
 
-    while (numRow == -1)
+    while(DDecoder::BytesInBuffer() < 322)          // Ожидаем, пока панель пришлёт запрошенные байты
     {
         HAL_BUS::Panel::Receive();
-        DDecoder::Update();
     }
-}
 
-
-void Display::SaveRow(int row)
-{
-    numRow = row;
+    std::memcpy(pixels, DDecoder::Buffer() + 2, 320);
 }
 
 

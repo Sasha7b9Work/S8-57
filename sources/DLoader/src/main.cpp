@@ -38,7 +38,7 @@ int main()
 
     FDrive::Init();
 
-    FDrive::AttemptUpdate();
+    //FDrive::AttemptUpdate();
     
     Timer::Disable(kTemp);
 

@@ -9,11 +9,22 @@
 #include <cstdlib>
 
 
-int      DDecoder::pointer = 0;
-pFuncBU8 DDecoder::curFunc = nullptr;
-uint8   *DDecoder::pixels = nullptr;
-int      DDecoder::step = 0;
-uint8    DDecoder::buffer[DDecoder::SIZE_BUFFER];
+static int pointer = 0;
+static pFuncBU8 curFunc = nullptr;  // Выполняемая функция
+static int step = 0;                // Текущий байт выполняемой функции
+static const int SIZE_BUFFER = 1024;
+static uint8 buffer[SIZE_BUFFER];
+
+
+static void RunStep(uint8 data);
+
+// Эту функцию надо вызывать после выполнения последнего шага
+static void FinishCommand();
+
+// Добавляет текстовую строку в консоль
+static bool AddToConsole(uint8);
+
+static bool ButtonPress(uint8);
 
 
 void DDecoder::AddData(uint8 data)
@@ -25,8 +36,10 @@ void DDecoder::AddData(uint8 data)
 }
 
 
-void DDecoder::Update()
+bool DDecoder::Update()
 {
+    bool result = (pointer != 0);
+
     if (pointer)
     {
         for (int i = 0; i < pointer; i++)
@@ -35,16 +48,18 @@ void DDecoder::Update()
         }
         pointer = 0;
     }
+
+    return result;
 }
 
 
-static bool EmptyFunc(uint8)
+static bool E(uint8)
 {
     return true;
 }
 
 
-void DDecoder::RunStep(uint8 data)
+static void RunStep(uint8 data)
 {
     static const struct StructFunc
     {
@@ -53,27 +68,27 @@ void DDecoder::RunStep(uint8 data)
     }
     commands[Command::Count] =
     {
-        EmptyFunc,      // None,
+        E,              // None,
         ButtonPress,    // ButtonPress,
-        EmptyFunc,      // Paint_BeginScene,
-        EmptyFunc,      // Paint_EndScene,
-        EmptyFunc,      // Paint_SetColor,
-        EmptyFunc,      // Paint_FillRegion,
-        EmptyFunc,      // Paint_DrawText,
-        EmptyFunc,      // Paint_SetPalette,
-        EmptyFunc,      // Paint_DrawRectangle,
-        EmptyFunc,      // Paint_DrawVLine,
-        EmptyFunc,      // Paint_DrawHLine,
-        EmptyFunc,      // Paint_SetFont,
-        EmptyFunc,      // Paint_SetPoint,
-        EmptyFunc,      // Paint_DrawLine,
-        EmptyFunc,      // Paint_TesterLines,
-        EmptyFunc,      // Paint_DrawBigText,
-        FuncScreen,     // Screen
-        EmptyFunc,      // Paint_VPointLine
-        EmptyFunc,      // Paint_HPointLine
-        EmptyFunc,      // Paint_SetMonoSpaceFont
-        EmptyFunc,      // Paint_SetTextSpacing
+        E,              // Paint_BeginScene,
+        E,              // Paint_EndScene,
+        E,              // Paint_SetColor,
+        E,              // Paint_FillRegion,
+        E,              // Paint_DrawText,
+        E,              // Paint_SetPalette,
+        E,              // Paint_DrawRectangle,
+        E,              // Paint_DrawVLine,
+        E,              // Paint_DrawHLine,
+        E,              // Paint_SetFont,
+        E,              // Paint_SetPoint,
+        E,              // Paint_DrawLine,
+        E,              // Paint_TesterLines,
+        E,              // Paint_DrawBigText,
+        E,              // Screen
+        E,              // Paint_VPointLine
+        E,              // Paint_HPointLine
+        E,              // Paint_SetMonoSpaceFont
+        E,              // Paint_SetTextSpacing
         AddToConsole    // AddToConsole
     };
 
@@ -108,7 +123,7 @@ void DDecoder::RunStep(uint8 data)
 }
 
 
-bool DDecoder::ButtonPress(uint8 data)
+static bool ButtonPress(uint8 data)
 {
     static Key::E button;
     if (step == 0)
@@ -129,19 +144,7 @@ bool DDecoder::ButtonPress(uint8 data)
 }
 
 
-void DDecoder::SetBufferForScreenRow(uint8 *_pixels)
-{
-    pixels = _pixels;
-}
-
-
-bool DDecoder::FuncScreen(uint8)
-{
-    return true;
-}
-
-
-bool DDecoder::AddToConsole(uint8 data)
+static bool AddToConsole(uint8 data)
 {
     static char *text = nullptr;        // Здесь будет храниться принятая строка
 
@@ -173,8 +176,20 @@ bool DDecoder::AddToConsole(uint8 data)
 }
 
 
-void DDecoder::FinishCommand()
+static void FinishCommand()
 {
     step = 0;
     curFunc = 0;
+}
+
+
+int DDecoder::BytesInBuffer()
+{
+    return pointer;
+}
+
+
+uint8 *DDecoder::Buffer()
+{
+    return buffer;
 }

@@ -19,7 +19,7 @@ static int step = 0;
 /// Обработка запроса на изображение экрана
 static bool FuncScreen(uint8);
 
-static bool EmptyFunc(uint8) { return true; }
+static bool E(uint8) { return true; }
 
 static bool InButtonPress(uint8);
 
@@ -71,7 +71,7 @@ void PDecoder::AddData(uint8 data)
     }
     command[Command::Count] =
     {
-        EmptyFunc,
+        E,
         InButtonPress,
         BeginScene,
         EndScene,
@@ -92,7 +92,7 @@ void PDecoder::AddData(uint8 data)
         DrawHPointLine,
         SetMinWidthFont,
         SetTextSpacing,
-        EmptyFunc
+        E
     };
 
     if (step == 0)

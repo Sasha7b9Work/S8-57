@@ -65,8 +65,6 @@ struct Display
 
     static void SaveScreenToDrive();
 
-    static void SaveRow(int row);
-
     static void LoadBrightness();
 
     struct Message
