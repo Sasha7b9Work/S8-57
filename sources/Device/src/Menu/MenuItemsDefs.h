@@ -124,10 +124,10 @@ static const DataItem di##name = { TypeItem::GovernorColor, title, hint, keeper,
 static const GraphButton name(&di##name);
 
 
-#define DEF_PAGE_0(name, namePage, keeper, funcOpenClose, funcBeforeDraw, funcArrows)                                                                                                       \
+#define DEF_PAGE_0(name, title, namePage, keeper, normalTitle, funcOpenClose, funcBeforeDraw, funcArrows)                                                                                                       \
 static const Item * const i##name[] = { nullptr };                                                                                                                                          \
-static const DataPage dp##name = { namePage, i##name, "", funcOpenClose, funcBeforeDraw, funcArrows };                                                                                      \
-static const DataItem di##name = { TypeItem::Page, title, hint, keeper, Item::Active, &dp##name };                                                                                          \
+static const DataPage dp##name = { namePage, i##name, normalTitle, funcOpenClose, funcBeforeDraw, funcArrows };                                                                             \
+static const DataItem di##name = { TypeItem::Page, title, "", keeper, Item::Active, &dp##name };                                                                                            \
 static const Page name(&di##name);
 
 #define DEF_PAGE_1(name, title, hint, item1, namePage, keeper, funcActive, normalTitle, funcOpenClose, funcBeforeDraw, funcArrows)                                                          \

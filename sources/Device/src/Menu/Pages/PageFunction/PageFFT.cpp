@@ -1,8 +1,10 @@
 #include "defines.h"
-#include "Settings/Settings.h"
 #include "Display/Painter.h"
+#include "Display/Primitives.h"
 #include "Hardware/Beeper.h"
 #include "Menu/Pages/Include/PageFunction.h"
+#include "Settings/Settings.h"
+
 
 
 ScaleFFT::E &ScaleFFT::Ref()
@@ -88,23 +90,6 @@ DEF_CHOICE_3( cRange,                                                           
 )
 
 
-static void OnPress_Cursors_Source()
-{
-    set.fft.cursor = static_cast<uint8>((set.fft.cursor + 1) % 2);
-}
-
-static void Draw_Cursors_Source(int x, int y)
-{
-    String((set.fft.cursor == 0) ? "1" : "2").Draw(x + 7, y + 5);
-}
-
-DEF_GRAPH_BUTTON( bCursors_Source,                                                                                                            //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ - Источник ---
-    "Источник",
-    "Выбор источника для расчёта спектра",
-    &PageFFT::Cursors::self, Item::Active, OnPress_Cursors_Source, Draw_Cursors_Source
-)
-
-
 static bool HandlerKey_FFT_Cursors(const KeyEvent &event)
 {
     if (event.IsArrow())
@@ -119,20 +104,34 @@ static bool HandlerKey_FFT_Cursors(const KeyEvent &event)
             return true;
         }
     }
+    else if(event.key == Key::F1 && event.IsRelease())
+    {
+        set.fft.cursor = static_cast<uint8>((set.fft.cursor + 1) % 2);
+        return true;
+    }
 
     return false;
 }
 
-DEF_PAGE_0( pCursors, PageName::FFT_Cursors
+static bool ShowTitle()
+{
+    return false;
+}
 
+
+static void OnCursors_BeforeDraw()
+{
+    Region(60, 20).DrawBounded(0, 219, Color::BACK, Color::FILL);
+
+    Text((set.fft.cursor == 0) ? "Курсор 1" : "Курсор 2").Draw(12, 224, Color::FILL);
+}
+
+
+DEF_PAGE_0( pCursors,
+    "КУРСОРЫ",
+    PageName::FFT_Cursors, &PageFFT::self, ShowTitle, Page::OpenClose, OnCursors_BeforeDraw, HandlerKey_FFT_Cursors
 )
 
-DEF_PAGE_1( pCursors,                                                                                                                                    //--- ФУНКЦИЯ - СПЕКТР - КУРСОРЫ ---
-    "КУРСОРЫ", 
-    "Включает курсоры для измерения параметров спектра",
-    &bCursors_Source,
-    PageName::FFT_Cursors, &PageFFT::self, IsActive_Parameter, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, HandlerKey_FFT_Cursors
-)
 
 const Page * const PageFFT::Cursors::self = static_cast<const Page *>(&pCursors);
 

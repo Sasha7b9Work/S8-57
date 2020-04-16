@@ -189,9 +189,6 @@ public:
     // true, если является вложенной подстраницей страницы parent
     bool IsSubPage(const Page *parent);
 
-    // Возвращает true, если page принадлежит 
-    static bool IsSubPage(PageName::E page, PageName::E parent);
-    
     // Обработка события кнопки
     virtual bool HandlerKey(const KeyEvent &event);
     

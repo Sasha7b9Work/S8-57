@@ -175,9 +175,9 @@ void DisplayOsci::PainterData::DrawSpectrum()
     {
         uint numPoints = DS->BytesInChannel();
     
-        if (numPoints > 2048)       /// \todo Пока 8к и более не хочет считать
+        if (numPoints > 1024)       /// \todo Пока 8к и более не хочет считать
         {
-            numPoints = 2048;
+            numPoints = 1024;
         }
     
         if (SourceFFT::IsA())

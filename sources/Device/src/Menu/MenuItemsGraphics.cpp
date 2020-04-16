@@ -343,6 +343,11 @@ void Page::DrawTitle(int y) const
 
 void Page::DrawItems(int x, int y) const
 {
+    if(NumItems() == 0)
+    {
+        return;
+    }
+
     for (int i = 0; i < 5; i++)
     {
         Rectangle(Width(i) - 1, Height()).Draw(x, y + 1, ColorFrame());
