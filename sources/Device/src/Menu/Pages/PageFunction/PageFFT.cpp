@@ -123,7 +123,7 @@ static bool HandlerKey_FFT_Cursors(const KeyEvent &event)
     return false;
 }
 
-DEF_PAGE_0(
+DEF_PAGE_0( pCursors, PageName::FFT_Cursors
 
 )
 
