@@ -33,7 +33,7 @@ DEF_CHOICE_2(cModeBtnMemory,                                                    
     "",
     "Меню",
     "Сохранение",
-    ModeBtnMemory::Ref(), &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.mem.modeBtnMemory, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

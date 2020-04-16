@@ -17,12 +17,6 @@ TypeSignalROM::E &TypeSignalROM::Ref()
 }
 
 
-ModeBtnMemory::E &ModeBtnMemory::Ref()
-{
-    return set.mem.modeBtnMemory;
-}
-
-
 ModeWork::E &ModeWork::Ref()
 {
     return set.mem.modeWork;
