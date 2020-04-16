@@ -29,4 +29,7 @@ private:
     int iFront;
     /// Индекс элемента за последним
     int iBack;
+
+    // Размер единократно выделяемой памяти
+    static const int sizeChunk = 128;
 };
