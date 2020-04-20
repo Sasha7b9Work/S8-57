@@ -10,9 +10,9 @@ static uint timePrev;
 static uint timeCounter;
 static uint timeStartCounter;
 
-/// Время старта профилировщика
+// Время старта профилировщика
 volatile static uint timeStartMS = 0;
-/// Время предыдущей точки профилировщика
+// Время предыдущей точки профилировщика
 volatile static uint timePrevMS = 0;
 
 const char *Debug::file[10] = { 0 };

@@ -16,7 +16,7 @@
 #include "Utils/Values.h"
 
 
-/// Нарисовать одну ячейчку памяти
+// Нарисовать одну ячейчку памяти
 static void DrawMemoryCell(int num, bool exist);
 
 static bool HandlerKey_ROM(const KeyEvent &event);

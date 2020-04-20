@@ -140,7 +140,7 @@ const float TShift::absStep[TBase::Count] =
 
 ///< Нужно ли рисовать горизонтальную линию уровня смещения уровня синхронизации.
 static bool needDraw = false;
-/// Установленное в true значение означает, что нужно выводить значок синхроимпульса
+// Установленное в true значение означает, что нужно выводить значок синхроимпульса
 bool Trig::pulse = false;
 
 
@@ -196,7 +196,7 @@ void TBase::Change(int delta)
 
 pString TBase::ToString()
 {
-    /// Структура для описания диапазона масштаба по времени.
+    // Структура для описания диапазона масштаба по времени.
     static const struct StructTBase
     {
         const char *name;    // Название диапазона в текстовом виде, пригодном для вывода на экран.
@@ -464,7 +464,7 @@ pString Chan::Name() const
 
 void TrigLevel::Load() const
 {
-    /// \todo Здесь много лишних движений. Нужно что-то сделать с вводом SET_TRIGLEV_SOURCE
+    // \todo Здесь много лишних движений. Нужно что-то сделать с вводом SET_TRIGLEV_SOURCE
     uint16 value = static_cast<uint16>(HARDWARE_ZERO - TrigLevel(ch).Value());
 
     Osci::InputController::Write(PIN_SPI3_CS1, static_cast<uint16>(0xa000 | (value << 2)));

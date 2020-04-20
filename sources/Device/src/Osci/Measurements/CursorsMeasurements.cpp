@@ -9,9 +9,9 @@
 #include <cmath>
 
 
-/// Нарисовать вертикальный курсор
+// Нарисовать вертикальный курсор
 static void DrawVertical(int x, int yTearing);
-/// Нарисовать горизонтальный курсор
+// Нарисовать горизонтальный курсор
 static void DrawHorizontal(int y, int xTearing);
 
 static void UpdateCursorsForLook();
@@ -168,7 +168,7 @@ static void UpdateCursorsForLook()
 
 String CursorsMeasurements::PercentsU(Chan::E source)
 {
-    /// \todo Тут дикая дичь. Эта строчка вызывает HardFault. Возможно, из-за включенного выравнивания Settings. Надо подумать
+    // \todo Тут дикая дичь. Эта строчка вызывает HardFault. Возможно, из-за включенного выравнивания Settings. Надо подумать
     // float dPerc = dUperc(source);     
     float dPerc = 100.0F;
     std::memcpy(&dPerc, &set.curs.deltaU100percents[source], sizeof(float));

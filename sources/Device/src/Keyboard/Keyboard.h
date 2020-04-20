@@ -47,7 +47,7 @@ struct Key
     explicit Key(E v = None) : value(v) {};
     bool IsFunctional() const { return value >= F1 && value <= F5; };
     bool IsArrow() const { return value >= Left && value <= Down; };
-    /// Возвращает true, если кнопка управляет параметром сигнала - развёрткой там, смещением
+    // Возвращает true, если кнопка управляет параметром сигнала - развёрткой там, смещением
     bool IsControlSignal() const;
     pString Name();
 };
@@ -79,10 +79,10 @@ struct KeyEvent
     explicit KeyEvent(Key::E k = Key::None, TypePress::E t = TypePress::None) : key(k), type(t) { };
     Key::E key;
     TypePress::E type;
-    /// Возвращает true, если кнопка означает увеличение
+    // Возвращает true, если кнопка означает увеличение
     bool IsIncrease() const { return key == Key::Up || key == Key::Right; }
     bool IsDecrease() const { return key == Key::Down || key == Key::Left; }
-    /// Возвращает 1, если кнопка означает увеличение, и -1 в обратном случае
+    // Возвращает 1, если кнопка означает увеличение, и -1 в обратном случае
     int Delta() const { return IsIncrease() ? 1 : -1; }
     
     bool IsArrowLeft() const { return key == Key::Left; };
@@ -101,12 +101,12 @@ struct KeyEvent
 
 struct Keyboard
 {
-    /// Заблокировать клавиатуру. Будут разрешены только кнопки из массива keys, заканчивающегося нулём
+    // Заблокировать клавиатуру. Будут разрешены только кнопки из массива keys, заканчивающегося нулём
     static void Lock(const Key::E * const keys);
-    /// Разблокировать клавиатуру
+    // Разблокировать клавиатуру
     static void Unlock();
-    /// Возвращает true, если кнопка не заблокирована
+    // Возвращает true, если кнопка не заблокирована
     static bool KeyIsActive(Key::E key);
-    /// Возвращает количество миллисекнуд, прошедших после нажатия последней кнопки
+    // Возвращает количество миллисекнуд, прошедших после нажатия последней кнопки
     static uint TimeAfterControlMS();
 };

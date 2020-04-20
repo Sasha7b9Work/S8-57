@@ -34,7 +34,7 @@ void HAL_PCD_SetupStageCallback(PCD_HandleTypeDef *hpcd)
             {                                                       //
                 VCP::connectedToUSB = false;                        //
                 Settings::Save();                                   // ѕри отконнекчивании сохран€ем настройки
-            }                                                       /// \todo ¬озможно, это не нужно делать
+            }                                                       // \todo ¬озможно, это не нужно делать
             //CONNECTED_TO_USB = prevLength != 0;                   // 
         }                                                           //
     }                                                               //
@@ -53,7 +53,7 @@ void HAL_PCD_DataInStageCallback(PCD_HandleTypeDef *hpcd, uint8_t epnum)
 {
     USBD_LL_DataInStage((USBD_HandleTypeDef *)hpcd->pData, epnum, hpcd->IN_ep[epnum].xfer_buff);
     
-    /// \todo здесь оказываем€ после каждой передачи пакета. ћожно отловить момент, когда передача закончена.
+    // \todo здесь оказываем€ после каждой передачи пакета. ћожно отловить момент, когда передача закончена.
 }
 
 

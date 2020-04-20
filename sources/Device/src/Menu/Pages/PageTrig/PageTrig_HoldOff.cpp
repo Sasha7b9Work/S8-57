@@ -34,7 +34,7 @@ DEF_GOVERNOR( gDuration,                                                        
     set.trig.holdOff, 10, 32000, &PageTrig::HoldOff::self, Item::Active, OnChanged_Duration
 )
 
-/// \todo gDuration должен обеспечивать возможность хранения большего значения, чем 32000
+// \todo gDuration должен обеспечивать возможность хранения большего значения, чем 32000
 
 
 

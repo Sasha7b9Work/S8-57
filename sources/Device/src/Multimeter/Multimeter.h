@@ -4,7 +4,7 @@
 struct DisplayMultimeter
 {
     static void Update();
-    /// Через эту функцию поступает измерение от прибора
+    // Через эту функцию поступает измерение от прибора
     static void SetMeasure(const uint8 buffer[13]);
 
     static void ChangedMode();
@@ -13,22 +13,22 @@ struct DisplayMultimeter
 
 struct Multimeter
 {
-    /// Инициализация
+    // Инициализация
     static void Init();
 
     static void DeInit();
 
     static void Update();
-    /// Сообщает мультиметру, что произошло изменение режима и нужно дождаться результата измерения перед выводом
+    // Сообщает мультиметру, что произошло изменение режима и нужно дождаться результата измерения перед выводом
     static void ChangeMode();
 
     static void Calibrate(int calibr);
 
     static void ChangeAVP();
-    /// Если (zero != 0) - заслать режим нуля
+    // Если (zero != 0) - заслать режим нуля
     static void LoadZero(int zero);
 
-    /// АВП - автовыбор предела
+    // АВП - автовыбор предела
     struct AVP
     {
         enum E
@@ -41,7 +41,7 @@ struct Multimeter
         static bool IsEnabled() { return Ref() == On; }
     };
 
-    /// Режим измерений мультиметра
+    // Режим измерений мультиметра
     struct Measure
     {
         enum E
@@ -63,7 +63,7 @@ struct Multimeter
             static const char symbols[Count] = { 'U', 'V', 'I', 'J', 'R', 'Y', 'W' };
             return symbols[Ref()]; //-V2006
         }
-        /// Получить код измерения из принятого буфера
+        // Получить код измерения из принятого буфера
         static Measure::E GetCode(const char buffer[13]);
         static bool IsVoltageDC()  { return Ref() == VoltageDC;  }
         static bool IsVoltageAC()  { return Ref() == VoltageAC;  }
@@ -74,7 +74,7 @@ struct Multimeter
         static bool IsBell()       { return Ref() == Bell;       }
     };
 
-    /// Предел имзерения постоянного напряжения
+    // Предел имзерения постоянного напряжения
     struct RangeDC
     {
         enum E
@@ -87,7 +87,7 @@ struct Multimeter
         operator RangeDC::E() { return Ref(); }
     };
 
-    /// Предел измерения переменного напряжения
+    // Предел измерения переменного напряжения
     struct RangeAC
     {
         enum E
@@ -100,7 +100,7 @@ struct Multimeter
         operator RangeAC::E() { return Ref(); }
     };
 
-    /// Предел измерения переменного тока
+    // Предел измерения переменного тока
     struct RangeCurrentAC
     {
         enum E
@@ -112,7 +112,7 @@ struct Multimeter
         operator RangeCurrentAC::E() { return Ref(); }
     };
 
-    /// Предел измерения постоянного тока
+    // Предел измерения постоянного тока
     struct RangeCurrentDC
     {
         enum E
@@ -124,7 +124,7 @@ struct Multimeter
         operator RangeCurrentDC::E() { return Ref(); }
     };
 
-    /// Предел измерения сопротивленя постоянному току
+    // Предел измерения сопротивленя постоянному току
     struct RangeResistance
     {
         enum E

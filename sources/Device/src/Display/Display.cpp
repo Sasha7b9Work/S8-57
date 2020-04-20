@@ -28,14 +28,14 @@ static pFuncVV funcOnHand = nullptr;
 static uint timeStart = 0;
 static const char *textWait = 0;
 static bool clearBackground = false;
-/// Дополнительная функция рисования. Выполняется после стандартной отрисовки, но перед вызовом EndScene;
+// Дополнительная функция рисования. Выполняется после стандартной отрисовки, но перед вызовом EndScene;
 volatile static pFuncVV funcAdditionDraw = EmptyFunc;
-/// true означает, что происходит процесс отрисовки
+// true означает, что происходит процесс отрисовки
 static bool inStateDraw = false;
 
 static pFuncVV funcAfterUpdateOnce = EmptyFunc;
 
-/// Выполняет функцию, определённую для выполнения после отрисовки
+// Выполняет функцию, определённую для выполнения после отрисовки
 static void ExecuteFuncAfterUpdateOnce();
 
 

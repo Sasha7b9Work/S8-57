@@ -17,9 +17,9 @@
 #endif
 
 
-/// Возвращает false, если выбор невозможен - строка кончилась.
+// Возвращает false, если выбор невозможен - строка кончилась.
 static bool ChooseSymbols(const char **string);
-/// Возвращает false, если выбор невозможен - строка кончилась.
+// Возвращает false, если выбор невозможен - строка кончилась.
 static bool ChooseSpaces(const char **string);
 
 

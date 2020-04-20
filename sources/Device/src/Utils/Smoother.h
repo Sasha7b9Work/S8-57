@@ -3,11 +3,11 @@
 #include <cstring>
 
 
-/// Специальный класс для сглаживающего фильтра
+// Специальный класс для сглаживающего фильтра
 class Smoother
 {
 public:
-    /// Сгладить данные in и положить их в out
+    // Сгладить данные in и положить их в out
     static void Run(const uint8 *in, uint8 *out, uint numBytes, uint _numSmooth)
     {
         numSmooth = _numSmooth;
@@ -27,7 +27,7 @@ public:
         }
     }
 private:
-    /// Рассчитывает одну сглаженную точку
+    // Рассчитывает одну сглаженную точку
     static uint8 CalculatePoint(int index)
     {
         uint sum = 0U;          // Здесь будет храниться сумма

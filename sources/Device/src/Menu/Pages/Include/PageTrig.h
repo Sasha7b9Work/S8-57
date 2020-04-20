@@ -38,7 +38,7 @@ struct TrigInput
     TrigInput() {};
     static TrigInput::E &Ref();
     operator TrigInput::E() { return Ref(); }
-    /// Установить в соотвествующие положения выводы, отвечающие за источник и вход синхронизации
+    // Установить в соотвествующие положения выводы, отвечающие за источник и вход синхронизации
     static void Load();
 };
 
@@ -55,7 +55,7 @@ struct TrigPolarity
     operator TrigPolarity::E() { return Ref(); }
 };
 
-/// Режим запуска.
+// Режим запуска.
 struct TrigStartMode
 {
     enum E
@@ -83,7 +83,7 @@ struct SettingsTrig
     int16            level[Chan::Count];
     TrigStartMode::E startMode;         ///< Режим запуска.
     TrigModeFind::E  modeFind;          ///< Поиск синхронизации - вручную или автоматически.
-                                        /// \todo разрядности trig_holdOff недостаточно
+                                        // \todo разрядности trig_holdOff недостаточно
     int16            holdOff;           ///< Удержание синхронизации
     bool             holdOffEnabled;    ///< Включение удержания синхронизации
 };

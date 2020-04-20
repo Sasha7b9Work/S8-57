@@ -17,10 +17,10 @@ struct PageHelpContent
     TypePageHelp       type;
     uint8              notUsed[3];
     void              *parent;              ///< Адрес родительской страницы
-    /// \todo избавиться от этого рудимента
+    // \todo избавиться от этого рудимента
     //pFuncBV            funcNotUsed;         ///< Оставлено для соместимости с типом Page - нужно для отрисовки.
     const char * const titleHint[2];        ///< \brief Название страницы на русском и английском языке, а затем содержимое на русском и английском 
-                                            /// (для случая TypePage_Description)
+                                            // (для случая TypePage_Description)
     void              *pages[MAX_PAGES];    ///< Массив содержит адреса ссылаемых страниц в случае TypePage_Content
     pString Title() const
     {

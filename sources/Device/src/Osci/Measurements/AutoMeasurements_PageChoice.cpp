@@ -7,7 +7,7 @@
 
 
 static bool isActive = false;
-/// Позиция курсора
+// Позиция курсора
 static int8 posCursor = 0;
 
 

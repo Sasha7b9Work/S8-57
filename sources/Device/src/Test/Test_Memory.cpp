@@ -19,7 +19,7 @@ struct TestMemoryStruct
 
 
 static void PrepareDS(DataSettings *ds);
-/// Создаёт данные в RAM под индексом "0"
+// Создаёт данные в RAM под индексом "0"
 static DataSettings *CreateDataInRAM(DataSettings *ds);
 
 

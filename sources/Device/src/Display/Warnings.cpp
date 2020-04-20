@@ -10,9 +10,9 @@
 Queue<WarningStruct> warnings;
 
 
-/// Удалить предупреждения с истёкшим времени жизни
+// Удалить предупреждения с истёкшим времени жизни
 static void RemoveOld();
-/// Возвращает true, 
+// Возвращает true, 
 static bool BackMessagesSame();
 
 static void DrawMessages();

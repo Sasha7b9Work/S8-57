@@ -24,19 +24,19 @@ struct Separator
 };
 
 
-/// Ќаписать параметры вертикального тракта заданного канала
+// Ќаписать параметры вертикального тракта заданного канала
 static void WriteTextVoltage(Chan::E ch, int x, int y);
 
 static void WriteStringAndNumber(const char *text, int x, int y, int number);
 
 static void DrawTime(int x, int y);
-/// Ќарисовать разделительные линии
+// Ќарисовать разделительные линии
 static void DrawSeparators();
-/// «аписывает главные параметры в указанную позицию. ¬озвращает х-координату правого верхнего угла выведенного изображени€
+// «аписывает главные параметры в указанную позицию. ¬озвращает х-координату правого верхнего угла выведенного изображени€
 static int DrawMainParameters(int x, int y);
 
 static void WriteCursors();
-/// Ќарисовать значок пикового детектора
+// Ќарисовать значок пикового детектора
 static void DrawPeakDet(int x, int y);
 
 

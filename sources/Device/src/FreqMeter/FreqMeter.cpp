@@ -12,8 +12,8 @@
 #include <cstring>
 
 
-/// для отладки
-/// \todo удалить
+// для отладки
+// \todo удалить
 static BitSet32 lastFreq;
 static BitSet32 lastPeriod;
 

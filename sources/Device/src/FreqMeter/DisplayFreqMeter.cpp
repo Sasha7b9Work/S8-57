@@ -39,7 +39,7 @@ static void WriteStackToBuffer(Stack<uint> *stack, int point, const char *suffix
 
 void DisplayFreqMeter::Draw()
 {
-    /// \todo В этой строке точку ставить не где придётся, а в той позиции, где она стояла последний раз
+    // \todo В этой строке точку ставить не где придётся, а в той позиции, где она стояла последний раз
 
     if(!set.freq.enabled)
     {
@@ -240,7 +240,7 @@ static pString FreqSetToString(const BitSet32 *fr)
 
     uint giverFreq = freq;
 
-    /// Это герцы * 10
+    // Это герцы * 10
 #define _10Hz   (               100) /* E_2 */
 #define _100Hz  (              1000) /* E_3 */
 #define _1kHz   (         10 * 1000) /* E_4 */

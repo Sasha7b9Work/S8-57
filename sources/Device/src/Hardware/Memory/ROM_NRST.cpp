@@ -24,7 +24,7 @@ struct Packet
     uint End()   { return reinterpret_cast<uint>(Next()); }
     // Возвращает true, если в пакете нет данных (пакет находится за последним записанным пакетом)
     bool IsEmpty() const;
-    /// Попытка записать в пакет структуру с данными
+    // Попытка записать в пакет структуру с данными
     bool SaveSettings(SettingsNRST *nrst);
 };
 
@@ -37,7 +37,7 @@ struct SectorNRST
     Packet *CreatePacket() const;
     // Возвращает указатель на последний записанный в секторе пакет
     Packet *LastPacket() const;
-    /// Попытка записать в сектор структуру с данными
+    // Попытка записать в сектор структуру с данными
     bool SaveSettings(SettingsNRST *) const;
 
     const Sector &sector;

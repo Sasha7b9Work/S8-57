@@ -2,7 +2,7 @@
 #include "Menu/MenuItems.h"
 
 
-/// Делитель.
+// Делитель.
 struct Divider
 {
     enum E

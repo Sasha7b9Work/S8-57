@@ -44,9 +44,9 @@ struct HAL_RTC
 struct HAL_ADC1
 {
     static void Init();
-    /// Читает АЦП батареи
+    // Читает АЦП батареи
     static uint ReadValueAKK();
-    /// Читает АЦП зарядного устройства
+    // Читает АЦП зарядного устройства
     static uint ReadValuePOW();
 private:
     static void SetActiveChannel2();
@@ -89,7 +89,7 @@ struct HAL_DAC2
 struct HAL_BUS
 {
     static void Init();
-    /// Конфигурировать для работы по шине FSMC с альтерой и памятью
+    // Конфигурировать для работы по шине FSMC с альтерой и памятью
     static void ConfigureToFSMC();
 
     struct Panel
@@ -107,17 +107,17 @@ struct HAL_BUS
         static void Write8(uint8 *address, uint8 value);
         static void Write16(uint8 *address, uint16 value);
         static uint8 Read(const uint8 *address);
-        /// Установить адрес для чтения данных
+        // Установить адрес для чтения данных
         static void SetAddrData(uint8 *address0, uint8 *address1 = nullptr);
-        /// Читать данные с установленного адреса
+        // Читать данные с установленного адреса
         static uint8 ReadA0();
         static uint8 ReadA1();
-        /// Возвращает растяжку для данного адреса
+        // Возвращает растяжку для данного адреса
         static float GetStretch(const uint8 *address);
     private:
-        /// Первый адрес чтения данных
+        // Первый адрес чтения данных
         static uint8 *addrData0;
-        /// Второй адрес чтения данных
+        // Второй адрес чтения данных
         static uint8 *addrData1;
     };
 
@@ -134,9 +134,9 @@ struct HAL_BUS
     static Mode::E mode;
 
 private:
-    /// Настроить FSMC для работы с внешней RAM
+    // Настроить FSMC для работы с внешней RAM
     static void InitRAM();
-    /// Инициализация пинов панели, которые не изменяют свой режим во время всей работы программы
+    // Инициализация пинов панели, которые не изменяют свой режим во время всей работы программы
     static void InitPanel();
 };
 
@@ -168,7 +168,7 @@ struct HAL_NVIC
 
 struct HAL_OTP
 {
-    /// Возвращает число свободных мест для записи. Если 0, то места в OTP уже не осталось.
+    // Возвращает число свободных мест для записи. Если 0, то места в OTP уже не осталось.
     static int GetSerialNumber(char buffer[17]);
     static bool SaveSerialNumber(char *servialNumber);
 };

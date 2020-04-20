@@ -118,7 +118,7 @@ public:
     bool    alreadyUsed;
     bool    notUsed;
 
-    /// Если forced == false, то инициализация происходит только при первом вызове функции
+    // Если forced == false, то инициализация происходит только при первом вызове функции
     void Init(bool forced);
     void SetBrightness(float brightness = -1.0F);
     void BrightnessChange(int delta);

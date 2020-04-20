@@ -87,7 +87,7 @@ class Time
 public:
 
     explicit Time(float v) : value(v) {};
-    /// ѕреобразует time секунд в текстовую строку
+    // ѕреобразует time секунд в текстовую строку
     char* ToStringAccuracy(bool alwaysSign,      ///< если true, знак показываетс€ даже если time > 0
                            char bufferOut[20],   ///< сюда записываетс€ возвращаемое значение
                            int numDigits         ///< количество цифр в строке

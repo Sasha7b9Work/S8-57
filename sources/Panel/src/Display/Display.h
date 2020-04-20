@@ -18,9 +18,9 @@ public:
     static void ToggleBuffers();
 
 private:
-    /// Экран
+    // Экран
     static uint8 *frontBuffer;
-    /// Задний буфер. В нём происходит отрисовка, и затем изображение копируется во frontBuffer
+    // Задний буфер. В нём происходит отрисовка, и затем изображение копируется во frontBuffer
     static uint8 *backBuffer;
 };
 

@@ -3,13 +3,13 @@
 #include "Osci/Measurements/Measures.h"
 
 
-/// Выводить автоматические измерения по каналу A
+// Выводить автоматические измерения по каналу A
 #define VIEW_MEASURES_A                 (ChanA.IsEnabled() && (MeasuresSource::IsA() || MeasuresSource::IsBoth()))
-/// Выводить автоматические измерения по каналу B
+// Выводить автоматические измерения по каналу B
 #define VIEW_MEASURES_B                 (ChanB.IsEnabled() && (MeasuresSource::IsB() || MeasuresSource::IsBoth()))
 
 
-/// Сколько автоматических измерений помещается на экран
+// Сколько автоматических измерений помещается на экран
 struct MeasuresOnDisplay
 {
     enum E
@@ -24,7 +24,7 @@ struct MeasuresOnDisplay
     };
     MeasuresOnDisplay() {};
     operator MeasuresOnDisplay::E();
-    /// Возвращает true, если измерения расположены вертикально с левой стороны экрана
+    // Возвращает true, если измерения расположены вертикально с левой стороны экрана
     static bool IsVertical();
 };
 
@@ -42,7 +42,7 @@ struct MeasuresSource
     static bool IsBoth();
 };
 
-/// Сжимать ли сигналы при выводе измерений.
+// Сжимать ли сигналы при выводе измерений.
 struct MeasuresModeViewSignals
 {
     enum E
@@ -67,7 +67,7 @@ struct SettingsAutoMeasures
 
 
 
-/// Режим слежения курсоров.
+// Режим слежения курсоров.
 struct CursorsLookMode
 {
     enum E
@@ -84,7 +84,7 @@ struct CursorsLookMode
     static bool IsBoth(Chan::E ch)    { return Ref(ch) == Both; }
 };
 
-/// Какие курсоры сейчас активны. Какие активны, те и будут перемещаться по вращению ручки УСТАНОВКА.
+// Какие курсоры сейчас активны. Какие активны, те и будут перемещаться по вращению ручки УСТАНОВКА.
 struct CursorsActive
 {
     enum E
@@ -110,7 +110,7 @@ struct CursorsSource
 };
 
 
-/// Каким курсором управлять
+// Каким курсором управлять
 struct CursorsControl
 {
     enum E
@@ -133,7 +133,7 @@ struct CursorsControl
     static bool IsEnabled2U() { return RefU(CursorsSource()) == _2 || RefU(CursorsSource()) == Both; }
 };
 
-/// Дискретность перемещения курсоров.
+// Дискретность перемещения курсоров.
 struct CursorsMovement
 {
     enum E
@@ -254,9 +254,9 @@ struct PageCursorsMeasures
         static void Draw_Channel(int x, int y);
 
         static void OnPress_Channel();
-        /// Выбрать следующий курсор
+        // Выбрать следующий курсор
         static void IncCursCntrlU(Chan::E ch);
-        /// Выбрать следующий курсор
+        // Выбрать следующий курсор
         static void IncCursCntrlT(Chan::E ch);
 
         static void OnPress_U();
@@ -264,26 +264,26 @@ struct PageCursorsMeasures
         static void OnPress_T();
 
         static void SetCursPos100(Chan::E ch);
-        /// Изменить значение позиции курсора напряжения на delta точек
+        // Изменить значение позиции курсора напряжения на delta точек
         static void SetShiftCursPosU(Chan::E ch, int numCur, float delta);
-        /// Изменить значение позиции курсора времени на delta точек
+        // Изменить значение позиции курсора времени на delta точек
         static void SetShiftCursPosT(Chan::E ch, int numCur, float delta);
 
         static bool HandlerKey(const KeyEvent &event);
 
         static void UpdateCursorsForLook();
-        /// Установить позицию курсора напряжения
+        // Установить позицию курсора напряжения
         static void SetCursorU(Chan::E ch, int numCur, float pos);
-        /// Установить позицию курсора времени
+        // Установить позицию курсора времени
         static void SetCursorT(Chan::E ch, int numCur, float pos);
-        /// Возвращает true, если вращение ручки УСТАНОВКА будет перемещать курсоры/курсоры
+        // Возвращает true, если вращение ручки УСТАНОВКА будет перемещать курсоры/курсоры
         static bool IsRegSetActiveOnCursors();
 
     private:
         static const float MAX_POS_U;
         static const float MAX_POS_T;
 
-        /// Установить источник курсорных измерений
+        // Установить источник курсорных измерений
         static void SetCursSource(Chan::E ch);
     };
 };

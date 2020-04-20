@@ -58,7 +58,7 @@ void HAL_BUS::Init()
         GPIO_AF12_FMC
     };
 
-    /// \todo Здесь не довеедно - не хотит, почему-то
+    // \todo Здесь не довеедно - не хотит, почему-то
 
     HAL_GPIO_Init(GPIOD, const_cast<GPIO_InitTypeDef *>(&isGPIO));
 

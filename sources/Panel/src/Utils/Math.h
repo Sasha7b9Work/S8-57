@@ -8,11 +8,11 @@
 class Math
 {
 public:
-    /// Возвращает максимальное значение из трёх
+    // Возвращает максимальное значение из трёх
     template<class T> static T    Max(T val1, T val2, T val3);
     
     template<class T> static bool IsEquals(T x, T y);
-    /// Обменивает местами содержимое памяти по адресам value0 и value1
+    // Обменивает местами содержимое памяти по адресам value0 и value1
     template<class T> static void Swap(T *value0, T *value1);
     
     template<class T> static int  Sign(T x);

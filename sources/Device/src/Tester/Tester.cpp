@@ -21,7 +21,7 @@ static bool enabled = false;
 
 static Settings oldSet = Settings::defaultSettings;
 
-static uint16 dataX[Tester::NUM_STEPS][TESTER_NUM_POINTS];  /// \todo Сделать так, чтобы при включении тестер-компонента необходимая память бралась из Heap.cpp
+static uint16 dataX[Tester::NUM_STEPS][TESTER_NUM_POINTS];  // \todo Сделать так, чтобы при включении тестер-компонента необходимая память бралась из Heap.cpp
 static uint8  dataY[Tester::NUM_STEPS][TESTER_NUM_POINTS];
 
 // Читать данные с ПЛИС

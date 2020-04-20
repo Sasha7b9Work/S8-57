@@ -98,7 +98,7 @@ void ADC_IRQHandler(void)
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 {
-    /// \todo временная затычка. Не в рандомизаторе эта функция вообще не должна вызываться
+    // \todo временная затычка. Не в рандомизаторе эта функция вообще не должна вызываться
 
     uint start = TIME_US;
 

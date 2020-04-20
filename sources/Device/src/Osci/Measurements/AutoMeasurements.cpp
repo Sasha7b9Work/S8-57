@@ -43,17 +43,17 @@ static float CalculateDelayPlus(Chan::E ch);
 static float CalculateDelayMinus(Chan::E ch);
 static float CalculatePhazaPlus(Chan::E ch);
 static float CalculatePhazaMinus(Chan::E ch);
-/// \brief Найти точку пересечения сигнала с горизонтальной линией, проведённой на уровне yLine. numItersection - порядковый номер пересечения, 
-/// начинается с 1. downToTop - если true, ищем пересечение сигнала со средней линией при прохождении из "-" в "+".
+// \brief Найти точку пересечения сигнала с горизонтальной линией, проведённой на уровне yLine. numItersection - порядковый номер пересечения, 
+// начинается с 1. downToTop - если true, ищем пересечение сигнала со средней линией при прохождении из "-" в "+".
 static float FindIntersectionWithHorLine(Chan::E ch, int numIntersection, bool downToUp, uint8 yLine);
-/// Делить val1 на val2. Возвращает nan, если результат неопределён
+// Делить val1 на val2. Возвращает nan, если результат неопределён
 static float Divide(float val1, float val2);
 
 static bool isSet = false;          ///< Если true, то сигнал назначен.
 
 static int firstByte = 0;
 static int lastByte = 0;
-/// Количество байт, по которым производятся расчёты
+// Количество байт, по которым производятся расчёты
 static int nBytes = 0;
 
 
@@ -126,7 +126,7 @@ static bool picIsCalculating[2] = {false, false};
 #define EXIT_IF_ERRORS_FLOAT(x, y)  if(isnan(x) || isnan(y))    return Float::ERROR;
 #define EXIT_IF_ERROR_INT(x)        if((x) == Integer::ERROR)   return Float::ERROR;
 
-/// Входной буфер данных канала ch
+// Входной буфер данных канала ch
 #define CHOICE_BUFFER (OUT(ch))
 
 
@@ -684,7 +684,7 @@ float CalculateTimeNarastaniya(Chan::E ch)   /** \todo Здесь, возможно, нужно ув
 
 
 
-float CalculateTimeSpada(Chan::E ch)        /// \todo Аналогично времени нарастания
+float CalculateTimeSpada(Chan::E ch)        // \todo Аналогично времени нарастания
 {
     float maxSteady = CalculateMaxSteadyRel(ch);
     float minSteady = CalculateMinSteadyRel(ch);

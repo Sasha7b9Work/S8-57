@@ -10,7 +10,7 @@
 
 
 static void DrawDataInRect(int x, int y, int width, int height, const uint8 *data, uint length);
-/// Нарисовать область экрана
+// Нарисовать область экрана
 static void DrawScreenArea();
 
 

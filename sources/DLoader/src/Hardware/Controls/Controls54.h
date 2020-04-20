@@ -57,7 +57,7 @@ typedef enum
     Direction_None      // вращение отсутствует
 } RegulatorDirection;
 
-///  оманды, принимаемые от панели
+//  оманды, принимаемые от панели
 typedef enum
 {
     C_None = 0,

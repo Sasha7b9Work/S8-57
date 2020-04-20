@@ -19,7 +19,7 @@ struct PageMultimeter
     static void Init();
 
     static void OnChanged_Mode(bool);
-    /// —юда поступают событи€ клавиатуры дл€ доступка к меню калибровки
+    // —юда поступают событи€ клавиатуры дл€ доступка к меню калибровки
     static void DecodePassword(const KeyEvent &event);
 
     static const Page *const self;

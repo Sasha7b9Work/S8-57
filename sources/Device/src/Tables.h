@@ -9,7 +9,7 @@ public:
     static ENumSignalsInSec::E ENumSignalsInSecToENUM(int numSignalsInSec);
     
     static pString Get(int index);
-    /// Выводит строку из таблицы symbolsAlphaBet
+    // Выводит строку из таблицы symbolsAlphaBet
     static void DrawStr(int index, int x, int y);
 
     static int Size();

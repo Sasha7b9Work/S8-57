@@ -43,9 +43,9 @@ public:
     explicit Color(uint8 val) : value(val) { }
     Color(const Color &color) : value(color.value) { }
 
-    /// Устанавливает текущий цвет отрисовки
+    // Устанавливает текущий цвет отрисовки
     void SetAsCurrent();
-    /// Возвращает текущий цвет отрисовки
+    // Возвращает текущий цвет отрисовки
     static Color GetCurent();
 
     static void Log(Color color);
@@ -57,7 +57,7 @@ public:
     uint8 value;
 
     static Color CHAN[4];
-    /// Переключить "мигающий" цвет. Если reset == true, сбрасывется на белый
+    // Переключить "мигающий" цвет. Если reset == true, сбрасывется на белый
     static void ChangeFlash(bool reset = false);
 
 private:

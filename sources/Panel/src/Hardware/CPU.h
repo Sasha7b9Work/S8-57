@@ -20,7 +20,7 @@ private:
 extern "C" {
 #endif
     
-    /// Timer.cpp
+    // Timer.cpp
     void TIM3_IRQHandler();
     
     void SysTick_Handler();

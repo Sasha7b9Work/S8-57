@@ -9,14 +9,14 @@
 
 
 typedef bool(*pFuncBU8)(uint8);
-/// Выполняемая функция
+// Выполняемая функция
 static pFuncBU8 curFunc;
-/// Текущий байт выполняемой функции
+// Текущий байт выполняемой функции
 static int step = 0;
 
 
 
-/// Обработка запроса на изображение экрана
+// Обработка запроса на изображение экрана
 static bool FuncScreen(uint8);
 
 static bool E(uint8) { return true; }
@@ -54,11 +54,11 @@ static bool DrawTesterPoints(uint8);
 static bool DrawVPointLine(uint8);
 
 static bool DrawHPointLine(uint8);
-/// Установка моноширинного вывода шрифта
+// Установка моноширинного вывода шрифта
 static bool SetMinWidthFont(uint8);
-/// Устанавливает расстояние между символами при выводе текста
+// Устанавливает расстояние между символами при выводе текста
 static bool SetTextSpacing(uint8);
-/// Эту функцию надо вызывать после выполнения последнего шага
+// Эту функцию надо вызывать после выполнения последнего шага
 static void FinishCommand();
 
 
@@ -145,9 +145,9 @@ static bool BeginScene(uint8)
 
 static bool DrawTesterPoints(uint8 data)
 {
-    /// Количество полных принятых иксов
+    // Количество полных принятых иксов
     static int numX = 0;
-    /// Количество принятых игреков
+    // Количество принятых игреков
     static int numY = 0;
     static Color color = Color::FILL;
     static uint8 mode = 0;

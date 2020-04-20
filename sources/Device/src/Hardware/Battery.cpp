@@ -7,9 +7,9 @@
 #include "Utils/Averager.h"
 
 
-/// Максимальное значение, которое возможно считать с АЦП
+// Максимальное значение, которое возможно считать с АЦП
 const float Battery::MAX_ADC_REL = static_cast<float>((1 << 12) - 1);
-/// Напряжение, соответствующее MAX_ADC_REL
+// Напряжение, соответствующее MAX_ADC_REL
 const float Battery::MAX_ADC_ABS = 2.91F;
 
 

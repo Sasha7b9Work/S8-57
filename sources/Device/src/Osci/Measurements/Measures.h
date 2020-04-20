@@ -45,11 +45,11 @@ public:
     TypeMeasure::E GetType();
 
     String GetStringMeasure(Chan::E ch, char *buffer, int lenBuf);
-    /// ”станавливает активным следующее или предыдущее измерение
+    // ”станавливает активным следующее или предыдущее измерение
     static void ChangeActive(int delta);
-    /// –ассчитать позицию курсора напр€жени€, соответствующю заданной позиции курсора posCurT
+    // –ассчитать позицию курсора напр€жени€, соответствующю заданной позиции курсора posCurT
     static float CalculateCursorU(Chan::E ch, float posCurT);
-    /// –ассчитать позицию курсора времени, соответствующую заданной позиции курсора напр€жени€ posCurU
+    // –ассчитать позицию курсора времени, соответствующую заданной позиции курсора напр€жени€ posCurU
     static float CalculateCursorT(Chan::E ch, float posCurU, int numCur);
 
     static void SetMarkerVoltage(Chan::E ch, int num, float value);
@@ -59,17 +59,17 @@ public:
     static char GetChar(TypeMeasure::E measure);
 
     static void ShortPressOnSmallButonMarker();
-    /// ¬озвращает true, если измерение активное - выбрано ручкой
+    // ¬озвращает true, если измерение активное - выбрано ручкой
     bool IsActive();
 
     String Name();
 
 private:
 
-    /// —делать активным
+    // —делать активным
     static void SetActive(int row, int col);
-    /// —трока в таблице, в которой находитс€ данное измерение
+    // —трока в таблице, в которой находитс€ данное измерение
     int row;
-    ///  олонка в таблице, в которой находитс€ данное измерение
+    //  олонка в таблице, в которой находитс€ данное измерение
     int col;
 };

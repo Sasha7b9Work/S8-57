@@ -11,7 +11,7 @@
 #include "Utils/Values.h"
 
 
-/// В таком массиве хранятся считанные точки тестер-компонента
+// В таком массиве хранятся считанные точки тестер-компонента
 typedef uint8 array8[Tester::NUM_STEPS][TESTER_NUM_POINTS];
 typedef uint16 array16[Tester::NUM_STEPS][TESTER_NUM_POINTS];
 

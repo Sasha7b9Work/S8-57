@@ -24,7 +24,7 @@ struct DataItem
 };
 
 
-/// Разные виды пунктов меню
+// Разные виды пунктов меню
 struct TypeItem
 {
     enum E
@@ -50,35 +50,35 @@ public:
     
     Item(const DataItem * const data = nullptr);
     virtual ~Item() { };
-    /// Количество пунктов меню, умещающиееся на экране
+    // Количество пунктов меню, умещающиееся на экране
     static const int NUM_ON_DISPLAY = 5;
-    /// Возвращает true, если кнопка, соответствующая элементу меню item, находится в нажатом положении
+    // Возвращает true, если кнопка, соответствующая элементу меню item, находится в нажатом положении
     bool IsPressed() const;
-    /// Сделать/разделать текущим
+    // Сделать/разделать текущим
     void SetCurrent(bool active) const;
-    /// Возвращает true, если элемент меню по адрему item открыт
+    // Возвращает true, если элемент меню по адрему item открыт
     bool IsOpened() const;
 
     void Open(bool open) const;
-    /// Возвращает название элемента, как оно выглядит на дисплее прибора
+    // Возвращает название элемента, как оно выглядит на дисплее прибора
     String Title() const;
-    /// Возвращает true, если контрол находится в активном состоянии (реагирует на органы управления)
+    // Возвращает true, если контрол находится в активном состоянии (реагирует на органы управления)
     bool IsActive() const { return data->funcActive(); };
 
     bool IsCurrentItem() const;
-    /// Возвращает адрес родителя
+    // Возвращает адрес родителя
     const Page *Keeper() const { return (data->keeper) ? *data->keeper : nullptr; }
-    /// Возвращает true, если в древе предков стоит keeper
+    // Возвращает true, если в древе предков стоит keeper
     bool ExistKeeper(const Page *keeper) const;
-    /// Имеет родителя - не является главной страницей меню
+    // Имеет родителя - не является главной страницей меню
     bool HaveParent() const { return Keeper() != nullptr; };
-    /// Позиция итема по горизонтали - закрытого либо раскрытого.
+    // Позиция итема по горизонтали - закрытого либо раскрытого.
     int PositionOnScreenX() const;
-    /// Возвращает свою позицию в списке родителя
+    // Возвращает свою позицию в списке родителя
     int PositionInKeeperList() const;
-    /// Высота итема
+    // Высота итема
     static int Height();
-    /// Ширина итема. pos - позиция итема на экране.
+    // Ширина итема. pos - позиция итема на экране.
     int Width(int pos = -1) const;
 
     void DrawCommonHiPart(int x, int y, bool opened) const;
@@ -93,9 +93,9 @@ public:
     virtual void Draw(int /*x*/, int /*y*/, bool /*opened*/) const {};
 
     virtual void HandlerFX(TypePress::E type) const;
-    /// Обработка события кнопки
+    // Обработка события кнопки
     virtual bool HandlerKey(const KeyEvent &) { return false; };
-    /// Возвращает высоту в пикселях открытого элемента Choice или Page::Name
+    // Возвращает высоту в пикселях открытого элемента Choice или Page::Name
     virtual int HeightOpened() const;
 
     static Item empty;
@@ -104,9 +104,9 @@ public:
 
     static bool Active() { return true; }
 
-    /// Возвращает цвет фона заголовка итема
+    // Возвращает цвет фона заголовка итема
     Color ColorTitleBackground() const { return IsPressed() ? Color::FILL : Color::BACK; };
-    /// Возвращает цвет, которым нужно рисовать на заголовке итема
+    // Возвращает цвет, которым нужно рисовать на заголовке итема
     Color ColorTitleText() const
     {
         Color result = ColorBackground();
@@ -118,16 +118,16 @@ public:
 
         return result;
     }
-    /// Цвет обводки итема
+    // Цвет обводки итема
     Color ColorFrame() const { return Color::FILL; };
-    /// Возвращает цвет, которым нужно заполнять участок выбора
+    // Возвращает цвет, которым нужно заполнять участок выбора
     Color ColorBackground() const;
 
     bool IsPage() const { return data->type == TypeItem::Page; };
 };
 
 
-////////////////////////////// Page ///
+///////////////////////////// Page ///
 struct DataPage
 {
     uint8               name;            ///< Имя из перечисления Page::Name
@@ -212,7 +212,7 @@ public:
     static bool NormalTitle() { return true; }
 };
 
-//////////////////////////// Button ///
+/////////////////////////// Button ///
 struct DataButton
 {
     pFuncVV     handlerPress;   ///< Функция, которая вызывается при нажатии на кнопку.
@@ -227,7 +227,7 @@ public:
     const DataButton *OwnData() const { return static_cast<const DataButton *>(data->ad); }
 };
 
-/////////////////////// GraphButton ///
+////////////////////// GraphButton ///
 struct StructHelpDrawButton
 {
     pFuncDrawUGO    funcDrawUGO;    ///< Указатель на функцию отрисовки изображения варианта кнопки
@@ -241,7 +241,7 @@ struct DataGraphButton
     const StructHelpDrawButton *hintUGO;
 };
 
-/// Описывает кнопку для дополнительного режима меню.
+// Описывает кнопку для дополнительного режима меню.
 class GraphButton : public Item
 {
 public:
@@ -254,7 +254,7 @@ public:
     int NumHints() const;
 };
 
-////////////////////////// Governor ///
+///////////////////////// Governor ///
 struct DataGovernor
 {
     int16  *cell;
@@ -263,38 +263,38 @@ struct DataGovernor
     pFuncVV handlerChange;  ///< Функция, которую нужно вызывать после того, как значение регулятора изменилось.
 };
 
-/// Описывает регулятор.
+// Описывает регулятор.
 class Governor : public Item
 {
 public:
     Governor(const DataItem * const data) : Item(data) {};
-    /// Возвращает следующее большее значение, которое может принять governor.
+    // Возвращает следующее большее значение, которое может принять governor.
     int16 NextValue() const;
-    /// Возвращает следующее меньшее значение, которое может принять governor.
+    // Возвращает следующее меньшее значение, которое может принять governor.
     int16 PrevValue() const;
-    /// Рассчитывате следующий кадр анимации.
+    // Рассчитывате следующий кадр анимации.
     float Step() const;
-    /// Изменяет значение в текущей позиции при раскрытом элементе.
+    // Изменяет значение в текущей позиции при раскрытом элементе.
     void ChangeValue(int16 delta);
-    /// При открытом элементе переставляет курсор на следующую позицию.
+    // При открытом элементе переставляет курсор на следующую позицию.
     void NextPosition() const;
-    /// При открытом элементе переставляет курсор не предыдущую позицию
+    // При открытом элементе переставляет курсор не предыдущую позицию
     void PrevPosition();
-    /// Нарисовать в раскрытом виде
+    // Нарисовать в раскрытом виде
     void DrawOpened(int x, int y) const;
-    /// Нарисовать в закрытом виде (в строке меню)
+    // Нарисовать в закрытом виде (в строке меню)
     void DrawClosed(int x, int y) const;
-    /// Отобразить значение
+    // Отобразить значение
     void DrawValue(int x, int y) const;
-    /// Возвращает символ ручки, соответствующий текущему значению
+    // Возвращает символ ручки, соответствующий текущему значению
     char GetSymbol() const;
-    /// Возвращает значение, установленное в регуляторе
+    // Возвращает значение, установленное в регуляторе
     int16 GetValue() const;
-    /// Задаёт новое значение
+    // Задаёт новое значение
     void SetValue(int16 v) const;
-    /// Обработка события кнопки
+    // Обработка события кнопки
     virtual bool HandlerKey(const KeyEvent &event);
-    /// Обработка события функциональной кнопки, соответствующей данному итему
+    // Обработка события функциональной кнопки, соответствующей данному итему
     virtual void HandlerFX(TypePress::E type) const;
 
     virtual void Draw(int x, int y, bool opened) const;
@@ -304,16 +304,16 @@ public:
 private:
 
     void DrawLowPart(int x, int y) const;
-    /// Возвращает число знакомест в поле для ввода элемента governor. Зависит от максимального значения, которое может принимать governor.
+    // Возвращает число знакомест в поле для ввода элемента governor. Зависит от максимального значения, которое может принимать governor.
     uint  NumDigits() const;
-    /// Нарисовать значение регулятора в режиме поразрядной регулировки. setPosFromEnd - подсвеченный (активный) разряд, начиная с конца. Если selPosFromEnd == -1, подсвечивать не нужно
+    // Нарисовать значение регулятора в режиме поразрядной регулировки. setPosFromEnd - подсвеченный (активный) разряд, начиная с конца. Если selPosFromEnd == -1, подсвечивать не нужно
     void DrawValueWithSelectedPosition(int x, int y, int value, uint numDigits, int selPosFromEnd, bool fillNull) const;
 
     static int8 currentDigit;
 };
 
 
-//////////////////////////// Choice ///
+/////////////////////////// Choice ///
 struct DataChoice
 {
     int8           *cell;
@@ -326,33 +326,33 @@ class Choice : public Item
 {
 public:
     Choice(const DataItem * const data) : Item(data) {};
-    /// Запускает процесс изменения значения на delta
+    // Запускает процесс изменения значения на delta
     void  StartChange(int delta) const;
-    /// Рассчитывает следующий кадр анимации.
+    // Рассчитывает следующий кадр анимации.
     float Step() const;
-    /// Изменяет значение choice в зависимости от величины и знака delta.
+    // Изменяет значение choice в зависимости от величины и знака delta.
     void  ChangeIndex(int delta) const;
-    /// Возвращает количество вариантов выбора в элементе по адресу choice
+    // Возвращает количество вариантов выбора в элементе по адресу choice
     int   NumChoices() const;
 
     void  DrawOpened(int x, int y) const;
 
     void  DrawClosed(int x, int y) const;
-    /// Возвращает имя текущего варианта выбора элемента choice, как оно записано в исходном коде программы
+    // Возвращает имя текущего варианта выбора элемента choice, как оно записано в исходном коде программы
     String NameCurrentSubItem() const;
-    /// Возвращает имя следующего варианта выбора элемента choice, как оно записано в исходном коде программы
+    // Возвращает имя следующего варианта выбора элемента choice, как оно записано в исходном коде программы
     const char *NameNextSubItem() const;
 
     const char *NamePrevSubItem() const;
-    /// Возвращает имя варианта выбора элемента choice в позиции i как оно записано в исходном коде программы
+    // Возвращает имя варианта выбора элемента choice в позиции i как оно записано в исходном коде программы
     String NameSubItem(int i) const;
 
     char GetSymbol();
 
     virtual void Draw(int x, int y, bool opened) const;
-    /// Обработка события кнопки
+    // Обработка события кнопки
     virtual bool HandlerKey(const KeyEvent &event);
-    /// Обработка события функциональной кнопки, соответствующей данному итему
+    // Обработка события функциональной кнопки, соответствующей данному итему
     virtual void HandlerFX(TypePress::E type) const;
 
     virtual int HeightOpened() const;
@@ -364,7 +364,7 @@ public:
     static void AfterDraw(int, int) {};
 };
 
-///////////////////// GovernorColor ///
+//////////////////// GovernorColor ///
 struct DataGovernorColor
 {
     ColorType  *ct;                 ///< Структура для описания цвета.
@@ -375,7 +375,7 @@ class GovernorColor : public Item
 public:
     GovernorColor(const DataItem * const data) : Item(data) {};
     virtual void Draw(int x, int y, bool opened) const;
-    /// Обработка события функциональной кнопки, соответствующей данному итему на странице
+    // Обработка события функциональной кнопки, соответствующей данному итему на странице
     virtual void HandlerFX(TypePress::E type) const;
     virtual bool HandlerKey(const KeyEvent &event);
     virtual int HeightOpened() const { return 27; };

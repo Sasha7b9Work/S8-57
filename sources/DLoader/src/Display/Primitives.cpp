@@ -328,8 +328,8 @@ static bool CompareArrays(const bool *array1, const bool *array2, int numElems) 
 }
 
 
-/// \brief Ќаходит следующий перенос. C letters начинаетс€ часть слово, где нужно найти перенос, в lettersInSyllable будет записано число букв в 
-/// найденном слоге. ≈сли слово закончилось, функци€ возвращает false
+// \brief Ќаходит следующий перенос. C letters начинаетс€ часть слово, где нужно найти перенос, в lettersInSyllable будет записано число букв в 
+// найденном слоге. ≈сли слово закончилось, функци€ возвращает false
 static bool FindNextTransfer(const char *letters, int8 *lettersInSyllable) //-V2506
 {
 

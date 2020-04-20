@@ -8,23 +8,23 @@
 #include <cstring>
 
 
-/// Рекурсивная функция обработки массива структур StructSCPI.
-/// В случае успешного выполнения возвращает адрес символа, расположенного за последним обработанным символом.
-/// В случае неуспешного завершения - возвращает nullptr. Код ошибки находится в *error
+// Рекурсивная функция обработки массива структур StructSCPI.
+// В случае успешного выполнения возвращает адрес символа, расположенного за последним обработанным символом.
+// В случае неуспешного завершения - возвращает nullptr. Код ошибки находится в *error
 static const char *Process(const char *buffer, const StructSCPI structs[]); //-V2504
-/// Рекурсивная функция тестирования
+// Рекурсивная функция тестирования
 static bool ProcessTest(const StructSCPI strct[]); //-V2504
-/// Обработка узла дерева node
+// Обработка узла дерева node
 static const char *ProcessNode(const char *begin, const StructSCPI *node);
-/// Обработка листа node
+// Обработка листа node
 static const char *ProcessLeaf(const char *begin, const StructSCPI *node);
-/// Возвращает true, если символ является началом комнады - разделителем или '*'
+// Возвращает true, если символ является началом комнады - разделителем или '*'
 static bool IsBeginCommand(const char &symbol);
-/// Удаляет неправильные символы из начала строки
+// Удаляет неправильные символы из начала строки
 static void RemoveBadSymbolsFromBegin();
-/// Удалить последовательность разделителей из начала строки до последнего имеющегося
+// Удалить последовательность разделителей из начала строки до последнего имеющегося
 static bool RemoveSeparatorsSequenceFromBegin();
-/// Удалить все символы до первого разделителя
+// Удалить все символы до первого разделителя
 static bool RemoveSymbolsBeforeSeparator();
 
 static String data;

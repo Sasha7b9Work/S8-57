@@ -65,7 +65,7 @@ void HAL_BUS::Init()
         GPIO_AF12_FMC
     };
 
-    /// \todo Здесь не довеедно - не хотит, почему-то
+    // \todo Здесь не довеедно - не хотит, почему-то
 
     HAL_GPIO_Init(GPIOD, const_cast<GPIO_InitTypeDef *>(&isGPIO));
 
@@ -198,7 +198,7 @@ void HAL_BUS::FPGA::Write16(uint8 *address, uint16 value)
 {
     HAL_BUS_CONFIGURE_TO_FSMC;
 
-    PAUSE_ON_TICKS(100);    /// \todo Без этой строки замедлен вывод при включённой оптимизации и TBase >= 0.5мс
+    PAUSE_ON_TICKS(100);    // \todo Без этой строки замедлен вывод при включённой оптимизации и TBase >= 0.5мс
 
     *address = static_cast<uint8>(value);
     *(address + 1) = static_cast<uint8>(value >> 8);

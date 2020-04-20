@@ -15,7 +15,7 @@ struct PeakDetMode
     static bool IsEnabled();
 };
 
-/// Положение точки синхронизация на сигнале.
+// Положение точки синхронизация на сигнале.
 struct TPos
 {
     enum E
@@ -30,7 +30,7 @@ struct TPos
     static TPos::E &Ref();
 
     operator TPos::E() { return Ref(); }
-    /// Узнать привязку отсительно уровня синхронизации в байтах
+    // Узнать привязку отсительно уровня синхронизации в байтах
     static int InBytes();
 
     static void Draw();
@@ -38,7 +38,7 @@ struct TPos
     static int PosX();
 };
 
-/// Тип выборки для режима рандомизатора.
+// Тип выборки для режима рандомизатора.
 struct SampleType
 {
     enum E
@@ -54,7 +54,7 @@ struct SampleType
     static void Set(SampleType::E type) { Ref() = type; }
 };
 
-/// Функция ВР/ДЕЛ.
+// Функция ВР/ДЕЛ.
 struct FunctionTime
 {
     enum E
@@ -64,7 +64,7 @@ struct FunctionTime
     };
 };
 
-/// Тип привязки к смещению по горизонтали
+// Тип привязки к смещению по горизонтали
 struct LinkingTShift
 {
     enum E

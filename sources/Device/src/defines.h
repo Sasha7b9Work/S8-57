@@ -198,7 +198,7 @@ union BitSet64 //-V2514
 
 
 
-/// В этом при нажатии на кнопки вместо выполнения её функции выводится информация о её назначении
+// В этом при нажатии на кнопки вместо выполнения её функции выводится информация о её назначении
 #define HINT_MODE_ENABLED       (gBF.showHelpHints)
 #define SHOW_DEBUG_MENU         (gBF.showDebugMenu)
 #define NEED_SAVE_TO_FLASHDRIVE (gBF.needForSaveToFlashDrive)
@@ -211,7 +211,7 @@ union BitSet64 //-V2514
 #define ALWAYS_SHOW_ROM_SIGNAL  (gBF.alwaysShowROMSignal)
 #define PANEL_CONTROL_RECEIVE   (gBF.panelControlReceive)
 #define FPGA_IN_PROCESS_OF_READ (gBF.FPGAinProcessingOfRead)
-/// Если 1, то консоль находится в режиме паузы
+// Если 1, то консоль находится в режиме паузы
 #define CONSOLE_IN_PAUSE        (gBF.consoleInPause)
 
 #define FM_NEED_REDRAW          (gBF.needRedrawFileManager)

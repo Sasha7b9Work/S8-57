@@ -11,7 +11,7 @@ const float PageCursorsMeasures::Set::MAX_POS_U = 200.0F;
 const float PageCursorsMeasures::Set::MAX_POS_T = 280.0F;
 
 
-/// Рассчитывает условия отрисовки УГО малых кнопок управления выбором курсорами.
+// Рассчитывает условия отрисовки УГО малых кнопок управления выбором курсорами.
 void CalculateConditions(int16 pos0, int16 pos1, CursorsControl::E cursCntrl, bool *condTopLeft, bool *condBottomRight)
 {
     bool zeroLessFirst = pos0 < pos1;
@@ -425,20 +425,20 @@ void PageCursorsMeasures::Set::SetShiftCursPosU(Chan::E ch, int numCur, float de
 
     if (CursorsMovement::IsPixels())                        // Если перемещение по пикселям, то нужно привести к пиксельной сетке экрана
     {
-        /// \todo
+        // \todo
     }
 }
 
 
 void PageCursorsMeasures::Set::SetShiftCursPosT(Chan::E ch, int numCur, float delta)
 {
-    /// \todo одинаковые ветки
+    // \todo одинаковые ветки
     // CURsT_POS(ch, numCur) = LimitationFloat(CURsT_POS(ch, numCur) + delta, 0, MAX_POS_T);   
     CursorsMeasurements::SetCursPosT_temp(ch, numCur, Math::LimitationRet(CursorsMeasurements::PosT(ch, numCur) + delta, 0.0F, MAX_POS_T));
 
     if (CursorsMovement::IsPixels())         // Если перемещение по пикселям, то нужно привести к пиксельной сетке экрана
     {
-        /// \todo
+        // \todo
     }
 }
 
@@ -474,7 +474,7 @@ void PageCursorsMeasures::Set::SetCursorU(Chan::E ch, int numCur, float pos)
 
 void PageCursorsMeasures::Set::SetCursorT(Chan::E ch, int numCur, float pos)
 {
-    /// \todo одинаковые ветки
+    // \todo одинаковые ветки
     // CURsT_POS(ch, numCur) = LimitationFloat(pos, 0, MAX_POS_T);      
     CursorsMeasurements::SetCursPosT_temp(ch, numCur, Math::LimitationRet(pos, 0.0F, MAX_POS_T));
 }

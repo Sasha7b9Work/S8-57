@@ -8,9 +8,9 @@
 #include <cmath>
 
 
-/// Столько вольт содержится в одной точке сигнала по вертикали
+// Столько вольт содержится в одной точке сигнала по вертикали
 
-/// Столько вольт в одной точке экрана
+// Столько вольт в одной точке экрана
 static const float voltsInPixel[] =
 {
     2e-3F   / GRID_DELTA,   // 2mV
@@ -197,7 +197,7 @@ void MathFPGA::CalculateFFT(float *dataR, uint numPoints, float *result, float *
         result[i] = std::sqrtf(dataR[i] * dataR[i] + result[i] * result[i]);
     }
 
-    result[0] = 0.0F;       /// \todo нулевая составляющая мешает постоянно. надо её убрать
+    result[0] = 0.0F;       // \todo нулевая составляющая мешает постоянно. надо её убрать
 
     Normalize(result, 256);
 

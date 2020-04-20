@@ -36,10 +36,10 @@ struct PacketROM
     PacketROM *Next() const;
     const DataSettings *UnPack() const;
     uint Size() const;
-    /// Делает попытку записи пакета в сектор sector. В случае неудачи возвращает false
+    // Делает попытку записи пакета в сектор sector. В случае неудачи возвращает false
     bool WriteToSector(const Sector *sector) const;
     void Erase() const;
-    /// Возвращает количество байт, необходимое для хранения данных
+    // Возвращает количество байт, необходимое для хранения данных
     static uint GetPackedSize(const DataSettings *ds);
 
     void Log() const;
@@ -60,7 +60,7 @@ struct Sector
         _07_FIRM_3,     // /
         _08,
         _09,
-        /// Первый сектор для сохранения настроек. При его заполнении начинает использоваться сектор 2.
+        // Первый сектор для сохранения настроек. При его заполнении начинает использоваться сектор 2.
         _10_SETTINGS_1, // Настройки
         _11_SETTINGS_2, // 
         _12,

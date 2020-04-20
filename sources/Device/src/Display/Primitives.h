@@ -103,19 +103,19 @@ public:
     void DrawInCenterBoundedRect(int x, int y, int width, int height, Color color = Color::NUMBER);
 
     int DrawWithLimitation(int x, int y, int limitX, int limitY, int limitWidth, int limitHeight);
-    /// Выводит текст на прямоугольнике цвета colorBackgound
+    // Выводит текст на прямоугольнике цвета colorBackgound
     int DrawOnBackground(int x, int y, Color colorBackground);
 
     void DrawRelativelyRight(int xRight, int y, Color color = Color::NUMBER);
-    /// Пишет текст с переносами
+    // Пишет текст с переносами
     int DrawInRectWithTransfers(int x, int y, int width, int height, Color color = Color::NUMBER);
-    /// Возвращает нижнюю координату прямоугольника
+    // Возвращает нижнюю координату прямоугольника
     int DrawInBoundedRectWithTransfers(int x, int y, int width, Color colorBackground, Color colorFill, Color colorBound = Color::NUMBER);
 
     void DrawInCenterRectAndBoundIt(int x, int y, int width, int height, Color colorBackground, Color colorFill);
-    /// Пишет строку текста в центре области(x, y, width, height)цветом ColorText на прямоугольнике с шириной бордюра widthBorder цвета colorBackground
+    // Пишет строку текста в центре области(x, y, width, height)цветом ColorText на прямоугольнике с шириной бордюра widthBorder цвета colorBackground
     void DrawInCenterRectOnBackground(int x, int y, int width, int height, Color colorText, int widthBorder, Color colorBackground);
-    /// Нарисовать с выводом цифр в моноширинных позициях
+    // Нарисовать с выводом цифр в моноширинных позициях
     int DrawDigitsMonospace(int x, int y, int width, Color color = Color::NUMBER);
 
 private:
@@ -152,7 +152,7 @@ private:
 };
 
 
-/// Вертикальная линия от y до y + height точками через каждые delta пикселей
+// Вертикальная линия от y до y + height точками через каждые delta пикселей
 class VPointLine
 {
 public:
@@ -164,7 +164,7 @@ private:
 };
 
 
-/// Горизонтальная линия от x до x + width точками через каждые delta пикселей
+// Горизонтальная линия от x до x + width точками через каждые delta пикселей
 class HPointLine
 {
 public:
@@ -176,8 +176,8 @@ private:
 };
 
 
-/// \brief Нарисовать numLines горизонтальных линий, состоящих из count точек каждая с расстоянием между точками delta. Вертикальная координата
-/// первой точки каждой линии соответствует очередному элементу массива y[]
+// \brief Нарисовать numLines горизонтальных линий, состоящих из count точек каждая с расстоянием между точками delta. Вертикальная координата
+// первой точки каждой линии соответствует очередному элементу массива y[]
 class MultiHPointLine
 {
 public:
@@ -191,7 +191,7 @@ private:
 };
 
 
-/// Массив вертикальных линий. Линии рисуются одна за другой. y0y1 - массив вертикальных координат.
+// Массив вертикальных линий. Линии рисуются одна за другой. y0y1 - массив вертикальных координат.
 class VLineArray
 {
 public:
@@ -203,8 +203,8 @@ private:
 };
 
 
-/// numLines вертикальных линий, состоящих из count точек каждая с расстоянием между точками delta. Горизонтальная координата
-/// первой точки каждой линии соответствует очередному элементу массива x[]
+// numLines вертикальных линий, состоящих из count точек каждая с расстоянием между точками delta. Горизонтальная координата
+// первой точки каждой линии соответствует очередному элементу массива x[]
 class MultiVPointLine
 {
 public:

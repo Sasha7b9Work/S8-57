@@ -4,7 +4,7 @@
 #include "Hardware/HAL/HAL.h"
 
 
-/// Время зажигания лампочки синхронизации
+// Время зажигания лампочки синхронизации
 static uint timeFireTrig = 0;
 
 

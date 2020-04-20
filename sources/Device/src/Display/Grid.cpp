@@ -3,9 +3,9 @@
 #include "Display/Primitives.h"
 #include "Display/Grid.h"
 
-/// Нарисовать сетку для режима осциллографа
+// Нарисовать сетку для режима осциллографа
 static void DrawOsci();
-/// Нарисовать сетку для режима тестер-компонента
+// Нарисовать сетку для режима тестер-компонента
 static void DrawTester();
 
 static void DrawRecorder();
@@ -13,7 +13,7 @@ static void DrawRecorder();
 static void DrawGridSignal(int left, int top, int width, int height);
 
 static void DrawGridSpectrum();
-/// Возвращает расстояние между 
+// Возвращает расстояние между 
 static int  DeltaHforLineGrid();
 
 static int  DeltaVforLineGrid();

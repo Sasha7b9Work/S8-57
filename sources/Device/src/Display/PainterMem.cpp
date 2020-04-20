@@ -9,7 +9,7 @@ int   PainterMem::width = 0;
 int   PainterMem::height = 0;
 Color PainterMem::color = Color::FILL;
 
-/// ¬озвращает адрес байта с координатами x, y.
+// ¬озвращает адрес байта с координатами x, y.
 #define ADDRESS_BYTE(x, y) (buffer + ((y) * width + (x)))
 
 #define SET_POINT(x, y)                             \

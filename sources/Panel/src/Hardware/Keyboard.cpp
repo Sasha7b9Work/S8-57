@@ -58,7 +58,7 @@ static GPIO_TypeDef* rlsPorts[Keyboard::NUM_RL] = {GPIOD, GPIOA, GPIOA, GPIOD, G
 
 #define BUTTON_IS_PRESS(state) ((state) == 0)
 
-/// Время последнего автонажатия нопки
+// Время последнего автонажатия нопки
 static uint prevRepeat = 0;
 static uint prevPause = 0;
 
@@ -66,10 +66,10 @@ static uint prevPause = 0;
 static void SendCommand(Control control, Control::Action::E action);
 
 static uint TimeBetweenRepeats(uint time);
-/// При обнаружении нажатия кнопки сюда записывается время нажатия
+// При обнаружении нажатия кнопки сюда записывается время нажатия
 static uint timePress[Keyboard::NUM_RL][Keyboard::NUM_SL];
-/// Установленное в true значение означает, что сохранять куда-либо информацию о её состоянии нельзя до отпускания (чтобы не было ложных
-/// срабатываний типа Long
+// Установленное в true значение означает, что сохранять куда-либо информацию о её состоянии нельзя до отпускания (чтобы не было ложных
+// срабатываний типа Long
 static bool alreadyLong[Keyboard::NUM_RL][Keyboard::NUM_SL];
 
 static bool init;

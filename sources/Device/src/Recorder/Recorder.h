@@ -26,7 +26,7 @@ public:
 
     static void ReadPoint();
 
-    /// Где хранятся данные
+    // Где хранятся данные
     struct TypeMemory
     {
         enum E
@@ -38,7 +38,7 @@ public:
         static TypeMemory::E &Ref();
     };
 
-    /// Используется при выборе оси
+    // Используется при выборе оси
     struct Axis
     {
         enum E
@@ -48,7 +48,7 @@ public:
         };
     };
 
-    /// Масшаб по времени
+    // Масшаб по времени
     struct ScaleX
     {
         enum E
@@ -68,9 +68,9 @@ public:
         static void Load();
         static void Change(int delta);
         static pString ToString();
-        /// Возвращает скорость потребления памяти в байтах/сек
+        // Возвращает скорость потребления памяти в байтах/сек
         uint BytesToSec() const;
-        /// Возвращает время считывания одной точки
+        // Возвращает время считывания одной точки
         static uint TimeForPointMS();
     };
 };

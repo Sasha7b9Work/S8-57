@@ -78,9 +78,9 @@ Color Color::currentColor = Color::NUMBER;
 static bool  inverseColor = false;
 
 
-/// Записывает мигающй цвет в дисплей. Возвращает false, если текущий цвет немигающий
+// Записывает мигающй цвет в дисплей. Возвращает false, если текущий цвет немигающий
 static bool WriteFlashColor();
-/// Записывает цвет в дисплей
+// Записывает цвет в дисплей
 static void WriteToDisplay(Color color);
 
 

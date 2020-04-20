@@ -5,7 +5,7 @@
 namespace Utils
 {
     template<typename T>
-    /// Усреднятор - усредняет последние попавшие в себя значения
+    // Усреднятор - усредняет последние попавшие в себя значения
     class Averager
     {
     public:
@@ -19,20 +19,20 @@ namespace Utils
         uint numELements;
     };
 
-    /// Приблизительно усреднение
+    // Приблизительно усреднение
     template <typename T>
     class AroundAverager
     {
     public:
         AroundAverager(uint parts);
-        /// Пушит очередное значение и одновременно возвращает усреднённое
+        // Пушит очередное значение и одновременно возвращает усреднённое
         void Push(T elem);
         T Value();
     private:
         T value;
-        /// На сколько частей делится значение
+        // На сколько частей делится значение
         const uint parts;
-        /// Сколько значений обработано
+        // Сколько значений обработано
         uint pushed;
     };
 }

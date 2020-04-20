@@ -11,7 +11,7 @@ public:
     T Pop();
     uint Size() const;
     bool Empty() const;
-    /// ¬озвращает количество нулей на дне стека
+    // ¬озвращает количество нулей на дне стека
     int NumFirstZeros() const;
 
 private:

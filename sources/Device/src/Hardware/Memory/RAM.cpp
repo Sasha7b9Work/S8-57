@@ -38,7 +38,7 @@ Packet *RAM::newest = nullptr;
 bool RAM::needNewFrame = true;
 
 
-/// Записывает по адресу dest. Возвращает адрес первого байта после записи
+// Записывает по адресу dest. Возвращает адрес первого байта после записи
 static uint *WriteToRAM(uint *dest, const void *src, uint size)
 {
     HAL_BUS::ConfigureToFSMC();
@@ -56,7 +56,7 @@ bool RAM::canTrace = false;
 
 struct Packet
 {
-    /// Адрес следующего пакета, более "свежего". Если addrNext == 0x00000000, следующего пакета нет, этот пакет самый новый
+    // Адрес следующего пакета, более "свежего". Если addrNext == 0x00000000, следующего пакета нет, этот пакет самый новый
     uint addrNewest;
 
     bool IsValid()
@@ -74,7 +74,7 @@ struct Packet
         //LOG_WRITE("%d %x", line, addrNewest);
     }
 
-    /// Упаковать данные по адресу this. Возвращает указатель на пакет, следующий за ним
+    // Упаковать данные по адресу this. Возвращает указатель на пакет, следующий за ним
     void Pack(const DataSettings *ds)
     {
         DataSettings data = *ds;
@@ -101,7 +101,7 @@ struct Packet
 
         std::memcpy(reinterpret_cast<uint *>(Address() + sizeof(Packet)), &data, sizeof(DataSettings)); // Записываем скорректированные настройки
     }
-    /// Подготовить пакет для сохранения данных в соответствии с настройками ds
+    // Подготовить пакет для сохранения данных в соответствии с настройками ds
     void Prepare(DataSettings *ds)
     {
         uint bytesInChannel = ds->BytesInChannel();
@@ -133,12 +133,12 @@ struct Packet
     {
         return reinterpret_cast<uint>(this);
     };
-    /// Возвращает адрес первого следующего за пакетом байта
+    // Возвращает адрес первого следующего за пакетом байта
     uint End() const
     {
         return Address() + Size();
     }
-    /// Возвращает размер памяти, необходимой для хранения данных в соответсвии с настройками ds
+    // Возвращает размер памяти, необходимой для хранения данных в соответсвии с настройками ds
     static uint NeedMemoryForPacedData(const DataSettings *ds)
     {
         return sizeof(Packet) + sizeof(DataSettings) + ds->NeedMemoryForData();
@@ -254,7 +254,7 @@ uint RAM::NumberDatas()
 
         packet = reinterpret_cast<Packet *>(packet->addrNewest);
 
-//        if(packet != nullptr && !packet->IsValid())     /// \todo Времення затычка. Нужно разобраться, почему память портится и исправить
+//        if(packet != nullptr && !packet->IsValid())     // \todo Времення затычка. Нужно разобраться, почему память портится и исправить
 //        {
 //            LOG_WRITE("invalid packet 0x%x", packet);
 //            break;

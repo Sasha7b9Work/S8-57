@@ -9,11 +9,11 @@ struct PageName
     enum E
     {
         None,
-        /// ÊÀÍÀË 1
+        // ÊÀÍÀË 1
         ChannelA,
-        /// ÊÀÍÀË 2
+        // ÊÀÍÀË 2
         ChannelB,
-        /// ÎÒËÀÄÊÀ
+        // ÎÒËÀÄÊÀ
         Debug,
         Debug_ADC,
         Debug_ADC_Balance,
@@ -25,13 +25,13 @@ struct PageName
         Debug_SerialNumber,
         Debug_Settings,
         Debug_Tests,
-        /// ÄÈÑÏËÅÉ
+        // ÄÈÑÏËÅÉ
         Display,
         Display_Accumulation,
         Display_Settings,
         Display_Settings_Colors,
         Display_View,
-        /// ÔÓÍÊÖÈß
+        // ÔÓÍÊÖÈß
         Function,
         FFT,
         FFT_Cursors,
@@ -44,16 +44,16 @@ struct PageName
         Recorder_Show_Choice_Cursors,
         Recorder_Source,
         Tester,
-        /// ÏÎÌÎÙÜ
+        // ÏÎÌÎÙÜ
         Help,
-        /// ÈÇÌÅĞ
+        // ÈÇÌÅĞ
         Measures,
         AutoMeasures,
         AutoMeasures_Tune,
         CursorsMeasures,
         CursorsMeasures_Set,
         Math,
-        /// ÏÀÌßÒÜ
+        // ÏÀÌßÒÜ
         Memory,
         Memory_Drive,
         Memory_Drive_Manager,
@@ -61,15 +61,15 @@ struct PageName
         Memory_Internal,
         Memory_Last,
         Memory_SetName,
-        /// ÑÅĞÂÈÑ
+        // ÑÅĞÂÈÑ
         Service,
         Service_Battery,
         Service_Calibrator,
         Service_Info,
         Service_RTC,
-        /// ĞÀÇÂ
+        // ĞÀÇÂ
         Time,
-        /// ÑÈÍÕĞ
+        // ÑÈÍÕĞ
         Trig,
         Trig_HoldOff,
         Trig_Search,

@@ -4,9 +4,9 @@
 #include <stm32f4xx_hal.h>
 
 
-/// Для датчика напряжения аккумулятора
+// Для датчика напряжения аккумулятора
 static ADC_HandleTypeDef handle;
-/// Для конфигурации
+// Для конфигурации
 static ADC_ChannelConfTypeDef config =
 {
     ADC_CHANNEL_2,

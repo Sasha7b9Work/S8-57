@@ -25,7 +25,7 @@ struct DisplayMapping
     static bool IsDots()                { return Ref() == Dots; }
 };
 
-/// Количество измерений для расчёта минимального и максимального значений.
+// Количество измерений для расчёта минимального и максимального значений.
 struct ENumMinMax
 {
     enum E
@@ -45,7 +45,7 @@ struct ENumMinMax
     int Number() { return 1 << Ref(); }
 };
 
-/// Количество усреднений по измерениям.
+// Количество усреднений по измерениям.
 struct ENumAverage
 {
     enum E
@@ -66,7 +66,7 @@ struct ENumAverage
     static void Set(ENumAverage::E v);
 };
 
-/// Количество накоплений.
+// Количество накоплений.
 struct ENumAccum
 {
     enum E
@@ -90,15 +90,15 @@ struct ModeAccumulation
 {
     enum E
     {
-        NoReset,   /// В этом режиме показываются строго N последних.
-        Reset      /// В этом режиме набираются N последних и потом сбрасываются.
+        NoReset,   // В этом режиме показываются строго N последних.
+        Reset      // В этом режиме набираются N последних и потом сбрасываются.
     };
 
     static ModeAccumulation::E &Ref();
     static bool IsReset() { return (Ref() == Reset); }
 };
 
-/// Количество точек для расчёта сглаживания.
+// Количество точек для расчёта сглаживания.
 struct ENumSmoothing
 {
     enum E
@@ -117,7 +117,7 @@ struct ENumSmoothing
     static uint ToNumber();
 };
 
-/// Ограничение FPS.
+// Ограничение FPS.
 struct ENumSignalsInSec
 {
     enum E
@@ -130,13 +130,13 @@ struct ENumSignalsInSec
     };
     ENumSignalsInSec() {}
     static ENumSignalsInSec::E &Ref();
-    /// Возвращает количество миллисекунда между кадрами
+    // Возвращает количество миллисекунда между кадрами
     static uint TimeBetweenFramesMS();
     operator ENumSignalsInSec::E() { return Ref(); }
     static bool Is25()             { return Ref() == _25; }
 };
 
-/// Тип сетки на экране.
+// Тип сетки на экране.
 struct TypeGrid
 {
     enum E
@@ -154,7 +154,7 @@ struct TypeGrid
     static bool Is3() { return (Ref() == _3); };
 };
 
-/// Тип привязки к смещению по вертикали
+// Тип привязки к смещению по вертикали
 struct LinkingRShift
 {
     enum E
@@ -166,7 +166,7 @@ struct LinkingRShift
     static LinkingRShift::E &Ref();
 };
 
-/// Через какое время после последнего нажатия кнопки скрывать меню.
+// Через какое время после последнего нажатия кнопки скрывать меню.
 struct MenuAutoHide
 {
     enum E
@@ -231,11 +231,11 @@ struct PageDisplay
         struct Colors
         {
             static const Page * const self;
-            /// Для сетки
+            // Для сетки
             static ColorType colorTypeGrid;
-            /// Для первого канала
+            // Для первого канала
             static ColorType colorTypeA;
-            /// Для второго канала
+            // Для второго канала
             static ColorType colorTypeB;
         };
     };

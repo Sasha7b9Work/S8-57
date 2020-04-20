@@ -10,14 +10,14 @@ struct DisplayOsci
     static void Update();
 
     void DrawScaleLine(int x, bool forTrigLev);
-    /// Установить признак того, что дисплей нуждается в перерисовке
+    // Установить признак того, что дисплей нуждается в перерисовке
     static void SetFlagRedraw();
 
     struct HiPart
     {
         static void Draw();
     private:
-        /// Нарисовать правую часть - синхронизация и режим работы
+        // Нарисовать правую часть - синхронизация и режим работы
         static void DrawRightPart(int x0, int y0);
     };
 
@@ -28,29 +28,29 @@ struct DisplayOsci
 
     struct Accumulator
     {
-        /// Эту функцию нужно вызывать после каждой отрисовки сигналов
+        // Эту функцию нужно вызывать после каждой отрисовки сигналов
         static void NextFrame();
-        /// Сброс информации
+        // Сброс информации
         static void Reset();
     };
 
     struct PainterData
     {
         static void DrawData();
-        /// Индекс первой точки, выводимой поверх сетки
+        // Индекс первой точки, выводимой поверх сетки
         static int FirstPointOnScreen();
-        /// Возвращает адрес первой и последней точки на экране в координатах экрана
+        // Возвращает адрес первой и последней точки на экране в координатах экрана
         static BitSet64 PointsOnDisplay();
-        /// \brief Возращает адрес первой и последней точки в координатах экрана
+        // \brief Возращает адрес первой и последней точки в координатах экрана
         static BitSet64 BytesOnDisplay();
-        /// Эту функцию надо вызывать при переключении TPos для перерасчёта смещения первого выводимого байта относительно левого края экрана
+        // Эту функцию надо вызывать при переключении TPos для перерасчёта смещения первого выводимого байта относительно левого края экрана
         static void ChangeTPos();
     private:
-        /// Нарисовать актуальные данные - соответствующие текущим установкам
+        // Нарисовать актуальные данные - соответствующие текущим установкам
         static void DrawCurrent();
-        /// Нарисовать данные из ОЗУ
+        // Нарисовать данные из ОЗУ
         static void DrawRAM();
-        /// Нарисовать данные из ППЗУ
+        // Нарисовать данные из ППЗУ
         static void DrawROM();
 
         static void DrawChannel(Chan::E ch);
@@ -66,7 +66,7 @@ struct DisplayOsci
         static void DrawModePointsPeakDetOn(int center, const uint8 *data, float scale, int x);
 
         static void DrawModePointsPeakDetOff(int center, const uint8 *data, float scale, int x);
-        /// Нарисовать спектр
+        // Нарисовать спектр
         static void DrawSpectrum();
 
         static void DrawSpectrum(const uint8 *dataIn, uint numPoints, Chan::E ch);

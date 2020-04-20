@@ -19,9 +19,9 @@
 #include <cstdlib>
 
 
-/// Настроить устройство в соответствии с установленным режимом
+// Настроить устройство в соответствии с установленным режимом
 static void SetCurrentMode();
-/// Установить режим работы mode, если открыта страница page или в числе предков открытой страницы есть page
+// Установить режим работы mode, если открыта страница page или в числе предков открытой страницы есть page
 static bool SetCurrentMode(const Page *page, Device::Mode::E mode);
 
 static Device::Mode::E currentMode = Device::Mode::Osci;

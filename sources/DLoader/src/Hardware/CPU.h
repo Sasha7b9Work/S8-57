@@ -89,7 +89,7 @@ private:
 extern "C" {
 #endif
 
-    /// Прерывание на таймер
+    // Прерывание на таймер
     void TIM3_IRQHandler();
     void EXTI9_5_IRQHandler();
     void SPI1_IRQHandler();

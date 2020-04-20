@@ -5,9 +5,9 @@
 #define PAUSE_ON_MS(ms)           Timer::PauseOnTime(ms)
 
 
-/// Количество тиков, прошедших с момента последнего вызова функции Timer_StartMultiMeasurement(). Не более (1 << 32)
- /// В одной секунде 120.000.000 тиков для С8-53 и 90.000.000 тиков для С8-54.
- /// Максимальный отрезок времени, который можно отсчитать с её помощью - 35 сек.
+// Количество тиков, прошедших с момента последнего вызова функции Timer_StartMultiMeasurement(). Не более (1 << 32)
+ // В одной секунде 120.000.000 тиков для С8-53 и 90.000.000 тиков для С8-54.
+ // Максимальный отрезок времени, который можно отсчитать с её помощью - 35 сек.
 #undef TIME_TICKS
 #undef TIME_MS
 #define TIME_TICKS Timer::TimeTicks()
@@ -39,7 +39,7 @@ struct Timer
     static void Init();
 
     static void DeInit();
-    /// Назначает таймеру timer функцию и время срабатывания
+    // Назначает таймеру timer функцию и время срабатывания
     static void Set(TypeTimer::E type, pFuncVV func, uint dTms);
 
     static void SetAndStartOnce(TypeTimer::E type, pFuncVV func, uint dTms);
@@ -51,30 +51,30 @@ struct Timer
     static void Enable(TypeTimer::E type);
 
     static void Disable(TypeTimer::E type);
-    /// Возвращает true, если таймер в данный момент ведёт отсчёт
+    // Возвращает true, если таймер в данный момент ведёт отсчёт
     static bool IsRunning(TypeTimer::E type);
 
     static void PauseOnTime(uint timeMS);
 
     static void PauseOnTicks(uint numTicks);
-    /// Запускает счётчик для измерения малых отрезков времени
+    // Запускает счётчик для измерения малых отрезков времени
     static void StartMultiMeasurement();
-    /// Ожидать определённое число элементарных операция в цилке for
+    // Ожидать определённое число элементарных операция в цилке for
     static void PauseOnOPS(uint ops);
 
     static bool IsBusy();
-    /// Возвращает количество микросекунд, прошедших с момента последнего вызова StartMultiMeasurement()
+    // Возвращает количество микросекунд, прошедших с момента последнего вызова StartMultiMeasurement()
     static uint TimeUS();
-    /// Возвращает количество тиков, прошедших с момента последнего вызова StartMultiMeasurement();
+    // Возвращает количество тиков, прошедших с момента последнего вызова StartMultiMeasurement();
     static uint TimeTicks();
-    /// Возвращает количество миллисекунд, прошедших с момента старта программы
+    // Возвращает количество миллисекунд, прошедших с момента старта программы
     static uint TimeMS();
-    /// Устанавливает стартовую точку логгирования. Далее вызовы Timer_LogPoint засекают временные интервалы от это точки
+    // Устанавливает стартовую точку логгирования. Далее вызовы Timer_LogPoint засекают временные интервалы от это точки
     static void StartLogging();
 
     static uint LogPointUS(char *name);
 
     static uint LogPointMS(char *name);
-    /// Служебная функция. Вызывается строго из прерывания
+    // Служебная функция. Вызывается строго из прерывания
     static void ElapsedCallback();
 };

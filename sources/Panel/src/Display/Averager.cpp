@@ -9,17 +9,17 @@ static int enumAve = 0;
 
 struct StructX
 {
-    /// Усреднённые данные канала X
+    // Усреднённые данные канала X
     uint data[TESTER_NUM_POINTS];
-    /// Количество измерений, находящихся в data
+    // Количество измерений, находящихся в data
     int cout;
 };
 
 struct StructY
 {
-    /// Усреднённые данные одного шага
+    // Усреднённые данные одного шага
     uint16 data[TESTER_NUM_POINTS];
-    /// Количество измерений, находящихся в data
+    // Количество измерений, находящихся в data
     int cout;
 };
 
@@ -35,13 +35,13 @@ struct StructDATA
     uint8 y[TESTER_NUM_POINTS];
 };
 
-/// Это отрисовываемые данные - после усреднения
+// Это отрисовываемые данные - после усреднения
 static StructDATA data      __attribute__((section("CCM_DATA")));
-/// Массив накопленных усреднений
+// Массив накопленных усреднений
 static StructAVE ave[5]     __attribute__((section("CCM_DATA")));
-/// Предыдущие поданные данные
+// Предыдущие поданные данные
 static StructDATA old[5]     __attribute__((section("CCM_DATA")));
-/// Текущие поданные данные
+// Текущие поданные данные
 static StructDATA current[5] __attribute__((section("CCM_DATA")));
 
 

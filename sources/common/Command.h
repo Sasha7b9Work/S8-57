@@ -42,7 +42,7 @@ struct Command
 #define SIZE_STRING (320)
 
 
-/// »звлекает режим рисовани€ - лини€ми (1) или точками (0)
+// »звлекает режим рисовани€ - лини€ми (1) или точками (0)
 #define BUILD_MODE(modeDraw, step, enumAverage) ((uint8)(((enumAverage) << 4) + ((step) << 1) + (modeDraw)))
 
 #define EXTRACT_MODE_DRAW(x)    ((x) & 0x01)
