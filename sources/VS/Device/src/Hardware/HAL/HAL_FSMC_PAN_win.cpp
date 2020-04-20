@@ -84,3 +84,14 @@ void HAL_BUS::Panel::RunAfterInteraction(void (*)())
 {
 //    funcAfterInteraction = func;
 }
+
+void HAL_BUS::Panel::ProhibitOtherActions()
+{
+
+}
+
+
+void HAL_BUS::Panel::AllowOtherActions()
+{
+
+}

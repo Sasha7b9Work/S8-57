@@ -5,11 +5,26 @@
 #include "Device.h"
 
 
+static void OnChanged_Control(bool);
+
+
+static void OnPress_Exit()
+{
+    Menu::CloseOpenedItem();
+}
+
+
+DEF_BUTTON( bExit,
+    "Выход",
+    "",
+    &PageTester::self, Item::Active, OnPress_Exit
+)
+
+
 static void OnChanged_Polarity(bool)
 {
     Tester::LoadPolarity();
 }
-
 
 DEF_CHOICE_2( cPolarity,                                                                                                                                        //--- ТЕСТЕР - Полярность ---
     "Полярность",
@@ -34,7 +49,7 @@ DEF_CHOICE_2( cControl,                                                         
     "Тип испытательного воздействия",
     "Напряжение",
     "Ток",
-    set.test.control, &PageTester::self, Item::Active, PageTester::OnChanged_Control, Choice::AfterDraw
+    set.test.control, &PageTester::self, Item::Active, OnChanged_Control, Choice::AfterDraw
 )
 
 
@@ -97,9 +112,10 @@ static void OnOpenClose_Tester(bool enter)
 }
 
 
-DEF_PAGE_5_VAR( pTester, 
+DEF_PAGE_6_VAR( pTester, 
     "ТЕСТЕР",
     "",
+    &bExit,
     &cControl,
     &cStepU,
     &cConductivity,
@@ -111,7 +127,7 @@ DEF_PAGE_5_VAR( pTester,
 const Page * const PageTester::self = static_cast<const Page *>(&pTester);
 
 
-void PageTester::OnChanged_Control(bool)
+static void OnChanged_Control(bool)
 {
     Page *page = const_cast<Page *>(&pTester);
 
@@ -119,13 +135,13 @@ void PageTester::OnChanged_Control(bool)
 
     if (set.test.control == Tester::Control::Voltage)
     {
-        items[1] = const_cast<Choice *>(&cStepU);
-        items[2] = const_cast<Choice *>(&cPolarity);
+        items[2] = const_cast<Choice *>(&cStepU);
+        items[3] = const_cast<Choice *>(&cPolarity);
     }
     else
     {
-        items[1] = const_cast<Choice *>(&cStepI);
-        items[2] = const_cast<Choice *>(&cConductivity);
+        items[2] = const_cast<Choice *>(&cStepI);
+        items[3] = const_cast<Choice *>(&cConductivity);
     }
 
     Tester::LoadStep();
