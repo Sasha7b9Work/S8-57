@@ -205,9 +205,10 @@ static void OnOpenClose_Multimeter(bool enter)
     Device::SetMode(enter ? Device::Mode::Multimeter : Device::Mode::Osci);
 }
 
-DEF_PAGE_5_VAR( pMultimeter,
+DEF_PAGE_6_VAR( pMultimeter,
     "МУЛЬТИМЕТР",
     "Управление прибором в режиме мультиметра",
+    &bExit,
     &cMode,
     &cRangesVoltageDC,
     &cAVP,
