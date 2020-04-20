@@ -48,6 +48,11 @@ struct DataBus
 };
 
 
+static bool interactionWithPanel = false;       // true означает, что шина находится в процессе обмена с панелью и запись по обычной FSMC в альтеру и память запрещена
+static bool otherActionsAllowed = true;         // true означает, что во время приёма/передачи разрешены и другие действия, выполняемые в процессе транзакция - чтение точек в поточечном
+                                                // режиме и регистраторе
+
+
 // По активному состоянию этого пина панель определяет, что главный МК готов к взаимодействию
 static OutPin pinCS(PIN_CS);
 // По активновному состоянию этого пина панель определяте, что главный МК хочет делать передачу
@@ -60,8 +65,6 @@ static InPin pinReadyPAN(PIN_PAN_READY);
 // Активное состояние этого пина сообщает о том, что панель имеет данные для пеередчи
 static InPin pinDataPAN(PIN_PAN_DATA);
 
-// true означает, что шина находится в процессе обмена с панелью и запись по обычной FSMC в альтеру и память запрещена
-static bool interactionWithPanel = false;
 
 void HAL_BUS::InitPanel()
 {
@@ -132,13 +135,20 @@ exit:
     // \todo Если убрать отсюда эти чтения, то нужно делать задержку, потому что без такой задержки зависает
     // 
 
-    if(Device::InModeRecorder())
+    if(otherActionsAllowed)
     {
-        Recorder::ReadPoint();
-    }
-    else if(OSCI_IN_MODE_P2P)
-    {
-        Roller::ReadPoint();
+        if(Device::InModeRecorder())
+        {
+            Recorder::ReadPoint();
+        }
+        else if(OSCI_IN_MODE_P2P)
+        {
+            Roller::ReadPoint();
+        }
+        else
+        {
+            Timer::PauseOnTicks(10);
+        }
     }
     else
     {
@@ -227,19 +237,22 @@ void HAL_BUS::Panel::Send(uint8 *data, uint size)
 
     interactionWithPanel = false;
 
-    if(Device::InModeRecorder())
+    if(otherActionsAllowed)
     {
-        Recorder::ReadPoint();
-    }
-    else if(OSCI_IN_MODE_P2P)
-    {
-        Roller::ReadPoint();
-    }
+        if(Device::InModeRecorder())
+        {
+            Recorder::ReadPoint();
+        }
+        else if(OSCI_IN_MODE_P2P)
+        {
+            Roller::ReadPoint();
+        }
 
-    if(funcAfterInteraction)
-    {
-        funcAfterInteraction();
-        funcAfterInteraction = nullptr;
+        if(funcAfterInteraction)
+        {
+            funcAfterInteraction();
+            funcAfterInteraction = nullptr;
+        }
     }
 }
 
@@ -265,4 +278,16 @@ void DataBus::Init()
     GPIOD->MODER &= 0x0ffffff0U;        // Настроим пины 14, 15, 0, 1 на запись D0, D1, D2, D3
 
     GPIOE->MODER &= 0xffc03fffU;        // Настроим пины 7, 8, 9, 10 на запись D4, D5, D6, D7
+}
+
+
+void HAL_BUS::Panel::ProhibitOtherActions()
+{
+    otherActionsAllowed = false;
+}
+
+
+void HAL_BUS::Panel::AllowOtherActions()
+{
+    otherActionsAllowed = true;
 }

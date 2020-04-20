@@ -482,6 +482,8 @@ static void SaveScreenToFlash()
         return;
     }
 
+    HAL_BUS::Panel::ProhibitOtherActions();
+
 #pragma pack(1)
     struct BITMAPFILEHEADER
     {
@@ -592,6 +594,8 @@ static void SaveScreenToFlash()
     Timer::PauseOnTime(1500);
 
     Display::Message::Hide();
+
+    HAL_BUS::Panel::AllowOtherActions();
 }
 
 

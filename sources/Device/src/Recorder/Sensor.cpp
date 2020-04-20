@@ -44,8 +44,6 @@ void Sensor::Update()
 
 void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
 {
-    LOG_WRITE("USBH_UserProcess(%d)", id);
-
     switch(id)
     {
     case HOST_USER_SELECT_CONFIGURATION:

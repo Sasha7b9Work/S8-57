@@ -100,6 +100,12 @@ struct HAL_BUS
         static bool Receive();
         static bool InInteraction();
         static void RunAfterInteraction(void (*func)());
+
+        // Запретить все действия кроме указааных (т.е. чтение в поточечном режиме и регистраторе)
+        static void ProhibitOtherActions();
+
+        // Разрешить некоторые другие действия кроме указанных (чтение в поточечном режиме и регистраторе)
+        static void AllowOtherActions();
     };
 
     struct FPGA

@@ -37,9 +37,6 @@ public:
   
     static bool AppendStringToFile(const char *string);
 
-    // Сохранить изображение экрана на флешку
-    static void SaveScreen();
-
     static bool GetNameDir(const char *fuulPath, int numDir, char *nameDirOut, StructForReadDir *sfrd);
 
     static bool GetNextNameDir(char *nameDirOut, StructForReadDir *sfrd);
@@ -55,6 +52,9 @@ public:
     static bool WriteToFile(uint8 *data, int sizeData, StructForWrite *structForWrite);
 
     static bool CloseFile(StructForWrite *structForWrite);
-    
+
+    // Сохранить изображение экрана на флешку
+    static void SaveScreen();
+
     static void *handle;
 };
