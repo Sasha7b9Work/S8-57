@@ -63,8 +63,6 @@ struct Display
     /// Если экран разделён на две части и основной сигнал выводится сверху - например, в режиме вывода спектра
     static bool IsSeparate();
 
-    static void SaveScreenToDrive();
-
     static void LoadBrightness();
 
     struct Message

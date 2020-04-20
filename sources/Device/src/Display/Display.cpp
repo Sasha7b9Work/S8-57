@@ -28,8 +28,6 @@ static pFuncVV funcOnHand = nullptr;
 static uint timeStart = 0;
 static const char *textWait = 0;
 static bool clearBackground = false;
-/// true, если нужно сохранять копию экрана на флешку
-static bool needSaveScreen = false;
 /// Дополнительная функция рисования. Выполняется после стандартной отрисовки, но перед вызовом EndScene;
 volatile static pFuncVV funcAdditionDraw = EmptyFunc;
 /// true означает, что происходит процесс отрисовки
@@ -37,11 +35,8 @@ static bool inStateDraw = false;
 
 static pFuncVV funcAfterUpdateOnce = EmptyFunc;
 
-static void ReadRow(uint8 row, uint8 pixels[320]);
 /// Выполняет функцию, определённую для выполнения после отрисовки
 static void ExecuteFuncAfterUpdateOnce();
-
-static void SaveScreenToFlash();
 
 
 void Display::Init()
@@ -86,8 +81,6 @@ void Display::Update()
     inStateDraw = false;
 
     ExecuteFuncAfterUpdateOnce();
-
-    SaveScreenToFlash();
 }
 
 
@@ -286,162 +279,6 @@ uint ENumSmoothing::ToNumber()
 {
     return static_cast<uint>(set.disp.enumSmoothing + 1);
 };
-
-
-void Display::SaveScreenToDrive()
-{
-    needSaveScreen = true;
-}
-
-
-static void CreateFileName(char name[256])
-{
-    std::strcpy(name, "screen.bmp");
-}
-
-
-static void SaveScreenToFlash()
-{
-    if(!needSaveScreen)
-    {
-        return;
-    }
-
-    needSaveScreen = false;
-
-    if (!FDrive::IsConnected())
-    {
-        return;
-    }
-
-#pragma pack(1)
-    struct BITMAPFILEHEADER
-    {
-        char    type0;      // 0
-        char    type1;      // 1
-        uint    size;       // 2
-        uint16  res1;       // 6
-        uint16  res2;       // 8
-        uint    offBits;    // 10
-    }
-    bmFH =
-    {
-        0x42,
-        0x4d,
-        14 + 40 + 1024 + 320 * 240,
-        0,
-        0,
-        14 + 40 + 1024
-    };
-
-    // 14
-
-    struct BITMAPINFOHEADER
-    {
-        uint    size;           // 14
-        int     width;          // 18
-        int     height;         // 22
-        uint16  planes;         // 26
-        uint16  bitCount;       // 28
-        uint    compression;    // 30
-        uint    sizeImage;      // 34
-        int     xPelsPerMeter;  // 38
-        int     yPelsPerMeter;  // 42
-        uint    clrUsed;        // 46
-        uint    clrImportant;   // 50
-        //uint    notUsed[15];
-    }
-    bmIH =
-    {
-        40, // size;
-        320,// width;
-        240,// height;
-        1,  // planes;
-        8,  // bitCount;
-        0,  // compression;
-        0,  // sizeImage;
-        0,  // xPelsPerMeter;
-        0,  // yPelsPerMeter;
-        0,  // clrUsed;
-        0   // clrImportant;
-    };
-
-    // 54
-#pragma pack(4)
-
-    StructForWrite structForWrite;
-
-    char fileName[255];
-
-    CreateFileName(fileName);
-
-    FDrive::OpenNewFileForWrite(fileName, &structForWrite);
-
-    FDrive::WriteToFile(reinterpret_cast<uint8 *>(&bmFH), 14, &structForWrite);
-
-    FDrive::WriteToFile(reinterpret_cast<uint8 *>(&bmIH), 40, &structForWrite);
-
-    uint8 buffer[320 * 3] = { 0 };
-
-    typedef struct tagRGBQUAD
-    {
-        uint8    blue;
-        uint8    green;
-        uint8    red;
-        uint8    rgbReserved;
-    } RGBQUAD;
-
-    RGBQUAD colorStruct;
-
-    for (int i = 0; i < 32; i++)
-    {
-        uint color = COLOR(i);
-        colorStruct.blue = (uint8)((float)B_FROM_COLOR(color));
-        colorStruct.green = (uint8)((float)G_FROM_COLOR(color));
-        colorStruct.red = (uint8)((float)R_FROM_COLOR(color));
-        colorStruct.rgbReserved = 0;
-        (reinterpret_cast<RGBQUAD*>(buffer))[i] = colorStruct;
-    }
-
-    for (int i = 0; i < 4; i++)
-    {
-        FDrive::WriteToFile(buffer, 256, &structForWrite);
-    }
-
-    uint8 pixels[320];
-
-    for (int row = 239; row >= 0; row--)
-    {
-        ReadRow(static_cast<uint8>(row), pixels);
-
-        FDrive::WriteToFile(pixels, 320, &structForWrite);
-    }
-
-    FDrive::CloseFile(&structForWrite);
-
-    Display::Message::Show("Файл сохранён", false);
-
-    Timer::PauseOnTime(1500);
-
-    Display::Message::Hide();
-}
-
-
-static void ReadRow(uint8 row, uint8 pixels[320])
-{
-    while(DDecoder::Update())                       // Обрабатываем данные, которые приняты на данный момент
-    {
-    }
-
-    HAL_BUS::Panel::Send(Command::Screen, row);
-
-    while(DDecoder::BytesInBuffer() < 322)          // Ожидаем, пока панель пришлёт запрошенные байты
-    {
-        HAL_BUS::Panel::Receive();
-    }
-
-    std::memcpy(pixels, DDecoder::Buffer() + 2, 320);
-}
 
 
 void Display::LoadBrightness()

@@ -3,6 +3,7 @@
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "usbh_core.h"
+#include <stm32f4xx_hal.h>
 
 
 extern HCD_HandleTypeDef handleHCD;
