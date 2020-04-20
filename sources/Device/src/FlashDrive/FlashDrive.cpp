@@ -12,18 +12,17 @@ static USBH_HandleTypeDef handleUSBH;
 USBH_HandleTypeDef &FDrive::handle = handleUSBH;
 static FATFS USBDISKFatFs;
 static char USBDISKPath[4]; // -V112
+static bool isConnected;
+static bool needMount;
 
+static void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id);
 
-bool FDrive::isConnected = false;
-bool FDrive::needMount = false;
-
-
-/// Устанавливает текущее время для файла nameFile
+// Устанавливает текущее время для файла nameFile
 static void SetTimeForFile(const char *nameFile);
 
 
 
-void FDrive::USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
+static void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
 {
     switch(id)
     {

@@ -56,12 +56,4 @@ public:
     static bool AppendStringToFile(const char *string);
     
     static USBH_HandleTypeDef &handle;
-
-private:
-
-    static bool isConnected;
-
-    static bool needMount;
-
-    static void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id);
 };
