@@ -9,7 +9,7 @@
 
 
 static USBH_HandleTypeDef handleUSBH;
-USBH_HandleTypeDef &FDrive::handle = handleUSBH;
+void *FDrive::handle = &handleUSBH;
 static FATFS USBDISKFatFs;
 static char USBDISKPath[4]; // -V112
 static bool isConnected;
@@ -88,17 +88,17 @@ void FDrive::Init()
 {
     if(FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == FR_OK)    // -V2001
     {
-        USBH_Init(&handle, USBH_UserProcess, 0);
-        USBH_RegisterClass(&handle, USBH_MSC_CLASS);
-        USBH_Start(&handle);
+        USBH_Init(&handleUSBH, USBH_UserProcess, 0);
+        USBH_RegisterClass(&handleUSBH, USBH_MSC_CLASS);
+        USBH_Start(&handleUSBH);
     }
 }
 
 
 void FDrive::DeInit()
 {
-    USBH_Stop(&handle);
-    USBH_DeInit(&handle);
+    USBH_Stop(&handleUSBH);
+    USBH_DeInit(&handleUSBH);
     FATFS_UnLinkDriver(USBDISKPath);
 }
 
@@ -130,7 +130,7 @@ void FDrive::Update()
     }
     else
     {
-        USBH_Process(&handle);
+        USBH_Process(&handleUSBH);
     }
 }
 

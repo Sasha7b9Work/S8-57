@@ -55,5 +55,5 @@ public:
     
     static bool AppendStringToFile(const char *string);
     
-    static USBH_HandleTypeDef &handle;
+    static void *handle;
 };
