@@ -58,13 +58,13 @@ static void OnOpenClose_Recorder(bool open)
 
     if(open)
     {
-        FDrive::DeInit();
-        Sensor::Init();
+//        FDrive::DeInit();
+//        Sensor::Init();
     }
     else
     {
-        Sensor::DeInit();
-        FDrive::Init();
+//        Sensor::DeInit();
+//        FDrive::Init();
     }
 }
 
