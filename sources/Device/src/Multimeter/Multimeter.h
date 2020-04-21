@@ -11,6 +11,66 @@ struct DisplayMultimeter
 };
 
 
+// Режим измерений мультиметра
+struct MultimeterMeasure
+{
+    enum E
+    {
+        VoltageDC,
+        VoltageAC,
+        CurrentDC,
+        CurrentAC,
+        Resistance,
+        TestDiode,
+        Bell,
+        Count
+    };
+    MultimeterMeasure()
+    {
+    }
+    static MultimeterMeasure::E &Ref();
+    operator MultimeterMeasure::E()
+    {
+        return Ref();
+    }
+    static char Symbol()
+    {
+        static const char symbols[Count] = { 'U', 'V', 'I', 'J', 'R', 'Y', 'W' };
+        return symbols[Ref()]; //-V2006
+    }
+    // Получить код измерения из принятого буфера
+    static MultimeterMeasure::E GetCode(const char buffer[13]);
+    static bool IsVoltageDC()
+    {
+        return Ref() == VoltageDC;
+    }
+    static bool IsVoltageAC()
+    {
+        return Ref() == VoltageAC;
+    }
+    static bool IsResistance()
+    {
+        return Ref() == Resistance;
+    }
+    static bool IsCurrentDC()
+    {
+        return Ref() == CurrentDC;
+    }
+    static bool IsCurrentAC()
+    {
+        return Ref() == CurrentAC;
+    }
+    static bool IsTestDiode()
+    {
+        return Ref() == TestDiode;
+    }
+    static bool IsBell()
+    {
+        return Ref() == Bell;
+    }
+};
+
+
 struct Multimeter
 {
     // Инициализация
@@ -39,39 +99,6 @@ struct Multimeter
 
         static AVP::E &Ref();
         static bool IsEnabled() { return Ref() == On; }
-    };
-
-    // Режим измерений мультиметра
-    struct Measure
-    {
-        enum E
-        {
-            VoltageDC,
-            VoltageAC,
-            CurrentDC,
-            CurrentAC,
-            Resistance,
-            TestDiode,
-            Bell,
-            Count
-        };
-        Measure() {}
-        static Measure::E &Ref();
-        operator Measure::E() { return Ref(); }
-        static char Symbol()
-        {
-            static const char symbols[Count] = { 'U', 'V', 'I', 'J', 'R', 'Y', 'W' };
-            return symbols[Ref()]; //-V2006
-        }
-        // Получить код измерения из принятого буфера
-        static Measure::E GetCode(const char buffer[13]);
-        static bool IsVoltageDC()  { return Ref() == VoltageDC;  }
-        static bool IsVoltageAC()  { return Ref() == VoltageAC;  }
-        static bool IsResistance() { return Ref() == Resistance; }
-        static bool IsCurrentDC()  { return Ref() == CurrentDC;  }
-        static bool IsCurrentAC()  { return Ref() == CurrentAC;  }
-        static bool IsTestDiode()  { return Ref() == TestDiode;  }
-        static bool IsBell()       { return Ref() == Bell;       }
     };
 
     // Предел имзерения постоянного напряжения

@@ -106,17 +106,17 @@ void Multimeter::Update()
     }
     
     uint8 range = 0;
-    if(Measure::IsVoltageDC())        { range = static_cast<uint8>(RangeDC()); }
-    else if(Measure::IsVoltageAC())   { range = static_cast<uint8>(RangeAC()); }
-    else if(Measure::IsCurrentDC())   { range = static_cast<uint8>(RangeCurrentDC()); }
-    else if(Measure::IsCurrentAC())   { range = static_cast<uint8>(RangeCurrentAC()); }
-    else if(Measure::IsResistance())  { range = static_cast<uint8>(RangeResistance()); }
+    if(MultimeterMeasure::IsVoltageDC())        { range = static_cast<uint8>(RangeDC()); }
+    else if(MultimeterMeasure::IsVoltageAC())   { range = static_cast<uint8>(RangeAC()); }
+    else if(MultimeterMeasure::IsCurrentDC())   { range = static_cast<uint8>(RangeCurrentDC()); }
+    else if(MultimeterMeasure::IsCurrentAC())   { range = static_cast<uint8>(RangeCurrentAC()); }
+    else if(MultimeterMeasure::IsResistance())  { range = static_cast<uint8>(RangeResistance()); }
     else
     {
         // больше выборов нету
     }
 
-    char symbol = Measure::Symbol();
+    char symbol = MultimeterMeasure::Symbol();
 
     uint8 send[] =
     {
@@ -132,9 +132,9 @@ void Multimeter::Update()
 }
 
 
-Multimeter::Measure::E Multimeter::Measure::GetCode(const char buffer[13])
+MultimeterMeasure::E MultimeterMeasure::GetCode(const char buffer[13])
 {
-    Measure::E result = Count;
+    MultimeterMeasure::E result = Count;
 
     int pos = 0;
 
@@ -190,7 +190,7 @@ Multimeter::AVP::E &Multimeter::AVP::Ref()
 }
 
 
-Multimeter::Measure::E &Multimeter::Measure::Ref()
+MultimeterMeasure::E &MultimeterMeasure::Ref()
 {
     return set.mult.meas;
 }

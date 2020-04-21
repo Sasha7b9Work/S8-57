@@ -130,7 +130,7 @@ static void DrawGraphics()
     int x0 = 10;
     int y0 = 10;
 
-    if(Multimeter::Measure().IsTestDiode())
+    if(MultimeterMeasure().IsTestDiode())
     {
         int edge = 50;
         int delta = edge / 2;
@@ -160,7 +160,7 @@ static void DrawGraphics()
         Line(startX + delta, startY + edge / 2 + 1, endX - delta, startY + 1).Draw();
         Line(startX + delta, startY + edge / 2 + 2, endX - delta + 1, startY + 1).Draw();
     }
-    else if(Multimeter::Measure().IsBell())
+    else if(MultimeterMeasure().IsBell())
     {
         int edge = 16;
 
@@ -216,23 +216,23 @@ void DisplayMultimeter::Update()
 
 static int GetRange()
 {
-    if (Multimeter::Measure::IsVoltageDC())
+    if (MultimeterMeasure::IsVoltageDC())
     {
         return Multimeter::RangeDC();
     }
-    else if (Multimeter::Measure::IsVoltageAC())
+    else if (MultimeterMeasure::IsVoltageAC())
     {
         return Multimeter::RangeAC();
     }
-    else if (Multimeter::Measure::IsCurrentDC())
+    else if (MultimeterMeasure::IsCurrentDC())
     {
         return Multimeter::RangeCurrentDC();
     }
-    else if (Multimeter::Measure::IsCurrentAC())
+    else if (MultimeterMeasure::IsCurrentAC())
     {
         return Multimeter::RangeCurrentAC();
     }
-    else if (Multimeter::Measure::IsResistance())
+    else if (MultimeterMeasure::IsResistance())
     {
         return Multimeter::RangeResistance();
     }
@@ -247,7 +247,7 @@ void DisplayMultimeter::ChangedMode()
 
     std::memset(outBuffer, '-', 7); //-V512
 
-    static const int position[Multimeter::Measure::Count][4] =
+    static const int position[MultimeterMeasure::Count][4] =
     {
         {2, 3, 4},      // VoltageDC
         {2, 3, 4},      // VoltageAC
@@ -258,7 +258,7 @@ void DisplayMultimeter::ChangedMode()
         (2),            // Bell
     };
     
-    static const pString suffix[Multimeter::Measure::Count][4] =
+    static const pString suffix[MultimeterMeasure::Count][4] =
     {
         {"V=", "V=", "V="},                     // U=
         {"V\x7e", "V\x7e", "V\x7e"},            // U~
@@ -269,11 +269,11 @@ void DisplayMultimeter::ChangedMode()
         {"  ", "  ", "  ", "  "}                // Прозвонка
     };
 
-    outBuffer[position[Multimeter::Measure()][GetRange()]] = '.';
+    outBuffer[position[MultimeterMeasure()][GetRange()]] = '.';
     
-    std::strcpy(&outBuffer[7], suffix[Multimeter::Measure()][GetRange()]);
+    std::strcpy(&outBuffer[7], suffix[MultimeterMeasure()][GetRange()]);
     
-    if(Multimeter::Measure().IsResistance())
+    if(MultimeterMeasure().IsResistance())
     {
         outBuffer[8] = SYMBOL_OMEGA;
     }
@@ -289,7 +289,7 @@ void DisplayMultimeter::SetMeasure(const uint8 buf[13])
         pFuncVCC func;
         Func(pFuncVCC f) : func(f) {};
     }
-    funcs[Multimeter::Measure::Count] =
+    funcs[MultimeterMeasure::Count] =
     {
         PrepareConstantVoltage,
         PrepareVariableVoltage,
@@ -300,9 +300,9 @@ void DisplayMultimeter::SetMeasure(const uint8 buf[13])
         PrepareBell
     };
 
-    Multimeter::Measure::E meas = Multimeter::Measure::GetCode(reinterpret_cast<const char *>(buf));
+    MultimeterMeasure::E meas = MultimeterMeasure::GetCode(reinterpret_cast<const char *>(buf));
 
-    if (meas >= Multimeter::Measure::Count)
+    if (meas >= MultimeterMeasure::Count)
     {
         return;
     }
