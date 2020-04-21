@@ -265,11 +265,11 @@ void DisplayMultimeter::ChangedMode()
         {"  ", "  ", "  ", "  "}                // Прозвонка
     };
 
-    outBuffer[position[MultimeterMeasure()][GetRange()]] = '.';
+    outBuffer[position[set.mult.meas][GetRange()]] = '.';
     
-    std::strcpy(&outBuffer[7], suffix[MultimeterMeasure()][GetRange()]);
+    std::strcpy(&outBuffer[7], suffix[set.mult.meas][GetRange()]);
     
-    if(MultimeterMeasure().IsResistance())
+    if(set.mult.meas == MultimeterMeasure::Resistance)
     {
         outBuffer[8] = SYMBOL_OMEGA;
     }

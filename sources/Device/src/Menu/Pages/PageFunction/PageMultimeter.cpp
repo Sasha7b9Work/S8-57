@@ -19,7 +19,7 @@ DEF_BUTTON( bExit,
 
 static bool IsActive_RangesVoltageDC()
 {
-    return MultimeterMeasure::IsVoltageDC();
+    return (set.mult.meas == MultimeterMeasure::VoltageDC);
 }
 
 static void OnChange_VoltageDC(bool active)
@@ -42,7 +42,7 @@ DEF_CHOICE_3( cRangesVoltageDC,                                                 
 
 static bool IsActive_RnagesVoltageAC()
 {
-    return MultimeterMeasure::IsVoltageAC();
+    return (set.mult.meas == MultimeterMeasure::VoltageAC);
 }
 
 static void OnChange_VoltageAC(bool active)
@@ -100,7 +100,7 @@ DEF_CHOICE_2( cRangesCurrentAC,
 
 static bool IsActive_RangesReistance()
 {
-    return MultimeterMeasure::IsResistance();
+    return (set.mult.meas == MultimeterMeasure::Resistance);
 }
 
 static void OnChange_Resistance(bool active)
@@ -140,7 +140,7 @@ DEF_CHOICE_7( cMode,
     "R",
     "VD",
     "Прозвонка",
-    MultimeterMeasure::Ref(), &PageMultimeter::self, Item::Active, PageMultimeter::OnChanged_Mode, Choice::AfterDraw
+    set.mult.meas, &PageMultimeter::self, Item::Active, PageMultimeter::OnChanged_Mode, Choice::AfterDraw
 )
 
 

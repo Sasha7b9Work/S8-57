@@ -25,33 +25,10 @@ struct MultimeterMeasure
         Bell,
         Count
     };
-    MultimeterMeasure()
-    {
-    }
-    static MultimeterMeasure::E &Ref();
-    operator MultimeterMeasure::E()
-    {
-        return Ref();
-    }
-    static char Symbol()
-    {
-        static const char symbols[Count] = { 'U', 'V', 'I', 'J', 'R', 'Y', 'W' };
-        return symbols[Ref()]; //-V2006
-    }
+    static char Symbol();
+
     // Получить код измерения из принятого буфера
     static MultimeterMeasure::E GetCode(const char buffer[13]);
-    static bool IsVoltageDC()
-    {
-        return Ref() == VoltageDC;
-    }
-    static bool IsVoltageAC()
-    {
-        return Ref() == VoltageAC;
-    }
-    static bool IsResistance()
-    {
-        return Ref() == Resistance;
-    }
 };
 
 

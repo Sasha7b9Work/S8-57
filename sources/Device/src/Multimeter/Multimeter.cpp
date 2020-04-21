@@ -195,12 +195,6 @@ Multimeter::AVP::E &Multimeter::AVP::Ref()
 }
 
 
-MultimeterMeasure::E &MultimeterMeasure::Ref()
-{
-    return set.mult.meas;
-}
-
-
 Multimeter::RangeDC::E &Multimeter::RangeDC::Ref()
 {
     return set.mult.rangeVoltageDC;
@@ -228,4 +222,11 @@ Multimeter::RangeCurrentDC::E &Multimeter::RangeCurrentDC::Ref()
 Multimeter::RangeResistance::E &Multimeter::RangeResistance::Ref()
 {
     return set.mult.rangeResist;
+}
+
+
+char MultimeterMeasure::Symbol()
+{
+    static const char symbols[Count] = { 'U', 'V', 'I', 'J', 'R', 'Y', 'W' };
+    return symbols[set.mult.meas]; //-V2006
 }
