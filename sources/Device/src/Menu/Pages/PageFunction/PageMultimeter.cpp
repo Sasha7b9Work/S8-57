@@ -4,6 +4,12 @@
 #include "Device.h"
 
 
+static bool IsActive_Ranges()
+{
+    return !ModeAVP::IsEnabled();
+}
+
+
 static void OnPress_Exit()
 {
     Menu::CloseOpenedItem();
@@ -16,11 +22,6 @@ DEF_BUTTON( bExit,
     &PageMultimeter::self, Item::Active, OnPress_Exit
 )
 
-
-static bool IsActive_RangesVoltageDC()
-{
-    return (set.mult.meas == MultimeterMeasure::VoltageDC);
-}
 
 static void OnChange_VoltageDC(bool active)
 {
@@ -36,14 +37,9 @@ DEF_CHOICE_3( cRangesVoltageDC,                                                 
     "2 В",
     "20 В",
     "500 В",
-    set.mult.rangeVoltageDC, &PageMultimeter::self, IsActive_RangesVoltageDC, OnChange_VoltageDC, Choice::AfterDraw
+    set.mult.rangeVoltageDC, &PageMultimeter::self, IsActive_Ranges, OnChange_VoltageDC, Choice::AfterDraw
 )
 
-
-static bool IsActive_RnagesVoltageAC()
-{
-    return (set.mult.meas == MultimeterMeasure::VoltageAC);
-}
 
 static void OnChange_VoltageAC(bool active)
 {
@@ -59,7 +55,7 @@ DEF_CHOICE_3( cRangesVoltageAC,                                                 
     "2 В",
     "20 В",
     "400 В",
-    set.mult.rangeVoltageAC, &PageMultimeter::self, IsActive_RnagesVoltageAC, OnChange_VoltageAC, Choice::AfterDraw
+    set.mult.rangeVoltageAC, &PageMultimeter::self, IsActive_Ranges, OnChange_VoltageAC, Choice::AfterDraw
 )
 
 
@@ -77,7 +73,7 @@ DEF_CHOICE_2( cRangesCurrentDC,
     "Диапазон измерения",
     "20мА",
     "2А",
-    set.mult.rangeCurrentDC, &PageMultimeter::self, Item::Active, OnChange_CurrentDC, Choice::AfterDraw
+    set.mult.rangeCurrentDC, &PageMultimeter::self, IsActive_Ranges, OnChange_CurrentDC, Choice::AfterDraw
 )
 
 
@@ -94,14 +90,9 @@ DEF_CHOICE_2( cRangesCurrentAC,
     "Диапазон измерения",
     "20мА",
     "2А",
-    set.mult.rangeCurrentAC, &PageMultimeter::self, Item::Active, OnChange_CurrentAC, Choice::AfterDraw
+    set.mult.rangeCurrentAC, &PageMultimeter::self, IsActive_Ranges, OnChange_CurrentAC, Choice::AfterDraw
 )
 
-
-static bool IsActive_RangesReistance()
-{
-    return (set.mult.meas == MultimeterMeasure::Resistance);
-}
 
 static void OnChange_Resistance(bool active)
 {
@@ -118,7 +109,7 @@ DEF_CHOICE_4( cRangesResistance,                                                
     "20 кОм",
     "200 кОм",
     "10 МОм",
-    set.mult.rangeResist, &PageMultimeter::self, IsActive_RangesReistance, OnChange_Resistance, Choice::AfterDraw
+    set.mult.rangeResist, &PageMultimeter::self, IsActive_Ranges, OnChange_Resistance, Choice::AfterDraw
 )
 
 DEF_CHOICE_7( cMode,

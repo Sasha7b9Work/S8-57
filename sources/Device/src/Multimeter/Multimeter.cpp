@@ -82,7 +82,7 @@ void Multimeter::LoadZero(int zero)
 {
     ChangeMode();
 
-    char send[] = { 0x02, 'Z', 'E', 'R', 'O', (zero == 0) ? '0' : '1', 0x0a };
+    char send[] = { 0x02, 'N', (zero == 0) ? '0' : '1', 0x0a };
 
     USART3_::Transmit(send, 100);
 
