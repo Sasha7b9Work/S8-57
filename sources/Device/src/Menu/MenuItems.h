@@ -326,32 +326,41 @@ class Choice : public Item
 {
 public:
     Choice(const DataItem * const data) : Item(data) {};
+
     // Запускает процесс изменения значения на delta
     void  StartChange(int delta) const;
+
     // Рассчитывает следующий кадр анимации.
     float Step() const;
+    
     // Изменяет значение choice в зависимости от величины и знака delta.
     void  ChangeIndex(int delta) const;
+    
     // Возвращает количество вариантов выбора в элементе по адресу choice
     int   NumChoices() const;
 
     void  DrawOpened(int x, int y) const;
 
     void  DrawClosed(int x, int y) const;
+    
     // Возвращает имя текущего варианта выбора элемента choice, как оно записано в исходном коде программы
     String NameCurrentSubItem() const;
+    
     // Возвращает имя следующего варианта выбора элемента choice, как оно записано в исходном коде программы
     const char *NameNextSubItem() const;
 
     const char *NamePrevSubItem() const;
+    
     // Возвращает имя варианта выбора элемента choice в позиции i как оно записано в исходном коде программы
     String NameSubItem(int i) const;
 
     char GetSymbol();
 
     virtual void Draw(int x, int y, bool opened) const;
+    
     // Обработка события кнопки
     virtual bool HandlerKey(const KeyEvent &event);
+    
     // Обработка события функциональной кнопки, соответствующей данному итему
     virtual void HandlerFX(TypePress::E type) const;
 

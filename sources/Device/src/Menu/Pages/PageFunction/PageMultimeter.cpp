@@ -164,6 +164,15 @@ DEF_CHOICE_2( cZero,
 )
 
 
+DEF_CHOICE_2 (cShow,
+    "Показывать",
+    "",
+    "В режиме",
+    "Всегда",
+    set.mult.showAlways, &PageMultimeter::self, Item::Active, Choice::Changed, Choice::AfterDraw
+)
+
+
 void PageMultimeter::Init()
 {
     OnChanged_Mode(true);
@@ -204,7 +213,7 @@ static void OnOpenClose_Multimeter(bool enter)
     Device::SetMode(enter ? Device::Mode::Multimeter : Device::Mode::Osci);
 }
 
-DEF_PAGE_5_VAR( pMultimeter,
+DEF_PAGE_7_VAR( pMultimeter,
     "МУЛЬТИМЕТР",
     "Управление прибором в режиме мультиметра",
     &cMode,
@@ -212,6 +221,8 @@ DEF_PAGE_5_VAR( pMultimeter,
     &cAVP,
     &cZero,
     &bExit,
+    &cShow,
+    &Item::empty,
     PageName::Multimeter, &PageFunction::self, Item::Active, Page::NormalTitle, OnOpenClose_Multimeter, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
@@ -293,7 +304,7 @@ void PageMultimeter::DecodePassword(const KeyEvent &event)
 
             Item **items = const_cast<Item **>(page->OwnData()->items);
 
-            items[4] = const_cast<Page *>(PageMultimeter::Calibration::self);
+            items[6] = const_cast<Page *>(PageMultimeter::Calibration::self);
 
             Menu::CloseOpenedItem();
 

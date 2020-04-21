@@ -10,6 +10,7 @@ struct SettingsMultimeter
     RangeCurrentAC::E       rangeCurrentAC;     // Предел измерения переменного тока
     RangeCurrentDC::E       rangeCurrentDC;     // Предел измерения постоянного тока
     RangeResistance::E      rangeResist;
+    bool                    showAlways;         // true - показывать в режиме осциллографа тоже
 };
 
 
