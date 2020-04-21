@@ -28,19 +28,6 @@ struct Multimeter
     // Если (zero != 0) - заслать режим нуля
     static void LoadZero(int zero);
 
-    // Предел измерения переменного напряжения
-    struct RangeAC
-    {
-        enum E
-        {
-            _2V,
-            _20V,
-            _400V
-        };
-        static RangeAC::E &Ref();
-        operator RangeAC::E() { return Ref(); }
-    };
-
     // Предел измерения переменного тока
     struct RangeCurrentAC
     {
@@ -122,5 +109,17 @@ struct RangeVoltageDC
         _2V,
         _20V,
         _500V
+    };
+};
+
+
+// Предел измерения переменного напряжения
+struct RangeVoltageAC
+{
+    enum E
+    {
+        _2V,
+        _20V,
+        _400V
     };
 };

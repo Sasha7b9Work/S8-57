@@ -59,7 +59,7 @@ DEF_CHOICE_3( cRangesVoltageAC,                                                 
     "2 Â",
     "20 Â",
     "400 Â",
-    Multimeter::RangeAC::Ref(), &PageMultimeter::self, IsActive_RnagesVoltageAC, OnChange_VoltageAC, Choice::AfterDraw
+    set.mult.rangeVoltageAC, &PageMultimeter::self, IsActive_RnagesVoltageAC, OnChange_VoltageAC, Choice::AfterDraw
 )
 
 
