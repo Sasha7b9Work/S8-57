@@ -189,31 +189,20 @@ void PageMultimeter::OnChanged_Mode(bool)
     items[3] = const_cast<Choice *>(&cZero);
     items[4] = const_cast<Button* >(&bExit);
 
-    if (MultimeterMeasure::IsVoltageDC())
+    switch(set.mult.meas)
     {
-        items[1] = const_cast<Choice *>(&cRangesVoltageDC);
-    }
-    else if (MultimeterMeasure::IsVoltageAC())
-    {
-        items[1] = const_cast<Choice *>(&cRangesVoltageAC);
-    }
-    else if (MultimeterMeasure::IsCurrentDC())
-    {
-        items[1] = const_cast<Choice *>(&cRangesCurrentDC);
-    }
-    else if (set.mult.meas == MultimeterMeasure::CurrentAC)
-    {
-        items[1] = const_cast<Choice *>(&cRangesCurrentAC);
-    }
-    else if (MultimeterMeasure::IsResistance())
-    {
-        items[1] = const_cast<Choice *>(&cRangesResistance);
-    }
-    else if ((set.mult.meas == MultimeterMeasure::TestDiode) || (set.mult.meas == MultimeterMeasure::Bell))
-    {
-        items[1] = &Item::empty;
-        items[2] = &Item::empty;
-        items[3] = &Item::empty;
+    case MultimeterMeasure::VoltageDC:      items[1] = const_cast<Choice *>(&cRangesVoltageDC);       break;
+    case MultimeterMeasure::VoltageAC:      items[1] = const_cast<Choice *>(&cRangesVoltageAC);       break;
+    case MultimeterMeasure::CurrentDC:      items[1] = const_cast<Choice *>(&cRangesCurrentDC);       break;
+    case MultimeterMeasure::CurrentAC:      items[1] = const_cast<Choice *>(&cRangesCurrentAC);       break;
+    case MultimeterMeasure::Resistance:     items[1] = const_cast<Choice *>(&cRangesResistance);      break;
+    case MultimeterMeasure::TestDiode:  
+    case MultimeterMeasure::Bell:           items[1] = &Item::empty;
+                                            items[2] = &Item::empty;
+                                            items[3] = &Item::empty;                                  break;
+
+    case MultimeterMeasure::Count:
+        break;
     }
 
     Multimeter::ChangeMode();

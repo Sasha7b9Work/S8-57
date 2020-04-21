@@ -52,10 +52,6 @@ struct MultimeterMeasure
     {
         return Ref() == Resistance;
     }
-    static bool IsCurrentDC()
-    {
-        return Ref() == CurrentDC;
-    }
 };
 
 

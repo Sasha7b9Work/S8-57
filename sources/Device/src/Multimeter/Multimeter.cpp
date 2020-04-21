@@ -106,14 +106,19 @@ void Multimeter::Update()
     }
     
     uint8 range = 0;
-    if(MultimeterMeasure::IsVoltageDC())        { range = static_cast<uint8>(RangeDC()); }
-    else if(MultimeterMeasure::IsVoltageAC())   { range = static_cast<uint8>(RangeAC()); }
-    else if(MultimeterMeasure::IsCurrentDC())   { range = static_cast<uint8>(RangeCurrentDC()); }
-    else if(set.mult.meas == MultimeterMeasure::CurrentAC)   { range = static_cast<uint8>(RangeCurrentAC()); }
-    else if(MultimeterMeasure::IsResistance())  { range = static_cast<uint8>(RangeResistance()); }
-    else
+
+    switch(set.mult.meas)
     {
-        // больше выборов нету
+    case MultimeterMeasure::VoltageDC:   range = static_cast<uint8>(RangeDC());          break;
+    case MultimeterMeasure::VoltageAC:   range = static_cast<uint8>(RangeAC());          break;
+    case MultimeterMeasure::CurrentDC:   range = static_cast<uint8>(RangeCurrentDC());   break;
+    case MultimeterMeasure::CurrentAC:   range = static_cast<uint8>(RangeCurrentAC());   break;
+    case MultimeterMeasure::Resistance:  range = static_cast<uint8>(RangeResistance());  break;
+
+    case MultimeterMeasure::TestDiode:
+    case MultimeterMeasure::Bell:
+    case MultimeterMeasure::Count:
+        break;
     }
 
     char symbol = MultimeterMeasure::Symbol();
