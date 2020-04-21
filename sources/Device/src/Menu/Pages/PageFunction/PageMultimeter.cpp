@@ -184,6 +184,11 @@ void PageMultimeter::OnChanged_Mode(bool)
 
     Item **items = const_cast<Item **>(page->OwnData()->items);
 
+    items[1] = const_cast<Choice *>(&cRangesVoltageDC);
+    items[2] = const_cast<Choice *>(&cAVP);
+    items[3] = const_cast<Choice *>(&cZero);
+    items[4] = const_cast<Button* >(&bExit);
+
     if (Multimeter::Measure::IsVoltageDC())
     {
         items[1] = const_cast<Choice *>(&cRangesVoltageDC);
@@ -204,9 +209,11 @@ void PageMultimeter::OnChanged_Mode(bool)
     {
         items[1] = const_cast<Choice *>(&cRangesResistance);
     }
-    else if (Multimeter::Measure::IsTestDiode())
+    else if (Multimeter::Measure::IsTestDiode() || Multimeter::Measure::IsBell())
     {
-        items[1] = nullptr;
+        items[1] = &Item::empty;
+        items[2] = &Item::empty;
+        items[3] = &Item::empty;
     }
 
     Multimeter::ChangeMode();
