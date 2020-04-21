@@ -11,51 +11,6 @@ struct DisplayMultimeter
 };
 
 
-// Режим измерений мультиметра
-struct MultimeterMeasure
-{
-    enum E
-    {
-        VoltageDC,
-        VoltageAC,
-        CurrentDC,
-        CurrentAC,
-        Resistance,
-        TestDiode,
-        Bell,
-        Count
-    };
-    static char Symbol();
-
-    // Получить код измерения из принятого буфера
-    static MultimeterMeasure::E GetCode(const char buffer[13]);
-};
-
-// АВП - автовыбор предела
-struct AVP
-{
-    enum E
-    {
-        Off,
-        On
-    };
-
-    static bool IsEnabled();
-};
-
-
-// Предел имзерения постоянного напряжения
-struct RangeDC
-{
-    enum E
-    {
-        _2V,
-        _20V,
-        _500V
-    };
-};
-
-
 struct Multimeter
 {
     // Инициализация
@@ -122,5 +77,50 @@ struct Multimeter
         };
         static RangeResistance::E &Ref();
         operator RangeResistance::E() { return Ref(); }
+    };
+};
+
+
+// Режим измерений мультиметра
+struct MultimeterMeasure
+{
+    enum E
+    {
+        VoltageDC,
+        VoltageAC,
+        CurrentDC,
+        CurrentAC,
+        Resistance,
+        TestDiode,
+        Bell,
+        Count
+    };
+    static char Symbol();
+
+    // Получить код измерения из принятого буфера
+    static MultimeterMeasure::E GetCode(const char buffer[13]);
+};
+
+// АВП - автовыбор предела
+struct AVP
+{
+    enum E
+    {
+        Off,
+        On
+    };
+
+    static bool IsEnabled();
+};
+
+
+// Предел имзерения постоянного напряжения
+struct RangeVoltageDC
+{
+    enum E
+    {
+        _2V,
+        _20V,
+        _500V
     };
 };
