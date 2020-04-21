@@ -54,7 +54,7 @@ struct MultimeterMeasure
 };
 
 // АВП - автовыбор предела
-struct AVP
+struct ModeAVP
 {
     enum E
     {

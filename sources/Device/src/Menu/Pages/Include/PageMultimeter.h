@@ -3,7 +3,7 @@
 
 struct SettingsMultimeter
 {
-    AVP::E                  avp;
+    ModeAVP::E              avp;
     MultimeterMeasure::E    meas;
     RangeVoltageDC::E       rangeVoltageDC;
     RangeVoltageAC::E       rangeVoltageAC;

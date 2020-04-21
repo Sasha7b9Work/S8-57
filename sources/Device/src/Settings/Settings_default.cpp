@@ -181,32 +181,32 @@ const Settings Settings::defaultSettings =
 
     // Настройки мультиметра
     {
-        AVP::Off,                               // avp
-        MultimeterMeasure::VoltageDC,           // meas
-        RangeVoltageDC::_2V,                    // rangeCV
-        RangeVoltageAC::_2V,                    // rangeVV
-        RangeCurrentAC::_2A,                    // rangeCurrentAC
-        RangeCurrentDC::_2A,                    // rangeCurrentDC
-        RangeResistance::_10M                   // rangeResist
+        ModeAVP::Off,                   // avp
+        MultimeterMeasure::VoltageDC,   // meas
+        RangeVoltageDC::_2V,            // rangeCV
+        RangeVoltageAC::_2V,            // rangeVV
+        RangeCurrentAC::_2A,            // rangeCurrentAC
+        RangeCurrentDC::_2A,            // rangeCurrentDC
+        RangeResistance::_10M           // rangeResist
     },
 
     // Настройки регистратора
     {
-        true,                                   // sourceChanA
-        true,                                   // sourceChanB
-        false,                                  // sourceSensor
-        Recorder::TypeMemory::RAM,              // typeMemory
-        Recorder::Axis::X,                      // axisMove
-        Recorder::Axis::X,                      // axisZoom
-        Recorder::ScaleX::_100ms,               // scaleX
-        0                                       // currentCursor
+        true,                           // sourceChanA
+        true,                           // sourceChanB
+        false,                          // sourceSensor
+        Recorder::TypeMemory::RAM,      // typeMemory
+        Recorder::Axis::X,              // axisMove
+        Recorder::Axis::X,              // axisZoom
+        Recorder::ScaleX::_100ms,       // scaleX
+        0                               // currentCursor
     },
 
     // Меню СЕРВИС
     {
-        Calibrator::Mode::Freq,                 // calibratorMode
-        0,                                      // soundVolume
-        false                                   // showInfoVoltage
+        Calibrator::Mode::Freq,         // calibratorMode
+        0,                              // soundVolume
+        false                           // showInfoVoltage
     },
         
     // Меню ОТЛАДКА
