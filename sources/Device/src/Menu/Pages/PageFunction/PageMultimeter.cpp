@@ -201,7 +201,7 @@ void PageMultimeter::OnChanged_Mode(bool)
     {
         items[1] = const_cast<Choice *>(&cRangesCurrentDC);
     }
-    else if (MultimeterMeasure::IsCurrentAC())
+    else if (set.mult.meas == MultimeterMeasure::CurrentAC)
     {
         items[1] = const_cast<Choice *>(&cRangesCurrentAC);
     }
@@ -209,7 +209,7 @@ void PageMultimeter::OnChanged_Mode(bool)
     {
         items[1] = const_cast<Choice *>(&cRangesResistance);
     }
-    else if (MultimeterMeasure::IsTestDiode() || MultimeterMeasure::IsBell())
+    else if ((set.mult.meas == MultimeterMeasure::TestDiode) || (set.mult.meas == MultimeterMeasure::Bell))
     {
         items[1] = &Item::empty;
         items[2] = &Item::empty;

@@ -56,18 +56,6 @@ struct MultimeterMeasure
     {
         return Ref() == CurrentDC;
     }
-    static bool IsCurrentAC()
-    {
-        return Ref() == CurrentAC;
-    }
-    static bool IsTestDiode()
-    {
-        return Ref() == TestDiode;
-    }
-    static bool IsBell()
-    {
-        return Ref() == Bell;
-    }
 };
 
 

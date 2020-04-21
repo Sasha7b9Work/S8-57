@@ -130,7 +130,7 @@ static void DrawGraphics()
     int x0 = 10;
     int y0 = 10;
 
-    if(MultimeterMeasure().IsTestDiode())
+    if(set.mult.meas == MultimeterMeasure::TestDiode)
     {
         int edge = 50;
         int delta = edge / 2;
@@ -160,7 +160,7 @@ static void DrawGraphics()
         Line(startX + delta, startY + edge / 2 + 1, endX - delta, startY + 1).Draw();
         Line(startX + delta, startY + edge / 2 + 2, endX - delta + 1, startY + 1).Draw();
     }
-    else if(MultimeterMeasure().IsBell())
+    else if(set.mult.meas == MultimeterMeasure::Bell)
     {
         int edge = 16;
 
@@ -216,28 +216,24 @@ void DisplayMultimeter::Update()
 
 static int GetRange()
 {
-    if (MultimeterMeasure::IsVoltageDC())
+    int result = 0;
+    
+    switch(set.mult.meas)
     {
-        return Multimeter::RangeDC();
-    }
-    else if (MultimeterMeasure::IsVoltageAC())
-    {
-        return Multimeter::RangeAC();
-    }
-    else if (MultimeterMeasure::IsCurrentDC())
-    {
-        return Multimeter::RangeCurrentDC();
-    }
-    else if (MultimeterMeasure::IsCurrentAC())
-    {
-        return Multimeter::RangeCurrentAC();
-    }
-    else if (MultimeterMeasure::IsResistance())
-    {
-        return Multimeter::RangeResistance();
+    case MultimeterMeasure::VoltageDC:    result = Multimeter::RangeDC();           break;
+    case MultimeterMeasure::VoltageAC:    result = Multimeter::RangeAC();           break;
+    case MultimeterMeasure::CurrentDC:    result = Multimeter::RangeCurrentDC();    break;
+    case MultimeterMeasure::CurrentAC:    result = Multimeter::RangeCurrentAC();    break;
+    case MultimeterMeasure::Resistance:   result = Multimeter::RangeResistance();   break;
+
+    case MultimeterMeasure::Bell:
+    case MultimeterMeasure::TestDiode:
+    case MultimeterMeasure::Count:
+        break;
     }
 
-    return 0;
+
+    return result;
 }
 
 
