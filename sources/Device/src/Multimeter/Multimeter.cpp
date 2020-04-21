@@ -111,8 +111,8 @@ void Multimeter::Update()
     {
     case MultimeterMeasure::VoltageDC:   range = static_cast<uint8>(set.mult.rangeVoltageDC);   break;
     case MultimeterMeasure::VoltageAC:   range = static_cast<uint8>(set.mult.rangeVoltageAC);   break;
-    case MultimeterMeasure::CurrentDC:   range = static_cast<uint8>(RangeCurrentDC());          break;
-    case MultimeterMeasure::CurrentAC:   range = static_cast<uint8>(RangeCurrentAC());          break;
+    case MultimeterMeasure::CurrentDC:   range = static_cast<uint8>(set.mult.rangeCurrentDC);   break;
+    case MultimeterMeasure::CurrentAC:   range = static_cast<uint8>(set.mult.rangeCurrentAC);   break;
     case MultimeterMeasure::Resistance:  range = static_cast<uint8>(RangeResistance());         break;
 
     case MultimeterMeasure::TestDiode:
@@ -186,18 +186,6 @@ static void ReceiveCallback()
 {
     DisplayMultimeter::SetMeasure(bufferUART);
     USART3_::StartReceiveIT(bufferUART);
-}
-
-
-Multimeter::RangeCurrentAC::E &Multimeter::RangeCurrentAC::Ref()
-{
-    return set.mult.rangeCurrentAC;
-}
-
-
-Multimeter::RangeCurrentDC::E &Multimeter::RangeCurrentDC::Ref()
-{
-    return set.mult.rangeCurrentDC;
 }
 
 
