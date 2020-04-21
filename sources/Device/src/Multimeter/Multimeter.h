@@ -31,6 +31,18 @@ struct MultimeterMeasure
     static MultimeterMeasure::E GetCode(const char buffer[13]);
 };
 
+// АВП - автовыбор предела
+struct AVP
+{
+    enum E
+    {
+        Off,
+        On
+    };
+
+    static bool IsEnabled();
+};
+
 
 struct Multimeter
 {
@@ -48,19 +60,6 @@ struct Multimeter
     static void ChangeAVP();
     // Если (zero != 0) - заслать режим нуля
     static void LoadZero(int zero);
-
-    // АВП - автовыбор предела
-    struct AVP
-    {
-        enum E
-        {
-            Off,
-            On
-        };
-
-        static AVP::E &Ref();
-        static bool IsEnabled() { return Ref() == On; }
-    };
 
     // Предел имзерения постоянного напряжения
     struct RangeDC

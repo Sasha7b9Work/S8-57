@@ -189,12 +189,6 @@ static void ReceiveCallback()
 }
 
 
-Multimeter::AVP::E &Multimeter::AVP::Ref()
-{
-    return set.mult.avp;
-}
-
-
 Multimeter::RangeDC::E &Multimeter::RangeDC::Ref()
 {
     return set.mult.rangeVoltageDC;
@@ -229,4 +223,10 @@ char MultimeterMeasure::Symbol()
 {
     static const char symbols[Count] = { 'U', 'V', 'I', 'J', 'R', 'Y', 'W' };
     return symbols[set.mult.meas]; //-V2006
+}
+
+
+bool AVP::IsEnabled()
+{
+    return set.mult.avp == AVP::On;
 }
