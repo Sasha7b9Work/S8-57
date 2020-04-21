@@ -3,13 +3,13 @@
 
 struct SettingsMultimeter
 {
-    AVP::E                          avp;
-    MultimeterMeasure::E            meas;
-    RangeVoltageDC::E               rangeVoltageDC;
-    RangeVoltageAC::E               rangeVoltageAC;
-    RangeCurrentAC::E               rangeCurrentAC;     // Предел измерения переменного тока
-    RangeCurrentDC::E               rangeCurrentDC;     // Предел измерения постоянного тока
-    Multimeter::RangeResistance::E  rangeResist;
+    AVP::E                  avp;
+    MultimeterMeasure::E    meas;
+    RangeVoltageDC::E       rangeVoltageDC;
+    RangeVoltageAC::E       rangeVoltageAC;
+    RangeCurrentAC::E       rangeCurrentAC;     // Предел измерения переменного тока
+    RangeCurrentDC::E       rangeCurrentDC;     // Предел измерения постоянного тока
+    RangeResistance::E      rangeResist;
 };
 
 

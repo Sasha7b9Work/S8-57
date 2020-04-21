@@ -4,6 +4,7 @@
 struct DisplayMultimeter
 {
     static void Update();
+    
     // Через эту функцию поступает измерение от прибора
     static void SetMeasure(const uint8 buffer[13]);
 
@@ -19,28 +20,16 @@ struct Multimeter
     static void DeInit();
 
     static void Update();
+    
     // Сообщает мультиметру, что произошло изменение режима и нужно дождаться результата измерения перед выводом
     static void ChangeMode();
 
     static void Calibrate(int calibr);
 
     static void ChangeAVP();
+    
     // Если (zero != 0) - заслать режим нуля
     static void LoadZero(int zero);
-
-    // Предел измерения сопротивленя постоянному току
-    struct RangeResistance
-    {
-        enum E
-        {
-            _2k,
-            _20k,
-            _200k,
-            _10M
-        };
-        static RangeResistance::E &Ref();
-        operator RangeResistance::E() { return Ref(); }
-    };
 };
 
 
@@ -119,5 +108,18 @@ struct RangeCurrentDC
     {
         _20mA,
         _2A
+    };
+};
+
+
+// Предел измерения сопротивленя постоянному току
+struct RangeResistance
+{
+    enum E
+    {
+        _2k,
+        _20k,
+        _200k,
+        _10M
     };
 };

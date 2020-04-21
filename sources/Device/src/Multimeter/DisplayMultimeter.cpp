@@ -220,11 +220,11 @@ static int GetRange()
     
     switch(set.mult.meas)
     {
-    case MultimeterMeasure::VoltageDC:    result = set.mult.rangeVoltageDC;         break;
-    case MultimeterMeasure::VoltageAC:    result = set.mult.rangeVoltageAC;         break;
-    case MultimeterMeasure::CurrentDC:    result = set.mult.rangeCurrentDC;         break;
-    case MultimeterMeasure::CurrentAC:    result = set.mult.rangeCurrentAC;         break;
-    case MultimeterMeasure::Resistance:   result = Multimeter::RangeResistance();   break;
+    case MultimeterMeasure::VoltageDC:    result = set.mult.rangeVoltageDC;     break;
+    case MultimeterMeasure::VoltageAC:    result = set.mult.rangeVoltageAC;     break;
+    case MultimeterMeasure::CurrentDC:    result = set.mult.rangeCurrentDC;     break;
+    case MultimeterMeasure::CurrentAC:    result = set.mult.rangeCurrentAC;     break;
+    case MultimeterMeasure::Resistance:   result = set.mult.rangeResist;        break;
 
     case MultimeterMeasure::Bell:
     case MultimeterMeasure::TestDiode:
