@@ -183,6 +183,37 @@ static void DrawGraphics()
         VLine(3 * edge + 4).Draw(x + edge * 2 + 1, y - edge - 2);
         VLine(3 * edge + 6).Draw(x + edge * 2 + 2, y - edge - 3);
     }
+    
+    if(PageMultimeter::ZeroEnabled() || (set.mult.avp == ModeAVP::On))
+    {
+        int x = 10;
+        int y = 145;
+
+        int dX = 6;
+        int dY = 6;
+
+        int width = 60;
+        int height = 36;
+
+        if(PageMultimeter::ZeroEnabled())
+        {
+            width = 69;
+            height = 43;
+        }
+
+        Rectangle(width, height).Draw(x, y, Color::FILL);
+
+        DFont::Set(DTypeFont::_GOST28);
+        int spacing = DFont::GetSpacing();
+        DFont::SetSpacing(3);
+
+        char *text = PageMultimeter::ZeroEnabled() ? "Íóëü" : "ÀÂÏ";
+
+        Text(text).Draw(x + dX, y + dY);
+
+        DFont::Pop();
+        DFont::SetSpacing(spacing);
+    }
 }
 
 

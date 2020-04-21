@@ -10,15 +10,15 @@
 #include "Menu/Pages/Include/PageFunction.h"
 
 
-typedef enum
+enum DIRECTION
 {
     NONE,
     INCREASE,
     DECREASE
-} DIRECTION;
+};
 
 // Структура используется для анимации элементов ГУИ Choice и Governor
-typedef struct
+struct TimeStruct
 {
     void       *address;    // Адрес элемента. Если 0 - не движется
     uint        timeStart;  // Время начала анимации в миллисекундах
@@ -26,7 +26,7 @@ typedef struct
     uint8       notUsed0;
     uint8       notUsed1;
     uint8       notUsed2;
-} TimeStruct;
+};
 
 static TimeStruct tsChoice = { 0, 0, NONE, 0, 0, 0 };
 
@@ -709,11 +709,14 @@ void Choice::HandlerFX(TypePress::E type) const
     }
     else if (type == TypePress::Long)
     {
-        if (!IsCurrentItem())
+        if(IsActive())
         {
-            SetCurrent(true);
+            if(!IsCurrentItem())
+            {
+                SetCurrent(true);
+            }
+            Open(!IsOpened());
         }
-        Open(!IsOpened());
     }
 }
 

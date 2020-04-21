@@ -135,9 +135,46 @@ DEF_CHOICE_7( cMode,
 )
 
 
-static void OnChanged_AVP(bool)
+static bool IsActive_Zero()
 {
-    Multimeter::ChangeAVP();
+    return (set.mult.avp == ModeAVP::Off);
+}
+
+static int8 zero = 0;
+
+static void OnChanged_Zero(bool active)
+{
+    if(active)
+    {
+        Multimeter::LoadZero(zero);
+    }
+}
+
+DEF_CHOICE_2(cZero,
+    "Нуль",
+    "",
+    DISABLE_RU,
+    ENABLE_RU,
+    zero, &PageMultimeter::self, IsActive_Zero, OnChanged_Zero, Choice::AfterDraw
+)
+
+bool PageMultimeter::ZeroEnabled()
+{
+    return (zero != 0);
+}
+
+
+static bool IsActive_AVP()
+{
+    return (zero == 0);
+}
+
+static void OnChanged_AVP(bool active)
+{
+    if(active)
+    {
+        Multimeter::ChangeAVP();
+    }
 }
 
 DEF_CHOICE_2 ( cAVP,
@@ -145,22 +182,7 @@ DEF_CHOICE_2 ( cAVP,
     "Автовыбор предела",
     DISABLE_RU,
     ENABLE_RU,
-    set.mult.avp, &PageMultimeter::self, Item::Active, OnChanged_AVP, Choice::AfterDraw
-)
-
-static int8 zero = 0;
-
-static void OnChanged_Zero(bool)
-{
-    Multimeter::LoadZero(zero);
-}
-
-DEF_CHOICE_2( cZero,
-    "Нуль",
-    "",
-    DISABLE_RU,
-    ENABLE_RU,
-    zero, &PageMultimeter::self, Item::Active, OnChanged_Zero, Choice::AfterDraw
+    set.mult.avp, &PageMultimeter::self, IsActive_AVP, OnChanged_AVP, Choice::AfterDraw
 )
 
 
