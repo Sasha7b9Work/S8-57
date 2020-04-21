@@ -6,12 +6,12 @@
 #include <cstdlib>
 
 
-#define WREN    BIN_U8(00000110)        ///< Set Write Enable Latch
-#define WRDI    BIN_U8(00000100)        ///< Reset Write Enable Latch
-#define RDSR    BIN_U8(00000101)        ///< Read Status Register
-#define READ    BIN_U8(00000011)        ///< Read Data from Memory Array
-#define WRITE   BIN_U8(00000010)        ///< Write Data to Memory Array
-#define WRSR    BIN_U8(00000001)        ///< Write Status Register
+#define WREN    BIN_U8(00000110)        // Set Write Enable Latch
+#define WRDI    BIN_U8(00000100)        // Reset Write Enable Latch
+#define RDSR    BIN_U8(00000101)        // Read Status Register
+#define READ    BIN_U8(00000011)        // Read Data from Memory Array
+#define WRITE   BIN_U8(00000010)        // Write Data to Memory Array
+#define WRSR    BIN_U8(00000001)        // Write Status Register
 
 
 

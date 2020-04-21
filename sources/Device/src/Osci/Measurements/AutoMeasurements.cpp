@@ -23,7 +23,7 @@ static float CalculateVoltageRMS(Chan::E ch);
 static float CalculateVoltageVybrosPlus(Chan::E ch);
 static float CalculateVoltageVybrosMinus(Chan::E ch);
 static float CalculatePeriod(Chan::E ch);
-static int   CalculatePeriodAccurately(Chan::E ch); ///< “очно вычисл€ет период или целое число периодов в точках сигнала.
+static int   CalculatePeriodAccurately(Chan::E ch); // “очно вычисл€ет период или целое число периодов в точках сигнала.
 static float CalculateFreq(Chan::E ch);
 static float CalculateTimeNarastaniya(Chan::E ch);
 static float CalculateTimeSpada(Chan::E ch);
@@ -33,11 +33,11 @@ static float CalculateSkvaznostPlus(Chan::E ch);
 static float CalculateSkvaznostMinus(Chan::E ch);
 
 
-static float CalculateMinRel(Chan::E ch);           ///< ¬озвращает минимальное значение относительного сигнала.
-static float CalculateMinSteadyRel(Chan::E ch);     ///< ¬озвращает минимальное установившеес€ значение относительного сигнала.
-static float CalculateMaxRel(Chan::E ch);           ///< ¬озвращает максимальное значение относительного сигнала.
-static float CalculateMaxSteadyRel(Chan::E ch);     ///< ¬озвращает максимальное установившеес€ значение относительного сигнала.
-static float CalculateAverageRel(Chan::E ch);       ///< ¬озвращает среденее значение относительного сигнала.
+static float CalculateMinRel(Chan::E ch);           // ¬озвращает минимальное значение относительного сигнала.
+static float CalculateMinSteadyRel(Chan::E ch);     // ¬озвращает минимальное установившеес€ значение относительного сигнала.
+static float CalculateMaxRel(Chan::E ch);           // ¬озвращает максимальное значение относительного сигнала.
+static float CalculateMaxSteadyRel(Chan::E ch);     // ¬озвращает максимальное установившеес€ значение относительного сигнала.
+static float CalculateAverageRel(Chan::E ch);       // ¬озвращает среденее значение относительного сигнала.
 static float CalculatePicRel(Chan::E ch);
 static float CalculateDelayPlus(Chan::E ch);
 static float CalculateDelayMinus(Chan::E ch);
@@ -49,7 +49,7 @@ static float FindIntersectionWithHorLine(Chan::E ch, int numIntersection, bool d
 // ƒелить val1 на val2. ¬озвращает nan, если результат неопределЄн
 static float Divide(float val1, float val2);
 
-static bool isSet = false;          ///< ≈сли true, то сигнал назначен.
+static bool isSet = false;          // ≈сли true, то сигнал назначен.
 
 static int firstByte = 0;
 static int lastByte = 0;
@@ -65,7 +65,7 @@ typedef struct
     const char *name;
     pFuncFCh    FuncCalculate;
     pFuncPCFBPC FucnConvertate;
-    bool        showSign;           ///< ≈сли true, нужно показывать знак.
+    bool        showSign;           // ≈сли true, нужно показывать знак.
     uint8       notUsed0[3];
 } MeasureCalculate;
 

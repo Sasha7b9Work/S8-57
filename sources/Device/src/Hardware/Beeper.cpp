@@ -13,8 +13,8 @@ static float frequency = 0.0F;
 static float amplitude = 0.0F;
 static TypeWave::E typeWave = TypeWave::Sine;
 static bool soundWarnIsBeep = false;
-static bool buttonIsPressed = false;    ///< \brief Когда запускается звук нажатой кнопки, устанавливается этот флаг, чтобы знать, проигрывать ли знак 
-                                        ///< отпускания
+static bool buttonIsPressed = false;    // \brief Когда запускается звук нажатой кнопки, устанавливается этот флаг, чтобы знать, проигрывать ли знак 
+                                        // отпускания
 static volatile bool isBeep = false;
 
 static bool bellIsEnabled = false;

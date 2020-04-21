@@ -43,12 +43,12 @@ public:
 
     static Color Cursors(Chan ch);
     static Color Trig();
-    static Color ChanAccum(Chan ch);     ///< Цвет канала в режиме накопления
-    static Color MenuItem(bool shade);      ///< Цвет элемента меню.
-    static Color MenuTitle(bool shade);     ///< Цвет заголовка страницы. inShade == true, если страница затенена
-    static Color BorderMenu(bool shade);    ///< Цвет окантовки меню
-    static Color LightShadingText();        ///< Светлый цвет в тени.
-    static Color Contrast(Color color);     ///< Возвращает цвет, контрастный к color. Может быть белым или чёрным.
+    static Color ChanAccum(Chan ch);     // Цвет канала в режиме накопления
+    static Color MenuItem(bool shade);      // Цвет элемента меню.
+    static Color MenuTitle(bool shade);     // Цвет заголовка страницы. inShade == true, если страница затенена
+    static Color BorderMenu(bool shade);    // Цвет окантовки меню
+    static Color LightShadingText();        // Светлый цвет в тени.
+    static Color Contrast(Color color);     // Возвращает цвет, контрастный к color. Может быть белым или чёрным.
     
     uint8 value;
 
@@ -70,7 +70,7 @@ public:
         COLOR_MENU_ITEM = 9,
         COLOR_MENU_ITEM_DARK = 10,
         COLOR_MENU_ITEM_BRIGHT = 11,
-        COLOR_DATA_WHITE_ACCUM_A = 12,   ///< Используется как для отрисовки канала на белом фоне, так и для отрисовки накопленных сигналов
+        COLOR_DATA_WHITE_ACCUM_A = 12,   // Используется как для отрисовки канала на белом фоне, так и для отрисовки накопленных сигналов
         COLOR_DATA_WHITE_ACCUM_B = 13,
         COLOR_GRID_WHITE = 14,
         COLOR_EMPTY = 15,

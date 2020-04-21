@@ -31,9 +31,9 @@ public:
     {
         enum E
         {
-            RAM,    ///< ÎÇÓ
-            ROM,    ///< Âíóòð ÇÓ
-            EXT     ///< Âíåøí ÇÓ
+            RAM,    // ÎÇÓ
+            ROM,    // Âíóòð ÇÓ
+            EXT     // Âíåøí ÇÓ
         };
         static TypeMemory::E &Ref();
     };

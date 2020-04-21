@@ -23,13 +23,13 @@ private:
 
 struct SettingsChannel
 { //-V802
-    int16               rShift;              ///< Сдвиг канала по вертикали
-    Range::E            range;               ///< Масштаб канала по вертикали
-    ModeCouple::E       couple;              ///< Связь по входу
-    bool                enabled;             ///< Включен/выключен канал
-    Bandwidth::E        bandwidth;           ///< Ограничение полосы
+    int16               rShift;              // Сдвиг канала по вертикали
+    Range::E            range;               // Масштаб канала по вертикали
+    ModeCouple::E       couple;              // Связь по входу
+    bool                enabled;             // Включен/выключен канал
+    Bandwidth::E        bandwidth;           // Ограничение полосы
     bool                inverse;
-    Divider::E          divider;             ///< Множитель
+    Divider::E          divider;             // Множитель
 };
 
 

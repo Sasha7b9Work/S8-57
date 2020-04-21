@@ -26,7 +26,7 @@ typedef void(*pFuncVV)(void);
 
 #define ERROR_VALUE_UINT8 255
 
-#define TIME_UPDATE_KEYBOARD 2   ///< Время между опросами клавиатуры
+#define TIME_UPDATE_KEYBOARD 2   // Время между опросами клавиатуры
 
 
 #ifdef WIN32

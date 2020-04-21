@@ -159,8 +159,8 @@ struct LinkingRShift
 {
     enum E
     {
-        Voltage,      ///< Смещение привязано к напряжению
-        Position      ///< Смещение привязано к позиции
+        Voltage,      // Смещение привязано к напряжению
+        Position      // Смещение привязано к позиции
     };
 
     static LinkingRShift::E &Ref();
@@ -171,12 +171,12 @@ struct MenuAutoHide
 {
     enum E
     {
-        None = 0,   ///< Никогда.
-        _5 = 5,   ///< Через 5 секунд.
-        _10 = 10,  ///< Через 10 секунд.
-        _15 = 15,  ///< Через 15 секунд.
-        _30 = 30,  ///< Через 30 секунд.
-        _60 = 60   ///< Через 60 секунд.
+        None = 0,   // Никогда.
+        _5 = 5,   // Через 5 секунд.
+        _10 = 10,  // Через 10 секунд.
+        _15 = 15,  // Через 15 секунд.
+        _30 = 30,  // Через 30 секунд.
+        _60 = 60   // Через 60 секунд.
     };
 
     MenuAutoHide() {};
@@ -188,21 +188,21 @@ struct MenuAutoHide
 struct SettingsDisplay
 { //-V802
     DisplayMapping::E      mapping;
-    ENumMinMax::E          enumMinMax;            ///< Перечисление количества измерений для определения минимумов и масимумов.
+    ENumMinMax::E          enumMinMax;            // Перечисление количества измерений для определения минимумов и масимумов.
     uint8                  _;
-    ENumAverage::E         enumAverage;           ///< Число усреднений сигнала.
-    ENumAccum::E           enumAccum;             ///< Число накоплений сигнала на экране.
-    ModeAccumulation::E    modeAccumulation;      ///< Режим накопления сигналов.
-    ENumSmoothing::E       enumSmoothing;         ///< Перечисление количества точек для скользящего фильтра.
-    ENumSignalsInSec::E    enumSignalsInSec;      ///< Перечисление числа считываний сигнала в секунда.
-    TypeGrid::E            typeGrid;              ///< Тип сетки
-    LinkingRShift::E       linkingRShift;         ///< Тип привязки к смещению по вертикали.
-    uint8                  brightness;            ///< Яркость дисплея.
-    MenuAutoHide::E        menuAutoHide;          ///< Через сколько времени после последнего нажатия клавиши прятать меню.
-    int16                  shiftInMemory;         ///< \brief Показывает смещение левого края стеки относительно нулевого байта памяти в 
-                                                  ///< байтах. Т.е. для пикового детектора будет в два раза больше количества точек на экране.
-    Chan::E                lastAffectedChannel;   ///< \brief Последний управляемый канал. Используется для правильного вывода сигналов
-                                                  ///< на экран с наложением один поверх другого
+    ENumAverage::E         enumAverage;           // Число усреднений сигнала.
+    ENumAccum::E           enumAccum;             // Число накоплений сигнала на экране.
+    ModeAccumulation::E    modeAccumulation;      // Режим накопления сигналов.
+    ENumSmoothing::E       enumSmoothing;         // Перечисление количества точек для скользящего фильтра.
+    ENumSignalsInSec::E    enumSignalsInSec;      // Перечисление числа считываний сигнала в секунда.
+    TypeGrid::E            typeGrid;              // Тип сетки
+    LinkingRShift::E       linkingRShift;         // Тип привязки к смещению по вертикали.
+    uint8                  brightness;            // Яркость дисплея.
+    MenuAutoHide::E        menuAutoHide;          // Через сколько времени после последнего нажатия клавиши прятать меню.
+    int16                  shiftInMemory;         // \brief Показывает смещение левого края стеки относительно нулевого байта памяти в 
+                                                  // байтах. Т.е. для пикового детектора будет в два раза больше количества точек на экране.
+    Chan::E                lastAffectedChannel;   // \brief Последний управляемый канал. Используется для правильного вывода сигналов
+                                                  // на экран с наложением один поверх другого
     void SetLastAffectedChannel(Chan::E ch)
     {
         lastAffectedChannel = ch;

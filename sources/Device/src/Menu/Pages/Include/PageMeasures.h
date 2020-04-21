@@ -14,13 +14,13 @@ struct MeasuresOnDisplay
 {
     enum E
     {
-        _1,      ///< 1 измерение слева внизу.
-        _2,      ///< 2 измерения слева внизу.
-        _1_5,    ///< 1 строка с 5 измерениями.
-        _2_5,    ///< 2 строки по 5 измерений.
-        _3_5,    ///< 3 строки по 5 измерений.
-        _6_1,    ///< 6 строк по 1 измерению.
-        _6_2     ///< 6 строк по 2 измерения.
+        _1,      // 1 измерение слева внизу.
+        _2,      // 2 измерения слева внизу.
+        _1_5,    // 1 строка с 5 измерениями.
+        _2_5,    // 2 строки по 5 измерений.
+        _3_5,    // 3 строки по 5 измерений.
+        _6_1,    // 6 строк по 1 измерению.
+        _6_2     // 6 строк по 2 измерения.
     };
     MeasuresOnDisplay() {};
     operator MeasuresOnDisplay::E();
@@ -47,8 +47,8 @@ struct MeasuresModeViewSignals
 {
     enum E
     {
-        AsIs,       ///< Показывать сигналы как есть.
-        Compress    ///< Сжимать сетку с сигналами.
+        AsIs,       // Показывать сигналы как есть.
+        Compress    // Сжимать сетку с сигналами.
     };
 
     static bool IsCompress();
@@ -57,12 +57,12 @@ struct MeasuresModeViewSignals
 
 struct SettingsAutoMeasures
 {
-    bool                        show;              ///< Показывать ли измерения.
-    MeasuresOnDisplay::E        number;            ///< Сколько измерений выводить.
-    MeasuresSource::E           source;            ///< Для каких каналов выводить измерения.
-    MeasuresModeViewSignals::E  modeViewSignals;   ///< Сжимать ли сигналы при выводе измерений.
-    TypeMeasure::E              measures[15];      ///< Выбранные для индикации измерения.
-    TypeMeasure::E              marked;            ///< Измерение, на которое нужно выводить маркеры.
+    bool                        show;              // Показывать ли измерения.
+    MeasuresOnDisplay::E        number;            // Сколько измерений выводить.
+    MeasuresSource::E           source;            // Для каких каналов выводить измерения.
+    MeasuresModeViewSignals::E  modeViewSignals;   // Сжимать ли сигналы при выводе измерений.
+    TypeMeasure::E              measures[15];      // Выбранные для индикации измерения.
+    TypeMeasure::E              marked;            // Измерение, на которое нужно выводить маркеры.
 };
 
 
@@ -72,10 +72,10 @@ struct CursorsLookMode
 {
     enum E
     {
-        None,      ///< Курсоры не следят.
-        Voltage,   ///< Курсоры следят за напряжением автоматически.
-        Time,      ///< Курсоры следят за временем автоматически.
-        Both       ///< Курсоры следят за временем и напряжением, в зависимости от того, какой курсоры вращали последним.
+        None,      // Курсоры не следят.
+        Voltage,   // Курсоры следят за напряжением автоматически.
+        Time,      // Курсоры следят за временем автоматически.
+        Both       // Курсоры следят за временем и напряжением, в зависимости от того, какой курсоры вращали последним.
     };
 
     static CursorsLookMode::E &Ref(Chan::E);
@@ -115,10 +115,10 @@ struct CursorsControl
 {
     enum E
     {
-        _1,        ///< первым
-        _2,        ///< вторым
-        Both,      ///< обоими
-        Disabled    ///< никаким
+        _1,        // первым
+        _2,        // вторым
+        Both,      // обоими
+        Disabled    // никаким
     };
 
     static CursorsControl::E &RefU(Chan::E ch);
@@ -138,8 +138,8 @@ struct CursorsMovement
 {
     enum E
     {
-        Pixels,    ///< По пикселям экрана
-        Percents   ///< По процентам
+        Pixels,    // По пикселям экрана
+        Percents   // По процентам
     };
 
     static CursorsMovement::E &Ref();
@@ -150,18 +150,18 @@ struct CursorsMovement
 
 struct SettingsCursorsMeasures
 {
-    bool               showCursors;             ///< Показывать ли курсоры.
-    CursorsLookMode::E lookMode[Chan::Count];   ///< Режимы слежения за курсорами для двух пар курсоров.
-    bool               showFreq;                ///< Установленное в true значение, что нужно показывать на экране 1/dT между курсорами.
-    CursorsActive::E   active;                  ///< Какие курсоры сейас активны.
-    Chan::E            source;                  ///< Источник - к какому каналу относятся курсоры.
-    CursorsControl::E  cntrlU[Chan::Count];     ///< Активные курсоры напряжения.
-    CursorsControl::E  cntrlT[Chan::Count];     ///< Активные курсоры времени.
-    CursorsMovement::E movement;                ///< Как перемещаться курсорам - по точкам или процентам.
-    float              deltaU100percents[2];    ///< Расстояние между курсорами напряжения для 100%, для обоих каналов.
-    float              deltaT100percents[2];    ///< Расстояние между курсорами времени для 100%, для обоих каналов.
-    float              posCurU[Chan::Count][2]; ///< Текущие позиции курсоров напряжения обоих каналов.
-    float              posCurT[Chan::Count][2]; ///< Текущие позиции курсоров времени обоих каналов.
+    bool               showCursors;             // Показывать ли курсоры.
+    CursorsLookMode::E lookMode[Chan::Count];   // Режимы слежения за курсорами для двух пар курсоров.
+    bool               showFreq;                // Установленное в true значение, что нужно показывать на экране 1/dT между курсорами.
+    CursorsActive::E   active;                  // Какие курсоры сейас активны.
+    Chan::E            source;                  // Источник - к какому каналу относятся курсоры.
+    CursorsControl::E  cntrlU[Chan::Count];     // Активные курсоры напряжения.
+    CursorsControl::E  cntrlT[Chan::Count];     // Активные курсоры времени.
+    CursorsMovement::E movement;                // Как перемещаться курсорам - по точкам или процентам.
+    float              deltaU100percents[2];    // Расстояние между курсорами напряжения для 100%, для обоих каналов.
+    float              deltaT100percents[2];    // Расстояние между курсорами времени для 100%, для обоих каналов.
+    float              posCurU[Chan::Count][2]; // Текущие позиции курсоров напряжения обоих каналов.
+    float              posCurT[Chan::Count][2]; // Текущие позиции курсоров времени обоих каналов.
 };
 
 
@@ -211,9 +211,9 @@ struct ModeRegSet
 
 struct SettingsMath
 { //-V802
-    FuncModeDraw::E modeDraw;       ///< Раздельный или общий дисплей в режиме математической функции.
+    FuncModeDraw::E modeDraw;       // Раздельный или общий дисплей в режиме математической функции.
     MathFunction::E function;
-    ModeRegSet::E   modeRegSet;     ///< Функция ручки УСТАНОВКА - масштаб по времени или смещение по вертикали.
+    ModeRegSet::E   modeRegSet;     // Функция ручки УСТАНОВКА - масштаб по времени или смещение по вертикали.
     int8            divider;
     int16           rShift;
     Range::E        range;

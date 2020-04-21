@@ -60,9 +60,9 @@ struct TrigStartMode
 {
     enum E
     {
-        Auto,     ///< Автоматический.
-        Wait,     ///< Ждущий.
-        Single,   ///< Однократный.
+        Auto,     // Автоматический.
+        Wait,     // Ждущий.
+        Single,   // Однократный.
         Count
     };
     TrigStartMode() {}
@@ -81,11 +81,11 @@ struct SettingsTrig
     TrigInput::E     input;
     TrigPolarity::E  polarity;
     int16            level[Chan::Count];
-    TrigStartMode::E startMode;         ///< Режим запуска.
-    TrigModeFind::E  modeFind;          ///< Поиск синхронизации - вручную или автоматически.
+    TrigStartMode::E startMode;         // Режим запуска.
+    TrigModeFind::E  modeFind;          // Поиск синхронизации - вручную или автоматически.
                                         // \todo разрядности trig_holdOff недостаточно
-    int16            holdOff;           ///< Удержание синхронизации
-    bool             holdOffEnabled;    ///< Включение удержания синхронизации
+    int16            holdOff;           // Удержание синхронизации
+    bool             holdOffEnabled;    // Включение удержания синхронизации
 };
 
 

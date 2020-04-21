@@ -5,8 +5,8 @@ struct ScaleFFT
 {
     enum E
     {
-        Log,           ///< Это значение означает логарифмическую шкалу вывода спектра.
-        Linear         ///< Это значение означает линейную шкалу вывода спектра.
+        Log,           // Это значение означает логарифмическую шкалу вывода спектра.
+        Linear         // Это значение означает линейную шкалу вывода спектра.
     };
     static ScaleFFT::E &Ref();
     static bool IsLog() { return Ref() == Log; }
@@ -64,12 +64,12 @@ struct MaxDBFFT
 struct SettingsFFT
 { //-V802
     bool            enabled;
-    uint8           posCur[2];      ///< Позиция курсора спектра. Изменяется 0...256.
+    uint8           posCur[2];      // Позиция курсора спектра. Изменяется 0...256.
     ScaleFFT::E     scale;
     SourceFFT::E    source;
     WindowFFT::E    window;
     MaxDBFFT::E     maxDB;
-    uint8           cursor;         ///< Определяет, каким курсором спектра управляет ручка УСТАНОВКА.
+    uint8           cursor;         // Определяет, каким курсором спектра управляет ручка УСТАНОВКА.
 };
 
 

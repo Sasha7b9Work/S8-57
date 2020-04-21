@@ -76,7 +76,7 @@ private:
         _NONE = 9,
         COLOR_MENU_ITEM_DARK = 10,
         COLOR_MENU_ITEM_BRIGHT = 11,
-        COLOR_DATA_WHITE_ACCUM_A = 12,   ///< Используется как для отрисовки канала на белом фоне, так и для отрисовки накопленных сигналов
+        COLOR_DATA_WHITE_ACCUM_A = 12,   // Используется как для отрисовки канала на белом фоне, так и для отрисовки накопленных сигналов
         COLOR_DATA_WHITE_ACCUM_B = 13,
         COLOR_RED = 14,
         COLOR_GREEN = 15,
