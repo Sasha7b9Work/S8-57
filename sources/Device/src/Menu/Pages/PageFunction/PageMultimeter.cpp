@@ -4,6 +4,18 @@
 #include "Device.h"
 
 
+static void OnPress_Exit()
+{
+    Menu::CloseOpenedItem();
+}
+
+
+DEF_BUTTON( bExit,
+    "¬ыход",
+    "",
+    &PageMultimeter::self, Item::Active, OnPress_Exit
+)
+
 
 static bool IsActive_RangesVoltageDC()
 {
@@ -205,15 +217,14 @@ static void OnOpenClose_Multimeter(bool enter)
     Device::SetMode(enter ? Device::Mode::Multimeter : Device::Mode::Osci);
 }
 
-DEF_PAGE_6_VAR( pMultimeter,
+DEF_PAGE_5_VAR( pMultimeter,
     "ћ”Ћ№“»ћ≈“–",
     "”правление прибором в режиме мультиметра",
-    &bExit,
     &cMode,
     &cRangesVoltageDC,
     &cAVP,
     &cZero,
-    &Item::empty,
+    &bExit,
     PageName::Multimeter, &PageFunction::self, Item::Active, Page::NormalTitle, OnOpenClose_Multimeter, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 

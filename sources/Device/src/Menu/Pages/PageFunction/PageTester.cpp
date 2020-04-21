@@ -115,11 +115,11 @@ static void OnOpenClose_Tester(bool enter)
 DEF_PAGE_6_VAR( pTester, 
     "реяреп",
     "",
-    &bExit,
     &cControl,
     &cStepU,
     &cConductivity,
     &cViewMode,
+    &bExit,
     &cAveraging,
     PageName::Tester, &PageFunction::self, Item::Active, Page::NormalTitle, OnOpenClose_Tester, Page::BeforeDraw, Page::HandlerKeyEvent
 )
@@ -135,13 +135,13 @@ static void OnChanged_Control(bool)
 
     if (set.test.control == Tester::Control::Voltage)
     {
-        items[2] = const_cast<Choice *>(&cStepU);
-        items[3] = const_cast<Choice *>(&cPolarity);
+        items[1] = const_cast<Choice *>(&cStepU);
+        items[2] = const_cast<Choice *>(&cPolarity);
     }
     else
     {
-        items[2] = const_cast<Choice *>(&cStepI);
-        items[3] = const_cast<Choice *>(&cConductivity);
+        items[1] = const_cast<Choice *>(&cStepI);
+        items[2] = const_cast<Choice *>(&cConductivity);
     }
 
     Tester::LoadStep();
