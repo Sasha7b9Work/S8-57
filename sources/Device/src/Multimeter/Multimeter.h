@@ -44,6 +44,18 @@ struct AVP
 };
 
 
+// Предел имзерения постоянного напряжения
+struct RangeDC
+{
+    enum E
+    {
+        _2V,
+        _20V,
+        _500V
+    };
+};
+
+
 struct Multimeter
 {
     // Инициализация
@@ -60,19 +72,6 @@ struct Multimeter
     static void ChangeAVP();
     // Если (zero != 0) - заслать режим нуля
     static void LoadZero(int zero);
-
-    // Предел имзерения постоянного напряжения
-    struct RangeDC
-    {
-        enum E
-        {
-            _2V,
-            _20V,
-            _500V
-        };
-        static RangeDC::E &Ref();
-        operator RangeDC::E() { return Ref(); }
-    };
 
     // Предел измерения переменного напряжения
     struct RangeAC
