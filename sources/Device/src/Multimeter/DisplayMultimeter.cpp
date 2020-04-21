@@ -140,11 +140,25 @@ static void DrawGraphics()
         int endX = startX + length;
         int startY = y0 + 150;
 
-        HLine(length).Draw(startX, startY, Color::FILL);
-        VLine(edge).Draw(startX + delta, startY - edge / 2);
-        VLine(edge).Draw(endX - delta, startY - edge / 2);
+        HLine(length).Draw(startX, startY - 1, Color::FILL);
+        HLine(length).Draw(startX, startY);
+        HLine(length).Draw(startX, startY + 1);
+
+        VLine(edge + 6).Draw(startX + delta - 1, startY - edge / 2 - 3);
+        VLine(edge + 2).Draw(startX + delta, startY - edge / 2 - 1);
+        VLine(edge).Draw(startX + delta + 1, startY - edge / 2);
+
+        VLine(edge + 6).Draw(endX - delta, startY - edge / 2 - 3);
+        VLine(edge + 6).Draw(endX - delta + 1, startY - edge / 2 - 3);
+        VLine(edge + 6).Draw(endX - delta + 2, startY - edge / 2 - 3);
+
+        Line(startX + delta, startY - edge / 2 - 2, endX - delta + 1, startY - 1).Draw();
+        Line(startX + delta, startY - edge / 2 - 1, endX - delta, startY - 1).Draw();
         Line(startX + delta, startY - edge / 2, endX - delta, startY).Draw();
+
         Line(startX + delta, startY + edge / 2, endX - delta, startY).Draw();
+        Line(startX + delta, startY + edge / 2 + 1, endX - delta, startY + 1).Draw();
+        Line(startX + delta, startY + edge / 2 + 2, endX - delta + 1, startY + 1).Draw();
     }
     else if(Multimeter::Measure().IsBell())
     {
@@ -154,9 +168,20 @@ static void DrawGraphics()
         int y = y0 + 135;
 
         Rectangle(edge, edge).Draw(x, y, Color::FILL);
+        Rectangle(edge + 2, edge + 2).Draw(x - 1, y - 1);
+        Rectangle(edge + 4, edge + 4).Draw(x - 2, y - 2);
+
+        Line(x + edge, y - 1, x + edge * 2, y - edge - 1).Draw();
         Line(x + edge, y, x + edge * 2, y - edge).Draw();
+        Line(x + edge, y + 1, x + edge * 2, y - edge + 1).Draw();
+
+        Line(x + edge, y + edge - 1, x + edge * 2, y + edge * 2 - 1).Draw();
         Line(x + edge, y + edge, x + edge * 2, y + edge * 2).Draw();
+        Line(x + edge, y + edge + 1, x + edge * 2, y + edge * 2 + 1).Draw();
+
         VLine(3 * edge).Draw(x + edge * 2, y - edge);
+        VLine(3 * edge + 4).Draw(x + edge * 2 + 1, y - edge - 2);
+        VLine(3 * edge + 6).Draw(x + edge * 2 + 2, y - edge - 3);
     }
 }
 
