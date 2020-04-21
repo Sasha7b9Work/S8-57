@@ -51,6 +51,18 @@ DEF_GRAPH_BUTTON_HINTS_2( bStart,                                               
 )
 
 
+static void OnPress_Exit()
+{
+    Menu::CloseOpenedItem();
+}
+
+
+DEF_BUTTON(bExit,
+    "Выход",
+    "",
+    &PageRecorder::self, Item::Active, OnPress_Exit
+)
+
 
 static void OnOpenClose_Recorder(bool open)
 {
@@ -74,8 +86,8 @@ DEF_PAGE_5( pRecorder,                                                          
     PageRecorder::Source::self,
     PageRecorder::Show::self,
     &Item::empty,
-    &Item::empty,
     &bStart,
+    &bExit,
     PageName::Recorder, &PageFunction::self, Item::Active, Page::NormalTitle, OnOpenClose_Recorder, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 

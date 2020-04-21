@@ -115,26 +115,19 @@ void FDrive::Update()
 {
     if (needMount)      // Если обнаружено физическое подключение внешнего диска
     {
-        uint timeStart = TIME_MS;
         needMount = 0;
-
-        Display::Message::Show("Обнаружено запоминающее устройство", false);
 
         if (f_mount(&USBDISKFatFs, static_cast<TCHAR const*>(USBDISKPath), 1) != FR_OK)
         {
-            Display::ShowWarning("Не могу прочитать флешку. Убедитесь, что на ней FAT32");
+            DISPLAY_SHOW_WARNING("Не могу прочитать флешку. Убедитесь, что на ней FAT32");
         }
         else
         {
+            DISPLAY_SHOW_WARNING("Обнаружено запоминающее устройство");
             isConnected = true;
             FileManager::Init();
             Menu::ChangeStateFlashDrive();
         }
-        while (TIME_MS - timeStart < 3000)
-        {
-        };
-
-        Display::Message::Hide();
     }
     else
     {
@@ -589,11 +582,8 @@ static void SaveScreenToFlash()
 
     FDrive::CloseFile(&structForWrite);
 
-    Display::Message::Show("Файл сохранён", false);
+    DISPLAY_SHOW_WARNING("Файл сохранён");
 
-    Timer::PauseOnTime(1500);
-
-    Display::Message::Hide();
 
     HAL_BUS::Panel::AllowOtherActions();
 }
