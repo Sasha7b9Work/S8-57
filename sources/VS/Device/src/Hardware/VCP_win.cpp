@@ -16,6 +16,7 @@ void VCP::Init()
 
 }
 
+
 void VCP::SendDataAsynch(const uint8 *text, uint)
 {
     ConsoleSCPI::Self()->AddText(reinterpret_cast<const char *>(text));

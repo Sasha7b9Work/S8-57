@@ -24,7 +24,7 @@ void HAL_BUS::Init()
 }
 
 
-void HAL_BUS::Panel::Send(uint8 *data, uint num)
+void HAL_BUS::Panel::Send(const uint8 *data, uint num)
 {
     if(data == nullptr)
     {

@@ -172,7 +172,7 @@ void HAL_BUS::Panel::Send(uint8 byte0, uint8 byte1)
     Send(buffer, 2);
 }
 
-void HAL_BUS::Panel::Send(uint8 *data, uint size)
+void HAL_BUS::Panel::Send(const uint8 *data, uint size)
 {
     HAL_IWDG_REFRESH;
 
