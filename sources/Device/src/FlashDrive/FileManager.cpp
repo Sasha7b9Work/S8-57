@@ -91,11 +91,11 @@ static void DrawDirs(int x, int y)
     if (FDrive::GetNameDir(currentDir, numFirstDir, nameDir, &sfrd))
     {
         int  drawingDirs = 0;
-        DrawLongString(x, y, nameDir, FM_CURSOR_IN_DIRS && ( numFirstDir == numCurDir));
+        DrawLongString(x, y, nameDir, (FM_CURSOR_IN_DIRS != 0) && ( numFirstDir == numCurDir));
         while (drawingDirs < (RECS_ON_PAGE - 1) && FDrive::GetNextNameDir(nameDir, &sfrd))
         {
             drawingDirs++;
-            DrawLongString(x, y + drawingDirs * 9, nameDir, FM_CURSOR_IN_DIRS && ( numFirstDir + drawingDirs == numCurDir));
+            DrawLongString(x, y + drawingDirs * 9, nameDir, (FM_CURSOR_IN_DIRS != 0) && ( numFirstDir + drawingDirs == numCurDir));
         }
     }
 }
@@ -110,11 +110,11 @@ static void DrawFiles(int x, int y)
     if (FDrive::GetNameFile(currentDir, numFirstFile, nameFile, &sfrd))
     {
         int drawingFiles = 0;
-        DrawLongString(x, y, nameFile, !FM_CURSOR_IN_DIRS && (numFirstFile == numCurFile));
+        DrawLongString(x, y, nameFile, (FM_CURSOR_IN_DIRS == 0) && (numFirstFile == numCurFile));
         while (drawingFiles < (RECS_ON_PAGE - 1) && FDrive::GetNextNameFile(nameFile, &sfrd))
         {
             drawingFiles++;
-            DrawLongString(x, y + drawingFiles * 9, nameFile, !FM_CURSOR_IN_DIRS && (numFirstFile + drawingFiles == numCurFile));
+            DrawLongString(x, y + drawingFiles * 9, nameFile, (FM_CURSOR_IN_DIRS == 0) && (numFirstFile + drawingFiles == numCurFile));
         }
     }
 }
@@ -150,7 +150,7 @@ static void DrawNameCurrentDir(int left, int top) //-V2506
 
 void FileManager::Draw() //-V2506
 {
-    if (!FM_NEED_REDRAW)
+    if (FM_NEED_REDRAW == 0)
     {
         return;
     }
@@ -196,7 +196,7 @@ void FileManager::Draw() //-V2506
 void FileManager::Press_LevelDown() //-V2506
 {
     FM_NEED_REDRAW = FM_REDRAW_FULL;
-    if (!FM_CURSOR_IN_DIRS)
+    if (FM_CURSOR_IN_DIRS == 0)
     {
         return;
     }

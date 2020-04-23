@@ -63,50 +63,41 @@ static int8_t CDC_Itf_Control (uint8 cmd, uint8* pbuf, uint16)
     switch (cmd)
     {
     case CDC_SEND_ENCAPSULATED_COMMAND:
-        /* Add your code here */
         break;
         
     case CDC_GET_ENCAPSULATED_RESPONSE:
-        /* Add your code here */
         break;
 
     case CDC_SET_COMM_FEATURE:
-        /* Add your code here */
         break;
 
     case CDC_GET_COMM_FEATURE:
-        /* Add your code here */
         break;
 
     case CDC_CLEAR_COMM_FEATURE:
-        /* Add your code here */
         break;
 
     case CDC_SET_LINE_CODING:
-        LineCoding.bitrate    = (uint32_t)(pbuf[0] | (pbuf[1] << 8) |\
-                                (pbuf[2] << 16) | (pbuf[3] << 24));
+        LineCoding.bitrate    = static_cast<uint32_t>(pbuf[0] | (pbuf[1] << 8) | (pbuf[2] << 16) | (pbuf[3] << 24));
         LineCoding.format     = pbuf[4];
         LineCoding.paritytype = pbuf[5];
         LineCoding.datatype   = pbuf[6];
         break;
 
     case CDC_GET_LINE_CODING:
-        pbuf[0] = (uint8_t)(LineCoding.bitrate);
-        pbuf[1] = (uint8_t)(LineCoding.bitrate >> 8);
-        pbuf[2] = (uint8_t)(LineCoding.bitrate >> 16);
-        pbuf[3] = (uint8_t)(LineCoding.bitrate >> 24);
+        pbuf[0] = static_cast<uint8_t>(LineCoding.bitrate);
+        pbuf[1] = static_cast<uint8_t>(LineCoding.bitrate >> 8);
+        pbuf[2] = static_cast<uint8_t>(LineCoding.bitrate >> 16);
+        pbuf[3] = static_cast<uint8_t>(LineCoding.bitrate >> 24);
         pbuf[4] = LineCoding.format;
         pbuf[5] = LineCoding.paritytype;
         pbuf[6] = LineCoding.datatype;
-        /* Add your code here */
         break;
 
     case CDC_SET_CONTROL_LINE_STATE:
-        /* Add your code here */
         break;
 
     case CDC_SEND_BREAK:
-        /* Add your code here */
         break;    
     
     default:
@@ -117,7 +108,7 @@ static int8_t CDC_Itf_Control (uint8 cmd, uint8* pbuf, uint16)
 }
 
 
-static int8_t CDC_Itf_Receive(uint8 *buffer, uint *length)
+static int8_t CDC_Itf_Receive(uint8 *buffer, uint *length) //-V2009 //-V2558
 {
     SCPI::AppendNewData(reinterpret_cast<const char *>(buffer), *length);
 

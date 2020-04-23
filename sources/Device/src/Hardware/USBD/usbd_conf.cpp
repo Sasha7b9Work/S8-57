@@ -143,7 +143,7 @@ USBD_StatusTypeDef  USBD_LL_Init (USBD_HandleTypeDef *pdev)
   
     if(pdev->id == VCP::DEVICE_FS)
     {
-        PCD_HandleTypeDef *handlePCD = (PCD_HandleTypeDef *)VCP::HandlePCD();
+        PCD_HandleTypeDef *handlePCD = reinterpret_cast<PCD_HandleTypeDef *>(VCP::handlePCD);
         // Link The driver to the stack
         handlePCD->pData = pdev;
         pdev->pData = handlePCD;

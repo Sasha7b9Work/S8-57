@@ -30,11 +30,11 @@ public:
 
     static void Flush();
 
-    static void *HandlePCD();
-
     static bool connectedToUSB;
 
     static bool cableUSBisConnected;
 
     static void *handleUSBD;
+
+    static void *handlePCD;
 };

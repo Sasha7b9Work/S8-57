@@ -148,7 +148,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
     if(uwCaptureNumber >= 2)
     {
         /* Compute the period length */
-        uwPeriodValue = (uint16_t)(0xFFFF - tmpCC4[0] + tmpCC4[1] + 1);
+        uwPeriodValue = static_cast<uint16_t>(0xFFFF - tmpCC4[0] + tmpCC4[1] + 1);
         uwMeasurementDone = 1;
         uwCaptureNumber = 0;
     }
@@ -160,7 +160,7 @@ void EXTI15_10_IRQHandler(void)
     /* As the following address is invalid (not mapped), a Hardfault exception
     will be generated with an infinite loop and when the WWDG counter falls to 63
     the WWDG reset occurs */
-    *(__IO uint32_t *) 0xA0002000 = 0xFF; //-V566
+    *reinterpret_cast<__IO uint32_t *>(0xA0002000U) = 0xFF; //-V566
 }
 
 

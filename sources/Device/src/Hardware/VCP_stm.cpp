@@ -12,9 +12,10 @@
 
 
 USBD_HandleTypeDef hUSBD;
-PCD_HandleTypeDef  handlePCD;
+PCD_HandleTypeDef  hPCD;
 
 void *VCP::handleUSBD = &hUSBD;
+void *VCP::handlePCD = &hPCD;
 bool VCP::cableUSBisConnected = false;
 bool VCP::connectedToUSB = false;
 
@@ -30,12 +31,6 @@ void VCP::Init()
     USBD_RegisterClass(&hUSBD, &USBD_CDC);
     USBD_CDC_RegisterInterface(&hUSBD, &USBD_CDC_fops);
     USBD_Start(&hUSBD);
-}
-
-
-void *VCP::HandlePCD()
-{
-    return static_cast<void *>(&handlePCD);
 }
 
 

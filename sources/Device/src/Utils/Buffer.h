@@ -16,7 +16,7 @@ public:
     uint Size() const { return size; }
 
     void Log();
-    static void LogU8(uint8 *buffer);
+    static void LogU8(const uint8 *buffer);
 private:
     uint size;
     void Free();

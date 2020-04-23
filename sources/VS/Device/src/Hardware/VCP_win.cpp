@@ -16,12 +16,6 @@ void VCP::Init()
 
 }
 
-void *VCP::HandlePCD()
-{
-    return static_cast<void *>(&handlePCD);
-}
-
-
 void VCP::SendDataAsynch(const uint8 *text, uint)
 {
     ConsoleSCPI::Self()->AddText(reinterpret_cast<const char *>(text));
