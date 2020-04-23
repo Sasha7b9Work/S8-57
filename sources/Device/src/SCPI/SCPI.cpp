@@ -177,7 +177,7 @@ static bool RemoveSymbolsBeforeSeparator()
 {
     bool result = false;
 
-    while (data.Size() && !IsBeginCommand(data[0]))
+    while ((data.Size() != 0) && !IsBeginCommand(data[0]))
     {
         badSymbols.Append(data[0]);
         data.RemoveFromBegin(1);

@@ -33,7 +33,7 @@ void Roller::Prepare()
 
 void Roller::ReadPoint()
 {
-    if (FPGA::IsRunning() && HAL_PIO::Read(PIN_P2P))
+    if (FPGA::IsRunning() && (HAL_PIO::Read(PIN_P2P) != 0))
     {
         HAL_BUS::FPGA::SetAddrData(RD::DATA_A, RD::DATA_A + 1);
         BitSet16 dataA(HAL_BUS::FPGA::ReadA0(), HAL_BUS::FPGA::ReadA1());

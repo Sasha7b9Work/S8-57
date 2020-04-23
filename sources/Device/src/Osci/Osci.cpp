@@ -580,7 +580,7 @@ bool Gates::Calculate(uint16 value, uint16 *min, uint16 *max)
         return true;
     }
 
-    if(minGate == 0.0F) //-V550
+    if(minGate == 0.0F) //-V550 //-V2550
     {
         *min = m.Min();
         *max = m.Max();
@@ -623,7 +623,7 @@ void Gates::RecalculateGates()
 
 void Gates::CalculateWithoutGates(uint16 *min, uint16 *max)
 {
-    if(minGate == 0.0F) //-V550
+    if(minGate == 0.0F) //-V550 //-V2550
     {
         *min = m.Min();
         *max = m.Max();

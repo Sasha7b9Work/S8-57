@@ -61,7 +61,7 @@ struct Packet
 
     bool IsValid()
     {
-        return (uint8*)this >= ExtRAM::Begin() && (uint8*)this < ExtRAM::End();
+        return reinterpret_cast<uint8*>(this) >= ExtRAM::Begin() && reinterpret_cast<uint8*>(this) < ExtRAM::End();
     }
 
     void Trace(uint)
@@ -167,7 +167,7 @@ void RAM::Init()
 
 DataSettings *RAM::PrepareForNewData()
 {
-    if(OSCI_IN_MODE_RANDOMIZER && NumberDatas() && !needNewFrame)
+    if(OSCI_IN_MODE_RANDOMIZER && (NumberDatas() != 0) && !needNewFrame)
     {
         return Get();
     }
@@ -193,7 +193,7 @@ DataSettings *RAM::PrepareForNewData()
 
     result->timeMS = TIME_MS;
 
-    if(OSCI_IN_MODE_RANDOMIZER && NumberDatas())
+    if(OSCI_IN_MODE_RANDOMIZER && (NumberDatas() != 0))
     {
         if(result->IsEquals(*Get(1)))
         {

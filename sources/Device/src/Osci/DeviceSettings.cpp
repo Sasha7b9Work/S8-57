@@ -138,7 +138,7 @@ void PackedTime::ChangeYear(int delta)
 }
 
 
-void DataSettings::CopyDataFrom(DataSettings *source)
+void DataSettings::CopyDataFrom(const DataSettings *source)
 {
     uint numBytes = Math::Min(BytesInChannel(), source->BytesInChannel());
 
