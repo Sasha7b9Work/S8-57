@@ -85,7 +85,7 @@ SettingsNRST *SectorNRST::GetSaved() const
 {
     Packet *last = LastPacket();
 
-    return last->IsEmpty() ? nullptr : reinterpret_cast<SettingsNRST *>(last);
+    return (last && last->IsEmpty()) ? nullptr : reinterpret_cast<SettingsNRST *>(last);
 }
 
 
