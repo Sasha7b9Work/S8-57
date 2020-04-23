@@ -56,7 +56,7 @@ static void DrawChar(uint numSymbol, int x)
     {
         y -= 10;
 
-        Pixel().Draw(x, y + 42);
+//        Pixel().Draw(x, y + 42);
 
     }
     else if(symbols[0] == '+')
@@ -68,9 +68,9 @@ static void DrawChar(uint numSymbol, int x)
 
     if(symbols[0] == '-')
     {
-        Region(5, 5).Fill(x + 31, y + 41, Color::BACK);
-        Pixel().Draw(x + 30, y + 41);
-        Pixel().Draw(x + 30, y + 46);
+//        Region(5, 5).Fill(x + 31, y + 41, Color::BACK);
+//        Pixel().Draw(x + 30, y + 41);
+//        Pixel().Draw(x + 30, y + 46);
     }
 
     Color::FILL.SetAsCurrent();
