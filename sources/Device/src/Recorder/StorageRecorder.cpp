@@ -41,7 +41,8 @@ void BufferMissingPoints::Pop(BitSet16 *a, BitSet16 *b)
 
     if(last == first)
     {
-        last = first = 0;
+        last = 0;
+        first = 0;
     }
 }
 

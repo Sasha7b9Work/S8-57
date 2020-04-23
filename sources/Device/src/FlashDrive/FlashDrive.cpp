@@ -107,7 +107,7 @@ void FDrive::DeInit()
 {
     USBH_Stop(&handleUSBH);
     USBH_DeInit(&handleUSBH);
-    FATFS_UnLinkDriver(USBDISKPath);
+    FATFS_UnLinkDriver(USBDISKPath); //-V2001
 }
 
 
