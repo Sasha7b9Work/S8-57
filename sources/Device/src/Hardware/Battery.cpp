@@ -27,7 +27,11 @@ float Battery::GetVoltageAKK()
 
     averager.Push(static_cast<float>(akk));
 
+#ifdef WIN32
+    return 8.0F;
+#else
     return BatADC_ToVoltage(static_cast<float>(averager.Value()));
+#endif
 
 
 
