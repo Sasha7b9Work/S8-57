@@ -217,12 +217,12 @@ void ColorType::BrightnessChange(int delta)
 
     int sign = Math::Sign(delta);
 
-    brightness += sign * 0.01F;
+    brightness += static_cast<float>(sign) * 0.01F;
     LIMITATION(brightness, 0.0F, 1.0F); // -V2516
 
-    red += sign * stepRed;
-    green += sign * stepGreen;
-    blue += sign * stepBlue;
+    red += static_cast<float>(sign) * stepRed;
+    green += static_cast<float>(sign) * stepGreen;
+    blue += static_cast<float>(sign) * stepBlue;
 
     SetColor();
 

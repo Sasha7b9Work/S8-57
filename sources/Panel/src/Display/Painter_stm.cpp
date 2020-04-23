@@ -269,12 +269,12 @@ void Painter::SendRow(int row)
 
 uint Painter::ReduceBrightness(uint colorValue, float newBrightness)
 {
-    int red = (int)(R_FROM_COLOR(colorValue) * newBrightness);
-    LIMITATION(red, 0, 0xff);                                       // -V2516
-    int green = (int)(G_FROM_COLOR(colorValue) * newBrightness);
-    LIMITATION(green, 0, 0xff);                                     // -V2516
-    int blue = (int)(B_FROM_COLOR(colorValue) * newBrightness);
-    LIMITATION(blue, 0, 0xff);                                      // -V2516
+    int red = static_cast<int>(static_cast<float>(R_FROM_COLOR(colorValue)) * newBrightness);
+    LIMITATION(red, 0, 0xff);
+    int green = static_cast<int>(static_cast<float>(G_FROM_COLOR(colorValue)) * newBrightness);
+    LIMITATION(green, 0, 0xff);
+    int blue = static_cast<int>(static_cast<float>(B_FROM_COLOR(colorValue)) * newBrightness);
+    LIMITATION(blue, 0, 0xff);
     return MAKE_COLOR(red, green, blue);
 }
 

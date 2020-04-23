@@ -272,7 +272,7 @@ bool Control::IsRepeatable() const
 
 static uint TimeBetweenRepeats(uint prev)
 {
-    uint retValue = static_cast<uint>(prev / 1.1F);
+    uint retValue = static_cast<uint>(static_cast<float>(prev) / 1.1F);
 
     if (retValue < 10)
     {
