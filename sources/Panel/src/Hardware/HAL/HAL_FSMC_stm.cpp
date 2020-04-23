@@ -153,14 +153,14 @@ void HAL_BUS::Update()
             //pinReady.SetActive();
             GPIOC->BSRR = (uint)GPIO_PIN_14 << 16U;
         }
-        else if(pinRD.IsActive() && queueData.Size())   // Запись байта в устройсто
+        else if(pinRD.IsActive() && queueData.Size())   // Запись байта в устройсто //-V2570
         {
             // Конфигурируем ШД на запись
             GPIOE->MODER &= 0xffff0000U;
             GPIOE->MODER |= 0x00005555U;
 
             // Устанавливаем данные на ШД
-            GPIOE->ODR = (GPIOD->ODR & 0xffff0000) + static_cast<uint16>(queueData.Front());
+            GPIOE->ODR = (GPIOD->ODR & 0xffff0000U) + static_cast<uint16>(queueData.Front());
 
             pinReady.SetPassive();
 

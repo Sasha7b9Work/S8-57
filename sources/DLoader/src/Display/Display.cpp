@@ -11,6 +11,7 @@
 #include <ff.h>
 #include <cmath>
 #include <cstdlib>
+#include <cstring>
 
 
 
@@ -128,7 +129,7 @@ void Display::Update()
 
         int height = 30;
         int fullWidth = 280;
-        int width = static_cast<int>(fullWidth * FDrive::PercentsUpdated());
+        int width = static_cast<int>(static_cast<float>(fullWidth) * FDrive::PercentsUpdated());
 
         Region(width, height).Fill(20, 130);
         Rectangle(fullWidth, height).Draw(20, 130);
@@ -147,16 +148,16 @@ void DrawProgressBar(uint dT)
     const int X = 10;
     const int Y = 200;
     
-    float step = dT / direction;
+    float step = static_cast<float>(dT) / direction;
 
     value += step;
 
-    if (direction > 0.0F && value > WIDTH)
+    if ((direction > 0.0F) && (value > static_cast<float>(WIDTH)))
     {
         direction = -direction;
         value -= step;
     }
-    else if (direction < 0.0F && value < 0)
+    else if ((direction < 0.0F) && (value < 0.0F))
     {
         direction = -direction;
         value -= step;
@@ -287,7 +288,7 @@ static void DrawBigTextInBuffer(int eX, int eY, int size, const char* text, uint
         }
     }
 
-    int numSymbols = static_cast<int>(strlen(text));
+    int numSymbols = static_cast<int>(std::strlen(text));
 
     int x = eX;
 

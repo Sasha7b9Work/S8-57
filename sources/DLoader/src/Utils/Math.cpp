@@ -45,7 +45,7 @@ void Math::Smoothing(uint8 *data, int numPoints, int numSmooth)
             int index = i + j;
             if (index >= 1 && index < numPoints)
             {
-                buffer[i] += data[index];
+                buffer[i] += static_cast<float>(data[index]);
                 ++num[i];
             }
         }
@@ -53,7 +53,7 @@ void Math::Smoothing(uint8 *data, int numPoints, int numSmooth)
     
     for (int i = 1; i < numPoints; i++)
     {
-        data[i] = static_cast<uint8>(buffer[i] / num[i] + 0.5F);
+        data[i] = static_cast<uint8>(buffer[i] / static_cast<float>(num[i]) + 0.5F);
     }
 
     std::free(buffer);
@@ -158,7 +158,7 @@ uint8 Math::MinFromArray(const uint8 *data, int firstPoint, int lastPoint)
 float RandFloat(float min, float max)
 {
     float delta = max - min;
-    return min + ((std::rand() / (float)RAND_MAX) * delta);
+    return min + ((static_cast<float>(std::rand()) / (float)RAND_MAX) * delta);
 }
 
 
@@ -169,7 +169,7 @@ float Math::GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, in
         return static_cast<float>(x1);
     }
 
-    return (yHorLine - y0) / (static_cast<float>(y1 - y0) / static_cast<float>(x1 - x0)) + x0;
+    return static_cast<float>(yHorLine - y0) / (static_cast<float>(y1 - y0) / static_cast<float>(x1 - x0)) + static_cast<float>(x0);
 }
 
 
@@ -206,7 +206,7 @@ uint8 Math::CalculateFiltr(const uint8 *data, int x, int numPoints, int numSmoot
         }
     }
 
-    return static_cast<uint8>(sum / static_cast<float>(count));
+    return static_cast<uint8>(static_cast<float>(sum) / static_cast<float>(count));
 }
 
 
@@ -247,7 +247,7 @@ void Math::CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoint
                 }
             }
 
-            dataOut[i] = static_cast<uint8>(sum / static_cast<float>(count));
+            dataOut[i] = static_cast<uint8>(static_cast<float>(sum) / static_cast<float>(count));
         }
     }
 }
@@ -349,7 +349,7 @@ float Math::RoundFloat(float value, int numDigits)
     if (digsInInt < numDigits)  // Подстрахуемся
     {
         int pow = Pow10(numDigits - digsInInt);
-        absValue = (static_cast<int>(absValue * pow + 0.5F)) / static_cast<float>(pow);
+        absValue = static_cast<float>(static_cast<int>(absValue * static_cast<float>(pow) + 0.5F)) / static_cast<float>(pow);
     }
 
     return value > 0.0F ? absValue : -absValue;

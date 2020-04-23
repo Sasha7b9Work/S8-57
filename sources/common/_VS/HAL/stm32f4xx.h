@@ -5,5 +5,5 @@
 typedef enum
 {
     DISABLE = 0U,
-    ENABLE = !DISABLE
+    ENABLE = !DISABLE //-V2570
 } FunctionalState;
