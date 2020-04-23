@@ -6,7 +6,8 @@
 #include <usbh_def.h>
 
 
-HCD_HandleTypeDef handleHCD;
+HCD_HandleTypeDef hHCD;
+void *HAL_HCD::handleHCD = &hHCD;
 
 
 void HAL_HCD::Init()
@@ -27,18 +28,18 @@ void HAL_HCD::Init()
 
 void HAL_HCD::InitUSBH_LL(USBH_HandleTypeDef *phost)
 {
-    handleHCD.Instance = USB_OTG_HS;
-    handleHCD.Init.speed = HCD_SPEED_HIGH;
-    handleHCD.Init.Host_channels = 12;
-    handleHCD.Init.dma_enable = 0;
-    handleHCD.Init.low_power_enable = 0;
-    handleHCD.Init.phy_itface = HCD_PHY_EMBEDDED;
-    handleHCD.Init.Sof_enable = 0;
-    handleHCD.Init.vbus_sensing_enable = 0;
-    handleHCD.Init.use_external_vbus = 0;
+    hHCD.Instance = USB_OTG_HS;
+    hHCD.Init.speed = HCD_SPEED_HIGH;
+    hHCD.Init.Host_channels = 12;
+    hHCD.Init.dma_enable = 0;
+    hHCD.Init.low_power_enable = 0;
+    hHCD.Init.phy_itface = HCD_PHY_EMBEDDED;
+    hHCD.Init.Sof_enable = 0;
+    hHCD.Init.vbus_sensing_enable = 0;
+    hHCD.Init.use_external_vbus = 0;
 
-    handleHCD.pData = phost;
-    phost->pData = &handleHCD;
-    HAL_HCD_Init(&handleHCD);
-    USBH_LL_SetTimer(phost, HAL_HCD_GetCurrentFrame(&handleHCD));
+    hHCD.pData = phost;
+    phost->pData = &hHCD;
+    HAL_HCD_Init(&hHCD);
+    USBH_LL_SetTimer(phost, HAL_HCD_GetCurrentFrame(&hHCD));
 }

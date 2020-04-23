@@ -6,9 +6,6 @@
 #include <stm32f4xx_hal.h>
 
 
-extern HCD_HandleTypeDef handleHCD;
-
-
 void HAL_HCD_SOF_Callback(HCD_HandleTypeDef *hhcd)
 {
     USBH_LL_IncTimer ((USBH_HandleTypeDef *)hhcd->pData);
@@ -141,13 +138,13 @@ USBH_StatusTypeDef USBH_LL_DriverVBUS(USBH_HandleTypeDef *, uint8_t)
 
 USBH_StatusTypeDef USBH_LL_SetToggle(USBH_HandleTypeDef *, uint8_t pipe, uint8_t toggle)   
 {
-    if(handleHCD.hc[pipe].ep_is_in)
+    if(reinterpret_cast<HCD_HandleTypeDef *>(HAL_HCD::handleHCD)->hc[pipe].ep_is_in)
     {
-        handleHCD.hc[pipe].toggle_in = toggle;
+        reinterpret_cast<HCD_HandleTypeDef *>(HAL_HCD::handleHCD)->hc[pipe].toggle_in = toggle;
     }
     else
     {
-        handleHCD.hc[pipe].toggle_out = toggle;
+        reinterpret_cast<HCD_HandleTypeDef *>(HAL_HCD::handleHCD)->hc[pipe].toggle_out = toggle;
     }
     return USBH_OK; 
 }
@@ -157,13 +154,13 @@ uint8_t USBH_LL_GetToggle(USBH_HandleTypeDef *, uint8_t pipe)
 {
     uint8_t toggle = 0;
   
-    if(handleHCD.hc[pipe].ep_is_in)
+    if(reinterpret_cast<HCD_HandleTypeDef *>(HAL_HCD::handleHCD)->hc[pipe].ep_is_in)
     {
-        toggle = handleHCD.hc[pipe].toggle_in;
+        toggle = reinterpret_cast<HCD_HandleTypeDef *>(HAL_HCD::handleHCD)->hc[pipe].toggle_in;
     }
     else
     {
-        toggle = handleHCD.hc[pipe].toggle_out;
+        toggle = reinterpret_cast<HCD_HandleTypeDef *>(HAL_HCD::handleHCD)->hc[pipe].toggle_out;
     }
     return toggle; 
 }

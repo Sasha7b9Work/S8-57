@@ -9,9 +9,6 @@
 #include <stm32f4xx_hal.h>
 
 
-extern HCD_HandleTypeDef handleHCD;
-
-
 INTERRUPT_BEGIN
 
 
@@ -93,7 +90,7 @@ void OTG_HS_IRQHandler()
 //    }
 
 
-    HAL_HCD_IRQHandler(&handleHCD);
+    HAL_HCD_IRQHandler(reinterpret_cast<HCD_HandleTypeDef *>(HAL_HCD::handleHCD));
 }
 
 

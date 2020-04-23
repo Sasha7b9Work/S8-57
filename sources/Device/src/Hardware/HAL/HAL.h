@@ -152,6 +152,8 @@ struct HAL_HCD
     static void Init();
 
     static void InitUSBH_LL(USBH_HandleTypeDef *phost);
+
+    static void *handleHCD;
 };
 
 
