@@ -70,7 +70,7 @@ bool HAL_BUS::Panel::Receive()
 {
     //if(pinReadyPAN.IsPassive() || pinDataPAN.IsPassive())
     //if((GPIOA->IDR & GPIO_PIN_7) != GPIO_PIN_RESET || (GPIOC->IDR & GPIO_PIN_4) != GPIO_PIN_RESET)
-    if((GPIOA->IDR & GPIO_PIN_7) || (GPIOC->IDR & GPIO_PIN_4))
+    if((GPIOA->IDR & GPIO_PIN_7) || (GPIOC->IDR & GPIO_PIN_4)) //-V2570
     {
         return false;
     }
@@ -142,7 +142,7 @@ void HAL_BUS::Panel::Send(uint8 byte0, uint8 byte1)
 
 void HAL_BUS::Panel::Send(uint8 *data, uint size)
 {
-    if(!(GPIOA->IDR & GPIO_PIN_7) && !(GPIOC->IDR & GPIO_PIN_4))
+    if(!(GPIOA->IDR & GPIO_PIN_7) && !(GPIOC->IDR & GPIO_PIN_4)) //-V2570
     {
         while(Receive()) { }
     }

@@ -31,7 +31,7 @@ uint8 *ExtRAM::End()
 }
 
 
-void ExtRAM::Write(uint8 *buffer, uint size, uint8 *address)
+void ExtRAM::Write(const uint8 *buffer, uint size, uint8 *address)
 {
     HAL_BUS_CONFIGURE_TO_FSMC;
 
@@ -39,7 +39,7 @@ void ExtRAM::Write(uint8 *buffer, uint size, uint8 *address)
 }
 
 
-void ExtRAM::Read(uint8 *buffer, uint size, uint8 *address)
+void ExtRAM::Read(uint8 *buffer, uint size, const uint8 *address)
 {
     HAL_BUS_CONFIGURE_TO_FSMC;
 
@@ -134,7 +134,7 @@ float ExtRAM::TestTime(uint sizekB)
     {
         float time = TestTime1kB(Begin() + i * 1024);
 
-        if(time == -1.0F) //-V550
+        if(time == -1.0F) //-V550 //-V2550
         {
             return -1.0F;
         }

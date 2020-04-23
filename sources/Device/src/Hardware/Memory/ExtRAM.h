@@ -12,10 +12,10 @@ public:
     static uint8 *End();
     
     // Записывает во внешнюю память по адресу address данные buffer, size кратен 4
-    static void Write(uint8 *buffer, uint size, uint8 *address);
+    static void Write(const uint8 *buffer, uint size, uint8 *address);
     
     // Читает из внешней памяти address в буфер buffer данные, size кратен 4
-    static void Read(uint8 *buffer, uint size, uint8 *address);
+    static void Read(uint8 *buffer, uint size, const uint8 *address);
 
     static void Fill(uint8 *begin = 0, uint8 value = 0, uint size = 0);
 
