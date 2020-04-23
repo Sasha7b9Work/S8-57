@@ -16,14 +16,19 @@
 struct Packet
 {
     uint size;
+    
     // Возвращает адрес следующего за этим пакета
     Packet *Next();
+    
     // Адрес первого байта в пакете
     uint Begin() { return reinterpret_cast<uint>(this);  }
+    
     // Возвращает адрес первого байта за этим пакетом
     uint End()   { return reinterpret_cast<uint>(Next()); }
+    
     // Возвращает true, если в пакете нет данных (пакет находится за последним записанным пакетом)
     bool IsEmpty() const;
+    
     // Попытка записать в пакет структуру с данными
     bool SaveSettings(SettingsNRST *nrst);
 };
@@ -33,10 +38,13 @@ struct SectorNRST
 {
     // Возвращает указатель на сохранённую структуру если таковая имеется и nullptr в противном случае
     SettingsNRST *GetSaved() const;
+    
     // Возвращает указатель на пакет, установленный на начало сектора
     Packet *CreatePacket() const;
+    
     // Возвращает указатель на последний записанный в секторе пакет
     Packet *LastPacket() const;
+    
     // Попытка записать в сектор структуру с данными
     bool SaveSettings(SettingsNRST *) const;
 
