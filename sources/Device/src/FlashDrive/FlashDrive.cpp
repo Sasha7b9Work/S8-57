@@ -242,12 +242,12 @@ bool FDrive::GetNameDir(const char *fullPath, int numDir, char *nameDirOut, Stru
                 }
                 alreadyNull = true;
             }
-            if (numDir == numDirs && (pFNO->fattrib & AM_DIR))
+            if ((numDir == numDirs) && ((pFNO->fattrib & AM_DIR) != 0))
             {
                 std::strcpy(nameDirOut, static_cast<const char *>(pFNO->fname));
                 return true;
             }
-            if ((pFNO->fattrib & AM_DIR) && (pFNO->fname[0] != '.'))
+            if (((pFNO->fattrib & AM_DIR) != 0) && (pFNO->fname[0] != '.'))
             {
                 numDirs++;
             }

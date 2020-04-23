@@ -192,6 +192,7 @@ DRESULT USBH_ioctl(BYTE lun, BYTE cmd, void *buff)
 
     default:
         res = RES_PARERR;
+        break;
     }
 
     return res;

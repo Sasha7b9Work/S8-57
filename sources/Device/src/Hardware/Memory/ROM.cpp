@@ -211,7 +211,7 @@ Record *Record::Next()
 
 bool Record::IsFree()
 {
-    return (set.crc32 == 0xFFFFFFFF);
+    return (set.crc32 == 0xFFFFFFFFU);
 }
 
 
@@ -249,7 +249,7 @@ SectorSet *Record::GetAnotherSector()
 
 bool Record::IsSaved()
 {
-    return (set.crc32 != 0xFFFFFFFF) && (set.crc32 != 0x00000000);
+    return (set.crc32 != 0xFFFFFFFFU) && (set.crc32 != 0x00000000U);
 }
 
 
@@ -264,11 +264,11 @@ bool Record::IsCorrect()
     uint *start = FirstDowbleWord() + 1;
     uint *end = FirstDowbleWord() + SIZE_RECORD / 4;
 
-    if (set.crc32 == 0xFFFFFFFF)
+    if (set.crc32 == 0xFFFFFFFFU)
     {
         for (uint *address = start; address < end; address++)
         {
-            if (*address != 0xFFFFFFFF)
+            if (*address != 0xFFFFFFFFU)
             {
                 return false;
             }

@@ -142,12 +142,12 @@ void DataSettings::CopyDataFrom(DataSettings *source)
 {
     uint numBytes = Math::Min(BytesInChannel(), source->BytesInChannel());
 
-    if(enableA && source->enableA)
+    if((enableA != 0) && (source->enableA != 0))
     {
         std::memcpy(dataA, source->dataA, numBytes);
     }
 
-    if(enableB && source->enableB)
+    if((enableB != 0) && (source->enableB != 0))
     {
         std::memcpy(dataB, source->dataB, numBytes);
     }

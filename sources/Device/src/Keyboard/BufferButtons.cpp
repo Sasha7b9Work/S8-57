@@ -16,7 +16,7 @@ static int end;
 // Позиция первого значащего события в буфере.
 static int start;
 // Возвращает время
-static uint timeLastControl = 0xFFFFFFFF;
+static uint timeLastControl = 0xFFFFFFFFU;
 
 
 void BufferButtons::Push(KeyEvent event)

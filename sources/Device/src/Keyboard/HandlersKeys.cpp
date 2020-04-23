@@ -325,7 +325,7 @@ static void OnMeasures()
 
 static void OnMemory()
 {
-    if (FDrive::IsConnected() && set.mem.modeBtnMemory)
+    if (FDrive::IsConnected() && (set.mem.modeBtnMemory != 0))
     {
         FDrive::SaveScreen();
     }

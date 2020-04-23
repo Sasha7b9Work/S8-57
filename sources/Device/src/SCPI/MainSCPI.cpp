@@ -23,5 +23,5 @@ const HeadSCPI morphems[] =
 
 static const char *FuncIDN(const char *)
 {
-
+    return "";
 }

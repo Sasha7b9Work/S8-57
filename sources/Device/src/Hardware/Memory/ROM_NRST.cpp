@@ -112,7 +112,7 @@ Packet *SectorNRST::LastPacket() const
 
 bool Packet::IsEmpty() const
 {
-    return (size == 0xFFFFFFFF);
+    return (size == 0xFFFFFFFFU);
 }
 
 
@@ -152,7 +152,7 @@ bool Packet::SaveSettings(SettingsNRST *nrst)
 
 Packet *Packet::Next()
 {
-    if(size == 0xFFFFFFFF)
+    if(size == 0xFFFFFFFFU)
     {
         return nullptr;
     }
