@@ -135,10 +135,10 @@ static void DrawUnits(int x, int y)
             Draw2HLinesRelCenter(x + radius, y - 1 + radius + i, lengths[i]);
         }
 
-        Region region(20, 6);
+        Region region(21, 6);
 
         region.Fill(x, y + 59, Color::FILL);
-        region.Fill(x + 34, y + 59);
+        region.Fill(x + 33, y + 59);
 
         Pixel pixel;
         pixel.Draw(x, y + 58);
@@ -146,7 +146,11 @@ static void DrawUnits(int x, int y)
         pixel.Draw(x, y + 65, Color::BACK);
         pixel.Draw(x + 54, y + 65);
 
-        Region(12, 5).Fill(x + 21, y + 47, Color::BACK);
+        Region(10, 5).Fill(x + 22, y + 47);
+
+        Region leg(4, 6);
+        leg.Fill(x + 17, y + 52, Color::FILL);
+        leg.Fill(x + 33, y + 52);
     }
     else
     {
