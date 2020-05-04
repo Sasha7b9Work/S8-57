@@ -54,14 +54,14 @@ void Display::Init()
 
 void Display::Update()
 {
-//    static uint prevTime = 0;
-//
-//    if(Device::InModeOsci() && (TIME_MS - prevTime < ENumSignalsInSec::TimeBetweenFramesMS()))
-//    {
-//        return;
-//    }
-//
-//    prevTime = TIME_MS;
+    static uint prevTime = 0;
+
+    if(Device::InModeOsci() && (TIME_MS - prevTime < ENumSignalsInSec::TimeBetweenFramesMS()))
+    {
+        return;
+    }
+
+    prevTime = TIME_MS;
 
     DFont::SetSpacing();
 
