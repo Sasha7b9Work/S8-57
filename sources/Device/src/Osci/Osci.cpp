@@ -216,22 +216,19 @@ static bool ProcessFlagReady()
 
     if(FPGA::flag.DataReady())
     {
-        if(Osci::CanReadData())
+        Timer::PauseOnTicks(5 * 90 * 20);
+
+        Osci::ReadData();
+
+        if(TrigStartMode::IsSingle())
+        {
+            needStop = true;
+            Trig::pulse = false;
+        }
+        else
         {
             Timer::PauseOnTicks(5 * 90 * 20);
-
-            Osci::ReadData();
-
-            if(TrigStartMode::IsSingle())
-            {
-                needStop = true;
-                Trig::pulse = false;
-            }
-            else
-            {
-                Timer::PauseOnTicks(5 * 90 * 20);
-                Osci::Start(false);
-            }
+            Osci::Start(false);
         }
     }
 
@@ -260,26 +257,6 @@ void Osci::ProcessFlagPred()
             FPGA::ForcedStart();
         }
     }
-}
-
-
-bool Osci::CanReadData()
-{
-    if (set.disp.enumSignalsInSec == ENumSignalsInSec::_25)
-    {
-        return true;
-    }
-    
-    static uint timePrevRead = 0;
-
-    if (TIME_MS > timePrevRead + ENumSignalsInSec::TimeBetweenFramesMS())
-    {
-        timePrevRead = TIME_MS;
-
-        return true;
-    }
-
-    return false;
 }
 
 

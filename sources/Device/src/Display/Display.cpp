@@ -54,6 +54,15 @@ void Display::Init()
 
 void Display::Update()
 {
+//    static uint prevTime = 0;
+//
+//    if(Device::InModeOsci() && (TIME_MS - prevTime < ENumSignalsInSec::TimeBetweenFramesMS()))
+//    {
+//        return;
+//    }
+//
+//    prevTime = TIME_MS;
+
     DFont::SetSpacing();
 
     Color::ChangeFlash(false);
@@ -263,7 +272,7 @@ bool Display::IsSeparate()
 
 uint ENumSignalsInSec::TimeBetweenFramesMS()
 {
-    static const uint time[] = { 40, 100, 200, 500, 1000 };
+    static const uint time[] = { 1, 100, 200, 500, 1000 };
 
     return time[set.disp.enumSignalsInSec];
 }

@@ -64,9 +64,6 @@ struct Osci
     // Обработать флаг предзапуска
     static void ProcessFlagPred();
 
-    // Возвращает true, если уже можно читать данные
-    static bool CanReadData();
-
 private:
 
     // Функции стопа
