@@ -87,7 +87,6 @@ void DFont::Set(const DTypeFont::E typeFont)
             break;
         case DTypeFont::_GOST28:
         case DTypeFont::_GOST72bold:
-        case DTypeFont::_OMEGA72:
         {
             font = nullptr;
             volatile DAdvancedFont f(typeFont);

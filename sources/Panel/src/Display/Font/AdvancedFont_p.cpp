@@ -2,7 +2,6 @@
 #include "AdvancedFont_p.h"
 #include "fontGOST28.inc"
 #include "fontGOST72bold.inc"
-#include "fontOMEGA72.inc"
 
 
 struct NativeSymbol
@@ -52,10 +51,6 @@ PAdvancedFont::PAdvancedFont(PTypeFont::E t)
     else if(currentType == PTypeFont::_GOST72bold)
     {
         font = fontGOST72bold;
-    }
-    else if(currentType == PTypeFont::_OMEGA72)
-    {
-        font = fontOMEGA72;
     }
     else
     {
