@@ -9,15 +9,6 @@
 #include <cstring>
 
 
-/*
-    Шрифт для отрисовки в режиме мультиметра
-
-    Имя - GOST
-
-    Размер - 
-*/
-
-
 #define SYMBOL_OMEGA '\x01'
 
 
@@ -61,14 +52,15 @@ static void DrawChar(uint numSymbol, int x)
         y -= 9;
     }
     
-    Text(symbols).Draw(x, y);
+    Text(symbols).Draw(x, y, Color::FILL);
 
     if(symbols[0] == '-')
     {
-        Region(5, 5).Fill(x + 31, y + 41, Color::BACK);
-        Pixel().Draw(x + 30, y + 41);
-        Pixel().Draw(x + 30, y + 46);
-        Pixel().Draw(x, y + 42);
+        Pixel().Draw(x, y + 41);
+
+        Region(3, 5).Fill(x + 31, y + 40, Color::BACK);
+        Pixel().Draw(x + 30, y + 40);
+        Pixel().Draw(x + 30, y + 45);
     }
 
     Color::FILL.SetAsCurrent();
