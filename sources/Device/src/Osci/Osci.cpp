@@ -265,7 +265,7 @@ void Osci::ProcessFlagPred()
 
 bool Osci::CanReadData()
 {
-    if (ENumSignalsInSec::Is25())
+    if (set.disp.enumSignalsInSec == ENumSignalsInSec::_25)
     {
         return true;
     }

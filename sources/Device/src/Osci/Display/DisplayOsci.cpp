@@ -17,6 +17,7 @@
 
 
 static const int DELTA = 5;
+
 // Признак того, что дисплей нуждается в полной перерисовке
 static bool needRedraw = false;
 

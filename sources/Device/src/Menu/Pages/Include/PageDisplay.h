@@ -128,12 +128,8 @@ struct ENumSignalsInSec
         _2,
         _1
     };
-    ENumSignalsInSec() {}
-    static ENumSignalsInSec::E &Ref();
     // Возвращает количество миллисекунда между кадрами
     static uint TimeBetweenFramesMS();
-    operator ENumSignalsInSec::E() { return Ref(); }
-    static bool Is25()             { return Ref() == _25; }
 };
 
 // Тип сетки на экране.
@@ -189,7 +185,6 @@ struct SettingsDisplay
 { //-V802
     DisplayMapping::E      mapping;
     ENumMinMax::E          enumMinMax;            // Перечисление количества измерений для определения минимумов и масимумов.
-    uint8                  _;
     ENumAverage::E         enumAverage;           // Число усреднений сигнала.
     ENumAccum::E           enumAccum;             // Число накоплений сигнала на экране.
     ModeAccumulation::E    modeAccumulation;      // Режим накопления сигналов.

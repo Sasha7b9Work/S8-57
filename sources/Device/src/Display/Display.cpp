@@ -265,13 +265,7 @@ uint ENumSignalsInSec::TimeBetweenFramesMS()
 {
     static const uint time[] = { 40, 100, 200, 500, 1000 };
 
-    return time[ENumSignalsInSec()];
-}
-
-
-ENumSignalsInSec::E &ENumSignalsInSec::Ref()
-{
-    return set.disp.enumSignalsInSec;
+    return time[set.disp.enumSignalsInSec];
 }
 
 
