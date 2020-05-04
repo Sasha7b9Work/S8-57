@@ -111,7 +111,12 @@ static void DrawUnits(int x, int y)
 
         DFont::Set(DTypeFont::_OMEGA72);
 
-        Text(String(SYMBOL_OMEGA)).Draw(x + 5, y + 5);
+        Text(String(SYMBOL_OMEGA)).Draw(x, y + 4);
+
+        Region region(3, 62);
+
+        region.Fill(x, y + 5, Color::BACK);
+        region.Fill(x + 50, y + 5);
 
         DFont::Set(DTypeFont::_GOST72bold);
     }
