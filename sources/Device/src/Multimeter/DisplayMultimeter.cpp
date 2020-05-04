@@ -7,6 +7,7 @@
 #include "Multimeter/Multimeter.h"
 #include "Settings/Settings.h"
 #include <cstring>
+#include <cmath>
 
 
 #define SYMBOL_OMEGA '\x01'
@@ -32,6 +33,9 @@ static void DrawGraphics();
 
 // ќтобразить единицы измерени€
 static void DrawUnits(int x, int y);
+
+// Ќарисовать линии вправо и влево отностиельно центра с длиной width
+static void Draw2HLinesRelCenter(int center, int y, int width);
 
 
 static char Symbol(uint i)
@@ -109,16 +113,54 @@ static void DrawUnits(int x, int y)
     {
         x = Text(String(outBuffer[7])).Draw(x, y);
 
-        DFont::Set(DTypeFont::_OMEGA72);
+        Rectangle(56, 67).Draw(x - 1, y - 1, Color::GREEN);
 
-        Text(String(SYMBOL_OMEGA)).Draw(x, y + 4);
+        Color::FILL.SetAsCurrent();
 
-        Region region(3, 62);
+        int radius = 27;
 
-        region.Fill(x, y + 5, Color::BACK);
-        region.Fill(x + 50, y + 5);
+        for(int i = 0; i < radius; i++)
+        {
+            float angle = std::asinf(i * (1.0F / radius));
+            float length = std::cosf(angle) * radius;
+            Draw2HLinesRelCenter(x + radius, y + i + radius - 1, static_cast<int>(length + 0.5F));
+            Draw2HLinesRelCenter(x + radius, y - i + radius - 1, static_cast<int>(length + 0.5F));
+        }
 
-        DFont::Set(DTypeFont::_GOST72bold);
+        Color::BACK.SetAsCurrent();
+
+        static const int lengths[23] =
+        {
+            18,
+            18,
+            18,
+            18,
+            18,
+            18,
+            17,
+            17,
+            17,
+            17,
+            16,
+            16,
+            16,
+            15,
+            14,
+            13,
+            12,
+            11,
+            10,
+            9,
+            7,
+            5,
+            3
+        };
+
+        for(int i = 0; i < 23; i++)
+        {
+            Draw2HLinesRelCenter(x + radius, y - 1 + radius - i, lengths[i]);
+            Draw2HLinesRelCenter(x + radius, y - 1 + radius + i, lengths[i]);
+        }
     }
     else
     {
@@ -150,6 +192,13 @@ static void DrawUnits(int x, int y)
     }
 
     DFont::SetSpacing(1);
+}
+
+
+static void Draw2HLinesRelCenter(int center, int y, int width)
+{
+    HLine(width).Draw(center, y);
+    HLine(width).Draw(center - width, y);
 }
 
 
