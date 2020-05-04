@@ -6,7 +6,7 @@
 
 static bool IsActive_Ranges()
 {
-    return !ModeAVP::IsEnabled();
+    return (set.mult.avp == ModeAVP::Off);
 }
 
 

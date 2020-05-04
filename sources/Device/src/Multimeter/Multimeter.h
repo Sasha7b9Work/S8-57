@@ -61,8 +61,6 @@ struct ModeAVP
         Off,
         On
     };
-
-    static bool IsEnabled();
 };
 
 

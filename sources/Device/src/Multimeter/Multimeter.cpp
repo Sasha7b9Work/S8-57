@@ -70,7 +70,7 @@ void Multimeter::ChangeAVP()
 {
     ChangeMode();
 
-    char send[] = { 0x02, 'Z', ModeAVP::IsEnabled() ? '1' : '0', 0x0a };
+    char send[] = { 0x02, 'Z', (set.mult.avp == ModeAVP::On) ? '1' : '0', 0x0a };
 
     USART3_::Transmit(send, 100);
 
@@ -193,10 +193,4 @@ char MultimeterMeasure::Symbol()
 {
     static const char symbols[Count] = { 'U', 'V', 'I', 'J', 'R', 'Y', 'W' };
     return symbols[set.mult.meas]; //-V2006
-}
-
-
-bool ModeAVP::IsEnabled()
-{
-    return (set.mult.avp == ModeAVP::On);
 }
