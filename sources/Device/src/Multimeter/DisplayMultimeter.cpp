@@ -113,8 +113,6 @@ static void DrawUnits(int x, int y)
     {
         x = Text(String(outBuffer[7])).Draw(x, y);
 
-        Rectangle(56, 67).Draw(x - 1, y - 1, Color::GREEN);
-
         Color::FILL.SetAsCurrent();
 
         int radius = 27;
@@ -129,38 +127,24 @@ static void DrawUnits(int x, int y)
 
         Color::BACK.SetAsCurrent();
 
-        static const int lengths[23] =
-        {
-            18,
-            18,
-            18,
-            18,
-            18,
-            18,
-            17,
-            17,
-            17,
-            17,
-            16,
-            16,
-            16,
-            15,
-            14,
-            13,
-            12,
-            11,
-            10,
-            9,
-            7,
-            5,
-            3
-        };
+        static const int lengths[23] = { 18, 18, 18, 18, 18, 18, 17, 17, 17, 17, 16, 16, 16, 15, 14, 13, 12, 11, 10, 9, 7, 5, 3 };
 
         for(int i = 0; i < 23; i++)
         {
             Draw2HLinesRelCenter(x + radius, y - 1 + radius - i, lengths[i]);
             Draw2HLinesRelCenter(x + radius, y - 1 + radius + i, lengths[i]);
         }
+
+        Region region(20, 6);
+
+        region.Fill(x, y + 59, Color::FILL);
+        region.Fill(x + 34, y + 59);
+
+        Pixel pixel;
+        pixel.Draw(x, y + 58);
+        pixel.Draw(x + 54, y + 58);
+        pixel.Draw(x, y + 65, Color::BACK);
+        pixel.Draw(x + 54, y + 65);
     }
     else
     {
