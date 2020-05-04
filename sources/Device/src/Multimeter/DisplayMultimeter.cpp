@@ -145,6 +145,8 @@ static void DrawUnits(int x, int y)
         pixel.Draw(x + 54, y + 58);
         pixel.Draw(x, y + 65, Color::BACK);
         pixel.Draw(x + 54, y + 65);
+
+        Region(12, 5).Fill(x + 21, y + 47, Color::BACK);
     }
     else
     {
