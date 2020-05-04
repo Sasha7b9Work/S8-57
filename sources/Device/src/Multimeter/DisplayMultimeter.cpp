@@ -30,6 +30,9 @@ static void DrawSymbols();
 // Нарисовать дополнительные изображения на экране, если в этом есть необходимость
 static void DrawGraphics();
 
+// Отобразить единицы измерения
+static void DrawUnits(int x, int y);
+
 
 static char Symbol(uint i)
 {
@@ -94,21 +97,45 @@ static void DrawSymbols()
         x += (Symbol(i) == '.') ? 16 : 38;
     }
 
+    DrawUnits(120, 125);
+}
+
+
+static void DrawUnits(int x, int y)
+{
     DFont::SetSpacing(5);
 
     if(outBuffer[8] == SYMBOL_OMEGA)
     {
-        x = Text(String(outBuffer[7])).Draw(120, 125);
+        x = Text(String(outBuffer[7])).Draw(x, y);
 
         DFont::Set(DTypeFont::_OMEGA72);
 
-        Text(String(SYMBOL_OMEGA)).Draw(x + 5, 130);
+        Text(String(SYMBOL_OMEGA)).Draw(x + 5, y + 5);
 
         DFont::Set(DTypeFont::_GOST72bold);
     }
     else
     {
-        Text(&outBuffer[7]).Draw(120, 125);
+        Text(&outBuffer[7]).Draw(x, y);
+
+        if(outBuffer[8] == '=')
+        {
+            Pixel pixel;
+
+            pixel.Draw(x + 44, y + 33, Color::BACK);
+            pixel.Draw(x + 44, y + 38);
+            pixel.Draw(x + 72, y + 38);
+
+            pixel.Draw(x + 44, y + 46);
+            pixel.Draw(x + 44, y + 51);
+            pixel.Draw(x + 72, y + 51);
+
+            Region region(3, 5);
+
+            region.Fill(x + 51, y + 46);
+            region.Fill(x + 62, y + 46);
+        }
     }
 
     DFont::SetSpacing(1);
