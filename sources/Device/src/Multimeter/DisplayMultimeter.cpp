@@ -119,8 +119,13 @@ static void DrawUnits(int x, int y)
     {
         Text(&outBuffer[7]).Draw(x, y);
 
-        if(outBuffer[8] == '=')
+        if(outBuffer[8] == '=' || outBuffer[9] == '=')
         {
+            if(outBuffer[9] == '=')
+            {
+                x += 50;
+            }
+
             Pixel pixel;
 
             pixel.Draw(x + 44, y + 33, Color::BACK);
@@ -135,6 +140,7 @@ static void DrawUnits(int x, int y)
 
             region.Fill(x + 51, y + 46);
             region.Fill(x + 62, y + 46);
+
         }
     }
 
