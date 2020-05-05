@@ -124,7 +124,7 @@ void AT25160N::Test()
 }
 
 
-void AT25160N::WriteData(uint address, uint8 *data, uint size)
+void AT25160N::WriteData(uint address, uint8 *data, int size)
 {
     while(1)
     {
@@ -144,7 +144,7 @@ void AT25160N::WriteData(uint address, uint8 *data, uint size)
 }
 
 
-void AT25160N::Write32BytesOrLess(uint address, const uint8 *, uint size)
+void AT25160N::Write32BytesOrLess(uint address, const uint8 *, int size)
 {
     WaitFinishWrite();
 
@@ -158,7 +158,7 @@ void AT25160N::Write32BytesOrLess(uint address, const uint8 *, uint size)
 
     WriteByte(address & 0xff);
 
-    for (uint i = 0; i < size; i++)
+    for (int i = 0; i < size; i++)
     {
         //uint8 byte = data[i];
 
