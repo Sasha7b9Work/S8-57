@@ -214,7 +214,7 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
 
     Color color = Color::CHAN[ch];
 
-    bool inverse = Chan(ch).IsInversed();
+    bool inverse = set.ch[ch].inverse;
     //int8 divider = (int8)SET_DIVIDER(ch);
     Range::E range = set.ch[ch].range;
 

@@ -790,12 +790,6 @@ bool Chan::IsEnabled()
 }
 
 
-bool Chan::IsInversed()
-{
-    return Ref().inverse;
-}
-
-
 SettingsChannel &Chan::Ref()
 {
     return set.ch[ch];
