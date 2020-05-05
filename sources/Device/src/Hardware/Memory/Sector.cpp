@@ -26,11 +26,11 @@ PacketROM *PacketROM::Next() const
 }
 
 
-uint PacketROM::Size() const
+int PacketROM::Size() const
 {
     if (IsFree())
     {
-        return END_SECTOR(Sector::Number(Address())) - Address();
+        return static_cast<int>((Sector::Number(Address())) - Address());
     }
 
     return size;
@@ -109,11 +109,13 @@ void PacketROM::Erase() const
 }
 
 
-uint PacketROM::GetPackedSize(const DataSettings *ds)
+int PacketROM::GetPackedSize(const DataSettings *ds)
 {
-    return sizeof(PacketROM) +      // Packet
-        sizeof(DataSettings) +      // DataSettings
-        ds->NeedMemoryForData();    // data
+    uint size = sizeof(PacketROM) +     // Packet
+        sizeof(DataSettings) +          // DataSettings
+        ds->NeedMemoryForData();        // data
+
+    return static_cast<int>(size);
 }
 
 

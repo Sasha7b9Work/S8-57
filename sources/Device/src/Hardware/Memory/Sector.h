@@ -34,13 +34,18 @@ struct PacketROM
     uint Address() const { return reinterpret_cast<uint>(this); };
 
     PacketROM *Next() const;
+    
     const DataSettings *UnPack() const;
-    uint Size() const;
+    
+    int Size() const;
+    
     // Делает попытку записи пакета в сектор sector. В случае неудачи возвращает false
     bool WriteToSector(const Sector *sector) const;
+    
     void Erase() const;
+    
     // Возвращает количество байт, необходимое для хранения данных
-    static uint GetPackedSize(const DataSettings *ds);
+    static int GetPackedSize(const DataSettings *ds);
 
     void Log() const;
 };
