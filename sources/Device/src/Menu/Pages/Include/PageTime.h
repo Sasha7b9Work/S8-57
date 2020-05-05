@@ -9,8 +9,7 @@ struct PeakDetMode
         Disabled,
         Enabled
     };
-    PeakDetMode() {}
-    static PeakDetMode::E &Ref();
+
     static bool IsEnabled();
 };
 
