@@ -182,7 +182,7 @@ struct ModeCouple
 
     operator ModeCouple::E() { return Ref(ch);};
     
-    pString UGO() const;
+    static pString UGO(ModeCouple::E v);
 
 private:
     Chan::E ch;

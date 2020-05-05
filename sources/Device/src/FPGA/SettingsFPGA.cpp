@@ -382,10 +382,10 @@ pString Range::Name(Chan::E ch)
 };
 
 
-pString ModeCouple::UGO() const
+pString ModeCouple::UGO(ModeCouple::E v)
 {
     static const pString couple[] = { "\x92", "\x91", "\x90" };
-    return couple[Ref(ch)];
+    return couple[v];
 }
 
 
