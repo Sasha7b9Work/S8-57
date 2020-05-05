@@ -25,7 +25,7 @@ bool RecorderHAL::ReadyPoint()
         10000 / 20  // 10ñ
     };
 
-    if (TIME_MS - timeLastRead >= delta[Recorder::ScaleX()])
+    if (TIME_MS - timeLastRead >= delta[set.rec.scaleX])
     {
         timeLastRead = TIME_MS;
         return true;
