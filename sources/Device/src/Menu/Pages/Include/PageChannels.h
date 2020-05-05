@@ -10,11 +10,8 @@ struct Divider
         _1,
         _10
     };
-    Divider(Chan::E _ch) : ch(_ch) {};
-    static Divider::E &Ref(Chan::E);
+
     static int ToAbs(Divider::E v) { return (v == _1) ? 1 : 10; };
-private:
-    Chan::E ch;
 };
 
 

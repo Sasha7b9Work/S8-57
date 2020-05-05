@@ -5,12 +5,6 @@
 #include <cstring>
 
 
-Divider::E &Divider::Ref(Chan::E ch)
-{
-    return set.ch[ch].divider;
-}
-
-
 static const char chanInput[] =   "1. \"¬кл\" - выводить сигнал на экран.\n"
                                   "2. \"ќткл\" - не выводить сигнал на экран.";
 
@@ -81,7 +75,7 @@ DEF_CHOICE_2( cDividerA,                                                        
     "",
     "1X",
     "10X",
-    Divider::Ref(ChanA), &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    setA.divider, &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -164,7 +158,7 @@ DEF_CHOICE_2( cDividerB,                                                        
     "",
     "1X",
     "10X",
-    Divider::Ref(ChanB), &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    setB.divider, &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
