@@ -60,7 +60,7 @@ static bool GenerateNormalModeData(Chan::E ch, uint8 *data, uint numBytes)
 
     double offset = RShift::ToAbs(set.ch[ch].rShift, set.ch[ch].range) * kOffset[set.ch[ch].range];
 
-    if(ModeCouple(ch) == ModeCouple::DC)
+    if(set.ch[ch].couple == ModeCouple::DC)
     {
         offset += TuneGeneratorDialog::offset[ch] * kOffset[set.ch[ch].range];
     }
