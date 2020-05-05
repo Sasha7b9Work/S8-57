@@ -22,12 +22,6 @@ ENumAccum::E &ENumAccum::Ref()
 }
 
 
-DisplayMapping::E &DisplayMapping::Ref()
-{
-    return set.disp.mapping;
-}
-
-
 TypeGrid::E &TypeGrid::Ref()
 {
     return set.disp.typeGrid;
@@ -123,7 +117,7 @@ DEF_CHOICE_2( cViewMode,                                                        
     "Задаёт режим отображения сигнала",
     "Вектор",
     "Точки",
-    DisplayMapping::Ref(), &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.disp.mapping, &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

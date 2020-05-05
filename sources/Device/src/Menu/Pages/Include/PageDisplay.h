@@ -16,13 +16,6 @@ struct DisplayMapping
         Dots,
         Count
     };
-
-    DisplayMapping() {};
-    static DisplayMapping::E &Ref();
-    DisplayMapping(DisplayMapping::E v) { Ref() = v; }
-    operator DisplayMapping::E()        { return Ref(); }
-    static bool IsLines()               { return Ref() == Lines; }
-    static bool IsDots()                { return Ref() == Dots; }
 };
 
 //  оличество усреднений по измерени€м.

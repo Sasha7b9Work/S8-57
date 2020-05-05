@@ -49,9 +49,9 @@ const StructSCPI SCPI::display[] =
 
 static const char *FuncMapping(const char *buffer)
 {
-    SCPI_REQUEST(SCPI::SendAnswer(mapping[DisplayMapping()]));
+    SCPI_REQUEST(SCPI::SendAnswer(mapping[set.disp.mapping]));
 
-    SCPI_PROCESS_ARRAY(mapping, DisplayMapping(static_cast<DisplayMapping::E>(i)));
+    SCPI_PROCESS_ARRAY(mapping, set.disp.mapping = static_cast<DisplayMapping::E>(i));
 }
 
 
@@ -64,14 +64,14 @@ static bool TestMapping()
     {
         SCPI_APPEND_STRING(commandLines); //-V814
 
-        if(!DisplayMapping::IsLines())
+        if(set.disp.mapping != DisplayMapping::Lines)
         {
             SCPI_EXIT_ERROR();
         }
 
         SCPI_APPEND_STRING(commandDots); //-V814
 
-        if(!DisplayMapping::IsDots())
+        if(set.disp.mapping != DisplayMapping::Dots)
         {
             SCPI_EXIT_ERROR();
         }

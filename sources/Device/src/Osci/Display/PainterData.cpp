@@ -262,7 +262,7 @@ void DisplayOsci::PainterData::DrawChannel(Chan::E ch)
         data = bufferP2P.data;
     }
 
-    if (DisplayMapping::IsLines())
+    if (set.disp.mapping == DisplayMapping::Lines)
     {
         DrawModeLines(ch, left, center, data, scale);
     }
