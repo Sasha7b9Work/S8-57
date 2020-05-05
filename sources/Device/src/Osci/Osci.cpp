@@ -252,7 +252,7 @@ void Osci::ProcessFlagPred()
 {
     if(FPGA::flag.Pred() && !FPGA::forcedStart)
     {
-        if(!OSCI_IN_MODE_RANDOMIZER && TrigStartMode::IsAuto() && FPGA::flag.HoldOff())
+        if(!OSCI_IN_MODE_RANDOMIZER && (set.trig.startMode == TrigStartMode::Auto) && FPGA::flag.HoldOff())
         {
             FPGA::ForcedStart();
         }
@@ -305,7 +305,7 @@ void Osci::ChangedTrigStartMode()
             set.time.sampleTypeOld = SampleType();
             SampleType().Set(SampleType::Real);
         }
-        else if(TrigStartMode::IsAuto())    // Иначе восстановим ранее сохранённый
+        else if(set.trig.startMode == TrigStartMode::Auto)    // Иначе восстановим ранее сохранённый
         {
             SampleType().Set(set.time.sampleTypeOld);
         }
@@ -326,7 +326,7 @@ void Osci::SetFunctionsStartStop()
 
     //funcStart = start[index][TrigStartMode()];
 
-    funcStop = stop[index][TrigStartMode()];
+    funcStop = stop[index][set.trig.startMode];
 }
 
 

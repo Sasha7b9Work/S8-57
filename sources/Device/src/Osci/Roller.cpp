@@ -105,7 +105,7 @@ bool Roller::NeedDraw()
         return true;
     }
 
-    if(TrigStartMode().IsAuto())
+    if(set.trig.startMode == TrigStartMode::Auto)
     {
         return (TIME_MS - last->timeMS > 1000);
     }
