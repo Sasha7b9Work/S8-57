@@ -302,12 +302,12 @@ void Osci::ChangedTrigStartMode()
         // рандомизатора автоматический или ждущий
         if(set.trig.startMode == TrigStartMode::Single)
         {
-            set.time.sampleTypeOld = SampleType();
-            SampleType().Set(SampleType::Real);
+            set.time.sampleTypeOld = set.time.sampleType;
+            set.time.sampleType = SampleType::Real;
         }
         else if(set.trig.startMode == TrigStartMode::Auto)    // Иначе восстановим ранее сохранённый
         {
-            SampleType().Set(set.time.sampleTypeOld);
+            set.time.sampleType = set.time.sampleTypeOld;
         }
     }
 }

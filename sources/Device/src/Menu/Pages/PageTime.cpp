@@ -30,12 +30,6 @@ void TPos::Draw()
 }
 
 
-SampleType::E &SampleType::Ref()
-{
-    return set.time.sampleType;
-}
-
-
 LinkingTShift::E &LinkingTShift::Ref()
 {
     return set.time.linkingTShift;
@@ -77,7 +71,7 @@ DEF_CHOICE_2( cSample,                                                          
     ,
     "–еальное врем€",
     "Ёквивалентна€",
-    SampleType::Ref(), &PageTime::self, IsActive_Sample, Choice::Changed, Choice::AfterDraw
+    set.time.sampleType, &PageTime::self, IsActive_Sample, Choice::Changed, Choice::AfterDraw
 )
 
 

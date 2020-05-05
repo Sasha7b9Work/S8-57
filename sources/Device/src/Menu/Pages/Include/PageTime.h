@@ -39,12 +39,6 @@ struct SampleType
         Real,    // реальное время - в построении участвуют только реально считанные точки, ничего не рассчитывается.
         Equal    // эквивалентная - сигнал строится по последним точкам, полученным от рандомизатора.
     };
-
-    static SampleType::E &Ref();
-
-    operator SampleType::E() { return Ref(); }
-
-    static void Set(SampleType::E type) { Ref() = type; }
 };
 
 // Функция ВР/ДЕЛ.
