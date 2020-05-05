@@ -4,6 +4,8 @@
 
 #define ChanA Chan::A
 #define ChanB Chan::B
+#define setA  set.ch[ChanA]
+#define setB  set.ch[ChanB]
 
 
 struct DataSettings;

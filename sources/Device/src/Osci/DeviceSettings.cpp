@@ -35,8 +35,10 @@ void DataSettings::Fill()
     TRIGLEV_B(this)      = set.trig.level[ChanB];
 
     Lval_PEAKDET(this)   = PeakDetMode().IsEnabled() ? PeakDetMode::Enabled : PeakDetMode::Disabled;
-    Lval_DIVIDER_A(this) = Divider(ChanA);
-    Lval_DIVIDER_B(this) = Divider(ChanB);
+
+    Lval_DIVIDER_A(this) = setA.divider;
+    Lval_DIVIDER_B(this) = setB.divider;
+
     TIME_TIME(this)      = HAL_RTC::GetPackedTime();
     ENUM_POINTS(this)    = ENumPointsFPGA();
 }

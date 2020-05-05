@@ -226,11 +226,11 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
     const int SIZE = 100;
 
     char buffer[SIZE];
-    std::snprintf(buffer, SIZE, "%s\xa5%s\xa5%s", (ch == ChanA) ? "1ê" : "2ê", ModeCouple::UGO(set.ch[ch].couple), Range::ToString(ch, static_cast<int8>(Divider(ch))));
+    std::snprintf(buffer, SIZE, "%s\xa5%s\xa5%s", (ch == ChanA) ? "1ê" : "2ê", ModeCouple::UGO(set.ch[ch].couple), Range::ToString(ch, static_cast<int8>(set.ch[ch].divider)));
     String(buffer).Draw(x + 1, y, colorDraw);
 
     char bufferTemp[SIZE];
-    std::snprintf(bufferTemp, SIZE, "\xa5%s", RShift::ToString(set.ch[ch].rShift, range, static_cast<int8>(Divider(ch))).c_str());
+    std::snprintf(bufferTemp, SIZE, "\xa5%s", RShift::ToString(set.ch[ch].rShift, range, static_cast<int8>(set.ch[ch].divider)).c_str());
     String(bufferTemp).Draw(x + 46, y);
 }
 
