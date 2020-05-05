@@ -20,8 +20,6 @@ struct ModeWork
 
     ModeWork() {}
     static ModeWork::E &Ref();
-    operator ModeWork::E() { return Ref(); }
-    static bool IsRAM()  { return Ref() == RAM; }
 };
 
 // „то делать при нажатии кнопки ѕјћя“№.

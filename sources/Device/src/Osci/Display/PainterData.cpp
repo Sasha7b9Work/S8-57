@@ -25,7 +25,7 @@ void DisplayOsci::PainterData::DrawData()
             DrawROM
         };
     
-        func[ModeWork()]();
+        func[set.mem.modeWork]();
     }
 
     DrawSpectrum();

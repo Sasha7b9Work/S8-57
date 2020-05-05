@@ -263,7 +263,7 @@ static void DrawTime(int x, int y)
 
     Color::FILL.SetAsCurrent();
 
-    if ((set.mem.modeWork == ModeWork::ROM) || ModeWork::IsRAM())
+    if ((set.mem.modeWork == ModeWork::ROM) || (set.mem.modeWork == ModeWork::RAM))
     {
         if (DS)
         {
@@ -303,9 +303,9 @@ void DisplayOsci::HiPart::DrawRightPart(int x0, int y0)
     Separator::Draw(x0 - 1, y0);
 
     static const int xses[3] = { 280, 271, 251 };
-    int x = xses[ModeWork()];
+    int x = xses[set.mem.modeWork];
 
-    if (!ModeWork::IsRAM())
+    if (set.mem.modeWork != ModeWork::RAM)
     {
         x += 2;
 
@@ -332,14 +332,14 @@ void DisplayOsci::HiPart::DrawRightPart(int x0, int y0)
 
         x += 2;
         String("режим").Draw(x, -1);
-        Text(strs[ModeWork()]).DrawInCenterRect(x + 1, 9, 25, 8);
+        Text(strs[set.mem.modeWork]).DrawInCenterRect(x + 1, 9, 25, 8);
     }
     else
     {
         x -= 9;
     }
 
-    if (!ModeWork::IsRAM())
+    if (set.mem.modeWork != ModeWork::RAM)
     {
         x += 27;
 

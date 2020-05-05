@@ -34,7 +34,7 @@ void Reader::ReadDataFromRAM()
 {
     DS = nullptr;
 
-    DS = RAM::Get(ModeWork::IsRAM() ? static_cast<uint>(RAM::currentSignal) : 0U);
+    DS = RAM::Get((set.mem.modeWork == ModeWork::RAM) ? static_cast<uint>(RAM::currentSignal) : 0U);
 
     if(Roller::NeedDraw())
     {
