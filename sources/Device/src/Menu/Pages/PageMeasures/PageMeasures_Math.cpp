@@ -86,7 +86,7 @@ static void Draw_Type(int x, int y)
 
 static bool IsActive_Type()
 {
-    return !FuncModeDraw::IsDisabled();
+    return (set.math.modeDraw != FuncModeDraw::Disabled);
 }
 
 DEF_GRAPH_BUTTON_HINTS_2( bType,                                                                                                                             //--- —≈–¬»— - ‘”Õ ÷»ﬂ - ¬Ë‰ ---
@@ -123,7 +123,7 @@ static void Draw_ModeArrows(int x, int y)
 
 static bool IsActive_ModeArrows()
 {
-    return !FuncModeDraw::IsDisabled();
+    return (set.math.modeDraw != FuncModeDraw::Disabled);
 }
 
 DEF_GRAPH_BUTTON_HINTS_2( bModeArrows,                                                                                                     //--- —≈–¬»— - ‘”Õ ÷»ﬂ - –ÂÊËÏ Û˜ÍË ”—“¿ÕŒ¬ ¿ ---
@@ -148,7 +148,7 @@ static void Draw_RangeA(int x, int y)
 
 static bool IsActive_RangeA()
 {
-    return !FuncModeDraw::IsDisabled();
+    return (set.math.modeDraw != FuncModeDraw::Disabled);
 }
 
 DEF_GRAPH_BUTTON( bRangeA,                                                                                                                   //--- —≈–¬»— - ‘”Õ ÷»ﬂ - Ã‡Ò¯Ú‡· 1-„Ó Í‡Ì‡Î‡ ---
@@ -171,7 +171,7 @@ static void Draw_RangeB(int x, int y)
 
 static bool IsActive_RangeB()
 {
-    return !FuncModeDraw::IsDisabled();
+    return (set.math.modeDraw != FuncModeDraw::Disabled);
 }
 
 DEF_GRAPH_BUTTON( bRangeB,                                                                                                                   //--- —≈–¬»— - ‘”Õ ÷»ﬂ - Ã‡Ò¯Ú‡· 2-„Ó Í‡Ì‡Î‡ ---
@@ -196,7 +196,7 @@ static void OnOpenClose_Math(bool)
 
 static bool HandlerKey_Function(const KeyEvent &event) // -V2506
 {
-    if (FuncModeDraw::IsDisabled())
+    if (set.math.modeDraw == FuncModeDraw::Disabled)
     {
         return false;
     }
