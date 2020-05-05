@@ -410,8 +410,10 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
 }
 
 
-void TrigLevel::Find(Chan::E ch)
+void TrigLevel::Find()
 {
+    Chan::E ch = set.trig.source;
+
     if (DS && ENABLED_DS(ch))
     {
         const uint8 *data = IN(ch);

@@ -280,7 +280,7 @@ struct TrigLevel
     static void Change(int16 delta);
 
     // Однократно найти уровень синхронизации
-    static void Find(Chan::E ch);
+    static void Find();
 
     static void Draw(Chan::E ch);
 

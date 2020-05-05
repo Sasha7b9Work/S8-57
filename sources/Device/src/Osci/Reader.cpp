@@ -84,6 +84,6 @@ void Reader::FindTrigLevelIfNeed()
 {
     if (TrigModeFind::IsAuto())
     {
-        TrigLevel::Find(set.trig.source);
+        TrigLevel::Find();
     }
 }
