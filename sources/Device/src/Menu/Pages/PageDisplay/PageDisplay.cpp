@@ -4,12 +4,6 @@
 #include "Settings/Settings.h"
 
 
-MenuAutoHide::E &MenuAutoHide::Ref()
-{
-    return set.disp.menuAutoHide;
-}
-
-
 void ENumAverage::Set(ENumAverage::E v)
 {
     set.disp.enumAverage = v;

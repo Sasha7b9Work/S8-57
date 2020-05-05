@@ -259,7 +259,7 @@ int Display::TimeMenuAutoHide()
     {
         0, 5, 10, 15, 30, 60
     };
-    return times[MenuAutoHide()] * 1000;
+    return times[set.disp.menuAutoHide] * 1000;
 }
 
 
