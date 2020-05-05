@@ -157,7 +157,7 @@ static bool StretchChannel(Chan::E ch)
 
     ModeCouple(ch).SetAC();
     RShift(ch).Set(0);
-    Range::Set500mV(ch);
+    Range::Set(ch, Range::_500mV);
     TBase::Set(TBase::_200us);
     TShift::Set(0);
     TrigSource::Set(ch);

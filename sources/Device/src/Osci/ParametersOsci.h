@@ -103,9 +103,6 @@ struct Range
     };
 
     static void Set(Chan::E ch, E range);
-    static void Set500mV(Chan::E ch) { Set(ch, _500mV); }
-    static void Set1V(Chan::E ch)    { Set(ch, _1V); }
-    static void Set2V(Chan::E ch)    { Set(ch, _2V); }
 
     static pString Name(Chan::E ch);
 
