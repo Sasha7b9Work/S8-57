@@ -9,30 +9,45 @@ namespace Utils
     class Averager
     {
     public:
-        Averager(uint size);
+        Averager(int size);
+    
         ~Averager();
+        
         void Push(T elem);
+        
         T Value() const;
+
     private:
+        
         T *buffer;
-        uint size;
-        uint numELements;
+        
+        int size;
+        
+        int numELements;
     };
+
 
     // Приблизительно усреднение
     template <typename T>
     class AroundAverager
     {
     public:
-        AroundAverager(uint parts);
+        
+        AroundAverager(int parts);
+        
         // Пушит очередное значение и одновременно возвращает усреднённое
         void Push(T elem);
+        
         T Value();
+
     private:
+        
         T value;
+        
         // На сколько частей делится значение
-        const uint parts;
+        const int parts;
+        
         // Сколько значений обработано
-        uint pushed;
+        int pushed;
     };
 }
