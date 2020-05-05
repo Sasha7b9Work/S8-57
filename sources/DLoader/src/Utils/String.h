@@ -34,21 +34,21 @@ public:
 
     void Append(const char *str);
 
-    void Append(const char *str, uint numSymbols);
+    void Append(const char *str, int numSymbols);
 
     void Append(char symbol);
     // Удаляет numSymbols из начала строки
-    void RemoveFromBegin(uint numSymbols);
+    void RemoveFromBegin(int numSymbols);
 
     void RemoveFromEnd();
 
-    uint Size() const;
+    int Size() const;
 
-    char &operator[](uint i);
+    char &operator[](int i);
 
 private:
 
-    bool Allocate(uint size);
+    bool Allocate(int size);
 
     char *buffer;
 };

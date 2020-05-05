@@ -19,7 +19,7 @@ String::String(const String &rhs) : buffer(nullptr)
 {
     Set(TypeConversionString::None, "");
 
-    if (Allocate(std::strlen(rhs.c_str()) + 1))
+    if (Allocate(static_cast<int>(std::strlen(rhs.c_str()) + 1)))
     {
         std::strcpy(buffer, rhs.c_str());
     }
@@ -59,7 +59,7 @@ String::String(const char *format, ...) : buffer(nullptr)
     {
         std::strcpy(buffer, "Буфер слишком мал");
     }
-    else if (Allocate(std::strlen(buf) + 1))
+    else if (Allocate(static_cast<int>(std::strlen(buf) + 1)))
     {
         std::strcpy(buffer, buf);
     }
@@ -84,7 +84,7 @@ void String::Set(TypeConversionString::E, const char *format, ...)
         {
             std::strcpy(buffer, "Буфер слишком мал");
         }
-        else if(Allocate(std::strlen(buf) + 1))
+        else if(Allocate(static_cast<int>(std::strlen(buf) + 1)))
         {
             std::strcpy(buffer, buf);
         }
@@ -103,14 +103,14 @@ void String::Append(const char *str)
 
     Free();
 
-    Allocate(old.Size() + std::strlen(str) + 1);
+    Allocate(static_cast<int>(old.Size() + std::strlen(str) + 1));
 
     std::strcpy(buffer, old.c_str());
     std::strcat(buffer, str);
 }
 
 
-void String::Append(const char *str, uint numSymbols)
+void String::Append(const char *str, int numSymbols)
 {
     if (!str || *str == '\0')
     {
@@ -121,12 +121,12 @@ void String::Append(const char *str, uint numSymbols)
 
     Free();
 
-    uint size = numSymbols + old.Size() + 1;
+    int size = numSymbols + old.Size() + 1;
 
     Allocate(size);
 
     std::strcpy(buffer, old.c_str());
-    std::memcpy(buffer + old.Size(), str, numSymbols);
+    std::memcpy(buffer + old.Size(), str, static_cast<uint>(numSymbols));
     buffer[size - 1] = '\0';
 }
 
@@ -161,10 +161,10 @@ char *String::c_str() const
 }
 
 
-bool String::Allocate(uint size)
+bool String::Allocate(int size)
 {
     std::free(buffer);
-    buffer = static_cast<char *>(std::malloc(size));
+    buffer = static_cast<char *>(std::malloc(static_cast<uint>(size)));
     if (buffer)
     {
         return true;
@@ -181,9 +181,9 @@ int String::Draw(int x, int y, Color color) const
 }
 
 
-void String::RemoveFromBegin(uint numSymbols)
+void String::RemoveFromBegin(int numSymbols)
 {
-    if (std::strlen(buffer) == numSymbols)
+    if (std::strlen(buffer) == static_cast<uint>(numSymbols))
     {
         Free();
     }
@@ -209,18 +209,18 @@ void String::RemoveFromEnd()
 }
 
 
-uint String::Size() const
+int String::Size() const
 {
     if (buffer == nullptr)
     {
         return 0;
     }
 
-    return std::strlen(buffer);
+    return static_cast<int>(std::strlen(buffer));
 }
 
 
-char &String::operator[](uint i)
+char &String::operator[](int i)
 {
     static char result = 0;
 
