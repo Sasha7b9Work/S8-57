@@ -6,17 +6,17 @@ class Message
 {
 public:
     explicit Message();
-    explicit Message(uint size, uint8);
-    explicit Message(uint size, uint8, uint8);
-    explicit Message(uint size, uint8, uint16, uint8);
-    explicit Message(uint size, uint8, uint8, uint);
-    explicit Message(uint size, uint8, uint16, uint8, uint8);
+    explicit Message(int size, uint8);
+    explicit Message(int size, uint8, uint8);
+    explicit Message(int size, uint8, uint16, uint8);
+    explicit Message(int size, uint8, uint8, uint);
+    explicit Message(int size, uint8, uint16, uint8, uint8);
     explicit Message(uint8, uint8, uint8, uint8 *, uint16, uint8 *, uint16);
-    explicit Message(uint size, uint8, uint16, uint8, uint16, uint8);
+    explicit Message(int size, uint8, uint16, uint8, uint16, uint8);
     explicit Message(uint8, uint16, uint8, char *);
     ~Message();
 
-    uint Size() const { return allocated; }
+    int Size() const { return allocated; }
 
     uint8 *Data(int pos = 0) { return data + pos; }	// -V104
 
@@ -30,20 +30,28 @@ public:
     };
 
 private:
+
     // Положить один байт
     void PutByte(uint8);
+    
     // Положить послова
     void PutHalfWord(uint16);
+    
     // Положить слово
     void PutWord(uint);
+    
     // Выделить память
-    bool Allocate(uint size);
+    bool Allocate(int size);
+    
     // Освободить занятую память
     void Free();
+    
     // Сколько выделено памяти
-    uint allocated;
+    int allocated;
+    
     // Сколько заполнено (функциями PutX())
-    uint used;
+    int used;
+    
     // Указатель на выделенный участок памяти
     uint8 *data;
 };

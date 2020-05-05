@@ -12,7 +12,7 @@ Message::Message() : allocated(0), used(0), data(0)
 }
 
 
-Message::Message(uint size, uint8 v0) : allocated(0), used(0), data(0)
+Message::Message(int size, uint8 v0) : allocated(0), used(0), data(0)
 {
     if (Allocate(size))
     {
@@ -21,7 +21,7 @@ Message::Message(uint size, uint8 v0) : allocated(0), used(0), data(0)
 }
 
 
-Message::Message(uint size, uint8 v0, uint8 v1) : allocated(0), used(0), data(0)
+Message::Message(int size, uint8 v0, uint8 v1) : allocated(0), used(0), data(0)
 {
     if (Allocate(size))
     {
@@ -31,7 +31,7 @@ Message::Message(uint size, uint8 v0, uint8 v1) : allocated(0), used(0), data(0)
 }
 
 
-Message::Message(uint size, uint8 v0, uint16 v1, uint8 v2) : allocated(0), used(0), data(0)
+Message::Message(int size, uint8 v0, uint16 v1, uint8 v2) : allocated(0), used(0), data(0)
 {
     if (Allocate(size))
     {
@@ -42,7 +42,7 @@ Message::Message(uint size, uint8 v0, uint16 v1, uint8 v2) : allocated(0), used(
 }
 
 
-Message::Message(uint size, uint8 v0, uint8 v1, uint v2) : allocated(0), used(0), data(0)
+Message::Message(int size, uint8 v0, uint8 v1, uint v2) : allocated(0), used(0), data(0)
 {
     if (Allocate(size))
     {
@@ -53,7 +53,7 @@ Message::Message(uint size, uint8 v0, uint8 v1, uint v2) : allocated(0), used(0)
 }
 
 
-Message::Message(uint size, uint8 v0, uint16 v1, uint8 v2, uint8 v3) : allocated(0), used(0), data(0)
+Message::Message(int size, uint8 v0, uint16 v1, uint8 v2, uint8 v3) : allocated(0), used(0), data(0)
 {
     if (Allocate(size))
     {
@@ -66,8 +66,8 @@ Message::Message(uint size, uint8 v0, uint16 v1, uint8 v2, uint8 v3) : allocated
 
 
 Message::Message(uint8 v0, uint8 v1, uint8 v2, uint8 *b0, uint16 s0, uint8 *b1, uint16 s1) : allocated(0), used(0), data(0)
-{   //          v0 | v1 | v2 | b0[s0] | b1[s1]
-    uint size = 1U + 1U + 1U + s0 +     s1;
+{   //         v0 | v1 | v2 | b0[s0] | b1[s1]
+    int size = 1 + 1 + 1 + s0 +     s1;
 
     if (Allocate(size))
     {
@@ -86,7 +86,7 @@ Message::Message(uint8 v0, uint8 v1, uint8 v2, uint8 *b0, uint16 s0, uint8 *b1, 
 }
 
 
-Message::Message(uint size, uint8 v0, uint16 v1, uint8 v2, uint16 v3, uint8 v4) : allocated(0), used(0), data(0)
+Message::Message(int size, uint8 v0, uint16 v1, uint8 v2, uint16 v3, uint8 v4) : allocated(0), used(0), data(0)
 {
     if (Allocate(size))
     {
@@ -101,8 +101,8 @@ Message::Message(uint size, uint8 v0, uint16 v1, uint8 v2, uint16 v3, uint8 v4) 
 
 Message::Message(uint8 v0, uint16 v1, uint8 v2, char *string) : allocated(0), used(0), data(0)
 {
-    //          v0  | v1  | v2  | размер_строки | string
-    uint size = 1 +   2 +   1 +   1 +             std::strlen(string); //-V2513
+    //         v0  | v1  | v2  | размер_строки | string
+    int size = 1 +   2 +   1 +   1 +             static_cast<int>(std::strlen(string)); //-V2513
 
     if (Allocate(size))
     {
@@ -159,10 +159,10 @@ void Message::PutWord(uint v)
 }
 
 
-bool Message::Allocate(uint size)
+bool Message::Allocate(int size)
 {
     Free();
-    data = static_cast<uint8 *>(std::malloc(size));  // -V106
+    data = static_cast<uint8 *>(std::malloc(static_cast<uint>(size)));  // -V106
     if (data)
     {
         allocated = size;
