@@ -84,6 +84,6 @@ void SettingsNRST::ResetExtraShift()
 
 void SettingsNRST::ResetExtraStretch()
 {
-    exStretch[Chan::A] = 1.0F;
-    exStretch[Chan::B] = 1.0F;
+    exStretch[ChanA] = 1.0F;
+    exStretch[ChanB] = 1.0F;
 }

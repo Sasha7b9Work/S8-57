@@ -91,16 +91,16 @@ void TableMeasures::Cell::DrawStringMeasure(int x, int y)
 
     char buffer[SIZE_BUFFER];
 
-    String measureA = measure.GetStringMeasure(Chan::A, buffer, SIZE_BUFFER);
-    String measureB = measure.GetStringMeasure(Chan::B, buffer, SIZE_BUFFER);
+    String measureA = measure.GetStringMeasure(ChanA, buffer, SIZE_BUFFER);
+    String measureB = measure.GetStringMeasure(ChanB, buffer, SIZE_BUFFER);
 
-    Color colA = Color::CHAN[Chan::A];
-    Color colB = Color::CHAN[Chan::B];
+    Color colA = Color::CHAN[ChanA];
+    Color colB = Color::CHAN[ChanB];
 
     if (MeasuresSource::IsBoth())
     {
         measureA.Draw(x + 2, y + 11, colA);
-        measureB.Draw(x + 2, y + (set.ch[Chan::A].enabled ? 20 : 11), colB); //-V547
+        measureB.Draw(x + 2, y + (set.ch[ChanA].enabled ? 20 : 11), colB); //-V547
     }
     else if (MeasuresSource::IsA())
     {

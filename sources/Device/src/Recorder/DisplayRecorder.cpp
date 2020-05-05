@@ -61,9 +61,9 @@ void DisplayRecorder::DrawSettings(int x, int y)
 
     Text(Recorder::ScaleX::ToString()).Draw(x + 2, y + 2);
 
-    Text(Range::ToString(Chan::A, static_cast<int8>(Divider(Chan::A)))).Draw(x + 2, y + 11, Color::CHAN[Chan::A]);
+    Text(Range::ToString(ChanA, static_cast<int8>(Divider(ChanA)))).Draw(x + 2, y + 11, Color::CHAN[ChanA]);
 
-    Text(Range::ToString(Chan::B, static_cast<int8>(Divider(Chan::B)))).Draw(x + 2, y + 20, Color::CHAN[Chan::B]);
+    Text(Range::ToString(ChanB, static_cast<int8>(Divider(ChanB)))).Draw(x + 2, y + 20, Color::CHAN[ChanB]);
 }
 
 
@@ -153,15 +153,15 @@ void DisplayRecorder::DrawParametersCursors()
 
     Text(String("1:%s", TimeCursor(0, buffer))).Draw(x + 2, y1, Color::FILL);
 
-    Text(VoltageCursor(Chan::A, 0, buffer)).Draw(x1, y2, Color::CHAN[Chan::A]);
+    Text(VoltageCursor(ChanA, 0, buffer)).Draw(x1, y2, Color::CHAN[ChanA]);
 
-    Text(VoltageCursor(Chan::B, 0, buffer)).Draw(x1, y3, Color::CHAN[Chan::B]);
+    Text(VoltageCursor(ChanB, 0, buffer)).Draw(x1, y3, Color::CHAN[ChanB]);
 
     Text(String("2:%s", TimeCursor(1, buffer))).Draw(x + 2, y4, Color::FILL);
 
-    Text(VoltageCursor(Chan::A, 1, buffer)).Draw(x1, y5, Color::CHAN[Chan::A]);
+    Text(VoltageCursor(ChanA, 1, buffer)).Draw(x1, y5, Color::CHAN[ChanA]);
 
-    Text(VoltageCursor(Chan::B, 1, buffer)).Draw(x1, y6, Color::CHAN[Chan::B]);
+    Text(VoltageCursor(ChanB, 1, buffer)).Draw(x1, y6, Color::CHAN[ChanB]);
 
     Text(String("dT %s", DeltaTime(buffer))).Draw(x + 2, y7, Color::FILL);
 }
@@ -192,12 +192,12 @@ void DisplayRecorder::DrawData(Record *record)
 
     if(record->sources & 0x01)
     {
-        DrawChannel(record, Chan::A);
+        DrawChannel(record, ChanA);
     }
 
     if(record->sources & 0x02)
     {
-        DrawChannel(record, Chan::B);
+        DrawChannel(record, ChanB);
     }
 
     if(record->sources & 0x04)

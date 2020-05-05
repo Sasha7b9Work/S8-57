@@ -30,12 +30,12 @@ void Calibrator::Calibrate()
     setNRST.ResetExtraStretch();
     setNRST.ResetExtraShift();
 
-    if (!CalibrateChannel(Chan::A))
+    if (!CalibrateChannel(ChanA))
     {
         Display::Message::ShowAndWaitKey("Калибровка канала 1 не прошла", true);
     }
     
-    if (!CalibrateChannel(Chan::B))
+    if (!CalibrateChannel(ChanB))
     {
         Display::Message::ShowAndWaitKey("Калибровка канала 2 не прошла", true);
     }
@@ -50,10 +50,10 @@ void Calibrator::Calibrate()
 
 static bool CalibrateChannel(Chan::E ch)
 {
-    Display::Message::ShowAndWaitKey(ch == Chan::A ?  "Подключите встроенный калибратор ко входу 1 и нажмите любую кнопку" :
+    Display::Message::ShowAndWaitKey(ch == ChanA ?  "Подключите встроенный калибратор ко входу 1 и нажмите любую кнопку" :
                                                       "Подключите встроенный калибратор ко входу 2 и нажмите любую кнопку", true);
 
-    Display::Message::Show(ch == Chan::A ? "Калибрую канал 1" : "Калибрую канал 2", true);
+    Display::Message::Show(ch == ChanA ? "Калибрую канал 1" : "Калибрую канал 2", true);
 
     bool result = Calibrator::BalanceChannel(ch, false) && StretchChannel(ch);
 
@@ -121,7 +121,7 @@ static void BalanceRange(Chan::E ch, Range::E range)
 
     int numPoints = 0;
 
-    uint8 *addr = ((ch == Chan::A) ? RD::DATA_A : RD::DATA_B) + 1;
+    uint8 *addr = ((ch == ChanA) ? RD::DATA_A : RD::DATA_B) + 1;
 
     while (numPoints < 100)
     {
@@ -207,7 +207,7 @@ static float FindStretchChannel(Chan::E ch)
     HAL_BUS::FPGA::Write16(WR::PRED_LO, addrRead);
     HAL_BUS::FPGA::Write8(WR::START_ADDR, 0xff);
 
-    uint8 *a0 = (ch == Chan::A) ? RD::DATA_A : RD::DATA_B;
+    uint8 *a0 = (ch == ChanA) ? RD::DATA_A : RD::DATA_B;
     uint8 *a1 = a0 + 1;
 
     HAL_BUS::FPGA::SetAddrData(a0, a1);

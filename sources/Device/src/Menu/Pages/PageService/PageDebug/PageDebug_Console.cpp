@@ -52,7 +52,7 @@ DEF_CHOICE_2( cRShiftA,                                                         
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg.showRShift[Chan::A], &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
+    set.dbg.showRShift[ChanA], &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -61,7 +61,7 @@ DEF_CHOICE_2( cRShiftB,                                                         
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg.showRShift[Chan::B], &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
+    set.dbg.showRShift[ChanB], &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -79,7 +79,7 @@ DEF_CHOICE_2( cRangeA,                                                          
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg.showRange[Chan::A], &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
+    set.dbg.showRange[ChanA], &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -88,7 +88,7 @@ DEF_CHOICE_2( cRangeB,                                                          
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg.showRange[Chan::B], &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
+    set.dbg.showRange[ChanB], &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -106,7 +106,7 @@ DEF_CHOICE_2( cChanParamA,                                                      
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg.showChanParam[Chan::A], &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
+    set.dbg.showChanParam[ChanA], &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -115,7 +115,7 @@ DEF_CHOICE_2( cChanParamB,                                                      
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg.showChanParam[Chan::B], &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
+    set.dbg.showChanParam[ChanB], &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
 )
 
 

@@ -37,7 +37,7 @@ static void Draw_ChannelB(int x, int y)
 
 void PageCursorsMeasures::Set::OnPress_Channel()
 {
-    Chan::E source = CursorsSource::IsA() ? Chan::B : Chan::A;
+    Chan::E source = CursorsSource::IsA() ? ChanB : ChanA;
     SetCursSource(source);
 }
 
@@ -447,19 +447,19 @@ void PageCursorsMeasures::Set::UpdateCursorsForLook()
 {
     Chan::E source = CursorsSource();
 
-    if (CursorsActive::IsT() && (CursorsLookMode::IsVoltage(Chan::A) || CursorsLookMode::IsBoth(Chan::A)))
+    if (CursorsActive::IsT() && (CursorsLookMode::IsVoltage(ChanA) || CursorsLookMode::IsBoth(ChanA)))
     {
         SetCursorU(source, 0, Measure::CalculateCursorU(source, CursorsMeasurements::PosT(source, 0)));
     }
-    if (CursorsActive::IsT() && (CursorsLookMode::IsVoltage(Chan::B) || CursorsLookMode::IsBoth(Chan::B)))
+    if (CursorsActive::IsT() && (CursorsLookMode::IsVoltage(ChanB) || CursorsLookMode::IsBoth(ChanB)))
     {
         SetCursorU(source, 1, Measure::CalculateCursorU(source, CursorsMeasurements::PosT(source, 1)));
     }
-    if (CursorsActive::IsU() && (CursorsLookMode::IsTime(Chan::A) || CursorsLookMode::IsBoth(Chan::A)))
+    if (CursorsActive::IsU() && (CursorsLookMode::IsTime(ChanA) || CursorsLookMode::IsBoth(ChanA)))
     {
         SetCursorT(source, 0, Measure::CalculateCursorT(source, set.curs.posCurU[source][0], 0));
     }
-    if (CursorsActive::IsU() && (CursorsLookMode::IsTime(Chan::B) || CursorsLookMode::IsBoth(Chan::B)))
+    if (CursorsActive::IsU() && (CursorsLookMode::IsTime(ChanB) || CursorsLookMode::IsBoth(ChanB)))
     {
         SetCursorT(source, 1, Measure::CalculateCursorT(source, set.curs.posCurU[source][1], 1));
     }

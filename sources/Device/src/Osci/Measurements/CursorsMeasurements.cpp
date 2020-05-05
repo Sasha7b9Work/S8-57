@@ -33,7 +33,7 @@ bool CursorsMeasurements::NecessaryDraw()
 
 String CursorsMeasurements::Voltage(Chan::E source, int numCur)
 {
-    float voltage = MathFPGA::VoltageCursor(PosU(source, numCur), set.ch[source].range, RShift(source));
+    float voltage = MathFPGA::VoltageCursor(PosU(source, numCur), set.ch[source].range, set.ch[source].rShift);
     if (Divider(source) == Divider::_10)
     {
         voltage *= 10.0F;
@@ -147,19 +147,19 @@ static void UpdateCursorsForLook()
 {
 //    Chan::E source = CURS_SOURCE;
 
-    if (CursorsActive::IsT() && (CursorsLookMode::IsVoltage(Chan::A) || CursorsLookMode::IsBoth(Chan::A)))
+    if (CursorsActive::IsT() && (CursorsLookMode::IsVoltage(ChanA) || CursorsLookMode::IsBoth(ChanA)))
     {
         //SetCursorU(source, 0, Processing::CalculateCursorU(source, CURsT_POS(source, 0)));
     }
-    if (CursorsActive::IsT() && (CursorsLookMode::IsVoltage(Chan::B) || CursorsLookMode::IsBoth(Chan::B)))
+    if (CursorsActive::IsT() && (CursorsLookMode::IsVoltage(ChanB) || CursorsLookMode::IsBoth(ChanB)))
     {
         //SetCursorU(source, 1, Processing::CalculateCursorU(source, CURsT_POS(source, 1)));
     }
-    if (CursorsActive::IsU() && (CursorsLookMode::IsTime(Chan::A) || CursorsLookMode::IsBoth(Chan::A)))
+    if (CursorsActive::IsU() && (CursorsLookMode::IsTime(ChanA) || CursorsLookMode::IsBoth(ChanA)))
     {
         //SetCursorT(source, 0, Processing::CalculateCursorT(source, CURsU_POS(source, 0), 0));
     }
-    if (CursorsActive::IsU() && (CursorsLookMode::IsTime(Chan::B) || CursorsLookMode::IsBoth(Chan::B)))
+    if (CursorsActive::IsU() && (CursorsLookMode::IsTime(ChanB) || CursorsLookMode::IsBoth(ChanB)))
     {
         //SetCursorT(source, 1, Processing::CalculateCursorT(source, CURsU_POS(source, 1), 1));
     }

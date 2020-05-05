@@ -197,11 +197,11 @@ static void UpdateFPGA()
                 {
                     if(ENABLED_A(last))
                     {
-                        AveragerOsci::Process(Chan::A, last->dataA, last->BytesInChannel());
+                        AveragerOsci::Process(ChanA, last->dataA, last->BytesInChannel());
                     }
                     if(ENABLED_B(last))
                     {
-                        AveragerOsci::Process(Chan::B, last->dataB, last->BytesInChannel());
+                        AveragerOsci::Process(ChanB, last->dataB, last->BytesInChannel());
                     }
                 }
             }
@@ -401,10 +401,10 @@ void Osci::ClearDataRand()
         DataSettings *ds = RAM::Get();
         ds->Fill();
 
-        std::memset(ds->Data(Chan::A), VALUE::NONE, ds->PointsInChannel());
-        std::memset(ds->Data(Chan::B), VALUE::NONE, ds->PointsInChannel());
+        std::memset(ds->Data(ChanA), VALUE::NONE, ds->PointsInChannel());
+        std::memset(ds->Data(ChanB), VALUE::NONE, ds->PointsInChannel());
 
-        std::memset(IntRAM::DataRand(Chan::A), VALUE::NONE, ds->PointsInChannel());
+        std::memset(IntRAM::DataRand(ChanA), VALUE::NONE, ds->PointsInChannel());
     }
 }
 
@@ -415,9 +415,9 @@ void Osci::ReadData()
 
     DataSettings *ds = RAM::PrepareForNewData();
 
-    if(ReadDataChannel(Chan::A, ds->dataA))
+    if(ReadDataChannel(ChanA, ds->dataA))
     {
-        if(ReadDataChannel(Chan::B, ds->dataB))
+        if(ReadDataChannel(ChanB, ds->dataB))
         {
         }
     }
@@ -439,7 +439,7 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
 
     uint8 *dataRead = data + infoRead.posFirst;
 
-    uint8 *interpolated = IntRAM::DataRand(Chan::A) + infoRead.posFirst;
+    uint8 *interpolated = IntRAM::DataRand(ChanA) + infoRead.posFirst;
 
     uint8 *last = data + ENumPointsFPGA::PointsInChannel();
 

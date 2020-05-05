@@ -26,7 +26,7 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
     HAL_BUS::FPGA::Write8(WR::START_ADDR, 0xff);
 
 
-    uint8 *a0 = (ch == Chan::A) ? RD::DATA_A : RD::DATA_B;  // -V566
+    uint8 *a0 = (ch == ChanA) ? RD::DATA_A : RD::DATA_B;  // -V566
     uint8 *a1 = a0 + 1;
 
     HAL_BUS::FPGA::SetAddrData(a0, a1);

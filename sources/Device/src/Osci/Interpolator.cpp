@@ -49,7 +49,7 @@ static uint8 *FindEmptyElement(uint8 * const start)
 {
     uint8 *element = start;
 
-    uint8 *interpol = IntRAM::DataRand(Chan::A) + (start - begin);
+    uint8 *interpol = IntRAM::DataRand(ChanA) + (start - begin);
 
     while(element != end)
     {

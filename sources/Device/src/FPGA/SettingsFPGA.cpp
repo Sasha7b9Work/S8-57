@@ -52,13 +52,13 @@ static bool NeedLoadRShift(Chan::E ch)
     static Range::E prevRanges[Chan::Count] = { Range::Count, Range::Count };
     static int16 prevShift[Chan::Count] = { -1000, -1000 };
 
-    if((prevShift[ch] == RShift(ch)) && (prevRanges[ch] == set.ch[ch].range))
+    if((prevShift[ch] == set.ch[ch].rShift) && (prevRanges[ch] == set.ch[ch].range))
     {
         result = false;
     }
 
     prevRanges[ch] = set.ch[ch].range;
-    prevShift[ch] = RShift(ch);
+    prevShift[ch] = set.ch[ch].rShift;
 
     return result;
 }
@@ -75,11 +75,11 @@ void RShift::Load(Chan::E ch, bool force)
 
     static const uint16 mask[2] = { 0x2000, 0x6000 };
 
-    int16 shift = RShift(ch) + HARDWARE_ZERO;
+    int16 shift = set.ch[ch].rShift + HARDWARE_ZERO;
 
     shift += setNRST.exShift[ch][set.ch[ch].range];
 
-    if ((ch == Chan::A) && Device::InModeTester())
+    if ((ch == ChanA) && Device::InModeTester())
     {
         shift -= Tester::DeltaRShiftA();
     }
@@ -245,11 +245,6 @@ void RShift::Set(Chan::E ch, int16 rShift)
     ::Math::Limitation(&rShift, MIN, MAX);
     set.ch[ch].rShift = rShift;
     Load(ch);
-}
-
-RShift::operator int16()
-{
-    return set.ch[ch].rShift;
 }
 
 

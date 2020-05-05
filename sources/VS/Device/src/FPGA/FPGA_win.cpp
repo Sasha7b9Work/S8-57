@@ -58,7 +58,7 @@ static bool GenerateNormalModeData(Chan::E ch, uint8 *data, uint numBytes)
 
     double frequency = TuneGeneratorDialog::frequency[ch] * TShift::ToAbs(1, set.time.base);
 
-    double offset = RShift::ToAbs(RShift(ch), set.ch[ch].range) * kOffset[set.ch[ch].range];
+    double offset = RShift::ToAbs(set.ch[ch].rShift, set.ch[ch].range) * kOffset[set.ch[ch].range];
 
     if(ModeCouple(ch) == ModeCouple::DC)
     {

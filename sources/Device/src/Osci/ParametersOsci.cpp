@@ -291,8 +291,8 @@ void TBase::Set(TBase::E base)
 
     TShift::Load();
 
-    Bandwidth(Chan::A).Load();
-    Bandwidth(Chan::B).Load();
+    Bandwidth(ChanA).Load();
+    Bandwidth(ChanB).Load();
 
     MessageMgr::OsciSettingsEffectOnAverageChanged();
 
@@ -302,7 +302,7 @@ void TBase::Set(TBase::E base)
 
 void Range::LoadBoth()
 {
-    uint16 val = static_cast<uint16>(ValueForRange(Chan::B) + (ValueForRange(Chan::A) << 8));
+    uint16 val = static_cast<uint16>(ValueForRange(ChanB) + (ValueForRange(ChanA) << 8));
 
     Osci::InputController::Write(PIN_SPI3_CS2, val);
 
@@ -423,7 +423,7 @@ void TrigLevel::Find()
 
         int deltaValue = static_cast<int>(VALUE::AVE) - (max + min) / 2;
 
-        int deltaRShift = RShift(ch);
+        int deltaRShift = set.ch[ch].rShift;
 
         float k = 200 / 125.0F;     // Этот коэффициент получается так, что на верхей границе экрана лежит 125-я точка сигнала от центра экрана (нулевого значение),
                                     // а маркер в этой точке смещён на 200 единиц относительно цента экрана
@@ -437,15 +437,15 @@ void TrigLevel::Find()
 
 void RShift::DrawBoth()
 {
-    if(set.disp.lastAffectedChannel == Chan::B)
+    if(set.disp.lastAffectedChannel == ChanB)
     {
-        RShift(Chan::A).Draw();
-        RShift(Chan::B).Draw();
+        RShift(ChanA).Draw();
+        RShift(ChanB).Draw();
     }
     else
     {
-        RShift(Chan::B).Draw();
-        RShift(Chan::A).Draw();
+        RShift(ChanB).Draw();
+        RShift(ChanA).Draw();
     }
 }
 
@@ -507,7 +507,7 @@ void TrigLevel::Draw()
 
     float scale = 1.0F / ((MAX - MIN) / 2.4F / Grid::Height());
 
-    int y = Grid::ChannelCenterHeight() - static_cast<int>((set.trig.level[ch] + RShift(ch)) * scale);
+    int y = Grid::ChannelCenterHeight() - static_cast<int>((set.trig.level[ch] + set.ch[ch].rShift) * scale);
 
     int x = Grid::Right();
     int xSymbol = Grid::Right() + 5;
@@ -543,7 +543,7 @@ void RShift::Draw()
 {
     Color::CHAN[ch].SetAsCurrent();
 
-    int delta = RShift(ch) / STEP;
+    int delta = set.ch[ch].rShift / STEP;
 
     if(set.fft.enabled)
     {
@@ -556,7 +556,7 @@ void RShift::Draw()
 
     Char(Symbol8::RSHIFT_NORMAL).Draw(Grid::Left() - 8, y - 4);
 
-    Char((ch == Chan::A) ? '1' : '2', DTypeFont::_5).Draw(Grid::Left() - 7, y - 6, Color::BACK);
+    Char((ch == ChanA) ? '1' : '2', DTypeFont::_5).Draw(Grid::Left() - 7, y - 6, Color::BACK);
 }
 
 

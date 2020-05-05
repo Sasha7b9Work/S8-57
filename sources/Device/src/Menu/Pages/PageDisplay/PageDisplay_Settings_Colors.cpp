@@ -16,7 +16,7 @@ DEF_BUTTON( bReset,                                                             
 )
 
 
-ColorType PageDisplay::Settings::Colors::colorTypeA = COLOR_TYPE(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, Color::CHAN[Chan::A])
+ColorType PageDisplay::Settings::Colors::colorTypeA = COLOR_TYPE(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, Color::CHAN[ChanA])
 
 DEF_GOVERNOR_COLOR( gcChannelA,                                                                                                               //--- ƒ»—œÀ≈… - Õ¿—“–Œ… » - ÷¬≈“¿ -  ‡Ì‡Î 1 ---
     " ‡Ì‡Î 1",
@@ -25,7 +25,7 @@ DEF_GOVERNOR_COLOR( gcChannelA,                                                 
 )
 
 
-ColorType PageDisplay::Settings::Colors::colorTypeB = COLOR_TYPE(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, Color::CHAN[Chan::B])
+ColorType PageDisplay::Settings::Colors::colorTypeB = COLOR_TYPE(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, Color::CHAN[ChanB])
 
 DEF_GOVERNOR_COLOR( gcChannelB,                                                                                                               //--- ƒ»—œÀ≈… - Õ¿—“–Œ… » - ÷¬≈“¿ -  ‡Ì‡Î 2 ---
     " ‡Ì‡Î 2",

@@ -25,7 +25,7 @@ DEF_CHOICE_2( cInputA,                                                          
     chanInput,
     DISABLE_RU,
     ENABLE_RU,
-    set.ch[Chan::A].enabled, &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.ch[ChanA].enabled, &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -40,13 +40,13 @@ DEF_CHOICE_3( cCoupleA,                                                         
     "Пост",
     "Перем",
     "Земля",
-    ModeCouple::Ref(Chan::A), &PageChannelA::self, Item::Active, PageChannelA::OnChanged_Couple, Choice::AfterDraw
+    ModeCouple::Ref(ChanA), &PageChannelA::self, Item::Active, PageChannelA::OnChanged_Couple, Choice::AfterDraw
 )
 
 
 static void OnChanged_BandwidthA(bool)
 {
-    Bandwidth(Chan::A).Load();
+    Bandwidth(ChanA).Load();
 }
 
 DEF_CHOICE_2( cBandwidthA,                                                                                                                                         //--- КАНАЛ 1 - Полоса ---
@@ -54,7 +54,7 @@ DEF_CHOICE_2( cBandwidthA,                                                      
     "Задаёт полосу пропускания канала",
     "Полная",
     "20МГц",
-    Bandwidth::Ref(Chan::A), &PageChannelA::self, Item::Active, OnChanged_BandwidthA, Choice::AfterDraw
+    Bandwidth::Ref(ChanA), &PageChannelA::self, Item::Active, OnChanged_BandwidthA, Choice::AfterDraw
 )
 
 
@@ -66,7 +66,7 @@ static void Balance(Chan::E ch)
 
 static void OnPress_BalanceA()
 {
-    Balance(Chan::A);
+    Balance(ChanA);
 }
 
 DEF_BUTTON( bBalanceA,                                                                                                                                      //--- КАНАЛ 1 - Балансировать ---
@@ -81,7 +81,7 @@ DEF_CHOICE_2( cDividerA,                                                        
     "",
     "1X",
     "10X",
-    Divider::Ref(Chan::A), &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    Divider::Ref(ChanA), &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -90,7 +90,7 @@ DEF_CHOICE_2( cInverseA,                                                        
     "Инвертирует сигнал относительно уровня 0В",
     "Откл",
     "Вкл",
-    set.ch[Chan::A].inverse, &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.ch[ChanA].inverse, &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -114,7 +114,7 @@ DEF_CHOICE_2( cInputB,                                                          
     chanInput,
     DISABLE_RU,
     ENABLE_RU,
-    set.ch[Chan::B].enabled, &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.ch[ChanB].enabled, &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -129,13 +129,13 @@ DEF_CHOICE_3( cCoupleB,                                                         
     "Пост",
     "Перем",
     "Земля",
-    ModeCouple::Ref(Chan::B), &PageChannelB::self, Item::Active, PageChannelB::OnChanged_Couple, Choice::AfterDraw
+    ModeCouple::Ref(ChanB), &PageChannelB::self, Item::Active, PageChannelB::OnChanged_Couple, Choice::AfterDraw
 )
 
 
 static void OnChanged_BandwidthB(bool)
 {
-    Bandwidth(Chan::B).Load();
+    Bandwidth(ChanB).Load();
 }
 
 DEF_CHOICE_2( cBandwidthB,                                                                                                                                         //--- КАНАЛ 2 - Полоса ---
@@ -143,13 +143,13 @@ DEF_CHOICE_2( cBandwidthB,                                                      
     "",
     "Полная",
     "20МГц",
-    Bandwidth::Ref(Chan::B), &PageChannelB::self, Item::Active, OnChanged_BandwidthB, Choice::AfterDraw
+    Bandwidth::Ref(ChanB), &PageChannelB::self, Item::Active, OnChanged_BandwidthB, Choice::AfterDraw
 )
 
 
 static void OnPress_BalanceB()
 {
-    Balance(Chan::B);
+    Balance(ChanB);
 }
 
 DEF_BUTTON( bBalanceB,                                                                                                                                       //--- КАНАЛ 2 - Балансировка ---
@@ -164,7 +164,7 @@ DEF_CHOICE_2( cDividerB,                                                        
     "",
     "1X",
     "10X",
-    Divider::Ref(Chan::B), &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    Divider::Ref(ChanB), &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -173,7 +173,7 @@ DEF_CHOICE_2( cInverseB,                                                        
     "Инвертирует сигнал относительно уровня 0В",
     "Откл",
     "Вкл",
-    set.ch[Chan::B].inverse, &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.ch[ChanB].inverse, &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

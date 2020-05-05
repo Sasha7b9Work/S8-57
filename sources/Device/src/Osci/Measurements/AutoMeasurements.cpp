@@ -166,24 +166,24 @@ void AutoMeasurements::CalculateMeasures()
             {
                 if(type == set.meas.marked || set.meas.marked == TypeMeasure::None)
                 {
-                    markerTime[Chan::A][0] = Integer::ERROR;
-                    markerTime[Chan::A][1] = Integer::ERROR;
-                    markerTime[Chan::B][0] = Integer::ERROR;
-                    markerTime[Chan::B][1] = Integer::ERROR;
-                    markerVoltage[Chan::A][0] = Integer::ERROR;
-                    markerVoltage[Chan::A][1] = Integer::ERROR;
-                    markerVoltage[Chan::B][0] = Integer::ERROR;
-                    markerVoltage[Chan::B][1] = Integer::ERROR;
+                    markerTime[ChanA][0] = Integer::ERROR;
+                    markerTime[ChanA][1] = Integer::ERROR;
+                    markerTime[ChanB][0] = Integer::ERROR;
+                    markerTime[ChanB][1] = Integer::ERROR;
+                    markerVoltage[ChanA][0] = Integer::ERROR;
+                    markerVoltage[ChanA][1] = Integer::ERROR;
+                    markerVoltage[ChanB][0] = Integer::ERROR;
+                    markerVoltage[ChanB][1] = Integer::ERROR;
                 }
                 
                 if(VIEW_MEASURES_A)
                 {
-                    values[static_cast<int>(type)].value[Chan::A] = func(Chan::A);
+                    values[static_cast<int>(type)].value[ChanA] = func(ChanA);
                 }
                 
                 if(VIEW_MEASURES_B)
                 {
-                    values[static_cast<int>(type)].value[Chan::B] = func(Chan::B);
+                    values[static_cast<int>(type)].value[ChanB] = func(ChanB);
                 }
             }
         }
@@ -974,8 +974,8 @@ float CalculatePicRel(Chan::E ch)
 
 float CalculateDelayPlus(Chan::E ch)
 {
-    float periodA = CalculatePeriod(Chan::A);
-    float periodB = CalculatePeriod(Chan::B);
+    float periodA = CalculatePeriod(ChanA);
+    float periodB = CalculatePeriod(ChanB);
 
     EXIT_IF_ERRORS_FLOAT(periodA, periodB); //-V2507
     if(!Math::FloatsIsEquals(periodA, periodB, 1.05F))
@@ -983,15 +983,15 @@ float CalculateDelayPlus(Chan::E ch)
         return Float::ERROR;
     }
 
-    float averageA = CalculateAverageRel(Chan::A);
-    float averageB = CalculateAverageRel(Chan::B);
+    float averageA = CalculateAverageRel(ChanA);
+    float averageB = CalculateAverageRel(ChanB);
 
     EXIT_IF_ERRORS_FLOAT(averageA, averageB); //-V2507
 
-    float averageFirst = (ch == Chan::A) ? averageA : averageB;
-    float averageSecond = (ch == Chan::A) ? averageB : averageA;
+    float averageFirst = (ch == ChanA) ? averageA : averageB;
+    float averageSecond = (ch == ChanA) ? averageB : averageA;
     Chan::E firstChannel = ch;
-    Chan::E secondChannel = (ch == Chan::A) ? Chan::B : Chan::A;
+    Chan::E secondChannel = (ch == ChanA) ? ChanB : ChanA;
 
     float firstIntersection = FindIntersectionWithHorLine(firstChannel, 1, true, static_cast<uint8>(averageFirst));
     float secondIntersection = FindIntersectionWithHorLine(secondChannel, 1, true, static_cast<uint8>(averageSecond));
@@ -1012,8 +1012,8 @@ float CalculateDelayPlus(Chan::E ch)
 
 float CalculateDelayMinus(Chan::E ch)
 {
-    float period0 = CalculatePeriod(Chan::A);
-    float period1 = CalculatePeriod(Chan::B);
+    float period0 = CalculatePeriod(ChanA);
+    float period1 = CalculatePeriod(ChanB);
 
     EXIT_IF_ERRORS_FLOAT(period0, period1); //-V2507
 
@@ -1022,15 +1022,15 @@ float CalculateDelayMinus(Chan::E ch)
         return Float::ERROR;
     }
 
-    float average0 = CalculateAverageRel(Chan::A);
-    float average1 = CalculateAverageRel(Chan::B);
+    float average0 = CalculateAverageRel(ChanA);
+    float average1 = CalculateAverageRel(ChanB);
 
     EXIT_IF_ERRORS_FLOAT(average0, average1); //-V2507
 
-    float averageFirst = (ch == Chan::A) ? average0 : average1;
-    float averageSecond = (ch == Chan::A) ? average1 : average0;
+    float averageFirst = (ch == ChanA) ? average0 : average1;
+    float averageSecond = (ch == ChanA) ? average1 : average0;
     Chan::E firstChannel = ch;
-    Chan::E secondChannel = (ch == Chan::A) ? Chan::B : Chan::A;
+    Chan::E secondChannel = (ch == ChanA) ? ChanB : ChanA;
 
     float firstIntersection = FindIntersectionWithHorLine(firstChannel, 1, false, static_cast<uint8>(averageFirst));
     float secondIntersection = FindIntersectionWithHorLine(secondChannel, 1, false, static_cast<uint8>(averageSecond));
@@ -1290,7 +1290,7 @@ String Measure::GetStringMeasure(Chan::E ch, char* buffer, int lenBuf)
     }
 
     buffer[0] = '\0';
-    std::strcpy(buffer, (ch == Chan::A) ? "1: " : "2: ");
+    std::strcpy(buffer, (ch == ChanA) ? "1: " : "2: ");
 
     if(!isSet || values[static_cast<int>(type)].value[static_cast<int>(ch)] == Float::ERROR) //-V550 //-V2550
     {
@@ -1431,7 +1431,7 @@ void AutoMeasurements::CountedToCurrentSettings()
     {
         Smoother::Run(IN_A, OUT_A, NUM_BYTES, ENumSmoothing::Number());
         std::memcpy(IN_A, OUT_A, NUM_BYTES);
-        CountedToCurrentSettings(Chan::A, NUM_BYTES, IN_A, OUT_A);
+        CountedToCurrentSettings(ChanA, NUM_BYTES, IN_A, OUT_A);
         LimitationData(OUT_A, NUM_BYTES);
     }
 
@@ -1439,7 +1439,7 @@ void AutoMeasurements::CountedToCurrentSettings()
     {
         Smoother::Run(IN_B, OUT_B, NUM_BYTES, ENumSmoothing::Number());
         std::memcpy(IN_B, OUT_B, NUM_BYTES);
-        CountedToCurrentSettings(Chan::B, NUM_BYTES, IN_B, OUT_B);
+        CountedToCurrentSettings(ChanB, NUM_BYTES, IN_B, OUT_B);
         LimitationData(OUT_B, NUM_BYTES);
     }
 }
@@ -1471,7 +1471,7 @@ void AutoMeasurements::CountedToCurrentRShift(Chan::E ch, uint numBytes, const u
     int16 shiftDS = RSHIFT_DS(ch);
     Range::E rangeDS = RANGE_DS(ch);
 
-    int16 shiftSET = RShift(ch);
+    int16 shiftSET = set.ch[ch].rShift;
     Range::E rangeSET = set.ch[ch].range;
 
     if((shiftDS == shiftSET) && (rangeDS == rangeSET))

@@ -41,15 +41,15 @@ void DisplayOsci::PainterData::DrawCurrent()
         return;
     }
 
-    if(set.disp.lastAffectedChannel == Chan::A)
+    if(set.disp.lastAffectedChannel == ChanA)
     {
-        DrawChannel(Chan::B);
-        DrawChannel(Chan::A);
+        DrawChannel(ChanB);
+        DrawChannel(ChanA);
     }
     else
     {
-        DrawChannel(Chan::A);
-        DrawChannel(Chan::B);
+        DrawChannel(ChanA);
+        DrawChannel(ChanB);
     }
 
     DisplayOsci::MemoryWindow::Draw();
@@ -58,8 +58,8 @@ void DisplayOsci::PainterData::DrawCurrent()
 
 void DisplayOsci::PainterData::DrawRAM()
 {
-    DrawChannel(Chan::A);
-    DrawChannel(Chan::B);
+    DrawChannel(ChanA);
+    DrawChannel(ChanB);
     DisplayOsci::MemoryWindow::Draw();
 }
 
@@ -94,7 +94,7 @@ void DisplayOsci::PainterData::WriteParametersFFT(Chan::E ch, float freq0, float
 
     Text(AutoMeasurements::Freq2String(freq1, false, buffer)).Draw(x, y);
 
-    if(ch == Chan::A)
+    if(ch == ChanA)
     {
         y += dY + 2;
     }
@@ -182,23 +182,23 @@ void DisplayOsci::PainterData::DrawSpectrum()
     
         if (SourceFFT::IsA())
         {
-            DrawSpectrum(OUT_A, numPoints, Chan::A);
+            DrawSpectrum(OUT_A, numPoints, ChanA);
         }
         else if (SourceFFT::IsB())
         {
-            DrawSpectrum(OUT_B, numPoints, Chan::B);
+            DrawSpectrum(OUT_B, numPoints, ChanB);
         }
         else
         {
-            if (set.disp.lastAffectedChannel == Chan::A)
+            if (set.disp.lastAffectedChannel == ChanA)
             {
-                DrawSpectrum(OUT_B, numPoints, Chan::B);
-                DrawSpectrum(OUT_A, numPoints, Chan::A);
+                DrawSpectrum(OUT_B, numPoints, ChanB);
+                DrawSpectrum(OUT_A, numPoints, ChanA);
             }
             else
             {
-                DrawSpectrum(OUT_A, numPoints, Chan::A);
-                DrawSpectrum(OUT_B, numPoints, Chan::B);
+                DrawSpectrum(OUT_A, numPoints, ChanA);
+                DrawSpectrum(OUT_B, numPoints, ChanB);
             }
         }
     

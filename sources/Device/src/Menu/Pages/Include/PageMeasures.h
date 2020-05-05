@@ -4,9 +4,9 @@
 
 
 // ¬ыводить автоматические измерени€ по каналу A
-#define VIEW_MEASURES_A                 (set.ch[Chan::A].enabled && (MeasuresSource::IsA() || MeasuresSource::IsBoth()))
+#define VIEW_MEASURES_A                 (set.ch[ChanA].enabled && (MeasuresSource::IsA() || MeasuresSource::IsBoth()))
 // ¬ыводить автоматические измерени€ по каналу B
-#define VIEW_MEASURES_B                 (set.ch[Chan::B].enabled && (MeasuresSource::IsB() || MeasuresSource::IsBoth()))
+#define VIEW_MEASURES_B                 (set.ch[ChanB].enabled && (MeasuresSource::IsB() || MeasuresSource::IsBoth()))
 
 
 // —колько автоматических измерений помещаетс€ на экран
@@ -106,7 +106,7 @@ struct CursorsSource
     CursorsSource() {}
     static Chan::E &Ref();
     operator Chan::E() { return Ref(); }
-    static bool IsA() { return Ref() == Chan::A; }
+    static bool IsA() { return Ref() == ChanA; }
 };
 
 

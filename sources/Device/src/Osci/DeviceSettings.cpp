@@ -13,23 +13,27 @@
 
 void DataSettings::Fill()
 {
-    Lval_ENABLED_A(this) = set.ch[Chan::A].enabled ? 1U : 0U;
-    Lval_ENABLED_B(this) = set.ch[Chan::B].enabled ? 1U : 0U;
-    INVERSE_A(this)      = set.ch[Chan::A].inverse ? 1U : 0U;
-    INVERSE_B(this)      = set.ch[Chan::B].inverse ? 1U : 0U;
-    Lval_RANGE_A(this)   = set.ch[Chan::A].range;
-    Lval_RANGE_B(this)   = set.ch[Chan::B].range;
-    RSHIFT_A(this)       = RShift(Chan::A);
-    RSHIFT_B(this)       = RShift(Chan::B);
+    Lval_ENABLED_A(this) = set.ch[ChanA].enabled ? 1U : 0U;
+    Lval_ENABLED_B(this) = set.ch[ChanB].enabled ? 1U : 0U;
+
+    INVERSE_A(this)      = set.ch[ChanA].inverse ? 1U : 0U;
+    INVERSE_B(this)      = set.ch[ChanB].inverse ? 1U : 0U;
+
+    Lval_RANGE_A(this)   = set.ch[ChanA].range;
+    Lval_RANGE_B(this)   = set.ch[ChanB].range;
+
+    RSHIFT_A(this)       = set.ch[ChanA].rShift;
+    RSHIFT_B(this)       = set.ch[ChanB].rShift;
+
     Lval_TBASE(this)     = set.time.base;
     TSHIFT(this)         = set.time.shift;
-    Lval_COUPLE_A(this)  = ModeCouple(Chan::A);
-    Lval_COUPLE_B(this)  = ModeCouple(Chan::B);
-    TRIGLEV_A(this)      = set.trig.level[Chan::A];
-    TRIGLEV_B(this)      = set.trig.level[Chan::B];
+    Lval_COUPLE_A(this)  = ModeCouple(ChanA);
+    Lval_COUPLE_B(this)  = ModeCouple(ChanB);
+    TRIGLEV_A(this)      = set.trig.level[ChanA];
+    TRIGLEV_B(this)      = set.trig.level[ChanB];
     Lval_PEAKDET(this)   = PeakDetMode().IsEnabled() ? PeakDetMode::Enabled : PeakDetMode::Disabled;
-    Lval_DIVIDER_A(this) = Divider(Chan::A);
-    Lval_DIVIDER_B(this) = Divider(Chan::B);
+    Lval_DIVIDER_A(this) = Divider(ChanA);
+    Lval_DIVIDER_B(this) = Divider(ChanB);
     TIME_TIME(this)      = HAL_RTC::GetPackedTime();
     ENUM_POINTS(this)    = ENumPointsFPGA();
 }

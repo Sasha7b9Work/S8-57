@@ -35,7 +35,7 @@ const Settings Settings::defaultSettings =
         100,                                // brightness
         MenuAutoHide::None,                 // menuAutoHide
         370,                                // shiftInMemory
-        Chan::A                             // lastAffectedChannel
+        ChanA                             // lastAffectedChannel
     },
 
     // ÃÂÌ˛  ¿Õ¿À 1,  ¿Õ¿À 2
@@ -62,7 +62,7 @@ const Settings Settings::defaultSettings =
 
     // ÃÂÌ˛ —»Õ’–ŒÕ»«¿÷»ﬂ
     {
-        Chan::A,                            // source
+        ChanA,                            // source
         TrigInput::Full,                    // input
         TrigPolarity::Rising,               // polarity
         { 0, 0},                            // lev[Chan::Count]
@@ -105,7 +105,7 @@ const Settings Settings::defaultSettings =
         {CursorsLookMode::None, CursorsLookMode::None},       // lookMode[2]
         true,                                                 // showFreq
         CursorsActive::None,                                  // active
-        Chan::A,                                              // source
+        ChanA,                                              // source
         {CursorsControl::Disabled, CursorsControl::Disabled}, // cntrlU[Chan::Count]
         {CursorsControl::Disabled, CursorsControl::Disabled}, // cntrlT[Chan::Count]
         CursorsMovement::Pixels,                              // movement

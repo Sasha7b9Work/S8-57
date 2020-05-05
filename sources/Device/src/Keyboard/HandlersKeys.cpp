@@ -127,25 +127,25 @@ static void ChangeRShift(Chan::E ch, int16 delta)
 
 static void OnRShiftA()
 {
-    OnChangeParameterChannel(ChangeRShift, Chan::A, (event.key == Key::RShiftMoreA) ? 1 : -1);
+    OnChangeParameterChannel(ChangeRShift, ChanA, (event.key == Key::RShiftMoreA) ? 1 : -1);
 }
 
 
 static void OnRShiftB()
 {
-    OnChangeParameterChannel(ChangeRShift, Chan::B, (event.key == Key::RShiftMoreB) ? 1 : -1);
+    OnChangeParameterChannel(ChangeRShift, ChanB, (event.key == Key::RShiftMoreB) ? 1 : -1);
 }
 
 
 static void OnRangeA()
 {
-    OnChangeParameterChannel(Range::Change, Chan::A, (event.key == Key::RangeMoreA) ? 1 : -1);
+    OnChangeParameterChannel(Range::Change, ChanA, (event.key == Key::RangeMoreA) ? 1 : -1);
 }
 
 
 static void OnRangeB()
 {
-    OnChangeParameterChannel(Range::Change, Chan::B, (event.key == Key::RangeMoreB) ? 1 : -1);
+    OnChangeParameterChannel(Range::Change, ChanB, (event.key == Key::RangeMoreB) ? 1 : -1);
 }
 
 

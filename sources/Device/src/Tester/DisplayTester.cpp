@@ -34,9 +34,9 @@ void DisplayTester::Update()
 
     DrawLegend(274, 2);
 
-    DrawParametersChannel(Chan::A, 3, 3);
+    DrawParametersChannel(ChanA, 3, 3);
 
-    DrawParametersChannel(Chan::B, 240, 206);
+    DrawParametersChannel(ChanB, 240, 206);
 
     Rectangle(::Display::WIDTH - 1, ::Display::HEIGHT - 1).Draw(0, 0, Color::FILL);
     
@@ -128,7 +128,7 @@ String DisplayTester::ValueForStep(int step)
 
 void DisplayTester::DrawParametersChannel(Chan::E ch, int x, int y)
 {
-    int16 rShift = RShift(ch);
+    int16 rShift = set.ch[ch].rShift;
     Tester::Scale scale(set.ch[ch].range, ch);
     Tester::Shift shift(rShift, ch);
 
@@ -136,5 +136,5 @@ void DisplayTester::DrawParametersChannel(Chan::E ch, int x, int y)
     Text(scale.ToString()).DrawOnBackground(x, y, Color::BACK);
     Color::FILL.SetAsCurrent();
 
-    Text(shift.ToString(scale.value).c_str()).DrawOnBackground(x + ((ch == Chan::A) ? 25 : 35), y, Color::BACK);
+    Text(shift.ToString(scale.value).c_str()).DrawOnBackground(x + ((ch == ChanA) ? 25 : 35), y, Color::BACK);
 }

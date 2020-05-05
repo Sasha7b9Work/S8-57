@@ -258,13 +258,13 @@ Color Color::Trig()
 {
     Color result = Color::FILL;
 
-    if(set.trig.source == Chan::A)
+    if(set.trig.source == ChanA)
     {
-        result = CHAN[Chan::A];
+        result = CHAN[ChanA];
     }
     else // set.trig.source == TrigSource::B
     {
-        result = CHAN[Chan::B];
+        result = CHAN[ChanB];
     }
 
     return result;

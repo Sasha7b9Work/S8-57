@@ -49,7 +49,7 @@ const StructSCPI SCPI::channels[] =
 
 static const char *FuncRange(const char *buffer)
 {
-    Chan::E ch = (*(buffer - 7) == '1') ? Chan::A : Chan::B;    // (buffer - 7) указывает на номер канала - 1 или 2
+    Chan::E ch = (*(buffer - 7) == '1') ? ChanA : ChanB;    // (buffer - 7) указывает на номер канала - 1 или 2
 
     SCPI_REQUEST(SCPI::SendAnswer(rangeName[set.ch[ch].range]));
 
@@ -72,7 +72,7 @@ static bool TestRange()
 
         SCPI_APPEND_STRING(commandA);
 
-        if(set.ch[Chan::A].range != range)
+        if(set.ch[ChanA].range != range)
         {
             SCPI_EXIT_ERROR();
         }
@@ -82,7 +82,7 @@ static bool TestRange()
 
         SCPI_APPEND_STRING(commandB);
 
-        if(set.ch[Chan::B].range != range)
+        if(set.ch[ChanB].range != range)
         {
             SCPI_EXIT_ERROR();
         }

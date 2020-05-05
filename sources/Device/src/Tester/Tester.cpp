@@ -300,7 +300,7 @@ void Tester::LoadStep()
 
 pString Tester::Scale::ToString() const // -V2506
 {
-    if (ch == Chan::A)
+    if (ch == ChanA)
     {
         return Range::ToString(static_cast<Range::E>(value), Divider::_1);
     }
@@ -335,7 +335,7 @@ pString Tester::Scale::ToString() const // -V2506
 
 String Tester::Shift::ToString(Scale::E scale) // -V2506
 {
-    if (ch == Chan::A)
+    if (ch == ChanA)
     {
         return RShift::ToString(shift, static_cast<Range::E>(scale), Divider::_1);
     }
@@ -348,7 +348,7 @@ String Tester::Shift::ToString(Scale::E scale) // -V2506
 
 static void ReadFPGA(uint16 *dataA, uint8 *dataB)
 {
-    uint16 aRead = (uint16)(Osci::ReadLastRecord(Chan::A) - TESTER_NUM_POINTS);
+    uint16 aRead = (uint16)(Osci::ReadLastRecord(ChanA) - TESTER_NUM_POINTS);
 
     HAL_BUS::FPGA::Write16(WR::PRED_LO, aRead);         // Указываем адрес, с которого будем читать данные
     HAL_BUS::FPGA::Write8(WR::START_ADDR, 0xff);        // И даём команду ПЛИС, чтобы чтение начиналось с него

@@ -60,35 +60,35 @@ struct DataSettings
     uint NeedMemoryForData() const;
     bool IsEquals(const DataSettings &ds) const;
     bool EqualsCurrentSettings() const;
-    uint8 *Data(Chan::E ch) { return ch == Chan::A ? dataA : dataB; }
+    uint8 *Data(Chan::E ch) { return ch == ChanA ? dataA : dataB; }
     //  опировать данные из source с проверкой безопасности
     void CopyDataFrom(const DataSettings *source);
 };
 
 
-#define DATA(ds, ch)         (((ch) == Chan::A) ? (ds)->dataA : (ds)->dataB)
+#define DATA(ds, ch)         (((ch) == ChanA) ? (ds)->dataA : (ds)->dataB)
 
 #define Lval_ENABLED_A(ds)      ((ds)->enableA)
 #define Lval_ENABLED_B(ds)      ((ds)->enableB)
 #define Lval_ENABLED(ds, ch)    (ch.IsA() ? Lval_ENABLED_A(ds) : Lval_ENABLED_B(ds))
 #define ENABLED_A(ds)           ((bool)Lval_ENABLED_A(ds))
 #define ENABLED_B(ds)           ((bool)Lval_ENABLED_B(ds))
-#define ENABLED(ds, ch)         (((ch) == Chan::A) ? ENABLED_A(ds) : ENABLED_B(ds))
+#define ENABLED(ds, ch)         (((ch) == ChanA) ? ENABLED_A(ds) : ENABLED_B(ds))
 
 #define ENABLED_DS(ch)          (ENABLED(DS, ch))
 #define ENABLED_DS_A            ENABLED_A(DS)
 #define ENABLED_DS_B            ENABLED_B(DS)
 
 #define RSHIFT(ds, ch)          ((ds)->rShift[static_cast<int>(ch)])
-#define RSHIFT_A(ds)            (RSHIFT(ds, Chan::A))
-#define RSHIFT_B(ds)            (RSHIFT(ds, Chan::B))
+#define RSHIFT_A(ds)            (RSHIFT(ds, ChanA))
+#define RSHIFT_B(ds)            (RSHIFT(ds, ChanB))
 
 #define Lval_RANGE(ds, ch)      ((ds)->range[static_cast<int>(ch)])
-#define Lval_RANGE_A(ds)        (Lval_RANGE(ds, Chan::A))
-#define Lval_RANGE_B(ds)        (Lval_RANGE(ds, Chan::B))
+#define Lval_RANGE_A(ds)        (Lval_RANGE(ds, ChanA))
+#define Lval_RANGE_B(ds)        (Lval_RANGE(ds, ChanB))
 #define RANGE(ds, ch)           ((Range::E)Lval_RANGE(ds, ch))
-#define RANGE_A(ds)             (RANGE(ds, Chan::A))
-#define RANGE_B(ds)             (RANGE(ds, Chan::B))
+#define RANGE_A(ds)             (RANGE(ds, ChanA))
+#define RANGE_B(ds)             (RANGE(ds, ChanB))
 
 #define Lval_TBASE(ds)          ((ds)->tBase)
 #define TBASE(ds)               ((TBase::E)(Lval_TBASE(ds)))
@@ -115,8 +115,8 @@ struct DataSettings
 #define COUPLE(ds, ch)          (ch.IsA() ? COUPLE_A(ds) : COUPLE_B(ds))
 
 #define TRIGLEV(ds, ch)         ((ds)->trigLev[ch])
-#define TRIGLEV_A(ds)           (TRIGLEV(ds, Chan::A))
-#define TRIGLEV_B(ds)           (TRIGLEV(ds, Chan::B))
+#define TRIGLEV_A(ds)           (TRIGLEV(ds, ChanA))
+#define TRIGLEV_B(ds)           (TRIGLEV(ds, ChanB))
 
 #define Lval_PEAKDET(ds)        ((ds)->peackDet)
 #define PEAKDET(ds)             ((PeakDetMode::E)Lval_PEAKDET(ds))

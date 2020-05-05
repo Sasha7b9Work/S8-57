@@ -23,7 +23,7 @@ void DisplayOsci::MemoryWindow::Draw()
 
     DrawScreenArea();
 
-    Chan::E chans[2] = { (set.disp.lastAffectedChannel == Chan::A) ? Chan::B : Chan::A, (set.disp.lastAffectedChannel == Chan::A) ? Chan::A : Chan::B };
+    Chan::E chans[2] = { (set.disp.lastAffectedChannel == ChanA) ? ChanB : ChanA, (set.disp.lastAffectedChannel == ChanA) ? ChanA : ChanB };
 
     for (int i = 0; i < 2; i++)
     {

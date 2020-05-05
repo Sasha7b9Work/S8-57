@@ -121,19 +121,22 @@ struct Range
 struct RShift
 {
 public:
+
     // Этим конструктором можно узнать значение
     RShift(Chan::E _ch) : ch(_ch) {};
+
     // Этим конструктором можно установить значение
     static void Set(Chan::E ch, int16 rShift);
 
-    operator int16();
-
     // Изменить на delta
     void Change(int16 delta);
+
     // Загрузить в аппаратуру. Если force, то загружать нужно, не проверяя никакие условия
     static void Load(Chan::E ch, bool force = false);
+
     // Отрисовать оба на экране
     static void DrawBoth();
+
     // Преобразовать в строку
     static String ToString(int16 rShiftRel, Range::E range, int8 divider);
 
@@ -144,16 +147,21 @@ public:
     static bool ChangeMath(int delta);
 
 private:
+
     // Отрисовать маркер вертикального смещения на сетке
     void Draw();
 
     static const float absStep[Range::Count];
+
     // Это значение соответствует минимуму смещения
     static const int16 MIN = -480;
+
     // Это значение соотвествует максимуму смещения
     static const int16 MAX = 480;
+
     // Это знаение, которое нужно засылать в аппаратную часть, чтобы получить смещение "0"
     static const int16 HARDWARE_ZERO = 500;
+
     // На столько единиц нужно изменить значение смещения, чтобы маркер смещения по напряжению передвинулся на одну точку.
     static const int16 STEP = (((MAX - MIN) / 24) / 20);
 
