@@ -124,8 +124,8 @@ static void StoreOsciSettings()
 
 static void RestoreOsciSettings()
 {
-    RShift(Chan::A).Set(osci.storedRShift[Chan::A]);
-    RShift(Chan::B).Set(osci.storedRShift[Chan::B]);
+    RShift::Set(Chan::A, osci.storedRShift[Chan::A]);
+    RShift::Set(Chan::B, osci.storedRShift[Chan::B]);
 }
 
 

@@ -89,14 +89,14 @@ void Tester::Enable() // -V2506
 
     oldSet = set;
 
-    ModeCouple(Chan::A).SetGND();
-    ModeCouple(Chan::B).SetGND();
+    ModeCouple(ChanA).SetGND();
+    ModeCouple(ChanB).SetGND();
 
-    Range::Set(Chan::A, Range::_2V);
-    Range::Set(Chan::B, Range::_2V);
+    Range::Set(ChanA, Range::_2V);
+    Range::Set(ChanB, Range::_2V);
 
-    RShift(Chan::A).Set(0);
-    RShift(Chan::B).Set(0);
+    RShift::Set(ChanA, 0);
+    RShift::Set(ChanB, 0);
 
     HAL_PIO::Reset(PIN_TESTER_ON);       // Включаем тестер-компонент
 

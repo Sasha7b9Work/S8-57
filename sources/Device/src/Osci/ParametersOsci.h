@@ -124,14 +124,14 @@ public:
     // Этим конструктором можно узнать значение
     RShift(Chan::E _ch) : ch(_ch) {};
     // Этим конструктором можно установить значение
-    void Set(int16 rShift);
+    static void Set(Chan::E ch, int16 rShift);
 
     operator int16();
 
     // Изменить на delta
     void Change(int16 delta);
     // Загрузить в аппаратуру. Если force, то загружать нужно, не проверяя никакие условия
-    void Load(bool force = false);
+    static void Load(Chan::E ch, bool force = false);
     // Отрисовать оба на экране
     static void DrawBoth();
     // Преобразовать в строку

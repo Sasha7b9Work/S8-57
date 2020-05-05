@@ -328,28 +328,28 @@ void Range::LoadBoth()
         BIN_U8(00000011)   // 20V      // -V2501
     };
 
-    uint8 valueA = vals[set.ch[Chan::A].range];
+    uint8 valueA = vals[set.ch[ChanA].range];
 
     HAL_PIO::Write(PIN_A1, _GET_BIT(valueA, 1));
     HAL_PIO::Write(PIN_A2, _GET_BIT(valueA, 0));
 
-    uint8 valueB = vals[set.ch[Chan::B].range];
+    uint8 valueB = vals[set.ch[ChanB].range];
 
     HAL_PIO::Write(PIN_A3, _GET_BIT(valueB, 1));
     HAL_PIO::Write(PIN_A4, _GET_BIT(valueB, 0));
 
-    Bandwidth(Chan::A).Load();
-    Bandwidth(Chan::B).Load();
+    Bandwidth(ChanA).Load();
+    Bandwidth(ChanB).Load();
 
-    if(set.disp.lastAffectedChannel == Chan::B)
+    if(set.disp.lastAffectedChannel == ChanB)
     {
-        RShift(Chan::A).Load();
-        RShift(Chan::B).Load();
+        RShift::Load(ChanA);
+        RShift::Load(ChanB);
     }
     else
     {
-        RShift(Chan::B).Load();
-        RShift(Chan::A).Load();
+        RShift::Load(ChanB);
+        RShift::Load(ChanA);
     }
 
     Osci::Restart();

@@ -279,7 +279,7 @@ static void OnChannelA()
     }
     else if (event.IsLong())
     {
-        RShift(Chan::A).Set(0);
+        RShift::Set(ChanA, 0);
     }
 }
 
@@ -294,7 +294,7 @@ static void OnChannelB()
     }
     else if (event.IsLong())
     {
-        RShift(Chan::B).Set(0);
+        RShift::Set(ChanB, 0);
     }
 }
 

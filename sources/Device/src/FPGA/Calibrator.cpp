@@ -113,7 +113,7 @@ static void BalanceRange(Chan::E ch, Range::E range)
 
     Range::Set(ch, range);
 
-    RShift(ch).Set(0);
+    RShift::Set(ch, 0);
 
     Osci::Start(false);
 
@@ -156,7 +156,7 @@ static bool StretchChannel(Chan::E ch)
     setNRST.ResetExtraStretch();
 
     ModeCouple(ch).SetAC();
-    RShift(ch).Set(0);
+    RShift::Set(ch, 0);
     Range::Set(ch, Range::_500mV);
     TBase::Set(TBase::_200us);
     TShift::Set(0);

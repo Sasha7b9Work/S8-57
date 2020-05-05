@@ -85,8 +85,8 @@ void Osci::Init()
     RAM::Init();
     FPGA::LoadRegUPR();
     Range::LoadBoth();
-    RShift(Chan::A).Load();
-    RShift(Chan::B).Load();
+    RShift::Load(ChanA);
+    RShift::Load(ChanB);
     TrigInput::Load();
     TrigLevel::Load();
     TrigPolarity().Load();
