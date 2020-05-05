@@ -16,12 +16,6 @@ MenuAutoHide::E &MenuAutoHide::Ref()
 }
 
 
-ENumMinMax::E &ENumMinMax::Ref()
-{
-    return set.disp.enumMinMax;
-}
-
-
 ENumAccum::E &ENumAccum::Ref()
 {
     return set.disp.enumAccum;

@@ -26,7 +26,6 @@ const Settings Settings::defaultSettings =
     // Ìåíş ÄÈÑÏËÅÉ
     {
         DisplayMapping::Lines,              // modeDrawSignal
-        ENumMinMax::_1,                     // ENumMinMax
         ENumAverage::_1,                    // ENumAverage
         ENumAccum::_1,                      // ENumAccum
         ModeAccumulation::NoReset,          // modeAccumulation

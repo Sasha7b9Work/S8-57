@@ -25,26 +25,6 @@ struct DisplayMapping
     static bool IsDots()                { return Ref() == Dots; }
 };
 
-// Количество измерений для расчёта минимального и максимального значений.
-struct ENumMinMax
-{
-    enum E
-    {
-        _1,
-        _2,
-        _4,
-        _8,
-        _16,
-        _32,
-        _64,
-        _128,
-        Count
-    };
-
-    ENumMinMax::E &Ref();
-    int Number() { return 1 << Ref(); }
-};
-
 // Количество усреднений по измерениям.
 struct ENumAverage
 {
@@ -184,7 +164,6 @@ struct MenuAutoHide
 struct SettingsDisplay
 { //-V802
     DisplayMapping::E      mapping;
-    ENumMinMax::E          enumMinMax;            // Перечисление количества измерений для определения минимумов и масимумов.
     ENumAverage::E         enumAverage;           // Число усреднений сигнала.
     ENumAccum::E           enumAccum;             // Число накоплений сигнала на экране.
     ModeAccumulation::E    modeAccumulation;      // Режим накопления сигналов.

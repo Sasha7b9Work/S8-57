@@ -196,7 +196,7 @@ static int DrawMainParameters(int _x, int _y)
     {
         WriteStringAndNumber("накопл", x, y0 - 4, ENumAccum().Number());
         WriteStringAndNumber("усредн", x, y1, ENumAverage().Number());
-        WriteStringAndNumber("мн\x93мкс", x, y1 + 6, ENumMinMax().Number());
+        //WriteStringAndNumber("мн\x93мкс", x, y1 + 6, ENumMinMax().Number());
     }
 
     Separator::Draw(x + 43, y0 - 1);
