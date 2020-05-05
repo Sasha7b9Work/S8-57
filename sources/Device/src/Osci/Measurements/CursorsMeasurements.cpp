@@ -147,19 +147,19 @@ static void UpdateCursorsForLook()
 {
 //    Chan::E source = CURS_SOURCE;
 
-    if (CursorsActive::IsT() && (CursorsLookMode::IsVoltage(ChanA) || CursorsLookMode::IsBoth(ChanA)))
+    if (CursorsActive::IsT() && (CursorsLookMode::IsVoltage(ChanA) || (set.curs.lookMode[ChanA] == CursorsLookMode::Both)))
     {
         //SetCursorU(source, 0, Processing::CalculateCursorU(source, CURsT_POS(source, 0)));
     }
-    if (CursorsActive::IsT() && (CursorsLookMode::IsVoltage(ChanB) || CursorsLookMode::IsBoth(ChanB)))
+    if (CursorsActive::IsT() && (CursorsLookMode::IsVoltage(ChanB) || (set.curs.lookMode[ChanB] == CursorsLookMode::Both)))
     {
         //SetCursorU(source, 1, Processing::CalculateCursorU(source, CURsT_POS(source, 1)));
     }
-    if (CursorsActive::IsU() && (CursorsLookMode::IsTime(ChanA) || CursorsLookMode::IsBoth(ChanA)))
+    if (CursorsActive::IsU() && (CursorsLookMode::IsTime(ChanA) || (set.curs.lookMode[ChanA] == CursorsLookMode::Both)))
     {
         //SetCursorT(source, 0, Processing::CalculateCursorT(source, CURsU_POS(source, 0), 0));
     }
-    if (CursorsActive::IsU() && (CursorsLookMode::IsTime(ChanB) || CursorsLookMode::IsBoth(ChanB)))
+    if (CursorsActive::IsU() && (CursorsLookMode::IsTime(ChanB) || (set.curs.lookMode[ChanB] == CursorsLookMode::Both)))
     {
         //SetCursorT(source, 1, Processing::CalculateCursorT(source, CURsU_POS(source, 1), 1));
     }

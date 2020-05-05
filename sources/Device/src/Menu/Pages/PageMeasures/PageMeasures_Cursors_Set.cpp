@@ -447,19 +447,19 @@ void PageCursorsMeasures::Set::UpdateCursorsForLook()
 {
     Chan::E source = CursorsSource();
 
-    if (CursorsActive::IsT() && (CursorsLookMode::IsVoltage(ChanA) || CursorsLookMode::IsBoth(ChanA)))
+    if (CursorsActive::IsT() && (CursorsLookMode::IsVoltage(ChanA) || (set.curs.lookMode[ChanA] == CursorsLookMode::Both)))
     {
         SetCursorU(source, 0, Measure::CalculateCursorU(source, CursorsMeasurements::PosT(source, 0)));
     }
-    if (CursorsActive::IsT() && (CursorsLookMode::IsVoltage(ChanB) || CursorsLookMode::IsBoth(ChanB)))
+    if (CursorsActive::IsT() && (CursorsLookMode::IsVoltage(ChanB) || (set.curs.lookMode[ChanB] == CursorsLookMode::Both)))
     {
         SetCursorU(source, 1, Measure::CalculateCursorU(source, CursorsMeasurements::PosT(source, 1)));
     }
-    if (CursorsActive::IsU() && (CursorsLookMode::IsTime(ChanA) || CursorsLookMode::IsBoth(ChanA)))
+    if (CursorsActive::IsU() && (CursorsLookMode::IsTime(ChanA) || (set.curs.lookMode[ChanA] == CursorsLookMode::Both)))
     {
         SetCursorT(source, 0, Measure::CalculateCursorT(source, set.curs.posCurU[source][0], 0));
     }
-    if (CursorsActive::IsU() && (CursorsLookMode::IsTime(ChanB) || CursorsLookMode::IsBoth(ChanB)))
+    if (CursorsActive::IsU() && (CursorsLookMode::IsTime(ChanB) || (set.curs.lookMode[ChanB] == CursorsLookMode::Both)))
     {
         SetCursorT(source, 1, Measure::CalculateCursorT(source, set.curs.posCurU[source][1], 1));
     }
