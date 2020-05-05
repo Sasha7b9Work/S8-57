@@ -65,9 +65,6 @@ struct TBase
     static pString ToString();
 
     static void Set(E v = Count);
-    static void Set200us() { Set(_200us); }
-    static void Set500us() { Set(_500us); }
-    static void Set100ms() { Set(_100ms); }
 
     static void Change(int delta);
 
@@ -82,9 +79,6 @@ struct TBase
 
     // Время между точками
     static float TimePoint(TBase::E base);
-
-private:
-    TBase() {};
 };
 
 

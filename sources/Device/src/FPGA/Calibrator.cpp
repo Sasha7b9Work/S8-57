@@ -84,7 +84,7 @@ bool Calibrator::BalanceChannel(Chan::E ch, bool showHint)
 
     ModeCouple(ch).SetGND();
 
-    TBase::Set100ms();
+    TBase::Set(TBase::_100ms);
 
     for (int range = 0; range < Range::Count; range++)
     {
@@ -158,7 +158,7 @@ static bool StretchChannel(Chan::E ch)
     ModeCouple(ch).SetAC();
     RShift(ch).Set(0);
     Range::Set500mV(ch);
-    TBase::Set200us();
+    TBase::Set(TBase::_200us);
     TShift::Set(0);
     TrigSource::Set(ch);
     TrigLevel::Set(ch, 0);
