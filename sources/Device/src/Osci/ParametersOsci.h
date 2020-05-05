@@ -128,8 +128,8 @@ public:
     // Изменить на delta
     static void Change(Chan::E ch, int16 delta);
 
-    // Загрузить в аппаратуру. Если force, то загружать нужно, не проверяя никакие условия
-    static void Load(Chan::E ch, bool force = false);
+    // Загрузить в аппаратуру
+    static void Load(Chan::E ch);
 
     // Отрисовать оба на экране
     static void DrawBoth();
