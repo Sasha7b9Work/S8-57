@@ -310,7 +310,7 @@ int TShift::Min()
         StructENumPoints(-4096 * mul + k, -2048 * mul + k, 0 * mul + k)   // 8192
     };
 
-    return m[ENumPointsFPGA()].m[TPos()];
+    return m[ENumPointsFPGA()].m[set.time.tPos];
 }
 
 

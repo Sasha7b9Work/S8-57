@@ -408,11 +408,11 @@ void DisplayOsci::PainterData::ChangeTPos()
 {
     int width = Grid::Width();
 
-    if (TPos() == TPos::Left)
+    if (set.time.tPos == TPos::Left)
     {
         set.disp.shiftInMemory = 0;
     }
-    else if (TPos() == TPos::Center)
+    else if (set.time.tPos == TPos::Center)
     {
         set.disp.shiftInMemory = static_cast<int16>(ENumPointsFPGA::PointsInChannel() / 2 - width / 2);
     }

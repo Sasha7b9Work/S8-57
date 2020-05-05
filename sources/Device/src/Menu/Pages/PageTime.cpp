@@ -14,7 +14,7 @@ int TPos::PosX()
 {
     int x[] = { Grid::Left(), (Grid::Right() - Grid::Left()) / 2 + Grid::Left(), Grid::Right() };
 
-    return x[TPos()];
+    return x[set.time.tPos];
 }
 
 

@@ -29,7 +29,6 @@ struct TPos
 
     static TPos::E &Ref();
 
-    operator TPos::E() { return Ref(); }
     // Узнать привязку отсительно уровня синхронизации в байтах
     static int InBytes();
 
