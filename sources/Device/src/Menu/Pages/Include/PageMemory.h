@@ -26,7 +26,6 @@ struct ModeWork
     static bool IsROM()  { return Ref() == ROM; }
     static void SetRAM() { Ref() = RAM; }
     static void SetDir() { Ref() = Dir; }
-    static void Set(E v) { Ref() = v;   }
 };
 
 // „то делать при нажатии кнопки ѕјћя“№.
