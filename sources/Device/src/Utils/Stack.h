@@ -5,17 +5,23 @@ template<typename T>
 class Stack
 {
 public:
-    Stack(uint size);
+    Stack(int size);
+    
     ~Stack();
+    
     void Push(T elem);
+    
     T Pop();
-    uint Size() const;
+    
+    int Size() const;
+    
     bool Empty() const;
+    
     // ¬озвращает количество нулей на дне стека
     int NumFirstZeros() const;
 
 private:
     T *buffer;
-    uint size;
-    uint numElements;
+    int size;
+    int numElements;
 };

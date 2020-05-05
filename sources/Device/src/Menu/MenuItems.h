@@ -304,10 +304,12 @@ public:
 private:
 
     void DrawLowPart(int x, int y) const;
+    
     // ¬озвращает число знакомест в поле дл€ ввода элемента governor. «ависит от максимального значени€, которое может принимать governor.
-    uint  NumDigits() const;
+    int  NumDigits() const;
+    
     // Ќарисовать значение регул€тора в режиме поразр€дной регулировки. setPosFromEnd - подсвеченный (активный) разр€д, начина€ с конца. ≈сли selPosFromEnd == -1, подсвечивать не нужно
-    void DrawValueWithSelectedPosition(int x, int y, int value, uint numDigits, int selPosFromEnd, bool fillNull) const;
+    void DrawValueWithSelectedPosition(int x, int y, int value, int numDigits, int selPosFromEnd, bool fillNull) const;
 
     static int8 currentDigit;
 };

@@ -385,11 +385,11 @@ void Item::DrawCommonHiPart(int x, int y, bool opened) const
 }
 
 
-void Governor::DrawValueWithSelectedPosition(int x, int y, int value, uint numDigits, int selPosFromEnd, bool) const
+void Governor::DrawValueWithSelectedPosition(int x, int y, int value, int numDigits, int selPosFromEnd, bool) const
 {
     Stack<uint8> stack(numDigits);
     
-    for(uint i = 0; i < numDigits; i++)
+    for(int i = 0; i < numDigits; i++)
     {
         stack.Push(static_cast<uint8>(value % 10));
         value /= 10;
@@ -397,7 +397,7 @@ void Governor::DrawValueWithSelectedPosition(int x, int y, int value, uint numDi
     
     int height = 8;
     
-    for (uint i = 0; i < numDigits; i++)
+    for (int i = 0; i < numDigits; i++)
     {
         if (selPosFromEnd == (static_cast<int>(numDigits) - static_cast<int>(i) - 1))
         {

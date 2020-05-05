@@ -9,7 +9,7 @@ template class Stack<uint8>;
 
 
 template <typename T>
-Stack<T>::Stack(uint _size) : buffer(0), size(_size), numElements(0U)
+Stack<T>::Stack(int _size) : buffer(0), size(_size), numElements(0U)
 {
     buffer = static_cast<T *>(std::malloc(sizeof(T) * _size));
 }
@@ -47,7 +47,7 @@ T Stack<T>::Pop()
 
 
 template <typename T>
-uint Stack<T>::Size() const
+int Stack<T>::Size() const
 {
     return numElements;
 }
@@ -65,7 +65,7 @@ int Stack<T>::NumFirstZeros() const
 {
     int result = 0;
 
-    for(uint i = 0; i < size; i++)
+    for(int i = 0; i < size; i++)
     {
         if(buffer[i] != 0)
         {

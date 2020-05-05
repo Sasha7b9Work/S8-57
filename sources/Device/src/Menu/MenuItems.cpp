@@ -558,7 +558,7 @@ float Governor::Step() const
 }
 
 
-uint Governor::NumDigits() const
+int Governor::NumDigits() const
 {
     int min = Integer(Math::Abs(OwnData()->min)).NumDigits();
     int max = Integer(Math::Abs(OwnData()->max)).NumDigits();
@@ -566,7 +566,7 @@ uint Governor::NumDigits() const
     {
         max = min;
     }
-    return static_cast<uint>(max);
+    return max;
 }
 
 
