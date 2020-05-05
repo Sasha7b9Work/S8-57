@@ -291,8 +291,8 @@ void TBase::Set(TBase::E base)
 
     TShift::Load();
 
-    Bandwidth(ChanA).Load();
-    Bandwidth(ChanB).Load();
+    Bandwidth::Load(ChanA);
+    Bandwidth::Load(ChanB);
 
     MessageMgr::OsciSettingsEffectOnAverageChanged();
 
@@ -338,8 +338,8 @@ void Range::LoadBoth()
     HAL_PIO::Write(PIN_A3, _GET_BIT(valueB, 1));
     HAL_PIO::Write(PIN_A4, _GET_BIT(valueB, 0));
 
-    Bandwidth(ChanA).Load();
-    Bandwidth(ChanB).Load();
+    Bandwidth::Load(ChanA);
+    Bandwidth::Load(ChanB);
 
     if(set.disp.lastAffectedChannel == ChanB)
     {

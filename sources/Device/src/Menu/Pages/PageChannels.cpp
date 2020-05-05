@@ -46,7 +46,7 @@ DEF_CHOICE_3( cCoupleA,                                                         
 
 static void OnChanged_BandwidthA(bool)
 {
-    Bandwidth(ChanA).Load();
+    Bandwidth::Load(ChanA);
 }
 
 DEF_CHOICE_2( cBandwidthA,                                                                                                                                         //--- КАНАЛ 1 - Полоса ---
@@ -135,7 +135,7 @@ DEF_CHOICE_3( cCoupleB,                                                         
 
 static void OnChanged_BandwidthB(bool)
 {
-    Bandwidth(ChanB).Load();
+    Bandwidth::Load(ChanB);
 }
 
 DEF_CHOICE_2( cBandwidthB,                                                                                                                                         //--- КАНАЛ 2 - Полоса ---

@@ -401,7 +401,7 @@ Bandwidth::E &Bandwidth::Ref(Chan::E ch)
 }
 
 
-void Bandwidth::Load()
+void Bandwidth::Load(Chan::E ch)
 {
     static const StructPIN pinsLF[2] = { {PIN_LF1}, {PIN_LF2} };
 

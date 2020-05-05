@@ -33,6 +33,7 @@ void DataSettings::Fill()
 
     TRIGLEV_A(this)      = set.trig.level[ChanA];
     TRIGLEV_B(this)      = set.trig.level[ChanB];
+
     Lval_PEAKDET(this)   = PeakDetMode().IsEnabled() ? PeakDetMode::Enabled : PeakDetMode::Disabled;
     Lval_DIVIDER_A(this) = Divider(ChanA);
     Lval_DIVIDER_B(this) = Divider(ChanB);

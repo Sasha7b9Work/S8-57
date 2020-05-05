@@ -191,7 +191,7 @@ struct Bandwidth
 
     Bandwidth(Chan::E c) : ch(c) {}
     static Bandwidth::E &Ref(Chan::E);
-    void Load();
+    static void Load(Chan::E ch);
     bool Is20MHz() { return Ref(ch) == _20MHz; };
 
 private:
