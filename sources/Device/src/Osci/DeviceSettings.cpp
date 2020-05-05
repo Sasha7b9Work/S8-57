@@ -87,9 +87,9 @@ int DataSettings::PointsInChannel() const
 }
 
 
-uint DataSettings::NeedMemoryForData() const
+int DataSettings::NeedMemoryForData() const
 {
-    uint result = 0;
+    int result = 0;
 
     if (enableA)
     {

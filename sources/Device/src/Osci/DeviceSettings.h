@@ -50,17 +50,25 @@ struct DataSettings
     uint        numInROM    : 5;    // Номер данных в памяти ROM
     uint        notUsed     : 7;
     PackedTime  time;
+    
     // Заполняет структуру в соответствии с текущими настройками
     void Fill();
+    
     // Возвращает размер занимаемый данными одного канала
     int BytesInChannel() const;
+    
     // Количество отсчётов на канал
     int PointsInChannel() const;
+    
     // Возвращает требуемое количество памяти для хранения данных каналов
-    uint NeedMemoryForData() const;
+    int NeedMemoryForData() const;
+    
     bool IsEquals(const DataSettings &ds) const;
+    
     bool EqualsCurrentSettings() const;
+    
     uint8 *Data(Chan::E ch) { return ch == ChanA ? dataA : dataB; }
+    
     // Копировать данные из source с проверкой безопасности
     void CopyDataFrom(const DataSettings *source);
 };
