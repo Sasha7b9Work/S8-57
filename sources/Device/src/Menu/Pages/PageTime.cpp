@@ -48,12 +48,6 @@ LinkingTShift::E &LinkingTShift::Ref()
 }
 
 
-TPos::E &TPos::Ref()
-{
-    return set.time.tPos;
-}
-
-
 int TPos::InBytes()
 {
     static const int m[][2][3] =
@@ -66,7 +60,7 @@ int TPos::InBytes()
         {{0,  8192, 16382}, {0,  8192, 16382}},
         {{0, 16384, 32766}, {0, 16384, 32766}}
     };
-    return m[ENumPointsFPGA()][PeakDetMode()][Ref()];
+    return m[ENumPointsFPGA()][PeakDetMode()][set.time.tPos];
 }
 
 
@@ -133,7 +127,7 @@ DEF_CHOICE_3( cTPos,                                                            
     "Лево",
     "Центр",
     "Право",
-    TPos::Ref(), &PageTime::self, Item::Active, PageTime::OnChanged_TPos, Choice::AfterDraw
+    set.time.tPos, &PageTime::self, Item::Active, PageTime::OnChanged_TPos, Choice::AfterDraw
 )
 
 

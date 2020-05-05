@@ -25,10 +25,6 @@ struct TPos
         Right          // Привязка к правому краю.
     };
 
-    TPos() {}
-
-    static TPos::E &Ref();
-
     // Узнать привязку отсительно уровня синхронизации в байтах
     static int InBytes();
 

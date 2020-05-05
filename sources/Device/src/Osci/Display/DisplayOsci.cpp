@@ -44,7 +44,7 @@ void DisplayOsci::Update()
 
     HiPart::Draw();
 
-    TPos().Draw();
+    TPos::Draw();
 
     TShift::Draw();
 
