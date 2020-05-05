@@ -34,8 +34,7 @@ struct ENumAverage
         _256,
         Count
     };
-    ENumAverage() {};
-    int Number();
+    static int Number();
     static void Set(ENumAverage::E v);
 };
 

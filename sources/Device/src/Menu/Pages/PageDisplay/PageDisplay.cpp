@@ -37,7 +37,7 @@ void ENumAverage::Set(ENumAverage::E v)
 
 int ENumAverage::Number()
 {
-    return 1 << set.disp.enumAverage;
+    return (1 << set.disp.enumAverage);
 }
 
 
