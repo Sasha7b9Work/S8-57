@@ -163,7 +163,7 @@ void DisplayOsci::DrawingValueParameter::Draw()
 
         Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
 
-        float trigLevVal = RShift::ToAbs(set.trig.level[set.trig.source], set.ch[set.trig.source].range) * Divider(set.trig.source).ToAbs();
+        float trigLevVal = RShift::ToAbs(set.trig.level[set.trig.source], set.ch[set.trig.source].range) * Divider::ToAbs(set.ch[set.trig.source].divider);
 
         Voltage voltage(trigLevVal);
 

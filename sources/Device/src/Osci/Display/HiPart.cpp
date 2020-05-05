@@ -400,7 +400,7 @@ static void WriteCursors()
             x = 49;
             float pos0 = MathFPGA::VoltageCursor(CursorsMeasurements::PosU(source, 0), set.ch[source].range, set.ch[source].rShift);
             float pos1 = MathFPGA::VoltageCursor(CursorsMeasurements::PosU(source, 1), set.ch[source].range, set.ch[source].rShift);
-            float delta = std::fabsf(pos1 - pos0) * Divider(source).ToAbs();
+            float delta = std::fabsf(pos1 - pos0) * Divider::ToAbs(set.ch[source].divider);
             String(":dU=").Draw(x, y1);
             Voltage(delta).ToString(false).Draw(x + 17, y1);
             String(':').Draw(x, y2);

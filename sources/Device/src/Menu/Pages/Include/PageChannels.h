@@ -13,7 +13,6 @@ struct Divider
     Divider(Chan::E _ch) : ch(_ch) {};
     static Divider::E &Ref(Chan::E);
     operator Divider::E()          { return Ref(ch); };
-    int ToAbs()                    { return Is1() ? 1 : 10; }
     static int ToAbs(Divider::E v) { return (v == _1) ? 1 : 10; };
     bool Is1()                     { return Ref(ch) == _1; }
 private:
