@@ -66,7 +66,7 @@ public:
         static void Change(int delta);
         static pString ToString();
         // ¬озвращает скорость потреблени€ пам€ти в байтах/сек
-        uint BytesToSec() const;
+        int BytesToSec() const;
         // ¬озвращает врем€ считывани€ одной точки
         static uint TimeForPointMS();
     };
