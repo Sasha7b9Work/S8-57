@@ -21,7 +21,6 @@ struct Chan
     Chan(E v) : ch(v) { };
     pString Name() const;
     operator Chan::E() { return ch; };
-    SettingsChannel &Ref();
 };
 
 

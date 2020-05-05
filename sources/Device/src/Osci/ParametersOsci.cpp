@@ -782,9 +782,3 @@ void TShift::DrawRight()
     Char(Symbol8::RSHIFT_NORMAL).Draw(Grid::Right() - 7, Grid::Top(), Color::BACK);
     Char(Symbol8::TSHIFT_RIGHT).Draw(Grid::Right() - 7, Grid::Top(), Color::FILL);
 }
-
-
-SettingsChannel &Chan::Ref()
-{
-    return set.ch[ch];
-}
