@@ -397,7 +397,7 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
         { BIN_U8(00011000), BIN_U8(00011000) }  // -V2501  // 20V
     };
 
-    ModeCouple::E couple = (Device::InModeRecorder()) ? ModeCouple::DC : ModeCouple(ch);
+    ModeCouple::E couple = (Device::InModeRecorder()) ? ModeCouple::DC : set.ch[ch].couple;
 
     if (Device::InModeOsci() && couple == ModeCouple::GND)
     {

@@ -27,8 +27,10 @@ void DataSettings::Fill()
 
     Lval_TBASE(this)     = set.time.base;
     TSHIFT(this)         = set.time.shift;
-    Lval_COUPLE_A(this)  = ModeCouple(ChanA);
-    Lval_COUPLE_B(this)  = ModeCouple(ChanB);
+
+    Lval_COUPLE_A(this)  = set.ch[ChanA].couple;
+    Lval_COUPLE_B(this)  = set.ch[ChanB].couple;
+
     TRIGLEV_A(this)      = set.trig.level[ChanA];
     TRIGLEV_B(this)      = set.trig.level[ChanB];
     Lval_PEAKDET(this)   = PeakDetMode().IsEnabled() ? PeakDetMode::Enabled : PeakDetMode::Disabled;

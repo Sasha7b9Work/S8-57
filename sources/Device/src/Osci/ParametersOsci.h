@@ -173,19 +173,12 @@ struct ModeCouple
         GND,     // Вход заземлён.
         Count
     };
-    // С помощью этого можно узнать значение
-    ModeCouple(Chan::E _ch) : ch(_ch) {};
 
     static void Set(Chan::E ch, ModeCouple::E couple);
 
     static ModeCouple::E &Ref(Chan::E);
 
-    operator ModeCouple::E() { return Ref(ch);};
-    
     static pString UGO(ModeCouple::E v);
-
-private:
-    Chan::E ch;
 };
 
 struct Bandwidth
