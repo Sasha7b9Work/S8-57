@@ -23,12 +23,6 @@ ModeRegSet::E &ModeRegSet::Ref()
 }
 
 
-MeasuresOnDisplay::operator MeasuresOnDisplay::E()
-{
-    return set.meas.number;
-}
-
-
 bool MeasuresSource::IsA()
 {
     return (set.meas.source == MeasuresSource::A);

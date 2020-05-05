@@ -22,8 +22,7 @@ struct MeasuresOnDisplay
         _6_1,    // 6 строк по 1 измерению.
         _6_2     // 6 строк по 2 измерения.
     };
-    MeasuresOnDisplay() {};
-    operator MeasuresOnDisplay::E();
+
     // Возвращает true, если измерения расположены вертикально с левой стороны экрана
     static bool IsVertical();
 };

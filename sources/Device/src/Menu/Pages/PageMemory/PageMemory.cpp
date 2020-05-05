@@ -24,13 +24,7 @@ int ENumPointsFPGA::BytesInChannel()
 
 int ENumPointsFPGA::PointsInChannel()
 {
-    return ENUM_TO_REL_POINTS(Ref());
-}
-
-
-ENumPointsFPGA::E &ENumPointsFPGA::Ref()
-{
-    return set.mem.enumPoints;
+    return ENUM_TO_REL_POINTS(set.mem.enumPoints);
 }
 
 
@@ -68,7 +62,7 @@ DEF_CHOICE_5( cPoints,                                                          
     namesLengthMemory[2],
     namesLengthMemory[3],
     namesLengthMemory[4],
-    ENumPointsFPGA::Ref(), &PageMemory::self, IsActive_Points, PageMemory::OnChanged_Points, Choice::AfterDraw
+    set.mem.enumPoints, &PageMemory::self, IsActive_Points, PageMemory::OnChanged_Points, Choice::AfterDraw
 )
 
 

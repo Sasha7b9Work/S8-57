@@ -42,7 +42,7 @@ int TPos::InBytes()
         {{0,  8192, 16382}, {0,  8192, 16382}},
         {{0, 16384, 32766}, {0, 16384, 32766}}
     };
-    return m[ENumPointsFPGA()][set.time.peakDet][set.time.tPos];
+    return m[set.mem.enumPoints][set.time.peakDet][set.time.tPos];
 }
 
 

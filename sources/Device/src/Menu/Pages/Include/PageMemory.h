@@ -72,9 +72,6 @@ struct ENumPointsFPGA
         _8k,
         Count
     };
-    ENumPointsFPGA() {};
-    static ENumPointsFPGA::E &Ref();
-    operator ENumPointsFPGA::E() { return Ref(); }
     static int BytesInChannel();
     static int PointsInChannel();
 };

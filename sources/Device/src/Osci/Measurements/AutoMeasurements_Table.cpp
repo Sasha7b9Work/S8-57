@@ -119,7 +119,7 @@ void TableMeasures::Cell::DrawStringMeasure(int x, int y)
 
 static int GetTopTable()
 {
-    if ((MeasuresOnDisplay() == MeasuresOnDisplay::_6_1) || (MeasuresOnDisplay() == MeasuresOnDisplay::_6_2))
+    if ((set.meas.number == MeasuresOnDisplay::_6_1) || (set.meas.number == MeasuresOnDisplay::_6_2))
     {
         return Grid::Bottom() - TableMeasures::DY() * 6;
     }
@@ -138,7 +138,7 @@ static int GetTopTable()
 int TableMeasures::NumCols()
 {
     static const int cols[] = { 1, 2, 5, 5, 5, 1, 2 };
-    return cols[MeasuresOnDisplay()];
+    return cols[set.meas.number];
 }
 
 
