@@ -31,23 +31,23 @@ uint8 *ExtRAM::End()
 }
 
 
-void ExtRAM::Write(const uint8 *buffer, uint size, uint8 *address)
+void ExtRAM::Write(const uint8 *buffer, int size, uint8 *address)
 {
     HAL_BUS_CONFIGURE_TO_FSMC;
 
-    std::memcpy(address, buffer, size);
+    std::memcpy(address, buffer, static_cast<uint>(size));
 }
 
 
-void ExtRAM::Read(uint8 *buffer, uint size, const uint8 *address)
+void ExtRAM::Read(uint8 *buffer, int size, const uint8 *address)
 {
     HAL_BUS_CONFIGURE_TO_FSMC;
 
-    std::memcpy(buffer, address, size);
+    std::memcpy(buffer, address, static_cast<uint>(size));
 }
 
 
-void ExtRAM::Fill(uint8 *begin, uint8 value, uint size)
+void ExtRAM::Fill(uint8 *begin, uint8 value, int size)
 {
     if(begin == 0)
     {
@@ -58,7 +58,7 @@ void ExtRAM::Fill(uint8 *begin, uint8 value, uint size)
 
     HAL_BUS_CONFIGURE_TO_FSMC;
 
-    std::memset(begin, value, size);
+    std::memset(begin, value, static_cast<uint>(size));
 }
 
 
@@ -126,11 +126,11 @@ float ExtRAM::Test2()
 }
 
 
-float ExtRAM::TestTime(uint sizekB)
+float ExtRAM::TestTime(int sizekB)
 {
     float result = 0;
 
-    for(uint i = 0; i < sizekB; i++)
+    for(int i = 0; i < sizekB; i++)
     {
         float time = TestTime1kB(Begin() + i * 1024);
 
