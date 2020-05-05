@@ -117,8 +117,8 @@ void Recorder::Stop()
 
 static void StoreOsciSettings()
 {
-    osci.storedRShift[ChanA] = set.ch[ChanA].rShift;
-    osci.storedRShift[ChanB] = set.ch[ChanB].rShift;
+    osci.storedRShift[ChanA] = setA.rShift;
+    osci.storedRShift[ChanB] = setB.rShift;
 }
 
 

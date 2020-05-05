@@ -100,7 +100,7 @@ void TableMeasures::Cell::DrawStringMeasure(int x, int y)
     if (MeasuresSource::IsBoth())
     {
         measureA.Draw(x + 2, y + 11, colA);
-        measureB.Draw(x + 2, y + (set.ch[ChanA].enabled ? 20 : 11), colB); //-V547
+        measureB.Draw(x + 2, y + (setA.enabled ? 20 : 11), colB); //-V547
     }
     else if (MeasuresSource::IsA())
     {

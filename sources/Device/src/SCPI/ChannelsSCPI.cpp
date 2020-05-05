@@ -72,7 +72,7 @@ static bool TestRange()
 
         SCPI_APPEND_STRING(commandA);
 
-        if(set.ch[ChanA].range != range)
+        if(setA.range != range)
         {
             SCPI_EXIT_ERROR();
         }
@@ -82,7 +82,7 @@ static bool TestRange()
 
         SCPI_APPEND_STRING(commandB);
 
-        if(set.ch[ChanB].range != range)
+        if(setB.range != range)
         {
             SCPI_EXIT_ERROR();
         }

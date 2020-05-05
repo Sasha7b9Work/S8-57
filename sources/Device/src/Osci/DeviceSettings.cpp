@@ -13,23 +13,23 @@
 
 void DataSettings::Fill()
 {
-    Lval_ENABLED_A(this) = set.ch[ChanA].enabled ? 1U : 0U;
-    Lval_ENABLED_B(this) = set.ch[ChanB].enabled ? 1U : 0U;
+    Lval_ENABLED_A(this) = setA.enabled ? 1U : 0U;
+    Lval_ENABLED_B(this) = setB.enabled ? 1U : 0U;
 
-    INVERSE_A(this)      = set.ch[ChanA].inverse ? 1U : 0U;
-    INVERSE_B(this)      = set.ch[ChanB].inverse ? 1U : 0U;
+    INVERSE_A(this)      = setA.inverse ? 1U : 0U;
+    INVERSE_B(this)      = setB.inverse ? 1U : 0U;
 
-    Lval_RANGE_A(this)   = set.ch[ChanA].range;
-    Lval_RANGE_B(this)   = set.ch[ChanB].range;
+    Lval_RANGE_A(this)   = setA.range;
+    Lval_RANGE_B(this)   = setB.range;
 
-    RSHIFT_A(this)       = set.ch[ChanA].rShift;
-    RSHIFT_B(this)       = set.ch[ChanB].rShift;
+    RSHIFT_A(this)       = setA.rShift;
+    RSHIFT_B(this)       = setB.rShift;
 
     Lval_TBASE(this)     = set.time.base;
     TSHIFT(this)         = set.time.shift;
 
-    Lval_COUPLE_A(this)  = set.ch[ChanA].couple;
-    Lval_COUPLE_B(this)  = set.ch[ChanB].couple;
+    Lval_COUPLE_A(this)  = setA.couple;
+    Lval_COUPLE_B(this)  = setB.couple;
 
     TRIGLEV_A(this)      = set.trig.level[ChanA];
     TRIGLEV_B(this)      = set.trig.level[ChanB];

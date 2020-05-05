@@ -25,7 +25,7 @@ DEF_CHOICE_2( cInputA,                                                          
     chanInput,
     DISABLE_RU,
     ENABLE_RU,
-    set.ch[ChanA].enabled, &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    setA.enabled, &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -54,7 +54,7 @@ DEF_CHOICE_2( cBandwidthA,                                                      
     "Задаёт полосу пропускания канала",
     "Полная",
     "20МГц",
-    set.ch[ChanA].bandwidth, &PageChannelA::self, Item::Active, OnChanged_BandwidthA, Choice::AfterDraw
+    setA.bandwidth, &PageChannelA::self, Item::Active, OnChanged_BandwidthA, Choice::AfterDraw
 )
 
 
@@ -90,7 +90,7 @@ DEF_CHOICE_2( cInverseA,                                                        
     "Инвертирует сигнал относительно уровня 0В",
     "Откл",
     "Вкл",
-    set.ch[ChanA].inverse, &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    setA.inverse, &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -114,7 +114,7 @@ DEF_CHOICE_2( cInputB,                                                          
     chanInput,
     DISABLE_RU,
     ENABLE_RU,
-    set.ch[ChanB].enabled, &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    setB.enabled, &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -143,7 +143,7 @@ DEF_CHOICE_2( cBandwidthB,                                                      
     "",
     "Полная",
     "20МГц",
-    set.ch[ChanB].bandwidth, &PageChannelB::self, Item::Active, OnChanged_BandwidthB, Choice::AfterDraw
+    setB.bandwidth, &PageChannelB::self, Item::Active, OnChanged_BandwidthB, Choice::AfterDraw
 )
 
 
@@ -173,7 +173,7 @@ DEF_CHOICE_2( cInverseB,                                                        
     "Инвертирует сигнал относительно уровня 0В",
     "Откл",
     "Вкл",
-    set.ch[ChanB].inverse, &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    setB.inverse, &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
