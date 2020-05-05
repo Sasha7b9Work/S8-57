@@ -252,7 +252,7 @@ void RShift::Change(Chan::E ch, int16 delta)
 {
     ::Math::AdditionThisLimitation<int16>(&set.ch[ch].rShift, STEP * delta, MIN, MAX);
 
-    RShift(ch).Load(ch);
+    RShift::Load(ch);
 }
 
 
