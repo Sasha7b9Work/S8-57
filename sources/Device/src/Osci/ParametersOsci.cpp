@@ -479,11 +479,11 @@ TrigModeFind::E &TrigModeFind::Ref()
 }
 
 
-void TrigLevel::Change(Chan::E ch, int16 delta)
+void TrigLevel::Change(int16 delta)
 {
-    Math::AdditionThisLimitation(&set.trig.level[ch], TrigLevel::STEP * delta, TrigLevel::MIN, TrigLevel::MAX);
+    Math::AdditionThisLimitation(&set.trig.level[set.trig.source], TrigLevel::STEP * delta, TrigLevel::MIN, TrigLevel::MAX);
 
-    Load(ch);
+    Load(set.trig.source);
 
     Trig::NeedForDraw();
 }

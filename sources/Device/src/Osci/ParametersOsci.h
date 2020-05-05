@@ -276,8 +276,8 @@ struct TrigLevel
     // Загрузить уровень синхронизации в аппаратную часть
     static void Load(Chan::E ch);
 
-    // Изменить уровень синхронизации на delta единиц
-    static void Change(Chan::E ch, int16 delta);
+    // Изменить уровень синхронизации текущего иточника синхронизации на delta единиц
+    static void Change(int16 delta);
 
     // Однократно найти уровень синхронизации
     static void Find(Chan::E ch);

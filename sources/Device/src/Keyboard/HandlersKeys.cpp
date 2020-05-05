@@ -273,7 +273,7 @@ static void OnEnter()
 
 static void OnTrigLev()
 {
-    TrigLevel::Change(set.trig.source, event.key == Key::TrigLevMore ? 1 : -1);
+    TrigLevel::Change((event.key == Key::TrigLevMore) ? 1 : -1);
 }
 
 
