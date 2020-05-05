@@ -11,9 +11,6 @@
 // Обрабатываемое событие
 static KeyEvent event;
 
-// Канал, параметры которого нужно временно выводить
-static Chan::E drawingChan = Chan::A;
-
 // Общий обработчик изменения параметра канала - масштаба или смещения
 static void OnChangeParameterChannel(pFuncVChI16, Chan::E, int16);
 
@@ -154,11 +151,6 @@ static void OnRangeB()
 
 static void OnChangeParameterChannel(pFuncVChI16 func, Chan::E ch, int16 delta)
 {
-    if (Device::InModeOsci())
-    {
-        drawingChan = ch;
-    }
-
     func(ch, delta);
 }
 
