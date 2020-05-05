@@ -54,7 +54,7 @@ DEF_CHOICE_2( cBandwidthA,                                                      
     "Задаёт полосу пропускания канала",
     "Полная",
     "20МГц",
-    Bandwidth::Ref(ChanA), &PageChannelA::self, Item::Active, OnChanged_BandwidthA, Choice::AfterDraw
+    set.ch[ChanA].bandwidth, &PageChannelA::self, Item::Active, OnChanged_BandwidthA, Choice::AfterDraw
 )
 
 
@@ -143,7 +143,7 @@ DEF_CHOICE_2( cBandwidthB,                                                      
     "",
     "Полная",
     "20МГц",
-    Bandwidth::Ref(ChanB), &PageChannelB::self, Item::Active, OnChanged_BandwidthB, Choice::AfterDraw
+    set.ch[ChanB].bandwidth, &PageChannelB::self, Item::Active, OnChanged_BandwidthB, Choice::AfterDraw
 )
 
 

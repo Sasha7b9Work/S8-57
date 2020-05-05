@@ -395,12 +395,6 @@ ModeCouple::E &ModeCouple::Ref(Chan::E ch)
 }
 
 
-Bandwidth::E &Bandwidth::Ref(Chan::E ch)
-{
-    return set.ch[ch].bandwidth;
-}
-
-
 void Bandwidth::Load(Chan::E ch)
 {
     static const StructPIN pinsLF[2] = { {PIN_LF1}, {PIN_LF2} };

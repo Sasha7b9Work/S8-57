@@ -189,12 +189,7 @@ struct Bandwidth
         _20MHz,
     };
 
-    Bandwidth(Chan::E c) : ch(c) {}
-    static Bandwidth::E &Ref(Chan::E);
     static void Load(Chan::E ch);
-
-private:
-    Chan::E ch;
 };
 
 struct TShift
