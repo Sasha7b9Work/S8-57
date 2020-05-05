@@ -407,3 +407,10 @@ void Bandwidth::Load()
 
     HAL_PIO::Write(pinsLF[ch], Bandwidth(ch).Is20MHz());
 }
+
+
+void ModeCouple::Set(Chan::E ch, ModeCouple::E couple)
+{
+    set.ch[ch].couple = couple;
+    Range::LoadBoth();
+}

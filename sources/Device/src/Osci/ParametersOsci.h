@@ -176,11 +176,7 @@ struct ModeCouple
     // С помощью этого можно узнать значение
     ModeCouple(Chan::E _ch) : ch(_ch) {};
 
-    void Set(ModeCouple::E couple) { Ref(ch) = couple; Range::LoadBoth(); }
-
-    void SetGND() { Set(GND); }
-
-    void SetAC() { Set(AC); }
+    static void Set(Chan::E ch, ModeCouple::E couple);
 
     static ModeCouple::E &Ref(Chan::E);
 

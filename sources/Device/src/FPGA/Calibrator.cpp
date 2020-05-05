@@ -82,7 +82,7 @@ bool Calibrator::BalanceChannel(Chan::E ch, bool showHint)
         Display::Message::Show(messages[ch], true);
     }
 
-    ModeCouple(ch).SetGND();
+    ModeCouple::Set(ch, ModeCouple::GND);
 
     TBase::Set(TBase::_100ms);
 
@@ -155,7 +155,7 @@ static bool StretchChannel(Chan::E ch)
 
     setNRST.ResetExtraStretch();
 
-    ModeCouple(ch).SetAC();
+    ModeCouple::Set(ch, ModeCouple::AC);
     RShift::Set(ch, 0);
     Range::Set(ch, Range::_500mV);
     TBase::Set(TBase::_200us);

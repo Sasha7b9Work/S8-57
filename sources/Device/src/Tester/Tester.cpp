@@ -89,8 +89,8 @@ void Tester::Enable() // -V2506
 
     oldSet = set;
 
-    ModeCouple(ChanA).SetGND();
-    ModeCouple(ChanB).SetGND();
+    ModeCouple::Set(ChanA, ModeCouple::GND);
+    ModeCouple::Set(ChanB, ModeCouple::GND);
 
     Range::Set(ChanA, Range::_2V);
     Range::Set(ChanB, Range::_2V);
