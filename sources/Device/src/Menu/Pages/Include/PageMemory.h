@@ -17,9 +17,6 @@ struct ModeWork
         ROM,        // В этом режиме можно сохранять во flash-памяти измерения просматривать ранее сохранённые.
         Count       // Используется в модуле Data.c. Нужен, чтобы указать, что мудуль не настроен ни на какой режим.
     };
-
-    ModeWork() {}
-    static ModeWork::E &Ref();
 };
 
 // Что делать при нажатии кнопки ПАМЯТЬ.
@@ -40,8 +37,6 @@ struct ModeSaveSignal
         BMP,
         TXT
     };
-    static ModeSaveSignal::E &Ref();
-    static bool IsBMP() { return Ref() == BMP; }
 };
 
 // Что показывать в режиме Внутр ЗУ - считанный или записанный сигнал.

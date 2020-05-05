@@ -28,18 +28,6 @@ TypeSignalROM::E &TypeSignalROM::Ref()
 }
 
 
-ModeWork::E &ModeWork::Ref()
-{
-    return set.mem.modeWork;
-}
-
-
-ModeSaveSignal::E &ModeSaveSignal::Ref()
-{
-    return set.mem.modeSaveSignal;
-}
-
-
 FileNamingMode::E &FileNamingMode::Ref()
 {
     return set.mem.fileNamingMode;

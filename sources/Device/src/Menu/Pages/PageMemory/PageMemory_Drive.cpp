@@ -11,7 +11,7 @@ DEF_CHOICE_2(cSaveAs,                                                           
     ,
     "Изображение",
     "Текст",
-    ModeSaveSignal::Ref(), &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.mem.modeSaveSignal, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
