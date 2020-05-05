@@ -82,7 +82,7 @@ void Reader::ReadDataFromROM()
 
 void Reader::FindTrigLevelIfNeed()
 {
-    if (TrigModeFind::IsAuto())
+    if (set.trig.modeFind == TrigModeFind::Auto)
     {
         TrigLevel::Find();
     }
