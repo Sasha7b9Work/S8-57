@@ -16,7 +16,7 @@ public:
     {
         uint8 *pointer = static_cast<uint8 *>(_buffer);
 
-        uint size = 0;
+        int size = 0;
         while (*pointer != 0x0a)
         {
             size++;

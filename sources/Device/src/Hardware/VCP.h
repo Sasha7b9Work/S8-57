@@ -10,9 +10,9 @@ public:
     // Инициализация
     static void Init();
 
-    static void SendDataAsynch(const uint8 *data, uint size);
+    static void SendDataAsynch(const uint8 *data, int size);
 
-    static void SendDataSynch(const void *data, uint size = 0);
+    static void SendDataSynch(const void *data, int size = 0);
     
     // Передаётся строка без завершающего нуля
     static void SendStringAsynch(const char *data);

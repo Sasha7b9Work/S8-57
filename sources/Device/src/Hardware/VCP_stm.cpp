@@ -41,9 +41,9 @@ static bool PrevSendingComplete()
 }
 
 
-void VCP::SendDataAsynch(const uint8 *buffer, uint size)
+void VCP::SendDataAsynch(const uint8 *buffer, int size)
 {
-#define SIZE_BUFFER 64U
+#define SIZE_BUFFER 64
     static uint8 trBuf[SIZE_BUFFER];
 
     size = Math::Min(size, SIZE_BUFFER);
@@ -77,14 +77,14 @@ void VCP::Flush()
 }
 
 
-void VCP::SendDataSynch(const void *_buffer, uint size)
+void VCP::SendDataSynch(const void *_buffer, int size)
 {
     if (VCP::connectedToUSB)
     {
         char *buffer = static_cast<char *>(const_cast<void *>(_buffer));
         if (size == 0)
         {
-            size = std::strlen(buffer);
+            size = static_cast<int>(std::strlen(buffer));
         }
 
         volatile USBD_CDC_HandleTypeDef *pCDC = static_cast<USBD_CDC_HandleTypeDef *>(hUSBD.pClassData);
@@ -118,13 +118,13 @@ void VCP::SendDataSynch(const void *_buffer, uint size)
 
 void VCP::SendStringAsynch(const char *data)
 {
-    SendDataAsynch(reinterpret_cast<uint8 *>(const_cast<char *>(data)), std::strlen(data));
+    SendDataAsynch(reinterpret_cast<uint8 *>(const_cast<char *>(data)), static_cast<int>(std::strlen(data)));
 }
 
 
 void VCP::SendStringSynch(char *data)
 {
-    SendDataSynch(reinterpret_cast<uint8 *>(data), std::strlen(data));
+    SendDataSynch(reinterpret_cast<uint8 *>(data), static_cast<int>(std::strlen(data)));
 }
 
 
@@ -138,7 +138,7 @@ void VCP::SendFormatStringAsynch(char *format, ...)
         std::vsprintf(buffer, format, args);
         va_end(args);
         std::strcat(buffer, "\r\n");
-        SendDataAsynch(reinterpret_cast<uint8 *>(buffer), std::strlen(buffer));
+        SendDataAsynch(reinterpret_cast<uint8 *>(buffer), static_cast<int>(std::strlen(buffer)));
     }
 }
 
@@ -151,7 +151,7 @@ void VCP::SendFormatStringSynch(char *format, ...)
     std::vsprintf(buffer, format, args);
     va_end(args);
     std::strcat(buffer, "\r\n");
-    SendDataSynch(reinterpret_cast<uint8 *>(buffer), std::strlen(buffer));
+    SendDataSynch(reinterpret_cast<uint8 *>(buffer), static_cast<int>(std::strlen(buffer)));
 }
 
 

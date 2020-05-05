@@ -44,9 +44,9 @@ bool Test::RAM::Test()
 
         TestMemoryStruct::FillData(ds);
 
-        for (uint j = 0; j < ::RAM::NumberDatas(); j++)
+        for (int j = 0; j < ::RAM::NumberDatas(); j++)
         {
-            DataSettings *read = ::RAM::Get(std::rand() % ::RAM::NumberDatas());
+            DataSettings *read = ::RAM::Get(static_cast<int>(std::rand() % ::RAM::NumberDatas()));
 
             if (read && !TestMemoryStruct::CheckData(read))
             {
