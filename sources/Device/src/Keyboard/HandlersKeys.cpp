@@ -118,7 +118,7 @@ static void ChangeRShift(Chan::E ch, int16 delta)
 {
     if (!Device::InModeRecorder())
     {
-        RShift(ch).Change(delta);
+        RShift::Change(ch, delta);
 
         DisplayOsci::SetFlagRedraw();
     }

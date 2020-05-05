@@ -129,7 +129,7 @@ public:
     static void Set(Chan::E ch, int16 rShift);
 
     // Изменить на delta
-    void Change(int16 delta);
+    static void Change(Chan::E ch, int16 delta);
 
     // Загрузить в аппаратуру. Если force, то загружать нужно, не проверяя никакие условия
     static void Load(Chan::E ch, bool force = false);
