@@ -273,7 +273,7 @@ static void OnEnter()
 
 static void OnTrigLev()
 {
-    TrigLevel().Change(event.key == Key::TrigLevMore ? 1 : -1);
+    TrigLevel::Change(set.trig.source, event.key == Key::TrigLevMore ? 1 : -1);
 }
 
 
@@ -388,7 +388,7 @@ static void OnTrig()
     }
     else if (event.IsLong())
     {
-        TrigLevel().Set(0);
+        TrigLevel::Set(set.trig.source, 0);
     }
 }
 

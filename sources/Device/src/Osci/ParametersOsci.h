@@ -271,29 +271,24 @@ struct Trig
 
 struct TrigLevel
 {
-    TrigLevel(Chan::E _ch = Chan::Count);
+    static void Set(Chan::E ch, int16 level);
 
-    void Set(int16 level);
-
-    static int16 &Ref(Chan::E);
-
-    int16 Value() { return Ref(ch); };
     // Загрузить уровень синхронизации в аппаратную часть
-    void Load() const;
-    // Изменить уровень синхронизации на delta единиц
-    void Change(int16 delta);
-    // Однократно найти уровень синхронизации
-    void Find();
+    static void Load(Chan::E ch);
 
-    void Draw() const;
+    // Изменить уровень синхронизации на delta единиц
+    static void Change(Chan::E ch, int16 delta);
+
+    // Однократно найти уровень синхронизации
+    static void Find(Chan::E ch);
+
+    static void Draw(Chan::E ch);
 
 private:
     static const int16 MIN = -480;
     static const int16 MAX = 480;
     static const int16 HARDWARE_ZERO = 500;
     static const int16 STEP = (((MAX - MIN) / 24) / 20);
-
-    Chan::E ch;
 };
 
 

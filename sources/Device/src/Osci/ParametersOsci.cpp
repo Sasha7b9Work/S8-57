@@ -410,7 +410,7 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
 }
 
 
-void TrigLevel::Find()
+void TrigLevel::Find(Chan::E ch)
 {
     if (DS && ENABLED_DS(ch))
     {
@@ -430,7 +430,7 @@ void TrigLevel::Find()
 
         float additionShift = deltaValue + deltaRShift / k;     // Итоговое смщение, которое нужно добавить к TrigLev::Zero
 
-        TrigLevel().Set(static_cast<int16>(HARDWARE_ZERO + additionShift * k + 0.5F));
+        TrigLevel::Set(ch, static_cast<int16>(HARDWARE_ZERO + additionShift * k + 0.5F));
     }
 }
 
@@ -462,10 +462,10 @@ pString Chan::Name() const
 }
 
 
-void TrigLevel::Load() const
+void TrigLevel::Load(Chan::E ch)
 {
     // \todo Здесь много лишних движений. Нужно что-то сделать с вводом SET_TRIGLEV_SOURCE
-    uint16 value = static_cast<uint16>(HARDWARE_ZERO - TrigLevel(ch).Value());
+    uint16 value = static_cast<uint16>(HARDWARE_ZERO - set.trig.level[ch]);
 
     Osci::InputController::Write(PIN_SPI3_CS1, static_cast<uint16>(0xa000 | (value << 2)));
 
@@ -479,11 +479,11 @@ TrigModeFind::E &TrigModeFind::Ref()
 }
 
 
-void TrigLevel::Change(int16 delta)
+void TrigLevel::Change(Chan::E ch, int16 delta)
 {
-    Math::AdditionThisLimitation(&TrigLevel::Ref(ch), TrigLevel::STEP * delta, TrigLevel::MIN, TrigLevel::MAX);
+    Math::AdditionThisLimitation(&set.trig.level[ch], TrigLevel::STEP * delta, TrigLevel::MIN, TrigLevel::MAX);
 
-    Load();
+    Load(ch);
 
     Trig::NeedForDraw();
 }
@@ -506,28 +506,13 @@ void Trig::NeedForDraw()
 }
 
 
-int16 &TrigLevel::Ref(Chan::E ch)
+void TrigLevel::Set(Chan::E ch, int16 newLevel)
 {
-    return set.trig.level[ch];
-}
+    set.trig.level[ch] = newLevel;
 
+    Math::Limitation(&set.trig.level[ch], TrigLevel::MIN, TrigLevel::MAX);
 
-TrigLevel::TrigLevel(Chan::E _ch) : ch(_ch)
-{
-    if(ch == Chan::Count)
-    {
-        ch = TrigSource();
-    }
-}
-
-
-void TrigLevel::Set(int16 newLevel)
-{
-    TrigLevel::Ref(ch) = newLevel;
-
-    Math::Limitation(&TrigLevel::Ref(ch), TrigLevel::MIN, TrigLevel::MAX);
-
-    Load();
+    Load(ch);
 
     Trig::NeedForDraw();
 }
@@ -551,7 +536,7 @@ void Trig::DrawOnGrid()
 
         Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
 
-        float trigLevVal = RShift::ToAbs(TrigLevel().Value(), set.ch[TrigSource()].range) * Divider(TrigSource()).ToAbs();
+        float trigLevVal = RShift::ToAbs(set.trig.level[set.trig.source], set.ch[TrigSource()].range) * Divider(TrigSource()).ToAbs();
 
         Voltage voltage(trigLevVal);
 
@@ -560,11 +545,11 @@ void Trig::DrawOnGrid()
 }
 
 
-void TrigLevel::Draw() const
+void TrigLevel::Draw(Chan::E ch)
 {
     float scale = 1.0F / ((MAX - MIN) / 2.4F / Grid::Height());
 
-    int y = Grid::ChannelCenterHeight() - static_cast<int>((TrigLevel().Value() + RShift(ch)) * scale);
+    int y = Grid::ChannelCenterHeight() - static_cast<int>((set.trig.level[ch] + RShift(ch)) * scale);
 
     int x = Grid::Right();
     int xSymbol = Grid::Right() + 5;

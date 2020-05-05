@@ -161,7 +161,7 @@ static bool StretchChannel(Chan::E ch)
     TBase::Set200us();
     TShift::Set(0);
     TrigSource::Set(ch);
-    TrigLevel(ch).Set(0);
+    TrigLevel::Set(ch, 0);
 
 
     float k = FindStretchChannel(ch);
