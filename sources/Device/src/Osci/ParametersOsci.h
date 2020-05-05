@@ -262,12 +262,6 @@ struct Trig
     // Возвращает true в случае наличия синхроимпульса
     static bool SyncPulse();
 
-    // Вывести уровень синхронизации поверх сетки
-    static void DrawOnGrid();
-
-    // После вызова этой функции уровень синхронизации будет отрисовываться поверх сигнала в течение timMS миллисекунд
-    static void NeedForDraw();
-
     static bool pulse;
 };
 

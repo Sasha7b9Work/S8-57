@@ -7,6 +7,7 @@
 #include "FlashDrive/FlashDrive.h"
 #include "FreqMeter/DisplayFreqMeter.h"
 #include "Hardware/Battery.h"
+#include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
 #include "Menu/Menu.h"
 #include "Osci/Osci.h"
@@ -14,12 +15,15 @@
 #include "Osci/Measurements/AutoMeasurements.h"
 #include "Osci/Measurements/CursorsMeasurements.h"
 #include "Settings/Settings.h"
+#include "Utils/Values.h"
+
+
+bool DisplayOsci::needRedraw = false;
+bool DisplayOsci::DrawingValueParameter::needDrawParameter = false;
+DisplayOsci::DrawingValueParameter::E DisplayOsci::DrawingValueParameter::parameter;
 
 
 static const int DELTA = 5;
-
-// Признак того, что дисплей нуждается в полной перерисовке
-static bool needRedraw = false;
 
 
 
@@ -51,6 +55,8 @@ void DisplayOsci::Update()
     RShift::DrawBoth();
     
     TrigLevel::Draw();
+
+    DrawingValueParameter::Draw();
     
     CursorsMeasurements::Draw();
     
@@ -120,4 +126,53 @@ void DisplayOsci::BottomPart::Draw(int x0, int y0)
     Battery::Draw(x0, y0);
 
     VLine(18).Draw(x0, y0 + 1, Color::FILL);
+}
+
+
+void DisplayOsci::DrawingValueParameter::Enable(DrawingValueParameter::E v)
+{
+    if(set.fft.enabled)                                                                     // Не будем рисовать при включённом спектре
+    {
+        return;
+    }
+
+    if(v == DrawingValueParameter::TrigLevel && (set.trig.modeFind == TrigModeFind::Auto))  // Не будем рисовать при автоматическом поиске уровня синхронизации
+    {
+        return;
+    }
+
+    needDrawParameter = true;
+
+    parameter = v;
+
+    Timer::SetAndStartOnce(TypeTimer::ShowLevelTrigLev, Disable, 2000);
+
+    DisplayOsci::SetFlagRedraw();
+}
+
+
+void DisplayOsci::DrawingValueParameter::Draw()
+{
+    if(needDrawParameter)
+    {
+        int width = 85;
+        int height = 18;
+
+        int x = (Grid::Right() - Grid::Left()) / 2 + Grid::Left() - width / 2;
+        int y = Grid::ChannelBottom() - height - 20;
+
+        Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
+
+        float trigLevVal = RShift::ToAbs(set.trig.level[set.trig.source], set.ch[set.trig.source].range) * Divider(set.trig.source).ToAbs();
+
+        Voltage voltage(trigLevVal);
+
+        String("Синхр %s", voltage.ToString(true).c_str()).Draw(x + 7, y + 5, Color::FILL);
+    }
+}
+
+
+void DisplayOsci::DrawingValueParameter::Disable()
+{
+    needDrawParameter = false;
 }

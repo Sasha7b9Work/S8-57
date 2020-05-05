@@ -138,8 +138,6 @@ const float TShift::absStep[TBase::Count] =
 };
 
 
-// Нужно ли рисовать горизонтальную линию уровня смещения уровня синхронизации.
-static bool needDraw = false;
 // Установленное в true значение означает, что нужно выводить значок синхроимпульса
 bool Trig::pulse = false;
 
@@ -481,24 +479,7 @@ void TrigLevel::Change(int16 delta)
 
     Load();
 
-    Trig::NeedForDraw();
-}
-
-
-static void DisableDrawing()
-{
-    needDraw = false;
-}
-
-
-void Trig::NeedForDraw()
-{
-    if (!set.fft.enabled && (set.trig.modeFind == TrigModeFind::Hand))
-    {
-        needDraw = true;
-        Timer::SetAndStartOnce(TypeTimer::ShowLevelTrigLev, DisableDrawing, 2000);
-        DisplayOsci::SetFlagRedraw();
-    }
+    DisplayOsci::DrawingValueParameter::Enable(DisplayOsci::DrawingValueParameter::TrigLevel);
 }
 
 
@@ -510,34 +491,13 @@ void TrigLevel::Set(Chan::E ch, int16 newLevel)
 
     Load();
 
-    Trig::NeedForDraw();
+    DisplayOsci::DrawingValueParameter::Enable(DisplayOsci::DrawingValueParameter::TrigLevel);
 }
 
 
 bool Trig::SyncPulse()
 {
     return pulse;
-}
-
-
-void Trig::DrawOnGrid()
-{
-    if (needDraw)
-    {
-        int width = 85;
-        int height = 18;
-
-        int x = (Grid::Right() - Grid::Left()) / 2 + Grid::Left() - width / 2;
-        int y = Grid::ChannelBottom() - height - 20;
-
-        Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
-
-        float trigLevVal = RShift::ToAbs(set.trig.level[set.trig.source], set.ch[set.trig.source].range) * Divider(set.trig.source).ToAbs();
-
-        Voltage voltage(trigLevVal);
-
-        String("Синхр %s", voltage.ToString(true).c_str()).Draw(x + 7, y + 5, Color::FILL);
-    }
 }
 
 
@@ -576,8 +536,6 @@ void TrigLevel::Draw()
     static const char symbols[2] = { '1', '2' };
 
     Char(symbols[ch], DTypeFont::_5).Draw(xSymbol, y - 6, Color::BACK);
-
-    Trig::DrawOnGrid();
 }
 
 

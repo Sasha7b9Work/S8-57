@@ -121,6 +121,19 @@ struct DisplayOsci
         };
 
         // После изменения параметра (вращения ручки) нужно вызывать эту функцию
-        void Enable(DrawingValueParameter::E v);
+        static void Enable(DrawingValueParameter::E v);
+
+        static void Draw();
+
+        static void Disable();
+
+    private:
+        static bool                     needDrawParameter;
+        static DrawingValueParameter::E parameter;
     };
+
+private:
+
+    // Признак того, что дисплей нуждается в полной перерисовке
+    static bool needRedraw;
 };
