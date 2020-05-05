@@ -141,7 +141,7 @@ int Roller::FillScreenBuffer(Chan::E ch, Buffer &buffer, int width)
         }
     }
 
-    buffer.Realloc(static_cast<uint>(width));
+    buffer.Realloc(width);
     std::memset(buffer.data, VALUE::NONE, static_cast<uint>(width));
 
     uint position = 0;
