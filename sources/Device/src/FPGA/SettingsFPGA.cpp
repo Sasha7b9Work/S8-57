@@ -405,7 +405,7 @@ void Bandwidth::Load(Chan::E ch)
 {
     static const StructPIN pinsLF[2] = { {PIN_LF1}, {PIN_LF2} };
 
-    HAL_PIO::Write(pinsLF[ch], Bandwidth(ch).Is20MHz());
+    HAL_PIO::Write(pinsLF[ch], (set.ch[ch].bandwidth == Bandwidth::_20MHz));
 }
 
 
