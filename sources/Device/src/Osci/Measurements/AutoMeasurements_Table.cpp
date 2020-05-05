@@ -110,10 +110,6 @@ void TableMeasures::Cell::DrawStringMeasure(int x, int y)
     {
         measureB.Draw(x + 2, y + 11, colB);
     }
-    else
-    {
-        // других вариантов нет
-    }
 }
 
 
@@ -145,28 +141,31 @@ int TableMeasures::NumCols()
 int TableMeasures::NumRows()
 {
     static const int rows[] = { 1, 1, 1, 2, 3, 6, 6 };
-    return rows[MeasuresOnDisplay()];
+    return rows[set.meas.number];
 }
 
 
 int TableMeasures::GetDeltaGridLeft()
 {
+    int result = 0;
+
     if (set.meas.show && MeasuresModeViewSignals::IsCompress())
     {
-        if (MeasuresOnDisplay() == MeasuresOnDisplay::_6_1)
+        switch (set.meas.number)
         {
-            return DX();
-        }
-        else if (MeasuresOnDisplay() == MeasuresOnDisplay::_6_2)
-        {
-            return DX() * 2;
-        }
-        else
-        {
-            // других вариантов нет
+        case MeasuresOnDisplay::_6_1:   result = DX();      break;
+        case MeasuresOnDisplay::_6_2:   result = DX() * 2;  break;
+
+        case MeasuresOnDisplay::_1:
+        case MeasuresOnDisplay::_2:
+        case MeasuresOnDisplay::_1_5:
+        case MeasuresOnDisplay::_2_5:
+        case MeasuresOnDisplay::_3_5:
+            break;
         }
     }
-    return 0;
+
+    return result;
 }
 
 
