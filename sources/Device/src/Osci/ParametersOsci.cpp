@@ -462,10 +462,10 @@ pString Chan::Name() const
 }
 
 
-void TrigLevel::Load(Chan::E ch)
+void TrigLevel::Load()
 {
     // \todo Здесь много лишних движений. Нужно что-то сделать с вводом SET_TRIGLEV_SOURCE
-    uint16 value = static_cast<uint16>(HARDWARE_ZERO - set.trig.level[ch]);
+    uint16 value = static_cast<uint16>(HARDWARE_ZERO - set.trig.level[set.trig.source]);
 
     Osci::InputController::Write(PIN_SPI3_CS1, static_cast<uint16>(0xa000 | (value << 2)));
 
@@ -483,7 +483,7 @@ void TrigLevel::Change(int16 delta)
 {
     Math::AdditionThisLimitation(&set.trig.level[set.trig.source], TrigLevel::STEP * delta, TrigLevel::MIN, TrigLevel::MAX);
 
-    Load(set.trig.source);
+    Load();
 
     Trig::NeedForDraw();
 }
@@ -512,7 +512,7 @@ void TrigLevel::Set(Chan::E ch, int16 newLevel)
 
     Math::Limitation(&set.trig.level[ch], TrigLevel::MIN, TrigLevel::MAX);
 
-    Load(ch);
+    Load();
 
     Trig::NeedForDraw();
 }
