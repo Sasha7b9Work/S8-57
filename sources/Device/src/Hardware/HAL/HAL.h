@@ -232,6 +232,6 @@ struct HAL_TIM3
 struct HAL_USART3
 {
     static void Init(pFuncVV recvCallback);
-    static void Transmit(void *buffer, uint size, uint timeout);
-    static void StartReceiveIT(void *buffer, uint size);
+    static void Transmit(void *buffer, int size, uint timeout);
+    static void StartReceiveIT(void *buffer, int size);
 };

@@ -37,13 +37,13 @@ void HAL_USART3::Init(pFuncVV _recvHandler)
 }
 
 
-void HAL_USART3::Transmit(void *buffer, uint size, uint timeout)
+void HAL_USART3::Transmit(void *buffer, int size, uint timeout)
 {
     HAL_UART_Transmit(&handler, static_cast<uint8 *>(buffer), static_cast<uint16>(size), timeout);
 }
 
 
-void HAL_USART3::StartReceiveIT(void *buffer, uint size)
+void HAL_USART3::StartReceiveIT(void *buffer, int size)
 {
     HAL_UART_Receive_IT(&handler, static_cast<uint8 *>(buffer), static_cast<uint16>(size));
 }
