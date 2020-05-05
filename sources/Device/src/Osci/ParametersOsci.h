@@ -149,7 +149,7 @@ public:
 private:
 
     // Отрисовать маркер вертикального смещения на сетке
-    void Draw();
+    static void Draw(Chan::E ch);
 
     static const float absStep[Range::Count];
 

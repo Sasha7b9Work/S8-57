@@ -439,13 +439,13 @@ void RShift::DrawBoth()
 {
     if(set.disp.lastAffectedChannel == ChanB)
     {
-        RShift(ChanA).Draw();
-        RShift(ChanB).Draw();
+        RShift::Draw(ChanA);
+        RShift::Draw(ChanB);
     }
     else
     {
-        RShift(ChanB).Draw();
-        RShift(ChanA).Draw();
+        RShift::Draw(ChanB);
+        RShift::Draw(ChanA);
     }
 }
 
@@ -539,7 +539,7 @@ void TrigLevel::Draw()
 }
 
 
-void RShift::Draw()
+void RShift::Draw(Chan::E ch)
 {
     Color::CHAN[ch].SetAsCurrent();
 
