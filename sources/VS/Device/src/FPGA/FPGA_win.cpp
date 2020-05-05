@@ -80,7 +80,7 @@ static bool GenerateNormalModeData(Chan::E ch, uint8 *data, uint numBytes)
 
 bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
 {
-    if (!Chan(ch).IsEnabled())
+    if (!set.ch[ch].enabled)
     {
         return false;
     }

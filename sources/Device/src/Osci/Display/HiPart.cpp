@@ -207,7 +207,7 @@ static int DrawMainParameters(int _x, int _y)
 
 static void WriteTextVoltage(Chan::E ch, int x, int y)
 {
-    if (!Chan(ch).IsEnabled())
+    if (!set.ch[ch].enabled)
     {
         return;
     }

@@ -784,12 +784,6 @@ void TShift::DrawRight()
 }
 
 
-bool Chan::IsEnabled()
-{
-    return Ref().enabled;
-}
-
-
 SettingsChannel &Chan::Ref()
 {
     return set.ch[ch];
