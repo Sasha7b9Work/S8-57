@@ -16,12 +16,6 @@ MenuAutoHide::E &MenuAutoHide::Ref()
 }
 
 
-ENumAccum::E &ENumAccum::Ref()
-{
-    return set.disp.enumAccum;
-}
-
-
 TypeGrid::E &TypeGrid::Ref()
 {
     return set.disp.typeGrid;
@@ -39,6 +33,11 @@ int ENumAverage::Number()
 {
     return (1 << set.disp.enumAverage);
 }
+
+int ENumAccum::Number()
+{
+    return (1 << set.disp.enumAccum);
+};
 
 
 DEF_CHOICE_10( cSmoothing,                                                                                                                                    //--- ÄÈÑÏËÅÉ - Ñãëàæèâàíèå ---
