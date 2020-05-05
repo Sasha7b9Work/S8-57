@@ -137,7 +137,7 @@ static int DrawMainParameters(int _x, int _y)
     if (ModeWork::IsDir())
     {
         pString source[3] = { "1", "2", "\x82" };
-        std::snprintf(buffer, 100, "ñ\xa5\x10%s", source[TrigSource()]);
+        std::snprintf(buffer, 100, "ñ\xa5\x10%s", source[set.trig.source]);
     }
 
     String(buffer).Draw(x, y1, Color::Trig());
