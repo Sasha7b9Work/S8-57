@@ -401,10 +401,10 @@ void Osci::ClearDataRand()
         DataSettings *ds = RAM::Get();
         ds->Fill();
 
-        std::memset(ds->Data(ChanA), VALUE::NONE, ds->PointsInChannel());
-        std::memset(ds->Data(ChanB), VALUE::NONE, ds->PointsInChannel());
+        std::memset(ds->Data(ChanA), VALUE::NONE, static_cast<uint>(ds->PointsInChannel()));
+        std::memset(ds->Data(ChanB), VALUE::NONE, static_cast<uint>(ds->PointsInChannel()));
 
-        std::memset(IntRAM::DataRand(ChanA), VALUE::NONE, ds->PointsInChannel());
+        std::memset(IntRAM::DataRand(ChanA), VALUE::NONE, static_cast<uint>(ds->PointsInChannel()));
     }
 }
 

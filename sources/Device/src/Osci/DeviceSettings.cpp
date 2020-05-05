@@ -68,9 +68,9 @@ bool DataSettings::EqualsCurrentSettings() const
 }
 
 
-uint DataSettings::BytesInChannel() const
+int DataSettings::BytesInChannel() const
 {
-    uint result = ENUM_TO_REL_POINTS(ENUM_POINTS(this));
+    int result = ENUM_TO_REL_POINTS(ENUM_POINTS(this));
 
     if (PEAKDET_ENABLED(this))
     {
@@ -81,7 +81,7 @@ uint DataSettings::BytesInChannel() const
 }
 
 
-uint DataSettings::PointsInChannel() const
+int DataSettings::PointsInChannel() const
 {
     return ENUM_TO_REL_POINTS(ENUM_POINTS(this));
 }
@@ -149,15 +149,15 @@ void PackedTime::ChangeYear(int delta)
 
 void DataSettings::CopyDataFrom(const DataSettings *source)
 {
-    uint numBytes = Math::Min(BytesInChannel(), source->BytesInChannel());
+    int numBytes = Math::Min(BytesInChannel(), source->BytesInChannel());
 
     if((enableA != 0) && (source->enableA != 0))
     {
-        std::memcpy(dataA, source->dataA, numBytes);
+        std::memcpy(dataA, source->dataA, static_cast<uint>(numBytes));
     }
 
     if((enableB != 0) && (source->enableB != 0))
     {
-        std::memcpy(dataB, source->dataB, numBytes);
+        std::memcpy(dataB, source->dataB, static_cast<uint>(numBytes));
     }
 }

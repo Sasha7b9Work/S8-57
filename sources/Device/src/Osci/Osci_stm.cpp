@@ -8,7 +8,7 @@
 
 bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
 {
-    uint numPoints = ENumPointsFPGA::PointsInChannel();
+    int numPoints = ENumPointsFPGA::PointsInChannel();
 
     if(addrRead == 0xffff)
     {
@@ -44,7 +44,7 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
 
         if(PeakDetMode().IsEnabled())
         {
-            for(uint i = 0; i < numPoints; i++)
+            for(int i = 0; i < numPoints; i++)
             {
                 *p++ = HAL_BUS::FPGA::ReadA0();
                 *p++ = HAL_BUS::FPGA::ReadA1();
@@ -54,7 +54,7 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
         {
             float stretch = HAL_BUS::FPGA::GetStretch(a1);
 
-            for(uint i = 0; i < numPoints; i++)
+            for(int i = 0; i < numPoints; i++)
             {
                 int delta = VALUE::AVE - static_cast<int>(*a1);
 

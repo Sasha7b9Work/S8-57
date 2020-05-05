@@ -9,7 +9,7 @@
 #include "Settings/Settings.h"
 
 
-static void DrawDataInRect(int x, int y, int width, int height, const uint8 *data, uint length);
+static void DrawDataInRect(int x, int y, int width, int height, const uint8 *data, int length);
 // Нарисовать область экрана
 static void DrawScreenArea();
 
@@ -37,7 +37,7 @@ void DisplayOsci::MemoryWindow::Draw()
 }
 
 
-static void DrawDataInRect(int x, int y, int width, int height, const uint8 *data, uint length)
+static void DrawDataInRect(int x, int y, int width, int height, const uint8 *data, int length)
 {
     if (PEAKDET_ENABLED(DS))
     {

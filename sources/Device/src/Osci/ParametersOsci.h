@@ -266,7 +266,7 @@ struct VALUE
     // Если значение == 0, значит, его нет. Это нужно для режимов рандомизатора и поточечного вывода p2p, а также для tShift ранее считанного сигнала
     static const uint8 NONE = 0;
 
-    static void PointsToVoltage(const uint8 *points, uint numPoints, Range::E range, int16 rShift, float *voltage);
+    static void PointsToVoltage(const uint8 *points, int numPoints, Range::E range, int16 rShift, float *voltage);
 
     static void PointsFromVoltage(const float *voltage, int numPoints, Range::E range, int16 rShift, uint8 *points);
 

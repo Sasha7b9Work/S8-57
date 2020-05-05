@@ -35,7 +35,7 @@ static float NextNoise()
 }
 
 
-static bool GenerateNormalModeData(Chan::E ch, uint8 *data, uint numBytes)
+static bool GenerateNormalModeData(Chan::E ch, uint8 *data, int numBytes)
 {
     static const double kOffset[Range::Count] =
     {
@@ -65,7 +65,7 @@ static bool GenerateNormalModeData(Chan::E ch, uint8 *data, uint numBytes)
         offset += TuneGeneratorDialog::offset[ch] * kOffset[set.ch[ch].range];
     }
 
-    for (uint i = 0; i < numBytes; i++)
+    for (int i = 0; i < numBytes; i++)
     {
         double value = offset + VALUE::AVE + amplitude * (sin(2 * Math::PI * i * frequency)) + NextNoise();
 
@@ -85,7 +85,7 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
         return false;
     }
 
-    uint numPoints = ENumPointsFPGA::PointsInChannel();
+    int numPoints = ENumPointsFPGA::PointsInChannel();
 
     if (OSCI_IN_MODE_P2P)
     {
@@ -103,7 +103,7 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
     double amplitude = 100.0 * TuneGeneratorDialog::amplitude[ch];
     double offset = 0.0 + TuneGeneratorDialog::offset[ch];
 
-    for (uint i = 0; i < numPoints; i++)
+    for (int i = 0; i < numPoints; i++)
     {
         double value = offset + VALUE::AVE + amplitude * (sin(i * 0.1)) + NextNoise();
 

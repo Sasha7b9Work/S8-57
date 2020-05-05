@@ -4,7 +4,7 @@
 
 
 // Преобразует перечисление в количество точек
-#define ENUM_TO_REL_POINTS(enum)    ((uint)(1 << (static_cast<int>(enum) + 9)))
+#define ENUM_TO_REL_POINTS(enum)    ((int)(1 << (static_cast<int>(enum) + 9)))
 
 
 // Режим работы.
@@ -75,8 +75,8 @@ struct ENumPointsFPGA
     ENumPointsFPGA() {};
     static ENumPointsFPGA::E &Ref();
     operator ENumPointsFPGA::E() { return Ref(); }
-    static uint BytesInChannel();
-    static uint PointsInChannel();
+    static int BytesInChannel();
+    static int PointsInChannel();
 };
 
 

@@ -86,7 +86,7 @@ private:
 
 struct AveragerOsci
 {
-    static void Process(Chan::E ch, const uint8 *newData, uint size);
+    static void Process(Chan::E ch, const uint8 *newData, int size);
     static void SettingChanged();
 };
 
@@ -131,10 +131,10 @@ private:
     static DataSettings *ds;
 
     // Позиция точки, которая будет записана следующей
-    static uint currentPoint;
+    static int currentPoint;
 
     // С этой точки следует начинать отрисовку текущего поточечного фрейма. Если firstOnDisplay == -1, то нужно запомнить текущую точку в качестве первой выводимой
-    static uint firstOnDisplay;
+    static int firstOnDisplay;
 };
 
 

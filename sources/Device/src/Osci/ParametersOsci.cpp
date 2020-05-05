@@ -416,7 +416,7 @@ void TrigLevel::Find()
     {
         const uint8 *data = IN(ch);
 
-        uint numBytes = DS->BytesInChannel();
+        int numBytes = DS->BytesInChannel();
 
         uint8 max = Math::MaxFromArray(data, 0, static_cast<int>(numBytes) - 1);
         uint8 min = Math::MinFromArray(data, 0, static_cast<int>(numBytes) - 1);
@@ -627,14 +627,14 @@ float TShift::ToAbs(const int tShift, const TBase::E tBase)
     return absStep[tBase] * tShift;
 }
 
-void VALUE::PointsToVoltage(const uint8 *points, uint numPoints, Range::E range, int16 rShift, float *voltage)
+void VALUE::PointsToVoltage(const uint8 *points, int numPoints, Range::E range, int16 rShift, float *voltage)
 {
     int voltInPixel = voltsInPixelInt[range];
     float maxVoltsOnScreen = Range::MaxVoltageOnScreen(range);
     float rShiftAbs = RShift::ToAbs(rShift, range);
     int diff = static_cast<int>((MIN * voltInPixel) + (maxVoltsOnScreen + rShiftAbs) * 20e3F);
     float koeff = 1.0F / 20e3F;
-    for (uint i = 0; i < numPoints; i++)
+    for (int i = 0; i < numPoints; i++)
     {
         voltage[i] = (points[i] * voltInPixel - diff) * koeff; //-V636
     }

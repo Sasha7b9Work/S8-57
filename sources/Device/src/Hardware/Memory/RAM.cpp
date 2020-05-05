@@ -39,13 +39,13 @@ bool RAM::needNewFrame = true;
 
 
 // Записывает по адресу dest. Возвращает адрес первого байта после записи
-static uint *WriteToRAM(uint *dest, const void *src, uint size)
+static uint *WriteToRAM(uint *dest, const void *src, int size)
 {
     HAL_BUS::ConfigureToFSMC();
     
     uint8 *address = reinterpret_cast<uint8 *>(dest);
 
-    std::memcpy(address, src, size);
+    std::memcpy(address, src, static_cast<uint>(size));
     
     return reinterpret_cast<uint *>(address + size);
 }
@@ -104,7 +104,7 @@ struct Packet
     // Подготовить пакет для сохранения данных в соответствии с настройками ds
     void Prepare(DataSettings *ds)
     {
-        uint bytesInChannel = ds->BytesInChannel();
+        int bytesInChannel = ds->BytesInChannel();
 
         addrNewest = 0x00000000;
         uint *address = reinterpret_cast<uint *>(Address() + sizeof(Packet));
@@ -116,14 +116,14 @@ struct Packet
         if (ds->enableA)
         {
             ds->dataA = addrData;
-            std::memset(addrData, VALUE::NONE, bytesInChannel);
+            std::memset(addrData, VALUE::NONE, static_cast<uint>(bytesInChannel));
             addrData += bytesInChannel;
         }
 
         if (ds->enableB)
         {
             ds->dataB = addrData;
-            std::memset(addrData, VALUE::NONE, bytesInChannel);
+            std::memset(addrData, VALUE::NONE, static_cast<uint>(bytesInChannel));
         }
 
         WriteToRAM(address, ds, sizeof(DataSettings));

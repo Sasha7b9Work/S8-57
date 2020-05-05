@@ -29,7 +29,7 @@ static const float voltsInPixel[] =
 };
 
 
-static void MultiplyToWindow(float *data, uint numPoints);
+static void MultiplyToWindow(float *data, int numPoints);
 
 static void Normalize(float *data, int numPoints);
 
@@ -79,7 +79,7 @@ static float const *Koeff(int numPoints)
 #endif
 
 
-void MathFPGA::CalculateFFT(float *dataR, uint numPoints, float *result, float *freq0, float *density0, float *freq1, float *density1, int *y0, int *y1)
+void MathFPGA::CalculateFFT(float *dataR, int numPoints, float *result, float *freq0, float *density0, float *freq1, float *density1, int *y0, int *y1)
 {
     float scale = 1.0F / TShift::ToAbs(1, set.time.base) / 1024.0F;
 
@@ -94,7 +94,7 @@ void MathFPGA::CalculateFFT(float *dataR, uint numPoints, float *result, float *
         *freq1 *= 2;
     }
 
-    for (uint i = 0; i < numPoints; i++)
+    for (int i = 0; i < numPoints; i++)
     {
         result[i] = 0.0F;
     }
@@ -244,7 +244,7 @@ void MathFPGA::CalculateFFT(float *dataR, uint numPoints, float *result, float *
 }
 
 
-static void MultiplyToWindow(float *data, uint numPoints)
+static void MultiplyToWindow(float *data, int numPoints)
 {
 #ifndef DEBUG
     float const *koeff = Koeff(numPoints);
@@ -257,7 +257,7 @@ static void MultiplyToWindow(float *data, uint numPoints)
 
     if (WindowFFT::IsHamming())
     {
-        for (uint i = 0; i < numPoints; i++)
+        for (int i = 0; i < numPoints; i++)
         {
             data[i] *= 0.53836F - 0.46164F * std::cosf(2 * Math::PI_F * i / (numPoints - 1));
         }
@@ -268,21 +268,17 @@ static void MultiplyToWindow(float *data, uint numPoints)
         float a0 = (1.0F - alpha) / 2.0F;
         float a1 = 0.5F;
         float a2 = alpha / 2.0F;
-        for (uint i = 0; i < numPoints; i++)
+        for (int i = 0; i < numPoints; i++)
         {
             data[i] *= a0 - a1 * std::cosf(2 * Math::PI_F * i / (numPoints - 1)) + a2 * std::cosf(4 * Math::PI_F * i / (numPoints - 1));
         }
     }
     else if (WindowFFT::IsHann())
     {
-        for (uint i = 0; i < numPoints; i++)
+        for (int i = 0; i < numPoints; i++)
         {
             data[i] *= 0.5F * (1.0F - std::cosf(2.0F * Math::PI_F * i / (numPoints - 1.0F)));
         }
-    }
-    else
-    {
-        // а других-то окон и нету
     }
 
 #endif

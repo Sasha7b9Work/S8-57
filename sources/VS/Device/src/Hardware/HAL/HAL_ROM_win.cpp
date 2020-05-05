@@ -41,15 +41,15 @@ const Sector HAL_ROM::sectors[Sector::Count] =
 };
 
 
-void HAL_ROM::WriteBufferBytes(uint address, const void *buffer, uint size)
+void HAL_ROM::WriteBufferBytes(uint address, const void *buffer, int size)
 {
     WriteBytes(address, static_cast<const uint8 *>(buffer), size);
 }
 
 
-void HAL_ROM::WriteBytes(uint address, const uint8 *buffer, uint size)
+void HAL_ROM::WriteBytes(uint address, const uint8 *buffer, int size)
 {
-    for (uint i = 0; i < size; i++)
+    for (int i = 0; i < size; i++)
     {
         *reinterpret_cast<uint8 *>(address) = *buffer;
         address++;

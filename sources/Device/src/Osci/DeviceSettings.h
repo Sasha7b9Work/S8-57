@@ -53,9 +53,9 @@ struct DataSettings
     // Заполняет структуру в соответствии с текущими настройками
     void Fill();
     // Возвращает размер занимаемый данными одного канала
-    uint BytesInChannel() const;
+    int BytesInChannel() const;
     // Количество отсчётов на канал
-    uint PointsInChannel() const;
+    int PointsInChannel() const;
     // Возвращает требуемое количество памяти для хранения данных каналов
     uint NeedMemoryForData() const;
     bool IsEquals(const DataSettings &ds) const;

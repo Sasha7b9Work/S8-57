@@ -13,7 +13,7 @@
 static uint16 numSignals[2] = { 0, 0 };
 
 
-void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, uint size)
+void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, int size)
 {
     uint8 *_new = const_cast<uint8 *>(dataNew);
     uint16 *av = AVE_DATA(ch);
@@ -31,14 +31,14 @@ void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, uint size)
     {
         if (numSignals[ch] == 0)
         {
-            for (uint i = 0; i < size; i++)
+            for (int i = 0; i < size; i++)
             {
                 av[i] = dataNew[i];
             }
         }
         else
         {
-            for(uint i = 0; i < size; i++)
+            for(int i = 0; i < size; i++)
             {
                 if(dataNew[i] != VALUE::NONE)
                 {
@@ -52,7 +52,7 @@ void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, uint size)
     {
         uint16 shift = static_cast<uint16>(enumAverages);
 
-        for(uint i = 0; i < size; i++)
+        for(int i = 0; i < size; i++)
         {
             av[i] = static_cast<uint16>(av[i] - (av[i] >> shift) + *_new);
             *_new++ = static_cast<uint8>(av[i] >> shift);

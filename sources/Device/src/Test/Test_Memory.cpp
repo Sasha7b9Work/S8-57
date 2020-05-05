@@ -107,13 +107,13 @@ bool Test::ROM::Data::Test()
     if (en) {                                               \
         uint8 *data = dat;                                  \
         data[0] = static_cast<uint8>(std::rand());          \
-        for (uint i = 1; i < numPoints; i++)                \
+        for (int i = 1; i < numPoints; i++)                 \
             { data[i] = static_cast<uint8>(data[0] * i); }  \
     }
 
 void TestMemoryStruct::FillData(DataSettings *ds)
 {
-    uint numPoints = ds->BytesInChannel();
+    int numPoints = ds->BytesInChannel();
 
     FILL(ds->enableA, ds->dataA);
     FILL(ds->enableB, ds->dataB);
@@ -123,14 +123,14 @@ void TestMemoryStruct::FillData(DataSettings *ds)
 #define CHECK(en, dat)                                                              \
     if (en) {                                                                       \
         uint8 *data = dat;                                                          \
-        for (uint i = 1; i < numPoints; i++)                                        \
+        for (int i = 1; i < numPoints; i++)                                         \
             { if (data[i] != static_cast<uint8>(data[0] * i)) { return false; } }   \
     }
 
 
 bool TestMemoryStruct::CheckData(const DataSettings *ds)
 {
-    uint numPoints = ds->BytesInChannel();
+    int numPoints = ds->BytesInChannel();
 
     CHECK(ds->enableA, ds->dataA);
     CHECK(ds->enableB, ds->dataB);

@@ -11,8 +11,8 @@
 
 
 DataSettings *Roller::ds = nullptr;
-uint          Roller::currentPoint = 0;
-uint          Roller::firstOnDisplay = static_cast<uint>(-1);
+int           Roller::currentPoint = 0;
+int           Roller::firstOnDisplay = -1;
 void         (*Roller::addPoint)(BitSet16, BitSet16);
 
 
@@ -25,7 +25,7 @@ void Roller::Prepare()
 
     ds = IntRAM::PrepareForP2P();
     currentPoint = 0;
-    firstOnDisplay = static_cast<uint>(-1);
+    firstOnDisplay = -1;
 
     addPoint = PEAKDET_ENABLED(ds) ? AddPointPeakDetEnabled : AddPointPeakDetDisabled;
 }
@@ -60,7 +60,7 @@ void Roller::AddPointPeakDetEnabled(BitSet16 dataA, BitSet16 dataB)
         ds->dataB[currentPoint * 2 + 1] = dataB.byte1;
     }
 
-    Math::CircleIncrease<uint>(&currentPoint, 0, ds->PointsInChannel());
+    Math::CircleIncrease<int>(&currentPoint, 0, ds->PointsInChannel());
 }
 
 
@@ -76,7 +76,7 @@ void Roller::AddPointPeakDetDisabled(BitSet16 dataA, BitSet16 dataB)
         ds->dataB[currentPoint] = dataB.byte1;
     }
 
-    Math::CircleIncrease<uint>(&currentPoint, 0, ds->PointsInChannel());
+    Math::CircleIncrease<int>(&currentPoint, 0, ds->PointsInChannel());
 }
 
 
@@ -124,7 +124,7 @@ bool Roller::FirstDrawThisFrame()
 
 int Roller::FillScreenBuffer(Chan::E ch, Buffer &buffer, int width)
 {
-    uint numBytes = currentPoint;
+    int numBytes = currentPoint;
 
     if(PEAKDET_ENABLED(ds))
     {
@@ -148,7 +148,7 @@ int Roller::FillScreenBuffer(Chan::E ch, Buffer &buffer, int width)
     uint8 *in = ds->Data(ch);
     uint8 *out = buffer.data;
 
-    for(uint i = firstOnDisplay; i < numBytes; i++)
+    for(int i = firstOnDisplay; i < numBytes; i++)
     {
         out[position] = in[i];
         Math::CircleIncrease<uint>(&position, 0, static_cast<uint>(width - 1));

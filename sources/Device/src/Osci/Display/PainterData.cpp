@@ -113,7 +113,7 @@ void DisplayOsci::PainterData::WriteParametersFFT(Chan::E ch, float freq0, float
 }
 
 
-void DisplayOsci::PainterData::DrawSpectrum(const uint8 *dataIn, uint numPoints, Chan::E ch)
+void DisplayOsci::PainterData::DrawSpectrum(const uint8 *dataIn, int numPoints, Chan::E ch)
 {
     if (!set.ch[ch].enabled)
     {
@@ -173,7 +173,7 @@ void DisplayOsci::PainterData::DrawSpectrum()
     
     if (set.mem.modeWork == ModeWork::Dir)
     {
-        uint numPoints = DS->BytesInChannel();
+        int numPoints = DS->BytesInChannel();
     
         if (numPoints > 1024)       // \todo Пока 8к и более не хочет считать
         {

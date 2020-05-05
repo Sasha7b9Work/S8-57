@@ -20,7 +20,7 @@ struct Segment
 
 
 // Интерполировать данные одного канала
-static void InterpolateChannel(uint8 *data, uint size);
+static void InterpolateChannel(uint8 *data, int size);
 
 // Находит первый пустой сегмент (т.е. в котором находятся толдько "пустые" элементы), начиная с элемента с адресом start
 static bool FindEmptySegment(uint8 *start, Segment *segment);
@@ -120,12 +120,12 @@ void Interpolator::Run(DataSettings *ds)
 }
 
 
-static void InterpolateChannel(uint8 *data, uint size)
+static void InterpolateChannel(uint8 *data, int size)
 {
-    uint readed = 0;                                     // Число реально считанных точек
+    int readed = 0;                                     // Число реально считанных точек
     uint8 *pointer = data;
     uint8 *last = pointer + size;
-    uint halfSize = size / 2;
+    int halfSize = size / 2;
 
     while(pointer < last)
     {

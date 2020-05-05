@@ -71,13 +71,13 @@ void Sector::Erase() const
 }
 
 
-void HAL_ROM::WriteBytes(uint address, const uint8 *data, uint size)
+void HAL_ROM::WriteBytes(uint address, const uint8 *data, int size)
 {
     CLEAR_FLASH_FLAGS;
 
     HAL_FLASH_Unlock();
 
-    for (uint i = 0; i < size; i++)
+    for (int i = 0; i < size; i++)
     {
         HAL_FLASH_Program(TYPEPROGRAM_BYTE, address, data[i]);
         address++;
@@ -103,7 +103,7 @@ void HAL_ROM::Fill(uint address, uint8 value, uint size)
 }
 
 
-void HAL_ROM::WriteBufferBytes(uint address, const void *buffer, uint size)
+void HAL_ROM::WriteBufferBytes(uint address, const void *buffer, int size)
 {
     Beeper::WaitForCompletion();
 
@@ -111,7 +111,7 @@ void HAL_ROM::WriteBufferBytes(uint address, const void *buffer, uint size)
 
     HAL_FLASH_Unlock();
 
-    for (uint i = 0; i < size; i++)
+    for (int i = 0; i < size; i++)
     {
         uint64_t data = static_cast<uint8 *>(const_cast<void *>(buffer))[i];
         HAL_FLASH_Program(TYPEPROGRAM_BYTE, address, data);

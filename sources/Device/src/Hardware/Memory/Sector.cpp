@@ -156,7 +156,7 @@ bool Sector::ExistPackets() const
 }
 
 
-static void WriteToROM(uint *address, const void *data, uint size)
+static void WriteToROM(uint *address, const void *data, int size)
 {
     HAL_ROM::WriteBufferBytes(*address, data, size);
     *address += size;
@@ -251,7 +251,7 @@ const PacketROM *Sector::FindValidPacket(uint numInROM) const
 
             if (ds && ds->numInROM == numInROM)
             {
-                for (uint j = 0; j < ds->BytesInChannel(); j++)
+                for (int j = 0; j < ds->BytesInChannel(); j++)
                 {
                     if (ds->enableA)
                     {

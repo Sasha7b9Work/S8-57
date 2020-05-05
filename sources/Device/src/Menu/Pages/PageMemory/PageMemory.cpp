@@ -11,9 +11,9 @@
 #include "Utils/Math.h"
 
 
-uint ENumPointsFPGA::BytesInChannel()
+int ENumPointsFPGA::BytesInChannel()
 {
-    uint result = PointsInChannel();
+    int result = PointsInChannel();
     if (set.time.peakDet == PeakDetMode::Enabled)
     {
         result *= 2;
@@ -22,7 +22,7 @@ uint ENumPointsFPGA::BytesInChannel()
 }
 
 
-uint ENumPointsFPGA::PointsInChannel()
+int ENumPointsFPGA::PointsInChannel()
 {
     return ENUM_TO_REL_POINTS(Ref());
 }

@@ -84,7 +84,7 @@ struct DisplayOsci
         // Нарисовать спектр
         static void DrawSpectrum();
 
-        static void DrawSpectrum(const uint8 *dataIn, uint numPoints, Chan::E ch);
+        static void DrawSpectrum(const uint8 *dataIn, int numPoints, Chan::E ch);
 
         static void DrawSpectrumChannel(const float *spectrum, Color color);
 
