@@ -19,7 +19,7 @@ struct Chan
         Count
     } ch;
     Chan(E v) : ch(v) { };
-    pString Name() const;
+    static pString Name(Chan::E ch);
     operator Chan::E() { return ch; };
 };
 

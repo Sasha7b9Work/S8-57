@@ -450,7 +450,7 @@ void RShift::DrawBoth()
 }
 
 
-pString Chan::Name() const
+pString Chan::Name(Chan::E ch)
 {
     static pString names[Chan::Count] =
     {
