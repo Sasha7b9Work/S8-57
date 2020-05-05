@@ -103,7 +103,7 @@ static void Draw_T_enableBoth(int x, int y)
 
 void PageCursorsMeasures::Set::OnPress_T()
 {
-    if (CursorsActive::IsT() || CursorsControl::IsDisabledT())
+    if ((set.curs.active == CursorsActive::T) || CursorsControl::IsDisabledT())
     {
         IncCursCntrlT(CursorsSource());
     }
@@ -119,7 +119,7 @@ static void Draw_T(int x, int y)
     }
     else
     {
-        if (!CursorsActive::IsT())
+        if ((set.curs.active != CursorsActive::T))
         {
             Draw_T_disableBoth(x, y);
         }
@@ -345,7 +345,7 @@ bool PageCursorsMeasures::Set::HandlerKey(const KeyEvent &event) //-V2506
         
         return true;
     }
-    else if(CursorsActive::IsT() && (event.IsArrowLeft() || event.IsArrowRight()))
+    else if((set.curs.active == CursorsActive::T) && (event.IsArrowLeft() || event.IsArrowRight()))
     {
         if (CursorsMovement::IsPercents())
         {
@@ -447,11 +447,11 @@ void PageCursorsMeasures::Set::UpdateCursorsForLook()
 {
     Chan::E source = CursorsSource();
 
-    if (CursorsActive::IsT() && ((set.curs.lookMode[ChanA] == CursorsLookMode::Voltage) || (set.curs.lookMode[ChanA] == CursorsLookMode::Both)))
+    if ((set.curs.active == CursorsActive::T) && ((set.curs.lookMode[ChanA] == CursorsLookMode::Voltage) || (set.curs.lookMode[ChanA] == CursorsLookMode::Both)))
     {
         SetCursorU(source, 0, Measure::CalculateCursorU(source, CursorsMeasurements::PosT(source, 0)));
     }
-    if (CursorsActive::IsT() && ((set.curs.lookMode[ChanB] == CursorsLookMode::Voltage) || (set.curs.lookMode[ChanB] == CursorsLookMode::Both)))
+    if ((set.curs.active == CursorsActive::T) && ((set.curs.lookMode[ChanB] == CursorsLookMode::Voltage) || (set.curs.lookMode[ChanB] == CursorsLookMode::Both)))
     {
         SetCursorU(source, 1, Measure::CalculateCursorU(source, CursorsMeasurements::PosT(source, 1)));
     }
@@ -484,5 +484,5 @@ bool PageCursorsMeasures::Set::IsRegSetActiveOnCursors()
 {
     return ((Menu::OpenedItem() == PageCursorsMeasures::Set::self) &&
         (((set.curs.active == CursorsActive::U) && CursorsControl::IsDisabledU()) ||
-        (CursorsActive::IsT() && CursorsControl::IsDisabledT())));
+        ((set.curs.active == CursorsActive::T) && CursorsControl::IsDisabledT())));
 }

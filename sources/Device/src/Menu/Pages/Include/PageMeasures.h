@@ -83,9 +83,6 @@ struct CursorsActive
         T,
         None
     };
-
-    static CursorsActive::E &Ref();
-    static bool IsT()    { return Ref() == T; }
 };
 
 

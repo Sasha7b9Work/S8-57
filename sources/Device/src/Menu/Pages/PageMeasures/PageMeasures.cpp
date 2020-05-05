@@ -35,12 +35,6 @@ bool MeasuresOnDisplay::IsVertical()
 }
 
 
-CursorsActive::E &CursorsActive::Ref()
-{
-    return set.curs.active;
-}
-
-
 CursorsMovement::E &CursorsMovement::Ref()
 {
     return set.curs.movement;
