@@ -6,18 +6,12 @@
 #include "Settings/Settings.h"
 
 
-ModeAccumulation::E &ModeAccumulation::Ref()
-{
-    return set.disp.modeAccumulation;
-}
-
-
 DEF_CHOICE_2( cEnable,                                                                                                                                 //--- ƒ»—œÀ≈… - Õ¿ ŒœÀ≈Õ»≈ - –ÂÊËÏ ---
     "–ÂÊËÏ",
     "",
     DISABLE_RU,
     ENABLE_RU,
-    ModeAccumulation::Ref(), &PageDisplay::Accumulation::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.disp.modeAccumulation, &PageDisplay::Accumulation::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

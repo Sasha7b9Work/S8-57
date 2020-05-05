@@ -63,9 +63,6 @@ struct ModeAccumulation
         NoReset,   // В этом режиме показываются строго N последних.
         Reset      // В этом режиме набираются N последних и потом сбрасываются.
     };
-
-    static ModeAccumulation::E &Ref();
-    static bool IsReset() { return (Ref() == Reset); }
 };
 
 // Количество точек для расчёта сглаживания.
