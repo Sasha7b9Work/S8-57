@@ -22,6 +22,12 @@ uint ENumPointsFPGA::BytesInChannel()
 }
 
 
+uint ENumPointsFPGA::PointsInChannel()
+{
+    return ENUM_TO_REL_POINTS(Ref());
+}
+
+
 ENumPointsFPGA::E &ENumPointsFPGA::Ref()
 {
     return set.mem.enumPoints;

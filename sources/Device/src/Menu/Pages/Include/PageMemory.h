@@ -76,7 +76,7 @@ struct ENumPointsFPGA
     static ENumPointsFPGA::E &Ref();
     operator ENumPointsFPGA::E() { return Ref(); }
     static uint BytesInChannel();
-    static uint PointsInChannel() { return ENUM_TO_REL_POINTS(Ref()); };
+    static uint PointsInChannel();
 };
 
 
