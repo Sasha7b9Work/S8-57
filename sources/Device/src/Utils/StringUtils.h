@@ -24,9 +24,9 @@ public:
     // Сравнивает две строки. Число символов берётся из str1
     static bool EqualsStrings(const char *str1, const char *str2);
 
-    static bool EqualsStrings(void *str1, void *str2, uint size);
+    static bool EqualsStrings(void *str1, void *str2, int size);
 
-    static bool EqualsStrings(uint8 *str1, const char * const str2, uint size);
+    static bool EqualsStrings(uint8 *str1, const char * const str2, int size);
 
     static bool EqualsZeroStrings(char *str1, char *str2);
     // Возвращает позицию первого символа, который не является цифрой либо точкой
@@ -34,7 +34,7 @@ public:
     // Преобразует строку в float. Обрабатываются символы до первого нецифрового символа
     static float StringToFloat(const char *string);
 
-    static char *ToUpper(char *str, uint size);
+    static char *ToUpper(char *str, int size);
 
     static char *ToUpper(char *str);
 

@@ -190,18 +190,18 @@ bool SU::EqualsZeroStrings(char *str1, char *str2)
 }
 
 
-bool SU::EqualsStrings(uint8 *str1, const char * const str2, uint size)
+bool SU::EqualsStrings(uint8 *str1, const char * const str2, int size)
 {
     return EqualsStrings(static_cast<void *>(str1), const_cast<char *>(str2), size);
 }
 
 
-bool SU::EqualsStrings(void *_str1, void *_str2, uint size)
+bool SU::EqualsStrings(void *_str1, void *_str2, int size)
 {
     char *str1 = static_cast<char *>(_str1);
     char *str2 = static_cast<char *>(_str2);
 
-    for (uint i = 0; i < size; i++)
+    for (int i = 0; i < size; i++)
     {
         if (str1[i] != str2[i])
         {
@@ -302,15 +302,15 @@ float SU::StringToFloat(const char *string)
 
 char *SU::ToUpper(char *str)
 {
-    return ToUpper(str, std::strlen(str));
+    return ToUpper(str, static_cast<int>(std::strlen(str)));
 }
 
 
-char *SU::ToUpper(char *_str, uint size)
+char *SU::ToUpper(char *_str, int size)
 {
     char *str = static_cast<char *>(_str);
 
-    for(uint i = 0; i < size; i++)
+    for(int i = 0; i < size; i++)
     {
         str[i] = static_cast<char>(std::toupper(str[i]));
     }
