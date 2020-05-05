@@ -5,6 +5,12 @@
 #include "Settings/Settings.h"
 
 
+CursorsSource::operator Chan::E()
+{
+    return set.curs.source;
+}
+
+
 FuncModeDraw::E &FuncModeDraw::Ref()
 {
     return set.math.modeDraw;
@@ -38,12 +44,6 @@ bool MeasuresOnDisplay::IsVertical()
 CursorsMovement::E &CursorsMovement::Ref()
 {
     return set.curs.movement;
-}
-
-
-Chan::E &CursorsSource::Ref()
-{
-    return set.curs.source;
 }
 
 

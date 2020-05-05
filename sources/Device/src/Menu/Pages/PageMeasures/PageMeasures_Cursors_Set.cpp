@@ -396,7 +396,7 @@ const Page * const PageCursorsMeasures::Set::self = static_cast<const Page *>(&p
 
 void PageCursorsMeasures::Set::SetCursSource(Chan::E ch)
 {
-    CursorsSource::Ref() = ch;
+    set.curs.source = ch;
 }
 
 

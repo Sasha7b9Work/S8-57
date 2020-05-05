@@ -89,8 +89,7 @@ struct CursorsActive
 struct CursorsSource
 {
     CursorsSource() {}
-    static Chan::E &Ref();
-    operator Chan::E() { return Ref(); }
+    operator Chan::E();
 };
 
 
