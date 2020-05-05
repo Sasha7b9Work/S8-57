@@ -20,7 +20,7 @@ uint8 *ExtRAM::Begin()
 #ifdef GUI
     return ram;
 #else
-    return reinterpret_cast<uint8 *>(0x68000000U); //-V566
+    return reinterpret_cast<uint8 *>(0x68000000U); //-V566 //-V2571
 #endif
 }
 

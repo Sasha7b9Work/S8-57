@@ -190,7 +190,7 @@ void ColorType::BrightnessChange(int delta) // -V2506
         return;
     }
 
-    int sign = Math::Sign(delta);
+    float sign = static_cast<float>(Math::Sign(delta));
 
     brightness += sign * 0.01F;
     LIMITATION(brightness, 0.0F, 1.0F);
