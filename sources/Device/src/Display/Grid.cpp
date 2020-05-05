@@ -208,7 +208,7 @@ void DrawGridSignal(int left, int top, int width, int height)
 
 void DrawGridSpectrum()
 {
-    if (ScaleFFT::IsLog())
+    if (set.fft.scale == ScaleFFT::Log)
     {
         static const int nums[] = {4, 6, 8};
         static pString strs[] = {"0", "-10", "-20", "-30", "-40", "-50", "-60", "-70"};

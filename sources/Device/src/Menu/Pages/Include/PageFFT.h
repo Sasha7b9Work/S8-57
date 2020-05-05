@@ -8,8 +8,6 @@ struct ScaleFFT
         Log,           // Это значение означает логарифмическую шкалу вывода спектра.
         Linear         // Это значение означает линейную шкалу вывода спектра.
     };
-    static ScaleFFT::E &Ref();
-    static bool IsLog() { return Ref() == Log; }
 };
 
 struct SourceFFT
