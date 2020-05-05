@@ -255,14 +255,14 @@ static void MultiplyToWindow(float *data, int numPoints)
     }
 #else
 
-    if (WindowFFT::IsHamming())
+    if (set.fft.window == WindowFFT::Hamming)
     {
         for (int i = 0; i < numPoints; i++)
         {
             data[i] *= 0.53836F - 0.46164F * std::cosf(2 * Math::PI_F * i / (numPoints - 1));
         }
     }
-    else if (WindowFFT::IsBlackman())
+    else if (set.fft.window == WindowFFT::Blackman)
     {
         float alpha = 0.16F;
         float a0 = (1.0F - alpha) / 2.0F;
@@ -273,7 +273,7 @@ static void MultiplyToWindow(float *data, int numPoints)
             data[i] *= a0 - a1 * std::cosf(2 * Math::PI_F * i / (numPoints - 1)) + a2 * std::cosf(4 * Math::PI_F * i / (numPoints - 1));
         }
     }
-    else if (WindowFFT::IsHann())
+    else if (set.fft.window == WindowFFT::Hann)
     {
         for (int i = 0; i < numPoints; i++)
         {

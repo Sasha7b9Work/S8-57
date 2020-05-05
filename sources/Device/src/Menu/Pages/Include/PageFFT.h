@@ -18,9 +18,6 @@ struct SourceFFT
         B,
         Both
     };
-    static SourceFFT::E &Ref();
-    static bool IsA() { return Ref() == A; }
-    static bool IsB() { return Ref() == B; }
 };
 
 struct WindowFFT
@@ -32,10 +29,6 @@ struct WindowFFT
         Blackman,
         Hann
     };
-    static WindowFFT::E &Ref();
-    static bool IsHamming()  { return Ref() == Hamming; }
-    static bool IsBlackman() { return Ref() == Blackman; }
-    static bool IsHann()     { return Ref() == Hann; }
 };
 
 struct MaxDBFFT

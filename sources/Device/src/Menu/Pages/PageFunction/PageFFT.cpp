@@ -7,17 +7,6 @@
 
 
 
-SourceFFT::E &SourceFFT::Ref()
-{
-    return set.fft.source;
-}
-
-WindowFFT::E &WindowFFT::Ref()
-{
-    return set.fft.window;
-}
-
-
 MaxDBFFT::E &MaxDBFFT::Ref()
 {
     return set.fft.maxDB;
@@ -54,7 +43,7 @@ DEF_CHOICE_3( cSource,                                                          
     "Канал 1",
     "Канал 2",
     "Канал 1 + 2",
-    SourceFFT::Ref(), &PageFFT::self, IsActive_Parameter, Choice::Changed, Choice::AfterDraw
+    set.fft.source, &PageFFT::self, IsActive_Parameter, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -65,7 +54,7 @@ DEF_CHOICE_4( cWindow,                                                          
     "Хэмминга",
     "Блэкмена",
     "Ханна",
-    WindowFFT::Ref(), &PageFFT::self, IsActive_Parameter, Choice::Changed, Choice::AfterDraw
+    set.fft.window, &PageFFT::self, IsActive_Parameter, Choice::Changed, Choice::AfterDraw
 )
 
 
