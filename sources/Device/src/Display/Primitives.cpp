@@ -365,9 +365,9 @@ static bool FindNextTransfer(const char *letters, int8 *lettersInSyllable) //-V2
 
     bool consonant[20];
 
-    int size = static_cast<int>(std::strlen(letters)); //-V2513
+    uint size = std::strlen(letters); //-V2513
 
-    for (int i = 0; i < size; i++)
+    for (uint i = 0; i < size; i++)
     {
         consonant[i] = IsConsonant(letters[i]);
     }
