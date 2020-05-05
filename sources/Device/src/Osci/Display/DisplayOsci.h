@@ -10,9 +10,11 @@ struct DisplayOsci
     static void Update();
 
     void DrawScaleLine(int x, bool forTrigLev);
+    
     // Установить признак того, что дисплей нуждается в перерисовке
     static void SetFlagRedraw();
 
+    
     struct HiPart
     {
         static void Draw();
@@ -21,35 +23,47 @@ struct DisplayOsci
         static void DrawRightPart(int x0, int y0);
     };
 
+      
     struct BottomPart
     {
         static void Draw(int x, int y);
     };
 
+    
     struct Accumulator
     {
         // Эту функцию нужно вызывать после каждой отрисовки сигналов
         static void NextFrame();
+    
         // Сброс информации
         static void Reset();
     };
 
+
     struct PainterData
     {
         static void DrawData();
+    
         // Индекс первой точки, выводимой поверх сетки
         static int FirstPointOnScreen();
+        
         // Возвращает адрес первой и последней точки на экране в координатах экрана
         static BitSet64 PointsOnDisplay();
+        
         // \brief Возращает адрес первой и последней точки в координатах экрана
         static BitSet64 BytesOnDisplay();
+        
         // Эту функцию надо вызывать при переключении TPos для перерасчёта смещения первого выводимого байта относительно левого края экрана
         static void ChangeTPos();
+
     private:
+        
         // Нарисовать актуальные данные - соответствующие текущим установкам
         static void DrawCurrent();
+        
         // Нарисовать данные из ОЗУ
         static void DrawRAM();
+        
         // Нарисовать данные из ППЗУ
         static void DrawROM();
 
@@ -66,6 +80,7 @@ struct DisplayOsci
         static void DrawModePointsPeakDetOn(int center, const uint8 *data, float scale, int x);
 
         static void DrawModePointsPeakDetOff(int center, const uint8 *data, float scale, int x);
+        
         // Нарисовать спектр
         static void DrawSpectrum();
 
@@ -75,6 +90,7 @@ struct DisplayOsci
 
         static void WriteParametersFFT(Chan::E ch, float freq0, float density0, float freq1, float density1);
     };
+
 
     struct MemoryWindow
     {
@@ -87,5 +103,24 @@ struct DisplayOsci
         static int Width();
 
         static int Height();
+    };
+
+    
+    // Структура для обслуживания параметра, значение которого необходимо отрисовывать поверх сетки (в течение некоторого времени поисле того, как этот параметр изменился)
+    struct DrawingValueParameter
+    {
+        enum E
+        {
+            TrigLevel,
+            RangeA,
+            RangeB,
+            RShiftA,
+            RShiftB,
+            TBase,
+            TShift
+        };
+
+        // После изменения параметра (вращения ручки) нужно вызывать эту функцию
+        void Enable(DrawingValueParameter::E v);
     };
 };
