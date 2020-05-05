@@ -8,7 +8,7 @@ class Smoother
 {
 public:
     // Сгладить данные in и положить их в out
-    static void Run(const uint8 *in, uint8 *out, uint numBytes, uint _numSmooth)
+    static void Run(const uint8 *in, uint8 *out, uint numBytes, int _numSmooth)
     {
         numSmooth = _numSmooth;
         size = static_cast<int>(numBytes);
@@ -32,7 +32,7 @@ private:
     {
         uint sum = 0U;          // Здесь будет храниться сумма
 
-        uint parts = 0U;        // Здесь количество уже просуммированных точек
+        int parts = 0;        // Здесь количество уже просуммированных точек
 
         index -= numSmooth / 2;
 
@@ -49,5 +49,5 @@ private:
 
     static int size;
     const static uint8 *data;
-    static uint numSmooth;
+    static int numSmooth;
 };

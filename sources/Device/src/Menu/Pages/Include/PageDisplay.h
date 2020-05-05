@@ -81,7 +81,7 @@ struct ENumSmoothing
         _9points,
         _10points
     };
-    static uint ToNumber();
+    static int Number();
 };
 
 // Ограничение FPS.
