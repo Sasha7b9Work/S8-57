@@ -2,8 +2,8 @@
 #include "Utils/String.h"
 
 
-#define ChanA Chan(Chan::A)
-#define ChanB Chan(Chan::B)
+#define ChanA Chan::A
+#define ChanB Chan::B
 
 
 struct DataSettings;
@@ -17,10 +17,9 @@ struct Chan
         A,
         B,
         Count
-    } ch;
-    Chan(E v) : ch(v) { };
+    };
+
     static pString Name(Chan::E ch);
-    operator Chan::E() { return ch; };
 };
 
 
