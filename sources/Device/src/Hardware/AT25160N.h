@@ -38,7 +38,7 @@ private:
     static void Write32BytesOrLess(uint address, const uint8 *data, int size);
     
     // Читает size байт, начиная с адреса address
-    static void ReadData(uint address, uint8 *data, uint size);
+    static void ReadData(uint address, uint8 *data, int size);
 
     // Записывает байт в микросхему
     static void WriteByte(uint8 byte);

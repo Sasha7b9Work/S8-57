@@ -286,7 +286,7 @@ uint8 AT25160N::ReadByte()
 }
 
 
-void AT25160N::ReadData(uint address, uint8 *data, uint size)
+void AT25160N::ReadData(uint address, uint8 *data, int size)
 {
     WaitFinishWrite();
 
@@ -296,7 +296,7 @@ void AT25160N::ReadData(uint address, uint8 *data, uint size)
     WriteByte((address >> 8) & 0xff);
     WriteByte(address & 0xff);
 
-    for(uint i = 0; i < size; i++) //-V756
+    for(int i = 0; i < size; i++) //-V756
     {
         data[i] = 0;
 
