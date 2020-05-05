@@ -122,7 +122,7 @@ void ConsoleSCPI::OnTextEnter(wxCommandEvent &)
     }
     else
     {
-        SCPI::AppendNewData(txt.c_str(), std::strlen(txt.c_str()));
+        SCPI::AppendNewData(txt.c_str(), static_cast<int>(std::strlen(txt.c_str())));
     }
 
     line->Clear();

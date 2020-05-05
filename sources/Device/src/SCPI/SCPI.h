@@ -60,7 +60,7 @@ struct StructSCPI
 
 #define SCPI_EXIT_ERROR()   LOG_WRITE("Ошибка теста SCPI %s:%d", __FILE__, __LINE__); return false;
 
-#define SCPI_APPEND_STRING(string) SCPI::AppendNewData(string.c_str(), std::strlen(string.c_str())); SCPI::Update()
+#define SCPI_APPEND_STRING(string) SCPI::AppendNewData(string.c_str(), static_cast<int>(std::strlen(string.c_str()))); SCPI::Update()
 
 
 namespace SCPI
@@ -70,7 +70,7 @@ namespace SCPI
 
     const int SIZE_SEPARATOR = 1;
 
-    void AppendNewData(const char *buffer, uint length);
+    void AppendNewData(const char *buffer, int length);
 
     void Update();
     // Возвращает true, если указатель указывает на завершающую последовательность
