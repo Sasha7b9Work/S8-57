@@ -234,12 +234,12 @@ int Recorder::ScaleX::BytesToSec() const
 }
 
 
-uint Recorder::ScaleX::TimeForPointMS()
+int Recorder::ScaleX::TimeForPointMS()
 {
     static const struct StructTime
     {
-        uint value;
-        StructTime(uint v) : value(v) {};
+        int value;
+        StructTime(int v) : value(v) {};
     }
     bytes[Count] =
     {

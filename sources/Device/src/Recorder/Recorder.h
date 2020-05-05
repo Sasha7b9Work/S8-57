@@ -62,6 +62,6 @@ public:
         // ¬озвращает скорость потреблени€ пам€ти в байтах/сек
         int BytesToSec() const;
         // ¬озвращает врем€ считывани€ одной точки
-        static uint TimeForPointMS();
+        static int TimeForPointMS();
     };
 };
