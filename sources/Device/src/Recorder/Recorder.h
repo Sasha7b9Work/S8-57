@@ -35,7 +35,6 @@ public:
             ROM,    // Внутр ЗУ
             EXT     // Внешн ЗУ
         };
-        static TypeMemory::E &Ref();
     };
 
     // Используется при выборе оси

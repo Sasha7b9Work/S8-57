@@ -171,11 +171,6 @@ struct ModeRegSet
         Range,
         RShift
     };
-    ModeRegSet() {}
-    static ModeRegSet::E &Ref();
-    operator ModeRegSet::E() { return Ref(); }
-    static bool IsRange()    { return Ref() == Range; }
-    static bool IsRShift()   { return Ref() == RShift; }
 };
 
 struct SettingsMath
@@ -223,8 +218,10 @@ struct PageCursorsMeasures
         static void Draw_Channel(int x, int y);
 
         static void OnPress_Channel();
+
         // Выбрать следующий курсор
         static void IncCursCntrlU(Chan::E ch);
+
         // Выбрать следующий курсор
         static void IncCursCntrlT(Chan::E ch);
 
@@ -233,18 +230,23 @@ struct PageCursorsMeasures
         static void OnPress_T();
 
         static void SetCursPos100(Chan::E ch);
+
         // Изменить значение позиции курсора напряжения на delta точек
         static void SetShiftCursPosU(Chan::E ch, int numCur, float delta);
+
         // Изменить значение позиции курсора времени на delta точек
         static void SetShiftCursPosT(Chan::E ch, int numCur, float delta);
 
         static bool HandlerKey(const KeyEvent &event);
 
         static void UpdateCursorsForLook();
+
         // Установить позицию курсора напряжения
         static void SetCursorU(Chan::E ch, int numCur, float pos);
+
         // Установить позицию курсора времени
         static void SetCursorT(Chan::E ch, int numCur, float pos);
+
         // Возвращает true, если вращение ручки УСТАНОВКА будет перемещать курсоры/курсоры
         static bool IsRegSetActiveOnCursors();
 

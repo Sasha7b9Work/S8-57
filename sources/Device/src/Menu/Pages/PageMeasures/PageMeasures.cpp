@@ -11,12 +11,6 @@ CursorsSource::operator Chan::E()
 }
 
 
-ModeRegSet::E &ModeRegSet::Ref()
-{
-    return set.math.modeRegSet;
-}
-
-
 bool MeasuresModeViewSignals::IsCompress()
 {
     return (set.meas.modeViewSignals == MeasuresModeViewSignals::Compress);

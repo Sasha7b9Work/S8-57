@@ -18,7 +18,7 @@ DEF_CHOICE_3( cTypeMemory,                                                      
     "ОЗУ",
     "Внутр ЗУ",
     "Внешн ЗУ",
-    Recorder::TypeMemory::Ref(), &PageRecorder::self, IsActive_Destination, Choice::Changed, Choice::AfterDraw
+    set.rec.typeMemory, &PageRecorder::self, IsActive_Destination, Choice::Changed, Choice::AfterDraw
 )
 
 

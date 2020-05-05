@@ -301,12 +301,6 @@ bool Recorder::IsEnabledSensor()
 }
 
 
-Recorder::TypeMemory::E &Recorder::TypeMemory::Ref()
-{
-    return set.rec.typeMemory;
-}
-
-
 Recorder::ScaleX::E &Recorder::ScaleX::Ref()
 {
     return set.rec.scaleX;
