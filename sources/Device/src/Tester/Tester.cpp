@@ -300,7 +300,7 @@ void Tester::LoadStep()
 
 pString Tester::Scale::ToString() const // -V2506
 {
-    if (Chan(ch).IsA())
+    if (ch == Chan::A)
     {
         return Range::ToString(static_cast<Range::E>(value), Divider::_1);
     }

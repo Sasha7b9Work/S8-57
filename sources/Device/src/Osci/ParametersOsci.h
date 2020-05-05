@@ -22,9 +22,6 @@ struct Chan
     pString Name() const;
     operator Chan::E() { return ch; };
     SettingsChannel &Ref();
-
-    bool IsA() const { return ch == A; };
-    bool IsB() const { return ch == B; }
 };
 
 

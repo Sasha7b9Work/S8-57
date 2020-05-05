@@ -79,7 +79,7 @@ void RShift::Load(bool force)
 
     shift += setNRST.exShift[ch][set.ch[ch].range];
 
-    if (Chan(ch).IsA() && Device::InModeTester())
+    if ((ch == Chan::A) && Device::InModeTester())
     {
         shift -= Tester::DeltaRShiftA();
     }

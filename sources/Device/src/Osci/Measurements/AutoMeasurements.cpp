@@ -988,10 +988,10 @@ float CalculateDelayPlus(Chan::E ch)
 
     EXIT_IF_ERRORS_FLOAT(averageA, averageB); //-V2507
 
-    float averageFirst = Chan(ch).IsA() ? averageA : averageB;
-    float averageSecond = Chan(ch).IsA() ? averageB : averageA;
+    float averageFirst = (ch == Chan::A) ? averageA : averageB;
+    float averageSecond = (ch == Chan::A) ? averageB : averageA;
     Chan::E firstChannel = ch;
-    Chan::E secondChannel = Chan(ch).IsA() ? Chan::B : Chan::A;
+    Chan::E secondChannel = (ch == Chan::A) ? Chan::B : Chan::A;
 
     float firstIntersection = FindIntersectionWithHorLine(firstChannel, 1, true, static_cast<uint8>(averageFirst));
     float secondIntersection = FindIntersectionWithHorLine(secondChannel, 1, true, static_cast<uint8>(averageSecond));
@@ -1027,10 +1027,10 @@ float CalculateDelayMinus(Chan::E ch)
 
     EXIT_IF_ERRORS_FLOAT(average0, average1); //-V2507
 
-    float averageFirst = Chan(ch).IsA() ? average0 : average1;
-    float averageSecond = Chan(ch).IsA() ? average1 : average0;
+    float averageFirst = (ch == Chan::A) ? average0 : average1;
+    float averageSecond = (ch == Chan::A) ? average1 : average0;
     Chan::E firstChannel = ch;
-    Chan::E secondChannel = Chan(ch).IsA() ? Chan::B : Chan::A;
+    Chan::E secondChannel = (ch == Chan::A) ? Chan::B : Chan::A;
 
     float firstIntersection = FindIntersectionWithHorLine(firstChannel, 1, false, static_cast<uint8>(averageFirst));
     float secondIntersection = FindIntersectionWithHorLine(secondChannel, 1, false, static_cast<uint8>(averageSecond));
@@ -1290,7 +1290,7 @@ String Measure::GetStringMeasure(Chan::E ch, char* buffer, int lenBuf)
     }
 
     buffer[0] = '\0';
-    std::strcpy(buffer, Chan(ch).IsA() ? "1: " : "2: ");
+    std::strcpy(buffer, (ch == Chan::A) ? "1: " : "2: ");
 
     if(!isSet || values[static_cast<int>(type)].value[static_cast<int>(ch)] == Float::ERROR) //-V550 //-V2550
     {

@@ -94,7 +94,7 @@ void DisplayOsci::PainterData::WriteParametersFFT(Chan::E ch, float freq0, float
 
     Text(AutoMeasurements::Freq2String(freq1, false, buffer)).Draw(x, y);
 
-    if (Chan(ch).IsA())
+    if(ch == Chan::A)
     {
         y += dY + 2;
     }
