@@ -455,11 +455,11 @@ void PageCursorsMeasures::Set::UpdateCursorsForLook()
     {
         SetCursorU(source, 1, Measure::CalculateCursorU(source, CursorsMeasurements::PosT(source, 1)));
     }
-    if (CursorsActive::IsU() && (CursorsLookMode::IsTime(ChanA) || (set.curs.lookMode[ChanA] == CursorsLookMode::Both)))
+    if (CursorsActive::IsU() && ((set.curs.lookMode[ChanA] == CursorsLookMode::Time) || (set.curs.lookMode[ChanA] == CursorsLookMode::Both)))
     {
         SetCursorT(source, 0, Measure::CalculateCursorT(source, set.curs.posCurU[source][0], 0));
     }
-    if (CursorsActive::IsU() && (CursorsLookMode::IsTime(ChanB) || (set.curs.lookMode[ChanB] == CursorsLookMode::Both)))
+    if (CursorsActive::IsU() && ((set.curs.lookMode[ChanB] == CursorsLookMode::Time) || (set.curs.lookMode[ChanB] == CursorsLookMode::Both)))
     {
         SetCursorT(source, 1, Measure::CalculateCursorT(source, set.curs.posCurU[source][1], 1));
     }
