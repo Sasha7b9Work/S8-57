@@ -28,12 +28,6 @@ TypeSignalROM::E &TypeSignalROM::Ref()
 }
 
 
-FileNamingMode::E &FileNamingMode::Ref()
-{
-    return set.mem.fileNamingMode;
-}
-
-
 ENumPointsFPGA::E &ENumPointsFPGA::Ref()
 {
     return set.mem.enumPoints;

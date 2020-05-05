@@ -58,8 +58,6 @@ struct FileNamingMode
         Mask,        // Именовать по маске.
         Manually     // Именовать вручную.
     };
-
-    static FileNamingMode::E &Ref();
 };
 
 // Число точек сигнала, с которым идёт работа.

@@ -24,7 +24,7 @@ DEF_CHOICE_2(cName,                                                             
     ,
     "По маске",
     "Вручную",
-    FileNamingMode::Ref(), &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.mem.fileNamingMode, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
