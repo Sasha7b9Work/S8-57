@@ -24,7 +24,7 @@ DEF_CHOICE_3( cTypeMemory,                                                      
 
 static bool IsActive_Start()
 {
-    return Recorder::IsEnabledA() || Recorder::IsEnabledB() || Recorder::IsEnabledSensor();
+    return (set.rec.enA || set.rec.enB || set.rec.enSensor);
 }
 
 static void Draw_Start(int x, int y)

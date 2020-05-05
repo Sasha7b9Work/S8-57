@@ -4,12 +4,6 @@
 class Recorder
 {
 public:
-    static bool IsEnabledA();
-
-    static bool IsEnabledB();
-
-    static bool IsEnabledSensor();
-
     static void Init();
 
     static void Update();

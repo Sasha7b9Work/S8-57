@@ -136,7 +136,7 @@ void Recorder::OnPressStart()
         return;
     }
 
-    if(!IsEnabledA() && !IsEnabledB() && !IsEnabledSensor())
+    if(!set.rec.enA && !set.rec.enB && !set.rec.enSensor)
     {
         Display::ShowWarning("Ќужно выбрать хот€ бы один источник записи");
         return;
@@ -280,22 +280,4 @@ void Recorder::ScaleX::Load()
         Recorder::Stop();
         Recorder::Start();
     }
-}
-
-
-bool Recorder::IsEnabledA()
-{
-    return set.rec.enA;
-}
-
-
-bool Recorder::IsEnabledB()
-{
-    return set.rec.enB;
-}
-
-
-bool Recorder::IsEnabledSensor()
-{
-    return set.rec.enSensor;
 }
