@@ -39,9 +39,6 @@ struct MaxDBFFT
         _60,
         _80
     };
-    MaxDBFFT() {}
-    static MaxDBFFT::E &Ref();
-    operator MaxDBFFT::E() { return Ref(); }
 
     static float MaxDBforFFT(MaxDBFFT::E maxDB)
     {

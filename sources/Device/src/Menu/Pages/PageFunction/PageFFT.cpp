@@ -7,12 +7,6 @@
 
 
 
-MaxDBFFT::E &MaxDBFFT::Ref()
-{
-    return set.fft.maxDB;
-}
-
-
 static bool IsActive_Parameter()
 {
     return set.fft.enabled;
@@ -69,7 +63,7 @@ DEF_CHOICE_3( cRange,                                                           
     "-40Да",
     "-60Да",
     "-80Да",
-    MaxDBFFT::Ref(), &PageFFT::self, IsActive_Range, Choice::Changed, Choice::AfterDraw
+    set.fft.maxDB, &PageFFT::self, IsActive_Range, Choice::Changed, Choice::AfterDraw
 )
 
 
