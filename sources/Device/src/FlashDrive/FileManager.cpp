@@ -352,7 +352,7 @@ bool FileManager::GetNameForNewFile(char name[255]) //-V2506
         return false;
     }
 
-    if (FileNamingMode::IsManually())
+    if (set.mem.fileNamingMode == FileNamingMode::Manually)
     {
         LIMITATION(size, 1, 95);
         std::strcat(name, set.mem.fileName);

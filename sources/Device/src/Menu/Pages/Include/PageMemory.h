@@ -60,8 +60,6 @@ struct FileNamingMode
     };
 
     static FileNamingMode::E &Ref();
-    static bool IsManually() { return Ref() == Manually; }
-    static bool IsMask()     { return Ref() == Mask; }
 };
 
 // Число точек сигнала, с которым идёт работа.
