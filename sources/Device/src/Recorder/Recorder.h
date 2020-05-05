@@ -55,12 +55,16 @@ public:
             _10s,   // TBase = 10c
             Count
         };
-        ScaleX() {}
+
         static void Load();
+
         static void Change(int delta);
+
         static pString ToString();
+        
         // ¬озвращает скорость потреблени€ пам€ти в байтах/сек
-        int BytesToSec() const;
+        static int BytesToSec();
+        
         // ¬озвращает врем€ считывани€ одной точки
         static int TimeForPointMS();
     };

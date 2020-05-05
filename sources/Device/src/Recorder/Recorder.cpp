@@ -212,7 +212,7 @@ pString Recorder::ScaleX::ToString()
 }
 
 
-int Recorder::ScaleX::BytesToSec() const
+int Recorder::ScaleX::BytesToSec()
 {
     static const struct StructBytes
     {
