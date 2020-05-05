@@ -91,7 +91,7 @@ struct ENumPointsFPGA
     ENumPointsFPGA() {};
     static ENumPointsFPGA::E &Ref();
     operator ENumPointsFPGA::E() { return Ref(); }
-    static uint BytesInChannel() { uint result = PointsInChannel(); if (PeakDetMode() == PeakDetMode::Enabled) { result *= 2; } return result; };
+    static uint BytesInChannel();
     static uint PointsInChannel() { return ENUM_TO_REL_POINTS(Ref()); };
 };
 

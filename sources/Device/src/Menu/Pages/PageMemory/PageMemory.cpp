@@ -11,6 +11,17 @@
 #include "Utils/Math.h"
 
 
+uint ENumPointsFPGA::BytesInChannel()
+{
+    uint result = PointsInChannel();
+    if (set.time.peakDet == PeakDetMode::Enabled)
+    {
+        result *= 2;
+    }
+    return result;
+}
+
+
 TypeSignalROM::E &TypeSignalROM::Ref()
 {
     return set.mem.typeSignalROM;

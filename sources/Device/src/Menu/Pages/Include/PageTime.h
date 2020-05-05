@@ -11,7 +11,6 @@ struct PeakDetMode
     };
     PeakDetMode() {}
     static PeakDetMode::E &Ref();
-    operator PeakDetMode::E() { return Ref(); }
     static bool IsEnabled();
 };
 
