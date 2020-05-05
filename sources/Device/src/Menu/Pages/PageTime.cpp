@@ -72,7 +72,7 @@ bool PeakDetMode::IsEnabled()
 
 static bool IsActive_Sample()
 {
-    return OSCI_IN_MODE_RANDOMIZER && !TrigStartMode::IsSingle();
+    return OSCI_IN_MODE_RANDOMIZER && (set.trig.startMode != TrigStartMode::Single);
 }
 
 DEF_CHOICE_2( cSample,                                                                                                                                          //--- РАЗВЕРТКА - Выборка ---

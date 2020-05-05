@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Menu/Pages/Include/PageTrig.h"
 #include "SCPI/TriggerSCPI.h"
+#include "Settings/Settings.h"
 
 
 // :TRIGGER:SWEEP
@@ -27,7 +28,7 @@ const StructSCPI SCPI::trigger[] =
 
 static const char *FuncSweep(const char *buffer)
 {
-    SCPI_REQUEST(SCPI::SendAnswer(sweep[TrigStartMode()]));
+    SCPI_REQUEST(SCPI::SendAnswer(sweep[set.trig.startMode]));
 
     SCPI_PROCESS_ARRAY(sweep, TrigStartMode::Set(static_cast<TrigStartMode::E>(i)));
 }

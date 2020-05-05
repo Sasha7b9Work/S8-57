@@ -220,7 +220,7 @@ static bool ProcessFlagReady()
 
         Osci::ReadData();
 
-        if(TrigStartMode::IsSingle())
+        if(set.trig.startMode == TrigStartMode::Single)
         {
             needStop = true;
             Trig::pulse = false;
@@ -290,7 +290,7 @@ void Osci::ChangedTrigStartMode()
 
     SetFunctionsStartStop();
 
-    if(!TrigStartMode::IsSingle())
+    if(set.trig.startMode != TrigStartMode::Single)
     {
         Start(true);
     }
@@ -300,7 +300,7 @@ void Osci::ChangedTrigStartMode()
     {
         // и переключаемся на одиночный режим запуска, то надо сохранить имеющийся тип выборки, чтобы восстановить при возвращении в режим 
         // рандомизатора автоматический или ждущий
-        if(TrigStartMode::IsSingle())
+        if(set.trig.startMode == TrigStartMode::Single)
         {
             set.time.sampleTypeOld = SampleType();
             SampleType().Set(SampleType::Real);

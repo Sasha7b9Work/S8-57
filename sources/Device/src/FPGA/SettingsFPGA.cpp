@@ -12,12 +12,6 @@
 #include "Utils/Values.h"
 
 
-TrigStartMode::E &TrigStartMode::Ref()
-{
-    return set.trig.startMode;
-}
-
-
 void TrigStartMode::Set(TrigStartMode::E v)
 {
     set.trig.startMode = v;

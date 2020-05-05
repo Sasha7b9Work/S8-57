@@ -51,13 +51,7 @@ struct TrigStartMode
         Single,   // Однократный.
         Count
     };
-//    TrigStartMode() {}
     static void Set(TrigStartMode::E);
-    static TrigStartMode::E &Ref();
-    operator TrigStartMode::E() { return Ref(); }
-    static bool IsSingle()      { return Ref() == Single; }
-    static bool IsWait()        { return Ref() == Wait; }
-//    static bool IsAuto()        { return Ref() == Auto; }
 };
 
 
