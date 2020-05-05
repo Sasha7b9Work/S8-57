@@ -164,11 +164,11 @@ static int DrawMainParameters(int _x, int _y)
     };
     if (ModeWork::IsDir())
     {
-        std::snprintf(buffer, SIZE, "\xa5\x10%s\x10\xa5\x10%s\x10\xa5\x10", couple[TrigInput()], polar[TrigPolarity()]);
+        std::snprintf(buffer, SIZE, "\xa5\x10%s\x10\xa5\x10%s\x10\xa5\x10", couple[set.trig.input], polar[set.trig.polarity]);
         String(buffer).Draw(x + 18, y1);
 
-        Char(filtr[TrigInput()][0]).Draw(x + 45, y1);
-        Char(filtr[TrigInput()][1]).Draw(x + 53, y1);
+        Char(filtr[set.trig.input][0]).Draw(x + 45, y1);
+        Char(filtr[set.trig.input][1]).Draw(x + 53, y1);
     }
 
     buffer[0] = '\0';

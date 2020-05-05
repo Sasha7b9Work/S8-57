@@ -21,7 +21,7 @@ bool          FPGA::isRunning = false;
 
 void FPGA::ForcedStart()
 {
-    uint8 value = static_cast<uint8>((static_cast<uint8>(TrigPolarity())) % 2);
+    uint8 value = static_cast<uint8>((static_cast<uint8>(set.trig.polarity)) % 2);
 
     uint8 stop = 0;
     if (Device::InModeRecorder())           // В режиме регистратора

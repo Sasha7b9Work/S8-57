@@ -27,9 +27,6 @@ struct TrigInput
         HF,
         LF
     };
-    TrigInput() {};
-    static TrigInput::E &Ref();
-    operator TrigInput::E() { return Ref(); }
     // Установить в соотвествующие положения выводы, отвечающие за источник и вход синхронизации
     static void Load();
 };
@@ -41,10 +38,7 @@ struct TrigPolarity
         Rising,
         Falling
     };
-    TrigPolarity() {}
-    static TrigPolarity::E &Ref();
-    void Load();
-    operator TrigPolarity::E() { return Ref(); }
+    static void Load();
 };
 
 // Режим запуска.

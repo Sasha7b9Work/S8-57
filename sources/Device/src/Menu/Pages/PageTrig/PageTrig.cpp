@@ -52,7 +52,7 @@ DEF_CHOICE_2( cPolarity, //-V206                                                
     ,
     "Ôðîíò",
     "Ñðåç",
-    TrigPolarity::Ref(), &PageTrig::self, Item::Active, OnChanged_Polarity, Choice::AfterDraw
+    set.trig.polarity, &PageTrig::self, Item::Active, OnChanged_Polarity, Choice::AfterDraw
 )
 
 
@@ -72,7 +72,7 @@ DEF_CHOICE_3( cFiltr, // -V206                                                  
     "ÏÑ",
     "Í×",
     "Â×",
-    TrigInput::Ref(), &PageTrig::self, Item::Active, OnChanged_Filtr, Choice::AfterDraw
+    set.trig.input, &PageTrig::self, Item::Active, OnChanged_Filtr, Choice::AfterDraw
 )
 
 DEF_PAGE_6( pTrig,                                                                                                                                                            //--- ÑÈÍÕÐ ---

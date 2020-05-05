@@ -45,15 +45,9 @@ void TrigInput::Load()
         {BIN_U8(00000000), BIN_U8(00000110)}  // -V2501      // อื
     };
 
-    HAL_PIO::Write(PIN_LF3, _GET_BIT(datas[TrigInput()][set.trig.source], 2)); //-V525
-    HAL_PIO::Write(PIN_A0S, _GET_BIT(datas[TrigInput()][set.trig.source], 1));
-    HAL_PIO::Write(PIN_LFS, _GET_BIT(datas[TrigInput()][set.trig.source], 0));
-}
-
-
-TrigInput::E &TrigInput::Ref()
-{
-    return set.trig.input;
+    HAL_PIO::Write(PIN_LF3, _GET_BIT(datas[set.trig.input][set.trig.source], 2)); //-V525
+    HAL_PIO::Write(PIN_A0S, _GET_BIT(datas[set.trig.input][set.trig.source], 1));
+    HAL_PIO::Write(PIN_LFS, _GET_BIT(datas[set.trig.input][set.trig.source], 0));
 }
 
 
@@ -276,12 +270,6 @@ void RShift::Change(int16 delta)
 void TrigPolarity::Load()
 {
     FPGA::ForcedStart();
-}
-
-
-TrigPolarity::E &TrigPolarity::Ref()
-{
-    return set.trig.polarity;
 }
 
 
