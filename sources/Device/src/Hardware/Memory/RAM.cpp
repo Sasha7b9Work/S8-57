@@ -139,9 +139,11 @@ struct Packet
         return Address() + Size();
     }
     // Возвращает размер памяти, необходимой для хранения данных в соответсвии с настройками ds
-    static uint NeedMemoryForPacedData(const DataSettings *ds)
+    static int NeedMemoryForPacedData(const DataSettings *ds)
     {
-        return sizeof(Packet) + sizeof(DataSettings) + ds->NeedMemoryForData();
+        uint size = sizeof(Packet) + sizeof(DataSettings) + ds->NeedMemoryForData();
+
+        return static_cast<int>(size);
     }
 
     int Size() const
@@ -180,16 +182,16 @@ DataSettings *RAM::PrepareForNewData()
 
     ds.id = NumberDatas() ? Get()->id + 1 : 0;
 
-    uint address = AllocateMemoryForPacket(&ds);         // Находим адрес для записи нового пакета
+    uint address = AllocateMemoryForPacket(&ds);    // Находим адрес для записи нового пакета
 
     if (newest)
     {
-        newest->addrNewest = address;                   // Указываем его в качестве адреса следующего пакета для предыдущего
+        newest->addrNewest = address;               // Указываем его в качестве адреса следующего пакета для предыдущего
     }
 
-    newest = reinterpret_cast<Packet *>(address);       // Устанавилваем этот адрес в качестве новейшего пакета
+    newest = reinterpret_cast<Packet *>(address);   // Устанавилваем этот адрес в качестве новейшего пакета
 
-    newest->Prepare(&ds);                               // И упаковываем данные
+    newest->Prepare(&ds);                           // И упаковываем данные
 
     DataSettings *result = Get();
 
@@ -209,16 +211,16 @@ DataSettings *RAM::PrepareForNewData()
 }
 
 
-DataSettings *RAM::Get(uint numFromEnd)
+DataSettings *RAM::Get(int numFromEnd)
 {
-    uint number = NumberDatas();
+    int number = NumberDatas();
     
     if (numFromEnd + 1 > number)
     {
         return nullptr;
     }
 
-    uint counter = number - 1 - numFromEnd;
+    int counter = number - 1 - numFromEnd;
 
     Packet *packet = oldest;
 
@@ -232,7 +234,7 @@ DataSettings *RAM::Get(uint numFromEnd)
 }
 
 
-uint RAM::NumberDatas()
+int RAM::NumberDatas()
 {
     HAL_BUS::ConfigureToFSMC();
 
@@ -246,7 +248,7 @@ uint RAM::NumberDatas()
         return 1;
     }
 
-    uint result = 0;
+    int result = 0;
 
     Packet *packet = oldest;
 
@@ -316,9 +318,9 @@ uint RAM::AllocateMemoryForPacket(const DataSettings *ds)
 }
 
 
-void RAM::AllocateMemoryFromBegin(uint size)
+void RAM::AllocateMemoryFromBegin(int size)
 {
-    while (oldest->Address() - BEGIN < size)
+    while (oldest->Address() - BEGIN < static_cast<uint>(size))
     {
         RemoveOldest();
     }

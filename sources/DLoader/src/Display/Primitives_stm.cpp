@@ -124,7 +124,7 @@ int Text::DrawSmall(int x, int y, Color color)
 {
     color.SetAsCurrent();
 
-    uint sizeBuffer = 1 + 2 + 1 + 1 + std::strlen(text);
+    int sizeBuffer = 1 + 2 + 1 + 1 + static_cast<int>(std::strlen(text));
 
     Buffer buffer(sizeBuffer);
     buffer.data[0] = Command::Paint_DrawText;

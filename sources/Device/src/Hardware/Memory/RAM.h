@@ -22,10 +22,10 @@ public:
     static DataSettings *PrepareForNewData();
 
     // Считать информацию о num с конца сохранённых данных. 0 - последние данные, 1 - предпоследние
-    static DataSettings *Get(uint num = 0);
+    static DataSettings *Get(int num = 0);
 
     // Возвращает количество записей в памяти
-    static uint NumberDatas();
+    static int NumberDatas();
 
     // Возвращает true, если настройки последнего сохранённого сигнала соответствуют текущим
     static bool LastSettingsEqualsCurrent();
@@ -40,14 +40,14 @@ private:
     // Указатель на последний записанный пакет. Он будет стёрт последним
     static Packet *newest;
 
-    // Освободить место для записи пакета с данными в соответствии с ds
+    // Освободить место для записи пакета с данными в соответствии с ds. Возвращает адрес
     static uint AllocateMemoryForPacket(const DataSettings *ds);
 
     // Удалить самую старую запись
     static void RemoveOldest();
 
     // Освободить size байт памяти с начала буфера
-    static void AllocateMemoryFromBegin(uint size);
+    static void AllocateMemoryFromBegin(int size);
 
     static bool needNewFrame;
 };
