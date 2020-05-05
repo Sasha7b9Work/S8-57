@@ -74,7 +74,6 @@ struct CursorsLookMode
     };
 
     static CursorsLookMode::E &Ref(Chan::E);
-    static bool IsVoltage(Chan::E ch) { return Ref(ch) == Voltage; }
 };
 
 // Какие курсоры сейчас активны. Какие активны, те и будут перемещаться по вращению ручки УСТАНОВКА.

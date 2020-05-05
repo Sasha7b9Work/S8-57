@@ -447,11 +447,11 @@ void PageCursorsMeasures::Set::UpdateCursorsForLook()
 {
     Chan::E source = CursorsSource();
 
-    if (CursorsActive::IsT() && (CursorsLookMode::IsVoltage(ChanA) || (set.curs.lookMode[ChanA] == CursorsLookMode::Both)))
+    if (CursorsActive::IsT() && ((set.curs.lookMode[ChanA] == CursorsLookMode::Voltage) || (set.curs.lookMode[ChanA] == CursorsLookMode::Both)))
     {
         SetCursorU(source, 0, Measure::CalculateCursorU(source, CursorsMeasurements::PosT(source, 0)));
     }
-    if (CursorsActive::IsT() && (CursorsLookMode::IsVoltage(ChanB) || (set.curs.lookMode[ChanB] == CursorsLookMode::Both)))
+    if (CursorsActive::IsT() && ((set.curs.lookMode[ChanB] == CursorsLookMode::Voltage) || (set.curs.lookMode[ChanB] == CursorsLookMode::Both)))
     {
         SetCursorU(source, 1, Measure::CalculateCursorU(source, CursorsMeasurements::PosT(source, 1)));
     }
