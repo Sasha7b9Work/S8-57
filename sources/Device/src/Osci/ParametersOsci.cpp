@@ -192,7 +192,7 @@ void TBase::Change(int delta)
 }
 
 
-pString TBase::ToString()
+pString TBase::ToString(TBase::E tBase)
 {
     // Структура для описания диапазона масштаба по времени.
     static const struct StructTBase
@@ -237,7 +237,7 @@ pString TBase::ToString()
         StructTBase("10\x10с")
     };
 
-    return tBases[set.time.base].name;
+    return tBases[tBase].name;
 }
 
 

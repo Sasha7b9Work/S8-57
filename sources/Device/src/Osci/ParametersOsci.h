@@ -60,9 +60,9 @@ struct TBase
         Count
     };
 
-    pString Name() const;
+    static pString Name(TBase::E tBase);
 
-    static pString ToString();
+    static pString ToString(TBase::E tBase);
 
     static void Set(E v = Count);
 
