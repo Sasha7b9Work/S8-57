@@ -50,10 +50,6 @@ void Math::Limitation(T *value, T min, T max)
     {
         *value = max;
     }
-    else
-    {
-        // значения равны - ничего делать не нужно
-    }
 }
 
 

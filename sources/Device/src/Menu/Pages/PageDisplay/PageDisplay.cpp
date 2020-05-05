@@ -4,21 +4,9 @@
 #include "Settings/Settings.h"
 
 
-LinkingRShift::E &LinkingRShift::Ref()
-{
-    return set.disp.linkingRShift;
-}
-
-
 MenuAutoHide::E &MenuAutoHide::Ref()
 {
     return set.disp.menuAutoHide;
-}
-
-
-TypeGrid::E &TypeGrid::Ref()
-{
-    return set.disp.typeGrid;
 }
 
 
@@ -69,16 +57,6 @@ DEF_CHOICE_5( cRefreshFPS,                                                      
 )
 
 
-DEF_CHOICE_2( cScaleYtype,                                                                                                                                       //--- ДИСПЛЕЙ - Смещение ---
-    "Смещение",
-    "Задаёт режим удержания смещения по вертикали\n1. \"Напряжение\" - сохраняется наряжение смещения.\n2. \"Деления\" - сохраняется положение "
-    "смещения на экране.",
-    "Напряжение",
-    "Деления",
-    LinkingRShift::Ref(), &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
-)
-
-
 DEF_CHOICE_4( cType, // -V206                                                                                                                                       //--- ДИСПЛЕЙ - Сетка ---
     "Сетка",
     "Выбор типа сетки",
@@ -86,7 +64,7 @@ DEF_CHOICE_4( cType, // -V206                                                   
     "Тип 2",
     "Тип 3",
     "Тип 4",
-    TypeGrid::Ref(), &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.disp.typeGrid, &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -129,7 +107,6 @@ DEF_PAGE_7( pDisplay,                                                           
     &cSmoothing,
     &cType,
     &cRefreshFPS,
-//    &cScaleYtype,
     PageDisplay::Settings::self,
     PageName::Display, nullptr, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )

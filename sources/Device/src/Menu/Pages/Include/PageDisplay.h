@@ -110,23 +110,6 @@ struct TypeGrid
         _4,
         Count
     };
-
-    static TypeGrid::E &Ref();
-    static bool Is1() { return (Ref() == _1); };
-    static bool Is2() { return (Ref() == _2); };
-    static bool Is3() { return (Ref() == _3); };
-};
-
-// Тип привязки к смещению по вертикали
-struct LinkingRShift
-{
-    enum E
-    {
-        Voltage,      // Смещение привязано к напряжению
-        Position      // Смещение привязано к позиции
-    };
-
-    static LinkingRShift::E &Ref();
 };
 
 // Через какое время после последнего нажатия кнопки скрывать меню.
@@ -157,7 +140,6 @@ struct SettingsDisplay
     ENumSmoothing::E       enumSmoothing;         // Перечисление количества точек для скользящего фильтра.
     ENumSignalsInSec::E    enumSignalsInSec;      // Перечисление числа считываний сигнала в секунда.
     TypeGrid::E            typeGrid;              // Тип сетки
-    LinkingRShift::E       linkingRShift;         // Тип привязки к смещению по вертикали.
     uint8                  brightness;            // Яркость дисплея.
     MenuAutoHide::E        menuAutoHide;          // Через сколько времени после последнего нажатия клавиши прятать меню.
     int16                  shiftInMemory;         // \brief Показывает смещение левого края стеки относительно нулевого байта памяти в 

@@ -32,7 +32,6 @@ const Settings Settings::defaultSettings =
         ENumSmoothing::Disable,             // ENumSmoothing
         ENumSignalsInSec::_25,              // ENumSignalsInSec
         TypeGrid::_1,                       // typeGrid
-        LinkingRShift::Position,            // linkingRShift
         100,                                // brightness
         MenuAutoHide::None,                 // menuAutoHide
         370,                                // shiftInMemory

@@ -191,21 +191,17 @@ void DrawGridSignal(int left, int top, int width, int height)
 
     Color::GRID.SetAsCurrent();
 
-    if (TypeGrid::Is1())
+    if (set.disp.typeGrid == TypeGrid::_1)
     {
         DrawGridType1(left, top, right, bottom, centerX, centerY, deltaX, deltaY, stepX, stepY);
     }
-    else if (TypeGrid::Is2())
+    else if (set.disp.typeGrid == TypeGrid::_2)
     {
         DrawGridType2(left, top, right, bottom, static_cast<int>(deltaX), static_cast<int>(deltaY), static_cast<int>(stepX), static_cast<int>(stepY));
     }
-    else if (TypeGrid::Is3())
+    else if (set.disp.typeGrid == TypeGrid::_3)
     {
         DrawGridType3(left, top, right, bottom, static_cast<int>(centerX), static_cast<int>(centerY), static_cast<int>(deltaX), static_cast<int>(deltaY), static_cast<int>(stepX));
-    }
-    else
-    {
-        // для других типов сетки ничего делать не нужно
     }
 }
 
