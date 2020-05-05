@@ -11,18 +11,6 @@ CursorsSource::operator Chan::E()
 }
 
 
-FuncModeDraw::E &FuncModeDraw::Ref()
-{
-    return set.math.modeDraw;
-}
-
-
-MathFunction::E &MathFunction::Ref()
-{
-    return set.math.function;
-}
-
-
 ModeRegSet::E &ModeRegSet::Ref()
 {
     return set.math.modeRegSet;

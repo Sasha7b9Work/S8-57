@@ -153,9 +153,6 @@ struct FuncModeDraw
         Separate,
         Together
     };
-    FuncModeDraw() {}
-    static FuncModeDraw::E &Ref();
-    operator FuncModeDraw::E() { return Ref(); }
 };
 
 struct MathFunction
@@ -165,11 +162,6 @@ struct MathFunction
         Sum,
         Mul
     };
-    MathFunction() {}
-    static MathFunction::E &Ref();
-    operator MathFunction::E() { return Ref(); }
-    static bool IsSum() { return Ref() == Sum; }
-    static bool IsMul() { return Ref() == Mul; }
 };
 
 struct ModeRegSet

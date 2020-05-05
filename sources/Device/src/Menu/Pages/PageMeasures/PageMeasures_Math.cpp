@@ -15,7 +15,7 @@ static void OnPress_Screen()
     }
     else
     {
-        Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&FuncModeDraw::Ref()), 0, 2);
+        Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&set.math.modeDraw), 0, 2);
     }
 }
 
@@ -47,7 +47,7 @@ static void Draw_Screen(int x, int y)
         Draw_Screen_Separate,
         Draw_Screen_Together
     };
-    funcs[FuncModeDraw()](x, y);
+    funcs[set.math.modeDraw](x, y);
 }
 
 DEF_GRAPH_BUTTON_HINTS_3( bScreen,                                                                                                                         //--- —≈–¬»— - ‘”Õ ÷»ﬂ - ›Í‡Ì ---
@@ -62,7 +62,7 @@ DEF_GRAPH_BUTTON_HINTS_3( bScreen,                                              
 
 static void OnPress_Type()
 {
-    Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&MathFunction::Ref()), 0, 1);
+    Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&set.math.function), 0, 1);
 }
 
 static void Draw_Type_Sum(int x, int y)
@@ -81,7 +81,7 @@ static void Draw_Type(int x, int y)
     typedef void (*pFuncDraw)(int, int);
 
     const pFuncDraw funcs[2] = { Draw_Type_Sum, Draw_Type_Mul };
-    funcs[MathFunction()](x, y);
+    funcs[set.math.function](x, y);
 }
 
 static bool IsActive_Type()
