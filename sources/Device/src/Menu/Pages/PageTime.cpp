@@ -30,12 +30,6 @@ void TPos::Draw()
 }
 
 
-LinkingTShift::E &LinkingTShift::Ref()
-{
-    return set.time.linkingTShift;
-}
-
-
 int TPos::InBytes()
 {
     static const int m[][2][3] =
@@ -125,7 +119,7 @@ DEF_CHOICE_2( cShiftXtype,                                                      
     ,
     "Время",
     "Деления",
-    LinkingTShift::Ref(), &PageTime::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    set.time.linkingTShift, &PageTime::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 DEF_PAGE_4( pTime,                                                                                                                                                        //--- РАЗВЕРТКА ---

@@ -59,8 +59,6 @@ struct LinkingTShift
         Time,     // Смещение привязано к времени
         Position  // Смещение привязано к позиции
     };
-
-    static LinkingTShift::E &Ref();
 };
 
 
