@@ -87,13 +87,13 @@ void HAL_ROM::WriteBytes(uint address, const uint8 *data, int size)
 }
 
 
-void HAL_ROM::Fill(uint address, uint8 value, uint size)
+void HAL_ROM::Fill(uint address, uint8 value, int size)
 {
     CLEAR_FLASH_FLAGS;
 
     HAL_FLASH_Unlock();
 
-    for(uint i = 0; i < size; i++)
+    for(int i = 0; i < size; i++)
     {
         HAL_FLASH_Program(TYPEPROGRAM_BYTE, address, value);
         address++;
