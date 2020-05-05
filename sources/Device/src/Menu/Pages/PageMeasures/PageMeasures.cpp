@@ -41,12 +41,6 @@ CursorsActive::E &CursorsActive::Ref()
 }
 
 
-CursorsLookMode::E &CursorsLookMode::Ref(Chan::E ch)
-{
-    return set.curs.lookMode[ch];
-}
-
-
 CursorsMovement::E &CursorsMovement::Ref()
 {
     return set.curs.movement;

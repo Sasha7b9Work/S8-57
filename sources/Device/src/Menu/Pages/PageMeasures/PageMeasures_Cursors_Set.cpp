@@ -108,7 +108,7 @@ void PageCursorsMeasures::Set::OnPress_T()
         IncCursCntrlT(CursorsSource());
     }
 
-    CursorsActive::Set(CursorsActive::T);
+    set.curs.active = CursorsActive::T;
 }
 
 static void Draw_T(int x, int y)
@@ -204,12 +204,12 @@ static void Draw_U_enableBoth(int x, int y)
 
 void PageCursorsMeasures::Set::OnPress_U()
 {
-    if (CursorsActive::IsU() || CursorsControl::IsDisabledU())
+    if ((set.curs.active == CursorsActive::U) || CursorsControl::IsDisabledU())
     {
         IncCursCntrlU(CursorsSource());
     }
 
-    CursorsActive::Set(CursorsActive::U);
+    set.curs.active = CursorsActive::U;
 }
 
 static void Draw_U(int x, int y)
@@ -221,7 +221,7 @@ static void Draw_U(int x, int y)
     }
     else
     {
-        if (!CursorsActive::IsU())
+        if (set.curs.active != CursorsActive::U)
         {
             Draw_U_disableBoth(x, y);
         }
@@ -326,7 +326,7 @@ bool PageCursorsMeasures::Set::HandlerKey(const KeyEvent &event) //-V2506
 
     float value = event.IsIncrease() ? 1.0F : -1.0F;
 
-    if (CursorsActive::IsU() && (event.IsArrowUp() || event.IsArrowDown()))
+    if ((set.curs.active == CursorsActive::U) && (event.IsArrowUp() || event.IsArrowDown()))
     {
         if (CursorsMovement::IsPercents())
         {
@@ -455,11 +455,11 @@ void PageCursorsMeasures::Set::UpdateCursorsForLook()
     {
         SetCursorU(source, 1, Measure::CalculateCursorU(source, CursorsMeasurements::PosT(source, 1)));
     }
-    if (CursorsActive::IsU() && ((set.curs.lookMode[ChanA] == CursorsLookMode::Time) || (set.curs.lookMode[ChanA] == CursorsLookMode::Both)))
+    if ((set.curs.active == CursorsActive::U) && ((set.curs.lookMode[ChanA] == CursorsLookMode::Time) || (set.curs.lookMode[ChanA] == CursorsLookMode::Both)))
     {
         SetCursorT(source, 0, Measure::CalculateCursorT(source, set.curs.posCurU[source][0], 0));
     }
-    if (CursorsActive::IsU() && ((set.curs.lookMode[ChanB] == CursorsLookMode::Time) || (set.curs.lookMode[ChanB] == CursorsLookMode::Both)))
+    if ((set.curs.active == CursorsActive::U) && ((set.curs.lookMode[ChanB] == CursorsLookMode::Time) || (set.curs.lookMode[ChanB] == CursorsLookMode::Both)))
     {
         SetCursorT(source, 1, Measure::CalculateCursorT(source, set.curs.posCurU[source][1], 1));
     }
@@ -483,6 +483,6 @@ void PageCursorsMeasures::Set::SetCursorT(Chan::E ch, int numCur, float pos)
 bool PageCursorsMeasures::Set::IsRegSetActiveOnCursors()
 {
     return ((Menu::OpenedItem() == PageCursorsMeasures::Set::self) &&
-        ((CursorsActive::IsU() && CursorsControl::IsDisabledU()) ||
+        (((set.curs.active == CursorsActive::U) && CursorsControl::IsDisabledU()) ||
         (CursorsActive::IsT() && CursorsControl::IsDisabledT())));
 }

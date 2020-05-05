@@ -72,8 +72,6 @@ struct CursorsLookMode
         Time,      // Курсоры следят за временем автоматически.
         Both       // Курсоры следят за временем и напряжением, в зависимости от того, какой курсоры вращали последним.
     };
-
-    static CursorsLookMode::E &Ref(Chan::E);
 };
 
 // Какие курсоры сейчас активны. Какие активны, те и будут перемещаться по вращению ручки УСТАНОВКА.
@@ -88,8 +86,6 @@ struct CursorsActive
 
     static CursorsActive::E &Ref();
     static bool IsT()    { return Ref() == T; }
-    static bool IsU()    { return Ref() == U; }
-    static void Set(E v) { Ref() = v; }
 };
 
 

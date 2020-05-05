@@ -155,11 +155,11 @@ static void UpdateCursorsForLook()
     {
         //SetCursorU(source, 1, Processing::CalculateCursorU(source, CURsT_POS(source, 1)));
     }
-    if (CursorsActive::IsU() && ((set.curs.lookMode[ChanA] == CursorsLookMode::Time) || (set.curs.lookMode[ChanA] == CursorsLookMode::Both)))
+    if ((set.curs.active == CursorsActive::U) && ((set.curs.lookMode[ChanA] == CursorsLookMode::Time) || (set.curs.lookMode[ChanA] == CursorsLookMode::Both)))
     {
         //SetCursorT(source, 0, Processing::CalculateCursorT(source, CURsU_POS(source, 0), 0));
     }
-    if (CursorsActive::IsU() && ((set.curs.lookMode[ChanB] == CursorsLookMode::Time) || (set.curs.lookMode[ChanB] == CursorsLookMode::Both)))
+    if ((set.curs.active == CursorsActive::U) && ((set.curs.lookMode[ChanB] == CursorsLookMode::Time) || (set.curs.lookMode[ChanB] == CursorsLookMode::Both)))
     {
         //SetCursorT(source, 1, Processing::CalculateCursorT(source, CURsU_POS(source, 1), 1));
     }
