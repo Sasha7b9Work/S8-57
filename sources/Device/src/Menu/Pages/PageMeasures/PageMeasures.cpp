@@ -41,12 +41,6 @@ bool MeasuresOnDisplay::IsVertical()
 }
 
 
-CursorsMovement::E &CursorsMovement::Ref()
-{
-    return set.curs.movement;
-}
-
-
 CursorsControl::E &CursorsControl::RefU(Chan::E ch)
 {
     return set.curs.cntrlU[ch];

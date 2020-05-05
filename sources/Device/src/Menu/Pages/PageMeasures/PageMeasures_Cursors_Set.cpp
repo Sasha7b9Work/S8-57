@@ -291,12 +291,12 @@ static void Draw_Movement_Points(int x, int y)
 
 static void OnPress_Movement()
 {
-    Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&CursorsMovement::Ref()), 0, 1);
+    Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&set.curs.movement), 0, 1);
 }
 
 static void Draw_Movement(int x, int y)
 {
-    if (CursorsMovement::IsPercents())
+    if (set.curs.movement == CursorsMovement::Percents)
     {
         Draw_Movement_Percents(x, y);
     }
@@ -328,7 +328,7 @@ bool PageCursorsMeasures::Set::HandlerKey(const KeyEvent &event) //-V2506
 
     if ((set.curs.active == CursorsActive::U) && (event.IsArrowUp() || event.IsArrowDown()))
     {
-        if (CursorsMovement::IsPercents())
+        if (set.curs.movement == CursorsMovement::Percents)
         {
             value *= set.curs.deltaU100percents[CursorsSource()] / 100.0F;
         }
@@ -347,7 +347,7 @@ bool PageCursorsMeasures::Set::HandlerKey(const KeyEvent &event) //-V2506
     }
     else if((set.curs.active == CursorsActive::T) && (event.IsArrowLeft() || event.IsArrowRight()))
     {
-        if (CursorsMovement::IsPercents())
+        if (set.curs.movement == CursorsMovement::Percents)
         {
             value *= set.curs.deltaT100percents[CursorsSource()] / 100.0F;
         }
@@ -423,7 +423,7 @@ void PageCursorsMeasures::Set::SetShiftCursPosU(Chan::E ch, int numCur, float de
 {
     set.curs.posCurU[ch][numCur] = Math::LimitationRet(set.curs.posCurU[ch][numCur] - delta, 0.0F, MAX_POS_U);
 
-    if (CursorsMovement::IsPixels())                        // ≈сли перемещение по пиксел€м, то нужно привести к пиксельной сетке экрана
+    if (set.curs.movement == CursorsMovement::Pixels)                        // ≈сли перемещение по пиксел€м, то нужно привести к пиксельной сетке экрана
     {
         // \todo
     }
@@ -436,7 +436,7 @@ void PageCursorsMeasures::Set::SetShiftCursPosT(Chan::E ch, int numCur, float de
     // CURsT_POS(ch, numCur) = LimitationFloat(CURsT_POS(ch, numCur) + delta, 0, MAX_POS_T);   
     CursorsMeasurements::SetCursPosT_temp(ch, numCur, Math::LimitationRet(CursorsMeasurements::PosT(ch, numCur) + delta, 0.0F, MAX_POS_T));
 
-    if (CursorsMovement::IsPixels())         // ≈сли перемещение по пиксел€м, то нужно привести к пиксельной сетке экрана
+    if (set.curs.movement == CursorsMovement::Pixels)         // ≈сли перемещение по пиксел€м, то нужно привести к пиксельной сетке экрана
     {
         // \todo
     }
