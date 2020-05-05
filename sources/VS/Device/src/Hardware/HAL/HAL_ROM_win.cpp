@@ -58,9 +58,9 @@ void HAL_ROM::WriteBytes(uint address, const uint8 *buffer, int size)
 }
 
 
-void HAL_ROM::Fill(uint address, uint8 value, uint size)
+void HAL_ROM::Fill(uint address, uint8 value, int size)
 {
-    for(uint i = 0; i < size; i++)
+    for(int i = 0; i < size; i++)
     {
         *reinterpret_cast<uint8 *>(address) = value;
         address++;
