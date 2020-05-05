@@ -223,8 +223,6 @@ private:
     static void DrawRight();
 
     static const float absStep[TBase::Count];
-
-    TShift() { };
 };
 
 struct Trig
