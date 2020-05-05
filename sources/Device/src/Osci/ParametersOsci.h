@@ -282,7 +282,7 @@ struct TrigLevel
     // Однократно найти уровень синхронизации
     static void Find();
 
-    static void Draw(Chan::E ch);
+    static void Draw();
 
 private:
     static const int16 MIN = -480;
