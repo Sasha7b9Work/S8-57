@@ -171,7 +171,7 @@ void DisplayOsci::PainterData::DrawSpectrum()
     VLine(Grid::MathBottom() - Grid::ChannelBottom()).Draw(Grid::Right(), Grid::ChannelBottom(), Color::BACK);
     
     
-    if (ModeWork::IsDir())
+    if (set.mem.modeWork == ModeWork::Dir)
     {
         uint numPoints = DS->BytesInChannel();
     

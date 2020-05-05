@@ -58,7 +58,7 @@ void DisplayOsci::HiPart::Draw()
 
     Separator::Draw(x + 1, y0);
 
-    if (ModeWork::IsDir())
+    if (set.mem.modeWork == ModeWork::Dir)
     {
         char mesFreq[20] = "\x7c=";
         float freq = FreqMeter::GetFreq();
@@ -134,7 +134,7 @@ static int DrawMainParameters(int _x, int _y)
 
     buffer[0] = 0;
 
-    if (ModeWork::IsDir())
+    if (set.mem.modeWork == ModeWork::Dir)
     {
         pString source[3] = { "1", "2", "\x82" };
         std::snprintf(buffer, 100, "с\xa5\x10%s", source[set.trig.source]);
@@ -162,7 +162,7 @@ static int DrawMainParameters(int _x, int _y)
         "\xb3\xb4",
         "\xb1\xb2"
     };
-    if (ModeWork::IsDir())
+    if (set.mem.modeWork == ModeWork::Dir)
     {
         std::snprintf(buffer, SIZE, "\xa5\x10%s\x10\xa5\x10%s\x10\xa5\x10", couple[set.trig.input], polar[set.trig.polarity]);
         String(buffer).Draw(x + 18, y1);
@@ -178,7 +178,7 @@ static int DrawMainParameters(int _x, int _y)
         '\xa0',
         '\xb0'
     };
-    if (ModeWork::IsDir())
+    if (set.mem.modeWork == ModeWork::Dir)
     {
         std::snprintf(buffer, 100, "\xa5\x10%c", mode[set.trig.startMode]);
         String(buffer).Draw(x + 63, y1);
@@ -192,7 +192,7 @@ static int DrawMainParameters(int _x, int _y)
 
     Separator::Draw(x - 2, y0 - 1);
 
-    if (ModeWork::IsDir())
+    if (set.mem.modeWork == ModeWork::Dir)
     {
         WriteStringAndNumber("накопл", x, y0 - 4, ENumAccum().Number());
         WriteStringAndNumber("усредн", x, y1, ENumAverage().Number());
@@ -263,7 +263,7 @@ static void DrawTime(int x, int y)
 
     Color::FILL.SetAsCurrent();
 
-    if (ModeWork::IsROM() || ModeWork::IsRAM())
+    if ((set.mem.modeWork == ModeWork::ROM) || ModeWork::IsRAM())
     {
         if (DS)
         {
@@ -324,7 +324,7 @@ void DisplayOsci::HiPart::DrawRightPart(int x0, int y0)
         "ВНТР"
     };
 
-    if (!ModeWork::IsDir())
+    if (set.mem.modeWork != ModeWork::Dir)
     {
         x += 18;
 

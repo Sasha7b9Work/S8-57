@@ -52,12 +52,13 @@ static void OnOpenClose_RAM(bool enter)
     {
         RUN_FPGA_BEFORE_SB = Osci::IsRunning() ? 1U : 0U;
         Osci::Stop();
-        ModeWork::SetRAM();
+        set.mem.modeWork = ModeWork::RAM;
         RAM::currentSignal = 0;
     }
     else
     {
-        ModeWork::SetDir();
+        set.mem.modeWork = ModeWork::Dir;
+
         if (RUN_FPGA_BEFORE_SB)
         {
             Osci::Start(true);
