@@ -361,9 +361,9 @@ static int DeltaVforLineGrid()
     {
         switch (set.meas.number)
         {
-        case MeasuresOnDisplay::_1_5: result = MeasuresSource::IsBoth() ? 55 : 59; break;
-        case MeasuresOnDisplay::_2_5: result = MeasuresSource::IsBoth() ? 69 : 51; break;
-        case MeasuresOnDisplay::_3_5: result = MeasuresSource::IsBoth() ? 54 : 68; break;
+        case MeasuresOnDisplay::_1_5: result = (set.meas.source == MeasuresSource::A_B) ? 55 : 59; break;
+        case MeasuresOnDisplay::_2_5: result = (set.meas.source == MeasuresSource::A_B) ? 69 : 51; break;
+        case MeasuresOnDisplay::_3_5: result = (set.meas.source == MeasuresSource::A_B) ? 54 : 68; break;
         case MeasuresOnDisplay::_1:
         case MeasuresOnDisplay::_2:
         case MeasuresOnDisplay::_6_1:

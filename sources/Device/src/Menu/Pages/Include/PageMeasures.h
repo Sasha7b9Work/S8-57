@@ -4,9 +4,9 @@
 
 
 // ¬ыводить автоматические измерени€ по каналу A
-#define VIEW_MEASURES_A                 (setA.enabled && (MeasuresSource::IsA() || MeasuresSource::IsBoth()))
+#define VIEW_MEASURES_A                 (setA.enabled && ((set.meas.source == MeasuresSource::A) || (set.meas.source == MeasuresSource::A_B)))
 // ¬ыводить автоматические измерени€ по каналу B
-#define VIEW_MEASURES_B                 (setB.enabled && (MeasuresSource::IsB() || MeasuresSource::IsBoth()))
+#define VIEW_MEASURES_B                 (setB.enabled && ((set.meas.source == MeasuresSource::B) || (set.meas.source == MeasuresSource::A_B)))
 
 
 // —колько автоматических измерений помещаетс€ на экран
@@ -35,10 +35,6 @@ struct MeasuresSource
         B,
         A_B
     };
-
-    static bool IsA();
-    static bool IsB();
-    static bool IsBoth();
 };
 
 // —жимать ли сигналы при выводе измерений.

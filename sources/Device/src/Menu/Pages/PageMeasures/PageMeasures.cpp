@@ -23,24 +23,6 @@ ModeRegSet::E &ModeRegSet::Ref()
 }
 
 
-bool MeasuresSource::IsA()
-{
-    return (set.meas.source == MeasuresSource::A);
-}
-
-
-bool MeasuresSource::IsB()
-{
-    return (set.meas.source == MeasuresSource::B);
-}
-
-
-bool MeasuresSource::IsBoth()
-{
-    return (set.meas.source == MeasuresSource::A_B);
-}
-
-
 bool MeasuresModeViewSignals::IsCompress()
 {
     return (set.meas.modeViewSignals == MeasuresModeViewSignals::Compress);
