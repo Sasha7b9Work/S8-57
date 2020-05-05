@@ -22,12 +22,6 @@ uint ENumPointsFPGA::BytesInChannel()
 }
 
 
-TypeSignalROM::E &TypeSignalROM::Ref()
-{
-    return set.mem.typeSignalROM;
-}
-
-
 ENumPointsFPGA::E &ENumPointsFPGA::Ref()
 {
     return set.mem.enumPoints;

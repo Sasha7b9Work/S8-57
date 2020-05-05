@@ -90,11 +90,6 @@ struct TypeSignalROM
         Both,
         Count
     };
-
-    static TypeSignalROM::E &Ref();
-    static bool IsRecorded() { return Ref() == Recorded; }
-    static bool IsCurrent()  { return Ref() == Current; }
-    static bool IsBoth()     { return Ref() == Both; }
 };
 
 #define MAX_SYMBOLS_IN_FILE_NAME 35
