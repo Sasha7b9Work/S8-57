@@ -175,11 +175,11 @@ void Recorder::ScaleX::Change(int delta)
     {
         if (delta > 0)
         {
-            ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&Recorder::ScaleX::Ref()), static_cast<uint8>(Recorder::ScaleX::Count - 1));
+            ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&set.rec.scaleX), static_cast<uint8>(Recorder::ScaleX::Count - 1));
         }
         else
         {
-            ::Math::LimitationDecrease<uint8>(reinterpret_cast<uint8 *>(&Recorder::ScaleX::Ref()), 0);
+            ::Math::LimitationDecrease<uint8>(reinterpret_cast<uint8 *>(&set.rec.scaleX), 0);
         }
 
         Load();
@@ -208,7 +208,7 @@ pString Recorder::ScaleX::ToString()
         StructScaleX("10\x10ñ")
     };
 
-    return scales[Ref()].name;
+    return scales[set.rec.scaleX].name;
 }
 
 
@@ -230,7 +230,7 @@ uint Recorder::ScaleX::BytesToSec() const
         8
     };
 
-    return bytes[Ref()].value;
+    return bytes[set.rec.scaleX].value;
 }
 
 
@@ -252,7 +252,7 @@ uint Recorder::ScaleX::TimeForPointMS()
         500
     };
 
-    return bytes[Ref()].value;
+    return bytes[set.rec.scaleX].value;
 }
 
 #ifdef WIN32
@@ -273,7 +273,7 @@ void Recorder::ScaleX::Load()
         BIN_U8(01011110)   // -V2501  // 10s
     };
 
-    HAL_BUS::FPGA::Write8(WR::TBASE, values[Ref()]);
+    HAL_BUS::FPGA::Write8(WR::TBASE, values[set.rec.scaleX]);
 
     if (Recorder::IsRunning())
     {
@@ -298,10 +298,4 @@ bool Recorder::IsEnabledB()
 bool Recorder::IsEnabledSensor()
 {
     return set.rec.enSensor;
-}
-
-
-Recorder::ScaleX::E &Recorder::ScaleX::Ref()
-{
-    return set.rec.scaleX;
 }

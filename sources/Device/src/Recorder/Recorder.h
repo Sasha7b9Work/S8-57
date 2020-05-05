@@ -62,8 +62,6 @@ public:
             Count
         };
         ScaleX() {}
-        static ScaleX::E &Ref();
-        operator ScaleX::E() { return Ref(); }
         static void Load();
         static void Change(int delta);
         static pString ToString();
