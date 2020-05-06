@@ -119,9 +119,6 @@ struct CursorsControl
         Disabled    // никаким
     };
 
-    static CursorsControl::E &RefU(Chan::E ch);
-    static CursorsControl::E &RefT(Chan::E ch);
-
     static bool IsDisabledT();
     static bool IsEnabled1T();
     static bool IsEnabled2T();

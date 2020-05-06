@@ -17,51 +17,39 @@ bool MeasuresOnDisplay::IsVertical()
 }
 
 
-CursorsControl::E &CursorsControl::RefU(Chan::E ch)
-{
-    return S_CURS_CONTROL_U(ch);
-}
-
-
-CursorsControl::E &CursorsControl::RefT(Chan::E ch)
-{
-    return S_CURS_CONTROL_T(ch);
-}
-
-
 bool CursorsControl::IsDisabledT()
 {
-    return RefT(S_CURS_SOURCE) == Disabled;
+    return S_CURS_CONTROL_T(S_CURS_SOURCE) == Disabled;
 }
 
 
 bool CursorsControl::IsEnabled1T()
 {
-    return (RefT(S_CURS_SOURCE) == _1) || (RefT(S_CURS_SOURCE) == Both);
+    return (S_CURS_CONTROL_T(S_CURS_SOURCE) == _1 || S_CURS_CONTROL_T(S_CURS_SOURCE) == Both);
 }
 
 
 bool CursorsControl::IsEnabled2T()
 {
-    return (RefT(S_CURS_SOURCE) == _2) || (RefT(S_CURS_SOURCE) == Both);
+    return (S_CURS_CONTROL_T(S_CURS_SOURCE) == _2 || S_CURS_CONTROL_T(S_CURS_SOURCE) == Both);
 }
 
 
 bool CursorsControl::IsDisabledU()
 {
-    return RefU(S_CURS_SOURCE) == Disabled;
+    return S_CURS_CONTROL_U(S_CURS_SOURCE) == Disabled;
 }
 
 
 bool CursorsControl::IsEnabled1U()
 {
-    return (RefU(S_CURS_SOURCE) == _1) || (RefU(S_CURS_SOURCE) == Both);
+    return (S_CURS_CONTROL_U(S_CURS_SOURCE) == _1 || S_CURS_CONTROL_U(S_CURS_SOURCE) == Both);
 }
 
 
 bool CursorsControl::IsEnabled2U()
 {
-    return (RefU(S_CURS_SOURCE) == _2) || (RefU(S_CURS_SOURCE) == Both);
+    return (S_CURS_CONTROL_U(S_CURS_SOURCE) == _2 || S_CURS_CONTROL_U(S_CURS_SOURCE) == Both);
 }
 
 

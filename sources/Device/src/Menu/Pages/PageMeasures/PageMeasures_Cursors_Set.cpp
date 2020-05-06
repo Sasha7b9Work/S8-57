@@ -129,7 +129,7 @@ static void Draw_T(int x, int y)
             Chan::E source = S_CURS_SOURCE;
 
             CalculateConditions(static_cast<int16>(CursorsMeasurements::PosT(source, 0)), static_cast<int16>(CursorsMeasurements::PosT(source, 1)), 
-                CursorsControl::RefT(source), &condLeft, &condDown);
+                                S_CURS_CONTROL_T(source), &condLeft, &condDown);
 
             if (condLeft && condDown)
             {
@@ -230,7 +230,7 @@ static void Draw_U(int x, int y)
             bool condTop = false, condDown = false;
 
             CalculateConditions(static_cast<int16>(CursorsMeasurements::PosU(source, 0)), static_cast<int16>(CursorsMeasurements::PosU(source, 1)),
-                CursorsControl::RefU(source), &condTop, &condDown);
+                                S_CURS_CONTROL_U(source), &condTop, &condDown);
 
             if (condTop && condDown)
             {
@@ -402,13 +402,13 @@ void PageCursorsMeasures::Set::SetCursSource(Chan::E ch)
 
 void PageCursorsMeasures::Set::IncCursCntrlU(Chan::E ch)
 {
-    Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&CursorsControl::RefU(ch)), 0, 3);
+    Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&S_CURS_CONTROL_U(ch)), 0, 3);
 }
 
 
 void PageCursorsMeasures::Set::IncCursCntrlT(Chan::E ch)
 {
-    Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&CursorsControl::RefT(ch)), 0, 3);
+    Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&S_CURS_CONTROL_T(ch)), 0, 3);
 }
 
 
