@@ -357,7 +357,7 @@ static int DeltaVforLineGrid()
 {
     int result = 49;
 
-    if (set.meas.show && MeasuresModeViewSignals::IsCompress())
+    if (S_MEAS_SHOW && MeasuresModeViewSignals::IsCompress())
     {
         switch (set.meas.number)
         {

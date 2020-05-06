@@ -132,7 +132,7 @@ static bool picIsCalculating[2] = {false, false};
 
 void AutoMeasurements::CalculateMeasures()
 {
-    if(!set.meas.show || !isSet)
+    if(!S_MEAS_SHOW || !isSet)
     {
         return;
     }

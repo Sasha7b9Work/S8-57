@@ -17,7 +17,7 @@ static int GetTopTable();
 
 void TableMeasures::Draw()
 {
-    if (!set.meas.show)
+    if (!S_MEAS_SHOW)
     {
         return;
     }
@@ -143,7 +143,7 @@ int TableMeasures::GetDeltaGridLeft()
 {
     int result = 0;
 
-    if (set.meas.show && MeasuresModeViewSignals::IsCompress())
+    if (S_MEAS_SHOW && MeasuresModeViewSignals::IsCompress())
     {
         switch (set.meas.number)
         {

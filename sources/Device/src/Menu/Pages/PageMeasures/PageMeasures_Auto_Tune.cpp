@@ -32,7 +32,7 @@ DEF_GRAPH_BUTTON( bSettings,                                                    
 
 static bool IsActive_Tune()
 {
-    return set.meas.show;
+    return S_MEAS_SHOW;
 }
 
 static bool HandlerKey_Tune(const KeyEvent &event)

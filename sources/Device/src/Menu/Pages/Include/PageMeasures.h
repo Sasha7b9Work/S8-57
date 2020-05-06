@@ -57,9 +57,12 @@ struct MeasuresModeViewSignals
 };
 
 
+#define S_MEAS_SHOW     (set.meas._show)
+
+
 struct SettingsAutoMeasures
 {
-    bool                        show;              // Показывать ли измерения.
+    bool                        _show;              // Показывать ли измерения.
     MeasuresOnDisplay::E        number;            // Сколько измерений выводить.
     MeasuresSource::E           source;            // Для каких каналов выводить измерения.
     MeasuresModeViewSignals::E  modeViewSignals;   // Сжимать ли сигналы при выводе измерений.

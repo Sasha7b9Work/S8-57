@@ -11,13 +11,13 @@ DEF_CHOICE_2( cIsShow,                                                          
     "Выводить или не выводить измерения на экран",
     "Нет",
     "Да",
-    set.meas.show, &PageAutoMeasures::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    S_MEAS_SHOW, &PageAutoMeasures::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
 static bool IsActive_NumberChannels()
 {
-    return set.meas.show;
+    return S_MEAS_SHOW;
 }
 
 DEF_CHOICE_7( cNumber,                                                                                                                             //--- ИЗМЕРЕНИЯ - АВТОМАТ - Количество ---
