@@ -427,7 +427,7 @@ void TrigLevel::Find()
 
         int deltaValue = static_cast<int>(VALUE::AVE) - (max + min) / 2;
 
-        int deltaRShift = set.ch[ch].rShift;
+        int deltaRShift = S_RSHIFT(ch);
 
         float k = 200 / 125.0F;     // Этот коэффициент получается так, что на верхей границе экрана лежит 125-я точка сигнала от центра экрана (нулевого значение),
                                     // а маркер в этой точке смещён на 200 единиц относительно цента экрана
@@ -511,7 +511,7 @@ void TrigLevel::Draw()
 
     float scale = 1.0F / ((MAX - MIN) / 2.4F / Grid::Height());
 
-    int y = Grid::ChannelCenterHeight() - static_cast<int>((set.trig.level[ch] + set.ch[ch].rShift) * scale);
+    int y = Grid::ChannelCenterHeight() - static_cast<int>((set.trig.level[ch] + S_RSHIFT(ch)) * scale);
 
     int x = Grid::Right();
     int xSymbol = Grid::Right() + 5;
@@ -547,7 +547,7 @@ void RShift::Draw(Chan::E ch)
 {
     Color::CHAN[ch].SetAsCurrent();
 
-    int delta = set.ch[ch].rShift / STEP;
+    int delta = S_RSHIFT(ch) / STEP;
 
     if(set.fft.enabled)
     {
@@ -589,7 +589,7 @@ int16 RShift::ToRel(float rShiftAbs, Range::E range)
 
 bool RShift::ChangeMath(int delta)
 {
-    int16 prevRShift = set.math.rShift;
+    int16 prevRShift = S_RSHIFT_MATH;
     int16 rShift = prevRShift;
 
     if (delta > 0)
@@ -603,7 +603,7 @@ bool RShift::ChangeMath(int delta)
             {
                 rShift = 0;
             }
-            set.math.rShift = rShift;
+            S_RSHIFT_MATH = rShift;
             return true;
         }
     }
@@ -617,7 +617,7 @@ bool RShift::ChangeMath(int delta)
             {
                 rShift = 0;
             }
-            set.math.rShift = rShift;
+            S_RSHIFT_MATH = rShift;
             return true;
         }
     }

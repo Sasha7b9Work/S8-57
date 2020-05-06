@@ -2,6 +2,12 @@
 #include "Menu/MenuItems.h"
 
 
+#define S_RSHIFT(channel)    set.ch[channel].rShift
+#define S_RSHIFT_A           S_RSHIFT(0)
+#define S_RSHIFT_B           S_RSHIFT(1)
+#define S_RSHIFT_MATH        set.math.rShift
+
+
 struct SettingsChannel
 { //-V802
     int16         rShift;    // Сдвиг канала по вертикали

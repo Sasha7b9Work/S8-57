@@ -22,8 +22,8 @@ void DataSettings::Fill()
     Lval_RANGE_A(this)   = setA.range;
     Lval_RANGE_B(this)   = setB.range;
 
-    RSHIFT_A(this)       = setA.rShift;
-    RSHIFT_B(this)       = setB.rShift;
+    RSHIFT_A(this)       = S_RSHIFT_A;
+    RSHIFT_B(this)       = S_RSHIFT_B;
 
     Lval_TBASE(this)     = set.time.base;
     TSHIFT(this)         = set.time.shift;

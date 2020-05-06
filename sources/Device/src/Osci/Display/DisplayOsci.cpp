@@ -189,7 +189,7 @@ void DisplayOsci::DrawingValueParameter::Draw()
             char *channels[2] = { "1", "2" };
             char *sCH = channels[ch];
             Color color = Color::CHAN[ch];
-            String("M%s: %s %s", sCH, Range::ToString(ch, DIVIDERS(ch)), RShift::ToString(set.ch[ch].rShift, set.ch[ch].range, DIVIDERS(ch)).c_str()).Draw(x + 7, y + 5, color);
+            String("M%s: %s %s", sCH, Range::ToString(ch, DIVIDERS(ch)), RShift::ToString(S_RSHIFT(ch), set.ch[ch].range, DIVIDERS(ch)).c_str()).Draw(x + 7, y + 5, color);
             break;
         }
 

@@ -52,13 +52,13 @@ static bool NeedLoadRShift(Chan::E ch)
     static Range::E prevRanges[Chan::Count] = { Range::Count, Range::Count };
     static int16 prevShift[Chan::Count] = { -1000, -1000 };
 
-    if((prevShift[ch] == set.ch[ch].rShift) && (prevRanges[ch] == set.ch[ch].range))
+    if((prevShift[ch] == S_RSHIFT(ch)) && (prevRanges[ch] == set.ch[ch].range))
     {
         result = false;
     }
 
     prevRanges[ch] = set.ch[ch].range;
-    prevShift[ch] = set.ch[ch].rShift;
+    prevShift[ch] = S_RSHIFT(ch);
 
     return result;
 }
@@ -75,7 +75,7 @@ void RShift::Load(Chan::E ch)
 
     static const uint16 mask[2] = { 0x2000, 0x6000 };
 
-    int16 shift = set.ch[ch].rShift + HARDWARE_ZERO;
+    int16 shift = S_RSHIFT(ch) + HARDWARE_ZERO;
 
     shift += setNRST.exShift[ch][set.ch[ch].range];
 
@@ -247,7 +247,7 @@ void Range::Change(Chan::E ch, int16 delta)
 void RShift::Set(Chan::E ch, int16 rShift)
 {
     ::Math::Limitation(&rShift, MIN, MAX);
-    set.ch[ch].rShift = rShift;
+    S_RSHIFT(ch) = rShift;
     Load(ch);
     DisplayOsci::DrawingValueParameter::Enable((ch == ChanA) ? DisplayOsci::DrawingValueParameter::RShiftA : DisplayOsci::DrawingValueParameter::RShiftB);
 }
@@ -255,7 +255,7 @@ void RShift::Set(Chan::E ch, int16 rShift)
 
 void RShift::Change(Chan::E ch, int16 delta)
 {
-    ::Math::AdditionThisLimitation<int16>(&set.ch[ch].rShift, STEP * delta, MIN, MAX);
+    ::Math::AdditionThisLimitation<int16>(&S_RSHIFT(ch), STEP * delta, MIN, MAX);
     RShift::Load(ch);
     DisplayOsci::DrawingValueParameter::Enable((ch == ChanA) ? DisplayOsci::DrawingValueParameter::RShiftA : DisplayOsci::DrawingValueParameter::RShiftB);
 }

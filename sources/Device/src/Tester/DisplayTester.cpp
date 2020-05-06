@@ -128,7 +128,7 @@ String DisplayTester::ValueForStep(int step)
 
 void DisplayTester::DrawParametersChannel(Chan::E ch, int x, int y)
 {
-    int16 rShift = set.ch[ch].rShift;
+    int16 rShift = S_RSHIFT(ch);
     Tester::Scale scale(set.ch[ch].range, ch);
     Tester::Shift shift(rShift, ch);
 
