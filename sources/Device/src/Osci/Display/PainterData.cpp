@@ -41,7 +41,7 @@ void DisplayOsci::PainterData::DrawCurrent()
         return;
     }
 
-    if(set.disp.lastAffectedChannel == ChanA)
+    if(S_DISP_LAST_AFFECTED_CHANNEL_IS_A)
     {
         DrawChannel(ChanB);
         DrawChannel(ChanA);
@@ -190,7 +190,7 @@ void DisplayOsci::PainterData::DrawSpectrum()
         }
         else
         {
-            if (set.disp.lastAffectedChannel == ChanA)
+            if (S_DISP_LAST_AFFECTED_CHANNEL_IS_A)
             {
                 DrawSpectrum(OUT_B, numPoints, ChanB);
                 DrawSpectrum(OUT_A, numPoints, ChanA);

@@ -345,15 +345,15 @@ void Range::LoadBoth()
     Bandwidth::Load(ChanA);
     Bandwidth::Load(ChanB);
 
-    if(set.disp.lastAffectedChannel == ChanB)
+    if(S_DISP_LAST_AFFECTED_CHANNEL_IS_A)
     {
-        RShift::Load(ChanA);
         RShift::Load(ChanB);
+        RShift::Load(ChanA);
     }
     else
     {
-        RShift::Load(ChanB);
         RShift::Load(ChanA);
+        RShift::Load(ChanB);
     }
 
     Osci::Restart();
@@ -441,15 +441,15 @@ void TrigLevel::Find()
 
 void RShift::DrawBoth()
 {
-    if(set.disp.lastAffectedChannel == ChanB)
+    if(S_DISP_LAST_AFFECTED_CHANNEL_IS_A)
     {
-        RShift::Draw(ChanA);
         RShift::Draw(ChanB);
+        RShift::Draw(ChanA);
     }
     else
     {
-        RShift::Draw(ChanB);
         RShift::Draw(ChanA);
+        RShift::Draw(ChanB);
     }
 }
 

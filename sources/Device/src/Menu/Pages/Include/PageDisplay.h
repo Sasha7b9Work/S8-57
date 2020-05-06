@@ -144,8 +144,10 @@ struct MenuAutoHide
 };
 
 
-#define S_DISP_BRIGHTNESS       (set.disp.brightness)
-#define S_DISP_SHIFT_IN_MEMORY  (set.disp.shiftInMemory)
+#define S_DISP_BRIGHTNESS                   (set.disp.brightness)
+#define S_DISP_SHIFT_IN_MEMORY              (set.disp.shiftInMemory)
+#define S_DISP_LAST_AFFECTED_CHANNEL        (set.disp.lastAffectedChannel)
+#define S_DISP_LAST_AFFECTED_CHANNEL_IS_A   (S_DISP_LAST_AFFECTED_CHANNEL == Chan::A)
 
 struct SettingsDisplay
 { //-V802
