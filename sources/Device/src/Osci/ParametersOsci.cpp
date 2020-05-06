@@ -161,25 +161,25 @@ void Osci::LoadHoldfOff()
 
 void TBase::Change(int delta)
 {
-    TBase::E old = set.time.base;
+    TBase::E old = S_TIME_BASE;
 
     if (delta > 0)
     {
-        ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&set.time.base), static_cast<uint8>(TBase::Count - 1));
+        ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&S_TIME_BASE), static_cast<uint8>(TBase::Count - 1));
     }
     else
     {
         if (PeakDetMode().IsEnabled() &&                            // Если вклюён режим пикового детектора
-            set.time.base == TBase::MIN_PEAK_DET)                   // и установлен масштаб по времени, соответствующий минмальному в режиме пикового детектора :
+            S_TIME_BASE == TBase::MIN_PEAK_DET)                     // и установлен масштаб по времени, соответствующий минмальному в режиме пикового детектора :
         {
             ::Display::ShowWarning("ВКЛЮЧЕН ПИКОВЫЙ ДЕТЕКТОР");		// выводим сообщение об этом
             return;													// и выходим
         }
 
-        ::Math::LimitationDecrease<uint8>(reinterpret_cast<uint8 *>(&set.time.base), 0);
+        ::Math::LimitationDecrease<uint8>(reinterpret_cast<uint8 *>(&S_TIME_BASE), 0);
     }
 
-    if (old == set.time.base)
+    if (old == S_TIME_BASE)
     {
         return;
     }
@@ -247,7 +247,7 @@ void TBase::Set(TBase::E base)
 {
     if (base != Count)
     {
-        set.time.base = base;
+        S_TIME_BASE = base;
     }
 
 
@@ -287,7 +287,7 @@ void TBase::Set(TBase::E base)
 
     Osci::ClearDataRand();
 
-    HAL_BUS::FPGA::Write8(WR::TBASE, values[set.time.base]);
+    HAL_BUS::FPGA::Write8(WR::TBASE, values[S_TIME_BASE]);
 
     FPGA::LoadRegUPR();
 
@@ -721,7 +721,7 @@ void Range::Set(Chan::E ch, E range)
 
 int TBase::DeltaPoint()
 {
-    return deltaPoint[set.time.base];
+    return deltaPoint[S_TIME_BASE];
 }
 
 

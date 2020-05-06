@@ -48,7 +48,7 @@ int TPos::InBytes()
 
 bool PeakDetMode::IsEnabled()
 {
-    return ((set.time.peakDet == PeakDetMode::Enabled) && (set.time.base >= TBase::MIN_PEAK_DET));
+    return ((set.time.peakDet == PeakDetMode::Enabled) && (S_TIME_BASE >= TBase::MIN_PEAK_DET));
 }
 
 
@@ -71,7 +71,7 @@ DEF_CHOICE_2( cSample,                                                          
 
 static bool IsActive_PeakDet()
 {
-    return (set.time.base >= TBase::MIN_PEAK_DET);
+    return (S_TIME_BASE >= TBase::MIN_PEAK_DET);
 }
 
 void PageTime::OnChanged_PeakDet(bool active)

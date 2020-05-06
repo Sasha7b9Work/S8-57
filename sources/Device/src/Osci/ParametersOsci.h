@@ -25,6 +25,7 @@ struct Chan
 };
 
 
+#define S_TIME_BASE (set.time._base)
 struct TBase
 {
     enum E

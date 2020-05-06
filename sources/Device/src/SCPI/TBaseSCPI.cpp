@@ -55,7 +55,7 @@ const StructSCPI SCPI::tBase[] =
 
 static const char *FuncScale(const char *buffer)
 {
-    SCPI_REQUEST(SCPI::SendAnswer(tBaseNames[set.time.base]));
+    SCPI_REQUEST(SCPI::SendAnswer(tBaseNames[S_TIME_BASE]));
 
     SCPI_PROCESS_ARRAY(tBaseNames, TBase::Set(static_cast<TBase::E>(i)));
 }

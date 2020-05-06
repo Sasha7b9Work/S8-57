@@ -123,7 +123,7 @@ static int DrawMainParameters(int _x, int _y)
     const int SIZE = 100;
     char buffer[SIZE] = { 0 };
 
-    std::snprintf(buffer, SIZE, "ð\xa5%s", TBase::ToString(set.time.base));
+    std::snprintf(buffer, SIZE, "ð\xa5%s", TBase::ToString(S_TIME_BASE));
 
     String(buffer).Draw(x, y0, Color::FILL);
 
@@ -419,8 +419,8 @@ static void WriteCursors()
             CursorsMeasurements::Time(source, 1).Draw(x, y2);
             x = 153;
 
-            float pos0 = MathFPGA::TimeCursor(CursorsMeasurements::PosT(source, 0), set.time.base);
-            float pos1 = MathFPGA::TimeCursor(CursorsMeasurements::PosT(source, 1), set.time.base);
+            float pos0 = MathFPGA::TimeCursor(CursorsMeasurements::PosT(source, 0), S_TIME_BASE);
+            float pos1 = MathFPGA::TimeCursor(CursorsMeasurements::PosT(source, 1), S_TIME_BASE);
             float delta = std::fabsf(pos1 - pos0);
             String(":dT=").Draw(x, y1);
             Time(delta).ToString(false).Draw(x + 17, y1);

@@ -9,7 +9,7 @@ bool OsciHAL::ReadyPoint()
 {
     static uint timeLastRead = 0;   // Время последнего чтения точки
 
-    if(TIME_MS - timeLastRead >= TBase::TimePoint(set.time.base))
+    if(TIME_MS - timeLastRead >= TBase::TimePoint(S_TIME_BASE))
     {
         timeLastRead = TIME_MS;
         return true;

@@ -302,7 +302,7 @@ String TShift::ToString(const TBase::E _base)
 
     if(tBase == TBase::Count)
     {
-        tBase = set.time.base;
+        tBase = S_TIME_BASE;
     }
 
     return Time(TShift::ToAbs(S_TIME_SHIFT, tBase)).ToString(true);

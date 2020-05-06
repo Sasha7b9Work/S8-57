@@ -56,7 +56,7 @@ static bool GenerateNormalModeData(Chan::E ch, uint8 *data, int numBytes)
 
     double amplitude = TuneGeneratorDialog::amplitude[ch] / RShift::ToAbs(1, S_RANGE(ch)) * 0.6;
 
-    double frequency = TuneGeneratorDialog::frequency[ch] * TShift::ToAbs(1, set.time.base);
+    double frequency = TuneGeneratorDialog::frequency[ch] * TShift::ToAbs(1, S_TIME_BASE);
 
     double offset = RShift::ToAbs(S_RSHIFT(ch), S_RANGE(ch)) * kOffset[S_RANGE(ch)];
 
