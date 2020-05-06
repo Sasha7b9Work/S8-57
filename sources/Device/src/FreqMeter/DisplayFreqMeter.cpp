@@ -41,7 +41,7 @@ void DisplayFreqMeter::Draw()
 {
     // \todo ¬ этой строке точку ставить не где придЄтс€, а в той позиции, где она сто€ла последний раз
 
-    if(set.freq.enabled == 0)
+    if(!S_FREQ_ENABLED)
     {
         return;
     }

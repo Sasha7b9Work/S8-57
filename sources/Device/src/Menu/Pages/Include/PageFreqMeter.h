@@ -6,9 +6,12 @@ class Page;
 class Choice;
 
 
+#define S_FREQ_ENABLED  (set.freq._enabled)
+
+
 struct SettingsFreqMeter
 {
-    uint8                        enabled;
+    bool                         _enabled;
     FreqMeter::ModeView::E       modeView;
     FreqMeter::TimeCounting::E   timeCounting;  // Время счёта частоты.
     FreqMeter::FreqClc::E        freqClc;       // Частота заполнения.
