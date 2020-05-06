@@ -158,6 +158,9 @@ struct FuncModeDraw
 };
 
 
+#define S_MATH_FUNCTION         (set.math.function)
+#define S_MATH_FUNCTION_IS_SUM  (S_MATH_FUNCTION == MathFunction::Sum)
+#define S_MATH_FUNCTION_IS_MUL  (S_MATH_FUNCTION == MathFunction::Mul)
 struct MathFunction
 {
     enum E
@@ -167,6 +170,10 @@ struct MathFunction
     };
 };
 
+
+#define S_MATH_MODE_REG_SET             (set.math.modeRegSet)
+#define S_MATH_MODE_REG_SET_IS_RSHIFT   (S_MATH_MODE_REG_SET == ModeRegSet::RShift)
+#define S_MATH_MODE_REG_SET_IS_RANGE    (S_MATH_MODE_REG_SET == ModeRegSet::Range)
 
 struct ModeRegSet
 {

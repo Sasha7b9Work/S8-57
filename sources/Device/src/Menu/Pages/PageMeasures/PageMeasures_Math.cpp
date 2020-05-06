@@ -62,7 +62,7 @@ DEF_GRAPH_BUTTON_HINTS_3( bScreen,                                              
 
 static void OnPress_Type()
 {
-    Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&set.math.function), 0, 1);
+    Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&S_MATH_FUNCTION), 0, 1);
 }
 
 static void Draw_Type_Sum(int x, int y)
@@ -81,7 +81,7 @@ static void Draw_Type(int x, int y)
     typedef void (*pFuncDraw)(int, int);
 
     const pFuncDraw funcs[2] = { Draw_Type_Sum, Draw_Type_Mul };
-    funcs[set.math.function](x, y);
+    funcs[S_MATH_FUNCTION](x, y);
 }
 
 static bool IsActive_Type()
@@ -100,7 +100,7 @@ DEF_GRAPH_BUTTON_HINTS_2( bType,                                                
 
 static void OnPress_ModeArrows()
 {
-    Math::CircleIncrease<int8>(reinterpret_cast<int8*>(&set.math.modeRegSet), 0, 1);
+    Math::CircleIncrease<int8>(reinterpret_cast<int8*>(&S_MATH_MODE_REG_SET), 0, 1);
 }
 
 static void Draw_ModeArrows_Range(int x, int y)
@@ -118,7 +118,7 @@ static void Draw_ModeArrows(int x, int y)
     typedef void (*pFuncDraw)(int, int);
 
     static const pFuncDraw funcs[2] = { Draw_ModeArrows_Range, Draw_ModeArrows_RShift };
-    funcs[set.math.modeRegSet](x, y);
+    funcs[S_MATH_MODE_REG_SET](x, y);
 }
 
 static bool IsActive_ModeArrows()
@@ -138,7 +138,7 @@ DEF_GRAPH_BUTTON_HINTS_2( bModeArrows,                                          
 static void OnPress_RangeA()
 {
     S_RANGE_MATH = S_RANGE_A;
-    set.math.divider = S_DIVIDER_A;
+    S_DIVIDER_MATH = S_DIVIDER_A;
 }
 
 static void Draw_RangeA(int x, int y)
@@ -161,7 +161,7 @@ DEF_GRAPH_BUTTON( bRangeA,                                                      
 static void OnPress_RangeB()
 {
     S_RANGE_MATH = S_RANGE_B;
-    set.math.divider = S_DIVIDER_B;
+    S_DIVIDER_MATH = S_DIVIDER_B;
 }
 
 static void Draw_RangeB(int x, int y)
@@ -214,14 +214,14 @@ static bool HandlerKey_Function(const KeyEvent &event) // -V2506
 
     if(delta != 0)
     {
-        if (set.math.modeRegSet == ModeRegSet::RShift)
+        if (S_MATH_MODE_REG_SET_IS_RSHIFT)
         {
             if (RShift::ChangeMath(delta))
             {
                 Beeper::RegulatorShiftRotate();
             }
         }
-        else if (set.math.modeRegSet == ModeRegSet::Range)
+        else if (S_MATH_MODE_REG_SET_IS_RANGE)
         {
             static int sum = 0;
             sum -= delta;
