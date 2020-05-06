@@ -109,7 +109,7 @@ void TableMeasures::Cell::DrawStringMeasure(int x, int y)
 
 static int GetTopTable()
 {
-    if ((set.meas.number == MeasuresOnDisplay::_6_1) || (set.meas.number == MeasuresOnDisplay::_6_2))
+    if (S_MEAS_ON_DISPLAY_IS_6_1 || S_MEAS_ON_DISPLAY_IS_6_2)
     {
         return Grid::Bottom() - TableMeasures::DY() * 6;
     }
@@ -128,14 +128,14 @@ static int GetTopTable()
 int TableMeasures::NumCols()
 {
     static const int cols[] = { 1, 2, 5, 5, 5, 1, 2 };
-    return cols[set.meas.number];
+    return cols[S_MEAS_ON_DISPLAY];
 }
 
 
 int TableMeasures::NumRows()
 {
     static const int rows[] = { 1, 1, 1, 2, 3, 6, 6 };
-    return rows[set.meas.number];
+    return rows[S_MEAS_ON_DISPLAY];
 }
 
 
@@ -145,7 +145,7 @@ int TableMeasures::GetDeltaGridLeft()
 
     if (S_MEAS_SHOW && MeasuresModeViewSignals::IsCompress())
     {
-        switch (set.meas.number)
+        switch (S_MEAS_ON_DISPLAY)
         {
         case MeasuresOnDisplay::_6_1:   result = DX();      break;
         case MeasuresOnDisplay::_6_2:   result = DX() * 2;  break;

@@ -39,7 +39,7 @@ DEF_CHOICE_7( cNumber,                                                          
     "3x5",
     "6x1",
     "6x2",
-    set.meas.number, &PageAutoMeasures::self, IsActive_NumberChannels, Choice::Changed, Choice::AfterDraw
+    S_MEAS_ON_DISPLAY, &PageAutoMeasures::self, IsActive_NumberChannels, Choice::Changed, Choice::AfterDraw
 )
 
 

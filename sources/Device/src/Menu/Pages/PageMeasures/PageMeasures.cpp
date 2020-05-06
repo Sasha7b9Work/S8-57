@@ -13,7 +13,7 @@ bool MeasuresModeViewSignals::IsCompress()
 
 bool MeasuresOnDisplay::IsVertical()
 {
-    return (set.meas.number == MeasuresOnDisplay::_6_1) || (set.meas.number == MeasuresOnDisplay::_6_2);
+    return (S_MEAS_ON_DISPLAY_IS_6_1 || S_MEAS_ON_DISPLAY_IS_6_2);
 }
 
 

@@ -359,7 +359,7 @@ static int DeltaVforLineGrid()
 
     if (S_MEAS_SHOW && MeasuresModeViewSignals::IsCompress())
     {
-        switch (set.meas.number)
+        switch (S_MEAS_ON_DISPLAY)
         {
         case MeasuresOnDisplay::_1_5: result = S_MEAS_SOURCE_IS_A_B ? 55 : 59; break;
         case MeasuresOnDisplay::_2_5: result = S_MEAS_SOURCE_IS_A_B ? 69 : 51; break;
@@ -382,11 +382,11 @@ static int DeltaHforLineGrid()
 
     if (MeasuresModeViewSignals::IsCompress())
     {
-        if (set.meas.number == MeasuresOnDisplay::_6_1)
+        if (S_MEAS_ON_DISPLAY_IS_6_1)
         {
             result = 73;
         }
-        else if (set.meas.number == MeasuresOnDisplay::_6_2)
+        else if (S_MEAS_ON_DISPLAY_IS_6_2)
         {
             result = 83;
         }

@@ -12,6 +12,10 @@
 // Сколько автоматических измерений помещается на экран
 struct MeasuresOnDisplay
 {
+#define S_MEAS_ON_DISPLAY           (set.meas._number)
+#define S_MEAS_ON_DISPLAY_IS_6_1    (S_MEAS_ON_DISPLAY == MeasuresOnDisplay::_6_1)
+#define S_MEAS_ON_DISPLAY_IS_6_2    (S_MEAS_ON_DISPLAY == MeasuresOnDisplay::_6_2)
+
     enum E
     {
         _1,      // 1 измерение слева внизу.
@@ -63,7 +67,7 @@ struct MeasuresModeViewSignals
 struct SettingsAutoMeasures
 {
     bool                        _show;              // Показывать ли измерения.
-    MeasuresOnDisplay::E        number;            // Сколько измерений выводить.
+    MeasuresOnDisplay::E        _number;            // Сколько измерений выводить.
     MeasuresSource::E           source;            // Для каких каналов выводить измерения.
     MeasuresModeViewSignals::E  modeViewSignals;   // Сжимать ли сигналы при выводе измерений.
     TypeMeasure::E              measures[15];      // Выбранные для индикации измерения.
