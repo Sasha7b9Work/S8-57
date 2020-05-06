@@ -180,11 +180,11 @@ void DisplayOsci::PainterData::DrawSpectrum()
             numPoints = 1024;
         }
     
-        if (set.fft.source == SourceFFT::A)
+        if (S_FFT_SOURCE_IS_A)
         {
             DrawSpectrum(OUT_A, numPoints, ChanA);
         }
-        else if (set.fft.source == SourceFFT::B)
+        else if (S_FFT_SOURCE_IS_B)
         {
             DrawSpectrum(OUT_B, numPoints, ChanB);
         }

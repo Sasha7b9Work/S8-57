@@ -37,7 +37,7 @@ DEF_CHOICE_3( cSource,                                                          
     "Канал 1",
     "Канал 2",
     "Канал 1 + 2",
-    set.fft.source, &PageFFT::self, IsActive_Parameter, Choice::Changed, Choice::AfterDraw
+    S_FFT_SOURCE, &PageFFT::self, IsActive_Parameter, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -48,7 +48,7 @@ DEF_CHOICE_4( cWindow,                                                          
     "Хэмминга",
     "Блэкмена",
     "Ханна",
-    set.fft.window, &PageFFT::self, IsActive_Parameter, Choice::Changed, Choice::AfterDraw
+    S_FFT_WINDOW, &PageFFT::self, IsActive_Parameter, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -63,7 +63,7 @@ DEF_CHOICE_3( cRange,                                                           
     "-40дБ",
     "-60дБ",
     "-80дБ",
-    set.fft.maxDB, &PageFFT::self, IsActive_Range, Choice::Changed, Choice::AfterDraw
+    S_FFT_MAX_DB, &PageFFT::self, IsActive_Range, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -75,7 +75,7 @@ static bool HandlerKey_FFT_Cursors(const KeyEvent &event)
         {
             int delta = (event.IsArrowUp() || event.IsArrowRight()) ? 1 : -1;
 
-            S_FFT_POS_CUR(set.fft.cursor) += static_cast<uint8>(delta);
+            S_FFT_POS_ACTIVE_CURSOR += static_cast<uint8>(delta);
             Beeper::RegulatorShiftRotate();
 
             return true;
@@ -83,7 +83,7 @@ static bool HandlerKey_FFT_Cursors(const KeyEvent &event)
     }
     else if(event.key == Key::F1 && event.IsRelease())
     {
-        set.fft.cursor = static_cast<uint8>((set.fft.cursor + 1) % 2);
+        S_FFT_ACTIVE_CURSOR = static_cast<uint8>((S_FFT_ACTIVE_CURSOR + 1) % 2);
         return true;
     }
 
@@ -100,7 +100,7 @@ static void OnCursors_BeforeDraw()
 {
     Region(60, 20).DrawBounded(0, 219, Color::BACK, Color::FILL);
 
-    Text((set.fft.cursor == 0) ? "Курсор 1" : "Курсор 2").Draw(12, 224, Color::FILL);
+    Text(S_FFT_ACTIVE_CURSOR_IS_0 ? "Курсор 1" : "Курсор 2").Draw(12, 224, Color::FILL);
 }
 
 
