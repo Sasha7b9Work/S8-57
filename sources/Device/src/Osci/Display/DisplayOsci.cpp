@@ -174,7 +174,7 @@ void DisplayOsci::DrawingValueParameter::Draw()
         {
         case TrigLevel:
         {
-            float trigLevVal = RShift::ToAbs(set.trig.level[set.trig.source], set.ch[set.trig.source].range) * Divider::ToAbs(DIVIDER(set.trig.source));
+            float trigLevVal = RShift::ToAbs(set.trig.level[set.trig.source], set.ch[set.trig.source].range) * Divider::ToAbs(DIVIDERS(set.trig.source));
             Voltage voltage(trigLevVal);
             String("Синхр %s", voltage.ToString(true).c_str()).Draw(x + 7, y + 5, Color::FILL);
             break;
@@ -189,7 +189,7 @@ void DisplayOsci::DrawingValueParameter::Draw()
             char *channels[2] = { "1", "2" };
             char *sCH = channels[ch];
             Color color = Color::CHAN[ch];
-            String("M%s: %s %s", sCH, Range::ToString(ch, DIVIDER(ch)), RShift::ToString(set.ch[ch].rShift, set.ch[ch].range, DIVIDER(ch)).c_str()).Draw(x + 7, y + 5, color);
+            String("M%s: %s %s", sCH, Range::ToString(ch, DIVIDERS(ch)), RShift::ToString(set.ch[ch].rShift, set.ch[ch].range, DIVIDERS(ch)).c_str()).Draw(x + 7, y + 5, color);
             break;
         }
 

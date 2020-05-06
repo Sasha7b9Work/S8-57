@@ -85,9 +85,9 @@ struct TBase
 
 
 // Делитель.
-#define DIVIDER(channel)    (set.ch[channel].divider)
-#define DIVIDER_A           DIVIDER(0)
-#define DIVIDER_B           DIVIDER(1)
+#define DIVIDERS(channel)    (set.ch[channel].divider)
+#define DIVIDERS_A           DIVIDERS(0)
+#define DIVIDERS_B           DIVIDERS(1)
 struct Divider
 {
     enum E
