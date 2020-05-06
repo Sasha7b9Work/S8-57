@@ -19,7 +19,9 @@ struct ModeWork
     };
 };
 
+
 // Что делать при нажатии кнопки ПАМЯТЬ.
+#define S_MEM_MODE_BTN_MEMORY   (set.mem._modeBtnMemory)
 struct ModeBtnMemory
 {
     enum E
@@ -28,6 +30,7 @@ struct ModeBtnMemory
         Save      // Сохранение содержимого экрана на флешку.
     };
 };
+
 
 // Как сохранять данные на флешку.
 struct ModeSaveSignal
@@ -38,6 +41,7 @@ struct ModeSaveSignal
         TXT
     };
 };
+
 
 // Что показывать в режиме Внутр ЗУ - считанный или записанный сигнал.
 struct ModeShowIntMem
@@ -50,6 +54,7 @@ struct ModeShowIntMem
     };
 };
 
+
 // Режим наименования файлов.
 struct FileNamingMode
 {
@@ -60,7 +65,9 @@ struct FileNamingMode
     };
 };
 
+
 // Число точек сигнала, с которым идёт работа.
+#define S_ENUMPOINTS_FPGA   (set.mem._enumPoints)
 struct ENumPointsFPGA
 {
     enum E
@@ -78,6 +85,10 @@ struct ENumPointsFPGA
 
 
 // Какой сигнал показывать в режиме ПАМЯТЬ - ВНЕШН ЗУ
+#define S_MEM_TYPE_SIGNAL_ROM               (set.mem._typeSignalROM)
+#define S_MEM_TYPE_SIGNAL_ROM_IS_CURRENT    (S_MEM_TYPE_SIGNAL_ROM == TypeSignalROM::Current)
+#define S_MEM_TYPE_SIGNAL_ROM_IS_RECORDED   (S_MEM_TYPE_SIGNAL_ROM == TypeSignalROM::Recorded)
+#define S_MEM_TYPE_SIGNAL_ROM_IS_BOTH       (S_MEM_TYPE_SIGNAL_ROM == TypeSignalROM::Both)
 struct TypeSignalROM
 {
     enum E
@@ -94,9 +105,9 @@ struct TypeSignalROM
 
 struct SettingsMemory
 {
-    ENumPointsFPGA::E   enumPoints;                             // Число точек
-    ModeBtnMemory::E    modeBtnMemory;
-    TypeSignalROM::E    typeSignalROM;                          // Какой сигнал выводить в режиме ПАМЯТЬ-ВНУТР ЗУ
+    ENumPointsFPGA::E   _enumPoints;                             // Число точек
+    ModeBtnMemory::E    _modeBtnMemory;
+    TypeSignalROM::E    _typeSignalROM;                          // Какой сигнал выводить в режиме ПАМЯТЬ-ВНУТР ЗУ
     ModeWork::E         modeWork;                               // Режим работы.
     bool                flashAutoConnect;                       // Если true, при подключении флешки автоматически выводится Файл-Менеджер.
     int8                indexCurSymbolNameMask;                 // Индекс текущего символа в режиме задания маски или выбора имени.

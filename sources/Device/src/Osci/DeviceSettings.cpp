@@ -40,7 +40,7 @@ void DataSettings::Fill()
     Lval_DIVIDER_B(this) = S_DIVIDER_B;
 
     TIME_TIME(this)      = HAL_RTC::GetPackedTime();
-    ENUM_POINTS(this)    = set.mem.enumPoints;
+    ENUM_POINTS(this)    = S_ENUMPOINTS_FPGA;
 }
 
 

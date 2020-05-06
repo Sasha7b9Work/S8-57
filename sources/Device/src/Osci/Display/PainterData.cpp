@@ -211,12 +211,12 @@ void DisplayOsci::PainterData::DrawSpectrum()
 
 void DisplayOsci::PainterData::DrawROM()
 {
-    if((set.mem.typeSignalROM == TypeSignalROM::Current) || (set.mem.typeSignalROM == TypeSignalROM::Both))
+    if(S_MEM_TYPE_SIGNAL_ROM_IS_CURRENT || S_MEM_TYPE_SIGNAL_ROM_IS_BOTH)
     {
         DrawCurrent();
     }
 
-    if ((set.mem.typeSignalROM == TypeSignalROM::Recorded) || (set.mem.typeSignalROM == TypeSignalROM::Both))
+    if (S_MEM_TYPE_SIGNAL_ROM_IS_RECORDED || S_MEM_TYPE_SIGNAL_ROM_IS_BOTH)
     {
         Reader::ReadDataFromROM();
         AutoMeasurements::SetData();
