@@ -51,12 +51,12 @@ void DisplayFreqMeter::Draw()
     DFont::SetSpacing(1);
 
     int width = 200;
-    int height = (set.freq.modeView == FreqMeter::ModeView::Frequency) ? 90 : 75;
+    int height = S_FREQ_MODE_VIEW_IS_FREQUENCY ? 90 : 75;
 
     int x = Grid::Left() + (Grid::Width() - width) / 2;
     int y = Grid::Top() + (Grid::Height() / 2 - height) / 2;
 
-    if(set.freq.modeView == FreqMeter::ModeView::Frequency)
+    if(S_FREQ_MODE_VIEW_IS_FREQUENCY)
     {
         y += 7;
     }
@@ -68,7 +68,7 @@ void DisplayFreqMeter::Draw()
     x += 2;
     y += 2;
 
-    if(set.freq.modeView == FreqMeter::ModeView::Frequency)
+    if(S_FREQ_MODE_VIEW_IS_FREQUENCY)
     {
         DrawFrequencyMode(x, y);
     }
@@ -524,8 +524,7 @@ static void WriteStackToBuffer(Stack<uint> *stack, int point, const char *suffix
 
 void ProgressBarFreqMeter::Draw(int x, int y)
 {
-    if((set.freq.modeView == FreqMeter::ModeView::Frequency) && 
-       (FreqMeter::timeStartMeasureFreq != 0))
+    if(S_FREQ_MODE_VIEW_IS_FREQUENCY && (FreqMeter::timeStartMeasureFreq != 0))
     {
         static const float time[FreqMeter::TimeCounting::Count] = { 100.0F, 1000.0F, 10000.0F };
 
@@ -547,8 +546,7 @@ void ProgressBarFreqMeter::Draw(int x, int y)
 
         Region(width, 3).Fill(x, y, Color::FILL);
     }
-    else if((set.freq.modeView == FreqMeter::ModeView::Period) &&
-        (FreqMeter::timeStartMeasurePeriod != 0))
+    else if(S_FREQ_MODE_VIEW_IS_PERIOD && (FreqMeter::timeStartMeasurePeriod != 0))
     {
 
     }

@@ -88,6 +88,10 @@ public:
     // Что показывать - период или частоту
     struct ModeView
     {
+#define S_FREQ_MODE_VIEW                (set.freq._modeView)
+#define S_FREQ_MODE_VIEW_IS_FREQUENCY   (S_FREQ_MODE_VIEW == FreqMeter::ModeView::Frequency)
+#define S_FREQ_MODE_VIEW_IS_PERIOD      (S_FREQ_MODE_VIEW == FreqMeter::ModeView::Period)
+
         enum E
         {
             Frequency,
