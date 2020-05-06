@@ -112,6 +112,10 @@ struct ENumSignalsInSec
 };
 
 // Тип сетки на экране.
+#define S_DISP_TYPE_GRID        (set.disp.typeGrid)
+#define S_DISP_TYPE_GRID_IS_1   (S_DISP_TYPE_GRID == TypeGrid::_1)
+#define S_DISP_TYPE_GRID_IS_2   (S_DISP_TYPE_GRID == TypeGrid::_2)
+#define S_DISP_TYPE_GRID_IS_3   (S_DISP_TYPE_GRID == TypeGrid::_3)
 struct TypeGrid
 {
     enum E

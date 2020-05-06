@@ -47,7 +47,7 @@ DEF_CHOICE_4( cType, // -V206                                                   
     "“ип 2",
     "“ип 3",
     "“ип 4",
-    set.disp.typeGrid, &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    S_DISP_TYPE_GRID, &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
