@@ -259,7 +259,7 @@ int Display::TimeMenuAutoHide()
     {
         0, 5, 10, 15, 30, 60
     };
-    return times[set.disp.menuAutoHide] * 1000;
+    return times[S_MENU_AUTOHIDE] * 1000;
 }
 
 
@@ -280,5 +280,5 @@ uint ENumSignalsInSec::TimeBetweenFramesMS()
 
 void Display::LoadBrightness()
 {
-    HAL_BUS::Panel::Send(Command::Display_Brightness, static_cast<uint8>(set.disp.brightness + 10));
+    HAL_BUS::Panel::Send(Command::Display_Brightness, static_cast<uint8>(S_DISP_BRIGHTNESS + 10));
 }

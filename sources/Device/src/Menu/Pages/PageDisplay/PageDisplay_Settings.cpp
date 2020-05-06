@@ -14,7 +14,7 @@ static void OnChanged_Brightness()
 DEF_GOVERNOR( gBrightness,                                                                                                                            //--- ДИСПЛЕЙ - НАСТРОЙКИ - Яркость ---
     "Яркость",
     "Установка яркости свечения дисплея",
-    set.disp.brightness, 0, 100, &PageDisplay::Settings::self, Item::Active, OnChanged_Brightness
+    S_DISP_BRIGHTNESS, 0, 100, &PageDisplay::Settings::self, Item::Active, OnChanged_Brightness
 )
 
 
@@ -32,7 +32,7 @@ DEF_CHOICE_6( cAutoHide,                                                        
     "Через 15 сек",
     "Через 30 сек",
     "Через 60 сек",
-    set.disp.menuAutoHide, &PageDisplay::Settings::self, Item::Active, OnChanged_AutoHide, Choice::AfterDraw
+    S_MENU_AUTOHIDE, &PageDisplay::Settings::self, Item::Active, OnChanged_AutoHide, Choice::AfterDraw
 )
 
 

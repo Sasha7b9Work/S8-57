@@ -129,6 +129,7 @@ struct TypeGrid
 };
 
 // Через какое время после последнего нажатия кнопки скрывать меню.
+#define S_MENU_AUTOHIDE (set.disp.menuAutoHide)
 struct MenuAutoHide
 {
     enum E
@@ -142,6 +143,8 @@ struct MenuAutoHide
     };
 };
 
+
+#define S_DISP_BRIGHTNESS (set.disp.brightness)
 
 struct SettingsDisplay
 { //-V802
