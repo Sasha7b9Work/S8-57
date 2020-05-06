@@ -49,6 +49,9 @@ struct TrigPolarity
 
 
 // Режим запуска.
+#define S_TRIG_START_MODE           (set.trig.startMode)
+#define S_TRIG_START_MODE_IS_SINGLE (S_TRIG_START_MODE == TrigStartMode::Single)
+#define S_TRIG_START_MODE_IS_AUTO   (S_TRIG_START_MODE == TrigStartMode::Auto)
 struct TrigStartMode
 {
     enum E
@@ -65,6 +68,7 @@ struct TrigStartMode
 #define S_TRIG_SOURCE           (set.trig.source)
 #define S_TRIG_LEVEL(channel)   (set.trig.level[channel])
 #define S_TRIG_LEVEL_SOURCE     S_TRIG_LEVEL(S_TRIG_SOURCE)
+
 
 struct SettingsTrig
 {

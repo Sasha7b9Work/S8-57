@@ -14,7 +14,7 @@
 
 void TrigStartMode::Set(TrigStartMode::E v)
 {
-    set.trig.startMode = v;
+    S_TRIG_START_MODE = v;
     Osci::ChangedTrigStartMode();
 }
 

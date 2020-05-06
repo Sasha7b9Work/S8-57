@@ -220,7 +220,7 @@ static bool ProcessFlagReady()
 
         Osci::ReadData();
 
-        if(set.trig.startMode == TrigStartMode::Single)
+        if(S_TRIG_START_MODE_IS_SINGLE)
         {
             needStop = true;
             Trig::pulse = false;
@@ -252,7 +252,7 @@ void Osci::ProcessFlagPred()
 {
     if(FPGA::flag.Pred() && !FPGA::forcedStart)
     {
-        if(!OSCI_IN_MODE_RANDOMIZER && (set.trig.startMode == TrigStartMode::Auto) && FPGA::flag.HoldOff())
+        if(!OSCI_IN_MODE_RANDOMIZER && S_TRIG_START_MODE_IS_AUTO && FPGA::flag.HoldOff())
         {
             FPGA::ForcedStart();
         }
@@ -290,7 +290,7 @@ void Osci::ChangedTrigStartMode()
 
     SetFunctionsStartStop();
 
-    if(set.trig.startMode != TrigStartMode::Single)
+    if(!S_TRIG_START_MODE_IS_SINGLE)
     {
         Start(true);
     }
@@ -300,12 +300,12 @@ void Osci::ChangedTrigStartMode()
     {
         // и переключаемся на одиночный режим запуска, то надо сохранить имеющийся тип выборки, чтобы восстановить при возвращении в режим 
         // рандомизатора автоматический или ждущий
-        if(set.trig.startMode == TrigStartMode::Single)
+        if(S_TRIG_START_MODE_IS_SINGLE)
         {
             set.time.sampleTypeOld = set.time.sampleType;
             set.time.sampleType = SampleType::Real;
         }
-        else if(set.trig.startMode == TrigStartMode::Auto)    // Иначе восстановим ранее сохранённый
+        else if(S_TRIG_START_MODE_IS_AUTO)    // Иначе восстановим ранее сохранённый
         {
             set.time.sampleType = set.time.sampleTypeOld;
         }
@@ -326,7 +326,7 @@ void Osci::SetFunctionsStartStop()
 
     //funcStart = start[index][TrigStartMode()];
 
-    funcStop = stop[index][set.trig.startMode];
+    funcStop = stop[index][S_TRIG_START_MODE];
 }
 
 

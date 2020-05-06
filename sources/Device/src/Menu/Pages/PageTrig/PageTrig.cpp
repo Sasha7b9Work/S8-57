@@ -20,7 +20,7 @@ DEF_CHOICE_3( cMode, // -V206                                                   
     "Авто ",
     "Ждущий",
     "Однократный",
-    set.trig.startMode, &PageTrig::self, Item::Active, OnChanged_Mode, Choice::AfterDraw
+    S_TRIG_START_MODE, &PageTrig::self, Item::Active, OnChanged_Mode, Choice::AfterDraw
 )
 
 

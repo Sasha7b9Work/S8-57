@@ -180,7 +180,7 @@ static int DrawMainParameters(int _x, int _y)
     };
     if (set.mem.modeWork == ModeWork::Dir)
     {
-        std::snprintf(buffer, 100, "\xa5\x10%c", mode[set.trig.startMode]);
+        std::snprintf(buffer, 100, "\xa5\x10%c", mode[S_TRIG_START_MODE]);
         String(buffer).Draw(x + 63, y1);
     }
 
