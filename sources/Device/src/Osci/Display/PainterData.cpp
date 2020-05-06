@@ -163,7 +163,7 @@ void DisplayOsci::PainterData::DrawSpectrum(const uint8 *dataIn, int numPoints, 
 
 void DisplayOsci::PainterData::DrawSpectrum()
 {
-    if (!set.fft.enabled || !DS)
+    if (!S_FFT_ENABLED || !DS)
     {
         return;
     }
@@ -247,7 +247,7 @@ void DisplayOsci::PainterData::DrawChannel(Chan::E ch)
 
     float scale = static_cast<float>(Grid::Height()) / (VALUE::MAX - VALUE::MIN);
 
-    if (set.fft.enabled)
+    if (S_FFT_ENABLED)
     {
         center -= (Grid::Bottom() - Grid::Top()) / 4;
         scale /= 2.0F;

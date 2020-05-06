@@ -104,7 +104,7 @@ struct Divider
 
 
 #define S_RANGE(channel)    set.ch[channel].range
-#define S_RANGA_A           S_RANGE(0)
+#define S_RANGE_A           S_RANGE(0)
 #define S_RANGE_B           S_RANGE(1)
 #define S_RANGE_MATH        set.math.range
 struct Range
@@ -189,7 +189,9 @@ private:
 };
 
 // Режим канала по входу.
-#define S_MODE_COUPLE(chan)   (set.ch[chan].couple)
+#define S_MODE_COUPLE(chan)     (set.ch[chan].couple)
+#define S_MODE_COUPLE_A         S_MODE_COUPLE(ChanA)
+#define S_MODE_COUPLE_B         S_MODE_COUPLE(ChanB)
 struct ModeCouple
 {
     enum E

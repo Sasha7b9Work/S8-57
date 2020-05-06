@@ -131,7 +131,7 @@ void DisplayOsci::BottomPart::Draw(int x0, int y0)
 
 void DisplayOsci::DrawingValueParameter::Enable(DrawingValueParameter::E v)
 {
-    if(set.fft.enabled)                                                                     // Не будем рисовать при включённом спектре
+    if(S_FFT_ENABLED)                                                                     // Не будем рисовать при включённом спектре
     {
         return;
     }

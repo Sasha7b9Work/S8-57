@@ -144,7 +144,7 @@ void DrawOsci()
     {
         DrawGridSignal(Grid::Left(), Grid::Top(), Grid::Width(), Grid::Height() / 2);
 
-        if (set.fft.enabled)
+        if (S_FFT_ENABLED)
         {
             DrawGridSpectrum();
         }

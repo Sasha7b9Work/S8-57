@@ -9,7 +9,7 @@
 
 static bool IsActive_Parameter()
 {
-    return set.fft.enabled;
+    return S_FFT_ENABLED;
 }
 
 
@@ -18,7 +18,7 @@ DEF_CHOICE_2( cView,                                                            
     "Включает и выключает отображение спектра",
     DISABLE_RU,
     ENABLE_RU,
-    set.fft.enabled, &PageFFT::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    S_FFT_ENABLED, &PageFFT::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -54,7 +54,7 @@ DEF_CHOICE_4( cWindow,                                                          
 
 static bool IsActive_Range()
 {
-    return (set.fft.enabled && (set.fft.scale == ScaleFFT::Log));
+    return (S_FFT_ENABLED && (set.fft.scale == ScaleFFT::Log));
 }
 
 DEF_CHOICE_3( cRange,                                                                                                                                   //--- ФУНКЦИЯ - СПЕКТР - Диапазон ---

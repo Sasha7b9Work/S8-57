@@ -49,6 +49,9 @@ struct MaxDBFFT
 };
 
 
+#define S_FFT_ENABLED   (set.fft.enabled)
+
+
 struct SettingsFFT
 { //-V802
     bool            enabled;

@@ -19,8 +19,8 @@ void DataSettings::Fill()
     INVERSE_A(this)      = setA.inverse ? 1U : 0U;
     INVERSE_B(this)      = setB.inverse ? 1U : 0U;
 
-    Lval_RANGE_A(this)   = setA.range;
-    Lval_RANGE_B(this)   = setB.range;
+    Lval_RANGE_A(this)   = S_RANGE_A;
+    Lval_RANGE_B(this)   = S_RANGE_B;
 
     RSHIFT_A(this)       = S_RSHIFT_A;
     RSHIFT_B(this)       = S_RSHIFT_B;
@@ -28,8 +28,8 @@ void DataSettings::Fill()
     Lval_TBASE(this)     = set.time.base;
     TSHIFT(this)         = set.time.shift;
 
-    Lval_COUPLE_A(this)  = setA.couple;
-    Lval_COUPLE_B(this)  = setB.couple;
+    Lval_COUPLE_A(this)  = S_MODE_COUPLE_A;
+    Lval_COUPLE_B(this)  = S_MODE_COUPLE_B;
 
     TRIGLEV_A(this)      = S_TRIG_LEVEL(ChanA);
     TRIGLEV_B(this)      = S_TRIG_LEVEL(ChanB);

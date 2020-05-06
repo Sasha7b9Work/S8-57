@@ -266,7 +266,7 @@ int Display::TimeMenuAutoHide()
 
 bool Display::IsSeparate()
 {
-    return ((set.math.modeDraw == FuncModeDraw::Separate) || set.fft.enabled);
+    return ((set.math.modeDraw == FuncModeDraw::Separate) || S_FFT_ENABLED);
 }
 
 

@@ -9,7 +9,7 @@
 
 static void OnPress_Screen()
 {
-    if (set.fft.enabled)
+    if (S_FFT_ENABLED)
     {
         Display::ShowWarning("Отключите вычисление БПФ");
     }
@@ -137,7 +137,7 @@ DEF_GRAPH_BUTTON_HINTS_2( bModeArrows,                                          
 
 static void OnPress_RangeA()
 {
-    S_RANGE_MATH = S_RANGA_A;
+    S_RANGE_MATH = S_RANGE_A;
     set.math.divider = S_DIVIDER_A;
 }
 
@@ -183,12 +183,12 @@ DEF_GRAPH_BUTTON( bRangeB,                                                      
 
 static bool IsActive_Math()
 {
-    return !set.fft.enabled;
+    return !S_FFT_ENABLED;
 }
 
 static void OnOpenClose_Math(bool)
 {
-    if (set.fft.enabled)
+    if (S_FFT_ENABLED)
     {
         Display::ShowWarning("Отключите вычисление БПФ");
     }

@@ -332,12 +332,12 @@ void Range::LoadBoth()
         BIN_U8(00000011)   // 20V      // -V2501
     };
 
-    uint8 valueA = vals[setA.range];
+    uint8 valueA = vals[S_RANGE_A];
 
     HAL_PIO::Write(PIN_A1, _GET_BIT(valueA, 1));
     HAL_PIO::Write(PIN_A2, _GET_BIT(valueA, 0));
 
-    uint8 valueB = vals[setB.range];
+    uint8 valueB = vals[S_RANGE_B];
 
     HAL_PIO::Write(PIN_A3, _GET_BIT(valueB, 1));
     HAL_PIO::Write(PIN_A4, _GET_BIT(valueB, 0));
@@ -549,7 +549,7 @@ void RShift::Draw(Chan::E ch)
 
     int delta = S_RSHIFT(ch) / STEP;
 
-    if(set.fft.enabled)
+    if(S_FFT_ENABLED)
     {
         delta /= 2;
     }
