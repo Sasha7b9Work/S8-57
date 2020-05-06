@@ -61,9 +61,9 @@ void DisplayRecorder::DrawSettings(int x, int y)
 
     Text(Recorder::ScaleX::ToString()).Draw(x + 2, y + 2);
 
-    Text(Range::ToString(ChanA, DIVIDERS_A)).Draw(x + 2, y + 11, Color::CHAN[ChanA]);
+    Text(Range::ToString(ChanA, S_DIVIDER_A)).Draw(x + 2, y + 11, Color::CHAN[ChanA]);
 
-    Text(Range::ToString(ChanB, DIVIDERS_B)).Draw(x + 2, y + 20, Color::CHAN[ChanB]);
+    Text(Range::ToString(ChanB, S_DIVIDER_B)).Draw(x + 2, y + 20, Color::CHAN[ChanB]);
 }
 
 

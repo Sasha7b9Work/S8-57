@@ -75,7 +75,7 @@ DEF_CHOICE_2( cDividerA,                                                        
     "",
     "1X",
     "10X",
-    DIVIDERS_A, &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    S_DIVIDER_A, &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -158,7 +158,7 @@ DEF_CHOICE_2( cDividerB,                                                        
     "",
     "1X",
     "10X",
-    DIVIDERS_B, &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    S_DIVIDER_B, &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

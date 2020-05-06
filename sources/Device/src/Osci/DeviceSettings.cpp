@@ -36,8 +36,8 @@ void DataSettings::Fill()
 
     Lval_PEAKDET(this)   = PeakDetMode().IsEnabled() ? PeakDetMode::Enabled : PeakDetMode::Disabled;
 
-    Lval_DIVIDER_A(this) = DIVIDERS_A;
-    Lval_DIVIDER_B(this) = DIVIDERS_B;
+    Lval_DIVIDER_A(this) = S_DIVIDER_A;
+    Lval_DIVIDER_B(this) = S_DIVIDER_B;
 
     TIME_TIME(this)      = HAL_RTC::GetPackedTime();
     ENUM_POINTS(this)    = set.mem.enumPoints;
