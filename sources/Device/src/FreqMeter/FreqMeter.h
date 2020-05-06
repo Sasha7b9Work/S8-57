@@ -60,6 +60,8 @@ public:
     // Частота заполняющих импульсов для счёта частоты.
     struct FreqClc
     {
+#define S_FREQ_FREQ_CLC     (set.freq._freqClc)
+
         enum E
         {
             _100kHz,
@@ -73,6 +75,8 @@ public:
     // Количество периодов.
     struct NumberPeriods
     {
+#define S_FREQ_NUMBER_PERIODS   (set.freq._numberPeriods)
+
         enum E
         {
             _1,
@@ -103,6 +107,9 @@ public:
     // Время счёта периода.
     struct TimeCounting
     {
+#define S_FREQ_TIME_COUNTING            (set.freq._timeCounting)
+#define S_FREQ_TIME_COUNTING_IS_100ms   (S_FREQ_TIME_COUNTING == FreqMeter::TimeCounting::_100ms)
+
         enum E
         {
             _100ms,

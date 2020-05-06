@@ -273,7 +273,7 @@ static pString FreqSetToString(const BitSet32 *fr)
     }
 
 
-    switch(set.freq.timeCounting)
+    switch(S_FREQ_TIME_COUNTING)
     {
     case FreqMeter::TimeCounting::_100ms:
 
@@ -435,7 +435,7 @@ static pString PeriodSetToString(const BitSet32 *pr)
         _period /= 10;
     }
 
-    int order = LowOrder(set.freq.freqClc, set.freq.numberPeriods);  // В ордер - порядок младшего значащего разряда
+    int order = LowOrder(S_FREQ_FREQ_CLC, S_FREQ_NUMBER_PERIODS);  // В ордер - порядок младшего значащего разряда
 
     while(stack.Size() < 6)
     {
@@ -530,7 +530,7 @@ void ProgressBarFreqMeter::Draw(int x, int y)
 
         int length = 185;
 
-        float percents = (TIME_MS - FreqMeter::timeStartMeasureFreq) / time[set.freq.timeCounting];
+        float percents = (TIME_MS - FreqMeter::timeStartMeasureFreq) / time[S_FREQ_TIME_COUNTING];
 
         int width = static_cast<int>(length * percents);
 
@@ -539,7 +539,7 @@ void ProgressBarFreqMeter::Draw(int x, int y)
             width = length;
         }
 
-        if(set.freq.timeCounting == FreqMeter::TimeCounting::_100ms && width > length / 2)
+        if(S_FREQ_TIME_COUNTING_IS_100ms && (width > length / 2))
         {
             width = length;
         }

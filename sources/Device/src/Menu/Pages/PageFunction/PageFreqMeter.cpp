@@ -66,7 +66,7 @@ DEF_CHOICE_3( cTimeF,                                                           
     "100לס",
     "1ס",
     "10ס",
-    set.freq.timeCounting, &PageFreqMeter::self, IsActive_TimeF, OnChanged_TimeF, Choice::AfterDraw
+    S_FREQ_TIME_COUNTING, &PageFreqMeter::self, IsActive_TimeF, OnChanged_TimeF, Choice::AfterDraw
 )
 
 
@@ -77,7 +77,7 @@ DEF_CHOICE_4( cFreqClc,                                                         
     "1ֳּצ",
     "10ֳּצ",
     "100ֳּצ",
-    set.freq.freqClc, &PageFreqMeter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, Choice::AfterDraw
+    S_FREQ_FREQ_CLC, &PageFreqMeter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, Choice::AfterDraw
 )
 
 
@@ -90,7 +90,7 @@ DEF_CHOICE_6( cNumPeriods,                                                      
     "1000",
     "10000",
     "100000",
-    set.freq.numberPeriods, &PageFreqMeter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, Choice::AfterDraw
+    S_FREQ_NUMBER_PERIODS, &PageFreqMeter::self, IsActive_SettingsFrequency, OnChanged_FreqMeter_Period, Choice::AfterDraw
 )
 
 
