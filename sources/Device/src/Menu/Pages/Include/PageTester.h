@@ -8,7 +8,7 @@ struct SettingsTester
     Tester::StepU::E    _stepU;          // Выбранный шаг изменения напряжения
     Tester::StepI::E    _stepI;          // Выбранный шаг изменения тока
     ENumAverage::E      _enumAverage;    // Количество усреднений
-    Tester::ViewMode::E viewMode;       // Режим отображения кривых
+    Tester::ViewMode::E _viewMode;       // Режим отображения кривых
 };
 
 

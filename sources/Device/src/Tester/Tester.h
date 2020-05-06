@@ -124,6 +124,8 @@ public:
 
     struct ViewMode
     {
+#define S_TEST_VIEW_MODE        (set.test._viewMode)
+
         enum E
         {
             Lines,
