@@ -2,22 +2,26 @@
 #include "Menu/MenuItems.h"
 
 
-#define S_DBG_SHOW_CONSOLE              (set.dbg.showConsole)
-#define S_DBG_NUM_STRINGS_IN_CONSOLE    (set.dbg.numStrings)
+#define S_DBG_SHOW_CONSOLE              (set.dbg._showConsole)
+#define S_DBG_NUM_STRINGS_IN_CONSOLE    (set.dbg._numStrings)
+#define S_DBG_SHOW_ALL_REGISTERS        (set.dbg._showAll)
+#define S_DBG_SHOW_FLAG                 (set.dbg._showFlag)
+#define S_DBG_SHOW_RSHIFT(chan)         (set.dbg._showRShift[chan])
+#define S_DBG_SHOW_TRIG_LEV             (set.dbg._showTrigLev)
+#define S_DBG_SHOW_RANGE(chan)          (set.dbg._showRange[chan])
+#define S_DBG_SHOW_CHAN_PARAM(chan)     (set.dbg._showChanParam[chan])
 
 
 struct SettingsDebug
 { //-V802
-    int8   showConsole;         // Показывать ли консоль
-    int16  numStrings;          // Число строк в консоли.
-    int8   sizeFont;            // Размер шрифта консоли - 0 - 5, 1 - 8.
-    bool   modePauseConsole;    // Если true, то вывод в консоль останавливается нажатием кнопки ПУСК/СТОП.
-    bool   showAll;
-    bool   showFlag;
-    bool   showRShift[2];
-    bool   showTrigLev;
-    bool   showRange[2];
-    bool   showChanParam[2];
+    int8   _showConsole;         // Показывать ли консоль
+    int16  _numStrings;          // Число строк в консоли.
+    bool   _showAll;
+    bool   _showFlag;
+    bool   _showRShift[2];
+    bool   _showTrigLev;
+    bool   _showRange[2];
+    bool   _showChanParam[2];
     bool   showTrigParam;
     bool   showTShift;
     bool   showTBase;

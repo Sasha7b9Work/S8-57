@@ -29,13 +29,13 @@ DEF_CHOICE_2( cShowAll,                                                         
     "Показывать все значения, засылаемые в регистры",
     "Нет",
     "Да",
-    set.dbg.showAll, &PageDebug::PageRegisters::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    S_DBG_SHOW_ALL_REGISTERS, &PageDebug::PageRegisters::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
 static bool IsActive_Registers()
 {
-    return set.dbg.showAll;
+    return S_DBG_SHOW_ALL_REGISTERS;
 }
 
 DEF_CHOICE_2( cRD_FL,                                                                                                                          //--- ОТЛАДКА - КОНСОЛЬ - РЕГИСТРЫ - RD_FL ---
@@ -43,7 +43,7 @@ DEF_CHOICE_2( cRD_FL,                                                           
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg.showFlag, &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
+    S_DBG_SHOW_FLAG, &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -52,7 +52,7 @@ DEF_CHOICE_2( cRShiftA,                                                         
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg.showRShift[ChanA], &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
+    S_DBG_SHOW_RSHIFT(ChanA), &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -61,7 +61,7 @@ DEF_CHOICE_2( cRShiftB,                                                         
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg.showRShift[ChanB], &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
+    S_DBG_SHOW_RSHIFT(ChanB), &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -70,7 +70,7 @@ DEF_CHOICE_2( cTrigLev,                                                         
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg.showTrigLev, &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
+    S_DBG_SHOW_TRIG_LEV, &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -79,7 +79,7 @@ DEF_CHOICE_2( cRangeA,                                                          
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg.showRange[ChanA], &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
+    S_DBG_SHOW_RANGE(ChanA), &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -88,7 +88,7 @@ DEF_CHOICE_2( cRangeB,                                                          
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg.showRange[ChanB], &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
+    S_DBG_SHOW_RANGE(ChanB), &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -106,7 +106,7 @@ DEF_CHOICE_2( cChanParamA,                                                      
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg.showChanParam[ChanA], &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
+    S_DBG_SHOW_CHAN_PARAM(ChanA), &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -115,7 +115,7 @@ DEF_CHOICE_2( cChanParamB,                                                      
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg.showChanParam[ChanB], &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
+    S_DBG_SHOW_CHAN_PARAM(ChanB), &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
 )
 
 

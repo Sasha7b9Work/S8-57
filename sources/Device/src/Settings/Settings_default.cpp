@@ -211,8 +211,6 @@ const Settings Settings::defaultSettings =
     {
         true,                       // showConsole
         30,                         // numStrings
-        8,                          // sizeFont
-        false,                      // modePauseConsole
         false,                      // showAll
         false,                      // showFlag
         { false, false },           // showRShift[2]
