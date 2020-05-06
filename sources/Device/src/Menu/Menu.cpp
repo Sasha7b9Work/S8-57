@@ -167,7 +167,7 @@ void Menu::ChangeStateFlashDrive()
 
 void Menu::Show()
 {
-    set.menu.show = true;
+    S_MENU_SHOW = true;
 
     Menu::SetAutoHide(true);
 }
@@ -175,7 +175,7 @@ void Menu::Show()
 
 void Menu::Hide()
 {
-    set.menu.show = false;
+    S_MENU_SHOW = false;
 
     Menu::SetAutoHide(true);
 }
@@ -183,7 +183,7 @@ void Menu::Hide()
 
 bool Menu::IsShown()
 {
-    return set.menu.show && GetMainPage() != nullptr;
+    return S_MENU_SHOW && GetMainPage() != nullptr;
 }
 
 

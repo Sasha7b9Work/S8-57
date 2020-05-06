@@ -3,6 +3,9 @@
 #include "Menu/MenuItems.h"
 
 
+#define S_MENU_SHOW (set.menu.show)
+
+
 struct SettingsMenu
 {
     bool        show;                               // Если true, то нужно показывать текущую страницу
