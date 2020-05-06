@@ -43,41 +43,56 @@ struct TypeItem
 };
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Item ///
 class Item
 {
 public:
     const DataItem *data;
     
     Item(const DataItem * const data = nullptr);
+    
     virtual ~Item() { };
+    
     // Количество пунктов меню, умещающиееся на экране
     static const int NUM_ON_DISPLAY = 5;
+    
     // Возвращает true, если кнопка, соответствующая элементу меню item, находится в нажатом положении
     bool IsPressed() const;
+    
     // Сделать/разделать текущим
     void SetCurrent(bool active) const;
+    
     // Возвращает true, если элемент меню по адрему item открыт
     bool IsOpened() const;
 
     void Open(bool open) const;
+    
     // Возвращает название элемента, как оно выглядит на дисплее прибора
     String Title() const;
+    
     // Возвращает true, если контрол находится в активном состоянии (реагирует на органы управления)
     bool IsActive() const { return data->funcActive(); };
 
     bool IsCurrentItem() const;
+    
     // Возвращает адрес родителя
     const Page *Keeper() const { return (data->keeper) ? *data->keeper : nullptr; }
+    
     // Возвращает true, если в древе предков стоит keeper
     bool ExistKeeper(const Page *keeper) const;
+    
     // Имеет родителя - не является главной страницей меню
     bool HaveParent() const { return Keeper() != nullptr; };
+    
     // Позиция итема по горизонтали - закрытого либо раскрытого.
     int PositionOnScreenX() const;
+    
     // Возвращает свою позицию в списке родителя
     int PositionInKeeperList() const;
+    
     // Высота итема
     static int Height();
+    
     // Ширина итема. pos - позиция итема на экране.
     int Width(int pos = -1) const;
 
@@ -93,8 +108,10 @@ public:
     virtual void Draw(int /*x*/, int /*y*/, bool /*opened*/) const {};
 
     virtual void HandlerFX(TypePress::E type) const;
+    
     // Обработка события кнопки
     virtual bool HandlerKey(const KeyEvent &) { return false; };
+    
     // Возвращает высоту в пикселях открытого элемента Choice или Page::Name
     virtual int HeightOpened() const;
 
@@ -106,6 +123,7 @@ public:
 
     // Возвращает цвет фона заголовка итема
     Color ColorTitleBackground() const { return IsPressed() ? Color::FILL : Color::BACK; };
+    
     // Возвращает цвет, которым нужно рисовать на заголовке итема
     Color ColorTitleText() const
     {
@@ -118,8 +136,10 @@ public:
 
         return result;
     }
+    
     // Цвет обводки итема
     Color ColorFrame() const { return Color::FILL; };
+    
     // Возвращает цвет, которым нужно заполнять участок выбора
     Color ColorBackground() const;
 
@@ -127,7 +147,7 @@ public:
 };
 
 
-///////////////////////////// Page ///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Page ///
 struct DataPage
 {
     uint8               name;            // Имя из перечисления Page::Name
@@ -212,7 +232,8 @@ public:
     static bool NormalTitle() { return true; }
 };
 
-/////////////////////////// Button ///
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Button ///
 struct DataButton
 {
     pFuncVV     handlerPress;   // Функция, которая вызывается при нажатии на кнопку.
@@ -222,12 +243,15 @@ class Button : public Item
 {
 public:
     Button(const DataItem * const data) : Item(data) {};
+    
     virtual void Draw(int x, int y, bool opened) const;
+    
     virtual void HandlerFX(TypePress::E type) const;
+    
     const DataButton *OwnData() const { return static_cast<const DataButton *>(data->ad); }
 };
 
-////////////////////// GraphButton ///
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// GraphButton ///
 struct StructHelpDrawButton
 {
     pFuncDrawUGO    funcDrawUGO;    // Указатель на функцию отрисовки изображения варианта кнопки
@@ -248,13 +272,17 @@ public:
     GraphButton(const DataItem * const data) : Item(data) {};
 
     virtual void Draw(int x, int y, bool opened) const;
+    
     void DrawHints(int x, int y, int width) const;
+    
     virtual void HandlerFX(TypePress::E type) const;
+    
     const DataGraphButton *OwnData() const { return static_cast<const DataGraphButton *>(data->ad); }
+    
     int NumHints() const;
 };
 
-///////////////////////// Governor ///
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Governor ///
 struct DataGovernor
 {
     int16  *cell;
@@ -268,32 +296,46 @@ class Governor : public Item
 {
 public:
     Governor(const DataItem * const data) : Item(data) {};
+    
     // Возвращает следующее большее значение, которое может принять governor.
     int16 NextValue() const;
+    
     // Возвращает следующее меньшее значение, которое может принять governor.
     int16 PrevValue() const;
+    
     // Рассчитывате следующий кадр анимации.
     float Step() const;
+    
     // Изменяет значение в текущей позиции при раскрытом элементе.
     void ChangeValue(int16 delta);
+    
     // При открытом элементе переставляет курсор на следующую позицию.
     void NextPosition() const;
+    
     // При открытом элементе переставляет курсор не предыдущую позицию
     void PrevPosition();
+    
     // Нарисовать в раскрытом виде
     void DrawOpened(int x, int y) const;
+    
     // Нарисовать в закрытом виде (в строке меню)
     void DrawClosed(int x, int y) const;
+    
     // Отобразить значение
     void DrawValue(int x, int y) const;
+    
     // Возвращает символ ручки, соответствующий текущему значению
     char GetSymbol() const;
+    
     // Возвращает значение, установленное в регуляторе
     int16 GetValue() const;
+    
     // Задаёт новое значение
     void SetValue(int16 v) const;
+    
     // Обработка события кнопки
     virtual bool HandlerKey(const KeyEvent &event);
+    
     // Обработка события функциональной кнопки, соответствующей данному итему
     virtual void HandlerFX(TypePress::E type) const;
 
@@ -317,7 +359,7 @@ private:
 };
 
 
-/////////////////////////// Choice ///
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Choice ///
 struct DataChoice
 {
     int8           *cell;
@@ -377,7 +419,8 @@ public:
     static void AfterDraw(int, int) {};
 };
 
-//////////////////// GovernorColor ///
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// GovernorColor ///
 struct DataGovernorColor
 {
     ColorType  *ct;                 // Структура для описания цвета.
@@ -387,16 +430,27 @@ class GovernorColor : public Item
 {
 public:
     GovernorColor(const DataItem * const data) : Item(data) {};
+    
     virtual void Draw(int x, int y, bool opened) const;
+    
     // Обработка события функциональной кнопки, соответствующей данному итему на странице
     virtual void HandlerFX(TypePress::E type) const;
+    
     virtual bool HandlerKey(const KeyEvent &event);
+    
     virtual int HeightOpened() const { return 27; };
+    
     const DataGovernorColor *OwnData() const;
+
 private:
+    
     void DrawOpened(int x, int y) const;
+    
     void DrawClosed(int x, int y) const;
+    
     void DrawValue(int x, int y) const;
+    
     static const int widthOpened = 129;
+    
     static const int heightOpened = 27;
 };
