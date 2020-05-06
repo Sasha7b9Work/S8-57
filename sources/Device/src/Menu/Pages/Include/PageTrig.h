@@ -11,7 +11,7 @@ struct TrigSource
 
 
 // Режим поиска синхронизции
-#define S_TRIG_MODE_FIND            (set.trig.modeFind)
+#define S_TRIG_MODE_FIND            (set.trig._modeFind)
 #define S_TRIG_MODE_FIND_IS_AUTO    (S_TRIG_MODE_FIND == TrigModeFind::Auto)
 struct TrigModeFind
 {
@@ -23,7 +23,7 @@ struct TrigModeFind
 };
 
 
-#define S_TRIG_INPUT    (set.trig.input)
+#define S_TRIG_INPUT    (set.trig._input)
 struct TrigInput
 {
     enum E
@@ -37,7 +37,7 @@ struct TrigInput
 };
 
 
-#define S_TRIG_POLARITY     (set.trig.polarity)
+#define S_TRIG_POLARITY     (set.trig._polarity)
 #define S_TRIG_POLARITY_U8  (static_cast<uint8>(S_TRIG_POLARITY))
 struct TrigPolarity
 {
@@ -51,7 +51,7 @@ struct TrigPolarity
 
 
 // Режим запуска.
-#define S_TRIG_START_MODE           (set.trig.startMode)
+#define S_TRIG_START_MODE           (set.trig._startMode)
 #define S_TRIG_START_MODE_IS_SINGLE (S_TRIG_START_MODE == TrigStartMode::Single)
 #define S_TRIG_START_MODE_IS_AUTO   (S_TRIG_START_MODE == TrigStartMode::Auto)
 struct TrigStartMode
@@ -67,26 +67,26 @@ struct TrigStartMode
 };
 
 
-#define S_TRIG_SOURCE           (set.trig.source)
+#define S_TRIG_SOURCE           (set.trig._source)
 
-#define S_TRIG_LEVEL(channel)   (set.trig.level[channel])
+#define S_TRIG_LEVEL(channel)   (set.trig._level[channel])
 #define S_TRIG_LEVEL_SOURCE     S_TRIG_LEVEL(S_TRIG_SOURCE)
 
-#define S_TRIG_HOLDOFF_VALUE    (set.trig.holdOff)
-#define S_TRIG_HOLDOFF_ENABLED  (set.trig.holdOffEnabled)
+#define S_TRIG_HOLDOFF_VALUE    (set.trig._holdOff)
+#define S_TRIG_HOLDOFF_ENABLED  (set.trig._holdOffEnabled)
 
 
 struct SettingsTrig
 {
-    Chan::E          source;
-    TrigInput::E     input;
-    TrigPolarity::E  polarity;
-    int16            level[Chan::Count];
-    TrigStartMode::E startMode;         // Режим запуска.
-    TrigModeFind::E  modeFind;          // Поиск синхронизации - вручную или автоматически.
+    Chan::E          _source;
+    TrigInput::E     _input;
+    TrigPolarity::E  _polarity;
+    int16            _level[Chan::Count];
+    TrigStartMode::E _startMode;         // Режим запуска.
+    TrigModeFind::E  _modeFind;          // Поиск синхронизации - вручную или автоматически.
                                         // \todo разрядности trig_holdOff недостаточно
-    int16            holdOff;           // Удержание синхронизации
-    bool             holdOffEnabled;    // Включение удержания синхронизации
+    int16            _holdOff;           // Удержание синхронизации
+    bool             _holdOffEnabled;    // Включение удержания синхронизации
 };
 
 
