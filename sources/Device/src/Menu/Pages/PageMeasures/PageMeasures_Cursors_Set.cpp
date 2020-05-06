@@ -291,12 +291,12 @@ static void Draw_Movement_Points(int x, int y)
 
 static void OnPress_Movement()
 {
-    Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&set.curs.movement), 0, 1);
+    Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&S_CURS_MOVEMENT), 0, 1);
 }
 
 static void Draw_Movement(int x, int y)
 {
-    if (set.curs.movement == CursorsMovement::Percents)
+    if (S_CURS_MOVEMENT_IS_PERCENTS)
     {
         Draw_Movement_Percents(x, y);
     }
@@ -328,9 +328,9 @@ bool PageCursorsMeasures::Set::HandlerKey(const KeyEvent &event) //-V2506
 
     if (S_CURS_ACTIVE_IS_U && (event.IsArrowUp() || event.IsArrowDown()))
     {
-        if (set.curs.movement == CursorsMovement::Percents)
+        if (S_CURS_MOVEMENT_IS_PERCENTS)
         {
-            value *= set.curs.deltaU100percents[CursorsSource()] / 100.0F;
+            value *= S_CURS_DU_PERCENTS(S_CURS_SOURCE) / 100.0F;
         }
 
         if (CursorsControl::IsEnabled1U())
@@ -347,7 +347,7 @@ bool PageCursorsMeasures::Set::HandlerKey(const KeyEvent &event) //-V2506
     }
     else if(S_CURS_ACTIVE_IS_T && (event.IsArrowLeft() || event.IsArrowRight()))
     {
-        if (set.curs.movement == CursorsMovement::Percents)
+        if (S_CURS_MOVEMENT_IS_PERCENTS)
         {
             value *= set.curs.deltaT100percents[CursorsSource()] / 100.0F;
         }
@@ -414,7 +414,7 @@ void PageCursorsMeasures::Set::IncCursCntrlT(Chan::E ch)
 
 void PageCursorsMeasures::Set::SetCursPos100(Chan::E ch)
 {
-    set.curs.deltaU100percents[ch] = static_cast<float>(std::fabsf(set.curs.posCurU[ch][0] - set.curs.posCurU[ch][1]));
+    S_CURS_DU_PERCENTS(ch) = static_cast<float>(std::fabsf(set.curs.posCurU[ch][0] - set.curs.posCurU[ch][1]));
     set.curs.deltaT100percents[ch] = static_cast<float>(std::fabsf(CursorsMeasurements::PosT(ch, 0) - CursorsMeasurements::PosT(ch, 1)));
 }
 
@@ -423,7 +423,7 @@ void PageCursorsMeasures::Set::SetShiftCursPosU(Chan::E ch, int numCur, float de
 {
     set.curs.posCurU[ch][numCur] = Math::LimitationRet(set.curs.posCurU[ch][numCur] - delta, 0.0F, MAX_POS_U);
 
-    if (set.curs.movement == CursorsMovement::Pixels)                        // ≈сли перемещение по пиксел€м, то нужно привести к пиксельной сетке экрана
+    if (S_CURS_MOVEMENT_IS_PIXELS)                        // ≈сли перемещение по пиксел€м, то нужно привести к пиксельной сетке экрана
     {
         // \todo
     }
@@ -436,7 +436,7 @@ void PageCursorsMeasures::Set::SetShiftCursPosT(Chan::E ch, int numCur, float de
     // CURsT_POS(ch, numCur) = LimitationFloat(CURsT_POS(ch, numCur) + delta, 0, MAX_POS_T);   
     CursorsMeasurements::SetCursPosT_temp(ch, numCur, Math::LimitationRet(CursorsMeasurements::PosT(ch, numCur) + delta, 0.0F, MAX_POS_T));
 
-    if (set.curs.movement == CursorsMovement::Pixels)         // ≈сли перемещение по пиксел€м, то нужно привести к пиксельной сетке экрана
+    if (S_CURS_MOVEMENT_IS_PIXELS)         // ≈сли перемещение по пиксел€м, то нужно привести к пиксельной сетке экрана
     {
         // \todo
     }

@@ -25,13 +25,13 @@ bool MeasuresOnDisplay::IsVertical()
 
 CursorsControl::E &CursorsControl::RefU(Chan::E ch)
 {
-    return set.curs.cntrlU[ch];
+    return S_CURS_CONTROL_U(ch);
 }
 
 
 CursorsControl::E &CursorsControl::RefT(Chan::E ch)
 {
-    return set.curs.cntrlT[ch];
+    return S_CURS_CONTROL_T(ch);
 }
 
 

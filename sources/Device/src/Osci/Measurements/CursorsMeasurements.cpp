@@ -171,7 +171,7 @@ String CursorsMeasurements::PercentsU(Chan::E source)
     // \todo Тут дикая дичь. Эта строчка вызывает HardFault. Возможно, из-за включенного выравнивания Settings. Надо подумать
     // float dPerc = dUperc(source);     
     float dPerc = 100.0F;
-    std::memcpy(&dPerc, &set.curs.deltaU100percents[source], sizeof(float));
+    std::memcpy(&dPerc, &S_CURS_DU_PERCENTS(source), sizeof(float));
 
     float dValue = std::fabsf(PosU(source, 0) - PosU(source, 1));
     return String("%s%%", Float(dValue / dPerc * 100.0F).ToString(false, 5).c_str());
