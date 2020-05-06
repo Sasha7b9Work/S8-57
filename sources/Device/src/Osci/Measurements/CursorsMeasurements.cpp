@@ -20,7 +20,7 @@ static void UpdateCursorsForLook();
 
 float CursorsMeasurements::PosU(Chan::E ch, int numCur)
 {
-    return set.curs.posCurU[ch][numCur] / (Grid::Bottom() == Grid::FullBottom() ? 1.0F : 2.0F);
+    return S_CURS_POS_U(ch, numCur) / (Grid::Bottom() == Grid::FullBottom() ? 1.0F : 2.0F);
 }
 
 
@@ -86,8 +86,8 @@ void CursorsMeasurements::Draw()
         {
             x0 = Grid::Left() + static_cast<int>(CursorsMeasurements::PosT(source, 0));
             x1 = Grid::Left() + static_cast<int>(CursorsMeasurements::PosT(source, 1));
-            y0 = Grid::Top() + static_cast<int>(set.curs.posCurU[source][0]);
-            y1 = Grid::Top() + static_cast<int>(set.curs.posCurU[source][1]);
+            y0 = Grid::Top() + static_cast<int>(S_CURS_POS_U0(source));
+            y1 = Grid::Top() + static_cast<int>(S_CURS_POS_U1(source));
 
             Rectangle(4, 4).Draw(x0 - 2, y0 - 2);
             Rectangle(4, 4).Draw(x1 - 2, y1 - 2);
@@ -100,8 +100,8 @@ void CursorsMeasurements::Draw()
         }
         if (!CursorsControl::IsDisabledU())
         {
-            DrawHorizontal(static_cast<int>(set.curs.posCurU[source][0]), x0);
-            DrawHorizontal(static_cast<int>(set.curs.posCurU[source][1]), x1);
+            DrawHorizontal(static_cast<int>(S_CURS_POS_U0(source)), x0);
+            DrawHorizontal(static_cast<int>(S_CURS_POS_U1(source)), x1);
         }
 
         UpdateCursorsForLook();
@@ -181,7 +181,7 @@ String CursorsMeasurements::PercentsU(Chan::E source)
 String CursorsMeasurements::PercentsT(Chan::E source)
 {
     float dPerc = 100.0F;
-    std::memcpy(&dPerc, &set.curs.deltaT100percents[source], sizeof(float));
+    std::memcpy(&dPerc, &S_CURS_DT_PERCENTS(source), sizeof(float));
 
     float dValue = std::fabsf(PosT(source, 0) - PosT(source, 1));
     return String("%s%%", Float(dValue / dPerc * 100.0F).ToString(false, 6).c_str());

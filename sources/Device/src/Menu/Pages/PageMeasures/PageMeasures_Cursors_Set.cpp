@@ -349,7 +349,7 @@ bool PageCursorsMeasures::Set::HandlerKey(const KeyEvent &event) //-V2506
     {
         if (S_CURS_MOVEMENT_IS_PERCENTS)
         {
-            value *= set.curs.deltaT100percents[CursorsSource()] / 100.0F;
+            value *= S_CURS_DT_PERCENTS(S_CURS_SOURCE) / 100.0F;
         }
 
         if (CursorsControl::IsEnabled1T())
@@ -414,14 +414,14 @@ void PageCursorsMeasures::Set::IncCursCntrlT(Chan::E ch)
 
 void PageCursorsMeasures::Set::SetCursPos100(Chan::E ch)
 {
-    S_CURS_DU_PERCENTS(ch) = static_cast<float>(std::fabsf(set.curs.posCurU[ch][0] - set.curs.posCurU[ch][1]));
-    set.curs.deltaT100percents[ch] = static_cast<float>(std::fabsf(CursorsMeasurements::PosT(ch, 0) - CursorsMeasurements::PosT(ch, 1)));
+    S_CURS_DU_PERCENTS(ch) = static_cast<float>(std::fabsf(S_CURS_POS_U0(ch) - S_CURS_POS_U1(ch)));
+    S_CURS_DT_PERCENTS(ch) = static_cast<float>(std::fabsf(CursorsMeasurements::PosT(ch, 0) - CursorsMeasurements::PosT(ch, 1)));
 }
 
 
 void PageCursorsMeasures::Set::SetShiftCursPosU(Chan::E ch, int numCur, float delta)
 {
-    set.curs.posCurU[ch][numCur] = Math::LimitationRet(set.curs.posCurU[ch][numCur] - delta, 0.0F, MAX_POS_U);
+    S_CURS_POS_U(ch, numCur) = Math::LimitationRet(S_CURS_POS_U(ch, numCur) - delta, 0.0F, MAX_POS_U);
 
     if (S_CURS_MOVEMENT_IS_PIXELS)                        // ≈сли перемещение по пиксел€м, то нужно привести к пиксельной сетке экрана
     {
@@ -457,18 +457,18 @@ void PageCursorsMeasures::Set::UpdateCursorsForLook()
     }
     if (S_CURS_ACTIVE_IS_U && (S_CURS_LOOK_MODE_IS_TIME(ChanA) || S_CURS_LOOK_MODE_IS_BOTH(ChanA)))
     {
-        SetCursorT(source, 0, Measure::CalculateCursorT(source, set.curs.posCurU[source][0], 0));
+        SetCursorT(source, 0, Measure::CalculateCursorT(source, S_CURS_POS_U0(source), 0));
     }
     if (S_CURS_ACTIVE_IS_U && (S_CURS_LOOK_MODE_IS_TIME(ChanB) || S_CURS_LOOK_MODE_IS_BOTH(ChanB)))
     {
-        SetCursorT(source, 1, Measure::CalculateCursorT(source, set.curs.posCurU[source][1], 1));
+        SetCursorT(source, 1, Measure::CalculateCursorT(source, S_CURS_POS_U1(source), 1));
     }
 }
 
 
 void PageCursorsMeasures::Set::SetCursorU(Chan::E ch, int numCur, float pos)
 {
-    set.curs.posCurU[ch][numCur] = Math::LimitationRet(pos, 0.0F, MAX_POS_U);
+    S_CURS_POS_U(ch, numCur) = Math::LimitationRet(pos, 0.0F, MAX_POS_U);
 }
 
 

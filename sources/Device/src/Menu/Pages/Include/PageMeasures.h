@@ -153,9 +153,16 @@ struct CursorsMovement
 
 #define S_CURS_SHOW                 (set.curs._showCursors)
 #define S_CURS_SHOW_FREQ            (set.curs._showFreq)
+
 #define S_CURS_SOURCE               (set.curs._source)
 #define S_CURS_SOURCE_IS_A          (S_CURS_SOURCE == ChanA)
+
 #define S_CURS_DU_PERCENTS(chan)    (set.curs._deltaU100percents[chan])
+#define S_CURS_DT_PERCENTS(chan)    (set.curs._deltaT100percents[chan])
+
+#define S_CURS_POS_U(chan, num)     (set.curs._posCurU[chan][num])
+#define S_CURS_POS_U0(chan)         (set.curs._posCurU[chan][0])
+#define S_CURS_POS_U1(chan)         (set.curs._posCurU[chan][1])
 
 
 struct SettingsCursorsMeasures
@@ -169,8 +176,8 @@ struct SettingsCursorsMeasures
     CursorsControl::E  _cntrlT[Chan::Count];     // јктивные курсоры времени.
     CursorsMovement::E _movement;                //  ак перемещатьс€ курсорам - по точкам или процентам.
     float              _deltaU100percents[2];    // –ассто€ние между курсорами напр€жени€ дл€ 100%, дл€ обоих каналов.
-    float              deltaT100percents[2];    // –ассто€ние между курсорами времени дл€ 100%, дл€ обоих каналов.
-    float              posCurU[Chan::Count][2]; // “екущие позиции курсоров напр€жени€ обоих каналов.
+    float              _deltaT100percents[2];    // –ассто€ние между курсорами времени дл€ 100%, дл€ обоих каналов.
+    float              _posCurU[Chan::Count][2]; // “екущие позиции курсоров напр€жени€ обоих каналов.
     float              posCurT[Chan::Count][2]; // “екущие позиции курсоров времени обоих каналов.
 };
 
