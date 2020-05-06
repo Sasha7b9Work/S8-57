@@ -63,6 +63,9 @@ struct ENumAccum
     };
 };
 
+
+#define S_DISP_MODE_ACCUM           (set.disp.modeAccumulation)
+#define S_DISP_MODE_ACCUM_IS_RESET  (S_DISP_MODE_ACCUM == ModeAccumulation::Reset)
 struct ModeAccumulation
 {
     enum E

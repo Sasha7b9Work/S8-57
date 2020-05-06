@@ -11,7 +11,7 @@ DEF_CHOICE_2( cEnable,                                                          
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.disp.modeAccumulation, &PageDisplay::Accumulation::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    S_DISP_MODE_ACCUM, &PageDisplay::Accumulation::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
