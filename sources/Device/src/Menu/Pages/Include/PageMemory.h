@@ -118,6 +118,7 @@ struct TypeSignalROM
 #define MAX_SYMBOLS_IN_FILE_NAME 35
 
 #define S_MEM_FILE_NAME             (set.mem._fileName)
+#define S_MEM_FILE_NAME_MASK        (set.mem._fileNameMask)
 #define S_MEM_FLASH_AUTO_CONNECT    (set.mem._flashAutoConnect)
 #define S_MEM_INDEX_CUR_SYMBOL_MASK (set.mem._indexCurSymbolNameMask)
 
@@ -133,7 +134,7 @@ struct SettingsMemory
     char                _fileName[MAX_SYMBOLS_IN_FILE_NAME];     // Имя файла для режима ручного задания.
     ModeShowIntMem::E   _;                                      // Что показывать в режиме ВНУТР ЗУ - считанный или записанный сигнал.
     FileNamingMode::E   _fileNamingMode;                         // Режим именования файлов.
-    char                fileNameMask[MAX_SYMBOLS_IN_FILE_NAME]; // \brief Здесь маска для автоматического именования файлов.
+    char                _fileNameMask[MAX_SYMBOLS_IN_FILE_NAME]; // \brief Здесь маска для автоматического именования файлов.
                         // \details Правила именования.\n
                         // \code
                         // %y('\x42') - год, %m('\x43') - месяц, %d('\x44') - день, %H('\x45') - часы, %M('\x46') - минуты, %S('\x47') - секунды

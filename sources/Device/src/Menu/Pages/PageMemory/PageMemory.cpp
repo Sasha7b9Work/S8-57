@@ -136,7 +136,7 @@ const Page * const PageDrive::Manager::self = static_cast<const Page *>(&pManage
 
 static void OnPress_Mask_Delete()
 {
-    set.mem.fileNameMask[0] = '\0';
+    S_MEM_FILE_NAME_MASK[0] = '\0';
 }
 
 static void Draw_Delete(int x, int y)
@@ -153,16 +153,16 @@ DEF_GRAPH_BUTTON( bMask_Delete,                                                 
 
 static void OnPress_Mask_Backspace()
 {
-    int size = static_cast<int>(std::strlen(set.mem.fileNameMask));
+    int size = static_cast<int>(std::strlen(S_MEM_FILE_NAME_MASK));
     if (size > 0)
     {
-        if (size > 1 && set.mem.fileNameMask[size - 2] == 0x07)
+        if (size > 1 && S_MEM_FILE_NAME_MASK[size - 2] == 0x07)
         {
-            set.mem.fileNameMask[size - 2] = '\0';
+            S_MEM_FILE_NAME_MASK[size - 2] = '\0';
         }
         else
         {
-            set.mem.fileNameMask[size - 1] = '\0';
+            S_MEM_FILE_NAME_MASK[size - 1] = '\0';
         }
     }
 }
@@ -182,15 +182,15 @@ DEF_GRAPH_BUTTON( bMask_Backspace,                                              
 static void OnPress_Mask_Insert()
 {
     int index = S_MEM_INDEX_CUR_SYMBOL_MASK;
-    int size = static_cast<int>(std::strlen(set.mem.fileNameMask));
+    uint size = std::strlen(S_MEM_FILE_NAME_MASK);
     if (size == MAX_SYMBOLS_IN_FILE_NAME - 1)
     {
         return;
     }
     if (index < 0x41)
     {
-        set.mem.fileNameMask[size] = Tables::Get(index)[0];
-        set.mem.fileNameMask[size + 1] = '\0';
+        S_MEM_FILE_NAME_MASK[size] = Tables::Get(index)[0];
+        S_MEM_FILE_NAME_MASK[size + 1] = '\0';
     }
     else
     {
@@ -199,18 +199,18 @@ static void OnPress_Mask_Insert()
         {
             if (size < MAX_SYMBOLS_IN_FILE_NAME - 2 && size > 0)
             {
-                if (set.mem.fileNameMask[size - 1] >= 0x30 && set.mem.fileNameMask[size - 1] <= 0x39) // Если ранее введено число
+                if (S_MEM_FILE_NAME_MASK[size - 1] >= 0x30 && S_MEM_FILE_NAME_MASK[size - 1] <= 0x39) // Если ранее введено число
                 {
-                    set.mem.fileNameMask[size] = set.mem.fileNameMask[size - 1] - 0x30;
-                    set.mem.fileNameMask[size - 1] = 0x07;
-                    set.mem.fileNameMask[size + 1] = '\0';
+                    S_MEM_FILE_NAME_MASK[size] = S_MEM_FILE_NAME_MASK[size - 1] - 0x30;
+                    S_MEM_FILE_NAME_MASK[size - 1] = 0x07;
+                    S_MEM_FILE_NAME_MASK[size + 1] = '\0';
                 }
             }
         }
         else
         {
-            set.mem.fileNameMask[size] = static_cast<char>(index);
-            set.mem.fileNameMask[size + 1] = '\0';
+            S_MEM_FILE_NAME_MASK[size] = static_cast<char>(index);
+            S_MEM_FILE_NAME_MASK[size + 1] = '\0';
         }
     }
 }
@@ -315,7 +315,7 @@ static void DrawSetMask()
 
 static void DrawFileMask(int x, int y)
 {
-    char *ch = set.mem.fileNameMask;
+    char *ch = S_MEM_FILE_NAME_MASK;
 
     Color::FILL.SetAsCurrent();
     while (*ch != '\0')

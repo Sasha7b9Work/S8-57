@@ -366,7 +366,7 @@ bool FileManager::GetNameForNewFile(char name[255]) //-V2506
                            //  1          2           3         4           5             6
         uint values[] = {0U, time.year, time.month, time.day, time.hours, time.minutes, time.seconds};
 
-        char *ch = set.mem.fileNameMask;
+        char *ch = S_MEM_FILE_NAME_MASK;
         char *wr = name;
 
         while (*wr != '\0')
