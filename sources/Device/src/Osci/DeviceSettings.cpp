@@ -31,8 +31,8 @@ void DataSettings::Fill()
     Lval_COUPLE_A(this)  = setA.couple;
     Lval_COUPLE_B(this)  = setB.couple;
 
-    TRIGLEV_A(this)      = set.trig.level[ChanA];
-    TRIGLEV_B(this)      = set.trig.level[ChanB];
+    TRIGLEV_A(this)      = S_TRIG_LEVEL(ChanA);
+    TRIGLEV_B(this)      = S_TRIG_LEVEL(ChanB);
 
     Lval_PEAKDET(this)   = PeakDetMode().IsEnabled() ? PeakDetMode::Enabled : PeakDetMode::Disabled;
 

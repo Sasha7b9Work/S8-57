@@ -56,7 +56,9 @@ struct TrigStartMode
 };
 
 
-#define S_TRIG_SOURCE (set.trig.source)
+#define S_TRIG_SOURCE           (set.trig.source)
+#define S_TRIG_LEVEL(channel)   (set.trig.level[channel])
+#define S_TRIG_LEVEL_SOURCE     S_TRIG_LEVEL(S_TRIG_SOURCE)
 
 struct SettingsTrig
 {
