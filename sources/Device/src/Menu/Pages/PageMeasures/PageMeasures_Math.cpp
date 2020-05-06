@@ -137,7 +137,7 @@ DEF_GRAPH_BUTTON_HINTS_2( bModeArrows,                                          
 
 static void OnPress_RangeA()
 {
-    set.math.range = setA.range;
+    S_RANGE_MATH = S_RANGA_A;
     set.math.divider = S_DIVIDER_A;
 }
 
@@ -160,7 +160,7 @@ DEF_GRAPH_BUTTON( bRangeA,                                                      
 
 static void OnPress_RangeB()
 {
-    set.math.range = setB.range;
+    S_RANGE_MATH = S_RANGE_B;
     set.math.divider = S_DIVIDER_B;
 }
 
@@ -226,24 +226,24 @@ static bool HandlerKey_Function(const KeyEvent &event) // -V2506
             static int sum = 0;
             sum -= delta;
 
-            float rShiftAbs = RShift::ToAbs(S_RSHIFT_MATH, set.math.range);
+            float rShiftAbs = RShift::ToAbs(S_RSHIFT_MATH, S_RANGE_MATH);
 
             if(sum > 2)
             {
-                if(set.math.range < Range::Count - 1)
+                if(S_RANGE_MATH < Range::Count - 1)
                 {
-                    set.math.range = static_cast<Range::E>(static_cast<uint8>(set.math.range + 1));  // SET_RANGE_MATH++;
-                    S_RSHIFT_MATH = RShift::ToRel(rShiftAbs, set.math.range);
+                    S_RANGE_MATH = static_cast<Range::E>(static_cast<uint8>(S_RANGE_MATH + 1));  // SET_RANGE_MATH++;
+                    S_RSHIFT_MATH = RShift::ToRel(rShiftAbs, S_RANGE_MATH);
                     Beeper::RegulatorSwitchRotate();
                 }
                 sum = 0;
             }
             else if(sum < -2)
             {
-                if(set.math.range > 0)
+                if(S_RANGE_MATH > 0)
                 {
-                    set.math.range = static_cast<Range::E>(static_cast<uint8>(set.math.range - 1));  // SET_RANGE_MATH--;
-                    S_RSHIFT_MATH = RShift::ToRel(rShiftAbs, set.math.range);
+                    S_RANGE_MATH = static_cast<Range::E>(static_cast<uint8>(S_RANGE_MATH - 1));  // SET_RANGE_MATH--;
+                    S_RSHIFT_MATH = RShift::ToRel(rShiftAbs, S_RANGE_MATH);
                     Beeper::RegulatorSwitchRotate();
                 }
                 sum = 0;

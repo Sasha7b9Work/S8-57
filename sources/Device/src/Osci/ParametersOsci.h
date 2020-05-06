@@ -106,7 +106,7 @@ struct Divider
 #define S_RANGE(channel)    set.ch[channel].range
 #define S_RANGA_A           S_RANGE(0)
 #define S_RANGE_B           S_RANGE(1)
-#define S_RANGE_MATH        S_RANGE_MATH
+#define S_RANGE_MATH        set.math.range
 struct Range
 {
     enum E
@@ -207,6 +207,9 @@ struct ModeCouple
     static pString UGO(ModeCouple::E v);
 };
 
+
+#define S_BANDWIDTH(chan)           set.ch[chan].bandwidth
+#define S_BANDWIDTH_IS_20MHz(chan)  (S_BANDWIDTH(chan) == Bandwidth::_20MHz)
 struct Bandwidth
 {
     enum E
@@ -217,6 +220,7 @@ struct Bandwidth
 
     static void Load(Chan::E ch);
 };
+
 
 struct TShift
 {
