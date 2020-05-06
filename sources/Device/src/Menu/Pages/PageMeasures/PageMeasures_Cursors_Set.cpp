@@ -402,13 +402,13 @@ void PageCursorsMeasures::Set::SetCursSource(Chan::E ch)
 
 void PageCursorsMeasures::Set::IncCursCntrlU(Chan::E ch)
 {
-    Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&S_CURS_CONTROL_U(ch)), 0, 3);
+    Math::CircleIncrease<int8>(&S_CURS_CONTROL_U_I8(ch), 0, 3);
 }
 
 
 void PageCursorsMeasures::Set::IncCursCntrlT(Chan::E ch)
 {
-    Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&S_CURS_CONTROL_T(ch)), 0, 3);
+    Math::CircleIncrease<int8>(&S_CURS_CONTROL_T_I8(ch), 0, 3);
 }
 
 
