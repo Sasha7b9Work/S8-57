@@ -229,7 +229,7 @@ DEF_GRAPH_BUTTON( bMask_Insert,                                                 
 
 static bool IsActive_Mask()
 {
-    return (set.mem.fileNamingMode == FileNamingMode::Mask);
+    return S_MEM_FILE_NAMING_MODE_IS_MASK;
 }
 
 static void OnOpenClose_Mask(bool open)
@@ -403,7 +403,7 @@ void PageMemory::SaveSignalToFlashDrive()
 {
     if (FDrive::IsConnected())
     {
-        if (set.mem.fileNamingMode == FileNamingMode::Manually)
+        if (S_MEM_FILE_NAMING_MODE_IS_MANUALLY)
         {
             Display::SetAddDrawFunction(DrawSetName);
         }

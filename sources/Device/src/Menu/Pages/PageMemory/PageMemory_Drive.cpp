@@ -11,7 +11,7 @@ DEF_CHOICE_2(cSaveAs,                                                           
     ,
     "Изображение",
     "Текст",
-    set.mem.modeSaveSignal, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    S_MEM_MODE_SAVE_SIGNAL, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -24,7 +24,7 @@ DEF_CHOICE_2(cName,                                                             
     ,
     "По маске",
     "Вручную",
-    set.mem.fileNamingMode, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    S_MEM_FILE_NAMING_MODE, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

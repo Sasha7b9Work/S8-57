@@ -352,12 +352,12 @@ bool FileManager::GetNameForNewFile(char name[255]) //-V2506
         return false;
     }
 
-    if (set.mem.fileNamingMode == FileNamingMode::Manually)
+    if (S_MEM_FILE_NAMING_MODE_IS_MANUALLY)
     {
         LIMITATION(size, 1, 95);
         std::strcat(name, S_MEM_FILE_NAME);
         std::strcat(name, ".");
-        std::strcat(name, (set.mem.modeSaveSignal == ModeSaveSignal::BMP) ? "bmp" : "txt");
+        std::strcat(name, S_MEM_MODE_SAVE_SIGNAL_IS_BMP ? "bmp" : "txt");
         return true;
     }
     else
@@ -407,7 +407,7 @@ bool FileManager::GetNameForNewFile(char name[255]) //-V2506
         *wr = '.';
         *(wr + 1) = '\0';
 
-        std::strcat(name, (set.mem.modeSaveSignal == ModeSaveSignal::BMP) ? "bmp" : "txt");
+        std::strcat(name, S_MEM_MODE_SAVE_SIGNAL_IS_BMP ? "bmp" : "txt");
 
         return true;
     }
