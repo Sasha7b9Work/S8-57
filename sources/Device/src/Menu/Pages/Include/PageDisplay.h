@@ -144,7 +144,8 @@ struct MenuAutoHide
 };
 
 
-#define S_DISP_BRIGHTNESS (set.disp.brightness)
+#define S_DISP_BRIGHTNESS       (set.disp.brightness)
+#define S_DISP_SHIFT_IN_MEMORY  (set.disp.shiftInMemory)
 
 struct SettingsDisplay
 { //-V802

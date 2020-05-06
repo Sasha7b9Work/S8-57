@@ -373,7 +373,7 @@ void DisplayOsci::PainterData::DrawModePointsPeakDetOff(int center, const uint8 
 
 int DisplayOsci::PainterData::FirstPointOnScreen()
 {
-    return set.disp.shiftInMemory;
+    return S_DISP_SHIFT_IN_MEMORY;
 }
 
 
@@ -410,14 +410,14 @@ void DisplayOsci::PainterData::ChangeTPos()
 
     if (set.time.tPos == TPos::Left)
     {
-        set.disp.shiftInMemory = 0;
+        S_DISP_SHIFT_IN_MEMORY = 0;
     }
     else if (set.time.tPos == TPos::Center)
     {
-        set.disp.shiftInMemory = static_cast<int16>(ENumPointsFPGA::PointsInChannel() / 2 - width / 2);
+        S_DISP_SHIFT_IN_MEMORY = static_cast<int16>(ENumPointsFPGA::PointsInChannel() / 2 - width / 2);
     }
     else // TPOS_IS_RIGHT
     {
-        set.disp.shiftInMemory = static_cast<int16>(ENumPointsFPGA::PointsInChannel() - width - 2);
+        S_DISP_SHIFT_IN_MEMORY = static_cast<int16>(ENumPointsFPGA::PointsInChannel() - width - 2);
     }
 }
