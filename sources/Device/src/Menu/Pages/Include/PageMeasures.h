@@ -109,9 +109,7 @@ struct CursorsActive
 struct CursorsControl
 {
 #define S_CURS_CONTROL_U(chan)      (set.curs._cntrlU[chan])
-#define S_CURS_CONTROL_U_I8(chan)   (static_cast<int8>(S_CURS_CONTROL_U(chan)))
 #define S_CURS_CONTROL_T(chan)      (set.curs._cntrlT[chan])
-#define S_CURS_CONTROL_T_I8(chan)   (static_cast<int8>(S_CURS_CONTROL_T(chan)))
 
     enum E
     {
