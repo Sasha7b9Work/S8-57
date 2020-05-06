@@ -54,13 +54,17 @@ struct MaxDBFFT
 };
 
 
-#define S_FFT_ENABLED   (set.fft.enabled)
+#define S_FFT_ENABLED       (set.fft._enabled)
+
+#define S_FFT_POS_CUR(num)  (set.fft._posCur[num])
+#define S_FFT_POS_CUR_0     (S_FFT_POS_CUR(0))
+#define S_FFT_POS_CUR_1     (S_FFT_POS_CUR(1))
 
 
 struct SettingsFFT
 { //-V802
-    bool            enabled;
-    uint8           posCur[2];      // Позиция курсора спектра. Изменяется 0...256.
+    bool            _enabled;
+    uint8           _posCur[2];      // Позиция курсора спектра. Изменяется 0...256.
     ScaleFFT::E     scale;
     SourceFFT::E    source;
     WindowFFT::E    window;

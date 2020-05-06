@@ -85,8 +85,8 @@ void MathFPGA::CalculateFFT(float *dataR, int numPoints, float *result, float *f
 
     float koeff = 1024.0F / numPoints;
 
-    *freq0 = scale * set.fft.posCur[0] * koeff;
-    *freq1 = scale * set.fft.posCur[1] * koeff;
+    *freq0 = scale * S_FFT_POS_CUR_0 * koeff;
+    *freq1 = scale * S_FFT_POS_CUR_1 * koeff;
 
     if (PEAKDET_ENABLED(DS))
     {
@@ -213,11 +213,11 @@ void MathFPGA::CalculateFFT(float *dataR, int numPoints, float *result, float *f
             result[i] = Log10[static_cast<int>(result[i] * 10000)];
 #endif
 
-            if (i == set.fft.posCur[0])
+            if (i == S_FFT_POS_CUR_0)
             {
                 *density0 = result[i];
             }
-            else if (i == set.fft.posCur[1])
+            else if (i == S_FFT_POS_CUR_1)
             {
                 *density1 = result[i];
             }
@@ -236,11 +236,11 @@ void MathFPGA::CalculateFFT(float *dataR, int numPoints, float *result, float *f
     }
     else
     {
-        *density0 = result[set.fft.posCur[0]];
-        *density1 = result[set.fft.posCur[1]];
+        *density0 = result[S_FFT_POS_CUR_0];
+        *density1 = result[S_FFT_POS_CUR_1];
     }
-    *y0 = static_cast<int>(Grid::MathBottom() - result[set.fft.posCur[0]] * Grid::MathHeight());
-    *y1 = static_cast<int>(Grid::MathBottom() - result[set.fft.posCur[1]] * Grid::MathHeight());
+    *y0 = static_cast<int>(Grid::MathBottom() - result[S_FFT_POS_CUR_0] * Grid::MathHeight());
+    *y1 = static_cast<int>(Grid::MathBottom() - result[S_FFT_POS_CUR_1] * Grid::MathHeight());
 }
 
 

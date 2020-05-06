@@ -151,10 +151,10 @@ void DisplayOsci::PainterData::DrawSpectrum(const uint8 *dataIn, int numPoints, 
 
         WriteParametersFFT(ch, freq0, density0, freq1, density1);
 
-        VLine(Grid::MathBottom() - Grid::ChannelBottom()).Draw(Grid::Left() + set.fft.posCur[0], Grid::ChannelBottom(), Color::GRID);
-        VLine(Grid::MathBottom() - Grid::ChannelBottom()).Draw(Grid::Left() + set.fft.posCur[1], Grid::ChannelBottom());
-        Rectangle(s * 2, s * 2).Draw(set.fft.posCur[0] + Grid::Left() - s, y0 - s, Color::FILL);
-        Rectangle(s * 2, s * 2).Draw(set.fft.posCur[1] + Grid::Left() - s, y1 - s);
+        VLine(Grid::MathBottom() - Grid::ChannelBottom()).Draw(Grid::Left() + S_FFT_POS_CUR_0, Grid::ChannelBottom(), Color::GRID);
+        VLine(Grid::MathBottom() - Grid::ChannelBottom()).Draw(Grid::Left() + S_FFT_POS_CUR_1, Grid::ChannelBottom());
+        Rectangle(s * 2, s * 2).Draw(S_FFT_POS_CUR_0 + Grid::Left() - s, y0 - s, Color::FILL);
+        Rectangle(s * 2, s * 2).Draw(S_FFT_POS_CUR_1 + Grid::Left() - s, y1 - s);
 
         std::free(spectrum);
     }

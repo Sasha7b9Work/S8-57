@@ -75,7 +75,7 @@ static bool HandlerKey_FFT_Cursors(const KeyEvent &event)
         {
             int delta = (event.IsArrowUp() || event.IsArrowRight()) ? 1 : -1;
 
-            set.fft.posCur[set.fft.cursor] += static_cast<uint8>(delta);
+            S_FFT_POS_CUR(set.fft.cursor) += static_cast<uint8>(delta);
             Beeper::RegulatorShiftRotate();
 
             return true;
