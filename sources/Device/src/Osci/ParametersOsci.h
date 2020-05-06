@@ -103,6 +103,10 @@ struct Divider
 };
 
 
+#define S_RANGE(channel)    set.ch[channel].range
+#define S_RANGA_A           S_RANGE(0)
+#define S_RANGE_B           S_RANGE(1)
+#define S_RANGE_MATH        S_RANGE_MATH
 struct Range
 {
     enum E

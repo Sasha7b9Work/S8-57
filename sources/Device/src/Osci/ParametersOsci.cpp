@@ -364,7 +364,7 @@ void Range::LoadBoth()
 
 pString Range::ToString(Chan::E ch, Divider::E divider)
 {
-    return ranges[set.ch[ch].range][divider].name;
+    return ranges[S_RANGE(ch)][divider].name;
 }
 
 
@@ -408,7 +408,7 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
         return datas[ModeCouple::GND];
     }
 
-    return static_cast<uint8>(values[set.ch[ch].range][ch] | datas[couple]);
+    return static_cast<uint8>(values[S_RANGE(ch)][ch] | datas[couple]);
 }
 
 
@@ -711,7 +711,7 @@ void Range::Set(Chan::E ch, E range)
 {
     set.disp.SetLastAffectedChannel(ch);
 
-    set.ch[ch].range = range;
+    S_RANGE(ch) = range;
 
     LoadBoth();
 

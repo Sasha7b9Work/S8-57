@@ -216,7 +216,7 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
 
     bool inverse = set.ch[ch].inverse;
 
-    Range::E range = set.ch[ch].range;
+    Range::E range = S_RANGE(ch);
 
     Color colorDraw = inverse ? Color::WHITE : color;
     if (inverse)
@@ -398,8 +398,8 @@ static void WriteCursors()
             CursorsMeasurements::Voltage(source, 0).Draw(x, y1);
             CursorsMeasurements::Voltage(source, 1).Draw(x, y2);
             x = 49;
-            float pos0 = MathFPGA::VoltageCursor(CursorsMeasurements::PosU(source, 0), set.ch[source].range, S_RSHIFT(source));
-            float pos1 = MathFPGA::VoltageCursor(CursorsMeasurements::PosU(source, 1), set.ch[source].range, S_RSHIFT(source));
+            float pos0 = MathFPGA::VoltageCursor(CursorsMeasurements::PosU(source, 0), S_RANGE(source), S_RSHIFT(source));
+            float pos1 = MathFPGA::VoltageCursor(CursorsMeasurements::PosU(source, 1), S_RANGE(source), S_RSHIFT(source));
             float delta = std::fabsf(pos1 - pos0) * Divider::ToAbs(S_DIVIDER(source));
             String(":dU=").Draw(x, y1);
             Voltage(delta).ToString(false).Draw(x + 17, y1);

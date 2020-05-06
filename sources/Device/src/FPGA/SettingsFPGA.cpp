@@ -52,12 +52,12 @@ static bool NeedLoadRShift(Chan::E ch)
     static Range::E prevRanges[Chan::Count] = { Range::Count, Range::Count };
     static int16 prevShift[Chan::Count] = { -1000, -1000 };
 
-    if((prevShift[ch] == S_RSHIFT(ch)) && (prevRanges[ch] == set.ch[ch].range))
+    if((prevShift[ch] == S_RSHIFT(ch)) && (prevRanges[ch] == S_RANGE(ch)))
     {
         result = false;
     }
 
-    prevRanges[ch] = set.ch[ch].range;
+    prevRanges[ch] = S_RANGE(ch);
     prevShift[ch] = S_RSHIFT(ch);
 
     return result;
@@ -77,7 +77,7 @@ void RShift::Load(Chan::E ch)
 
     int16 shift = S_RSHIFT(ch) + HARDWARE_ZERO;
 
-    shift += setNRST.exShift[ch][set.ch[ch].range];
+    shift += setNRST.exShift[ch][S_RANGE(ch)];
 
     if ((ch == ChanA) && Device::InModeTester())
     {
@@ -224,16 +224,16 @@ void Range::Change(Chan::E ch, int16 delta)
 
     if (delta > 0)
     {
-        ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&set.ch[ch].range), static_cast<uint8>(Range::Count - 1)); // -V206
+        ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&S_RANGE(ch)), static_cast<uint8>(Range::Count - 1)); // -V206
     }
     else
     {
-        ::Math::LimitationDecrease<uint8>(reinterpret_cast<uint8 *>(&set.ch[ch].range), 0);  // -V206
+        ::Math::LimitationDecrease<uint8>(reinterpret_cast<uint8 *>(&S_RANGE(ch)), 0);  // -V206
     }
 
     if(Device::InModeTester())
     {
-        LimitForTester(&set.ch[ch].range);
+        LimitForTester(&S_RANGE(ch));
     }
 
     Range::LoadBoth();
@@ -383,7 +383,7 @@ pString Range::Name(Chan::E ch)
         StructRange("20Â")
     };
 
-    return names[set.ch[ch].range].name;
+    return names[S_RANGE(ch)].name;
 };
 
 

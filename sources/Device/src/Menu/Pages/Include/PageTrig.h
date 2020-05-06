@@ -41,6 +41,7 @@ struct TrigPolarity
     static void Load();
 };
 
+
 // Режим запуска.
 struct TrigStartMode
 {
@@ -55,6 +56,7 @@ struct TrigStartMode
 };
 
 
+#define S_TRIG_SOURCE (set.trig.source)
 struct SettingsTrig
 {
     Chan::E          source;
@@ -67,7 +69,6 @@ struct SettingsTrig
     int16            holdOff;           // Удержание синхронизации
     bool             holdOffEnabled;    // Включение удержания синхронизации
 };
-
 
 
 struct PageTrig

@@ -51,7 +51,7 @@ static const char *FuncRange(const char *buffer)
 {
     Chan::E ch = (*(buffer - 7) == '1') ? ChanA : ChanB;    // (buffer - 7) указывает на номер канала - 1 или 2
 
-    SCPI_REQUEST(SCPI::SendAnswer(rangeName[set.ch[ch].range]));
+    SCPI_REQUEST(SCPI::SendAnswer(rangeName[S_RANGE(ch)]));
 
     SCPI_PROCESS_ARRAY(rangeName, Range::Set(ch, static_cast<Range::E>(i)))
 }
