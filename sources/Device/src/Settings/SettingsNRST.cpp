@@ -10,7 +10,6 @@ SettingsNRST setNRST;
 static const SettingsNRST defaultNRST =
 {
     0,                                   // size
-    {0, 0},                              // balanceShiftADC
     0,                                   // numAveForRand
     0,                                   // numSmoothForRand
     0,                                   // correctionTime
