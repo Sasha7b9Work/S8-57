@@ -28,7 +28,7 @@ void DisplayOsci::MemoryWindow::Draw()
     for (int i = 0; i < 2; i++)
     {
         Chan::E ch = chans[i];
-        if (set.ch[ch].enabled)
+        if (S_CHANNEL_ENABLED(ch))
         {
             Color::CHAN[ch].SetAsCurrent();
             DrawDataInRect(X(), Y(), Width(), Height(), OUT(ch), ENumPointsFPGA::PointsInChannel());

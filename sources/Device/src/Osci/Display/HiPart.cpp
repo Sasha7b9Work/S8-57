@@ -207,7 +207,7 @@ static int DrawMainParameters(int _x, int _y)
 
 static void WriteTextVoltage(Chan::E ch, int x, int y)
 {
-    if (!set.ch[ch].enabled)
+    if (!S_CHANNEL_ENABLED(ch))
     {
         return;
     }

@@ -1284,7 +1284,7 @@ String Measure::GetStringMeasure(Chan::E ch, char* buffer, int lenBuf)
 {
     TypeMeasure::E type = GetType();
 
-    if (!set.ch[ch].enabled)
+    if (!S_CHANNEL_ENABLED(ch))
     {
         return String("");
     }
