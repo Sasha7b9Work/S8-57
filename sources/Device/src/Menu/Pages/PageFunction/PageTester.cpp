@@ -31,7 +31,7 @@ DEF_CHOICE_2( cPolarity,                                                        
     "Полярность испытательного воздействия",
     "+",
     "-",
-    set.test.polarity, &PageTester::self, Item::Active, OnChanged_Polarity, Choice::AfterDraw
+    S_TEST_POLARITY, &PageTester::self, Item::Active, OnChanged_Polarity, Choice::AfterDraw
 )
 
 
@@ -40,7 +40,7 @@ DEF_CHOICE_2( cConductivity,                                                    
     "Тип проводимости биполярного транзистора",
     "n-p-n",
     "p-n-p",
-    set.test.polarity, &PageTester::self, Item::Active, OnChanged_Polarity, Choice::AfterDraw
+    S_TEST_POLARITY, &PageTester::self, Item::Active, OnChanged_Polarity, Choice::AfterDraw
 )
 
 
@@ -49,7 +49,7 @@ DEF_CHOICE_2( cControl,                                                         
     "Тип испытательного воздействия",
     "Напряжение",
     "Ток",
-    set.test.control, &PageTester::self, Item::Active, OnChanged_Control, Choice::AfterDraw
+    S_TEST_CONTROL, &PageTester::self, Item::Active, OnChanged_Control, Choice::AfterDraw
 )
 
 
@@ -133,7 +133,7 @@ static void OnChanged_Control(bool)
 
     Item **items = const_cast<Item **>(page->OwnData()->items);
 
-    if (set.test.control == Tester::Control::Voltage)
+    if (S_TEST_CONTROL_IS_VOLTAGE)
     {
         items[1] = const_cast<Choice *>(&cStepU);
         items[2] = const_cast<Choice *>(&cPolarity);

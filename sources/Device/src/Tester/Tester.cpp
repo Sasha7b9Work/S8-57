@@ -131,8 +131,8 @@ void Tester::Disable() // -V2506
 
     HAL_PIO::Set(PIN_TESTER_ON);
 
-    oldSet.test.control = set.test.control;
-    oldSet.test.polarity = set.test.polarity;
+    oldSet.test._control = S_TEST_CONTROL;
+    oldSet.test._polarity = S_TEST_POLARITY;
     oldSet.test.stepU = set.test.stepU;
     oldSet.test.stepI = set.test.stepI;
 
@@ -266,14 +266,14 @@ static void RecountPoints(uint16 *x, uint8 *y)
 void Tester::LoadPolarity()
 {
     // ”станавливаем пол€рность
-    HAL_PIO::Write(PIN_TESTER_PNP, (set.test.polarity == Tester::Polarity::Positive) ? 1 : 0);
+    HAL_PIO::Write(PIN_TESTER_PNP, S_TEST_POLARITY_IS_POSITIVE ? 1 : 0);
 }
 
 
 // ¬озвращает true, если дл€ данноого режима работы нужна уменьшенна€ ступенька
 static bool NeedSmallStep()
 {
-    if(set.test.control == Tester::Control::Voltage)
+    if(S_TEST_CONTROL_IS_VOLTAGE)
     {
         return (set.test.stepU == Tester::StepU::_600mV);
     }
@@ -285,9 +285,9 @@ static bool NeedSmallStep()
 void Tester::LoadStep()
 {
     // ”станавливаем управление напр€жением или током
-    HAL_PIO::Write(PIN_TESTER_U, (set.test.control == Tester::Control::Voltage) ? 1 : 0);
+    HAL_PIO::Write(PIN_TESTER_U, S_TEST_CONTROL_IS_VOLTAGE ? 1 : 0);
 
-    HAL_PIO::Write(PIN_TESTER_I, (set.test.control == Tester::Control::Voltage) ? 0 : 1);
+    HAL_PIO::Write(PIN_TESTER_I, S_TEST_CONTROL_IS_VOLTAGE ? 0 : 1);
 
     stepU = 255.0F / 5;
 

@@ -111,7 +111,7 @@ String DisplayTester::ValueForStep(int step)
         {"0 Â", "3 Â",   "6 Â",   "9 Â",   "12 Â"}
     };
 
-    if (set.test.control == Tester::Control::Voltage)
+    if (S_TEST_CONTROL_IS_VOLTAGE)
     {
         return String(valuesU[set.test.stepU][step]);
     }

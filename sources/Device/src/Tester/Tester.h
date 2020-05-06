@@ -57,6 +57,7 @@ public:
         pString ToString() const;
     };
 
+    
     // Смещение
     struct Shift
     {
@@ -67,9 +68,13 @@ public:
         Chan::E ch;
     };
 
+    
     // Чем будем управлять в тестер-компоненте - напряжением или током
     struct Control
     {
+#define S_TEST_CONTROL (set.test._control)
+#define S_TEST_CONTROL_IS_VOLTAGE (S_TEST_CONTROL == Tester::Control::Voltage)
+
         enum E
         {
             Voltage,
@@ -77,8 +82,12 @@ public:
         };
     };
 
+    
     struct Polarity
     {
+#define S_TEST_POLARITY             (set.test._polarity)
+#define S_TEST_POLARITY_IS_POSITIVE (S_TEST_POLARITY == Tester::Polarity::Positive)
+
         enum E
         {
             Positive,
@@ -86,6 +95,7 @@ public:
         };
     };
 
+    
     struct StepI
     {
         enum E
@@ -95,6 +105,7 @@ public:
         };
     };
 
+    
     struct StepU
     {
         enum E
