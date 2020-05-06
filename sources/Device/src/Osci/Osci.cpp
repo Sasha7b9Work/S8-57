@@ -186,7 +186,7 @@ static void UpdateFPGA()
 
     if(ds && ds->id != lastID)
     {
-        if(set.disp.enumAverage != ENumAverage::_1)               // Если включено усреднение
+        if(S_DISP_AVERAGING_IS_ENABLED)               // Если включено усреднение
         {
             DataSettings *last = RAM::Get(0);
             DataSettings *prev = RAM::Get(1);
@@ -445,7 +445,7 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
 
     HAL_BUS::FPGA::SetAddrData(addr);
 
-    if(set.disp.enumAverage > 1)
+    if(S_DISP_AVERAGING_IS_ENABLED)
     {
         uint8 *dataPointer = &data[infoRead.posFirst];              // Указатель в переданном массиве
 

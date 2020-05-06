@@ -22,6 +22,10 @@ struct DisplayMapping
 };
 
 //  оличество усреднений по измерени€м.
+#define S_DISP_ENUM_AVERAGE         (set.disp.enumAverage)
+#define S_DISP_AVERAGING_IS_ENABLED (S_DISP_ENUM_AVERAGE != ENumAverage::_1)
+#define S_DISP_ENUM_AVERAGE_U16     (static_cast<uint16>(S_DISP_ENUM_AVERAGE))
+#define S_DISP_NUM_AVERAGE          (1 << S_DISP_ENUM_AVERAGE)
 struct ENumAverage
 {
     enum E
@@ -37,7 +41,6 @@ struct ENumAverage
         _256,
         Count
     };
-    static int Number();
     static void Set(ENumAverage::E v);
 };
 
