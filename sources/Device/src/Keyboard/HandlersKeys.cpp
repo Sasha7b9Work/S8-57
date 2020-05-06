@@ -380,7 +380,7 @@ static void OnTrig()
     }
     else if (event.IsLong())
     {
-        TrigLevel::Set(set.trig.source, 0);
+        TrigLevel::Set(S_TRIG_SOURCE, 0);
     }
 }
 

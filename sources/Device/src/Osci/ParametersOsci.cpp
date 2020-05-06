@@ -414,7 +414,7 @@ static uint8 ValueForRange(Chan::E ch) // -V2506
 
 void TrigLevel::Find()
 {
-    Chan::E ch = set.trig.source;
+    Chan::E ch = S_TRIG_SOURCE;
 
     if (DS && ENABLED_DS(ch))
     {
@@ -469,7 +469,7 @@ pString Chan::Name(Chan::E ch)
 void TrigLevel::Load()
 {
     // \todo Здесь много лишних движений. Нужно что-то сделать с вводом SET_TRIGLEV_SOURCE
-    uint16 value = static_cast<uint16>(HARDWARE_ZERO - set.trig.level[set.trig.source]);
+    uint16 value = static_cast<uint16>(HARDWARE_ZERO - set.trig.level[S_TRIG_SOURCE]);
 
     Osci::InputController::Write(PIN_SPI3_CS1, static_cast<uint16>(0xa000 | (value << 2)));
 
@@ -479,7 +479,7 @@ void TrigLevel::Load()
 
 void TrigLevel::Change(int16 delta)
 {
-    Math::AdditionThisLimitation(&set.trig.level[set.trig.source], TrigLevel::STEP * delta, TrigLevel::MIN, TrigLevel::MAX);
+    Math::AdditionThisLimitation(&set.trig.level[S_TRIG_SOURCE], TrigLevel::STEP * delta, TrigLevel::MIN, TrigLevel::MAX);
 
     Load();
 
@@ -507,7 +507,7 @@ bool Trig::SyncPulse()
 
 void TrigLevel::Draw()
 {
-    Chan::E ch = set.trig.source;
+    Chan::E ch = S_TRIG_SOURCE;
 
     float scale = 1.0F / ((MAX - MIN) / 2.4F / Grid::Height());
 

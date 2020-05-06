@@ -57,6 +57,7 @@ struct TrigStartMode
 
 
 #define S_TRIG_SOURCE (set.trig.source)
+
 struct SettingsTrig
 {
     Chan::E          source;

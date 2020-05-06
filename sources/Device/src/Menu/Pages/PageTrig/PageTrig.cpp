@@ -35,7 +35,7 @@ DEF_CHOICE_2( cSource, // -V206                                                 
     ,
     "Канал 1",
     "Канал 2",
-    set.trig.source, &PageTrig::self, Item::Active, OnChanged_Source, Choice::AfterDraw
+    S_TRIG_SOURCE, &PageTrig::self, Item::Active, OnChanged_Source, Choice::AfterDraw
 )
 
 
