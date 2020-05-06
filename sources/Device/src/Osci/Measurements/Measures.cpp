@@ -119,13 +119,13 @@ TypeMeasure::E Measure::GetType()
 
 void Measure::ShortPressOnSmallButonMarker()
 {
-    if(S_MEAS_INDICATED(AutoMeasurements::posActive) == set.meas.marked)
+    if(S_MEAS_INDICATED(AutoMeasurements::posActive) == S_MEAS_MARKED)
     {
-        set.meas.marked = TypeMeasure::None;
+        S_MEAS_MARKED = TypeMeasure::None;
     }
     else
     {
-        set.meas.marked = S_MEAS_INDICATED(AutoMeasurements::posActive);
+        S_MEAS_MARKED = S_MEAS_INDICATED(AutoMeasurements::posActive);
     }
 }
 

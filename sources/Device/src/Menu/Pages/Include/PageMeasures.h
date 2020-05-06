@@ -74,7 +74,7 @@ struct SettingsAutoMeasures
     MeasuresSource::E           _source;            // ƒл€ каких каналов выводить измерени€.
     MeasuresModeViewSignals::E  _modeViewSignals;   // —жимать ли сигналы при выводе измерений.
     TypeMeasure::E              _measures[15];      // ¬ыбранные дл€ индикации измерени€.
-    TypeMeasure::E              marked;            // »змерение, на которое нужно выводить маркеры.
+    TypeMeasure::E              _marked;            // »змерение, на которое нужно выводить маркеры.
 };
 
 

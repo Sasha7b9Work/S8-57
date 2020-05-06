@@ -6,7 +6,8 @@
 struct TypeMeasure
 {
 // Индицируемые измерения
-#define S_MEAS_INDICATED(num)  (set.meas._measures[num])
+#define S_MEAS_INDICATED(num)   (set.meas._measures[num])
+#define S_MEAS_MARKED           (set.meas._marked)
 
     enum E
     {
