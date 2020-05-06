@@ -65,7 +65,7 @@ DEF_CHOICE_2( cSample,                                                          
     ,
     "Реальное время",
     "Эквивалентная",
-    set.time.sampleType, &PageTime::self, IsActive_Sample, Choice::Changed, Choice::AfterDraw
+    S_RAND_SAMPLE_TYPE, &PageTime::self, IsActive_Sample, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -119,7 +119,7 @@ DEF_CHOICE_2( cShiftXtype,                                                      
     ,
     "Время",
     "Деления",
-    set.time.linkingTShift, &PageTime::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    S_LINKING_TSHIFT, &PageTime::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 DEF_PAGE_4( pTime,                                                                                                                                                        //--- РАЗВЕРТКА ---

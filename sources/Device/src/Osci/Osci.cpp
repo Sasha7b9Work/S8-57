@@ -302,12 +302,12 @@ void Osci::ChangedTrigStartMode()
         // рандомизатора автоматический или ждущий
         if(S_TRIG_START_MODE_IS_SINGLE)
         {
-            set.time.sampleTypeOld = set.time.sampleType;
-            set.time.sampleType = SampleType::Real;
+            S_RAND_SAMPLE_TYPE_OLD = S_RAND_SAMPLE_TYPE;
+            S_RAND_SAMPLE_TYPE = SampleType::Real;
         }
         else if(S_TRIG_START_MODE_IS_AUTO)    // Иначе восстановим ранее сохранённый
         {
-            set.time.sampleType = set.time.sampleTypeOld;
+            S_RAND_SAMPLE_TYPE = S_RAND_SAMPLE_TYPE_OLD;
         }
     }
 }

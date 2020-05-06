@@ -39,6 +39,8 @@ struct TPos
 
 
 // Тип выборки для режима рандомизатора.
+#define S_RAND_SAMPLE_TYPE      (set.time._sampleType)
+#define S_RAND_SAMPLE_TYPE_OLD  (set.time._sampleTypeOld)
 struct SampleType
 {
     enum E
@@ -59,7 +61,9 @@ struct FunctionTime
     };
 };
 
+
 // Тип привязки к смещению по горизонтали
+#define S_LINKING_TSHIFT    (set.time._linkingTShift)
 struct LinkingTShift
 {
     enum E
@@ -78,10 +82,10 @@ struct LinkingTShift
     TBase::E            _base;
     PeakDetMode::E      _peakDet;
     TPos::E             _tPos;
-    SampleType::E       sampleType;
+    SampleType::E       _sampleType;
     FunctionTime::E     _;
-    LinkingTShift::E    linkingTShift;  // Тип привязки смещения по горизонтали
-    SampleType::E       sampleTypeOld;
+    LinkingTShift::E    _linkingTShift;  // Тип привязки смещения по горизонтали
+    SampleType::E       _sampleTypeOld;
 };
 
 
