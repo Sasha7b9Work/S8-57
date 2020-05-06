@@ -75,7 +75,7 @@ DEF_CHOICE_4(cAverage,
     "2",
     "4",
     "8",
-    setNRST.enumAverageRand, &PageDebug::PageRand::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    NRST_ENUM_AVERAGE_RAND, &PageDebug::PageRand::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

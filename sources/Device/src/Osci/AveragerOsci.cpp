@@ -20,9 +20,9 @@ void AveragerOsci::Process(Chan::E ch, const uint8 *dataNew, int size)
 
     uint16 enumAverages = S_OSCI_ENUM_AVERAGE_U16;
 
-    if((OSCI_IN_MODE_RANDOMIZER) && (setNRST.enumAverageRand > enumAverages))
+    if((OSCI_IN_MODE_RANDOMIZER) && (NRST_ENUM_AVERAGE_RAND > enumAverages))
     {
-        enumAverages = static_cast<uint16>(setNRST.enumAverageRand);
+        enumAverages = static_cast<uint16>(NRST_ENUM_AVERAGE_RAND);
     }
 
     uint16 numAverages = static_cast<uint16>(1 << enumAverages);

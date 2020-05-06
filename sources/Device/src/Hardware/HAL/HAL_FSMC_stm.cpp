@@ -274,10 +274,10 @@ float HAL_BUS::FPGA::GetStretch(const uint8 *address)
 {
     static const float *stretchs[4] =
     {
-        &setNRST.exStretch[ChanA],
-        &setNRST.exStretch[ChanA],
-        &setNRST.exStretch[ChanB],
-        &setNRST.exStretch[ChanB]
+        &NRST_EX_STRETCH(ChanA),
+        &NRST_EX_STRETCH(ChanA),
+        &NRST_EX_STRETCH(ChanB),
+        &NRST_EX_STRETCH(ChanB)
     };
 
     int delta = address - RD::DATA_A;

@@ -77,7 +77,7 @@ static void DebugShowSetInfo_Draw()
     y += dY * 3;
 
     DRAW_FORMAT("correctionTime : %d", NRST_CORRECTION_TIME); //-V2528
-    DRAW_FORMAT("numAveForRand : %d", NRST_NUM_AVE_FOR_RAND); //-V2528
+//    DRAW_FORMAT("numAveForRand : %d", NRST_NUM_AVE_FOR_RAND); //-V2528
 
 //    pString s[3] = {"выключено", "настроено автоматически", "задано вручную"};
 //    DRAW_FORMAT("stretchADCtype : %s", (ExtraStretch::Type() < 3 ? s[ExtraStretch::Type()] : "!!! неправильное значение !!!")); //-V547 //-V2528

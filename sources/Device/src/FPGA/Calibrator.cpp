@@ -168,7 +168,7 @@ static bool StretchChannel(Chan::E ch)
 
     if (k > 0.0F)
     {
-        old.exStretch[ch] = k;
+        old._exStretch[ch] = k;
     }
 
     setNRST = old;

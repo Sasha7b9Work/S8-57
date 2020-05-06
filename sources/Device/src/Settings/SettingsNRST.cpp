@@ -10,7 +10,6 @@ SettingsNRST setNRST;
 static const SettingsNRST defaultNRST =
 {
     0,                                   // size
-    0,                                   // numAveForRand
     0,                                   // numSmoothForRand
     0,                                   // correctionTime
     0,                                   // enum_gate_max
@@ -83,6 +82,6 @@ void SettingsNRST::ResetExtraShift()
 
 void SettingsNRST::ResetExtraStretch()
 {
-    exStretch[ChanA] = 1.0F;
-    exStretch[ChanB] = 1.0F;
+    NRST_EX_STRETCH(ChanA) = 1.0F;
+    NRST_EX_STRETCH(ChanB) = 1.0F;
 }
