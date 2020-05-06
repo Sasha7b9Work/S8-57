@@ -189,6 +189,7 @@ private:
 };
 
 // Режим канала по входу.
+#define S_MODE_COUPLE(chan)   (set.ch[chan].couple)
 struct ModeCouple
 {
     enum E

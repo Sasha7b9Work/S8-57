@@ -396,7 +396,7 @@ pString ModeCouple::UGO(ModeCouple::E v)
 
 ModeCouple::E &ModeCouple::Ref(Chan::E ch)
 {
-    return set.ch[ch].couple;
+    return S_MODE_COUPLE(ch);
 }
 
 
@@ -410,6 +410,6 @@ void Bandwidth::Load(Chan::E ch)
 
 void ModeCouple::Set(Chan::E ch, ModeCouple::E couple)
 {
-    set.ch[ch].couple = couple;
+    S_MODE_COUPLE(ch) = couple;
     Range::LoadBoth();
 }
