@@ -9,6 +9,7 @@ struct TrigSource
     static void Set(Chan::E ch = Chan::Count);
 };
 
+
 // Режим поиска синхронизции
 struct TrigModeFind
 {
@@ -19,6 +20,8 @@ struct TrigModeFind
     };
 };
 
+
+#define S_TRIG_INPUT    (set.trig.input)
 struct TrigInput
 {
     enum E
@@ -30,6 +33,7 @@ struct TrigInput
     // Установить в соотвествующие положения выводы, отвечающие за источник и вход синхронизации
     static void Load();
 };
+
 
 struct TrigPolarity
 {

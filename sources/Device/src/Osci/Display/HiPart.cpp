@@ -164,11 +164,11 @@ static int DrawMainParameters(int _x, int _y)
     };
     if (set.mem.modeWork == ModeWork::Dir)
     {
-        std::snprintf(buffer, SIZE, "\xa5\x10%s\x10\xa5\x10%s\x10\xa5\x10", couple[set.trig.input], polar[set.trig.polarity]);
+        std::snprintf(buffer, SIZE, "\xa5\x10%s\x10\xa5\x10%s\x10\xa5\x10", couple[S_TRIG_INPUT], polar[set.trig.polarity]);
         String(buffer).Draw(x + 18, y1);
 
-        Char(filtr[set.trig.input][0]).Draw(x + 45, y1);
-        Char(filtr[set.trig.input][1]).Draw(x + 53, y1);
+        Char(filtr[S_TRIG_INPUT][0]).Draw(x + 45, y1);
+        Char(filtr[S_TRIG_INPUT][1]).Draw(x + 53, y1);
     }
 
     buffer[0] = '\0';

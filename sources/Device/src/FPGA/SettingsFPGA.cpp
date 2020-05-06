@@ -39,9 +39,9 @@ void TrigInput::Load()
         {BIN_U8(00000000), BIN_U8(00000110)}  // -V2501      // อื
     };
 
-    HAL_PIO::Write(PIN_LF3, _GET_BIT(datas[set.trig.input][S_TRIG_SOURCE], 2)); //-V525
-    HAL_PIO::Write(PIN_A0S, _GET_BIT(datas[set.trig.input][S_TRIG_SOURCE], 1));
-    HAL_PIO::Write(PIN_LFS, _GET_BIT(datas[set.trig.input][S_TRIG_SOURCE], 0));
+    HAL_PIO::Write(PIN_LF3, _GET_BIT(datas[S_TRIG_INPUT][S_TRIG_SOURCE], 2)); //-V525
+    HAL_PIO::Write(PIN_A0S, _GET_BIT(datas[S_TRIG_INPUT][S_TRIG_SOURCE], 1));
+    HAL_PIO::Write(PIN_LFS, _GET_BIT(datas[S_TRIG_INPUT][S_TRIG_SOURCE], 0));
 }
 
 

@@ -72,7 +72,7 @@ DEF_CHOICE_3( cFiltr, // -V206                                                  
     "оя",
     "мв",
     "бв",
-    set.trig.input, &PageTrig::self, Item::Active, OnChanged_Filtr, Choice::AfterDraw
+    S_TRIG_INPUT, &PageTrig::self, Item::Active, OnChanged_Filtr, Choice::AfterDraw
 )
 
 DEF_PAGE_6( pTrig,                                                                                                                                                            //--- яхмуп ---
