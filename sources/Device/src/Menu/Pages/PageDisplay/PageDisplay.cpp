@@ -6,7 +6,7 @@
 
 void ENumAverage::Set(ENumAverage::E v)
 {
-    S_DISP_ENUM_AVERAGE = v;
+    S_OSCI_ENUM_AVERAGE = v;
     AveragerOsci::SettingChanged();
 }
 
@@ -68,7 +68,7 @@ DEF_CHOICE_9( cAverage_Num,                                                     
     "64",
     "128",
     "256",
-    S_DISP_ENUM_AVERAGE, &PageDisplay::self, Item::Active, OnChange_AverageNum, Choice::AfterDraw
+    S_OSCI_ENUM_AVERAGE, &PageDisplay::self, Item::Active, OnChange_AverageNum, Choice::AfterDraw
 )
 
 

@@ -8,11 +8,12 @@
 #define NUM_AVE_MAX     256
 
 
+struct DisplayMapping
+{
 #define S_DISP_MAPPING          (set.disp._mapping)
 #define S_DISP_MAPPING_IS_LINES (S_DISP_MAPPING == DisplayMapping::Lines)
 #define S_DISP_MAPPING_IS_DOTS  (S_DISP_MAPPING == DisplayMapping::Dots)
-struct DisplayMapping
-{
+
     enum E
     {
         Lines,
@@ -21,13 +22,17 @@ struct DisplayMapping
     };
 };
 
+
 // Количество усреднений по измерениям.
-#define S_DISP_ENUM_AVERAGE         (set.disp._enumAverage)
-#define S_DISP_AVERAGING_IS_ENABLED (S_DISP_ENUM_AVERAGE != ENumAverage::_1)
-#define S_DISP_ENUM_AVERAGE_U16     (static_cast<uint16>(S_DISP_ENUM_AVERAGE))
-#define S_DISP_NUM_AVERAGE          (1 << S_DISP_ENUM_AVERAGE)
 struct ENumAverage
 {
+#define S_OSCI_ENUM_AVERAGE         (set.disp._enumAverage)
+#define S_OSCI_AVERAGING_IS_ENABLED (S_OSCI_ENUM_AVERAGE != ENumAverage::_1)
+#define S_OSCI_ENUM_AVERAGE_U16     (static_cast<uint16>(S_OSCI_ENUM_AVERAGE))
+#define S_OSCI_NUM_AVERAGE          (1 << S_OSCI_ENUM_AVERAGE)
+
+#define S_TEST_ENUM_AVERAGE         (set.test._enumAverage)
+
     enum E
     {
         _1,
@@ -44,11 +49,13 @@ struct ENumAverage
     static void Set(ENumAverage::E v);
 };
 
+
 // Количество накоплений.
-#define S_DISP_ENUM_ACCUM       (set.disp._enumAccum)
-#define S_DISP_NUM_ACCUM        (1 << S_DISP_ENUM_ACCUM)
 struct ENumAccum
 {
+#define S_DISP_ENUM_ACCUM       (set.disp._enumAccum)
+#define S_DISP_NUM_ACCUM        (1 << S_DISP_ENUM_ACCUM)
+
     enum E
     {
         _1,
@@ -64,10 +71,11 @@ struct ENumAccum
 };
 
 
-#define S_DISP_MODE_ACCUM           (set.disp._modeAccumulation)
-#define S_DISP_MODE_ACCUM_IS_RESET  (S_DISP_MODE_ACCUM == ModeAccumulation::Reset)
 struct ModeAccumulation
 {
+#define S_DISP_MODE_ACCUM           (set.disp._modeAccumulation)
+#define S_DISP_MODE_ACCUM_IS_RESET  (S_DISP_MODE_ACCUM == ModeAccumulation::Reset)
+
     enum E
     {
         NoReset,   // В этом режиме показываются строго N последних.
@@ -75,11 +83,13 @@ struct ModeAccumulation
     };
 };
 
+
 // Количество точек для расчёта сглаживания.
-#define S_DISP_ENUM_SMOOTH  (set.disp._enumSmoothing)
-#define S_DISP_NUM_SMOOTH   (S_DISP_ENUM_SMOOTH + 1)
 struct ENumSmoothing
 {
+#define S_DISP_ENUM_SMOOTH  (set.disp._enumSmoothing)
+#define S_DISP_NUM_SMOOTH   (S_DISP_ENUM_SMOOTH + 1)
+
     enum E
     {
         Disable,
@@ -95,10 +105,12 @@ struct ENumSmoothing
     };
 };
 
+
 // Ограничение FPS.
-#define S_DISP_ENUM_FPS (set.disp._enumSignalsInSec)
 struct ENumSignalsInSec
 {
+#define S_DISP_ENUM_FPS (set.disp._enumSignalsInSec)
+
     enum E
     {
         _25,
@@ -111,13 +123,15 @@ struct ENumSignalsInSec
     static uint TimeBetweenFramesMS();
 };
 
+
 // Тип сетки на экране.
+struct TypeGrid
+{
 #define S_DISP_TYPE_GRID        (set.disp._typeGrid)
 #define S_DISP_TYPE_GRID_IS_1   (S_DISP_TYPE_GRID == TypeGrid::_1)
 #define S_DISP_TYPE_GRID_IS_2   (S_DISP_TYPE_GRID == TypeGrid::_2)
 #define S_DISP_TYPE_GRID_IS_3   (S_DISP_TYPE_GRID == TypeGrid::_3)
-struct TypeGrid
-{
+
     enum E
     {
         _1,
@@ -129,9 +143,10 @@ struct TypeGrid
 };
 
 // Через какое время после последнего нажатия кнопки скрывать меню.
-#define S_MENU_AUTOHIDE (set.disp._menuAutoHide)
 struct MenuAutoHide
 {
+#define S_MENU_AUTOHIDE (set.disp._menuAutoHide)
+
     enum E
     {
         None,   // Никогда.

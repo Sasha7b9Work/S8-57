@@ -97,7 +97,7 @@ DEF_CHOICE_9( cAveraging,
     "64",
     "128",
     "256",
-    set.test.enumAverage, &PageTester::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    S_TEST_ENUM_AVERAGE, &PageTester::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

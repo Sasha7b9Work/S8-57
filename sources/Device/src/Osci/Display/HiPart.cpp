@@ -195,7 +195,7 @@ static int DrawMainParameters(int _x, int _y)
     if (S_MEM_MODE_WORK_IS_DIR)
     {
         WriteStringAndNumber("накопл", x, y0 - 4, S_DISP_NUM_ACCUM);
-        WriteStringAndNumber("усредн", x, y1, S_DISP_NUM_AVERAGE);
+        WriteStringAndNumber("усредн", x, y1, S_OSCI_NUM_AVERAGE);
         WriteStringAndNumber("сглаж", x, y1 + 6, S_DISP_NUM_SMOOTH);
     }
 
