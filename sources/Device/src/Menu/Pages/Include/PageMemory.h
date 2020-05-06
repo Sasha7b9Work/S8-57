@@ -8,6 +8,10 @@
 
 
 // Режим работы.
+#define S_MEM_MODE_WORK         (set.mem._modeWork)
+#define S_MEM_MODE_WORK_IS_DIR  (S_MEM_MODE_WORK == ModeWork::Dir)
+#define S_MEM_MODE_WORK_IS_RAM  (S_MEM_MODE_WORK == ModeWork::RAM)
+#define S_MEM_MODE_WORK_IS_ROM  (S_MEM_MODE_WORK == ModeWork::ROM)
 struct ModeWork
 {
     enum E
@@ -108,7 +112,7 @@ struct SettingsMemory
     ENumPointsFPGA::E   _enumPoints;                             // Число точек
     ModeBtnMemory::E    _modeBtnMemory;
     TypeSignalROM::E    _typeSignalROM;                          // Какой сигнал выводить в режиме ПАМЯТЬ-ВНУТР ЗУ
-    ModeWork::E         modeWork;                               // Режим работы.
+    ModeWork::E         _modeWork;                               // Режим работы.
     bool                flashAutoConnect;                       // Если true, при подключении флешки автоматически выводится Файл-Менеджер.
     int8                indexCurSymbolNameMask;                 // Индекс текущего символа в режиме задания маски или выбора имени.
     ModeSaveSignal::E   modeSaveSignal;                         // В каком виде сохранять сигнал.

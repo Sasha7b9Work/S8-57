@@ -58,7 +58,7 @@ void DisplayOsci::HiPart::Draw()
 
     Separator::Draw(x + 1, y0);
 
-    if (set.mem.modeWork == ModeWork::Dir)
+    if (S_MEM_MODE_WORK_IS_DIR)
     {
         char mesFreq[20] = "\x7c=";
         float freq = FreqMeter::GetFreq();
@@ -134,7 +134,7 @@ static int DrawMainParameters(int _x, int _y)
 
     buffer[0] = 0;
 
-    if (set.mem.modeWork == ModeWork::Dir)
+    if (S_MEM_MODE_WORK_IS_DIR)
     {
         pString source[3] = { "1", "2", "\x82" };
         std::snprintf(buffer, 100, "с\xa5\x10%s", source[S_TRIG_SOURCE]);
@@ -162,7 +162,7 @@ static int DrawMainParameters(int _x, int _y)
         "\xb3\xb4",
         "\xb1\xb2"
     };
-    if (set.mem.modeWork == ModeWork::Dir)
+    if (S_MEM_MODE_WORK_IS_DIR)
     {
         std::snprintf(buffer, SIZE, "\xa5\x10%s\x10\xa5\x10%s\x10\xa5\x10", couple[S_TRIG_INPUT], polar[S_TRIG_POLARITY]);
         String(buffer).Draw(x + 18, y1);
@@ -178,7 +178,7 @@ static int DrawMainParameters(int _x, int _y)
         '\xa0',
         '\xb0'
     };
-    if (set.mem.modeWork == ModeWork::Dir)
+    if (S_MEM_MODE_WORK_IS_DIR)
     {
         std::snprintf(buffer, 100, "\xa5\x10%c", mode[S_TRIG_START_MODE]);
         String(buffer).Draw(x + 63, y1);
@@ -192,7 +192,7 @@ static int DrawMainParameters(int _x, int _y)
 
     Separator::Draw(x - 2, y0 - 1);
 
-    if (set.mem.modeWork == ModeWork::Dir)
+    if (S_MEM_MODE_WORK_IS_DIR)
     {
         WriteStringAndNumber("накопл", x, y0 - 4, S_DISP_NUM_ACCUM);
         WriteStringAndNumber("усредн", x, y1, S_DISP_NUM_AVERAGE);
@@ -263,7 +263,7 @@ static void DrawTime(int x, int y)
 
     Color::FILL.SetAsCurrent();
 
-    if ((set.mem.modeWork == ModeWork::ROM) || (set.mem.modeWork == ModeWork::RAM))
+    if (S_MEM_MODE_WORK_IS_ROM || S_MEM_MODE_WORK_IS_RAM)
     {
         if (DS)
         {
@@ -303,9 +303,9 @@ void DisplayOsci::HiPart::DrawRightPart(int x0, int y0)
     Separator::Draw(x0 - 1, y0);
 
     static const int xses[3] = { 280, 271, 251 };
-    int x = xses[set.mem.modeWork];
+    int x = xses[S_MEM_MODE_WORK];
 
-    if (set.mem.modeWork != ModeWork::RAM)
+    if (!S_MEM_MODE_WORK_IS_RAM)
     {
         x += 2;
 
@@ -324,7 +324,7 @@ void DisplayOsci::HiPart::DrawRightPart(int x0, int y0)
         "ВНТР"
     };
 
-    if (set.mem.modeWork != ModeWork::Dir)
+    if (!S_MEM_MODE_WORK_IS_DIR)
     {
         x += 18;
 
@@ -332,14 +332,14 @@ void DisplayOsci::HiPart::DrawRightPart(int x0, int y0)
 
         x += 2;
         String("режим").Draw(x, -1);
-        Text(strs[set.mem.modeWork]).DrawInCenterRect(x + 1, 9, 25, 8);
+        Text(strs[S_MEM_MODE_WORK]).DrawInCenterRect(x + 1, 9, 25, 8);
     }
     else
     {
         x -= 9;
     }
 
-    if (set.mem.modeWork != ModeWork::RAM)
+    if (!S_MEM_MODE_WORK_IS_RAM)
     {
         x += 27;
 

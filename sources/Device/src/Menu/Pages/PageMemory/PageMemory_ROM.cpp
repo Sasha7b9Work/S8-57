@@ -163,7 +163,7 @@ static void OnOpenClose_ROM(bool open)
         Color::ChangeFlash(true);
     }
 
-    set.mem.modeWork = open ? ModeWork::ROM : ModeWork::Dir;
+    S_MEM_MODE_WORK = open ? ModeWork::ROM : ModeWork::Dir;
 }
 
 static void AfterDraw_ROM()
