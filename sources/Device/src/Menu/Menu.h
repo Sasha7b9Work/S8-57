@@ -6,6 +6,7 @@
 #define S_MENU_SHOW                     (set.menu.show)
 #define S_MENU_POS_ACT_ITEM(name)       (set.menu.posActItem[name])
 #define S_MENU_CURRENT_SUB_PAGE(name)   (set.menu.currentSubPage[name])
+#define S_MENU_MAIN_PAGE                (set.menu.mainPage)
 
 
 struct SettingsMenu

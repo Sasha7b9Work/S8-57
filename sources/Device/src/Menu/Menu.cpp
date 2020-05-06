@@ -492,11 +492,11 @@ Page *Menu::PageFromName(PageName::E name)
 
 void Menu::SetMainPage(const Page *page)
 {
-    set.menu.mainPage = page->GetName();
+    S_MENU_MAIN_PAGE = page->GetName();
 }
 
 
 const Page *Menu::GetMainPage()
 {
-    return PageFromName(set.menu.mainPage);
+    return PageFromName(S_MENU_MAIN_PAGE);
 }
