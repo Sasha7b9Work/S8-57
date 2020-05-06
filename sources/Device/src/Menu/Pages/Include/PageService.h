@@ -3,11 +3,15 @@
 #include "Menu/MenuItems.h"
 
 
+#define S_SERV_ENUM_VOLUME          (set.serv._enumVolume)
+#define S_SERV_SHOW_INFO_VOLTAGE    (set.serv._showInfoVoltage)
+
+
 struct SettingsService
 {
-    Calibrator::Mode::E calibratorMode;     // Режим работы калибратора.
-    uint8               enumVolume;         // Громкость звука
-    bool                showInfoVoltage;    // Показывать напряжение батареи на экране
+    Calibrator::Mode::E _calibratorMode;     // Режим работы калибратора.
+    uint8               _enumVolume;         // Громкость звука
+    bool                _showInfoVoltage;    // Показывать напряжение батареи на экране
     uint8               SoundVolume();      // Возвращает значение от 0 (выкл) до 100 (макс)
 };
 

@@ -25,5 +25,5 @@ uint8 SettingsService::SoundVolume()
 {
     static const uint8 volume[4] = { 0, 25, 55, 100 };
 
-    return volume[set.serv.enumVolume];
+    return volume[S_SERV_ENUM_VOLUME];
 }

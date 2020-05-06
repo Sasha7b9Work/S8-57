@@ -39,7 +39,7 @@ DEF_CHOICE_4( cSoundVolume,
     "Мин",
     "Средн",
     "Макс",
-    set.serv.enumVolume, &PageService::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    S_SERV_ENUM_VOLUME, &PageService::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

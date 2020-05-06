@@ -10,7 +10,7 @@ DEF_CHOICE_2( cShow,                                                            
     "Включает/отключает вывод иноформации о напряжении батарии на экран",
     DISABLE_RU,
     ENABLE_RU,
-    set.serv.showInfoVoltage, &PageService::Battery::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    S_SERV_SHOW_INFO_VOLTAGE, &PageService::Battery::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

@@ -13,6 +13,8 @@ public:
 
     struct Mode
     {
+#define S_SERV_CALIBRATOR_MODE  (set.serv._calibratorMode)
+
         enum E
         {
             Freq,
