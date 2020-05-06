@@ -2,29 +2,29 @@
 #include "Menu/MenuItems.h"
 
 
-#define S_RSHIFT(channel)       set.ch[channel].rShift
+#define S_RSHIFT(channel)       set.ch[channel]._rShift
 #define S_RSHIFT_A              S_RSHIFT(0)
 #define S_RSHIFT_B              S_RSHIFT(1)
 #define S_RSHIFT_MATH           set.math.rShift
 
-#define S_CHANNEL_ENABLED(chan) set.ch[chan].enabled
+#define S_CHANNEL_ENABLED(chan) set.ch[chan]._enabled
 #define S_CHANNEL_ENABLED_A     S_CHANNEL_ENABLED(ChanA)
 #define S_CHANNEL_ENABLED_B     S_CHANNEL_ENABLED(ChanB)
 
-#define S_INVERSE(chan)         set.ch[chan].inverse
+#define S_INVERSE(chan)         set.ch[chan]._inverse
 #define S_INVERSE_A             S_INVERSE(ChanA)
 #define S_INVERSE_B             S_INVERSE(ChanB)
 
 
 struct SettingsChannel
 { //-V802
-    int16         rShift;    // Сдвиг канала по вертикали
-    Range::E      range;     // Масштаб канала по вертикали
-    ModeCouple::E couple;    // Связь по входу
-    bool          enabled;   // Включен/выключен канал
-    Bandwidth::E  bandwidth; // Ограничение полосы
-    bool          inverse;
-    Divider::E    divider;   // Множитель
+    int16         _rShift;    // Сдвиг канала по вертикали
+    Range::E      _range;     // Масштаб канала по вертикали
+    ModeCouple::E _couple;    // Связь по входу
+    bool          _enabled;   // Включен/выключен канал
+    Bandwidth::E  _bandwidth; // Ограничение полосы
+    bool          _inverse;
+    Divider::E    _divider;   // Множитель
 };
 
 
