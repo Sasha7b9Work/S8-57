@@ -97,7 +97,7 @@ void TableMeasures::Cell::DrawStringMeasure(int x, int y)
     Color colA = Color::CHAN[ChanA];
     Color colB = Color::CHAN[ChanB];
 
-    switch (set.meas.source)
+    switch (S_MEAS_SOURCE)
     {
     case MeasuresSource::A:     measureA.Draw(x + 2, y + 11, colA);                                 break;
     case MeasuresSource::B:     measureB.Draw(x + 2, y + 11, colB);                                 break;
@@ -165,7 +165,7 @@ int TableMeasures::GetDeltaGridLeft()
 
 int TableMeasures::DY()
 {
-    if (set.meas.source == MeasuresSource::A_B)
+    if (S_MEAS_SOURCE_IS_A_B)
     {
         return 30;
     }

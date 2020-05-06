@@ -49,7 +49,7 @@ DEF_CHOICE_3( cChannels,                                                        
     "1",
     "2",
     "1 è 2",
-    set.meas.source, &PageAutoMeasures::self, IsActive_NumberChannels, Choice::Changed, Choice::AfterDraw
+    S_MEAS_SOURCE, &PageAutoMeasures::self, IsActive_NumberChannels, Choice::Changed, Choice::AfterDraw
 )
 
 

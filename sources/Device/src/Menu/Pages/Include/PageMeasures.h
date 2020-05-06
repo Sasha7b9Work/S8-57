@@ -4,9 +4,9 @@
 
 
 // ¬ыводить автоматические измерени€ по каналу A
-#define VIEW_MEASURES_A                 (S_CHANNEL_ENABLED_A && ((set.meas.source == MeasuresSource::A) || (set.meas.source == MeasuresSource::A_B)))
+#define VIEW_MEASURES_A                 (S_CHANNEL_ENABLED_A && (S_MEAS_SOURCE_IS_A || S_MEAS_SOURCE_IS_A_B))
 // ¬ыводить автоматические измерени€ по каналу B
-#define VIEW_MEASURES_B                 (S_CHANNEL_ENABLED_B && ((set.meas.source == MeasuresSource::B) || (set.meas.source == MeasuresSource::A_B)))
+#define VIEW_MEASURES_B                 (S_CHANNEL_ENABLED_B && (S_MEAS_SOURCE_IS_B || S_MEAS_SOURCE_IS_A_B))
 
 
 // —колько автоматических измерений помещаетс€ на экран
@@ -27,6 +27,11 @@ struct MeasuresOnDisplay
     static bool IsVertical();
 };
 
+
+#define S_MEAS_SOURCE           (set.meas._source)
+#define S_MEAS_SOURCE_IS_A      (S_MEAS_SOURCE == MeasuresSource::A)
+#define S_MEAS_SOURCE_IS_B      (S_MEAS_SOURCE == MeasuresSource::B)
+#define S_MEAS_SOURCE_IS_A_B    (S_MEAS_SOURCE == MeasuresSource::A_B)
 struct MeasuresSource
 {
     enum E
@@ -36,6 +41,7 @@ struct MeasuresSource
         A_B
     };
 };
+
 
 // —жимать ли сигналы при выводе измерений.
 struct MeasuresModeViewSignals
@@ -54,7 +60,7 @@ struct SettingsAutoMeasures
 {
     bool                        show;              // ѕоказывать ли измерени€.
     MeasuresOnDisplay::E        number;            // —колько измерений выводить.
-    MeasuresSource::E           source;            // ƒл€ каких каналов выводить измерени€.
+    MeasuresSource::E           _source;            // ƒл€ каких каналов выводить измерени€.
     MeasuresModeViewSignals::E  modeViewSignals;   // —жимать ли сигналы при выводе измерений.
     TypeMeasure::E              measures[15];      // ¬ыбранные дл€ индикации измерени€.
     TypeMeasure::E              marked;            // »змерение, на которое нужно выводить маркеры.
