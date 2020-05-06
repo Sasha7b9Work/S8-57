@@ -5,8 +5,8 @@ struct SettingsTester
 {
     Tester::Control::E  _control;
     Tester::Polarity::E _polarity;       // Полярность управляющего воздействия
-    Tester::StepU::E    stepU;          // Выбранный шаг изменения напряжения
-    Tester::StepI::E    stepI;          // Выбранный шаг изменения тока
+    Tester::StepU::E    _stepU;          // Выбранный шаг изменения напряжения
+    Tester::StepI::E    _stepI;          // Выбранный шаг изменения тока
     ENumAverage::E      enumAverage;    // Количество усреднений
     Tester::ViewMode::E viewMode;       // Режим отображения кривых
 };

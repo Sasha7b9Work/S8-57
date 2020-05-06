@@ -63,7 +63,7 @@ DEF_CHOICE_2( cStepU,                                                           
     "Шаг испытательного напряжения",
     "600 мВ",
     "3 В",
-    set.test.stepU, &PageTester::self, Item::Active, OnChanged_Step, Choice::AfterDraw
+    S_TEST_STEP_U, &PageTester::self, Item::Active, OnChanged_Step, Choice::AfterDraw
 )
 
 
@@ -72,7 +72,7 @@ DEF_CHOICE_2( cStepI,
     "Шаг исптытательного тока",
     "4 мкА",
     "20 мкА",
-    set.test.stepI, &PageTester::self, Item::Active, OnChanged_Step, Choice::AfterDraw
+    S_TEST_STEP_I, &PageTester::self, Item::Active, OnChanged_Step, Choice::AfterDraw
 )
 
 

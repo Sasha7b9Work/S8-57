@@ -133,8 +133,8 @@ void Tester::Disable() // -V2506
 
     oldSet.test._control = S_TEST_CONTROL;
     oldSet.test._polarity = S_TEST_POLARITY;
-    oldSet.test.stepU = set.test.stepU;
-    oldSet.test.stepI = set.test.stepI;
+    oldSet.test._stepU = S_TEST_STEP_U;
+    oldSet.test._stepI = S_TEST_STEP_I;
 
     set = oldSet;
     //set.Save();
@@ -275,10 +275,10 @@ static bool NeedSmallStep()
 {
     if(S_TEST_CONTROL_IS_VOLTAGE)
     {
-        return (set.test.stepU == Tester::StepU::_600mV);
+        return S_TEST_STEP_U_IS_600mV;
     }
 
-    return (set.test.stepI == Tester::StepI::_4uA);
+    return S_TEST_STEP_I_IS_4uA;
 }
 
 

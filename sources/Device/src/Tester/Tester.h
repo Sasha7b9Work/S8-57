@@ -98,6 +98,9 @@ public:
     
     struct StepI
     {
+#define S_TEST_STEP_I           (set.test._stepI)
+#define S_TEST_STEP_I_IS_4uA    (S_TEST_STEP_I == Tester::StepI::_4uA)
+
         enum E
         {
             _4uA,
@@ -108,6 +111,9 @@ public:
     
     struct StepU
     {
+#define S_TEST_STEP_U           (set.test._stepU)
+#define S_TEST_STEP_U_IS_600mV  (S_TEST_STEP_U == Tester::StepU::_600mV)
+
         enum E
         {
             _600mV,

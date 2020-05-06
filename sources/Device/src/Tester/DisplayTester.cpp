@@ -113,7 +113,7 @@ String DisplayTester::ValueForStep(int step)
 
     if (S_TEST_CONTROL_IS_VOLTAGE)
     {
-        return String(valuesU[set.test.stepU][step]);
+        return String(valuesU[S_TEST_STEP_U][step]);
     }
 
     static pString valuesI[2][5] =
@@ -122,7 +122,7 @@ String DisplayTester::ValueForStep(int step)
         {"0 לךְ", "20 לךְ", "40 לךְ", "60 לךְ", "80 לךְ"}
     };
 
-    return String(valuesI[set.test.stepI][step]);
+    return String(valuesI[S_TEST_STEP_I][step]);
 }
 
 
