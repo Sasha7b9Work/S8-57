@@ -105,13 +105,6 @@ struct CursorsActive
 };
 
 
-struct CursorsSource
-{
-    CursorsSource() {}
-    operator Chan::E();
-};
-
-
 // Каким курсором управлять
 struct CursorsControl
 {
@@ -129,13 +122,13 @@ struct CursorsControl
     static CursorsControl::E &RefU(Chan::E ch);
     static CursorsControl::E &RefT(Chan::E ch);
 
-    static bool IsDisabledT() { return RefT(CursorsSource()) == Disabled; }
-    static bool IsEnabled1T() { return RefT(CursorsSource()) == _1 || RefT(CursorsSource()) == Both; }
-    static bool IsEnabled2T() { return RefT(CursorsSource()) == _2 || RefT(CursorsSource()) == Both; }
+    static bool IsDisabledT();
+    static bool IsEnabled1T();
+    static bool IsEnabled2T();
 
-    static bool IsDisabledU() { return RefU(CursorsSource()) == Disabled; }
-    static bool IsEnabled1U() { return RefU(CursorsSource()) == _1 || RefU(CursorsSource()) == Both; }
-    static bool IsEnabled2U() { return RefU(CursorsSource()) == _2 || RefU(CursorsSource()) == Both; }
+    static bool IsDisabledU();
+    static bool IsEnabled1U();
+    static bool IsEnabled2U();
 };
 
 

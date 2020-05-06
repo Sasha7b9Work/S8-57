@@ -67,7 +67,7 @@ void CursorsMeasurements::SetCursPosT_temp(Chan::E ch, int num, float value)
 
 void CursorsMeasurements::Draw()
 {
-    Chan::E source = CursorsSource();
+    Chan::E source = S_CURS_SOURCE;
 
     Color::CHAN[source].SetAsCurrent();
 

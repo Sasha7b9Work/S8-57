@@ -46,7 +46,7 @@ void PageCursorsMeasures::Set::Draw_Channel(int x, int y)
     typedef void (*pFuncDraw)(int, int);
 
     static const pFuncDraw func[2] = {Draw_ChannelA, Draw_ChannelB};
-    func[CursorsSource()](x, y);
+    func[S_CURS_SOURCE](x, y);
 }
 
 DEF_GRAPH_BUTTON_HINTS_2( bChannel,                                                                                                        //--- »«Ã≈–≈Õ»ﬂ -  ”–—Œ–€ - ”—“¿ÕŒ¬»“‹ -  ‡Ì‡Î ---
@@ -105,7 +105,7 @@ void PageCursorsMeasures::Set::OnPress_T()
 {
     if (S_CURS_ACTIVE_IS_T || CursorsControl::IsDisabledT())
     {
-        IncCursCntrlT(CursorsSource());
+        IncCursCntrlT(S_CURS_SOURCE);
     }
 
     S_CURS_ACTIVE = CursorsActive::T;
@@ -126,7 +126,7 @@ static void Draw_T(int x, int y)
         else
         {
             bool condLeft = false, condDown = false;
-            Chan::E source = CursorsSource();
+            Chan::E source = S_CURS_SOURCE;
 
             CalculateConditions(static_cast<int16>(CursorsMeasurements::PosT(source, 0)), static_cast<int16>(CursorsMeasurements::PosT(source, 1)), 
                 CursorsControl::RefT(source), &condLeft, &condDown);
@@ -206,7 +206,7 @@ void PageCursorsMeasures::Set::OnPress_U()
 {
     if (S_CURS_ACTIVE_IS_U || CursorsControl::IsDisabledU())
     {
-        IncCursCntrlU(CursorsSource());
+        IncCursCntrlU(S_CURS_SOURCE);
     }
 
     S_CURS_ACTIVE = CursorsActive::U;
@@ -214,7 +214,7 @@ void PageCursorsMeasures::Set::OnPress_U()
 
 static void Draw_U(int x, int y)
 {
-    Chan::E source = CursorsSource();
+    Chan::E source = S_CURS_SOURCE;
     if (CursorsControl::IsDisabledU())
     {
         Draw_U_disable(x, y);
@@ -263,7 +263,7 @@ DEF_GRAPH_BUTTON_HINTS_5( bU,                                                   
 
 static void OnPress_100()
 {
-    PageCursorsMeasures::Set::SetCursPos100(CursorsSource());
+    PageCursorsMeasures::Set::SetCursPos100(S_CURS_SOURCE);
 }
 
 static void Draw_100(int x, int y)
@@ -335,11 +335,11 @@ bool PageCursorsMeasures::Set::HandlerKey(const KeyEvent &event) //-V2506
 
         if (CursorsControl::IsEnabled1U())
         {
-            SetShiftCursPosU(CursorsSource(), 0, value);
+            SetShiftCursPosU(S_CURS_SOURCE, 0, value);
         }
         if (CursorsControl::IsEnabled2U())
         {
-            SetShiftCursPosU(CursorsSource(), 1, value);
+            SetShiftCursPosU(S_CURS_SOURCE, 1, value);
         }
         UpdateCursorsForLook();
         
@@ -354,11 +354,11 @@ bool PageCursorsMeasures::Set::HandlerKey(const KeyEvent &event) //-V2506
 
         if (CursorsControl::IsEnabled1T())
         {
-            SetShiftCursPosT(CursorsSource(), 0, value);
+            SetShiftCursPosT(S_CURS_SOURCE, 0, value);
         }
         if (CursorsControl::IsEnabled2T())
         {
-            SetShiftCursPosT(CursorsSource(), 1, value);
+            SetShiftCursPosT(S_CURS_SOURCE, 1, value);
         }
         UpdateCursorsForLook();
         
@@ -445,7 +445,7 @@ void PageCursorsMeasures::Set::SetShiftCursPosT(Chan::E ch, int numCur, float de
 
 void PageCursorsMeasures::Set::UpdateCursorsForLook()
 {
-    Chan::E source = CursorsSource();
+    Chan::E source = S_CURS_SOURCE;
 
     if (S_CURS_ACTIVE_IS_T && (S_CURS_LOOK_MODE_IS_VOLTAGE(ChanA) || S_CURS_LOOK_MODE_IS_BOTH(ChanA)))
     {
