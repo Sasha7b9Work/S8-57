@@ -8,7 +8,7 @@
 #define NUM_AVE_MAX     256
 
 
-#define S_DISP_MAPPING          (set.disp.mapping)
+#define S_DISP_MAPPING          (set.disp._mapping)
 #define S_DISP_MAPPING_IS_LINES (S_DISP_MAPPING == DisplayMapping::Lines)
 #define S_DISP_MAPPING_IS_DOTS  (S_DISP_MAPPING == DisplayMapping::Dots)
 struct DisplayMapping
@@ -22,7 +22,7 @@ struct DisplayMapping
 };
 
 // Количество усреднений по измерениям.
-#define S_DISP_ENUM_AVERAGE         (set.disp.enumAverage)
+#define S_DISP_ENUM_AVERAGE         (set.disp._enumAverage)
 #define S_DISP_AVERAGING_IS_ENABLED (S_DISP_ENUM_AVERAGE != ENumAverage::_1)
 #define S_DISP_ENUM_AVERAGE_U16     (static_cast<uint16>(S_DISP_ENUM_AVERAGE))
 #define S_DISP_NUM_AVERAGE          (1 << S_DISP_ENUM_AVERAGE)
@@ -45,7 +45,7 @@ struct ENumAverage
 };
 
 // Количество накоплений.
-#define S_DISP_ENUM_ACCUM       (set.disp.enumAccum)
+#define S_DISP_ENUM_ACCUM       (set.disp._enumAccum)
 #define S_DISP_NUM_ACCUM        (1 << S_DISP_ENUM_ACCUM)
 struct ENumAccum
 {
@@ -64,7 +64,7 @@ struct ENumAccum
 };
 
 
-#define S_DISP_MODE_ACCUM           (set.disp.modeAccumulation)
+#define S_DISP_MODE_ACCUM           (set.disp._modeAccumulation)
 #define S_DISP_MODE_ACCUM_IS_RESET  (S_DISP_MODE_ACCUM == ModeAccumulation::Reset)
 struct ModeAccumulation
 {
@@ -76,7 +76,7 @@ struct ModeAccumulation
 };
 
 // Количество точек для расчёта сглаживания.
-#define S_DISP_ENUM_SMOOTH  (set.disp.enumSmoothing)
+#define S_DISP_ENUM_SMOOTH  (set.disp._enumSmoothing)
 #define S_DISP_NUM_SMOOTH   (S_DISP_ENUM_SMOOTH + 1)
 struct ENumSmoothing
 {
@@ -96,7 +96,7 @@ struct ENumSmoothing
 };
 
 // Ограничение FPS.
-#define S_DISP_ENUM_FPS (set.disp.enumSignalsInSec)
+#define S_DISP_ENUM_FPS (set.disp._enumSignalsInSec)
 struct ENumSignalsInSec
 {
     enum E
@@ -112,7 +112,7 @@ struct ENumSignalsInSec
 };
 
 // Тип сетки на экране.
-#define S_DISP_TYPE_GRID        (set.disp.typeGrid)
+#define S_DISP_TYPE_GRID        (set.disp._typeGrid)
 #define S_DISP_TYPE_GRID_IS_1   (S_DISP_TYPE_GRID == TypeGrid::_1)
 #define S_DISP_TYPE_GRID_IS_2   (S_DISP_TYPE_GRID == TypeGrid::_2)
 #define S_DISP_TYPE_GRID_IS_3   (S_DISP_TYPE_GRID == TypeGrid::_3)
@@ -129,7 +129,7 @@ struct TypeGrid
 };
 
 // Через какое время после последнего нажатия кнопки скрывать меню.
-#define S_MENU_AUTOHIDE (set.disp.menuAutoHide)
+#define S_MENU_AUTOHIDE (set.disp._menuAutoHide)
 struct MenuAutoHide
 {
     enum E
@@ -144,29 +144,29 @@ struct MenuAutoHide
 };
 
 
-#define S_DISP_BRIGHTNESS                   (set.disp.brightness)
-#define S_DISP_SHIFT_IN_MEMORY              (set.disp.shiftInMemory)
-#define S_DISP_LAST_AFFECTED_CHANNEL        (set.disp.lastAffectedChannel)
+#define S_DISP_BRIGHTNESS                   (set.disp._brightness)
+#define S_DISP_SHIFT_IN_MEMORY              (set.disp._shiftInMemory)
+#define S_DISP_LAST_AFFECTED_CHANNEL        (set.disp._lastAffectedChannel)
 #define S_DISP_LAST_AFFECTED_CHANNEL_IS_A   (S_DISP_LAST_AFFECTED_CHANNEL == Chan::A)
 
 struct SettingsDisplay
 { //-V802
-    DisplayMapping::E      mapping;
-    ENumAverage::E         enumAverage;           // Число усреднений сигнала.
-    ENumAccum::E           enumAccum;             // Число накоплений сигнала на экране.
-    ModeAccumulation::E    modeAccumulation;      // Режим накопления сигналов.
-    ENumSmoothing::E       enumSmoothing;         // Перечисление количества точек для скользящего фильтра.
-    ENumSignalsInSec::E    enumSignalsInSec;      // Перечисление числа считываний сигнала в секунда.
-    TypeGrid::E            typeGrid;              // Тип сетки
-    uint8                  brightness;            // Яркость дисплея.
-    MenuAutoHide::E        menuAutoHide;          // Через сколько времени после последнего нажатия клавиши прятать меню.
-    int16                  shiftInMemory;         // \brief Показывает смещение левого края стеки относительно нулевого байта памяти в 
+    DisplayMapping::E      _mapping;
+    ENumAverage::E         _enumAverage;           // Число усреднений сигнала.
+    ENumAccum::E           _enumAccum;             // Число накоплений сигнала на экране.
+    ModeAccumulation::E    _modeAccumulation;      // Режим накопления сигналов.
+    ENumSmoothing::E       _enumSmoothing;         // Перечисление количества точек для скользящего фильтра.
+    ENumSignalsInSec::E    _enumSignalsInSec;      // Перечисление числа считываний сигнала в секунда.
+    TypeGrid::E            _typeGrid;              // Тип сетки
+    uint8                  _brightness;            // Яркость дисплея.
+    MenuAutoHide::E        _menuAutoHide;          // Через сколько времени после последнего нажатия клавиши прятать меню.
+    int16                  _shiftInMemory;         // \brief Показывает смещение левого края стеки относительно нулевого байта памяти в 
                                                   // байтах. Т.е. для пикового детектора будет в два раза больше количества точек на экране.
-    Chan::E                lastAffectedChannel;   // \brief Последний управляемый канал. Используется для правильного вывода сигналов
+    Chan::E                _lastAffectedChannel;   // \brief Последний управляемый канал. Используется для правильного вывода сигналов
                                                   // на экран с наложением один поверх другого
     void SetLastAffectedChannel(Chan::E ch)
     {
-        lastAffectedChannel = ch;
+        _lastAffectedChannel = ch;
     }
 };
 
