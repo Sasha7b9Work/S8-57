@@ -36,6 +36,11 @@ struct Multimeter
 // Режим измерений мультиметра
 struct MultimeterMeasure
 {
+#define S_MULT_MEASURE                  (set.mult._meas)
+#define S_MULT_MEASURE_IS_RESISTANCE    (S_MULT_MEASURE == MultimeterMeasure::Resistance)
+#define S_MULT_MEASURE_IS_TEST_DIODE    (S_MULT_MEASURE == MultimeterMeasure::TestDiode)
+#define S_MULT_MEASURE_IS_BELL          (S_MULT_MEASURE == MultimeterMeasure::Bell)
+
     enum E
     {
         VoltageDC,
@@ -53,9 +58,14 @@ struct MultimeterMeasure
     static MultimeterMeasure::E GetCode(const char buffer[13]);
 };
 
+
 // АВП - автовыбор предела
 struct ModeAVP
 {
+#define S_MULT_MODE_AVP     (set.mult._avp)
+#define S_MULT_AVP_DISABLED (S_MULT_MODE_AVP == ModeAVP::Off)
+#define S_MULT_AVP_ENABLED  (S_MULT_MODE_AVP == ModeAVP::On)
+
     enum E
     {
         Off,

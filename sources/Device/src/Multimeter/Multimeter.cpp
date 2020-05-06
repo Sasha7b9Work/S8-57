@@ -70,7 +70,7 @@ void Multimeter::ChangeAVP()
 {
     ChangeMode();
 
-    char send[] = { 0x02, 'Z', (set.mult.avp == ModeAVP::On) ? '1' : '0', 0x0a };
+    char send[] = { 0x02, 'Z', S_MULT_AVP_ENABLED ? '1' : '0', 0x0a };
 
     USART3_::Transmit(send, 100);
 
@@ -107,7 +107,7 @@ void Multimeter::Update()
     
     uint8 range = 0;
 
-    switch(set.mult.meas)
+    switch(S_MULT_MEASURE)
     {
     case MultimeterMeasure::VoltageDC:   range = static_cast<uint8>(set.mult.rangeVoltageDC);   break;
     case MultimeterMeasure::VoltageAC:   range = static_cast<uint8>(set.mult.rangeVoltageAC);   break;
@@ -192,5 +192,5 @@ static void ReceiveCallback()
 char MultimeterMeasure::Symbol()
 {
     static const char symbols[Count] = { 'U', 'V', 'I', 'J', 'R', 'Y', 'W' };
-    return symbols[set.mult.meas]; //-V2006
+    return symbols[S_MULT_MEASURE]; //-V2006
 }

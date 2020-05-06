@@ -6,7 +6,7 @@
 
 static bool IsActive_Ranges()
 {
-    return (set.mult.avp == ModeAVP::Off);
+    return S_MULT_AVP_DISABLED;
 }
 
 
@@ -131,13 +131,13 @@ DEF_CHOICE_7( cMode,
     "R",
     "VD",
     "Прозвонка",
-    set.mult.meas, &PageMultimeter::self, Item::Active, PageMultimeter::OnChanged_Mode, Choice::AfterDraw
+    S_MULT_MEASURE, &PageMultimeter::self, Item::Active, PageMultimeter::OnChanged_Mode, Choice::AfterDraw
 )
 
 
 static bool IsActive_Zero()
 { //-V524
-    return (set.mult.avp == ModeAVP::Off);
+    return S_MULT_AVP_DISABLED;
 }
 
 static int8 zero = 0;
@@ -182,7 +182,7 @@ DEF_CHOICE_2 ( cAVP,
     "Автовыбор предела",
     DISABLE_RU,
     ENABLE_RU,
-    set.mult.avp, &PageMultimeter::self, IsActive_AVP, OnChanged_AVP, Choice::AfterDraw
+    S_MULT_MODE_AVP, &PageMultimeter::self, IsActive_AVP, OnChanged_AVP, Choice::AfterDraw
 )
 
 
@@ -211,7 +211,7 @@ void PageMultimeter::OnChanged_Mode(bool)
     items[3] = const_cast<Choice *>(&cZero);
     items[4] = const_cast<Button* >(&bExit);
 
-    switch(set.mult.meas)
+    switch(S_MULT_MEASURE)
     {
     case MultimeterMeasure::VoltageDC:      items[1] = const_cast<Choice *>(&cRangesVoltageDC);       break;
     case MultimeterMeasure::VoltageAC:      items[1] = const_cast<Choice *>(&cRangesVoltageAC);       break;

@@ -197,7 +197,7 @@ static void DrawGraphics()
     int x0 = 10;
     int y0 = 10;
 
-    if(set.mult.meas == MultimeterMeasure::TestDiode)
+    if(S_MULT_MEASURE_IS_TEST_DIODE)
     {
         int edge = 50;
         int delta = edge / 2;
@@ -227,7 +227,7 @@ static void DrawGraphics()
         Line(startX + delta, startY + edge / 2 + 1, endX - delta, startY + 1).Draw();
         Line(startX + delta, startY + edge / 2 + 2, endX - delta + 1, startY + 1).Draw();
     }
-    else if(set.mult.meas == MultimeterMeasure::Bell)
+    else if(S_MULT_MEASURE_IS_BELL)
     {
         int edge = 16;
 
@@ -251,7 +251,7 @@ static void DrawGraphics()
         VLine(3 * edge + 6).Draw(x + edge * 2 + 2, y - edge - 3);
     }
     
-    if(PageMultimeter::ZeroEnabled() || (set.mult.avp == ModeAVP::On))
+    if(PageMultimeter::ZeroEnabled() || S_MULT_AVP_ENABLED)
     {
         int x = 10;
         int y = 145;
@@ -316,7 +316,7 @@ static int GetRange()
 {
     int result = 0;
     
-    switch(set.mult.meas)
+    switch(S_MULT_MEASURE)
     {
     case MultimeterMeasure::VoltageDC:    result = set.mult.rangeVoltageDC;     break;
     case MultimeterMeasure::VoltageAC:    result = set.mult.rangeVoltageAC;     break;
@@ -363,11 +363,11 @@ void DisplayMultimeter::ChangedMode()
         {"  ", "  ", "  ", "  "}                // Прозвонка
     };
 
-    outBuffer[position[set.mult.meas][GetRange()]] = '.';
+    outBuffer[position[S_MULT_MEASURE][GetRange()]] = '.';
     
-    std::strcpy(&outBuffer[7], suffix[set.mult.meas][GetRange()]);
+    std::strcpy(&outBuffer[7], suffix[S_MULT_MEASURE][GetRange()]);
     
-    if(set.mult.meas == MultimeterMeasure::Resistance)
+    if(S_MULT_MEASURE_IS_RESISTANCE)
     {
         outBuffer[8] = SYMBOL_OMEGA;
     }
