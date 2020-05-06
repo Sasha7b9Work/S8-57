@@ -89,6 +89,10 @@ struct CursorsLookMode
 // Какие курсоры сейчас активны. Какие активны, те и будут перемещаться по вращению ручки УСТАНОВКА.
 struct CursorsActive
 {
+#define S_CURS_ACTIVE       (set.curs._active)
+#define S_CURS_ACTIVE_IS_T  (S_CURS_ACTIVE == CursorsActive::T)
+#define S_CURS_ACTIVE_IS_U  (S_CURS_ACTIVE == CursorsActive::U)
+
     enum E
     {
         U,
@@ -140,15 +144,16 @@ struct CursorsMovement
 };
 
 
-#define S_CURS_SHOW     (set.curs._showCursors)
+#define S_CURS_SHOW         (set.curs._showCursors)
+#define S_CURS_SHOW_FREQ    (set.curs._showFreq)
 
 
 struct SettingsCursorsMeasures
 {
     bool               _showCursors;             // Показывать ли курсоры.
     CursorsLookMode::E _lookMode[Chan::Count];   // Режимы слежения за курсорами для двух пар курсоров.
-    bool               showFreq;                // Установленное в true значение, что нужно показывать на экране 1/dT между курсорами.
-    CursorsActive::E   active;                  // Какие курсоры сейас активны.
+    bool               _showFreq;                // Установленное в true значение, что нужно показывать на экране 1/dT между курсорами.
+    CursorsActive::E   _active;                  // Какие курсоры сейас активны.
     Chan::E            source;                  // Источник - к какому каналу относятся курсоры.
     CursorsControl::E  cntrlU[Chan::Count];     // Активные курсоры напряжения.
     CursorsControl::E  cntrlT[Chan::Count];     // Активные курсоры времени.

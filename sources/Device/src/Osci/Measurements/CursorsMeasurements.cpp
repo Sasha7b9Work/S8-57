@@ -147,19 +147,19 @@ static void UpdateCursorsForLook()
 {
 //    Chan::E source = CURS_SOURCE;
 
-    if ((set.curs.active == CursorsActive::T) && (S_CURS_LOOK_MODE_IS_VOLTAGE(ChanA) || S_CURS_LOOK_MODE_IS_BOTH(ChanA)))
+    if (S_CURS_ACTIVE_IS_T && (S_CURS_LOOK_MODE_IS_VOLTAGE(ChanA) || S_CURS_LOOK_MODE_IS_BOTH(ChanA)))
     {
         //SetCursorU(source, 0, Processing::CalculateCursorU(source, CURsT_POS(source, 0)));
     }
-    if ((set.curs.active == CursorsActive::T) && (S_CURS_LOOK_MODE_IS_VOLTAGE(ChanB) || S_CURS_LOOK_MODE_IS_BOTH(ChanB)))
+    if (S_CURS_ACTIVE_IS_T && (S_CURS_LOOK_MODE_IS_VOLTAGE(ChanB) || S_CURS_LOOK_MODE_IS_BOTH(ChanB)))
     {
         //SetCursorU(source, 1, Processing::CalculateCursorU(source, CURsT_POS(source, 1)));
     }
-    if ((set.curs.active == CursorsActive::U) && (S_CURS_LOOK_MODE_IS_TIME(ChanA) || S_CURS_LOOK_MODE_IS_BOTH(ChanA)))
+    if (S_CURS_ACTIVE_IS_U && (S_CURS_LOOK_MODE_IS_TIME(ChanA) || S_CURS_LOOK_MODE_IS_BOTH(ChanA)))
     {
         //SetCursorT(source, 0, Processing::CalculateCursorT(source, CURsU_POS(source, 0), 0));
     }
-    if ((set.curs.active == CursorsActive::U) && (S_CURS_LOOK_MODE_IS_TIME(ChanB) || S_CURS_LOOK_MODE_IS_BOTH(ChanB)))
+    if (S_CURS_ACTIVE_IS_U && (S_CURS_LOOK_MODE_IS_TIME(ChanB) || S_CURS_LOOK_MODE_IS_BOTH(ChanB)))
     {
         //SetCursorT(source, 1, Processing::CalculateCursorT(source, CURsU_POS(source, 1), 1));
     }

@@ -103,12 +103,12 @@ static void Draw_T_enableBoth(int x, int y)
 
 void PageCursorsMeasures::Set::OnPress_T()
 {
-    if ((set.curs.active == CursorsActive::T) || CursorsControl::IsDisabledT())
+    if (S_CURS_ACTIVE_IS_T || CursorsControl::IsDisabledT())
     {
         IncCursCntrlT(CursorsSource());
     }
 
-    set.curs.active = CursorsActive::T;
+    S_CURS_ACTIVE = CursorsActive::T;
 }
 
 static void Draw_T(int x, int y)
@@ -119,7 +119,7 @@ static void Draw_T(int x, int y)
     }
     else
     {
-        if ((set.curs.active != CursorsActive::T))
+        if (!S_CURS_ACTIVE_IS_T)
         {
             Draw_T_disableBoth(x, y);
         }
@@ -204,12 +204,12 @@ static void Draw_U_enableBoth(int x, int y)
 
 void PageCursorsMeasures::Set::OnPress_U()
 {
-    if ((set.curs.active == CursorsActive::U) || CursorsControl::IsDisabledU())
+    if (S_CURS_ACTIVE_IS_U || CursorsControl::IsDisabledU())
     {
         IncCursCntrlU(CursorsSource());
     }
 
-    set.curs.active = CursorsActive::U;
+    S_CURS_ACTIVE = CursorsActive::U;
 }
 
 static void Draw_U(int x, int y)
@@ -221,7 +221,7 @@ static void Draw_U(int x, int y)
     }
     else
     {
-        if (set.curs.active != CursorsActive::U)
+        if (!S_CURS_ACTIVE_IS_U)
         {
             Draw_U_disableBoth(x, y);
         }
@@ -326,7 +326,7 @@ bool PageCursorsMeasures::Set::HandlerKey(const KeyEvent &event) //-V2506
 
     float value = event.IsIncrease() ? 1.0F : -1.0F;
 
-    if ((set.curs.active == CursorsActive::U) && (event.IsArrowUp() || event.IsArrowDown()))
+    if (S_CURS_ACTIVE_IS_U && (event.IsArrowUp() || event.IsArrowDown()))
     {
         if (set.curs.movement == CursorsMovement::Percents)
         {
@@ -345,7 +345,7 @@ bool PageCursorsMeasures::Set::HandlerKey(const KeyEvent &event) //-V2506
         
         return true;
     }
-    else if((set.curs.active == CursorsActive::T) && (event.IsArrowLeft() || event.IsArrowRight()))
+    else if(S_CURS_ACTIVE_IS_T && (event.IsArrowLeft() || event.IsArrowRight()))
     {
         if (set.curs.movement == CursorsMovement::Percents)
         {
@@ -447,19 +447,19 @@ void PageCursorsMeasures::Set::UpdateCursorsForLook()
 {
     Chan::E source = CursorsSource();
 
-    if ((set.curs.active == CursorsActive::T) && (S_CURS_LOOK_MODE_IS_VOLTAGE(ChanA) || S_CURS_LOOK_MODE_IS_BOTH(ChanA)))
+    if (S_CURS_ACTIVE_IS_T && (S_CURS_LOOK_MODE_IS_VOLTAGE(ChanA) || S_CURS_LOOK_MODE_IS_BOTH(ChanA)))
     {
         SetCursorU(source, 0, Measure::CalculateCursorU(source, CursorsMeasurements::PosT(source, 0)));
     }
-    if ((set.curs.active == CursorsActive::T) && (S_CURS_LOOK_MODE_IS_VOLTAGE(ChanB) || S_CURS_LOOK_MODE_IS_BOTH(ChanB)))
+    if (S_CURS_ACTIVE_IS_T && (S_CURS_LOOK_MODE_IS_VOLTAGE(ChanB) || S_CURS_LOOK_MODE_IS_BOTH(ChanB)))
     {
         SetCursorU(source, 1, Measure::CalculateCursorU(source, CursorsMeasurements::PosT(source, 1)));
     }
-    if ((set.curs.active == CursorsActive::U) && (S_CURS_LOOK_MODE_IS_TIME(ChanA) || S_CURS_LOOK_MODE_IS_BOTH(ChanA)))
+    if (S_CURS_ACTIVE_IS_U && (S_CURS_LOOK_MODE_IS_TIME(ChanA) || S_CURS_LOOK_MODE_IS_BOTH(ChanA)))
     {
         SetCursorT(source, 0, Measure::CalculateCursorT(source, set.curs.posCurU[source][0], 0));
     }
-    if ((set.curs.active == CursorsActive::U) && (S_CURS_LOOK_MODE_IS_TIME(ChanB) || S_CURS_LOOK_MODE_IS_BOTH(ChanB)))
+    if (S_CURS_ACTIVE_IS_U && (S_CURS_LOOK_MODE_IS_TIME(ChanB) || S_CURS_LOOK_MODE_IS_BOTH(ChanB)))
     {
         SetCursorT(source, 1, Measure::CalculateCursorT(source, set.curs.posCurU[source][1], 1));
     }
@@ -483,6 +483,6 @@ void PageCursorsMeasures::Set::SetCursorT(Chan::E ch, int numCur, float pos)
 bool PageCursorsMeasures::Set::IsRegSetActiveOnCursors()
 {
     return ((Menu::OpenedItem() == PageCursorsMeasures::Set::self) &&
-        (((set.curs.active == CursorsActive::U) && CursorsControl::IsDisabledU()) ||
-        ((set.curs.active == CursorsActive::T) && CursorsControl::IsDisabledT())));
+        ((S_CURS_ACTIVE_IS_U && CursorsControl::IsDisabledU()) ||
+        (S_CURS_ACTIVE_IS_T && CursorsControl::IsDisabledT())));
 }

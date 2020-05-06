@@ -427,7 +427,7 @@ static void WriteCursors()
             String(':').Draw(x, y2);
             CursorsMeasurements::PercentsT(source).Draw(x + 8, y2);
 
-            if (set.curs.showFreq)
+            if (S_CURS_SHOW_FREQ)
             {
                 int width = 65;
                 x = Grid::Right() - width;
