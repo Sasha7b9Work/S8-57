@@ -178,7 +178,7 @@ struct SettingsMath
     FuncModeDraw::E modeDraw;       // Раздельный или общий дисплей в режиме математической функции.
     MathFunction::E function;
     ModeRegSet::E   modeRegSet;     // Функция ручки УСТАНОВКА - масштаб по времени или смещение по вертикали.
-    int8            divider;
+    Divider::E      divider;
     int16           rShift;
     Range::E        range;
 };

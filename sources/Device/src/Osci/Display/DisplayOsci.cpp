@@ -174,7 +174,7 @@ void DisplayOsci::DrawingValueParameter::Draw()
         {
         case TrigLevel:
         {
-            float trigLevVal = RShift::ToAbs(set.trig.level[set.trig.source], set.ch[set.trig.source].range) * Divider::ToAbs(set.ch[set.trig.source].divider);
+            float trigLevVal = RShift::ToAbs(set.trig.level[set.trig.source], set.ch[set.trig.source].range) * Divider::ToAbs(DIVIDER(set.trig.source));
             Voltage voltage(trigLevVal);
             String("Синхр %s", voltage.ToString(true).c_str()).Draw(x + 7, y + 5, Color::FILL);
             break;
