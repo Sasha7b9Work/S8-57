@@ -45,6 +45,8 @@ struct ENumAverage
 };
 
 // Количество накоплений.
+#define S_DISP_ENUM_ACCUM       (set.disp.enumAccum)
+#define S_DISP_NUM_ACCUM        (1 << S_DISP_ENUM_ACCUM)
 struct ENumAccum
 {
     enum E
@@ -59,7 +61,6 @@ struct ENumAccum
         _128,
         _Infinity
     };
-    static int Number();
 };
 
 struct ModeAccumulation

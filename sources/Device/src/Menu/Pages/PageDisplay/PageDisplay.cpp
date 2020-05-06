@@ -11,12 +11,6 @@ void ENumAverage::Set(ENumAverage::E v)
 }
 
 
-int ENumAccum::Number()
-{
-    return (1 << set.disp.enumAccum);
-};
-
-
 DEF_CHOICE_10( cSmoothing,                                                                                                                                    //--- ДИСПЛЕЙ - Сглаживание ---
     "Сглаж.",
     "Устанавливает количество точек для расчёта сглаженного по соседним точкам сигнала.",
