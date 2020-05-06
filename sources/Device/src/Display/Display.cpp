@@ -278,12 +278,6 @@ uint ENumSignalsInSec::TimeBetweenFramesMS()
 }
 
 
-int ENumSmoothing::Number()
-{
-    return set.disp.enumSmoothing + 1;
-};
-
-
 void Display::LoadBrightness()
 {
     HAL_BUS::Panel::Send(Command::Display_Brightness, static_cast<uint8>(set.disp.brightness + 10));

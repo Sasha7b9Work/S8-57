@@ -24,7 +24,7 @@ DEF_CHOICE_10( cSmoothing,                                                      
     "8 точек",
     "9 точек",
     "10 точек",
-    set.disp.enumSmoothing, &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    S_DISP_ENUM_SMOOTH, &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

@@ -76,6 +76,8 @@ struct ModeAccumulation
 };
 
 // Количество точек для расчёта сглаживания.
+#define S_DISP_ENUM_SMOOTH  (set.disp.enumSmoothing)
+#define S_DISP_NUM_SMOOTH   (S_DISP_ENUM_SMOOTH + 1)
 struct ENumSmoothing
 {
     enum E
@@ -91,7 +93,6 @@ struct ENumSmoothing
         _9points,
         _10points
     };
-    static int Number();
 };
 
 // Ограничение FPS.
