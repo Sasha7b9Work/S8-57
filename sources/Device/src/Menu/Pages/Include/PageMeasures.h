@@ -28,12 +28,13 @@ struct MeasuresOnDisplay
 };
 
 
+struct MeasuresSource
+{
 #define S_MEAS_SOURCE           (set.meas.source)
 #define S_MEAS_SOURCE_IS_A      (S_MEAS_SOURCE == MeasuresSource::A)
 #define S_MEAS_SOURCE_IS_B      (S_MEAS_SOURCE == MeasuresSource::B)
 #define S_MEAS_SOURCE_IS_A_B    (S_MEAS_SOURCE == MeasuresSource::A_B)
-struct MeasuresSource
-{
+
     enum E
     {
         A,
@@ -71,6 +72,11 @@ struct SettingsAutoMeasures
 // Режим слежения курсоров.
 struct CursorsLookMode
 {
+#define S_CURS_LOOK_MODE(chan)              (set.curs._lookMode[chan])
+#define S_CURS_LOOK_MODE_IS_VOLTAGE(chan)   (S_CURS_LOOK_MODE(chan) == CursorsLookMode::Voltage)
+#define S_CURS_LOOK_MODE_IS_TIME(chan)      (S_CURS_LOOK_MODE(chan) == CursorsLookMode::Time)
+#define S_CURS_LOOK_MODE_IS_BOTH(chan)      (S_CURS_LOOK_MODE(chan) == CursorsLookMode::Both)
+
     enum E
     {
         None,      // Курсоры не следят.
@@ -122,6 +128,7 @@ struct CursorsControl
     static bool IsEnabled2U() { return RefU(CursorsSource()) == _2 || RefU(CursorsSource()) == Both; }
 };
 
+
 // Дискретность перемещения курсоров.
 struct CursorsMovement
 {
@@ -133,10 +140,13 @@ struct CursorsMovement
 };
 
 
+#define S_CURS_SHOW     (set.curs._showCursors)
+
+
 struct SettingsCursorsMeasures
 {
-    bool               showCursors;             // Показывать ли курсоры.
-    CursorsLookMode::E lookMode[Chan::Count];   // Режимы слежения за курсорами для двух пар курсоров.
+    bool               _showCursors;             // Показывать ли курсоры.
+    CursorsLookMode::E _lookMode[Chan::Count];   // Режимы слежения за курсорами для двух пар курсоров.
     bool               showFreq;                // Установленное в true значение, что нужно показывать на экране 1/dT между курсорами.
     CursorsActive::E   active;                  // Какие курсоры сейас активны.
     Chan::E            source;                  // Источник - к какому каналу относятся курсоры.

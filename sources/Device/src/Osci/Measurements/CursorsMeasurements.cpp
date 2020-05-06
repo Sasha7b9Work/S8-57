@@ -27,7 +27,7 @@ float CursorsMeasurements::PosU(Chan::E ch, int numCur)
 bool CursorsMeasurements::NecessaryDraw()
 {
     return (!CursorsControl::IsDisabledU() || !CursorsControl::IsDisabledT()) &&
-        (set.curs.showCursors || (Menu::OpenedItem() == PageCursorsMeasures::Set::self));
+        (S_CURS_SHOW || (Menu::OpenedItem() == PageCursorsMeasures::Set::self));
 }
 
 
@@ -147,19 +147,19 @@ static void UpdateCursorsForLook()
 {
 //    Chan::E source = CURS_SOURCE;
 
-    if ((set.curs.active == CursorsActive::T) && ((set.curs.lookMode[ChanA] == CursorsLookMode::Voltage) || (set.curs.lookMode[ChanA] == CursorsLookMode::Both)))
+    if ((set.curs.active == CursorsActive::T) && (S_CURS_LOOK_MODE_IS_VOLTAGE(ChanA) || S_CURS_LOOK_MODE_IS_BOTH(ChanA)))
     {
         //SetCursorU(source, 0, Processing::CalculateCursorU(source, CURsT_POS(source, 0)));
     }
-    if ((set.curs.active == CursorsActive::T) && ((set.curs.lookMode[ChanB] == CursorsLookMode::Voltage) || (set.curs.lookMode[ChanB] == CursorsLookMode::Both)))
+    if ((set.curs.active == CursorsActive::T) && (S_CURS_LOOK_MODE_IS_VOLTAGE(ChanB) || S_CURS_LOOK_MODE_IS_BOTH(ChanB)))
     {
         //SetCursorU(source, 1, Processing::CalculateCursorU(source, CURsT_POS(source, 1)));
     }
-    if ((set.curs.active == CursorsActive::U) && ((set.curs.lookMode[ChanA] == CursorsLookMode::Time) || (set.curs.lookMode[ChanA] == CursorsLookMode::Both)))
+    if ((set.curs.active == CursorsActive::U) && (S_CURS_LOOK_MODE_IS_TIME(ChanA) || S_CURS_LOOK_MODE_IS_BOTH(ChanA)))
     {
         //SetCursorT(source, 0, Processing::CalculateCursorT(source, CURsU_POS(source, 0), 0));
     }
-    if ((set.curs.active == CursorsActive::U) && ((set.curs.lookMode[ChanB] == CursorsLookMode::Time) || (set.curs.lookMode[ChanB] == CursorsLookMode::Both)))
+    if ((set.curs.active == CursorsActive::U) && (S_CURS_LOOK_MODE_IS_TIME(ChanB) || S_CURS_LOOK_MODE_IS_BOTH(ChanB)))
     {
         //SetCursorT(source, 1, Processing::CalculateCursorT(source, CURsU_POS(source, 1), 1));
     }

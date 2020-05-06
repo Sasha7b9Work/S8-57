@@ -376,7 +376,7 @@ bool PageCursorsMeasures::Set::HandlerKey(const KeyEvent &event) //-V2506
 
 static bool IsActive_Set()
 {
-    return set.curs.showCursors;
+    return S_CURS_SHOW;
 }
 
 DEF_PAGE_5( pSet,                                                                                                                                  //--- »«Ã≈–≈Õ»ﬂ -  ”–—Œ–€ - ”—“¿ÕŒ¬»“‹ ---
@@ -447,19 +447,19 @@ void PageCursorsMeasures::Set::UpdateCursorsForLook()
 {
     Chan::E source = CursorsSource();
 
-    if ((set.curs.active == CursorsActive::T) && ((set.curs.lookMode[ChanA] == CursorsLookMode::Voltage) || (set.curs.lookMode[ChanA] == CursorsLookMode::Both)))
+    if ((set.curs.active == CursorsActive::T) && (S_CURS_LOOK_MODE_IS_VOLTAGE(ChanA) || S_CURS_LOOK_MODE_IS_BOTH(ChanA)))
     {
         SetCursorU(source, 0, Measure::CalculateCursorU(source, CursorsMeasurements::PosT(source, 0)));
     }
-    if ((set.curs.active == CursorsActive::T) && ((set.curs.lookMode[ChanB] == CursorsLookMode::Voltage) || (set.curs.lookMode[ChanB] == CursorsLookMode::Both)))
+    if ((set.curs.active == CursorsActive::T) && (S_CURS_LOOK_MODE_IS_VOLTAGE(ChanB) || S_CURS_LOOK_MODE_IS_BOTH(ChanB)))
     {
         SetCursorU(source, 1, Measure::CalculateCursorU(source, CursorsMeasurements::PosT(source, 1)));
     }
-    if ((set.curs.active == CursorsActive::U) && ((set.curs.lookMode[ChanA] == CursorsLookMode::Time) || (set.curs.lookMode[ChanA] == CursorsLookMode::Both)))
+    if ((set.curs.active == CursorsActive::U) && (S_CURS_LOOK_MODE_IS_TIME(ChanA) || S_CURS_LOOK_MODE_IS_BOTH(ChanA)))
     {
         SetCursorT(source, 0, Measure::CalculateCursorT(source, set.curs.posCurU[source][0], 0));
     }
-    if ((set.curs.active == CursorsActive::U) && ((set.curs.lookMode[ChanB] == CursorsLookMode::Time) || (set.curs.lookMode[ChanB] == CursorsLookMode::Both)))
+    if ((set.curs.active == CursorsActive::U) && (S_CURS_LOOK_MODE_IS_TIME(ChanB) || S_CURS_LOOK_MODE_IS_BOTH(ChanB)))
     {
         SetCursorT(source, 1, Measure::CalculateCursorT(source, set.curs.posCurU[source][1], 1));
     }
