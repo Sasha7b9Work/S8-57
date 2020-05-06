@@ -34,7 +34,7 @@ DEF_CHOICE_3( cCoupleA,                                                         
     "Пост",
     "Перем",
     "Земля",
-    ModeCouple::Ref(ChanA), &PageChannelA::self, Item::Active, PageChannelA::OnChanged_Couple, Choice::AfterDraw
+    S_MODE_COUPLE_A, &PageChannelA::self, Item::Active, PageChannelA::OnChanged_Couple, Choice::AfterDraw
 )
 
 
@@ -123,7 +123,7 @@ DEF_CHOICE_3( cCoupleB,                                                         
     "Пост",
     "Перем",
     "Земля",
-    ModeCouple::Ref(ChanB), &PageChannelB::self, Item::Active, PageChannelB::OnChanged_Couple, Choice::AfterDraw
+    S_MODE_COUPLE_B, &PageChannelB::self, Item::Active, PageChannelB::OnChanged_Couple, Choice::AfterDraw
 )
 
 

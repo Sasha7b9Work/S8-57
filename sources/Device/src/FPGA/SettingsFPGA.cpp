@@ -394,12 +394,6 @@ pString ModeCouple::UGO(ModeCouple::E v)
 }
 
 
-ModeCouple::E &ModeCouple::Ref(Chan::E ch)
-{
-    return S_MODE_COUPLE(ch);
-}
-
-
 void Bandwidth::Load(Chan::E ch)
 {
     static const StructPIN pinsLF[2] = { {PIN_LF1}, {PIN_LF2} };

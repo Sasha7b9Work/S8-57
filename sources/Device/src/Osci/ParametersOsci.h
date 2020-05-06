@@ -207,8 +207,6 @@ struct ModeCouple
 
     static void Set(Chan::E ch, ModeCouple::E couple);
 
-    static ModeCouple::E &Ref(Chan::E);
-
     static pString UGO(ModeCouple::E v);
 };
 
