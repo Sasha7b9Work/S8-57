@@ -105,7 +105,10 @@ struct TypeSignalROM
 };
 
 #define MAX_SYMBOLS_IN_FILE_NAME 35
-#define S_MEM_FILE_NAME (set.mem.fileName)
+
+#define S_MEM_FILE_NAME             (set.mem.fileName)
+#define S_MEM_FLASH_AUTO_CONNECT    (set.mem._flashAutoConnect)
+#define S_MEM_INDEX_CUR_SYMBOL_MASK (set.mem._indexCurSymbolNameMask)
 
 struct SettingsMemory
 {
@@ -113,8 +116,8 @@ struct SettingsMemory
     ModeBtnMemory::E    _modeBtnMemory;
     TypeSignalROM::E    _typeSignalROM;                          // Какой сигнал выводить в режиме ПАМЯТЬ-ВНУТР ЗУ
     ModeWork::E         _modeWork;                               // Режим работы.
-    bool                flashAutoConnect;                       // Если true, при подключении флешки автоматически выводится Файл-Менеджер.
-    int8                indexCurSymbolNameMask;                 // Индекс текущего символа в режиме задания маски или выбора имени.
+    bool                _flashAutoConnect;                       // Если true, при подключении флешки автоматически выводится Файл-Менеджер.
+    int8                _indexCurSymbolNameMask;                 // Индекс текущего символа в режиме задания маски или выбора имени.
     ModeSaveSignal::E   modeSaveSignal;                         // В каком виде сохранять сигнал.
     char                fileName[MAX_SYMBOLS_IN_FILE_NAME];     // Имя файла для режима ручного задания.
     ModeShowIntMem::E   _;                                      // Что показывать в режиме ВНУТР ЗУ - считанный или записанный сигнал.

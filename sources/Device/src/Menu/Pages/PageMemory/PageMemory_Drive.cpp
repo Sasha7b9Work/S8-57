@@ -42,7 +42,7 @@ DEF_CHOICE_2(cAutoconnect,                                                      
     "Eсли \"¬кл\", при подключении внешнего накопител€ происходит автоматический переход на страницу ѕјћя“№ - ¬нешн «”",
     DISABLE_RU,
     ENABLE_RU,
-    set.mem.flashAutoConnect, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    S_MEM_FLASH_AUTO_CONNECT, &PageDrive::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

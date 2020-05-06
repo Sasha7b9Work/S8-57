@@ -181,7 +181,7 @@ DEF_GRAPH_BUTTON( bMask_Backspace,                                              
 
 static void OnPress_Mask_Insert()
 {
-    int index = set.mem.indexCurSymbolNameMask;
+    int index = S_MEM_INDEX_CUR_SYMBOL_MASK;
     int size = static_cast<int>(std::strlen(set.mem.fileNameMask));
     if (size == MAX_SYMBOLS_IN_FILE_NAME - 1)
     {
@@ -520,7 +520,7 @@ static void OnPress_SetName_Insert()
     uint size = std::strlen(S_MEM_FILE_NAME);
     if (size < MAX_SYMBOLS_IN_FILE_NAME - 1)
     {
-        S_MEM_FILE_NAME[size] = Tables::Get(set.mem.indexCurSymbolNameMask)[0];
+        S_MEM_FILE_NAME[size] = Tables::Get(S_MEM_INDEX_CUR_SYMBOL_MASK)[0];
         S_MEM_FILE_NAME[size + 1] = '\0';
     }
 }
@@ -576,11 +576,11 @@ void OnMemExtSetMaskNameRegSet(int angle, int maxIndex)
 
     Color::ChangeFlash(true);
 
-    if (set.mem.indexCurSymbolNameMask > maxIndex)
+    if (S_MEM_INDEX_CUR_SYMBOL_MASK > maxIndex)
     {
-        set.mem.indexCurSymbolNameMask = static_cast<int8>(maxIndex - 1);
+        S_MEM_INDEX_CUR_SYMBOL_MASK = static_cast<int8>(maxIndex - 1);
     }
-    func[Math::Sign(angle) + 1](&set.mem.indexCurSymbolNameMask, 0, static_cast<int8>(maxIndex - 1));
+    func[Math::Sign(angle) + 1](&S_MEM_INDEX_CUR_SYMBOL_MASK, 0, static_cast<int8>(maxIndex - 1));
     Beeper::RegulatorSwitchRotate();
 }
 

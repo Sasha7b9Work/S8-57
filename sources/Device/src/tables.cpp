@@ -83,10 +83,10 @@ const char *Tables_RangeNameFromValue(Range::E range)
 void Tables::DrawStr(int index, int x, int y)
 {
     const char *str = symbolsAlphaBet[index];
-    if (index == set.mem.indexCurSymbolNameMask)
+    if (index == S_MEM_INDEX_CUR_SYMBOL_MASK)
     {
         Region(DFont::GetLengthText(str), 9).Fill(x - 1, y, Color::FLASH_10);
     }
 
-    String(symbolsAlphaBet[index]).Draw(x, y, index == set.mem.indexCurSymbolNameMask ? Color::FLASH_01 : Color::FILL);
+    String(symbolsAlphaBet[index]).Draw(x, y, (index == S_MEM_INDEX_CUR_SYMBOL_MASK) ? Color::FLASH_01 : Color::FILL);
 }
