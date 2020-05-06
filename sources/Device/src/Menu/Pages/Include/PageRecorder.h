@@ -3,16 +3,22 @@
 #include "Recorder/Recorder.h"
 
 
+#define S_REC_ENABLED_A         (set.rec._enA)
+#define S_REC_ENABLED_B         (set.rec._enB)
+#define S_REC_ENABLED_SENSOR    (set.rec._enSensor)
+#define S_REC_CURRENT_CURSOR    (set.rec._currentCursor)
+
+
 struct SettingsRecorder
 { //-V802
-    bool                    enA;            // Включение записи канала 1
-    bool                    enB;            // Включение записи канала 2
-    bool                    enSensor;       // Включение записи показаний датчика
-    Recorder::TypeMemory::E typeMemory;     // Место хранения записываемых/показываемых данных
-    Recorder::Axis::E       axisMove;       // Текущая ось перемещения
-    Recorder::Axis::E       axisZoom;       // Текущая ось масштабирования
-    Recorder::ScaleX::E     scaleX;         // Установленный масштаб по времени
-    int8                    currentCursor;  // Курсор, которым сейчас можно управлять
+    bool                    _enA;            // Включение записи канала 1
+    bool                    _enB;            // Включение записи канала 2
+    bool                    _enSensor;       // Включение записи показаний датчика
+    Recorder::TypeMemory::E _typeMemory;     // Место хранения записываемых/показываемых данных
+    Recorder::Axis::E       _axisMove;       // Текущая ось перемещения
+    Recorder::Axis::E       _axisZoom;       // Текущая ось масштабирования
+    Recorder::ScaleX::E     _scaleX;         // Установленный масштаб по времени
+    int8                    _currentCursor;  // Курсор, которым сейчас можно управлять
 };
 
 

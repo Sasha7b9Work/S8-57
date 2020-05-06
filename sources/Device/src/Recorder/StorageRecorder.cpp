@@ -239,7 +239,7 @@ void Record::Init()
     offsetB = 0;
     offsetSensor = 0;
 
-    if(set.rec.enA)
+    if(S_REC_ENABLED_A)
     {
         sources |= (1 << 0);
         bytesOnPoint += 2;
@@ -248,7 +248,7 @@ void Record::Init()
         offsetSensor = sizeof(BitSet16);
     }
 
-    if(set.rec.enB)
+    if(S_REC_ENABLED_B)
     {
         sources |= (1 << 1);
         bytesOnPoint += 2;
@@ -256,7 +256,7 @@ void Record::Init()
         offsetSensor += sizeof(BitSet16);
     }
 
-    if(set.rec.enSensor)
+    if(S_REC_ENABLED_SENSOR)
     {
         sources |= (1 << 2);
         bytesOnPoint += sizeof(float) * 2;      //  ажда€ точка датчика требует 2 значени€ типа float - минимальное и максимальное

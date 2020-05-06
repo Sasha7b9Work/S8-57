@@ -21,6 +21,7 @@ public:
     static void ReadPoint();
 
     // Где хранятся данные
+#define S_REC_TYPE_MEMORY   (set.rec._typeMemory)
     struct TypeMemory
     {
         enum E
@@ -31,7 +32,9 @@ public:
         };
     };
 
+    
     // Используется при выборе оси
+#define S_REC_AXIS_MOVE     (set.rec._axisMove)
     struct Axis
     {
         enum E
@@ -41,7 +44,9 @@ public:
         };
     };
 
+    
     // Масшаб по времени
+#define S_REC_SCALE_X   (set.rec._scaleX)
     struct ScaleX
     {
         enum E

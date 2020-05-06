@@ -136,7 +136,7 @@ void Recorder::OnPressStart()
         return;
     }
 
-    if(!set.rec.enA && !set.rec.enB && !set.rec.enSensor)
+    if(!S_REC_ENABLED_A && !S_REC_ENABLED_B && !S_REC_ENABLED_SENSOR)
     {
         Display::ShowWarning("Ќужно выбрать хот€ бы один источник записи");
         return;
@@ -175,11 +175,11 @@ void Recorder::ScaleX::Change(int delta)
     {
         if (delta > 0)
         {
-            ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&set.rec.scaleX), static_cast<uint8>(Recorder::ScaleX::Count - 1));
+            ::Math::LimitationIncrease<uint8>(reinterpret_cast<uint8 *>(&S_REC_SCALE_X), static_cast<uint8>(Recorder::ScaleX::Count - 1));
         }
         else
         {
-            ::Math::LimitationDecrease<uint8>(reinterpret_cast<uint8 *>(&set.rec.scaleX), 0);
+            ::Math::LimitationDecrease<uint8>(reinterpret_cast<uint8 *>(&S_REC_SCALE_X), 0);
         }
 
         Load();
@@ -208,7 +208,7 @@ pString Recorder::ScaleX::ToString()
         StructScaleX("10\x10с")
     };
 
-    return scales[set.rec.scaleX].name;
+    return scales[S_REC_SCALE_X].name;
 }
 
 
@@ -230,7 +230,7 @@ int Recorder::ScaleX::BytesToSec()
         8
     };
 
-    return bytes[set.rec.scaleX].value;
+    return bytes[S_REC_SCALE_X].value;
 }
 
 
@@ -252,7 +252,7 @@ int Recorder::ScaleX::TimeForPointMS()
         500
     };
 
-    return bytes[set.rec.scaleX].value;
+    return bytes[S_REC_SCALE_X].value;
 }
 
 #ifdef WIN32
@@ -273,7 +273,7 @@ void Recorder::ScaleX::Load()
         BIN_U8(01011110)   // -V2501  // 10s
     };
 
-    HAL_BUS::FPGA::Write8(WR::TBASE, values[set.rec.scaleX]);
+    HAL_BUS::FPGA::Write8(WR::TBASE, values[S_REC_SCALE_X]);
 
     if (Recorder::IsRunning())
     {

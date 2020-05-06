@@ -28,7 +28,7 @@ struct MeasuresOnDisplay
 };
 
 
-#define S_MEAS_SOURCE           (set.meas._source)
+#define S_MEAS_SOURCE           (set.meas.source)
 #define S_MEAS_SOURCE_IS_A      (S_MEAS_SOURCE == MeasuresSource::A)
 #define S_MEAS_SOURCE_IS_B      (S_MEAS_SOURCE == MeasuresSource::B)
 #define S_MEAS_SOURCE_IS_A_B    (S_MEAS_SOURCE == MeasuresSource::A_B)
@@ -60,7 +60,7 @@ struct SettingsAutoMeasures
 {
     bool                        show;              // Показывать ли измерения.
     MeasuresOnDisplay::E        number;            // Сколько измерений выводить.
-    MeasuresSource::E           _source;            // Для каких каналов выводить измерения.
+    MeasuresSource::E           source;            // Для каких каналов выводить измерения.
     MeasuresModeViewSignals::E  modeViewSignals;   // Сжимать ли сигналы при выводе измерений.
     TypeMeasure::E              measures[15];      // Выбранные для индикации измерения.
     TypeMeasure::E              marked;            // Измерение, на которое нужно выводить маркеры.

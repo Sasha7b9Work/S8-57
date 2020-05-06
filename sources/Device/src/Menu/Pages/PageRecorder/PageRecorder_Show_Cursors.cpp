@@ -10,7 +10,7 @@ DEF_CHOICE_2(cChoice,
     "Выбор курсора",
     "1",
     "2",
-    set.rec.currentCursor, &PageRecorder::Show::Cursors::self, Choice::Active, Choice::Changed, Choice::AfterDraw
+    S_REC_CURRENT_CURSOR, &PageRecorder::Show::Cursors::self, Choice::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

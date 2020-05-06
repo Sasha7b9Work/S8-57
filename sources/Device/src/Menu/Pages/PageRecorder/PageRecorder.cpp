@@ -18,13 +18,13 @@ DEF_CHOICE_3( cTypeMemory,                                                      
     "ОЗУ",
     "Внутр ЗУ",
     "Внешн ЗУ",
-    set.rec.typeMemory, &PageRecorder::self, IsActive_Destination, Choice::Changed, Choice::AfterDraw
+    S_REC_TYPE_MEMORY, &PageRecorder::self, IsActive_Destination, Choice::Changed, Choice::AfterDraw
 )
 
 
 static bool IsActive_Start()
 {
-    return (set.rec.enA || set.rec.enB || set.rec.enSensor);
+    return (S_REC_ENABLED_A || S_REC_ENABLED_B || S_REC_ENABLED_SENSOR);
 }
 
 static void Draw_Start(int x, int y)
