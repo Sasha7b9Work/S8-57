@@ -201,7 +201,7 @@ void MathFPGA::CalculateFFT(float *dataR, int numPoints, float *result, float *f
 
     Normalize(result, 256);
 
-    if ((set.fft.scale == ScaleFFT::Log))
+    if (S_FFT_SCALE_IS_LOG)
     {
         float minDB = MaxDBFFT::MaxDBforFFT(set.fft.maxDB);
 

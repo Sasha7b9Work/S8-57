@@ -13,7 +13,7 @@ DEF_CHOICE_2( cShow,                                                            
     "",
     "Нет",
     "Да",
-    set.dbg.showConsole, &PageDebug::PageConsole::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    S_DBG_SHOW_CONSOLE, &PageDebug::PageConsole::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

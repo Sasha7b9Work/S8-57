@@ -1,6 +1,8 @@
 #pragma once
 
 
+#define S_FFT_SCALE     (set.fft._scale)
+#define S_FFT_SCALE_IS_LOG  (S_FFT_SCALE == ScaleFFT::Log)
 struct ScaleFFT
 {
     enum E
@@ -9,6 +11,7 @@ struct ScaleFFT
         Linear         // Ёто значение означает линейную шкалу вывода спектра.
     };
 };
+
 
 struct SourceFFT
 {
@@ -20,6 +23,7 @@ struct SourceFFT
     };
 };
 
+
 struct WindowFFT
 {
     enum E
@@ -30,6 +34,7 @@ struct WindowFFT
         Hann
     };
 };
+
 
 struct MaxDBFFT
 {
@@ -56,7 +61,7 @@ struct SettingsFFT
 { //-V802
     bool            enabled;
     uint8           posCur[2];      // ѕозици€ курсора спектра. »змен€етс€ 0...256.
-    ScaleFFT::E     scale;
+    ScaleFFT::E     _scale;
     SourceFFT::E    source;
     WindowFFT::E    window;
     MaxDBFFT::E     maxDB;

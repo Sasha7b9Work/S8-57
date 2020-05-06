@@ -2,7 +2,8 @@
 #include "Menu/MenuItems.h"
 
 
-#define S_DBG_NUM_STRINGS_IN_CONSOLE (set.dbg.numStrings)
+#define S_DBG_SHOW_CONSOLE              (set.dbg.showConsole)
+#define S_DBG_NUM_STRINGS_IN_CONSOLE    (set.dbg.numStrings)
 
 
 struct SettingsDebug

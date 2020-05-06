@@ -88,7 +88,7 @@ void Console::AddString(char *string)
 
 bool Console::IsShown()
 {
-    return set.dbg.showConsole != 0;
+    return (S_DBG_SHOW_CONSOLE != 0);
 }
 
 
