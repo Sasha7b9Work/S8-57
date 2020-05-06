@@ -54,15 +54,15 @@ static bool GenerateNormalModeData(Chan::E ch, uint8 *data, int numBytes)
         1.25        //  20 V
     };
 
-    double amplitude = TuneGeneratorDialog::amplitude[ch] / RShift::ToAbs(1, set.ch[ch].range) * 0.6;
+    double amplitude = TuneGeneratorDialog::amplitude[ch] / RShift::ToAbs(1, S_RANGE(ch)) * 0.6;
 
     double frequency = TuneGeneratorDialog::frequency[ch] * TShift::ToAbs(1, set.time.base);
 
-    double offset = RShift::ToAbs(set.ch[ch].rShift, set.ch[ch].range) * kOffset[set.ch[ch].range];
+    double offset = RShift::ToAbs(S_RSHIFT(ch), S_RANGE(ch)) * kOffset[S_RANGE(ch)];
 
-    if(set.ch[ch].couple == ModeCouple::DC)
+    if(S_MODE_COUPLE_IS_DC(ch))
     {
-        offset += TuneGeneratorDialog::offset[ch] * kOffset[set.ch[ch].range];
+        offset += TuneGeneratorDialog::offset[ch] * kOffset[S_RANGE(ch)];
     }
 
     for (int i = 0; i < numBytes; i++)
@@ -80,7 +80,7 @@ static bool GenerateNormalModeData(Chan::E ch, uint8 *data, int numBytes)
 
 bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
 {
-    if (!set.ch[ch].enabled)
+    if (!S_CHANNEL_ENABLED(ch))
     {
         return false;
     }

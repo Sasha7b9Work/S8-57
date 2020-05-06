@@ -190,9 +190,10 @@ private:
 };
 
 // Режим канала по входу.
-#define S_MODE_COUPLE(chan)     (set.ch[chan]._couple)
-#define S_MODE_COUPLE_A         S_MODE_COUPLE(ChanA)
-#define S_MODE_COUPLE_B         S_MODE_COUPLE(ChanB)
+#define S_MODE_COUPLE(chan)         (set.ch[chan]._couple)
+#define S_MODE_COUPLE_A             S_MODE_COUPLE(ChanA)
+#define S_MODE_COUPLE_B             S_MODE_COUPLE(ChanB)
+#define S_MODE_COUPLE_IS_DC(chan)   (S_MODE_COUPLE(chan) == ModeCouple::DC)
 struct ModeCouple
 {
     enum E
