@@ -8,6 +8,9 @@
 #define NUM_AVE_MAX     256
 
 
+#define S_DISP_MAPPING          (set.disp.mapping)
+#define S_DISP_MAPPING_IS_LINES (S_DISP_MAPPING == DisplayMapping::Lines)
+#define S_DISP_MAPPING_IS_DOTS  (S_DISP_MAPPING == DisplayMapping::Dots)
 struct DisplayMapping
 {
     enum E

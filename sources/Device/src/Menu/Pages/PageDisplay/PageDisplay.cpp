@@ -88,7 +88,7 @@ DEF_CHOICE_2( cViewMode,                                                        
     "Задаёт режим отображения сигнала",
     "Вектор",
     "Точки",
-    set.disp.mapping, &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    S_DISP_MAPPING, &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
