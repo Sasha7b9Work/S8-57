@@ -17,7 +17,7 @@ void FPGA::LoadRegUPR()
 {
     uint8 data = 0;
 
-    if ((set.time.peakDet == PeakDetMode::Enabled) || Device::InModeRecorder())
+    if (S_PEAK_DET_ENABLED || Device::InModeRecorder())
     {
         data |= 1 << BIT_UPR_PEAK;
     }

@@ -286,7 +286,7 @@ int TShift::Min()
         StructENumPoints(-4096 * mul + k, -2048 * mul + k, 0 * mul + k)   // 8192
     };
 
-    return m[set.mem.enumPoints].m[set.time.tPos];
+    return m[set.mem.enumPoints].m[S_TPOS];
 }
 
 

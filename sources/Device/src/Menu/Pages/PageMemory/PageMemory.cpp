@@ -14,7 +14,7 @@
 int ENumPointsFPGA::BytesInChannel()
 {
     int result = PointsInChannel();
-    if (set.time.peakDet == PeakDetMode::Enabled)
+    if (S_PEAK_DET_ENABLED)
     {
         result *= 2;
     }

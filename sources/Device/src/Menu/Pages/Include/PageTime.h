@@ -2,6 +2,8 @@
 #include "Osci/ParametersOsci.h"
 
 
+#define S_PEAK_DET          (set.time._peakDet)
+#define S_PEAK_DET_ENABLED  (S_PEAK_DET == PeakDetMode::Enabled)
 struct PeakDetMode
 {
     enum E
@@ -13,7 +15,11 @@ struct PeakDetMode
     static bool IsEnabled();
 };
 
+
 // Положение точки синхронизация на сигнале.
+#define S_TPOS              (set.time._tPos)
+#define S_TPOS_IS_LEFT      (S_TPOS == TPos::Left)
+#define S_TPOS_IS_CENTER    (S_TPOS == TPos::Center)
 struct TPos
 {
     enum E
@@ -31,6 +37,7 @@ struct TPos
     static int PosX();
 };
 
+
 // Тип выборки для режима рандомизатора.
 struct SampleType
 {
@@ -40,6 +47,7 @@ struct SampleType
         Equal    // эквивалентная - сигнал строится по последним точкам, полученным от рандомизатора.
     };
 };
+
 
 // Функция ВР/ДЕЛ.
 struct FunctionTime
@@ -68,8 +76,8 @@ struct LinkingTShift
 {
     int                 _shift;
     TBase::E            _base;
-    PeakDetMode::E      peakDet;
-    TPos::E             tPos;
+    PeakDetMode::E      _peakDet;
+    TPos::E             _tPos;
     SampleType::E       sampleType;
     FunctionTime::E     _;
     LinkingTShift::E    linkingTShift;  // Тип привязки смещения по горизонтали

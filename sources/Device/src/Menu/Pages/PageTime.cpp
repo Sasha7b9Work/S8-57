@@ -14,7 +14,7 @@ int TPos::PosX()
 {
     int x[] = { Grid::Left(), (Grid::Right() - Grid::Left()) / 2 + Grid::Left(), Grid::Right() };
 
-    return x[set.time.tPos];
+    return x[S_TPOS];
 }
 
 
@@ -42,13 +42,13 @@ int TPos::InBytes()
         {{0,  8192, 16382}, {0,  8192, 16382}},
         {{0, 16384, 32766}, {0, 16384, 32766}}
     };
-    return m[set.mem.enumPoints][set.time.peakDet][set.time.tPos];
+    return m[set.mem.enumPoints][S_PEAK_DET][S_TPOS];
 }
 
 
 bool PeakDetMode::IsEnabled()
 {
-    return ((set.time.peakDet == PeakDetMode::Enabled) && (S_TIME_BASE >= TBase::MIN_PEAK_DET));
+    return (S_PEAK_DET_ENABLED && (S_TIME_BASE >= TBase::MIN_PEAK_DET));
 }
 
 
@@ -92,7 +92,7 @@ DEF_CHOICE_2( cPeakDet,                                                         
     ,
     DISABLE_RU,
     ENABLE_RU,
-    set.time.peakDet, &PageTime::self, IsActive_PeakDet, PageTime::OnChanged_PeakDet, Choice::AfterDraw
+    S_PEAK_DET, &PageTime::self, IsActive_PeakDet, PageTime::OnChanged_PeakDet, Choice::AfterDraw
 )
 
 
@@ -109,7 +109,7 @@ DEF_CHOICE_3( cTPos,                                                            
     "Лево",
     "Центр",
     "Право",
-    set.time.tPos, &PageTime::self, Item::Active, PageTime::OnChanged_TPos, Choice::AfterDraw
+    S_TPOS, &PageTime::self, Item::Active, PageTime::OnChanged_TPos, Choice::AfterDraw
 )
 
 
