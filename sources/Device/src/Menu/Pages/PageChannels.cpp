@@ -19,7 +19,7 @@ DEF_CHOICE_2( cInputA,                                                          
     chanInput,
     DISABLE_RU,
     ENABLE_RU,
-    setA.enabled, &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    S_CHANNEL_ENABLED_A, &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -108,7 +108,7 @@ DEF_CHOICE_2( cInputB,                                                          
     chanInput,
     DISABLE_RU,
     ENABLE_RU,
-    setB.enabled, &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    S_CHANNEL_ENABLED_B, &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

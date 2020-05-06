@@ -8,6 +8,8 @@
 #define S_RSHIFT_MATH           set.math.rShift
 
 #define S_CHANNEL_ENABLED(chan) set.ch[chan].enabled
+#define S_CHANNEL_ENABLED_A     S_CHANNEL_ENABLED(ChanA)
+#define S_CHANNEL_ENABLED_B     S_CHANNEL_ENABLED(ChanB)
 
 #define S_INVERSE(chan)         set.ch[chan].inverse
 #define S_INVERSE_A             S_INVERSE(ChanA)

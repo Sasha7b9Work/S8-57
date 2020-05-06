@@ -4,9 +4,9 @@
 
 
 // ¬ыводить автоматические измерени€ по каналу A
-#define VIEW_MEASURES_A                 (setA.enabled && ((set.meas.source == MeasuresSource::A) || (set.meas.source == MeasuresSource::A_B)))
+#define VIEW_MEASURES_A                 (S_CHANNEL_ENABLED_A && ((set.meas.source == MeasuresSource::A) || (set.meas.source == MeasuresSource::A_B)))
 // ¬ыводить автоматические измерени€ по каналу B
-#define VIEW_MEASURES_B                 (setB.enabled && ((set.meas.source == MeasuresSource::B) || (set.meas.source == MeasuresSource::A_B)))
+#define VIEW_MEASURES_B                 (S_CHANNEL_ENABLED_B && ((set.meas.source == MeasuresSource::B) || (set.meas.source == MeasuresSource::A_B)))
 
 
 // —колько автоматических измерений помещаетс€ на экран

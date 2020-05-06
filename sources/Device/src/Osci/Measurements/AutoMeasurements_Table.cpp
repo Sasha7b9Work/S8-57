@@ -99,10 +99,10 @@ void TableMeasures::Cell::DrawStringMeasure(int x, int y)
 
     switch (set.meas.source)
     {
-    case MeasuresSource::A:     measureA.Draw(x + 2, y + 11, colA);                         break;
-    case MeasuresSource::B:     measureB.Draw(x + 2, y + 11, colB);                         break;
+    case MeasuresSource::A:     measureA.Draw(x + 2, y + 11, colA);                                 break;
+    case MeasuresSource::B:     measureB.Draw(x + 2, y + 11, colB);                                 break;
     case MeasuresSource::A_B:   measureA.Draw(x + 2, y + 11, colA);
-                                measureB.Draw(x + 2, y + (setA.enabled ? 20 : 11), colB);   break;
+                                measureB.Draw(x + 2, y + (S_CHANNEL_ENABLED_A ? 20 : 11), colB);    break;
     }
 }
 

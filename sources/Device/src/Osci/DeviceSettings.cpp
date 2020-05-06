@@ -13,8 +13,8 @@
 
 void DataSettings::Fill()
 {
-    Lval_ENABLED_A(this) = setA.enabled ? 1U : 0U;
-    Lval_ENABLED_B(this) = setB.enabled ? 1U : 0U;
+    Lval_ENABLED_A(this) = S_CHANNEL_ENABLED_A ? 1U : 0U;
+    Lval_ENABLED_B(this) = S_CHANNEL_ENABLED_B ? 1U : 0U;
 
     INVERSE_A(this)      = S_INVERSE_A ? 1U : 0U;
     INVERSE_B(this)      = S_INVERSE_B ? 1U : 0U;
