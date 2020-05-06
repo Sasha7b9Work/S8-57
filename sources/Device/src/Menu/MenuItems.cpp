@@ -409,13 +409,13 @@ void Page::ChangeSubPage(int delta)
 
 int8 Page::CurrentSubPage() const
 {
-    return set.menu.currentSubPage[OwnData()->name];
+    return S_MENU_CURRENT_SUB_PAGE(OwnData()->name);
 }
 
 
 void Page::SetCurrentSubPage(int8 pos) const
 {
-    set.menu.currentSubPage[OwnData()->name] = pos;
+    S_MENU_CURRENT_SUB_PAGE(OwnData()->name) = pos;
 }
 
 

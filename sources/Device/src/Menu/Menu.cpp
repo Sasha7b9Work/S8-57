@@ -468,7 +468,7 @@ void Menu::CloseAllBadOpenedPages()
 
 int8 &Menu::Position::ActItem(PageName::E name)
 {
-    return set.menu.posActItem[name];
+    return S_MENU_POS_ACT_ITEM(name);
 }
 
 
