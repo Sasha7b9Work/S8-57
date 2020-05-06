@@ -161,8 +161,12 @@ struct CursorsMovement
 #define S_CURS_DT_PERCENTS(chan)    (set.curs._deltaT100percents[chan])
 
 #define S_CURS_POS_U(chan, num)     (set.curs._posCurU[chan][num])
-#define S_CURS_POS_U0(chan)         (set.curs._posCurU[chan][0])
-#define S_CURS_POS_U1(chan)         (set.curs._posCurU[chan][1])
+#define S_CURS_POS_U0(chan)         (S_CURS_POS_U(chan, 0))
+#define S_CURS_POS_U1(chan)         (S_CURS_POS_U(chan, 1))
+
+#define S_CURS_POS_T(chan, num)     (set.curs._posCurT[chan][num])
+#define S_CURS_POS_T0(chan)         (S_CURS_POS_T(chan, 0))
+#define S_CURS_POS_T1(chan)         (S_CURS_POS_T(chan, 1))
 
 
 struct SettingsCursorsMeasures
@@ -178,7 +182,7 @@ struct SettingsCursorsMeasures
     float              _deltaU100percents[2];    // Расстояние между курсорами напряжения для 100%, для обоих каналов.
     float              _deltaT100percents[2];    // Расстояние между курсорами времени для 100%, для обоих каналов.
     float              _posCurU[Chan::Count][2]; // Текущие позиции курсоров напряжения обоих каналов.
-    float              posCurT[Chan::Count][2]; // Текущие позиции курсоров времени обоих каналов.
+    float              _posCurT[Chan::Count][2]; // Текущие позиции курсоров времени обоих каналов.
 };
 
 
