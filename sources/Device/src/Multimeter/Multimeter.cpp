@@ -109,11 +109,11 @@ void Multimeter::Update()
 
     switch(S_MULT_MEASURE)
     {
-    case MultimeterMeasure::VoltageDC:   range = static_cast<uint8>(set.mult.rangeVoltageDC);   break;
-    case MultimeterMeasure::VoltageAC:   range = static_cast<uint8>(set.mult.rangeVoltageAC);   break;
-    case MultimeterMeasure::CurrentDC:   range = static_cast<uint8>(set.mult.rangeCurrentDC);   break;
-    case MultimeterMeasure::CurrentAC:   range = static_cast<uint8>(set.mult.rangeCurrentAC);   break;
-    case MultimeterMeasure::Resistance:  range = static_cast<uint8>(set.mult.rangeResist);      break;
+    case MultimeterMeasure::VoltageDC:   range = static_cast<uint8>(S_MULT_RANGE_VOLTAGE_DC);   break;
+    case MultimeterMeasure::VoltageAC:   range = static_cast<uint8>(S_MULT_RANGE_VOLTAGE_AC);   break;
+    case MultimeterMeasure::CurrentDC:   range = static_cast<uint8>(S_MULT_RANGE_CURRENT_DC);   break;
+    case MultimeterMeasure::CurrentAC:   range = static_cast<uint8>(S_MULT_RANGE_CURRENT_AC);   break;
+    case MultimeterMeasure::Resistance:  range = static_cast<uint8>(S_MULT_RANGE_RESISTANCE);   break;
 
     case MultimeterMeasure::TestDiode:
     case MultimeterMeasure::Bell:

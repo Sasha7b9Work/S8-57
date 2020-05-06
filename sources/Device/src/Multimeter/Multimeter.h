@@ -77,6 +77,8 @@ struct ModeAVP
 // Предел имзерения постоянного напряжения
 struct RangeVoltageDC
 {
+#define S_MULT_RANGE_VOLTAGE_DC (set.mult._rangeVoltageDC)
+
     enum E
     {
         _2V,
@@ -89,6 +91,8 @@ struct RangeVoltageDC
 // Предел измерения переменного напряжения
 struct RangeVoltageAC
 {
+#define S_MULT_RANGE_VOLTAGE_AC     (set.mult._rangeVoltageAC)
+
     enum E
     {
         _2V,
@@ -101,6 +105,8 @@ struct RangeVoltageAC
 // Предел измерения переменного тока
 struct RangeCurrentAC
 {
+#define S_MULT_RANGE_CURRENT_AC     (set.mult._rangeCurrentAC)
+
     enum E
     {
         _20mA,
@@ -112,6 +118,8 @@ struct RangeCurrentAC
 // Предел измерения постоянного тока
 struct RangeCurrentDC
 {
+#define S_MULT_RANGE_CURRENT_DC     (set.mult._rangeCurrentDC)
+
     enum E
     {
         _20mA,
@@ -123,6 +131,8 @@ struct RangeCurrentDC
 // Предел измерения сопротивленя постоянному току
 struct RangeResistance
 {
+#define S_MULT_RANGE_RESISTANCE     (set.mult._rangeResist)
+
     enum E
     {
         _2k,

@@ -37,7 +37,7 @@ DEF_CHOICE_3( cRangesVoltageDC,                                                 
     "2 В",
     "20 В",
     "500 В",
-    set.mult.rangeVoltageDC, &PageMultimeter::self, IsActive_Ranges, OnChange_VoltageDC, Choice::AfterDraw
+    S_MULT_RANGE_VOLTAGE_DC, &PageMultimeter::self, IsActive_Ranges, OnChange_VoltageDC, Choice::AfterDraw
 )
 
 
@@ -55,7 +55,7 @@ DEF_CHOICE_3( cRangesVoltageAC,                                                 
     "2 В",
     "20 В",
     "400 В",
-    set.mult.rangeVoltageAC, &PageMultimeter::self, IsActive_Ranges, OnChange_VoltageAC, Choice::AfterDraw
+    S_MULT_RANGE_VOLTAGE_AC, &PageMultimeter::self, IsActive_Ranges, OnChange_VoltageAC, Choice::AfterDraw
 )
 
 
@@ -73,7 +73,7 @@ DEF_CHOICE_2( cRangesCurrentDC,
     "Диапазон измерения",
     "20мА",
     "2А",
-    set.mult.rangeCurrentDC, &PageMultimeter::self, IsActive_Ranges, OnChange_CurrentDC, Choice::AfterDraw
+    S_MULT_RANGE_CURRENT_DC, &PageMultimeter::self, IsActive_Ranges, OnChange_CurrentDC, Choice::AfterDraw
 )
 
 
@@ -90,7 +90,7 @@ DEF_CHOICE_2( cRangesCurrentAC,
     "Диапазон измерения",
     "20мА",
     "2А",
-    set.mult.rangeCurrentAC, &PageMultimeter::self, IsActive_Ranges, OnChange_CurrentAC, Choice::AfterDraw
+    S_MULT_RANGE_CURRENT_AC, &PageMultimeter::self, IsActive_Ranges, OnChange_CurrentAC, Choice::AfterDraw
 )
 
 
@@ -109,7 +109,7 @@ DEF_CHOICE_4( cRangesResistance,                                                
     "20 кОм",
     "200 кОм",
     "10 МОм",
-    set.mult.rangeResist, &PageMultimeter::self, IsActive_Ranges, OnChange_Resistance, Choice::AfterDraw
+    S_MULT_RANGE_RESISTANCE, &PageMultimeter::self, IsActive_Ranges, OnChange_Resistance, Choice::AfterDraw
 )
 
 DEF_CHOICE_7( cMode,
@@ -191,7 +191,7 @@ DEF_CHOICE_2 (cShow,
     "",
     "В режиме",
     "Всегда",
-    set.mult.showAlways, &PageMultimeter::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    S_MULT_SHOW_ALWAYS, &PageMultimeter::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
