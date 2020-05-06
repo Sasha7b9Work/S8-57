@@ -11,6 +11,8 @@ struct TrigSource
 
 
 // Режим поиска синхронизции
+#define S_TRIG_MODE_FIND            (set.trig.modeFind)
+#define S_TRIG_MODE_FIND_IS_AUTO    (S_TRIG_MODE_FIND == TrigModeFind::Auto)
 struct TrigModeFind
 {
     enum E
@@ -66,8 +68,12 @@ struct TrigStartMode
 
 
 #define S_TRIG_SOURCE           (set.trig.source)
+
 #define S_TRIG_LEVEL(channel)   (set.trig.level[channel])
 #define S_TRIG_LEVEL_SOURCE     S_TRIG_LEVEL(S_TRIG_SOURCE)
+
+#define S_TRIG_HOLDOFF_VALUE    (set.trig.holdOff)
+#define S_TRIG_HOLDOFF_ENABLED  (set.trig.holdOffEnabled)
 
 
 struct SettingsTrig

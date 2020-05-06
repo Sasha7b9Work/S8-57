@@ -138,7 +138,7 @@ void DisplayOsci::DrawingValueParameter::Enable(DrawingValueParameter::E v)
 
     if (v == DrawingValueParameter::TrigLevel)
     {
-        if (set.trig.modeFind == TrigModeFind::Auto)
+        if (S_TRIG_MODE_FIND_IS_AUTO)
         {
             return;
         }

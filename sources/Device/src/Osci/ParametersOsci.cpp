@@ -147,9 +147,9 @@ static uint8 ValueForRange(Chan::E ch);
 
 void Osci::LoadHoldfOff()
 {
-    HAL_BUS::FPGA::Write8(WR::TRIG_HOLD_ENABLE, set.trig.holdOffEnabled ? 1U : 0U);
+    HAL_BUS::FPGA::Write8(WR::TRIG_HOLD_ENABLE, S_TRIG_HOLDOFF_ENABLED ? 1U : 0U);
 
-    uint value = static_cast<uint>(0 - set.trig.holdOff + 1);
+    uint value = static_cast<uint>(0 - S_TRIG_HOLDOFF_VALUE + 1);
 
     BitSet32 bs(value);
 
