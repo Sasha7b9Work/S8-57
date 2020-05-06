@@ -214,7 +214,7 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
 
     Color color = Color::CHAN[ch];
 
-    bool inverse = set.ch[ch].inverse;
+    bool inverse = S_INVERSE(ch);
 
     Range::E range = S_RANGE(ch);
 

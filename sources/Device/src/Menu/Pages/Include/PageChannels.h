@@ -9,6 +9,10 @@
 
 #define S_CHANNEL_ENABLED(chan) set.ch[chan].enabled
 
+#define S_INVERSE(chan)         set.ch[chan].inverse
+#define S_INVERSE_A             S_INVERSE(ChanA)
+#define S_INVERSE_B             S_INVERSE(ChanB)
+
 
 struct SettingsChannel
 { //-V802

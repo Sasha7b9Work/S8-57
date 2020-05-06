@@ -16,8 +16,8 @@ void DataSettings::Fill()
     Lval_ENABLED_A(this) = setA.enabled ? 1U : 0U;
     Lval_ENABLED_B(this) = setB.enabled ? 1U : 0U;
 
-    INVERSE_A(this)      = setA.inverse ? 1U : 0U;
-    INVERSE_B(this)      = setB.inverse ? 1U : 0U;
+    INVERSE_A(this)      = S_INVERSE_A ? 1U : 0U;
+    INVERSE_B(this)      = S_INVERSE_B ? 1U : 0U;
 
     Lval_RANGE_A(this)   = S_RANGE_A;
     Lval_RANGE_B(this)   = S_RANGE_B;
