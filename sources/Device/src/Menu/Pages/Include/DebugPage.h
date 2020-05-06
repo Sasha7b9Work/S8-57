@@ -10,6 +10,9 @@
 #define S_DBG_SHOW_TRIG_LEV             (set.dbg._showTrigLev)
 #define S_DBG_SHOW_RANGE(chan)          (set.dbg._showRange[chan])
 #define S_DBG_SHOW_CHAN_PARAM(chan)     (set.dbg._showChanParam[chan])
+#define S_DBG_SHOW_TRIG_PARAM           (set.dbg._showTrigParam)
+#define S_DBG_SHOW_TSHIFT               (set.dbg._showTShift)
+#define S_DBG_SHOW_TBASE                (set.dbg._showTBase)
 
 
 struct SettingsDebug
@@ -22,10 +25,9 @@ struct SettingsDebug
     bool   _showTrigLev;
     bool   _showRange[2];
     bool   _showChanParam[2];
-    bool   showTrigParam;
-    bool   showTShift;
-    bool   showTBase;
-    int16  numMeasuresForGates; // Число измерений для ворот.
+    bool   _showTrigParam;
+    bool   _showTShift;
+    bool   _showTBase;
     bool   showRandInfo;        // Выводить информацию по рандомизатору - ворота и считанное значение.
     bool   showRandStat;        // Выводить график статистики.
     int16  timeCompensation;    // Дополнительное смещение по времени для данной развёртки режима рандомизатора.
@@ -94,8 +96,6 @@ struct PageDebug
         struct PageStretch
         {
             static const Page *const self;
-
-            static void OnChanged_Mode(bool);
         };
 
 

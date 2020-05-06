@@ -97,7 +97,7 @@ DEF_CHOICE_2( cTrigParam,                                                       
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg.showTrigParam, &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
+    S_DBG_SHOW_TRIG_PARAM, &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -124,7 +124,7 @@ DEF_CHOICE_2( cTBase,                                                           
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg.showTBase, &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
+    S_DBG_SHOW_TBASE, &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -133,7 +133,7 @@ DEF_CHOICE_2( cTShift,                                                          
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg.showTShift, &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
+    S_DBG_SHOW_TSHIFT, &PageDebug::PageRegisters::self, IsActive_Registers, Choice::Changed, Choice::AfterDraw
 )
 
 

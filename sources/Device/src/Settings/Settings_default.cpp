@@ -220,7 +220,6 @@ const Settings Settings::defaultSettings =
         false,                      // showTrigParam
         false,                      // showTShift
         false,                      // showTBase
-        10,                         // numMeasuresForGates
         false,                      // showRandInfo
         false,                      // showRandStat
         0,                          // timeCompensation
