@@ -136,9 +136,16 @@ void DisplayOsci::DrawingValueParameter::Enable(DrawingValueParameter::E v)
         return;
     }
 
-    if(v == DrawingValueParameter::TrigLevel && (set.trig.modeFind == TrigModeFind::Auto))  // Не будем рисовать при автоматическом поиске уровня синхронизации
+    if (v == DrawingValueParameter::TrigLevel)
     {
-        return;
+        if (set.trig.modeFind == TrigModeFind::Auto)
+        {
+            return;
+        }
+    }
+    else if(!CursorsMeasurements::NecessaryDraw())
+    {
+//        return;
     }
 
     needDrawParameter = true;
@@ -163,11 +170,35 @@ void DisplayOsci::DrawingValueParameter::Draw()
 
         Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
 
-        float trigLevVal = RShift::ToAbs(set.trig.level[set.trig.source], set.ch[set.trig.source].range) * Divider::ToAbs(set.ch[set.trig.source].divider);
+        switch (parameter)
+        {
+        case TrigLevel:
+        {
+            float trigLevVal = RShift::ToAbs(set.trig.level[set.trig.source], set.ch[set.trig.source].range) * Divider::ToAbs(set.ch[set.trig.source].divider);
+            Voltage voltage(trigLevVal);
+            String("Синхр %s", voltage.ToString(true).c_str()).Draw(x + 7, y + 5, Color::FILL);
+            break;
+        }
 
-        Voltage voltage(trigLevVal);
+        case RangeA:
+        case RangeB:
+        case RShiftA:
+        case RShiftB:
+        {
+            Chan::E ch = ((parameter == RangeA) || (parameter == RShiftA)) ? ChanA : ChanB;
+            char *channels[2] = { "1", "2" };
+            char *sCH = channels[ch];
+            Color color = Color::CHAN[ch];
+            String("M%s: %s %s", sCH, Range::ToString(ch, DIVIDER(ch)), RShift::ToString(set.ch[ch].rShift, set.ch[ch].range, DIVIDER(ch)).c_str()).Draw(x + 7, y + 5, color);
+            break;
+        }
 
-        String("Синхр %s", voltage.ToString(true).c_str()).Draw(x + 7, y + 5, Color::FILL);
+        case TBase:
+            break;
+
+        case TShift:
+            break;
+        }
     }
 }
 

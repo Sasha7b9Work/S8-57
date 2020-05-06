@@ -84,6 +84,25 @@ struct TBase
 };
 
 
+// Делитель.
+#define DIVIDER(channel)    (set.ch[channel].divider)
+#define DIVIDER_A           DIVIDER(0)
+#define DIVIDER_B           DIVIDER(1)
+struct Divider
+{
+    enum E
+    {
+        _1,
+        _10
+    };
+
+    static int ToAbs(Divider::E v)
+    {
+        return (v == _1) ? 1 : 10;
+    };
+};
+
+
 struct Range
 {
     enum E
@@ -108,7 +127,7 @@ struct Range
 
     static pString Name(Chan::E ch);
 
-    static pString ToString(Chan::E ch, int8 divider);
+    static pString ToString(Chan::E ch, Divider::E divider);
 
     static pString ToString(Range::E range, int8 divider);
     // Возвращает напряжение, соответствующее верхней границе сетки
@@ -137,7 +156,7 @@ public:
     static void DrawBoth();
 
     // Преобразовать в строку
-    static String ToString(int16 rShiftRel, Range::E range, int8 divider);
+    static String ToString(int16 rShiftRel, Range::E range, Divider::E divider);
 
     static float ToAbs(int16 rShift, Range::E range);
 

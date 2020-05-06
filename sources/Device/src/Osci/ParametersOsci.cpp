@@ -189,6 +189,8 @@ void TBase::Change(int delta)
     Osci::Restart();
 
     DisplayOsci::SetFlagRedraw();
+
+    DisplayOsci::DrawingValueParameter::Enable(DisplayOsci::DrawingValueParameter::TBase);
 }
 
 
@@ -297,6 +299,8 @@ void TBase::Set(TBase::E base)
     MessageMgr::OsciSettingsEffectOnAverageChanged();
 
     Osci::ChangedTBase();
+
+    DisplayOsci::DrawingValueParameter::Enable(DisplayOsci::DrawingValueParameter::TBase);
 }
 
 
@@ -358,9 +362,9 @@ void Range::LoadBoth()
 }
 
 
-pString Range::ToString(Chan::E ch, int8 _divider)
+pString Range::ToString(Chan::E ch, Divider::E divider)
 {
-    return ranges[set.ch[ch].range][_divider].name;
+    return ranges[set.ch[ch].range][divider].name;
 }
 
 
@@ -710,6 +714,8 @@ void Range::Set(Chan::E ch, E range)
     set.ch[ch].range = range;
 
     LoadBoth();
+
+    DisplayOsci::DrawingValueParameter::Enable((ch == ChanA) ? DisplayOsci::DrawingValueParameter::RangeA : DisplayOsci::DrawingValueParameter::RangeB);
 }
 
 
@@ -736,6 +742,8 @@ void TShift::Set(int tShift)
     Osci::Restart();
 
     DisplayOsci::SetFlagRedraw();
+
+    DisplayOsci::DrawingValueParameter::Enable(DisplayOsci::DrawingValueParameter::TShift);
 }
 
 

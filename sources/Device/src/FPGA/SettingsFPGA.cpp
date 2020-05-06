@@ -194,6 +194,8 @@ void TShift::Change(const int delta)
     }
 
     TShift::Set(set.time.shift + delta);
+
+    DisplayOsci::DrawingValueParameter::Enable(DisplayOsci::DrawingValueParameter::TShift);
 }
 
 
@@ -237,6 +239,8 @@ void Range::Change(Chan::E ch, int16 delta)
     Range::LoadBoth();
 
     DisplayOsci::SetFlagRedraw();
+
+    DisplayOsci::DrawingValueParameter::Enable((ch == ChanA) ? DisplayOsci::DrawingValueParameter::RangeA : DisplayOsci::DrawingValueParameter::RangeB);
 }
 
 
@@ -245,14 +249,15 @@ void RShift::Set(Chan::E ch, int16 rShift)
     ::Math::Limitation(&rShift, MIN, MAX);
     set.ch[ch].rShift = rShift;
     Load(ch);
+    DisplayOsci::DrawingValueParameter::Enable((ch == ChanA) ? DisplayOsci::DrawingValueParameter::RShiftA : DisplayOsci::DrawingValueParameter::RShiftB);
 }
 
 
 void RShift::Change(Chan::E ch, int16 delta)
 {
     ::Math::AdditionThisLimitation<int16>(&set.ch[ch].rShift, STEP * delta, MIN, MAX);
-
     RShift::Load(ch);
+    DisplayOsci::DrawingValueParameter::Enable((ch == ChanA) ? DisplayOsci::DrawingValueParameter::RShiftA : DisplayOsci::DrawingValueParameter::RShiftB);
 }
 
 
@@ -304,9 +309,9 @@ String TShift::ToString(const TBase::E _base)
 }
 
 
-String RShift::ToString(int16 rShiftRel, Range::E range, int8 _divider)
+String RShift::ToString(int16 rShiftRel, Range::E range, Divider::E divider)
 {
-    float rShiftVal = ToAbs(rShiftRel, range) * Divider::ToAbs(static_cast<Divider::E>(_divider));
+    float rShiftVal = ToAbs(rShiftRel, range) * Divider::ToAbs(divider);
     return Voltage(rShiftVal).ToString(true);
 }
 
