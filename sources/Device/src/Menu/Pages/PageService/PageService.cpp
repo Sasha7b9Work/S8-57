@@ -43,7 +43,7 @@ DEF_CHOICE_4( cSoundVolume,
 )
 
 
-DEF_PAGE_7_VAR( pService,                                                                                                                                                    //--- СЕРВИС ---
+DEF_PAGE_8_VAR( pService,                                                                                                                                                    //--- СЕРВИС ---
     "СЕРВИС",
     "Дополнительные настройки, калибровка, поиск сигнала, математические функции",
     &bResetSettings,
@@ -51,8 +51,8 @@ DEF_PAGE_7_VAR( pService,                                                       
     PageService::Calibrate::self,
     &cSoundVolume,
     PageRTC::self,
+    PagePowerSaving::self,
     PageService::Information::self,
-    //&Item::empty,
     PageDebug::self,
     PageName::Service, nullptr, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )

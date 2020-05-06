@@ -244,7 +244,7 @@ static bool HandlerKey_Set(const KeyEvent &event)
 }
 
 DEF_PAGE_5( pSet,
-    "Время",
+    "ВРЕМЯ",
     "Установка текущего времени",
     &bSet_Left,
     &bSet_Right,

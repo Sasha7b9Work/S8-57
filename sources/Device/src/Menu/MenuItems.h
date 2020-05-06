@@ -299,6 +299,8 @@ public:
 
     virtual void Draw(int x, int y, bool opened) const;
 
+    static void Changed() { };
+
     const DataGovernor *OwnData() const { return static_cast<const DataGovernor *>(data->ad); }
 
 private:
