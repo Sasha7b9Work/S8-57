@@ -14,14 +14,14 @@ static void RunTest(bool (*func)(), char *message);
 
 void Test::Run()
 {
-    if (!set.dbg.runTest)
+    if (!S_DBG_RUN_TEST)
     {
         return;
     }
 
     std::srand(TIME_MS);
 
-    set.dbg.runTest = false;
+    S_DBG_RUN_TEST = false;
     
     Display::Init();
 

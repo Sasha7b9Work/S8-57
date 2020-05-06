@@ -153,7 +153,7 @@ void TShift::LoadRandomize()
 
 //    LOG_WRITE("pred = %d, post = %d", FPGA::pred, FPGA::post + 1);
 
-    if(set.dbg.showRandPredPost)
+    if(S_DBG_SHOW_RAND_PRED_POST)
     {
         LOG_WRITE("pred = %d, post = %d", FPGA::pred, FPGA::post);
     }

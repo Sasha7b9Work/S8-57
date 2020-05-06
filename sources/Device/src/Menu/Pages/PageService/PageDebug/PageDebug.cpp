@@ -22,7 +22,7 @@ DEF_CHOICE_2( cStats,                                                           
     ,
     "Не показывать",
     "Показывать",
-    set.dbg.ShowStats, &PageDebug::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    S_DBG_SHOW_STATS, &PageDebug::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -31,7 +31,7 @@ DEF_CHOICE_2( cBattery,
     "Показывать дополнительную информацию о состоянии батареи",
     "Не показывать",
     "Показывать",
-    set.dbg.showBattery, &PageDebug::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    S_DBG_SHOW_BATTERY, &PageDebug::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

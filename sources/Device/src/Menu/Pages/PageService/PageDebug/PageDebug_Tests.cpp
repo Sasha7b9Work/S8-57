@@ -6,7 +6,7 @@
 
 void PageDebug::PageTests::OnPress_Run()
 {
-    set.dbg.runTest = true;
+    S_DBG_RUN_TEST = true;
     set.Save();
     Device::Reset();
 }

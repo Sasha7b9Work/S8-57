@@ -163,7 +163,7 @@ DEF_CHOICE_2( cShowGate,
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg.showRandGate, &PageDebug::PageConsole::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    S_DBG_SHOW_RAND_GATES, &PageDebug::PageConsole::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 DEF_CHOICE_2( cShowPredPost,
@@ -171,7 +171,7 @@ DEF_CHOICE_2( cShowPredPost,
     "",
     DISABLE_RU,
     ENABLE_RU,
-    set.dbg.showRandPredPost, &PageDebug::PageConsole::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    S_DBG_SHOW_RAND_PRED_POST, &PageDebug::PageConsole::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

@@ -220,10 +220,6 @@ const Settings Settings::defaultSettings =
         false,                      // showTrigParam
         false,                      // showTShift
         false,                      // showTBase
-        false,                      // showRandInfo
-        false,                      // showRandStat
-        0,                          // timeCompensation
-        0,                          // pretriggered
         false,                      // ShowStats
         false,                      // runTest
         false                       // showBattery

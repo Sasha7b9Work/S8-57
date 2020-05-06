@@ -91,7 +91,7 @@ void Battery::Draw(int x, int y)
 
     DrawUGO(x + 1, y + 9, percents);
 
-    if(set.dbg.showBattery)
+    if(S_DBG_SHOW_BATTERY)
     {
         DFont::Set(DTypeFont::_8);
 

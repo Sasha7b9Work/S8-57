@@ -13,6 +13,11 @@
 #define S_DBG_SHOW_TRIG_PARAM           (set.dbg._showTrigParam)
 #define S_DBG_SHOW_TSHIFT               (set.dbg._showTShift)
 #define S_DBG_SHOW_TBASE                (set.dbg._showTBase)
+#define S_DBG_SHOW_STATS                (set.dbg._showStats)
+#define S_DBG_RUN_TEST                  (set.dbg._runTest)
+#define S_DBG_SHOW_BATTERY              (set.dbg._showBattery)
+#define S_DBG_SHOW_RAND_GATES           (set.dbg._showRandGate)
+#define S_DBG_SHOW_RAND_PRED_POST       (set.dbg._showRandPredPost)
 
 
 struct SettingsDebug
@@ -28,15 +33,11 @@ struct SettingsDebug
     bool   _showTrigParam;
     bool   _showTShift;
     bool   _showTBase;
-    bool   showRandInfo;        // Выводить информацию по рандомизатору - ворота и считанное значение.
-    bool   showRandStat;        // Выводить график статистики.
-    int16  timeCompensation;    // Дополнительное смещение по времени для данной развёртки режима рандомизатора.
-    int16  pretriggered;        // Регулируемая величина предзапуска для исследования рандомизатора.
-    bool   ShowStats;           // Показывать статистику на экране (fps, например).
-    bool   runTest;             // Если true, то нужно выполнять тест при запуске
-    bool   showBattery;         // Показывать или нет состояние батареи
-    bool   showRandGate;        // Выводить ли значения ворот в режиме рандомизатора
-    bool   showRandPredPost;    // Выводить ли значения пред- и после- запуска в режиме рандомизатора
+    bool   _showStats;           // Показывать статистику на экране (fps, например).
+    bool   _runTest;             // Если true, то нужно выполнять тест при запуске
+    bool   _showBattery;         // Показывать или нет состояние батареи
+    bool   _showRandGate;        // Выводить ли значения ворот в режиме рандомизатора
+    bool   _showRandPredPost;    // Выводить ли значения пред- и после- запуска в режиме рандомизатора
 };
 
 

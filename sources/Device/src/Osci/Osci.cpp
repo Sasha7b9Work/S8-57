@@ -589,7 +589,7 @@ void Gates::RecalculateGates()
     minGate = 0.8F * minGate + m.Min() * 0.2F;
     maxGate = 0.8F * maxGate + m.Max() * 0.2F;
 
-    if(set.dbg.showRandGate)
+    if(S_DBG_SHOW_RAND_GATES)
     {
         static uint timePrev = 0;
         LOG_WRITE("Новые ворота %d %d  время %d", static_cast<uint16>(minGate), static_cast<uint16>(maxGate), (TIME_MS - timePrev) / 1000);
