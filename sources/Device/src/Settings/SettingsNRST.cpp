@@ -75,7 +75,7 @@ void SettingsNRST::ResetExtraShift()
     {
         for(int range = 0; range < Range::Count; range++)
         {
-            exShift[ch][range] = 0;
+            NRST_EX_SHIFT(ch, range) = 0;
         }
     }
 }

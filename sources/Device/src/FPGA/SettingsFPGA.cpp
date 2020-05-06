@@ -77,7 +77,7 @@ void RShift::Load(Chan::E ch)
 
     int16 shift = S_RSHIFT(ch) + HARDWARE_ZERO;
 
-    shift += setNRST.exShift[ch][S_RANGE(ch)];
+    shift += NRST_EX_SHIFT(ch, S_RANGE(ch));
 
     if ((ch == ChanA) && Device::InModeTester())
     {

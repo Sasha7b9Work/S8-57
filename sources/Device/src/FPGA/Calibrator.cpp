@@ -91,7 +91,7 @@ bool Calibrator::BalanceChannel(Chan::E ch, bool showHint)
         BalanceRange(ch, static_cast<Range::E>(range));
     }
 
-    std::memcpy(&oldNRST.exShift[ch][0], &setNRST.exShift[ch][0], sizeof(setNRST.exShift[ch][0]) * Range::Count);
+    std::memcpy(&oldNRST._exShift[ch][0], &NRST_EX_SHIFT(ch, 0), sizeof(NRST_EX_SHIFT(ch, 0)) * Range::Count);
 
     setNRST = oldNRST;
     set = old;
@@ -140,11 +140,11 @@ static void BalanceRange(Chan::E ch, Range::E range)
 
     if (delta > 0.0F)
     {
-        setNRST.exShift[ch][range] = static_cast<int8>(delta * 200.0F / 125.0F + 0.5F);
+        NRST_EX_SHIFT(ch, range) = static_cast<int8>(delta * 200.0F / 125.0F + 0.5F);
     }
     else
     {
-        setNRST.exShift[ch][range] = static_cast<int8>(delta * 200.0F / 125.0F - 0.5F);
+        NRST_EX_SHIFT(ch, range) = static_cast<int8>(delta * 200.0F / 125.0F - 0.5F);
     }
 }
 

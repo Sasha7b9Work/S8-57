@@ -35,7 +35,7 @@ DEF_CHOICE_21( gGateMax,                                                        
     "180",
     "190",
     "200",
-    setNRST.enumGameMax, &PageDebug::PageRand::self, Item::Active, OnChanged_Gates, Choice::AfterDraw
+    NRST_ENUM_GATE_MAX, &PageDebug::PageRand::self, Item::Active, OnChanged_Gates, Choice::AfterDraw
 )
 
 
@@ -64,7 +64,7 @@ DEF_CHOICE_21( gGateMin,                                                        
     "180",
     "190",
     "200",
-    setNRST.enumGameMin, &PageDebug::PageRand::self, Item::Active, OnChanged_Gates, Choice::AfterDraw
+    NRST_ENUM_GATE_MIN, &PageDebug::PageRand::self, Item::Active, OnChanged_Gates, Choice::AfterDraw
 )
 
 

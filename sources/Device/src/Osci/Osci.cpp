@@ -491,7 +491,7 @@ ShiftPoint Gates::CalculateShiftPoint()
         return result;
     }
 
-    if(((Osci::valueADC > max - setNRST.enumGameMax * 10) || (Osci::valueADC < min + setNRST.enumGameMin * 10)) && (S_TIME_BASE > TBase::_5ns))
+    if(((Osci::valueADC > max - NRST_ENUM_GATE_MAX * 10) || (Osci::valueADC < min + NRST_ENUM_GATE_MIN * 10)) && (S_TIME_BASE > TBase::_5ns))
     {
         result.type = ShiftPoint::FAIL;
         return result;
@@ -510,7 +510,7 @@ ShiftPoint Gates::CalculateShiftPoint()
         result.shift = TBase::DeltaPoint() - 1;
     }
 
-    if(((Osci::valueADC > max - setNRST.enumGameMax * 10) || (Osci::valueADC < min + setNRST.enumGameMin * 10)) && (S_TIME_BASE < TBase::_10ns))
+    if(((Osci::valueADC > max - NRST_ENUM_GATE_MAX * 10) || (Osci::valueADC < min + NRST_ENUM_GATE_MIN * 10)) && (S_TIME_BASE < TBase::_10ns))
     {
         result.type = ShiftPoint::FAIL;
     }

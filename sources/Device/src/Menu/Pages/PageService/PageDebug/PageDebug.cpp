@@ -69,15 +69,15 @@ static void DebugShowSetInfo_Draw()
     {
         for (int range = 0; range < Range::Count; ++range)
         {
-            String("%d", setNRST.exShift[ch][range]).Draw(x + range * 20, y + dY * ddY);
+            String("%d", NRST_EX_SHIFT(ch, range)).Draw(x + range * 20, y + dY * ddY);
         }
         ddY++;
     }
 
     y += dY * 3;
 
-    DRAW_FORMAT("correctionTime : %d", setNRST.correctionTime); //-V2528
-    DRAW_FORMAT("numAveForRand : %d", setNRST.numAveForRand); //-V2528
+    DRAW_FORMAT("correctionTime : %d", NRST_CORRECTION_TIME); //-V2528
+    DRAW_FORMAT("numAveForRand : %d", NRST_NUM_AVE_FOR_RAND); //-V2528
 
 //    pString s[3] = {"выключено", "настроено автоматически", "задано вручную"};
 //    DRAW_FORMAT("stretchADCtype : %s", (ExtraStretch::Type() < 3 ? s[ExtraStretch::Type()] : "!!! неправильное значение !!!")); //-V547 //-V2528
@@ -93,7 +93,7 @@ static void DebugShowSetInfo_Draw()
 
 #define DRAW_STRETCH(name) DRAW_FORMAT2(#name " : %d %d", set.nrst_##name[0], set.nrst_##name[1])
 
-    DRAW_FORMAT("numSmoothForRand : %d", setNRST.numSmoothForRand); //-V2528
+    DRAW_FORMAT("numSmoothForRand : %d", NRST_NUM_SMOOTH_FOR_RAND); //-V2528
 
     Menu::Draw();
     Painter::EndScene();
