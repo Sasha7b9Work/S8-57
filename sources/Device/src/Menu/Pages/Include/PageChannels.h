@@ -5,7 +5,7 @@
 #define S_RSHIFT(channel)       set.ch[channel]._rShift
 #define S_RSHIFT_A              S_RSHIFT(0)
 #define S_RSHIFT_B              S_RSHIFT(1)
-#define S_RSHIFT_MATH           set.math.rShift
+#define S_RSHIFT_MATH           set.math._rShift
 
 #define S_CHANNEL_ENABLED(chan) set.ch[chan]._enabled
 #define S_CHANNEL_ENABLED_A     S_CHANNEL_ENABLED(ChanA)

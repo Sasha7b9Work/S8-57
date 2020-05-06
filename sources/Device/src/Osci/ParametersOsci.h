@@ -89,7 +89,7 @@ struct TBase
 #define S_DIVIDER(channel)  (set.ch[channel]._divider)
 #define S_DIVIDER_A         S_DIVIDER(0)
 #define S_DIVIDER_B         S_DIVIDER(1)
-#define S_DIVIDER_MATH      (set.math.divider)
+#define S_DIVIDER_MATH      (set.math._divider)
 struct Divider
 {
     enum E
@@ -108,7 +108,7 @@ struct Divider
 #define S_RANGE(channel)    set.ch[channel]._range
 #define S_RANGE_A           S_RANGE(0)
 #define S_RANGE_B           S_RANGE(1)
-#define S_RANGE_MATH        set.math.range
+#define S_RANGE_MATH        set.math._range
 struct Range
 {
     enum E
