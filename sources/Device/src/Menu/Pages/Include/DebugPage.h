@@ -2,6 +2,9 @@
 #include "Menu/MenuItems.h"
 
 
+#define S_DBG_NUM_STRINGS_IN_CONSOLE (set.dbg.numStrings)
+
+
 struct SettingsDebug
 { //-V802
     int8   showConsole;         // Показывать ли консоль

@@ -27,7 +27,7 @@ void Console::Draw()
 {
     if (prevMaxStrinsInConsole == -1)
     {
-        prevMaxStrinsInConsole = set.dbg.numStrings;
+        prevMaxStrinsInConsole = S_DBG_NUM_STRINGS_IN_CONSOLE;
     }
 
     if (!IsShown() || stringInConsole == 0)
@@ -74,7 +74,7 @@ void Console::AddString(char *string)
         inProcessAddingString = true;
 
         static int count = 0;
-        if (stringInConsole == set.dbg.numStrings)
+        if (stringInConsole == S_DBG_NUM_STRINGS_IN_CONSOLE)
         {
             DeleteFirstString();
         }
@@ -96,14 +96,14 @@ void Console::OnChanged_MaxStringsInConsole()
 {
     // \todo Здесь, видимо, не совсем корректное поведение в случае, когда реальных строк меньше, чем максимально допустимое их количество
 
-    int delta = prevMaxStrinsInConsole - set.dbg.numStrings;
+    int delta = prevMaxStrinsInConsole - S_DBG_NUM_STRINGS_IN_CONSOLE;
 
     for (int i = 0; i < delta; i++)
     {
         DeleteFirstString();
     }
 
-    prevMaxStrinsInConsole = set.dbg.numStrings;
+    prevMaxStrinsInConsole = S_DBG_NUM_STRINGS_IN_CONSOLE;
 
 
 }
