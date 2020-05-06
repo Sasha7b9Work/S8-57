@@ -26,7 +26,7 @@ void DataSettings::Fill()
     RSHIFT_B(this)       = S_RSHIFT_B;
 
     Lval_TBASE(this)     = set.time.base;
-    TSHIFT(this)         = set.time.shift;
+    TSHIFT(this)         = S_TIME_SHIFT;
 
     Lval_COUPLE_A(this)  = S_MODE_COUPLE_A;
     Lval_COUPLE_B(this)  = S_MODE_COUPLE_B;

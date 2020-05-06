@@ -108,7 +108,7 @@ void FPGA::LoadCalibratorMode()
 
 void TShift::LoadReal()
 {
-    FPGA::post = static_cast<uint16>(set.time.shift - TShift().Min());
+    FPGA::post = static_cast<uint16>(S_TIME_SHIFT - TShift().Min());
     int Pred = static_cast<int>(ENumPointsFPGA::PointsInChannel()) - static_cast<int>(FPGA::post);
 
     if (Pred < 0)
@@ -135,9 +135,9 @@ void TShift::LoadRandomize()
 {
     int k = TBase::DeltaPoint();
 
-    FPGA::post = static_cast<uint16>((set.time.shift - TShift().Min() - GetK()) / k);
+    FPGA::post = static_cast<uint16>((S_TIME_SHIFT - TShift().Min() - GetK()) / k);
 
-    if(set.time.shift - static_cast<int>(GetK()) < TShift().Min())
+    if(S_TIME_SHIFT - static_cast<int>(GetK()) < TShift().Min())
     {
         FPGA::post = 0;
     }
@@ -164,7 +164,7 @@ void TShift::LoadRandomize()
     HAL_BUS::FPGA::Write16(WR::PRED_LO, FPGA::pred);
     HAL_BUS::FPGA::Write16(WR::POST_LO, FPGA::post);
 
-    Osci::addShift = static_cast<int>(set.time.shift % k);
+    Osci::addShift = static_cast<int>(S_TIME_SHIFT % k);
 
     if (Osci::addShift < 0)
     {
@@ -193,7 +193,7 @@ void TShift::Change(const int delta)
         return;
     }
 
-    TShift::Set(set.time.shift + delta);
+    TShift::Set(S_TIME_SHIFT + delta);
 
     DisplayOsci::DrawingValueParameter::Enable(DisplayOsci::DrawingValueParameter::TShift);
 }
@@ -305,7 +305,7 @@ String TShift::ToString(const TBase::E _base)
         tBase = set.time.base;
     }
 
-    return Time(TShift::ToAbs(set.time.shift, tBase)).ToString(true);
+    return Time(TShift::ToAbs(S_TIME_SHIFT, tBase)).ToString(true);
 }
 
 

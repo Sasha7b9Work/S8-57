@@ -99,7 +99,7 @@ DEF_CHOICE_2( cPeakDet,                                                         
 void PageTime::OnChanged_TPos(bool active)
 {
     PageMemory::OnChanged_Points(active);
-    TShift::Set(set.time.shift);
+    TShift::Set(S_TIME_SHIFT);
 }
 
 DEF_CHOICE_3( cTPos,                                                                                                                                                 //--- –¿«¬≈–“ ¿ - “Ó ---

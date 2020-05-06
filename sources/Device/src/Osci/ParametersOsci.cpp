@@ -735,7 +735,7 @@ void TShift::Set(int tShift)
 {
     LIMITATION(tShift, Min(), Max());
 
-    set.time.shift = tShift;
+    S_TIME_SHIFT = tShift;
 
     Load();
 
@@ -755,7 +755,7 @@ void TShift::Reset()
 
 void TShift::Draw()
 {
-    int x = TPos().PosX() - set.time.shift;
+    int x = TPos().PosX() - S_TIME_SHIFT;
 
     if (x < Grid::Left())
     {

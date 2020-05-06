@@ -62,9 +62,11 @@ struct LinkingTShift
 };
 
 
+#define S_TIME_SHIFT    (set.time._shift)
+
  struct SettingsTime
 {
-    int                 shift;
+    int                 _shift;
     TBase::E            base;
     PeakDetMode::E      peakDet;
     TPos::E             tPos;
