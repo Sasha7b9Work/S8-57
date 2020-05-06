@@ -7,7 +7,7 @@
 
 CursorsSource::operator Chan::E()
 {
-    return set.curs.source;
+    return S_CURS_SOURCE;
 }
 
 

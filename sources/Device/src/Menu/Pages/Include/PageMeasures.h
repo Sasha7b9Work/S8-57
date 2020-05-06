@@ -146,6 +146,8 @@ struct CursorsMovement
 
 #define S_CURS_SHOW         (set.curs._showCursors)
 #define S_CURS_SHOW_FREQ    (set.curs._showFreq)
+#define S_CURS_SOURCE       (set.curs._source)
+#define S_CURS_SOURCE_IS_A  (S_CURS_SOURCE == ChanA)
 
 
 struct SettingsCursorsMeasures
@@ -154,7 +156,7 @@ struct SettingsCursorsMeasures
     CursorsLookMode::E _lookMode[Chan::Count];   // Режимы слежения за курсорами для двух пар курсоров.
     bool               _showFreq;                // Установленное в true значение, что нужно показывать на экране 1/dT между курсорами.
     CursorsActive::E   _active;                  // Какие курсоры сейас активны.
-    Chan::E            source;                  // Источник - к какому каналу относятся курсоры.
+    Chan::E            _source;                  // Источник - к какому каналу относятся курсоры.
     CursorsControl::E  cntrlU[Chan::Count];     // Активные курсоры напряжения.
     CursorsControl::E  cntrlT[Chan::Count];     // Активные курсоры времени.
     CursorsMovement::E movement;                // Как перемещаться курсорам - по точкам или процентам.

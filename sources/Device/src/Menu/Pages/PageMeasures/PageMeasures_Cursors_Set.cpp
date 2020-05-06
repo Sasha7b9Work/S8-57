@@ -37,7 +37,7 @@ static void Draw_ChannelB(int x, int y)
 
 void PageCursorsMeasures::Set::OnPress_Channel()
 {
-    Chan::E source = (set.curs.source == Chan::A) ? ChanB : ChanA;
+    Chan::E source = S_CURS_SOURCE_IS_A ? ChanB : ChanA;
     SetCursSource(source);
 }
 
@@ -396,7 +396,7 @@ const Page * const PageCursorsMeasures::Set::self = static_cast<const Page *>(&p
 
 void PageCursorsMeasures::Set::SetCursSource(Chan::E ch)
 {
-    set.curs.source = ch;
+    S_CURS_SOURCE = ch;
 }
 
 
