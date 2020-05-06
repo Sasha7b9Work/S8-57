@@ -90,6 +90,7 @@ struct TypeSignalROM
 };
 
 #define MAX_SYMBOLS_IN_FILE_NAME 35
+#define S_MEM_FILE_NAME (set.mem.fileName)
 
 struct SettingsMemory
 {

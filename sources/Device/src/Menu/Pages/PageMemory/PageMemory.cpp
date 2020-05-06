@@ -460,7 +460,7 @@ static void DrawSetName()
         position++;
     }
 
-    int x = String(set.mem.fileName).Draw(x0 + deltaX, y0 + 65, Color::FILL);
+    int x = String(S_MEM_FILE_NAME).Draw(x0 + deltaX, y0 + 65, Color::FILL);
 
     Region(5, 8).Fill(x, y0 + 65, Color::FLASH_10);
 }
@@ -489,7 +489,7 @@ static void OnPress_SetName_Exit()
 
 static void OnPress_SetName_Delete()
 {
-    set.mem.fileName[0] = '\0';
+    S_MEM_FILE_NAME[0] = '\0';
 }
 
 DEF_GRAPH_BUTTON( bSetName_Delete,                                                                                                                              //--- »Ãﬂ ‘¿…À¿ - ”‰‡ÎËÚ¸ ---
@@ -501,10 +501,10 @@ DEF_GRAPH_BUTTON( bSetName_Delete,                                              
 
 static void OnPress_SetName_Backspace()
 {
-    int size = static_cast<int>(std::strlen(set.mem.fileName));
-    if (size > 0)
+    uint size = std::strlen(S_MEM_FILE_NAME);
+    if (size != 0)
     {
-        set.mem.fileName[size - 1] = '\0';
+        S_MEM_FILE_NAME[size - 1] = '\0';
     }
 }
 
@@ -517,11 +517,11 @@ DEF_GRAPH_BUTTON( bSetName_Backspace,                                           
 
 static void OnPress_SetName_Insert()
 {
-    int size = static_cast<int>(std::strlen(set.mem.fileName));
+    uint size = std::strlen(S_MEM_FILE_NAME);
     if (size < MAX_SYMBOLS_IN_FILE_NAME - 1)
     {
-        set.mem.fileName[size] = Tables::Get(set.mem.indexCurSymbolNameMask)[0];
-        set.mem.fileName[size + 1] = '\0';
+        S_MEM_FILE_NAME[size] = Tables::Get(set.mem.indexCurSymbolNameMask)[0];
+        S_MEM_FILE_NAME[size + 1] = '\0';
     }
 }
 

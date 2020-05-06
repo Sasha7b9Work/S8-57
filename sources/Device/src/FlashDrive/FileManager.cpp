@@ -346,7 +346,7 @@ bool FileManager::GetNameForNewFile(char name[255]) //-V2506
     std::strcpy(name, currentDir);
     std::strcat(name, "\\");
 
-    int size = static_cast<int>(std::strlen(set.mem.fileName));
+    int size = static_cast<int>(std::strlen(S_MEM_FILE_NAME));
     if (size == 0)
     {
         return false;
@@ -355,7 +355,7 @@ bool FileManager::GetNameForNewFile(char name[255]) //-V2506
     if (set.mem.fileNamingMode == FileNamingMode::Manually)
     {
         LIMITATION(size, 1, 95);
-        std::strcat(name, set.mem.fileName);
+        std::strcat(name, S_MEM_FILE_NAME);
         std::strcat(name, ".");
         std::strcat(name, (set.mem.modeSaveSignal == ModeSaveSignal::BMP) ? "bmp" : "txt");
         return true;

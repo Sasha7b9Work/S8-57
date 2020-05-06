@@ -1,7 +1,7 @@
 #pragma once
 
 
-#define S_FFT_SCALE     (set.fft._scale)
+#define S_FFT_SCALE     (set.fft.scale)
 #define S_FFT_SCALE_IS_LOG  (S_FFT_SCALE == ScaleFFT::Log)
 struct ScaleFFT
 {
@@ -61,7 +61,7 @@ struct SettingsFFT
 { //-V802
     bool            enabled;
     uint8           posCur[2];      // Позиция курсора спектра. Изменяется 0...256.
-    ScaleFFT::E     _scale;
+    ScaleFFT::E     scale;
     SourceFFT::E    source;
     WindowFFT::E    window;
     MaxDBFFT::E     maxDB;
