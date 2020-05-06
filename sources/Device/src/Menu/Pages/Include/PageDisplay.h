@@ -96,6 +96,7 @@ struct ENumSmoothing
 };
 
 // Ограничение FPS.
+#define S_DISP_ENUM_FPS (set.disp.enumSignalsInSec)
 struct ENumSignalsInSec
 {
     enum E

@@ -36,7 +36,7 @@ DEF_CHOICE_5( cRefreshFPS,                                                      
     "5",
     "2",
     "1",
-    set.disp.enumSignalsInSec, &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    S_DISP_ENUM_FPS, &PageDisplay::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
