@@ -113,19 +113,19 @@ String Measure::Name()
 
 TypeMeasure::E Measure::GetType()
 {
-    return set.meas.measures[row * TableMeasures::NumCols() + col];
+    return S_MEAS_INDICATED(row * TableMeasures::NumCols() + col);
 }
 
 
 void Measure::ShortPressOnSmallButonMarker()
 {
-    if(set.meas.measures[AutoMeasurements::posActive] == set.meas.marked)
+    if(S_MEAS_INDICATED(AutoMeasurements::posActive) == set.meas.marked)
     {
         set.meas.marked = TypeMeasure::None;
     }
     else
     {
-        set.meas.marked = set.meas.measures[AutoMeasurements::posActive];
+        set.meas.marked = S_MEAS_INDICATED(AutoMeasurements::posActive);
     }
 }
 

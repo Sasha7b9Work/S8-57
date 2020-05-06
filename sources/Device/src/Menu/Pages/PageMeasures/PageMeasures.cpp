@@ -7,7 +7,7 @@
 
 bool MeasuresModeViewSignals::IsCompress()
 {
-    return (set.meas.modeViewSignals == MeasuresModeViewSignals::Compress);
+    return S_MEAS_MODE_VIEW_SIGNALS_IS_COMPRESS;
 }
 
 

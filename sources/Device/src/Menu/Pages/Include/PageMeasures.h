@@ -34,7 +34,7 @@ struct MeasuresOnDisplay
 
 struct MeasuresSource
 {
-#define S_MEAS_SOURCE           (set.meas.source)
+#define S_MEAS_SOURCE           (set.meas._source)
 #define S_MEAS_SOURCE_IS_A      (S_MEAS_SOURCE == MeasuresSource::A)
 #define S_MEAS_SOURCE_IS_B      (S_MEAS_SOURCE == MeasuresSource::B)
 #define S_MEAS_SOURCE_IS_A_B    (S_MEAS_SOURCE == MeasuresSource::A_B)
@@ -51,6 +51,9 @@ struct MeasuresSource
 // Сжимать ли сигналы при выводе измерений.
 struct MeasuresModeViewSignals
 {
+#define S_MEAS_MODE_VIEW_SIGNALS                (set.meas._modeViewSignals)
+#define S_MEAS_MODE_VIEW_SIGNALS_IS_COMPRESS    (S_MEAS_MODE_VIEW_SIGNALS == MeasuresModeViewSignals::Compress)
+
     enum E
     {
         AsIs,       // Показывать сигналы как есть.
@@ -68,9 +71,9 @@ struct SettingsAutoMeasures
 {
     bool                        _show;              // Показывать ли измерения.
     MeasuresOnDisplay::E        _number;            // Сколько измерений выводить.
-    MeasuresSource::E           source;            // Для каких каналов выводить измерения.
-    MeasuresModeViewSignals::E  modeViewSignals;   // Сжимать ли сигналы при выводе измерений.
-    TypeMeasure::E              measures[15];      // Выбранные для индикации измерения.
+    MeasuresSource::E           _source;            // Для каких каналов выводить измерения.
+    MeasuresModeViewSignals::E  _modeViewSignals;   // Сжимать ли сигналы при выводе измерений.
+    TypeMeasure::E              _measures[15];      // Выбранные для индикации измерения.
     TypeMeasure::E              marked;            // Измерение, на которое нужно выводить маркеры.
 };
 

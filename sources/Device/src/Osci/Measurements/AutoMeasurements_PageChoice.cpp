@@ -22,7 +22,7 @@ void PageChoiceMeasures::OnOpenCloseEvent()
     ChangeState();
     if (isActive)
     {
-        posCursor = static_cast<int8>(set.meas.measures[AutoMeasurements::posActive]);
+        posCursor = static_cast<int8>(S_MEAS_INDICATED(AutoMeasurements::posActive));
     }
 }
 
@@ -50,7 +50,7 @@ void PageChoiceMeasures::OnKeyEvent(const KeyEvent &event)
             posCursor = 0;
         }
 
-        set.meas.measures[AutoMeasurements::posActive] = static_cast<TypeMeasure::E>(posCursor);
+        S_MEAS_INDICATED(AutoMeasurements::posActive) = static_cast<TypeMeasure::E>(posCursor);
         Color::ChangeFlash(true);
     }
     else

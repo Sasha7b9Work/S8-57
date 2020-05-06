@@ -5,6 +5,9 @@
 // Виды измерений
 struct TypeMeasure
 {
+// Индицируемые измерения
+#define S_MEAS_INDICATED(num)  (set.meas._measures[num])
+
     enum E
     {
         None,
