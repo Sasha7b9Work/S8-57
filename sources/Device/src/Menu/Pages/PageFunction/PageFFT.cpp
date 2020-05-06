@@ -114,7 +114,7 @@ const Page * const PageFFT::Cursors::self = static_cast<const Page *>(&pCursors)
 
 static bool IsActive_FFT()
 {
-    return (set.math.modeDraw == FuncModeDraw::Disabled);
+    return S_MATH_MODE_DRAW_IS_DISABLED;
 }
 
 static void OnOpenClose_FFT(bool)

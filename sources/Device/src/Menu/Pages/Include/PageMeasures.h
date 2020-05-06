@@ -144,7 +144,9 @@ struct SettingsCursorsMeasures
 };
 
 
-
+#define S_MATH_MODE_DRAW                (set.math.modeDraw)
+#define S_MATH_MODE_DRAW_IS_SEPARATE    (S_MATH_MODE_DRAW == FuncModeDraw::Separate)
+#define S_MATH_MODE_DRAW_IS_DISABLED    (S_MATH_MODE_DRAW == FuncModeDraw::Disabled)
 struct FuncModeDraw
 {
     enum E
@@ -155,6 +157,7 @@ struct FuncModeDraw
     };
 };
 
+
 struct MathFunction
 {
     enum E
@@ -163,6 +166,7 @@ struct MathFunction
         Mul
     };
 };
+
 
 struct ModeRegSet
 {

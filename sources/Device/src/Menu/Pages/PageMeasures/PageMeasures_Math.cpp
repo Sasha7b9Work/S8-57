@@ -15,7 +15,7 @@ static void OnPress_Screen()
     }
     else
     {
-        Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&set.math.modeDraw), 0, 2);
+        Math::CircleIncrease<int8>(reinterpret_cast<int8 *>(&S_MATH_MODE_DRAW), 0, 2);
     }
 }
 
@@ -47,7 +47,7 @@ static void Draw_Screen(int x, int y)
         Draw_Screen_Separate,
         Draw_Screen_Together
     };
-    funcs[set.math.modeDraw](x, y);
+    funcs[S_MATH_MODE_DRAW](x, y);
 }
 
 DEF_GRAPH_BUTTON_HINTS_3( bScreen,                                                                                                                         //--- —≈–¬»— - ‘”Õ ÷»ﬂ - ›Í‡Ì ---
@@ -86,7 +86,7 @@ static void Draw_Type(int x, int y)
 
 static bool IsActive_Type()
 {
-    return (set.math.modeDraw != FuncModeDraw::Disabled);
+    return !S_MATH_MODE_DRAW_IS_DISABLED;
 }
 
 DEF_GRAPH_BUTTON_HINTS_2( bType,                                                                                                                             //--- —≈–¬»— - ‘”Õ ÷»ﬂ - ¬Ë‰ ---
@@ -123,7 +123,7 @@ static void Draw_ModeArrows(int x, int y)
 
 static bool IsActive_ModeArrows()
 {
-    return (set.math.modeDraw != FuncModeDraw::Disabled);
+    return !S_MATH_MODE_DRAW_IS_DISABLED;
 }
 
 DEF_GRAPH_BUTTON_HINTS_2( bModeArrows,                                                                                                     //--- —≈–¬»— - ‘”Õ ÷»ﬂ - –ÂÊËÏ Û˜ÍË ”—“¿ÕŒ¬ ¿ ---
@@ -148,7 +148,7 @@ static void Draw_RangeA(int x, int y)
 
 static bool IsActive_RangeA()
 {
-    return (set.math.modeDraw != FuncModeDraw::Disabled);
+    return !S_MATH_MODE_DRAW_IS_DISABLED;
 }
 
 DEF_GRAPH_BUTTON( bRangeA,                                                                                                                   //--- —≈–¬»— - ‘”Õ ÷»ﬂ - Ã‡Ò¯Ú‡· 1-„Ó Í‡Ì‡Î‡ ---
@@ -171,7 +171,7 @@ static void Draw_RangeB(int x, int y)
 
 static bool IsActive_RangeB()
 {
-    return (set.math.modeDraw != FuncModeDraw::Disabled);
+    return !S_MATH_MODE_DRAW_IS_DISABLED;
 }
 
 DEF_GRAPH_BUTTON( bRangeB,                                                                                                                   //--- —≈–¬»— - ‘”Õ ÷»ﬂ - Ã‡Ò¯Ú‡· 2-„Ó Í‡Ì‡Î‡ ---
@@ -196,7 +196,7 @@ static void OnOpenClose_Math(bool)
 
 static bool HandlerKey_Function(const KeyEvent &event) // -V2506
 {
-    if (set.math.modeDraw == FuncModeDraw::Disabled)
+    if (S_MATH_MODE_DRAW_IS_DISABLED)
     {
         return false;
     }
