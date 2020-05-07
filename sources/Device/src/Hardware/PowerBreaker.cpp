@@ -13,10 +13,7 @@
 static void DisablePowerIfBatteryDischarged();
 
 // Отключить электропитание если не нажата кнопка в течение необходимого времени
-static void DisablePowerIfTimeout(uint timeout);
-
-// Отключить электропитание если не нажата кнопка в течение необходимого времени
-static void DisableDisplayIfTimeout(uint timeout);
+static void DisableDisplayIfTimeout();
 
 
 void PowerBreaker::Init()
@@ -30,19 +27,15 @@ void PowerBreaker::Update()
 {
     DisablePowerIfBatteryDischarged();
 
-    uint timeout = BufferButtons::TimeAfterControlMS();
-
-    DisablePowerIfTimeout(timeout);
-
-    DisableDisplayIfTimeout(timeout);
+    DisableDisplayIfTimeout();
 }
 
 
 static void DisablePowerIfBatteryDischarged()
 {
-    if(Battery::GetVoltageAKK() < 5.0F)
+    if (Battery::GetVoltageAKK() < 5.0F)
     {
-        if(!Device::InModeTester())
+        if (!Device::InModeTester())
         {
             Settings::Save();
         }
@@ -54,25 +47,13 @@ static void DisablePowerIfBatteryDischarged()
 }
 
 
-static void DisablePowerIfTimeout(uint timeout)
-{
-    if (S_SERV_TIME_DISABLE_POWER)
-    {
-        uint timeWait = static_cast<uint>(S_SERV_TIME_DISABLE_POWER * 60 * 1000);
-
-        if (timeout >= timeWait)
-        {
-            HAL_PIO::Reset(PIN_POWER);
-        }
-    }
-}
-
-
-static void DisableDisplayIfTimeout(uint timeout)
+static void DisableDisplayIfTimeout()
 {
     if (S_SERV_TIME_DISABLE_DISPLAY)
     {
         uint timeWait = static_cast<uint>(S_SERV_TIME_DISABLE_DISPLAY * 60 * 1000);
+
+        uint timeout = BufferButtons::TimeAfterControlMS();
 
         if (timeout >= timeWait)
         {
