@@ -15,12 +15,18 @@ static int end;                             // Позиция первого свободного места 
 static int start;                           // Позиция первого значащего события в буфере.
 static uint timeLastControl = 0xFFFFFFFFU;  // Возвращает время
 
+// Возвращаемое значение true означает, что идёт процесс обработки события электропитания - не нужно обрабатывать код клавиши
+static bool IsBeingProcessedPower(KeyEvent event);
+
 
 void BufferButtons::Push(KeyEvent event)
 {
-    Display::Breaker::PowerOn();
-
     timeLastControl = TIME_MS;
+
+    if (IsBeingProcessedPower(event))
+    {
+        return;
+    }
 
     if ((event.key == prevPushEvent.key) &&             // Если отпущена кнпока, которая раньше прислала "длинное" нажатие,
         prevPushEvent.IsLong() &&
@@ -38,7 +44,6 @@ void BufferButtons::Push(KeyEvent event)
 
     if(end == SIZE)
     {
-//        LOG_ERROR("Буфер переполнен");
         return;
     }
 
@@ -72,4 +77,27 @@ bool BufferButtons::IsEmpty()
 uint BufferButtons::TimeAfterControlMS()
 {
     return TIME_MS - timeLastControl;
+}
+
+
+static bool IsBeingProcessedPower(KeyEvent event)
+{
+    static bool inProcessPowerOn = false;   // Установленное в true значение означает, что идёт процесс включения питания дисплея - нужно дождаться отпускания клавиши и не передавать
+                                            // коды клавиш для отработки
+
+    if (Display::Breaker::PowerOn())
+    {
+        inProcessPowerOn = true;
+    }
+
+    if (inProcessPowerOn)
+    {
+        if (event.IsRelease())
+        {
+            inProcessPowerOn = false;
+        }
+        return true;
+    }
+
+    return false;
 }
