@@ -161,7 +161,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\FlashDrive\FlashDrive.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\FlashDrive\FlashDrive.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\src/FlashDrive/FlashDrive.cpp\548</Expression>
         </Bp>
@@ -1142,7 +1142,7 @@
 
   <Group>
     <GroupName>Hardware</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1225,8 +1225,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Hardware\PowerSwitch.h</PathWithFileName>
-      <FilenameWithoutPath>PowerSwitch.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Hardware\PowerBreaker.h</PathWithFileName>
+      <FilenameWithoutPath>PowerBreaker.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1237,8 +1237,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Hardware\PowerSwitch.cpp</PathWithFileName>
-      <FilenameWithoutPath>PowerSwitch.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Hardware\PowerBreaker.cpp</PathWithFileName>
+      <FilenameWithoutPath>PowerBreaker.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -2718,7 +2718,7 @@
 
   <Group>
     <GroupName>Menu/Pages/PageService</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

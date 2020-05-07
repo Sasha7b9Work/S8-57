@@ -6,7 +6,7 @@
 #include "FPGA/FPGA.h"
 #include "Hardware/Battery.h"
 #include "Hardware/Beeper.h"
-#include "Hardware/PowerSwitch.h"
+#include "Hardware/PowerBreaker.h"
 #include "Hardware/Timer.h"
 #include "Hardware/VCP.h"
 #include "Hardware/HAL/HAL.h"

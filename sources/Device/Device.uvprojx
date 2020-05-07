@@ -793,14 +793,14 @@
               <FilePath>.\src\Hardware\Beeper.cpp</FilePath>
             </File>
             <File>
-              <FileName>PowerSwitch.h</FileName>
+              <FileName>PowerBreaker.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Hardware\PowerSwitch.h</FilePath>
+              <FilePath>.\src\Hardware\PowerBreaker.h</FilePath>
             </File>
             <File>
-              <FileName>PowerSwitch.cpp</FileName>
+              <FileName>PowerBreaker.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\PowerSwitch.cpp</FilePath>
+              <FilePath>.\src\Hardware\PowerBreaker.cpp</FilePath>
             </File>
             <File>
               <FileName>Timer.h</FileName>

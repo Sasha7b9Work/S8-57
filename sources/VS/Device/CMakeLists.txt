@@ -143,8 +143,8 @@ source_group(Hardware           FILES   ../../Device/src/Hardware/Battery.h
                                         ../../Device/src/Hardware/Beeper.cpp
                                         ../../Device/src/Hardware/Clock.h
                                         ../../Device/src/Hardware/Clock.cpp
-                                        ../../Device/src/Hardware/PowerSwitch.h
-                                        ../../Device/src/Hardware/PowerSwitch.cpp
+                                        ../../Device/src/Hardware/PowerBreaker.h
+                                        ../../Device/src/Hardware/PowerBreaker.cpp
                                         ../../Device/src/Hardware/Timer.h
                                         ../../Device/src/Hardware/Timer.cpp
                                         ../../Device/src/Hardware/VCP.h
@@ -301,8 +301,8 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Hardware/Beeper.cpp
                     ../../Device/src/Hardware/Clock.h
                     ../../Device/src/Hardware/Clock.cpp
-                    ../../Device/src/Hardware/PowerSwitch.h
-                    ../../Device/src/Hardware/PowerSwitch.cpp
+                    ../../Device/src/Hardware/PowerBreaker.h
+                    ../../Device/src/Hardware/PowerBreaker.cpp
                     ../../Device/src/Hardware/Timer.h
                     ../../Device/src/Hardware/Timer.cpp
                     ../../Device/src/Hardware/VCP.h

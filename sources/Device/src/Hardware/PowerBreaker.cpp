@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "device.h"
 #include "Hardware/Battery.h"
-#include "Hardware/PowerSwitch.h"
+#include "Hardware/PowerBreaker.h"
 #include "Hardware/HAL/HAL_PIO.h"
 #include "Settings/Settings.h"
 #include "Settings/SettingsNRST.h"
