@@ -10,78 +10,79 @@ const Settings Settings::defaultSettings =
 
     // Настройки меню
     {
-        false,                                  // menu_show;
-        {                                       // menu_posActItem[Page_NumPages];    
+        false,                      // menu_show;
+        {                           // menu_posActItem[Page_NumPages];    
             0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f,
             0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f,
             0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f,
             0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f,
             0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f,
-            0x7f, 0x7f
+            0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f,
+            0x7f, 0x7f, 0x7f
         },
-        {},                                     // menu_currentSubPage[Page_NumPages];
+        {},                         // menu_currentSubPage[Page_NumPages];
         PageName::None
     },
 
     // Меню ДИСПЛЕЙ
     {
-        DisplayMapping::Lines,              // modeDrawSignal
-        ENumAverage::_1,                    // ENumAverage
-        ENumAccum::_1,                      // ENumAccum
-        ModeAccumulation::NoReset,          // modeAccumulation
-        ENumSmoothing::Disable,             // ENumSmoothing
-        ENumSignalsInSec::_25,              // ENumSignalsInSec
-        TypeGrid::_1,                       // typeGrid
-        100,                                // brightness
-        MenuAutoHide::None,                 // menuAutoHide
-        370,                                // shiftInMemory
-        ChanA                             // lastAffectedChannel
+        DisplayMapping::Lines,      // modeDrawSignal
+        ENumAverage::_1,            // ENumAverage
+        ENumAccum::_1,              // ENumAccum
+        ModeAccumulation::NoReset,  // modeAccumulation
+        ENumSmoothing::Disable,     // ENumSmoothing
+        ENumSignalsInSec::_25,      // ENumSignalsInSec
+        TypeGrid::_1,               // typeGrid
+        100,                        // brightness
+        MenuAutoHide::None,         // menuAutoHide
+        370,                        // shiftInMemory
+        ChanA                       // lastAffectedChannel
     },
 
     // Меню КАНАЛ 1, КАНАЛ 2
     {
         {
-            0,                              // shift
-            Range::_500mV,                  // range
-            ModeCouple::DC,                 // couple
-            true,                           // enabled
-            Bandwidth::Full,                // bandwidth
-            false,                          // inverse
-            Divider::_1                     // divider
+            0,                      // shift
+            Range::_500mV,          // range
+            ModeCouple::DC,         // couple
+            true,                   // enabled
+            Bandwidth::Full,        // bandwidth
+            false,                  // inverse
+            Divider::_1             // divider
         },
         {
-            0,                              // shift
-            Range::_500mV,                  // range
-            ModeCouple::DC,                 // couple
-            true,                           // enabled
-            Bandwidth::Full,                // bandwidth
-            false,                          // inverse
-            Divider::_1                     // divider
+            0,                      // shift
+            Range::_500mV,          // range
+            ModeCouple::DC,         // couple
+            true,                   // enabled
+            Bandwidth::Full,        // bandwidth
+            false,                  // inverse
+            Divider::_1             // divider
         }
     },
 
     // Меню СИНХРОНИЗАЦИЯ
     {
-        ChanA,                            // source
-        TrigInput::Full,                    // input
-        TrigPolarity::Rising,               // polarity
-        { 0, 0},                            // lev[Chan::Count]
-        TrigStartMode::Auto,                // startMode
-        TrigModeFind::Hand,                 // modeFind
-        10,                                 // holdOff
-        false                               // holdOffEnable
+        ChanA,                      // source
+        TrigInput::Full,            // input
+        TrigPolarity::Rising,       // polarity
+        { 0, 0},                    // lev[Chan::Count]
+        TrigStartMode::Auto,        // startMode
+        TrigModeFind::Hand,         // modeFind
+        10,                         // holdOff
+        false                       // holdOffEnable
     },
 
     // Меню РАЗВЁРТКА
     {
-        0,                                  // shift
-        TBase::_5ms,                        // base
-        PeakDetMode::Disabled,              // peakDet
-        TPos::Center,                       // TPos
-        SampleType::Real,                   // sampleType
-        FunctionTime::Time,                 // timeDivXPos
-        LinkingTShift::Time,                // linkingTShift
-        SampleType::Real                    // sampleTypeOld
+        0,                          // shift
+        TBase::_5ms,                // base
+        PeakDetMode::Disabled,      // peakDet
+        TPos::Center,               // TPos
+        SampleType::Real,           // sampleType
+        FunctionTime::Time,         // timeDivXPos
+        LinkingTShift::Time,        // linkingTShift
+        SampleType::Real            // sampleTypeOld
     },
 
     // Меню ПАМЯТЬ
@@ -101,31 +102,31 @@ const Settings Settings::defaultSettings =
 
     // Курсорные измерения
     {
-        false,                                                // showCursors
-        {CursorsLookMode::None, CursorsLookMode::None},       // lookMode[2]
-        true,                                                 // showFreq
-        CursorsActive::None,                                  // active
-        ChanA,                                              // source
-        {CursorsControl::Disabled, CursorsControl::Disabled}, // cntrlU[Chan::Count]
-        {CursorsControl::Disabled, CursorsControl::Disabled}, // cntrlT[Chan::Count]
-        CursorsMovement::Pixels,                              // movement
-        {80,  80},                                            // deltaU100percents[2]
-        {120, 120},                                           // deltaT100percents[2]
-        {                                                     // posCurU[Chan::Count][2]
-        { 60, 140 },                                          // Канал 1
-        { 60, 140 }},                                         // Канал 2
-        {                                                     // posCurT[Chan::Count][2]
-        { 80, 200 },                                          // Канал 1
-        { 80, 200 }}                                          // Канал 2
+        false,                                                  // showCursors
+        {CursorsLookMode::None, CursorsLookMode::None},         // lookMode[2]
+        true,                                                   // showFreq
+        CursorsActive::None,                                    // active
+        ChanA,                                                  // source
+        {CursorsControl::Disabled, CursorsControl::Disabled},   // cntrlU[Chan::Count]
+        {CursorsControl::Disabled, CursorsControl::Disabled},   // cntrlT[Chan::Count]
+        CursorsMovement::Pixels,                                // movement
+        {80,  80},                                              // deltaU100percents[2]
+        {120, 120},                                             // deltaT100percents[2]
+        {                                                       // posCurU[Chan::Count][2]
+        { 60, 140 },                                            // Канал 1
+        { 60, 140 }},                                           // Канал 2
+        {                                                       // posCurT[Chan::Count][2]
+        { 80, 200 },                                            // Канал 1
+        { 80, 200 }}                                            // Канал 2
     },
 
     // Меню ИЗМЕРЕНИЯ
     {
-        false,                              // show
-        MeasuresOnDisplay::_1_5,            // number
-        MeasuresSource::A_B,                // source
-        MeasuresModeViewSignals::AsIs,      // modeViewSignals
-        {                                   // measures[15]
+        false,                          // show
+        MeasuresOnDisplay::_1_5,        // number
+        MeasuresSource::A_B,            // source
+        MeasuresModeViewSignals::AsIs,  // modeViewSignals
+        {                               // measures[15]
             TypeMeasure::VoltageMax,          TypeMeasure::VoltageMin,  TypeMeasure::VoltagePic,      TypeMeasure::VoltageMaxSteady,
             TypeMeasure::VoltageMinSteady,
             TypeMeasure::VoltageAverage,      TypeMeasure::VoltageAmpl, TypeMeasure::VoltageRMS,      TypeMeasure::VoltageVybrosPlus,
@@ -133,28 +134,28 @@ const Settings Settings::defaultSettings =
             TypeMeasure::Period,              TypeMeasure::Freq,        TypeMeasure::TimeNarastaniya, TypeMeasure::TimeSpada,
             TypeMeasure::DurationPlus
         },
-        TypeMeasure::Freq                 // marked
+        TypeMeasure::Freq               // marked
     },
 
     // Настройки математики
     {
-        FuncModeDraw::Disabled,     // modeDraw
-        MathFunction::Sum,          // function
-        ModeRegSet::Range,          // modeRegSet
-        Divider::_1,                // divider
+        FuncModeDraw::Disabled,         // modeDraw
+        MathFunction::Sum,              // function
+        ModeRegSet::Range,              // modeRegSet
+        Divider::_1,                    // divider
         0,
         Range::_500mV
     },
 
     // FFT
     {
-        false,                      // enabled
-        { 50, 50 },                 // posCur[2]
-        ScaleFFT::Log,              // scale
-        SourceFFT::Both,            // source
-        WindowFFT::Hamming,         // window
-        MaxDBFFT::_60,              // maxDB
-        0                           // cursor
+        false,                          // enabled
+        { 50, 50 },                     // posCur[2]
+        ScaleFFT::Log,                  // scale
+        SourceFFT::Both,                // source
+        WindowFFT::Hamming,             // window
+        MaxDBFFT::_60,                  // maxDB
+        0                               // cursor
     },
 
     // Настройки частотомера
@@ -211,20 +212,20 @@ const Settings Settings::defaultSettings =
         
     // Меню ОТЛАДКА
     {
-        true,                       // showConsole
-        30,                         // numStrings
-        false,                      // showAll
-        false,                      // showFlag
-        { false, false },           // showRShift[2]
-        false,                      // showTrigLev
-        { false, false },           // showRange[2]
-        { false, false },           // showChanParam[2]
-        false,                      // showTrigParam
-        false,                      // showTShift
-        false,                      // showTBase
-        false,                      // ShowStats
-        false,                      // runTest
-        false                       // showBattery
+        true,                           // showConsole
+        30,                             // numStrings
+        false,                          // showAll
+        false,                          // showFlag
+        { false, false },               // showRShift[2]
+        false,                          // showTrigLev
+        { false, false },               // showRange[2]
+        { false, false },               // showChanParam[2]
+        false,                          // showTrigParam
+        false,                          // showTShift
+        false,                          // showTBase
+        false,                          // ShowStats
+        false,                          // runTest
+        false                           // showBattery
     },
     0
 };

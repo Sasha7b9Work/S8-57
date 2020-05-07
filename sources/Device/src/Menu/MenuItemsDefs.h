@@ -66,7 +66,6 @@ struct PageName
         Service_Battery,
         Service_Calibrator,
         Service_Info,
-        Service_PowerSaving,
         Service_RTC,
         // РАЗВ
         Time,
@@ -75,6 +74,17 @@ struct PageName
         Trig_HoldOff,
         Trig_Search,
 
+        // Для будущего расширения. Вносите имена будущих страниц сюда
+        EmptyPage1,
+        EmptyPage2,
+        EmptyPage3,
+        EmptyPage4,
+        EmptyPage5,
+        EmptyPage6,
+        EmptyPage7,
+        EmptyPage8,
+        EmptyPage9,
+        EmptyPage10,
         Count
     } value;
 };
