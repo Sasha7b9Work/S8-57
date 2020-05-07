@@ -68,6 +68,7 @@ struct TrigStartMode
 
 
 #define S_TRIG_SOURCE           (set.trig._source)
+#define S_TRIG_SOURCE_IS_A      (S_TRIG_SOURCE == ChanA)
 
 #define S_TRIG_LEVEL(channel)   (set.trig._level[channel])
 #define S_TRIG_LEVEL_SOURCE     S_TRIG_LEVEL(S_TRIG_SOURCE)

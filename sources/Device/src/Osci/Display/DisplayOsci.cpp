@@ -170,13 +170,16 @@ void DisplayOsci::DrawingValueParameter::Draw()
 
         Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
 
+        Color color = Color::FILL;
+
         switch (parameter)
         {
         case TrigLevel:
         {
+            color = Color::CHAN[S_TRIG_SOURCE];
             float trigLevVal = RShift::ToAbs(S_TRIG_LEVEL_SOURCE, S_RANGE(S_TRIG_SOURCE)) * Divider::ToAbs(S_DIVIDER(S_TRIG_SOURCE));
             Voltage voltage(trigLevVal);
-            String("Синхр %s", voltage.ToString(true).c_str()).Draw(x + 7, y + 5, Color::FILL);
+            String("Синхр %s", voltage.ToString(true).c_str()).Draw(x + 7, y + 5, color);
             break;
         }
 
