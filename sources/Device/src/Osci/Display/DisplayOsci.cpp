@@ -145,7 +145,7 @@ void DisplayOsci::DrawingValueParameter::Enable(DrawingValueParameter::E v)
     }
     else if(!CursorsMeasurements::NecessaryDraw())
     {
-//        return;
+        return;
     }
 
     needDrawParameter = true;
