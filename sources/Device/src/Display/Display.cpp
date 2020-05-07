@@ -290,12 +290,16 @@ void Display::Breaker::PowerOff()
 }
 
 
-void Display::Breaker::PowerOn()
+bool Display::Breaker::PowerOn()
 {
     if (!powerOn)
     {
         LoadBrightness();
 
         powerOn = true;
+
+        return true;
     }
+
+    return false;
 }

@@ -1,5 +1,6 @@
 #pragma once
-#include "Settings/Settings.h"
+#include "Keyboard/Keyboard.h"
+//#include "Settings/Settings.h"
 
 
 struct TypeWave

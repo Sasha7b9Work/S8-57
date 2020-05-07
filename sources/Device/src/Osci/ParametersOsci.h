@@ -12,19 +12,6 @@ struct DataSettings;
 struct SettingsChannel;
 
 
-struct Chan
-{
-    enum E
-    {
-        A,
-        B,
-        Count
-    };
-
-    static pString Name(Chan::E ch);
-};
-
-
 #define S_TIME_BASE (set.time._base)
 struct TBase
 {

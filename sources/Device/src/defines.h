@@ -259,3 +259,15 @@ extern volatile BitField gBF;   // @brief Структура сделана volatile, потому что
 
 
 #define BUTTON_SIZE wxSize(70, 30)
+
+struct Chan
+{
+    enum E
+    {
+        A,
+        B,
+        Count
+    };
+
+    static pString Name(Chan::E ch);
+};

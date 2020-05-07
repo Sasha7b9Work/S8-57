@@ -8,6 +8,7 @@
 #include "Hardware/Timer.h"
 #include "Display/Symbols.h"
 #include "Menu/Pages/Include/PageFunction.h"
+#include "Settings/Settings.h"
 
 
 enum DIRECTION

@@ -1,4 +1,5 @@
 #pragma once
+#include "Multimeter/Multimeter.h"
 
 
 #define S_MULT_SHOW_ALWAYS  (set.mult._showAlways)

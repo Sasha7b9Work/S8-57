@@ -8,9 +8,11 @@
 #include "Hardware/Beeper.h"
 #include "Hardware/HAL/HAL.h"
 #include "Menu/Menu.h"
+#include "Menu/Pages/Include/PageMemory.h"
 #include "Osci/DeviceSettings.h"
 #include "Utils/Math.h"
 #include "Utils/Values.h"
+#include "Settings/Settings.h"
 #include <cstring>
 
 

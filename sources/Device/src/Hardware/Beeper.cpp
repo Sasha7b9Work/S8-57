@@ -3,6 +3,7 @@
 #include "Timer.h"
 #include "Utils/Math.h"
 #include "Hardware/HAL/HAL.h"
+#include "Settings/Settings.h"
 #include <cmath>
 
 
