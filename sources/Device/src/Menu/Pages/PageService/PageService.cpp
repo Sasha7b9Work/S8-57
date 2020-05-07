@@ -43,6 +43,13 @@ DEF_CHOICE_4( cSoundVolume,
 )
 
 
+DEF_GOVERNOR( gTimeDisableDisplay,
+    "Эн.сбер",
+    "Время отключения дисплея",
+    S_SERV_TIME_DISABLE_DISPLAY, 0, 240, &PageService::self, Item::Active, Governor::Changed
+)
+
+
 DEF_PAGE_8_VAR( pService,                                                                                                                                                    //--- СЕРВИС ---
     "СЕРВИС",
     "Дополнительные настройки, калибровка, поиск сигнала, математические функции",
@@ -51,7 +58,7 @@ DEF_PAGE_8_VAR( pService,                                                       
     PageService::Calibrate::self,
     &cSoundVolume,
     PageRTC::self,
-    PagePowerSaving::self,
+    &gTimeDisableDisplay,
     PageService::Information::self,
     PageDebug::self,
     PageName::Service, nullptr, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
@@ -95,7 +102,7 @@ void PageService::DecodePassword(const KeyEvent &event)
 
             Item **items = const_cast<Item **>(page->OwnData()->items);
 
-            items[6] = const_cast<Page *>(PageDebug::self);
+            items[7] = const_cast<Page *>(PageDebug::self);
 
             DISPLAY_SHOW_WARNING("Доступ к меню ОТЛАДКА открыт");
         }

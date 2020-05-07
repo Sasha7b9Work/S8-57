@@ -48,13 +48,7 @@ struct PageService
 };
 
 
-
 struct PageRTC
-{
-    static const Page *const self;
-};
-
-struct PagePowerSaving
 {
     static const Page *const self;
 };
