@@ -162,24 +162,16 @@ void DisplayOsci::DrawingValueParameter::Draw()
 {
     if(needDrawParameter)
     {
-        int width = 85;
-        int height = 18;
-
-        int x = (Grid::Right() - Grid::Left()) / 2 + Grid::Left() - width / 2;
-        int y = Grid::ChannelBottom() - height - 20;
-
-        Region(width, height).DrawBounded(x, y, Color::BACK, Color::FILL);
-
-        Color color = Color::FILL;
+        int y = Grid::ChannelBottom() - 33;
 
         switch (parameter)
         {
         case TrigLevel:
         {
-            color = Color::CHAN[S_TRIG_SOURCE];
             float trigLevVal = RShift::ToAbs(S_TRIG_LEVEL_SOURCE, S_RANGE(S_TRIG_SOURCE)) * Divider::ToAbs(S_DIVIDER(S_TRIG_SOURCE));
             Voltage voltage(trigLevVal);
-            String("Синхр %s", voltage.ToString(true).c_str()).Draw(x + 7, y + 5, color);
+            String text("Синхр %s", voltage.ToString(true).c_str());
+            DrawBoundedText(y, &text, Color::CHAN[S_TRIG_SOURCE]);
             break;
         }
 
@@ -190,9 +182,8 @@ void DisplayOsci::DrawingValueParameter::Draw()
         {
             Chan::E ch = ((parameter == RangeA) || (parameter == RShiftA)) ? ChanA : ChanB;
             char *channels[2] = { "1", "2" };
-            char *sCH = channels[ch];
-            color = Color::CHAN[ch];
-            String("M%s: %s %s", sCH, Range::ToString(ch, S_DIVIDER(ch)), RShift::ToString(S_RSHIFT(ch), S_RANGE(ch), S_DIVIDER(ch)).c_str()).Draw(x + 7, y + 5, color);
+            String text("M%s: %s %s", channels[ch], Range::ToString(ch, S_DIVIDER(ch)), RShift::ToString(S_RSHIFT(ch), S_RANGE(ch), S_DIVIDER(ch)).c_str());
+            DrawBoundedText(y, &text, Color::CHAN[ch]);
             break;
         }
 
@@ -203,6 +194,15 @@ void DisplayOsci::DrawingValueParameter::Draw()
             break;
         }
     }
+}
+
+
+void DisplayOsci::DrawingValueParameter::DrawBoundedText(int y, String *text, Color color)
+{
+    int length = DFont::GetLengthText(text->c_str()) + 6;
+    int x = Grid::Left() + Grid::Width() / 2 - length / 2;
+    Region(length, 16).DrawBounded(x, y, Color::BACK, Color::FILL);
+    text->Draw(x + 4, y + 4, color);
 }
 
 

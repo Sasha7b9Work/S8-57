@@ -125,11 +125,14 @@ struct DisplayOsci
 
         static void Draw();
 
-        static void Disable();
-
     private:
         static bool                     needDrawParameter;
         static DrawingValueParameter::E parameter;
+
+        static void Disable();
+
+        // Отобразить строку в прямоугольнике на высоте y
+        static void DrawBoundedText(int y, String *text, Color color);
     };
 
 private:
