@@ -1948,6 +1948,11 @@
           <GroupName>SCPI</GroupName>
           <Files>
             <File>
+              <FileName>READ_ME.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\READ_ME.h</FilePath>
+            </File>
+            <File>
               <FileName>ChannelsSCPI.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\SCPI\ChannelsSCPI.cpp</FilePath>
