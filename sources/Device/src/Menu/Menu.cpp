@@ -37,6 +37,8 @@ void Menu::Update()
 {
     while(!BufferButtons::IsEmpty())                // Если есть события клавиатуры
     {
+        Display::Breaker::PowerOn();
+
         KeyEvent event = BufferButtons::Extract();  // Извлекаем очередное событие
 
         if (!Keyboard::KeyIsActive(event.key))      // Если кнопка не разрешена для обработки сейчас:

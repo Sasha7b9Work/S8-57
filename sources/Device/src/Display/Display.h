@@ -37,14 +37,18 @@ struct Display
     static const int WIDTH = 320;
 
     static void Init();
+    
     // Здесь происходит вся отрисовка
     static void Update();
+    
     // Возвращаемое значение true означает, что дисплей находится в состоянии отрисовки
     static bool InProcess();
+    
     // Устанавливает функцию, которая выполится после отрисовки кадра однократно
     static void SetFuncAfterUpadteOnce(pFuncVV func);
 
 	static void ShowWarning(const char* warning);
+    
     // @brief Установить функцию и режим отрисовки экрана.
     // @details Возможны три варианта.
     // 1. DrawMode_Hand - в этом случае будет вызываться функция func(), определяемая пользователем, с частотой 25 раз в секунду.
@@ -53,13 +57,17 @@ struct Display
     // 3. DrawMode::Auto и func != 0 - в этом случае будет выполняться функция func(), определяемая пользователем, но в теле
     // главного цикла, будучи вызываемой из Update() вместо Update().
     static void SetDrawMode(DrawMode::E mode, pFuncVV func = nullptr);
+    
     // Устанавливает дополнительную функцию, которая будет отрисовываться каждый раз после обновления экрана
     // timeRemove - время, по истечении которого дополнительная функция отрисовки будет удалена. Если его не указывать, фукнция удаляться самостоятельно не будет
     static void SetAddDrawFunction(pFuncVV func, uint timeRemove = 0);
+    
     // Удаляет дополнительую функцию отрисовки, установленную вызовом функции SetAddDrawFunction()
     static void RemoveAddDrawFunction();
+    
     // Возвращает время, через которое меню автоматически скрывается, если не было больше нажатий
     static int TimeMenuAutoHide();
+    
     // Если экран разделён на две части и основной сигнал выводится сверху - например, в режиме вывода спектра
     static bool IsSeparate();
 
@@ -69,6 +77,7 @@ struct Display
     {
         // Выводит на экран сообщение. Для удаления нунжно вызвать функцию Stop()
         static void Show(const char *text, bool eraseBackground);
+        
         // Выводит на экран сообщение и ожидает нажатия кнопки. По нажатии сообщение исчезает с экрана
         static void ShowAndWaitKey(const char *text, bool eraseBackground);
 
@@ -80,5 +89,15 @@ struct Display
         static bool waitKey;
 
         static volatile bool running;
+    };
+
+    struct Breaker
+    {
+        static void PowerOff();
+
+        static void PowerOn();
+
+    private:
+        static bool powerOn;    // Установленное в false значение означает, что дисплей находится в выключенном состоянии (яркость равна нулю)
     };
 };

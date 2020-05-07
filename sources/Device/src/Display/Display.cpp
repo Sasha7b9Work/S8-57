@@ -22,17 +22,15 @@ static void EmptyFunc() { }
 
 bool Display::Message::waitKey = false;
 volatile bool Display::Message::running = false;
+bool Display::Breaker::powerOn = true;
 
 
 static pFuncVV funcOnHand = nullptr;
 static uint timeStart = 0;
 static const char *textWait = 0;
 static bool clearBackground = false;
-// Дополнительная функция рисования. Выполняется после стандартной отрисовки, но перед вызовом EndScene;
-volatile static pFuncVV funcAdditionDraw = EmptyFunc;
-// true означает, что происходит процесс отрисовки
-static bool inStateDraw = false;
-
+volatile static pFuncVV funcAdditionDraw = EmptyFunc;   // Дополнительная функция рисования. Выполняется после стандартной отрисовки, но перед вызовом EndScene;
+static bool inStateDraw = false;                        // true означает, что происходит процесс отрисовки
 static pFuncVV funcAfterUpdateOnce = EmptyFunc;
 
 // Выполняет функцию, определённую для выполнения после отрисовки
@@ -281,4 +279,23 @@ uint ENumSignalsInSec::TimeBetweenFramesMS()
 void Display::LoadBrightness()
 {
     HAL_BUS::Panel::Send(Command::Display_Brightness, static_cast<uint8>(S_DISP_BRIGHTNESS + 10));
+}
+
+
+void Display::Breaker::PowerOff()
+{
+    HAL_BUS::Panel::Send(Command::Display_Brightness, 0);
+
+    powerOn = false;
+}
+
+
+void Display::Breaker::PowerOn()
+{
+    if (!powerOn)
+    {
+        LoadBrightness();
+
+        powerOn = true;
+    }
 }

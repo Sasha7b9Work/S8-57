@@ -132,7 +132,7 @@ void Device::Update()
 
     Menu::Update();
 
-    PowerSwitch::OffIfNeed();
+    PowerBreaker::Update();
 }
 
 

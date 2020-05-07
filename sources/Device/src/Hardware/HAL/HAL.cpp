@@ -41,7 +41,7 @@ void HAL::Init()
 
     SystemClockConfig();
 
-    PowerSwitch::Init();
+    PowerBreaker::Init();
 
     HAL_CRC32::Init();
 
