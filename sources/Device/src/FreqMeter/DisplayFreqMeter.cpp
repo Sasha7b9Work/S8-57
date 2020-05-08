@@ -56,6 +56,11 @@ void DisplayFreqMeter::Update()
     int x = Grid::Left() + (Grid::Width() - width) / 2;
     int y = Grid::Top() + (Grid::Height() / 2 - height) / 2;
 
+    if (S_MULT_SHOW_ALWAYS)
+    {
+        y += DisplayMultimeter::HEIGHT;
+    }
+
     if(S_FREQ_MODE_VIEW_IS_FREQUENCY)
     {
         y += 7;

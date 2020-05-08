@@ -1,4 +1,6 @@
 #include "defines.h"
+#include "device.h"
+#include "Display/Grid.h"
 #include "Display/Painter.h"
 #include "Display/Primitives.h"
 #include "Hardware/Beeper.h"
@@ -26,7 +28,10 @@ static void PrepareResistance(const char *);
 static void PrepareTestDiode(const char *);
 
 // Отрисовать значение измерения
-static void DrawSymbols();
+static void DrawSymbols(bool inModeOsci);
+
+// Отрисовать измерение. Если inModeOsci == true, рисовать надо на экране, совмещённом с осциллографом
+static void DrawMeasure(bool inModeOsci);
 
 // Нарисовать дополнительные изображения на экране, если в этом есть необходимость
 static void DrawGraphics();
@@ -36,6 +41,17 @@ static void DrawUnits(int x, int y);
 
 // Нарисовать линии вправо и влево отностиельно центра с длиной width
 static void Draw2HLinesRelCenter(int center, int y, int width);
+
+// Отрисовка в режиме осциллографа
+static void UpdateInModeOsci();
+
+// Отрисовка в режиме мультиметра
+static void UpdateInModeMultimeter();
+
+// Возвращает координату x для вывода измерения в совмещённом режиме
+static int CalculateX();
+// Возвращает координату y для вывода измерения в совмещённом режиме
+static int CalculateY();
 
 
 static char Symbol(uint i)
@@ -74,13 +90,19 @@ static void DrawChar(uint numSymbol, int x)
 }
 
 
-static void DrawSymbols()
+static void DrawSymbols(bool inModeOsci)
 {
     int x0 = 20;
+    int x = 48;
+
+    if (inModeOsci)
+    {
+        DFont::Set(DTypeFont::_GOST28);
+        x0 = CalculateX();
+        x += CalculateX();
+    }
 
     DrawChar(0, x0 + 10);
-
-    int x = 48;
 
     for (uint i = 1; i < 7; i++)
     {
@@ -284,15 +306,20 @@ static void DrawGraphics()
 }
 
 
-static void DrawMeasure()
+static void DrawMeasure(bool inModeOsci)
 {
+    if (inModeOsci)
+    {
+        Region(100, DisplayMultimeter::HEIGHT).DrawBounded(CalculateX(), CalculateY(), Color::BACK, Color::FILL);
+    }
+
     Color color = received ? Color::FILL : Color::GRAY_50;
 
     DFont::Set(DTypeFont::_GOST72bold);
 
     color.SetAsCurrent();
     
-    DrawSymbols();
+    DrawSymbols(inModeOsci);
 
     DrawGraphics();
 
@@ -302,9 +329,33 @@ static void DrawMeasure()
 
 void DisplayMultimeter::Update()
 {
+    if (Device::InModeOsci())
+    {
+        UpdateInModeOsci();
+    }
+    else if (Device::InModeMultimeter())
+    {
+        UpdateInModeMultimeter();
+    }
+}
+
+
+static void UpdateInModeOsci()
+{
+    if (!S_MULT_SHOW_ALWAYS)
+    {
+        return;
+    }
+
+    DrawMeasure(true);
+}
+
+
+static void UpdateInModeMultimeter()
+{
     Painter::BeginScene(Color::BACK);
 
-    DrawMeasure();
+    DrawMeasure(false);
 
     Color::FILL.SetAsCurrent();
 
@@ -464,4 +515,16 @@ static void PrepareBell(const char *)
     {
         Beeper::Bell::Off();
     }
+}
+
+
+static int CalculateX()
+{
+    return Grid::Left();
+}
+
+
+static int CalculateY()
+{
+    return Grid::Top();
 }

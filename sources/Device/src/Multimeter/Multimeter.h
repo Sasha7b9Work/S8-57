@@ -9,6 +9,8 @@ struct DisplayMultimeter
     static void SetMeasure(const uint8 buffer[13]);
 
     static void ChangedMode();
+
+    static const int HEIGHT = 50;
 };
 
 
