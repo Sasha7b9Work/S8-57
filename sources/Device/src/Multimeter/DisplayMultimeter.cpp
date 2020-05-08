@@ -112,6 +112,22 @@ static void DrawChar(int numSymbol, int x, bool inModeOsci)
 }
 
 
+// Рассчёт дополнительного смещения для точки и цифры 1 по иксу
+static int CalculateOffsetX(int i, bool inModeOsci)
+{
+    if (Symbol(i) == '.')
+    {
+        return inModeOsci ? -2 : 0;
+    }
+    else if (Symbol(i) == '1')
+    {
+        return inModeOsci ? 2 : 10;
+    }
+
+    return 0;
+}
+
+
 static void DrawSymbols(bool inModeOsci)
 {
     int x0 = 20;
@@ -133,19 +149,7 @@ static void DrawSymbols(bool inModeOsci)
 
     for (int i = 1; i < 7; i++)
     {
-        char symbol = Symbol(i);
-
-        if (symbol == '1')
-        {
-            x += 10;
-        }
-
-        DrawChar(i, x0 + x - ((Symbol(i) == '.' && inModeOsci) ? 2 : 0), inModeOsci);
-
-        if (symbol == '1')
-        {
-            x -= 10;
-        }
+        DrawChar(i, x0 + x + CalculateOffsetX(i, inModeOsci), inModeOsci);
 
         x += 38;
 
@@ -366,16 +370,18 @@ static void DrawMeasure(bool inModeOsci)
 
 void DisplayMultimeter::Update()
 {
-    static uint prevTime = 0;
-    static bool isMinus = true;
-
-    if (TIME_MS - prevTime > 1000)
-    {
-        isMinus = !isMinus;
-        prevTime = TIME_MS;
-    }
-
-    outBuffer[0] = isMinus ? '+' : '-';
+//    static uint prevTime = 0;
+//    static bool isMinus = true;
+//
+//    if (TIME_MS - prevTime > 1000)
+//    {
+//        isMinus = !isMinus;
+//        prevTime = TIME_MS;
+//    }
+//
+//    outBuffer[0] = isMinus ? '+' : '-';
+//
+//    outBuffer[4] = isMinus ? '1' : '2';
 
     if (Device::InModeOsci())
     {
