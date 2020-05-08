@@ -263,10 +263,10 @@ static void DrawSymbolOMEGA(int x, int y, bool inModeOsci)
             Draw2HLinesRelCenter(x + radius, y - 1 + radius + i, lengths[i]);
         }
 
-        Region region(7, 2);
+        Region region(8, 2);
 
         region.Fill(x, y + 22, Color::FILL);
-        region.Fill(x + 13, y + 22);
+        region.Fill(x + 12, y + 22);
 
         Pixel pixel;
         pixel.Draw(x, y + 21);
@@ -274,11 +274,11 @@ static void DrawSymbolOMEGA(int x, int y, bool inModeOsci)
         pixel.Draw(x, y + 24, Color::BACK);
         pixel.Draw(x + 20, y + 24);
 
-        Region(4, 2).Fill(x + 8, y + 16, Color::BACK);
+        Region(2, 2).Fill(x + 9, y + 16, Color::BACK);
 
         Region leg(1, 3);
-        leg.Fill(x + 6, y + 18, Color::FILL);
-        leg.Fill(x + 13, y + 18);
+        leg.Fill(x + 7, y + 18, Color::FILL);
+        leg.Fill(x + 12, y + 18);
     }
     else
     {
