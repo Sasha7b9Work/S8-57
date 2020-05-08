@@ -228,28 +228,37 @@ static void DrawUnits(bool inModeOsci)
     {
         Text(&outBuffer[7]).Draw(x, y);
 
-        if(outBuffer[8] == '=' || outBuffer[9] == '=')
+        if(outBuffer[8] == '=' || 
+           outBuffer[9] == '=')         // При миллиамперах этот симовл '=' будет девятым
         {
             if(outBuffer[9] == '=')
             {
-                x += 50;
+                x = x + (inModeOsci ? 22 : 50);
             }
 
             Pixel pixel;
 
-            pixel.Draw(x + 44, y + 33, Color::BACK);
-            pixel.Draw(x + 44, y + 38);
-            pixel.Draw(x + 72, y + 38);
+            if (inModeOsci)
+            {
+                Region region(1, 1);
+                region.Fill(x + 22, y + 18, Color::BACK);
+                region.Fill(x + 27, y + 18);
+            }
+            else
+            {
+                pixel.Draw(x + 44, y + 33, Color::BACK);
+                pixel.Draw(x + 44, y + 38);
+                pixel.Draw(x + 72, y + 38);
 
-            pixel.Draw(x + 44, y + 46);
-            pixel.Draw(x + 44, y + 51);
-            pixel.Draw(x + 72, y + 51);
+                pixel.Draw(x + 44, y + 46);
+                pixel.Draw(x + 44, y + 51);
+                pixel.Draw(x + 72, y + 51);
 
-            Region region(3, 5);
+                Region region(3, 5);
 
-            region.Fill(x + 51, y + 46);
-            region.Fill(x + 62, y + 46);
-
+                region.Fill(x + 51, y + 46);
+                region.Fill(x + 62, y + 46);
+            }
         }
     }
 
@@ -360,7 +369,7 @@ static void DrawMeasure(bool inModeOsci)
 {
     if (inModeOsci)
     {
-        Region(DisplayMultimeter::WIDTH, DisplayMultimeter::HEIGHT).DrawBounded(CalculateX(), CalculateY(), Color::BACK, Color::FILL);
+        Region(DisplayMultimeter::Width(), DisplayMultimeter::HEIGHT).DrawBounded(CalculateX(), CalculateY(), Color::BACK, Color::FILL);
     }
 
     Color color = received ? Color::FILL : Color::GRAY_50;
@@ -590,4 +599,19 @@ static int CalculateX()
 static int CalculateY()
 {
     return Grid::Top();
+}
+
+
+int DisplayMultimeter::Width()
+{
+    if (S_MULT_MEASURE_IS_CURRENT_DC && S_MULT_RANGE_CURRENT_DC_IS_20mA)
+    {
+        return 175;
+    }
+    else if (S_MULT_MEASURE_IS_CURRENT_AC && S_MULT_RANGE_CURRENT_AC_IS_20mA)
+    {
+        return 175;
+    }
+
+    return 150;
 }

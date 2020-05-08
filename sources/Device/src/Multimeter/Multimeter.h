@@ -10,8 +10,9 @@ struct DisplayMultimeter
 
     static void ChangedMode();
 
+    static int Width();
+
     static const int HEIGHT = 30;
-    static const int WIDTH = 200;
 };
 
 
@@ -40,6 +41,8 @@ struct Multimeter
 struct MultimeterMeasure
 {
 #define S_MULT_MEASURE                  (set.mult._meas)
+#define S_MULT_MEASURE_IS_CURRENT_DC    (S_MULT_MEASURE == MultimeterMeasure::CurrentDC)
+#define S_MULT_MEASURE_IS_CURRENT_AC    (S_MULT_MEASURE == MultimeterMeasure::CurrentAC)
 #define S_MULT_MEASURE_IS_RESISTANCE    (S_MULT_MEASURE == MultimeterMeasure::Resistance)
 #define S_MULT_MEASURE_IS_TEST_DIODE    (S_MULT_MEASURE == MultimeterMeasure::TestDiode)
 #define S_MULT_MEASURE_IS_BELL          (S_MULT_MEASURE == MultimeterMeasure::Bell)
@@ -108,7 +111,8 @@ struct RangeVoltageAC
 // Предел измерения переменного тока
 struct RangeCurrentAC
 {
-#define S_MULT_RANGE_CURRENT_AC     (set.mult._rangeCurrentAC)
+#define S_MULT_RANGE_CURRENT_AC         (set.mult._rangeCurrentAC)
+#define S_MULT_RANGE_CURRENT_AC_IS_20mA (S_MULT_RANGE_CURRENT_AC == RangeCurrentAC::_20mA)
 
     enum E
     {
@@ -121,7 +125,8 @@ struct RangeCurrentAC
 // Предел измерения постоянного тока
 struct RangeCurrentDC
 {
-#define S_MULT_RANGE_CURRENT_DC     (set.mult._rangeCurrentDC)
+#define S_MULT_RANGE_CURRENT_DC         (set.mult._rangeCurrentDC)
+#define S_MULT_RANGE_CURRENT_DC_IS_20mA (S_MULT_RANGE_CURRENT_DC == RangeCurrentDC::_20mA)
 
     enum E
     {
