@@ -394,57 +394,78 @@ static void DrawGraphics(bool inModeOsci)
     }
     else if(S_MULT_MEASURE_IS_BELL)
     {
-        int edge = 16;
+        if (inModeOsci)
+        {
+            int edge = 8;
 
-        int x = x0 + 150;
-        int y = y0 + 135;
+            int x = CalculateX() + 125;
+            int y = CalculateY() + 11;
 
-        Rectangle(edge, edge).Draw(x, y, Color::FILL);
-        Rectangle(edge + 2, edge + 2).Draw(x - 1, y - 1);
-        Rectangle(edge + 4, edge + 4).Draw(x - 2, y - 2);
+            Rectangle(edge, edge).Draw(x, y, Color::FILL);
 
-        Line(x + edge, y - 1, x + edge * 2, y - edge - 1).Draw();
-        Line(x + edge, y, x + edge * 2, y - edge).Draw();
-        Line(x + edge, y + 1, x + edge * 2, y - edge + 1).Draw();
+            Line(x + edge, y, x + edge * 2, y - edge).Draw();
 
-        Line(x + edge, y + edge - 1, x + edge * 2, y + edge * 2 - 1).Draw();
-        Line(x + edge, y + edge, x + edge * 2, y + edge * 2).Draw();
-        Line(x + edge, y + edge + 1, x + edge * 2, y + edge * 2 + 1).Draw();
+            Line(x + edge, y + edge, x + edge * 2, y + edge * 2).Draw();
 
-        VLine(3 * edge).Draw(x + edge * 2, y - edge);
-        VLine(3 * edge + 4).Draw(x + edge * 2 + 1, y - edge - 2);
-        VLine(3 * edge + 6).Draw(x + edge * 2 + 2, y - edge - 3);
+            VLine(3 * edge).Draw(x + edge * 2, y - edge);
+        }
+        else
+        {
+            int edge = 16;
+
+            int x = x0 + 150;
+            int y = y0 + 135;
+
+            Rectangle(edge, edge).Draw(x, y, Color::FILL);
+            Rectangle(edge + 2, edge + 2).Draw(x - 1, y - 1);
+            Rectangle(edge + 4, edge + 4).Draw(x - 2, y - 2);
+
+            Line(x + edge, y - 1, x + edge * 2, y - edge - 1).Draw();
+            Line(x + edge, y, x + edge * 2, y - edge).Draw();
+            Line(x + edge, y + 1, x + edge * 2, y - edge + 1).Draw();
+
+            Line(x + edge, y + edge - 1, x + edge * 2, y + edge * 2 - 1).Draw();
+            Line(x + edge, y + edge, x + edge * 2, y + edge * 2).Draw();
+            Line(x + edge, y + edge + 1, x + edge * 2, y + edge * 2 + 1).Draw();
+
+            VLine(3 * edge).Draw(x + edge * 2, y - edge);
+            VLine(3 * edge + 4).Draw(x + edge * 2 + 1, y - edge - 2);
+            VLine(3 * edge + 6).Draw(x + edge * 2 + 2, y - edge - 3);
+        }
     }
     
     if(PageMultimeter::ZeroEnabled() || S_MULT_AVP_ENABLED)
     {
-        int x = 10;
-        int y = 145;
-
-        int dX = 6;
-        int dY = 6;
-
-        int width = 60;
-        int height = 36;
-
-        if(PageMultimeter::ZeroEnabled())
+        if (!inModeOsci)
         {
-            width = 69;
-            height = 43;
+            int x = 10;
+            int y = 145;
+
+            int dX = 6;
+            int dY = 6;
+
+            int width = 60;
+            int height = 36;
+
+            if (PageMultimeter::ZeroEnabled())
+            {
+                width = 69;
+                height = 43;
+            }
+
+            Rectangle(width, height).Draw(x, y, Color::FILL);
+
+            DFont::Set(DTypeFont::_GOST28);
+            int spacing = DFont::GetSpacing();
+            DFont::SetSpacing(3);
+
+            char *text = PageMultimeter::ZeroEnabled() ? "Íóëü" : "ÀÂÏ";
+
+            Text(text).Draw(x + dX, y + dY);
+
+            DFont::Pop();
+            DFont::SetSpacing(spacing);
         }
-
-        Rectangle(width, height).Draw(x, y, Color::FILL);
-
-        DFont::Set(DTypeFont::_GOST28);
-        int spacing = DFont::GetSpacing();
-        DFont::SetSpacing(3);
-
-        char *text = PageMultimeter::ZeroEnabled() ? "Íóëü" : "ÀÂÏ";
-
-        Text(text).Draw(x + dX, y + dY);
-
-        DFont::Pop();
-        DFont::SetSpacing(spacing);
     }
 }
 
