@@ -670,7 +670,7 @@ int DisplayMultimeter::Width()
     }
     else if (S_MULT_MEASURE_IS_RESISTANCE)
     {
-        return 175;
+        return 170;
     }
 
     return 150;
