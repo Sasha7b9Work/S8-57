@@ -37,7 +37,7 @@ static void DrawChar(int numSymbol, int x, bool inModeOsci);
 static void DrawMeasure(bool inModeOsci);
 
 // Нарисовать дополнительные изображения на экране, если в этом есть необходимость
-static void DrawGraphics();
+static void DrawGraphics(bool inModeOsci);
 
 // Отобразить единицы измерения
 static void DrawUnits(bool inModeOsci);
@@ -329,40 +329,68 @@ static void Draw2HLinesRelCenter(int center, int y, int width)
 }
 
 
-static void DrawGraphics()
+static void DrawGraphics(bool inModeOsci)
 {
     int x0 = 10;
     int y0 = 10;
 
     if(S_MULT_MEASURE_IS_TEST_DIODE)
     {
-        int edge = 50;
-        int delta = edge / 2;
-        int length = 2 * edge;
+        if (inModeOsci)
+        {
+            int edge = 15;
+            int delta = edge / 2;
+            int length = 2 * edge;
 
-        int startX = x0 + 115;
-        int endX = startX + length;
-        int startY = y0 + 150;
+            int startX = CalculateX() + 118;
+            int endX = startX + length;
+            int startY = CalculateY() + 15;
 
-        HLine(length).Draw(startX, startY - 1, Color::FILL);
-        HLine(length).Draw(startX, startY);
-        HLine(length).Draw(startX, startY + 1);
+            HLine(length).Draw(startX, startY, Color::FILL);
+            HLine(length).Draw(startX, startY + 1, Color::FILL);
 
-        VLine(edge + 6).Draw(startX + delta - 1, startY - edge / 2 - 3);
-        VLine(edge + 2).Draw(startX + delta, startY - edge / 2 - 1);
-        VLine(edge).Draw(startX + delta + 1, startY - edge / 2);
+            VLine(edge).Draw(startX + delta,     startY - edge / 2);
+            VLine(edge).Draw(startX + delta + 1, startY - edge / 2);
 
-        VLine(edge + 6).Draw(endX - delta, startY - edge / 2 - 3);
-        VLine(edge + 6).Draw(endX - delta + 1, startY - edge / 2 - 3);
-        VLine(edge + 6).Draw(endX - delta + 2, startY - edge / 2 - 3);
+            VLine(edge + 3).Draw(endX - delta,     startY - edge / 2 - 2);
+            VLine(edge + 3).Draw(endX - delta + 1, startY - edge / 2 - 2);
 
-        Line(startX + delta, startY - edge / 2 - 2, endX - delta + 1, startY - 1).Draw();
-        Line(startX + delta, startY - edge / 2 - 1, endX - delta, startY - 1).Draw();
-        Line(startX + delta, startY - edge / 2, endX - delta, startY).Draw();
+            Line(startX + delta, startY - edge / 2 - 1, endX - delta, startY - 1).Draw();
+            Line(startX + delta, startY - edge / 2 - 2, endX - delta, startY - 2).Draw();
 
-        Line(startX + delta, startY + edge / 2, endX - delta, startY).Draw();
-        Line(startX + delta, startY + edge / 2 + 1, endX - delta, startY + 1).Draw();
-        Line(startX + delta, startY + edge / 2 + 2, endX - delta + 1, startY + 1).Draw();
+            Line(startX + delta, startY + edge / 2 + 1, endX - delta, startY + 1).Draw();
+            Line(startX + delta, startY + edge / 2 + 2, endX - delta, startY + 2).Draw();
+        }
+        else
+        {
+            int edge = 50;
+            int delta = edge / 2;
+            int length = 2 * edge;
+
+            int startX = x0 + 115;
+            int endX = startX + length;
+            int startY = y0 + 150;
+
+            HLine(length).Draw(startX, startY - 1, Color::FILL);
+            HLine(length).Draw(startX, startY);
+            HLine(length).Draw(startX, startY + 1);
+
+            VLine(edge + 6).Draw(startX + delta - 1, startY - edge / 2 - 3);
+            VLine(edge + 2).Draw(startX + delta, startY - edge / 2 - 1);
+            VLine(edge).Draw(startX + delta + 1, startY - edge / 2);
+
+            VLine(edge + 6).Draw(endX - delta, startY - edge / 2 - 3);
+            VLine(edge + 6).Draw(endX - delta + 1, startY - edge / 2 - 3);
+            VLine(edge + 6).Draw(endX - delta + 2, startY - edge / 2 - 3);
+
+            Line(startX + delta, startY - edge / 2 - 2, endX - delta + 1, startY - 1).Draw();
+            Line(startX + delta, startY - edge / 2 - 1, endX - delta, startY - 1).Draw();
+            Line(startX + delta, startY - edge / 2, endX - delta, startY).Draw();
+
+            Line(startX + delta, startY + edge / 2, endX - delta, startY).Draw();
+            Line(startX + delta, startY + edge / 2 + 1, endX - delta, startY + 1).Draw();
+            Line(startX + delta, startY + edge / 2 + 2, endX - delta + 1, startY + 1).Draw();
+        }
     }
     else if(S_MULT_MEASURE_IS_BELL)
     {
@@ -436,7 +464,7 @@ static void DrawMeasure(bool inModeOsci)
     
     DrawSymbols(inModeOsci);
 
-    //DrawGraphics();
+    DrawGraphics(inModeOsci);
 
     DFont::Set(DTypeFont::_8);
 }
@@ -673,6 +701,10 @@ int DisplayMultimeter::Width()
     else if (S_MULT_MEASURE_IS_RESISTANCE)
     {
         result = S_MULT_RANGE_RESISTANCE_IS_10M ? 170 : 165;
+    }
+    else if (S_MULT_MEASURE_IS_TEST_DIODE)
+    {
+        result = 155;
     }
 
     return result;
