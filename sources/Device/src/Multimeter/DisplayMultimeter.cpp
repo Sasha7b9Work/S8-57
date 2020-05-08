@@ -57,6 +57,9 @@ static int CalculateX();
 // Возвращает координату y для вывода измерения в совмещённом режиме
 static int CalculateY();
 
+// Нарисовать символ омеги в заданных координатах
+static void DrawSymbolOMEGA(int x, int y, bool inModeOsci);
+
 
 static char Symbol(int i)
 {
@@ -183,46 +186,14 @@ static void DrawUnits(bool inModeOsci)
 
     if(outBuffer[8] == SYMBOL_OMEGA)
     {
+        if (inModeOsci)
+        {
+            x += 5;
+        }
+
         x = Text(String(outBuffer[7])).Draw(x, y);
 
-        Color::FILL.SetAsCurrent();
-
-        int radius = 27;
-
-        for(int i = 0; i < radius; i++)
-        {
-            float angle = std::asinf(i * (1.0F / radius));
-            float length = std::cosf(angle) * radius;
-            Draw2HLinesRelCenter(x + radius, y + i + radius - 1, static_cast<int>(length + 0.5F));
-            Draw2HLinesRelCenter(x + radius, y - i + radius - 1, static_cast<int>(length + 0.5F));
-        }
-
-        Color::BACK.SetAsCurrent();
-
-        static const int lengths[23] = { 18, 18, 18, 18, 18, 18, 17, 17, 17, 17, 16, 16, 16, 15, 14, 13, 12, 11, 10, 9, 7, 5, 3 };
-
-        for(int i = 0; i < 23; i++)
-        {
-            Draw2HLinesRelCenter(x + radius, y - 1 + radius - i, lengths[i]);
-            Draw2HLinesRelCenter(x + radius, y - 1 + radius + i, lengths[i]);
-        }
-
-        Region region(21, 6);
-
-        region.Fill(x, y + 59, Color::FILL);
-        region.Fill(x + 33, y + 59);
-
-        Pixel pixel;
-        pixel.Draw(x, y + 58);
-        pixel.Draw(x + 54, y + 58);
-        pixel.Draw(x, y + 65, Color::BACK);
-        pixel.Draw(x + 54, y + 65);
-
-        Region(10, 5).Fill(x + 22, y + 47);
-
-        Region leg(4, 6);
-        leg.Fill(x + 17, y + 52, Color::FILL);
-        leg.Fill(x + 33, y + 52);
+        DrawSymbolOMEGA(x, y, inModeOsci);
     }
     else
     {
@@ -263,6 +234,91 @@ static void DrawUnits(bool inModeOsci)
     }
 
     DFont::SetSpacing(1);
+}
+
+
+static void DrawSymbolOMEGA(int x, int y, bool inModeOsci)
+{
+    Color::FILL.SetAsCurrent();
+
+    if (inModeOsci)
+    {
+        int radius = 10;
+
+        for (int i = 0; i < radius; i++)
+        {
+            float angle = std::asinf(i * (1.0F / radius));
+            float length = std::cosf(angle) * radius;
+            Draw2HLinesRelCenter(x + radius, y + i + radius - 1, static_cast<int>(length + 0.5F));
+            Draw2HLinesRelCenter(x + radius, y - i + radius - 1, static_cast<int>(length + 0.5F));
+        }
+
+        Color::BACK.SetAsCurrent();
+
+        static const int lengths[8] = { 6, 6, 6, 5, 5, 4, 3, 2};
+
+        for (int i = 0; i < 8; i++)
+        {
+            Draw2HLinesRelCenter(x + radius, y - 1 + radius - i, lengths[i]);
+            Draw2HLinesRelCenter(x + radius, y - 1 + radius + i, lengths[i]);
+        }
+
+        Region region(7, 2);
+
+        region.Fill(x, y + 22, Color::FILL);
+        region.Fill(x + 13, y + 22);
+
+        Pixel pixel;
+        pixel.Draw(x, y + 21);
+        pixel.Draw(x + 20, y + 21);
+        pixel.Draw(x, y + 24, Color::BACK);
+        pixel.Draw(x + 20, y + 24);
+
+//        Region(10, 5).Fill(x + 22, y + 47);
+
+//        Region leg(4, 6);
+//        leg.Fill(x + 17, y + 52, Color::FILL);
+//        leg.Fill(x + 33, y + 52);
+    }
+    else
+    {
+        int radius = 27;
+
+        for (int i = 0; i < radius; i++)
+        {
+            float angle = std::asinf(i * (1.0F / radius));
+            float length = std::cosf(angle) * radius;
+            Draw2HLinesRelCenter(x + radius, y + i + radius - 1, static_cast<int>(length + 0.5F));
+            Draw2HLinesRelCenter(x + radius, y - i + radius - 1, static_cast<int>(length + 0.5F));
+        }
+
+        Color::BACK.SetAsCurrent();
+
+        static const int lengths[23] = { 18, 18, 18, 18, 18, 18, 17, 17, 17, 17, 16, 16, 16, 15, 14, 13, 12, 11, 10, 9, 7, 5, 3 };
+
+        for (int i = 0; i < 23; i++)
+        {
+            Draw2HLinesRelCenter(x + radius, y - 1 + radius - i, lengths[i]);
+            Draw2HLinesRelCenter(x + radius, y - 1 + radius + i, lengths[i]);
+        }
+
+        Region region(21, 6);
+
+        region.Fill(x, y + 59, Color::FILL);
+        region.Fill(x + 33, y + 59);
+
+        Pixel pixel;
+        pixel.Draw(x, y + 58);
+        pixel.Draw(x + 54, y + 58);
+        pixel.Draw(x, y + 65, Color::BACK);
+        pixel.Draw(x + 54, y + 65);
+
+        Region(10, 5).Fill(x + 22, y + 47);
+
+        Region leg(4, 6);
+        leg.Fill(x + 17, y + 52, Color::FILL);
+        leg.Fill(x + 33, y + 52);
+    }
 }
 
 
@@ -609,6 +665,10 @@ int DisplayMultimeter::Width()
         return 175;
     }
     else if (S_MULT_MEASURE_IS_CURRENT_AC && S_MULT_RANGE_CURRENT_AC_IS_20mA)
+    {
+        return 175;
+    }
+    else if (S_MULT_MEASURE_IS_RESISTANCE)
     {
         return 175;
     }
