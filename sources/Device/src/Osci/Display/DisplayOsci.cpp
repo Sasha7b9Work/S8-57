@@ -62,7 +62,9 @@ void DisplayOsci::Update()
     
     BottomPart::Draw(273, Grid::Bottom() + 1);
     
-    DisplayFreqMeter::Draw();
+    DisplayFreqMeter::Update();
+
+    DisplayMultimeter::Update();
     
     TableMeasures::Draw();
     

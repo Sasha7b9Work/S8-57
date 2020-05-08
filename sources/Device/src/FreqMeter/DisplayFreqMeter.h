@@ -5,7 +5,7 @@
 struct DisplayFreqMeter
 {
     // Отрисовка значения
-    static void Draw();
+    static void Update();
 
 private:
     // Выводит отладочную информацию

@@ -37,7 +37,7 @@ static pString StackToString(Stack<uint> *stack, int order);
 static void WriteStackToBuffer(Stack<uint> *stack, int point, const char *suffix);
 
 
-void DisplayFreqMeter::Draw()
+void DisplayFreqMeter::Update()
 {
     // \todo ¬ этой строке точку ставить не где придЄтс€, а в той позиции, где она сто€ла последний раз
 
