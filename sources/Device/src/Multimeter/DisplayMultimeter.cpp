@@ -274,11 +274,11 @@ static void DrawSymbolOMEGA(int x, int y, bool inModeOsci)
         pixel.Draw(x, y + 24, Color::BACK);
         pixel.Draw(x + 20, y + 24);
 
-//        Region(10, 5).Fill(x + 22, y + 47);
+        Region(4, 2).Fill(x + 8, y + 16, Color::BACK);
 
-//        Region leg(4, 6);
-//        leg.Fill(x + 17, y + 52, Color::FILL);
-//        leg.Fill(x + 33, y + 52);
+        Region leg(1, 3);
+        leg.Fill(x + 6, y + 18, Color::FILL);
+        leg.Fill(x + 13, y + 18);
     }
     else
     {
