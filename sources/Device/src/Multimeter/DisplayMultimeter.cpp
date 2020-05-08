@@ -30,6 +30,9 @@ static void PrepareTestDiode(const char *);
 // Отрисовать значение измерения
 static void DrawSymbols(bool inModeOsci);
 
+// Отрисовать один символ
+static void DrawChar(int numSymbol, int x, bool inModeOsci);
+
 // Отрисовать измерение. Если inModeOsci == true, рисовать надо на экране, совмещённом с осциллографом
 static void DrawMeasure(bool inModeOsci);
 
@@ -50,40 +53,59 @@ static void UpdateInModeMultimeter();
 
 // Возвращает координату x для вывода измерения в совмещённом режиме
 static int CalculateX();
+
 // Возвращает координату y для вывода измерения в совмещённом режиме
 static int CalculateY();
 
 
-static char Symbol(uint i)
+static char Symbol(int i)
 {
     return outBuffer[i];
 }
 
 
-static void DrawChar(uint numSymbol, int x)
+static void DrawChar(int numSymbol, int x, bool inModeOsci)
 {
-    int y = 35;
+    int y = inModeOsci ? (CalculateY() + 3) : 35;
 
     char symbols[2] = {Symbol(numSymbol), 0};
 
     if(symbols[0] == '-')
     {
         y -= 10;
+
+        if (inModeOsci)
+        {
+            x -= 6;
+            y += 7;
+        }
     }
     else if(symbols[0] == '+')
     {
         y -= 9;
+
+        if (inModeOsci)
+        {
+            x -= 6;
+            y += 6;
+        }
     }
     
     Text(symbols).Draw(x, y, Color::FILL);
 
-    if(symbols[0] == '-')
+    if(symbols[0] == '-' && !inModeOsci)
     {
         Pixel().Draw(x, y + 41);
 
         Region(3, 5).Fill(x + 31, y + 40, Color::BACK);
         Pixel().Draw(x + 30, y + 40);
         Pixel().Draw(x + 30, y + 45);
+    }
+    if (symbols[0] == '+' && inModeOsci)
+    {
+        VLine line(4);
+        line.Draw(x + 4, y + 10, Color::BACK);
+        line.Draw(x + 4, y + 17);
     }
 
     Color::FILL.SetAsCurrent();
@@ -102,9 +124,14 @@ static void DrawSymbols(bool inModeOsci)
         x += CalculateX();
     }
 
-    DrawChar(0, x0 + 10);
+    DrawChar(0, x0 + 10, inModeOsci);
 
-    for (uint i = 1; i < 7; i++)
+    if (inModeOsci)
+    {
+        x -= 48;
+    }
+
+    for (int i = 1; i < 7; i++)
     {
         char symbol = Symbol(i);
 
@@ -113,17 +140,27 @@ static void DrawSymbols(bool inModeOsci)
             x += 10;
         }
 
-        DrawChar(i, x0 + x);
+        DrawChar(i, x0 + x - ((Symbol(i) == '.' && inModeOsci) ? 2 : 0), inModeOsci);
 
         if (symbol == '1')
         {
             x -= 10;
         }
 
-        x += (Symbol(i) == '.') ? 16 : 38;
+        x += 38;
+
+        if (Symbol(i) == '.')
+        {
+            x = x - (inModeOsci ? 15 : 22);
+        }
+
+        if (inModeOsci)
+        {
+            x -= 21;
+        }
     }
 
-    DrawUnits(120, 125);
+    //DrawUnits(120, 125);
 }
 
 
@@ -310,7 +347,7 @@ static void DrawMeasure(bool inModeOsci)
 {
     if (inModeOsci)
     {
-        Region(100, DisplayMultimeter::HEIGHT).DrawBounded(CalculateX(), CalculateY(), Color::BACK, Color::FILL);
+        Region(DisplayMultimeter::WIDTH, DisplayMultimeter::HEIGHT).DrawBounded(CalculateX(), CalculateY(), Color::BACK, Color::FILL);
     }
 
     Color color = received ? Color::FILL : Color::GRAY_50;
@@ -321,7 +358,7 @@ static void DrawMeasure(bool inModeOsci)
     
     DrawSymbols(inModeOsci);
 
-    DrawGraphics();
+    //DrawGraphics();
 
     DFont::Set(DTypeFont::_8);
 }
@@ -329,6 +366,17 @@ static void DrawMeasure(bool inModeOsci)
 
 void DisplayMultimeter::Update()
 {
+    static uint prevTime = 0;
+    static bool isMinus = true;
+
+    if (TIME_MS - prevTime > 1000)
+    {
+        isMinus = !isMinus;
+        prevTime = TIME_MS;
+    }
+
+    outBuffer[0] = isMinus ? '+' : '-';
+
     if (Device::InModeOsci())
     {
         UpdateInModeOsci();
@@ -344,7 +392,7 @@ static void UpdateInModeOsci()
 {
     if (!S_MULT_SHOW_ALWAYS)
     {
-        return;
+        //return;
     }
 
     DrawMeasure(true);

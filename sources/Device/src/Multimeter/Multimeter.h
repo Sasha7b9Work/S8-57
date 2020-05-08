@@ -10,7 +10,8 @@ struct DisplayMultimeter
 
     static void ChangedMode();
 
-    static const int HEIGHT = 50;
+    static const int HEIGHT = 30;
+    static const int WIDTH = 200;
 };
 
 
