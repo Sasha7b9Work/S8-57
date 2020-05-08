@@ -139,7 +139,8 @@ struct RangeCurrentDC
 // ѕредел измерени€ сопротивлен€ посто€нному току
 struct RangeResistance
 {
-#define S_MULT_RANGE_RESISTANCE     (set.mult._rangeResist)
+#define S_MULT_RANGE_RESISTANCE         (set.mult._rangeResist)
+#define S_MULT_RANGE_RESISTANCE_IS_10M  (S_MULT_RANGE_RESISTANCE == RangeResistance::_10M)
 
     enum E
     {

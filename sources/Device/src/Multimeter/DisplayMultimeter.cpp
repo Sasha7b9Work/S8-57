@@ -660,18 +660,20 @@ static int CalculateY()
 
 int DisplayMultimeter::Width()
 {
+    int result = 150;
+
     if (S_MULT_MEASURE_IS_CURRENT_DC && S_MULT_RANGE_CURRENT_DC_IS_20mA)
     {
-        return 175;
+        result = 175;
     }
     else if (S_MULT_MEASURE_IS_CURRENT_AC && S_MULT_RANGE_CURRENT_AC_IS_20mA)
     {
-        return 175;
+        result = 175;
     }
     else if (S_MULT_MEASURE_IS_RESISTANCE)
     {
-        return 170;
+        result = S_MULT_RANGE_RESISTANCE_IS_10M ? 170 : 165;
     }
 
-    return 150;
+    return result;
 }
