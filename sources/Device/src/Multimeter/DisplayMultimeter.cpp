@@ -40,7 +40,7 @@ static void DrawMeasure(bool inModeOsci);
 static void DrawGraphics();
 
 // ќтобразить единицы измерени€
-static void DrawUnits(int x, int y);
+static void DrawUnits(bool inModeOsci);
 
 // Ќарисовать линии вправо и влево отностиельно центра с длиной width
 static void Draw2HLinesRelCenter(int center, int y, int width);
@@ -164,12 +164,21 @@ static void DrawSymbols(bool inModeOsci)
         }
     }
 
-    //DrawUnits(120, 125);
+    DrawUnits(inModeOsci);
 }
 
 
-static void DrawUnits(int x, int y)
+static void DrawUnits(bool inModeOsci)
 {
+    int x = 120;
+    int y = 125;
+
+    if (inModeOsci)
+    {
+        x = CalculateX() + 113;
+        y = CalculateY() + 3;
+    }
+
     DFont::SetSpacing(5);
 
     if(outBuffer[8] == SYMBOL_OMEGA)
