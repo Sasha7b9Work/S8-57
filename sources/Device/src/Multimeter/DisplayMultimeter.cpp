@@ -521,7 +521,7 @@ static void UpdateInModeOsci()
 {
     if (!S_MULT_SHOW_ALWAYS)
     {
-        //return;
+        return;
     }
 
     DrawMeasure(true);
