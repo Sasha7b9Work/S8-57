@@ -73,8 +73,8 @@ DEF_BUTTON( bBalanceA,                                                          
 DEF_CHOICE_2( cDividerA,                                                                                                                                         //--- КАНАЛ 1 - Делитель ---
     "Делитель",
     "",
-    "1X",
-    "10X",
+    "X1",
+    "X10",
     S_DIVIDER_A, &PageChannelA::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
@@ -156,8 +156,8 @@ DEF_BUTTON( bBalanceB,                                                          
 DEF_CHOICE_2( cDividerB,                                                                                                                                         //--- КАНАЛ 2 - Делитель ---
     "Делитель",
     "",
-    "1X",
-    "10X",
+    "X1",
+    "X10",
     S_DIVIDER_B, &PageChannelB::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
