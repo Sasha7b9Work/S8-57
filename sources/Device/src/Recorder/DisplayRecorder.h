@@ -69,4 +69,6 @@ private:
 
     // С этой точки начинается вывод
     static int startPoint;
+
+
 };

@@ -19,19 +19,15 @@ struct StateOsci
 };
 
 
-
-// Если true - идёт чтение точек
-static bool running = false;
-// true, если регистратор был инициализирован
-static bool initialized = false;
-// Сюда сохраним состояние осциллографа в момент перехода в режим регистратора
-static StateOsci osci;
+static bool isRecording = false;    // Если true - идёт процесс записи точек
+static bool initialized = false;    // true, если регистратор был инициализирован
+static StateOsci osci;              // Сюда сохраним состояние осциллографа в момент перехода в режим регистратора
 
 // Сохранить установленные настройки осциллографа
 static void StoreOsciSettings();
+
 // Восстановить ранее сохранённые настройки осциллорафа
 static void RestoreOsciSettings();
-
 
 
 void Recorder::Init()
@@ -46,7 +42,7 @@ void Recorder::Init()
     Osci::LoadHoldfOff();
     StorageRecorder::Init();
 
-    running = false;
+    isRecording = false;
 
     initialized = true;
 
@@ -105,13 +101,13 @@ void Recorder::Start()
 {
     StorageRecorder::CreateNewRecord();
 
-    running = true;
+    isRecording = true;
 }
 
 
 void Recorder::Stop()
 {
-    running = false;
+    isRecording = false;
 }
 
 
@@ -144,14 +140,14 @@ void Recorder::OnPressStart()
 
     if (Menu::OpenedItem() == const_cast<Page *>(PageRecorder::self))
     {
-        if (running)
+        if (isRecording)
         {
             Stop();
             Keyboard::Unlock();
         }
         else
         {
-            static const Key::E keys[] = { Key::F5, Key::Start, Key::None };
+            static const Key::E keys[] = { Key::F4, Key::Start, Key::None };
             Start();
             Keyboard::Lock(keys);
         }
@@ -163,15 +159,15 @@ void Recorder::OnPressStart()
 }
 
 
-bool Recorder::IsRunning()
+bool Recorder::IsRecording()
 {
-    return running;
+    return isRecording;
 }
 
 
 void Recorder::ScaleX::Change(int delta)
 {
-    if (!Recorder::IsRunning())
+    if (!Recorder::IsRecording())
     {
         if (delta > 0)
         {
@@ -275,7 +271,7 @@ void Recorder::ScaleX::Load()
 
     HAL_BUS::FPGA::Write8(WR::TBASE, values[S_REC_SCALE_X]);
 
-    if (Recorder::IsRunning())
+    if (Recorder::IsRecording())
     {
         Recorder::Stop();
         Recorder::Start();

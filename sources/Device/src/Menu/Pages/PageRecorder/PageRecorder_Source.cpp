@@ -35,7 +35,7 @@ DEF_CHOICE_2( cSensor,                                                          
 
 static bool IsActive_Source()
 {
-    return !Recorder::IsRunning();
+    return !Recorder::IsRecording();
 }
 
 DEF_PAGE_3( pSource,                                                                                                                               //--- ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - »—“Œ◊Õ»  ---

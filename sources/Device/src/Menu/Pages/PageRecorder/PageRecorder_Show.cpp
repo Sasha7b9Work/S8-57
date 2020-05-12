@@ -48,7 +48,7 @@ DEF_GRAPH_BUTTON( bScreenLeft,                                                  
 
 static bool IsActive_PageShow()
 {
-    return !Recorder::IsRunning();
+    return !Recorder::IsRecording();
 }
 
 static bool HandlerKey_PageShow(const KeyEvent &event)

@@ -16,7 +16,8 @@ public:
 
     static void Stop();
 
-    static bool IsRunning();
+    // true означает, что регистратор находится в режиме записи
+    static bool IsRecording();
 
     static void ReadPoint();
 
