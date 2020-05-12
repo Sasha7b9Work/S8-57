@@ -70,5 +70,9 @@ private:
     // С этой точки начинается вывод
     static int startPoint;
 
-
+    // Значок, который показывает, в каком состоянии сейчас находится регистратор
+    struct RecordIcon
+    {
+        static void Upate(int x, int y);
+    };
 };

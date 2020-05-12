@@ -47,6 +47,8 @@ void DisplayRecorder::Update()
     Warnings::Draw();
 
     Menu::Draw();
+
+    RecordIcon::Upate(5, 5);
 }
 
 
@@ -333,4 +335,17 @@ void DisplayRecorder::MoveCursorRight()
 bool DisplayRecorder::InProcessUpdate()
 {
     return inProcessUpdate;
+}
+
+
+void DisplayRecorder::RecordIcon::Upate(int x, int y)
+{
+    if (Recorder::InRecordingMode())
+    {
+
+    }
+    else
+    {
+        Region(10, 10).Fill(x, y, Color::GREEN);
+    }
 }

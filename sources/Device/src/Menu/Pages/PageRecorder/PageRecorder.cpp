@@ -9,7 +9,7 @@
 
 static bool IsActive_Destination()
 {
-    return !Recorder::IsRecording();
+    return !Recorder::InRecordingMode();
 }
 
 DEF_CHOICE_3( cTypeMemory,                                                                                                                           //--- ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ‡ÏˇÚ¸ ---
@@ -39,7 +39,7 @@ static void Draw_Stop(int x, int y)
 
 static void Draw_StartStop(int x, int y)
 {
-    Recorder::IsRecording() ? Draw_Stop(x, y) : Draw_Start(x, y);
+    Recorder::InRecordingMode() ? Draw_Stop(x, y) : Draw_Start(x, y);
 }
 
 DEF_GRAPH_BUTTON_HINTS_2( bStart,                                                                                                                 //--- ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - œ”— /—“Œœ ---

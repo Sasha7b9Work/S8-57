@@ -19,9 +19,9 @@ struct StateOsci
 };
 
 
-static bool isRecording = false;    // Если true - идёт процесс записи точек
-static bool initialized = false;    // true, если регистратор был инициализирован
-static StateOsci osci;              // Сюда сохраним состояние осциллографа в момент перехода в режим регистратора
+static bool inRecordingMode = false;    // Если true - идёт процесс записи точек
+static bool initialized = false;        // true, если регистратор был инициализирован
+static StateOsci osci;                  // Сюда сохраним состояние осциллографа в момент перехода в режим регистратора
 
 // Сохранить установленные настройки осциллографа
 static void StoreOsciSettings();
@@ -42,7 +42,7 @@ void Recorder::Init()
     Osci::LoadHoldfOff();
     StorageRecorder::Init();
 
-    isRecording = false;
+    inRecordingMode = false;
 
     initialized = true;
 
@@ -101,13 +101,13 @@ void Recorder::Start()
 {
     StorageRecorder::CreateNewRecord();
 
-    isRecording = true;
+    inRecordingMode = true;
 }
 
 
 void Recorder::Stop()
 {
-    isRecording = false;
+    inRecordingMode = false;
 }
 
 
@@ -140,7 +140,7 @@ void Recorder::OnPressStart()
 
     if (Menu::OpenedItem() == const_cast<Page *>(PageRecorder::self))
     {
-        if (isRecording)
+        if (inRecordingMode)
         {
             Stop();
             Keyboard::Unlock();
@@ -159,15 +159,15 @@ void Recorder::OnPressStart()
 }
 
 
-bool Recorder::IsRecording()
+bool Recorder::InRecordingMode()
 {
-    return isRecording;
+    return inRecordingMode;
 }
 
 
 void Recorder::ScaleX::Change(int delta)
 {
-    if (!Recorder::IsRecording())
+    if (!Recorder::InRecordingMode())
     {
         if (delta > 0)
         {
@@ -271,7 +271,7 @@ void Recorder::ScaleX::Load()
 
     HAL_BUS::FPGA::Write8(WR::TBASE, values[S_REC_SCALE_X]);
 
-    if (Recorder::IsRecording())
+    if (Recorder::InRecordingMode())
     {
         Recorder::Stop();
         Recorder::Start();
