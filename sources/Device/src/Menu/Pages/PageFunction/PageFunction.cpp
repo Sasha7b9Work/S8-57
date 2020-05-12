@@ -1,11 +1,11 @@
 #include "defines.h"
+#include "Menu/MenuItems.h"
+#include "Menu/Pages/Include/PageFFT.h"
+#include "Menu/Pages/Include/PageFreqMeter.h"
 #include "Menu/Pages/Include/PageFunction.h"
+#include "Menu/Pages/Include/PageMultimeter.h"
 #include "Menu/Pages/Include/PageRecorder.h"
-#include "Menu/Menu.h"
-#include "Settings/Settings.h"
-#include "Hardware/Beeper.h"
-#include "Display/Painter.h"
-
+#include "Menu/Pages/Include/PageTester.h"
 
 
 DEF_PAGE_5( pFunction,                                                                                                                                                      //--- ‘”Õ ÷»ﬂ ---
