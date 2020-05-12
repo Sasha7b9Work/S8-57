@@ -355,7 +355,7 @@ bool StorageRecorder::CreateListeningRecord()
 
     if (result)
     {
-        LastRecord()->maxPoints = 320;
+        LastRecord()->SetMaxPoints(320);
     }
 
     return result;

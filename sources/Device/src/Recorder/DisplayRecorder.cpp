@@ -17,7 +17,7 @@
 
 
 
-static Record *displayed = nullptr;                // Текущая отображаемая запись
+static Record *displayed = nullptr;             // Текущая отображаемая запись
 static int startPoint = -1;                     // С этой точки начинается вывод
 static uint16 posCursor[2] = { 100, 220 };
 static bool inProcessUpdate = false;            // true, если в данный момент происходит отрисовка
@@ -29,7 +29,7 @@ static void DrawSettings(int x, int y);
 // Отобразить данные
 static void DrawData();
 
-// Нарисовать данные канала
+// Нарисовать данные канала, начиная с точки start
 static void DrawChannel(Chan::E ch);
 
 // Нарисовать данные датчика
@@ -70,13 +70,15 @@ void DisplayRecorder::Update()
 
     inProcessUpdate = true;
 
-    DrawData();
+    DrawData(startPoint);
 
     inProcessUpdate = false;
 
     StorageRecorder::LastRecord()->AddMissingPoints();
 
     DrawSettings(289, 0);
+
+    DrawCursors();
 
     DrawMemoryWindow();
 
@@ -225,7 +227,7 @@ static void DrawCursors()
 }
 
 
-static void DrawData()
+static void DrawData(int start)
 {
     HAL_BUS_CONFIGURE_TO_FSMC();
 
@@ -277,8 +279,6 @@ static void DrawChannel(Chan::E ch)
 
         point = point->Next(displayed);
     };
-
-    DrawCursors();
 }
 
 
@@ -379,6 +379,11 @@ bool DisplayRecorder::InProcessUpdate()
 
 void RecordIcon::Upate(int x, int y)
 {
+    if (Menu::OpenedItem() != PageRecorder::self)
+    {
+        return;
+    }
+
     if (Recorder::InRecordingMode())
     {
         static uint timeStart = 0;              // Время начала цикла (зажёгся/потух)

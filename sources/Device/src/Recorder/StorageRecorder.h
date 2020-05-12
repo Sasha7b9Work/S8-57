@@ -66,9 +66,7 @@ struct PointFloat
 struct Record
 {
     PackedTime timeStart;       // Время записи первой точки
-private:
     int        numPoints;       // Число сохранённых точек
-public:
     uint8      sources;         // Здесь иточники данных.
                                 // бит 0 - канал 1; бит 1 - канал 2; бит 2 - датчик. Именно в таком порядке расположены точки соответствующих источников в хранилище после структуры Record
     uint8      bytesOnPoint;    // Сколько байт нужно на одну точку всех источников
@@ -121,6 +119,9 @@ public:
 
     // Возвращает true, если запись содержит данные датчика
     bool ContainsSensor() const;
+
+    // Устанавливает максимальное количество точек для записи
+    void SetMaxPoints(uint16 max) {  maxPoints = max; }
 
 private:
     
