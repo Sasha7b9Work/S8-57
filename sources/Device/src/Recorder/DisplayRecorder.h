@@ -25,45 +25,4 @@ public:
 
     // 
     static bool InProcessUpdate();
-
-private:
-    
-    // Изобразить установленные настройки
-    static void DrawSettings(int x, int y);
-    
-    // Отобразить данные
-    static void DrawData(Record *record);
-
-    // Нарисовать данные канала
-    static void DrawChannel(Record *record, Chan::E ch);
-
-    // Нарисовать данные датчика
-    static void DrawSensor(Record *record);
-
-
-    static void DrawMemoryWindow();
-
-    // Возвращает значение Y экрана для value точки
-    static int Y(int value);
-
-
-    static void DrawCursors();
-
-
-    static void DrawParametersCursors();
-
-
-    static char *TimeCursor(int numCur, char buffer[20]);
-
-
-    static char *VoltageCursor(Chan::E, int, char[20]);
-
-
-    static char *DeltaTime(char buffer[20]);
-
-    // Значок, который показывает, в каком состоянии сейчас находится регистратор
-    struct RecordIcon
-    {
-        static void Upate(int x, int y);
-    };
 };
