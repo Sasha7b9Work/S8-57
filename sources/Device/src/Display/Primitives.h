@@ -4,6 +4,15 @@
 #include "common/Display/Font/Font_d.h"
 
 
+
+class Circle
+{
+public:
+    Circle(int radius);
+};
+
+
+
 class Region
 {
 public:
@@ -14,6 +23,7 @@ private:
     int width;
     int height;
 };
+
 
 
 class Rectangle
