@@ -64,6 +64,7 @@ void Recorder::StartListening()
     FPGA::GiveStart(0, 0);
     FPGA::ForcedStart();
     mode = Mode::Listening;
+    DisplayRecorder::SetDisplayerRecord(StorageRecorder::LastRecord());
 }
 
 
@@ -114,6 +115,8 @@ void Recorder::RecordPoints()
 void Recorder::Start()
 {
     StorageRecorder::CreateNewRecord();
+
+    DisplayRecorder::SetDisplayerRecord(StorageRecorder::LastRecord());
 
     mode = Mode::Recording;
 }

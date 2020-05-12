@@ -111,6 +111,15 @@ struct Record
     // Указатель на точку number датчика
     PointFloat *ValueSensor(int number);
 
+    // Возвращает true, если запись содержит данные канала A
+    bool ContainsChannelA() const;
+
+    // Возвращает true, если запись содержит данные канала B
+    bool ContainsChannelB() const;
+
+    // Возвращает true, если запись содержит данные датчика
+    bool ContainsSensor() const;
+
 private:
     
     // С этого адреса начинаются данные

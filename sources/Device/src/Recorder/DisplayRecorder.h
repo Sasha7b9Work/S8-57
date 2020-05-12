@@ -12,10 +12,10 @@ public:
     static void Update();
 
     // —местить окно просмотра влево
-    static void MoveLeft();
+    static void MoveWindowLeft();
 
     // —местить окно просмотра вправо
-    static void MoveRight();
+    static void MoveWindowRight();
 
     // ѕереместить текущий курсор влево
     static void MoveCursorLeft();
@@ -23,6 +23,9 @@ public:
     // ѕереместить текущий курсор вправо
     static void MoveCursorRight();
 
-    // 
+    // ¬озвращает true, если как раз происходит отображение данных
     static bool InProcessUpdate();
+
+    // ”становить отображаемую запись
+    static void SetDisplayerRecord(Record *record);
 };

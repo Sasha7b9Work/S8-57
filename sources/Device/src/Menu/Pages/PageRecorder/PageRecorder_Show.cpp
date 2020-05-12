@@ -8,10 +8,6 @@
 #include "Settings/Settings.h"
 
 
-static void OnPress_Right()
-{
-}
-
 static void Draw_Right(int x, int y)
 {
     for (int i = 0; i < 2; i++)
@@ -23,13 +19,9 @@ static void Draw_Right(int x, int y)
 DEF_GRAPH_BUTTON( bScreenRight,                                                                                                     //--- ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - Ýêðàí âïðàâî ---
     "Ýêðàí âïðàâî",
     "Ïåðåìåñòèòü îêíî ïðîñìîòðà íà îäèí ýêðàí âïðàâî",
-    &PageRecorder::Show::self, Item::Active, OnPress_Right, Draw_Right
+    &PageRecorder::Show::self, Item::Active, DisplayRecorder::MoveWindowRight, Draw_Right
 )
 
-
-static void OnPress_Left()
-{
-}
 
 static void Draw_Left(int x, int y)
 {
@@ -42,7 +34,7 @@ static void Draw_Left(int x, int y)
 DEF_GRAPH_BUTTON( bScreenLeft,                                                                                                       //--- ÔÓÍÊÖÈß - ÐÅÃÈÑÒÐÀÒÎÐ - ÏÐÎÑÌÎÒÐ - Ýêðàí âëåâî ---
     "Ýêðàí âëåâî",
     "Ïåðåìåñòèòü îêíî ïðîñìîòðà íà îäèí ýêðàí âëåâî",
-    &PageRecorder::Show::self, Item::Active, OnPress_Left, Draw_Left
+    &PageRecorder::Show::self, Item::Active, DisplayRecorder::MoveWindowLeft, Draw_Left
 )
 
 

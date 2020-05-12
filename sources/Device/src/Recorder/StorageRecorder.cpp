@@ -299,6 +299,24 @@ bool Record::IsValid() const
 }
 
 
+bool Record::ContainsChannelA() const
+{
+    return (sources & 0x01) != 0;
+}
+
+
+bool Record::ContainsChannelB() const
+{
+    return (sources & 0x02) != 0;
+}
+
+
+bool Record::ContainsSensor() const
+{
+    return (sources & 0x04) != 0;
+}
+
+
 Record *StorageRecorder::LastRecord()
 {
     return last;
