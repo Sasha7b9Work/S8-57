@@ -11,6 +11,25 @@ void ENumAverage::Set(ENumAverage::E v)
 }
 
 
+pString ENumAccum::ToString(ENumAccum::E v)
+{
+    static const pString strings[ENumAccum::Count] =
+    {
+        "1",
+        "2",
+        "4",
+        "8",
+        "16",
+        "32",
+        "64",
+        "128",
+        "INF"
+    };
+
+    return strings[v];
+}
+
+
 DEF_CHOICE_10( cSmoothing,                                                                                                                                    //--- ДИСПЛЕЙ - Сглаживание ---
     "Сглаж.",
     "Устанавливает количество точек для расчёта сглаженного по соседним точкам сигнала.",

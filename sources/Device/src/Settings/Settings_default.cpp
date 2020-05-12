@@ -29,7 +29,6 @@ const Settings Settings::defaultSettings =
         DisplayMapping::Lines,      // modeDrawSignal
         ENumAverage::_1,            // ENumAverage
         ENumAccum::_1,              // ENumAccum
-        ModeAccumulation::NoReset,  // modeAccumulation
         ENumSmoothing::Disable,     // ENumSmoothing
         ENumSignalsInSec::_25,      // ENumSignalsInSec
         TypeGrid::_1,               // typeGrid

@@ -6,16 +6,6 @@
 #include "Settings/Settings.h"
 
 
-DEF_CHOICE_2( cEnable,                                                                                                                                 //--- ДИСПЛЕЙ - НАКОПЛЕНИЕ - Режим ---
-    "Режим",
-    "",
-    DISABLE_RU,
-    ENABLE_RU,
-    S_DISP_MODE_ACCUM, &PageDisplay::Accumulation::self, Item::Active, Choice::Changed, Choice::AfterDraw
-)
-
-
-
 DEF_CHOICE_9( cNumber,                                                                                                                            //--- ДИСПЛЕЙ - НАКОПЛЕНИЕ - Количество ---
     "Количество"
     ,
@@ -58,10 +48,9 @@ static bool IsActive_Accum()
     return !OSCI_IN_MODE_RANDOMIZER;
 }
 
-DEF_PAGE_3( pAccum,                                                                                                                           //--- ДИСПЛЕЙ - НАКОПЛЕНИЕ ---
+DEF_PAGE_2( pAccum,                                                                                                                           //--- ДИСПЛЕЙ - НАКОПЛЕНИЕ ---
     "НАКОПЛ",
     "Настройки режима отображения последних сигналов на экране",
-    &cEnable,
     &cNumber,
     &bClear,
     PageName::Display_Accumulation, &PageDisplay::self, IsActive_Accum, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent

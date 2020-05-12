@@ -27,7 +27,8 @@ struct Separator
 // Ќаписать параметры вертикального тракта заданного канала
 static void WriteTextVoltage(Chan::E ch, int x, int y);
 
-static void WriteStringAndNumber(const char *text, int x, int y, int number);
+// ¬ыводит наименование параметра (text) и его числовое (number) значение или символьное (number_c)
+static void WriteStringAndNumber(const char *text, int x, int y, int number, pString number_c = nullptr);
 
 static void DrawTime(int x, int y);
 
@@ -197,7 +198,7 @@ static int DrawMainParameters(int _x, int _y)
 
     if (S_MEM_MODE_WORK_IS_DIR)
     {
-        WriteStringAndNumber("накопл", x, y0 - 4, S_DISP_NUM_ACCUM);
+        WriteStringAndNumber("накопл", x, y0 - 4, 0, ENumAccum::ToString(S_DISP_ENUM_ACCUM));
         WriteStringAndNumber("усредн", x, y1, S_OSCI_NUM_AVERAGE);
         WriteStringAndNumber("сглаж", x, y1 + 6, S_DISP_NUM_SMOOTH);
     }
@@ -238,14 +239,18 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
 }
 
 
-static void WriteStringAndNumber(const char *text, int x, int y, int number)
+static void WriteStringAndNumber(const char *text, int x, int y, int number, pString number_c)
 {
     String(text).Draw(x, y, Color::FILL);
 
     const int SIZE = 100;
     char buffer[SIZE];
 
-    if (number == 0)
+    if (number_c != nullptr)
+    {
+        std::snprintf(buffer, SIZE, "%s", number_c);
+    }
+    else if (number == 0)
     {
         std::snprintf(buffer, SIZE, "-");
     }

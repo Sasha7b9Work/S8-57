@@ -53,8 +53,9 @@ struct ENumAverage
 // Количество накоплений.
 struct ENumAccum
 {
-#define S_DISP_ENUM_ACCUM       (set.disp._enumAccum)
-#define S_DISP_NUM_ACCUM        (1 << S_DISP_ENUM_ACCUM)
+#define S_DISP_ENUM_ACCUM               (set.disp._enumAccum)
+#define S_DISP_NUM_ACCUM                (1 << S_DISP_ENUM_ACCUM)
+#define S_DISP_ENUM_ACCUM_IS_INFINITY   (set.disp._enumAccum == ENumAccum::_Infinity)
 
     enum E
     {
@@ -66,21 +67,11 @@ struct ENumAccum
         _32,
         _64,
         _128,
-        _Infinity
+        _Infinity,
+        Count
     };
-};
 
-
-struct ModeAccumulation
-{
-#define S_DISP_MODE_ACCUM           (set.disp._modeAccumulation)
-#define S_DISP_MODE_ACCUM_IS_RESET  (S_DISP_MODE_ACCUM == ModeAccumulation::Reset)
-
-    enum E
-    {
-        NoReset,   // В этом режиме показываются строго N последних.
-        Reset      // В этом режиме набираются N последних и потом сбрасываются.
-    };
+    static pString ToString(ENumAccum::E v);
 };
 
 
@@ -169,7 +160,6 @@ struct SettingsDisplay
     DisplayMapping::E      _mapping;
     ENumAverage::E         _enumAverage;           // Число усреднений сигнала.
     ENumAccum::E           _enumAccum;             // Число накоплений сигнала на экране.
-    ModeAccumulation::E    _modeAccumulation;      // Режим накопления сигналов.
     ENumSmoothing::E       _enumSmoothing;         // Перечисление количества точек для скользящего фильтра.
     ENumSignalsInSec::E    _enumSignalsInSec;      // Перечисление числа считываний сигнала в секунда.
     TypeGrid::E            _typeGrid;              // Тип сетки
