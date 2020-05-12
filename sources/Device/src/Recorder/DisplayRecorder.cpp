@@ -227,7 +227,7 @@ static void DrawCursors()
 
 static void DrawData()
 {
-    HAL_BUS_CONFIGURE_TO_FSMC;
+    HAL_BUS_CONFIGURE_TO_FSMC();
 
     if(displayed->ContainsChannelA())
     {
@@ -272,7 +272,7 @@ static void DrawChannel(Chan::E ch)
 
             VLine(max - min).Draw(x, min, Color::CHAN[ch]);
 
-            HAL_BUS_SET_MODE_FSMC;
+            HAL_BUS_SET_MODE_FSMC();
         }
 
         point = point->Next(displayed);
@@ -291,6 +291,8 @@ static void DrawSensor()
 static void DrawMemoryWindow()
 {
     static int prevNumPoints = 0;
+
+    HAL_BUS_CONFIGURE_TO_FSMC();
 
     if (Menu::OpenedItem() != PageRecorder::Show::self || displayed->NumPoints() == 0)
     {

@@ -99,7 +99,7 @@ void Record::AddPoints(BitSet16 dataA, BitSet16 dataB)
         return;
     }
 
-    HAL_BUS_CONFIGURE_TO_FSMC;
+    HAL_BUS_CONFIGURE_TO_FSMC();
 
     if(maxPoints)
     {
@@ -130,7 +130,7 @@ void Record::AddMissingPoints()
         BitSet16 b;
 
         BufferMissingPoints::Pop(&a, &b);
-
+         
         AddPoints(a, b);
     }
 }
@@ -140,7 +140,7 @@ void Record::DeleteOldPoints()
 {
     if(numPoints == maxPoints)
     {
-        uint numBytes = bytesOnPoint * static_cast<uint>(numPoints - 1);      // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        uint numBytes = bytesOnPoint * static_cast<uint>(numPoints - 1);      // Столько байт будем перемещать
 
         uint8 *dest = BeginData();
 
@@ -155,7 +155,7 @@ void Record::DeleteOldPoints()
 
 void Record::AddPoint(float value)
 {
-    HAL_BUS_CONFIGURE_TO_FSMC;
+    HAL_BUS_CONFIGURE_TO_FSMC();
 
     if(EXIST_SENS)
     {
@@ -280,7 +280,7 @@ uint8 *Record::Begin() const
 
 uint8 *Record::End() const
 {
-    HAL_BUS_CONFIGURE_TO_FSMC;
+    HAL_BUS_CONFIGURE_TO_FSMC();
 
     return Begin() + sizeof(*this) + bytesOnPoint * numPoints;
 }
@@ -288,7 +288,7 @@ uint8 *Record::End() const
 
 bool Record::IsValid() const
 {
-    HAL_BUS_CONFIGURE_TO_FSMC;
+    HAL_BUS_CONFIGURE_TO_FSMC();
 
     if(Begin() < ExtRAM::Begin() || (End() + 1024) > ExtRAM::End())
     {
@@ -325,7 +325,7 @@ Record *StorageRecorder::LastRecord()
 
 bool StorageRecorder::CreateNewRecord()
 {
-    HAL_BUS_CONFIGURE_TO_FSMC;
+    HAL_BUS_CONFIGURE_TO_FSMC();
 
     if(last)
     {
@@ -371,7 +371,7 @@ void StorageRecorder::Init()
 
 uint StorageRecorder::NumRecords()
 {
-    HAL_BUS_CONFIGURE_TO_FSMC;
+    HAL_BUS_CONFIGURE_TO_FSMC();
 
     const Record *record = reinterpret_cast<Record *>(ExtRAM::Begin());
 

@@ -196,7 +196,7 @@ void HAL_BUS::ConfigureToFSMC()
 
 void HAL_BUS::FPGA::Write16(uint8 *address, uint16 value)
 {
-    HAL_BUS_CONFIGURE_TO_FSMC;
+    HAL_BUS_CONFIGURE_TO_FSMC();
 
     PAUSE_ON_TICKS(100);    // \todo Без этой строки замедлен вывод при включённой оптимизации и TBase >= 0.5мс
 
@@ -209,7 +209,7 @@ void HAL_BUS::FPGA::Write16(uint8 *address, uint16 value)
 
 void HAL_BUS::FPGA::Write8(uint8 *address, uint8 value)
 {
-    HAL_BUS_CONFIGURE_TO_FSMC;
+    HAL_BUS_CONFIGURE_TO_FSMC();
 
     *address = value;
 }
@@ -217,7 +217,7 @@ void HAL_BUS::FPGA::Write8(uint8 *address, uint8 value)
 
 uint8 HAL_BUS::FPGA::Read(const uint8 *address)
 {
-    HAL_BUS_CONFIGURE_TO_FSMC;
+    HAL_BUS_CONFIGURE_TO_FSMC();
 
     return *address;
 }
@@ -228,7 +228,7 @@ void HAL_BUS::FPGA::SetAddrData(uint8 *address0, uint8 *address1)
     addrData0 = address0;
     addrData1 = address1;
 
-    HAL_BUS_CONFIGURE_TO_FSMC;
+    HAL_BUS_CONFIGURE_TO_FSMC();
 }
 
 
