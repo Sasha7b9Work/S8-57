@@ -4,6 +4,7 @@
 #include "Display/Painter.h"
 #include "Display/Primitives.h"
 #include "Display/Warnings.h"
+#include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Include/PageRecorder.h"
@@ -342,7 +343,17 @@ void DisplayRecorder::RecordIcon::Upate(int x, int y)
 {
     if (Recorder::InRecordingMode())
     {
+        static uint timeStart = 0;              // Время начала цикла (зажёгся/потух)
 
+        while (TIME_MS - timeStart >= 1000)
+        {
+            timeStart += 1000;
+        }
+
+        if (TIME_MS - timeStart <= 500)
+        {
+            Circle(6).Fill(x, y, Color::RED);
+        }
     }
     else
     {
