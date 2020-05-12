@@ -135,12 +135,12 @@ struct StorageRecorder
     // Создаёт новую запись для хранения данных в хранилище
     static bool CreateNewRecord();
 
+    // Создаёт запись для "прослушивания".
+    static bool CreateListeningRecord();
+
     // Возвращает указатель на текущую запись
     static Record *LastRecord();
 
     // Возвращает количество сохранённых записей. 0 - последняя, 1 - предпоследняя. Если идёт запись, то в 0-ую заппсь добавляются новые данные
     static uint NumRecords();
-
-    // Возвращает количество свободной памяти
-    static uint FreeMemory();
 };

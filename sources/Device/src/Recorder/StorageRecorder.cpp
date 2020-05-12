@@ -331,6 +331,19 @@ bool StorageRecorder::CreateNewRecord()
 }
 
 
+bool StorageRecorder::CreateListeningRecord()
+{
+    bool result = CreateNewRecord();
+
+    if (result)
+    {
+        LastRecord()->maxPoints = 320;
+    }
+
+    return result;
+}
+
+
 void StorageRecorder::Init()
 {
     ExtRAM::Fill();

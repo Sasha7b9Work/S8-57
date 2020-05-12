@@ -19,7 +19,10 @@ public:
     // true означает, что регистратор находится в режиме записи
     static bool InRecordingMode();
 
-    static void ReadPoint();
+    static void RecordPoints();
+
+    // Начать процесс "прослушивания" входов
+    static void StartListening();
 
     // Где хранятся данные
 #define S_REC_TYPE_MEMORY   (set.rec._typeMemory)

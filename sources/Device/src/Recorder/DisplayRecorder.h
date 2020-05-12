@@ -61,15 +61,6 @@ private:
 
     static char *DeltaTime(char buffer[20]);
 
-    // true, если в данный момент происходит отрисовка
-    static bool inProcessUpdate;
-
-
-    static uint16 posCursor[2];
-
-    // — этой точки начинаетс€ вывод
-    static int startPoint;
-
     // «начок, который показывает, в каком состо€нии сейчас находитс€ регистратор
     struct RecordIcon
     {

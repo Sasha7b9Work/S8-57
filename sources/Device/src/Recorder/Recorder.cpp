@@ -55,14 +55,15 @@ void Recorder::Init()
     mode = Mode::Listening;
 
     initialized = true;
+}
 
-    StorageRecorder::CreateNewRecord();
 
-    StorageRecorder::LastRecord()->maxPoints = 320;
-
+void Recorder::StartListening()
+{
+    StorageRecorder::CreateListeningRecord();
     FPGA::GiveStart(0, 0);
-
     FPGA::ForcedStart();
+    mode = Mode::Listening;
 }
 
 
@@ -85,9 +86,9 @@ void Recorder::Update()
 }
 
 
-void Recorder::ReadPoint()
+void Recorder::RecordPoints()
 {
-    if (InRecordingMode())
+    if (mode == Mode::Listening || mode == Mode::Recording)
     {
         if (HAL_PIO::Read(PIN_P2P))
         {

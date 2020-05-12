@@ -22,12 +22,6 @@ DEF_CHOICE_3( cTypeMemory,                                                      
 )
 
 
-static void OnPress_Clear()
-{
-
-}
-
-
 static bool IsActive_Clear()
 {
     return !Recorder::InRecordingMode();
@@ -37,7 +31,7 @@ static bool IsActive_Clear()
 DEF_BUTTON(bClear,
     "Очистить",
     "",
-    &PageRecorder::self, IsActive_Clear, OnPress_Clear
+    &PageRecorder::self, IsActive_Clear, Recorder::StartListening
 )
 
 
@@ -95,6 +89,8 @@ static void OnOpenClose_Recorder(bool open)
 
     if(open)
     {
+        Recorder::StartListening();
+
 //        FDrive::DeInit();
 //        Sensor::Init();
     }

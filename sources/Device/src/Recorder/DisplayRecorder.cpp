@@ -16,11 +16,9 @@
 #include <cstring>
 
 
-int DisplayRecorder::startPoint = -1;
-
-uint16 DisplayRecorder::posCursor[2] = { 100, 220 };
-
-bool DisplayRecorder::inProcessUpdate = false;
+static int startPoint = -1;                     // С этой точки начинается вывод
+static uint16 posCursor[2] = { 100, 220 };
+static bool inProcessUpdate = false;            // true, если в данный момент происходит отрисовка
 
 
 void DisplayRecorder::Update()
@@ -38,8 +36,6 @@ void DisplayRecorder::Update()
     StorageRecorder::LastRecord()->AddMissingPoints();
 
     DrawSettings(289, 0);
-
-    //DrawSizeMemory(0, 0);
 
     DrawMemoryWindow();
 
