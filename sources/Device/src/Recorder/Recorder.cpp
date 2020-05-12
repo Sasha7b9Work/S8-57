@@ -19,7 +19,17 @@ struct StateOsci
 };
 
 
-static bool inRecordingMode = false;    // Если true - идёт процесс записи точек
+struct Mode
+{
+    enum E
+    {
+        Listening,      // Режим "прослушивания" входов, при котором на экране мы видим то, что подаётся на входы, без сохранения в память  
+        Recording,      // Режим записи, в котором пользователь наблюдает за записываемым сигналом
+        Review          // Режим просмотра
+    };
+};
+
+static Mode::E mode = Mode::Listening;
 static bool initialized = false;        // true, если регистратор был инициализирован
 static StateOsci osci;                  // Сюда сохраним состояние осциллографа в момент перехода в режим регистратора
 
@@ -42,7 +52,7 @@ void Recorder::Init()
     Osci::LoadHoldfOff();
     StorageRecorder::Init();
 
-    inRecordingMode = false;
+    mode = Mode::Listening;
 
     initialized = true;
 
@@ -101,13 +111,13 @@ void Recorder::Start()
 {
     StorageRecorder::CreateNewRecord();
 
-    inRecordingMode = true;
+    mode = Mode::Recording;
 }
 
 
 void Recorder::Stop()
 {
-    inRecordingMode = false;
+    mode = Mode::Review;
 }
 
 
@@ -140,7 +150,7 @@ void Recorder::OnPressStart()
 
     if (Menu::OpenedItem() == const_cast<Page *>(PageRecorder::self))
     {
-        if (inRecordingMode)
+        if (mode == Mode::Recording)
         {
             Stop();
             Keyboard::Unlock();
@@ -161,7 +171,7 @@ void Recorder::OnPressStart()
 
 bool Recorder::InRecordingMode()
 {
-    return inRecordingMode;
+    return (mode == Mode::Recording);
 }
 
 

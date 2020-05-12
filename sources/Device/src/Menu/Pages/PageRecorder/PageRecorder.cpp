@@ -22,6 +22,25 @@ DEF_CHOICE_3( cTypeMemory,                                                      
 )
 
 
+static void OnPress_Clear()
+{
+
+}
+
+
+static bool IsActive_Clear()
+{
+    return !Recorder::InRecordingMode();
+}
+
+
+DEF_BUTTON(bClear,
+    "Очистить",
+    "",
+    &PageRecorder::self, IsActive_Clear, OnPress_Clear
+)
+
+
 static bool IsActive_Start()
 {
     return (S_REC_ENABLED_A || S_REC_ENABLED_B || S_REC_ENABLED_SENSOR);
@@ -57,10 +76,16 @@ static void OnPress_Exit()
 }
 
 
+static bool IsActive_Exit()
+{
+    return !Recorder::InRecordingMode();
+}
+
+
 DEF_BUTTON(bExit,
     "Выход",
     "",
-    &PageRecorder::self, Item::Active, OnPress_Exit
+    &PageRecorder::self, IsActive_Exit, OnPress_Exit
 )
 
 
@@ -85,7 +110,7 @@ DEF_PAGE_5( pRecorder,                                                          
     "Запись и воспроизведение сигналов входов и датчиков",
     PageRecorder::Source::self,
     PageRecorder::Show::self,
-    &Item::empty,
+    &bClear,
     &bStart,
     &bExit,
     PageName::Recorder, &PageFunction::self, Item::Active, Page::NormalTitle, OnOpenClose_Recorder, Page::BeforeDraw, Page::HandlerKeyEvent
