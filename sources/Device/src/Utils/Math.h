@@ -79,7 +79,7 @@ namespace Math
 
     template<class T> T    Min(T x1, T x2);
 
-    template<class T> T    Max(T x1, T x2);
+    //template<class T> T    Max(T x1, T x2);
     // Возвращает максимальное значение из трёх
     template<class T> T    Max(T val1, T val2, T val3);
 

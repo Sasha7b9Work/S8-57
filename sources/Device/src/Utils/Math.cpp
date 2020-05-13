@@ -19,22 +19,22 @@ template int   Math::Sign<int16>(int16);
 template void  Math::CircleIncrease<int8>(int8 *, int8, int8);
 template void  Math::CircleIncrease<uint8>(uint8 *, uint8, uint8);
 template void  Math::CircleIncrease<int16>(int16 *, int16, int16);
-template void  Math::CircleIncrease<uint16>(uint16 *, uint16, uint16);
 template void  Math::CircleIncrease<int>(int *, int, int);
 template void  Math::CircleIncrease<uint>(uint *, uint, uint);
 
 template void  Math::CircleDecrease<int8>(int8 *, int8, int8);
 template void  Math::CircleDecrease<uint8>(uint8 *, uint8, uint8);
 template void  Math::CircleDecrease<int16>(int16 *, int16, int16);
-template void  Math::CircleDecrease<uint16>(uint16 *, uint16, uint16);
 template void  Math::CircleDecrease<int>(int *, int, int);
 
 template int16 Math::Abs<int16>(int16);
 template int   Math::Abs<int>(int);
 
 template void  Math::LimitationIncrease<uint8>(uint8 *, uint8);
+template void  Math::LimitationIncrease<int>(int *, int);
 
 template void  Math::LimitationDecrease<uint8>(uint8 *, uint8);
+template void  Math::LimitationDecrease<int>(int *, int);
 
 template void  Math::Limitation<float>(float *, float, float);
 template void  Math::Limitation<int16>(int16 *, int16, int16);

@@ -20,7 +20,7 @@
 
 static Record *displayed = nullptr;             // Текущая отображаемая запись
 static int startPoint = -1;                     // С этой точки начинается вывод
-static uint16 posCursor[2] = { 100, 220 };
+static int posCursor[2] = { 100, 220 };
 static bool inProcessUpdate = false;            // true, если в данный момент происходит отрисовка
 
 
@@ -60,7 +60,7 @@ static char *VoltageCursor(Chan::E, int, char[20]);
 static char *DeltaTime(char buffer[20]);
 
 // Возвращает указатель на переменную с позицией текущего курсора (0, если курсор для перемещения не выбран)
-static uint16 *CurrentPosCursor();
+static int *CurrentPosCursor();
 
 
 // Значок, который показывает, в каком состоянии сейчас находится регистратор
@@ -371,20 +371,20 @@ void DisplayRecorder::MoveWindowRight()
 
 void DisplayRecorder::MoveCursorLeft()
 {
-    Math::CircleDecrease<uint16>(CurrentPosCursor(), 0, 319);
+    Math::LimitationDecrease(CurrentPosCursor(), 0);
 }
 
 
 void DisplayRecorder::MoveCursorRight()
 {
-    Math::CircleIncrease<uint16>(CurrentPosCursor(), 0, 319);
+    Math::LimitationIncrease(CurrentPosCursor(), 319);
 }
 
 
-static uint16 *CurrentPosCursor()
+static int *CurrentPosCursor()
 {
-    static uint16 nullPos;
-    uint16 *result = &nullPos;
+    static int nullPos;
+    int *result = &nullPos;
 
     if (S_REC_CURSOR_IS_1)      { result = &posCursor[0]; }
     else if (S_REC_CURSOR_IS_2) { result = &posCursor[1]; }
