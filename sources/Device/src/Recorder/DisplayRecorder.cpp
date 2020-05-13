@@ -271,7 +271,14 @@ static void DrawChannel(Chan::E ch)
 
     funcValue func = funcs[ch];
 
-    Point16 *point = (displayed->*func)(numPoints < 320 ? 0 : (numPoints - 320));
+    int index = (numPoints < 320) ? 0 : (numPoints - 320);
+
+    if (startPoint >= 0)
+    {
+        index = startPoint;
+    }
+
+    Point16 *point = (displayed->*func)(index);
 
     for(int x = 0; x < 320; x++)
     {
@@ -427,7 +434,24 @@ void RecordIcon::Upate(int x, int y)
 }
 
 
-void DisplayRecorder::SetDisplayerRecord(Record *record)
+void DisplayRecorder::SetDisplayedRecord(Record *record, bool forListening)
 {
     displayed = record;
+
+    if (forListening)
+    {
+        startPoint = -1;
+    }
+    else
+    {
+        startPoint = 0;
+
+        if (record)
+        {
+            if (record->NumPoints() > 320)
+            {
+                startPoint = record->NumPoints() - 320;
+            }
+        }
+    }
 }

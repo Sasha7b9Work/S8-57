@@ -27,8 +27,7 @@ public:
     static bool InProcessUpdate();
 
     // Установить отображаемую запись
-    static void SetDisplayerRecord(Record *record);
-
+    static void SetDisplayedRecord(Record *record, bool forListening);
 
     struct Cursor
     {

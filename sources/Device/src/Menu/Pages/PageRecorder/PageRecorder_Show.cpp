@@ -87,6 +87,15 @@ static bool HandlerKey_PageShow(const KeyEvent &event)
     return false;
 }
 
+static void OnOpenClose_PageShow(bool open)
+{
+    if (open)
+    {
+        DisplayRecorder::SetDisplayedRecord(StorageRecorder::LastRecord(), false);
+    }
+}
+
+
 DEF_PAGE_5( pShow,                                                                                                                                 //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР ---
     "ПРОСМОТР",
     "Просмотр записанных данных",
@@ -96,7 +105,7 @@ DEF_PAGE_5( pShow,                                                              
     &cSpeed,
     &cCursor,
     //PageRecorder::Show::Cursors::self,
-    PageName::Recorder_Show, &PageRecorder::self, IsActive_PageShow, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, HandlerKey_PageShow
+    PageName::Recorder_Show, &PageRecorder::self, IsActive_PageShow, Page::NormalTitle, OnOpenClose_PageShow, Page::BeforeDraw, HandlerKey_PageShow
 )
 
 const Page * const PageRecorder::Show::self = static_cast<const Page *>(&pShow);
