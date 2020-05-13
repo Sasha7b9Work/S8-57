@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "globals.h"
 #include "log.h"
 #include "device.h"
 #include "FPGA/FPGA.h"
@@ -70,9 +71,6 @@ static Gates gates;             // "Ворота" рандомизатора
 
 int    Osci::addShift = 0;
 void (*Osci::funcStop)() = EmptyFuncVV;
-
-extern bool trig_pulse;
-
 
 static void UpdateFPGA();
 
@@ -225,7 +223,7 @@ static bool ProcessFlagReady()
         if(S_TRIG_START_MODE_IS_SINGLE)
         {
             needStop = true;
-            trig_pulse = false;
+            Trig::pulse = false;
         }
         else
         {
@@ -274,9 +272,17 @@ void Osci::OnChangedPoints()
 }
 
 
-void Osci::OnPressStart()
+void Osci::OnPressButtonStart()
 {
-    return IsRunning() ? Stop() : Start(true);
+    if (IsRunning())
+    {
+        Stop();
+        OsciStateWork::triggered = false;
+    }
+    else
+    {
+        Start(true);
+    }
 }
 
 
@@ -612,4 +618,15 @@ void Gates::CalculateWithoutGates(uint16 *min, uint16 *max)
         *min = static_cast<uint16>(minGate);
         *max = static_cast<uint16>(maxGate);
     }
+}
+
+
+OsciStateWork::E OsciStateWork::Current()
+{
+    if (!Osci::IsRunning())
+    {
+        return OsciStateWork::Stopped;
+    }
+
+    return triggered ? OsciStateWork::Triggered : OsciStateWork::Awaiting;
 }

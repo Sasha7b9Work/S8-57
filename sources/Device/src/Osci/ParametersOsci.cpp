@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "globals.h"
 #include "device.h"
 #include "MessageMgr.h"
 #include "Display/Grid.h"
@@ -136,8 +137,6 @@ const float TShift::absStep[TBase::Count] =
     /* 10 с    */ 10.0F   / 20    // 200e4
 };
 
-
-bool trig_pulse = false;    // Установленное в true значение означает, что нужно выводить значок синхроимпульса
 
 static uint8 ValueForRange(Chan::E ch);
 
@@ -498,7 +497,7 @@ void TrigLevel::Set(Chan::E ch, int16 newLevel)
 
 bool Trig::SyncPulse()
 {
-    return trig_pulse;
+    return Trig::pulse;
 }
 
 

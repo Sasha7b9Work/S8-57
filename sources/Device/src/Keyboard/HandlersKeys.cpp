@@ -365,7 +365,7 @@ static void OnStart()
     }
     else
     {
-        Osci::OnPressStart();
+        Osci::OnPressButtonStart();
     }
 }
 

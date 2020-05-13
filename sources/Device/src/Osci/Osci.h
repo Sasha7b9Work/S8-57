@@ -7,6 +7,21 @@
 #define OSCI_IN_MODE_RANDOMIZER (S_TIME_BASE <= TBase::_50ns)
 
 
+
+namespace OsciStateWork
+{
+    enum E
+    {
+        Stopped,        // Осциллограф в состоянии останова
+        Awaiting,       // Осциллограф в состоянии ожидания синхронизации
+        Triggered       // Синхронизировани
+    };
+
+    OsciStateWork::E Current();
+};
+
+
+
 struct Osci
 {
     friend struct Randomizer;
@@ -16,7 +31,7 @@ struct Osci
 
     static void Update();
 
-    static void OnPressStart();
+    static void OnPressButtonStart();
 
     static void DeInit();
 

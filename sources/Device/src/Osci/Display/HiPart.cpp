@@ -4,6 +4,7 @@
 #include "FPGA/FPGA.h"
 #include "Hardware/HAL/HAL.h"
 #include "Osci/DeviceSettings.h"
+#include "Osci/Osci.h"
 #include "Osci/Reader.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/AutoMeasurements.h"
@@ -357,13 +358,12 @@ void DisplayOsci::HiPart::DrawRightPart(int x0, int y0)
         
         int y = 1;
 
-        if (FPGA::IsRunning())       // Рабочий режим
+        switch (OsciStateWork::Current())
         {
-            Char(Symbol8::PLAY).Draw4SymbolsInRect(x, y);
-        }
-        else
-        {
-            Region(10, 10).Fill(x + 3, y + 3);
+        case OsciStateWork::Stopped:    Region(10, 10).Fill(x + 3, y + 3);              break;
+        case OsciStateWork::Triggered:  Char(Symbol8::PLAY).Draw4SymbolsInRect(x, y);   break;
+        case OsciStateWork::Awaiting:   Region(4, 10).Fill(x + 3, y + 3);
+                                        Region(4, 10).Fill(x + 10, y + 3);              break;
         }
     }
 }

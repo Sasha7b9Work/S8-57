@@ -1,13 +1,11 @@
 #include "defines.h"
+#include "globals.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 
 
 static uint timeFireTrig = 0;   // Время зажигания лампочки синхронизации
-
-extern bool trig_pulse;
-
 
 void FPGA::ReadFlag()
 {
@@ -16,12 +14,13 @@ void FPGA::ReadFlag()
     if (flag.TrigReady() && !forcedStart)
     {
         timeFireTrig = TIME_MS;
-        trig_pulse = true;
+        Trig::pulse = true;
+        OsciStateWork::triggered = true;
     }
 
     if(!flag.TrigReady() && TIME_MS - timeFireTrig > 1000)
     {
-        trig_pulse = false;
+        Trig::pulse = false;
     }
 
     FreqMeter::Update();
