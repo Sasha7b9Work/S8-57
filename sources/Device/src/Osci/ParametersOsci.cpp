@@ -24,7 +24,6 @@
 static const int deltaPoint[TBase::Count] = { 50, 20, 10,  5,   2 };
 
 
-
 static const int voltsInPixelInt[] =   // Коэффициент 20000
 {
     2,      // 2
@@ -138,9 +137,7 @@ const float TShift::absStep[TBase::Count] =
 };
 
 
-// Установленное в true значение означает, что нужно выводить значок синхроимпульса
-bool Trig::pulse = false;
-
+bool trig_pulse = false;    // Установленное в true значение означает, что нужно выводить значок синхроимпульса
 
 static uint8 ValueForRange(Chan::E ch);
 
@@ -501,7 +498,7 @@ void TrigLevel::Set(Chan::E ch, int16 newLevel)
 
 bool Trig::SyncPulse()
 {
-    return pulse;
+    return trig_pulse;
 }
 
 

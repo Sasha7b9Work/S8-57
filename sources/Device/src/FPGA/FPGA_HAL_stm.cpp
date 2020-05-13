@@ -4,8 +4,9 @@
 #include "Hardware/HAL/HAL.h"
 
 
-// Время зажигания лампочки синхронизации
-static uint timeFireTrig = 0;
+static uint timeFireTrig = 0;   // Время зажигания лампочки синхронизации
+
+extern bool trig_pulse;
 
 
 void FPGA::ReadFlag()
@@ -15,12 +16,12 @@ void FPGA::ReadFlag()
     if (flag.TrigReady() && !forcedStart)
     {
         timeFireTrig = TIME_MS;
-        Trig::pulse = true;
+        trig_pulse = true;
     }
 
     if(!flag.TrigReady() && TIME_MS - timeFireTrig > 1000)
     {
-        Trig::pulse = false;
+        trig_pulse = false;
     }
 
     FreqMeter::Update();

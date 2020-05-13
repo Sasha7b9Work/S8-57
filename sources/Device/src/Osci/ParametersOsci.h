@@ -249,8 +249,6 @@ struct Trig
 {
     // Возвращает true в случае наличия синхроимпульса
     static bool SyncPulse();
-
-    static bool pulse;
 };
 
 struct TrigLevel

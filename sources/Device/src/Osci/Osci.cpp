@@ -65,11 +65,13 @@ private:
 static RandShift randShift;
 StructReadRand RandShift::structRand = { 0, 0 };
 
-static Gates gates; // "Ворота" рандомизатора
+static Gates gates;             // "Ворота" рандомизатора
 
 
 int    Osci::addShift = 0;
 void (*Osci::funcStop)() = EmptyFuncVV;
+
+extern bool trig_pulse;
 
 
 static void UpdateFPGA();
@@ -223,7 +225,7 @@ static bool ProcessFlagReady()
         if(S_TRIG_START_MODE_IS_SINGLE)
         {
             needStop = true;
-            Trig::pulse = false;
+            trig_pulse = false;
         }
         else
         {
