@@ -4,6 +4,7 @@
 #include "FPGA/FPGA.h"
 #include "Osci/Osci.h"
 #include "Osci/Reader.h"
+#include "Osci/Math/OsciMath.h"
 #include "Settings/Settings.h"
 #include "Settings/SettingsNRST.h"
 #include <cstring>

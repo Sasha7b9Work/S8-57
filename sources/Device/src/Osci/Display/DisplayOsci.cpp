@@ -199,7 +199,7 @@ void DisplayOsci::DrawingValueParameter::Draw()
 }
 
 
-void DisplayOsci::DrawingValueParameter::DrawBoundedText(int y, String *text, Color color)
+void DisplayOsci::DrawingValueParameter::DrawBoundedText(int y, const String *text, Color color)
 {
     int length = DFont::GetLengthText(text->c_str()) + 6;
     int x = Grid::Left() + Grid::Width() / 2 - length / 2;

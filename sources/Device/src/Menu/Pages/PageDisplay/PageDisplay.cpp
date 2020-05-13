@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Menu/Pages/Include/PageDisplay.h"
 #include "Osci/Osci.h"
+#include "Osci/Math/OsciMath.h"
 #include "Settings/Settings.h"
 
 

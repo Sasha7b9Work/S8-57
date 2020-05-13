@@ -621,7 +621,7 @@ static void ReadRow(uint8 row, uint8 pixels[320])
 }
 
 
-bool FDrive::ExistFile(const char *fullPath, char *fileName)
+bool FDrive::ExistFile(const char *fullPath, const char *fileName)
 {
     int numDirs = 0;
     int numFiles = 0;

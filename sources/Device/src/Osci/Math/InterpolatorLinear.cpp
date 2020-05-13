@@ -5,6 +5,7 @@
 #include "Hardware/Timer.h"
 #include "Osci/DeviceSettings.h"
 #include "Osci/Osci.h"
+#include "Osci/Math/OsciMath.h"
 
 
 static uint8 *begin = nullptr;  // Начало обрабатываемых данных
@@ -107,7 +108,7 @@ static void InterpolateSegment(Segment *segment)
 }
 
 
-void Interpolator::Run(DataSettings *ds)
+void InterpolatorLinear::Run(DataSettings *ds)
 {
     if(ds->enableA)
     {

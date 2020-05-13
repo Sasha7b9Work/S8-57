@@ -12,6 +12,7 @@
 #include "Osci/Osci.h"
 #include "Osci/Reader.h"
 #include "Osci/Display/DisplayOsci.h"
+#include "Osci/Math/OsciMath.h"
 #include "Osci/Measurements/AutoMeasurements.h"
 #include "Settings/SettingsNRST.h"
 #include "Utils/Math.h"
@@ -182,7 +183,7 @@ static void UpdateFPGA()
 
     if(OSCI_IN_MODE_RANDOMIZER)
     {
-        Interpolator::Run(RAM::Get());
+        InterpolatorLinear::Run(RAM::Get());
     }
 
     ds = RAM::Get();

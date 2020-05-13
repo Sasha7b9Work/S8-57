@@ -1648,9 +1648,19 @@
               <FilePath>.\src\Osci\Math\Averager.cpp</FilePath>
             </File>
             <File>
-              <FileName>Interpolator.cpp</FileName>
+              <FileName>InterpolatorLinear.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Osci\Math\Interpolator.cpp</FilePath>
+              <FilePath>.\src\Osci\Math\InterpolatorLinear.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InterpolatorSinX_X.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Math\InterpolatorSinX_X.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>OsciMath.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Osci\Math\OsciMath.h</FilePath>
             </File>
           </Files>
         </Group>
