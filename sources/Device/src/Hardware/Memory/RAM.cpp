@@ -171,7 +171,10 @@ void RAM::Init()
 
 DataSettings *RAM::PrepareForNewData()
 {
-    if(OSCI_IN_MODE_RANDOMIZER && (NumberDatas() != 0) && !needNewFrame)
+    if(OSCI_IN_MODE_RANDOMIZER &&           // В рандомизаторе иногда будем возвращать указатель на последние считанные данные
+       (NumberDatas() != 0) &&              // Но только если в хранилище они есть
+       !needNewFrame &&                     // И если прямо не заявлено подготовить новый фрейм
+       !S_TRIG_START_MODE_IS_SINGLE)        // И если не находимся в режиме однократного запуска
     {
         return Get();
     }
@@ -197,7 +200,10 @@ DataSettings *RAM::PrepareForNewData()
 
     result->timeMS = TIME_MS;
 
-    if(OSCI_IN_MODE_RANDOMIZER && (NumberDatas() != 0))
+    if(OSCI_IN_MODE_RANDOMIZER && 
+       (NumberDatas() != 0) &&
+       !S_TRIG_START_MODE_IS_SINGLE
+       )
     {
         if(result->IsEquals(*Get(1)))
         {

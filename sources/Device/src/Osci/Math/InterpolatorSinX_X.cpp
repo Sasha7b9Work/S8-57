@@ -1,4 +1,7 @@
 #include "defines.h"
+#include "log.h"
+#include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
 #include "Osci/DeviceSettings.h"
 #include "Osci/Math/OsciMath.h"
 #include "Utils/Math.h"
@@ -11,6 +14,10 @@ static void InterpolateChannel(uint8 *data, int numPoints, uint tBase);
 
 void InterpolatorSinX_X::Run(DataSettings *ds)
 {
+    HAL_BUS_CONFIGURE_TO_FSMC();
+
+    uint start = TIME_MS;
+
     int numPoints = ds->PointsInChannel();
 
     if (ds->enableA)
@@ -22,6 +29,8 @@ void InterpolatorSinX_X::Run(DataSettings *ds)
     {
         InterpolateChannel(ds->dataB, numPoints, ds->tBase);
     }
+
+    LOG_WRITE("%d ms", TIME_MS - start);
 }
 
 

@@ -10,6 +10,17 @@
 #include "Osci/Osci.h"
 
 
+bool SampleType::IsReal()
+{
+    if (S_TRIG_START_MODE_IS_SINGLE)
+    {
+        return true;
+    }
+
+    return (S_RAND_SAMPLE_TYPE == SampleType::Real);
+}
+
+
 int TPos::PosX()
 {
     int x[] = { Grid::Left(), (Grid::Right() - Grid::Left()) / 2 + Grid::Left(), Grid::Right() };
@@ -122,14 +133,14 @@ DEF_CHOICE_2( cShiftXtype,                                                      
     S_LINKING_TSHIFT, &PageTime::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
-DEF_PAGE_4( pTime,                                                                                                                                                        //--- РАЗВЕРТКА ---
+DEF_PAGE_3( pTime,                                                                                                                                                        //--- РАЗВЕРТКА ---
     "РАЗВ",
     "Содержит настройки развёртки",
-    &cSample,
     &cPeakDet,
+    &cSample,
     &cTPos,
-    //&cDivRole,
-    &cShiftXtype,
+//  &cDivRole,
+//  &cShiftXtype,
     PageName::Time, nullptr, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 

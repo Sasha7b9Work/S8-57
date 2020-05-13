@@ -39,8 +39,8 @@ struct TPos
 
 
 // Тип выборки для режима рандомизатора.
-#define S_RAND_SAMPLE_TYPE      (set.time._sampleType)
-#define S_RAND_SAMPLE_TYPE_OLD  (set.time._sampleTypeOld)
+#define S_RAND_SAMPLE_TYPE              (set.time._sampleType)
+#define S_RAND_SAMPLE_TYPE_OLD          (set.time._sampleTypeOld)
 struct SampleType
 {
     enum E
@@ -48,6 +48,9 @@ struct SampleType
         Real,    // реальное время - в построении участвуют только реально считанные точки, ничего не рассчитывается.
         Equal    // эквивалентная - сигнал строится по последним точкам, полученным от рандомизатора.
     };
+
+    // Сделано отдельной функцией потому, что при однократном запуске в рандомизаторе может быть только Real
+    static bool IsReal();
 };
 
 

@@ -155,7 +155,7 @@ void Osci::Update()
 
 static void UpdateFPGA()
 {
-    int number = OSCI_IN_MODE_RANDOMIZER ? TBase::DeltaPoint() : 1;
+    int number = (OSCI_IN_MODE_RANDOMIZER && !SampleType::IsReal()) ? TBase::DeltaPoint() : 1;
 
     RAM::NewFrameForRandomize();
 
@@ -181,7 +181,7 @@ static void UpdateFPGA()
         }
     }
 
-    if(OSCI_IN_MODE_RANDOMIZER)
+    if(OSCI_IN_MODE_RANDOMIZER && !SampleType::IsReal())
     {
         InterpolatorLinear::Run(RAM::Get());
     }
@@ -382,6 +382,10 @@ void Osci::ReadData()
     {
         if(ReadDataChannel(ChanB, ds->dataB))
         {
+            if (SampleType::IsReal())
+            {
+                InterpolatorSinX_X::Run(ds);
+            }
         }
     }
 }
