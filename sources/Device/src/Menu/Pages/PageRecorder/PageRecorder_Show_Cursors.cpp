@@ -5,12 +5,13 @@
 #include "Settings/Settings.h"
 
 
-DEF_CHOICE_2(cChoice,
+DEF_CHOICE_3(cChoice,
     "Курсор",
     "Выбор курсора",
+    "Не выбран",
     "1",
     "2",
-    S_REC_CURRENT_CURSOR, &PageRecorder::Show::Cursors::self, Choice::Active, Choice::Changed, Choice::AfterDraw
+    S_REC_CURSOR, &PageRecorder::Show::Cursors::self, Choice::Active, Choice::Changed, Choice::AfterDraw
 )
 
 

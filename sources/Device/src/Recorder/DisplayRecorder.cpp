@@ -11,6 +11,7 @@
 #include "Recorder/DisplayRecorder.h"
 #include "Recorder/StorageRecorder.h"
 #include "Settings/Settings.h"
+#include "Utils/Math.h"
 #include "Utils/Values.h"
 #include <cmath>
 #include <cstring>
@@ -23,7 +24,10 @@ static uint16 posCursor[2] = { 100, 220 };
 static bool inProcessUpdate = false;            // true, если в данный момент происходит отрисовка
 
 
-    // »зобразить установленные настройки
+DisplayRecorder::SpeedWindow::E DisplayRecorder::speed = DisplayRecorder::SpeedWindow::_1Window;
+
+
+// »зобразить установленные настройки
 static void DrawSettings(int x, int y);
 
 // ќтобразить данные
@@ -55,6 +59,10 @@ static char *VoltageCursor(Chan::E, int, char[20]);
 
 static char *DeltaTime(char buffer[20]);
 
+// ¬озвращает указатель на переменную с позицией текущего курсора (0, если курсор дл€ перемещени€ не выбран)
+static uint16 *CurrentPosCursor();
+
+
 // «начок, который показывает, в каком состо€нии сейчас находитс€ регистратор
 struct RecordIcon
 {
@@ -70,7 +78,7 @@ void DisplayRecorder::Update()
 
     inProcessUpdate = true;
 
-    DrawData(startPoint);
+    DrawData();
 
     inProcessUpdate = false;
 
@@ -227,7 +235,7 @@ static void DrawCursors()
 }
 
 
-static void DrawData(int start)
+static void DrawData()
 {
     HAL_BUS_CONFIGURE_TO_FSMC();
 
@@ -363,11 +371,25 @@ void DisplayRecorder::MoveWindowRight()
 
 void DisplayRecorder::MoveCursorLeft()
 {
+    Math::CircleDecrease<uint16>(CurrentPosCursor(), 0, 319);
 }
 
 
 void DisplayRecorder::MoveCursorRight()
 {
+    Math::CircleIncrease<uint16>(CurrentPosCursor(), 0, 319);
+}
+
+
+static uint16 *CurrentPosCursor()
+{
+    static uint16 nullPos;
+    uint16 *result = &nullPos;
+
+    if (S_REC_CURSOR_IS_1)      { result = &posCursor[0]; }
+    else if (S_REC_CURSOR_IS_2) { result = &posCursor[1]; }
+
+    return result;
 }
 
 

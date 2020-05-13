@@ -28,4 +28,29 @@ public:
 
     // Установить отображаемую запись
     static void SetDisplayerRecord(Record *record);
+
+
+    struct Cursor
+    {
+        enum E
+        {
+            None,
+            _1,
+            _2
+        };
+    };
+
+
+    // Скорость перемещения окна по памяти в режиме просмотра
+    struct SpeedWindow
+    {
+        enum E
+        {
+            Cell,           // 1 клетка
+            _1Window,       // 1 окно
+            _10Windows      // 10 окон
+        };
+    };
+
+    static SpeedWindow::E speed;
 };

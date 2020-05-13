@@ -38,6 +38,26 @@ DEF_GRAPH_BUTTON( bScreenLeft,                                                  
 )
 
 
+DEF_CHOICE_3( cSpeed,
+    "Скорость",
+    "Выбор скорости перемещения экрана",
+    "1 клетка",
+    "1 экран",
+    "10 экранов",
+    DisplayRecorder::speed, &PageRecorder::Show::self, Item::Active, Choice::Changed, Choice::AfterDraw
+)
+
+
+DEF_CHOICE_3( cCursor,
+    "Курсор",
+    "Выбор курсора",
+    "Не выбран",
+    "1",
+    "2",
+    S_REC_CURSOR, &PageRecorder::Show::self, Choice::Active, Choice::Changed, Choice::AfterDraw
+)
+
+
 static bool IsActive_PageShow()
 {
     return !Recorder::InRecordingMode();
@@ -45,6 +65,11 @@ static bool IsActive_PageShow()
 
 static bool HandlerKey_PageShow(const KeyEvent &event)
 {
+    if (S_REC_CURSOR_IS_NONE)
+    {
+        return false;
+    }
+
     if (event.IsPress() || event.IsRepeat())
     {
         if (event.IsArrowLeft())
@@ -62,12 +87,14 @@ static bool HandlerKey_PageShow(const KeyEvent &event)
     return false;
 }
 
-DEF_PAGE_4( pShow,                                                                                                                                 //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР ---
+DEF_PAGE_6( pShow,                                                                                                                                 //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР ---
     "ПРОСМОТР",
     "Просмотр записанных данных",
     PageRecorder::Show::Choice::self,
     &bScreenLeft,
     &bScreenRight,
+    &cSpeed,
+    &cCursor,
     PageRecorder::Show::Cursors::self,
     PageName::Recorder_Show, &PageRecorder::self, IsActive_PageShow, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, HandlerKey_PageShow
 )
