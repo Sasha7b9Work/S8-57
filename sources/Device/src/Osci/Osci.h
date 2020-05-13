@@ -53,10 +53,7 @@ struct Osci
     
     // Ёту функцию нужно вызывать при изменении режима запуска
     static void ChangedTrigStartMode();
-    
-    // Ёту функцию нужно вызывать при изменении TBase
-    static void ChangedTBase();
-    
+      
     // ќчистка данных рандомизатора при переключении режимов
     static void ClearDataRand();
 
@@ -80,14 +77,6 @@ struct Osci
     static void ProcessFlagPred();
 
 private:
-
-    // ‘ункции стопа
-    static void (*funcStop)();
-    static void StopNormal();
-    static void StopWaitP2P();
-    static void StopSingleP2P();
-
-    static void SetFunctionsStartStop();
 
     // „итать данные канала в пам€ить data
     static bool ReadDataChannel(Chan::E ch, uint8 *data);

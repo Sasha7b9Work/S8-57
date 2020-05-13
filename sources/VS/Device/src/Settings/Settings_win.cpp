@@ -20,7 +20,7 @@ void Settings::Load(bool _default)
         Reset();
         Osci::Init();
         Menu::Init();
-        Osci::OnPressStart();
+        Osci::OnPressButtonStart();
     }
 }
 

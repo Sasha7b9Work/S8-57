@@ -65,12 +65,9 @@ private:
 
 static RandShift randShift;
 StructReadRand RandShift::structRand = { 0, 0 };
-
 static Gates gates;             // "Ворота" рандомизатора
-
-
 int    Osci::addShift = 0;
-void (*Osci::funcStop)() = EmptyFuncVV;
+
 
 static void UpdateFPGA();
 
@@ -116,6 +113,12 @@ void Osci::Start(bool)
     FPGA::GiveStart(FPGA::pred, FPGA::post);
 
     FPGA::isRunning = true;
+}
+
+
+void Osci::Stop()
+{
+    FPGA::isRunning = false;
 }
 
 
@@ -236,12 +239,6 @@ static bool ProcessFlagReady()
 }
 
 
-void Osci::Stop()
-{
-    funcStop();
-}
-
-
 bool Osci::IsRunning()
 {
     return FPGA::IsRunning();
@@ -286,17 +283,9 @@ void Osci::OnPressButtonStart()
 }
 
 
-void Osci::ChangedTBase()
-{
-    SetFunctionsStartStop();
-}
-
-
 void Osci::ChangedTrigStartMode()
 {
     Stop();
-
-    SetFunctionsStartStop();
 
     if(!S_TRIG_START_MODE_IS_SINGLE)
     {
@@ -318,41 +307,6 @@ void Osci::ChangedTrigStartMode()
             S_RAND_SAMPLE_TYPE = S_RAND_SAMPLE_TYPE_OLD;
         }
     }
-}
-
-
-void Osci::SetFunctionsStartStop()
-{
-    static const pFuncVV stop[2][TrigStartMode::Count] =
-    {
-        //  Auto        Wait         Single
-        { StopNormal, StopNormal,  StopNormal    },        // Normal mode
-        { StopNormal, StopWaitP2P, StopSingleP2P }         // P2P mode
-    };
-
-    int index = OSCI_IN_MODE_P2P ? 1 : 0;
-
-    //funcStart = start[index][TrigStartMode()];
-
-    funcStop = stop[index][S_TRIG_START_MODE];
-}
-
-
-void Osci::StopNormal()
-{
-    FPGA::isRunning = false;
-}
-
-
-void Osci::StopWaitP2P()
-{
-
-}
-
-
-void Osci::StopSingleP2P()
-{
-
 }
 
 

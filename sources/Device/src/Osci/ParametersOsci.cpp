@@ -294,8 +294,6 @@ void TBase::Set(TBase::E base)
 
     MessageMgr::OsciSettingsEffectOnAverageChanged();
 
-    Osci::ChangedTBase();
-
     DisplayOsci::DrawingValueParameter::Enable(DisplayOsci::DrawingValueParameter::TBase);
 }
 
