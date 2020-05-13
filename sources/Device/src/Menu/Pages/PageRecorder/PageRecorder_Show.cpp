@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Display/Symbols.h"
 #include "Display/Primitives.h"
+#include "Hardware/HAL/HAL.h"
 #include "Menu/Pages/Include/PageRecorder.h"
 #include "Recorder/Recorder.h"
 #include "Recorder/DisplayRecorder.h"
@@ -91,6 +92,7 @@ static void OnOpenClose_PageShow(bool open)
 {
     if (open)
     {
+        HAL_BUS_CONFIGURE_TO_FSMC();
         DisplayRecorder::SetDisplayedRecord(StorageRecorder::LastRecord(), false);
     }
 }

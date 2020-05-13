@@ -288,9 +288,9 @@ static void DrawChannel(Chan::E ch)
             int max = Y(point->max);
 
             VLine(max - min).Draw(x, min, Color::CHAN[ch]);
-
-            HAL_BUS_SET_MODE_FSMC();
         }
+
+        HAL_BUS_CONFIGURE_TO_FSMC();
 
         point = point->Next(displayed);
     };
@@ -319,11 +319,6 @@ static void DrawMemoryWindow()
     if (prevNumPoints != numPoints)
     {
         prevNumPoints = numPoints;
-        startPoint = numPoints - 319;
-        if (startPoint < 0)
-        {
-            startPoint = 0;
-        }
     }
 
     Region(319, 5).DrawBounded(0, 3, Color::BACK, Color::FILL);
@@ -436,6 +431,8 @@ void RecordIcon::Upate(int x, int y)
 
 void DisplayRecorder::SetDisplayedRecord(Record *record, bool forListening)
 {
+    HAL_BUS_CONFIGURE_TO_FSMC();
+
     displayed = record;
 
     if (forListening)
@@ -446,11 +443,11 @@ void DisplayRecorder::SetDisplayedRecord(Record *record, bool forListening)
     {
         startPoint = 0;
 
-        if (record)
+        if (displayed)
         {
-            if (record->NumPoints() > 320)
+            if (displayed->NumPoints() > 320)
             {
-                startPoint = record->NumPoints() - 320;
+                startPoint = displayed->NumPoints() - 320;
             }
         }
     }
