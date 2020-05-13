@@ -1553,11 +1553,6 @@
           <GroupName>Osci</GroupName>
           <Files>
             <File>
-              <FileName>AveragerOsci.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\AveragerOsci.cpp</FilePath>
-            </File>
-            <File>
               <FileName>DeviceSettings.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Osci\DeviceSettings.h</FilePath>
@@ -1566,11 +1561,6 @@
               <FileName>DeviceSettings.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\DeviceSettings.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Interpolator.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\Interpolator.cpp</FilePath>
             </File>
             <File>
               <FileName>Osci.h</FileName>
@@ -1646,6 +1636,21 @@
               <FileName>PainterData.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\Display\PainterData.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Osci/Math</GroupName>
+          <Files>
+            <File>
+              <FileName>Averager.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Math\Averager.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Interpolator.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Math\Interpolator.cpp</FilePath>
             </File>
           </Files>
         </Group>

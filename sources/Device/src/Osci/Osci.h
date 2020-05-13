@@ -103,6 +103,13 @@ public:
 };
 
 
+class InterpolatorSinX_X
+{
+public:
+    static void Run(DataSettings *ds);
+};
+
+
 class Roller
 {
 public:
