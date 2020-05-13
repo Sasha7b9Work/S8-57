@@ -24,7 +24,7 @@ static int posCursor[2] = { 100, 220 };
 static bool inProcessUpdate = false;            // true, если в данный момент происходит отрисовка
 
 
-DisplayRecorder::SpeedWindow::E DisplayRecorder::speed = DisplayRecorder::SpeedWindow::_1Window;
+DisplayRecorder::SpeedWindow DisplayRecorder::speed = DisplayRecorder::SpeedWindow::_1Window;
 
 
 // Изобразить установленные настройки
@@ -343,12 +343,15 @@ static void DrawMemoryWindow()
 
 void DisplayRecorder::MoveWindowLeft()
 {
+    HAL_BUS_CONFIGURE_TO_FSMC();
+
     if (displayed->NumPoints() < 321)
     {
         return;
     }
 
-    startPoint -= 320;
+    startPoint -= speed.NumPoints();
+
     if (startPoint < 0)
     {
         startPoint = 0;
@@ -358,12 +361,15 @@ void DisplayRecorder::MoveWindowLeft()
 
 void DisplayRecorder::MoveWindowRight()
 {
+    HAL_BUS_CONFIGURE_TO_FSMC();
+
     if (displayed->NumPoints() < 321)
     {
         return;
     }
 
-    startPoint += 320;
+    startPoint += speed.NumPoints();
+
     if (startPoint > static_cast<int>(displayed->NumPoints() - 320))
     {
         startPoint = static_cast<int>(displayed->NumPoints() - 320);
@@ -451,4 +457,12 @@ void DisplayRecorder::SetDisplayedRecord(Record *record, bool forListening)
             }
         }
     }
+}
+
+
+int DisplayRecorder::SpeedWindow::NumPoints() const
+{
+    static const int nums[3] = { 20, 320, 320 * 10 };
+
+    return nums[value];
 }

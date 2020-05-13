@@ -48,8 +48,12 @@ public:
             Cell,           // 1 клетка
             _1Window,       // 1 окно
             _10Windows      // 10 окон
-        };
+        } value;
+
+        SpeedWindow(E v) : value(v)  { }
+
+        int NumPoints() const;      // ¬озвращает число точек, на которое нужно сдвинуть экран
     };
 
-    static SpeedWindow::E speed;
+    static SpeedWindow speed;
 };
