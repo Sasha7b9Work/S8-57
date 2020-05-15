@@ -538,10 +538,6 @@ void Math::Limitation(T *value, T min, T max)
     {
         *value = max;
     }
-    else
-    {
-        // значения совпадают - ничего не делаем
-    }
 }
 
 

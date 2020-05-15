@@ -364,10 +364,6 @@ bool PageCursorsMeasures::Set::HandlerKey(const KeyEvent &event) //-V2506
         
         return true;
     }
-    else
-    {
-        // ничего не делаем
-    }
 
     Beeper::RegulatorShiftRotate();
 
