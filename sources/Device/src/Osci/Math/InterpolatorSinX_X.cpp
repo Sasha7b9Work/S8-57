@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Osci/DeviceSettings.h"
@@ -29,8 +28,6 @@ void InterpolatorSinX_X::Run(DataSettings *ds)
     {
         InterpolateChannel(ds->dataB, numPoints, ds->tBase);
     }
-
-    LOG_WRITE("%d ms", TIME_MS - start);
 }
 
 

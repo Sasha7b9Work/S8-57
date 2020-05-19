@@ -12,6 +12,11 @@
 
 bool SampleType::IsReal()
 {
+    if (!OSCI_IN_MODE_RANDOMIZER)
+    {
+        return false; 
+    }
+
     if (S_TRIG_START_MODE_IS_SINGLE)
     {
         return true;
