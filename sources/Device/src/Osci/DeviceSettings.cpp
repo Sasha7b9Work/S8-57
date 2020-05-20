@@ -161,3 +161,17 @@ void DataSettings::CopyDataFrom(const DataSettings *source)
         std::memcpy(dataB, source->dataB, static_cast<uint>(numBytes));
     }
 }
+
+
+void DataSettings::Clear()
+{
+    if (enableA)
+    {
+        std::memset(dataA, VALUE::NONE, static_cast<uint>(BytesInChannel()));
+    }
+
+    if (enableB)
+    {
+        std::memset(dataB, VALUE::NONE, static_cast<uint>(BytesInChannel()));
+    }
+}

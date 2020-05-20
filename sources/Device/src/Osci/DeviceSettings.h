@@ -71,10 +71,13 @@ struct DataSettings
     
     // Копировать данные из source с проверкой безопасности
     void CopyDataFrom(const DataSettings *source);
+
+    // Забить значениями VALUE::AVE
+    void Clear();
 };
 
 
-#define DATA(ds, ch)         (((ch) == ChanA) ? (ds)->dataA : (ds)->dataB)
+#define DATA(ds, ch)            (((ch) == ChanA) ? (ds)->dataA : (ds)->dataB)
 
 #define Lval_ENABLED_A(ds)      ((ds)->enableA)
 #define Lval_ENABLED_B(ds)      ((ds)->enableB)
