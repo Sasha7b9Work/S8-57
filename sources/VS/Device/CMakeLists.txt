@@ -73,6 +73,7 @@ source_group(Menu\\Pages\\PageService\\PageDebug        REGULAR_EXPRESSION src/M
 source_group(Menu\\Pages\\PageTrig                      REGULAR_EXPRESSION src/Menu/Pages/PageTrig/*)
 source_group(Multimeter                                 REGULAR_EXPRESSION src/Multimeter/*)
 source_group(Osci\\Display                              REGULAR_EXPRESSION src/Osci/Display/*)
+source_group(Osci\\Math                                 REGULAR_EXPRESSION src/Osci/Math/*)
 source_group(Osci\\Measurements\\                       REGULAR_EXPRESSION src/Osci/Measurements/*)
 source_group(SCPI                                       REGULAR_EXPRESSION src/SCPI/*)
 source_group(Test                                       REGULAR_EXPRESSION src/Test/*)
@@ -82,6 +83,8 @@ source_group(src                FILES   ../../Device/src/defines.h
                                         ../../Device/src/defines.cpp
                                         ../../Device/src/device.h
                                         ../../Device/src/device.cpp
+                                        ../../Device/src/globals.h
+                                        ../../Device/src/globals.cpp
                                         ../../Device/src/log.h
                                                      src/log_win.cpp
                                                      src/main_win.cpp
@@ -364,12 +367,12 @@ file(GLOB SOURCES   ../../common/_VS/*
 
                     ../../Device/src/Multimeter/*
 
-                    ../../Device/src/Osci/AveragerOsci.cpp
+                    ../../Device/src/Osci/Math/*
+
                     ../../Device/src/Osci/DeviceSettings.h
                     ../../Device/src/Osci/DeviceSettings.cpp
                     ../../Device/src/Osci/FreqMeter.h
                     ../../Device/src/Osci/FreqMeter.cpp
-                    ../../Device/src/Osci/Interpolator.cpp
                     ../../Device/src/Osci/Osci.h
                     ../../Device/src/Osci/Osci.cpp
                     ../../Device/src/Osci/ParametersOsci.h
@@ -412,6 +415,8 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/defines.cpp
                     ../../Device/src/device.h
                     ../../Device/src/device.cpp
+                    ../../Device/src/globals.h
+                    ../../Device/src/globals.cpp
                     ../../Device/src/log.h
                                  src/log_win.cpp
                                  src/main_win.cpp

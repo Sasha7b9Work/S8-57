@@ -43,7 +43,7 @@ void HAL_IWDG::Init()
     //                      = freqLSI / 8
 
     handleIWDG.Init.Prescaler = IWDG_PRESCALER_128;
-    handleIWDG.Init.Reload = freqLSI / 64;
+    handleIWDG.Init.Reload = freqLSI / 32;
 
     if(HAL_IWDG_Init(&handleIWDG) != HAL_OK)
     {

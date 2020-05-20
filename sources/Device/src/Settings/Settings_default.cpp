@@ -29,7 +29,6 @@ const Settings Settings::defaultSettings =
         DisplayMapping::Lines,      // modeDrawSignal
         ENumAverage::_1,            // ENumAverage
         ENumAccum::_1,              // ENumAccum
-        ModeAccumulation::NoReset,  // modeAccumulation
         ENumSmoothing::Disable,     // ENumSmoothing
         ENumSignalsInSec::_25,      // ENumSignalsInSec
         TypeGrid::_1,               // typeGrid
@@ -79,10 +78,9 @@ const Settings Settings::defaultSettings =
         TBase::_5ms,                // base
         PeakDetMode::Disabled,      // peakDet
         TPos::Center,               // TPos
-        SampleType::Real,           // sampleType
+        SampleType::Equal,          // sampleType
         FunctionTime::Time,         // timeDivXPos
-        LinkingTShift::Time,        // linkingTShift
-        SampleType::Real            // sampleTypeOld
+        LinkingTShift::Time         // linkingTShift
     },
 
     // Ìåíþ ÏÀÌßÒÜ
@@ -198,7 +196,7 @@ const Settings Settings::defaultSettings =
         Recorder::Axis::X,              // axisMove
         Recorder::Axis::X,              // axisZoom
         Recorder::ScaleX::_100ms,       // scaleX
-        0                               // currentCursor
+        DisplayRecorder::Cursor::None   // currentCursor
     },
 
     // Ìåíþ ÑÅÐÂÈÑ

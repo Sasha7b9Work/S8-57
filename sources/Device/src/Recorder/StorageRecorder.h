@@ -111,6 +111,18 @@ struct Record
     // Указатель на точку number датчика
     PointFloat *ValueSensor(int number);
 
+    // Возвращает true, если запись содержит данные канала A
+    bool ContainsChannelA() const;
+
+    // Возвращает true, если запись содержит данные канала B
+    bool ContainsChannelB() const;
+
+    // Возвращает true, если запись содержит данные датчика
+    bool ContainsSensor() const;
+
+    // Устанавливает максимальное количество точек для записи
+    void SetMaxPoints(uint16 max) {  maxPoints = max; }
+
 private:
     
     // С этого адреса начинаются данные
@@ -135,12 +147,12 @@ struct StorageRecorder
     // Создаёт новую запись для хранения данных в хранилище
     static bool CreateNewRecord();
 
+    // Создаёт запись для "прослушивания".
+    static bool CreateListeningRecord();
+
     // Возвращает указатель на текущую запись
     static Record *LastRecord();
 
     // Возвращает количество сохранённых записей. 0 - последняя, 1 - предпоследняя. Если идёт запись, то в 0-ую заппсь добавляются новые данные
     static uint NumRecords();
-
-    // Возвращает количество свободной памяти
-    static uint FreeMemory();
 };

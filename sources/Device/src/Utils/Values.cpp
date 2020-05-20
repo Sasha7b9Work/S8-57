@@ -182,10 +182,6 @@ char *Frequency::ToStringAccuracy(char bufferOut[20], int numDigits) const //-V2
         suffix = "к√ц";
         freq /= 1e3F;
     }
-    else
-    {
-        // тут ничего не делаем
-    }
 
     std::strcat(bufferOut, Float(freq).ToString(false, numDigits).c_str()); //-V2513
     std::strcat(bufferOut, suffix); //-V2513
@@ -276,10 +272,6 @@ char* Time::ToStringAccuracy(bool alwaysSign, char buffer[20], int numDigits) co
     {
         suffix = "мс";
         time *= 1e3F;
-    }
-    else
-    {
-        // тут ничего не делаем
     }
 
     std::strcat(buffer, Float(time).ToString(alwaysSign, numDigits).c_str()); //-V2513

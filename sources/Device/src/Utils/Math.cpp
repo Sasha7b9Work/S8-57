@@ -15,29 +15,41 @@ template void  Math::Swap<int>(int *, int *);
 template int   Math::Sign<int>(int);
 template int   Math::Sign<int8>(int8);
 template int   Math::Sign<int16>(int16);
+
 template void  Math::CircleIncrease<int8>(int8 *, int8, int8);
 template void  Math::CircleIncrease<uint8>(uint8 *, uint8, uint8);
 template void  Math::CircleIncrease<int16>(int16 *, int16, int16);
 template void  Math::CircleIncrease<int>(int *, int, int);
 template void  Math::CircleIncrease<uint>(uint *, uint, uint);
+
 template void  Math::CircleDecrease<int8>(int8 *, int8, int8);
 template void  Math::CircleDecrease<uint8>(uint8 *, uint8, uint8);
-template void  Math::CircleDecrease<int>(int *, int, int);
 template void  Math::CircleDecrease<int16>(int16 *, int16, int16);
+template void  Math::CircleDecrease<int>(int *, int, int);
+
 template int16 Math::Abs<int16>(int16);
 template int   Math::Abs<int>(int);
+
 template void  Math::LimitationIncrease<uint8>(uint8 *, uint8);
+template void  Math::LimitationIncrease<int>(int *, int);
+
 template void  Math::LimitationDecrease<uint8>(uint8 *, uint8);
+template void  Math::LimitationDecrease<int>(int *, int);
+
 template void  Math::Limitation<float>(float *, float, float);
 template void  Math::Limitation<int16>(int16 *, int16, int16);
 template void  Math::Limitation<uint16>(uint16 *, uint16, uint16);
 template void  Math::Limitation<int>(int *, int, int);
 template void  Math::Limitation<uint8>(uint8 *, uint8, uint8);
+
 template float Math::LimitationRet<float>(float, float, float);
 template uint8 Math::LimitationRet<uint8>(uint8, uint8, uint8);
+
 template void  Math::AdditionThisLimitation<int16>(int16 *, int, int16, int16);
 template void  Math::AdditionThisLimitation<uint16>(uint16 *, int, uint16, uint16);
+
 template float Math::Max<float>(float, float, float);
+
 template int   Math::Min<int>(int, int);
 template uint  Math::Min<uint>(uint, uint);
 
@@ -525,10 +537,6 @@ void Math::Limitation(T *value, T min, T max)
     else if (*value > max)
     {
         *value = max;
-    }
-    else
-    {
-        // значения совпадают - ничего не делаем
     }
 }
 

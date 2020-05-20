@@ -139,7 +139,7 @@ exit:
     {
         if(Device::InModeRecorder())
         {
-            Recorder::ReadPoint();
+            Recorder::RecordPoints();
         }
         else if(OSCI_IN_MODE_P2P)
         {
@@ -241,7 +241,7 @@ void HAL_BUS::Panel::Send(const uint8 *data, int size)
     {
         if(Device::InModeRecorder())
         {
-            Recorder::ReadPoint();
+            Recorder::RecordPoints();
         }
         else if(OSCI_IN_MODE_P2P)
         {

@@ -1,16 +1,13 @@
 #include "defines.h"
 #include "Display/Symbols.h"
 #include "Display/Primitives.h"
+#include "Hardware/HAL/HAL.h"
 #include "Menu/Pages/Include/PageRecorder.h"
 #include "Recorder/Recorder.h"
 #include "Recorder/DisplayRecorder.h"
 #include "Recorder/StorageRecorder.h"
 #include "Settings/Settings.h"
 
-
-static void OnPress_Right()
-{
-}
 
 static void Draw_Right(int x, int y)
 {
@@ -23,13 +20,9 @@ static void Draw_Right(int x, int y)
 DEF_GRAPH_BUTTON( bScreenRight,                                                                                                     //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Экран вправо ---
     "Экран вправо",
     "Переместить окно просмотра на один экран вправо",
-    &PageRecorder::Show::self, Item::Active, OnPress_Right, Draw_Right
+    &PageRecorder::Show::self, Item::Active, DisplayRecorder::MoveWindowRight, Draw_Right
 )
 
-
-static void OnPress_Left()
-{
-}
 
 static void Draw_Left(int x, int y)
 {
@@ -42,17 +35,42 @@ static void Draw_Left(int x, int y)
 DEF_GRAPH_BUTTON( bScreenLeft,                                                                                                       //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Экран влево ---
     "Экран влево",
     "Переместить окно просмотра на один экран влево",
-    &PageRecorder::Show::self, Item::Active, OnPress_Left, Draw_Left
+    &PageRecorder::Show::self, Item::Active, DisplayRecorder::MoveWindowLeft, Draw_Left
+)
+
+
+DEF_CHOICE_3( cSpeed,
+    "Скорость",
+    "Выбор скорости перемещения экрана",
+    "1 клетка",
+    "1 экран",
+    "10 экранов",
+    DisplayRecorder::speed, &PageRecorder::Show::self, Item::Active, Choice::Changed, Choice::AfterDraw
+)
+
+
+DEF_CHOICE_3( cCursor,
+    "Курсор",
+    "Выбор курсора",
+    "Не выбран",
+    "1",
+    "2",
+    S_REC_CURSOR, &PageRecorder::Show::self, Choice::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
 static bool IsActive_PageShow()
 {
-    return !Recorder::IsRunning();
+    return !Recorder::InRecordingMode();
 }
 
 static bool HandlerKey_PageShow(const KeyEvent &event)
 {
+    if (S_REC_CURSOR_IS_NONE)
+    {
+        return false;
+    }
+
     if (event.IsPress() || event.IsRepeat())
     {
         if (event.IsArrowLeft())
@@ -70,14 +88,26 @@ static bool HandlerKey_PageShow(const KeyEvent &event)
     return false;
 }
 
-DEF_PAGE_4( pShow,                                                                                                                                 //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР ---
+static void OnOpenClose_PageShow(bool open)
+{
+    if (open)
+    {
+        HAL_BUS_CONFIGURE_TO_FSMC();
+        DisplayRecorder::SetDisplayedRecord(StorageRecorder::LastRecord(), false);
+    }
+}
+
+
+DEF_PAGE_5( pShow,                                                                                                                                 //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР ---
     "ПРОСМОТР",
     "Просмотр записанных данных",
     PageRecorder::Show::Choice::self,
     &bScreenLeft,
     &bScreenRight,
-    PageRecorder::Show::Cursors::self,
-    PageName::Recorder_Show, &PageRecorder::self, IsActive_PageShow, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, HandlerKey_PageShow
+    &cSpeed,
+    &cCursor,
+    //PageRecorder::Show::Cursors::self,
+    PageName::Recorder_Show, &PageRecorder::self, IsActive_PageShow, Page::NormalTitle, OnOpenClose_PageShow, Page::BeforeDraw, HandlerKey_PageShow
 )
 
 const Page * const PageRecorder::Show::self = static_cast<const Page *>(&pShow);

@@ -235,22 +235,23 @@ private:
     static void LoadReal();
 
     static void LoadRandomize();
+    
     // Ќарисовать "нормальное" изображение маркера смещени€, когда позици€ смещени€ находитс€ на экране
     static void DrawNormal(const int x, const int y);
+    
     // Ќарисовать маркер смещени€, когда позици€ смещени€ находитс€ за левой границей экрана
     static void DrawLeft();
+    
     // Ќарисовать маркер смещени€, когда позици€ смещени€ находитс€ за правой границей экрана
     static void DrawRight();
 
     static const float absStep[TBase::Count];
 };
 
-struct Trig
+namespace Trig
 {
     // ¬озвращает true в случае наличи€ синхроимпульса
-    static bool SyncPulse();
-
-    static bool pulse;
+    bool SyncPulse();
 };
 
 struct TrigLevel

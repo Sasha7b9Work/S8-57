@@ -7,6 +7,7 @@
 #include "Menu/Menu.h"
 #include "Osci/DeviceSettings.h"
 #include "usbh_diskio.h"
+#include <cstdio>
 
 
 static USBH_HandleTypeDef handleUSBH;
@@ -591,7 +592,15 @@ static void SaveScreenToFlash()
 
 static void CreateFileName(char name[256])
 {
-    std::strcpy(name, "screen.bmp");
+    for (int i = 0; ; i++)
+    {
+        std::snprintf(name, 255, "screen%03d.bmp", i);
+
+        if (!FDrive::ExistFile("\\", name))
+        {
+            return;
+        }
+    }
 }
 
 
@@ -609,4 +618,29 @@ static void ReadRow(uint8 row, uint8 pixels[320])
     }
 
     std::memcpy(pixels, DDecoder::Buffer() + 2, 320);
+}
+
+
+bool FDrive::ExistFile(const char *fullPath, const char *fileName)
+{
+    int numDirs = 0;
+    int numFiles = 0;
+
+    GetNumDirsAndFiles(fullPath, &numDirs, &numFiles);
+
+    char nameFile[100];
+
+    StructForReadDir sfrd;
+
+    for (int i = 0; i < numFiles; i++)
+    {
+        GetNameFile(fullPath, i, nameFile, &sfrd);
+
+        if (std::strcmp(fileName, nameFile) == 0)
+        {
+            return true;
+        }
+    }
+
+    return false;
 }

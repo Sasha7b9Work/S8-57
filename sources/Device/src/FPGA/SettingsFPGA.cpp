@@ -215,7 +215,7 @@ static void LimitForTester(Range::E *range)
 
 void Range::Change(Chan::E ch, int16 delta)
 {
-    if (Recorder::IsRunning())
+    if (Recorder::InRecordingMode())
     {
         return;
     }

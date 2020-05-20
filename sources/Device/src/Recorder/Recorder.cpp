@@ -19,19 +19,25 @@ struct StateOsci
 };
 
 
+struct Mode
+{
+    enum E
+    {
+        Listening,      // Режим "прослушивания" входов, при котором на экране мы видим то, что подаётся на входы, без сохранения в память  
+        Recording,      // Режим записи, в котором пользователь наблюдает за записываемым сигналом
+        Review          // Режим просмотра
+    };
+};
 
-// Если true - идёт чтение точек
-static bool running = false;
-// true, если регистратор был инициализирован
-static bool initialized = false;
-// Сюда сохраним состояние осциллографа в момент перехода в режим регистратора
-static StateOsci osci;
+static Mode::E mode = Mode::Listening;
+static bool initialized = false;        // true, если регистратор был инициализирован
+static StateOsci osci;                  // Сюда сохраним состояние осциллографа в момент перехода в режим регистратора
 
 // Сохранить установленные настройки осциллографа
 static void StoreOsciSettings();
+
 // Восстановить ранее сохранённые настройки осциллорафа
 static void RestoreOsciSettings();
-
 
 
 void Recorder::Init()
@@ -46,17 +52,19 @@ void Recorder::Init()
     Osci::LoadHoldfOff();
     StorageRecorder::Init();
 
-    running = false;
+    mode = Mode::Listening;
 
     initialized = true;
+}
 
-    StorageRecorder::CreateNewRecord();
 
-    StorageRecorder::LastRecord()->maxPoints = 320;
-
+void Recorder::StartListening()
+{
+    StorageRecorder::CreateListeningRecord();
     FPGA::GiveStart(0, 0);
-
     FPGA::ForcedStart();
+    mode = Mode::Listening;
+    DisplayRecorder::SetDisplayedRecord(StorageRecorder::LastRecord(), true);
 }
 
 
@@ -79,23 +87,26 @@ void Recorder::Update()
 }
 
 
-void Recorder::ReadPoint()
+void Recorder::RecordPoints()
 {
-    if(HAL_PIO::Read(PIN_P2P))
+    if (mode == Mode::Listening || mode == Mode::Recording)
     {
-        if (StorageRecorder::LastRecord()->FreeMemory() > 4)
+        if (HAL_PIO::Read(PIN_P2P))
         {
-            HAL_BUS::FPGA::SetAddrData(RD::DATA_A, RD::DATA_A + 1);
-            BitSet16 dataA(HAL_BUS::FPGA::ReadA0(), HAL_BUS::FPGA::ReadA1());
+            if (StorageRecorder::LastRecord()->FreeMemory() > 4)
+            {
+                HAL_BUS::FPGA::SetAddrData(RD::DATA_A, RD::DATA_A + 1);
+                BitSet16 dataA(HAL_BUS::FPGA::ReadA0(), HAL_BUS::FPGA::ReadA1());
 
-            HAL_BUS::FPGA::SetAddrData(RD::DATA_B, RD::DATA_B + 1);
-            BitSet16 dataB(HAL_BUS::FPGA::ReadA0(), HAL_BUS::FPGA::ReadA1());
+                HAL_BUS::FPGA::SetAddrData(RD::DATA_B, RD::DATA_B + 1);
+                BitSet16 dataB(HAL_BUS::FPGA::ReadA0(), HAL_BUS::FPGA::ReadA1());
 
-            StorageRecorder::LastRecord()->AddPoints(dataA, dataB);
-        }
-        else
-        {
-            Stop();
+                StorageRecorder::LastRecord()->AddPoints(dataA, dataB);
+            }
+            else
+            {
+                Stop();
+            }
         }
     }
 }
@@ -105,13 +116,15 @@ void Recorder::Start()
 {
     StorageRecorder::CreateNewRecord();
 
-    running = true;
+    DisplayRecorder::SetDisplayedRecord(StorageRecorder::LastRecord(), true);
+
+    mode = Mode::Recording;
 }
 
 
 void Recorder::Stop()
 {
-    running = false;
+    mode = Mode::Review;
 }
 
 
@@ -144,14 +157,14 @@ void Recorder::OnPressStart()
 
     if (Menu::OpenedItem() == const_cast<Page *>(PageRecorder::self))
     {
-        if (running)
+        if (mode == Mode::Recording)
         {
             Stop();
             Keyboard::Unlock();
         }
         else
         {
-            static const Key::E keys[] = { Key::F5, Key::Start, Key::None };
+            static const Key::E keys[] = { Key::F4, Key::Start, Key::None };
             Start();
             Keyboard::Lock(keys);
         }
@@ -163,15 +176,15 @@ void Recorder::OnPressStart()
 }
 
 
-bool Recorder::IsRunning()
+bool Recorder::InRecordingMode()
 {
-    return running;
+    return (mode == Mode::Recording);
 }
 
 
 void Recorder::ScaleX::Change(int delta)
 {
-    if (!Recorder::IsRunning())
+    if (!Recorder::InRecordingMode())
     {
         if (delta > 0)
         {
@@ -275,7 +288,7 @@ void Recorder::ScaleX::Load()
 
     HAL_BUS::FPGA::Write8(WR::TBASE, values[S_REC_SCALE_X]);
 
-    if (Recorder::IsRunning())
+    if (Recorder::InRecordingMode())
     {
         Recorder::Stop();
         Recorder::Start();

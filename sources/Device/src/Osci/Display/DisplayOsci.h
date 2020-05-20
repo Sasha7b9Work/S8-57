@@ -132,7 +132,7 @@ struct DisplayOsci
         static void Disable();
 
         // Отобразить строку в прямоугольнике на высоте y
-        static void DrawBoundedText(int y, String *text, Color color);
+        static void DrawBoundedText(int y, const String *text, Color color);
     };
 
 private:

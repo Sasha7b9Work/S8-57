@@ -4,6 +4,20 @@
 #include "common/Display/Font/Font_d.h"
 
 
+
+class Circle
+{
+public:
+    Circle(int radius);
+    void Fill(int x, int y, Color color = Color::NUMBER);
+private:
+    int radius;
+    // Нарисовать линии вправо и влево отностиельно центра с длиной width
+    static void Draw2HLinesRelCenter(int center, int y, int width);
+};
+
+
+
 class Region
 {
 public:
@@ -14,6 +28,7 @@ private:
     int width;
     int height;
 };
+
 
 
 class Rectangle

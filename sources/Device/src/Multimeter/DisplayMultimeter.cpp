@@ -140,7 +140,7 @@ static void DrawSymbols(bool inModeOsci)
     {
         DFont::Set(DTypeFont::_GOST28);
         x0 = CalculateX();
-        x += CalculateX();
+        x += CalculateX(); //-V656
     }
 
     DrawChar(0, x0 + 10, inModeOsci);

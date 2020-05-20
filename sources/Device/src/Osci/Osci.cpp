@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "globals.h"
 #include "log.h"
 #include "device.h"
 #include "FPGA/FPGA.h"
@@ -11,6 +12,7 @@
 #include "Osci/Osci.h"
 #include "Osci/Reader.h"
 #include "Osci/Display/DisplayOsci.h"
+#include "Osci/Math/OsciMath.h"
 #include "Osci/Measurements/AutoMeasurements.h"
 #include "Settings/SettingsNRST.h"
 #include "Utils/Math.h"
@@ -64,12 +66,8 @@ private:
 
 static RandShift randShift;
 StructReadRand RandShift::structRand = { 0, 0 };
-
-static Gates gates; // "¬орота" рандомизатора
-
-
+static Gates gates;             // "¬орота" рандомизатора
 int    Osci::addShift = 0;
-void (*Osci::funcStop)() = EmptyFuncVV;
 
 
 static void UpdateFPGA();
@@ -119,6 +117,12 @@ void Osci::Start(bool)
 }
 
 
+void Osci::Stop()
+{
+    FPGA::isRunning = false;
+}
+
+
 void Osci::Restart()
 {
     if(FPGA::IsRunning())
@@ -151,7 +155,7 @@ void Osci::Update()
 
 static void UpdateFPGA()
 {
-    int number = OSCI_IN_MODE_RANDOMIZER ? TBase::DeltaPoint() : 1;
+    int number = (OSCI_IN_MODE_RANDOMIZER && !SampleType::IsReal()) ? TBase::DeltaPoint() : 1;
 
     RAM::NewFrameForRandomize();
 
@@ -177,9 +181,9 @@ static void UpdateFPGA()
         }
     }
 
-    if(OSCI_IN_MODE_RANDOMIZER)
+    if(OSCI_IN_MODE_RANDOMIZER && !SampleType::IsReal())
     {
-        Interpolator::Run(RAM::Get());
+        InterpolatorLinear::Run(RAM::Get());
     }
 
     ds = RAM::Get();
@@ -236,12 +240,6 @@ static bool ProcessFlagReady()
 }
 
 
-void Osci::Stop()
-{
-    funcStop();
-}
-
-
 bool Osci::IsRunning()
 {
     return FPGA::IsRunning();
@@ -272,15 +270,17 @@ void Osci::OnChangedPoints()
 }
 
 
-void Osci::OnPressStart()
+void Osci::OnPressButtonStart()
 {
-    return IsRunning() ? Stop() : Start(true);
-}
-
-
-void Osci::ChangedTBase()
-{
-    SetFunctionsStartStop();
+    if (IsRunning())
+    {
+        Stop();
+        OsciStateWork::triggered = false;
+    }
+    else
+    {
+        Start(true);
+    }
 }
 
 
@@ -288,63 +288,10 @@ void Osci::ChangedTrigStartMode()
 {
     Stop();
 
-    SetFunctionsStartStop();
-
     if(!S_TRIG_START_MODE_IS_SINGLE)
     {
         Start(true);
     }
-
-    // ≈лси находимс€ в режиме рандомизатора
-    if(OSCI_IN_MODE_RANDOMIZER)
-    {
-        // и переключаемс€ на одиночный режим запуска, то надо сохранить имеющийс€ тип выборки, чтобы восстановить при возвращении в режим 
-        // рандомизатора автоматический или ждущий
-        if(S_TRIG_START_MODE_IS_SINGLE)
-        {
-            S_RAND_SAMPLE_TYPE_OLD = S_RAND_SAMPLE_TYPE;
-            S_RAND_SAMPLE_TYPE = SampleType::Real;
-        }
-        else if(S_TRIG_START_MODE_IS_AUTO)    // »наче восстановим ранее сохранЄнный
-        {
-            S_RAND_SAMPLE_TYPE = S_RAND_SAMPLE_TYPE_OLD;
-        }
-    }
-}
-
-
-void Osci::SetFunctionsStartStop()
-{
-    static const pFuncVV stop[2][TrigStartMode::Count] =
-    {
-        //  Auto        Wait         Single
-        { StopNormal, StopNormal,  StopNormal    },        // Normal mode
-        { StopNormal, StopWaitP2P, StopSingleP2P }         // P2P mode
-    };
-
-    int index = OSCI_IN_MODE_P2P ? 1 : 0;
-
-    //funcStart = start[index][TrigStartMode()];
-
-    funcStop = stop[index][S_TRIG_START_MODE];
-}
-
-
-void Osci::StopNormal()
-{
-    FPGA::isRunning = false;
-}
-
-
-void Osci::StopWaitP2P()
-{
-
-}
-
-
-void Osci::StopSingleP2P()
-{
-
 }
 
 
@@ -419,6 +366,10 @@ void Osci::ReadData()
     {
         if(ReadDataChannel(ChanB, ds->dataB))
         {
+            if (SampleType::IsReal())
+            {
+                InterpolatorSinX_X::Run(ds);
+            }
         }
     }
 }
@@ -610,4 +561,15 @@ void Gates::CalculateWithoutGates(uint16 *min, uint16 *max)
         *min = static_cast<uint16>(minGate);
         *max = static_cast<uint16>(maxGate);
     }
+}
+
+
+OsciStateWork::E OsciStateWork::Current()
+{
+    if (!Osci::IsRunning())
+    {
+        return OsciStateWork::Stopped;
+    }
+
+    return triggered ? OsciStateWork::Triggered : OsciStateWork::Awaiting;
 }

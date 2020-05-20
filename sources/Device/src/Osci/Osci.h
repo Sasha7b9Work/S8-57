@@ -7,6 +7,21 @@
 #define OSCI_IN_MODE_RANDOMIZER (S_TIME_BASE <= TBase::_50ns)
 
 
+
+namespace OsciStateWork
+{
+    enum E
+    {
+        Stopped,        // Осциллограф в состоянии останова
+        Awaiting,       // Осциллограф в состоянии ожидания синхронизации
+        Triggered       // Синхронизировани
+    };
+
+    OsciStateWork::E Current();
+};
+
+
+
 struct Osci
 {
     friend struct Randomizer;
@@ -16,7 +31,7 @@ struct Osci
 
     static void Update();
 
-    static void OnPressStart();
+    static void OnPressButtonStart();
 
     static void DeInit();
 
@@ -38,10 +53,7 @@ struct Osci
     
     // Эту функцию нужно вызывать при изменении режима запуска
     static void ChangedTrigStartMode();
-    
-    // Эту функцию нужно вызывать при изменении TBase
-    static void ChangedTBase();
-    
+      
     // Очистка данных рандомизатора при переключении режимов
     static void ClearDataRand();
 
@@ -66,14 +78,6 @@ struct Osci
 
 private:
 
-    // Функции стопа
-    static void (*funcStop)();
-    static void StopNormal();
-    static void StopWaitP2P();
-    static void StopSingleP2P();
-
-    static void SetFunctionsStartStop();
-
     // Читать данные канала в памяить data
     static bool ReadDataChannel(Chan::E ch, uint8 *data);
 
@@ -81,21 +85,6 @@ private:
 
     // Здесь хранится адрес, начиная с которого будем читать данные по каналам. Если addrRead == 0xffff, то адрес вначале нужно считать
     static uint16 addrRead;
-};
-
-
-struct AveragerOsci
-{
-    static void Process(Chan::E ch, const uint8 *newData, int size);
-    static void SettingChanged();
-};
-
-
-
-class Interpolator
-{
-public:
-    static void Run(DataSettings *ds);
 };
 
 

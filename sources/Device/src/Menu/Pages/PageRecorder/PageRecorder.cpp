@@ -9,7 +9,7 @@
 
 static bool IsActive_Destination()
 {
-    return !Recorder::IsRunning();
+    return !Recorder::InRecordingMode();
 }
 
 DEF_CHOICE_3( cTypeMemory,                                                                                                                           //--- ФУНКЦИЯ - РЕГИСТРАТОР - Память ---
@@ -19,6 +19,19 @@ DEF_CHOICE_3( cTypeMemory,                                                      
     "Внутр ЗУ",
     "Внешн ЗУ",
     S_REC_TYPE_MEMORY, &PageRecorder::self, IsActive_Destination, Choice::Changed, Choice::AfterDraw
+)
+
+
+static bool IsActive_Clear()
+{
+    return !Recorder::InRecordingMode();
+}
+
+
+DEF_BUTTON(bClear,
+    "Очистить",
+    "",
+    &PageRecorder::self, IsActive_Clear, Recorder::StartListening
 )
 
 
@@ -39,7 +52,7 @@ static void Draw_Stop(int x, int y)
 
 static void Draw_StartStop(int x, int y)
 {
-    Recorder::IsRunning() ? Draw_Stop(x, y) : Draw_Start(x, y);
+    Recorder::InRecordingMode() ? Draw_Stop(x, y) : Draw_Start(x, y);
 }
 
 DEF_GRAPH_BUTTON_HINTS_2( bStart,                                                                                                                 //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПУСК/СТОП ---
@@ -57,10 +70,16 @@ static void OnPress_Exit()
 }
 
 
+static bool IsActive_Exit()
+{
+    return !Recorder::InRecordingMode();
+}
+
+
 DEF_BUTTON(bExit,
     "Выход",
     "",
-    &PageRecorder::self, Item::Active, OnPress_Exit
+    &PageRecorder::self, IsActive_Exit, OnPress_Exit
 )
 
 
@@ -70,6 +89,8 @@ static void OnOpenClose_Recorder(bool open)
 
     if(open)
     {
+        Recorder::StartListening();
+
 //        FDrive::DeInit();
 //        Sensor::Init();
     }
@@ -85,7 +106,7 @@ DEF_PAGE_5( pRecorder,                                                          
     "Запись и воспроизведение сигналов входов и датчиков",
     PageRecorder::Source::self,
     PageRecorder::Show::self,
-    &Item::empty,
+    &bClear,
     &bStart,
     &bExit,
     PageName::Recorder, &PageFunction::self, Item::Active, Page::NormalTitle, OnOpenClose_Recorder, Page::BeforeDraw, Page::HandlerKeyEvent

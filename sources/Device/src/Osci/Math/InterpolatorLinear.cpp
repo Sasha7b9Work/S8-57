@@ -5,6 +5,7 @@
 #include "Hardware/Timer.h"
 #include "Osci/DeviceSettings.h"
 #include "Osci/Osci.h"
+#include "Osci/Math/OsciMath.h"
 
 
 static uint8 *begin = nullptr;  // Начало обрабатываемых данных
@@ -86,7 +87,9 @@ static uint8 *FindReadedElement(uint8 * const start)
 
 static void InterpolateSegment(Segment *segment)
 {
-    if(segment->start == end || segment->start == begin || segment->end == end)
+    if((segment->start == end) ||
+       (segment->start == begin) ||
+       (segment->end == end))
     {
         return;
     }
@@ -107,7 +110,7 @@ static void InterpolateSegment(Segment *segment)
 }
 
 
-void Interpolator::Run(DataSettings *ds)
+void InterpolatorLinear::Run(DataSettings *ds)
 {
     if(ds->enableA)
     {

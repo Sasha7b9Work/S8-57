@@ -12,10 +12,10 @@ public:
     static void Update();
 
     // Сместить окно просмотра влево
-    static void MoveLeft();
+    static void MoveWindowLeft();
 
     // Сместить окно просмотра вправо
-    static void MoveRight();
+    static void MoveWindowRight();
 
     // Переместить текущий курсор влево
     static void MoveCursorLeft();
@@ -23,50 +23,37 @@ public:
     // Переместить текущий курсор вправо
     static void MoveCursorRight();
 
-    // 
+    // Возвращает true, если как раз происходит отображение данных
     static bool InProcessUpdate();
 
-private:
-    
-    // Изобразить установленные настройки
-    static void DrawSettings(int x, int y);
-    
-    // Отобразить данные
-    static void DrawData(Record *record);
+    // Установить отображаемую запись
+    static void SetDisplayedRecord(Record *record, bool forListening);
 
-    // Нарисовать данные канала
-    static void DrawChannel(Record *record, Chan::E ch);
-
-    // Нарисовать данные датчика
-    static void DrawSensor(Record *record);
-
-
-    static void DrawMemoryWindow();
-
-    // Возвращает значение Y экрана для value точки
-    static int Y(int value);
+    struct Cursor
+    {
+        enum E
+        {
+            None,
+            _1,
+            _2
+        };
+    };
 
 
-    static void DrawCursors();
+    // Скорость перемещения окна по памяти в режиме просмотра
+    struct SpeedWindow
+    {
+        enum E
+        {
+            Cell,           // 1 клетка
+            _1Window,       // 1 окно
+            _10Windows      // 10 окон
+        } value;
 
+        SpeedWindow(E v) : value(v)  { }
 
-    static void DrawParametersCursors();
+        int NumPoints() const;      // Возвращает число точек, на которое нужно сдвинуть экран
+    };
 
-
-    static char *TimeCursor(int numCur, char buffer[20]);
-
-
-    static char *VoltageCursor(Chan::E, int, char[20]);
-
-
-    static char *DeltaTime(char buffer[20]);
-
-    // true, если в данный момент происходит отрисовка
-    static bool inProcessUpdate;
-
-
-    static uint16 posCursor[2];
-
-    // С этой точки начинается вывод
-    static int startPoint;
+    static SpeedWindow speed;
 };

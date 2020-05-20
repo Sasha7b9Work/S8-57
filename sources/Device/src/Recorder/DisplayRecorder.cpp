@@ -4,22 +4,70 @@
 #include "Display/Painter.h"
 #include "Display/Primitives.h"
 #include "Display/Warnings.h"
+#include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Include/PageRecorder.h"
 #include "Recorder/DisplayRecorder.h"
 #include "Recorder/StorageRecorder.h"
 #include "Settings/Settings.h"
+#include "Utils/Math.h"
 #include "Utils/Values.h"
 #include <cmath>
 #include <cstring>
 
 
-int DisplayRecorder::startPoint = -1;
 
-uint16 DisplayRecorder::posCursor[2] = { 100, 220 };
+static Record *displayed = nullptr;             // Текущая отображаемая запись
+static int startPoint = -1;                     // С этой точки начинается вывод
+static int posCursor[2] = { 100, 220 };
+static bool inProcessUpdate = false;            // true, если в данный момент происходит отрисовка
 
-bool DisplayRecorder::inProcessUpdate = false;
+
+DisplayRecorder::SpeedWindow DisplayRecorder::speed = DisplayRecorder::SpeedWindow::_1Window;
+
+
+// Изобразить установленные настройки
+static void DrawSettings(int x, int y);
+
+// Отобразить данные
+static void DrawData();
+
+// Нарисовать данные канала, начиная с точки start
+static void DrawChannel(Chan::E ch);
+
+// Нарисовать данные датчика
+static void DrawSensor();
+
+static void DrawMemoryWindow();
+
+// Возвращает значение Y экрана для value точки
+static int Y(int value);
+
+
+static void DrawCursors();
+
+
+static void DrawParametersCursors();
+
+
+static char *TimeCursor(int numCur, char buffer[20]);
+
+
+static char *VoltageCursor(Chan::E, int, char[20]);
+
+
+static char *DeltaTime(char buffer[20]);
+
+// Возвращает указатель на переменную с позицией текущего курсора (0, если курсор для перемещения не выбран)
+static int *CurrentPosCursor();
+
+
+// Значок, который показывает, в каком состоянии сейчас находится регистратор
+struct RecordIcon
+{
+    static void Upate(int x, int y);
+};
 
 
 void DisplayRecorder::Update()
@@ -30,7 +78,7 @@ void DisplayRecorder::Update()
 
     inProcessUpdate = true;
 
-    DrawData(StorageRecorder::LastRecord());
+    DrawData();
 
     inProcessUpdate = false;
 
@@ -38,7 +86,7 @@ void DisplayRecorder::Update()
 
     DrawSettings(289, 0);
 
-    //DrawSizeMemory(0, 0);
+    DrawCursors();
 
     DrawMemoryWindow();
 
@@ -47,12 +95,14 @@ void DisplayRecorder::Update()
     Warnings::Draw();
 
     Menu::Draw();
+
+    RecordIcon::Upate(5, 5);
 }
 
 
-void DisplayRecorder::DrawSettings(int x, int y)
+static void DrawSettings(int x, int y)
 {
-    if (Menu::OpenedItem() != PageRecorder::self)
+    if (Menu::OpenedItem() == PageRecorder::Show::self)
     {
         return;
     }
@@ -67,7 +117,7 @@ void DisplayRecorder::DrawSettings(int x, int y)
 }
 
 
-int DisplayRecorder::Y(int value)
+static int Y(int value)
 {
     int delta = VALUE::AVE - value;
 
@@ -88,7 +138,7 @@ int DisplayRecorder::Y(int value)
 }
 
 
-char *DisplayRecorder::DeltaTime(char buffer[20])
+static char *DeltaTime(char buffer[20])
 {
     float delta = std::fabsf(static_cast<float>(posCursor[0] - posCursor[1])) * Recorder::ScaleX::TimeForPointMS() / 1000.0F;
 
@@ -98,7 +148,7 @@ char *DisplayRecorder::DeltaTime(char buffer[20])
 }
 
 
-char *DisplayRecorder::TimeCursor(int numCur, char buffer[20])
+static char *TimeCursor(int numCur, char buffer[20])
 {
     int numPoint = startPoint + posCursor[numCur];
 
@@ -110,7 +160,7 @@ char *DisplayRecorder::TimeCursor(int numCur, char buffer[20])
 }
 
 
-char *DisplayRecorder::VoltageCursor(Chan::E, int, char [20])
+static char *VoltageCursor(Chan::E, int, char [20])
 {
 //    uint numPoint = static_cast<uint>(startPoint + posCursor[numCur]);
 //
@@ -130,7 +180,7 @@ char *DisplayRecorder::VoltageCursor(Chan::E, int, char [20])
 }
 
 
-void DisplayRecorder::DrawParametersCursors()
+static void DrawParametersCursors()
 {
     int width = 49;
 
@@ -166,8 +216,7 @@ void DisplayRecorder::DrawParametersCursors()
     Text(String("dT %s", DeltaTime(buffer))).Draw(x + 2, y7, Color::FILL);
 }
 
-
-void DisplayRecorder::DrawCursors()
+static void DrawCursors()
 {
     if (Menu::OpenedItem() != PageRecorder::Show::self)
     {
@@ -186,30 +235,30 @@ void DisplayRecorder::DrawCursors()
 }
 
 
-void DisplayRecorder::DrawData(Record *record)
+static void DrawData()
 {
-    HAL_BUS_CONFIGURE_TO_FSMC;
+    HAL_BUS_CONFIGURE_TO_FSMC();
 
-    if(record->sources & 0x01)
+    if(displayed->ContainsChannelA())
     {
-        DrawChannel(record, ChanA);
+        DrawChannel(ChanA);
     }
 
-    if(record->sources & 0x02)
+    if(displayed->ContainsChannelB())
     {
-        DrawChannel(record, ChanB);
+        DrawChannel(ChanB);
     }
 
-    if(record->sources & 0x04)
+    if(displayed->ContainsSensor())
     {
-        DrawSensor(record);
+        DrawSensor();
     }
 }
 
 
-void DisplayRecorder::DrawChannel(Record *record, Chan::E ch)
+static void DrawChannel(Chan::E ch)
 {
-    int numPoints = record->NumPoints();
+    int numPoints = displayed->NumPoints();
 
     if(numPoints == 0)
     {
@@ -222,7 +271,14 @@ void DisplayRecorder::DrawChannel(Record *record, Chan::E ch)
 
     funcValue func = funcs[ch];
 
-    Point16 *point = (record->*func)(numPoints < 320 ? 0 : (numPoints - 320));
+    int index = (numPoints < 320) ? 0 : (numPoints - 320);
+
+    if (startPoint >= 0)
+    {
+        index = startPoint;
+    }
+
+    Point16 *point = (displayed->*func)(index);
 
     for(int x = 0; x < 320; x++)
     {
@@ -232,42 +288,37 @@ void DisplayRecorder::DrawChannel(Record *record, Chan::E ch)
             int max = Y(point->max);
 
             VLine(max - min).Draw(x, min, Color::CHAN[ch]);
-
-            HAL_BUS_SET_MODE_FSMC;
         }
 
-        point = point->Next(record);
-    };
+        HAL_BUS_CONFIGURE_TO_FSMC();
 
-    DrawCursors();
+        point = point->Next(displayed);
+    };
 }
 
 
-void DisplayRecorder::DrawSensor(Record *)
+static void DrawSensor()
 {
 
 }
 
 
-void DisplayRecorder::DrawMemoryWindow()
+static void DrawMemoryWindow()
 {
     static int prevNumPoints = 0;
 
-    if (Menu::OpenedItem() != PageRecorder::Show::self || StorageRecorder::LastRecord()->NumPoints() == 0)
+    HAL_BUS_CONFIGURE_TO_FSMC();
+
+    if (Menu::OpenedItem() != PageRecorder::Show::self || displayed->NumPoints() == 0)
     {
         return;
     }
 
-    int numPoints = static_cast<int>(StorageRecorder::LastRecord()->NumPoints());
+    int numPoints = static_cast<int>(displayed->NumPoints());
 
     if (prevNumPoints != numPoints)
     {
         prevNumPoints = numPoints;
-        startPoint = numPoints - 319;
-        if (startPoint < 0)
-        {
-            startPoint = 0;
-        }
     }
 
     Region(319, 5).DrawBounded(0, 3, Color::BACK, Color::FILL);
@@ -290,14 +341,17 @@ void DisplayRecorder::DrawMemoryWindow()
 }
 
 
-void DisplayRecorder::MoveLeft()
+void DisplayRecorder::MoveWindowLeft()
 {
-    if (StorageRecorder::LastRecord()->NumPoints() < 321)
+    HAL_BUS_CONFIGURE_TO_FSMC();
+
+    if (displayed->NumPoints() < 321)
     {
         return;
     }
 
-    startPoint -= 320;
+    startPoint -= speed.NumPoints();
+
     if (startPoint < 0)
     {
         startPoint = 0;
@@ -305,32 +359,110 @@ void DisplayRecorder::MoveLeft()
 }
 
 
-void DisplayRecorder::MoveRight()
+void DisplayRecorder::MoveWindowRight()
 {
-    if (StorageRecorder::LastRecord()->NumPoints() < 321)
+    HAL_BUS_CONFIGURE_TO_FSMC();
+
+    if (displayed->NumPoints() < 321)
     {
         return;
     }
 
-    startPoint += 320;
-    if (startPoint > static_cast<int>(StorageRecorder::LastRecord()->NumPoints() - 320))
+    startPoint += speed.NumPoints();
+
+    if (startPoint > static_cast<int>(displayed->NumPoints() - 320))
     {
-        startPoint = static_cast<int>(StorageRecorder::LastRecord()->NumPoints() - 320);
+        startPoint = static_cast<int>(displayed->NumPoints() - 320);
     }
 }
 
 
 void DisplayRecorder::MoveCursorLeft()
 {
+    Math::LimitationDecrease(CurrentPosCursor(), 0);
 }
 
 
 void DisplayRecorder::MoveCursorRight()
 {
+    Math::LimitationIncrease(CurrentPosCursor(), 319);
+}
+
+
+static int *CurrentPosCursor()
+{
+    static int nullPos;
+    int *result = &nullPos;
+
+    if (S_REC_CURSOR_IS_1)      { result = &posCursor[0]; }
+    else if (S_REC_CURSOR_IS_2) { result = &posCursor[1]; }
+
+    return result;
 }
 
 
 bool DisplayRecorder::InProcessUpdate()
 {
     return inProcessUpdate;
+}
+
+
+void RecordIcon::Upate(int x, int y)
+{
+    if (Menu::OpenedItem() != PageRecorder::self)
+    {
+        return;
+    }
+
+    if (Recorder::InRecordingMode())
+    {
+        static uint timeStart = 0;              // Время начала цикла (зажёгся/потух)
+
+        while (TIME_MS - timeStart >= 1000)
+        {
+            timeStart += 1000;
+        }
+
+        if (TIME_MS - timeStart <= 500)
+        {
+            Circle(6).Fill(x, y, Color::RED);
+        }
+    }
+    else
+    {
+        Region(10, 10).Fill(x, y, Color::GREEN);
+    }
+}
+
+
+void DisplayRecorder::SetDisplayedRecord(Record *record, bool forListening)
+{
+    HAL_BUS_CONFIGURE_TO_FSMC();
+
+    displayed = record;
+
+    if (forListening)
+    {
+        startPoint = -1;
+    }
+    else
+    {
+        startPoint = 0;
+
+        if (displayed)
+        {
+            if (displayed->NumPoints() > 320)
+            {
+                startPoint = displayed->NumPoints() - 320;
+            }
+        }
+    }
+}
+
+
+int DisplayRecorder::SpeedWindow::NumPoints() const
+{
+    static const int nums[3] = { 20, 320, 320 * 10 };
+
+    return nums[value];
 }

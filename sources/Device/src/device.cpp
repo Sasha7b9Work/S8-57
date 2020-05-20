@@ -35,7 +35,7 @@ void Device::Init()
     Console::Init();
 
     Timer::Init();
-    
+
     PAUSE_ON_MS(500);
 
     Beeper::Init();
@@ -93,7 +93,7 @@ bool SetCurrentMode(const Page *page, Device::Mode::E mode)
 {
     Item *opened = Menu::OpenedItem();
 
-    if (opened && 
+    if (opened &&
         (opened == const_cast<Page *>(page) || opened->ExistKeeper(page)))
     {
         Device::SetMode(mode);
@@ -117,14 +117,16 @@ void Device::Update()
     Tester::Update();
 
     Recorder::Update();
-   
+
     Multimeter::Update();
-       
+
     FDrive::Update();
 
     //Sensor::Update();
 
-    while (HAL_BUS::Panel::Receive()) {};
+    while (HAL_BUS::Panel::Receive())
+    {
+    };
 
     SCPI::Update();
 
@@ -153,12 +155,14 @@ void Device::SetMode(Mode::E mode)
         Multimeter::DeInit();
         Recorder::DeInit();
 
-        if (InModeOsci())
+        switch (CurrentMode())
         {
+        case Mode::Osci:
             Keyboard::Unlock();
             Osci::Init();
-        }
-        else if (InModeTester())
+            break;
+
+        case Mode::Tester:
         {
             static const Key::E keys[] =
             {
@@ -172,8 +176,10 @@ void Device::SetMode(Mode::E mode)
             Keyboard::Lock(keys);
             Tester::Init();
             Tester::Enable();
+            break;
         }
-        else if (InModeMultimeter())
+
+        case Mode::Multimeter:
         {
             static const Key::E keys[] =
             {
@@ -184,11 +190,16 @@ void Device::SetMode(Mode::E mode)
 
             Keyboard::Lock(keys);
             Multimeter::Init();
+            break;
         }
-        else if (InModeRecorder())
-        {
+
+        case Mode::Recorder:
             Keyboard::Unlock();
             Recorder::Init();
+            break;
+
+        case Mode::Count:
+            break;
         }
     }
 }

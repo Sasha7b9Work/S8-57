@@ -18,8 +18,13 @@ static uint CurrentFrame();
 
 void DisplayOsci::Accumulator::NextFrame()
 {
-    if (S_DISP_MODE_ACCUM_IS_RESET)
+    if (S_DISP_NUM_ACCUM > 1)
     {
+        if (S_DISP_ENUM_ACCUM_IS_INFINITY)
+        {
+            return;
+        }
+
         static uint prevFrame = 0;
 
         if (CurrentFrame() == prevFrame)

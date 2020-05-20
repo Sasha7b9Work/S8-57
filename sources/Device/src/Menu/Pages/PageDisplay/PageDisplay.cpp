@@ -1,6 +1,7 @@
 #include "defines.h"
 #include "Menu/Pages/Include/PageDisplay.h"
 #include "Osci/Osci.h"
+#include "Osci/Math/OsciMath.h"
 #include "Settings/Settings.h"
 
 
@@ -8,6 +9,25 @@ void ENumAverage::Set(ENumAverage::E v)
 {
     S_OSCI_ENUM_AVERAGE = v;
     AveragerOsci::SettingChanged();
+}
+
+
+pString ENumAccum::ToString(ENumAccum::E v)
+{
+    static const pString strings[ENumAccum::Count] =
+    {
+        "1",
+        "2",
+        "4",
+        "8",
+        "16",
+        "32",
+        "64",
+        "128",
+        "INF"
+    };
+
+    return strings[v];
 }
 
 

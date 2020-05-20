@@ -4,6 +4,7 @@
 #include "FPGA/FPGA.h"
 #include "Hardware/HAL/HAL.h"
 #include "Osci/DeviceSettings.h"
+#include "Osci/Osci.h"
 #include "Osci/Reader.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/AutoMeasurements.h"
@@ -27,7 +28,8 @@ struct Separator
 // Ќаписать параметры вертикального тракта заданного канала
 static void WriteTextVoltage(Chan::E ch, int x, int y);
 
-static void WriteStringAndNumber(const char *text, int x, int y, int number);
+// ¬ыводит наименование параметра (text) и его числовое (number) значение или символьное (number_c)
+static void WriteStringAndNumber(const char *text, int x, int y, int number, pString number_c = nullptr);
 
 static void DrawTime(int x, int y);
 
@@ -197,7 +199,7 @@ static int DrawMainParameters(int _x, int _y)
 
     if (S_MEM_MODE_WORK_IS_DIR)
     {
-        WriteStringAndNumber("накопл", x, y0 - 4, S_DISP_NUM_ACCUM);
+        WriteStringAndNumber("накопл", x, y0 - 4, 0, ENumAccum::ToString(S_DISP_ENUM_ACCUM));
         WriteStringAndNumber("усредн", x, y1, S_OSCI_NUM_AVERAGE);
         WriteStringAndNumber("сглаж", x, y1 + 6, S_DISP_NUM_SMOOTH);
     }
@@ -238,14 +240,18 @@ static void WriteTextVoltage(Chan::E ch, int x, int y)
 }
 
 
-static void WriteStringAndNumber(const char *text, int x, int y, int number)
+static void WriteStringAndNumber(const char *text, int x, int y, int number, pString number_c)
 {
     String(text).Draw(x, y, Color::FILL);
 
     const int SIZE = 100;
     char buffer[SIZE];
 
-    if (number == 0)
+    if (number_c != nullptr)
+    {
+        std::snprintf(buffer, SIZE, "%s", number_c);
+    }
+    else if (number == 0)
     {
         std::snprintf(buffer, SIZE, "-");
     }
@@ -352,13 +358,12 @@ void DisplayOsci::HiPart::DrawRightPart(int x0, int y0)
         
         int y = 1;
 
-        if (FPGA::IsRunning())       // –абочий режим
+        switch (OsciStateWork::Current())
         {
-            Char(Symbol8::PLAY).Draw4SymbolsInRect(x, y);
-        }
-        else
-        {
-            Region(10, 10).Fill(x + 3, y + 3);
+        case OsciStateWork::Stopped:    Region(10, 10).Fill(x + 3, y + 3);              break;
+        case OsciStateWork::Triggered:  Char(Symbol8::PLAY).Draw4SymbolsInRect(x, y);   break;
+        case OsciStateWork::Awaiting:   Region(4, 10).Fill(x + 3, y + 3);
+                                        Region(4, 10).Fill(x + 10, y + 3);              break;
         }
     }
 }

@@ -87,6 +87,7 @@ source_group(Menu\\Pages\\PageTrig                   REGULAR_EXPRESSION src/Menu
 source_group(Multimeter                              REGULAR_EXPRESSION src/Multimeter/*)
 source_group(Osci                                    REGULAR_EXPRESSION src/Osci/*)
 source_group(Osci\\Display                           REGULAR_EXPRESSION src/Osci/Display/*)
+source_group(Osci\\Math                              REGULAR_EXPRESSION src/Osci/Math/*)
 source_group(Osci\\Measurements\\                    REGULAR_EXPRESSION src/Osci/Measurements/*)
 source_group(Recorder                                REGULAR_EXPRESSION src/Recorder/*)
 source_group(SCPI                                    REGULAR_EXPRESSION src/SCPI/*)
@@ -193,6 +194,7 @@ file(GLOB SOURCES   ../common/_VS/*
                     src/Multimeter/*
                     src/Osci/*
                     src/Osci/Display/*
+                    src/Osci/Math/*
                     src/Osci/Measurements/*
                     src/Recorder/*
                     src/SCPI/*

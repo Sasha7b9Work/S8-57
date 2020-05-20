@@ -404,10 +404,6 @@ void Menu::DrawHint()
         {
             DrawHintItem(x, y, width);
         }
-        else
-        {
-            // ничего не делаем
-        }
     }
 }
 

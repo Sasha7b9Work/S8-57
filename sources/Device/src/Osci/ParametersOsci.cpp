@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "globals.h"
 #include "device.h"
 #include "MessageMgr.h"
 #include "Display/Grid.h"
@@ -22,7 +23,6 @@
 
 //                                            2нс 5нс 10нс 20нс 50нс
 static const int deltaPoint[TBase::Count] = { 50, 20, 10,  5,   2 };
-
 
 
 static const int voltsInPixelInt[] =   // Коэффициент 20000
@@ -136,10 +136,6 @@ const float TShift::absStep[TBase::Count] =
     /* 5 с     */ 5.0F    / 20,   // 100e4
     /* 10 с    */ 10.0F   / 20    // 200e4
 };
-
-
-// Установленное в true значение означает, что нужно выводить значок синхроимпульса
-bool Trig::pulse = false;
 
 
 static uint8 ValueForRange(Chan::E ch);
@@ -297,8 +293,6 @@ void TBase::Set(TBase::E base)
     Bandwidth::Load(ChanB);
 
     MessageMgr::OsciSettingsEffectOnAverageChanged();
-
-    Osci::ChangedTBase();
 
     DisplayOsci::DrawingValueParameter::Enable(DisplayOsci::DrawingValueParameter::TBase);
 }
@@ -501,7 +495,7 @@ void TrigLevel::Set(Chan::E ch, int16 newLevel)
 
 bool Trig::SyncPulse()
 {
-    return pulse;
+    return Trig::pulse;
 }
 
 

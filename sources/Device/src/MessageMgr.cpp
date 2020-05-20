@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "MessageMgr.h"
-#include "Osci/Osci.h"
+#include "Osci/Math/OsciMath.h"
 
 
 

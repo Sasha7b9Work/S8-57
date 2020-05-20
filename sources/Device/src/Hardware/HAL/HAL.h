@@ -5,11 +5,10 @@
 
 #define PRIORITY_SOUND_DMA1_STREAM5 5, 0
 
-#define ERROR_HANDLER()            ::HAL::ErrorHandler(__FILE__, __LINE__)
+#define ERROR_HANDLER()             ::HAL::ErrorHandler(__FILE__, __LINE__)
 
 
-#define HAL_BUS_SET_MODE_FSMC     HAL_BUS::ConfigureToFSMC()
-#define HAL_BUS_CONFIGURE_TO_FSMC if(HAL_BUS::mode != HAL_BUS::Mode::FSMC) { HAL_BUS_SET_MODE_FSMC; }
+#define HAL_BUS_CONFIGURE_TO_FSMC() if(HAL_BUS::mode != HAL_BUS::Mode::FSMC) { HAL_BUS::ConfigureToFSMC(); }
 
 #ifdef GUI
 #define HAL_IWDG_REFRESH

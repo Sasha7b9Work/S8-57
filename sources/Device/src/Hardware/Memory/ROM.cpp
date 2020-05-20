@@ -10,7 +10,7 @@
 #define SIZE_RECORD         512                      // Размер одной записи
 
 
-class Record;
+struct Record;
 
 /*
     В каждом секторе расположено (128 * 1024 / SIZE_RECORD) записей
@@ -40,7 +40,7 @@ struct SectorSet
 };
 
 
-class Record
+struct Record
 {
 public:
 

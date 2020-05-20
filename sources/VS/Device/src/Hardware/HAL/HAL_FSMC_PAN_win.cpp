@@ -28,7 +28,7 @@ void HAL_BUS::Panel::Send(const uint8 *data, int num)
 {
     if(data == nullptr)
     {
-        Recorder::ReadPoint();
+        Recorder::RecordPoints();
     }
     else if(num == 2 && *data == Command::Paint_SetColor)
     {
@@ -47,7 +47,7 @@ void HAL_BUS::Panel::Send(const uint8 *data, int num)
     }
     else
     {
-        Recorder::ReadPoint();
+        Recorder::RecordPoints();
     }
 }
 

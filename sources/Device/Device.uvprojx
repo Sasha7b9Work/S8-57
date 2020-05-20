@@ -433,6 +433,16 @@
               <FilePath>.\src\device.h</FilePath>
             </File>
             <File>
+              <FileName>globals.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\globals.h</FilePath>
+            </File>
+            <File>
+              <FileName>globals.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\globals.cpp</FilePath>
+            </File>
+            <File>
               <FileName>log.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\log.h</FilePath>
@@ -1293,6 +1303,11 @@
               <FilePath>.\src\Menu\Pages\PageDisplay\PageDisplay.cpp</FilePath>
             </File>
             <File>
+              <FileName>PageDisplay_Accumulation.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageDisplay\PageDisplay_Accumulation.cpp</FilePath>
+            </File>
+            <File>
               <FileName>PageDisplay_Settings.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageDisplay\PageDisplay_Settings.cpp</FilePath>
@@ -1301,11 +1316,6 @@
               <FileName>PageDisplay_Settings_Colors.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageDisplay\PageDisplay_Settings_Colors.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageAccumulation.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageDisplay\PageAccumulation.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1543,11 +1553,6 @@
           <GroupName>Osci</GroupName>
           <Files>
             <File>
-              <FileName>AveragerOsci.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\AveragerOsci.cpp</FilePath>
-            </File>
-            <File>
               <FileName>DeviceSettings.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Osci\DeviceSettings.h</FilePath>
@@ -1556,11 +1561,6 @@
               <FileName>DeviceSettings.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\DeviceSettings.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Interpolator.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\Interpolator.cpp</FilePath>
             </File>
             <File>
               <FileName>Osci.h</FileName>
@@ -1636,6 +1636,31 @@
               <FileName>PainterData.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\Display\PainterData.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Osci/Math</GroupName>
+          <Files>
+            <File>
+              <FileName>Averager.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Math\Averager.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InterpolatorLinear.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Math\InterpolatorLinear.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>InterpolatorSinX_X.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Math\InterpolatorSinX_X.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>OsciMath.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Osci\Math\OsciMath.h</FilePath>
             </File>
           </Files>
         </Group>
