@@ -135,8 +135,8 @@ DEF_CHOICE_7( cMode,
 )
 
 
-static bool IsActive_Zero()
-{ //-V524
+static bool IsActive_Zero() //-V524
+{
     return S_MULT_AVP_DISABLED;
 }
 

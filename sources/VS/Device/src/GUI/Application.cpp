@@ -23,7 +23,7 @@ extern void init();
 #define FILE_CONFIG wxT("config.ini")
 
 
-enum
+enum //-V2521
 {
     FILE_QUIT = wxID_EXIT,
     FILE_SIZE = wxID_HIGHEST + 1,

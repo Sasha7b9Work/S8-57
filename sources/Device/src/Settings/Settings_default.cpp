@@ -78,7 +78,7 @@ const Settings Settings::defaultSettings =
         TBase::_5ms,                // base
         PeakDetMode::Disabled,      // peakDet
         TPos::Center,               // TPos
-        SampleType::Real,           // sampleType
+        SampleType::Equal,          // sampleType
         FunctionTime::Time,         // timeDivXPos
         LinkingTShift::Time,        // linkingTShift
         SampleType::Real            // sampleTypeOld
