@@ -1,21 +1,25 @@
 #include "defines.h"
+#include "log.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Osci/DeviceSettings.h"
 #include "Osci/Math/OsciMath.h"
 #include "Utils/Math.h"
+#include "Utils/Queue.h"
+#include <cstdio>
 #include <cstdlib>
 #include <cmath>
 
 
 static void InterpolateChannel(uint8 *data, int numPoints, uint tBase);
 
+// Подсчитать и вывести на экран количество пропущенных точек между считанными
+static void ShowDeltas(uint8 *data, int numPoints);
+
 
 void InterpolatorSinX_X::Run(DataSettings *ds)
 {
     HAL_BUS_CONFIGURE_TO_FSMC();
-
-    uint start = TIME_MS;
 
     int numPoints = ds->PointsInChannel();
 
@@ -33,6 +37,8 @@ void InterpolatorSinX_X::Run(DataSettings *ds)
 
 static void InterpolateChannel(uint8 *data, int numPoints, uint tBase)
 {
+    ShowDeltas(data, numPoints);
+
     /*
  Последовательности x в sin(x)   // Это, наверное, неправильно
 2    1. 20нс : pi/2, -pi/2 ...
@@ -128,4 +134,32 @@ static void InterpolateChannel(uint8 *data, int numPoints, uint tBase)
     }
 
     std::free(signedData);
+}
+
+
+static void ShowDeltas(uint8 *data, int numPoints)
+{
+    int iPrevAve = 0;                       // Индекс предыдущей несчитанной точки
+
+    Queue<int> queue;
+
+    for (int i = 0; i < numPoints; i++)
+    {
+        if (data[i] == VALUE::AVE)
+        {
+            queue.Push(i - iPrevAve);
+            iPrevAve = i;
+        }
+
+        if (queue.Size() == 5)
+        {
+            break;
+        }
+    }
+
+    char buffer[100];
+
+    std::snprintf(buffer, 99, "%d %d %d %d %d", queue[0], queue[1], queue[2], queue[3], queue[4]);
+
+    LOG_WRITE(buffer);
 }

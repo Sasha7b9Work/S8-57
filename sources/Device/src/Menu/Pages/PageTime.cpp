@@ -12,14 +12,9 @@
 
 bool SampleType::IsReal()
 {
-    if (!OSCI_IN_MODE_RANDOMIZER)
+    if (!OSCI_IN_MODE_RANDOMIZER || S_TRIG_START_MODE_IS_SINGLE)
     {
-        return false; 
-    }
-
-    if (S_TRIG_START_MODE_IS_SINGLE)
-    {
-        return true;
+        return true; 
     }
 
     return (S_RAND_SAMPLE_TYPE == SampleType::Real);
@@ -79,8 +74,8 @@ DEF_CHOICE_2( cSample,                                                          
     "\"–еальна€\" - \n"
     "\"Ёквивалентна€\" -"
     ,
-    "–еальное врем€",
     "Ёквивалентна€",
+    "–еальное врем€",
     S_RAND_SAMPLE_TYPE, &PageTime::self, IsActive_Sample, Choice::Changed, Choice::AfterDraw
 )
 

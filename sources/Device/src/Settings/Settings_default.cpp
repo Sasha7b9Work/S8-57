@@ -80,8 +80,7 @@ const Settings Settings::defaultSettings =
         TPos::Center,               // TPos
         SampleType::Equal,          // sampleType
         FunctionTime::Time,         // timeDivXPos
-        LinkingTShift::Time,        // linkingTShift
-        SampleType::Real            // sampleTypeOld
+        LinkingTShift::Time         // linkingTShift
     },
 
     // Μενώ ΟΐΜίÒά

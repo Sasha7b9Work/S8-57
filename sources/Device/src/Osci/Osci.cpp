@@ -292,22 +292,6 @@ void Osci::ChangedTrigStartMode()
     {
         Start(true);
     }
-
-    // Елси находимся в режиме рандомизатора
-    if(OSCI_IN_MODE_RANDOMIZER)
-    {
-        // и переключаемся на одиночный режим запуска, то надо сохранить имеющийся тип выборки, чтобы восстановить при возвращении в режим 
-        // рандомизатора автоматический или ждущий
-        if(S_TRIG_START_MODE_IS_SINGLE)
-        {
-            S_RAND_SAMPLE_TYPE_OLD = S_RAND_SAMPLE_TYPE;
-            S_RAND_SAMPLE_TYPE = SampleType::Real;
-        }
-        else if(S_TRIG_START_MODE_IS_AUTO)    // Иначе восстановим ранее сохранённый
-        {
-            S_RAND_SAMPLE_TYPE = S_RAND_SAMPLE_TYPE_OLD;
-        }
-    }
 }
 
 
