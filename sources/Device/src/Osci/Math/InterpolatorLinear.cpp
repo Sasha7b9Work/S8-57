@@ -87,7 +87,9 @@ static uint8 *FindReadedElement(uint8 * const start)
 
 static void InterpolateSegment(Segment *segment)
 {
-    if(segment->start == end || segment->start == begin || segment->end == end)
+    if((segment->start == end) ||
+       (segment->start == begin) ||
+       (segment->end == end))
     {
         return;
     }

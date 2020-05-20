@@ -43,6 +43,13 @@ uint16 Osci::ReadLastRecord(Chan::E ch)
     if(ch == ChanA)
     {
         address = static_cast<uint16>(HAL_BUS::FPGA::Read(RD::LAST_RECORD_LO) + ((HAL_BUS::FPGA::Read(RD::LAST_RECORD_HI)) << 8));
+
+        static const uint16 deltas[8] = { 5, 5, 5, 5, 5, 10, 5, 2 };
+
+        if (S_TIME_BASE <= TBase::_500ns)
+        {
+            address += deltas[S_TIME_BASE];
+        }
     }
 
     return address;
