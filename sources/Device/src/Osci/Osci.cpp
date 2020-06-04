@@ -218,7 +218,7 @@ static bool ProcessFlagReady()
 {
     bool needStop = false;
 
-    if(FPGA::flag.DataReady())
+    if(FPGA::Flag::DataReady())
     {
         Timer::PauseOnTicks(5 * 90 * 20);
 
@@ -248,9 +248,9 @@ bool Osci::IsRunning()
 
 void Osci::ProcessFlagPred()
 {
-    if(FPGA::flag.Pred() && !FPGA::forcedStart)
+    if(FPGA::Flag::Pred() && !FPGA::forcedStart)
     {
-        if(!OSCI_IN_MODE_RANDOMIZER && S_TRIG_START_MODE_IS_AUTO && FPGA::flag.HoldOff())
+        if(!OSCI_IN_MODE_RANDOMIZER && S_TRIG_START_MODE_IS_AUTO && FPGA::Flag::HoldOff())
         {
             FPGA::ForcedStart();
         }

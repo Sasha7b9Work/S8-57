@@ -198,7 +198,7 @@ void Tester::ProcessStep()
         countRead++;
 
         FPGA::ReadFlag();
-        if(FPGA::flag.DataReady())
+        if(FPGA::Flag::DataReady())
         {
             ReadData();
             countRead = 0;
@@ -382,7 +382,7 @@ static bool StartFPGA()
     for(int i = 0; i < 20; i++)
     {
         FPGA::ReadFlag();
-        if(FPGA::flag.Pred())
+        if(FPGA::Flag::Pred())
         {
             FPGA::ForcedStart();
             return true;

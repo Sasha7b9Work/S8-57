@@ -187,9 +187,9 @@ static float FindStretchChannel(Chan::E ch)
 
     FPGA::GiveStart(static_cast<uint16>(~(1)), static_cast<uint16>(~(NUM_POINTS + 100)));
     
-    FPGA::flag.flag = 0;
+    FPGA::Flag::Clear();
 
-    while(!FPGA::flag.Pred())
+    while(!FPGA::Flag::Pred())
     {
         FPGA::ReadFlag();
     }
@@ -200,7 +200,7 @@ static float FindStretchChannel(Chan::E ch)
     {
         FPGA::ReadFlag();
 
-    } while (!FPGA::flag.DataReady());
+    } while (!FPGA::Flag::DataReady());
 
     uint16 addrRead = static_cast<uint16>(Osci::ReadLastRecord(ch) - NUM_POINTS - 50);
 

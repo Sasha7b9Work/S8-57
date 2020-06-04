@@ -7,18 +7,20 @@
 
 static uint timeFireTrig = 0;   // Время зажигания лампочки синхронизации
 
+extern uint16 flagFPGA;
+
 void FPGA::ReadFlag()
 {
-    flag.flag = static_cast<uint16>(HAL_BUS::FPGA::Read(RD::FLAG_LO) | (HAL_BUS::FPGA::Read(RD::FLAG_HI) << 8));
+    flagFPGA = static_cast<uint16>(HAL_BUS::FPGA::Read(RD::FLAG_LO) | (HAL_BUS::FPGA::Read(RD::FLAG_HI) << 8));
 
-    if (flag.TrigReady() && !forcedStart)
+    if (Flag::TrigReady() && !forcedStart)
     {
         timeFireTrig = TIME_MS;
         Trig::pulse = true;
         OsciStateWork::triggered = true;
     }
 
-    if(!flag.TrigReady() && TIME_MS - timeFireTrig > 1000)
+    if(!Flag::TrigReady() && TIME_MS - timeFireTrig > 1000)
     {
         Trig::pulse = false;
     }

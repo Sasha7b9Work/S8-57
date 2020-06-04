@@ -67,14 +67,14 @@ void FreqMeter::Update()
 {
     SetStateLamps();
 
-    bool freqReady = ::FPGA::flag.FreqReady();
+    bool freqReady = ::FPGA::Flag::FreqReady();
 
     if(freqReady)
     {
         lastFreqRead = TIME_MS;
     }
 
-    bool periodReady = ::FPGA::flag.PeriodReady();
+    bool periodReady = ::FPGA::Flag::PeriodReady();
 
     if(periodReady)
     {
@@ -106,12 +106,12 @@ void FreqMeter::Update()
         }
     }
 
-    if(::FPGA::flag.FreqOverflow())
+    if(::FPGA::Flag::FreqOverflow())
     {
         freqActual.word = MAX_UINT;
         lastFreqOver = TIME_MS;
     }
-    if(::FPGA::flag.PeriodOverflow())
+    if(::FPGA::Flag::PeriodOverflow())
     {
         periodActual.word = MAX_UINT;
         lastPeriodOver = TIME_MS;
@@ -203,14 +203,14 @@ void FreqMeter::SetStateLampFreq()
 {
     if(timeStartMeasureFreq == 0)
     {
-        if(::FPGA::flag.FreqInProcess())
+        if(::FPGA::Flag::FreqInProcess())
         {
             timeStartMeasureFreq = TIME_MS;
         }
     }
     else
     {
-        if(::FPGA::flag.FreqReady())
+        if(::FPGA::Flag::FreqReady())
         {
             timeStartMeasureFreq = 0;
         }
@@ -222,14 +222,14 @@ void FreqMeter::SetStateLampPeriod()
 {
     if(timeStartMeasurePeriod == 0)
     {
-        if(::FPGA::flag.PeriodInProcess())
+        if(::FPGA::Flag::PeriodInProcess())
         {
             timeStartMeasurePeriod = TIME_MS;
         }
     }
     else
     {
-        if(::FPGA::flag.PeriodReady())
+        if(::FPGA::Flag::PeriodReady())
         {
             timeStartMeasurePeriod = 0;
         }
@@ -297,12 +297,12 @@ void DisplayFreqMeter::DrawDebugInfo()
 
     x += 20;
 
-    if(::FPGA::flag.FreqInProcess())
+    if(::FPGA::Flag::FreqInProcess())
     {
         Region(size - 2, size - 2).Fill(x + 1, y + 5, Color::FILL);
     }
 
-    if(::FPGA::flag.PeriodInProcess())
+    if(::FPGA::Flag::PeriodInProcess())
     {
         Region(size - 2, size - 2).Fill(x + 1, y + 16, Color::FILL);
     }

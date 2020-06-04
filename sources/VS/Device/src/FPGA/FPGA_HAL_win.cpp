@@ -6,7 +6,10 @@
 static uint timePrevReadP2P = 0;
 
 
+extern uint16 flagFPGA;
+
+
 void FPGA::ReadFlag()
 {
-    flag.flag = 0xFFFF;
+    flagFPGA = 0xFFFF;
 }

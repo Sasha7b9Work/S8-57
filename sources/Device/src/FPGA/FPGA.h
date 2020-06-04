@@ -4,25 +4,6 @@
 #include "FPGA/MathFPGA.h"
 
 
-struct FlagFPGA
-{
-    static uint16 flag;
-
-    FlagFPGA() { flag = 0; }
-
-    static bool DataReady();
-    static bool TrigReady();
-    static bool Pred();
-    static bool FreqReady();
-    static bool HoldOff();
-    static bool PeriodReady();
-    static bool FreqOverflow();
-    static bool PeriodOverflow();
-    static bool FreqInProcess();
-    static bool PeriodInProcess();
-};
-
-
 struct FPGA
 {
     friend struct ContextFreqMeter;
@@ -48,12 +29,7 @@ struct FPGA
     // ¬ключить/выключить калибратор.
     static void LoadCalibratorMode();
 
-
     static void GiveStart(uint16 pred, uint16 post);
-
-
-    static FlagFPGA flag;
-
 
     static const int MAX_NUM_POINTS = 8 * 1024;
 
@@ -63,6 +39,21 @@ struct FPGA
     static void ReadFlag();
 
     static void LoadRegUPR();
+
+    struct Flag
+    {
+        static void Clear();
+        static bool DataReady();
+        static bool TrigReady();
+        static bool Pred();
+        static bool FreqReady();
+        static bool HoldOff();
+        static bool PeriodReady();
+        static bool FreqOverflow();
+        static bool PeriodOverflow();
+        static bool FreqInProcess();
+        static bool PeriodInProcess();
+    };
 
 private:
 

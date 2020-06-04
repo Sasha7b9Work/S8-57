@@ -8,9 +8,7 @@
 #include <stm32f4xx_hal.h>
 
 
-FlagFPGA FPGA::flag;
-
-uint16 FlagFPGA::flag = 0;
+uint16 flagFPGA = 0;
 
 
 void FPGA::LoadRegUPR()
@@ -40,63 +38,69 @@ void FPGA::LoadRegUPR()
 }
 
 
-bool FlagFPGA::DataReady()
+void FPGA::Flag::Clear()
 {
-    return _GET_BIT(flag, Flag::_DATA_READY) == 1;
+    flagFPGA = 0;
 }
 
 
-bool FlagFPGA::TrigReady()
+bool FPGA::Flag::DataReady()
 {
-    return _GET_BIT(flag, Flag::_TRIG_READY) == 1;
+    return _GET_BIT(flagFPGA, ::Flag::_DATA_READY) == 1;
 }
 
 
-bool FlagFPGA::HoldOff()
+bool FPGA::Flag::TrigReady()
 {
-    return _GET_BIT(flag, Flag::_HOLD_OFF_FLAG) == 1;
+    return _GET_BIT(flagFPGA, ::Flag::_TRIG_READY) == 1;
 }
 
 
-bool FlagFPGA::Pred()
+bool FPGA::Flag::HoldOff()
 {
-    return _GET_BIT(flag, Flag::_PRED) == 1;
+    return _GET_BIT(flagFPGA, ::Flag::_HOLD_OFF_FLAG) == 1;
 }
 
 
-bool FlagFPGA::FreqReady()
+bool FPGA::Flag::Pred()
 {
-    return _GET_BIT(flag, Flag::_FREQ_READY) == 1;
+    return _GET_BIT(flagFPGA, ::Flag::_PRED) == 1;
 }
 
 
-bool FlagFPGA::PeriodReady()
+bool FPGA::Flag::FreqReady()
 {
-    return _GET_BIT(flag, Flag::_PERIOD_READY) == 1;
+    return _GET_BIT(flagFPGA, ::Flag::_FREQ_READY) == 1;
 }
 
 
-bool FlagFPGA::FreqOverflow()
+bool FPGA::Flag::PeriodReady()
 {
-    return _GET_BIT(flag, Flag::_FREQ_OVERFLOW) == 1;
+    return _GET_BIT(flagFPGA, ::Flag::_PERIOD_READY) == 1;
 }
 
 
-bool FlagFPGA::PeriodOverflow()
+bool FPGA::Flag::FreqOverflow()
 {
-    return _GET_BIT(flag, Flag::_PERIOD_OVERFLOW) == 1;
+    return _GET_BIT(flagFPGA, ::Flag::_FREQ_OVERFLOW) == 1;
 }
 
 
-bool FlagFPGA::FreqInProcess()
+bool FPGA::Flag::PeriodOverflow()
 {
-    return _GET_BIT(flag, Flag::_FREQ_IN_PROCESS) == 1;
+    return _GET_BIT(flagFPGA, ::Flag::_PERIOD_OVERFLOW) == 1;
 }
 
 
-bool FlagFPGA::PeriodInProcess()
+bool FPGA::Flag::FreqInProcess()
 {
-    return _GET_BIT(flag, Flag::_PERIOD_IN_PROCESS) == 1;
+    return _GET_BIT(flagFPGA, ::Flag::_FREQ_IN_PROCESS) == 1;
+}
+
+
+bool FPGA::Flag::PeriodInProcess()
+{
+    return _GET_BIT(flagFPGA, ::Flag::_PERIOD_IN_PROCESS) == 1;
 }
 
 

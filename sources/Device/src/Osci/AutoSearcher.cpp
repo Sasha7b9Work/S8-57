@@ -98,7 +98,7 @@ static float FindFrequency(Chan::E ch, Range::E range)
     {
         FPGA::ReadFlag();
 
-    } while (FPGA::flag.PeriodInProcess() && FPGA::flag.FreqInProcess());
+    } while (FPGA::Flag::PeriodInProcess() && FPGA::Flag::FreqInProcess());
 
     set = old;
 
