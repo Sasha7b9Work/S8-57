@@ -1,4 +1,6 @@
 #include "defines.h"
+#include "FPGA/FPGA.h"
+#include "FreqMeter/FreqMeter.h"
 #include "Osci/Osci.h"
 
 
@@ -92,7 +94,11 @@ static float FindFrequency(Chan::E ch, Range::E range)
     TuneFreqMeter();
     Osci::Start(false);
 
+    do
+    {
+        FPGA::ReadFlag();
 
+    } while (FPGA::flag.PeriodInProcess() && FPGA::flag.FreqInProcess());
 
     set = old;
 
@@ -162,6 +168,11 @@ Range::E FindRange(Chan::E)
 
 static void TuneFreqMeter()
 {
+    S_FREQ_METER_ENABLED = true;
+    S_FREQ_TIME_COUNTING = FreqMeter::TimeCounting::_100ms;
+    S_FREQ_FREQ_CLC = FreqMeter::FreqClc::_100MHz;
+    S_FREQ_NUMBER_PERIODS = FreqMeter::NumberPeriods::_1;
+
     FreqMeter::FPGA::LoadSettings();
     FreqMeter::FPGA::ResetCounterFreq();
     FreqMeter::FPGA::ResetCounterPeriod();
