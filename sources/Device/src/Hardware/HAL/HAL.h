@@ -158,7 +158,8 @@ struct HAL_HCD
 
 struct HAL_IWDG
 {
-    static void Init();
+    static void Disable();
+    static void Enable();
 };
 
 

@@ -3,6 +3,12 @@
 #include <stm32f4xx_hal.h>
 
 
-void HAL_IWDG::Init()
+void HAL_IWDG::Enable()
 {
+}
+
+
+void HAL_IWDG::Disable()
+{
+
 }

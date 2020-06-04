@@ -18,7 +18,7 @@ static uint16_t tmpCC4[2] = { 0, 0 };
 static uint GetLSIFrequency();
 
 
-void HAL_IWDG::Init()
+void HAL_IWDG::Enable()
 {
     __HAL_RCC_TIM5_CLK_ENABLE();
 
@@ -49,6 +49,14 @@ void HAL_IWDG::Init()
     {
         ERROR_HANDLER();
     }
+}
+
+
+void HAL_IWDG::Disable()
+{
+    HAL_NVIC_DisableIRQ(TIM5_IRQn);
+
+    __HAL_RCC_TIM5_CLK_DISABLE();
 }
 
 

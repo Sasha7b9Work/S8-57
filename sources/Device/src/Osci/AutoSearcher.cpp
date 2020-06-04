@@ -1,13 +1,16 @@
 #include "defines.h"
 #include "FPGA/FPGA.h"
 #include "FreqMeter/FreqMeter.h"
+#include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
 #include "Osci/Osci.h"
+#include "Utils/Values.h"
 
 
 // Попытка найти сигнал на канале ch. Если попытка удалась, то найденные параметры загружаются в прибор
 static bool FindSignal(Chan::E ch);
 
-// Находит частоту сигнала, поданного на вход ch. В случае неудачи возвращает значение 0.0F
+// Находит частоту сигнала, поданного на вход ch. В случае неудачи возвращает значение Float::ERROR
 static float FindFrequency(Chan::E ch);
 static float FindFrequency(Chan::E ch, Range::E range);
 
@@ -20,9 +23,14 @@ static TBase::E CalculateTBase(float frequency);
 // Заслать соответствующие настройки в частотомер
 static void TuneFreqMeter();
 
+// Рассчитывает частоту, исходя из данных аппаратного частотомера
+static float CalculateFrequency();
+
 
 void Osci::RunAutoSearch()
 {
+    HAL_IWDG::Disable();
+
     Settings old = set;
 
     if (!FindSignal(ChanA))
@@ -38,6 +46,8 @@ void Osci::RunAutoSearch()
     }
 
     Osci::Init();
+
+    HAL_IWDG::Enable();
 }
 
 
@@ -45,14 +55,14 @@ static bool FindSignal(Chan::E ch)
 {
     float frequency = FindFrequency(ch);
 
-    if (frequency != 0.0F)
+    if (frequency != Float::ERROR)
     {
         TBase::Set(CalculateTBase(frequency));
 
-        Range::Set(ch, FindRange(ch));
+        //Range::Set(ch, FindRange(ch));
     }
 
-    return (frequency != 0.0F);
+    return (frequency != Float::ERROR);
 }
 
 
@@ -66,9 +76,9 @@ static float FindFrequency(Chan::E ch)
     TShift::Set(0);
     RShift::Set(ch, 0);
     
-    float frequency = 0.0F;
+    float frequency = Float::ERROR;
 
-    for (int range = Range::_20V; range >= 0 && (frequency == 0.0F); range--)
+    for (int range = Range::_20V; range >= 0 && (frequency == Float::ERROR); range--)
     {
         frequency = FindFrequency(ch, static_cast<Range::E>(range));
     }
@@ -91,6 +101,9 @@ static float FindFrequency(Chan::E ch, Range::E range)
 
     Osci::Stop();
     Range::Set(ch, range);
+
+    Timer::PauseOnTime(500);
+
     TuneFreqMeter();
     Osci::Start(false);
 
@@ -98,11 +111,11 @@ static float FindFrequency(Chan::E ch, Range::E range)
     {
         FPGA::ReadFlag();
 
-    } while (FPGA::Flag::PeriodInProcess() && FPGA::Flag::FreqInProcess());
+    } while (!FPGA::Flag::PeriodReady() || !FPGA::Flag::FreqReady());
 
     set = old;
 
-    return 0.0F;
+    return CalculateFrequency();
 }
 
 
@@ -169,11 +182,32 @@ Range::E FindRange(Chan::E)
 static void TuneFreqMeter()
 {
     S_FREQ_METER_ENABLED = true;
-    S_FREQ_TIME_COUNTING = FreqMeter::TimeCounting::_100ms;
+    S_FREQ_TIME_COUNTING = FreqMeter::TimeCounting::_1s;
     S_FREQ_FREQ_CLC = FreqMeter::FreqClc::_100MHz;
     S_FREQ_NUMBER_PERIODS = FreqMeter::NumberPeriods::_1;
 
     FreqMeter::FPGA::LoadSettings();
     FreqMeter::FPGA::ResetCounterFreq();
     FreqMeter::FPGA::ResetCounterPeriod();
+
+    FPGA::Flag::Clear();
+}
+
+
+static float CalculateFrequency()
+{
+    if (!FPGA::Flag::FreqOverflow() && FPGA::Flag::FreqReady())
+    {
+        BitSet32 counter = FreqMeter::FPGA::ReadCounterFreq();
+        uint freq = counter.word;
+        freq = freq;
+    }
+
+    if (!FPGA::Flag::PeriodOverflow() && FPGA::Flag::PeriodReady())
+    {
+        BitSet32 counter = FreqMeter::FPGA::ReadCounterPeriod();
+        counter = counter;
+    }
+
+    return Float::ERROR;
 }

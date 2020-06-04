@@ -46,8 +46,9 @@ struct FPGA
         static bool DataReady();
         static bool TrigReady();
         static bool Pred();
-        static bool FreqReady();
         static bool HoldOff();
+
+        static bool FreqReady();
         static bool PeriodReady();
         static bool FreqOverflow();
         static bool PeriodOverflow();
