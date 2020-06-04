@@ -33,6 +33,8 @@ static void WriteStringAndNumber(const char *text, int x, int y, int number, pSt
 
 static void DrawTime(int x, int y);
 
+static void DrawFrequency(int x, int y);
+
 // Нарисовать разделительные линии
 static void DrawSeparators();
 
@@ -55,29 +57,13 @@ void DisplayOsci::HiPart::Draw()
 
     x = DrawMainParameters(x, y0 + 1); //-V2007
 
-    x += 82;
-
-    x += 42;
+    x += 124;
 
     DFont::Set(DTypeFont::_8);
 
     Separator::Draw(x + 1, y0);
 
-    if (S_MEM_MODE_WORK_IS_DIR)
-    {
-        char mesFreq[20] = "\x7c=";
-        float freq = FreqMeter::GetFreq();
-        if (freq == -1.0F) //-V550 //-V2550
-        {
-            std::strcat(mesFreq, "******");
-        }
-        else
-        {
-            std::strcat(mesFreq, Frequency(freq).ToString().c_str());
-        }
-
-        String(mesFreq).Draw(x + 3, y0 + 1, Color::FILL); //-V2007
-    }
+    DrawFrequency(x + 3, y0 + 1);
 
     DrawTime(x + 3, y0 + 10); //-V2007
 
@@ -302,6 +288,26 @@ static void DrawTime(int x, int y)
     Integer(static_cast<int>(time.minutes)).ToString(false, 2).Draw(x + dField + dSeparator, y);
     String(':').Draw(x + 2 * dField + dSeparator, y);
     Integer(static_cast<int>(time.seconds)).ToString(false, 2).Draw(x + 2 * dField + 2 * dSeparator, y);
+}
+
+
+static void DrawFrequency(int x, int y)
+{
+    if (S_MEM_MODE_WORK_IS_DIR)
+    {
+        char mesFreq[20] = "\x7c=";
+        float freq = FreqMeter::GetFreq();
+        if (freq == -1.0F) //-V550 //-V2550
+        {
+            std::strcat(mesFreq, "******");
+        }
+        else
+        {
+            std::strcat(mesFreq, Frequency(freq).ToString().c_str());
+        }
+
+        String(mesFreq).Draw(x, y, Color::FILL); //-V2007
+    }
 }
 
 
