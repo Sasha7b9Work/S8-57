@@ -223,7 +223,7 @@ void FreqMeter::SetStateLampPeriod()
 {
     if(timeStartMeasurePeriod == 0)
     {
-        if(ContextFreqMeter::GetFlag::PERIOD_IN_PROCESS())
+        if(::FPGA::flag.PeriodInProcess())
         {
             timeStartMeasurePeriod = TIME_MS;
         }
@@ -303,7 +303,7 @@ void DisplayFreqMeter::DrawDebugInfo()
         Region(size - 2, size - 2).Fill(x + 1, y + 5, Color::FILL);
     }
 
-    if(ContextFreqMeter::GetFlag::PERIOD_IN_PROCESS())
+    if(::FPGA::flag.PeriodInProcess())
     {
         Region(size - 2, size - 2).Fill(x + 1, y + 16, Color::FILL);
     }
