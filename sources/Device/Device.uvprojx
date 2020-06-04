@@ -703,16 +703,6 @@
               <FilePath>.\src\FPGA\Calibrator.cpp</FilePath>
             </File>
             <File>
-              <FileName>ContextFreqMeter.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\FPGA\ContextFreqMeter.h</FilePath>
-            </File>
-            <File>
-              <FileName>ContextFreqMeter.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\FPGA\ContextFreqMeter.cpp</FilePath>
-            </File>
-            <File>
               <FileName>ContextRecorder.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\FPGA\ContextRecorder.h</FilePath>

@@ -1,7 +1,6 @@
 #include "defines.h"
 #include "Display/Grid.h"
 #include "Display/Primitives.h"
-#include "FPGA/ContextFreqMeter.h"
 #include "FPGA/FPGA.h"
 #include "FreqMeter/DisplayFreqMeter.h"
 #include "Hardware/Timer.h"
