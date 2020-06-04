@@ -41,7 +41,7 @@ void DisplayFreqMeter::Update()
 {
     // \todo ¬ этой строке точку ставить не где придЄтс€, а в той позиции, где она сто€ла последний раз
 
-    if(!S_FREQ_ENABLED)
+    if(!S_FREQ_METER_ENABLED)
     {
         return;
     }

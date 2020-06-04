@@ -19,14 +19,14 @@ DEF_CHOICE_2( cEnable,                                                          
     "",
     DISABLE_RU,
     ENABLE_RU,
-    S_FREQ_ENABLED, &PageFreqMeter::self, Item::Active, OnChanged_Enable, Choice::AfterDraw
+    S_FREQ_METER_ENABLED, &PageFreqMeter::self, Item::Active, OnChanged_Enable, Choice::AfterDraw
 )
 
 
 
 static bool IsActive_ModeView()
 {
-    return S_FREQ_ENABLED;
+    return S_FREQ_METER_ENABLED;
 }
 
 static void OnChanged_ModeView(bool)
@@ -46,13 +46,13 @@ DEF_CHOICE_2( cModeMeasure,                                                     
 
 static bool IsActive_SettingsFrequency()
 {
-    return S_FREQ_ENABLED && S_FREQ_MODE_MEASURE_IS_PERIOD;
+    return S_FREQ_METER_ENABLED && S_FREQ_MODE_MEASURE_IS_PERIOD;
 }
 
 
 static bool IsActive_TimeF()
 {
-    return S_FREQ_ENABLED && S_FREQ_MODE_MEASURE_IS_FREQUENCY;
+    return S_FREQ_METER_ENABLED && S_FREQ_MODE_MEASURE_IS_FREQUENCY;
 }
 
 static void OnChanged_TimeF(bool)

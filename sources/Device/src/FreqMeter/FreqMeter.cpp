@@ -168,7 +168,7 @@ void FreqMeter::ReadPeriod()
 float FreqMeter::FreqSetToFreq(const BitSet32 *fr)
 {
     const float k[3] = {10.0F, 1.0F, 0.1F};
-    return S_FREQ_ENABLED ? (fr->word * k[S_FREQ_TIME_COUNTING]) : (fr->word * 10.0F);
+    return S_FREQ_METER_ENABLED ? (fr->word * k[S_FREQ_TIME_COUNTING]) : (fr->word * 10.0F);
 }
 
 
@@ -182,7 +182,7 @@ float FreqMeter::PeriodSetToFreq(const BitSet32 *period_)
     const float k[4] = {10e4F, 10e5F, 10e6F, 10e7F};
     const float kP[3] = {1.0F, 10.0F, 100.0F};
 
-    return S_FREQ_ENABLED ? (k[S_FREQ_FREQ_CLC] * kP[S_FREQ_NUMBER_PERIODS] / static_cast<float>(period_->word)) : (10e5F / static_cast<float>(period_->word));
+    return S_FREQ_METER_ENABLED ? (k[S_FREQ_FREQ_CLC] * kP[S_FREQ_NUMBER_PERIODS] / static_cast<float>(period_->word)) : (10e5F / static_cast<float>(period_->word));
 }
 
 
@@ -356,7 +356,7 @@ void FreqMeter::FPGA::LoadSettings()
 {
     uint8 data = 0;
 
-    if(S_FREQ_ENABLED)
+    if(S_FREQ_METER_ENABLED)
     {
         const uint16 maskTime[3] = { 0, 1, 2 };
         const uint16 maskFreqClc[4] = { 0, (1 << 2), (1 << 3), ((1 << 3) + (1 << 2)) };
