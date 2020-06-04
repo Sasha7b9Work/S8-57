@@ -14,7 +14,11 @@
 typedef struct _USBH_HandleTypeDef USBH_HandleTypeDef;
 
 
+#ifdef WIN32
+#define HAL_IWDG_REFRESH()
+#else
 #define HAL_IWDG_REFRESH()  (*(reinterpret_cast<uint *>(0x40003000U)) = IWDG_KEY_RELOAD)            // Вынесено в #define для уменьшения задержки
+#endif
 
 
 struct HAL
