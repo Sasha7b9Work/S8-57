@@ -75,7 +75,7 @@ void FreqMeter::Update()
         lastFreqRead = TIME_MS;
     }
 
-    bool periodReady = ContextFreqMeter::GetFlag::PERIOD_READY();
+    bool periodReady = ::FPGA::flag.PeriodReady();
 
     if(periodReady)
     {
@@ -230,7 +230,7 @@ void FreqMeter::SetStateLampPeriod()
     }
     else
     {
-        if(ContextFreqMeter::GetFlag::PERIOD_READY())
+        if(::FPGA::flag.PeriodReady())
         {
             timeStartMeasurePeriod = 0;
         }
