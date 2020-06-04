@@ -3,11 +3,6 @@
 #include "FPGA/FPGA.h"
 
 
-bool ContextFreqMeter::GetFlag::FREQ_READY()
-{
-    return FPGA::flag.FreqReady();
-}
-
 bool ContextFreqMeter::GetFlag::PERIOD_READY()
 {
     return FPGA::flag.PeriodReady();

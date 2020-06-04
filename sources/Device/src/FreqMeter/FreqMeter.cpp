@@ -2,6 +2,7 @@
 #include "Display/Grid.h"
 #include "Display/Primitives.h"
 #include "FPGA/ContextFreqMeter.h"
+#include "FPGA/FPGA.h"
 #include "FreqMeter/DisplayFreqMeter.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
@@ -67,7 +68,7 @@ void FreqMeter::Update()
 {
     SetStateLamps();
 
-    bool freqReady = ContextFreqMeter::GetFlag::FREQ_READY();
+    bool freqReady = ::FPGA::flag.FreqReady();
 
     if(freqReady)
     {
@@ -210,7 +211,7 @@ void FreqMeter::SetStateLampFreq()
     }
     else
     {
-        if(ContextFreqMeter::GetFlag::FREQ_READY())
+        if(::FPGA::flag.FreqReady())
         {
             timeStartMeasureFreq = 0;
         }

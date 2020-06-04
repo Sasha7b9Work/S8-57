@@ -6,7 +6,6 @@ struct ContextFreqMeter
 {
     struct GetFlag
     {
-        static bool FREQ_READY();
         static bool PERIOD_READY();
         static bool FREQ_OVERFLOW();
         static bool PERIOD_OVERFLOW();
