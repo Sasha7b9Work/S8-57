@@ -27,3 +27,15 @@ uint8 SettingsService::SoundVolume()
 
     return volume[S_SERV_ENUM_VOLUME];
 }
+
+
+void Settings::Store(Settings *storing)
+{
+    *storing = set;
+}
+
+
+void Settings::Restore(const Settings *restoring)
+{
+    set = *restoring;
+}

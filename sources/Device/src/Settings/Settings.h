@@ -25,6 +25,12 @@ public:
     static void Save();
     static void Reset();
 
+    // Сохранить текущие настройки в storing
+    static void Store(Settings *storing);
+
+    // Восстановить ранее сохранённые настройки из restoring
+    static void Restore(const Settings *restoring);
+
     // Рассчитать и записать контрольную сумму
     uint CalcWriteCRC32();
 
