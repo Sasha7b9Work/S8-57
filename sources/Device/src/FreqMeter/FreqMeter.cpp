@@ -204,7 +204,7 @@ void FreqMeter::SetStateLampFreq()
 {
     if(timeStartMeasureFreq == 0)
     {
-        if(ContextFreqMeter::GetFlag::FREQ_IN_PROCESS())
+        if(::FPGA::flag.FreqInProcess())
         {
             timeStartMeasureFreq = TIME_MS;
         }
@@ -298,7 +298,7 @@ void DisplayFreqMeter::DrawDebugInfo()
 
     x += 20;
 
-    if(ContextFreqMeter::GetFlag::FREQ_IN_PROCESS())
+    if(::FPGA::flag.FreqInProcess())
     {
         Region(size - 2, size - 2).Fill(x + 1, y + 5, Color::FILL);
     }
