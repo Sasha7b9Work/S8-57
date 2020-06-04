@@ -74,6 +74,14 @@ static float FindFrequency(Chan::E ch)
 
 static float FindFrequency(Chan::E ch, Range::E range)
 {
+    /*
+        Находим сигнал с помощью частотомера
+        1. Устанавливаем один периода в параметрах частотомера
+        2. Читаем счётчики, тем самым обнуляя их.
+        3. Даём запуск.
+        4. Ждём, пока появится флаг частоты или периода
+    */
+
     Osci::Stop();
     Range::Set(ch, range);
     Osci::Start(false);
