@@ -78,7 +78,7 @@ static float FindFrequency(Chan::E ch)
     
     float frequency = Float::ERROR;
 
-    for (int range = Range::_20V; range >= 0 && (frequency == Float::ERROR); range--)
+    for (int range = static_cast<int>(Range::_20V); range >= 0 && (frequency == Float::ERROR); range--)
     {
         frequency = FindFrequency(ch, static_cast<Range::E>(range));
     }
@@ -105,17 +105,64 @@ static float FindFrequency(Chan::E ch, Range::E range)
     Timer::PauseOnTime(500);
 
     TuneFreqMeter();
+    
     Osci::Start(false);
 
+    static int counter = 0;
+    
     do
     {
+        counter++;
+        
         FPGA::ReadFlag();
 
     } while (!FPGA::Flag::PeriodReady() || !FPGA::Flag::FreqReady());
 
+    counter = counter;
+    
     set = old;
 
     return CalculateFrequency();
+}
+
+
+Range::E FindRange(Chan::E)
+{
+    return Range::Count;
+}
+
+
+static void TuneFreqMeter()
+{
+    S_FREQ_METER_ENABLED = true;
+    S_FREQ_TIME_COUNTING = FreqMeter::TimeCounting::_1s;
+    S_FREQ_FREQ_CLC = FreqMeter::FreqClc::_100MHz;
+    S_FREQ_NUMBER_PERIODS = FreqMeter::NumberPeriods::_1;
+
+    FreqMeter::FPGA::LoadSettings();
+    FreqMeter::FPGA::ResetCounterFreq();
+    FreqMeter::FPGA::ResetCounterPeriod();
+
+    FPGA::Flag::Clear();
+}
+
+
+static float CalculateFrequency()
+{
+    if (!FPGA::Flag::FreqOverflow() && FPGA::Flag::FreqReady())
+    {
+        BitSet32 counter = FreqMeter::FPGA::ReadCounterFreq();
+        uint freq = counter.word;
+        freq = freq;
+    }
+
+    if (!FPGA::Flag::PeriodOverflow() && FPGA::Flag::PeriodReady())
+    {
+        BitSet32 counter = FreqMeter::FPGA::ReadCounterPeriod();
+        counter = counter;
+    }
+
+    return Float::ERROR;
 }
 
 
@@ -170,44 +217,4 @@ static TBase::E CalculateTBase(float frequency)
     }
 
     return TBase::_2ns;
-}
-
-
-Range::E FindRange(Chan::E)
-{
-    return Range::Count;
-}
-
-
-static void TuneFreqMeter()
-{
-    S_FREQ_METER_ENABLED = true;
-    S_FREQ_TIME_COUNTING = FreqMeter::TimeCounting::_1s;
-    S_FREQ_FREQ_CLC = FreqMeter::FreqClc::_100MHz;
-    S_FREQ_NUMBER_PERIODS = FreqMeter::NumberPeriods::_1;
-
-    FreqMeter::FPGA::LoadSettings();
-    FreqMeter::FPGA::ResetCounterFreq();
-    FreqMeter::FPGA::ResetCounterPeriod();
-
-    FPGA::Flag::Clear();
-}
-
-
-static float CalculateFrequency()
-{
-    if (!FPGA::Flag::FreqOverflow() && FPGA::Flag::FreqReady())
-    {
-        BitSet32 counter = FreqMeter::FPGA::ReadCounterFreq();
-        uint freq = counter.word;
-        freq = freq;
-    }
-
-    if (!FPGA::Flag::PeriodOverflow() && FPGA::Flag::PeriodReady())
-    {
-        BitSet32 counter = FreqMeter::FPGA::ReadCounterPeriod();
-        counter = counter;
-    }
-
-    return Float::ERROR;
 }
