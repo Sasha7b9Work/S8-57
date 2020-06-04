@@ -90,11 +90,11 @@ public:
     };
 
     // Что показывать - период или частоту
-    struct ModeView
+    struct ModeMeasure
     {
-#define S_FREQ_MODE_VIEW                (set.freq._modeView)
-#define S_FREQ_MODE_VIEW_IS_FREQUENCY   (S_FREQ_MODE_VIEW == FreqMeter::ModeView::Frequency)
-#define S_FREQ_MODE_VIEW_IS_PERIOD      (S_FREQ_MODE_VIEW == FreqMeter::ModeView::Period)
+#define S_FREQ_MODE_MEASURE                (set.freq._modeMeasure)
+#define S_FREQ_MODE_MEASURE_IS_FREQUENCY   (S_FREQ_MODE_MEASURE == FreqMeter::ModeMeasure::Frequency)
+#define S_FREQ_MODE_MEASURE_IS_PERIOD      (S_FREQ_MODE_MEASURE == FreqMeter::ModeMeasure::Period)
 
         enum E
         {

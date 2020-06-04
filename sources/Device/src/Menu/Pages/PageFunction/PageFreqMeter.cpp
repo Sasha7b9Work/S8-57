@@ -34,25 +34,25 @@ static void OnChanged_ModeView(bool)
     PageFreqMeter::Init();
 }
 
-DEF_CHOICE_2( cModeView,                                                                                                                               //--- ‘”Õ ÷»ﬂ - ◊¿—“Œ“ŒÃ≈– - –ÂÊËÏ ---
+DEF_CHOICE_2( cModeMeasure,                                                                                                                               //--- ‘”Õ ÷»ﬂ - ◊¿—“Œ“ŒÃ≈– - –ÂÊËÏ ---
     "–ÂÊËÏ",
     "",
     "◊‡ÒÚÓÚ‡",
     "œÂËÓ‰",
-    S_FREQ_MODE_VIEW, &PageFreqMeter::self, IsActive_ModeView, OnChanged_ModeView, Choice::AfterDraw
+    S_FREQ_MODE_MEASURE, &PageFreqMeter::self, IsActive_ModeView, OnChanged_ModeView, Choice::AfterDraw
 )
 
 
 
 static bool IsActive_SettingsFrequency()
 {
-    return S_FREQ_ENABLED && S_FREQ_MODE_VIEW_IS_PERIOD;
+    return S_FREQ_ENABLED && S_FREQ_MODE_MEASURE_IS_PERIOD;
 }
 
 
 static bool IsActive_TimeF()
 {
-    return S_FREQ_ENABLED && S_FREQ_MODE_VIEW_IS_FREQUENCY;
+    return S_FREQ_ENABLED && S_FREQ_MODE_MEASURE_IS_FREQUENCY;
 }
 
 static void OnChanged_TimeF(bool)
@@ -98,7 +98,7 @@ DEF_PAGE_5_VAR( pFreqMeter,                                                     
     "◊¿—“Œ“ŒÃ≈–",
     "",
     &cEnable,
-    &cModeView,
+    &cModeMeasure,
     &Item::empty,
     &Item::empty,
     &Item::empty,
@@ -115,12 +115,12 @@ void PageFreqMeter::Init()
 
     Item **items = const_cast<Item **>(page->OwnData()->items);
 
-    if (S_FREQ_MODE_VIEW_IS_FREQUENCY)
+    if (S_FREQ_MODE_MEASURE_IS_FREQUENCY)
     {
         items[2] = const_cast<Choice *>(&cTimeF);
         items[3] = &Item::empty;
     }
-    else if (S_FREQ_MODE_VIEW_IS_PERIOD)
+    else if (S_FREQ_MODE_MEASURE_IS_PERIOD)
     {
         items[2] = const_cast<Choice *>(&cFreqClc);
         items[3] = const_cast<Choice *>(&cNumPeriods);

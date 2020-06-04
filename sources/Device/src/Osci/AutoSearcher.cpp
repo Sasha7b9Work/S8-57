@@ -85,12 +85,16 @@ static float FindFrequency(Chan::E ch, Range::E range)
         4. ∆дЄм, пока по€витс€ флаг частоты или периода
     */
 
+    Settings old = set;
+
     Osci::Stop();
     Range::Set(ch, range);
     TuneFreqMeter();
     Osci::Start(false);
 
 
+
+    set = old;
 
     return 0.0F;
 }
@@ -158,5 +162,7 @@ Range::E FindRange(Chan::E)
 
 static void TuneFreqMeter()
 {
-
+    FreqMeter::FPGA::LoadSettings();
+    FreqMeter::FPGA::ResetCounterFreq();
+    FreqMeter::FPGA::ResetCounterPeriod();
 }

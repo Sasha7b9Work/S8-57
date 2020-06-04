@@ -12,7 +12,7 @@ class Choice;
 struct SettingsFreqMeter
 {
     bool                         _enabled;
-    FreqMeter::ModeView::E       _modeView;
+    FreqMeter::ModeMeasure::E    _modeMeasure;
     FreqMeter::TimeCounting::E   _timeCounting;  // Время счёта частоты.
     FreqMeter::FreqClc::E        _freqClc;       // Частота заполнения.
     FreqMeter::NumberPeriods::E  _numberPeriods; // Количество периодов.
