@@ -17,15 +17,15 @@ static TBase::E CalculateTBase(float frequency);
 
 void Osci::RunAutoSearch()
 {
-    Settings old;
-    Settings::Store(&old);
+    Settings old = set;
 
     if (!FindSignal(ChanA))
     {
         if (!FindSignal(ChanB))
         {
             DISPLAY_SHOW_WARNING("Сигнал не обнаружен");
-            Settings::Restore(&old);
+
+            set = old;
         }
     }
 
@@ -48,8 +48,11 @@ static bool FindSignal(Chan::E ch)
 }
 
 
-static float FindFrequency(Chan::E ch)
+static float FindFrequency(Chan::E)
 {
+
+
+
     return 0.0F;
 }
 
@@ -108,7 +111,7 @@ static TBase::E CalculateTBase(float frequency)
 }
 
 
-Range::E FindRange(Chan::E ch)
+Range::E FindRange(Chan::E)
 {
     return Range::Count;
 }
