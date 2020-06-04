@@ -64,17 +64,20 @@ struct Osci
     
     static void ReadData();
 
+    static uint16 ReadLastRecord(Chan::E ch);
+
+    // Обработать флаг предзапуска
+    static void ProcessFlagPred();
+
+    // Выполнить поиск сигнала
+    static void RunAutoSearch();
+
     // Управитель входными цепями
     struct InputController
     {
         static void Init();
         static void Write(HPort::E port, uint16 pin, uint16 value);
     };
-
-    static uint16 ReadLastRecord(Chan::E ch);
-
-    // Обработать флаг предзапуска
-    static void ProcessFlagPred();
 
 private:
 

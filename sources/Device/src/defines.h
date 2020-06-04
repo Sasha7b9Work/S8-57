@@ -207,7 +207,6 @@ union BitSet64 //-V2514
 #define NUM_ROM_SIGNAL          (gBF.currentNumROMSignal)
 #define RUN_FPGA_BEFORE_SB      (gBF.runningFPGAbeforeDrawButtons)
 #define EXIT_FROM_ROM_TO_RAM    (gBF.exitFromROMtoRAM)
-#define FPGA_NEED_AUTO_FIND     (gBF.FPGAneedAutoFind)
 #define ALWAYS_SHOW_ROM_SIGNAL  (gBF.alwaysShowROMSignal)
 #define PANEL_CONTROL_RECEIVE   (gBF.panelControlReceive)
 #define FPGA_IN_PROCESS_OF_READ (gBF.FPGAinProcessingOfRead)
@@ -232,7 +231,6 @@ struct BitField
     uint temporaryShowStrNavi         : 1;  // Признак того, что нужно временно показывать строку навигации меню.
     uint runningFPGAbeforeDrawButtons : 1;  // Здесь сохраняется информация о том, работала ли ПЛИС перед переходом в режим работы с памятью.
     uint exitFromROMtoRAM             : 1;  // Если 1, то выходить из страницы внутренней памяти нужно не стандартно, а в меню последних.
-    uint FPGAneedAutoFind             : 1;  // Если 1, то нужно найти сигнал.
     uint needRedrawFileManager        : 2;  // @brief Если 1, то файл-менеджер нуждается в полной перерисовке.
                                             // Если 2, то перерисовать только каталоги.
                                             // Если 3, то перерисовать только файлы.

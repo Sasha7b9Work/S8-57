@@ -186,12 +186,9 @@ source_group(Hardware\\Memory   FILES   ../../Device/src/Hardware/Memory/ExtRAM.
                                         ../../Device/src/Hardware/Memory/Sector.h
                                         ../../Device/src/Hardware/Memory/Sector.cpp
                                                      src/Hardware/Memory/Sector_win.cpp)
-source_group(Osci               FILES   ../../Device/src/Osci/AveragerOsci.cpp
+source_group(Osci               FILES   ../../Device/src/Osci/AutoSearcher.cpp
                                         ../../Device/src/Osci/DeviceSettings.h
                                         ../../Device/src/Osci/DeviceSettings.cpp
-                                        ../../Device/src/Osci/FreqMeter.h
-                                        ../../Device/src/Osci/FreqMeter.cpp
-                                        ../../Device/src/Osci/Interpolator.cpp
                                         ../../Device/src/Osci/Osci.h
                                         ../../Device/src/Osci/Osci.cpp
                                         ../../Device/src/Osci/ParametersOsci.h
@@ -367,12 +364,13 @@ file(GLOB SOURCES   ../../common/_VS/*
 
                     ../../Device/src/Multimeter/*
 
+                    ../../Device/src/Osci/Display/*
                     ../../Device/src/Osci/Math/*
+                    ../../Device/src/Osci/Measurements/*
 
+                    ../../Device/src/Osci/AutoSearcher.cpp
                     ../../Device/src/Osci/DeviceSettings.h
                     ../../Device/src/Osci/DeviceSettings.cpp
-                    ../../Device/src/Osci/FreqMeter.h
-                    ../../Device/src/Osci/FreqMeter.cpp
                     ../../Device/src/Osci/Osci.h
                     ../../Device/src/Osci/Osci.cpp
                     ../../Device/src/Osci/ParametersOsci.h
@@ -382,8 +380,6 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Osci/Roller.cpp
                                  src/Osci/Osci_win.h
                                  src/Osci/Osci_win.cpp
-                    ../../Device/src/Osci/Display/*
-                    ../../Device/src/Osci/Measurements/*
 
                     ../../Device/src/SCPI/*
 

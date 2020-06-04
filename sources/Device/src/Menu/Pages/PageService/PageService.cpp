@@ -20,15 +20,10 @@ DEF_BUTTON( bResetSettings,                                                     
 )
 
 
-static void OnPress_AutoSearch()
-{
-    FPGA_NEED_AUTO_FIND = 1;
-}
-
-DEF_BUTTON( bAutoSearch,                                                                                                                                     //--- СЕРВИС - Поиск сигнала ---
+DEF_BUTTON(bAutoSearch,                                                                                                                                     //--- СЕРВИС - Поиск сигнала ---
     "Поиск сигн",
     "Устанавливает оптимальные установки осциллографа для сигнала в канале 1",
-    &PageService::self, Item::Active, OnPress_AutoSearch
+    &PageService::self, Item::Active, Osci::RunAutoSearch
 )
 
 
