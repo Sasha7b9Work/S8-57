@@ -62,24 +62,18 @@ struct FPGA
 
     static void ReadFlag();
 
-private:
+    static void LoadRegUPR();
 
+private:
 
     static void Init();
 
-
     static void OnPressStart();
     
-
     static void Reset();
 
-
-    static void LoadRegUPR();
-
-
     static uint16 post;
-    static uint16 pred;
-    
+    static uint16 pred;   
 
     static bool isRunning;
    

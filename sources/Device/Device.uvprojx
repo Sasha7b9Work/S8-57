@@ -703,16 +703,6 @@
               <FilePath>.\src\FPGA\Calibrator.cpp</FilePath>
             </File>
             <File>
-              <FileName>ContextRecorder.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\FPGA\ContextRecorder.h</FilePath>
-            </File>
-            <File>
-              <FileName>ContextRecorder.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\FPGA\ContextRecorder.cpp</FilePath>
-            </File>
-            <File>
               <FileName>FPGA.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\FPGA\FPGA.h</FilePath>

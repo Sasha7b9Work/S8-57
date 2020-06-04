@@ -1,6 +1,5 @@
 #include "defines.h"
 #include "FPGA/FPGA.h"
-#include "FPGA/ContextRecorder.h"
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Osci.h"
 #include "Recorder/DisplayRecorder.h"
@@ -44,7 +43,7 @@ void Recorder::Init()
 {
     StoreOsciSettings();
 
-    ContextRecorder::LoadRegUPR();
+    FPGA::LoadRegUPR();
     Range::LoadBoth();
     TrigInput().Load();
     Recorder::ScaleX::Load();
