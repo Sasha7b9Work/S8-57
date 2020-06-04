@@ -3,11 +3,6 @@
 #include "FPGA/FPGA.h"
 
 
-bool ContextFreqMeter::GetFlag::PERIOD_OVERFLOW()
-{
-    return FPGA::flag.PeriodOverflow();
-}
-
 bool ContextFreqMeter::GetFlag::FREQ_IN_PROCESS()
 {
     return FPGA::flag.FreqInProcess();

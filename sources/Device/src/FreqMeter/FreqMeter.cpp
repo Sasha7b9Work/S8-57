@@ -112,7 +112,7 @@ void FreqMeter::Update()
         freqActual.word = MAX_UINT;
         lastFreqOver = TIME_MS;
     }
-    if(ContextFreqMeter::GetFlag::PERIOD_OVERFLOW())
+    if(::FPGA::flag.PeriodOverflow())
     {
         periodActual.word = MAX_UINT;
         lastPeriodOver = TIME_MS;
