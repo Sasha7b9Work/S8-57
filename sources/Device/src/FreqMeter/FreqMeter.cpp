@@ -107,7 +107,7 @@ void FreqMeter::Update()
         }
     }
 
-    if(ContextFreqMeter::GetFlag::FREQ_OVERFLOW())
+    if(::FPGA::flag.FreqOverflow())
     {
         freqActual.word = MAX_UINT;
         lastFreqOver = TIME_MS;
