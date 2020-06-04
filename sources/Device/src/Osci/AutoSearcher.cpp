@@ -15,6 +15,9 @@ static Range::E FindRange(Chan::E ch);
 // Рассчитывает TBase, необходимый для отображения задданой частоты
 static TBase::E CalculateTBase(float frequency);
 
+// Заслать соответствующие настройки в частотомер
+static void TuneFreqMeter();
+
 
 void Osci::RunAutoSearch()
 {
@@ -84,6 +87,7 @@ static float FindFrequency(Chan::E ch, Range::E range)
 
     Osci::Stop();
     Range::Set(ch, range);
+    TuneFreqMeter();
     Osci::Start(false);
 
 
@@ -149,4 +153,10 @@ static TBase::E CalculateTBase(float frequency)
 Range::E FindRange(Chan::E)
 {
     return Range::Count;
+}
+
+
+static void TuneFreqMeter()
+{
+
 }
