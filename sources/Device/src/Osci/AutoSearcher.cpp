@@ -7,6 +7,7 @@ static bool FindSignal(Chan::E ch);
 
 // Находит частоту сигнала, поданного на вход ch. В случае неудачи возвращает значение 0.0F
 static float FindFrequency(Chan::E ch);
+static float FindFrequency(Chan::E ch, Range::E range);
 
 // Находит масштаб по вертикаил
 static Range::E FindRange(Chan::E ch);
@@ -21,11 +22,13 @@ void Osci::RunAutoSearch()
 
     if (!FindSignal(ChanA))
     {
+        set = old;
+
         if (!FindSignal(ChanB))
         {
-            DISPLAY_SHOW_WARNING("Сигнал не обнаружен");
-
             set = old;
+
+            DISPLAY_SHOW_WARNING("Сигнал не обнаружен");
         }
     }
 
@@ -48,8 +51,32 @@ static bool FindSignal(Chan::E ch)
 }
 
 
-static float FindFrequency(Chan::E)
+static float FindFrequency(Chan::E ch)
 {
+    ModeCouple::Set(ch, ModeCouple::AC);
+    TrigSource::Set(ch);
+    TrigStartMode::Set(TrigStartMode::Wait);
+    TrigLevel::Set(ch, 0);
+    TBase::Set(TBase::_100ns);
+    TShift::Set(0);
+    RShift::Set(ch, 0);
+    
+    float frequency = 0.0F;
+
+    for (int range = Range::_20V; range >= 0 && (frequency == 0.0F); range--)
+    {
+        frequency = FindFrequency(ch, static_cast<Range::E>(range));
+    }
+
+    return frequency;
+}
+
+
+static float FindFrequency(Chan::E ch, Range::E range)
+{
+    Osci::Stop();
+    Range::Set(ch, range);
+    Osci::Start(false);
 
 
 
