@@ -53,7 +53,7 @@ void HAL::Init()
 
     HAL_HCD::Init();
 
-    HAL_IWDG::Enable();
+    HAL_IWDG::Init();
 }
 
 

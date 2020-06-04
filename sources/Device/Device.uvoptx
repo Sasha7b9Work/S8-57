@@ -156,50 +156,34 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>100</LineNumber>
+          <LineNumber>0</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134415376</Address>
+          <Address>134415360</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Osci\AutoSearcher.cpp</Filename>
+          <Filename></Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\S8_57\src/Osci/AutoSearcher.cpp\100</Expression>
+          <Expression></Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>83</LineNumber>
+          <LineNumber>0</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134415318</Address>
+          <Address>134415362</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Osci\AutoSearcher.cpp</Filename>
+          <Filename></Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\S8_57\src/Osci/AutoSearcher.cpp\83</Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
-          <LineNumber>81</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134415314</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Osci\AutoSearcher.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\S8_57\src/Osci/AutoSearcher.cpp\81</Expression>
+          <Expression></Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -2932,7 +2916,7 @@
 
   <Group>
     <GroupName>Osci</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

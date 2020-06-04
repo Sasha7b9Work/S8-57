@@ -10,14 +10,11 @@
 
 #define HAL_BUS_CONFIGURE_TO_FSMC() if(HAL_BUS::mode != HAL_BUS::Mode::FSMC) { HAL_BUS::ConfigureToFSMC(); }
 
-#ifdef GUI
-#define HAL_IWDG_REFRESH
-#else
-#define HAL_IWDG_REFRESH (*(reinterpret_cast<uint *>(0x40003000U)) = IWDG_KEY_RELOAD)
-#endif
-
 
 typedef struct _USBH_HandleTypeDef USBH_HandleTypeDef;
+
+
+#define HAL_IWDG_REFRESH()  (*(reinterpret_cast<uint *>(0x40003000U)) = IWDG_KEY_RELOAD)            // Вынесено в #define для уменьшения задержки
 
 
 struct HAL
@@ -158,8 +155,7 @@ struct HAL_HCD
 
 struct HAL_IWDG
 {
-    static void Disable();
-    static void Enable();
+    static void Init();
 };
 
 

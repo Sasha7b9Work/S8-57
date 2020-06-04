@@ -29,8 +29,6 @@ static float CalculateFrequency();
 
 void Osci::RunAutoSearch()
 {
-    HAL_IWDG::Disable();
-
     Settings old = set;
 
     if (!FindSignal(ChanA))
@@ -46,8 +44,6 @@ void Osci::RunAutoSearch()
     }
 
     Osci::Init();
-
-    HAL_IWDG::Enable();
 }
 
 
