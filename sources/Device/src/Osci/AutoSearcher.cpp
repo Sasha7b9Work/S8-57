@@ -11,8 +11,8 @@
 static bool FindSignal(Chan::E ch);
 
 // Находит частоту сигнала, поданного на вход ch. В случае неудачи возвращает значение Float::ERROR
-static float FindFrequency(Chan::E ch);
-static float FindFrequency(Chan::E ch, Range::E range);
+static bool FindFrequency(Chan::E ch, float *outFreq);
+static bool FindFrequency(Chan::E ch, Range::E range, float *outFreq);
 
 // Находит масштаб по вертикаил
 static Range::E FindRange(Chan::E ch);
@@ -24,7 +24,7 @@ static TBase::E CalculateTBase(float frequency);
 static void TuneFreqMeter();
 
 // Рассчитывает частоту, исходя из данных аппаратного частотомера
-static float CalculateFrequency();
+static bool CalculateFrequency(float *outFreq);
 
 
 void Osci::RunAutoSearch()
@@ -49,20 +49,22 @@ void Osci::RunAutoSearch()
 
 static bool FindSignal(Chan::E ch)
 {
-    float frequency = FindFrequency(ch);
+    float frequency = 0.0F;
 
-    if (frequency != Float::ERROR)
+    if (FindFrequency(ch, &frequency))
     {
         TBase::Set(CalculateTBase(frequency));
 
         //Range::Set(ch, FindRange(ch));
+
+        return true;
     }
 
-    return (frequency != Float::ERROR);
+    return false;
 }
 
 
-static float FindFrequency(Chan::E ch)
+static bool FindFrequency(Chan::E ch, float *outFreq)
 {
     ModeCouple::Set(ch, ModeCouple::AC);
     TrigSource::Set(ch);
@@ -72,18 +74,18 @@ static float FindFrequency(Chan::E ch)
     TShift::Set(0);
     RShift::Set(ch, 0);
     
-    float frequency = Float::ERROR;
+    bool result = false;
 
-    for (int range = static_cast<int>(Range::_20V); range >= 0 && (frequency == Float::ERROR); range--)
+    for (int range = static_cast<int>(Range::_20V); range >= 0 && !result; range--)
     {
-        frequency = FindFrequency(ch, static_cast<Range::E>(range));
+        result = FindFrequency(ch, static_cast<Range::E>(range), outFreq);
     }
 
-    return frequency;
+    return result;
 }
 
 
-static float FindFrequency(Chan::E ch, Range::E range)
+static bool FindFrequency(Chan::E ch, Range::E range, float *outFreq)
 {
     /*
         Находим сигнал с помощью частотомера
@@ -118,7 +120,7 @@ static float FindFrequency(Chan::E ch, Range::E range)
     
     set = old;
 
-    return CalculateFrequency();
+    return CalculateFrequency(outFreq);
 }
 
 
@@ -143,22 +145,26 @@ static void TuneFreqMeter()
 }
 
 
-static float CalculateFrequency()
+static bool CalculateFrequency(float *outFreq)
 {
     if (!FPGA::Flag::FreqOverflow() && FPGA::Flag::FreqReady())
     {
         BitSet32 counter = FreqMeter::FPGA::ReadCounterFreq();
         uint freq = counter.word;
         freq = freq;
+
+        return true;
     }
 
     if (!FPGA::Flag::PeriodOverflow() && FPGA::Flag::PeriodReady())
     {
         BitSet32 counter = FreqMeter::FPGA::ReadCounterPeriod();
         counter = counter;
+
+        return true;
     }
 
-    return Float::ERROR;
+    return false;
 }
 
 
@@ -202,9 +208,7 @@ static TBase::E CalculateTBase(float frequency)
         {0.0F,   TBase::Count}
     };
 
-    int i = 0;
-
-    while (times[i].tBase != TBase::Count)
+    for (int i = 0; times[i].tBase != TBase::Count; i++)
     {
         if (frequency < times[i].frequency)
         {
