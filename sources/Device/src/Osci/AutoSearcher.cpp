@@ -8,14 +8,14 @@
 
 
 // Попытка найти сигнал на канале ch. Если попытка удалась, то найденные параметры загружаются в прибор
-static bool FindSignal(Chan::E ch);
+static bool FindSignal(Chan::E ch, TBase::E *tBase, Range::E *range);
 
 // Находит частоту сигнала, поданного на вход ch. В случае неудачи возвращает значение Float::ERROR
 static bool FindFrequency(Chan::E ch, float *outFreq);
 static bool FindFrequency(Chan::E ch, Range::E range, float *outFreq);
 
 // Находит масштаб по вертикаил
-static Range::E FindRange(Chan::E ch);
+//static Range::E FindRange(Chan::E ch);
 
 // Рассчитывает TBase, необходимый для отображения задданой частоты
 static TBase::E CalculateTBase(float frequency);
@@ -31,29 +31,47 @@ void Osci::RunAutoSearch()
 {
     Settings old = set;
 
-    if (!FindSignal(ChanA))
+    TBase::E tBase = S_TIME_BASE;;
+    Range::E rangeA = S_RANGE_A;
+    Range::E rangeB = S_RANGE_B;
+
+    Chan::E source = Chan::Count;
+
+    if (FindSignal(ChanA, &tBase, &rangeA))
     {
-        set = old;
+        source = ChanA;
+    }
+    else if (FindSignal(ChanB, &tBase, &rangeB))
+    {
+        source = ChanB;
+    }
+    else
+    {
+        DISPLAY_SHOW_WARNING("Сигнал не обнаружен");
+    }
 
-        if (!FindSignal(ChanB))
-        {
-            set = old;
+    set = old;
 
-            DISPLAY_SHOW_WARNING("Сигнал не обнаружен");
-        }
+    S_TIME_BASE = tBase;
+    S_RANGE_A = rangeA;
+    S_RANGE_B = rangeB;
+    
+    if (source != Chan::Count)
+    {
+        S_TRIG_SOURCE = source;
     }
 
     Osci::Init();
 }
 
 
-static bool FindSignal(Chan::E ch)
+static bool FindSignal(Chan::E ch, TBase::E *tBase, Range::E *)
 {
     float frequency = 0.0F;
 
     if (FindFrequency(ch, &frequency))
     {
-        TBase::Set(CalculateTBase(frequency));
+        *tBase = CalculateTBase(frequency);
 
         //Range::Set(ch, FindRange(ch));
 
@@ -124,10 +142,10 @@ static bool FindFrequency(Chan::E ch, Range::E range, float *outFreq)
 }
 
 
-Range::E FindRange(Chan::E)
-{
-    return Range::Count;
-}
+//Range::E FindRange(Chan::E)
+//{
+//    return Range::Count;
+//}
 
 
 static void TuneFreqMeter()
@@ -145,7 +163,7 @@ static void TuneFreqMeter()
 }
 
 
-static bool CalculateFrequency(float *outFreq)
+static bool CalculateFrequency(float *)
 {
     if (!FPGA::Flag::FreqOverflow() && FPGA::Flag::FreqReady())
     {
