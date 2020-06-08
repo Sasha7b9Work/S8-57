@@ -20,8 +20,6 @@ static uint GetLSIFrequency();
 
 void HAL_IWDG::Init()
 {
-    return;
-
     __HAL_RCC_TIM5_CLK_ENABLE();
 
     HAL_NVIC_SetPriority(TIM5_IRQn, 0, 0);
