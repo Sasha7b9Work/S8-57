@@ -49,29 +49,29 @@ static void DrawPeakDet(int x, int y);
 
 void DisplayOsci::HiPart::Draw()
 {
-    const int y0 = 0;
+#define Y0 0
 
     int x = -1;
 
     DrawSeparators();
 
-    x = DrawMainParameters(x, y0 + 1); //-V2007
+    x = DrawMainParameters(x, Y0 + 1); //-V2007
 
     x += 124;
 
     DFont::Set(DTypeFont::_8);
 
-    Separator::Draw(x + 1, y0);
+    Separator::Draw(x + 1, Y0);
 
-    DrawFrequency(x + 3, y0 + 1);
+    DrawFrequency(x + 3, Y0 + 1);
 
-    DrawTime(x + 3, y0 + 10); //-V2007
+    DrawTime(x + 3, Y0 + 10); //-V2007
 
-    DrawRightPart(271, y0);
+    DrawRightPart(271, Y0);
 
     WriteCursors();
 
-    DrawPeakDet(x + 37, y0 + 10); //-V2007
+    DrawPeakDet(x + 37, Y0 + 10); //-V2007
 }
 
 
