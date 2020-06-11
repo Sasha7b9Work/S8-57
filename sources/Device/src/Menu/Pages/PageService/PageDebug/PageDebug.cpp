@@ -245,14 +245,14 @@ DEF_PAGE_2( pSerialNumber,                                                      
 const Page * const PageDebug::PageSerialNumber::self = static_cast<const Page *>(&pSerialNumber);
 
 
-DEF_PAGE_6( pDebug,                                                                                                                                                         //--- Œ“À¿ƒ ¿ ---
+DEF_PAGE_7( pDebug,                                                                                                                                                         //--- Œ“À¿ƒ ¿ ---
     "Œ“À¿ƒ ¿",
     "",
     PageDebug::PageConsole::self,
     //PageDebug::PageADC::self,
     PageDebug::PageRand::self,
     //&cStats,
-    //&cBattery,
+    &cBattery,
     &bResetNRST,
     &bSaveFirmware,
     PageDebug::PageTests::self,

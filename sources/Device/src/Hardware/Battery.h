@@ -4,6 +4,9 @@
 class Battery
 {
 public:
+
+    static const float MIN_ABS;
+
     // Инициализация
     static void Init();
 

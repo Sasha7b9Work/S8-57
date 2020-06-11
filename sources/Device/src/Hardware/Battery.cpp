@@ -10,7 +10,10 @@
 // Максимальное значение, которое возможно считать с АЦП
 const float Battery::MAX_ADC_REL = static_cast<float>((1 << 12) - 1);
 // Напряжение, соответствующее MAX_ADC_REL
-const float Battery::MAX_ADC_ABS = 2.91F;
+const float Battery::MAX_ADC_ABS = 3.0F;
+
+
+const float Battery::MIN_ABS = 5.4F;
 
 
 void Battery::Init()
@@ -32,12 +35,6 @@ float Battery::GetVoltageAKK()
 #else
     return BatADC_ToVoltage(static_cast<float>(averager.Value()));
 #endif
-
-
-
-//    uint akk = HAL_ADC1::ReadValueAKK();
-//
-//    return BatADC_ToVoltage(akk);
 }
 
 
@@ -95,7 +92,7 @@ void Battery::Draw(int x, int y)
     {
         DFont::Set(DTypeFont::_8);
 
-        Text(String("%4.1f В", akk)).Draw(x + 10, y, Color::FILL);
+        Text(String("%4.2f В", akk)).Draw(x + 10, y, Color::FILL);
         Text(String("%4.1f %%", percents)).Draw(x + 10, y + 9);
     }
 }
@@ -119,11 +116,11 @@ float Battery::BatADC_ToVoltage(float value)
 
 float Battery::Voltage100()
 {
-    return GetVoltagePOW() > 8.0F ? 8.1F : 7.8F;
+    return GetVoltagePOW() > 8.0F ? 8.4F : 8.4F;
 }
 
 
 float Battery::Voltage0()
 {
-    return GetVoltagePOW() > 8.0F ? 6.0F : 6.0F; //-V583
+    return GetVoltagePOW() > 8.0F ? MIN_ABS : MIN_ABS; //-V583
 }
