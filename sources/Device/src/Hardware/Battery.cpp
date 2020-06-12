@@ -67,16 +67,19 @@ float Battery::CalculatePercents(float volts)
 
 void Battery::DrawUGO(int x, int y, float percents)
 {
-    int width = 38;
+    int widthBig = 30;
+    int widthSmall = 4;
 
     int dY = 5;
 
-    Rectangle(width + 2, 8 + dY).Draw(x + 5, y - dY, Color::BATTERY);
-    Rectangle(4, 4 + dY).Draw(x + 1, y + 2 - dY);
+    Rectangle(widthBig + 2, 8 + dY).Draw(x + widthSmall + 1, y - dY, Color::BATTERY);
+    Rectangle(widthSmall, 4 + dY).Draw(x + 1, y + 2 - dY);
 
-    int filled = static_cast<int>((width - 2) * percents / 100.0F + 0.5F);
+    int filled = static_cast<int>((widthBig - 2) * percents / 100.0F + 0.5F);
 
-    Region(filled, 4 + dY).Fill(x + width - filled + 5, y + 2 - dY, Color::BATTERY);
+    Region(filled, 4 + dY).Fill(x + widthBig - filled + widthSmall + 1, y + 2 - dY, Color::BATTERY);
+
+
 }
 
 
