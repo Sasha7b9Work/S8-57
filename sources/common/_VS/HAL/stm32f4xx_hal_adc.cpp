@@ -13,7 +13,7 @@ extern "C"
     }
 
 
-    HAL_StatusTypeDef HAL_ADC_ConfigChannel(ADC_HandleTypeDef* /*hadc*/, ADC_ChannelConfTypeDef* config)
+    HAL_StatusTypeDef HAL_ADC_ConfigChannel(ADC_HandleTypeDef* /*hadc*/, ADC_ChannelConfTypeDef* config) //-V2009 //-V2558
     {
         channel = config->Channel;
 
@@ -27,7 +27,7 @@ extern "C"
 
         if (channel == 2)
         {
-            return max * 70 / 100;
+            return max * 50 / 100;
         }
 
         return max;

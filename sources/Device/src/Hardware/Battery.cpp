@@ -2,6 +2,7 @@
 #include "log.h"
 #include "Display/Primitives.h"
 #include "Hardware/Battery.h"
+#include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Settings/Settings.h"
 #include "Utils/Averager.h"
@@ -26,15 +27,11 @@ static float CalculatePercents(float volts);
 // Отобразить заряд батареи в графическом виде
 static void DrawUGO(int x, int y, float procents);
 
-static void DrawFilled();
+static void DrawFilled(int x, int y, int full, float percents);
 
 // Значения, соответствующие 100% и 0%, для текущих напряжения аккумуляторов akk и источника заряда pow
 static float Voltage100();
 static float Voltage0();
-
-// Возвращает true, если батарея заряжается - зарядное устройство подключено и батарея не заряжена на 100%
-static bool ChargeInProgress();
-
 
 void Battery::Init()
 {
@@ -78,18 +75,34 @@ static void DrawUGO(int x, int y, float percents)
 
     int dY = 5;
 
-    Rectangle(widthFull - widthSmall, 8 + dY).Draw(x + widthSmall + 1, y - dY, Color::BATTERY);
+    Rectangle(widthFull - widthSmall, 8 + dY).Draw(x + widthSmall + 1, y - dY, percents <= 25.0F ? Color::RED : Color::BATTERY);
     Rectangle(widthSmall, 4 + dY).Draw(x + 1, y + 2 - dY);
 
-    int filled = static_cast<int>((widthFull - widthSmall - 4) * percents / 100.0F + 0.5F);
-
-    Region(filled, 4 + dY).Fill(x + widthFull - filled - 1, y + 2 - dY, Color::BATTERY);
+    DrawFilled(x + widthSmall + 3, y - 3, widthFull - widthSmall - 4, percents);
 }
 
 
-static void DrawFilled()
+static void DrawFilled(int x, int y, int full, float percents)
 {
+    int filled = static_cast<int>(full * percents / 100.0F + 0.5F);
 
+    if (ChargerIsConnected() && percents < 100.0F)
+    {
+        int onePart = 1000 / full;
+
+        int time = static_cast<int>(TIME_MS % 1000);
+
+        int area = time / onePart;
+
+        Region(area, 9).Fill(x + full - area, y, Color::GRAY_20);
+
+        if (filled > area)
+        {
+            filled = area;
+        }
+    }
+
+    Region(filled, 9).Fill(x + full - filled, y, percents <= 25.0F ? Color::RED : Color::BATTERY);
 }
 
 
@@ -148,10 +161,4 @@ static bool ChargerIsConnected()
     uint pow = HAL_ADC1::ValueCharger();
 
     return ChargerADC_ToVoltage(pow) > 8.0F;
-}
-
-
-static bool ChargeInProgress()
-{
-    return ChargerIsConnected() && CalculatePercents(Battery::GetVoltage()) >= 100.0F;
 }
