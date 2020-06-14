@@ -114,19 +114,9 @@ static float ChargerADC_ToVoltage(uint value)
 
 static float BatteryADC_ToVoltage(float value)
 {
-#ifdef WIN32
-
-    UNUSED_PARAMETER(value);
-
-    return 8.0F;
-
-#else
-
     const float k = 101.1F / 26.1F;
 
     return (value / MAX_ADC_REL) * MAX_ADC_ABS * k;
-    
-#endif
 }
 
 

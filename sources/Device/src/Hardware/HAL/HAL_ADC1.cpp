@@ -47,10 +47,7 @@ void HAL_ADC1::Init()
     handle.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;  // Программный запуск преобразования вручную
     handle.Init.ExternalTrigConv = ADC_SOFTWARE_START;
 
-    if (HAL_ADC_Init(&handle) != HAL_OK)
-    {
-        ERROR_HANDLER();
-    }
+    HAL_ADC_Init(&handle);
 
     SetActiveChannel2();
 }
@@ -74,10 +71,7 @@ uint HAL_ADC1::ValueCharger()
 
 static uint ReadValue()
 {
-    if (HAL_ADC_Start(&handle) != HAL_OK)
-    {
-        ERROR_HANDLER();
-    }
+    HAL_ADC_Start(&handle);
 
     do
     {

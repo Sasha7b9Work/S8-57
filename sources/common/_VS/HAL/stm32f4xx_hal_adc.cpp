@@ -17,7 +17,7 @@ extern "C"
 
     uint32_t HAL_ADC_GetValue(ADC_HandleTypeDef* /*hadc*/)
     {
-        return 0;
+        return ((1 << 12) - 1);
     }
 
 
