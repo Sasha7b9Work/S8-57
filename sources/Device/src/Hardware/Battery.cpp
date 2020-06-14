@@ -37,7 +37,7 @@ void Battery::Init()
 }
 
 
-float Battery::GetVoltageBattery()
+float Battery::GetVoltage()
 {
     static Utils::AroundAverager<float> averager(32);
 
@@ -88,7 +88,7 @@ static void DrawUGO(int x, int y, float percents)
 
 void Battery::Draw(int x, int y)
 {
-    float akk = GetVoltageBattery();
+    float akk = GetVoltage();
 
     float percents = CalculatePercents(akk);
 

@@ -13,5 +13,5 @@ public:
     static void Draw(int x, int y);
 
     // Возвращает значение напряжения батареи
-    static float GetVoltageBattery();
+    static float GetVoltage();
 };
