@@ -38,14 +38,6 @@ float Battery::GetVoltageAKK()
 }
 
 
-float Battery::GetVoltageCharger()
-{
-    uint pow = HAL_ADC1::ReadValuePOW();
-
-    return PowerADC_ToVoltage(pow);
-}
-
-
 float Battery::CalculatePercents(float volts)
 {
     if (volts >= Voltage100())
@@ -131,5 +123,7 @@ float Battery::Voltage0()
 
 bool Battery::ChargerIsConnected()
 {
-    return GetVoltageCharger() > 8.0F;
+    uint pow = HAL_ADC1::ReadValueCharger();
+
+    return PowerADC_ToVoltage(pow) > 8.0F;
 }

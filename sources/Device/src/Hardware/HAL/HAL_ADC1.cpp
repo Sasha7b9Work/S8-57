@@ -59,7 +59,7 @@ uint HAL_ADC1::ReadValueAKK()
 }
 
 
-uint HAL_ADC1::ReadValuePOW()
+uint HAL_ADC1::ReadValueCharger()
 {
     SetActiveChannel9();
 

@@ -47,7 +47,7 @@ struct HAL_ADC1
     // Читает АЦП батареи
     static uint ReadValueAKK();
     // Читает АЦП зарядного устройства
-    static uint ReadValuePOW();
+    static uint ReadValueCharger();
 private:
     static void SetActiveChannel2();
     static void SetActiveChannel9();

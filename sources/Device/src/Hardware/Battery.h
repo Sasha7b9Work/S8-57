@@ -17,9 +17,6 @@ public:
 
 private:   
     
-    // ѕолучить значение напр€жени€ источника зар€дного напр€жени€
-    static float GetVoltageCharger();
-
     // ¬озвращает true, если зар€дное устройство подключено
     static bool ChargerIsConnected();
     
