@@ -33,7 +33,7 @@ void PowerBreaker::Update()
 
 static void DisablePowerIfBatteryDischarged()
 {
-    if (Battery::GetVoltageAKK() < Battery::MIN_ABS)
+    if (Battery::GetVoltageBattery() < Battery::MIN_ABS)
     {
         if (!Device::InModeTester())
         {

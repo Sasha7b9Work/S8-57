@@ -13,7 +13,7 @@ public:
     static void Draw(int x, int y);
 
     // Получить значение напряжения батареи
-    static float GetVoltageAKK();
+    static float GetVoltageBattery();
 
 private:   
     
