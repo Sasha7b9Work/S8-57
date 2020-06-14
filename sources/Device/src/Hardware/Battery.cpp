@@ -26,7 +26,7 @@ float Battery::GetVoltageAKK()
 {
     static Utils::AroundAverager<float> averager(32);
 
-    uint akk = HAL_ADC1::ReadValueAKK();
+    uint akk = HAL_ADC1::ReadValueBattery();
 
     averager.Push(static_cast<float>(akk));
 
