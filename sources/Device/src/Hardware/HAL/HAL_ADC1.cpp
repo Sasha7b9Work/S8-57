@@ -56,7 +56,7 @@ void HAL_ADC1::Init()
 }
 
 
-uint HAL_ADC1::ReadValueBattery()
+uint HAL_ADC1::ValueBattery()
 {
     SetActiveChannel2();
 
@@ -64,7 +64,7 @@ uint HAL_ADC1::ReadValueBattery()
 }
 
 
-uint HAL_ADC1::ReadValueCharger()
+uint HAL_ADC1::ValueCharger()
 {
     SetActiveChannel9();
 

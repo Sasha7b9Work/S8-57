@@ -46,10 +46,10 @@ struct HAL_ADC1
     static void Init();
 
     // Читает АЦП батареи
-    static uint ReadValueBattery();
+    static uint ValueBattery();
 
     // Читает АЦП зарядного устройства
-    static uint ReadValueCharger();
+    static uint ValueCharger();
 };
 
 

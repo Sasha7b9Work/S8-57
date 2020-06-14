@@ -41,7 +41,7 @@ float Battery::GetVoltage()
 {
     static Utils::AroundAverager<float> averager(32);
 
-    uint akk = HAL_ADC1::ReadValueBattery();
+    uint akk = HAL_ADC1::ValueBattery();
 
     averager.Push(static_cast<float>(akk));
 
@@ -144,7 +144,7 @@ static float Voltage0()
 
 static bool ChargerIsConnected()
 {
-    uint pow = HAL_ADC1::ReadValueCharger();
+    uint pow = HAL_ADC1::ValueCharger();
 
     return ChargerADC_ToVoltage(pow) > 8.0F;
 }
