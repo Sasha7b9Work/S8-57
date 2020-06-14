@@ -21,7 +21,7 @@ private:
     static bool ChargerIsConnected();
     
     // Перевод считанного значения ЦАП источника в вольты
-    static float PowerADC_ToVoltage(uint value);
+    static float ChargerADC_ToVoltage(uint value);
     
     // Перевод считанного значения ЦАП батареи в вольты
     static float BatADC_ToVoltage(float value);

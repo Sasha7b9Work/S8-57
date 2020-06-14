@@ -93,7 +93,7 @@ void Battery::Draw(int x, int y)
 }
 
 
-float Battery::PowerADC_ToVoltage(uint value)
+float Battery::ChargerADC_ToVoltage(uint value)
 {
     const float k = 124.0F / 24.0F;
 
@@ -125,5 +125,5 @@ bool Battery::ChargerIsConnected()
 {
     uint pow = HAL_ADC1::ReadValueCharger();
 
-    return PowerADC_ToVoltage(pow) > 8.0F;
+    return ChargerADC_ToVoltage(pow) > 8.0F;
 }
