@@ -38,7 +38,7 @@ float Battery::GetVoltageAKK()
 }
 
 
-float Battery::GetVoltagePOW()
+float Battery::GetVoltageCharger()
 {
     uint pow = HAL_ADC1::ReadValuePOW();
 
@@ -119,11 +119,17 @@ float Battery::BatADC_ToVoltage(float value)
 
 float Battery::Voltage100()
 {
-    return GetVoltagePOW() > 8.0F ? 8.4F : 8.4F;
+    return ChargerIsConnected() ? 8.401F : 8.4F;
 }
 
 
 float Battery::Voltage0()
 {
-    return GetVoltagePOW() > 8.0F ? MIN_ABS : MIN_ABS; //-V583
+    return ChargerIsConnected() ? MIN_ABS : MIN_ABS; //-V583
+}
+
+
+bool Battery::ChargerIsConnected()
+{
+    return GetVoltageCharger() > 8.0F;
 }

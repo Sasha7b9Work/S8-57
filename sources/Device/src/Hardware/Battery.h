@@ -18,7 +18,10 @@ public:
 private:   
     
     // Получить значение напряжения источника зарядного напряжения
-    static float GetVoltagePOW();
+    static float GetVoltageCharger();
+
+    // Возвращает true, если зарядное устройство подключено
+    static bool ChargerIsConnected();
     
     // Перевод считанного значения ЦАП источника в вольты
     static float PowerADC_ToVoltage(uint value);
