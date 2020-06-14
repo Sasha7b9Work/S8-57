@@ -1,4 +1,8 @@
+#include "defines.h"
 #include <stm32f4xx_hal_adc.h>
+
+
+static uint channel = 2;
 
 
 extern "C"
@@ -9,15 +13,24 @@ extern "C"
     }
 
 
-    HAL_StatusTypeDef HAL_ADC_ConfigChannel(ADC_HandleTypeDef* /*hadc*/, ADC_ChannelConfTypeDef* /*sConfig*/)
+    HAL_StatusTypeDef HAL_ADC_ConfigChannel(ADC_HandleTypeDef* /*hadc*/, ADC_ChannelConfTypeDef* config)
     {
+        channel = config->Channel;
+
         return HAL_OK;
     }
 
 
-    uint32_t HAL_ADC_GetValue(ADC_HandleTypeDef* /*hadc*/)
+    uint32_t HAL_ADC_GetValue(ADC_HandleTypeDef * /*hadc*/)
     {
-        return ((1 << 12) - 1);
+        uint max = (1 << 12) - 1;
+
+        if (channel == 2)
+        {
+            return max * 70 / 100;
+        }
+
+        return max;
     }
 
 

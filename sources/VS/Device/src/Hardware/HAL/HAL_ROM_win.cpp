@@ -49,12 +49,16 @@ void HAL_ROM::WriteBufferBytes(uint address, const void *buffer, int size)
 
 void HAL_ROM::WriteBytes(uint address, const uint8 *buffer, int size)
 {
-    for (int i = 0; i < size; i++)
-    {
-        *reinterpret_cast<uint8 *>(address) = *buffer;
-        address++;
-        buffer++;
-    }
+    UNUSED_PARAMETER(address);
+    UNUSED_PARAMETER(buffer);
+    UNUSED_PARAMETER(size);
+
+//    for (int i = 0; i < size; i++)
+//    {
+//        *reinterpret_cast<uint8 *>(address) = *buffer;
+//        address++;
+//        buffer++;
+//    }
 }
 
 
