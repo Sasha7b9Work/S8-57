@@ -31,7 +31,7 @@ struct SectorSet
     Record *FirstFree();
 
     // Возвращает true, если запись record принадлежит этому сектору
-    bool Belong(Record *record);
+    bool Contains(Record *record);
 
     // Проверить и исправить найденные ошибки
     void CheckAndCorrect();
@@ -217,12 +217,12 @@ bool Record::IsFree()
 
 SectorSet *Record::GetSector()
 {
-    if(sectorFirst.Belong(this))
+    if(sectorFirst.Contains(this))
     {
         return &sectorFirst;
     }
 
-    if(sectorSecond.Belong(this))
+    if(sectorSecond.Contains(this))
     {
         return &sectorSecond;
     }
@@ -233,12 +233,12 @@ SectorSet *Record::GetSector()
 
 SectorSet *Record::GetAnotherSector()
 {
-    if(sectorFirst.Belong(this))
+    if(sectorFirst.Contains(this))
     {
         return &sectorSecond;
     }
 
-    if(sectorSecond.Belong(this))
+    if(sectorSecond.Contains(this))
     {
         return &sectorFirst;
     }
@@ -305,7 +305,7 @@ Record *SectorSet::FirstRecord()
 }
 
 
-bool SectorSet::Belong(Record *record)
+bool SectorSet::Contains(Record *record)
 {
     uint addressRecord = reinterpret_cast<uint>(record);
 
@@ -317,7 +317,7 @@ Record *SectorSet::NextFree(Record *record)
 {
     record = record->Next();
 
-    while(Belong(record))
+    while(Contains(record))
     {
         if(record->IsFree())
         {
@@ -336,7 +336,7 @@ Record *SectorSet::LastSaved()
 
     Record *record = FirstRecord();
 
-    while(Belong(record))
+    while(Contains(record))
     {
         if(record->IsSaved())
         {
@@ -371,7 +371,7 @@ Record *SectorSet::FirstFree()
 {
     Record *record = FirstRecord();
 
-    while(Belong(record))
+    while(Contains(record))
     {
         if(record->IsFree())
         {
@@ -389,7 +389,7 @@ void SectorSet::CheckAndCorrect()
 {
     Record *record = FirstRecord();
 
-    while (Belong(record))
+    while (Contains(record))
     {
         if (!record->IsCorrect())
         {
