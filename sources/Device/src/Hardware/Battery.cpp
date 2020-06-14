@@ -7,13 +7,28 @@
 #include "Utils/Averager.h"
 
 
-// Максимальное значение, которое возможно считать с АЦП
-const float Battery::MAX_ADC_REL = static_cast<float>((1 << 12) - 1);
-// Напряжение, соответствующее MAX_ADC_REL
-const float Battery::MAX_ADC_ABS = 3.0F;
+static const float MAX_ADC_REL = static_cast<float>((1 << 12) - 1);     // Максимальное значение, которое возможно считать с АЦП
+static const float MAX_ADC_ABS = 3.0F;                                  // Напряжение, соответствующее MAX_ADC_REL
+const float Battery::SHUTDOWN_VOLTAGE = 5.4F;
 
+// Возвращает true, если зарядное устройство подключено
+static bool ChargerIsConnected();
 
-const float Battery::MIN_ABS = 5.4F;
+// Перевод считанного значения ЦАП источника в вольты
+static float ChargerADC_ToVoltage(uint value);
+
+// Перевод считанного значения ЦАП батареи в вольты
+static float BatteryADC_ToVoltage(float value);
+
+// Рассчитать процент отставшегося заряда
+static float CalculatePercents(float volts);
+
+// Отобразить заряд батареи в графическом виде
+static void DrawUGO(int x, int y, float procents);
+
+// Значения, соответствующие 100% и 0%, для текущих напряжения аккумуляторов akk и источника заряда pow
+static float Voltage100();
+static float Voltage0();
 
 
 void Battery::Init()
@@ -30,15 +45,11 @@ float Battery::GetVoltageBattery()
 
     averager.Push(static_cast<float>(akk));
 
-#ifdef WIN32
-    return 8.0F;
-#else
-    return BatADC_ToVoltage(static_cast<float>(averager.Value()));
-#endif
+    return BatteryADC_ToVoltage(static_cast<float>(averager.Value()));
 }
 
 
-float Battery::CalculatePercents(float volts)
+static float CalculatePercents(float volts)
 {
     if (volts >= Voltage100())
     {
@@ -57,7 +68,7 @@ float Battery::CalculatePercents(float volts)
 }
 
 
-void Battery::DrawUGO(int x, int y, float percents)
+static void DrawUGO(int x, int y, float percents)
 {
     int widthBig = 30;
     int widthSmall = 4;
@@ -93,7 +104,7 @@ void Battery::Draw(int x, int y)
 }
 
 
-float Battery::ChargerADC_ToVoltage(uint value)
+static float ChargerADC_ToVoltage(uint value)
 {
     const float k = 124.0F / 24.0F;
 
@@ -101,27 +112,37 @@ float Battery::ChargerADC_ToVoltage(uint value)
 }
 
 
-float Battery::BatADC_ToVoltage(float value)
+static float BatteryADC_ToVoltage(float value)
 {
+#ifdef WIN32
+
+    UNUSED_PARAMETER(value);
+
+    return 8.0F;
+
+#else
+
     const float k = 101.1F / 26.1F;
 
     return (value / MAX_ADC_REL) * MAX_ADC_ABS * k;
+    
+#endif
 }
 
 
-float Battery::Voltage100()
+static float Voltage100()
 {
     return ChargerIsConnected() ? 8.401F : 8.4F;
 }
 
 
-float Battery::Voltage0()
+static float Voltage0()
 {
-    return ChargerIsConnected() ? MIN_ABS : MIN_ABS; //-V583
+    return ChargerIsConnected() ? Battery::SHUTDOWN_VOLTAGE : Battery::SHUTDOWN_VOLTAGE; //-V583
 }
 
 
-bool Battery::ChargerIsConnected()
+static bool ChargerIsConnected()
 {
     uint pow = HAL_ADC1::ReadValueCharger();
 
