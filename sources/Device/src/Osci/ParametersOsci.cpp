@@ -428,7 +428,7 @@ void TrigLevel::Find()
 
         float additionShift = deltaValue + deltaRShift / k;     // Итоговое смщение, которое нужно добавить к TrigLev::Zero
 
-        TrigLevel::Set(ch, static_cast<int16>(HARDWARE_ZERO + additionShift * k + 0.5F));
+        TrigLevel::Set(ch, static_cast<int16>(-additionShift * k + 0.5F));
     }
 }
 
