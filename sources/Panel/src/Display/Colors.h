@@ -20,8 +20,6 @@ public:
     static Color FLASH_10;
     static Color FLASH_01;
 
-    static Color BLUE_50;
-
     static Color GREEN_10;
     static Color GREEN_50;
 
@@ -89,7 +87,7 @@ public:
         COLOR_GRAY_10 = 27,
         COLOR_GRAY_20 = 28,
         COLOR_RED_50 = 29,
-        COLOR_BLUE_50 = 30,
+
         COLOR_GREEN_50 = 31,
         COLOR_NUMBER = 32
     };

@@ -25,7 +25,7 @@ uint colors[256] =
     /* 15 */    MAKE_COLOR(0x00, 0xff, 0x00),       // GREEN
     /* 16 */    MAKE_COLOR(0x00, 0x00, 0xff),       // BLUE
     /* 17 */    MAKE_COLOR(0x00, 0x00, 0x40),
-    /* 18 */    MAKE_COLOR(0x00, 0x00, 0x80),       // BLUE_50
+    /* 18 */    MAKE_COLOR(0x00, 0x00, 0x80),
     /* 19 */    MAKE_COLOR(0x1a, 0x1a, 0x1a),       // GRAY_10
     /* 20 */    MAKE_COLOR(0x33, 0x33, 0x33),       // GRAY_20
     /* 21 */    MAKE_COLOR(0x00, 0x00, 0x1a),       // BLUE_10
@@ -57,7 +57,6 @@ Color Color::GRAY_25(COLOR_GRAY_25);
 Color Color::GRAY_10(COLOR_GRAY_10);
 Color Color::GRAY_20(COLOR_GRAY_20);
 Color Color::RED_50(COLOR_RED_50);
-Color Color::BLUE_50(COLOR_BLUE_50);
 Color Color::GREEN_50(COLOR_GREEN_50);
 
 Color Color::CHAN[4] = {Color(COLOR_DATA_A), Color(COLOR_DATA_B), Color(COLOR_WHITE), Color(COLOR_WHITE)};
