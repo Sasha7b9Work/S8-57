@@ -65,7 +65,7 @@ struct FunctionTime
 
 
 // Тип привязки к смещению по горизонтали
-#define S_LINKING_TSHIFT    (set.time._linkingTShift)
+#define S_LINKING_TSHIFT    (set.time._1)
 struct LinkingTShift
 {
     enum E
@@ -85,8 +85,8 @@ struct LinkingTShift
     PeakDetMode::E      _peakDet;
     TPos::E             _tPos;
     SampleType::E       _sampleType;
-    FunctionTime::E     _;
-    LinkingTShift::E    _linkingTShift;  // Тип привязки смещения по горизонтали
+    FunctionTime::E     _0;
+    LinkingTShift::E    _1;  // Тип привязки смещения по горизонтали
 };
 
 

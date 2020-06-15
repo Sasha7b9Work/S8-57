@@ -139,7 +139,6 @@ DEF_PAGE_3( pTime,                                                              
     &cPeakDet,
     &cSample,
     &cTPos,
-//  &cDivRole,
 //  &cShiftXtype,
     PageName::Time, nullptr, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
