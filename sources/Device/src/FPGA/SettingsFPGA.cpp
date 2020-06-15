@@ -156,7 +156,7 @@ void TShift::LoadRandomize()
         LOG_WRITE("pred = %d, post = %d", FPGA::pred, FPGA::post);
     }
 
-    FPGA::post = static_cast<uint16>(~(FPGA::post + 5));
+    FPGA::post = static_cast<uint16>(~(FPGA::post + 10));
     FPGA::pred = static_cast<uint16>(~(FPGA::pred));
 
     HAL_BUS::FPGA::Write16(WR::PRED_LO, FPGA::pred);

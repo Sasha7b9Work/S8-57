@@ -467,11 +467,11 @@ StructReadRand RandShift::GetInfoForReadRand(ShiftPoint Tsm, const uint8 *addres
 {
     static const int add[] =
     {
-        260,     // 2 ns
-        0,     // 5 ns
-        0,     // 10 ns
-        0,     // 20 ns
-        0      // 50 ns
+        150,    // 2 ns
+        75,     // 5 ns
+        30,     // 10 ns
+        15,     // 20 ns
+        3       // 50 ns
     };
 
     StructReadRand structRand;

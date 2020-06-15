@@ -14,11 +14,11 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
     {
         static const int shift[TBase::Count] =
         {
-            7,  // 2 ns
-            6,  // 5 ns
-            5,  // 10 ns
-            4,  // 20 ns
-            3,  // 50 ns
+            10,  // 2 ns
+            10,  // 5 ns
+            10,  // 10 ns
+            10,  // 20 ns
+            10,  // 50 ns
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
         };
 
