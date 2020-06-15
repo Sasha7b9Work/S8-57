@@ -473,16 +473,11 @@ StructReadRand RandShift::GetInfoForReadRand(ShiftPoint Tsm, const uint8 *addres
 {
     if(Tsm.type != ShiftPoint::FAIL)
     {
-        int addShift = static_cast<int>(S_TIME_SHIFT % TBase::DeltaPoint());
-
-        if (addShift < 0)
-        {
-            addShift += TBase::DeltaPoint();
-        }
-
         structRand.step = TBase::DeltaPoint();
 
-        int index = Tsm.shift - addShift - structRand.step;
+        static const int addShift[] = { 260, 50, 25, 10, 0 };
+
+        int index = Tsm.shift - addShift[S_TIME_BASE] - structRand.step;
 
         while(index < 0)
         {
