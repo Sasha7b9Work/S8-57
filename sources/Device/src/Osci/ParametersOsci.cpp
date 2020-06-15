@@ -715,7 +715,7 @@ void Range::Set(Chan::E ch, E range)
 
 int TBase::DeltaPoint()
 {
-    return OSCI_IN_MODE_RANDOMIZER ? deltaPoint[S_TIME_BASE] : 1;
+    return deltaPoint[S_TIME_BASE];
 }
 
 

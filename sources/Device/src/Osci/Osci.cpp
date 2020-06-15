@@ -23,7 +23,6 @@
 // Структура для хранения информации, необходимой для чтения в режиме рандомизатора
 struct StructReadRand
 {
-    StructReadRand() : step(0), posFirst(0) { }
     int step;       // Шаг между точками
     int posFirst;   // Позиция первой считанной точки
 };
@@ -34,7 +33,12 @@ struct RandShift
 {
     // Возвращает данные, необходимые для чтения даннхы в режмиме рандомизатора.
     // Если Tsm == 0, то структура будет использоваться не для чтения данных, а для правильного усредения.
-    static StructReadRand GetInfoForReadRand(ShiftPoint Tsm, const uint8 *address = nullptr);
+    StructReadRand GetInfoForReadRand(ShiftPoint Tsm, const uint8 *address = nullptr);
+
+    // Возвращает true, если в данной позиции точка не может быть считана с АЦП и её нужно рассчитывать программно
+    bool Interpolated(int pos);
+
+    static StructReadRand structRand;
 };
 
 
@@ -60,6 +64,8 @@ private:
 };
 
 
+static RandShift randShift;
+StructReadRand RandShift::structRand = { 0, 0 };
 static Gates gates;             // "Ворота" рандомизатора
 
 static void UpdateFPGA();
@@ -376,7 +382,7 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
         return false;
     }
 
-    StructReadRand infoRead = RandShift::GetInfoForReadRand(Tsm, addr);
+    StructReadRand infoRead = randShift.GetInfoForReadRand(Tsm, addr);
 
     int step = infoRead.step;
 
@@ -465,15 +471,18 @@ ShiftPoint Gates::CalculateShiftPoint()
 
 StructReadRand RandShift::GetInfoForReadRand(ShiftPoint Tsm, const uint8 *address)
 {
-    StructReadRand structRand;
-
     if(Tsm.type != ShiftPoint::FAIL)
     {
+        int addShift = static_cast<int>(S_TIME_SHIFT % TBase::DeltaPoint());
+
+        if (addShift < 0)
+        {
+            addShift += TBase::DeltaPoint();
+        }
+
         structRand.step = TBase::DeltaPoint();
 
-        static const int addShift[] = { 0, 0, 0, 0, 0 };
-
-        int index = Tsm.shift - addShift[S_TIME_BASE] - structRand.step;
+        int index = Tsm.shift - addShift - structRand.step;
 
         while(index < 0)
         {

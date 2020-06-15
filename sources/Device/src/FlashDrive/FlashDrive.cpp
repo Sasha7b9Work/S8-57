@@ -254,7 +254,6 @@ bool FDrive::GetNameDir(const char *fullPath, int numDir, char *nameDirOut, Stru
                 numDirs++;
             }
         }
-        f_closedir(pDir);
     }
     return false;
 }
@@ -344,7 +343,6 @@ bool FDrive::GetNameFile(const char *fullPath, int numFile, char *nameFileOut, S
                 numFiles++;
             }
         }
-        f_closedir(pDir);
     }
     return false;
 }
