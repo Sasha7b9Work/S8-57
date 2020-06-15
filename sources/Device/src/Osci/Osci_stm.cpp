@@ -12,7 +12,17 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
 
     if(addrRead == 0xffff)
     {
-        addrRead = static_cast<uint16>(ReadLastRecord(ch) - static_cast<int>(numPoints) / TBase::DeltaPoint());
+        static const int shift[TBase::Count] =
+        {
+            7,  // 2 ns
+            6,  // 5 ns
+            5,  // 10 ns
+            4,  // 20 ns
+            3,  // 50 ns
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+        };
+
+        addrRead = static_cast<uint16>(ReadLastRecord(ch) - static_cast<int>(numPoints) / TBase::DeltaPoint() - shift[S_TIME_BASE]);
     }
 
     HAL_BUS::FPGA::Write16(WR::PRED_LO, static_cast<uint16>(addrRead));
