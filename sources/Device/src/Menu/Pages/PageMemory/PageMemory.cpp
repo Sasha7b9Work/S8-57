@@ -102,6 +102,19 @@ DEF_GRAPH_BUTTON( bManager_LevelDown,                                           
 )
 
 
+static void OnPress_Exit()
+{
+    Menu::CloseOpenedItem();
+    Display::SetDrawMode(DrawMode::Auto);
+}
+
+DEF_BUTTON(bExit,
+    "Выход",
+    "",
+    &PageDrive::Manager::self, Item::Active, OnPress_Exit
+)
+
+
 static bool IsActive_Drive_Manager()
 {
     return FDrive::IsConnected();
@@ -128,7 +141,7 @@ DEF_PAGE_5(pManager,                                                            
     &bManager_LevelUp,
     &bManager_LevelDown,
     &Item::empty,
-    &Item::empty,
+    &bExit,
     PageName::Memory_Drive_Manager,
     &PageDrive::self, IsActive_Drive_Manager, Page::NormalTitle, PageMemory::OnOpenClose_Drive_Manager, Page::BeforeDraw, FileManager::HandlerKey
 )

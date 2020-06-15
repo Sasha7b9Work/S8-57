@@ -322,23 +322,28 @@ static void DecCurrentFile()
 
 bool FileManager::HandlerKey(const KeyEvent &event)
 {
-    int delta = (event.IsArrowUp() || event.IsArrowRight()) ? 1 : -1;
-
-    Beeper::RegulatorSwitchRotate();
-    if (FM_CURSOR_IN_DIRS)
+    if (event.IsRelease() && event.IsArrow())
     {
-        delta > 0 ? DecCurrentDir() : IncCurrentDir();
+        int delta = (event.IsArrowUp() || event.IsArrowRight()) ? 1 : -1;
 
-        ModeRedrawFM::Set(ModeRedrawFM::Folders);
+        Beeper::RegulatorSwitchRotate();
+        if (FM_CURSOR_IN_DIRS)
+        {
+            delta > 0 ? DecCurrentDir() : IncCurrentDir();
+
+            ModeRedrawFM::Set(ModeRedrawFM::Folders);
+        }
+        else
+        {
+            delta > 0 ? DecCurrentFile() : IncCurrentFile();
+
+            ModeRedrawFM::Set(ModeRedrawFM::Files);
+        }
+
+        return true;
     }
-    else
-    {
-        delta > 0 ? DecCurrentFile() : IncCurrentFile();
 
-        ModeRedrawFM::Set(ModeRedrawFM::Files);
-    }
-
-    return true;
+    return false;
 }
 
 
