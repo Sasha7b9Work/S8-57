@@ -152,7 +152,7 @@ static void DrawNameCurrentDir(int left, int top) //-V2506
 
 void FileManager::Draw() //-V2506
 {
-    if (FM_NEED_REDRAW == 0)
+    if (FM_REDRAWING_IS_NONE)
     {
         return;
     }
@@ -165,7 +165,7 @@ void FileManager::Draw() //-V2506
     int width = 297;
     int left2col = width / 2;
 
-    if (FM_NEED_REDRAW == FM_REDRAW_FULL)
+    if (FM_REDRAWING_IS_FULL)
     {
         Painter::BeginScene(Color::BACK);
         Menu::Draw();
@@ -178,26 +178,27 @@ void FileManager::Draw() //-V2506
 		HLine(width).Draw(0, top + 15);
     }
 
-    if (FM_NEED_REDRAW != FM_REDRAW_FILES)
+    if (!FM_REDRAWING_IS_FILES)
     {
         DrawDirs(left + 2, top + 18);
     }
 
-    if (FM_NEED_REDRAW != FM_REDRAW_FOLDERS)
+    if (!FM_REDRAWING_IS_FOLDERS)
     {
         DrawFiles(left2col + 3, top + 18);
     }
 
     Painter::EndScene();
 
-    FM_NEED_REDRAW = 0;
+    FM_MODE_REDRAW = FM_MODE_REDRAW_NONE;
 
     //FSMC::SetMode(mode);
 }
 
 void FileManager::Press_LevelDown() //-V2506
 {
-    FM_NEED_REDRAW = FM_REDRAW_FULL;
+    FM_MODE_REDRAW = FM_MODE_REDRAW_FULL;
+
     if (FM_CURSOR_IN_DIRS == 0)
     {
         return;
@@ -224,7 +225,8 @@ void FileManager::Press_LevelDown() //-V2506
 
 void FileManager::Press_LevelUp() //-V2506
 {
-    FM_NEED_REDRAW = FM_REDRAW_FULL;
+    FM_MODE_REDRAW = FM_MODE_REDRAW_FULL;
+
     if (std::strlen(currentDir) == 1)
     {
         return;
@@ -329,12 +331,14 @@ bool FileManager::HandlerKey(const KeyEvent &event)
     if (FM_CURSOR_IN_DIRS)
     {
         delta > 0 ? DecCurrentDir() : IncCurrentDir();
-        FM_NEED_REDRAW = FM_REDRAW_FOLDERS;
+
+        FM_MODE_REDRAW = FM_MODE_REDRAW_FOLDERS;
     }
     else
     {
         delta > 0 ? DecCurrentFile() : IncCurrentFile();
-        FM_NEED_REDRAW = FM_REDRAW_FILES;
+
+        FM_MODE_REDRAW = FM_MODE_REDRAW_FILES;
     }
 
     return true;
@@ -418,7 +422,7 @@ bool FileManager::GetNameForNewFile(char name[255]) //-V2506
 
 void FileManager::Press_Tab()
 {
-    FM_NEED_REDRAW = FM_REDRAW_FOLDERS;
+    FM_MODE_REDRAW = FM_MODE_REDRAW_FOLDERS;
 
     if (FM_CURSOR_IN_DIRS)
     {

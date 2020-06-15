@@ -46,13 +46,13 @@ DEF_CHOICE_2(cAutoconnect,                                                      
 )
 
 
-DEF_PAGE_6(pDrive,   //-V1027                                                                                                                                     //--- ÏÀÌ‗ÒÜ - ÂÍÅØÍ ÇÓ ---
+DEF_PAGE_5(pDrive,   //-V1027                                                                                                                                     //--- ÏÀÌ‗ÒÜ - ÂÍÅØÍ ÇÓ ---
     "ÂÍÅØÍ ÇÓ",
     "Ðאבמעא ס גםורםטל חאןמלטםא‏שטל ףסענמיסעגמל.",
     PageDrive::Manager::self,
     &cName,
     PageDrive::Mask::self,
-    &cSaveAs,
+    //&cSaveAs,
     &cModeBtnMemory,
     &cAutoconnect,
     PageName::Memory_Drive,

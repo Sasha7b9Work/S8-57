@@ -113,7 +113,7 @@ void PageMemory::OnOpenClose_Drive_Manager(bool)
     {
         FDrive::Mount();
         Display::SetDrawMode(DrawMode::Auto, FileManager::Draw);
-        FM_NEED_REDRAW = FM_REDRAW_FULL;
+        FM_MODE_REDRAW = FM_MODE_REDRAW_FULL;
     }
     else
     {
@@ -121,12 +121,14 @@ void PageMemory::OnOpenClose_Drive_Manager(bool)
     }
 }
 
-DEF_PAGE_3( pManager,                                                                                                                                   //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ ---
+DEF_PAGE_5(pManager,                                                                                                                                   //--- ПАМЯТЬ - ВНЕШН ЗУ - КАТАЛОГ ---
     "КАТАЛОГ",
     "Открывает доступ к файловой системе подключенного накопителя",
     &bManager_Tab,
     &bManager_LevelUp,
     &bManager_LevelDown,
+    &Item::empty,
+    &Item::empty,
     PageName::Memory_Drive_Manager,
     &PageDrive::self, IsActive_Drive_Manager, Page::NormalTitle, PageMemory::OnOpenClose_Drive_Manager, Page::BeforeDraw, FileManager::HandlerKey
 )

@@ -212,11 +212,15 @@ union BitSet64 //-V2514
 // ≈сли 1, то консоль находитс€ в режиме паузы
 #define CONSOLE_IN_PAUSE        (gBF.consoleInPause)
 
-#define FM_NEED_REDRAW          (gBF.needRedrawFileManager)
-#define FM_REDRAW_FULL          1
-#define FM_REDRAW_FOLDERS       2
-#define FM_REDRAW_FILES         3
-
+#define FM_MODE_REDRAW          (gBF.needRedrawFileManager)
+#define FM_MODE_REDRAW_NONE     0
+#define FM_MODE_REDRAW_FULL     1
+#define FM_MODE_REDRAW_FILES    3
+#define FM_MODE_REDRAW_FOLDERS  2
+#define FM_REDRAWING_IS_NONE    (FM_MODE_REDRAW == FM_MODE_REDRAW_NONE)
+#define FM_REDRAWING_IS_FULL    (FM_MODE_REDRAW == FM_MODE_REDRAW_FULL)
+#define FM_REDRAWING_IS_FILES   (FM_MODE_REDRAW == FM_MODE_REDRAW_FILES)
+#define FM_REDRAWING_IS_FOLDERS (FM_MODE_REDRAW == FM_MODE_REDRAW_FOLDERS)
 
 
 struct BitField
