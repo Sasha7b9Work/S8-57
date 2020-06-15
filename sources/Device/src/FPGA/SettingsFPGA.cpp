@@ -135,24 +135,20 @@ void TShift::LoadRandomize()
 {
     int k = TBase::DeltaPoint();
 
-    int d1 = S_TIME_SHIFT - TShift().Min() - GetK();
+    int kk = 4 * k;
 
-    int d2 = S_TIME_SHIFT - static_cast<int>(GetK());
+    FPGA::post = static_cast<uint16>((S_TIME_SHIFT - TShift().Min() - GetK() + kk) / k);
 
-    LOG_WRITE("d %d %d", d1, d2);
-
-    FPGA::post = static_cast<uint16>(d1 / k);
-
-    if(d2 < TShift().Min())
+    if((S_TIME_SHIFT - static_cast<int>(GetK()) - kk) < TShift().Min())
     {
         FPGA::post = 0;
     }
 
-    int Pred = static_cast<int>(ENumPointsFPGA::PointsInChannel()) / static_cast<int>(k) - static_cast<int>(FPGA::post) + 2;
+    int Pred = static_cast<int>(ENumPointsFPGA::PointsInChannel()) / static_cast<int>(k) - static_cast<int>(FPGA::post);
 
-    if (Pred < 6)
+    if (Pred < 5)
     {
-        Pred = 6;
+        Pred = 5;
     }
 
     FPGA::pred = static_cast<uint16>(Pred);
