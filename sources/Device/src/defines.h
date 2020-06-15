@@ -212,16 +212,6 @@ union BitSet64 //-V2514
 // Если 1, то консоль находится в режиме паузы
 #define CONSOLE_IN_PAUSE        (gBF.consoleInPause)
 
-#define FM_MODE_REDRAW          (gBF.needRedrawFileManager)
-#define FM_MODE_REDRAW_NONE     0
-#define FM_MODE_REDRAW_FULL     1
-#define FM_MODE_REDRAW_FILES    3
-#define FM_MODE_REDRAW_FOLDERS  2
-#define FM_REDRAWING_IS_NONE    (FM_MODE_REDRAW == FM_MODE_REDRAW_NONE)
-#define FM_REDRAWING_IS_FULL    (FM_MODE_REDRAW == FM_MODE_REDRAW_FULL)
-#define FM_REDRAWING_IS_FILES   (FM_MODE_REDRAW == FM_MODE_REDRAW_FILES)
-#define FM_REDRAWING_IS_FOLDERS (FM_MODE_REDRAW == FM_MODE_REDRAW_FOLDERS)
-
 
 struct BitField
 {
@@ -234,9 +224,6 @@ struct BitField
     uint temporaryShowStrNavi         : 1;  // Признак того, что нужно временно показывать строку навигации меню.
     uint runningFPGAbeforeDrawButtons : 1;  // Здесь сохраняется информация о том, работала ли ПЛИС перед переходом в режим работы с памятью.
     uint exitFromROMtoRAM             : 1;  // Если 1, то выходить из страницы внутренней памяти нужно не стандартно, а в меню последних.
-    uint needRedrawFileManager        : 2;  // @brief Если 1, то файл-менеджер нуждается в полной перерисовке.
-                                            // Если 2, то перерисовать только каталоги.
-                                            // Если 3, то перерисовать только файлы.
     uint alwaysShowROMSignal          : 1;  // Если 1, то показывать всегда выбранный в режиме "Внутр. ЗУ" сигнал.
     uint panelControlReceive          : 1;  // Если 1, то панель прислала команду.
     uint FPGAinProcessingOfRead       : 1;

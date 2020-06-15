@@ -113,7 +113,7 @@ void PageMemory::OnOpenClose_Drive_Manager(bool)
     {
         FDrive::Mount();
         Display::SetDrawMode(DrawMode::Auto, FileManager::Draw);
-        FM_MODE_REDRAW = FM_MODE_REDRAW_FULL;
+        ModeRedrawFM::Set(ModeRedrawFM::Full);
     }
     else
     {

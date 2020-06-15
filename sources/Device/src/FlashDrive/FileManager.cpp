@@ -37,6 +37,8 @@ static int numDirs = 0;
 static int numFiles = 0;
 
 
+ModeRedrawFM::E ModeRedrawFM::modeRedraw = ModeRedrawFM::Full;
+
 
 void FileManager::Init()
 {
@@ -152,20 +154,17 @@ static void DrawNameCurrentDir(int left, int top) //-V2506
 
 void FileManager::Draw() //-V2506
 {
-    if (FM_REDRAWING_IS_NONE)
+    if (ModeRedrawFM::Is(ModeRedrawFM::None))
     {
         return;
     }
-
-    //ModeFSMC mode = FSMC::GetMode();
-    //FSMC_SetMode(ModeFSMC_Display);
 
     int left = 1;
     int top = 1;
     int width = 297;
     int left2col = width / 2;
 
-    if (FM_REDRAWING_IS_FULL)
+    if (ModeRedrawFM::Is(ModeRedrawFM::Full))
     {
         Painter::BeginScene(Color::BACK);
         Menu::Draw();
@@ -178,26 +177,24 @@ void FileManager::Draw() //-V2506
 		HLine(width).Draw(0, top + 15);
     }
 
-    if (!FM_REDRAWING_IS_FILES)
+    if (!ModeRedrawFM::Is(ModeRedrawFM::Files))
     {
         DrawDirs(left + 2, top + 18);
     }
 
-    if (!FM_REDRAWING_IS_FOLDERS)
+    if (!ModeRedrawFM::Is(ModeRedrawFM::Folders))
     {
         DrawFiles(left2col + 3, top + 18);
     }
 
     Painter::EndScene();
 
-    FM_MODE_REDRAW = FM_MODE_REDRAW_NONE;
-
-    //FSMC::SetMode(mode);
+    ModeRedrawFM::Set(ModeRedrawFM::None);
 }
 
 void FileManager::Press_LevelDown() //-V2506
 {
-    FM_MODE_REDRAW = FM_MODE_REDRAW_FULL;
+    ModeRedrawFM::Set(ModeRedrawFM::Full);
 
     if (FM_CURSOR_IN_DIRS == 0)
     {
@@ -225,7 +222,7 @@ void FileManager::Press_LevelDown() //-V2506
 
 void FileManager::Press_LevelUp() //-V2506
 {
-    FM_MODE_REDRAW = FM_MODE_REDRAW_FULL;
+    ModeRedrawFM::Set(ModeRedrawFM::Full);
 
     if (std::strlen(currentDir) == 1)
     {
@@ -332,13 +329,13 @@ bool FileManager::HandlerKey(const KeyEvent &event)
     {
         delta > 0 ? DecCurrentDir() : IncCurrentDir();
 
-        FM_MODE_REDRAW = FM_MODE_REDRAW_FOLDERS;
+        ModeRedrawFM::Set(ModeRedrawFM::Folders);
     }
     else
     {
         delta > 0 ? DecCurrentFile() : IncCurrentFile();
 
-        FM_MODE_REDRAW = FM_MODE_REDRAW_FILES;
+        ModeRedrawFM::Set(ModeRedrawFM::Files);
     }
 
     return true;
@@ -422,7 +419,7 @@ bool FileManager::GetNameForNewFile(char name[255]) //-V2506
 
 void FileManager::Press_Tab()
 {
-    FM_MODE_REDRAW = FM_MODE_REDRAW_FOLDERS;
+    ModeRedrawFM::Set(ModeRedrawFM::Folders);
 
     if (FM_CURSOR_IN_DIRS)
     {
@@ -438,4 +435,16 @@ void FileManager::Press_Tab()
             FM_CURSOR_IN_DIRS = 1;
         }
     }
+}
+
+
+void ModeRedrawFM::Set(ModeRedrawFM::E mode)
+{
+    modeRedraw = mode;
+}
+
+
+bool ModeRedrawFM::Is(ModeRedrawFM::E mode)
+{
+    return (modeRedraw == mode);
 }

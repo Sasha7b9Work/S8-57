@@ -2,6 +2,24 @@
 #include "Keyboard/Keyboard.h"
 
 
+struct ModeRedrawFM
+{
+    enum E
+    {
+        None,
+        Full,
+        Files,
+        Folders
+    };
+
+    static void Set(E);
+
+    static bool Is(E);
+
+private:
+    static E modeRedraw;
+};
+
 
 class FileManager
 {
