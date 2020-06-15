@@ -150,7 +150,7 @@ struct SettingsMemory
 
 struct PageMemory
 {
-    static void OnChanged_Points(bool active);
+    static void OnChanged_LengthMemoryChannel(bool active);
 
     static void OnOpenClose_Drive_Manager(bool enter = true);
 

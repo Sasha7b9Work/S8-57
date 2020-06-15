@@ -46,7 +46,7 @@ struct Osci
     static void Restart();
     
     // Эту функцию надо вызывать при изменении длины памяти. Ну или режима пикового детектора
-    static void OnChangedPoints();
+    static void OnChangedLengthMemoryChannel();
    
     // Загрузить значение удержания синхронизации
     static void LoadHoldfOff();

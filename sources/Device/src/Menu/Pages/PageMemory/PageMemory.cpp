@@ -40,7 +40,7 @@ static bool IsActive_Points()
     return !PeakDetMode().IsEnabled();
 }
 
-void PageMemory::OnChanged_Points(bool active)
+void PageMemory::OnChanged_LengthMemoryChannel(bool active)
 {
     // Если включен пиковый детектор, то не можем переключать память
     if (PeakDetMode().IsEnabled() && !active)
@@ -49,7 +49,7 @@ void PageMemory::OnChanged_Points(bool active)
         return;
     }
 
-    Osci::OnChangedPoints();
+    Osci::OnChangedLengthMemoryChannel();
 }
 
 static pString namesLengthMemory[] = {"512", "1k", "2k", "4k", "8k", "16k", "32k"};
@@ -62,7 +62,7 @@ DEF_CHOICE_5( cPoints,                                                          
     namesLengthMemory[2],
     namesLengthMemory[3],
     namesLengthMemory[4],
-    S_ENUMPOINTS_FPGA, &PageMemory::self, IsActive_Points, PageMemory::OnChanged_Points, Choice::AfterDraw
+    S_ENUMPOINTS_FPGA, &PageMemory::self, IsActive_Points, PageMemory::OnChanged_LengthMemoryChannel, Choice::AfterDraw
 )
 
 

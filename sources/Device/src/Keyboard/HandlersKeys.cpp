@@ -163,7 +163,10 @@ static void OnChangeParameterTime(pFuncVI func, int delta)
 
 static void OnTShift()
 {
-    OnChangeParameterTime(TShift::Change, (event.key == Key::TShiftMore) ? 1 : -1);
+    if (Osci::IsRunning())
+    {
+        OnChangeParameterTime(TShift::Change, (event.key == Key::TShiftMore) ? 1 : -1);
+    }
 }
 
 

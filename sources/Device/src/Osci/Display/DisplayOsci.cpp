@@ -224,3 +224,22 @@ void DisplayOsci::ShiftInMemory::Set(int16 shift)
 {
     set.disp._shiftInMemory = shift;
 }
+
+
+void DisplayOsci::ShiftInMemory::ChangeTPos()
+{
+    int width = Grid::Width();
+
+    if (S_TPOS_IS_LEFT)
+    {
+        Set(0);
+    }
+    else if (S_TPOS_IS_CENTER)
+    {
+        Set(static_cast<int16>(ENumPointsFPGA::PointsInChannel() / 2 - width / 2));
+    }
+    else // TPOS_IS_RIGHT
+    {
+        Set(static_cast<int16>(ENumPointsFPGA::PointsInChannel() - width - 2));
+    }
+}

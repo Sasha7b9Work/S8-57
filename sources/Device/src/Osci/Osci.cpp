@@ -250,11 +250,11 @@ void Osci::ProcessFlagPred()
 }
 
 
-void Osci::OnChangedPoints()
+void Osci::OnChangedLengthMemoryChannel()
 {
     FPGA::LoadRegUPR();
     FPGA::Reset();
-    DisplayOsci::PainterData::ChangeTPos();
+    DisplayOsci::ShiftInMemory::ChangeTPos();
     FPGA::Reset();
     TShift::Set(S_TIME_SHIFT);
     FPGA::Reset();

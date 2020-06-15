@@ -396,22 +396,3 @@ BitSet64 DisplayOsci::PainterData::BytesOnDisplay()
 
     return retValue;
 }
-
-
-void DisplayOsci::PainterData::ChangeTPos()
-{
-    int width = Grid::Width();
-
-    if (S_TPOS_IS_LEFT)
-    {
-        DisplayOsci::ShiftInMemory::Set(0);
-    }
-    else if (S_TPOS_IS_CENTER)
-    {
-        DisplayOsci::ShiftInMemory::Set(static_cast<int16>(ENumPointsFPGA::PointsInChannel() / 2 - width / 2));
-    }
-    else // TPOS_IS_RIGHT
-    {
-        DisplayOsci::ShiftInMemory::Set(static_cast<int16>(ENumPointsFPGA::PointsInChannel() - width - 2));
-    }
-}

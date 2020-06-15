@@ -89,7 +89,7 @@ void PageTime::OnChanged_PeakDet(bool active)
 {
     if (active)
     {
-        Osci::OnChangedPoints();
+        Osci::OnChangedLengthMemoryChannel();
     }
     else
     {
@@ -109,7 +109,7 @@ DEF_CHOICE_2( cPeakDet,                                                         
 
 void PageTime::OnChanged_TPos(bool active)
 {
-    PageMemory::OnChanged_Points(active);
+    PageMemory::OnChanged_LengthMemoryChannel(active);
     TShift::Set(S_TIME_SHIFT);
 }
 
