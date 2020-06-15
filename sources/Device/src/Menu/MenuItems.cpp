@@ -343,10 +343,6 @@ bool Page::HandlerKey(const KeyEvent &event)
             result = true;
         }
     }
-    else
-    {
-        // остальные типы событий не обрабатываются
-    }
 
     return result;
 }
@@ -622,10 +618,6 @@ bool Governor::HandlerKey(const KeyEvent &event)
 
             return true;
         }
-    }
-    else
-    {
-        // остальные случаи не обрабатываем
     }
 
     return false;

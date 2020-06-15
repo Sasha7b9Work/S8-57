@@ -327,6 +327,7 @@ bool FileManager::HandlerKey(const KeyEvent &event)
         int delta = (event.IsArrowUp() || event.IsArrowRight()) ? 1 : -1;
 
         Beeper::RegulatorSwitchRotate();
+
         if (FM_CURSOR_IN_DIRS)
         {
             delta > 0 ? DecCurrentDir() : IncCurrentDir();

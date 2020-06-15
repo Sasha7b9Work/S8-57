@@ -223,13 +223,7 @@ static bool HandlerKey_ROM(const KeyEvent &event)
             Color::ChangeFlash(true);
 
             result = true;
-        }
-        else
-        {
-            // остальные кнопки не обрабатываем
-        }
-
-        
+        }       
     }
 
     return result;

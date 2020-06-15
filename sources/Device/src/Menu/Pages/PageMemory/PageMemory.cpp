@@ -104,8 +104,7 @@ DEF_GRAPH_BUTTON( bManager_LevelDown,                                           
 
 static void OnPress_Exit()
 {
-    Menu::CloseOpenedItem();
-    Display::SetDrawMode(DrawMode::Auto);
+    PageMemory::OnOpenClose_Drive_Manager(false);
 }
 
 DEF_BUTTON(bExit,
@@ -120,17 +119,25 @@ static bool IsActive_Drive_Manager()
     return FDrive::IsConnected();
 }
 
-void PageMemory::OnOpenClose_Drive_Manager(bool)
+void PageMemory::OnOpenClose_Drive_Manager(bool enter)
 {
-    if (FDrive::IsConnected())
+    if (enter)
     {
-        FDrive::Mount();
-        Display::SetDrawMode(DrawMode::Auto, FileManager::Draw);
-        ModeRedrawFM::Set(ModeRedrawFM::Full);
+        if (FDrive::IsConnected())
+        {
+            FDrive::Mount();
+            Display::SetDrawMode(DrawMode::Auto, FileManager::Draw);
+            ModeRedrawFM::Set(ModeRedrawFM::Full);
+        }
+        else
+        {
+            Display::ShowWarning("Сначала подключите флеш-диск");
+        }
     }
     else
     {
-        Display::ShowWarning("Сначала подключите флеш-диск");
+        Menu::CloseOpenedItem();
+        Display::SetDrawMode(DrawMode::Auto);
     }
 }
 

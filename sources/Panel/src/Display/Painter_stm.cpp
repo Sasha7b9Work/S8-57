@@ -112,10 +112,6 @@ void Painter::DrawLine(int x1, int y1, int x2, int y2)
         DrawHLine(y1, x1, x2);
         return;
     }
-    else
-    {
-        // остальные варианты не рассматриваем - нет надобности
-    }
 
     int x = x1;
     int y = y1;
