@@ -151,8 +151,6 @@ void TShift::LoadRandomize()
 
     FPGA::pred = static_cast<uint16>(Pred);
 
-//    LOG_WRITE("pred = %d, post = %d", FPGA::pred, FPGA::post + 1);
-
     if(S_DBG_SHOW_RAND_PRED_POST)
     {
         LOG_WRITE("pred = %d, post = %d", FPGA::pred, FPGA::post);

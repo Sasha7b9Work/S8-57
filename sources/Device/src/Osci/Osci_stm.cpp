@@ -19,12 +19,11 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
             k = TBase::DeltaPoint();
         }
 
-        addrRead = static_cast<uint16>(ReadLastRecord(ch) - static_cast<int>(numPoints) / k - 2);
+        addrRead = static_cast<uint16>(ReadLastRecord(ch) - static_cast<int>(numPoints) / k - 7);
     }
 
     HAL_BUS::FPGA::Write16(WR::PRED_LO, static_cast<uint16>(addrRead));
     HAL_BUS::FPGA::Write8(WR::START_ADDR, 0xff);
-
 
     uint8 *a0 = (ch == ChanA) ? RD::DATA_A : RD::DATA_B;  // -V566
     uint8 *a1 = a0 + 1;
