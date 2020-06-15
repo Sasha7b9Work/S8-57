@@ -480,8 +480,6 @@ StructReadRand RandShift::GetInfoForReadRand(ShiftPoint Tsm, const uint8 *addres
         while(index < 0)
         {
             index += structRand.step;
-            volatile uint8 d = *address;
-            d = d;
         }
 
         structRand.posFirst = index;
