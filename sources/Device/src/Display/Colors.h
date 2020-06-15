@@ -23,7 +23,6 @@ public:
     static Color GREEN;
 
     static Color BLUE;
-    static Color BLUE_25;
     static Color BLUE_50;
 
     static Color GRAY_10;
@@ -86,7 +85,7 @@ private:
         COLOR_RED = 14,
         COLOR_GREEN = 15,
         COLOR_BLUE = 16,
-        COLOR_BLUE_25 = 17,
+
         COLOR_BLUE_50 = 18,
         COLOR_GRAY_10 = 19,
         COLOR_GRAY_20 = 20,

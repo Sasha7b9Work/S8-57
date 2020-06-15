@@ -25,7 +25,7 @@ extern uint GlobalColors[256] =
     /* 14 */    MAKE_COLOR(0xff, 0x00, 0x00),       // RED
     /* 15 */    MAKE_COLOR(0x00, 0xff, 0x00),       // GREEN
     /* 16 */    MAKE_COLOR(0x00, 0x00, 0xff),       // BLUE
-    /* 17 */    MAKE_COLOR(0x00, 0x00, 0x40),       // BLUE_25
+    /* 17 */    MAKE_COLOR(0x00, 0x00, 0x40),
     /* 18 */    MAKE_COLOR(0x00, 0x00, 0x80),       // BLUE_50
     /* 19 */    MAKE_COLOR(0x1a, 0x1a, 0x1a),       // GRAY_10
     /* 20 */    MAKE_COLOR(0x33, 0x33, 0x33),       // GRAY_20
