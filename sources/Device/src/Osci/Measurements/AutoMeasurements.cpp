@@ -713,8 +713,8 @@ float CalculateTimeSpada(Chan::E ch)        // \todo Аналогично времени нарастан
     {
         Measure::SetMarkerVoltage(ch, 0, max09);
         Measure::SetMarkerVoltage(ch, 1, min01);
-        Measure::SetMarkerTime(ch, 0, static_cast<int16>(firstIntersection) - SHIFT_IN_MEMORY);
-        Measure::SetMarkerTime(ch, 1, static_cast<int16>(secondIntersection) - SHIFT_IN_MEMORY);
+        Measure::SetMarkerTime(ch, 0, static_cast<int16>(firstIntersection) - DisplayOsci::ShiftInMemory::Get());
+        Measure::SetMarkerTime(ch, 1, static_cast<int16>(secondIntersection) - DisplayOsci::ShiftInMemory::Get());
     }
 
     return retValue;

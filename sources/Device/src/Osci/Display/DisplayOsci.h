@@ -40,13 +40,21 @@ struct DisplayOsci
     };
 
 
+    // Управление выводимой на экран частью сигнала
+    struct ShiftInMemory
+    {
+        // Возвращает индекс первой точки на экране
+        static int16 Get();
+
+        // Устанавливает индекс первой точки на экране
+        static void Set(int16 shift);
+    };
+
+
     struct PainterData
     {
         static void DrawData();
-    
-        // Индекс первой точки, выводимой поверх сетки
-        static int FirstPointOnScreen();
-        
+      
         // Возвращает адрес первой и последней точки на экране в координатах экрана
         static BitSet64 PointsOnDisplay();
         

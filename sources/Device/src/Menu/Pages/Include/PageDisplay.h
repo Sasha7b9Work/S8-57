@@ -151,24 +151,23 @@ struct MenuAutoHide
 
 
 #define S_DISP_BRIGHTNESS                   (set.disp._brightness)
-#define S_DISP_SHIFT_IN_MEMORY              (set.disp._shiftInMemory)
 #define S_DISP_LAST_AFFECTED_CHANNEL        (set.disp._lastAffectedChannel)
 #define S_DISP_LAST_AFFECTED_CHANNEL_IS_A   (S_DISP_LAST_AFFECTED_CHANNEL == Chan::A)
 
 struct SettingsDisplay
 { //-V802
     DisplayMapping::E      _mapping;
-    ENumAverage::E         _enumAverage;           // Число усреднений сигнала.
-    ENumAccum::E           _enumAccum;             // Число накоплений сигнала на экране.
-    ENumSmoothing::E       _enumSmoothing;         // Перечисление количества точек для скользящего фильтра.
-    ENumSignalsInSec::E    _enumSignalsInSec;      // Перечисление числа считываний сигнала в секунда.
-    TypeGrid::E            _typeGrid;              // Тип сетки
-    uint8                  _brightness;            // Яркость дисплея.
-    MenuAutoHide::E        _menuAutoHide;          // Через сколько времени после последнего нажатия клавиши прятать меню.
-    int16                  _shiftInMemory;         // \brief Показывает смещение левого края стеки относительно нулевого байта памяти в 
-                                                  // байтах. Т.е. для пикового детектора будет в два раза больше количества точек на экране.
-    Chan::E                _lastAffectedChannel;   // \brief Последний управляемый канал. Используется для правильного вывода сигналов
-                                                  // на экран с наложением один поверх другого
+    ENumAverage::E         _enumAverage;            // Число усреднений сигнала.
+    ENumAccum::E           _enumAccum;              // Число накоплений сигнала на экране.
+    ENumSmoothing::E       _enumSmoothing;          // Перечисление количества точек для скользящего фильтра.
+    ENumSignalsInSec::E    _enumSignalsInSec;       // Перечисление числа считываний сигнала в секунда.
+    TypeGrid::E            _typeGrid;               // Тип сетки
+    uint8                  _brightness;             // Яркость дисплея.
+    MenuAutoHide::E        _menuAutoHide;           // Через сколько времени после последнего нажатия клавиши прятать меню.
+    int16                  _shiftInMemory;          // \brief Показывает смещение левого края стеки относительно нулевого байта памяти в 
+                                                    // байтах. Т.е. для пикового детектора будет в два раза больше количества точек на экране.
+    Chan::E                _lastAffectedChannel;    // \brief Последний управляемый канал. Используется для правильного вывода сигналов
+                                                    // на экран с наложением один поверх другого
     void SetLastAffectedChannel(Chan::E ch)
     {
         _lastAffectedChannel = ch;

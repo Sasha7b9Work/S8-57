@@ -10,6 +10,7 @@
 
 
 static void DrawDataInRect(int x, int y, int width, int height, const uint8 *data, int length);
+
 // Нарисовать область экрана
 static void DrawScreenArea();
 
@@ -92,7 +93,7 @@ static void DrawDataInRect(int x, int y, int width, int height, const uint8 *dat
 
 static void DrawScreenArea()
 {
-    float relBegin = static_cast<float>(SHIFT_IN_MEMORY) / ENumPointsFPGA::PointsInChannel();          // Относительное начало экранной области относительно всей памяти
+    float relBegin = static_cast<float>(DisplayOsci::ShiftInMemory::Get()) / ENumPointsFPGA::PointsInChannel();          // Относительное начало экранной области относительно всей памяти
     float relWidth = static_cast<float>(Grid::Width() + 1) / ENumPointsFPGA::PointsInChannel();        // Относительное (относительно всей шириный окна) ширина видимой области
 
     int begin = static_cast<int>(relBegin * DisplayOsci::MemoryWindow::Width() + 0.5F);                 // Реальное начало экранной области относительно начала окна памяти

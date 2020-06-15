@@ -234,11 +234,11 @@ void DisplayOsci::PainterData::DrawChannel(Chan::E ch)
 
     uint8 *data = OUT(ch);
 
-    data += SHIFT_IN_MEMORY;
+    data += DisplayOsci::ShiftInMemory::Get();
 
     if (PEAKDET_ENABLED(DS))
     {
-        data += SHIFT_IN_MEMORY;
+        data += DisplayOsci::ShiftInMemory::Get();
     }
 
     int center = (Grid::Bottom() - Grid::Top()) / 2 + Grid::Top();
@@ -371,17 +371,11 @@ void DisplayOsci::PainterData::DrawModePointsPeakDetOff(int center, const uint8 
 }
 
 
-int DisplayOsci::PainterData::FirstPointOnScreen()
-{
-    return S_DISP_SHIFT_IN_MEMORY;
-}
-
-
 BitSet64 DisplayOsci::PainterData::PointsOnDisplay()
 {
     BitSet64 retValue;
 
-    retValue.sword0 = SHIFT_IN_MEMORY;
+    retValue.sword0 = DisplayOsci::ShiftInMemory::Get();
     retValue.sword1 = retValue.sword0 + 281;
 
     return retValue;
@@ -392,7 +386,7 @@ BitSet64 DisplayOsci::PainterData::BytesOnDisplay()
 {
     BitSet64 retValue;
 
-    retValue.sword0 = SHIFT_IN_MEMORY;
+    retValue.sword0 = DisplayOsci::ShiftInMemory::Get();
     retValue.sword1 = retValue.sword0 + 281;
 
     if (PEAKDET_ENABLED(DS))
@@ -410,14 +404,14 @@ void DisplayOsci::PainterData::ChangeTPos()
 
     if (S_TPOS_IS_LEFT)
     {
-        S_DISP_SHIFT_IN_MEMORY = 0;
+        DisplayOsci::ShiftInMemory::Set(0);
     }
     else if (S_TPOS_IS_CENTER)
     {
-        S_DISP_SHIFT_IN_MEMORY = static_cast<int16>(ENumPointsFPGA::PointsInChannel() / 2 - width / 2);
+        DisplayOsci::ShiftInMemory::Set(static_cast<int16>(ENumPointsFPGA::PointsInChannel() / 2 - width / 2));
     }
     else // TPOS_IS_RIGHT
     {
-        S_DISP_SHIFT_IN_MEMORY = static_cast<int16>(ENumPointsFPGA::PointsInChannel() - width - 2);
+        DisplayOsci::ShiftInMemory::Set(static_cast<int16>(ENumPointsFPGA::PointsInChannel() - width - 2));
     }
 }
