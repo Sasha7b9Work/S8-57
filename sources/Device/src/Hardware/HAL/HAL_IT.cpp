@@ -15,9 +15,9 @@ INTERRUPT_BEGIN
 
 void HardFault_Handler()
 {
-    __IO const char *file0 = Debug::file[0];
+    __IO const char *file0 = Debug::file0;
     __IO const char *file1 = Debug::file[1];
-    __IO int line0 = Debug::line[0];
+    __IO int line0 = Debug::line0;
     __IO int line1 = Debug::line[1];
     __IO int line2 = Debug::line[2];
     

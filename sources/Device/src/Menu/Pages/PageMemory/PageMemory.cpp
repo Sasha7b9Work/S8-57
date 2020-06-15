@@ -104,7 +104,8 @@ DEF_GRAPH_BUTTON( bManager_LevelDown,                                           
 
 static void OnPress_Exit()
 {
-    PageMemory::OnOpenClose_Drive_Manager(false);
+    Menu::CloseOpenedItem();
+    Display::SetDrawMode(DrawMode::Auto);
 }
 
 DEF_BUTTON(bExit,
@@ -136,8 +137,17 @@ void PageMemory::OnOpenClose_Drive_Manager(bool enter)
     }
     else
     {
+        bool inMode = OSCI_IN_MODE_P2P;
+        
         Menu::CloseOpenedItem();
+
+        inMode = OSCI_IN_MODE_P2P;
+
         Display::SetDrawMode(DrawMode::Auto);
+
+        inMode = OSCI_IN_MODE_P2P;
+        
+        inMode = inMode;
     }
 }
 

@@ -13,6 +13,7 @@
 #include "Keyboard/BufferButtons.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Recorder/DisplayRecorder.h"
+#include "Utils/Debug.h"
 #include "Utils/Values.h"
 #include <cstring>
 
@@ -52,6 +53,8 @@ void Display::Init()
 
 void Display::Update()
 {
+    D_POINT;
+
     static uint prevTime = 0;
 
     if(Device::InModeOsci() && (TIME_MS - prevTime < ENumSignalsInSec::TimeBetweenFramesMS()))
@@ -61,11 +64,19 @@ void Display::Update()
 
     prevTime = TIME_MS;
 
+    D_POINT;
+
     DFont::SetSpacing();
+
+    D_POINT;
 
     Color::ChangeFlash(false);
 
+    D_POINT;
+
     DFont::Set(DTypeFont::_8);
+
+    D_POINT;
 
     inStateDraw = true;
 
@@ -77,7 +88,11 @@ void Display::Update()
         DisplayRecorder::Update
     };
 
+    D_POINT;
+
     funcs[static_cast<int>(Device::CurrentMode())]();
+
+    D_POINT;
 
     Console::Draw();
 
@@ -88,6 +103,8 @@ void Display::Update()
     inStateDraw = false;
 
     ExecuteFuncAfterUpdateOnce();
+
+    D_POINT;
 }
 
 

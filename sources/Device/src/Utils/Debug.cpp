@@ -19,6 +19,10 @@ const char *Debug::file[10] = { 0 };
 int   Debug::line[10] = { 0 };
 
 
+const char *Debug::file0 = nullptr;
+int Debug::line0 = 0;
+
+
 void Debug::StartProfilingMS()
 {
     timeStartMS = TIME_MS;
