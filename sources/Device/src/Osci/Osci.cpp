@@ -465,6 +465,15 @@ ShiftPoint Gates::CalculateShiftPoint()
 
 StructReadRand RandShift::GetInfoForReadRand(ShiftPoint Tsm, const uint8 *address)
 {
+    static const int add[] =
+    {
+        50,     // 2 ns
+        10,     // 5 ns
+        10,     // 10 ns
+        10,     // 20 ns
+        10      // 50 ns
+    };
+
     StructReadRand structRand;
 
     if(Tsm.type != ShiftPoint::FAIL)
@@ -480,7 +489,7 @@ StructReadRand RandShift::GetInfoForReadRand(ShiftPoint Tsm, const uint8 *addres
             addShift += step;
         }
 
-        int index = Tsm.shift - addShift - step;
+        int index = Tsm.shift - addShift - step - add[S_TIME_BASE];
 
         while(index < 0)
         {
