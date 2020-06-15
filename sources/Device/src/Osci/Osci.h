@@ -60,8 +60,6 @@ struct Osci
     // Значение, считанное из handleADC
     static uint16 valueADC;
     
-    static int addShift;
-    
     static void ReadData();
 
     static uint16 ReadLastRecord(Chan::E ch);

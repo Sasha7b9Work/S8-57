@@ -67,8 +67,6 @@ private:
 static RandShift randShift;
 StructReadRand RandShift::structRand = { 0, 0 };
 static Gates gates;             // "Ворота" рандомизатора
-int    Osci::addShift = 0;
-
 
 static void UpdateFPGA();
 
@@ -473,9 +471,16 @@ StructReadRand RandShift::GetInfoForReadRand(ShiftPoint Tsm, const uint8 *addres
 {
     if(Tsm.type != ShiftPoint::FAIL)
     {
+        int addShift = static_cast<int>(S_TIME_SHIFT % TBase::DeltaPoint());
+
+        if (addShift < 0)
+        {
+            addShift += TBase::DeltaPoint();
+        }
+
         structRand.step = TBase::DeltaPoint();
 
-        int index = Tsm.shift - Osci::addShift - structRand.step;
+        int index = Tsm.shift - addShift - structRand.step;
 
         while(index < 0)
         {

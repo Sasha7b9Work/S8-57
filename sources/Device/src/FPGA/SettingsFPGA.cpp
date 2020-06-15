@@ -163,13 +163,6 @@ void TShift::LoadRandomize()
 
     HAL_BUS::FPGA::Write16(WR::PRED_LO, FPGA::pred);
     HAL_BUS::FPGA::Write16(WR::POST_LO, FPGA::post);
-
-    Osci::addShift = static_cast<int>(S_TIME_SHIFT % k);
-
-    if (Osci::addShift < 0)
-    {
-        Osci::addShift += k;
-    }
 }
 
 
