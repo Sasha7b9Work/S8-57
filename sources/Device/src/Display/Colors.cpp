@@ -16,7 +16,7 @@ extern uint GlobalColors[256] =
     /* 6  */    MAKE_COLOR(31 * 8, 44 * 4, 0  * 8), // MENU_TITLE
     /* 7  */    MAKE_COLOR(0x00, 0x00, 0x80),       // MENU_TITLE_DARK
     /* 8  */    MAKE_COLOR(31 * 8, 63 * 4, 0  * 8), // MENU_TITLE_BRIGHT
-    /* 9  */    MAKE_COLOR(26 * 8, 34 * 4, 0  * 8), // 
+    /* 9  */    MAKE_COLOR(0x20, 0x45, 0x20),       // BATTERY_EMPTY
     /* 10 */    MAKE_COLOR(13 * 8, 17 * 4, 0  * 8), // MENU_ITEM_DARK
     /* 11 */    MAKE_COLOR(31 * 8, 51 * 4, 0  * 8), // MENU_ITEM_BRIGHT
     /* 12 */    MAKE_COLOR(0x00, 13,   0x00),       // DATA_WHITE_ACCUM_A
@@ -49,18 +49,24 @@ Color Color::MENU_ITEM_DARK(COLOR_MENU_ITEM_DARK);
 Color Color::MENU_ITEM_BRIGHT(COLOR_MENU_ITEM_BRIGHT);
 Color Color::DATA_WHITE_ACCUM_A(COLOR_DATA_WHITE_ACCUM_A);
 Color Color::DATA_WHITE_ACCUM_B(COLOR_DATA_WHITE_ACCUM_B);
+
 Color Color::RED(COLOR_RED);
+
 Color Color::GREEN(COLOR_GREEN);
+
 Color Color::BLUE(COLOR_BLUE);
+
 Color Color::GRAY_10(COLOR_GRAY_10);
 Color Color::GRAY_20(COLOR_GRAY_20);
 Color Color::GRAY_50(COLOR_GRAY_50);
 Color Color::GRAY_75(COLOR_GRAY_75);
+
 Color Color::DATA_HALF_A(COLOR_DATA_HALF_A);
 Color Color::DATA_HALF_B(COLOR_DATA_HALF_B);
 Color Color::SEPARATOR(COLOR_SEPARATOR);
 Color Color::YELLOW(COLOR_YELLOW);
 Color Color::BATTERY(COLOR_BATTERY);
+Color Color::BATTERY_EMPTY(COLOR_BATTERY_EMPTY);
 
 Color Color::NUMBER(COLOR_NUMBER);
 Color Color::FLASH_10(COLOR_FLASH_10);

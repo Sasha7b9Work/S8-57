@@ -34,6 +34,8 @@ public:
     static Color SEPARATOR;
     static Color YELLOW;
     static Color BATTERY;
+    static Color BATTERY_EMPTY;     // Этот цвет используется для отрисовки пустого поля при отрисовке заряда батареи
+
 
     static Color NUMBER;
 
@@ -76,7 +78,7 @@ private:
         COLOR_MENU_TITLE = 6,
         COLOR_MENU_TITLE_DARK = 7,
         COLOR_MENU_TITLE_BRIGHT = 8,
-        _NONE = 9,
+        COLOR_BATTERY_EMPTY = 9,
         COLOR_MENU_ITEM_DARK = 10,
         COLOR_MENU_ITEM_BRIGHT = 11,
         COLOR_DATA_WHITE_ACCUM_A = 12,   // Используется как для отрисовки канала на белом фоне, так и для отрисовки накопленных сигналов

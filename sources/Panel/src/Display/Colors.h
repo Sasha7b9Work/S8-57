@@ -21,13 +21,10 @@ public:
     static Color FLASH_01;
 
     static Color GREEN_10;
-    static Color GREEN_50;
 
     static Color RED_10;
     static Color RED_25;
-    static Color RED_50;
 
-    static Color GRAY;
     static Color GRAY_10;
     static Color GRAY_20;
     static Color GRAY_25;
@@ -82,13 +79,13 @@ public:
 
 
         COLOR_RED_25 = 24,
-        COLOR_GRAY = 25,
+
         COLOR_GRAY_25 = 26,
         COLOR_GRAY_10 = 27,
         COLOR_GRAY_20 = 28,
-        COLOR_RED_50 = 29,
 
-        COLOR_GREEN_50 = 31,
+
+
         COLOR_NUMBER = 32
     };
 };

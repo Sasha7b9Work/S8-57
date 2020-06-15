@@ -50,14 +50,13 @@ Color Color::DATA_WHITE_ACCUM_B(COLOR_DATA_WHITE_ACCUM_B);
 Color Color::NUMBER(COLOR_NUMBER);
 Color Color::FLASH_10(COLOR_FLASH_10);
 Color Color::FLASH_01(COLOR_FLASH_01);
+
 Color Color::RED_10(COLOR_RED_10);
 Color Color::RED_25(COLOR_RED_25);
-Color Color::GRAY(COLOR_GRAY);
-Color Color::GRAY_25(COLOR_GRAY_25);
+
 Color Color::GRAY_10(COLOR_GRAY_10);
 Color Color::GRAY_20(COLOR_GRAY_20);
-Color Color::RED_50(COLOR_RED_50);
-Color Color::GREEN_50(COLOR_GREEN_50);
+Color Color::GRAY_25(COLOR_GRAY_25);
 
 Color Color::CHAN[4] = {Color(COLOR_DATA_A), Color(COLOR_DATA_B), Color(COLOR_WHITE), Color(COLOR_WHITE)};
 Color Color::FILL(COLOR_WHITE);
