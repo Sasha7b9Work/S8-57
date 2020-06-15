@@ -475,7 +475,7 @@ StructReadRand RandShift::GetInfoForReadRand(ShiftPoint Tsm, const uint8 *addres
     {
         structRand.step = TBase::DeltaPoint();
 
-        static const int addShift[] = { 260, 50, 25, 10, 0 };
+        static const int addShift[] = { 260, 120, 50, 25, 10 };
 
         int index = Tsm.shift - addShift[S_TIME_BASE] - structRand.step;
 
