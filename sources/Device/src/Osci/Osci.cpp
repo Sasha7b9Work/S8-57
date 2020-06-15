@@ -33,7 +33,7 @@ struct RandShift
 {
     // Возвращает данные, необходимые для чтения даннхы в режмиме рандомизатора.
     // Если Tsm == 0, то структура будет использоваться не для чтения данных, а для правильного усредения.
-    StructReadRand GetInfoForReadRand(ShiftPoint Tsm, const uint8 *address = nullptr);
+    StructReadRand GetInfoForReadRand(ShiftPoint Tsm);
 
     // Возвращает true, если в данной позиции точка не может быть считана с АЦП и её нужно рассчитывать программно
     bool Interpolated(int pos);
@@ -384,7 +384,7 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
         return false;
     }
 
-    StructReadRand infoRead = randShift.GetInfoForReadRand(Tsm, addr);
+    StructReadRand infoRead = randShift.GetInfoForReadRand(Tsm);
 
     int step = infoRead.step;
 
@@ -469,7 +469,7 @@ ShiftPoint Gates::CalculateShiftPoint()
 }
 
 
-StructReadRand RandShift::GetInfoForReadRand(ShiftPoint Tsm, const uint8 *address)
+StructReadRand RandShift::GetInfoForReadRand(ShiftPoint Tsm)
 {
     if(Tsm.type != ShiftPoint::FAIL)
     {
