@@ -388,7 +388,7 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
 
     int step = infoRead.step;
 
-    uint8 *dataRead = data + infoRead.posFirst;
+    uint8 *dataWrite = data + infoRead.posFirst;                                // —юда запишем первую считанную точку
 
     uint8 *interpolated = IntRAM::DataRand(ChanA) + infoRead.posFirst;
 
@@ -400,26 +400,25 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
     {
         uint8 *dataPointer = &data[infoRead.posFirst];              // ”казатель в переданном массиве
 
-        while(dataRead < last)
+        while(dataWrite < last)
         {
-            *dataRead = HAL_BUS::FPGA::ReadA0();
-            *dataPointer = *dataRead;
-            *interpolated = *dataRead;
+            *dataWrite = HAL_BUS::FPGA::ReadA0();
+            *dataPointer = *dataWrite;
+            *interpolated = *dataWrite;
             
-
-            dataRead += step;
+            dataWrite += step;
             dataPointer += step;
             interpolated += step;
         }
     }
     else
     {
-        while(dataRead < last)
+        while(dataWrite < last)
         {
-            *dataRead = HAL_BUS::FPGA::ReadA0();
-            *interpolated = *dataRead;
+            *dataWrite = HAL_BUS::FPGA::ReadA0();
+            *interpolated = *dataWrite;
 
-            dataRead += step;
+            dataWrite += step;
             interpolated += step;
 
         }
