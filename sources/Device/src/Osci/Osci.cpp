@@ -23,6 +23,7 @@
 // Структура для хранения информации, необходимой для чтения в режиме рандомизатора
 struct StructReadRand
 {
+    StructReadRand() : step(0), posFirst(0) { }
     int step;       // Шаг между точками
     int posFirst;   // Позиция первой считанной точки
 };
@@ -33,12 +34,7 @@ struct RandShift
 {
     // Возвращает данные, необходимые для чтения даннхы в режмиме рандомизатора.
     // Если Tsm == 0, то структура будет использоваться не для чтения данных, а для правильного усредения.
-    StructReadRand GetInfoForReadRand(ShiftPoint Tsm, const uint8 *address = nullptr);
-
-    // Возвращает true, если в данной позиции точка не может быть считана с АЦП и её нужно рассчитывать программно
-    bool Interpolated(int pos);
-
-    static StructReadRand structRand;
+    static StructReadRand GetInfoForReadRand(ShiftPoint Tsm, const uint8 *address = nullptr);
 };
 
 
@@ -64,8 +60,6 @@ private:
 };
 
 
-static RandShift randShift;
-StructReadRand RandShift::structRand = { 0, 0 };
 static Gates gates;             // "Ворота" рандомизатора
 
 static void UpdateFPGA();
@@ -382,7 +376,7 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
         return false;
     }
 
-    StructReadRand infoRead = randShift.GetInfoForReadRand(Tsm, addr);
+    StructReadRand infoRead = RandShift::GetInfoForReadRand(Tsm, addr);
 
     int step = infoRead.step;
 
@@ -471,22 +465,26 @@ ShiftPoint Gates::CalculateShiftPoint()
 
 StructReadRand RandShift::GetInfoForReadRand(ShiftPoint Tsm, const uint8 *address)
 {
+    StructReadRand structRand;
+
     if(Tsm.type != ShiftPoint::FAIL)
     {
-        int addShift = static_cast<int>(S_TIME_SHIFT % TBase::DeltaPoint());
+        int step = TBase::DeltaPoint();
+
+        structRand.step = step;
+
+        int addShift = static_cast<int>(S_TIME_SHIFT % step);
 
         if (addShift < 0)
         {
-            addShift += TBase::DeltaPoint();
+            addShift += step;
         }
 
-        structRand.step = TBase::DeltaPoint();
-
-        int index = Tsm.shift - addShift - structRand.step;
+        int index = Tsm.shift - addShift - step;
 
         while(index < 0)
         {
-            index += structRand.step;
+            index += step;
 
             volatile uint8 d = *address;    // Эти строчки удалять нельзя - считываем и отбрасываем неиспользуемые точки
             d = d;                          // 
