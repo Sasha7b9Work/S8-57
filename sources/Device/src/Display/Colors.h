@@ -17,16 +17,20 @@ public:
     static Color MENU_ITEM_BRIGHT;
     static Color DATA_WHITE_ACCUM_A;
     static Color DATA_WHITE_ACCUM_B;
+
     static Color RED;
+
     static Color GREEN;
+
     static Color BLUE;
     static Color BLUE_25;
     static Color BLUE_50;
+
     static Color GRAY_10;
     static Color GRAY_20;
-    static Color BLUE_10;
     static Color GRAY_50;
     static Color GRAY_75;
+
     static Color DATA_HALF_A;
     static Color DATA_HALF_B;
     static Color SEPARATOR;
@@ -94,6 +98,7 @@ private:
         COLOR_SEPARATOR = 26,
         COLOR_YELLOW = 27,
         COLOR_BATTERY = 28,
+        
 
         COLOR_NUMBER = 32,
 

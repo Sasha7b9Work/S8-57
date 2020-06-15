@@ -94,7 +94,7 @@ static void DrawFilled(int x, int y, int full, float percents)
 
         int area = time / onePart;
 
-        Region(area, 9).Fill(x + full - area, y, Color::GRAY_20);
+        Region(area, 9).Fill(x + full - area, y, Color::GRAY_50);
 
         if (filled > area)
         {

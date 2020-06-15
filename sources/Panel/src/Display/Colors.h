@@ -19,19 +19,21 @@ public:
     static Color NUMBER;
     static Color FLASH_10;
     static Color FLASH_01;
-    static Color BLUE_10;
-    static Color GREEN_10;
-    static Color RED_10;
+
     static Color BLUE_25;
-    static Color GREEN_25;
+    static Color BLUE_50;
+
+    static Color GREEN_10;
+    static Color GREEN_50;
+
+    static Color RED_10;
     static Color RED_25;
+    static Color RED_50;
+
     static Color GRAY;
-    static Color GRAY_25;
     static Color GRAY_10;
     static Color GRAY_20;
-    static Color RED_50;
-    static Color BLUE_50;
-    static Color GREEN_50;
+    static Color GRAY_25;
 
     static Color FILL;
     static Color BACK;
@@ -77,10 +79,10 @@ public:
         COLOR_FLASH_10 = 16,
         COLOR_FLASH_01 = 17,
         COLOR_INVERSE = 18,
-        COLOR_GREEN_10 = 19,
-        COLOR_BLUE_10 = 20,
+
+
         COLOR_RED_10 = 21,
-        COLOR_GREEN_25 = 22,
+
         COLOR_BLUE_25 = 23,
         COLOR_RED_25 = 24,
         COLOR_GRAY = 25,

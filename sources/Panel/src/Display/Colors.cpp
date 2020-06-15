@@ -13,12 +13,12 @@ uint colors[256] =
     /* 3  */    MAKE_COLOR(0x00, 0xdf, 0xff),       // DATA_A
     /* 4  */    MAKE_COLOR(0x00, 0xff, 0x00),       // DATA_B
     /* 5  */    MAKE_COLOR(0x90, 0x90, 0xa0),       // MENU_FIELD
-    /* 6  */    MAKE_COLOR(31 * 8, 44 * 4, 0 * 8), // MENU_TITLE
+    /* 6  */    MAKE_COLOR(31 * 8, 44 * 4, 0 * 8),  // MENU_TITLE
     /* 7  */    MAKE_COLOR(0x00, 0x00, 0x40),       // MENU_TITLE_DARK
-    /* 8  */    MAKE_COLOR(31 * 8, 63 * 4, 0 * 8), // MENU_TITLE_BRIGHT
-    /* 9  */    MAKE_COLOR(26 * 8, 34 * 4, 0 * 8), // MENU_ITEM
-    /* 10 */    MAKE_COLOR(13 * 8, 17 * 4, 0 * 8), // MENU_ITEM_DARK
-    /* 11 */    MAKE_COLOR(31 * 8, 51 * 4, 0 * 8), // MENU_ITEM_BRIGHT
+    /* 8  */    MAKE_COLOR(31 * 8, 63 * 4, 0 * 8),  // MENU_TITLE_BRIGHT
+    /* 9  */    MAKE_COLOR(26 * 8, 34 * 4, 0 * 8),  // MENU_ITEM
+    /* 10 */    MAKE_COLOR(13 * 8, 17 * 4, 0 * 8),  // MENU_ITEM_DARK
+    /* 11 */    MAKE_COLOR(31 * 8, 51 * 4, 0 * 8),  // MENU_ITEM_BRIGHT
     /* 12 */    MAKE_COLOR(0x00, 13,   0x00),       // DATA_WHITE_ACCUM_A
     /* 13 */    MAKE_COLOR(0x00, 25,   0x00),       // DATA_WHITE_ACCUM_B
     /* 14 */    MAKE_COLOR(0xff, 0x00, 0x00),       // RED
@@ -29,7 +29,7 @@ uint colors[256] =
     /* 19 */    MAKE_COLOR(0x1a, 0x1a, 0x1a),       // GRAY_10
     /* 20 */    MAKE_COLOR(0x33, 0x33, 0x33),       // GRAY_20
     /* 21 */    MAKE_COLOR(0x00, 0x00, 0x1a),       // BLUE_10
-    /* 22 */    MAKE_COLOR(0x80, 0x80, 0x80),       // GRAY_50
+    /* 22 */    MAKE_COLOR(0x80, 0x80, 0x80),
     /* 23 */    MAKE_COLOR(0xc0, 0xc0, 0xc0),       // GRAY_75
     /* 24 */    MAKE_COLOR(0x00, 0x6f, 0x80),       // DATA_HALF_A
     /* 25 */    MAKE_COLOR(0x00, 0x80, 0x00),       // DATA_HALF_B
@@ -50,11 +50,8 @@ Color Color::DATA_WHITE_ACCUM_B(COLOR_DATA_WHITE_ACCUM_B);
 Color Color::NUMBER(COLOR_NUMBER);
 Color Color::FLASH_10(COLOR_FLASH_10);
 Color Color::FLASH_01(COLOR_FLASH_01);
-Color Color::BLUE_10(COLOR_BLUE_10);
-Color Color::GREEN_10(COLOR_GREEN_10);
 Color Color::RED_10(COLOR_RED_10);
 Color Color::BLUE_25(COLOR_BLUE_25);
-Color Color::GREEN_25(COLOR_GREEN_25);
 Color Color::RED_25(COLOR_RED_25);
 Color Color::GRAY(COLOR_GRAY);
 Color Color::GRAY_25(COLOR_GRAY_25);
