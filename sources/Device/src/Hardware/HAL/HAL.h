@@ -41,6 +41,7 @@ struct HAL_RTC
 };
 
 
+// Используется для работы с питанием
 struct HAL_ADC1
 {
     static void Init();
@@ -53,6 +54,7 @@ struct HAL_ADC1
 };
 
 
+// Исользуется в режиме рандомизатора
 struct HAL_ADC3
 {
     static void Init();
