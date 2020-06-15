@@ -56,10 +56,7 @@ struct Osci
       
     // Очистка данных рандомизатора при переключении режимов
     static void ClearDataRand();
-
-    // Значение, считанное из handleADC
-    static uint16 valueADC;
-    
+  
     static void ReadData();
 
     static uint16 ReadLastRecord(Chan::E ch);

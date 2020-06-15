@@ -12,7 +12,6 @@
 
 
 bool   FPGA::forcedStart = false;
-uint16 Osci::valueADC = 0;
 uint16 FPGA::post = static_cast<uint16>(~(512));
 uint16 FPGA::pred = static_cast<uint16>(~(512));
 

@@ -433,19 +433,21 @@ ShiftPoint Gates::CalculateShiftPoint()
     uint16 min = 0;
     uint16 max = 0;
 
-    if(!Calculate(Osci::valueADC, &min, &max))
+    uint16 valueADC = HAL_ADC3::ValueRandomizer();
+
+    if(!Calculate(valueADC, &min, &max))
     {
         result.type = ShiftPoint::FAIL;
         return result;
     }
 
-    if(((Osci::valueADC > max - NRST_ENUM_GATE_MAX * 10) || (Osci::valueADC < min + NRST_ENUM_GATE_MIN * 10)) && (S_TIME_BASE > TBase::_5ns))
+    if(((valueADC > max - NRST_ENUM_GATE_MAX * 10) || (valueADC < min + NRST_ENUM_GATE_MIN * 10)) && (S_TIME_BASE > TBase::_5ns))
     {
         result.type = ShiftPoint::FAIL;
         return result;
     }
 
-    float tin = static_cast<float>(Osci::valueADC - min) / (max - min);
+    float tin = static_cast<float>(valueADC - min) / (max - min);
 
     result.shift = static_cast<int>(tin * TBase::DeltaPoint());
 
@@ -458,7 +460,7 @@ ShiftPoint Gates::CalculateShiftPoint()
         result.shift = TBase::DeltaPoint() - 1;
     }
 
-    if(((Osci::valueADC > max - NRST_ENUM_GATE_MAX * 10) || (Osci::valueADC < min + NRST_ENUM_GATE_MIN * 10)) && (S_TIME_BASE < TBase::_10ns))
+    if(((valueADC > max - NRST_ENUM_GATE_MAX * 10) || (valueADC < min + NRST_ENUM_GATE_MIN * 10)) && (S_TIME_BASE < TBase::_10ns))
     {
         result.type = ShiftPoint::FAIL;
     }

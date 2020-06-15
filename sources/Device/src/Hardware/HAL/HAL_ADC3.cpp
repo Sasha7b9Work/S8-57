@@ -26,6 +26,8 @@ static void ConfigToIT();
 static void ConfigToHand();
 
 
+static uint16 value = 0;
+
 void HAL_ADC3::Init()
 {
     // Теперь настроим вход АЦП от рандомизатора
@@ -56,6 +58,12 @@ void HAL_ADC3::Init()
     handle.Init.NbrOfDiscConversion = 0;
 
     ConfigToIT();
+}
+
+
+uint16 HAL_ADC3::ValueRandomizer()
+{
+    return value;
 }
 
 
@@ -112,7 +120,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 
         HAL_ADC_PollForConversion(&handle, 10);
 
-        Osci::valueADC = static_cast<uint16>(HAL_ADC_GetValue(hadc));
+        value = static_cast<uint16>(HAL_ADC_GetValue(hadc));
 
         ConfigToIT();
     }

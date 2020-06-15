@@ -56,6 +56,7 @@ struct HAL_ADC1
 struct HAL_ADC3
 {
     static void Init();
+    static uint16 ValueRandomizer();
 };
 
 
