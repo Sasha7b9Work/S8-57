@@ -254,7 +254,7 @@ void Osci::OnChangedLengthMemoryChannel()
 {
     FPGA::LoadRegUPR();
     FPGA::Reset();
-    DisplayOsci::ShiftInMemory::ChangeTPos();
+    DisplayOsci::ShiftInMemory::OnChangeTPos();
     FPGA::Reset();
     TShift::Set(S_TIME_SHIFT);
     FPGA::Reset();

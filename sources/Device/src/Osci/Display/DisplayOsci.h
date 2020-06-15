@@ -50,7 +50,10 @@ struct DisplayOsci
         static void Set(int16 shift);
 
         // Вызывать при изменении TPos
-        static void ChangeTPos();
+        static void OnChangeTPos();
+
+        // Изменить смещение в памяти на delta точек
+        static void Change(int delta);
     };
 
 

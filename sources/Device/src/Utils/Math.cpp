@@ -27,6 +27,8 @@ template void  Math::CircleDecrease<uint8>(uint8 *, uint8, uint8);
 template void  Math::CircleDecrease<int16>(int16 *, int16, int16);
 template void  Math::CircleDecrease<int>(int *, int, int);
 
+template int16 Math::Add<int16>(int16 value, int16 delta, int16 min, int16 max);
+
 template int16 Math::Abs<int16>(int16);
 template int   Math::Abs<int>(int);
 
@@ -514,6 +516,24 @@ void Math::CircleDecrease(T *value, T min, T max)
     {
         *value = (T)max;
     }
+}
+
+
+template<class T>
+T Math::Add(T value, T delta, T min, T max)
+{
+    T result = value + delta;
+
+    if (result < min)
+    {
+        result = min;
+    }
+    else if (result > max)
+    {
+        result = max;
+    }
+
+    return result;
 }
 
 

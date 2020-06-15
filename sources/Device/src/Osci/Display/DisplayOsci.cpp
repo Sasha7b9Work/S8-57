@@ -15,6 +15,7 @@
 #include "Osci/Measurements/AutoMeasurements.h"
 #include "Osci/Measurements/CursorsMeasurements.h"
 #include "Settings/Settings.h"
+#include "Utils/Math.h"
 #include "Utils/Values.h"
 
 
@@ -226,7 +227,7 @@ void DisplayOsci::ShiftInMemory::Set(int16 shift)
 }
 
 
-void DisplayOsci::ShiftInMemory::ChangeTPos()
+void DisplayOsci::ShiftInMemory::OnChangeTPos()
 {
     int width = Grid::Width();
 
@@ -242,4 +243,12 @@ void DisplayOsci::ShiftInMemory::ChangeTPos()
     {
         Set(static_cast<int16>(ENumPointsFPGA::PointsInChannel() - width - 2));
     }
+}
+
+
+void DisplayOsci::ShiftInMemory::Change(int delta)
+{
+    int16 max = static_cast<int16>(ENumPointsFPGA::PointsInChannel() - Grid::Width());
+
+    Set(Math::Add<int16>(Get(), static_cast<int16>(delta), 0, max));
 }

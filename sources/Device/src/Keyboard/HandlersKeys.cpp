@@ -163,9 +163,15 @@ static void OnChangeParameterTime(pFuncVI func, int delta)
 
 static void OnTShift()
 {
+    int delta = (event.key == Key::TShiftMore) ? 1 : -1;
+
     if (Osci::IsRunning())
     {
-        OnChangeParameterTime(TShift::Change, (event.key == Key::TShiftMore) ? 1 : -1);
+        OnChangeParameterTime(TShift::Change, delta);
+    }
+    else
+    {
+        OnChangeParameterTime(DisplayOsci::ShiftInMemory::Change, delta);
     }
 }
 
