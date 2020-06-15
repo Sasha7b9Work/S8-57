@@ -53,12 +53,12 @@ bool CursorsControl::IsEnabled2U()
 }
 
 
-DEF_PAGE_3( pMeasures,                                                                                                                                                    //--- ИЗМЕРЕНИЯ ---
+DEF_PAGE_2( pMeasures,                                                                                                                                                    //--- ИЗМЕРЕНИЯ ---
     "ИЗМЕРЕНИЯ",
     "Доступ к настройкам измерений - курсорных и автоматических",
     PageCursorsMeasures::self,
     PageAutoMeasures::self,
-    PageMath::self,
+    //PageMath::self,
     PageName::Measures, nullptr, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
