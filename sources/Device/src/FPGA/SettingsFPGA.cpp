@@ -168,7 +168,7 @@ void TShift::LoadRandomize()
 
     if (Osci::addShift < 0)
     {
-        Osci::addShift = static_cast<int>(k + Osci::addShift);
+        Osci::addShift += k;
     }
 }
 

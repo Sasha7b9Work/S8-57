@@ -480,8 +480,9 @@ StructReadRand RandShift::GetInfoForReadRand(ShiftPoint Tsm, const uint8 *addres
         while(index < 0)
         {
             index += structRand.step;
-            volatile uint8 d = *address;
-            d = d;
+
+            volatile uint8 d = *address;    // Эти строчки удалять нельзя - считываем и отбрасываем неиспользуемые точки
+            d = d;                          // 
         }
 
         structRand.posFirst = index;
