@@ -28,7 +28,8 @@ struct ModeWork
 // „то делать при нажатии кнопки ѕјћя“№.
 struct ModeBtnMemory
 {
-#define S_MEM_MODE_BTN_MEMORY   (set.mem._modeBtnMemory)
+#define S_MEM_MODE_BTN_MEMORY           (set.mem._modeBtnMemory)
+#define S_MEM_MODE_BTN_MEMORY_IS_SAVE   (S_MEM_MODE_BTN_MEMORY == ModeBtnMemory::Save)
 
     enum E
     {

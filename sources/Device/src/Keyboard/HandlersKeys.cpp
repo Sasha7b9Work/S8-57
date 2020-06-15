@@ -317,7 +317,7 @@ static void OnMeasures()
 
 static void OnMemory()
 {
-    if (FDrive::IsConnected() && (S_MEM_MODE_BTN_MEMORY != 0))
+    if (FDrive::IsConnected() && S_MEM_MODE_BTN_MEMORY_IS_SAVE)
     {
         FDrive::SaveScreen();
     }
