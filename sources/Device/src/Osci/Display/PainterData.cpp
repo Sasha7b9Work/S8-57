@@ -9,7 +9,6 @@
 #include "Osci/Measurements/AutoMeasurements.h"
 #include "Settings/Settings.h"
 #include "Utils/Buffer.h"
-#include "Utils/Debug.h"
 #include "Utils/Math.h"
 #include "Utils/StringUtils.h"
 #include <cstdlib>
@@ -17,8 +16,6 @@
 
 void DisplayOsci::PainterData::DrawData()
 {
-    D_POINT;
-
     if (AutoMeasurements::DataIsSetting())
     {
         static const pFuncVV func[ModeWork::Count] =
@@ -28,29 +25,17 @@ void DisplayOsci::PainterData::DrawData()
             DrawROM
         };
     
-        D_POINT;
-
         func[S_MEM_MODE_WORK]();
-
-        D_POINT;
     }
-
-    D_POINT;
 
     DrawSpectrum();
 
-    D_POINT;
-
     Accumulator::NextFrame();
-
-    D_POINT;
 }
 
 
 void DisplayOsci::PainterData::DrawCurrent()
 {
-    D_POINT;
-
     if (DS == nullptr)
     {
         return;
@@ -68,8 +53,6 @@ void DisplayOsci::PainterData::DrawCurrent()
     }
 
     DisplayOsci::MemoryWindow::Draw();
-
-    D_POINT;
 }
 
 

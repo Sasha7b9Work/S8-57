@@ -120,34 +120,17 @@ static bool IsActive_Drive_Manager()
     return FDrive::IsConnected();
 }
 
-void PageMemory::OnOpenClose_Drive_Manager(bool enter)
+void PageMemory::OnOpenClose_Drive_Manager(bool)
 {
-    if (enter)
+    if (FDrive::IsConnected())
     {
-        if (FDrive::IsConnected())
-        {
-            FDrive::Mount();
-            Display::SetDrawMode(DrawMode::Auto, FileManager::Draw);
-            ModeRedrawFM::Set(ModeRedrawFM::Full);
-        }
-        else
-        {
-            Display::ShowWarning("Сначала подключите флеш-диск");
-        }
+        FDrive::Mount();
+        Display::SetDrawMode(DrawMode::Auto, FileManager::Draw);
+        ModeRedrawFM::Set(ModeRedrawFM::Full);
     }
     else
     {
-        bool inMode = OSCI_IN_MODE_P2P;
-        
-        Menu::CloseOpenedItem();
-
-        inMode = OSCI_IN_MODE_P2P;
-
-        Display::SetDrawMode(DrawMode::Auto);
-
-        inMode = OSCI_IN_MODE_P2P;
-        
-        inMode = inMode;
+        Display::ShowWarning("Сначала подключите флеш-диск");
     }
 }
 

@@ -158,6 +158,10 @@ void Menu::ChangeStateFlashDrive()
     {
         PageMemory::OnOpenClose_Drive_Manager();
     }
+    else
+    {
+        // остальные ситуации не обрабатываются
+    }
 }
 
 

@@ -16,7 +16,6 @@
 #include "Recorder/Sensor.h"
 #include "SCPI/SCPI.h"
 #include "Settings/SettingsNRST.h"
-#include "Utils/Debug.h"
 #include <cstdlib>
 
 
@@ -107,19 +106,13 @@ bool SetCurrentMode(const Page *page, Device::Mode::E mode)
 
 void Device::Update()
 {
-    D_POINT;
-
     Timer::StartMultiMeasurement();
 
     HAL_IWDG_REFRESH(); //-V2571
 
     Osci::Update();
 
-    D_POINT;
-
     Display::Update();
-
-    D_POINT;
 
     Tester::Update();
 
@@ -142,8 +135,6 @@ void Device::Update()
     Menu::Update();
 
     PowerBreaker::Update();
-
-    D_POINT;
 }
 
 

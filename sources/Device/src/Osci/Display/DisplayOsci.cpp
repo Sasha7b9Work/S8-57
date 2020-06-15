@@ -15,7 +15,6 @@
 #include "Osci/Measurements/AutoMeasurements.h"
 #include "Osci/Measurements/CursorsMeasurements.h"
 #include "Settings/Settings.h"
-#include "Utils/Debug.h"
 #include "Utils/Values.h"
 
 
@@ -30,8 +29,6 @@ static const int DELTA = 5;
 
 void DisplayOsci::Update()
 {
-    D_POINT;
-
     DFont::SetSpacing(1);
 
     if (needRedraw)
@@ -45,11 +42,7 @@ void DisplayOsci::Update()
         Accumulator::Reset();
     }
 
-    D_POINT;
-
     PainterData::DrawData();
-
-    D_POINT;
 
     Rectangle(Grid::Width(), Grid::ChannelHeight()).Draw(Grid::Left(), Grid::Top(), Color::FILL);
 
@@ -78,8 +71,6 @@ void DisplayOsci::Update()
     Menu::Draw();
 
     Warnings::Draw();
-
-    D_POINT;
 }
 
 

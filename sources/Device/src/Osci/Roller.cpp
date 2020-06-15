@@ -6,7 +6,6 @@
 #include "Hardware/Memory/IntRAM.h"
 #include "Osci/Osci.h"
 #include "Osci/Reader.h"
-#include "Utils/Debug.h"
 #include "Utils/Math.h"
 #include <cstring>
 
@@ -34,34 +33,16 @@ void Roller::Prepare()
 
 void Roller::ReadPoint()
 {
-    D_POINT;
-
     if (FPGA::IsRunning() && (HAL_PIO::Read(PIN_P2P) != 0))
     {
-        D_POINT;
-
         HAL_BUS::FPGA::SetAddrData(RD::DATA_A, RD::DATA_A + 1);
-
-        D_POINT;
-
         BitSet16 dataA(HAL_BUS::FPGA::ReadA0(), HAL_BUS::FPGA::ReadA1());
-
-        D_POINT;
     
         HAL_BUS::FPGA::SetAddrData(RD::DATA_B, RD::DATA_B + 1);
-
-        D_POINT;
-
         BitSet16 dataB(HAL_BUS::FPGA::ReadA0(), HAL_BUS::FPGA::ReadA1());
-
-        D_POINT;
     
         addPoint(dataA, dataB);
-
-        D_POINT;
     }
-
-    D_POINT;
 }
 
 

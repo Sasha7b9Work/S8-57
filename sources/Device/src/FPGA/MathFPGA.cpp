@@ -221,6 +221,10 @@ void MathFPGA::CalculateFFT(float *dataR, int numPoints, float *result, float *f
             {
                 *density1 = result[i];
             }
+            else
+            {
+                // остальные варианты не обрабатываем
+            }
 
             if (result[i] < minDB)
             {

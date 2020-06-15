@@ -4,7 +4,6 @@
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/HAL/HAL_PIO.h"
-#include "Utils/Debug.h"
 #include <stm32f4xx_hal.h>
 #ifdef DEVICE
 #include "Osci/Osci.h"
@@ -168,20 +167,14 @@ void HAL_BUS::Panel::Send(uint8 byte)
 
 void HAL_BUS::Panel::Send(uint8 byte0, uint8 byte1)
 {
-    D_POINT;
-
     uint8 buffer[2] = { byte0, byte1 };
     
     Send(buffer, 2);
-
-    D_POINT;
 }
 
 void HAL_BUS::Panel::Send(const uint8 *data, int size)
 {
     HAL_IWDG_REFRESH();
-
-    D_POINT;
 
     if(!(GPIOA->IDR & GPIO_PIN_7) && !(GPIOC->IDR & GPIO_PIN_4)) //-V2570
     {
@@ -204,8 +197,6 @@ void HAL_BUS::Panel::Send(const uint8 *data, int size)
         GPIOE->MODER &= 0xffc03fffU;        // Настроим пины 7, 8, 9, 10 на запись D4, D5, D6, D7
         GPIOE->MODER |= 0x00154000U;        // Устанавливаем для этих пинов GPIO_MODE_OUTPUT_PP
     }
-
-    D_POINT;
 
     for(int i = 0; i < size; i++)
     {
@@ -244,46 +235,25 @@ void HAL_BUS::Panel::Send(const uint8 *data, int size)
         GPIOG->BSRR = GPIO_PIN_12;
     }
 
-    D_POINT;
-
     interactionWithPanel = false;
 
     if(otherActionsAllowed)
     {
-        D_POINT;
-
         if(Device::InModeRecorder())
         {
-            D_POINT;
-
             Recorder::RecordPoints();
-
-            D_POINT;
         }
         else if(OSCI_IN_MODE_P2P)
         {
-            D_POINT;
-
             Roller::ReadPoint();
-
-            D_POINT;
         }
-
-        D_POINT;
 
         if(funcAfterInteraction)
         {
             funcAfterInteraction();
-
-            D_POINT;
-
             funcAfterInteraction = nullptr;
         }
-
-        D_POINT;
     }
-
-    D_POINT;
 }
 
 
