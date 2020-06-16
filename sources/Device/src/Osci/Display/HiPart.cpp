@@ -296,7 +296,7 @@ static void DrawFrequency(int x, int y)
     if (S_MEM_MODE_WORK_IS_DIR)
     {
         char mesFreq[20] = "\x7c=";
-        float freq = FreqMeter::GetFreq();
+        float freq = FreqMeter::GetFrequency();
         if (freq == -1.0F) //-V550 //-V2550
         {
             std::strcat(mesFreq, "******");

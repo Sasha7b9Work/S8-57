@@ -186,7 +186,7 @@ float FreqMeter::PeriodSetToFreq(const BitSet32 *period_)
 }
 
 
-float FreqMeter::GetFreq()
+float FreqMeter::GetFrequency()
 {
     return frequency;
 }
@@ -195,6 +195,12 @@ float FreqMeter::GetFreq()
 void FreqMeter::ClearMeasure()
 {
     frequency = 0.0F;
+}
+
+
+bool FreqMeter::FrequencyIsFound()
+{
+    return (frequency != 0.0F); //-V2550 //-V550
 }
 
 

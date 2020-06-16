@@ -23,9 +23,6 @@ static TBase::E CalculateTBase(float frequency);
 // Заслать соответствующие настройки в частотомер
 static void TuneFreqMeter();
 
-// Рассчитывает частоту, исходя из данных аппаратного частотомера
-//static bool CalculateFrequency(float *outFreq);
-
 
 void Osci::RunAutoSearch()
 {
@@ -139,23 +136,16 @@ static bool FindFrequency(Chan::E ch, Range::E range, float *outFreq)
 
     uint timeStart = TIME_MS;
 
-    int counter = 0;
-    
     do
     {
-        counter++;
         FPGA::ReadFlag();
-    } while ((FreqMeter::GetFreq() == 0.0F) && (TIME_MS - timeStart < 10000));
+    } while (!FreqMeter::FrequencyIsFound() && (TIME_MS - timeStart < 10000));
 
-    float frequency = FreqMeter::GetFreq();
-    
-    counter = counter;
-    
-    *outFreq = frequency;
+    *outFreq = FreqMeter::GetFrequency();
 
     set = old;
 
-    return (*outFreq != 0.0F);
+    return FreqMeter::FrequencyIsFound();
 }
 
 
@@ -178,29 +168,6 @@ static void TuneFreqMeter()
 
     FPGA::Flag::Clear();
 }
-
-
-//static bool CalculateFrequency(float *)
-//{
-//    if (!FPGA::Flag::FreqOverflow() && FPGA::Flag::FreqReady())
-//    {
-//        BitSet32 counter = FreqMeter::FPGA::ReadCounterFreq();
-//        uint freq = counter.word;
-//        freq = freq;
-//
-//        return true;
-//    }
-//
-//    if (!FPGA::Flag::PeriodOverflow() && FPGA::Flag::PeriodReady())
-//    {
-//        BitSet32 counter = FreqMeter::FPGA::ReadCounterPeriod();
-//        counter = counter;
-//
-//        return true;
-//    }
-//
-//    return false;
-//}
 
 
 static TBase::E CalculateTBase(float frequency)
