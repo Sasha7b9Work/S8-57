@@ -357,7 +357,14 @@ static void OnTime()
     }
     else if (event.IsLong())
     {
-        TShift::Reset();
+        if (Osci::IsRunning())
+        {
+            TShift::Reset();
+        }
+        else
+        {
+            DisplayOsci::ShiftInMemory::OnChangeTPos();
+        }
     }
 }
 
