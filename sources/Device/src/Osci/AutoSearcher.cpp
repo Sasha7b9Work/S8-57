@@ -62,6 +62,8 @@ void Osci::RunAutoSearch()
     }
 
     Osci::Init();
+
+    FreqMeter::Init();
 }
 
 
