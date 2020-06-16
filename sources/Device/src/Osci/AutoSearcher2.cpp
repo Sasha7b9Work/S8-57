@@ -19,7 +19,7 @@ static void ToScaleChannel(Chan::E ch);
 // Находит частоту на канале ch
 static bool FindFrequency(Chan::E ch, float *outFreq);
 static bool FindFrequencyForRanges(Chan::E ch, uint timeWaitMS, float *outFreq);
-static bool FindFrequencyForRange(Chan::E ch, Range::E range, float *outFreq, uint timeWaitMS);
+static bool FindFrequencyForRange(Chan::E ch, Range::E range, uint timeWaitMS, float *outFreq);
 
 // Ожидает импульса синхронизации в течение timeWaitMS миллисекунд и возвращает true, если синхронизация пришла
 static bool WaitSync(uint timeWaitMS);
@@ -149,11 +149,11 @@ static bool FindFrequencyForRanges(Chan::E ch, uint timeWaitMS, float *outFreq)
     {
         float frequency1 = 0.0F;
 
-        if (FindFrequencyForRange(ch, static_cast<Range::E>(range), &frequency1, timeWaitMS))
+        if (FindFrequencyForRange(ch, static_cast<Range::E>(range), timeWaitMS, &frequency1))
         {
             float frequency2 = 0.0F;
 
-            if (FindFrequencyForRange(ch, static_cast<Range::E>(range - 1), &frequency2, timeWaitMS))
+            if (FindFrequencyForRange(ch, static_cast<Range::E>(range - 1), timeWaitMS, &frequency2))
             {
                 if (Math::FloatsIsEquals(frequency1, frequency2, 0.05F))
                 {
@@ -171,7 +171,7 @@ static bool FindFrequencyForRanges(Chan::E ch, uint timeWaitMS, float *outFreq)
 }
 
 
-static bool FindFrequencyForRange(Chan::E ch, Range::E range, float *outFreq, uint timeWaitMS)
+static bool FindFrequencyForRange(Chan::E ch, Range::E range, uint timeWaitMS, float *outFreq)
 {
     DisplayUpdate();
 
