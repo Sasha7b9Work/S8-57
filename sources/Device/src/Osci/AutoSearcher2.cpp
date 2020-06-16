@@ -15,13 +15,11 @@ static bool FindSignal(Chan::E ch, TBase::E *tBase, Range::E *range);
 static void ToScaleChannel(Chan::E ch);
 
 // Находит частоту на канале ch
-static float FindFrequency(Chan::E ch);
+static bool FindFrequency(Chan::E ch, float *outFreq);
+static bool FindFrequencyForRanges(Chan::E ch, float *outFreq, uint timeWaitMS);
 
-// Находит время между двумя синхронизациями при заданном range. Возвращаемые значения:
-// -1 - Не найдено ни одной синхронизации
-// 0 - Найдена одна синхронизация
-// 1 и более - время в миллисекундах между синхронизациями
-static uint FindTwoSync(uint timeWaitMS);
+// Ожидает импульса синхронизации в течение timeWaitMS миллисекунд и возвращает true, если синхронизация пришла
+static bool WaitSync(uint timeWaitMS);
 
 // Рассчитывает TBase, необходимый для отображения задданой частоты
 static TBase::E CalculateTBase(float frequency);
@@ -30,8 +28,7 @@ static TBase::E CalculateTBase(float frequency);
 namespace FrequencyMeter
 {
     // Найти частоту по счётчику частоты
-    float FindFromCounerFrequency();
-
+    void TuneForFind();
     
     namespace State
     {
@@ -95,9 +92,9 @@ void Osci::RunAutoSearch()
 
 static bool FindSignal(Chan::E ch, TBase::E *tBase, Range::E *range)
 {
-    float frequency = FindFrequency(ch);
+    float frequency = 0.0F;
 
-    if (frequency != 0.0F)
+    if (FindFrequency(ch, &frequency))
     {
         *tBase = CalculateTBase(frequency);
 
@@ -110,7 +107,7 @@ static bool FindSignal(Chan::E ch, TBase::E *tBase, Range::E *range)
 }
 
 
-static float FindFrequency(Chan::E ch)
+static bool FindFrequency(Chan::E ch, float *outFreq)
 {
     Osci::Stop();
     ModeCouple::Set(ch, ModeCouple::AC);
@@ -121,23 +118,77 @@ static float FindFrequency(Chan::E ch)
     TShift::Set(0);
     RShift::Set(ch, 0);
 
+    if (FindFrequencyForRanges(ch, outFreq, 150))
+    {
+        return true;
+    }
+
+    if (FindFrequencyForRanges(ch, outFreq, 1200))
+    {
+        return true;
+    }
+
+    return false;
+}
+
+
+static bool FindFrequencyForRanges(Chan::E ch, float *outFreq, uint timeWaitMS)
+{
+    FrequencyMeter::State::Store();
+
+    FrequencyMeter::TuneForFind();
+
     for (int range = static_cast<int>(Range::_2mV); range < Range::Count; range++)
     {
         DisplayUpdate();
 
         Range::Set(ch, static_cast<Range::E>(range));
 
-        uint timeSync = FindTwoSync(150);
-
-        if (timeSync > 0)
+        if (WaitSync(timeWaitMS))
         {
-            return FrequencyMeter::FindFromCounerFrequency();
+            FreqMeter::FPGA::ReadCounterFreq();
+
+            FPGA::Flag::Clear();
+
+            *outFreq = 0.0F;
+
+            return true;
         }
     }
+
+    FrequencyMeter::State::Restore();
+
+    return false;
 }
 
 
-static uint FindTwoSync(uint timeWaitMS)
+void FrequencyMeter::TuneForFind()
+{
+    S_FREQ_METER_ENABLED = true;
+    S_FREQ_TIME_COUNTING = FreqMeter::TimeCounting::_100ms;
+    S_FREQ_FREQ_CLC = FreqMeter::FreqClc::_100MHz;
+    S_FREQ_NUMBER_PERIODS = FreqMeter::NumberPeriods::_1;
+
+    FreqMeter::FPGA::LoadSettings();
+
+    FreqMeter::FPGA::ResetCounterFreq();
+
+    FPGA::Flag::Clear();
+
+    Osci::Start(false);
+
+    do
+    {
+        FPGA::ReadFlag();
+    } while (!FPGA::Flag::FreqReady());
+
+    BitSet32 counter = FreqMeter::FPGA::ReadCounterFreq();
+
+//    return counter.word * 10.0F;
+}
+
+
+static bool WaitSync(uint timeWaitMS)
 {
     FPGA::Flag::Clear();
 
@@ -149,36 +200,13 @@ static uint FindTwoSync(uint timeWaitMS)
     {
         if (TIME_MS - start > timeWaitMS)
         {
-            return static_cast<uint>(-1);
+            return false;
         }
 
         FPGA::ReadFlag();
     }
 
-    uint timeFirst = TIME_MS;
-
-    FPGA::Flag::Clear();
-
-    Osci::Start(false);
-
-    while (!FPGA::Flag::TrigReady())
-    {
-        if (TIME_MS - timeFirst > timeWaitMS)
-        {
-            return 0;
-        }
-
-        FPGA::ReadFlag();
-    }
-
-    uint result = TIME_MS - timeFirst;
-
-    if (result == 0)
-    {
-        result++;
-    }
-
-    return result;
+    return true;
 }
 
 
@@ -203,13 +231,61 @@ static void DisplayUpdate()
 }
 
 
-float FrequencyMeter::FindFromCounerFrequency()
+static void ToScaleChannel(Chan::E)
 {
-    State::Store();
+
+}
 
 
+static TBase::E CalculateTBase(float frequency)
+{
+    struct TimeStruct
+    {
+        float       frequency;  // Частота, ниже которой нужно устанавливать tBase
+        TBase::E    tBase;
+    };
 
-    State::Restore();
+    static const TimeStruct times[] =
+    {
+        {10.0F,  TBase::_10ms},
+        {30.0F,  TBase::_5ms},
+        {80.0F,  TBase::_2ms},
+
+        {100.0F, TBase::_1ms},
+        {300.0F, TBase::_500us},
+        {800.0F, TBase::_200us},
+
+        {1e3F,   TBase::_100us},
+        {3e3F,   TBase::_50us},
+        {8e3F,   TBase::_20us},
+
+        {10e3F,  TBase::_10us},
+        {30e3F,  TBase::_5us},
+        {80e3F,  TBase::_2us},
+
+        {100e3F, TBase::_1us},
+        {300e3F, TBase::_500ns},
+        {800e3F, TBase::_200ns},
+
+        {1e6F,   TBase::_100ns},
+        {3e6F,   TBase::_50ns},
+        {8e6F,   TBase::_20ns},
+
+        {10e6F,  TBase::_10ns},
+        {30e6F,  TBase::_5ns},
+        {250e6F, TBase::_2ns},
+        {0.0F,   TBase::Count}
+    };
+
+    for (int i = 0; times[i].tBase != TBase::Count; i++)
+    {
+        if (frequency < times[i].frequency)
+        {
+            return times[i].tBase;
+        }
+    }
+
+    return TBase::_2ns;
 }
 
 
@@ -228,4 +304,6 @@ void FrequencyMeter::State::Restore()
     S_FREQ_TIME_COUNTING = counting;
     S_FREQ_FREQ_CLC = clc;
     S_FREQ_NUMBER_PERIODS = periods;
+
+    FreqMeter::Init();
 }
