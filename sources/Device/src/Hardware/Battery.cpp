@@ -146,7 +146,7 @@ static float BatteryADC_ToVoltage(float value)
 
 static float Voltage100()
 {
-    return ChargerIsConnected() ? 8.401F : 8.4F;
+    return ChargerIsConnected() ? 8.301F : 8.3F;
 }
 
 
