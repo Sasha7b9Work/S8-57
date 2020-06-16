@@ -362,7 +362,7 @@ pString Range::ToString(Chan::E ch, Divider::E divider)
 }
 
 
-pString Range::ToString(Range::E range, int8 _divider)
+pString Range::ToString(Range::E range, Divider::E _divider)
 {
     return ranges[range][_divider].name;
 }

@@ -122,7 +122,7 @@ struct Range
 
     static pString ToString(Chan::E ch, Divider::E divider);
 
-    static pString ToString(Range::E range, int8 divider);
+    static pString ToString(Range::E range, Divider::E divider);
     // Возвращает напряжение, соответствующее верхней границе сетки
     static float MaxVoltageOnScreen(Range::E range);
 

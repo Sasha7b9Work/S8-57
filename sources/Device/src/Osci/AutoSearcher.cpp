@@ -29,6 +29,13 @@ static void TuneFreqMeter();
 static void DisplayUpdate();
 
 
+namespace DisplayParameters
+{
+    Chan::E ch = Chan::A;
+    Range::E range = Range::_20V;
+};
+
+
 void Osci::RunAutoSearch()
 {
     Settings old = set;
@@ -71,6 +78,8 @@ void Osci::RunAutoSearch()
 
 static bool FindSignal(Chan::E ch, TBase::E *tBase, Range::E *)
 {
+    DisplayParameters::ch = ch;
+
     float frequency = 0.0F;
 
     if (FindFrequency(ch, &frequency))
@@ -98,8 +107,9 @@ static bool FindFrequency(Chan::E ch, float *outFreq)
     
     bool result = false;
 
-    for (int range = static_cast<int>(Range::_20V); range >= 0 && !result; range--)
+    for (int range = static_cast<int>(Range::_2mV); range < Range::Count && !result; range++)
     {
+        DisplayParameters::range = static_cast<Range::E>(range);
         DisplayUpdate();
         result = FindFrequency(ch, static_cast<Range::E>(range), outFreq);
     }
@@ -226,7 +236,7 @@ static void DisplayUpdate()
 
     Text("Поиск сигнала").DrawInCenterRect(0, 0, 320, 200, Color::FILL);
 
-    int length = (TIME_MS / 250) % 20;
+    int length = static_cast<int>((TIME_MS / 250) % 20);
 
     int dX = 5;
 
@@ -236,6 +246,10 @@ static void DisplayUpdate()
     {
         Text(".").Draw(320 / 2 - width / 2 + i * dX, 120);
     }
+
+    Text(Chan::Name(DisplayParameters::ch)).Draw(10, 200);
+
+    Text(Range::ToString(DisplayParameters::range, Divider::_1)).Draw(50, 200);
 
     Painter::EndScene();
 }
