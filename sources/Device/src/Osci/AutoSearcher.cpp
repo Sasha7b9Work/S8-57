@@ -10,7 +10,7 @@
 // Попытка найти сигнал на канале ch. Если попытка удалась, то найденные параметры загружаются в прибор
 static bool FindSignal(Chan::E ch, TBase::E *tBase, Range::E *range);
 
-// Находит частоту сигнала, поданного на вход ch. В случае неудачи возвращает значение Float::ERROR
+// Находит частоту сигнала, поданного на вход ch
 static bool FindFrequency(Chan::E ch, float *outFreq);
 static bool FindFrequency(Chan::E ch, Range::E range, float *outFreq);
 
@@ -91,21 +91,12 @@ static bool FindFrequency(Chan::E ch, float *outFreq)
     TShift::Set(0);
     RShift::Set(ch, 0);
     
-    bool result = FindFrequency(ch, Range::_500mV, outFreq);
+    bool result = false;
 
-    //int range = static_cast<int>(Range::_20V);
-    //
-    //for (; range >= 0 && !result; range--)
-    //{
-    //    if(range == 0x0B)
-    //    {
-    //        range = range;
-    //    }
-    //    
-    //    result = FindFrequency(ch, static_cast<Range::E>(range), outFreq);
-    //}
-    //
-    //range = range;
+    for (int range = static_cast<int>(Range::_20V); range >= 0 && !result; range--)
+    {
+        result = FindFrequency(ch, static_cast<Range::E>(range), outFreq);
+    }
 
     return result;
 }
@@ -139,7 +130,7 @@ static bool FindFrequency(Chan::E ch, Range::E range, float *outFreq)
     do
     {
         FPGA::ReadFlag();
-    } while (!FreqMeter::FrequencyIsFound() && (TIME_MS - timeStart < 10000));
+    } while (!FreqMeter::FrequencyIsFound() && (TIME_MS - timeStart < 2000));
 
     *outFreq = FreqMeter::GetFrequency();
 
