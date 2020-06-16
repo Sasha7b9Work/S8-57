@@ -18,6 +18,7 @@ static void ToScaleChannel(Chan::E ch);
 // Находит частоту на канале ch
 static bool FindFrequency(Chan::E ch, float *outFreq);
 static bool FindFrequencyForRanges(Chan::E ch, float *outFreq, uint timeWaitMS);
+static bool FindFrequencyForRange(Chan::E ch, Range::E range, float *outFreq, uint timeWaitMS);
 
 // Ожидает импульса синхронизации в течение timeWaitMS миллисекунд и возвращает true, если синхронизация пришла
 static bool WaitSync(uint timeWaitMS);
@@ -139,38 +140,52 @@ static bool FindFrequency(Chan::E ch, float *outFreq)
 
 static bool FindFrequencyForRanges(Chan::E ch, float *outFreq, uint timeWaitMS)
 {
+    bool result = false;
+
     FrequencyMeter::State::Store();
 
     FrequencyMeter::TuneForFind();
 
     for (int range = static_cast<int>(Range::_10mV); range < Range::Count; range++)
     {
-        DisplayUpdate();
-
-        Range::Set(ch, static_cast<Range::E>(range));
-
-        Timer::PauseOnTime(500);
-
-        FPGA::Flag::Clear();
-
-        Osci::Start(false);
-
-        if (WaitSync(timeWaitMS))
+        if (FindFrequencyForRange(ch, static_cast<Range::E>(range), outFreq, timeWaitMS))
         {
-            do 
-            {
-                FPGA::Flag::Read(false);
-            } while (!FPGA::Flag::FreqReady());
-
-            BitSet32 counterFreq = FreqMeter::FPGA::ReadCounterFreq();
-
-            *outFreq = counterFreq.word * 10.0F;
-
-            return true;
+            result = true;
+            break;
         }
     }
 
     FrequencyMeter::State::Restore();
+
+    return result;
+}
+
+
+static bool FindFrequencyForRange(Chan::E ch, Range::E range, float *outFreq, uint timeWaitMS)
+{
+    DisplayUpdate();
+
+    Range::Set(ch, range);
+
+    Timer::PauseOnTime(100);
+
+    FPGA::Flag::Clear();
+
+    Osci::Start(false);
+
+    if (WaitSync(timeWaitMS))
+    {
+        do
+        {
+            FPGA::Flag::Read(false);
+        } while (!FPGA::Flag::FreqReady());
+
+        BitSet32 counterFreq = FreqMeter::FPGA::ReadCounterFreq();
+
+        *outFreq = counterFreq.word * 10.0F;
+
+        return true;
+    }
 
     return false;
 }
