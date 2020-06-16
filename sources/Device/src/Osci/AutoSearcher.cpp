@@ -17,8 +17,8 @@ static bool FindSignal(Chan::E ch, TBase::E *tBase, Range::E *range);
 static void ToScaleChannel(Chan::E ch);
 
 // Находит частоту на канале ch
-static bool FindFrequency(Chan::E ch, float *outFreq);
-static bool FindFrequencyForRanges(Chan::E ch, uint timeWaitMS, float *outFreq);
+static bool FindFrequency(Chan::E ch, float *outFreq, Range::E *outRange);
+static bool FindFrequencyForRanges(Chan::E ch, uint timeWaitMS, float *outFreq, Range::E *outRange);
 static bool FindFrequencyForRange(Chan::E ch, Range::E range, uint timeWaitMS, float *outFreq);
 
 // Ожидает импульса синхронизации в течение timeWaitMS миллисекунд и возвращает true, если синхронизация пришла
@@ -63,18 +63,24 @@ void Osci::RunAutoSearch()
         S_TIME_BASE = tBase;
         S_RANGE_A = rangeA;
         TrigSource::Set(ChanA);
+        RShift::Set(ChanA, 0);
+        TrigLevel::Set(ChanA, 0);
+        TrigStartMode::Set(TrigStartMode::Wait);
 
         Osci::Init();
 
         ToScaleChannel(ChanA);
         ToScaleChannel(ChanB);
     }
-    else if (FindSignal(ChanA, &tBase, &rangeB))
+    else if (FindSignal(ChanB, &tBase, &rangeB))
     {
         set = old;
         S_TIME_BASE = tBase;
         S_RANGE_B = rangeB;
         TrigSource::Set(ChanB);
+        RShift::Set(ChanB, 0);
+        TrigLevel::Set(ChanB, 0);
+        TrigStartMode::Set(TrigStartMode::Wait);
 
         Osci::Init();
 
@@ -93,15 +99,13 @@ void Osci::RunAutoSearch()
 }
 
 
-static bool FindSignal(Chan::E ch, TBase::E *tBase, Range::E *range)
+static bool FindSignal(Chan::E ch, TBase::E *tBase, Range::E *outRange)
 {
     float frequency = 0.0F;
 
-    if (FindFrequency(ch, &frequency))
+    if (FindFrequency(ch, &frequency, outRange))
     {
         *tBase = CalculateTBase(frequency);
-
-        *range = Range::_500mV;
 
         return true;
     }
@@ -110,7 +114,7 @@ static bool FindSignal(Chan::E ch, TBase::E *tBase, Range::E *range)
 }
 
 
-static bool FindFrequency(Chan::E ch, float *outFreq)
+static bool FindFrequency(Chan::E ch, float *outFreq, Range::E *outRange)
 {
     Osci::Stop();
     ModeCouple::Set(ch, ModeCouple::AC);
@@ -123,12 +127,12 @@ static bool FindFrequency(Chan::E ch, float *outFreq)
     S_TRIG_INPUT = TrigInput::Full;
     TrigInput::Load();
 
-    if (FindFrequencyForRanges(ch, 150, outFreq))
+    if (FindFrequencyForRanges(ch, 150, outFreq, outRange))
     {
         return true;
     }
 
-    if (FindFrequencyForRanges(ch, 1200, outFreq))
+    if (FindFrequencyForRanges(ch, 1200, outFreq, outRange))
     {
         return true;
     }
@@ -137,7 +141,7 @@ static bool FindFrequency(Chan::E ch, float *outFreq)
 }
 
 
-static bool FindFrequencyForRanges(Chan::E ch, uint timeWaitMS, float *outFreq)
+static bool FindFrequencyForRanges(Chan::E ch, uint timeWaitMS, float *outFreq, Range::E *outRange)
 {
     bool result = false;
 
@@ -158,6 +162,7 @@ static bool FindFrequencyForRanges(Chan::E ch, uint timeWaitMS, float *outFreq)
                 if (Math::FloatsIsEquals(frequency1, frequency2, 0.05F))
                 {
                     *outFreq = (frequency1 + frequency2) / 2.0F;
+                    *outRange = static_cast<Range::E>(range - 1);
                     result = true;
                     break;
                 }
