@@ -5,6 +5,7 @@
 #include "FPGA/FPGA.h"
 #include "Hardware/Timer.h"
 #include "Osci/Osci.h"
+#include "Utils/Math.h"
 
 
 static void DisplayUpdate();
@@ -144,12 +145,23 @@ static bool FindFrequencyForRanges(Chan::E ch, float *outFreq, uint timeWaitMS)
 
     FrequencyMeter::TuneForFind();
 
-    for (int range = static_cast<int>(Range::_20V); range >= 0; range--)
+    for (int range = static_cast<int>(Range::_20V); range > 0; range--)
     {
-        if (FindFrequencyForRange(ch, static_cast<Range::E>(range), outFreq, timeWaitMS))
+        float frequency1 = 0.0F;
+
+        if (FindFrequencyForRange(ch, static_cast<Range::E>(range), &frequency1, timeWaitMS))
         {
-            result = true;
-            break;
+            float frequency2 = 0.0F;
+
+            if (FindFrequencyForRange(ch, static_cast<Range::E>(range - 1), &frequency2, timeWaitMS))
+            {
+                if (Math::FloatsIsEquals(frequency1, frequency2, 0.05F))
+                {
+                    *outFreq = (frequency1 + frequency2) / 2.0F;
+                    result = true;
+                    break;
+                }
+            }
         }
     }
 
