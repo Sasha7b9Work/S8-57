@@ -146,7 +146,7 @@ static bool FindFrequencyForRanges(Chan::E ch, float *outFreq, uint timeWaitMS)
 
     FrequencyMeter::TuneForFind();
 
-    for (int range = static_cast<int>(Range::_10mV); range < Range::Count; range++)
+    for (int range = static_cast<int>(Range::_20V); range >= 0; range--)
     {
         if (FindFrequencyForRange(ch, static_cast<Range::E>(range), outFreq, timeWaitMS))
         {
@@ -167,7 +167,7 @@ static bool FindFrequencyForRange(Chan::E ch, Range::E range, float *outFreq, ui
 
     Range::Set(ch, range);
 
-    Timer::PauseOnTime(100);
+    Timer::PauseOnTime(50);
 
     FPGA::Flag::Clear();
 
@@ -257,33 +257,32 @@ static TBase::E CalculateTBase(float frequency)
 
     static const TimeStruct times[] =
     {
-        {10.0F,  TBase::_20ms},
-        {30.0F,  TBase::_5ms},
+        {30.0F,  TBase::_20ms},
+        {60.0F,  TBase::_5ms},
         {80.0F,  TBase::_2ms},
 
-        {100.0F, TBase::_2ms},
-        {300.0F, TBase::_500us},
+        {300.0F, TBase::_1ms},
+        {600.0F, TBase::_500us},
         {800.0F, TBase::_200us},
 
-        {1e3F,   TBase::_200us},
-        {3e3F,   TBase::_50us},
+        {3e3F,   TBase::_100us},
+        {6e3F,   TBase::_50us},
         {8e3F,   TBase::_20us},
 
-        {10e3F,  TBase::_20us},
-        {30e3F,  TBase::_5us},
+        {30e3F,  TBase::_10us},
+        {60e3F,  TBase::_5us},
         {80e3F,  TBase::_2us},
 
-        {100e3F, TBase::_2us},
-        {300e3F, TBase::_500ns},
+        {300e3F, TBase::_1us},
+        {600e3F, TBase::_500ns},
         {800e3F, TBase::_200ns},
 
-        {1e6F,   TBase::_200ns},
-        {3e6F,   TBase::_50ns},
-        {8e6F,   TBase::_20ns},
+        {3e6F,   TBase::_100ns},
+        {6e6F,   TBase::_50ns},
+        {15e6F,  TBase::_20ns},
 
-        {10e6F,  TBase::_20ns},
-        {30e6F,  TBase::_5ns},
-        {250e6F, TBase::_2ns},
+        {30e6F,  TBase::_10ns},
+        {60e6F,  TBase::_5ns},
         {0.0F,   TBase::Count}
     };
 
