@@ -98,8 +98,6 @@ static bool FindSignal(Chan::E ch, TBase::E *tBase, Range::E *range)
 
     if (FindFrequency(ch, &frequency))
     {
-        LOG_WRITE("%f", frequency);
-
         *tBase = CalculateTBase(frequency);
 
         *range = Range::_500mV;
@@ -182,7 +180,21 @@ static bool FindFrequencyForRange(Chan::E ch, Range::E range, float *outFreq, ui
 
         BitSet32 counterFreq = FreqMeter::FPGA::ReadCounterFreq();
 
-        *outFreq = counterFreq.word * 10.0F;
+        if (counterFreq.word > 10)
+        {
+            *outFreq = counterFreq.word * 10.0F;
+        }
+        else
+        {
+            while (!FPGA::Flag::PeriodReady())
+            {
+                FPGA::Flag::Read(false);
+            }
+
+            BitSet32 counterPeriod = FreqMeter::FPGA::ReadCounterPeriod();
+
+            *outFreq = 1.0F / (counterPeriod.word * 10e-9F);
+        }
 
         return true;
     }
@@ -257,6 +269,9 @@ static TBase::E CalculateTBase(float frequency)
 
     static const TimeStruct times[] =
     {
+        {2.0F,   TBase::_200ms},
+        {3.0F,   TBase::_100ms},
+        {5.0F,   TBase::_50ms},
         {30.0F,  TBase::_20ms},
         {60.0F,  TBase::_5ms},
         {80.0F,  TBase::_2ms},
