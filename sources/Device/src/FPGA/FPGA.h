@@ -40,7 +40,7 @@ struct FPGA
 
     struct Flag
     {
-        static void Read();
+        static void Read(bool updateFreqMeter = true);
 
         static void Clear();
         static bool DataReady();

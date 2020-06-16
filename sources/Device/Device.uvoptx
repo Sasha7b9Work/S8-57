@@ -161,7 +161,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\Osci\AutoSearcher.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\Osci\AutoSearcher.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\src/Osci/AutoSearcher.cpp\147</Expression>
         </Bp>

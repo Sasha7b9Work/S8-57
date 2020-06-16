@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include "Display/Painter.h"
 #include "Display/Primitives.h"
 #include "FPGA/FPGA.h"
@@ -96,6 +97,8 @@ static bool FindSignal(Chan::E ch, TBase::E *tBase, Range::E *range)
 
     if (FindFrequency(ch, &frequency))
     {
+        LOG_WRITE("%f", frequency);
+
         *tBase = CalculateTBase(frequency);
 
         *range = Range::_500mV;
@@ -117,6 +120,8 @@ static bool FindFrequency(Chan::E ch, float *outFreq)
     TBase::Set(TBase::_100ns);
     TShift::Set(0);
     RShift::Set(ch, 0);
+    S_TRIG_INPUT = TrigInput::Full;
+    TrigInput::Load();
 
     if (FindFrequencyForRanges(ch, outFreq, 150))
     {
@@ -138,19 +143,28 @@ static bool FindFrequencyForRanges(Chan::E ch, float *outFreq, uint timeWaitMS)
 
     FrequencyMeter::TuneForFind();
 
-    for (int range = static_cast<int>(Range::_2mV); range < Range::Count; range++)
+    for (int range = static_cast<int>(Range::_10mV); range < Range::Count; range++)
     {
         DisplayUpdate();
 
         Range::Set(ch, static_cast<Range::E>(range));
 
+        Timer::PauseOnTime(500);
+
+        FPGA::Flag::Clear();
+
+        Osci::Start(false);
+
         if (WaitSync(timeWaitMS))
         {
-            FreqMeter::FPGA::ReadCounterFreq();
+            do 
+            {
+                FPGA::Flag::Read(false);
+            } while (!FPGA::Flag::FreqReady());
 
-            FPGA::Flag::Clear();
+            BitSet32 counterFreq = FreqMeter::FPGA::ReadCounterFreq();
 
-            *outFreq = 0.0F;
+            *outFreq = counterFreq.word * 10.0F;
 
             return true;
         }
@@ -170,30 +184,11 @@ void FrequencyMeter::TuneForFind()
     S_FREQ_NUMBER_PERIODS = FreqMeter::NumberPeriods::_1;
 
     FreqMeter::FPGA::LoadSettings();
-
-    FreqMeter::FPGA::ResetCounterFreq();
-
-    FPGA::Flag::Clear();
-
-    Osci::Start(false);
-
-    do
-    {
-        FPGA::Flag::Read();
-    } while (!FPGA::Flag::FreqReady());
-
-    BitSet32 counter = FreqMeter::FPGA::ReadCounterFreq();
-
-//    return counter.word * 10.0F;
 }
 
 
 static bool WaitSync(uint timeWaitMS)
 {
-    FPGA::Flag::Clear();
-
-    Osci::Start(false);
-
     uint start = TIME_MS;           // Время начала ожидания
 
     while (!FPGA::Flag::TrigReady())
@@ -247,31 +242,31 @@ static TBase::E CalculateTBase(float frequency)
 
     static const TimeStruct times[] =
     {
-        {10.0F,  TBase::_10ms},
+        {10.0F,  TBase::_20ms},
         {30.0F,  TBase::_5ms},
         {80.0F,  TBase::_2ms},
 
-        {100.0F, TBase::_1ms},
+        {100.0F, TBase::_2ms},
         {300.0F, TBase::_500us},
         {800.0F, TBase::_200us},
 
-        {1e3F,   TBase::_100us},
+        {1e3F,   TBase::_200us},
         {3e3F,   TBase::_50us},
         {8e3F,   TBase::_20us},
 
-        {10e3F,  TBase::_10us},
+        {10e3F,  TBase::_20us},
         {30e3F,  TBase::_5us},
         {80e3F,  TBase::_2us},
 
-        {100e3F, TBase::_1us},
+        {100e3F, TBase::_2us},
         {300e3F, TBase::_500ns},
         {800e3F, TBase::_200ns},
 
-        {1e6F,   TBase::_100ns},
+        {1e6F,   TBase::_200ns},
         {3e6F,   TBase::_50ns},
         {8e6F,   TBase::_20ns},
 
-        {10e6F,  TBase::_10ns},
+        {10e6F,  TBase::_20ns},
         {30e6F,  TBase::_5ns},
         {250e6F, TBase::_2ns},
         {0.0F,   TBase::Count}
