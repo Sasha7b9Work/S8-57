@@ -1538,11 +1538,6 @@
               <FilePath>.\src\Osci\AutoSearcher.cpp</FilePath>
             </File>
             <File>
-              <FileName>AutoSearcher2.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\AutoSearcher2.cpp</FilePath>
-            </File>
-            <File>
               <FileName>DeviceSettings.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Osci\DeviceSettings.h</FilePath>

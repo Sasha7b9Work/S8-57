@@ -187,7 +187,6 @@ source_group(Hardware\\Memory   FILES   ../../Device/src/Hardware/Memory/ExtRAM.
                                         ../../Device/src/Hardware/Memory/Sector.cpp
                                                      src/Hardware/Memory/Sector_win.cpp)
 source_group(Osci               FILES   ../../Device/src/Osci/AutoSearcher.cpp
-                                        ../../Device/src/Osci/AutoSearcher2.cpp
                                         ../../Device/src/Osci/DeviceSettings.h
                                         ../../Device/src/Osci/DeviceSettings.cpp
                                         ../../Device/src/Osci/Osci.h
@@ -370,7 +369,6 @@ file(GLOB SOURCES   ../../common/_VS/*
                     ../../Device/src/Osci/Measurements/*
 
                     ../../Device/src/Osci/AutoSearcher.cpp
-                    ../../Device/src/Osci/AutoSearcher2.cpp
                     ../../Device/src/Osci/DeviceSettings.h
                     ../../Device/src/Osci/DeviceSettings.cpp
                     ../../Device/src/Osci/Osci.h
