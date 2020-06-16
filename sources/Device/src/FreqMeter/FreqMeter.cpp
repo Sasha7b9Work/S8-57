@@ -26,9 +26,9 @@ uint     FreqMeter::lastPeriodOver;
 uint     FreqMeter::timeStartMeasureFreq = 0;
 uint     FreqMeter::timeStartMeasurePeriod = 0;
 
-static bool freqNeedCalculateFromPeriod;    // Установленное в true значение означает, что частоту нужно считать по счётчику периода
-static float prevFreq;
-static float frequency;                     // Значение частоты для встроенного частотомера справа вверху экрана
+static bool freqNeedCalculateFromPeriod = false;    // Установленное в true значение означает, что частоту нужно считать по счётчику периода
+static float prevFreq = 0.0F;
+static float frequency = 0.0F;                      // Значение частоты для встроенного частотомера справа вверху экрана
 
 
 
@@ -134,7 +134,7 @@ void FreqMeter::ReadFreq()
         float fr = FreqSetToFreq(&freqSet);
         if (fr < prevFreq * 0.9F || fr > prevFreq * 1.1F)
         {
-            frequency = Float::ERROR;
+            frequency = 0.0F;
         }
         else
         {
@@ -154,7 +154,7 @@ void FreqMeter::ReadPeriod()
     float fr = PeriodSetToFreq(&periodSet);
     if (fr < prevFreq * 0.9F || fr > prevFreq * 1.1F)
     {
-        frequency = Float::ERROR;
+        frequency = 0.0F;
     }
     else
     {
@@ -189,6 +189,12 @@ float FreqMeter::PeriodSetToFreq(const BitSet32 *period_)
 float FreqMeter::GetFreq()
 {
     return frequency;
+}
+
+
+void FreqMeter::ClearMeasure()
+{
+    frequency = 0.0F;
 }
 
 
