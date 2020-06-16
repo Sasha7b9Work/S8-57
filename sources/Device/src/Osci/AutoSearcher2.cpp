@@ -18,7 +18,7 @@ static void ToScaleChannel(Chan::E ch);
 
 // Находит частоту на канале ch
 static bool FindFrequency(Chan::E ch, float *outFreq);
-static bool FindFrequencyForRanges(Chan::E ch, float *outFreq, uint timeWaitMS);
+static bool FindFrequencyForRanges(Chan::E ch, uint timeWaitMS, float *outFreq);
 static bool FindFrequencyForRange(Chan::E ch, Range::E range, float *outFreq, uint timeWaitMS);
 
 // Ожидает импульса синхронизации в течение timeWaitMS миллисекунд и возвращает true, если синхронизация пришла
@@ -123,12 +123,12 @@ static bool FindFrequency(Chan::E ch, float *outFreq)
     S_TRIG_INPUT = TrigInput::Full;
     TrigInput::Load();
 
-    if (FindFrequencyForRanges(ch, outFreq, 150))
+    if (FindFrequencyForRanges(ch, 150, outFreq))
     {
         return true;
     }
 
-    if (FindFrequencyForRanges(ch, outFreq, 1200))
+    if (FindFrequencyForRanges(ch, 1200, outFreq))
     {
         return true;
     }
@@ -137,7 +137,7 @@ static bool FindFrequency(Chan::E ch, float *outFreq)
 }
 
 
-static bool FindFrequencyForRanges(Chan::E ch, float *outFreq, uint timeWaitMS)
+static bool FindFrequencyForRanges(Chan::E ch, uint timeWaitMS, float *outFreq)
 {
     bool result = false;
 
