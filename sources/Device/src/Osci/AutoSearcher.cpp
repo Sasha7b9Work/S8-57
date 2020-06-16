@@ -1,4 +1,6 @@
 #include "defines.h"
+#include "Display/Painter.h"
+#include "Display/Primitives.h"
 #include "FPGA/FPGA.h"
 #include "FreqMeter/FreqMeter.h"
 #include "Hardware/Timer.h"
@@ -22,6 +24,9 @@ static TBase::E CalculateTBase(float frequency);
 
 // Заслать соответствующие настройки в частотомер
 static void TuneFreqMeter();
+
+
+static void DisplayUpdate();
 
 
 void Osci::RunAutoSearch()
@@ -95,6 +100,7 @@ static bool FindFrequency(Chan::E ch, float *outFreq)
 
     for (int range = static_cast<int>(Range::_20V); range >= 0 && !result; range--)
     {
+        DisplayUpdate();
         result = FindFrequency(ch, static_cast<Range::E>(range), outFreq);
     }
 
@@ -130,6 +136,7 @@ static bool FindFrequency(Chan::E ch, Range::E range, float *outFreq)
     do
     {
         FPGA::ReadFlag();
+        DisplayUpdate();
     } while (!FreqMeter::FrequencyIsFound() && (TIME_MS - timeStart < 2000));
 
     *outFreq = FreqMeter::GetFrequency();
@@ -210,4 +217,25 @@ static TBase::E CalculateTBase(float frequency)
     }
 
     return TBase::_2ns;
+}
+
+
+static void DisplayUpdate()
+{
+    Painter::BeginScene(Color::BACK);
+
+    Text("Поиск сигнала").DrawInCenterRect(0, 0, 320, 200, Color::FILL);
+
+    int length = (TIME_MS / 250) % 20;
+
+    int dX = 5;
+
+    int width = dX * length;
+
+    for (int i = 0; i < length; i++)
+    {
+        Text(".").Draw(320 / 2 - width / 2 + i * dX, 120);
+    }
+
+    Painter::EndScene();
 }
