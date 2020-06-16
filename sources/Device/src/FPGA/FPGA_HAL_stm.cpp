@@ -9,7 +9,7 @@ static uint timeFireTrig = 0;   // Время зажигания лампочки синхронизации
 
 extern uint16 flagFPGA;
 
-void FPGA::ReadFlag()
+void FPGA::Flag::Read()
 {
     flagFPGA = static_cast<uint16>(HAL_BUS::FPGA::Read(RD::FLAG_LO) | (HAL_BUS::FPGA::Read(RD::FLAG_HI) << 8));
 

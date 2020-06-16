@@ -36,12 +36,12 @@ struct FPGA
     // Принудительный запуск синхронизации
     static void ForcedStart();
 
-    static void ReadFlag();
-
     static void LoadRegUPR();
 
     struct Flag
     {
+        static void Read();
+
         static void Clear();
         static bool DataReady();
         static bool TrigReady();

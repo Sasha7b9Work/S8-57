@@ -127,7 +127,7 @@ static bool FindFrequency(Chan::E ch, float *outFreq)
 
             do 
             {
-                FPGA::ReadFlag();
+                FPGA::Flag::Read();
             } while (!FreqMeter::FrequencyIsFound());
 
             *outFreq = FreqMeter::GetFrequency();

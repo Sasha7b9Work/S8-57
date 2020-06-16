@@ -179,7 +179,7 @@ void FrequencyMeter::TuneForFind()
 
     do
     {
-        FPGA::ReadFlag();
+        FPGA::Flag::Read();
     } while (!FPGA::Flag::FreqReady());
 
     BitSet32 counter = FreqMeter::FPGA::ReadCounterFreq();
@@ -203,7 +203,7 @@ static bool WaitSync(uint timeWaitMS)
             return false;
         }
 
-        FPGA::ReadFlag();
+        FPGA::Flag::Read();
     }
 
     return true;

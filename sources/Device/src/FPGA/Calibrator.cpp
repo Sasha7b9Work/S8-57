@@ -191,14 +191,14 @@ static float FindStretchChannel(Chan::E ch)
 
     while(!FPGA::Flag::Pred())
     {
-        FPGA::ReadFlag();
+        FPGA::Flag::Read();
     }
 
     FPGA::ForcedStart();
 
     do 
     {
-        FPGA::ReadFlag();
+        FPGA::Flag::Read();
 
     } while (!FPGA::Flag::DataReady());
 

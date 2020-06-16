@@ -162,7 +162,7 @@ static void UpdateFPGA()
 
     for(int i = 0; i < number; i++)
     {
-        FPGA::ReadFlag();
+        FPGA::Flag::Read();
 
         Osci::ProcessFlagPred();
 
