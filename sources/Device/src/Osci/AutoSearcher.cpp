@@ -14,7 +14,16 @@ static bool FindSignal(Chan::E ch, TBase::E *tBase, Range::E *range);
 
 // Находит частоту сигнала, поданного на вход ch
 static bool FindFrequency(Chan::E ch, float *outFreq);
-static bool FindFrequency(Chan::E ch, Range::E range, float *outFreq);
+//static bool FindFrequency(Chan::E ch, Range::E range, float *outFreq);
+
+// Находит одну синхронизацию и возвращает true в случае успеха и range, при котором она найдена
+//static bool FindOneSync(Chan::E ch, Range::E range, uint timeWait);
+
+// Ищет две синхронизации во временном промежутке timeWait.
+// Если не найдено не одной, возращает -1
+// Если найдена только одна возрващает 0
+// Если найдены две, возвращает время в микросекундах между ними (но не менее 1)
+static uint FindTwoSync(Chan::E ch, Range::E range, uint timeWait);
 
 // Находит масштаб по вертикаил
 //static Range::E FindRange(Chan::E ch);
@@ -23,20 +32,13 @@ static bool FindFrequency(Chan::E ch, Range::E range, float *outFreq);
 static TBase::E CalculateTBase(float frequency);
 
 // Заслать соответствующие настройки в частотомер
-static void TuneFreqMeter();
+//static void TuneFreqMeter();
 
 
 static void DisplayUpdate();
 
 
-namespace DisplayParameters
-{
-    Chan::E ch = Chan::A;
-    Range::E range = Range::_20V;
-};
-
-
-void Osci::RunAutoSearch()
+void Osci::_RunAutoSearch()
 {
     Settings old = set;
 
@@ -78,8 +80,6 @@ void Osci::RunAutoSearch()
 
 static bool FindSignal(Chan::E ch, TBase::E *tBase, Range::E *)
 {
-    DisplayParameters::ch = ch;
-
     float frequency = 0.0F;
 
     if (FindFrequency(ch, &frequency))
@@ -104,57 +104,77 @@ static bool FindFrequency(Chan::E ch, float *outFreq)
     TBase::Set(TBase::_100ns);
     TShift::Set(0);
     RShift::Set(ch, 0);
-    
-    bool result = false;
 
-    for (int range = static_cast<int>(Range::_2mV); range < Range::Count && !result; range++)
+    for (int range = static_cast<int>(Range::_2mV); range < Range::Count; range++)
     {
-        DisplayParameters::range = static_cast<Range::E>(range);
         DisplayUpdate();
-        result = FindFrequency(ch, static_cast<Range::E>(range), outFreq);
+
+        uint timeSync = FindTwoSync(ch, static_cast<Range::E>(range), 150);
+
+        if (timeSync == static_cast<uint>(-1))                                  // Не найдено синхронизации - переходим к следующему
+        {
+            continue;
+        }
+        else if (timeSync == 0)
+        {
+            timeSync = FindTwoSync(ch, static_cast<Range::E>(range), 1500);
+        }
+        else
+        {
+            FreqMeter::ClearMeasure();
+
+            Osci::Start(false);
+
+            do 
+            {
+                FPGA::ReadFlag();
+            } while (!FreqMeter::FrequencyIsFound());
+
+            *outFreq = FreqMeter::GetFrequency();
+        }
     }
 
-    return result;
+    return false;
 }
 
 
-static bool FindFrequency(Chan::E ch, Range::E range, float *outFreq)
-{
-    /*
-        Находим сигнал с помощью частотомера
-        1. Устанавливаем один периода в параметрах частотомера
-        2. Читаем счётчики, тем самым обнуляя их.
-        3. Даём запуск.
-        4. Ждём, пока появится флаг частоты или периода
-    */
-
-    Settings old = set;
-
-    Osci::Stop();
-    Range::Set(ch, range);
-
-    Timer::PauseOnTime(500);
-
-    TuneFreqMeter();
-    
-    FreqMeter::ClearMeasure();
-
-    Osci::Start(false);
-
-    uint timeStart = TIME_MS;
-
-    do
-    {
-        FPGA::ReadFlag();
-        DisplayUpdate();
-    } while (!FreqMeter::FrequencyIsFound() && (TIME_MS - timeStart < 2000));
-
-    *outFreq = FreqMeter::GetFrequency();
-
-    set = old;
-
-    return FreqMeter::FrequencyIsFound();
-}
+//static bool FindFrequency(Chan::E ch, Range::E range, float *outFreq)
+//{
+//    /*
+//        Находим сигнал с помощью частотомера
+//        1. Устанавливаем один периода в параметрах частотомера
+//        2. Читаем счётчики, тем самым обнуляя их.
+//        3. Даём запуск.
+//        4. Ждём, пока появится флаг частоты или периода
+//    */
+//
+//    Settings old = set;
+//
+//    Osci::Stop();
+//    Range::Set(ch, range);
+//
+//    Timer::PauseOnTime(500);
+//
+//    TuneFreqMeter();
+//    
+//    FreqMeter::ClearMeasure();
+//
+//    Osci::Start(false);
+//
+//    uint timeStart = TIME_MS;
+//
+//    do
+//    {
+//        FPGA::ReadFlag();
+//        DisplayUpdate();
+//    } while (!FreqMeter::FrequencyIsFound() && (TIME_MS - timeStart < 2000));
+//
+//    *outFreq = FreqMeter::GetFrequency();
+//
+//    set = old;
+//
+//    return FreqMeter::FrequencyIsFound();
+//}
 
 
 //Range::E FindRange(Chan::E)
@@ -163,19 +183,19 @@ static bool FindFrequency(Chan::E ch, Range::E range, float *outFreq)
 //}
 
 
-static void TuneFreqMeter()
-{
-    S_FREQ_METER_ENABLED = true;
-    S_FREQ_TIME_COUNTING = FreqMeter::TimeCounting::_1s;
-    S_FREQ_FREQ_CLC = FreqMeter::FreqClc::_100MHz;
-    S_FREQ_NUMBER_PERIODS = FreqMeter::NumberPeriods::_1;
-
-    FreqMeter::FPGA::LoadSettings();
-    FreqMeter::FPGA::ResetCounterFreq();
-    FreqMeter::FPGA::ResetCounterPeriod();
-
-    FPGA::Flag::Clear();
-}
+//static void TuneFreqMeter()
+//{
+//    S_FREQ_METER_ENABLED = true;
+//    S_FREQ_TIME_COUNTING = FreqMeter::TimeCounting::_1s;
+//    S_FREQ_FREQ_CLC = FreqMeter::FreqClc::_100MHz;
+//    S_FREQ_NUMBER_PERIODS = FreqMeter::NumberPeriods::_1;
+//
+//    FreqMeter::FPGA::LoadSettings();
+//    FreqMeter::FPGA::ResetCounterFreq();
+//    FreqMeter::FPGA::ResetCounterPeriod();
+//
+//    FPGA::Flag::Clear();
+//}
 
 
 static TBase::E CalculateTBase(float frequency)
@@ -247,9 +267,11 @@ static void DisplayUpdate()
         Text(".").Draw(320 / 2 - width / 2 + i * dX, 120);
     }
 
-    Text(Chan::Name(DisplayParameters::ch)).Draw(10, 200);
-
-    Text(Range::ToString(DisplayParameters::range, Divider::_1)).Draw(50, 200);
-
     Painter::EndScene();
+}
+
+
+static uint FindTwoSync(Chan::E /*ch*/, Range::E /*range*/, uint /*timeWait*/)
+{
+    return 0;
 }

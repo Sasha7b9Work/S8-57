@@ -65,6 +65,7 @@ struct Osci
     static void ProcessFlagPred();
 
     // Выполнить поиск сигнала
+    static void _RunAutoSearch();
     static void RunAutoSearch();
 
     // Управитель входными цепями
