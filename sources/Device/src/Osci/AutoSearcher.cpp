@@ -208,7 +208,7 @@ static bool FindFrequencyForRange(Chan::E ch, Range::E range, uint timeWaitMS, f
 
     Range::Set(ch, range);
 
-    AutoFPGA::Wait(50);
+    AutoFPGA::Wait(100);
 
     FPGA::Flag::Clear();
 
@@ -378,7 +378,7 @@ static void ScaleChannel(Chan::E ch, bool onlyReduce)
 {
     float delta = AutoFPGA::ReadAndCalculateMinMax(ch);
 
-    while (delta > 0.8F)
+    while (delta > 0.8F && S_RANGE(ch) < Range::_20V)
     {
         Range::Change(ch, 1);
         delta = AutoFPGA::ReadAndCalculateMinMax(ch);
@@ -386,7 +386,7 @@ static void ScaleChannel(Chan::E ch, bool onlyReduce)
 
     if (!onlyReduce)
     {
-        while (delta < 0.4F)
+        while (delta < 0.4F && S_RANGE(ch) > Range::_2mV)
         {
             Range::Change(ch, -1);           
             delta = AutoFPGA::ReadAndCalculateMinMax(ch);
@@ -401,7 +401,7 @@ float AutoFPGA::ReadAndCalculateMinMax(Chan::E ch)
 
     Osci::Init();
 
-    AutoFPGA::Wait(10);
+    AutoFPGA::Wait(100);
 
     AutoFPGA::Start();
 
@@ -414,8 +414,8 @@ float AutoFPGA::ReadAndCalculateMinMax(Chan::E ch)
 
     AutoFPGA::ReadData(ch, buffer.data);
 
-    uint8 max = Math::MaxFromArray(buffer.data, 0, 300);
-    uint8 min = Math::MinFromArray(buffer.data, 0, 300);
+    uint8 max = Math::MaxFromArray(buffer.data, 10, 290);
+    uint8 min = Math::MinFromArray(buffer.data, 10, 290);
 
     float delta = static_cast<float>(max - min) / static_cast<float>(VALUE::MAX - VALUE::MIN);
 
@@ -438,14 +438,16 @@ void AutoFPGA::Start()
 {
     FPGA::GiveStart(static_cast<uint16>(~(1)), static_cast<uint16>(~(SIZE + 5)));
 
-    for (int i = 0; i < 20; i++)
+    for (int i = 0; i < 50; i++)
     {
         FPGA::Flag::Read();
         if (FPGA::Flag::Pred())
         {
-            FPGA::ForcedStart();
+            break;
         }
     }
+
+    FPGA::ForcedStart();
 }
 
 
