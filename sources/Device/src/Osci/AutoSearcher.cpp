@@ -14,7 +14,7 @@ static void DisplayUpdate();
 static bool FindSignal(Chan::E ch, TBase::E *tBase, Range::E *range);
 
 // Сжать сигнал, если не влазит в экран по вертикали
-static void ToScaleChannel(Chan::E ch);
+static void ScaleChannel(Chan::E ch);
 
 // Находит частоту на канале ch
 static bool FindFrequency(Chan::E ch, float *outFreq, Range::E *outRange);
@@ -66,11 +66,12 @@ void Osci::RunAutoSearch()
         RShift::Set(ChanA, 0);
         TrigLevel::Set(ChanA, 0);
         TrigStartMode::Set(TrigStartMode::Wait);
+        ModeCouple::Set(ChanA, ModeCouple::AC);
+
+        ScaleChannel(ChanA);
+        ScaleChannel(ChanB);
 
         Osci::Init();
-
-        ToScaleChannel(ChanA);
-        ToScaleChannel(ChanB);
     }
     else if (FindSignal(ChanB, &tBase, &rangeB))
     {
@@ -81,11 +82,12 @@ void Osci::RunAutoSearch()
         RShift::Set(ChanB, 0);
         TrigLevel::Set(ChanB, 0);
         TrigStartMode::Set(TrigStartMode::Wait);
+        ModeCouple::Set(ChanB, ModeCouple::AC);
+
+        ScaleChannel(ChanA);
+        ScaleChannel(ChanB);
 
         Osci::Init();
-
-        ToScaleChannel(ChanA);
-        ToScaleChannel(ChanB);
     }
     else
     {
@@ -270,7 +272,7 @@ static void DisplayUpdate()
 }
 
 
-static void ToScaleChannel(Chan::E)
+static void ScaleChannel(Chan::E)
 {
 
 }
