@@ -246,6 +246,12 @@ void DisplayOsci::ShiftInMemory::OnChangeTPos()
 }
 
 
+int DisplayOsci::ShiftInMemory::Default(TPos::E /*tPos*/)
+{
+    return 0;
+}
+
+
 void DisplayOsci::ShiftInMemory::Change(int delta)
 {
     int16 max = static_cast<int16>(ENumPointsFPGA::PointsInChannel() - Grid::Width());

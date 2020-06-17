@@ -1,5 +1,6 @@
 #pragma once
 #include "Osci/ParametersOsci.h"
+#include "Menu/Pages/Include/PageTime.h"
 
 
 #define SHIFT_IN_MEMORY     DisplayOsci::PainterData::FirstPointOnScreen()
@@ -54,6 +55,9 @@ struct DisplayOsci
 
         // »зменить смещение в пам€ти на delta точек
         static void Change(int delta);
+
+        // ¬озвращает индекс первой точки по умолчанию при данном tPos
+        static int Default(TPos::E tPos);
     };
 
 
