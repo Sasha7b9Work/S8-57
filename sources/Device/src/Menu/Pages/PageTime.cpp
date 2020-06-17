@@ -21,17 +21,20 @@ int TPos::PosX()
 {
     int x[] = { Grid::Left(), (Grid::Right() - Grid::Left()) / 2 + Grid::Left(), Grid::Right() };
 
-    int result = x[S_TPOS] - DisplayOsci::ShiftInMemory::Get() + DisplayOsci::ShiftInMemory::Default(S_TPOS);
-
-    LIMITATION(result, Grid::Left(), Grid::Right());
-
-    return result;
+    return x[S_TPOS] - DisplayOsci::ShiftInMemory::Get() + DisplayOsci::ShiftInMemory::Default(S_TPOS);
 }
 
 
 void TPos::Draw()
 {
-    int x0 = PosX() - 3;
+    int x0 = PosX();
+
+    if (x0 < Grid::Left() || x0 > Grid::Right())
+    {
+        return;
+    }
+
+    x0 -= 3;
 
     int y = Grid::Top() - 1;
     
