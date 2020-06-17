@@ -1,13 +1,9 @@
 #include "defines.h"
 #include "Display/Grid.h"
 #include "Display/Primitives.h"
-#include "Menu/Pages/Include/PageMemory.h"
-#include "Menu/Pages/Include/PageTime.h"
-#include "FPGA/FPGA.h"
-#include "Menu/MenuItems.h"
-#include "Utils/CommonFunctions.h"
-#include "Settings/Settings.h"
 #include "Osci/Osci.h"
+#include "Osci/Display/DisplayOsci.h"
+#include "Utils/Math.h"
 
 
 bool SampleType::IsReal()
@@ -25,7 +21,11 @@ int TPos::PosX()
 {
     int x[] = { Grid::Left(), (Grid::Right() - Grid::Left()) / 2 + Grid::Left(), Grid::Right() };
 
-    return x[S_TPOS];
+    int result = x[S_TPOS] - DisplayOsci::ShiftInMemory::Get() + DisplayOsci::ShiftInMemory::Default(S_TPOS);
+
+    LIMITATION(result, Grid::Left(), Grid::Right());
+
+    return result;
 }
 
 
