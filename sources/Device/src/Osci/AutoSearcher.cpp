@@ -14,8 +14,8 @@ static void DisplayUpdate();
 // Нахоит сигнал на канале ch. Возвращает true, если сигнал найден и параметры сигнала в tBase, range
 static bool FindSignal(Chan::E ch, TBase::E *tBase, Range::E *range);
 
-// Сжать сигнал, если не влазит в экран по вертикали
-static void ScaleChannel(Chan::E ch);
+// Отмасштабировать сигнал. Если onlyReduce - только сжать
+static void ScaleChannel(Chan::E ch, bool onlyReduce);
 
 // Находит частоту на канале ch
 static bool FindFrequency(Chan::E ch, float *outFreq, Range::E *outRange);
@@ -80,8 +80,8 @@ void Osci::RunAutoSearch()
         TrigStartMode::Set(TrigStartMode::Wait);
         ModeCouple::Set(ChanA, ModeCouple::AC);
 
-        ScaleChannel(ChanA);
-        ScaleChannel(ChanB);
+        ScaleChannel(ChanA, false);
+        ScaleChannel(ChanB, true);
 
         Osci::Init();
     }
@@ -96,8 +96,8 @@ void Osci::RunAutoSearch()
         TrigStartMode::Set(TrigStartMode::Wait);
         ModeCouple::Set(ChanB, ModeCouple::AC);
 
-        ScaleChannel(ChanA);
-        ScaleChannel(ChanB);
+        ScaleChannel(ChanA, true);
+        ScaleChannel(ChanB, false);
 
         Osci::Init();
     }
@@ -360,7 +360,7 @@ void FrequencyMeter::State::Restore()
 }
 
 
-static void ScaleChannel(Chan::E ch)
+static void ScaleChannel(Chan::E ch, bool onlyReduce)
 {
     float delta = AutoFPGA::ReadAndCalculateMinMax(ch);
 
@@ -370,10 +370,13 @@ static void ScaleChannel(Chan::E ch)
         delta = AutoFPGA::ReadAndCalculateMinMax(ch);
     }
 
-    while (delta < 0.4F)
+    if (!onlyReduce)
     {
-        Range::Change(ch, -1);
-        delta = AutoFPGA::ReadAndCalculateMinMax(ch);
+        while (delta < 0.4F)
+        {
+            Range::Change(ch, -1);
+            delta = AutoFPGA::ReadAndCalculateMinMax(ch);
+        }
     }
 }
 
