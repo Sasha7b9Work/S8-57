@@ -175,7 +175,7 @@ static bool FindFrequencyForRanges(Chan::E ch, uint timeWaitMS, float *outFreq, 
 
     FrequencyMeter::TuneForFind();
 
-    for (int range = static_cast<int>(Range::_20V); range > 0; range--)
+    for (int range = static_cast<int>(Range::_20V); range >= 0; range -= 2)
     {
         float frequency1 = 0.0F;
 
@@ -183,12 +183,12 @@ static bool FindFrequencyForRanges(Chan::E ch, uint timeWaitMS, float *outFreq, 
         {
             float frequency2 = 0.0F;
 
-            if (FindFrequencyForRange(ch, static_cast<Range::E>(range - 1), timeWaitMS, &frequency2))
+            if (FindFrequencyForRange(ch, static_cast<Range::E>(range), timeWaitMS, &frequency2))
             {
-                if (Math::FloatsIsEquals(frequency1, frequency2, 0.05F))
+                if (Math::FloatsIsEquals(frequency1, frequency2, 0.1F))
                 {
                     *outFreq = (frequency1 + frequency2) / 2.0F;
-                    *outRange = static_cast<Range::E>(range - 1);
+                    *outRange = static_cast<Range::E>(range > 0 ? (range - 1) : range);
                     result = true;
                     break;
                 }
@@ -293,7 +293,7 @@ static void DisplayUpdate()
 
     for (int i = 0; i < length; i++)
     {
-        Text(".").Draw(320 / 2 - width / 2 + i * dX, 120);
+        Text(".").Draw(320 / 2 - width / 2 + i * dX + 2, 120);
     }
 
     Painter::EndScene();
