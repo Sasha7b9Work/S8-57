@@ -57,7 +57,7 @@ struct DisplayOsci
         static void Change(int delta);
 
         // Возвращает индекс первой точки по умолчанию при данном tPos
-        static int Default(TPos::E tPos);
+        static int16 Default(TPos::E tPos);
     };
 
 

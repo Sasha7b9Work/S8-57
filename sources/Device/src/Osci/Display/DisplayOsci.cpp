@@ -229,25 +229,21 @@ void DisplayOsci::ShiftInMemory::Set(int16 shift)
 
 void DisplayOsci::ShiftInMemory::OnChangeTPos()
 {
-    int width = Grid::Width();
-
-    if (S_TPOS_IS_LEFT)
-    {
-        Set(0);
-    }
-    else if (S_TPOS_IS_CENTER)
-    {
-        Set(static_cast<int16>(ENumPointsFPGA::PointsInChannel() / 2 - width / 2));
-    }
-    else // TPOS_IS_RIGHT
-    {
-        Set(static_cast<int16>(ENumPointsFPGA::PointsInChannel() - width - 2));
-    }
+    Set(Default(S_TPOS));
 }
 
 
-int DisplayOsci::ShiftInMemory::Default(TPos::E /*tPos*/)
+int16 DisplayOsci::ShiftInMemory::Default(TPos::E tPos)
 {
+    if (tPos == TPos::Center)
+    {
+        return static_cast<int16>(ENumPointsFPGA::PointsInChannel() / 2 - Grid::Width() / 2);
+    }
+    else if (tPos == TPos::Right)
+    {
+        return static_cast<int16>(ENumPointsFPGA::PointsInChannel() - Grid::Width() - 2);
+    }
+
     return 0;
 }
 
