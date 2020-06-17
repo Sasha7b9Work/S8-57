@@ -4,6 +4,7 @@
 #include "Display/Primitives.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
 #include "Osci/Osci.h"
 #include "Utils/Math.h"
 
@@ -26,6 +27,17 @@ static bool WaitSync(uint timeWaitMS);
 
 // Рассчитывает TBase, необходимый для отображения задданой частоты
 static TBase::E CalculateTBase(float frequency);
+
+
+namespace AutoFPGA
+{
+    static const int SIZE = 300;
+    void Start();
+    void ReadData(Chan::E ch, uint8 *data);
+
+    // Прочитать данные и проверить, что они не выходят за пределы минимального и максимального. Если false - выход за экран
+    bool ReadAndVerifyMinMax(Chan::E ch);
+}
 
 
 namespace FrequencyMeter
@@ -194,6 +206,7 @@ static bool FindFrequencyForRange(Chan::E ch, Range::E range, uint timeWaitMS, f
     {
         do
         {
+            DisplayUpdate();
             FPGA::Flag::Read(false);
         } while (!FPGA::Flag::FreqReady());
 
@@ -207,6 +220,7 @@ static bool FindFrequencyForRange(Chan::E ch, Range::E range, uint timeWaitMS, f
         {
             while (!FPGA::Flag::PeriodReady())
             {
+                DisplayUpdate();
                 FPGA::Flag::Read(false);
             }
 
@@ -269,12 +283,6 @@ static void DisplayUpdate()
     }
 
     Painter::EndScene();
-}
-
-
-static void ScaleChannel(Chan::E)
-{
-
 }
 
 
@@ -349,4 +357,73 @@ void FrequencyMeter::State::Restore()
     S_FREQ_NUMBER_PERIODS = periods;
 
     FreqMeter::Init();
+}
+
+
+static void ScaleChannel(Chan::E ch)
+{
+    while (!AutoFPGA::ReadAndVerifyMinMax(ch))        // Пока не впишемся в экран - уменьшаем размах по вертикали
+    {
+        Range::Change(ch, 1);
+    }
+}
+
+
+bool AutoFPGA::ReadAndVerifyMinMax(Chan::E ch)
+{
+    Buffer buffer(AutoFPGA::SIZE);
+
+    AutoFPGA::Start();
+
+    do
+    {
+        FPGA::Flag::Read();
+    } while (!FPGA::Flag::DataReady());
+
+    AutoFPGA::ReadData(ch, buffer.data);
+
+    uint8 max = Math::MaxFromArray(buffer.data, 0, 300);
+    uint8 min = Math::MinFromArray(buffer.data, 0, 300);
+
+    LOG_WRITE("%s min = %d, max = %d", Chan::Name(ch), min, max);
+
+    return (max < VALUE::MAX) || (min > VALUE::MIN);
+}
+
+
+void AutoFPGA::Start()
+{
+    FPGA::GiveStart(static_cast<uint16>(~(1)), static_cast<uint16>(~(SIZE + 5)));
+
+    for (int i = 0; i < 20; i++)
+    {
+        FPGA::Flag::Read();
+        if (FPGA::Flag::Pred())
+        {
+            FPGA::ForcedStart();
+        }
+    }
+}
+
+
+void AutoFPGA::ReadData(Chan::E ch, uint8 *data)
+{
+    uint16 addrRead = (uint16)(Osci::ReadLastRecord(ch) - SIZE);
+
+    HAL_BUS::FPGA::Write16(WR::PRED_LO, addrRead);
+    HAL_BUS::FPGA::Write8(WR::START_ADDR, 0xff);
+
+    uint8 *a0 = (ch == ChanA) ? RD::DATA_A : RD::DATA_B;
+    uint8 *a1 = a0 + 1;
+
+    HAL_BUS::FPGA::SetAddrData(a0, a1);
+
+    uint8 *p = data;
+    *p = HAL_BUS::FPGA::ReadA1();
+
+    for (int i = 0; i < SIZE; i++)
+    {
+        *p = HAL_BUS::FPGA::ReadA1();
+        p++;
+    }
 }
