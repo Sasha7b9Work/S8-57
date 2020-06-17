@@ -37,6 +37,8 @@ namespace AutoFPGA
 
     // ѕрочитать данные и проверить, что они не выход€т за пределы минимального и максимального. ≈сли false - выход за экран
     float ReadAndCalculateMinMax(Chan::E ch);
+
+    void Wait(uint timeMS);
 }
 
 
@@ -196,7 +198,7 @@ static bool FindFrequencyForRange(Chan::E ch, Range::E range, uint timeWaitMS, f
 
     Range::Set(ch, range);
 
-    Timer::PauseOnTime(50);
+    AutoFPGA::Wait(50);
 
     FPGA::Flag::Clear();
 
@@ -368,9 +370,7 @@ static void ScaleChannel(Chan::E ch, bool onlyReduce)
 
     while (delta > 0.8F)
     {
-        DisplayUpdate();
         Range::Change(ch, 1);
-        Timer::PauseOnTime(100);
         delta = AutoFPGA::ReadAndCalculateMinMax(ch);
     }
 
@@ -378,10 +378,7 @@ static void ScaleChannel(Chan::E ch, bool onlyReduce)
     {
         while (delta < 0.4F)
         {
-            DisplayUpdate();
-            Range::Change(ch, -1);
-            Osci::Init();
-            Timer::PauseOnTime(100);
+            Range::Change(ch, -1);           
             delta = AutoFPGA::ReadAndCalculateMinMax(ch);
         }
     }
@@ -391,6 +388,10 @@ static void ScaleChannel(Chan::E ch, bool onlyReduce)
 float AutoFPGA::ReadAndCalculateMinMax(Chan::E ch)
 {
     Buffer buffer(AutoFPGA::SIZE);
+
+    Osci::Init();
+
+    AutoFPGA::Wait(10);
 
     AutoFPGA::Start();
 
@@ -409,6 +410,17 @@ float AutoFPGA::ReadAndCalculateMinMax(Chan::E ch)
     float delta = static_cast<float>(max - min) / static_cast<float>(VALUE::MAX - VALUE::MIN);
 
     return delta;
+}
+
+
+void AutoFPGA::Wait(uint timeMS)
+{
+    uint start = TIME_MS;
+
+    while (TIME_MS - start < timeMS)
+    {
+        DisplayUpdate();
+    }
 }
 
 
