@@ -374,8 +374,6 @@ static void ScaleChannel(Chan::E ch, bool onlyReduce)
         delta = AutoFPGA::ReadAndCalculateMinMax(ch);
     }
 
-    Range::E range = S_RANGE(ch);
-    
     if (!onlyReduce)
     {
         while (delta < 0.4F)
@@ -383,17 +381,10 @@ static void ScaleChannel(Chan::E ch, bool onlyReduce)
             DisplayUpdate();
             Range::Change(ch, -1);
             Osci::Init();
-            range = S_RANGE(ch);
-            range = range;
             Timer::PauseOnTime(100);
             delta = AutoFPGA::ReadAndCalculateMinMax(ch);
         }
     }
-    
-    range = S_RANGE(ch);
-    range = range;
-    
-    delta = delta;
 }
 
 
@@ -403,17 +394,12 @@ float AutoFPGA::ReadAndCalculateMinMax(Chan::E ch)
 
     AutoFPGA::Start();
 
-    int counter = 0;
-
     do
     {
         DisplayUpdate();
         FPGA::Flag::Read();
-        counter++;
 
     } while (!FPGA::Flag::DataReady());
-
-    counter = counter;
 
     AutoFPGA::ReadData(ch, buffer.data);
 
