@@ -108,7 +108,7 @@ void FPGA::LoadCalibratorMode()
 
 void TShift::LoadReal()
 {
-    FPGA::post = static_cast<uint16>(S_TIME_SHIFT - TShift().Min());
+    FPGA::post = static_cast<uint16>(S_TIME_SHIFT - TShift().Min()) + 10;
     int Pred = static_cast<int>(ENumPointsFPGA::PointsInChannel()) - static_cast<int>(FPGA::post);
 
     if (Pred < 0)
