@@ -236,7 +236,7 @@ void Record::Init()
     numPoints = 0;
     sources = 0;
     bytesOnPoint = 0;
-    timeForPointMS = Recorder::ScaleX::TimeForPointMS();
+    timeForPointMS = static_cast<uint>(Recorder::ScaleX::TimeForPointMS());
 
     offsetB = 0;
     offsetSensor = 0;

@@ -156,34 +156,18 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>395</LineNumber>
+          <LineNumber>155</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134504696</Address>
+          <Address>134402844</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Osci\AutoSearcher.cpp</Filename>
+          <Filename>&lt;1&gt;.\src\Recorder\DisplayRecorder.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\S8_57\src/Osci/AutoSearcher.cpp\395</Expression>
-        </Bp>
-        <Bp>
-          <Number>1</Number>
-          <Type>0</Type>
-          <LineNumber>188</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134425192</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>&lt;1&gt;.\src\Multimeter\Multimeter.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\S8_57\src/Multimeter/Multimeter.cpp\188</Expression>
+          <Expression>\\S8_57\src/Recorder/DisplayRecorder.cpp\155</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -216,6 +200,11 @@
           <count>5</count>
           <WinNumber>1</WinNumber>
           <ItemText>fullPath</ItemText>
+        </Ww>
+        <Ww>
+          <count>6</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>time</ItemText>
         </Ww>
       </WatchWindow1>
       <MemoryWindow1>
@@ -2892,7 +2881,7 @@
 
   <Group>
     <GroupName>Multimeter</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -3316,7 +3305,7 @@
 
   <Group>
     <GroupName>Recorder</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

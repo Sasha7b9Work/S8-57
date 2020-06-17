@@ -150,11 +150,11 @@ static char *DeltaTime(char buffer[20])
 
 static char *TimeCursor(int numCur, char buffer[20])
 {
-    int numPoint = startPoint + posCursor[numCur];
+    PackedTime time = displayed->timeStart;
 
-    float time = (static_cast<float>(numPoint) * Recorder::ScaleX::TimeForPointMS()) / 1000.0F;
+    time.AddTime((startPoint + posCursor[numCur]) * displayed->timeForPointMS);
 
-    std::strcpy(buffer, Time(time).ToString(false).c_str());
+    std::strcpy(buffer, time.ToString().c_str());
 
     return buffer;
 }

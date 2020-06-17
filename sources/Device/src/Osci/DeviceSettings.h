@@ -14,9 +14,9 @@ struct PackedTime
     unsigned month    : 4;
     unsigned notUsed0 : 4;
     unsigned day      : 5;
-    unsigned notUsed1 : 27;
+    unsigned ms       : 27;
     PackedTime(uint h = 11, uint m = 11, uint s = 11, uint d = 11, uint mo = 11, uint y = 11) :
-        hours(h), minutes(m), seconds(s), year(y), month(mo), notUsed0(0), day(d), notUsed1(0) {};
+        hours(h), minutes(m), seconds(s), year(y), month(mo), notUsed0(0), day(d), ms(0) {};
     // »зменение значени€ пол€ на +/- 1
     void ChangeHours(int delta);
     void ChangeMinutes(int delta);
@@ -24,6 +24,21 @@ struct PackedTime
     void ChangeDay(int delta);
     void ChangeMonth(int delta);
     void ChangeYear(int delta);
+
+    // ¬озвращает структура PackedTime, врем€ в которой отстоит в будущее на timeMS миллисекунд
+    void AddTime(uint timeMS);
+
+    String ToString() const;
+
+private:
+
+    // ƒобавить к дате hours часов
+    void AddHours(uint hours);
+    void AddMinutes(uint minutes);
+    void AddSeconds(uint seconds);
+    void AddMilliseconds(uint ms);
+    void AddDays(uint days);
+    void AddMonths(uint months);
 };
 
 struct DataSettings

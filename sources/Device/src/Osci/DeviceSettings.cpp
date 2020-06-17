@@ -147,6 +147,151 @@ void PackedTime::ChangeYear(int delta)
 }
 
 
+void PackedTime::AddTime(uint timeMS)
+{
+    static const uint msInSecond = 1000;
+    static const uint msInMinute = msInSecond * 60;
+    static const uint msInHour = msInMinute * 60;
+
+    if (timeMS >= msInHour)
+    {
+        uint h = timeMS / msInHour;
+
+        AddHours(h);
+
+        timeMS -= h * msInHour;
+    }
+
+    if (timeMS >= msInMinute)
+    {
+        uint m = timeMS / msInMinute;
+
+        AddMinutes(m);
+
+        timeMS -= m * msInMinute;
+    }
+
+    if (timeMS >= msInSecond)
+    {
+        uint s = timeMS / msInSecond;
+
+        AddSeconds(s);
+
+        timeMS -= s * msInSecond;
+    }
+
+    AddMilliseconds(timeMS);
+}
+
+
+void PackedTime::AddHours(uint h)
+{
+    while (h != 0)
+    {
+        h--;
+
+        hours++;
+
+        if (hours == 24)
+        {
+            hours = 0;
+            AddDays(1);
+        }
+    }
+}
+
+
+void PackedTime::AddMinutes(uint m)
+{
+    while (m != 0)
+    {
+        m--;
+
+        minutes++;
+
+        if (minutes == 60)
+        {
+            minutes = 0;
+            AddHours(1);
+        }
+    }
+}
+
+
+void PackedTime::AddSeconds(uint s)
+{
+    while (s != 0)
+    {
+        s--;
+
+        seconds++;
+
+        if (seconds == 60)
+        {
+            seconds = 0;
+            AddMinutes(1);
+        }
+    }
+}
+
+
+void PackedTime::AddMilliseconds(uint m)
+{
+    while (m != 0)
+    {
+        m--;
+
+        ms++;
+
+        if (ms == 1000)
+        {
+            ms = 0;
+            AddSeconds(1);
+        }
+    }
+}
+
+
+void PackedTime::AddDays(uint d)
+{
+    while (d != 0)
+    {
+        d--;
+
+        day++;
+
+        if (day == 31)
+        {
+            day = 0;
+            AddMonths(1);
+        }
+    }
+}
+
+
+void PackedTime::AddMonths(uint m)
+{
+    while (m != 0)
+    {
+        m--;
+
+        month++;
+
+        if (month == 13)
+        {
+            month = 1;
+            year++;
+        }
+    }
+}
+
+
+String PackedTime::ToString() const
+{
+    return String("% 2d-% 2d-% 2d-% 3d", hours, minutes, seconds, ms);
+}
+
+
 void DataSettings::CopyDataFrom(const DataSettings *source)
 {
     int numBytes = Math::Min(BytesInChannel(), source->BytesInChannel());
