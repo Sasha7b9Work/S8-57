@@ -13,6 +13,7 @@ static void DisplayUpdate();
 
 // Нахоит сигнал на канале ch. Возвращает true, если сигнал найден и параметры сигнала в tBase, range
 static bool FindSignal(Chan::E ch, TBase::E *tBase, Range::E *range, ModeCouple::E *couple);
+static bool FullSearchSignal(Chan::E ch, Settings *old);
 
 // Отмасштабировать сигнал. Если onlyReduce - только сжать
 static void ScaleChannel(Chan::E ch, bool onlyReduce);
@@ -67,57 +68,49 @@ void Osci::RunAutoSearch()
 {
     Settings old = set;
 
-    TBase::E tBase = S_TIME_BASE;
-    Range::E rangeA = S_RANGE_A;
-    Range::E rangeB = S_RANGE_B;
-    ModeCouple::E coupleA = S_MODE_COUPLE_A;
-    ModeCouple::E coupleB = S_MODE_COUPLE_B;
-
-    if (FindSignal(ChanA, &tBase, &rangeA, &coupleA))
+    if (!FullSearchSignal(ChanA, &old))
     {
-        set = old;
-        S_TIME_BASE = tBase;
-        S_RANGE_A = rangeA;
-        S_MODE_COUPLE_A = coupleA;
-        TrigSource::Set(ChanA);
-        RShift::Set(ChanA, 0);
-        TrigLevel::Set(ChanA, 0);
-        TrigStartMode::Set(TrigStartMode::Wait);
+        if (!FullSearchSignal(ChanB, &old))
+        {
+            DISPLAY_SHOW_WARNING("Сигнал не обнаружен");
 
-        Osci::Init();
-
-        ScaleChannel(ChanA, false);
-        ScaleChannel(ChanB, true);
-
-        Osci::Init();
-    }
-    else if (FindSignal(ChanB, &tBase, &rangeB, &coupleB))
-    {
-        set = old;
-        S_TIME_BASE = tBase;
-        S_RANGE_B = rangeB;
-        S_MODE_COUPLE_B = coupleB;
-        TrigSource::Set(ChanB);
-        RShift::Set(ChanB, 0);
-        TrigLevel::Set(ChanB, 0);
-        TrigStartMode::Set(TrigStartMode::Wait);
-
-        Osci::Init();
-
-        ScaleChannel(ChanA, true);
-        ScaleChannel(ChanB, false);
-
-        Osci::Init();
-    }
-    else
-    {
-        DISPLAY_SHOW_WARNING("Сигнал не обнаружен");
-
-        set = old;
-        Osci::Init();
+            set = old;
+            Osci::Init();
+        }
     }
 
     FreqMeter::Init();
+}
+
+
+static bool FullSearchSignal(Chan::E ch, Settings *old)
+{
+    TBase::E tBase = TBase::Count;
+    Range::E range = Range::Count;
+    ModeCouple::E couple = ModeCouple::Count;
+
+    if (FindSignal(ch, &tBase, &range, &couple))
+    {
+        set = *old;
+        S_TIME_BASE = tBase;
+        S_RANGE(ch) = range;
+        S_MODE_COUPLE(ch) = couple;
+        TrigSource::Set(ch);
+        RShift::Set(ch, 0);
+        TrigLevel::Set(ch, 0);
+        TrigStartMode::Set(TrigStartMode::Wait);
+
+        Osci::Init();
+
+        ScaleChannel(ChanA, ch == Chan::B);
+        ScaleChannel(ChanB, ch == Chan::A);
+
+        Osci::Init();
+
+        return true;
+    }
+
+    return false;
 }
 
 
