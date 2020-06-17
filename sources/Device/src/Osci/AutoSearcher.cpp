@@ -12,13 +12,13 @@
 static void DisplayUpdate();
 
 // Нахоит сигнал на канале ch. Возвращает true, если сигнал найден и параметры сигнала в tBase, range
-static bool FindSignal(Chan::E ch, TBase::E *tBase, Range::E *range);
+static bool FindSignal(Chan::E ch, TBase::E *tBase, Range::E *range, ModeCouple::E *couple);
 
 // Отмасштабировать сигнал. Если onlyReduce - только сжать
 static void ScaleChannel(Chan::E ch, bool onlyReduce);
 
 // Находит частоту на канале ch
-static bool FindFrequency(Chan::E ch, float *outFreq, Range::E *outRange);
+static bool FindFrequency(Chan::E ch, float *outFreq, Range::E *outRange, ModeCouple::E *couple);
 static bool FindFrequencyForRanges(Chan::E ch, uint timeWaitMS, float *outFreq, Range::E *outRange);
 static bool FindFrequencyForRange(Chan::E ch, Range::E range, uint timeWaitMS, float *outFreq);
 
@@ -70,33 +70,39 @@ void Osci::RunAutoSearch()
     TBase::E tBase = S_TIME_BASE;
     Range::E rangeA = S_RANGE_A;
     Range::E rangeB = S_RANGE_B;
+    ModeCouple::E coupleA = S_MODE_COUPLE_A;
+    ModeCouple::E coupleB = S_MODE_COUPLE_B;
 
-    if (FindSignal(ChanA, &tBase, &rangeA))
+    if (FindSignal(ChanA, &tBase, &rangeA, &coupleA))
     {
         set = old;
         S_TIME_BASE = tBase;
         S_RANGE_A = rangeA;
+        S_MODE_COUPLE_A = coupleA;
         TrigSource::Set(ChanA);
         RShift::Set(ChanA, 0);
         TrigLevel::Set(ChanA, 0);
         TrigStartMode::Set(TrigStartMode::Wait);
-        ModeCouple::Set(ChanA, ModeCouple::AC);
+
+        Osci::Init();
 
         ScaleChannel(ChanA, false);
         ScaleChannel(ChanB, true);
 
         Osci::Init();
     }
-    else if (FindSignal(ChanB, &tBase, &rangeB))
+    else if (FindSignal(ChanB, &tBase, &rangeB, &coupleB))
     {
         set = old;
         S_TIME_BASE = tBase;
         S_RANGE_B = rangeB;
+        S_MODE_COUPLE_B = coupleB;
         TrigSource::Set(ChanB);
         RShift::Set(ChanB, 0);
         TrigLevel::Set(ChanB, 0);
         TrigStartMode::Set(TrigStartMode::Wait);
-        ModeCouple::Set(ChanB, ModeCouple::AC);
+
+        Osci::Init();
 
         ScaleChannel(ChanA, true);
         ScaleChannel(ChanB, false);
@@ -115,11 +121,11 @@ void Osci::RunAutoSearch()
 }
 
 
-static bool FindSignal(Chan::E ch, TBase::E *tBase, Range::E *outRange)
+static bool FindSignal(Chan::E ch, TBase::E *tBase, Range::E *outRange, ModeCouple::E *couple)
 {
     float frequency = 0.0F;
 
-    if (FindFrequency(ch, &frequency, outRange))
+    if (FindFrequency(ch, &frequency, outRange, couple))
     {
         *tBase = CalculateTBase(frequency);
 
@@ -130,7 +136,7 @@ static bool FindSignal(Chan::E ch, TBase::E *tBase, Range::E *outRange)
 }
 
 
-static bool FindFrequency(Chan::E ch, float *outFreq, Range::E *outRange)
+static bool FindFrequency(Chan::E ch, float *outFreq, Range::E *outRange, ModeCouple::E *couple)
 {
     Osci::Stop();
     ModeCouple::Set(ch, ModeCouple::AC);
@@ -145,11 +151,15 @@ static bool FindFrequency(Chan::E ch, float *outFreq, Range::E *outRange)
 
     if (FindFrequencyForRanges(ch, 150, outFreq, outRange))
     {
+        *couple = ModeCouple::AC;
         return true;
     }
 
+    ModeCouple::Set(ch, ModeCouple::DC);
+
     if (FindFrequencyForRanges(ch, 1200, outFreq, outRange))
     {
+        *couple = ModeCouple::DC;
         return true;
     }
 
