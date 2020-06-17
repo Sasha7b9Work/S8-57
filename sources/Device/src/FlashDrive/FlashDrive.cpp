@@ -596,7 +596,7 @@ static void CreateFileName(char name[256])
 {
     for (int i = 0; ; i++)
     {
-        std::snprintf(name, 255, "screen%03d.bmp", i);
+        std::snprintf(name, 255, "S857_%03d.bmp", i);
 
         if (!FDrive::ExistFile("\\", name))
         {
