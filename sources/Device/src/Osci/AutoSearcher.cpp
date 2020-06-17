@@ -259,6 +259,8 @@ static bool WaitSync(uint timeWaitMS)
         }
 
         FPGA::Flag::Read();
+
+        DisplayUpdate();
     }
 
     return true;
