@@ -13,19 +13,19 @@ static const uint SIZE_BUFFER = 106 * 1024;
 static uint8 buffer[SIZE_BUFFER];
 
 static uint16 *const memAveA = reinterpret_cast<uint16 *>(buffer);                              // 0            = 0k
-static uint16 *const memAveB = reinterpret_cast<uint16 *>(buffer + 2 * FPGA::MAX_NUM_POINTS);   // 2 * 8k       = 16k
+static uint16 *const memAveB = reinterpret_cast<uint16 *>(buffer + 4 * FPGA::MAX_NUM_POINTS);   // 0   + 4 * 8k = 32k
 
-static uint8 *const memP2PA = reinterpret_cast<uint8 *>(memAveB) + 2 * FPGA::MAX_NUM_POINTS;    // 4 * 8k       = 32k
-static uint8 *const memP2PB = memP2PA + 2 * FPGA::MAX_NUM_POINTS;                               // 6 * 8k       = 48k
+static uint8 *const memP2PA = reinterpret_cast<uint8 *>(memAveB) + 4 * FPGA::MAX_NUM_POINTS;    // 32k + 4 * 8k = 64k
+static uint8 *const memP2PB = memP2PA + 2 * FPGA::MAX_NUM_POINTS;                               // 64k + 2 * 8k = 80k
 
-static uint8 *const memRandA = memP2PB + 2 * FPGA::MAX_NUM_POINTS;                              // 8 * 8k       = 64k
-static uint8 *const memRandB = memRandA + FPGA::MAX_NUM_POINTS;                                 // 9 * 8k + 8k  = 72k
+static uint8 *const memRandA = memP2PA;
+static uint8 *const memRandB = memP2PB;
 
 static uint16 *const ave[2] = { memAveA, memAveB };
 static uint8 *const rand[2] = { memRandA, memRandB };
 
 
-uint16 *IntRAM::Averager16k(Chan::E ch)
+uint16 *IntRAM::Averager32k(Chan::E ch)
 {
     return ave[ch];
 }
