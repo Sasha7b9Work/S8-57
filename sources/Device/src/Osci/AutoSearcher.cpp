@@ -36,7 +36,7 @@ namespace AutoFPGA
     void ReadData(Chan::E ch, uint8 *data);
 
     // Прочитать данные и проверить, что они не выходят за пределы минимального и максимального. Если false - выход за экран
-    bool ReadAndVerifyMinMax(Chan::E ch);
+    float ReadAndCalculateMinMax(Chan::E ch);
 }
 
 
@@ -362,14 +362,23 @@ void FrequencyMeter::State::Restore()
 
 static void ScaleChannel(Chan::E ch)
 {
-    while (!AutoFPGA::ReadAndVerifyMinMax(ch))        // Пока не впишемся в экран - уменьшаем размах по вертикали
+    float delta = AutoFPGA::ReadAndCalculateMinMax(ch);
+
+    while (delta > 0.8F)
     {
         Range::Change(ch, 1);
+        delta = AutoFPGA::ReadAndCalculateMinMax(ch);
+    }
+
+    while (delta < 0.4F)
+    {
+        Range::Change(ch, -1);
+        delta = AutoFPGA::ReadAndCalculateMinMax(ch);
     }
 }
 
 
-bool AutoFPGA::ReadAndVerifyMinMax(Chan::E ch)
+float AutoFPGA::ReadAndCalculateMinMax(Chan::E ch)
 {
     Buffer buffer(AutoFPGA::SIZE);
 
@@ -385,9 +394,7 @@ bool AutoFPGA::ReadAndVerifyMinMax(Chan::E ch)
     uint8 max = Math::MaxFromArray(buffer.data, 0, 300);
     uint8 min = Math::MinFromArray(buffer.data, 0, 300);
 
-    LOG_WRITE("%s min = %d, max = %d", Chan::Name(ch), min, max);
-
-    return (max < VALUE::MAX) || (min > VALUE::MIN);
+    return static_cast<float>(max - min) / static_cast<float>(VALUE::MAX - VALUE::MIN);
 }
 
 
