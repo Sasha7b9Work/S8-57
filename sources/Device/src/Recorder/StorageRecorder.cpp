@@ -16,7 +16,7 @@ int BufferMissingPoints::first = 0;
 
 
 // Последняя запись. Если идёт запись, то именно в неё.
-static Record *last = nullptr;
+static Record *lastRecord = nullptr;
 
 static PointFloat empty = { 1.0F, -1.0F };
 
@@ -321,7 +321,7 @@ bool Record::ContainsSensor() const
 
 Record *StorageRecorder::LastRecord()
 {
-    return last;
+    return lastRecord;
 }
 
 
@@ -329,23 +329,23 @@ bool StorageRecorder::CreateNewRecord()
 {
     HAL_BUS_CONFIGURE_TO_FSMC();
 
-    if(last)
+    if(lastRecord)
     {
-        Record *next = reinterpret_cast<Record *>(last->End());
+        Record *next = reinterpret_cast<Record *>(lastRecord ->End());
 
         if(!next->IsValid())
         {
             return false;
         }
 
-        last = next;
+        lastRecord = next;
     }
     else
     {
-        last = reinterpret_cast<Record *>(ExtRAM::Begin());
+        lastRecord = reinterpret_cast<Record *>(ExtRAM::Begin());
     }
 
-    last->Init();
+    lastRecord->Init();
 
     return true;
 }
@@ -367,7 +367,7 @@ bool StorageRecorder::CreateListeningRecord()
 void StorageRecorder::Init()
 {
     ExtRAM::Fill();
-    last = nullptr;
+    lastRecord = nullptr;
 }
 
 
