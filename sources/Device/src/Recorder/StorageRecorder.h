@@ -7,12 +7,12 @@ struct Record;
 
 struct Point16
 {
-    uint8 min;
     uint8 max;
+    uint8 min;
 
-    Point16() : min(255), max(0) { }
+    Point16() : max(0), min(255) {}
 
-    Point16(BitSet16 p) : min(p.byte0), max(p.byte1) { }
+    Point16(BitSet16 p) : max(p.byte0), min(p.byte1) { }
 
     bool IsEmpty() const { return (min == 255) && (max == 0); };
 

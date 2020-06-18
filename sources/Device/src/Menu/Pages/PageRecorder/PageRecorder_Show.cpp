@@ -61,8 +61,8 @@ DEF_CHOICE_2( cCursor,
 DEF_CHOICE_2(cInfo,
     "Информация",
     "",
-    "Скрыть",
     "Показывать",
+    "Скрыть",
     set.rec._showInfo, &PageRecorder::Show::self, Choice::Active, Choice::Changed, Choice::AfterDraw
 )
 

@@ -51,16 +51,19 @@ static void DrawCursors();
 static void DrawParametersCursors();
 
 
-static char *TimeCursor(int numCur, char buffer[20]);
+static char *TimeCursor(int numCur, char buffer[30]);
 
 
-static char *VoltageCursor(Chan::E, int, char[20]);
+static char *VoltageCursor(Chan::E, int, char[30]);
+
+// ƒописывает в buffer символьное представление value
+static void VoltagePoint(Chan::E ch, uint8 value, char buffer[30]);
 
 
-static char *VoltageSensor(int numCur, char[20]);
+static char *VoltageSensor(int numCur, char[30]);
 
 
-static char *DeltaTime(char buffer[20]);
+static char *DeltaTime(char buffer[30]);
 
 // ¬озвращает указатель на переменную с позицией текущего курсора (0, если курсор дл€ перемещени€ не выбран)
 static int *CurrentPosCursor();
@@ -141,7 +144,7 @@ static int Y(int value)
 }
 
 
-static char *DeltaTime(char buffer[20])
+static char *DeltaTime(char buffer[30])
 {
     float delta = std::fabsf(static_cast<float>(posCursor[0] - posCursor[1])) * Recorder::ScaleX::TimeForPointMS() / 1000.0F;
 
@@ -151,46 +154,19 @@ static char *DeltaTime(char buffer[20])
 }
 
 
-static char *TimeCursor(int numCur, char buffer[20])
-{
-    HAL_BUS_CONFIGURE_TO_FSMC();
-
-    PackedTime time = displayed->timeStart;
-
-    time.AddTime((startPoint + posCursor[numCur]) * displayed->timeForPointMS);
-
-    std::strcpy(buffer, time.ToString().c_str());
-
-    return buffer;
-}
-
-
-static char *VoltageCursor(Chan::E ch, int numCur, char buffer[20])
+static char *TimeCursor(int numCur, char buffer[30])
 {
     HAL_BUS_CONFIGURE_TO_FSMC();
 
     int numPoint = startPoint + posCursor[numCur];
 
-    Point16 *point = (ch == Chan::A) ? displayed->ValueA(numPoint) : displayed->ValueB(numPoint);
-
-    if (point)
+    if (numPoint < displayed->NumPoints())
     {
-        uint8 value = static_cast<uint8>((point->min + point->max) / 2);
+        PackedTime time = displayed->timeStart;
 
-        if (value > VALUE::MAX)
-        {
-            std::strcpy(buffer, "\x9d");
-        }
-        else if (value < VALUE::MIN)
-        {
-            std::strcpy(buffer, "\xb9");
-        }
-        else
-        {
-            float voltage = VALUE::ToVoltage(value, S_RANGE(ch), 0);
+        time.AddTime((startPoint + posCursor[numCur]) * displayed->timeForPointMS);
 
-            std::strcpy(buffer, Voltage(voltage).ToString(false).c_str());
-        }
+        std::strcpy(buffer, time.ToString().c_str());
     }
     else
     {
@@ -201,7 +177,50 @@ static char *VoltageCursor(Chan::E ch, int numCur, char buffer[20])
 }
 
 
-static char *VoltageSensor(int, char[20])
+static void VoltagePoint(Chan::E ch, uint8 value, char buffer[30])
+{
+    if (value > VALUE::MAX)
+    {
+        std::strcat(buffer, "\x9d");
+    }
+    else if (value < VALUE::MIN)
+    {
+        std::strcat(buffer, "\xb9");
+    }
+    else
+    {
+        float voltage = VALUE::ToVoltage(value, S_RANGE(ch), 0);
+
+        std::strcat(buffer, Voltage(voltage).ToString(false).c_str());
+    }
+}
+
+
+static char *VoltageCursor(Chan::E ch, int numCur, char buffer[30])
+{
+    HAL_BUS_CONFIGURE_TO_FSMC();
+
+    int numPoint = startPoint + posCursor[numCur];
+
+    Point16 *point = (ch == Chan::A) ? displayed->ValueA(numPoint) : displayed->ValueB(numPoint);
+
+    if (numPoint < displayed->NumPoints())
+    {
+        buffer[0] = '\0';
+        VoltagePoint(ch, point->min, buffer);
+        std::strcat(buffer, " - ");
+        VoltagePoint(ch, point->max, buffer);
+    }
+    else
+    {
+        std::strcpy(buffer, "...");
+    }
+
+    return buffer;
+}
+
+
+static char *VoltageSensor(int, char[30])
 {
     return "";
 }
@@ -222,7 +241,7 @@ static void DrawParametersCursors()
     bool enB = displayed->ContainsChannelB();
     bool enSensor = displayed->ContainsSensor();
 
-    int width = 67;
+    int width = 100;
     int height = 29;
     int x = 319 - width;
     int y = 11;
@@ -237,7 +256,7 @@ static void DrawParametersCursors()
 
     Region(width + 2, height).DrawBounded(x - 2, 10, Color::BACK, Color::FILL);
 
-    char buffer[20];
+    char buffer[30];
     
     Text(String("1:%s", TimeCursor(0, buffer))).Draw(x, y, Color::FILL);
 

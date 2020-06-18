@@ -10,7 +10,7 @@
 #define S_REC_CURSOR            (set.rec._cursor)
 #define S_REC_CURSOR_IS_1       (S_REC_CURSOR == DisplayRecorder::Cursor::_1)
 #define S_REC_CURSOR_IS_2       (S_REC_CURSOR == DisplayRecorder::Cursor::_2)
-#define S_REC_INFO_IS_SHOWN     (set.rec._showInfo == 1)
+#define S_REC_INFO_IS_SHOWN     (set.rec._showInfo == 0)
 
 
 struct SettingsRecorder
