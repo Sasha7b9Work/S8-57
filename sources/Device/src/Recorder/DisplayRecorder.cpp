@@ -108,18 +108,16 @@ void DisplayRecorder::Update()
 
 static void DrawSettings(int x, int y)
 {
-    if (Menu::OpenedItem() == PageRecorder::Show::self)
+    if (Menu::OpenedItem() == PageRecorder::self)
     {
-        return;
+        Region(30, 30).DrawBounded(x, y, Color::BACK, Color::FILL);
+
+        Text(Recorder::ScaleX::ToString()).Draw(x + 2, y + 2);
+
+        Text(Range::ToString(ChanA, S_DIVIDER_A)).Draw(x + 2, y + 11, Color::CHAN[ChanA]);
+
+        Text(Range::ToString(ChanB, S_DIVIDER_B)).Draw(x + 2, y + 20, Color::CHAN[ChanB]);
     }
-
-    Region(30, 30).DrawBounded(x, y, Color::BACK, Color::FILL);
-
-    Text(Recorder::ScaleX::ToString()).Draw(x + 2, y + 2);
-
-    Text(Range::ToString(ChanA, S_DIVIDER_A)).Draw(x + 2, y + 11, Color::CHAN[ChanA]);
-
-    Text(Range::ToString(ChanB, S_DIVIDER_B)).Draw(x + 2, y + 20, Color::CHAN[ChanB]);
 }
 
 
@@ -191,7 +189,7 @@ static void VoltagePoint(Chan::E ch, uint8 value, char buffer[30])
     {
         float voltage = VALUE::ToVoltage(value, S_RANGE(ch), 0);
 
-        std::strcat(buffer, Voltage(voltage).ToString(false).c_str());
+        std::strcat(buffer, Voltage(voltage).ToString(true).c_str());
     }
 }
 
@@ -208,7 +206,7 @@ static char *VoltageCursor(Chan::E ch, int numCur, char buffer[30])
     {
         buffer[0] = '\0';
         VoltagePoint(ch, point->min, buffer);
-        std::strcat(buffer, " - ");
+        std::strcat(buffer, " : ");
         VoltagePoint(ch, point->max, buffer);
     }
     else
@@ -283,20 +281,18 @@ static void DrawParametersCursors()
 
 static void DrawCursors()
 {
-    if (Menu::OpenedItem() != PageRecorder::Show::self)
+    if (Menu::OpenedItem() == PageRecorder::Show::self || Menu::OpenedItem()->Keeper() == PageRecorder::Show::self)
     {
-        return;
+        DashedVLine cursor(239, 3, 1, 0);
+
+        Color::FILL.SetAsCurrent();
+
+        cursor.Draw(posCursor[0], 0);
+
+        cursor.Draw(posCursor[1], 0);
+
+        DrawParametersCursors();
     }
-
-    DashedVLine cursor(239, 3, 1, 0);
-
-    Color::FILL.SetAsCurrent();
-
-    cursor.Draw(posCursor[0], 0);
-    
-    cursor.Draw(posCursor[1], 0);
-
-    DrawParametersCursors();
 }
 
 
@@ -374,7 +370,7 @@ static void DrawMemoryWindow()
 
     HAL_BUS_CONFIGURE_TO_FSMC();
 
-    if (Menu::OpenedItem() != PageRecorder::Show::self || displayed->NumPoints() == 0)
+    if ((Menu::OpenedItem() != PageRecorder::Show::self && Menu::OpenedItem()->Keeper() != PageRecorder::Show::self) || displayed->NumPoints() == 0)
     {
         return;
     }
