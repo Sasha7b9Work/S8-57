@@ -57,6 +57,9 @@ static char *TimeCursor(int numCur, char buffer[20]);
 static char *VoltageCursor(Chan::E, int, char[20]);
 
 
+static char *VoltageSensor(int numCur, char[20]);
+
+
 static char *DeltaTime(char buffer[20]);
 
 // Возвращает указатель на переменную с позицией текущего курсора (0, если курсор для перемещения не выбран)
@@ -162,60 +165,74 @@ static char *TimeCursor(int numCur, char buffer[20])
 }
 
 
-static char *VoltageCursor(Chan::E, int, char [20])
+static char *VoltageCursor(Chan::E ch, int numCur, char buffer[20])
 {
-//    uint numPoint = static_cast<uint>(startPoint + posCursor[numCur]);
-//
-//    Record *record = StorageRecorder::LastRecord();
-//
-//    Point16 *point = record->GetPoint(numPoint, record->NumPoints());
-//
-//    uint8 value = static_cast<uint8>((point.Min(ch) + point.Max(ch)) / 2);
-//
-//    float voltage = VALUE::ToVoltage(value, Range(ch), 0);
-//
-//    std::strcpy(buffer, Voltage(voltage).ToString(false).c_str());
-//
-//    return buffer;
+    HAL_BUS_CONFIGURE_TO_FSMC();
 
-    return nullptr;
+    int numPoint = startPoint + posCursor[numCur];
+
+    Point16 *point = (ch == Chan::A) ? displayed->ValueA(numPoint) : displayed->ValueB(numPoint);
+
+    uint8 value = static_cast<uint8>((point->min + point->max) / 2);
+
+    float voltage = VALUE::ToVoltage(value, S_RANGE(ch), 0);
+
+    std::strcpy(buffer, Voltage(voltage).ToString(false).c_str());
+
+    return buffer;
+}
+
+
+static char *VoltageSensor(int, char[20])
+{
+    return "";
 }
 
 
 static void DrawParametersCursors()
 {
-    int width = 49;
+#define DRAW_IF_ENABLED(en, text) if(en) { text; y +=d; }
+
+    HAL_BUS_CONFIGURE_TO_FSMC();
+
+    bool enA = displayed->ContainsChannelA();
+    bool enB = displayed->ContainsChannelB();
+    bool enSensor = displayed->ContainsSensor();
+
+    int width = 74;
 
     int x = 319 - width;
-    int y = 10;
-
+    int y = 11;
+    int d = 8;
     int x1 = x + 9;
 
-    int y1 = y + 1;
-    int y2 = y1 + 8;
-    int y3 = y2 + 8;
-    int y4 = y3 + 8;
-    int y5 = y4 + 8;
-    int y6 = y5 + 8;
-    int y7 = y6 + 8;
-
     char buffer[20];
+    
+    Text(String("1:%s", TimeCursor(0, buffer))).Draw(x, y, Color::FILL);
 
-    Region(width, 58).DrawBounded(x, y, Color::BACK, Color::FILL);
+    y += d;
 
-    Text(String("1:%s", TimeCursor(0, buffer))).Draw(x + 2, y1, Color::FILL);
+    DRAW_IF_ENABLED(enA, Text(VoltageCursor(ChanA, 0, buffer)).Draw(x1, y, Color::CHAN[ChanA]));
 
-    Text(VoltageCursor(ChanA, 0, buffer)).Draw(x1, y2, Color::CHAN[ChanA]);
+    DRAW_IF_ENABLED(enB, Text(VoltageCursor(ChanB, 0, buffer)).Draw(x1, y, Color::CHAN[ChanB]));
 
-    Text(VoltageCursor(ChanB, 0, buffer)).Draw(x1, y3, Color::CHAN[ChanB]);
+    DRAW_IF_ENABLED(enSensor, Text(VoltageSensor(0, buffer)).Draw(x1, y, Color::FILL));
 
-    Text(String("2:%s", TimeCursor(1, buffer))).Draw(x + 2, y4, Color::FILL);
+    Text(String("2:%s", TimeCursor(1, buffer))).Draw(x, y, Color::FILL);
 
-    Text(VoltageCursor(ChanA, 1, buffer)).Draw(x1, y5, Color::CHAN[ChanA]);
+    y += d;
 
-    Text(VoltageCursor(ChanB, 1, buffer)).Draw(x1, y6, Color::CHAN[ChanB]);
+    DRAW_IF_ENABLED(enA, Text(VoltageCursor(ChanA, 1, buffer)).Draw(x1, y, Color::CHAN[ChanA]));
 
-    Text(String("dT %s", DeltaTime(buffer))).Draw(x + 2, y7, Color::FILL);
+    DRAW_IF_ENABLED(enB, Text(VoltageCursor(ChanB, 1, buffer)).Draw(x1, y, Color::CHAN[ChanB]));
+
+    DRAW_IF_ENABLED(enSensor, Text(VoltageSensor(1, buffer)).Draw(x1, y, Color::FILL));
+
+    Text(String("dT %s", DeltaTime(buffer))).Draw(x, y, Color::FILL);
+
+    VLine(y + 8 - 10).Draw(x - 2, 10);
+
+    HLine(width + 2).Draw(x - 2, y + 8 + 10, Color::FILL);
 }
 
 static void DrawCursors()
@@ -468,3 +485,5 @@ int DisplayRecorder::SpeedWindow::NumPoints() const
 
     return nums[value];
 }
+
+
