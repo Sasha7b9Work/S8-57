@@ -75,14 +75,14 @@ DEF_CHOICE_3( cFiltr, // -V206                                                  
     S_TRIG_INPUT, &PageTrig::self, Item::Active, OnChanged_Filtr, Choice::AfterDraw
 )
 
-DEF_PAGE_6( pTrig,                                                                                                                                                            //--- СИНХР ---
+DEF_PAGE_5( pTrig,                                                                                                                                                            //--- СИНХР ---
     "СИНХР",
     "Содержит настройки синхронизации.",
     &cMode,
     &cSource,
     &cPolarity,
     &cFiltr,
-    PageTrig::HoldOff::self,
+//    PageTrig::HoldOff::self,
     PageTrig::Find::self,
     PageName::Trig, nullptr, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
