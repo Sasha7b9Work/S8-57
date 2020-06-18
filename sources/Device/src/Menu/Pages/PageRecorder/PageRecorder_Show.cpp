@@ -49,13 +49,21 @@ DEF_CHOICE_3( cSpeed,
 )
 
 
-DEF_CHOICE_3( cCursor,
+DEF_CHOICE_2( cCursor,
     "Курсор",
     "Выбор курсора",
-    "Не выбран",
     "1",
     "2",
     S_REC_CURSOR, &PageRecorder::Show::self, Choice::Active, Choice::Changed, Choice::AfterDraw
+)
+
+
+DEF_CHOICE_2(cInfo,
+    "Информация",
+    "",
+    "Скрыть",
+    "Показывать",
+    set.rec._showInfo, &PageRecorder::Show::self, Choice::Active, Choice::Changed, Choice::AfterDraw
 )
 
 
@@ -66,11 +74,6 @@ static bool IsActive_PageShow()
 
 static bool HandlerKey_PageShow(const KeyEvent &event)
 {
-    if (S_REC_CURSOR_IS_NONE)
-    {
-        return false;
-    }
-
     if (event.IsPress() || event.IsRepeat())
     {
         if (event.IsArrowLeft())
@@ -98,15 +101,14 @@ static void OnOpenClose_PageShow(bool open)
 }
 
 
-DEF_PAGE_4( pShow,                                                                                                                                 //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР ---
+DEF_PAGE_5( pShow,                                                                                                                                 //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР ---
     "ПРОСМОТР",
     "Просмотр записанных данных",
-//    PageRecorder::Show::Choice::self,
     &bScreenLeft,
     &bScreenRight,
     &cSpeed,
     &cCursor,
-    //PageRecorder::Show::Cursors::self,
+    &cInfo,
     PageName::Recorder_Show, &PageRecorder::self, IsActive_PageShow, Page::NormalTitle, OnOpenClose_PageShow, Page::BeforeDraw, HandlerKey_PageShow
 )
 

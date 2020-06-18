@@ -196,7 +196,7 @@ const Settings Settings::defaultSettings =
         Recorder::Axis::X,              // axisMove
         Recorder::Axis::X,              // axisZoom
         Recorder::ScaleX::_100ms,       // scaleX
-        DisplayRecorder::Cursor::None   // currentCursor
+        DisplayRecorder::Cursor::_1     // currentCursor
     },
 
     // Ìåíþ ÑÅÐÂÈÑ

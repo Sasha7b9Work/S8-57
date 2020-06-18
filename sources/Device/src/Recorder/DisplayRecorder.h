@@ -33,7 +33,6 @@ public:
     {
         enum E
         {
-            None,
             _1,
             _2
         };

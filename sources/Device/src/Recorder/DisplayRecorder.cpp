@@ -191,6 +191,11 @@ static char *VoltageSensor(int, char[20])
 
 static void DrawParametersCursors()
 {
+    if (!S_REC_INFO_IS_SHOWN)
+    {
+        return;
+    }
+
 #define DRAW_IF_ENABLED(en, text) if(en) { text; y +=d; }
 
     HAL_BUS_CONFIGURE_TO_FSMC();
