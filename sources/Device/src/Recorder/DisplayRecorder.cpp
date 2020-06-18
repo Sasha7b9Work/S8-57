@@ -200,11 +200,19 @@ static void DrawParametersCursors()
     bool enSensor = displayed->ContainsSensor();
 
     int width = 74;
-
+    int height = 29;
     int x = 319 - width;
     int y = 11;
-    int d = 8;
+    int d = 9;
     int x1 = x + 9;
+
+    int dHeight = 2 * 9;
+
+    if (enA)      { height += dHeight; }
+    if (enB)      { height += dHeight; }
+    if (enSensor) { height += dHeight; }
+
+    Region(width + 2, height).DrawBounded(x - 2, 10, Color::BACK, Color::FILL);
 
     char buffer[20];
     
@@ -229,10 +237,6 @@ static void DrawParametersCursors()
     DRAW_IF_ENABLED(enSensor, Text(VoltageSensor(1, buffer)).Draw(x1, y, Color::FILL));
 
     Text(String("dT %s", DeltaTime(buffer))).Draw(x, y, Color::FILL);
-
-    VLine(y + 8 - 10).Draw(x - 2, 10);
-
-    HLine(width + 2).Draw(x - 2, y + 8 + 10, Color::FILL);
 }
 
 static void DrawCursors()
