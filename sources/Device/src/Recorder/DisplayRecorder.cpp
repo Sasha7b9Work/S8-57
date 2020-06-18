@@ -150,6 +150,8 @@ static char *DeltaTime(char buffer[20])
 
 static char *TimeCursor(int numCur, char buffer[20])
 {
+    HAL_BUS_CONFIGURE_TO_FSMC();
+
     PackedTime time = displayed->timeStart;
 
     time.AddTime((startPoint + posCursor[numCur]) * displayed->timeForPointMS);
