@@ -173,11 +173,29 @@ static char *VoltageCursor(Chan::E ch, int numCur, char buffer[20])
 
     Point16 *point = (ch == Chan::A) ? displayed->ValueA(numPoint) : displayed->ValueB(numPoint);
 
-    uint8 value = static_cast<uint8>((point->min + point->max) / 2);
+    if (point)
+    {
+        uint8 value = static_cast<uint8>((point->min + point->max) / 2);
 
-    float voltage = VALUE::ToVoltage(value, S_RANGE(ch), 0);
+        if (value > VALUE::MAX)
+        {
+            std::strcpy(buffer, "\x9d");
+        }
+        else if (value < VALUE::MIN)
+        {
+            std::strcpy(buffer, "\xb9");
+        }
+        else
+        {
+            float voltage = VALUE::ToVoltage(value, S_RANGE(ch), 0);
 
-    std::strcpy(buffer, Voltage(voltage).ToString(false).c_str());
+            std::strcpy(buffer, Voltage(voltage).ToString(false).c_str());
+        }
+    }
+    else
+    {
+        std::strcpy(buffer, "...");
+    }
 
     return buffer;
 }
@@ -204,7 +222,7 @@ static void DrawParametersCursors()
     bool enB = displayed->ContainsChannelB();
     bool enSensor = displayed->ContainsSensor();
 
-    int width = 74;
+    int width = 67;
     int height = 29;
     int x = 319 - width;
     int y = 11;

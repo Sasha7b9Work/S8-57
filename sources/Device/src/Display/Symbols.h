@@ -33,6 +33,8 @@ struct Symbol8
         GOVERNOR_SHIFT_0    = '\xaa',  // Символ регулятора
         GOVERNOR_SHIFT_1    = '\xac',  // Символ регулятора
         PLAY                = '\xae',  // Символ работы справа вверху экрана
+        ARROW_UP            = '\xb9',
+        ARROW_DOWN          = '\x9d'
     };
 };
 

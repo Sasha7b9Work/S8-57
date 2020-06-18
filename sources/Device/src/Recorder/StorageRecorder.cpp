@@ -226,6 +226,8 @@ uint8 *Record::BeginData()
 uint8 *Record::AddressPoints(int number)
 {
     return BeginData() + bytesOnPoint * number;
+
+    //return (number < NumPoints()) ? (BeginData() + bytesOnPoint * number) : nullptr;
 }
 
 

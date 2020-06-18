@@ -288,7 +288,7 @@ void PackedTime::AddMonths(uint m)
 
 String PackedTime::ToString() const
 {
-    return String("% 2d:% 2d:% 2d:% 3d", hours, minutes, seconds, ms);
+    return String("%02d:%02d:%02d:%03d", hours, minutes, seconds, ms);
 }
 
 
