@@ -54,8 +54,6 @@ void Reader::ReadDataFromRAM()
 
         ds = *DS;
         DS = &ds;
-
-        FindTrigLevelIfNeed();
     }
 }
 
@@ -80,10 +78,10 @@ void Reader::ReadDataFromROM()
 }
 
 
-void Reader::FindTrigLevelIfNeed()
-{
-    if (S_TRIG_MODE_FIND_IS_AUTO)
-    {
-        TrigLevel::Find();
-    }
-}
+//void Reader::FindTrigLevelIfNeed()
+//{
+//    if (S_TRIG_MODE_FIND_IS_AUTO)
+//    {
+//        TrigLevel::Find();
+//    }
+//}

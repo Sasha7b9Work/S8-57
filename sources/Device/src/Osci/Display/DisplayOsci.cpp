@@ -141,10 +141,10 @@ void DisplayOsci::DrawingValueParameter::Enable(DrawingValueParameter::E v)
 
     if (v == DrawingValueParameter::TrigLevel)
     {
-        if (S_TRIG_MODE_FIND_IS_AUTO)
-        {
-            return;
-        }
+//        if (S_TRIG_MODE_FIND_IS_AUTO)
+//        {
+//            return;
+//        }
     }
     else if(!CursorsMeasurements::NecessaryDraw())
     {

@@ -73,8 +73,8 @@ struct TrigStartMode
 #define S_TRIG_LEVEL(channel)   (set.trig._level[channel])
 #define S_TRIG_LEVEL_SOURCE     S_TRIG_LEVEL(S_TRIG_SOURCE)
 
-#define S_TRIG_HOLDOFF_VALUE    (set.trig._holdOff)
-#define S_TRIG_HOLDOFF_ENABLED  (set.trig._holdOffEnabled)
+//#define S_TRIG_HOLDOFF_VALUE    (set.trig._holdOff)
+//#define S_TRIG_HOLDOFF_ENABLED  (set.trig._holdOffEnabled)
 
 
 struct SettingsTrig
@@ -84,10 +84,10 @@ struct SettingsTrig
     TrigPolarity::E  _polarity;
     int16            _level[Chan::Count];
     TrigStartMode::E _startMode;         // Режим запуска.
-    TrigModeFind::E  _modeFind;          // Поиск синхронизации - вручную или автоматически.
-                                        // \todo разрядности trig_holdOff недостаточно
-    int16            _holdOff;           // Удержание синхронизации
-    bool             _holdOffEnabled;    // Включение удержания синхронизации
+    TrigModeFind::E  _notUsed2;          // Поиск синхронизации - вручную или автоматически.
+                                         // \todo разрядности trig_holdOff недостаточно
+    int16            _hotUsed0;          // Удержание синхронизации
+    bool             _notUsed1;          // Включение удержания синхронизации
 };
 
 

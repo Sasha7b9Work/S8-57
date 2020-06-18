@@ -48,7 +48,6 @@ void Recorder::Init()
     TrigInput().Load();
     Recorder::ScaleX::Load();
     TShift::Load();
-    Osci::LoadHoldfOff();
     StorageRecorder::Init();
 
     mode = Mode::Listening;

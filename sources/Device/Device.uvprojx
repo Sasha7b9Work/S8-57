@@ -1187,6 +1187,11 @@
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageTime.cpp</FilePath>
             </File>
+            <File>
+              <FileName>PageTrig.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Menu\Pages\PageTrig.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1486,26 +1491,6 @@
               <FileName>PageDebug_Tests.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Menu\Pages\PageService\PageDebug\PageDebug_Tests.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Menu/Pages/PageTrig</GroupName>
-          <Files>
-            <File>
-              <FileName>PageTrig.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageTrig\PageTrig.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageTrig_Find.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageTrig\PageTrig_Find.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>PageTrig_HoldOff.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Menu\Pages\PageTrig\PageTrig_HoldOff.cpp</FilePath>
             </File>
           </Files>
         </Group>

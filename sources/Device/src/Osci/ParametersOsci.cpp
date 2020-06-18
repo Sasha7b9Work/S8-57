@@ -141,18 +141,18 @@ const float TShift::absStep[TBase::Count] =
 static uint8 ValueForRange(Chan::E ch);
 
 
-void Osci::LoadHoldfOff()
-{
-    HAL_BUS::FPGA::Write8(WR::TRIG_HOLD_ENABLE, S_TRIG_HOLDOFF_ENABLED ? 1U : 0U);
-
-    uint value = static_cast<uint>(0 - S_TRIG_HOLDOFF_VALUE + 1);
-
-    BitSet32 bs(value);
-
-    HAL_BUS::FPGA::Write8(WR::TRIG_HOLD_VALUE_LOW, bs.byte0);
-    HAL_BUS::FPGA::Write8(WR::TRIG_HOLD_VALUE_MID, bs.byte1);
-    HAL_BUS::FPGA::Write8(WR::TRIG_HOLD_VALUE_HI, bs.byte2);
-}
+//void Osci::LoadHoldfOff()
+//{
+//    HAL_BUS::FPGA::Write8(WR::TRIG_HOLD_ENABLE, S_TRIG_HOLDOFF_ENABLED ? 1U : 0U);
+//
+//    uint value = static_cast<uint>(0 - S_TRIG_HOLDOFF_VALUE + 1);
+//
+//    BitSet32 bs(value);
+//
+//    HAL_BUS::FPGA::Write8(WR::TRIG_HOLD_VALUE_LOW, bs.byte0);
+//    HAL_BUS::FPGA::Write8(WR::TRIG_HOLD_VALUE_MID, bs.byte1);
+//    HAL_BUS::FPGA::Write8(WR::TRIG_HOLD_VALUE_HI, bs.byte2);
+//}
 
 
 void TBase::Change(int delta)

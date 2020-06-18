@@ -49,7 +49,7 @@ struct Osci
     static void OnChangedLengthMemoryChannel();
    
     // Загрузить значение удержания синхронизации
-    static void LoadHoldfOff();
+    //static void LoadHoldfOff();
     
     // Эту функцию нужно вызывать при изменении режима запуска
     static void ChangedTrigStartMode();

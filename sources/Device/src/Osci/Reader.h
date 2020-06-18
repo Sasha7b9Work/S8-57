@@ -63,5 +63,5 @@ public:
     static void ReadDataFromROM();
 private:
     // ѕоиск уровн€ синхронизации, если установлен автоматический режим поиска
-    static void FindTrigLevelIfNeed();
+    //static void FindTrigLevelIfNeed();
 };

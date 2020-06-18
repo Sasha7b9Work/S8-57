@@ -83,7 +83,6 @@ void Osci::Init()
     TBase::Set();
     TShift::Load();
     FPGA::LoadCalibratorMode();
-    LoadHoldfOff();
     HAL_PIO::Init(PIN_P2P, HMode::Input, HPull::Up);
     ChangedTrigStartMode();
     Osci::Start(true);

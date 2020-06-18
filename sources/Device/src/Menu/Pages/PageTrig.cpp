@@ -75,6 +75,19 @@ DEF_CHOICE_3( cFiltr, // -V206                                                  
     S_TRIG_INPUT, &PageTrig::self, Item::Active, OnChanged_Filtr, Choice::AfterDraw
 )
 
+
+static void OnPress_Search()
+{
+    TrigLevel::Find();
+}
+
+DEF_BUTTON(bSearch,                                                                                                                                          //--- СИНХР - ПОИСК - Найти ---
+    "Поиск",
+    "Производит поиск уровня синхронизации.",
+    &PageTrig::self, Item::Active, OnPress_Search
+)
+
+
 DEF_PAGE_5( pTrig,                                                                                                                                                            //--- СИНХР ---
     "СИНХР",
     "Содержит настройки синхронизации.",
@@ -82,8 +95,7 @@ DEF_PAGE_5( pTrig,                                                              
     &cSource,
     &cPolarity,
     &cFiltr,
-//    PageTrig::HoldOff::self,
-    PageTrig::Find::self,
+    &bSearch,
     PageName::Trig, nullptr, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
