@@ -80,6 +80,11 @@ void Multimeter::ChangeAVP()
     USART3_::Transmit(send, 100);
 
     USART3_::StartReceiveIT(bufferUART);
+
+    if (!S_MULT_AVP_ENABLED)
+    {
+        Multimeter::Update();
+    }
 }
 
 
@@ -91,7 +96,10 @@ void Multimeter::LoadZero(int zero)
 
     USART3_::Transmit(send, 100);
 
-    USART3_::StartReceiveIT(bufferUART);
+    if (zero == 0)
+    {
+        Multimeter::Update();
+    }
 }
 
 
@@ -189,9 +197,25 @@ MultimeterMeasure::E MultimeterMeasure::GetCode(const char buffer[13])
 
 static void ReceiveCallback()
 {
+    char buffer[20];
+
+    int i = 0;
+
+    while (bufferUART[i] != 0x0a)
+    {
+        buffer[i] = static_cast<char>(bufferUART[i]);
+        i++;
+    }
+
+    buffer[i] = 0;
+
+    LOG_WRITE("Прием %s", buffer);
+
     DisplayMultimeter::SetMeasure(bufferUART);
-    Multimeter::Update();
-    //USART3_::StartReceiveIT(bufferUART);
+  
+    //Multimeter::Update();
+    
+    USART3_::StartReceiveIT(bufferUART);
 }
 
 
