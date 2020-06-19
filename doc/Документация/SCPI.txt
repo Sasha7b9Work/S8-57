@@ -18,7 +18,7 @@
 
 :CHANNEL{ 1 | 2 }:RANGE_{ 2mV | 5mV | 10mV | 20mV | 50 mV | 100mV | 200mV | 500mV | 1V | 2V | 5V | 10V }
 :CHANNEL{ 1 | 2 }:RANGE?
-Пример - ":CHANNEL:RANGE 1V"
+Пример - ":CHANNEL1:RANGE 1V"
 
 :DISPLAY:MAPPING_{ LINES | DOTS }
 :DISPLAY:MAPPING?
