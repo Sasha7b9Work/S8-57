@@ -118,8 +118,6 @@ void Device::Update()
 
     Recorder::Update();
 
-    Multimeter::Update();
-
     FDrive::Update();
 
     //Sensor::Update();

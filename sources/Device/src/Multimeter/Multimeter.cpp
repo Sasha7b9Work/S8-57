@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include "device.h"
 #include "Multimeter.h"
 #include "Hardware/HAL/HAL.h"
@@ -14,14 +15,21 @@ public:
     }
     static void Transmit(void *_buffer, uint timeout)
     {
+        char buffer[100];
+
         uint8 *pointer = static_cast<uint8 *>(_buffer);
 
         int size = 0;
         while (*pointer != 0x0a)
         {
+            buffer[size] = *reinterpret_cast<char *>(pointer);
             size++;
             pointer++;
         }
+
+        buffer[size] = '\0';
+
+        LOG_WRITE(buffer);
 
         HAL_USART3::Transmit(_buffer, size + 1, timeout);
     }
@@ -45,6 +53,7 @@ static void ReceiveCallback();
 void Multimeter::ChangeMode()
 {
     DisplayMultimeter::ChangedMode();
+    Update();
 }
 
 
@@ -52,11 +61,7 @@ void Multimeter::Init()
 {
     USART3_::Init(ReceiveCallback);
 
-    uint8 send[] = { 0x02, 'V', '0', 0x0a };
-
-    USART3_::Transmit(send, 10);
-
-    USART3_::StartReceiveIT(bufferUART);
+    ChangeAVP();
 }
 
 
@@ -185,7 +190,8 @@ MultimeterMeasure::E MultimeterMeasure::GetCode(const char buffer[13])
 static void ReceiveCallback()
 {
     DisplayMultimeter::SetMeasure(bufferUART);
-    USART3_::StartReceiveIT(bufferUART);
+    Multimeter::Update();
+    //USART3_::StartReceiveIT(bufferUART);
 }
 
 

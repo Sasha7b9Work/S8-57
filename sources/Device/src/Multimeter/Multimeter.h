@@ -22,9 +22,7 @@ struct Multimeter
     static void Init();
 
     static void DeInit();
-
-    static void Update();
-    
+   
     // Сообщает мультиметру, что произошло изменение режима и нужно дождаться результата измерения перед выводом
     static void ChangeMode();
 
@@ -34,6 +32,8 @@ struct Multimeter
     
     // Если (zero != 0) - заслать режим нуля
     static void LoadZero(int zero);
+
+    static void Update();
 };
 
 
