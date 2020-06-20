@@ -4,22 +4,134 @@
 *IDN?
 *RST
 
-:KEY:{ PRESS | LONG }_{ Function | Measure | Memory | Service | A | B | Time | Start | Trig | Display |
+:KEY:{ PRESS | LONG } { Function | Measure | Memory | Service | A | B | Time | Start | Trig | Display |
                         RangeA+ | RangeA- | RshiftA+ | RshiftA- | RangeB+ | RangeB- | RshiftB+ | RshiftB- |
                         TBase+ | TBase- | TShift+ | TShift- | TrigLev+ | TrigLev- |
                         Left | Right | Up | Down | Enter | F1 | F2 | F3 | F4 | F5 }
                         
-:TIMEBASE:SCALE_{        2ns | 5ns | 10ns | 20ns | 50ns | 100ns | 200ns | 500ns | 
+:TIMEBASE
+         :SCALE {        2ns | 5ns | 10ns | 20ns | 50ns | 100ns | 200ns | 500ns | 
                    1us | 2us | 5us | 10us | 20us | 50us | 100us | 200us | 500us |
                    1ms | 2ms | 5ms | 10ms | 20ms | 50ms | 100ms | 200ms | 500ms |
                    1s  | 2s  | 5s  | 10s }
-:TIMEBASE:SCALE?
-Пример - ":TIMEBASE:SCALE 2ms"
+         :SCALE?
+         
+         :OFFSET [-500...30000]
+         :OFFSET?
+         
+         :TPOS { LEFT | CENTER | RIGHT }
+         :TPOS?
+         
+         
 
-:CHANNEL{ 1 | 2 }:RANGE_{ 2mV | 5mV | 10mV | 20mV | 50 mV | 100mV | 200mV | 500mV | 1V | 2V | 5V | 10V }
-:CHANNEL{ 1 | 2 }:RANGE?
-Пример - ":CHANNEL1:RANGE 1V"
+:CHANNEL{ 1 | 2 }
+                 :RANGE { 2mV | 5mV | 10mV | 20mV | 50 mV | 100mV | 200mV | 500mV | 1V | 2V | 5V | 10V | 20V }
+                 :RANGE?
+                 
+                 :OFFSET [-200...200]
+                 :OFFSET?
+                 
+                 :DISPLAY { ON | OFF }
+                 :DISPLAY?
+                 
+                 :COUPLING { AC | DC | GND }
+                 :COUPLING?
+                 
+                 :BANDWIDTH { FULL | 20MHZ }
+                 :BANDWIDTH?
+                 
+                 :PROBE { 1X | 10X }
+                 :PROBE?
+                 
+                 :BALANCE
+                 
+                 :DATA?
 
-:DISPLAY:MAPPING_{ LINES | DOTS }
-:DISPLAY:MAPPING?
-Пример - ":DISPLAY:MAPPING DOTS"
+:DISPLAY
+        :MAPPING_{ LINES | DOTS }
+        :MAPPING?
+
+        :AVERAGE { 1 | 2 | 4 | 8 | 16 | 32 | 64 | 128 | 256 }
+        :AVERAGE?
+
+        :SMOOTHING [1...10]
+        :SMOOTHING?
+        
+        :FPS { 1 | 2 | 5 | 10 | 25 }
+        :FPS?
+        
+        :GRID { TYPE1 | TYPE2 | TYPE3 | TYPE4 }
+        :GRID?
+        
+        :ACCUMULATION {1 | 2 | 4 | 8 | 16 | 32 | 64 | 128 | 256 | INFINITY | CLEAR }
+        :ACCUMULATION?
+        
+:TRIG
+     :MODE {AUTO | HAND | SINGLE }
+     :MODE?
+     
+     :SOURCE { A | 2 }
+     :SOURCE?
+     
+     :POLARITY { RISE | FALL |
+     :POLARITY?
+     
+     :INPUT { FULL | LF | HF }
+     :INPUT?
+     
+     :START
+     
+     :STOP
+
+:MEASURE
+        :DISPLAY { ON | OFF }
+        :DISPLAY?
+        
+        :SOURCE { 1 | 2 | BOTH }
+        :SOURCE?
+        
+        :VALUE { PERIOD | FREQUENCY | VMIN | VMAX | VPP | VMAXEST | VMINEST | VAMPL | VRMS | VAVE | VOVER+ | VOVER- | TIMERISE | TIMEFALL | PHASE | WIDTHN | WIDTHP | DUTY+ | DUTY- | DELAY+ | DELAY- }
+        
+:FREQMETER
+          :MODE { ON | OFF }
+          :MODE?
+          
+          :MEASURE { FREQUENCY | PERIOD }
+          :MEASURE?
+          
+          :TIME { 100MS | 1S | 10S }
+          :TIME?
+          
+          :LABELS { 100KHZ | 1MHZ | 10MHZ | 100MHZ }
+          :LABELS?
+          
+          :AVEPERIODS { 1E0 | 1E1 | 1E2 | 1E3 | 1E4 | 1E5 }
+          :AVEPERIODS?
+     
+:MULTIMETER
+           :MODE { ON | OFF }
+           :MODE?
+           
+           :MEASURE { AC2V | AC20V | AC400V |
+                      DC2V | DC20V | DC400V |
+                      AC20MA | AC2A |
+                      DC20MA | DC2A |
+                      2K | 20K | 200K | 10M |
+                      DIODE | DELL }
+           :MEASURE?
+           
+           :AVP { ON | OFF }
+           :AVP?
+           
+           :ZERO { ON | OFF }
+           :ZERO?
+           
+:TESTER
+       :MODE { ON | OFF }
+       :MODE?
+       
+       :CONTROL { 100MV | 500MV | 4MA | 20MA }
+       :CONTROL?
+       
+       
+                      
