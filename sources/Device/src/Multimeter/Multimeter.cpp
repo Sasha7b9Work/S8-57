@@ -197,19 +197,19 @@ MultimeterMeasure::E MultimeterMeasure::GetCode(const char buffer[13])
 
 static void ReceiveCallback()
 {
-    char buffer[20];
-
-    int i = 0;
-
-    while (bufferUART[i] != 0x0a)
-    {
-        buffer[i] = static_cast<char>(bufferUART[i]);
-        i++;
-    }
-
-    buffer[i] = 0;
-
-    LOG_WRITE("Прием %s", buffer);
+//    char buffer[20];
+//
+//    int i = 0;
+//
+//    while (bufferUART[i] != 0x0a)
+//    {
+//        buffer[i] = static_cast<char>(bufferUART[i]);
+//        i++;
+//    }
+//
+//    buffer[i] = 0;
+//
+//    LOG_WRITE("Прием %s", buffer);
 
     DisplayMultimeter::SetMeasure(bufferUART);
   

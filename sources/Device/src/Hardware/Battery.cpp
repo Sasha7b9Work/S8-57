@@ -27,8 +27,6 @@ static float CalculatePercents(float volts);
 // Отобразить заряд батареи в графическом виде
 static void DrawUGO(int x, int y, float procents);
 
-static void DrawFilled(int x, int y, int full, float percents);
-
 // Значения, соответствующие 100% и 0%, для текущих напряжения аккумуляторов akk и источника заряда pow
 static float Voltage100();
 static float Voltage0();
@@ -78,7 +76,9 @@ static void DrawUGO(int x, int y, float percents)
     Rectangle(widthFull - widthSmall, 8 + dY).Draw(x + widthSmall + 1, y - dY, percents <= 25.0F ? Color::RED : Color::BATTERY);
     Rectangle(widthSmall, 4 + dY).Draw(x + 1, y + 2 - dY);
 
-    DrawFilled(x + widthSmall + 3, y - 3, widthFull - widthSmall - 4, percents);
+
+
+        DrawFilled(x + widthSmall + 3, y - 3, widthFull - widthSmall - 4, percents);
 }
 
 
