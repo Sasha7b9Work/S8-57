@@ -55,7 +55,7 @@ DEF_PAGE_8_VAR( pService,                                                       
     PageRTC::self,
     &gTimeDisableDisplay,
     PageService::Information::self,
-    PageDebug::self,
+    &Item::empty,
     PageName::Service, nullptr, Item::Active, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
@@ -98,8 +98,6 @@ void PageService::DecodePassword(const KeyEvent &event)
             Item **items = const_cast<Item **>(page->OwnData()->items);
 
             items[7] = const_cast<Page *>(PageDebug::self);
-
-            DISPLAY_SHOW_WARNING("Доступ к меню ОТЛАДКА открыт");
         }
     }
     else

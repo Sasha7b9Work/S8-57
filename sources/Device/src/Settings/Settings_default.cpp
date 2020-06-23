@@ -75,7 +75,7 @@ const Settings Settings::defaultSettings =
     // Ìåíş ĞÀÇÂ¨ĞÒÊÀ
     {
         0,                          // shift
-        TBase::_5ms,                // base
+        TBase::_500us,              // base
         PeakDetMode::Disabled,      // peakDet
         TPos::Center,               // TPos
         SampleType::Equal,          // sampleType
