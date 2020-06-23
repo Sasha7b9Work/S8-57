@@ -330,7 +330,7 @@ static void OnMemory()
     {
         FDrive::SaveScreen();
     }
-    else
+    else if(Device::InModeOsci())
     {
         CommonButtonPage(PageMemory::self);
 

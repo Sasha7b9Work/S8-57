@@ -168,7 +168,7 @@ void Device::SetMode(Mode::E mode)
                 Key::RangeMoreB, Key::RangeLessB, Key::RShiftMoreB, Key::RShiftLessB,
                 Key::F1, Key::F2, Key::F3, Key::F4, Key::F5,
                 Key::Left, Key::Right, Key::Up, Key::Down,
-                Key::Start, Key::Enter, Key::None
+                Key::Start, Key::Enter, Key::Memory, Key::None
             };
 
             Keyboard::Lock(keys);
@@ -183,7 +183,7 @@ void Device::SetMode(Mode::E mode)
             {
                 Key::F1, Key::F2, Key::F3, Key::F4, Key::F5,
                 Key::Left, Key::Right, Key::Up, Key::Down,
-                Key::Enter, Key::None
+                Key::Enter, Key::Memory, Key::None
             };
 
             Keyboard::Lock(keys);
