@@ -1,5 +1,4 @@
 #include "defines.h"
-#include "log.h"
 #include "device.h"
 #include "Multimeter.h"
 #include "Hardware/HAL/HAL.h"
@@ -28,8 +27,6 @@ public:
         }
 
         buffer[size] = '\0';
-
-        LOG_WRITE(buffer);
 
         HAL_USART3::Transmit(_buffer, size + 1, timeout);
     }
