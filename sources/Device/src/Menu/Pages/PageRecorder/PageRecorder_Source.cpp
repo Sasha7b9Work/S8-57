@@ -38,12 +38,12 @@ static bool IsActive_Source()
     return !Recorder::InRecordingMode();
 }
 
-DEF_PAGE_3( pSource,                                                                                                                               //--- ФУНКЦИЯ - РЕГИСТРАТОР - ИСТОЧНИК ---
+DEF_PAGE_2( pSource,                                                                                                                               //--- ФУНКЦИЯ - РЕГИСТРАТОР - ИСТОЧНИК ---
     "ИСТОЧНИК",
     "Выбор записываемых сигналов",
     &cChanA,
     &cChanB,
-    &cSensor,
+    //&cSensor,
     PageName::Recorder_Source, &PageRecorder::self, IsActive_Source, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 
