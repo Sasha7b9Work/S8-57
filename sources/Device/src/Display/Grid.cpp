@@ -462,7 +462,7 @@ static void DrawTester()
 
 void DrawRecorder()
 {
-    Color::GRAY_10.SetAsCurrent();
+    Color::GRID.SetAsCurrent();
 
     VLine vLine(Display::HEIGHT - 1);
 
@@ -480,7 +480,7 @@ void DrawRecorder()
         hLine.Draw(0, y);
     }
 
-    HLine(Display::WIDTH - 1).Draw(0, Display::HEIGHT / 2, Color::GRAY_20);
+    HLine(Display::WIDTH - 1).Draw(0, Display::HEIGHT / 2);
 
     Rectangle(Display::WIDTH - 1, Display::HEIGHT - 1).Draw(0, 0, Color::FILL);
 }
