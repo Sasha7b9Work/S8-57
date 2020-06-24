@@ -1,7 +1,7 @@
 Символ подчёркивания '_' означает пробел
 Сообщение должно заканчиваться символом 0x0D
 
-*IDN?
+*IDN?               ″MNIPI,S8-57, VY.Y,ZZZZZZZZ″ (VY.Y - версия ПО, ZZZZZZZZ  -  контрольная сумма CRC-32 в шестнадцатеричной форме) версия не ниже 1.2
 *RST
 
 :KEY:{ PRESS | LONG } { Function | Measure | Memory | Service | A | B | Time | Start | Trig | Display |
