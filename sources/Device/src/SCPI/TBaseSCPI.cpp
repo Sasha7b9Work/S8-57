@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Osci/ParametersOsci.h"
-#include "SCPI/TBaseSCPI.h"
+#include "SCPI/HeadSCPI.h"
 #include "Settings/Settings.h"
 
 

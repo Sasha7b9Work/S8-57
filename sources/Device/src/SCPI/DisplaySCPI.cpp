@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "log.h"
 #include "Menu/Pages/Include/PageDisplay.h"
-#include "SCPI/DisplaySCPI.h"
+#include "SCPI/HeadSCPI.h"
 #include "Settings/Settings.h"
 #include <cstring>
 

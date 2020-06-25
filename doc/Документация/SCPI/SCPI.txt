@@ -1,15 +1,22 @@
 Сообщение должно заканчиваться символом 0x0D
 
-90 шт - 23 шт/день
+102 шт - 26 шт/день
 
 - *IDN?               ″MNIPI,S8-57, VY.Y,ZZZZZZZZ″ (VY.Y - версия ПО, ZZZZZZZZ  -  контрольная сумма CRC-32 в шестнадцатеричной форме) версия не ниже 1.2.0
 - *RST
+
+- :RUN
+- :STOP
+- :AUTOSEARCH
+
+- :HELP
   
-  :KEY:{ PRESS | LONG } { Function | Measure | Memory | Service | A | B | Time | Start | Trig | Display |
+- :KEY:{ PRESS | LONG } { Function | Measure | Memory | Service | A | B | Time | Start | Trig | Display |
                           RangeA+ | RangeA- | RshiftA+ | RshiftA- | RangeB+ | RangeB- | RshiftB+ | RshiftB- |
                           TBase+ | TBase- | TShift+ | TShift- | TrigLev+ | TrigLev- |
                           Left | Right | Up | Down | Enter | F1 | F2 | F3 | F4 | F5 }
-                          
+
+         
   :TIMEBASE
 -          :SCALE {        2ns | 5ns | 10ns | 20ns | 50ns | 100ns | 200ns | 500ns | 
                      1us | 2us | 5us | 10us | 20us | 50us | 100us | 200us | 500us |
@@ -17,14 +24,19 @@
                      1s  | 2s  | 5s  | 10s }
 -          :SCALE?
            
--          :OFFSET [-500...30000]
+-          :OFFSET [-8192...32767]
 -          :OFFSET?
            
 -          :TPOS { LEFT | CENTER | RIGHT }
 -          :TPOS?
-           
-           
-  
+
+-          :PEAKDET { ON | OFF }
+-          :PEAKDET?
+
+-          :MODE { REAL | EQUAL }
+-          :MODE?
+
+
   :CHANNEL{ 1 | 2 }
 -                  :SCALE { 2mV | 5mV | 10mV | 20mV | 50 mV | 100mV | 200mV | 500mV | 1V | 2V | 5V | 10V | 20V }
 -                  :SCALE?
@@ -47,9 +59,10 @@
 -                  :BALANCE
                    
 -                  :DATA?
-  
+
+
   :DISPLAY
--         :MAPPING_{ LINES | DOTS }
+-         :MAPPING { LINES | DOTS }
 -         :MAPPING?
   
 -         :AVERAGE { 1 | 2 | 4 | 8 | 16 | 32 | 64 | 128 | 256 }
@@ -66,7 +79,11 @@
           
 -         :ACCUMULATION { OFF | 2 | 4 | 8 | 16 | 32 | 64 | 128 | 256 | INFINITY | CLEAR }
 -         :ACCUMULATION?
-          
+
+-         :BRIGHTNESS [0...100]
+-         :BRIGHTNESS?
+
+
   :TRIG
 -      :MODE { AUTO | HAND | SINGLE }
 -      :MODE?
@@ -79,11 +96,15 @@
        
 -      :INPUT { FULL | LF | HF }
 -      :INPUT?
+
+-      :LEVEL [-300...+300]
+-      :LEVEL?
        
 -      :START
        
 -      :STOP
-  
+
+
   :MEASURE
 -         :DISPLAY { ON | OFF }
 -         :DISPLAY?
@@ -92,7 +113,8 @@
 -         :SOURCE?
           
 -         :VALUE { PERIOD | FREQUENCY | VMIN | VMAX | VPP | VMAXEST | VMINEST | VAMPL | VRMS | VAVE | VOVER+ | VOVER- | TIMERISE | TIMEFALL | PHASE | WIDTHN | WIDTHP | DUTY+ | DUTY- | DELAY+ | DELAY- }
-          
+
+
   :FREQMETER
 -           :MODE { ON | OFF }
 -           :MODE?
@@ -110,7 +132,8 @@
 -           :AVEPERIODS?
 
 -           :VALUE?
-       
+
+
   :MULTIMETER
 -            :MODE { ON | OFF }
 -            :MODE?
@@ -130,7 +153,8 @@
 -            :ZERO?
              
 -            :VALUE?
-             
+
+
   :TESTER
 -        :MODE { ON | OFF }
 -        :MODE?
@@ -143,10 +167,12 @@
          
 -        :CONDUCTION { PNP | PNP }
 -        :CONDUCTION?
-         
+
+
   :CALIBRATOR
 -            :MODE { AC | DC }
 -            :MODE?
+
 
   :FFT
 -     :DISPLAY { ON | OFF }
@@ -162,6 +188,7 @@
 -     :WINDOW?
 
 -     :DATA?
+
 
   :MEMORY
 -        :LENGTH { 512 | 1K | 2K | 4K | 8K }
