@@ -71,6 +71,12 @@ DEF_CHOICE_4( cType, // -V206                                                   
 )
 
 
+void PageDisplay::SetTypeGrid(TypeGrid::E v)
+{
+    S_DISP_TYPE_GRID = v;
+}
+
+
 static void OnChange_AverageNum(bool)
 {
     AveragerOsci::SettingChanged();

@@ -179,6 +179,7 @@ struct PageDisplay
 {
     static const Page * const self;
 
+    static void SetTypeGrid(TypeGrid::E v);
 
     struct Accumulation
     {
