@@ -1,9 +1,11 @@
 Сообщение должно заканчиваться символом 0x0D
 
-102 шт - 26 шт/день
+98 шт - 26 шт/день
+
+76
 
 - *IDN?               ″MNIPI,S8-57, VY.Y,ZZZZZZZZ″ (VY.Y - версия ПО, ZZZZZZZZ  -  контрольная сумма CRC-32 в шестнадцатеричной форме) версия не ниже 1.2.0
-- *RST
+  *RST
 
 - :RUN
 - :STOP
@@ -11,7 +13,7 @@
 
 - :HELP
   
-- :KEY:{ PRESS | LONG } { Function | Measure | Memory | Service | A | B | Time | Start | Trig | Display |
+  :KEY:{ PRESS | LONG } { Function | Measure | Memory | Service | A | B | Time | Start | Trig | Display |
                           RangeA+ | RangeA- | RshiftA+ | RshiftA- | RangeB+ | RangeB- | RshiftB+ | RshiftB- |
                           TBase+ | TBase- | TShift+ | TShift- | TrigLev+ | TrigLev- |
                           Left | Right | Up | Down | Enter | F1 | F2 | F3 | F4 | F5 }
@@ -38,8 +40,8 @@
 
 
   :CHANNEL{ 1 | 2 }
--                  :SCALE { 2mV | 5mV | 10mV | 20mV | 50 mV | 100mV | 200mV | 500mV | 1V | 2V | 5V | 10V | 20V }
--                  :SCALE?
+                   :SCALE { 2mV | 5mV | 10mV | 20mV | 50 mV | 100mV | 200mV | 500mV | 1V | 2V | 5V | 10V | 20V }
+                   :SCALE?
                    
 -                  :OFFSET [-200...200]
 -                  :OFFSET?

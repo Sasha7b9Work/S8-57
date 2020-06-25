@@ -8,9 +8,9 @@
 
 
 // :CHANNEL{1|2}:RANGE:
-static const char *FuncRange(const char *);
-static bool TestRange();
-static void HintRange(String *);
+static const char *FuncScale(const char *);
+static bool TestScale();
+static void HintScale(String *);
 
 
 static const char *const rangeName[] =
@@ -34,7 +34,7 @@ static const char *const rangeName[] =
 
 static const StructSCPI chan[] =
 {
-    SCPI_LEAF("RANGE", FuncRange, TestRange, "Vertical zoom control", HintRange),
+    SCPI_LEAF("SCALE", FuncScale, TestScale, "Vertical zoom control", HintScale),
     SCPI_EMPTY()
 };
 
@@ -47,7 +47,7 @@ const StructSCPI SCPI::channels[] =
 };
 
 
-static const char *FuncRange(const char *buffer)
+static const char *FuncScale(const char *buffer)
 {
     Chan::E ch = (*(buffer - 7) == '1') ? ChanA : ChanB;    // (buffer - 7) указывает на номер канала - 1 или 2
 
@@ -57,13 +57,13 @@ static const char *FuncRange(const char *buffer)
 }
 
 
-static void HintRange(String *message)
+static void HintScale(String *message)
 {
     SCPI::ProcessHint(message, rangeName);
 }
 
 
-static bool TestRange()
+static bool TestScale()
 {
     for(int i = 0; i < 5; i++)
     {
