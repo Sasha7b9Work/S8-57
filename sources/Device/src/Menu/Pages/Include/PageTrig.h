@@ -46,7 +46,10 @@ struct TrigPolarity
         Rising,
         Falling
     };
+
     static void Load();
+
+    static void Set(E v);
 };
 
 
@@ -94,7 +97,6 @@ struct SettingsTrig
 struct PageTrig
 {
     static const Page * const self;
-
 
     struct HoldOff
     {

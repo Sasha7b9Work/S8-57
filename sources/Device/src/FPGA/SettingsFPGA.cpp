@@ -258,6 +258,13 @@ void TrigPolarity::Load()
 }
 
 
+void TrigPolarity::Set(E v)
+{
+    S_TRIG_POLARITY = v;
+    Load();
+}
+
+
 int TShift::Min()
 {
 #define k 0

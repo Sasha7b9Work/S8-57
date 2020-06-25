@@ -9,6 +9,10 @@ static const char *FuncMode(const char *);
 static void HintMode(String *);
 static bool TestMode();
 
+// :TRIG:POLARITY
+static const char *FuncPolarity(const char *);
+static void HintPolarity(String *);
+static bool TestPolarity();
 
 // :TRIG:SOURCE
 static const char *FuncSource(const char *);
@@ -25,6 +29,14 @@ static const char *const modes[] =
 };
 
 
+static const char *const polarities[] =
+{
+    " RISE",
+    " FALL",
+    ""
+};
+
+
 static const char *const sources[] =
 {
     " 1",
@@ -35,8 +47,9 @@ static const char *const sources[] =
 
 const StructSCPI SCPI::trigger[] =
 {
-    SCPI_LEAF(":MODE",   FuncMode,   TestMode,   "Set or query the trigger mode", HintMode),
-    SCPI_LEAF(":SOURCE", FuncSource, TestSource, "Source selection",              HintSource),
+    SCPI_LEAF(":MODE",     FuncMode,     TestMode,     "Set or query the trigger mode", HintMode),
+    SCPI_LEAF(":POLARITY", FuncPolarity, TestPolarity, "Sync polarity selection",       HintPolarity),
+    SCPI_LEAF(":SOURCE",   FuncSource,   TestSource,   "Source selection",              HintSource),
     SCPI_EMPTY()
 };
 
@@ -46,6 +59,14 @@ static const char *FuncMode(const char *buffer)
     SCPI_REQUEST(SCPI::SendAnswer(modes[S_TRIG_START_MODE]));
 
     SCPI_PROCESS_ARRAY(modes, TrigStartMode::Set(static_cast<TrigStartMode::E>(i)));
+}
+
+
+static const char *FuncPolarity(const char *buffer)
+{
+    SCPI_REQUEST(SCPI::SendAnswer(polarities[S_TRIG_POLARITY]));
+
+    SCPI_PROCESS_ARRAY(polarities, TrigPolarity::Set(static_cast<TrigPolarity::E>(i)));
 }
 
 
@@ -63,6 +84,12 @@ static void HintMode(String *message)
 }
 
 
+static void HintPolarity(String *message)
+{
+    SCPI::ProcessHint(message, polarities);
+}
+
+
 static void HintSource(String *message)
 {
     SCPI::ProcessHint(message, sources);
@@ -70,6 +97,12 @@ static void HintSource(String *message)
 
 
 static bool TestMode()
+{
+    return false;
+}
+
+
+static bool TestPolarity()
 {
     return false;
 }
