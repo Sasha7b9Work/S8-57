@@ -4,6 +4,11 @@
 #include "Settings/Settings.h"
 
 
+// :TRIG:INPUT
+static const char *FuncInput(const char *);
+static void HintInput(String *);
+static bool TestInput();
+
 // :TRIG:MODE
 static const char *FuncMode(const char *);
 static void HintMode(String *);
@@ -18,6 +23,15 @@ static bool TestPolarity();
 static const char *FuncSource(const char *);
 static void HintSource(String *);
 static bool TestSource();
+
+
+static const char *const inputs[] =
+{
+    " FULL",
+    " HF",
+    " LF",
+    ""
+};
 
 
 static const char *const modes[] =
@@ -47,11 +61,20 @@ static const char *const sources[] =
 
 const StructSCPI SCPI::trigger[] =
 {
-    SCPI_LEAF(":MODE",     FuncMode,     TestMode,     "Set or query the trigger mode", HintMode),
-    SCPI_LEAF(":POLARITY", FuncPolarity, TestPolarity, "Sync polarity selection",       HintPolarity),
-    SCPI_LEAF(":SOURCE",   FuncSource,   TestSource,   "Source selection",              HintSource),
+    SCPI_LEAF(":INPUT",    FuncInput,    TestInput,    "Filter selection by synchronization", HintInput),
+    SCPI_LEAF(":MODE",     FuncMode,     TestMode,     "Set or query the trigger mode",       HintMode),
+    SCPI_LEAF(":POLARITY", FuncPolarity, TestPolarity, "Sync polarity selection",             HintPolarity),
+    SCPI_LEAF(":SOURCE",   FuncSource,   TestSource,   "Source selection",                    HintSource),
     SCPI_EMPTY()
 };
+
+
+static const char *FuncInput(const char *buffer)
+{
+    SCPI_REQUEST(SCPI::SendAnswer(inputs[S_TRIG_INPUT]));
+
+    SCPI_PROCESS_ARRAY(inputs, TrigInput::Set(static_cast<TrigInput::E>(i)));
+}
 
 
 static const char *FuncMode(const char *buffer)
@@ -78,6 +101,12 @@ static const char *FuncSource(const char *buffer)
 }
 
 
+static void HintInput(String *message)
+{
+    SCPI::ProcessHint(message, inputs);
+}
+
+
 static void HintMode(String *message)
 {
     SCPI::ProcessHint(message, modes);
@@ -93,6 +122,12 @@ static void HintPolarity(String *message)
 static void HintSource(String *message)
 {
     SCPI::ProcessHint(message, sources);
+}
+
+
+static bool TestInput()
+{
+    return false;
 }
 
 

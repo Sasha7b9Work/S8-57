@@ -45,6 +45,13 @@ void TrigInput::Load()
 }
 
 
+void TrigInput::Set(E v)
+{
+    S_TRIG_INPUT = v;
+    Load();
+}
+
+
 static bool NeedLoadRShift(Chan::E ch)
 {
     bool result = true;

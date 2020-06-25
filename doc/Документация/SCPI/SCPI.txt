@@ -1,6 +1,6 @@
 Сообщение должно заканчиваться символом 0x0D
 
-75 шт - 26 шт/день
+73 шт - 26 шт/день
 
 76
 
@@ -96,8 +96,8 @@
        :POLARITY { RISE | FALL |
        :POLARITY?
        
--      :INPUT { FULL | LF | HF }
--      :INPUT?
+       :INPUT { FULL | HF | LF }
+       :INPUT?
 
 -      :LEVEL [-300...+300]
 -      :LEVEL?  
