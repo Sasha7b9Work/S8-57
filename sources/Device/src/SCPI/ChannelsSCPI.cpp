@@ -7,10 +7,27 @@
 #include <cstring>
 
 
-// :CHANNEL{1|2}:RANGE:
+#define EXTRACT_CHANNEL(x) Chan::E ch = (*(buffer - (x)) == '1') ? ChanA : ChanB;    /* (buffer - 7) указывает на номер канала - 1 или 2 */
+
+
+// :CHANNEL{1|2}:DISPLAY
+static const char *FuncDisplay(const char *);
+static bool TestDisplay();
+static void HintDisplay(String *);
+
+
+// :CHANNEL{1|2}:SCALE
 static const char *FuncScale(const char *);
 static bool TestScale();
 static void HintScale(String *);
+
+
+static const char *displays[] =
+{
+    " OFF",
+    " ON",
+    ""
+};
 
 
 static const char *const rangeName[] =
@@ -34,7 +51,8 @@ static const char *const rangeName[] =
 
 static const StructSCPI chan[] =
 {
-    SCPI_LEAF("SCALE", FuncScale, TestScale, "Vertical zoom control", HintScale),
+    SCPI_LEAF("DISPLAY", FuncDisplay, TestDisplay, "Turns channel display on/off", HintDisplay),
+    SCPI_LEAF("SCALE",   FuncScale,   TestScale,   "Vertical zoom control",        HintScale),
     SCPI_EMPTY()
 };
 
@@ -47,9 +65,19 @@ const StructSCPI SCPI::channels[] =
 };
 
 
+static const char *FuncDisplay(const char *buffer)
+{
+    EXTRACT_CHANNEL(9);
+
+    SCPI_REQUEST(SCPI::SendAnswer(displays[S_CHANNEL_ENABLED(ch)]));
+
+    SCPI_PROCESS_ARRAY(displays, PageChannel::Enable(ch, i));
+}
+
+
 static const char *FuncScale(const char *buffer)
 {
-    Chan::E ch = (*(buffer - 7) == '1') ? ChanA : ChanB;    // (buffer - 7) указывает на номер канала - 1 или 2
+    EXTRACT_CHANNEL(7);
 
     SCPI_REQUEST(SCPI::SendAnswer(rangeName[S_RANGE(ch)]));
 
@@ -57,9 +85,21 @@ static const char *FuncScale(const char *buffer)
 }
 
 
+static void HintDisplay(String *message)
+{
+    SCPI::ProcessHint(message, displays);
+}
+
+
 static void HintScale(String *message)
 {
     SCPI::ProcessHint(message, rangeName);
+}
+
+
+static bool TestDisplay()
+{
+    return true;
 }
 
 

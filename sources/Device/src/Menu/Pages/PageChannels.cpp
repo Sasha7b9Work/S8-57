@@ -14,6 +14,12 @@ static const char chanCouple[] =  "Задаёт вид связи с источником сигнала.\n"
                                   "3. \"Земля\" - вход соединён с землёй.";
 
 
+void PageChannel::Enable(Chan::E ch, int enable)
+{
+    S_CHANNEL_ENABLED(ch) = (enable != 0);
+}
+
+
 DEF_CHOICE_2( cInputA,                                                                                                                                               //--- КАНАЛ 1 - Вход ---
     "Вход",
     chanInput,

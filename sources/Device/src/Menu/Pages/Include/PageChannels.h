@@ -44,3 +44,9 @@ struct PageChannelB
 
     static const Page * const self;
 };
+
+
+struct PageChannel
+{
+    static void Enable(Chan::E ch, int enable);
+};

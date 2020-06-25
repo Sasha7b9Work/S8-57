@@ -1,6 +1,6 @@
 Сообщение должно заканчиваться символом 0x0D
 
-87 шт - 26 шт/день
+83 шт - 26 шт/день
 
 76
 
@@ -35,8 +35,8 @@
            :PEAKDET { ON | OFF }
            :PEAKDET?
 
--          :MODE { REAL | EQUAL }
--          :MODE?
+           :MODE { REAL | EQUAL }
+           :MODE?
 
 
   :CHANNEL{ 1 | 2 }
@@ -46,8 +46,8 @@
 -                  :OFFSET [-200...200]
 -                  :OFFSET?
                    
--                  :DISPLAY { ON | OFF }
--                  :DISPLAY?
+                   :DISPLAY { ON | OFF }
+                   :DISPLAY?
                    
 -                  :COUPLING { AC | DC | GND }
 -                  :COUPLING?
