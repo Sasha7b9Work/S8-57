@@ -1,6 +1,6 @@
 Сообщение должно заканчиваться символом 0x0D
 
-94 шт - 26 шт/день
+91 шт - 26 шт/день
 
 76
 
@@ -11,7 +11,7 @@
 - :STOP
 - :AUTOSEARCH
 
-- :HELP
+  :HELP
   
   :KEY:{ PRESS | LONG } { Function | Measure | Memory | Service | A | B | Time | Start | Trig | Display |
                           RangeA+ | RangeA- | RshiftA+ | RshiftA- | RangeB+ | RangeB- | RshiftB+ | RshiftB- |
@@ -87,8 +87,8 @@
 
 
   :TRIG
--      :MODE { AUTO | NORMAL | SINGLE }
--      :MODE?
+       :MODE { AUTO | NORMAL | SINGLE }
+       :MODE?
        
 -      :SOURCE { A | B }
 -      :SOURCE?

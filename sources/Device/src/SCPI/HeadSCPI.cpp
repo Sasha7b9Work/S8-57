@@ -34,7 +34,7 @@ const StructSCPI SCPI::head[] =
     SCPI_NODE(":DISPLAY",  SCPI::display),
     SCPI_NODE(":KEY",      SCPI::key),
     SCPI_NODE(":TIMEBASE", SCPI::tBase),
-    SCPI_NODE(":TRIGGER",  SCPI::trigger),
+    SCPI_NODE(":TRIG",     SCPI::trigger),
     SCPI_EMPTY()
 };
 

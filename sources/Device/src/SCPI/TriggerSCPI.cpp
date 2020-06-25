@@ -5,12 +5,12 @@
 
 
 // :TRIGGER:SWEEP
-static const char *FuncSweep(const char *);
-static bool TestSweep();
-static void HintSweep(String *);
+static const char *FuncMode(const char *);
+static bool TestMode();
+static void HintMode(String *);
 
 
-static const char *const sweep[] =
+static const char *const modes[] =
 {
     " AUTO",
     " NORMAL",
@@ -21,26 +21,26 @@ static const char *const sweep[] =
 
 const StructSCPI SCPI::trigger[] =
 {
-    SCPI_LEAF(":SWEEP", FuncSweep, TestSweep, "Set or query the trigger mode", HintSweep),
+    SCPI_LEAF(":MODE", FuncMode, TestMode, "Set or query the trigger mode", HintMode),
     SCPI_EMPTY()
 };
 
 
-static const char *FuncSweep(const char *buffer)
+static const char *FuncMode(const char *buffer)
 {
-    SCPI_REQUEST(SCPI::SendAnswer(sweep[S_TRIG_START_MODE]));
+    SCPI_REQUEST(SCPI::SendAnswer(modes[S_TRIG_START_MODE]));
 
-    SCPI_PROCESS_ARRAY(sweep, TrigStartMode::Set(static_cast<TrigStartMode::E>(i)));
+    SCPI_PROCESS_ARRAY(modes, TrigStartMode::Set(static_cast<TrigStartMode::E>(i)));
 }
 
 
-static void HintSweep(String *message)
+static void HintMode(String *message)
 {
-    SCPI::ProcessHint(message, sweep);
+    SCPI::ProcessHint(message, modes);
 }
 
 
-static bool TestSweep()
+static bool TestMode()
 {
     return false;
 }
