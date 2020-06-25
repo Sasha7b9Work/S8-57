@@ -1943,19 +1943,9 @@
           <GroupName>SCPI</GroupName>
           <Files>
             <File>
-              <FileName>READ_ME.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\SCPI\READ_ME.h</FilePath>
-            </File>
-            <File>
               <FileName>ChannelsSCPI.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\SCPI\ChannelsSCPI.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>ChannelsSCPI.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\SCPI\ChannelsSCPI.h</FilePath>
             </File>
             <File>
               <FileName>DisplaySCPI.cpp</FileName>
@@ -1963,29 +1953,14 @@
               <FilePath>.\src\SCPI\DisplaySCPI.cpp</FilePath>
             </File>
             <File>
-              <FileName>DisplaySCPI.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\SCPI\DisplaySCPI.h</FilePath>
-            </File>
-            <File>
               <FileName>HeadSCPI.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\SCPI\HeadSCPI.cpp</FilePath>
             </File>
             <File>
-              <FileName>HeadSCPI.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\SCPI\HeadSCPI.h</FilePath>
-            </File>
-            <File>
               <FileName>KeySCPI.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\SCPI\KeySCPI.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>KeySCPI.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\SCPI\KeySCPI.h</FilePath>
             </File>
             <File>
               <FileName>SCPI.cpp</FileName>
@@ -2003,19 +1978,9 @@
               <FilePath>.\src\SCPI\TBaseSCPI.cpp</FilePath>
             </File>
             <File>
-              <FileName>TBaseSCPI.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\SCPI\TBaseSCPI.h</FilePath>
-            </File>
-            <File>
               <FileName>TriggerSCPI.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\SCPI\TriggerSCPI.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>TriggerSCPI.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\SCPI\TriggerSCPI.h</FilePath>
             </File>
           </Files>
         </Group>

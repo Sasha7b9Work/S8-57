@@ -9,6 +9,7 @@
     4. Команда должна заканчиваться символом с кодом 0x0D.
 */
 
+
 class String;
 
 typedef const char *(*FuncSCPI)(const char *);
@@ -87,3 +88,19 @@ namespace SCPI
 
     void ProcessHint(String *message, const char *const *names); //-V2504
 };
+
+
+namespace SCPI
+{
+    extern const StructSCPI head[];     //-V2504
+
+    extern const StructSCPI channels[]; //-V2504
+
+    extern const StructSCPI display[];  //-V2504
+
+    extern const StructSCPI key[];      //-V2504
+
+    extern const StructSCPI tBase[];    //-V2504
+
+    extern const StructSCPI trigger[];  //-V2504
+}

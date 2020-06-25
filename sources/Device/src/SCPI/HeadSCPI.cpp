@@ -1,12 +1,7 @@
 #include "defines.h"
 #include "Menu/Pages/Include/DebugPage.h"
 #include "Menu/Pages/Include/PageService.h"
-#include "SCPI/ChannelsSCPI.h"
-#include "SCPI/DisplaySCPI.h"
-#include "SCPI/HeadSCPI.h"
-#include "SCPI/KeySCPI.h"
-#include "SCPI/TBaseSCPI.h"
-#include "SCPI/TriggerSCPI.h"
+#include "SCPI/SCPI.h"
 
 
 // *IDN?

@@ -1,6 +1,5 @@
 #include "defines.h"
 #include "Hardware/VCP.h"
-#include "SCPI/HeadSCPI.h"
 #include "SCPI/SCPI.h"
 #include "Utils/Buffer.h"
 #include "Utils/String.h"

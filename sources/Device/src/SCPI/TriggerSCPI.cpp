@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "Menu/Pages/Include/PageTrig.h"
-#include "SCPI/HeadSCPI.h"
+#include "SCPI/SCPI.h"
 #include "Settings/Settings.h"
 
 
