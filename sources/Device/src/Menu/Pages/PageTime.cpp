@@ -89,6 +89,14 @@ DEF_CHOICE_2( cSample,                                                          
     S_RAND_SAMPLE_TYPE, &PageTime::self, IsActive_Sample, Choice::Changed, Choice::AfterDraw
 )
 
+void PageTime::SetSampleTime(SampleType::E v)
+{
+    if (IsActive_Sample())
+    {
+        S_RAND_SAMPLE_TYPE = v;
+    }
+}
+
 
 static bool IsActive_PeakDet()
 {

@@ -101,5 +101,7 @@ struct PageTime
 
     static void OnChanged_TPos(bool active);
 
+    static void SetSampleTime(SampleType::E v);
+
     static const Page * const self;
 };
