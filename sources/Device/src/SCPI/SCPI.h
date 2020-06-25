@@ -74,13 +74,17 @@ namespace SCPI
     void AppendNewData(const char *buffer, int length);
 
     void Update();
+    
     // Возвращает true, если указатель указывает на завершающую последовательность
     bool IsLineEnding(const char **bufer);
+    
     // Послать ответ
     void SendAnswer(const char *message);
+    
     // Если строка buffer начинается с последовательности символов word, то возвращает указатель на символ, следующий за последним символом последовательности word.
     // Иначе возвращает nullptr.
     const char *BeginWith(const char *buffer, const char *word);
+    
     // Послать сообщение об ошибочных символах, если таковые имеются
     void SendBadSymbols();
 

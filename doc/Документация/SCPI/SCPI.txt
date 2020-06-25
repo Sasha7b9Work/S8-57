@@ -1,6 +1,6 @@
 Сообщение должно заканчиваться символом 0x0D
 
-98 шт - 26 шт/день
+94 шт - 26 шт/день
 
 76
 
@@ -20,11 +20,11 @@
 
          
   :TIMEBASE
--          :SCALE {        2ns | 5ns | 10ns | 20ns | 50ns | 100ns | 200ns | 500ns | 
+           :SCALE {        2ns | 5ns | 10ns | 20ns | 50ns | 100ns | 200ns | 500ns | 
                      1us | 2us | 5us | 10us | 20us | 50us | 100us | 200us | 500us |
                      1ms | 2ms | 5ms | 10ms | 20ms | 50ms | 100ms | 200ms | 500ms |
                      1s  | 2s  | 5s  | 10s }
--          :SCALE?
+           :SCALE?
            
 -          :OFFSET [-8192...32767]
 -          :OFFSET?
@@ -64,8 +64,8 @@
 
 
   :DISPLAY
--         :MAPPING { LINES | DOTS }
--         :MAPPING?
+          :MAPPING { LINES | DOTS }
+          :MAPPING?
   
 -         :AVERAGE { 1 | 2 | 4 | 8 | 16 | 32 | 64 | 128 | 256 }
 -         :AVERAGE?
@@ -87,7 +87,7 @@
 
 
   :TRIG
--      :MODE { AUTO | HAND | SINGLE }
+-      :MODE { AUTO | NORMAL | SINGLE }
 -      :MODE?
        
 -      :SOURCE { A | B }

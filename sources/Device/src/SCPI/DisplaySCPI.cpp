@@ -26,22 +26,22 @@ static const char *const mapping[] =
 
 static const char *const averages[] =
 {
-    " 0",
     " 1",
     " 2",
-    " 3",
     " 4",
-    " 5",
-    " 6",
-    " 7",
     " 8",
+    " 16",
+    " 32",
+    " 64",
+    " 128",
+    " 256",
     ""
 };
 
 
 const StructSCPI SCPI::display[] =
 {
-    SCPI_LEAF(":AVERAGES", FuncAverages, TestAverages, "Number of averages",     HintAverages),
+    SCPI_LEAF(":AVERAGE",  FuncAverages, TestAverages, "Number of averages",     HintAverages),
     SCPI_LEAF(":MAPPING",  FuncMapping, TestMapping,   "Signal display control", HintMapping),
     SCPI_EMPTY()
 };
