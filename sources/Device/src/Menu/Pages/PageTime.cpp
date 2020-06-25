@@ -116,6 +116,12 @@ DEF_CHOICE_2( cPeakDet,                                                         
     S_PEAK_DET, &PageTime::self, IsActive_PeakDet, PageTime::OnChanged_PeakDet, Choice::AfterDraw
 )
 
+void PeakDetMode::Set(PeakDetMode::E v)
+{
+    S_PEAK_DET = v;
+
+    PageTime::OnChanged_PeakDet(cPeakDet.IsActive());
+}
 
 void PageTime::OnChanged_TPos(bool active)
 {

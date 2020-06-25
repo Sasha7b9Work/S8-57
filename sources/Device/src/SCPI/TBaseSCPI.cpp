@@ -4,12 +4,22 @@
 #include "Settings/Settings.h"
 
 
-// :TIME:SCALE:
+// :TIMEBASE:MODE
+static const char *FuncMode(const char *);
+static bool TestMode();
+static void HintMode(String *);
+
+// :TIMEBASE:PEAKDET
+static const char *FuncPeakDet(const char *);
+static bool TestPeakDet();
+static void HintPeakDet(String *);
+
+// :TIMEBASE:SCALE:
 static const char *FuncScale(const char *);
 static bool TestScale();
 static void HintScale(String *);
 
-// :TIME:TPOS:
+// :TIMEBASE:TPOS:
 static const char *FuncTPos(const char *);
 static bool TestTPos();
 static void HintTPos(String *);
@@ -61,12 +71,29 @@ static const char *const tposes[] =
 };
 
 
+static const char *const peakdets[] =
+{
+    " OFF",
+    " ON",
+    ""
+};
+
+
 const StructSCPI SCPI::tBase[] =
 {
-    SCPI_LEAF(":SCALE", FuncScale, TestScale, "Horizontal zoom control", HintScale),
-    SCPI_LEAF(":TPOS",  FuncTPos,  TestTPos,  "Snap sync to screen",     HintTPos),
+    SCPI_LEAF(":PEAKDET", FuncPeakDet, TestPeakDet, "Peak detector control",   HintPeakDet),
+    SCPI_LEAF(":SCALE",   FuncScale,   TestScale,   "Horizontal zoom control", HintScale),
+    SCPI_LEAF(":TPOS",    FuncTPos,    TestTPos,    "Snap sync to screen",     HintTPos),
     SCPI_EMPTY()
 };
+
+
+static const char *FuncPeakDet(const char *buffer)
+{
+    SCPI_REQUEST(SCPI::SendAnswer(peakdets[S_PEAK_DET]));
+
+    SCPI_PROCESS_ARRAY(peakdets, PeakDetMode::Set(static_cast<PeakDetMode::E>(i)));
+}
 
 
 static const char *FuncScale(const char *buffer)
@@ -85,14 +112,27 @@ static const char *FuncTPos(const char *buffer)
 }
 
 
+static bool TestPeakDet()
+{
+    return true;
+}
+
+
 static bool TestScale()
 {
    return true;
 }
 
+
 static bool TestTPos()
 {
     return true;
+}
+
+
+static void HintPeakDet(String *message)
+{
+    SCPI::ProcessHint(message, peakdets);
 }
 
 

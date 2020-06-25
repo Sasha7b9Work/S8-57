@@ -13,6 +13,8 @@ struct PeakDetMode
     };
 
     static bool IsEnabled();
+
+    static void Set(E v);
 };
 
 

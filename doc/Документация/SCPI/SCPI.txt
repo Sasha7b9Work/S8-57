@@ -1,6 +1,6 @@
 Сообщение должно заканчиваться символом 0x0D
 
-91 шт - 26 шт/день
+87 шт - 26 шт/день
 
 76
 
@@ -29,11 +29,11 @@
 -          :OFFSET [-8192...32767]
 -          :OFFSET?
            
--          :TPOS { LEFT | CENTER | RIGHT }
--          :TPOS?
+           :TPOS { LEFT | CENTER | RIGHT }
+           :TPOS?
 
--          :PEAKDET { ON | OFF }
--          :PEAKDET?
+           :PEAKDET { ON | OFF }
+           :PEAKDET?
 
 -          :MODE { REAL | EQUAL }
 -          :MODE?
