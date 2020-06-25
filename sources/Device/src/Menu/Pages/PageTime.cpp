@@ -25,6 +25,13 @@ int TPos::PosX()
 }
 
 
+void TPos::Set(TPos::E v)
+{
+    S_TPOS = v;
+    PageTime::OnChanged_TPos(true);
+}
+
+
 void TPos::Draw()
 {
     int x0 = PosX();

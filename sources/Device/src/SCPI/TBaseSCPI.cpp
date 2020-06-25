@@ -9,6 +9,12 @@ static const char *FuncScale(const char *);
 static bool TestScale();
 static void HintScale(String *);
 
+// :TIME:TPOS:
+static const char *FuncTPos(const char *);
+static bool TestTPos();
+static void HintTPos(String *);
+
+
 
 static const char *const tBaseNames[] =
 {
@@ -46,9 +52,19 @@ static const char *const tBaseNames[] =
 };
 
 
+static const char *const tposes[] =
+{
+    " LEFT",
+    " CENTER",
+    " RIGHT",
+    ""
+};
+
+
 const StructSCPI SCPI::tBase[] =
 {
     SCPI_LEAF(":SCALE", FuncScale, TestScale, "Horizontal zoom control", HintScale),
+    SCPI_LEAF(":TPOS",  FuncTPos,  TestTPos,  "Snap sync to screen",     HintTPos),
     SCPI_EMPTY()
 };
 
@@ -61,13 +77,32 @@ static const char *FuncScale(const char *buffer)
 }
 
 
+static const char *FuncTPos(const char *buffer)
+{
+    SCPI_REQUEST(SCPI::SendAnswer(tposes[S_TPOS]));
+
+    SCPI_PROCESS_ARRAY(tposes, TPos::Set(static_cast<TPos::E>(i)));
+}
+
+
 static bool TestScale()
 {
    return true;
+}
+
+static bool TestTPos()
+{
+    return true;
 }
 
 
 static void HintScale(String *message)
 {
     SCPI::ProcessHint(message, tBaseNames);
+}
+
+
+static void HintTPos(String *message)
+{
+    SCPI::ProcessHint(message, tposes);
 }

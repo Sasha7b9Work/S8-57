@@ -35,6 +35,8 @@ struct TPos
     static void Draw();
 
     static int PosX();
+
+    static void Set(E v);
 };
 
 
