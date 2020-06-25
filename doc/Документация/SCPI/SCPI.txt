@@ -1,6 +1,6 @@
 Сообщение должно заканчиваться символом 0x0D
 
-81 шт - 26 шт/день
+79 шт - 26 шт/день
 
 76
 
@@ -90,8 +90,8 @@
        :MODE { AUTO | NORMAL | SINGLE }
        :MODE?
        
--      :SOURCE { A | B }
--      :SOURCE?
+       :SOURCE { 1 | 2 }
+       :SOURCE?
        
 -      :POLARITY { RISE | FALL |
 -      :POLARITY?
@@ -180,7 +180,7 @@
 -     :DISPLAY { ON | OFF }
 -     :DISPLAY?
 
--     :SOURCE { A | B | BOTH }
+-     :SOURCE { 1 | 2 | BOTH }
 -     :SOURCE?
 
 -     :SCALE { LINEAR | LOG }

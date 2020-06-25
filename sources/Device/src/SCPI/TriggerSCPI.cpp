@@ -4,10 +4,16 @@
 #include "Settings/Settings.h"
 
 
-// :TRIGGER:SWEEP
+// :TRIG:MODE
 static const char *FuncMode(const char *);
-static bool TestMode();
 static void HintMode(String *);
+static bool TestMode();
+
+
+// :TRIG:SOURCE
+static const char *FuncSource(const char *);
+static void HintSource(String *);
+static bool TestSource();
 
 
 static const char *const modes[] =
@@ -19,9 +25,18 @@ static const char *const modes[] =
 };
 
 
+static const char *const sources[] =
+{
+    " 1",
+    " 2",
+    ""
+};
+
+
 const StructSCPI SCPI::trigger[] =
 {
-    SCPI_LEAF(":MODE", FuncMode, TestMode, "Set or query the trigger mode", HintMode),
+    SCPI_LEAF(":MODE",   FuncMode,   TestMode,   "Set or query the trigger mode", HintMode),
+    SCPI_LEAF(":SOURCE", FuncSource, TestSource, "Source selection",              HintSource),
     SCPI_EMPTY()
 };
 
@@ -34,13 +49,33 @@ static const char *FuncMode(const char *buffer)
 }
 
 
+static const char *FuncSource(const char *buffer)
+{
+    SCPI_REQUEST(SCPI::SendAnswer(sources[S_TRIG_SOURCE]));
+
+    SCPI_PROCESS_ARRAY(sources, TrigSource::Set(static_cast<Chan::E>(i)));
+}
+
+
 static void HintMode(String *message)
 {
     SCPI::ProcessHint(message, modes);
 }
 
 
+static void HintSource(String *message)
+{
+    SCPI::ProcessHint(message, sources);
+}
+
+
 static bool TestMode()
+{
+    return false;
+}
+
+
+static bool TestSource()
 {
     return false;
 }
