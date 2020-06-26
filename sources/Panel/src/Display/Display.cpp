@@ -1,11 +1,12 @@
 #include "defines.h"
 #include "Display.h"
 #include "Display/Painter.h"
+#include "Display/Text.h"
 #include "Hardware/Controls.h"
 #include "Hardware/CPU.h"
 #include "Hardware/LTDC.h"
 #include "Hardware/HAL/HAL.h"
-#include <stdlib.h>
+#include <cstdlib>
 
 
 
@@ -17,12 +18,16 @@ uint8 *Display::frontBuffer = front;
 uint8 *Display::backBuffer = back;
 
 
+static void DrawStartScreen();
+
 
 void Display::Init()
 {
     HAL_DAC2::Init();
     LTDC_::Init(reinterpret_cast<uint>(frontBuffer), reinterpret_cast<uint>(backBuffer));
     Painter::LoadPalette();
+
+    DrawStartScreen();
 }
 
 
@@ -68,4 +73,32 @@ uint8 *Display::GetBuffer()
 uint8 *Display::GetBufferEnd()
 {
     return backBuffer + BUFFER_WIDTH * BUFFER_HEIGHT;
+}
+
+
+static void DrawStartScreen()
+{
+    Painter::SetColor(Color::BACK);
+
+    Painter::BeginScene();
+
+    Painter::SetColor(Color::FILL);
+
+    PFont::Set(PTypeFont::_GOST28);
+    Text::SetSpacing(3);
+
+    int x0 = 85;
+    int dX = 65;
+    int y0 = 50;
+
+    int x1 = 120;
+    int y1 = 130;
+
+    Text::Draw(x0, y0, "Œ¿Œ");
+
+    Text::Draw(x0 + dX, y0, "ÃÕ»œ»");
+
+    Text::Draw(x1, y1, "—8-57");
+
+    Painter::EndScene();
 }
