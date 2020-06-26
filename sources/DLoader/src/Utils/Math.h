@@ -26,14 +26,14 @@
 #define IN_RANGE(x, min, max)               ((x) >= (min) && (x) <= (max))
 
 
-// Возвращает true, если value входит в диапазон [min; max]
+/// Возвращает true, если value входит в диапазон [min; max]
 bool IntInRange(int value, int min, int max);
-// Возвращает номер младшего бита, равного единице
+/// Возвращает номер младшего бита, равного единице
 int LowSignedBit(uint value);
-// Возвращает максимальное значение из трёх
+/// Возвращает максимальное значение из трёх
 float MaxFloat(float val1, float val2, float val3);
-// \brief Сравнивает два числа. Возвращает true, если числа отличаются друг от друга не более, чем на epsilonPart. При этом для расчёта epsilonPart 
-// используется большее в смысле модуля число.
+/// \brief Сравнивает два числа. Возвращает true, если числа отличаются друг от друга не более, чем на epsilonPart. При этом для расчёта epsilonPart 
+/// используется большее в смысле модуля число.
 bool FloatsIsEquals(float value0, float value1, float epsilonPart);
 
 bool IsEquals(float x, float y);
@@ -60,30 +60,30 @@ public:
     static uint8 MaxFromArrayWithErrorCode(const uint8 *data, int firstPoint, int lastPoint);
 
     static uint8 MinFromArrayWithErrorCode(const uint8 *data, int firstPoint, int lastPoint);
-    // \brief Возвращает координату x пересечения линии, проходящей через (x0, y0), (x1, y1), с горизонтальной линией, проходящей через точку с 
-    // ординатой yHorLine.
+    /// \brief Возвращает координату x пересечения линии, проходящей через (x0, y0), (x1, y1), с горизонтальной линией, проходящей через точку с 
+    /// ординатой yHorLine.
     static float GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, int yHorLine);
     
     static uint8 CalculateFiltr(const uint8 *data, int x, int numPoints, int numSmoothing);
 
     static void CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoints, int numSmoothing);
-    // Найти первый элемент массива, не соотвествующий заданному
+    /// Найти первый элемент массива, не соотвествующий заданному
     static int FindAnotherElement(const uint8 *data, uint8 value, int numElements);
 
     static int DigitsInIntPart(float value);
-    // \brief Округляет число с плавающей точкой. numDigits - полное число знаков, по которым производится округление.
-    // Например, RoundFloat(12.37137, 4) округлит до 12.40)
+    /// \brief Округляет число с плавающей точкой. numDigits - полное число знаков, по которым производится округление.
+    /// Например, RoundFloat(12.37137, 4) округлит до 12.40)
     static float RoundFloat(float value, int numDigits);
 };
 
 
-// Вычисление 10**pow.
+/// Вычисление 10**pow.
 int Pow10(int pow);
 
-// Обменивает местами содержимое памяти по адресам value0 и value1
+/// Обменивает местами содержимое памяти по адресам value0 и value1
 template<class T> void Swap(T *value0, T *value1) { T temp = *value0; *value0 = *value1; *value1 = temp; }
 
-// Размещает переменные value0 и value1 в порядке возрастания
+/// Размещает переменные value0 и value1 в порядке возрастания
 template<class T> void Sort(T *value0, T *value1) { if (*value1 < *value0) { Swap<T>(value0, value1); } }
 
 template<class T> int Sign(T x) { if (x > (T)(0)) { return 1; } if (x < (T)(0)) { return -1; } return 0; }
@@ -105,15 +105,19 @@ template<class T> void CircleDecrease(T *value, T min, T max)
     if (*value > min) { --(*value); }
     else              { *value = (T)max; }
 }
-// Инкрементировать *value, но не больше, чем max
+/// Инкрементировать *value, но не больше, чем max
 template<class T> static void LimitationIncrease(T *value, T max) { if ((*value) < max) { ++(*value); } }
-// Декрементировать *value, но не меньше, чем min
+/// Декрементировать *value, но не меньше, чем min
 template<class T> static void LimitationDecrease(T *value, T min) { if (*value > min) { --(*value); } }
 
 template<class T> static void Limitation(T *value, T min, T max)
 {
     if (*value < min)      { *value = min; }
     else if (*value > max) { *value = max; }
+    else
+    {
+        // здесь ничего
+    }
 }
 
 template<class T> static T LimitationRet(T value, T min, T max)
@@ -122,7 +126,7 @@ template<class T> static T LimitationRet(T value, T min, T max)
     if (value > max) { return max; }
     return value;
 }
-// Прибавить к *value term и ограничить, если результат выходит за границы [min, max]
+/// Прибавить к *value term и ограничить, если результат выходит за границы [min, max]
 template<class T> static void AddtionThisLimitation(T *value, int term, T min, T max)
 {
     if (term > 0){

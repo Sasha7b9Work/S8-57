@@ -328,8 +328,8 @@ static bool CompareArrays(const bool *array1, const bool *array2, int numElems) 
 }
 
 
-// \brief Ќаходит следующий перенос. C letters начинаетс€ часть слово, где нужно найти перенос, в lettersInSyllable будет записано число букв в 
-// найденном слоге. ≈сли слово закончилось, функци€ возвращает false
+/// \brief Ќаходит следующий перенос. C letters начинаетс€ часть слово, где нужно найти перенос, в lettersInSyllable будет записано число букв в 
+/// найденном слоге. ≈сли слово закончилось, функци€ возвращает false
 static bool FindNextTransfer(const char *letters, int8 *lettersInSyllable) //-V2506
 {
 
@@ -338,7 +338,7 @@ static bool FindNextTransfer(const char *letters, int8 *lettersInSyllable) //-V2
 
     *lettersInSyllable = static_cast<int8>(std::strlen(letters)); //-V1029
 
-    if (std::strlen(letters) <= 3) //-V2513 //-V1051
+    if (std::strlen(letters) <= 3) //-V2513
     {
         return false;
     }
@@ -427,6 +427,10 @@ static int8 *BreakWord(char *word)
     {
         int8 lenghts[] = { 4, 3, 4, 5, 3, 0 };
         std::memcpy(lengthSyllables, lenghts, 6);
+    }
+    else
+    {
+        // здесь ничего не делаем
     }
 
     return lengthSyllables;

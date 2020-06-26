@@ -36,24 +36,24 @@ struct InPin
 
 struct DataBus
 {
-    // Первоначальная инициализация
+    /// Первоначальная инициализация
     static void Init();
 };
 
 
-// По активному состоянию этого пина панель определяет, что главный МК готов к взаимодействию
+/// По активному состоянию этого пина панель определяет, что главный МК готов к взаимодействию
 static OutPin pinCS(PIN_CS);
-// По активновному состоянию этого пина панель определяте, что главный МК хочет делать передачу
+/// По активновному состоянию этого пина панель определяте, что главный МК хочет делать передачу
 static OutPin pinWR(PIN_WR);
-// По активному состоянию этого пина панель определяте, что главный МК хочет делать чтение
+/// По активному состоянию этого пина панель определяте, что главный МК хочет делать чтение
 static OutPin pinRD(PIN_RD);
 
-// Активным состоянием этого пина панель сообщает о готовности к взаимодействию
+/// Активным состоянием этого пина панель сообщает о готовности к взаимодействию
 static InPin pinReadyPAN(PIN_PAN_READY);
-// Активное состояние этого пина сообщает о том, что панель имеет данные для пеередчи
+/// Активное состояние этого пина сообщает о том, что панель имеет данные для пеередчи
 static InPin pinDataPAN(PIN_PAN_DATA);
 
-// true означает, что шина находится в процессе обмена с панелью и запись по обычной FSMC в альтеру и память запрещена
+/// true означает, что шина находится в процессе обмена с панелью и запись по обычной FSMC в альтеру и память запрещена
 static bool interactionWithPanel = false;
 
 void HAL_BUS::InitPanel()
@@ -70,7 +70,7 @@ bool HAL_BUS::Panel::Receive()
 {
     //if(pinReadyPAN.IsPassive() || pinDataPAN.IsPassive())
     //if((GPIOA->IDR & GPIO_PIN_7) != GPIO_PIN_RESET || (GPIOC->IDR & GPIO_PIN_4) != GPIO_PIN_RESET)
-    if((GPIOA->IDR & GPIO_PIN_7) || (GPIOC->IDR & GPIO_PIN_4)) //-V2570
+    if((GPIOA->IDR & GPIO_PIN_7) || (GPIOC->IDR & GPIO_PIN_4))
     {
         return false;
     }
@@ -140,9 +140,9 @@ void HAL_BUS::Panel::Send(uint8 byte0, uint8 byte1)
     Send(buffer, 2);
 }
 
-void HAL_BUS::Panel::Send(uint8 *data, int size)
+void HAL_BUS::Panel::Send(uint8 *data, uint size)
 {
-    if(!(GPIOA->IDR & GPIO_PIN_7) && !(GPIOC->IDR & GPIO_PIN_4)) //-V2570
+    if(!(GPIOA->IDR & GPIO_PIN_7) && !(GPIOC->IDR & GPIO_PIN_4))
     {
         while(Receive()) { }
     }
@@ -164,7 +164,7 @@ void HAL_BUS::Panel::Send(uint8 *data, int size)
         GPIOE->MODER |= 0x00154000U;        // Устанавливаем для этих пинов GPIO_MODE_OUTPUT_PP
     }
 
-    for(int i = 0; i < size; i++)
+    for(uint i = 0; i < size; i++)
     {
         uint8 d = *data++;
 

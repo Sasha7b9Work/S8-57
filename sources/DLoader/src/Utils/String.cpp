@@ -19,7 +19,7 @@ String::String(const String &rhs) : buffer(nullptr)
 {
     Set(TypeConversionString::None, "");
 
-    if (Allocate(static_cast<int>(std::strlen(rhs.c_str()) + 1)))
+    if (Allocate(std::strlen(rhs.c_str()) + 1))
     {
         std::strcpy(buffer, rhs.c_str());
     }
@@ -59,14 +59,18 @@ String::String(const char *format, ...) : buffer(nullptr)
     {
         std::strcpy(buffer, "Буфер слишком мал");
     }
-    else if (Allocate(static_cast<int>(std::strlen(buf) + 1)))
+    else if (Allocate(std::strlen(buf) + 1))
     {
         std::strcpy(buffer, buf);
+    }
+    else
+    {
+        // здесь ничего
     }
 }
 
 
-void String::Set(TypeConversionString::E, const char *format, ...)
+void String::Set(TypeConversionString::E conv, const char *format, ...)
 {
     Free();
 
@@ -84,9 +88,13 @@ void String::Set(TypeConversionString::E, const char *format, ...)
         {
             std::strcpy(buffer, "Буфер слишком мал");
         }
-        else if(Allocate(static_cast<int>(std::strlen(buf) + 1)))
+        else if(Allocate(std::strlen(buf) + 1))
         {
             std::strcpy(buffer, buf);
+        }
+        else
+        {
+            // здесь ничего
         }
     }
 }
@@ -103,14 +111,14 @@ void String::Append(const char *str)
 
     Free();
 
-    Allocate(static_cast<int>(old.Size() + std::strlen(str) + 1));
+    Allocate(old.Size() + std::strlen(str) + 1);
 
     std::strcpy(buffer, old.c_str());
     std::strcat(buffer, str);
 }
 
 
-void String::Append(const char *str, int numSymbols)
+void String::Append(const char *str, uint numSymbols)
 {
     if (!str || *str == '\0')
     {
@@ -121,12 +129,12 @@ void String::Append(const char *str, int numSymbols)
 
     Free();
 
-    int size = numSymbols + old.Size() + 1;
+    uint size = numSymbols + old.Size() + 1;
 
     Allocate(size);
 
     std::strcpy(buffer, old.c_str());
-    std::memcpy(buffer + old.Size(), str, static_cast<uint>(numSymbols));
+    std::memcpy(buffer + old.Size(), str, numSymbols);
     buffer[size - 1] = '\0';
 }
 
@@ -161,10 +169,10 @@ char *String::c_str() const
 }
 
 
-bool String::Allocate(int size)
+bool String::Allocate(uint size)
 {
     std::free(buffer);
-    buffer = static_cast<char *>(std::malloc(static_cast<uint>(size)));
+    buffer = static_cast<char *>(std::malloc(size));
     if (buffer)
     {
         return true;
@@ -181,9 +189,9 @@ int String::Draw(int x, int y, Color color) const
 }
 
 
-void String::RemoveFromBegin(int numSymbols)
+void String::RemoveFromBegin(uint numSymbols)
 {
-    if (std::strlen(buffer) == static_cast<uint>(numSymbols))
+    if (std::strlen(buffer) == numSymbols)
     {
         Free();
     }
@@ -209,18 +217,18 @@ void String::RemoveFromEnd()
 }
 
 
-int String::Size() const
+uint String::Size() const
 {
     if (buffer == nullptr)
     {
         return 0;
     }
 
-    return static_cast<int>(std::strlen(buffer));
+    return std::strlen(buffer);
 }
 
 
-char &String::operator[](int i)
+char &String::operator[](uint i)
 {
     static char result = 0;
 

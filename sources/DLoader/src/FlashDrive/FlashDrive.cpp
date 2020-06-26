@@ -140,8 +140,8 @@ void FDrive::AttemptUpdate()
     {
     }
 
-    if(((connection != 0) && (active == 0)) ||  // ≈сли флеша подключена, но в активное состо€ние почему-то не перешла
-        ((active != 0) && (state != State::Mount)))     // или перешла в активное состо€ние, по почему-то не запустилс€ процесс монтировани€
+    if((connection && active == 0) ||  // ≈сли флеша подключена, но в активное состо€ние почему-то не перешла
+        (active && state != State::Mount))     // или перешла в активное состо€ние, по почему-то не запустилс€ процесс монтировани€
     {
         NVIC_SystemReset();
     }
@@ -156,6 +156,10 @@ void FDrive::AttemptUpdate()
         if(FileExist(FILE_FIRMWARE))                    // ≈сли на диске обнаружена прошивка
         {
             Upgrade();
+        }
+        else
+        {
+            state = State::NotFile;
         }
     }
     else if(state == State::WrongFlash) // ƒиск не удалось примонтировать //-V774
@@ -411,7 +415,7 @@ void Upgrade()
         size -= readedBytes;
         address += static_cast<uint>(readedBytes);
 
-        percentsUpdate = 1.0F - static_cast<float>(size) / static_cast<float>(fullSize);
+        percentsUpdate = 1.0F - static_cast<float>(size) / fullSize;
     }
 
     FDrive::CloseOpenedFile();

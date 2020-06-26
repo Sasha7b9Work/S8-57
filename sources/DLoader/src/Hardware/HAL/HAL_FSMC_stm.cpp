@@ -58,7 +58,7 @@ void HAL_BUS::Init()
         GPIO_AF12_FMC
     };
 
-    // \todo Здесь не довеедно - не хотит, почему-то
+    /// \todo Здесь не довеедно - не хотит, почему-то
 
     HAL_GPIO_Init(GPIOD, const_cast<GPIO_InitTypeDef *>(&isGPIO));
 
@@ -175,7 +175,7 @@ void HAL_BUS::ConfigureToFSMC()
 
     //           NOE          NWE          NE1
     is.Pin = GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_7;   
-    HAL_GPIO_Init(GPIOD, &is); //-V525
+    HAL_GPIO_Init(GPIOD, &is);
 
     //           D2           D3           D0            D1
     is.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_14 | GPIO_PIN_15;

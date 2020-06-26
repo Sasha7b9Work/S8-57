@@ -31,7 +31,7 @@ struct HAL_BUS
     {
         static void Send(uint8 byte);
         static void Send(uint8 byte0, uint8 byte1);
-        static void Send(uint8 *data, int size);
+        static void Send(uint8 *data, uint size);
         static bool Receive();
         static bool InInteraction();
     };

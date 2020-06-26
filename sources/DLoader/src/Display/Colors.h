@@ -17,18 +17,16 @@ public:
     static Color MENU_ITEM_BRIGHT;
     static Color DATA_WHITE_ACCUM_A;
     static Color DATA_WHITE_ACCUM_B;
-
     static Color RED;
-
     static Color GREEN;
-
     static Color BLUE;
-
+    static Color BLUE_25;
+    static Color BLUE_50;
     static Color GRAY_10;
     static Color GRAY_20;
+    static Color BLUE_10;
     static Color GRAY_50;
     static Color GRAY_75;
-
     static Color DATA_HALF_A;
     static Color DATA_HALF_B;
     static Color SEPARATOR;
@@ -45,9 +43,9 @@ public:
     explicit Color(uint8 val) : value(val) { }
     Color(const Color &color) : value(color.value) { }
 
-    // Устанавливает текущий цвет отрисовки
+    /// Устанавливает текущий цвет отрисовки
     void SetAsCurrent();
-    // Возвращает текущий цвет отрисовки
+    /// Возвращает текущий цвет отрисовки
     static Color GetCurent();
 
     static void Log(Color color);
@@ -59,7 +57,7 @@ public:
     uint8 value;
 
     static Color CHAN[4];
-    // Переключить "мигающий" цвет. Если reset == true, сбрасывется на белый
+    /// Переключить "мигающий" цвет. Если reset == true, сбрасывется на белый
     static void ChangeFlash(bool reset = false);
 
 private:
@@ -78,16 +76,16 @@ private:
         _NONE = 9,
         COLOR_MENU_ITEM_DARK = 10,
         COLOR_MENU_ITEM_BRIGHT = 11,
-        COLOR_DATA_WHITE_ACCUM_A = 12,   // Используется как для отрисовки канала на белом фоне, так и для отрисовки накопленных сигналов
+        COLOR_DATA_WHITE_ACCUM_A = 12,   ///< Используется как для отрисовки канала на белом фоне, так и для отрисовки накопленных сигналов
         COLOR_DATA_WHITE_ACCUM_B = 13,
         COLOR_RED = 14,
         COLOR_GREEN = 15,
         COLOR_BLUE = 16,
-
-
+        COLOR_BLUE_25 = 17,
+        COLOR_BLUE_50 = 18,
         COLOR_GRAY_10 = 19,
         COLOR_GRAY_20 = 20,
-
+        COLOR_BLUE_10 = 21,
         COLOR_GRAY_50 = 22,
         COLOR_GRAY_75 = 23,
         COLOR_DATA_HALF_A = 24,

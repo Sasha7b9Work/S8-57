@@ -11,7 +11,6 @@
 #include <ff.h>
 #include <cmath>
 #include <cstdlib>
-#include <cstring>
 
 
 
@@ -30,8 +29,8 @@ static uint   timePrev;
 
 
 static void DrawProgressBar(uint dT);
-//static void DrawBigMNIPI();
-//static int RandValue(int min, int max);
+static void DrawBigMNIPI();
+static int RandValue(int min, int max);
 static void InitPoints();
 
 
@@ -49,7 +48,7 @@ struct Vector
 static int numPoints = 0;
 static Vector array[7000] __attribute__ ((section("CCM_DATA")));
 
-//static TypeWelcomeScreen typeScreen = TypeWelcomeScreen_Wave;
+static TypeWelcomeScreen typeScreen = TypeWelcomeScreen_Wave;
 
 #define VAGUE (typeScreen == TypeWelcomeScreen_Vague)
 #define WAVE (typeScreen == TypeWelcomeScreen_Wave)
@@ -102,7 +101,10 @@ void Display::Update()
     {
         Painter::BeginScene(Color::BACK);
         Rectangle(319, 239).Draw(0, 0, Color::FILL);
-        //DrawBigMNIPI();
+        DrawBigMNIPI();
+        Text("Для получения помощи нажмите и удерживайте кнопку ПОМОЩЬ").DrawInCenterRect(0, 180, 320, 20, Color::WHITE);
+        Text("Отдел маркетинга: тел./факс. 8-017-237-23-40").DrawInCenterRect(0, 205, 320, 20);
+        Text("Разработчики: e-mail: mnipi-24(@)tut.by, тел. 8-017-237-22-15").DrawInCenterRect(0, 220, 320, 20);
         Painter::EndScene();
     }
     else if (FDrive::State() == State::Mount)
@@ -129,7 +131,7 @@ void Display::Update()
 
         int height = 30;
         int fullWidth = 280;
-        int width = static_cast<int>(static_cast<float>(fullWidth) * FDrive::PercentsUpdated());
+        int width = static_cast<int>(fullWidth * FDrive::PercentsUpdated());
 
         Region(width, height).Fill(20, 130);
         Rectangle(fullWidth, height).Draw(20, 130);
@@ -148,19 +150,23 @@ void DrawProgressBar(uint dT)
     const int X = 10;
     const int Y = 200;
     
-    float step = static_cast<float>(dT) / direction;
+    float step = dT / direction;
 
     value += step;
 
-    if ((direction > 0.0F) && (value > static_cast<float>(WIDTH)))
+    if (direction > 0.0F && value > WIDTH)
     {
         direction = -direction;
         value -= step;
     }
-    else if ((direction < 0.0F) && (value < 0.0F))
+    else if (direction < 0.0F && value < 0)
     {
         direction = -direction;
         value -= step;
+    }
+    else
+    {
+        // ничего нет
     }
 
     int dH = 15;
@@ -182,7 +188,7 @@ bool Display::IsRun()
 }
 
 
-/*
+
 static void DrawBigMNIPI()
 {
     static uint startTime = 0;
@@ -227,16 +233,14 @@ static void DrawBigMNIPI()
         }
     }
 }
-*/
 
-/*
+
 static int RandValue(int min, int max)
 {
     int val = static_cast<int>(std::rand() % (max - min + 1));
 
     return val + min;
 }
-*/
 
 
 static int DrawBigCharInBuffer(int eX, int eY, int size, uint8 symbol, uint8 buffer[320][240])
@@ -288,7 +292,7 @@ static void DrawBigTextInBuffer(int eX, int eY, int size, const char* text, uint
         }
     }
 
-    int numSymbols = static_cast<int>(std::strlen(text));
+    int numSymbols = static_cast<int>(strlen(text));
 
     int x = eX;
 
