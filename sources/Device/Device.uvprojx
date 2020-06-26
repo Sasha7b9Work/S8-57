@@ -388,6 +388,11 @@
               <FilePath>..\common\Command.h</FilePath>
             </File>
             <File>
+              <FileName>common_defines.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\common_defines.h</FilePath>
+            </File>
+            <File>
               <FileName>Decoder_d.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\common\Decoder_d.h</FilePath>

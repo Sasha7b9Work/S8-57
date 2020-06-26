@@ -7,9 +7,6 @@
 #define __attribute__(x)
 #endif
 
-#define MODEL_RU "Осциллограф-мультиметр"
-#define NUM_VER "0.0.1"
-
 
 typedef const char  *const  pString;
 typedef unsigned char       uchar;

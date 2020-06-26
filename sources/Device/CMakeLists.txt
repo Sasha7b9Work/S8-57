@@ -53,6 +53,7 @@ set_source_files_properties(../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Dr
 
 
 source_group(common                                  FILES ../common/Command.h
+                                                           ../common/common_defines.h
                                                            ../common/Decoder_d.h
                                                            ../common/Decoder_d.cpp
                                                            ../common/Message.h
@@ -131,6 +132,7 @@ file(GLOB SOURCES   ../common/_VS/*
                     ../common/_VS/std_includes/*
 
                     ../common/Command.h
+                    ../common/common_defines.h
                     ../common/Decoder_d.h
                     ../common/Decoder_d.cpp
                     ../common/Message.h
