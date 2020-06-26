@@ -32,9 +32,9 @@ int main()
 
     Timer::PauseOnTime(250);
     
-    Display::Init();
+    //Display::Init();
    
-    Timer::SetAndEnable(kTemp, Display::Update, 10);
+    //Timer::SetAndEnable(kTemp, Display::Update, 10);
 
     FDrive::Init();
 
@@ -42,9 +42,9 @@ int main()
     
     Timer::Disable(kTemp);
 
-    while (Display::IsRun())
-    {
-    }
+    //while (Display::IsRun())
+    //{
+    //}
     
     CPU::DeInit();
 

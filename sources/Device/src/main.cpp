@@ -10,7 +10,7 @@ int main(void)
 {
     Device::Init();
 
-    Timer::PauseOnTime(1000);
+    Timer::PauseOnTime(1);
 
 //    AT25160N::Init();
 
