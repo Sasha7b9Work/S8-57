@@ -5,6 +5,7 @@
 #include "CPU.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
+#include "Hardware/HAL/HAL_PIO.h"
 
 
 
@@ -19,6 +20,9 @@ void CPU::Init()
     // Таймер для мс
     HAL_NVIC_SetPriority(TIM6_DAC_IRQn, 2, 0);
     HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
+
+    HAL_PIO::Init(PIN_POWER, HMode::Output_PP, HPull::Up);
+    HAL_PIO::Set(PIN_POWER);
 }
 
 

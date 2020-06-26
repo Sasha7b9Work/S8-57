@@ -25,10 +25,10 @@ add_definitions(-DSTM32F437xx -DLOADER)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
-add_compile_options(/wd4100)    # 'identifier' : unreferenced formal parameter
+#add_compile_options(/wd4100)    # 'identifier' : unreferenced formal parameter
 add_compile_options(/wd4159)    # #pragma pack(pop,...): has popped previously pushed identifier xxx
-add_compile_options(/wd4505)    # 'function' : unreferenced local function has been removed
-add_compile_options(/wd4514)    # 'function' : unreferenced inline function has been removed
+#add_compile_options(/wd4505)    # 'function' : unreferenced local function has been removed
+#add_compile_options(/wd4514)    # 'function' : unreferenced inline function has been removed
 add_compile_options(/wd4820)    # 'xxx': '4' bytes padding added after data member 'yyy'
 add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially throwing function passed to extern C function under -EHc.
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified

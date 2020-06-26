@@ -31,7 +31,7 @@ static uint   timePrev;
 static void DrawProgressBar(uint dT);
 static void DrawBigMNIPI();
 static int RandValue(int min, int max);
-static void InitPoints();
+//static void InitPoints();
 
 
 struct Vector
@@ -71,7 +71,28 @@ void Display::Init()
 
     HAL_BUS::Panel::Send(Command::Display_Brightness, 110);
 
-    InitPoints();
+    Painter::BeginScene(Color::BACK);
+
+    DFont::Set(DTypeFont::_GOST28);
+    DFont::SetSpacing(3);
+
+    int x0 = 85;
+    int dX = 65;
+    int y0 = 50;
+
+    int x1 = 120;
+    int y1 = 130;
+
+    Text("Œ¿Œ").Draw(x0, y0, Color::FILL);
+
+    Text("ÃÕ»œ»").Draw(x0 + dX, y0);
+
+    Text("—8-57").Draw(x1, y1);
+
+    Painter::EndScene();
+
+    DFont::Set(DTypeFont::_8);
+    DFont::SetSpacing(1);
 }
 
 
@@ -304,25 +325,25 @@ static void DrawBigTextInBuffer(int eX, int eY, int size, const char* text, uint
 }
 
 
-static void InitPoints()
-{
-    uint8 buffer[320][240];
-
-    DrawBigTextInBuffer(31, 70, 9, "ÃÕ»œ»", buffer);
-
-    for (int x = 0; x < 320; x++)
-    {
-        for (int y = 0; y < 240; y++)
-        {
-            if (buffer[x][y])
-            {
-                array[numPoints].x = static_cast<uint16>(x);
-                array[numPoints].y = static_cast<uint8>(y);
-                numPoints++;
-            }
-        }
-    }
-}
+//static void InitPoints()
+//{
+//    uint8 buffer[320][240];
+//
+//    DrawBigTextInBuffer(31, 70, 9, "ÃÕ»œ»", buffer);
+//
+//    for (int x = 0; x < 320; x++)
+//    {
+//        for (int y = 0; y < 240; y++)
+//        {
+//            if (buffer[x][y])
+//            {
+//                array[numPoints].x = static_cast<uint16>(x);
+//                array[numPoints].y = static_cast<uint8>(y);
+//                numPoints++;
+//            }
+//        }
+//    }
+//}
 
 
 void Display::AddStringToIndicating(pString)

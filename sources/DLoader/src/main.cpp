@@ -32,7 +32,7 @@ int main()
 
     Timer::PauseOnTime(250);
     
-    //Display::Init();
+    Display::Init();
    
     //Timer::SetAndEnable(kTemp, Display::Update, 10);
 

@@ -8,6 +8,7 @@
 #define PIN_PAN_DATA    HPort::_C, HPin::_4
 #define PIN_HCD_DM      HPort::_B, HPin::_14
 #define PIN_HCD_DP      HPort::_B, HPin::_15
+#define PIN_POWER       HPort::_E, HPin::_2
 
 
 struct HPort
