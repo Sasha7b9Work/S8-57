@@ -165,6 +165,8 @@
 -        :CONDUCTION { PNP | PNP }
 -        :CONDUCTION?
 
+-        :DATA?
+
 
   :CALIBRATOR
 -            :MODE { AC | DC }
