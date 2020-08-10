@@ -68,6 +68,16 @@ set_source_files_properties(../common/libs/STM32Cube_F4/Middlewares/Third_Party/
                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c
                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_iwdg.c
                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c
+                            ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c
+                            ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c
+                            ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.c
+                            ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.c
+                            ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.c
+                            ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c
+                            ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.c
+                            ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc.c
+                            ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c
+                            ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_scsi.c
     PROPERTIES HEADER_FILE_ONLY TRUE)
 
 
@@ -92,13 +102,13 @@ file(GLOB HARDWARE_HAL                     src/Hardware/HAL/*)
 file(GLOB HARDWARE_MEMORY                  src/Hardware/Memory/*)
 file(GLOB HARDWARE_USBD                    src/Hardware/USBD/*)
 file(GLOB HARDWARE_USBH                    src/Hardware/USBH/*)
-file(GLOB HARDWARE_LIBS_FATFS              ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFs/src/ff.*
+file(GLOB LIBS_FATFS                       ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFs/src/ff.*
                                            ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFs/src/diskio.*
                                            ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFs/src/ff_gen_drv.*
                                            ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFs/src/ff_gen_drv.*
                                            ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c
                                            ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFs/src/option/syscall.c)
-file(GLOB HARDWARE_LIBS_HAL                ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
+file(GLOB LIBS_HAL                         ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
                                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
                                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h
                                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c
@@ -152,6 +162,26 @@ file(GLOB HARDWARE_LIBS_HAL                ../common/libs/STM32Cube_F4/Drivers/S
                                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_iwdg.c
                                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
                                            ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c)
+file(GLOB LIBS_USBD                        ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h
+                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c
+                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h
+                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c
+                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h
+                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.c)
+file(GLOB LIBS_USBH                        ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_core.h
+                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.c
+                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_ctlreq.h
+                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.c
+                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_ioreq.h
+                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c
+                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_pipes.h
+                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.c
+                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc/usbh_msc.h
+                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc.c
+                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc/usbh_msc_bot.h
+                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c
+                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc/usbh_msc_scsi.h
+                                           ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_scsi.c)
 file(GLOB KEYBOARD                         src/Keyboard/*)
 file(GLOB MENU                             src/Menu/*.h src/Menu/*.cpp)
 file(GLOB MENU_PAGES                       src/Menu/Pages/*.h src/Menu/Pages/*.cpp)
@@ -193,8 +223,10 @@ source_group(Hardware\\HAL                       FILES ${HARDWARE_HAL})
 source_group(Hardware\\Memory                    FILES ${HARDWARE_MEMORY})
 source_group(Hardware\\USBD                      FILES ${HARDWARE_USBD})
 source_group(Hardware\\USBH                      FILES ${HARDWARE_USBH})
-source_group(Hardware\\libs\\FatFS               FILES ${HARDWARE_LIBS_FATFS})
-source_group(Hardware\\libs\\HAL                 FILES ${HARDWARE_LIBS_HAL})
+source_group(libs\\FatFS                         FILES ${LIBS_FATFS})
+source_group(libs\\HAL                           FILES ${LIBS_HAL})
+source_group(libs\\USBD                          FILES ${LIBS_USBD})
+source_group(libs\\USBH                          FILES ${LIBS_USBH})
 source_group(Keyboard                            FILES ${KEYBOARD})
 source_group(Menu                                FILES ${MENU})
 source_group(Menu\\Pages                         FILES ${MENU_PAGES})
@@ -215,13 +247,13 @@ source_group(Osci\\Math                          FILES ${OSCI_MATH})
 source_group(Osci\\Measurements                  FILES ${OSCI_MEASUREMENTS})
 source_group(Recorder                            FILES ${RECORDER})
 source_group(SCPI                                FILES ${_SCPI})
-source_group(Settings                            FILES ${SETTTINGS})
+source_group(Settings                            FILES ${SETTINGS})
 source_group(Test                                FILES ${TEST})
 source_group(Tester                              FILES ${TESTER})
 source_group(Utils                               FILES ${UTILS})
 
 add_library(Device ${COMMON} ${DOC} ${VS} ${VS_STD_INCLUDES} ${SRC} ${DISPLAY} ${DISPLAY_FONT} ${FLASHDRIVE} ${_FPGA} ${FREQMETER} ${HARDWARE} ${HARDWARE_CMSIS} ${HARDWARE_HAL}
-                   ${HARDWARE_MEMORY} ${HARDWARE_USBD} ${HARDWARE_USBH} ${HARDWARE_LIBS_FATFS} ${HARDWARE_LIBS_HAL} ${KEYBOARD} ${MENU} ${MENU_PAGES} ${MENU_PAGES_INCLUDE} ${MENU_PAGES_PAGEDISPLAY}
+                   ${HARDWARE_MEMORY} ${HARDWARE_USBD} ${HARDWARE_USBH} ${LIBS_FATFS} ${LIBS_HAL} ${LIBS_USBD} ${LIBS_USBH} ${KEYBOARD} ${MENU} ${MENU_PAGES} ${MENU_PAGES_INCLUDE} ${MENU_PAGES_PAGEDISPLAY}
                    ${MENU_PAGES_PAGEFUNCTION} ${MENU_PAGES_PAGERECORDER} ${MENU_PAGES_PAGEHELP} ${MENU_PAGES_PAGEMEASURES} ${MENU_PAGES_PAGEMEMORY}
                    ${MENU_PAGES_PAGESERVICE} ${MENU_PAGES_PAGESERVICE_PAGEDEBUG} ${MENU_PAGES_PAGETRIG} ${MULTIMETER} ${_OSCI} ${OSCI_DISPLAY} ${OSCI_MATH}
-                   ${OSCI_MEASUREMENTS} ${RECORDER} ${_SCPI} ${SETTTINGS} ${TEST} ${TESTER} ${UTILS})
+                   ${OSCI_MEASUREMENTS} ${RECORDER} ${_SCPI} ${SETTINGS} ${TEST} ${TESTER} ${UTILS})
