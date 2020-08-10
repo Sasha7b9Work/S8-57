@@ -14,19 +14,14 @@ public:
     }
     static void Transmit(void *_buffer, uint timeout)
     {
-        char buffer[100];
-
         uint8 *pointer = static_cast<uint8 *>(_buffer);
 
         int size = 0;
         while (*pointer != 0x0a)
         {
-            buffer[size] = *reinterpret_cast<char *>(pointer);
             size++;
             pointer++;
         }
-
-        buffer[size] = '\0';
 
         HAL_USART3::Transmit(_buffer, size + 1, timeout);
     }
