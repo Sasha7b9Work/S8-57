@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F437xx,LOADER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\common\libs\STM32Cube_F4\Middlewares\Third_Party\FatFs\src;..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Core\Inc;..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;.\src\libs\FatFS;.\src\libs\HAL;.\src\libs\USBH;.\src;..\</IncludePath>
+              <IncludePath>..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\common\libs\STM32Cube_F4\Middlewares\Third_Party\FatFs\src;..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Core\Inc;..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;.\src\Hardware\FatFS;.\src\Hardware\HAL;.\src\Hardware\USBH;.\src;..\</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -380,68 +380,8 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>src</GroupName>
-          <Files>
-            <File>
-              <FileName>defines.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\defines.h</FilePath>
-            </File>
-            <File>
-              <FileName>log.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\log.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>log.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\log.h</FilePath>
-            </File>
-            <File>
-              <FileName>main.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\main.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>common</GroupName>
-          <Files>
-            <File>
-              <FileName>Decoder_d.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\Decoder_d.h</FilePath>
-            </File>
-            <File>
-              <FileName>Decoder_d.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\common\Decoder_d.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>libs/CMSIS</GroupName>
-          <Files>
-            <File>
-              <FileName>startup_stm32f437xx.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\src\libs\CMSIS\startup_stm32f437xx.s</FilePath>
-            </File>
-            <File>
-              <FileName>system_stm32f4xx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\libs\CMSIS\system_stm32f4xx.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>libs/FatFS</GroupName>
           <Files>
-            <File>
-              <FileName>ffconf.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\libs\FatFS\ffconf.h</FilePath>
-            </File>
             <File>
               <FileName>diskio.c</FileName>
               <FileType>1</FileType>
@@ -614,26 +554,6 @@
           <GroupName>libs/USBH</GroupName>
           <Files>
             <File>
-              <FileName>usbh_conf.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\libs\USBH\usbh_conf.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>usbh_conf.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\libs\USBH\usbh_conf.h</FilePath>
-            </File>
-            <File>
-              <FileName>usbh_diskio.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\libs\USBH\usbh_diskio.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>usbh_diskio.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\libs\USBH\usbh_diskio.h</FilePath>
-            </File>
-            <File>
               <FileName>usbh_core.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_core.c</FilePath>
@@ -667,6 +587,46 @@
               <FileName>usbh_msc_scsi.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\common\libs\STM32Cube_F4\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Src\usbh_msc_scsi.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>src</GroupName>
+          <Files>
+            <File>
+              <FileName>defines.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\defines.h</FilePath>
+            </File>
+            <File>
+              <FileName>log.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\log.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>log.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\log.h</FilePath>
+            </File>
+            <File>
+              <FileName>main.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\main.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>common</GroupName>
+          <Files>
+            <File>
+              <FileName>Decoder_d.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\common\Decoder_d.h</FilePath>
+            </File>
+            <File>
+              <FileName>Decoder_d.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\common\Decoder_d.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -806,6 +766,31 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Hardware/CMSIS</GroupName>
+          <Files>
+            <File>
+              <FileName>startup_stm32f437xx.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\src\Hardware\CMSIS\startup_stm32f437xx.s</FilePath>
+            </File>
+            <File>
+              <FileName>system_stm32f4xx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Hardware\CMSIS\system_stm32f4xx.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Hardware/FatFS</GroupName>
+          <Files>
+            <File>
+              <FileName>ffconf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\FatFS\ffconf.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Hardware/HAL</GroupName>
           <Files>
             <File>
@@ -843,30 +828,60 @@
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_PIO.h</FilePath>
             </File>
+            <File>
+              <FileName>stm32f4xx_hal_conf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\HAL\stm32f4xx_hal_conf.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>Hardware/stm32/4XX</GroupName>
+          <GroupName>Hardware/stm32</GroupName>
           <Files>
             <File>
               <FileName>stm437.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\stm32\4XX\stm437.cpp</FilePath>
+              <FilePath>.\src\Hardware\stm32\stm437.cpp</FilePath>
             </File>
             <File>
               <FileName>stm437.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Hardware\stm32\4XX\stm437.h</FilePath>
+              <FilePath>.\src\Hardware\stm32\stm437.h</FilePath>
             </File>
             <File>
               <FileName>Timer4XX.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\Hardware\stm32\4XX\Timer4XX.cpp</FilePath>
+              <FilePath>.\src\Hardware\stm32\Timer4XX.cpp</FilePath>
             </File>
             <File>
               <FileName>Timer4XX.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\src\Hardware\stm32\4XX\Timer4XX.h</FilePath>
+              <FilePath>.\src\Hardware\stm32\Timer4XX.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Hardware/USBH</GroupName>
+          <Files>
+            <File>
+              <FileName>usbh_conf.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\USBH\usbh_conf.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>usbh_conf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\USBH\usbh_conf.h</FilePath>
+            </File>
+            <File>
+              <FileName>usbh_diskio.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Hardware\USBH\usbh_diskio.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>usbh_diskio.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\USBH\usbh_diskio.h</FilePath>
             </File>
           </Files>
         </Group>

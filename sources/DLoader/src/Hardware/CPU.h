@@ -1,13 +1,10 @@
 #pragma once
 #include "defines.h"
-#include "Hardware/stm32/4XX/stm437.h"
+#include "Hardware/stm32/stm437.h"
 #include "Hardware/Controls.h"
 
 #include <usbh_core.h>
 #include <stm32f4xx_hal_hcd.h>
-
-
-
 
 #define PRIORITY_SYS_TICK           0, 0
 #define PRIORITY_FPGA_ADC           1, 0

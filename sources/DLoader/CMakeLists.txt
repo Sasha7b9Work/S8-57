@@ -17,9 +17,9 @@ include_directories(../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc
                     ../common/_VS
                     ../common/_VS/std_includes
                     src
-                    src/libs/HAL
-                    src/libs/FatFS
-                    src/libs/USBH)
+                    src/Hardware/HAL
+                    src/Hardware/FatFS
+                    src/Hardware/USBH)
                     
 add_definitions(-DSTM32F437xx -DLOADER)
 
@@ -32,55 +32,139 @@ add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially thr
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 add_compile_options(/wd26812)   # The enum type %type% is unscoped. Prefer 'enum class' over 'enum' (Enum.3)
 
+set_source_files_properties(../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFs/src/ff.c
+                             ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFs/src/diskio.c
+                             ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFs/src/ff_gen_drv.c
+                             ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFs/src/ff_gen_drv.c
+                             ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c
+                             ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFs/src/option/syscall.c
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_hcd.h
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_hcd.c
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_sram.h
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.c
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_fmc.h
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_fmc.c
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c
+                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_core.h
+                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.c
+                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_ctlreq.h
+                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.c
+                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_ioreq.h
+                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c
+                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_pipes.h
+                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.c
+                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc/usbh_msc.h
+                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc.c
+                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc/usbh_msc_bot.h
+                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c
+                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc/usbh_msc_scsi.h
+                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_scsi.c
+    PROPERTIES HEADER_FILE_ONLY TRUE)
+                             
+file(GLOB LIBS_FATFS         ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFs/src/ff.*
+                             ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFs/src/diskio.*
+                             ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFs/src/ff_gen_drv.*
+                             ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFs/src/ff_gen_drv.*
+                             ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c
+                             ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFs/src/option/syscall.c)
+file(GLOB LIBS_HAL           ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_hcd.h
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_hcd.c
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_sram.h
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.c
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_fmc.h
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_fmc.c
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h
+                             ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c)
+file(GLOB LIBS_USBH          ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_core.h
+                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.c
+                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_ctlreq.h
+                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.c
+                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_ioreq.h
+                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c
+                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Inc/usbh_pipes.h
+                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.c
+                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc/usbh_msc.h
+                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc.c
+                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc/usbh_msc_bot.h
+                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c
+                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc/usbh_msc_scsi.h
+                             ../common/libs/STM32Cube_F4/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_scsi.c)
+file(GLOB SRC                src/*.h src/*.cpp)
+file(GLOB COMMON             ../common/Command.h
+                             ../common/Decoder_d.h
+                             ../common/Decoder_d.cpp)
+file(GLOB DISPLAY            src/Display/*)
+file(GLOB DISPLAY_FONT       ../common/Display/Font/Font_d.h
+                             ../common/Display/Font/Font_d.cpp
+                             ../common/Display/Font/font8.inc
+                             src/Display/AdvancedFont_d.cpp)
+file(GLOB FDRIVE             src/FlashDrive/*)
+file(GLOB HARDWARE           src/Hardware/*.h src/Hardware/*.cpp)
+file(GLOB HARDWARE_CMSIS     src/Hardware/CMSIS/*)
+file(GLOB HARDWARE_FATFS     src/Hardware/FatFS/*)
+file(GLOB HARDWARE_HAL       src/Hardware/HAL/*)
+file(GLOB HARDWARE_STM32     src/Hardware/stm32/*)
+file(GLOB HARDWARE_USBH      src/Hardware/USBH/*)
+file(GLOB KEYBOARD           src/Keyboard/*)
+file(GLOB UTILS              src/Utils/*)
 
-source_group(src                    FILES src/main.h
-                                          src/main.cpp
-                                          src/defines.h
-                                          src/log.h
-                                          src/log.cpp)
-source_group(libs\\CMSIS            REGULAR_EXPRESSION src/libs/CMSIS/*)
-source_group(libs\\FatFS            REGULAR_EXPRESSION src/libs/FatFS/*)
-source_group(libs\\HAL              REGULAR_EXPRESSION src/libs/HAL/*)
-source_group(libs\\USBH             REGULAR_EXPRESSION src/libs/USBH/*)
-source_group(common                 FILES ../common/Command.h
-                                          ../common/Decoder_d.h
-                                          ../common/Decoder_d.cpp)
-source_group(Display                REGULAR_EXPRESSION src/Display/*)
-source_group(Display\\Font          FILES ../common/Display/Font/Font_d.h
-                                          ../common/Display/Font/Font_d.cpp
-                                          ../common/Display/Font/font8.inc
-                                          src/Display/AdvancedFont_d.cpp)
-source_group(FlashDrive             REGULAR_EXPRESSION src/FlashDrive/*)
-source_group(Hardware               REGULAR_EXPRESSION src/Hardware/*)
-source_group(Hardware\\HAL          REGULAR_EXPRESSION src/Hardware/HAL/*)
-source_group(Hardware\\stm32        REGULAR_EXPRESSION src/Hardware/stm32/*)
-source_group(Hardware\\stm32\\4XX   REGULAR_EXPRESSION src/Hardware/stm32/4XX/*)
-source_group(Keyboard               REGULAR_EXPRESSION src/Keyboard/*)
-source_group(Utils                  REGULAR_EXPRESSION src/Utils/*)
+source_group(libs\\FatFS     FILES ${LIBS_FATFS})
+source_group(libs\\HAL       FILES ${LIBS_HAL})
+source_group(libs\\USBH      FILES ${LIBS_USBH})
+source_group(src             FILES ${SRC})
+source_group(commmon         FILES ${COMMON})
+source_group(Display         FILES ${DISPLAY})
+source_group(Display\\Font   FILES ${DISPLAY_FONT})
+source_group(FDrive          FILES ${FDRIVE})
+source_group(Hardware        FILES ${HARDWARE})
+source_group(Hardware\\CMSIS FILES ${HARDWARE_CMSIS})
+source_group(Hardware\\FatFS FILES ${HARDWARE_FATFS})
+source_group(Hardware\\HAL   FILES ${HARDWARE_HAL})
+source_group(Hardware\\stm32 FILES ${HARDWARE_STM32})
+source_group(Hardware\\USBH  FILES ${HARDWARE_USBH})
+source_group(Keyboard        FILES ${KEYBOARD})
+source_group(Utils           FILES ${UTILS})
 
-file(GLOB SOURCES   ../common/Command.h
-                    ../common/Decoder_d.h
-                    ../common/Decoder_d.cpp
-                    src/main.h
-                    src/main.cpp
-                    src/defines.h
-                    src/log.h
-                    src/log.cpp
-                    src/libs/CMSIS/*
-                    src/libs/FatFS/*
-                    src/libs/HAL/*
-                    src/libs/USBH/*
-                    src/Display/*
-                    ../common/Display/Font/Font_d.h
-                    ../common/Display/Font/Font_d.cpp
-                    ../common/Display/Font/font8.inc
-                    src/Display/AdvancedFont_d.cpp
-                    src/FlashDrive/*
-                    src/Hardware/*
-                    src/Hardware/HAL/*
-                    src/Hardware/stm32/*
-                    src/Hardware/stm32/4XX/*
-                    src/Keyboard/*
-                    src/Utils/*)
-
-add_library(DLoader ${SOURCES})
+add_library(DLoader ${LIBS_FATFS} ${LIBS_HAL} ${LIBS_USBH} ${SRC} ${COMMON} ${DISPLAY} ${DISPLAY_FONT} ${FDRIVE} ${HARDWARE} ${HARDWARE_CMSIS}
+                    ${HARDWARE_FATFS} ${HARDWARE_HAL} ${HARDWARE_STM32} ${HARDWARE_USBH} ${KEYBOARD} ${UTILS})
