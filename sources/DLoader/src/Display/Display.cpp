@@ -264,65 +264,65 @@ static int RandValue(int min, int max)
 }
 
 
-static int DrawBigCharInBuffer(int eX, int eY, int size, uint8 symbol, uint8 buffer[320][240])
-{
-    uint8 width = DFont::GetWidth (symbol);
-    uint8 height = DFont::GetHeight();
+//static int DrawBigCharInBuffer(int eX, int eY, int size, uint8 symbol, uint8 buffer[320][240])
+//{
+//    uint8 width = DFont::GetWidth (symbol);
+//    uint8 height = DFont::GetHeight();
+//
+//    for (int b = 0; b < height; b++)
+//    {
+//        if (DFont::RowNotEmpty(symbol, b))
+//        {
+//            int x = eX;
+//            int y = eY + b * size + 9 - height;
+//            int endBit = 8 - width;
+//            for (int bit = 7; bit >= endBit; bit--)
+//            {
+//                if (DFont::BitIsExist(symbol, b, bit))
+//                {
+//                    for (int i = 0; i < size; i++)
+//                    {
+//                        for (int j = 0; j < size; j++)
+//                        {
+//                            int fullX = x + i;
+//                            int fullY = y + j;
+//
+//                            if (fullX >= 0 && fullX < 320 && fullY >= 0 && fullY < 240)
+//                            {
+//                                buffer[fullX][fullY] = 1;
+//                            }
+//                        }
+//                    }
+//                }
+//                x += size;
+//            }
+//        }
+//    }
+//
+//    return eX + width * size;
+//}
 
-    for (int b = 0; b < height; b++)
-    {
-        if (DFont::RowNotEmpty(symbol, b))
-        {
-            int x = eX;
-            int y = eY + b * size + 9 - height;
-            int endBit = 8 - width;
-            for (int bit = 7; bit >= endBit; bit--)
-            {
-                if (DFont::BitIsExist(symbol, b, bit))
-                {
-                    for (int i = 0; i < size; i++)
-                    {
-                        for (int j = 0; j < size; j++)
-                        {
-                            int fullX = x + i;
-                            int fullY = y + j;
 
-                            if (fullX >= 0 && fullX < 320 && fullY >= 0 && fullY < 240)
-                            {
-                                buffer[fullX][fullY] = 1;
-                            }
-                        }
-                    }
-                }
-                x += size;
-            }
-        }
-    }
-
-    return eX + width * size;
-}
-
-
-static void DrawBigTextInBuffer(int eX, int eY, int size, const char* text, uint8 buffer[320][240])
-{
-    for (int x = 0; x < 320; x++)
-    {
-        for (int y = 0; y < 240; y++)
-        {
-            buffer[x][y] = 0;
-        }
-    }
-
-    int numSymbols = static_cast<int>(strlen(text));
-
-    int x = eX;
-
-    for (int i = 0; i < numSymbols; i++)
-    {
-        x = DrawBigCharInBuffer(x, eY, size, static_cast<uint8>(text[i]), buffer);
-        x += size;
-    }
-}
+//static void DrawBigTextInBuffer(int eX, int eY, int size, const char* text, uint8 buffer[320][240])
+//{
+//    for (int x = 0; x < 320; x++)
+//    {
+//        for (int y = 0; y < 240; y++)
+//        {
+//            buffer[x][y] = 0;
+//        }
+//    }
+//
+//    int numSymbols = static_cast<int>(strlen(text));
+//
+//    int x = eX;
+//
+//    for (int i = 0; i < numSymbols; i++)
+//    {
+//        x = DrawBigCharInBuffer(x, eY, size, static_cast<uint8>(text[i]), buffer);
+//        x += size;
+//    }
+//}
 
 
 //static void InitPoints()

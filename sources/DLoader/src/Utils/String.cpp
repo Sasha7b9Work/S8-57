@@ -70,7 +70,7 @@ String::String(const char *format, ...) : buffer(nullptr)
 }
 
 
-void String::Set(TypeConversionString::E conv, const char *format, ...)
+void String::Set(TypeConversionString::E /*conv*/, const char *format, ...)
 {
     Free();
 

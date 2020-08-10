@@ -7,6 +7,7 @@
 #undef __ASM
 #define __ASM()
 
+#define __FPU_USED 0
 
 struct SysTickStruct
 {
