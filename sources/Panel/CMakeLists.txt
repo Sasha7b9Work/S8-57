@@ -2,14 +2,14 @@ cmake_minimum_required(VERSION 3.0)
 
 project (Panel)
 
-include_directories(..
+include_directories(../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc
+                    ../common/libs/STM32Cube_F4/Drivers/CMSIS/Device/ST/STM32F4xx/Include
+                    ..
                     ../common/_VS
                     ../common/_VS/std_includes
+                    ../common/Display/Font
                     src
-                    ../common/_VS/HAL
-                    src/libs/HAL
-                    ../common/_VS/CMSIS
-                    ../common/Display/Font)
+                    src/Hardware/HAL)
                     
 add_definitions(-DSTM32F429xx -DPANEL)
 
@@ -23,42 +23,66 @@ add_compile_options(/wd4996)    # 'xxx': This function or variable may be unsafe
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 add_compile_options(/wd26812)   #The enum type %type% is unscoped. Prefer 'enum class' over 'enum' (Enum.3)
 
-source_group(common                    FILES ../common/Command.h
-                                             ../common/Decoder_p.h
-                                             ../common/Decoder_p.cpp)
-source_group(_VS                       REGULAR_EXPRESSION ../common/_VS/*)
-source_group(_VS\\std_includes         REGULAR_EXPRESSION ../common/_VS/std_includes/*)
-source_group(_VS\\CMSIS                REGULAR_EXPRESSION ../common/_VS/CMSIS/*)
-source_group(src                       REGULAR_EXPRESSION src/*)
-source_group(libs\\HAL                 FILES src/libs/HAL/stm32f4xx_hal_conf.h
-                                             src/libs/HAL/stm32f4xx_it.h)
-source_group(Display                   REGULAR_EXPRESSION src/Display/*)
-source_group(Display\\Font             REGULAR_EXPRESSION src/Display/Font/*)
-source_group(FPGA                      REGULAR_EXPRESSION src/FPGA/*)
-source_group(Hardware                  REGULAR_EXPRESSION src/Hardware/*)
-source_group(Hardware\\HAL             REGULAR_EXPRESSION src/Hardware/HAL/*)
-source_group(Hardware\\stm32           REGULAR_EXPRESSION src/Hardware/stm32/*)
-source_group(Settings                  REGULAR_EXPRESSION src/Settings/*)
-source_group(Utils                     REGULAR_EXPRESSION src/Utils/*)
+file(GLOB LIBS_HAL        ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rtc_ex.h
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rtc_ex.c
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_ltdc.h
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_ltdc.c
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma2d.h
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma2d.c
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dac.h
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dac.c
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dac_ex.h
+                          ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dac_ex.c)
+file(GLOB COMMON          ../common/Command.h
+                          ../common/Decoder_p.h
+                          ../common/Decoder_p.cpp)
+file(GLOB SRC             src/*.h src/*.cpp)
+file(GLOB DISPLAY         src/Display/*.h src/Display/*.cpp)
+file(GLOB DISPLAY_FONT    src/Display/Font/*)
+file(GLOB HARDWARE        src/Hardware/*.h src/Hardware/*.cpp)
+file(GLOB HARDWARE_CMSIS  src/Hardware/CMSIS/*)
+file(GLOB HARDWARE_HAL    src/Hardware/HAL/*)
+file(GLOB HARDWARE_STM32  src/Hardware/stm32/*)
+file(GLOB SETTINGS        src/Settings/*)
+file(GLOB UTILS           src/Utils/*)
+file(GLOB VS              ../common/_VS/*.h)
+file(GLOB VS_STD_INCLUDES ../common/_VS/std_includes/*)
+file(GLOB VS_CMSIS        ../common/_VS/CMSIS/*)
 
+set_source_files_properties(${LIBS_HAL} PROPERTIES HEADER_FILE_ONLY TRUE)
 
-file(GLOB SOURCES   ../common/_VS/*
-                    ../common/_VS/std_includes/*
-                    ../common/_VS/CMSIS/*
-                    ../common/Command.h
-                    ../common/Decoder_p.h
-                    ../common/Decoder_p.cpp
-                    src/Data/*
-                    src/Display/*
-                    src/Display/Font/*
-                    src/FPGA/*
-                    src/Hardware/*
-                    src/Hardware/HAL/*
-                    src/Hardware/stm32/*
-                    src/Settings/*
-                    src/Utils/*
-                    src/*
-                    src/libs/HAL/stm32f4xx_hal_conf.h
-                    src/libs/HAL/stm32f4xx_it.h)
+source_group(libs\\HAL         FILES ${LIBS_HAL})
+source_group(common            FILES ${COMMON})
+source_group(src               FILES ${SRC})
+source_group(Display           FILES ${DISPLAY})
+source_group(Display\\Font     FILES ${DISPLAY_FONT})
+source_group(Hardware          FILES ${HARDWARE})
+source_group(Hardware\\CMSIS   FILES ${HARDWARE_CMSIS})
+source_group(Hardware\\HAL     FILES ${HARDWARE_HAL})
+source_group(Hardware\\stm32   FILES ${HARDWARE_STM32})
+source_group(Settings          FILES ${SETTINGS})
+source_group(Utils             FILES ${UTILS})
+source_group(_VS               FILES ${VS})
+source_group(_VS\\std_includes FILES ${VS_STD_INCLUDES})
+source_group(_VS\\CMSIS        FILES ${VS_CMSIS})
 
-add_library(Panel ${SOURCES})
+add_library(Panel ${LIBS_HAL} ${COMMON} ${SRC} ${DISPLAY} ${DISPLAY_FONT} ${HARDWARE} ${HARDWARE_CMSIS} ${HARDWARE_HAL}
+                  ${HARDWARE_STM32}  ${SETTINGS} ${UTILS} ${VS} ${VS_STD_INCLUDES} ${VS_CMSIS})
