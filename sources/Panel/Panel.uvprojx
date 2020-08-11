@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER, STM32F429xx, DEBUG,PANEL</Define>
               <Undefine></Undefine>
-              <IncludePath>.\src;.\src\libs\CMSIS;.\src\libs\HAL;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\;..\common\Display\Font</IncludePath>
+              <IncludePath>.\src;.\src\Hardware\HAL;..\src\Hardware\HAL;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc;..\common\libs\STM32Cube_F4\Drivers\CMSIS\Include;..\;..\common\Display\Font</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -379,82 +379,6 @@
         </TargetArmAds>
       </TargetOption>
       <Groups>
-        <Group>
-          <GroupName>libs/CMSIS</GroupName>
-          <Files>
-            <File>
-              <FileName>startup_stm32f429xx.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\src\libs\CMSIS\startup_stm32f429xx.s</FilePath>
-            </File>
-            <File>
-              <FileName>system_stm32f4xx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\libs\CMSIS\system_stm32f4xx.c</FilePath>
-              <FileOption>
-                <CommonProperty>
-                  <UseCPPCompiler>2</UseCPPCompiler>
-                  <RVCTCodeConst>0</RVCTCodeConst>
-                  <RVCTZI>0</RVCTZI>
-                  <RVCTOtherData>0</RVCTOtherData>
-                  <ModuleSelection>0</ModuleSelection>
-                  <IncludeInBuild>2</IncludeInBuild>
-                  <AlwaysBuild>2</AlwaysBuild>
-                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
-                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
-                  <PublicsOnly>2</PublicsOnly>
-                  <StopOnExitCode>11</StopOnExitCode>
-                  <CustomArgument></CustomArgument>
-                  <IncludeLibraryModules></IncludeLibraryModules>
-                  <ComprImg>1</ComprImg>
-                </CommonProperty>
-                <FileArmAds>
-                  <Cads>
-                    <interw>2</interw>
-                    <Optim>0</Optim>
-                    <oTime>2</oTime>
-                    <SplitLS>2</SplitLS>
-                    <OneElfS>2</OneElfS>
-                    <Strict>2</Strict>
-                    <EnumInt>2</EnumInt>
-                    <PlainCh>2</PlainCh>
-                    <Ropi>2</Ropi>
-                    <Rwpi>2</Rwpi>
-                    <wLevel>1</wLevel>
-                    <uThumb>2</uThumb>
-                    <uSurpInc>2</uSurpInc>
-                    <uC99>2</uC99>
-                    <uGnu>2</uGnu>
-                    <useXO>2</useXO>
-                    <v6Lang>0</v6Lang>
-                    <v6LangP>0</v6LangP>
-                    <vShortEn>2</vShortEn>
-                    <vShortWch>2</vShortWch>
-                    <v6Lto>2</v6Lto>
-                    <v6WtE>2</v6WtE>
-                    <v6Rtti>2</v6Rtti>
-                    <VariousControls>
-                      <MiscControls></MiscControls>
-                      <Define></Define>
-                      <Undefine></Undefine>
-                      <IncludePath></IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-            <File>
-              <FileName>stm32f4xx.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f429xx.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\common\libs\STM32Cube_F4\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f429xx.h</FilePath>
-            </File>
-          </Files>
-        </Group>
         <Group>
           <GroupName>libs/HAL</GroupName>
           <Files>
@@ -1191,21 +1115,6 @@
               </FileOption>
             </File>
             <File>
-              <FileName>stm32f4xx_hal_conf.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\libs\HAL\stm32f4xx_hal_conf.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_it.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\libs\HAL\stm32f4xx_it.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_it.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\libs\HAL\stm32f4xx_it.h</FilePath>
-            </File>
-            <File>
               <FileName>stm32f4xx_hal_dac.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\common\libs\STM32Cube_F4\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dac.h</FilePath>
@@ -1448,6 +1357,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Hardware/CMSIS</GroupName>
+          <Files>
+            <File>
+              <FileName>startup_stm32f429xx.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\src\Hardware\CMSIS\startup_stm32f429xx.s</FilePath>
+            </File>
+            <File>
+              <FileName>system_stm32f4xx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Hardware\CMSIS\system_stm32f4xx.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Hardware/HAL</GroupName>
           <Files>
             <File>
@@ -1469,6 +1393,21 @@
               <FileName>HAL_FSMC_stm.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Hardware\HAL\HAL_FSMC_stm.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_conf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\HAL\stm32f4xx_hal_conf.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_it.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Hardware\HAL\stm32f4xx_it.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_it.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Hardware\HAL\stm32f4xx_it.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1494,6 +1433,21 @@
               <FileName>Timer4XX.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Hardware\stm32\Timer4XX.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Settings</GroupName>
+          <Files>
+            <File>
+              <FileName>SettingsTypes.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Settings\SettingsTypes.h</FilePath>
+            </File>
+            <File>
+              <FileName>Settings.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Settings\Settings.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1529,21 +1483,6 @@
               <FileName>Queue.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Queue.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Settings</GroupName>
-          <Files>
-            <File>
-              <FileName>SettingsTypes.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Settings\SettingsTypes.h</FilePath>
-            </File>
-            <File>
-              <FileName>Settings.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Settings\Settings.h</FilePath>
             </File>
           </Files>
         </Group>
