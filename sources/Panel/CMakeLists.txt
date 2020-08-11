@@ -1,5 +1,3 @@
-cmake_minimum_required(VERSION 3.0)
-
 project (Panel)
 
 include_directories(../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc
