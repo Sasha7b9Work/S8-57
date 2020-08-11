@@ -13,8 +13,8 @@ include_directories(../../VS/Device/src
                     ../../common/_VS/USBD
                     ../../common/_VS/USBH
                     ../../common/Display/Font
-                    ../../../../ThirdParty/wxWidgets/include
-                    ../../../../ThirdParty/wxWidgets/generated/lib/vc_dll/mswud)
+                    ../../ThirdParty/wxWidgets/include
+                    ../../ThirdParty/wxWidgets/generated/lib/vc_dll/mswud)
                     
 add_definitions(-DSTM32F437xx -DWXUSINGDLL -DGUI -DDEVICE)
 
@@ -421,8 +421,8 @@ file(GLOB SOURCES   ../../common/_VS/*
                     
 add_executable(S8-57 ${SOURCES})
 
-target_link_libraries(S8-57 ../../../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase31ud)
-target_link_libraries(S8-57 ../../../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw31ud_core)
+target_link_libraries(S8-57 ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase31ud)
+target_link_libraries(S8-57 ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw31ud_core)
 
 target_link_libraries(S8-57 WinMM.lib)
 target_link_libraries(S8-57 version.lib)
