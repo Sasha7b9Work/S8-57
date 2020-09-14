@@ -96,6 +96,8 @@ namespace SCPI
 
 namespace SCPI
 {
+    extern const StructSCPI calibrator[];   //-V2504
+
     extern const StructSCPI channels[];     //-V2504
 
     extern const StructSCPI display[];      //-V2504
