@@ -36,6 +36,26 @@ static pCHAR FuncMemoryLength(pCHAR);
 static bool TestMemoryLength();
 static void HintMemoryLength(String *);
 
+// :MEMORY:SAVE
+static pCHAR FuncMemorySave(pCHAR);
+static bool TestMemorySave();
+static void HintMemorySave(String *);
+
+// :RUN
+static pCHAR FuncRun(pCHAR);
+static bool TestRun();
+static void HintRun(String *);
+
+// :STOP
+static pCHAR FuncStop(pCHAR);
+static bool TestStop();
+static void HintStop(String *);
+
+// :AUTOSEARCH
+static pCHAR FuncAutoSearch(pCHAR);
+static bool TestAutoSearch();
+static void HintAutoSearch(String *);
+
 
 const StructSCPI SCPI::head[] =
 {
@@ -45,6 +65,10 @@ const StructSCPI SCPI::head[] =
     SCPI_LEAF(":TEST",            FuncTest,           TestTest,           "Run all tests",                    HintTest),
     SCPI_LEAF(":CALIBRATOR:MODE", FuncCalibratorMode, TestCalibratorMode, "",                                 HintCalibratorMode),
     SCPI_LEAF(":MEMORY:LENGTH",   FuncMemoryLength,   TestMemoryLength,   "",                                 HintMemoryLength),
+    SCPI_LEAF(":MEMORY:SAVE",     FuncMemorySave,     TestMemorySave,     "",                                 HintMemorySave),
+    SCPI_LEAF(":RUN",             FuncRun,            TestRun,            "",                                 HintRun),
+    SCPI_LEAF(":STOP",            FuncStop,           TestStop,           "",                                 HintStop),
+    SCPI_LEAF(":AUTOSEARCH",      FuncAutoSearch,     TestAutoSearch,     "",                                 HintAutoSearch),
     SCPI_NODE(":CHANNEL",         SCPI::channels),
     SCPI_NODE(":DISPLAY",         SCPI::display),
     SCPI_NODE(":FFT",             SCPI::fft),
@@ -133,6 +157,12 @@ static pCHAR FuncTest(pCHAR buffer)
 }
 
 
+static pCHAR FuncAutoSearch(pCHAR)
+{
+    return nullptr;
+}
+
+
 static pCHAR FuncCalibratorMode(pCHAR)
 {
     return nullptr;
@@ -145,15 +175,27 @@ static pCHAR FuncMemoryLength(pCHAR)
 }
 
 
-static bool TestCalibratorMode()
+static pCHAR FuncMemorySave(pCHAR)
 {
-    return false;
+    return nullptr;
 }
 
 
-static bool TestMemoryLength()
+static pCHAR FuncRun(pCHAR)
 {
-    return false;
+    return nullptr;
+}
+
+
+static pCHAR FuncStop(pCHAR)
+{
+    return nullptr;
+}
+
+
+static void HintAutoSearch(String *)
+{
+
 }
 
 
@@ -169,9 +211,63 @@ static void HintMemoryLength(String *)
 }
 
 
+static void HintMemorySave(String *)
+{
+
+}
+
+
+static void HintRun(String *)
+{
+
+}
+
+
+static void HintStop(String *)
+{
+
+}
+
+
 static void HintTest(String *message) //-V2009 //-V2558
 {
     SCPI::SendAnswer(message->c_str());
+}
+
+
+static bool TestAutoSearch()
+{
+    return false;
+}
+
+
+static bool TestCalibratorMode()
+{
+    return false;
+}
+
+
+static bool TestMemoryLength()
+{
+    return false;
+}
+
+
+static bool TestMemorySave()
+{
+    return false;
+}
+
+
+static bool TestRun()
+{
+    return false;
+}
+
+
+static bool TestStop()
+{
+    return false;
 }
 
 
