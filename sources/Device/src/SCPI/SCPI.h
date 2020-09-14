@@ -111,4 +111,6 @@ namespace SCPI
     extern const StructSCPI measures[];     //-V2504
 
     extern const StructSCPI freqmeter[];    //-V2504
+
+    extern const StructSCPI multimeter[];   //-V2504
 }

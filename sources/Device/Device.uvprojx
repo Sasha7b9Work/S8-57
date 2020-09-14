@@ -2239,14 +2239,9 @@
               <FilePath>.\src\SCPI\MeasuresSCPI.cpp</FilePath>
             </File>
             <File>
-              <FileName>SCPI.cpp</FileName>
+              <FileName>MultimeterSCPI.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\src\SCPI\SCPI.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SCPI.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\SCPI\SCPI.h</FilePath>
+              <FilePath>.\src\SCPI\MultimeterSCPI.cpp</FilePath>
             </File>
             <File>
               <FileName>TBaseSCPI.cpp</FileName>
@@ -2257,6 +2252,16 @@
               <FileName>TriggerSCPI.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\SCPI\TriggerSCPI.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SCPI.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\SCPI\SCPI.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>SCPI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\SCPI.h</FilePath>
             </File>
             <File>
               <FileName>MainSCPI.cpp</FileName>
