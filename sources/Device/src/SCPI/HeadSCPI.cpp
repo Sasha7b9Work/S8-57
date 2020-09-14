@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "common/common_defines.h"
 #include "Menu/Pages/Include/DebugPage.h"
 #include "Menu/Pages/Include/PageService.h"
 #include "SCPI/SCPI.h"
@@ -43,7 +44,7 @@ static const char *FuncIDN(const char *buffer)
 {
     SCPI_PROLOG(buffer)
 
-    SCPI::SendAnswer("MNIPI, S8-57, v.1.2");
+    SCPI::SendAnswer(String("MNIPI, %s, %s, %s", IDENTIVICATOR, VERSION, CRC32_DEVICE).c_str());
 
     SCPI_EPILOG(buffer)
 }
