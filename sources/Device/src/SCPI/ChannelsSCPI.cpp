@@ -9,6 +9,11 @@
 
 #define EXTRACT_CHANNEL(x) Chan::E ch = (*(buffer - (x)) == '1') ? ChanA : ChanB;    /* (buffer - 7) указывает на номер канала - 1 или 2 */
 
+// :CHANNEL{1|2}:BALANCE
+static pCHAR FuncBalance(pCHAR);
+static bool TestBalance();
+static void HintBalance(String *);
+
 // :CHANNEL{1|2}:BANDWIDTH
 static pCHAR FuncBandwidth(pCHAR);
 static bool TestBandwidth();
@@ -19,6 +24,11 @@ static pCHAR FuncCoupling(pCHAR);
 static bool TestCoupling();
 static void HintCoupling(String *);
 
+// :CHANNEL{1|2}:DATA
+static pCHAR FuncData(pCHAR);
+static bool TestData();
+static void HintData(String *);
+
 // :CHANNEL{1|2}:DISPLAY
 static pCHAR FuncDisplay(pCHAR);
 static bool TestDisplay();
@@ -28,6 +38,11 @@ static void HintDisplay(String *);
 static pCHAR FuncOffset(pCHAR);
 static bool TestOffset();
 static void HintOffset(String *);
+
+// :CHANNEL{1|2}:PROBE
+static pCHAR FuncProbe(pCHAR);
+static bool TestProbe();
+static void HintProbe(String *);
 
 // :CHANNEL{1|2}:SCALE
 static pCHAR FuncScale(pCHAR);
@@ -64,10 +79,13 @@ static pString rangeName[] =
 
 static const StructSCPI chan[] =
 {
+    SCPI_LEAF("BALANCE",   FuncBalance,   TestBalance,   "",                             HintBalance),
     SCPI_LEAF("BANDWIDTH", FuncBandwidth, TestBandwidth, "",                             HintBandwidth),
     SCPI_LEAF("COUPLING",  FuncCoupling,  TestCoupling,  "",                             HintCoupling),
+    SCPI_LEAF("DATA?",     FuncData,      TestData,      "",                             HintData),
     SCPI_LEAF("DISPLAY",   FuncDisplay,   TestDisplay,   "Turns channel display on/off", HintDisplay),
     SCPI_LEAF("OFFSET",    FuncOffset,    TestOffset,    "",                             HintOffset),
+    SCPI_LEAF("PROBE",     FuncProbe,     TestProbe,     "",                             HintProbe),
     SCPI_LEAF("SCALE",     FuncScale,     TestScale,     "Vertical zoom control",        HintScale),
     SCPI_EMPTY()
 };
@@ -82,6 +100,12 @@ const StructSCPI SCPI::channels[] =
 };
 
 
+static pCHAR FuncBalance(pCHAR)
+{
+    return nullptr;
+}
+
+
 static pCHAR FuncBandwidth(pCHAR)
 {
     return nullptr;
@@ -89,6 +113,12 @@ static pCHAR FuncBandwidth(pCHAR)
 
 
 static pCHAR FuncCoupling(pCHAR)
+{
+    return nullptr;
+}
+
+
+static pCHAR FuncData(pCHAR)
 {
     return nullptr;
 }
@@ -110,6 +140,12 @@ static pCHAR FuncOffset(pCHAR)
 }
 
 
+static pCHAR FuncProbe(pCHAR)
+{
+    return nullptr;
+}
+
+
 static pCHAR FuncScale(pCHAR buffer)
 {
     EXTRACT_CHANNEL(7);
@@ -120,6 +156,12 @@ static pCHAR FuncScale(pCHAR buffer)
 }
 
 
+static void HintBalance(String *)
+{
+
+}
+
+
 static void HintBandwidth(String *)
 {
 
@@ -127,6 +169,12 @@ static void HintBandwidth(String *)
 
 
 static void HintCoupling(String *)
+{
+
+}
+
+
+static void HintData(String *)
 {
 
 }
@@ -144,9 +192,21 @@ static void HintOffset(String *)
 }
 
 
+static void HintProbe(String *)
+{
+
+}
+
+
 static void HintScale(String *message)
 {
     SCPI::ProcessHint(message, rangeName);
+}
+
+
+static bool TestBalance()
+{
+    return false;
 }
 
 
@@ -162,6 +222,12 @@ static bool TestCoupling()
 }
 
 
+static bool TestData()
+{
+    return false;
+}
+
+
 static bool TestDisplay()
 {
     return false;
@@ -169,6 +235,12 @@ static bool TestDisplay()
 
 
 static bool TestOffset()
+{
+    return false;
+}
+
+
+static bool TestProbe()
 {
     return false;
 }
