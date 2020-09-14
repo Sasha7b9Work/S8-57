@@ -7,17 +7,22 @@
 
 
 // :DISPLAY:AVERAGES
-static const char *FuncAverages(const char *);
+static pCHAR FuncAverages(pCHAR);
 static void HintAverages(String *);
 static bool TestAverages();
 
+// :DISPLAY:FPS
+static pCHAR FuncFPS(pCHAR);
+static void HintFPS(String *);
+static bool TestFPS();
+
 // :DISPLAY:GRID
-static const char *FuncGrid(const char *);
+static pCHAR FuncGrid(pCHAR);
 static void HintGrid(String *);
 static bool TestGrid();
 
 // :DISPLAY:MAPPING
-static const char *FuncMapping(const char *);
+static pCHAR FuncMapping(pCHAR);
 static void HintMapping(String *);
 static bool TestMapping();
 
@@ -48,6 +53,7 @@ static const char *const mapping[] =
 const StructSCPI SCPI::display[] =
 {
     SCPI_LEAF(":AVERAGE",   FuncAverages,  TestAverages,  "Number of averages",     HintAverages),
+    SCPI_LEAF(":FPS",       FuncFPS,       TestFPS,       "",                       HintFPS),
     SCPI_LEAF(":GRID",      FuncGrid,      TestGrid,      "Grid type selection",    HintGrid),
     SCPI_LEAF(":MAPPING",   FuncMapping,   TestMapping,   "Signal display control", HintMapping),
     SCPI_LEAF(":SMOOTHING", FuncSmoothing, TestSmoothing, "",                       HintSmoothing),
@@ -70,11 +76,28 @@ static const char *const averages[] =
 };
 
 
-static const char *FuncAverages(const char *buffer)
+static pCHAR FuncAverages(pCHAR buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(averages[S_OSCI_ENUM_AVERAGE]));
 
     SCPI_PROCESS_ARRAY(averages, ENumAverage::Set(static_cast<ENumAverage::E>(i)));
+}
+
+static const char *const fps[] =
+{
+    " 25",
+    " 10",
+    " 5",
+    " 2",
+    " 1",
+    ""
+};
+
+static pCHAR FuncFPS(pCHAR buffer)
+{
+    SCPI_REQUEST(SCPI::SendAnswer(fps[S_DISP_ENUM_FPS]));
+
+    SCPI_PROCESS_ARRAY(fps, S_DISP_ENUM_FPS = static_cast<ENumSignalsInSec::E>(i));
 }
 
 
@@ -124,6 +147,12 @@ static void HintAverages(String *message)
 }
 
 
+static void HintFPS(String *message)
+{
+    SCPI::ProcessHint(message, fps);
+}
+
+
 static void HintGrid(String *message)
 {
     SCPI::ProcessHint(message, grids);
@@ -143,6 +172,12 @@ static void HintSmoothing(String *message)
 
 
 static bool TestAverages()
+{
+    return false;
+}
+
+
+static bool TestFPS()
 {
     return false;
 }
