@@ -36,6 +36,7 @@ add_compile_options(/wd5026)    # 'xxx': move constructor was implicitly defined
 add_compile_options(/wd5027)    # 'type': move assignment operator was implicitly defined as deleted
 add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially throwing function passed to extern C function under -EHc.
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+add_compile_options(/wd5219)
 add_compile_options(/wd26812)   # Prefer 'enum class' over 'enum' (Enum.3)
 
 file(GLOB COMMON                            ../../common/Command.h
