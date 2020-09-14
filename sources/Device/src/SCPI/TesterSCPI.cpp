@@ -50,8 +50,16 @@ static pCHAR FuncData(pCHAR)
 }
 
 
-static pCHAR FuncMode(pCHAR)
+static pString mode[] =
 {
+    " ON",
+    " OFF",
+    ""
+};
+
+static pCHAR FuncMode(pCHAR buffer)
+{
+    SCPI_REQUEST(SCPI::SendAnswer(mode[set.test._viewMode))
     return nullptr;
 }
 

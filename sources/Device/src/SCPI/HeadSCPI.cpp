@@ -3,6 +3,7 @@
 #include "Menu/Pages/Include/DebugPage.h"
 #include "Menu/Pages/Include/PageService.h"
 #include "SCPI/SCPI.h"
+#include "Settings/Settings.h"
 
 
 // *IDN?
@@ -169,9 +170,21 @@ static pCHAR FuncCalibratorMode(pCHAR)
 }
 
 
-static pCHAR FuncMemoryLength(pCHAR)
+static pString length[] =
 {
-    return nullptr;
+    " 512",
+    " 1K",
+    " 2K",
+    " 4K",
+    " 8K",
+    ""
+};
+
+static pCHAR FuncMemoryLength(pCHAR buffer)
+{
+    SCPI_REQUEST(SCPI::SendAnswer(length[set.mem._enumPoints]));
+
+    SCPI_PROCESS_ARRAY(length, set.mem._enumPoints = static_cast<ENumPointsFPGA::E>(i));
 }
 
 
