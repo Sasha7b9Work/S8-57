@@ -19,6 +19,8 @@ add_compile_options(/wd4710)    # 'xxx': function not inlined
 add_compile_options(/wd4820)    # 'xxx': '4' bytes padding added after data member 'yyy'
 add_compile_options(/wd4996)    # 'xxx': This function or variable may be unsafe.
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+add_compile_options(/wd5219)    # implicit conversion from 'xxx' to 'float', possible loss of data
+add_compile_options(/wd5220)    # a non-static data member with a volatile qualified type no longer implies
 add_compile_options(/wd26812)   #The enum type %type% is unscoped. Prefer 'enum class' over 'enum' (Enum.3)
 
 file(GLOB LIBS_HAL        ../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
