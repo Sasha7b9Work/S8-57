@@ -53,12 +53,10 @@ static pString display[] =
     ""
 };
 
-
 static void EnableFFT(int i)
 {
     S_FFT_ENABLED = (i == 0);
 }
-
 
 static pCHAR FuncDisplay(pCHAR buffer)
 {
@@ -74,9 +72,19 @@ static pCHAR FuncScale(pCHAR)
 }
 
 
-static pCHAR FuncSource(pCHAR)
+static pString source[] =
 {
-    return nullptr;
+    " 1",
+    " 2",
+    " BOTH",
+    ""
+};
+
+static pCHAR FuncSource(pCHAR buffer)
+{
+    SCPI_REQUEST(SCPI::SendAnswer(source[S_FFT_SOURCE]));
+
+    SCPI_PROCESS_ARRAY(source, S_FFT_SOURCE = static_cast<SourceFFT::E>(i));
 }
 
 
