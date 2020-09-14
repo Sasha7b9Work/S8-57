@@ -5,28 +5,33 @@
 
 
 // :TIMEBASE:MODE
-static const char *FuncMode(const char *);
+static pCHAR FuncMode(pCHAR);
 static bool TestMode();
 static void HintMode(String *);
 
+// :TIMEBASE:OFFSETBASE
+static pCHAR FuncOffsetBase(pCHAR);
+static bool TestOffsetBase();
+static void HintOffsetBase(String *);
+
 // :TIMEBASE:PEAKDET
-static const char *FuncPeakDet(const char *);
+static pCHAR FuncPeakDet(pCHAR);
 static bool TestPeakDet();
 static void HintPeakDet(String *);
 
 // :TIMEBASE:SCALE:
-static const char *FuncScale(const char *);
+static pCHAR FuncScale(pCHAR);
 static bool TestScale();
 static void HintScale(String *);
 
 // :TIMEBASE:TPOS:
-static const char *FuncTPos(const char *);
+static pCHAR FuncTPos(pCHAR);
 static bool TestTPos();
 static void HintTPos(String *);
 
 
 
-static const char *const tBaseNames[] =
+static pString tBaseNames[] =
 {
     " 2NS",
     " 5NS",
@@ -62,7 +67,7 @@ static const char *const tBaseNames[] =
 };
 
 
-static const char *const modes[] =
+static pString modes[] =
 {
     " EQUAL",
     " REAL",
@@ -70,7 +75,7 @@ static const char *const modes[] =
 };
 
 
-static const char *const peakdets[] =
+static pString peakdets[] =
 {
     " OFF",
     " ON",
@@ -78,7 +83,7 @@ static const char *const peakdets[] =
 };
 
 
-static const char *const tposes[] =
+static pString tposes[] =
 {
     " LEFT",
     " CENTER",
@@ -89,15 +94,16 @@ static const char *const tposes[] =
 
 const StructSCPI SCPI::tBase[] =
 {
-    SCPI_LEAF(":MODE",    FuncMode,    TestMode,    "", HintMode),
-    SCPI_LEAF(":PEAKDET", FuncPeakDet, TestPeakDet, "Peak detector control",   HintPeakDet),
-    SCPI_LEAF(":SCALE",   FuncScale,   TestScale,   "Horizontal zoom control", HintScale),
-    SCPI_LEAF(":TPOS",    FuncTPos,    TestTPos,    "Snap sync to screen",     HintTPos),
+    SCPI_LEAF(":MODE",       FuncMode,       TestMode,       "",                        HintMode),
+    SCPI_LEAF(":PEAKDET",    FuncPeakDet,    TestPeakDet,    "Peak detector control",   HintPeakDet),
+    SCPI_LEAF(":OFFSETBASE", FuncOffsetBase, TestOffsetBase, "",                        HintOffsetBase),
+    SCPI_LEAF(":SCALE",      FuncScale,      TestScale,      "Horizontal zoom control", HintScale),
+    SCPI_LEAF(":TPOS",       FuncTPos,       TestTPos,       "Snap sync to screen",     HintTPos),
     SCPI_EMPTY()
 };
 
 
-static const char *FuncMode(const char *buffer)
+static pCHAR FuncMode(pCHAR buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(modes[S_RAND_SAMPLE_TYPE]));
 
@@ -105,7 +111,13 @@ static const char *FuncMode(const char *buffer)
 }
 
 
-static const char *FuncPeakDet(const char *buffer)
+static pCHAR FuncOffsetBase(pCHAR)
+{
+    return nullptr;
+}
+
+
+static pCHAR FuncPeakDet(pCHAR buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(peakdets[S_PEAK_DET]));
 
@@ -113,7 +125,7 @@ static const char *FuncPeakDet(const char *buffer)
 }
 
 
-static const char *FuncScale(const char *buffer)
+static pCHAR FuncScale(pCHAR buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(tBaseNames[S_TIME_BASE]));
 
@@ -121,7 +133,7 @@ static const char *FuncScale(const char *buffer)
 }
 
 
-static const char *FuncTPos(const char *buffer)
+static pCHAR FuncTPos(pCHAR buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(tposes[S_TPOS]));
 
@@ -132,6 +144,12 @@ static const char *FuncTPos(const char *buffer)
 static bool TestMode()
 {
     return true;
+}
+
+
+static bool TestOffsetBase()
+{
+    return false;
 }
 
 
@@ -156,6 +174,12 @@ static bool TestTPos()
 static void HintMode(String *message)
 {
     SCPI::ProcessHint(message, modes);
+}
+
+
+static void HintOffsetBase(String *)
+{
+
 }
 
 
