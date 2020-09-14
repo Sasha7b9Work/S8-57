@@ -42,7 +42,8 @@ add_compile_options(/wd26812)   # Prefer 'enum class' over 'enum' (Enum.3)
 file(GLOB COMMON                            ../../common/Command.h
                                             ../../common/Decoder_d.*
                                             ../../common/Decoder_p.h
-                                            ../../common/Message.*)
+                                            ../../common/Message.*
+                                            ../../common/common_defines.h)
 file(GLOB VS                                ../../common/_VS/*.h)
 file(GLOB VS_CMSIS                          ../../common/_VS/CMSIS/*)
 file(GLOB VS_FATFS                          ../../common/_VS/FatFS/*)
