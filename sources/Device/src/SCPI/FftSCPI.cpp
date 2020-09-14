@@ -66,9 +66,18 @@ static pCHAR FuncDisplay(pCHAR buffer)
 }
 
 
-static pCHAR FuncScale(pCHAR)
+static pString scale[] =
 {
-    return nullptr;
+    " LOG",
+    " LINEAR",
+    ""
+};
+
+static pCHAR FuncScale(pCHAR buffer)
+{
+    SCPI_REQUEST(SCPI::SendAnswer(scale[S_FFT_SCALE]));
+
+    SCPI_PROCESS_ARRAY(scale, S_FFT_SCALE = static_cast<ScaleFFT::E>(i));
 }
 
 
