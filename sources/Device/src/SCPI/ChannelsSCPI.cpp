@@ -9,6 +9,10 @@
 
 #define EXTRACT_CHANNEL(x) Chan::E ch = (*(buffer - (x)) == '1') ? ChanA : ChanB;    /* (buffer - 7) указывает на номер канала - 1 или 2 */
 
+// :CHANNEL{1|2}:BANDWIDTH
+static pCHAR FuncBandwidth(pCHAR);
+static bool TestBandwidth();
+static void HintBandwidth(String *);
 
 // :CHANNEL{1|2}:COUPLING
 static pCHAR FuncCoupling(pCHAR);
@@ -60,10 +64,11 @@ static pString rangeName[] =
 
 static const StructSCPI chan[] =
 {
-    SCPI_LEAF("COUPLING", FuncCoupling, TestCoupling, "",                             HintCoupling),
-    SCPI_LEAF("DISPLAY",  FuncDisplay,  TestDisplay,  "Turns channel display on/off", HintDisplay),
-    SCPI_LEAF("OFFSET",   FuncOffset,   TestOffset,   "",                             HintOffset),
-    SCPI_LEAF("SCALE",    FuncScale,    TestScale,    "Vertical zoom control",        HintScale),
+    SCPI_LEAF("BANDWIDTH", FuncBandwidth, TestBandwidth, "",                             HintBandwidth),
+    SCPI_LEAF("COUPLING",  FuncCoupling,  TestCoupling,  "",                             HintCoupling),
+    SCPI_LEAF("DISPLAY",   FuncDisplay,   TestDisplay,   "Turns channel display on/off", HintDisplay),
+    SCPI_LEAF("OFFSET",    FuncOffset,    TestOffset,    "",                             HintOffset),
+    SCPI_LEAF("SCALE",     FuncScale,     TestScale,     "Vertical zoom control",        HintScale),
     SCPI_EMPTY()
 };
 
@@ -75,6 +80,12 @@ const StructSCPI SCPI::channels[] =
     SCPI_NODE("2:", chan),
     SCPI_EMPTY()
 };
+
+
+static pCHAR FuncBandwidth(pCHAR)
+{
+    return nullptr;
+}
 
 
 static pCHAR FuncCoupling(pCHAR)
@@ -109,6 +120,12 @@ static pCHAR FuncScale(pCHAR buffer)
 }
 
 
+static void HintBandwidth(String *)
+{
+
+}
+
+
 static void HintCoupling(String *)
 {
 
@@ -130,6 +147,12 @@ static void HintOffset(String *)
 static void HintScale(String *message)
 {
     SCPI::ProcessHint(message, rangeName);
+}
+
+
+static bool TestBandwidth()
+{
+    return false;
 }
 
 
