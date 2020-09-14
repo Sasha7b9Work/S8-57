@@ -21,20 +21,10 @@ static const char *FuncMapping(const char *);
 static void HintMapping(String *);
 static bool TestMapping();
 
-
-static const char *const averages[] =
-{
-    " 1",
-    " 2",
-    " 4",
-    " 8",
-    " 16",
-    " 32",
-    " 64",
-    " 128",
-    " 256",
-    ""
-};
+// :DISPLAY:SMOOTHING
+static pCHAR FuncSmoothing(pCHAR);
+static void HintSmoothing(String *);
+static bool TestSmoothing();
 
 
 static const char *const grids[] =
@@ -57,10 +47,26 @@ static const char *const mapping[] =
 
 const StructSCPI SCPI::display[] =
 {
-    SCPI_LEAF(":AVERAGE",  FuncAverages, TestAverages, "Number of averages",     HintAverages),
-    SCPI_LEAF(":GRID",     FuncGrid,     TestGrid,     "Grid type selection",    HintGrid),
-    SCPI_LEAF(":MAPPING",  FuncMapping, TestMapping,   "Signal display control", HintMapping),
+    SCPI_LEAF(":AVERAGE",   FuncAverages,  TestAverages,  "Number of averages",     HintAverages),
+    SCPI_LEAF(":GRID",      FuncGrid,      TestGrid,      "Grid type selection",    HintGrid),
+    SCPI_LEAF(":MAPPING",   FuncMapping,   TestMapping,   "Signal display control", HintMapping),
+    SCPI_LEAF(":SMOOTHING", FuncSmoothing, TestSmoothing, "",                       HintSmoothing),
     SCPI_EMPTY()
+};
+
+
+static const char *const averages[] =
+{
+    " 128",
+    " 16",
+    " 1",
+    " 256",
+    " 2",
+    " 4",
+    " 8",
+    " 32",
+    " 64",
+    ""
 };
 
 
@@ -88,6 +94,30 @@ static const char *FuncMapping(const char *buffer)
 }
 
 
+static pString smoothings[] =
+{
+    " 1",
+    " 2",
+    " 3",
+    " 4",
+    " 5",
+    " 6",
+    " 7",
+    " 8",
+    " 9",
+    " 10",
+    ""
+};
+
+
+static pCHAR FuncSmoothing(pCHAR buffer)
+{
+    SCPI_REQUEST(SCPI::SendAnswer(smoothings[S_DISP_ENUM_SMOOTH]));
+
+    SCPI_PROCESS_ARRAY(smoothings, S_DISP_ENUM_SMOOTH = static_cast<ENumSmoothing::E>(i));
+}
+
+
 static void HintAverages(String *message)
 {
     SCPI::ProcessHint(message, averages);
@@ -103,6 +133,12 @@ static void HintGrid(String *message)
 static void HintMapping(String *message)
 {
     SCPI::ProcessHint(message, mapping);
+}
+
+
+static void HintSmoothing(String *message)
+{
+    SCPI::ProcessHint(message, averages);
 }
 
 
@@ -141,4 +177,10 @@ static bool TestMapping()
     }
 
     return true;
+}
+
+
+static bool TestSmoothing()
+{
+    return false;
 }

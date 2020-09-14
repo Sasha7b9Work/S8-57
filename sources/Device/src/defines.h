@@ -9,6 +9,7 @@
 
 
 typedef const char  *const  pString;
+typedef const char *        pCHAR;
 typedef unsigned char       uchar;
 typedef signed char         int8;
 typedef unsigned char       uint8;
