@@ -88,9 +88,20 @@ static pCHAR FuncSource(pCHAR buffer)
 }
 
 
-static pCHAR FuncWindow(pCHAR)
+static pString window[] =
 {
-    return nullptr;
+    " RECTANGLE",
+    " HAMMING",
+    " BLACKMAN",
+    " HANN",
+    ""
+};
+
+static pCHAR FuncWindow(pCHAR buffer)
+{
+    SCPI_REQUEST(SCPI::SendAnswer(window[S_FFT_WINDOW]));
+
+    SCPI_PROCESS_ARRAY(window, S_FFT_WINDOW = static_cast<WindowFFT::E>(i));
 }
 
 
