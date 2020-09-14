@@ -1,5 +1,7 @@
 #include "defines.h"
+#include "Menu/Pages/Include/PageFFT.h"
 #include "SCPI/SCPI.h"
+#include "Settings/Settings.h"
 
 // :FFT:DATA?
 static pCHAR FuncData(pCHAR);
@@ -44,9 +46,25 @@ static pCHAR FuncData(pCHAR)
 }
 
 
-static pCHAR FuncDisplay(pCHAR)
+static pString display[] =
 {
-    return nullptr;
+    " ON",
+    " OFF",
+    ""
+};
+
+
+static void EnableFFT(int i)
+{
+    S_FFT_ENABLED = (i == 0);
+}
+
+
+static pCHAR FuncDisplay(pCHAR buffer)
+{
+    SCPI_REQUEST(SCPI::SendAnswer(display[S_FFT_ENABLED ? 0 : 1]));
+
+    SCPI_PROCESS_ARRAY(display, EnableFFT(i));
 }
 
 

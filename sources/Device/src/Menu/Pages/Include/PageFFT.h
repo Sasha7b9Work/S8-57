@@ -1,6 +1,9 @@
 #pragma once
 
 
+class Page;
+
+
 struct ScaleFFT
 {
 #define S_FFT_SCALE         (set.fft._scale)
