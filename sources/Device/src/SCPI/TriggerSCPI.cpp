@@ -5,27 +5,27 @@
 
 
 // :TRIG:INPUT
-static const char *FuncInput(const char *);
+static pCHAR FuncInput(pCHAR);
 static void HintInput(String *);
 static bool TestInput();
 
 // :TRIG:MODE
-static const char *FuncMode(const char *);
+static pCHAR FuncMode(pCHAR);
 static void HintMode(String *);
 static bool TestMode();
 
 // :TRIG:POLARITY
-static const char *FuncPolarity(const char *);
+static pCHAR FuncPolarity(pCHAR);
 static void HintPolarity(String *);
 static bool TestPolarity();
 
 // :TRIG:SOURCE
-static const char *FuncSource(const char *);
+static pCHAR FuncSource(pCHAR);
 static void HintSource(String *);
 static bool TestSource();
 
 
-static const char *const inputs[] =
+static pString inputs[] =
 {
     " FULL",
     " HF",
@@ -34,7 +34,7 @@ static const char *const inputs[] =
 };
 
 
-static const char *const modes[] =
+static pString modes[] =
 {
     " AUTO",
     " NORMAL",
@@ -43,7 +43,7 @@ static const char *const modes[] =
 };
 
 
-static const char *const polarities[] =
+static pString polarities[] =
 {
     " RISE",
     " FALL",
@@ -51,7 +51,7 @@ static const char *const polarities[] =
 };
 
 
-static const char *const sources[] =
+static pString sources[] =
 {
     " 1",
     " 2",
@@ -69,7 +69,7 @@ const StructSCPI SCPI::trigger[] =
 };
 
 
-static const char *FuncInput(const char *buffer)
+static pCHAR FuncInput(pCHAR buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(inputs[S_TRIG_INPUT]));
 
@@ -77,7 +77,7 @@ static const char *FuncInput(const char *buffer)
 }
 
 
-static const char *FuncMode(const char *buffer)
+static pCHAR FuncMode(pCHAR buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(modes[S_TRIG_START_MODE]));
 
@@ -85,7 +85,7 @@ static const char *FuncMode(const char *buffer)
 }
 
 
-static const char *FuncPolarity(const char *buffer)
+static pCHAR FuncPolarity(pCHAR buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(polarities[S_TRIG_POLARITY]));
 
@@ -93,7 +93,7 @@ static const char *FuncPolarity(const char *buffer)
 }
 
 
-static const char *FuncSource(const char *buffer)
+static pCHAR FuncSource(pCHAR buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(sources[S_TRIG_SOURCE]));
 
