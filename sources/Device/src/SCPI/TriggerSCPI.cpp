@@ -9,6 +9,11 @@ static pCHAR FuncInput(pCHAR);
 static void HintInput(String *);
 static bool TestInput();
 
+// :TRIG:LEVEL
+static pCHAR FuncLevel(pCHAR);
+static void HintLevel(String *);
+static bool TestLevel();
+
 // :TRIG:MODE
 static pCHAR FuncMode(pCHAR);
 static void HintMode(String *);
@@ -62,6 +67,7 @@ static pString sources[] =
 const StructSCPI SCPI::trigger[] =
 {
     SCPI_LEAF(":INPUT",    FuncInput,    TestInput,    "Filter selection by synchronization", HintInput),
+    SCPI_LEAF(":LEVEL",    FuncLevel,    TestLevel,    "",                                    HintLevel),
     SCPI_LEAF(":MODE",     FuncMode,     TestMode,     "Set or query the trigger mode",       HintMode),
     SCPI_LEAF(":POLARITY", FuncPolarity, TestPolarity, "Sync polarity selection",             HintPolarity),
     SCPI_LEAF(":SOURCE",   FuncSource,   TestSource,   "Source selection",                    HintSource),
@@ -74,6 +80,12 @@ static pCHAR FuncInput(pCHAR buffer)
     SCPI_REQUEST(SCPI::SendAnswer(inputs[S_TRIG_INPUT]));
 
     SCPI_PROCESS_ARRAY(inputs, TrigInput::Set(static_cast<TrigInput::E>(i)));
+}
+
+
+static pCHAR FuncLevel(pCHAR)
+{
+    return nullptr;
 }
 
 
@@ -107,6 +119,12 @@ static void HintInput(String *message)
 }
 
 
+static void HintLevel(String *)
+{
+
+}
+
+
 static void HintMode(String *message)
 {
     SCPI::ProcessHint(message, modes);
@@ -126,6 +144,12 @@ static void HintSource(String *message)
 
 
 static bool TestInput()
+{
+    return false;
+}
+
+
+static bool TestLevel()
 {
     return false;
 }
