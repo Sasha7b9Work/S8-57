@@ -11,18 +11,22 @@
 
 
 // :CHANNEL{1|2}:DISPLAY
-static const char *FuncDisplay(const char *);
+static pCHAR FuncDisplay(pCHAR);
 static bool TestDisplay();
 static void HintDisplay(String *);
 
+// :CHANNEL{1|2}:OFFSET
+static pCHAR FuncOffset(pCHAR);
+static bool TestOffset();
+static void HintOffset(String *);
 
 // :CHANNEL{1|2}:SCALE
-static const char *FuncScale(const char *);
+static pCHAR FuncScale(pCHAR);
 static bool TestScale();
 static void HintScale(String *);
 
 
-static const char *displays[] =
+static pString displays[] =
 {
     " OFF",
     " ON",
@@ -30,7 +34,7 @@ static const char *displays[] =
 };
 
 
-static const char *const rangeName[] =
+static pString rangeName[] =
 {
     " 2MV",
     " 5MV",
@@ -52,6 +56,7 @@ static const char *const rangeName[] =
 static const StructSCPI chan[] =
 {
     SCPI_LEAF("DISPLAY", FuncDisplay, TestDisplay, "Turns channel display on/off", HintDisplay),
+    SCPI_LEAF("OFFSET",  FuncOffset,  TestOffset,  "",                             HintOffset),
     SCPI_LEAF("SCALE",   FuncScale,   TestScale,   "Vertical zoom control",        HintScale),
     SCPI_EMPTY()
 };
@@ -59,13 +64,14 @@ static const StructSCPI chan[] =
 
 const StructSCPI SCPI::channels[] =
 {
+    
     SCPI_NODE("1:", chan),
     SCPI_NODE("2:", chan),
     SCPI_EMPTY()
 };
 
 
-static const char *FuncDisplay(const char *buffer)
+static pCHAR FuncDisplay(pCHAR buffer)
 {
     EXTRACT_CHANNEL(9);
 
@@ -75,7 +81,13 @@ static const char *FuncDisplay(const char *buffer)
 }
 
 
-static const char *FuncScale(const char *buffer)
+static pCHAR FuncOffset(pCHAR)
+{
+    return nullptr;
+}
+
+
+static pCHAR FuncScale(pCHAR buffer)
 {
     EXTRACT_CHANNEL(7);
 
@@ -91,6 +103,12 @@ static void HintDisplay(String *message)
 }
 
 
+static void HintOffset(String *)
+{
+
+}
+
+
 static void HintScale(String *message)
 {
     SCPI::ProcessHint(message, rangeName);
@@ -99,7 +117,13 @@ static void HintScale(String *message)
 
 static bool TestDisplay()
 {
-    return true;
+    return false;
+}
+
+
+static bool TestOffset()
+{
+    return false;
 }
 
 
