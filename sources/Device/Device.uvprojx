@@ -2209,6 +2209,21 @@
           <GroupName>SCPI</GroupName>
           <Files>
             <File>
+              <FileName>SCPI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\SCPI\SCPI.h</FilePath>
+            </File>
+            <File>
+              <FileName>SCPI.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\SCPI\SCPI.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HeadSCPI.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\SCPI\HeadSCPI.cpp</FilePath>
+            </File>
+            <File>
               <FileName>ChannelsSCPI.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\SCPI\ChannelsSCPI.cpp</FilePath>
@@ -2222,11 +2237,6 @@
               <FileName>FreqMeterSCPI.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\SCPI\FreqMeterSCPI.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>HeadSCPI.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\SCPI\HeadSCPI.cpp</FilePath>
             </File>
             <File>
               <FileName>KeySCPI.cpp</FileName>
@@ -2249,19 +2259,14 @@
               <FilePath>.\src\SCPI\TBaseSCPI.cpp</FilePath>
             </File>
             <File>
+              <FileName>TesterSCPI.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\SCPI\TesterSCPI.cpp</FilePath>
+            </File>
+            <File>
               <FileName>TriggerSCPI.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\SCPI\TriggerSCPI.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SCPI.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\SCPI\SCPI.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>SCPI.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\SCPI\SCPI.h</FilePath>
             </File>
             <File>
               <FileName>MainSCPI.cpp</FileName>

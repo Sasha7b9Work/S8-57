@@ -36,6 +36,7 @@ const StructSCPI SCPI::head[] =
     SCPI_NODE(":FREQMETER", SCPI::freqmeter),
     SCPI_NODE(":KEY",       SCPI::key),
     SCPI_NODE(":MEASURE",   SCPI::measures),
+    SCPI_NODE(":TESTER",    SCPI::tester),
     SCPI_NODE(":TIMEBASE",  SCPI::tBase),
     SCPI_NODE(":TRIG",      SCPI::trigger),
     SCPI_EMPTY()
