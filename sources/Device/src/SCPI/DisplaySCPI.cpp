@@ -6,10 +6,20 @@
 #include <cstring>
 
 
+// :DISPLAY:ACCUMULATION
+static pCHAR FuncAccumulation(pCHAR);
+static void HintAccumulation(String *);
+static bool TestAccumulation();
+
 // :DISPLAY:AVERAGES
 static pCHAR FuncAverages(pCHAR);
 static void HintAverages(String *);
 static bool TestAverages();
+
+// :DISPLAY:BRIGHTNESS
+static pCHAR FuncBrightness(pCHAR);
+static void HintBrightness(String *);
+static bool TestBrightness();
 
 // :DISPLAY:FPS
 static pCHAR FuncFPS(pCHAR);
@@ -42,7 +52,7 @@ static const char *const grids[] =
 };
 
 
-static const char *const mapping[] =
+static pString mapping[] =
 {
     " LINES",
     " DOTS",
@@ -52,16 +62,41 @@ static const char *const mapping[] =
 
 const StructSCPI SCPI::display[] =
 {
-    SCPI_LEAF(":AVERAGE",   FuncAverages,  TestAverages,  "Number of averages",     HintAverages),
-    SCPI_LEAF(":FPS",       FuncFPS,       TestFPS,       "",                       HintFPS),
-    SCPI_LEAF(":GRID",      FuncGrid,      TestGrid,      "Grid type selection",    HintGrid),
-    SCPI_LEAF(":MAPPING",   FuncMapping,   TestMapping,   "Signal display control", HintMapping),
-    SCPI_LEAF(":SMOOTHING", FuncSmoothing, TestSmoothing, "",                       HintSmoothing),
+    SCPI_LEAF(":ACCUMULATION", FuncAccumulation, TestAccumulation, "",                       HintAccumulation),
+    SCPI_LEAF(":AVERAGE",      FuncAverages,     TestAverages,     "Number of averages",     HintAverages),
+    SCPI_LEAF(":BRIGHTNESS",   FuncBrightness,   TestBrightness,   "",                       HintBrightness),
+    SCPI_LEAF(":FPS",          FuncFPS,          TestFPS,          "",                       HintFPS),
+    SCPI_LEAF(":GRID",         FuncGrid,         TestGrid,         "Grid type selection",    HintGrid),
+    SCPI_LEAF(":MAPPING",      FuncMapping,      TestMapping,      "Signal display control", HintMapping),
+    SCPI_LEAF(":SMOOTHING",    FuncSmoothing,    TestSmoothing,    "",                       HintSmoothing),
     SCPI_EMPTY()
 };
 
 
-static const char *const averages[] =
+static pString accumulation[] =
+{
+    " OFF",
+    " 2",
+    " 4",
+    " 8",
+    " 16",
+    " 32",
+    " 64",
+    " 128",
+    " INFINITY",
+    ""
+};
+
+
+static pCHAR FuncAccumulation(pCHAR buffer)
+{
+    SCPI_REQUEST(SCPI::SendAnswer(accumulation[S_DISP_ENUM_ACCUM]));
+
+    SCPI_PROCESS_ARRAY(accumulation, S_DISP_ENUM_ACCUM = static_cast<ENumAccum::E>(i));
+}
+
+
+static pString averages[] =
 {
     " 128",
     " 16",
@@ -82,6 +117,13 @@ static pCHAR FuncAverages(pCHAR buffer)
 
     SCPI_PROCESS_ARRAY(averages, ENumAverage::Set(static_cast<ENumAverage::E>(i)));
 }
+
+
+static pCHAR FuncBrightness(pCHAR)
+{
+    return nullptr;
+}
+
 
 static const char *const fps[] =
 {
@@ -141,9 +183,21 @@ static pCHAR FuncSmoothing(pCHAR buffer)
 }
 
 
+static void HintAccumulation(String *message)
+{
+    SCPI::ProcessHint(message, accumulation);
+}
+
+
 static void HintAverages(String *message)
 {
     SCPI::ProcessHint(message, averages);
+}
+
+
+static void HintBrightness(String *)
+{
+
 }
 
 
@@ -171,7 +225,19 @@ static void HintSmoothing(String *message)
 }
 
 
+static bool TestAccumulation()
+{
+    return false;
+}
+
+
 static bool TestAverages()
+{
+    return false;
+}
+
+
+static bool TestBrightness()
 {
     return false;
 }
