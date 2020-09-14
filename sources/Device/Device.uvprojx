@@ -2219,6 +2219,11 @@
               <FilePath>.\src\SCPI\DisplaySCPI.cpp</FilePath>
             </File>
             <File>
+              <FileName>FreqMeterSCPI.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\SCPI\FreqMeterSCPI.cpp</FilePath>
+            </File>
+            <File>
               <FileName>HeadSCPI.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\SCPI\HeadSCPI.cpp</FilePath>

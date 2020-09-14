@@ -27,16 +27,17 @@ static void HintTest(String *);
 
 const StructSCPI SCPI::head[] =
 {
-    SCPI_LEAF("*IDN?",     FuncIDN,        TestIDN,   "ID request",                       HintIDN),
-    SCPI_LEAF("*RST",      FuncReset,      TestReset, "Reset settings to default values", HintReset),
-    SCPI_LEAF(":HELP",     FuncHelp,       TestHelp,  "Output of this help",              HintHelp),
-    SCPI_LEAF(":TEST",     FuncTest,       TestTest,  "Run all tests",                    HintTest),
-    SCPI_NODE(":CHANNEL",  SCPI::channels),
-    SCPI_NODE(":DISPLAY",  SCPI::display),
-    SCPI_NODE(":KEY",      SCPI::key),
-    SCPI_NODE(":MEASURE",  SCPI::measures),
-    SCPI_NODE(":TIMEBASE", SCPI::tBase),
-    SCPI_NODE(":TRIG",     SCPI::trigger),
+    SCPI_LEAF("*IDN?",      FuncIDN,        TestIDN,   "ID request",                       HintIDN),
+    SCPI_LEAF("*RST",       FuncReset,      TestReset, "Reset settings to default values", HintReset),
+    SCPI_LEAF(":HELP",      FuncHelp,       TestHelp,  "Output of this help",              HintHelp),
+    SCPI_LEAF(":TEST",      FuncTest,       TestTest,  "Run all tests",                    HintTest),
+    SCPI_NODE(":CHANNEL",   SCPI::channels),
+    SCPI_NODE(":DISPLAY",   SCPI::display),
+    SCPI_NODE(":FREQMETER", SCPI::freqmeter),
+    SCPI_NODE(":KEY",       SCPI::key),
+    SCPI_NODE(":MEASURE",   SCPI::measures),
+    SCPI_NODE(":TIMEBASE",  SCPI::tBase),
+    SCPI_NODE(":TRIG",      SCPI::trigger),
     SCPI_EMPTY()
 };
 
