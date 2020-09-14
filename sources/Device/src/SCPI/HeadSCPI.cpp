@@ -31,6 +31,11 @@ static pCHAR FuncCalibratorMode(pCHAR);
 static bool TestCalibratorMode();
 static void HintCalibratorMode(String *);
 
+// :MEMORY:LENGTH
+static pCHAR FuncMemoryLength(pCHAR);
+static bool TestMemoryLength();
+static void HintMemoryLength(String *);
+
 
 const StructSCPI SCPI::head[] =
 {
@@ -39,6 +44,7 @@ const StructSCPI SCPI::head[] =
     SCPI_LEAF(":HELP",            FuncHelp,           TestHelp,           "Output of this help",              HintHelp),
     SCPI_LEAF(":TEST",            FuncTest,           TestTest,           "Run all tests",                    HintTest),
     SCPI_LEAF(":CALIBRATOR:MODE", FuncCalibratorMode, TestCalibratorMode, "",                                 HintCalibratorMode),
+    SCPI_LEAF(":MEMORY:LENGTH",   FuncMemoryLength,   TestMemoryLength,   "",                                 HintMemoryLength),
     SCPI_NODE(":CHANNEL",         SCPI::channels),
     SCPI_NODE(":DISPLAY",         SCPI::display),
     SCPI_NODE(":FFT",             SCPI::fft),
@@ -133,13 +139,31 @@ static pCHAR FuncCalibratorMode(pCHAR)
 }
 
 
+static pCHAR FuncMemoryLength(pCHAR)
+{
+    return nullptr;
+}
+
+
 static bool TestCalibratorMode()
 {
     return false;
 }
 
 
+static bool TestMemoryLength()
+{
+    return false;
+}
+
+
 static void HintCalibratorMode(String *)
+{
+
+}
+
+
+static void HintMemoryLength(String *)
 {
 
 }
