@@ -161,7 +161,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\Utils\Queue.cpp</Filename>
+          <Filename>D:\Projects\stm32\S8-57\sources\DLoader\src\Utils\Queue.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\\src/Utils/Queue.cpp\52</Expression>
         </Bp>

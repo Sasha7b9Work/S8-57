@@ -107,4 +107,6 @@ namespace SCPI
     extern const StructSCPI tBase[];    //-V2504
 
     extern const StructSCPI trigger[];  //-V2504
+
+    extern const StructSCPI measures[]; //-V2504
 }

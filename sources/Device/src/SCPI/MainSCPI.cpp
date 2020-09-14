@@ -12,16 +12,16 @@ struct HeadSCPI
 };
 
 
-static const char *FuncIDN(const char *);
+//static const char *FuncIDN(const char *);
 
 
-const HeadSCPI morphems[] =
-{
-    {"*IDN?", FuncIDN}
-};
+//const HeadSCPI morphems[] =
+//{
+//    {"*IDN?", FuncIDN}
+//};
 
 
-static const char *FuncIDN(const char *)
-{
-    return "";
-}
+//static const char *FuncIDN(const char *)
+//{
+//    return "";
+//}
