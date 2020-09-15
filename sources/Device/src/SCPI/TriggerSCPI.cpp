@@ -87,7 +87,7 @@ static pCHAR FuncInput(pCHAR buffer)
 
 static void SendAnswerLevel()
 {
-    String answer("%d", set.trig._level);
+    String answer("%d", S_TRIG_LEVEL_SOURCE);
     SCPI::SendAnswer(answer.c_str());
 }
 
