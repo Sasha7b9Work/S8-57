@@ -1,5 +1,7 @@
 #include "defines.h"
+#include "Menu/Pages/Include/PageMeasures.h"
 #include "SCPI/SCPI.h"
+#include "Settings/Settings.h"
 
 
 // :MEASURE:DISPLAY
@@ -27,15 +29,39 @@ const StructSCPI SCPI::measures[] =
 };
 
 
-static pCHAR FuncDisplay(pCHAR)
+static pString display[] =
 {
-    return nullptr;
+    " OFF",
+    " ON",
+    ""
+};
+
+static void DisplayMeasures(int i)
+{
+    S_MEAS_SHOW = (i == 1);
+}
+
+static pCHAR FuncDisplay(pCHAR buffer)
+{
+    SCPI_REQUEST(SCPI::SendAnswer(S_MEAS_SHOW ? " ON" : " OFF"));
+
+    SCPI_PROCESS_ARRAY(display, DisplayMeasures(i));
 }
 
 
-static pCHAR FuncSource(pCHAR)
+static pString source[] =
 {
-    return nullptr;
+    " 1",
+    " 2",
+    " BOTH",
+    ""
+};
+
+static pCHAR FuncSource(pCHAR buffer)
+{
+    SCPI_REQUEST(SCPI::SendAnswer(source[S_MEAS_SOURCE]));
+
+    SCPI_PROCESS_ARRAY(source, S_MEAS_SOURCE = static_cast<MeasuresSource::E>(i));
 }
 
 
