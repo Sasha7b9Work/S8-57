@@ -40,9 +40,28 @@ const StructSCPI SCPI::multimeter[] =
 };
 
 
-static pCHAR FuncAVP(pCHAR)
+static void TuneAVP(int i)
 {
-    return nullptr;
+    if (Device::InModeMultimeter())
+    {
+        set.mult._avp = static_cast<ModeAVP::E>(i);
+        Multimeter::ChangeAVP();
+    }
+}
+
+
+static pCHAR FuncAVP(pCHAR buffer)
+{
+    static pString avp[] =
+    {
+        " OFF",
+        " ON",
+        ""
+    };
+
+    SCPI_REQUEST(SCPI::SendAnswer(String(avp[set.mult._avp]).c_str()));
+
+    SCPI_PROCESS_ARRAY(avp, TuneAVP(i));
 }
 
 
