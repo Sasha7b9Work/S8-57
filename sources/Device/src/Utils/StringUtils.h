@@ -45,6 +45,8 @@ public:
     static char *DoubleToString(double value);
 
     static bool StringToDouble(double *value, const char *buffer);
+
+    static bool String2Int(const char *buffer, int *value, char **end);
 };
 
 

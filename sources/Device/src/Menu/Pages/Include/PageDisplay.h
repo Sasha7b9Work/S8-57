@@ -181,6 +181,8 @@ struct PageDisplay
 
     static void SetTypeGrid(TypeGrid::E v);
 
+    static void SetBrightness(int value);
+
     struct Accumulation
     {
         static const Page * const self;

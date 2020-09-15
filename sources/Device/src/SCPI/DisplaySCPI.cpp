@@ -3,6 +3,7 @@
 #include "Menu/Pages/Include/PageDisplay.h"
 #include "SCPI/SCPI.h"
 #include "Settings/Settings.h"
+#include "Utils/StringUtils.h"
 #include <cstring>
 
 
@@ -134,8 +135,20 @@ static pCHAR FuncAverages(pCHAR buffer)
 }
 
 
-static pCHAR FuncBrightness(pCHAR)
+static pCHAR FuncBrightness(pCHAR buffer)
 {
+    SCPI_REQUEST(SCPI::SendAnswer(String("%d", set.disp._brightness).c_str()));
+
+    char *end_str = nullptr;
+
+    int value = 0;
+
+    if (SU::String2Int(buffer, &value, &end_str))
+    {
+        PageDisplay::SetBrightness(value);
+        return end_str + 1;
+    }
+
     return nullptr;
 }
 

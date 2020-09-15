@@ -14,6 +14,7 @@ public:
     void Fill(uint8 value);
     uint8 *data;
     int Size() const { return size; }
+    char *DataChar() { return reinterpret_cast<char *>(data); }
 
     void Log();
     static void LogU8(const uint8 *buffer);

@@ -1,8 +1,9 @@
 #include "defines.h"
+#include "Display/Painter.h"
 #include "Menu/pages/Include/PageDisplay.h"
 #include "Menu/MenuItems.h"
 #include "Settings/Settings.h"
-#include "Display/Painter.h"
+#include "Utils/Math.h"
 
 
 
@@ -10,6 +11,14 @@ static void OnChanged_Brightness()
 {
     Display::LoadBrightness();
 }
+
+void PageDisplay::SetBrightness(int value)
+{
+    Math::Limitation(&value, 0, 100);
+    set.disp._brightness = static_cast<uint8>(value);
+    OnChanged_Brightness();
+}
+
 
 DEF_GOVERNOR( gBrightness,                                                                                                                            //--- ÄÈÑÏËÅÉ - ÍÀÑÒĞÎÉÊÈ - ßğêîñòü ---
     "ßğêîñòü",

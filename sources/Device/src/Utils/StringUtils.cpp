@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Utils/Buffer.h"
 #include "Utils/Stack.h"
 #include "Utils/StringUtils.h"
 #include "Utils/Values.h"
@@ -417,6 +418,28 @@ bool SU::StringToDouble(double *value, const char *str)
     return (end != buffer);
 }
 
+
+bool SU::String2Int(const char *buffer, int *value, char **end)
+{
+    Buffer string(static_cast<int>(std::strlen(buffer)) + 1);
+
+    std::strcpy(string.DataChar(), buffer);
+
+    *value = std::strtol(string.DataChar(), end, 10);
+
+    if (*end == string.DataChar())
+    {
+        *end = const_cast<char *>(buffer);
+    }
+    else
+    {
+        *end = const_cast<char *>(buffer) + (*end - string.DataChar());
+    }
+
+    return (*end != const_cast<char *>(buffer));
+}
+
+
 #ifndef GUI
 
 int strcpy_s(char *dest, uint dest_size, const char *src)
@@ -431,3 +454,4 @@ int strcpy_s(char *dest, uint dest_size, const char *src)
 }
 
 #endif
+
