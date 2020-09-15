@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "common/common_defines.h"
+#include "FlashDrive/FlashDrive.h"
 #include "FPGA/FPGA.h"
 #include "Menu/Pages/Include/DebugPage.h"
 #include "Menu/Pages/Include/PageService.h"
@@ -208,9 +209,17 @@ static pCHAR FuncMemoryLength(pCHAR buffer)
 }
 
 
-static pCHAR FuncMemorySave(pCHAR)
+static pCHAR FuncMemorySave(pCHAR buffer)
 {
-    return nullptr;
+    if (FDrive::IsConnected())
+    {
+        FDrive::SaveScreen();
+    }
+    else
+    {
+        SCPI::SendAnswer("Error save screen. Connect flash-drive");
+    }
+    return buffer + 1;
 }
 
 
