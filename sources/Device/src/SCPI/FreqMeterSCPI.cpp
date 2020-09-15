@@ -53,9 +53,30 @@ static pCHAR FuncAvePeriods(pCHAR)
 }
 
 
-static pCHAR FuncLabels(pCHAR)
+static pString labels[] =
 {
-    return nullptr;
+    " 100KHZ",
+    " 1MHZ",
+    " 10MHZ",
+    " 100MHZ",
+    ""
+};
+
+static void SetLabels(int i)
+{
+    if (S_FREQ_MODE_MEASURE_IS_PERIOD)
+    {
+        S_FREQ_FREQ_CLC = static_cast<FreqMeter::FreqClc::E>(i);
+        
+        FreqMeter::LoadPeriodSettings();
+    }
+}
+
+static pCHAR FuncLabels(pCHAR buffer)
+{
+    SCPI_REQUEST(SCPI::SendAnswer(labels[S_FREQ_FREQ_CLC]));
+
+    SCPI_PROCESS_ARRAY(labels, SetLabels(i));
 }
 
 
