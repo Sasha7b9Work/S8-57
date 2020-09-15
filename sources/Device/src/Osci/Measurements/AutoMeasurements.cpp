@@ -207,12 +207,12 @@ void AutoMeasurements::CalculateMeasures()
             if (VIEW_MEASURES_A)    
             {
                 values[type].value[ChanA] = func(ChanA);
-                SCPI::SendAnswer(measure.GetStringMeasure(ChanA, buffer, 49).c_str());
+                SCPI::SendMeasure(measure.GetStringMeasure(ChanA, buffer, 49));
             }
             if (VIEW_MEASURES_B)
             {
                 values[type].value[ChanB] = func(ChanB);
-                SCPI::SendAnswer(measure.GetStringMeasure(ChanB, buffer, 49).c_str());
+                SCPI::SendMeasure(measure.GetStringMeasure(ChanB, buffer, 49));
             }
         }
 

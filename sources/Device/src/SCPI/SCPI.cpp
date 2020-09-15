@@ -274,3 +274,36 @@ void SCPI::ProcessHint(String *message, const char *const *names)
     message->Append('}');
     SCPI::SendAnswer(message->c_str());
 }
+
+
+void SCPI::SendMeasure(const String &str)
+{
+    String message;
+
+    for (int i = 0; i < str.Size(); i++)
+    {
+        char symbol = str[i];
+
+        if (symbol == '\x10')     { symbol = ' '; }
+        else if (symbol == 'ì')
+        {
+            if (str[i + 1] == 'ê') { message.Append('u'); i++; }
+            else                   { message.Append('m');      }
+            continue;
+        }
+        else if (symbol == 'í')    { symbol = 'n'; }
+        else if (symbol == 'ñ')    { symbol = 's'; }
+        else if (symbol == 'Â')    { symbol = 'V'; }
+        else if (symbol == 'À')    { symbol = 'A'; }
+        else if (symbol == 'Ì')    { symbol = 'M'; }
+        else if (symbol == 'ê')    { symbol = 'k'; }
+        else if ((symbol == 'Ã') && (str[i + 1] == 'ö'))
+        {
+            message.Append('H');  message.Append('z');  i++; continue;
+        }
+
+        message.Append(symbol);
+    }
+
+    SendAnswer(message.c_str());
+}

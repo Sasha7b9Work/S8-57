@@ -45,7 +45,7 @@ public:
 
     int Size() const;
 
-    char &operator[](int i);
+    char &operator[](int i) const;
 
 private:
 
