@@ -102,9 +102,29 @@ static pCHAR FuncMode(pCHAR buffer)
 }
 
 
-static pCHAR FuncTime(pCHAR)
+static pString time[] =
 {
-    return nullptr;
+    " 100MS",
+    " 1S",
+    " 10S",
+    ""
+};
+
+static void SetTime(int i)
+{
+    if(S_FREQ_MODE_MEASURE_IS_FREQUENCY)
+    {
+        S_FREQ_TIME_COUNTING = static_cast<FreqMeter::TimeCounting::E>(i);
+    
+        FreqMeter::LoadFreqSettings();
+    }
+}
+
+static pCHAR FuncTime(pCHAR buffer)
+{
+    SCPI_REQUEST(SCPI::SendAnswer(time[S_FREQ_TIME_COUNTING]));
+
+    SCPI_PROCESS_ARRAY(time, SetTime(i));
 }
 
 
