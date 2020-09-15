@@ -102,9 +102,15 @@ const StructSCPI SCPI::channels[] =
 };
 
 
-static pCHAR FuncBalance(pCHAR)
+static pCHAR FuncBalance(pCHAR buffer)
 {
-    return nullptr;
+    EXTRACT_CHANNEL(9);
+
+    SCPI_PROLOG(buffer);
+
+    Calibrator::BalanceChannel(ch);
+
+    SCPI_EPILOG(buffer);
 }
 
 
