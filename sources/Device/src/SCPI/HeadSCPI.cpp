@@ -211,27 +211,38 @@ static pCHAR FuncMemoryLength(pCHAR buffer)
 
 static pCHAR FuncMemorySave(pCHAR buffer)
 {
+    SCPI_PROLOG(buffer);
+
     if (FDrive::IsConnected())
     {
         FDrive::SaveScreen();
     }
     else
     {
-        SCPI::SendAnswer("Error save screen. Connect flash-drive");
+        SCPI::SendAnswer("Error save screen. Connect flash-drive.");
     }
-    return buffer + 1;
+
+    SCPI_EPILOG(buffer);
 }
 
 
-static pCHAR FuncRun(pCHAR)
+static pCHAR FuncRun(pCHAR buffer)
 {
-    return nullptr;
+    SCPI_PROLOG(buffer);
+
+    Osci::Start(true);
+
+    SCPI_EPILOG(buffer);
 }
 
 
-static pCHAR FuncStop(pCHAR)
+static pCHAR FuncStop(pCHAR buffer)
 {
-    return nullptr;
+    SCPI_PROLOG(buffer);
+
+    Osci::Stop();
+
+    SCPI_EPILOG(buffer);
 }
 
 
