@@ -3,6 +3,7 @@
 #include "FPGA/FPGA.h"
 #include "Menu/Pages/Include/DebugPage.h"
 #include "Menu/Pages/Include/PageService.h"
+#include "Osci/Osci.h"
 #include "SCPI/SCPI.h"
 #include "Settings/Settings.h"
 
@@ -160,9 +161,10 @@ static pCHAR FuncTest(pCHAR buffer)
 }
 
 
-static pCHAR FuncAutoSearch(pCHAR)
+static pCHAR FuncAutoSearch(pCHAR buffer)
 {
-    return nullptr;
+    Osci::RunAutoSearch();
+    return buffer;
 }
 
 
