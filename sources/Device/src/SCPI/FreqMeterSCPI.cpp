@@ -47,9 +47,32 @@ const StructSCPI SCPI::freqmeter[] =
 };
 
 
-static pCHAR FuncAvePeriods(pCHAR)
+static pString periodsReverse[] =
 {
-    return nullptr;
+    " 1E0",
+    " 1E1",
+    " 1E2",
+    " 1E3",
+    " 1E4",
+    " 1E5",
+    ""
+};
+
+static void SetNumberPeriods(int i)
+{
+    if (S_FREQ_MODE_MEASURE_IS_PERIOD)
+    {
+        S_FREQ_NUMBER_PERIODS = static_cast<FreqMeter::NumberPeriods::E>(i);
+
+        FreqMeter::LoadPeriodSettings();
+    }
+}
+
+static pCHAR FuncAvePeriods(pCHAR buffer)
+{
+    SCPI_REQUEST(SCPI::SendAnswer(periodsReverse[S_FREQ_NUMBER_PERIODS]));
+
+    SCPI_PROCESS_ARRAY(periodsReverse, SetNumberPeriods(i));
 }
 
 
