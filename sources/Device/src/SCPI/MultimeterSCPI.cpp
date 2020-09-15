@@ -46,9 +46,112 @@ static pCHAR FuncAVP(pCHAR)
 }
 
 
-static pCHAR FuncMeasure(pCHAR)
+static pString measures[] =
 {
-    return nullptr;
+    " AC2V",
+    " AC20V",
+    " AC400V",
+    " DC2V",
+    " DC20V",
+    " DC400V",
+    " AC20MA",
+    " AC2A",
+    " DC20MA",
+    " DC2A",
+    " 2K",
+    " 20K",
+    " 200K",
+    " 10M",
+    " DIODE",
+    " BELL",
+    ""
+};
+
+
+static void SendAnswerForMeasure()
+{
+    uint8 meas = static_cast<uint8>(set.mult._meas);
+
+    if (meas == 0)                     // DC Voltage
+    {
+        static const pString ranges[] =  { " DC2V", " DC20V", " DC400V" };
+        SCPI::SendAnswer(ranges[set.mult._rangeVoltageDC]);
+    }
+    else if (meas == 1)                 // AC Voltage
+    {
+        static const pString ranges[] = { " AC2V", " AC20V", " AC400V" };
+        SCPI::SendAnswer(ranges[set.mult._rangeVoltageAC]);
+    }
+    else if (meas == 2)
+    {
+        SCPI::SendAnswer(set.mult._rangeCurrentDC == 0 ? " DC20MA" : " DC2A");
+    }
+    else if (meas == 3)
+    {
+        SCPI::SendAnswer(set.mult._rangeCurrentAC == 0 ? " AC20MA" : " AC2A");
+    }
+    else if (meas == 4)
+    {
+        static const pString ranges[] = { "2K", "20K", "200K", "10M" };
+        SCPI::SendAnswer(ranges[set.mult._rangeResist]);
+    }
+    else if (meas == 5)
+    {
+        SCPI::SendAnswer(" DIODE");
+    }
+    else if (meas == 6)
+    {
+        SCPI::SendAnswer(" BELL");
+    }
+}
+
+
+static void EnableMeasure(int i)
+{
+    struct StructMode
+    {
+        uint8 mode;
+        uint8 range;
+        uint8 *pRange;
+    };
+
+    static const StructMode modes[] =
+    {
+        {1, 0, reinterpret_cast<uint8 *>(&set.mult._rangeVoltageAC)},   // " AC2V",
+        {1, 1, reinterpret_cast<uint8 *>(&set.mult._rangeVoltageAC)},   // " AC20V",
+        {1, 2, reinterpret_cast<uint8 *>(&set.mult._rangeVoltageAC)},   // " AC400V",
+        {0, 0, reinterpret_cast<uint8 *>(&set.mult._rangeVoltageDC)},   // " DC2V",
+        {0, 1, reinterpret_cast<uint8 *>(&set.mult._rangeVoltageDC)},   // " DC20V",
+        {0, 2, reinterpret_cast<uint8 *>(&set.mult._rangeVoltageDC)},   // " DC400V",
+        {3, 0, reinterpret_cast<uint8 *>(&set.mult._rangeCurrentAC)},   // " AC20MA",
+        {3, 1, reinterpret_cast<uint8 *>(&set.mult._rangeCurrentAC)},   // " AC2A",
+        {2, 0, reinterpret_cast<uint8 *>(&set.mult._rangeCurrentDC)},   // " DC20MA",
+        {2, 1, reinterpret_cast<uint8 *>(&set.mult._rangeCurrentDC)},   // " DC2A",
+        {4, 0, reinterpret_cast<uint8 *>(&set.mult._rangeResist)},      // " 2K",
+        {4, 1, reinterpret_cast<uint8 *>(&set.mult._rangeResist)},      // " 20K",
+        {4, 2, reinterpret_cast<uint8 *>(&set.mult._rangeResist)},      // " 200K",
+        {4, 3, reinterpret_cast<uint8 *>(&set.mult._rangeResist)},      // " 10M",
+        {5, 0, nullptr},                                                // " DIODE",
+        {6, 0, nullptr}                                                 // " BELL"
+    };
+
+    const StructMode &mode = modes[i];
+
+    if(mode.pRange != nullptr)
+    {
+        *mode.pRange = mode.range;
+    }
+    set.mult._meas = static_cast<MultimeterMeasure::E>(mode.mode);
+
+    PageMultimeter::OnChanged_Mode();
+}
+
+
+static pCHAR FuncMeasure(pCHAR buffer)
+{
+    SCPI_REQUEST(SendAnswerForMeasure());
+
+    SCPI_PROCESS_ARRAY(measures, EnableMeasure(i));
 }
 
 
