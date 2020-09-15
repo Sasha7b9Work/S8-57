@@ -106,9 +106,28 @@ static pCHAR FuncBalance(pCHAR)
 }
 
 
-static pCHAR FuncBandwidth(pCHAR)
+static pString bandwidth[] =
 {
-    return nullptr;
+    " FULL",
+    " 20MHZ",
+    ""
+};
+
+
+static void SetBandwidth(Chan::E ch, int i)
+{
+    S_BANDWIDTH(ch) = static_cast<Bandwidth::E>(i);
+    Bandwidth::Load(ch);
+}
+
+
+static pCHAR FuncBandwidth(pCHAR buffer)
+{
+    EXTRACT_CHANNEL(11);
+
+    SCPI_REQUEST(SCPI::SendAnswer(bandwidth[S_BANDWIDTH(ch)]));
+
+    SCPI_PROCESS_ARRAY(bandwidth, SetBandwidth(ch, i));
 }
 
 
