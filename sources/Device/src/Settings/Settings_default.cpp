@@ -201,7 +201,7 @@ const Settings Settings::defaultSettings =
 
     // Ìåíþ ÑÅÐÂÈÑ
     {
-        Calibrator::Mode::Freq,         // calibratorMode
+        Calibrator::Mode::AC,           // calibratorMode
         0,                              // soundVolume
         false,                          // showInfoVoltage
         0,                              // timeDisableDisplay

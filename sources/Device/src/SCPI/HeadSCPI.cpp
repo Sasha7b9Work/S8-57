@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "common/common_defines.h"
+#include "FPGA/FPGA.h"
 #include "Menu/Pages/Include/DebugPage.h"
 #include "Menu/Pages/Include/PageService.h"
 #include "SCPI/SCPI.h"
@@ -165,9 +166,25 @@ static pCHAR FuncAutoSearch(pCHAR)
 }
 
 
-static pCHAR FuncCalibratorMode(pCHAR)
+static pString calibratorMode[] =
 {
-    return nullptr;
+    " AC",
+    " DC",
+    ""
+};
+
+static void SetCalibratorMode(int i)
+{
+    S_SERV_CALIBRATOR_MODE = static_cast<Calibrator::Mode::E>(i);
+    
+    FPGA::LoadCalibratorMode();
+}
+
+static pCHAR FuncCalibratorMode(pCHAR buffer)
+{
+    SCPI_REQUEST(SCPI::SendAnswer(calibratorMode[S_SERV_CALIBRATOR_MODE]));
+    
+    SCPI_PROCESS_ARRAY(calibratorMode, SetCalibratorMode(i));
 }
 
 

@@ -17,7 +17,7 @@ public:
 
         enum E
         {
-            Freq,
+            AC,
             DC,
             GND
         };
