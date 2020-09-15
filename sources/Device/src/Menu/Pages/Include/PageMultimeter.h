@@ -27,6 +27,8 @@ struct PageMultimeter
 
     // Возвращает true, если "Нуль" - "Вкл"
     static bool ZeroEnabled();
+
+    static void EnableZero(bool enable);
     
     // Сюда поступают события клавиатуры для доступка к меню калибровки
     static void DecodePassword(const KeyEvent &event);

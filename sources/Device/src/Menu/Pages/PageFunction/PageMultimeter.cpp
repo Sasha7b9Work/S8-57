@@ -150,6 +150,12 @@ static void OnChanged_Zero(bool active)
     }
 }
 
+void PageMultimeter::EnableZero(bool enable)
+{
+    zero = enable ? 1 : 0;
+    OnChanged_Zero(true);
+}
+
 DEF_CHOICE_2(cZero,
     "Нуль",
     "",

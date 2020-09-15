@@ -217,9 +217,18 @@ static pCHAR FuncValue(pCHAR)
 }
 
 
-static pCHAR FuncZero(pCHAR)
+static pCHAR FuncZero(pCHAR buffer)
 {
-    return nullptr;
+    static pString zero[] =
+    {
+        " OFF",
+        " ON",
+        ""
+    };
+
+    SCPI_REQUEST(SCPI::SendAnswer(String(PageMultimeter::ZeroEnabled() ? " ON" : " OFF").c_str()));
+
+    SCPI_PROCESS_ARRAY(zero, PageMultimeter::EnableZero(i != 0));
 }
 
 
