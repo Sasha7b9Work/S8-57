@@ -14,6 +14,7 @@
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Math/OsciMath.h"
 #include "Osci/Measurements/AutoMeasurements.h"
+#include "SCPI/SCPI.h"
 #include "Settings/SettingsNRST.h"
 #include "Utils/Math.h"
 #include "Utils/Values.h"
@@ -139,6 +140,8 @@ void Osci::Update()
     };
 
     Reader::ReadDataFromRAM();
+
+    Osci::SendDataToSCPI();
 
     AutoMeasurements::SetData();
 }
@@ -585,4 +588,37 @@ OsciStateWork::E OsciStateWork::Current()
     }
 
     return triggered ? OsciStateWork::Triggered : OsciStateWork::Awaiting;
+}
+
+
+void Osci::SendDataToSCPI()
+{
+    SendDataToSCPI(Chan::A);
+    SendDataToSCPI(Chan::B);
+}
+
+
+void Osci::SendDataToSCPI(Chan::E ch)
+{
+    if (!SCPI::Sender::dataOsci[ch] || !ENABLE_CH_DS(ch))
+    {
+        return;
+    }
+
+    SCPI::Sender::dataOsci[ch] = false;
+
+    int numBytes = DS->BytesInChannel();
+
+    char buffer[100];
+
+    uint8 *data = const_cast<uint8 *>(DS->Data(ch));
+
+    for (int i = 0; i < numBytes - 1; i++)
+    {
+        std::sprintf(buffer, "%d ", data[i]);
+        SCPI::SendData(buffer);
+    }
+
+    std::sprintf(buffer, "%d", data[numBytes - 1]);
+    SCPI::SendAnswer(buffer);
 }

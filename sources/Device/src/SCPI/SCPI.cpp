@@ -37,6 +37,8 @@ static String data;
 
 static String badSymbols;
 
+bool SCPI::Sender::dataOsci[Chan::Count] = { false, false };
+
 
 void SCPI::AppendNewData(const char *buffer, int size)
 {
@@ -221,6 +223,12 @@ void SCPI::SendAnswer(const char *message)
     {
         VCP::SendStringAsynch(message);
     }
+}
+
+
+void SCPI::SendData(const char *message)
+{
+    VCP::SendStringAsynch(message);
 }
 
 

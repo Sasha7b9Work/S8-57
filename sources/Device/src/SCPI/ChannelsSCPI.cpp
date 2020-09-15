@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "log.h"
+#include "Osci/Osci.h"
 #include "Osci/ParametersOsci.h"
 #include "SCPI/SCPI.h"
 #include "Settings/Settings.h"
@@ -158,9 +159,15 @@ static pCHAR FuncCoupling(pCHAR buffer)
 }
 
 
-static pCHAR FuncData(pCHAR)
+static pCHAR FuncData(pCHAR buffer)
 {
-    return nullptr;
+    EXTRACT_CHANNEL(7);
+
+    SCPI_PROLOG(buffer);
+
+    SCPI::Sender::dataOsci[ch] = true;
+
+    SCPI_EPILOG(buffer);
 }
 
 

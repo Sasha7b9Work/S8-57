@@ -11,6 +11,8 @@ extern uint16 *ave[2];
 
 #define DS          pDS             // ”казатель на настройки текущего рисуемого сигнала.
 
+#define ENABLE_CH_DS(ch)  ((ch == Chan::A) ? DS->enableA : DS->enableB)
+
 #define IN(ch)  (dataIN[static_cast<int>(ch)])
 #define IN_A    IN(ChanA)
 #define IN_B    IN(ChanB)

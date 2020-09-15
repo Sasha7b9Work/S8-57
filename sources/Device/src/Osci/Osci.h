@@ -65,8 +65,10 @@ struct Osci
     static void ProcessFlagPred();
 
     // Выполнить поиск сигнала
-    static void _RunAutoSearch();
     static void RunAutoSearch();
+
+    // Послать данные в SCPI, если это необходимо
+    static void SendDataToSCPI();
 
     // Управитель входными цепями
     struct InputController
@@ -81,6 +83,8 @@ private:
     static bool ReadDataChannel(Chan::E ch, uint8 *data);
 
     static bool ReadDataChannelRand(uint8 *address, uint8 *data);
+
+    static void SendDataToSCPI(Chan::E ch);
 
     // Здесь хранится адрес, начиная с которого будем читать данные по каналам. Если addrRead == 0xffff, то адрес вначале нужно считать
     static uint16 addrRead;

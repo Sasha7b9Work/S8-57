@@ -80,8 +80,11 @@ namespace SCPI
     // Возвращает true, если указатель указывает на завершающую последовательность
     bool IsLineEnding(const char **bufer);
     
-    // Послать ответ
+    // Послать ответ м в конце дописать 0x0D, если нет
     void SendAnswer(const char *message);
+
+    // Послать строку как есть - без завершающего символа
+    void SendData(const char *message);
 
     // Послать измерение в SCPI - с заменой нечитаемых символов и единиц измерения
     void SendMeasure(const String &message);
@@ -122,4 +125,10 @@ namespace SCPI
     extern const StructSCPI tester[];       //-V2504
 
     extern const StructSCPI trigger[];      //-V2504
+
+    namespace Sender
+    {
+        // Установленное в true значение означает, что данне осциллографа нужно послать в SCPI
+        extern bool dataOsci[Chan::Count];
+    }
 }
