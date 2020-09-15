@@ -67,14 +67,6 @@ static pString tBaseNames[] =
 };
 
 
-static pString modes[] =
-{
-    " EQUAL",
-    " REAL",
-    ""
-};
-
-
 static pString peakdets[] =
 {
     " OFF",
@@ -103,11 +95,23 @@ const StructSCPI SCPI::tBase[] =
 };
 
 
+static pString modes[] =
+{
+    " EQUAL",
+    " REAL",
+    ""
+};
+
+static void SetSampleType(int i)
+{
+    PageTime::SetSampleTime(static_cast<SampleType::E>(i));
+}
+
 static pCHAR FuncMode(pCHAR buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(modes[S_RAND_SAMPLE_TYPE]));
 
-    SCPI_PROCESS_ARRAY(modes, PageTime::SetSampleTime(static_cast<SampleType::E>(i)));
+    SCPI_PROCESS_ARRAY(modes, SetSampleType(i));
 }
 
 
