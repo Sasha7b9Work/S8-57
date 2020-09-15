@@ -9,7 +9,7 @@
 #include <sstream>
 #include <cstdlib>
 #ifdef WIN32
-#include <string.h>
+#include <cstring>
 #endif
 
 #ifndef LANG

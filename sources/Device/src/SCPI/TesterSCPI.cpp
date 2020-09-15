@@ -35,9 +35,26 @@ const StructSCPI SCPI::tester[] =
 };
 
 
-static pCHAR FuncConduction(pCHAR)
+static pString polarity[] =
 {
-    return nullptr;
+    " NPN",
+    " PNP",
+    ""
+};
+
+
+static void SetPolarity(int i)
+{
+    set.test._polarity = static_cast<Tester::Polarity::E>(i);
+    Tester::LoadPolarity();
+}
+
+
+static pCHAR FuncConduction(pCHAR buffer)
+{
+    SCPI_REQUEST(SCPI::SendAnswer(polarity[set.test._polarity]));
+
+    SCPI_PROCESS_ARRAY(polarity, SetPolarity(i));
 }
 
 

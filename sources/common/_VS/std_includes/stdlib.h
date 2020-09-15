@@ -4,6 +4,7 @@
 
 float atof(char *);
 double strtod(const char *string, char **endptr);
+long int strtol(const char *str, char **endptr, int base);
 void *malloc(size_t);
 //void memcpy(void *, void *, unsigned int);
 void free(void *);

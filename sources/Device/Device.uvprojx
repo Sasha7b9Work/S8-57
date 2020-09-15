@@ -2273,11 +2273,6 @@
               <FileType>8</FileType>
               <FilePath>.\src\SCPI\TriggerSCPI.cpp</FilePath>
             </File>
-            <File>
-              <FileName>MainSCPI.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\SCPI\MainSCPI.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
