@@ -3,6 +3,8 @@
 #include "Osci/ParametersOsci.h"
 #include "SCPI/SCPI.h"
 #include "Settings/Settings.h"
+#include "Utils/Math.h"
+#include "Utils/StringUtils.h"
 #include <cstdlib>
 #include <cstring>
 
@@ -166,8 +168,31 @@ static pCHAR FuncDisplay(pCHAR buffer)
 }
 
 
-static pCHAR FuncOffset(pCHAR)
+static void SendAnswerForOffst(Chan::E ch)
 {
+    String answer("%d", set.ch[ch]._rShift / 2);
+    SCPI::SendAnswer(answer.c_str());
+}
+
+static pCHAR FuncOffset(pCHAR buffer)
+{
+    EXTRACT_CHANNEL(8);
+
+    SCPI_REQUEST(SendAnswerForOffst(ch));
+
+    char *end_str = nullptr;
+
+    int value = 0;
+
+    if (SU::String2Int(buffer, &value, &end_str))
+    {
+        Math::Limitation(&value, -200, 200);
+
+        RShift::Set(ch, static_cast<int16>(value * 2));
+
+        return end_str + 1;
+    }
+
     return nullptr;
 }
 
