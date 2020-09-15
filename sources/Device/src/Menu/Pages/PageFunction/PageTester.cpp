@@ -5,9 +5,6 @@
 #include "Device.h"
 
 
-static void OnChanged_Control(bool);
-
-
 static void OnPress_Exit()
 {
     Menu::CloseOpenedItem();
@@ -49,7 +46,7 @@ DEF_CHOICE_2( cControl,                                                         
     "Тип испытательного воздействия",
     "Напряжение",
     "Ток",
-    S_TEST_CONTROL, &PageTester::self, Item::Active, OnChanged_Control, Choice::AfterDraw
+    S_TEST_CONTROL, &PageTester::self, Item::Active, PageTester::OnChanged_Control, Choice::AfterDraw
 )
 
 
@@ -127,7 +124,7 @@ DEF_PAGE_6_VAR( pTester,
 const Page * const PageTester::self = static_cast<const Page *>(&pTester);
 
 
-static void OnChanged_Control(bool)
+void PageTester::OnChanged_Control(bool)
 {
     Page *page = const_cast<Page *>(&pTester);
 

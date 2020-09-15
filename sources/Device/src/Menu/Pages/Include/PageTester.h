@@ -18,5 +18,7 @@ struct PageTester
 {
     static void Init();
 
+    static void OnChanged_Control(bool = true);
+
     static const Page *const self;
 };

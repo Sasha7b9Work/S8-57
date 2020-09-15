@@ -41,9 +41,51 @@ static pCHAR FuncConduction(pCHAR)
 }
 
 
-static pCHAR FuncControl(pCHAR)
+static void SendAnswerForControl()
 {
-    return nullptr;
+    if (set.test._control == Tester::Control::Current)
+    {
+        SCPI::SendAnswer(set.test._stepI == Tester::StepI::_4uA ? " 4UA" : " 20UA");
+    }
+    else
+    {
+        SCPI::SendAnswer(set.test._stepU == Tester::StepU::_600mV ? " 600MV" : " 3V");
+    }
+}
+
+
+static pString controls[] =
+{
+    " 600MV",
+    " 3V",
+    " 4UA",
+    " 20UA",
+    ""
+};
+
+
+static void EnableControl(int i)
+{
+    if (i < 2)
+    {
+        set.test._control = Tester::Control::Voltage;
+        set.test._stepU = (i == 0) ? Tester::StepU::_600mV : Tester::StepU::_3V;
+    }
+    else
+    {
+        set.test._control = Tester::Control::Current;
+        set.test._stepI = (i == 2) ? Tester::StepI::_4uA : Tester::StepI::_20uA;
+    }
+
+    PageTester::OnChanged_Control();
+}
+
+
+static pCHAR FuncControl(pCHAR buffer)
+{
+    SCPI_REQUEST(SendAnswerForControl());
+
+    SCPI_PROCESS_ARRAY(controls, EnableControl(i));
 }
 
 
