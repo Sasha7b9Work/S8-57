@@ -112,9 +112,22 @@ static pCHAR FuncBandwidth(pCHAR)
 }
 
 
-static pCHAR FuncCoupling(pCHAR)
+static pString couple[] =
 {
-    return nullptr;
+    " DC",
+    " AC",
+    " GND",
+    ""
+};
+
+
+static pCHAR FuncCoupling(pCHAR buffer)
+{
+    EXTRACT_CHANNEL(10);
+
+    SCPI_REQUEST(SCPI::SendAnswer(couple[S_MODE_COUPLE(ch)]));
+
+    SCPI_PROCESS_ARRAY(couple, ModeCouple::Set(ch, static_cast<ModeCouple::E>(i)));
 }
 
 
