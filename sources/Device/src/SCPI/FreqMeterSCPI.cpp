@@ -1,5 +1,7 @@
 #include "defines.h"
+#include "Menu/Pages/Include/PageFreqMeter.h"
 #include "SCPI/SCPI.h"
+#include "Settings/Settings.h"
 
 
 // :FREQMETER:AVEPERIODS
@@ -63,8 +65,14 @@ static pCHAR FuncMeasure(pCHAR)
 }
 
 
-static pCHAR FuncMode(pCHAR)
+static pCHAR FuncMode(pCHAR buffer)
 {
+    SCPI_REQUEST(SCPI::SendAnswer(S_FREQ_METER_ENABLED ? " ON" : " OFF"));
+
+    SCPI_IF_BEGIN_WITH_THEN(" ON", S_FREQ_METER_ENABLED = 1);
+
+    SCPI_IF_BEGIN_WITH_THEN(" OFF", S_FREQ_METER_ENABLED = 0);
+
     return nullptr;
 }
 

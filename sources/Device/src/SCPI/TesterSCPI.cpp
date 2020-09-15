@@ -138,9 +138,9 @@ static pCHAR FuncMode(pCHAR buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(Device::InModeTester() ? " ON" : " OFF"));
 
-    SCPI_IF_BEGIN_WITH_THEN(" ON", EnableTester);
+    SCPI_IF_BEGIN_WITH_THEN(" ON", EnableTester());
 
-    SCPI_IF_BEGIN_WITH_THEN(" OFF", DisableTester);
+    SCPI_IF_BEGIN_WITH_THEN(" OFF", DisableTester());
 
     return nullptr;
 }

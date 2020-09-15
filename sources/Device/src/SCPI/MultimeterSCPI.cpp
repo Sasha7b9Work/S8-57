@@ -202,9 +202,9 @@ static pCHAR FuncMode(pCHAR buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(Device::InModeMultimeter() ? " ON" : " OFF"));
 
-    SCPI_IF_BEGIN_WITH_THEN(" ON", EnableMultimeter);
+    SCPI_IF_BEGIN_WITH_THEN(" ON", EnableMultimeter());
 
-    SCPI_IF_BEGIN_WITH_THEN(" OFF", DisableMultimeter);
+    SCPI_IF_BEGIN_WITH_THEN(" OFF", DisableMultimeter());
 
     return nullptr;
 }
