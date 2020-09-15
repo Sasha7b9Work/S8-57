@@ -96,26 +96,33 @@ static pCHAR FuncAccumulation(pCHAR buffer)
 }
 
 
-static pString averages[] =
+static void SetAverage(int i)
 {
-    " 128",
-    " 16",
-    " 1",
-    " 256",
-    " 2",
-    " 4",
-    " 8",
-    " 32",
-    " 64",
-    ""
-};
+    static const ENumAverage::E ave[] =
+    {
+        ENumAverage::_128,
+        ENumAverage::_16,
+        ENumAverage::_256,
+        ENumAverage::_8,
+        ENumAverage::_2,
+        ENumAverage::_32,
+        ENumAverage::_64,
+        ENumAverage::_1,
+        ENumAverage::_4
+    };
 
+    ENumAverage::Set(ave[i]);
+}
+
+static pString averagesDirect[] = { " 1", " 2", " 4", " 8", " 16", " 32", " 64", " 128", " 256", "" };
 
 static pCHAR FuncAverages(pCHAR buffer)
 {
-    SCPI_REQUEST(SCPI::SendAnswer(averages[S_OSCI_ENUM_AVERAGE]));
+    static pString averages[] = { " 128", " 16", " 256", " 8", " 2", " 32", " 64", " 1", " 4", "" };
 
-    SCPI_PROCESS_ARRAY(averages, ENumAverage::Set(static_cast<ENumAverage::E>(i)));
+    SCPI_REQUEST(SCPI::SendAnswer(averagesDirect[S_OSCI_ENUM_AVERAGE]));
+
+    SCPI_PROCESS_ARRAY(averages, SetAverage(i));
 }
 
 
@@ -125,7 +132,7 @@ static pCHAR FuncBrightness(pCHAR)
 }
 
 
-static const char *const fps[] =
+static pString fps[] =
 {
     " 25",
     " 10",
@@ -151,13 +158,12 @@ static const char *FuncGrid(const char *buffer)
 }
 
 
-static const char *FuncMapping(const char *buffer)
+static pCHAR FuncMapping(pCHAR buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(mapping[S_DISP_MAPPING]));
 
     SCPI_PROCESS_ARRAY(mapping, S_DISP_MAPPING = static_cast<DisplayMapping::E>(i));
 }
-
 
 static pString smoothings[] =
 {
@@ -191,7 +197,7 @@ static void HintAccumulation(String *message)
 
 static void HintAverages(String *message)
 {
-    SCPI::ProcessHint(message, averages);
+    SCPI::ProcessHint(message, averagesDirect);
 }
 
 
@@ -221,7 +227,7 @@ static void HintMapping(String *message)
 
 static void HintSmoothing(String *message)
 {
-    SCPI::ProcessHint(message, averages);
+    SCPI::ProcessHint(message, smoothings);
 }
 
 
