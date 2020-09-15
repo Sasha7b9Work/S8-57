@@ -19,7 +19,7 @@ static uint timeLastControl = 0xFFFFFFFFU;  // Возвращает время
 static bool IsBeingProcessedPower(KeyEvent event);
 
 
-void BufferButtons::Push(KeyEvent event)
+void BufferButtons::Push(const KeyEvent &event)
 {
     timeLastControl = TIME_MS;
 

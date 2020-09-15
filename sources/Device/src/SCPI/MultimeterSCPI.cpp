@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Device.h"
 #include "SCPI/SCPI.h"
 
 
@@ -51,8 +52,39 @@ static pCHAR FuncMeasure(pCHAR)
 }
 
 
-static pCHAR FuncMode(pCHAR)
+static void EnableMultimeter()
 {
+    if (Menu::OpenedPage() != PageMultimeter::self)
+    {
+        Keyboard::ShortPress(Key::Function);
+        Keyboard::ShortPress(Key::Enter);
+        Keyboard::ShortPress(Key::Enter);
+        Keyboard::ShortPress(Key::Enter);
+        Keyboard::ShortPress(Key::Function);
+        Keyboard::ShortPress(Key::F3);
+    }
+}
+
+
+static void DisableMultimeter()
+{
+    if (Menu::OpenedPage() == PageMultimeter::self)
+    {
+        Keyboard::ShortPress(Key::Enter);
+        Keyboard::ShortPress(Key::Enter);
+    }
+}
+
+
+static pCHAR FuncMode(pCHAR buffer)
+{
+    String answer("%s", Device::InModeMultimeter() ? " ON" : " OFF");
+    SCPI_REQUEST(SCPI::SendAnswer(answer.c_str()));
+
+    SCPI_IF_BEGIN_WITH_THEN(" ON", EnableMultimeter);
+
+    SCPI_IF_BEGIN_WITH_THEN(" OFF", DisableMultimeter);
+
     return nullptr;
 }
 

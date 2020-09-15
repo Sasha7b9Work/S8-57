@@ -93,13 +93,7 @@ static pCHAR FuncAccumulation(pCHAR buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(accumulationDirect[S_DISP_ENUM_ACCUM]));
 
-    end = SCPI::BeginWith(buffer, " CLEAR");
-    if (end)
-    {
-        SCPI_PROLOG(end);
-        PageDisplay::Accumulation::OnPress_Accumulation_Clear();
-        SCPI_EPILOG(end);
-    }
+    SCPI_IF_BEGIN_WITH_THEN(" CLEAR", PageDisplay::Accumulation::OnPress_Accumulation_Clear);
 
     SCPI_PROCESS_ARRAY(accumulationDirect, S_DISP_ENUM_ACCUM = static_cast<ENumAccum::E>(i));
 }

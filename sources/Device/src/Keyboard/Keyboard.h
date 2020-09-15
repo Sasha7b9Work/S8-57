@@ -127,4 +127,6 @@ struct Keyboard
     
     // Возвращает true, если кнопка не заблокирована
     static bool KeyIsActive(Key::E key);
+
+    static void ShortPress(Key::E key);
 };

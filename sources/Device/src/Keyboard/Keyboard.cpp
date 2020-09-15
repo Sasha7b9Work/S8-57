@@ -1,5 +1,7 @@
 #include "defines.h"
-#include "Keyboard.h"
+#include "Keyboard/BufferButtons.h"
+#include "Keyboard/Keyboard.h"
+#include "Menu/Menu.h"
 
 
 // Указатель на массив кнопок, которые разрешены для обработки. Если == 0, то разрешены все кнопки
@@ -170,4 +172,16 @@ const char *TypePress::ToChar() const
     };
 
     return ugo[value];
+}
+
+
+void Keyboard::ShortPress(Key::E key)
+{
+    BufferButtons::Push(KeyEvent(key, TypePress::Press));
+    BufferButtons::Push(KeyEvent(key, TypePress::Release));
+
+    while (!BufferButtons::IsEmpty())
+    {
+        Menu::Update();
+    }
 }

@@ -5,7 +5,7 @@
 struct BufferButtons
 {
     // Функция вызывается при нажатии, повторе и отпускании кнопки
-    static void Push(KeyEvent str);
+    static void Push(const KeyEvent &str);
     
     // Извлекает событие из очереди
     static KeyEvent Extract();
