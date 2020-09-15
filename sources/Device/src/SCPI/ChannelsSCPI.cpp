@@ -172,9 +172,21 @@ static pCHAR FuncOffset(pCHAR)
 }
 
 
-static pCHAR FuncProbe(pCHAR)
+static pString probe[] =
 {
-    return nullptr;
+    " 1X",
+    " 10X",
+    ""
+};
+
+
+static pCHAR FuncProbe(pCHAR buffer)
+{
+    EXTRACT_CHANNEL(7);
+
+    SCPI_REQUEST(SCPI::SendAnswer(probe[S_DIVIDER(ch)]));
+
+    SCPI_PROCESS_ARRAY(probe, S_DIVIDER(ch) = static_cast<Divider::E>(i));
 }
 
 
