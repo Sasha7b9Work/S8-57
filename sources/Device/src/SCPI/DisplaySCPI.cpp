@@ -73,7 +73,7 @@ const StructSCPI SCPI::display[] =
 };
 
 
-static pString accumulation[] =
+static pString accumulationDirect[] =
 {
     " OFF",
     " 2",
@@ -90,9 +90,17 @@ static pString accumulation[] =
 
 static pCHAR FuncAccumulation(pCHAR buffer)
 {
-    SCPI_REQUEST(SCPI::SendAnswer(accumulation[S_DISP_ENUM_ACCUM]));
+    SCPI_REQUEST(SCPI::SendAnswer(accumulationDirect[S_DISP_ENUM_ACCUM]));
 
-    SCPI_PROCESS_ARRAY(accumulation, S_DISP_ENUM_ACCUM = static_cast<ENumAccum::E>(i));
+    end = SCPI::BeginWith(buffer, " CLEAR");
+    if (end)
+    {
+        SCPI_PROLOG(end);
+        PageDisplay::Accumulation::OnPress_Accumulation_Clear();
+        SCPI_EPILOG(end);
+    }
+
+    SCPI_PROCESS_ARRAY(accumulationDirect, S_DISP_ENUM_ACCUM = static_cast<ENumAccum::E>(i));
 }
 
 
@@ -165,7 +173,8 @@ static pCHAR FuncMapping(pCHAR buffer)
     SCPI_PROCESS_ARRAY(mapping, S_DISP_MAPPING = static_cast<DisplayMapping::E>(i));
 }
 
-static pString smoothings[] =
+
+static pString smoothingsDirect[] =
 {
     " 1",
     " 2",
@@ -181,17 +190,39 @@ static pString smoothings[] =
 };
 
 
+static void SetSmoothing(int i)
+{
+    static const ENumSmoothing::E smoot[] =
+    {
+        ENumSmoothing::_10points,
+        ENumSmoothing::_2points,
+        ENumSmoothing::_3points,
+        ENumSmoothing::_4points,
+        ENumSmoothing::_5points,
+        ENumSmoothing::_6points,
+        ENumSmoothing::_7points,
+        ENumSmoothing::_8points,
+        ENumSmoothing::_9points,
+        ENumSmoothing::Disable
+    };
+
+    S_DISP_ENUM_SMOOTH = smoot[i];
+}
+
+
 static pCHAR FuncSmoothing(pCHAR buffer)
 {
-    SCPI_REQUEST(SCPI::SendAnswer(smoothings[S_DISP_ENUM_SMOOTH]));
+    SCPI_REQUEST(SCPI::SendAnswer(smoothingsDirect[S_DISP_ENUM_SMOOTH]));
 
-    SCPI_PROCESS_ARRAY(smoothings, S_DISP_ENUM_SMOOTH = static_cast<ENumSmoothing::E>(i));
+    static pString smoothings[] = { " 10", " 2", " 3", " 4", " 5", " 6", " 7", " 8", " 9", " 1", "" };
+
+    SCPI_PROCESS_ARRAY(smoothings, SetSmoothing(i));
 }
 
 
 static void HintAccumulation(String *message)
 {
-    SCPI::ProcessHint(message, accumulation);
+    SCPI::ProcessHint(message, accumulationDirect);
 }
 
 
@@ -227,7 +258,7 @@ static void HintMapping(String *message)
 
 static void HintSmoothing(String *message)
 {
-    SCPI::ProcessHint(message, smoothings);
+    SCPI::ProcessHint(message, smoothingsDirect);
 }
 
 
