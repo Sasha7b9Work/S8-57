@@ -44,7 +44,9 @@ struct TypeMeasure
 struct Measure
 {
 public:
-    Measure(int r, int c) : row(r), col(c) {};
+    Measure(int r, int c) : row(r), col(c), t(TypeMeasure::Count) {};
+
+    Measure(TypeMeasure::E type) : t(type) {};
 
     TypeMeasure::E GetType();
 
@@ -76,4 +78,6 @@ private:
     int row;
     // Колонка в таблице, в которой находится данное измерение
     int col;
+
+    TypeMeasure::E t;
 };

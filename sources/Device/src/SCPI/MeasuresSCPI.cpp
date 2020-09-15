@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "Menu/Pages/Include/PageMeasures.h"
+#include "Osci/Measurements/AutoMeasurements.h"
 #include "SCPI/SCPI.h"
 #include "Settings/Settings.h"
 
@@ -65,9 +66,39 @@ static pCHAR FuncSource(pCHAR buffer)
 }
 
 
-static pCHAR FuncValue(pCHAR)
+static pString values[] =
 {
-    return nullptr;
+    " NNNNNNN",     // None,
+    " VMAX",        // VoltageMax,
+    " VMIN",        // VoltageMin,
+    " VPP",         // VoltagePic,
+    " VMAXEST",     // VoltageMaxSteady,
+    " VMINEST",     // VoltageMinSteady,
+    " VAMPL",       // VoltageAmpl,
+    " VAVE",        // VoltageAverage,
+    " VRMS",        // VoltageRMS,
+    " VOVER+",      // VoltageVybrosPlus,
+    " VOVER-",      // VoltageVybrosMinus,
+    " PERIOD",      // Period,
+    " FREQUENCY",   // Freq,
+    " TIMERISSE",   // TimeNarastaniya,
+    " TIMEFALL",    // TimeSpada,
+    " WIDTHP",      // DurationPlus,
+    " WIDTHN",      // DurationMinus,
+    " DUTY+",       // SkvaznostPlus,
+    " DUTY-",       // SkvaznostMinus,
+    " DELAY+",      // DelayPlus,
+    " DELAY-",      // DelayMinus,
+    " PHASE",       // PhazaPlus,
+    " PHASE",       // PhazaMinus,
+    ""
+};
+
+static pCHAR FuncValue(pCHAR buffer)
+{
+    pCHAR end = nullptr;
+
+    SCPI_PROCESS_ARRAY(values, AutoMeasuresSender::DesignateForSending(static_cast<TypeMeasure::E>(i)));
 }
 
 

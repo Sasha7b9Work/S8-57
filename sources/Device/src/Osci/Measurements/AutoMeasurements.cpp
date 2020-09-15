@@ -3,6 +3,7 @@
 #include "Osci/Reader.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/AutoMeasurements.h"
+#include "SCPI/SCPI.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include "Utils/Smoother.h"
@@ -187,6 +188,35 @@ void AutoMeasurements::CalculateMeasures()
                 }
             }
         }
+    }
+
+
+    // Посылаем измерение в SCPI
+    if (AutoMeasuresSender::sended != TypeMeasure::Count)
+    {
+        TypeMeasure::E type = AutoMeasuresSender::sended;
+
+        Measure measure(type);
+
+        pFuncFCh func = sMeas[type].FuncCalculate;
+
+        char buffer[50];
+
+        if (func)
+        {
+            if (VIEW_MEASURES_A)    
+            {
+                values[type].value[ChanA] = func(ChanA);
+                SCPI::SendAnswer(measure.GetStringMeasure(ChanA, buffer, 49).c_str());
+            }
+            if (VIEW_MEASURES_B)
+            {
+                values[type].value[ChanB] = func(ChanB);
+                SCPI::SendAnswer(measure.GetStringMeasure(ChanB, buffer, 49).c_str());
+            }
+        }
+
+        AutoMeasuresSender::sended = TypeMeasure::Count;
     }
 }
 
@@ -1486,4 +1516,12 @@ void AutoMeasurements::CountedToCurrentRShift(Chan::E ch, uint numBytes, const u
             out[i] = VALUE::FromVoltage(voltage, rangeSET, shiftSET);
         }
     }
+}
+
+
+TypeMeasure::E AutoMeasuresSender::sended = TypeMeasure::Count;
+
+void AutoMeasuresSender::DesignateForSending(TypeMeasure::E type)
+{
+    sended = type;
 }

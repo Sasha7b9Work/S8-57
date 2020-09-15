@@ -113,7 +113,12 @@ String Measure::Name()
 
 TypeMeasure::E Measure::GetType()
 {
-    return S_MEAS_INDICATED(row * TableMeasures::NumCols() + col);
+    if(t == TypeMeasure::Count)
+    {
+        return S_MEAS_INDICATED(row * TableMeasures::NumCols() + col);
+    }
+
+    return t;
 }
 
 
