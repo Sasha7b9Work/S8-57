@@ -19,6 +19,7 @@
 #include "Utils/Math.h"
 #include "Utils/Values.h"
 #include <cstring>
+#include <cstdio>
 
 
 // Структура для хранения информации, необходимой для чтения в режиме рандомизатора
@@ -611,7 +612,7 @@ void Osci::SendDataToSCPI(Chan::E ch)
 
     char buffer[100];
 
-    uint8 *data = const_cast<uint8 *>(DS->Data(ch));
+    uint8 *data = const_cast<DataSettings *>(DS)->Data(ch);
 
     for (int i = 0; i < numBytes - 1; i++)
     {

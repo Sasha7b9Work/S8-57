@@ -48,7 +48,11 @@ String::String(const char *format, ...) : buffer(nullptr)
         return;
     }
 
-    static const int SIZE = 500;
+#ifdef WIN32
+    static const int SIZE = 5000;
+#else
+    static const int SIZE = 5000;
+#endif
     char buf[SIZE + 1];
 
     std::va_list args;

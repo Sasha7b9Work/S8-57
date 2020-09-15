@@ -77,19 +77,51 @@ void ConsoleSCPI::OnSize(wxSizeEvent &)
 }
 
 
+static int Consist0D(char *buffer, int size)
+{
+    int i = 0;
+    while (*buffer != 0x0d)
+    {
+        i++;
+        buffer++;
+        if (i == size)
+        {
+            return -1;
+        }
+    }
+    return i;
+}
+
+
 void ConsoleSCPI::OnTimerComPort(wxTimerEvent &)
 {
     if (ComPort::IsOpened())
     {
+        static char fullBuffer[4096 * 16] = { 0 };  // Полный текст
+            
         char buffer[4096];
 
         int n = ComPort::Receive(buffer, 4095);
 
         if (n)
         {
-            buffer[n] = '\0';
-            String message(">>> %s", buffer);
-            AddText(message.c_str());
+            int positionOD = Consist0D(buffer, n);
+
+            if (positionOD < 0)
+            {
+                buffer[n] = '/0';
+                std::strcat(fullBuffer, buffer);
+            }
+            else
+            {
+                String message(">>> %s", fullBuffer);
+                AddText(message.c_str());
+
+                buffer[positionOD] = 0;
+                AddText(buffer);
+
+                fullBuffer[0] = 0;
+            }
         }
     }
 }

@@ -23,8 +23,39 @@ void VCP::SendDataAsynch(const uint8 *text, int)
 }
 
 
+
+static int Position0D(const char *message)
+{
+    int position = 0;
+
+    while (*message)
+    {
+        if (*message == 0x0D)
+        {
+            return position;
+        }
+        message++;
+        position++;
+    }
+    return -1;
+}
+
+
 void VCP::SendStringAsynch(const char *message)
 {
-    String text(">>> %s", message);
-    ConsoleSCPI::Self()->AddText(text.c_str());
+    static char buffer[32 * 1024] = { 0 };
+
+    int position0D = Position0D(message);
+
+    if (position0D < 0)
+    {
+        std::strcat(buffer, message);
+    }
+    else
+    {
+        std::strcat(buffer, message);
+        String text(">>> %s", buffer);
+        ConsoleSCPI::Self()->AddText(text.c_str());
+        buffer[0] = 0;
+    }
 }
