@@ -59,9 +59,38 @@ static pCHAR FuncLabels(pCHAR)
 }
 
 
-static pCHAR FuncMeasure(pCHAR)
+static pString measures[] =
 {
-    return nullptr;
+    " FREQUENCY",
+    " PERIOD",
+    ""
+};
+
+static void SetMeasure(int i)
+{
+    S_FREQ_MODE_MEASURE = static_cast<FreqMeter::ModeMeasure::E>(i);
+    PageFreqMeter::Init();
+}
+
+static pCHAR FuncMeasure(pCHAR buffer)
+{
+    SCPI_REQUEST(SCPI::SendAnswer(measures[S_FREQ_MODE_MEASURE]));
+
+    SCPI_PROCESS_ARRAY(measures, SetMeasure(i));
+}
+
+
+static pString mode[] =
+{
+    " OFF",
+    " ON",
+    ""
+};
+
+static void SetMode(int i)
+{
+    S_FREQ_METER_ENABLED = (i == 1);
+    FreqMeter::Init();
 }
 
 
@@ -69,11 +98,7 @@ static pCHAR FuncMode(pCHAR buffer)
 {
     SCPI_REQUEST(SCPI::SendAnswer(S_FREQ_METER_ENABLED ? " ON" : " OFF"));
 
-    SCPI_IF_BEGIN_WITH_THEN(" ON", S_FREQ_METER_ENABLED = 1);
-
-    SCPI_IF_BEGIN_WITH_THEN(" OFF", S_FREQ_METER_ENABLED = 0);
-
-    return nullptr;
+    SCPI_PROCESS_ARRAY(mode, SetMode(i));
 }
 
 
