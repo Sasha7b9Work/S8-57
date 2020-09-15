@@ -1,4 +1,7 @@
 #include "defines.h"
+#include "Device.h"
+#include "Menu/Menu.h"
+#include "Menu/Pages/Include/PageTester.h"
 #include "SCPI/SCPI.h"
 
 // :TESTER:CONDUCTION
@@ -50,16 +53,36 @@ static pCHAR FuncData(pCHAR)
 }
 
 
-static pString mode[] =
+static void EnableTester()
 {
-    " ON",
-    " OFF",
-    ""
-};
+    if (Menu::OpenedItem() != PageTester::self)
+    {
+        Keyboard::ShortPress(Key::Function);
+        Keyboard::ShortPress(Key::Enter);
+        Keyboard::ShortPress(Key::Enter);
+        Keyboard::ShortPress(Key::Enter);
+        Keyboard::ShortPress(Key::Function);
+        Keyboard::ShortPress(Key::F4);
+    }
+}
+
+static void DisableTester()
+{
+    if (Menu::OpenedItem() == PageTester::self)
+    {
+        Keyboard::ShortPress(Key::Enter);
+        Keyboard::ShortPress(Key::Enter);
+    }
+}
 
 static pCHAR FuncMode(pCHAR buffer)
 {
-    //SCPI_REQUEST(SCPI::SendAnswer(mode[set.test._viewMode))
+    SCPI_REQUEST(SCPI::SendAnswer(Device::InModeTester() ? " ON" : " OFF"));
+
+    SCPI_IF_BEGIN_WITH_THEN(" ON", EnableTester);
+
+    SCPI_IF_BEGIN_WITH_THEN(" OFF", DisableTester);
+
     return nullptr;
 }
 

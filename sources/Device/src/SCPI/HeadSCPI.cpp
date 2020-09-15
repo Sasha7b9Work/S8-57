@@ -60,6 +60,7 @@ static void HintAutoSearch(String *);
 
 const StructSCPI SCPI::head[] =
 {
+    SCPI_NODE(":TESTER",          SCPI::tester),
     SCPI_LEAF("*IDN?",            FuncIDN,            TestIDN,            "ID request",                       HintIDN),
     SCPI_LEAF("*RST",             FuncReset,          TestReset,          "Reset settings to default values", HintReset),
     SCPI_LEAF(":HELP",            FuncHelp,           TestHelp,           "Output of this help",              HintHelp),
@@ -77,7 +78,6 @@ const StructSCPI SCPI::head[] =
     SCPI_NODE(":KEY",             SCPI::key),
     SCPI_NODE(":MEASURE",         SCPI::measures),
     SCPI_NODE(":MULTIMETER",      SCPI::multimeter),
-    SCPI_NODE(":TESTER",          SCPI::tester),
     SCPI_NODE(":TIMEBASE",        SCPI::tBase),
     SCPI_NODE(":TRIG",            SCPI::trigger),
     SCPI_EMPTY()

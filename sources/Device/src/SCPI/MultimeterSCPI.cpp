@@ -200,8 +200,7 @@ static void DisableMultimeter()
 
 static pCHAR FuncMode(pCHAR buffer)
 {
-    String answer("%s", Device::InModeMultimeter() ? " ON" : " OFF");
-    SCPI_REQUEST(SCPI::SendAnswer(answer.c_str()));
+    SCPI_REQUEST(SCPI::SendAnswer(Device::InModeMultimeter() ? " ON" : " OFF"));
 
     SCPI_IF_BEGIN_WITH_THEN(" ON", EnableMultimeter);
 
