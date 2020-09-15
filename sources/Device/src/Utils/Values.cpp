@@ -211,10 +211,7 @@ char *TimeToString(float time, bool alwaysSign, char buffer[20]) //-V2506
         return buffer;
     }
 
-    pString suffix[4] =
-    {
-        "нс", "мкс", "мс", "с"
-    };
+    pString suffix[4] = { "нс", "мкс", "мс", "с" };
 
     static const float factor[4] = { 1e9F, 1e6F, 1e3F, 1.0F };
 
@@ -222,21 +219,10 @@ char *TimeToString(float time, bool alwaysSign, char buffer[20]) //-V2506
 
     int num = 0;
 
-    if (absTime + 0.5e-10F < 1e-6F)
-    {
-    }
-    else if (absTime + 0.5e-7F < 1e-3F)
-    {
-        num = 1;
-    }
-    else if (absTime + 0.5e-3F < 1.0F)
-    {
-        num = 2;
-    }
-    else
-    {
-        num = 3;
-    }
+    if (absTime + 0.5e-10F < 1e-6F)     { }
+    else if (absTime + 0.5e-7F < 1e-3F) { num = 1; }
+    else if (absTime + 0.5e-3F < 1.0F)  { num = 2; }
+    else                                { num = 3; }
 
     std::strcpy(buffer, Float(time * factor[num]).ToString(alwaysSign, 4).c_str()); //-V2513
     std::strcat(buffer, suffix[num]); //-V2513
