@@ -1,12 +1,46 @@
 @echo off
 
-@echo .
-@echo %TIME%   Making Visual Studio Win Debug ...
+if "%3" equ "" goto VERIFY_PARAMETER_1
+if %3==edit goto VERIFY_PARAMETER_1
+goto HINT
 
-cd ../..
+:VERIFY_PARAMETER_1
+    if "%1" equ "" goto HINT
+    if %1==build goto VERIFY_PARAMETER_2
+    if %1==debug   ( call :MAKE %1 & goto EXIT )
+    if %1==release ( call :MAKE %1 & goto EXIT )
+    goto HINT
 
-rmdir "generated/Win32" /s /q
+:VERIFY_PARAMETER_2
+    if "%2" equ "" goto HINT
+    if %2==debug   ( call :MAKE %2 & call build.bat & goto VERIFY_PARAMETER_3 )
+    if %2==release ( call :MAKE %2 & call build.bat & goto VERIFY_PARAMETER_3 )
+    goto HINT
 
-cd scripts/vs_win
+:VERIFY_PARAMETER_3
+    if "%3" equ "" goto EXIT
+    if %3==edit ( call edit.bat & goto EXIT )
+    goto HINT
 
-cmake ../../VS/CMakeLists.txt -B../../generated/Win32 -DCMAKE_SYSTEM_VERSION=10.0.17763.0 -G "Visual Studio 16 2019" -A Win32
+:MAKE
+    @echo.
+    @echo %TIME%   Making Visual Studio Win Debug ...
+    cd ../..
+    rmdir "generated/Win32" /s /q
+    cd scripts/vs_win
+    if %1==debug ( @echo on & cmake ../../VS/CMakeLists.txt -B../../generated/Win32 -G "Visual Studio 16 2019" -A Win32 )
+    @echo off
+    if %1==release ( @echo on & cmake ../../VS/CMakeLists.txt -B../../generated/Win32 -G "Visual Studio 16 2019" -A Win32 -DBUILD_USE_STATIC_RUNTIME=ON )
+    @echo off
+    @echo %TIME%   Complete
+    exit /b
+
+:HINT
+    echo.
+    echo Using:
+    echo       make.bat ^<debug^|release^>
+    echo       make.bat build ^<debug^|release^> [edit]
+    echo.
+    goto EXIT
+
+:EXIT

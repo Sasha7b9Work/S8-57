@@ -59,7 +59,7 @@ static pString mode[] =
 
 static pCHAR FuncMode(pCHAR buffer)
 {
-    SCPI_REQUEST(SCPI::SendAnswer(mode[set.test._viewMode))
+    //SCPI_REQUEST(SCPI::SendAnswer(mode[set.test._viewMode))
     return nullptr;
 }
 
