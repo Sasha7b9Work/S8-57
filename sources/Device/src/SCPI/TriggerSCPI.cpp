@@ -2,6 +2,8 @@
 #include "Menu/Pages/Include/PageTrig.h"
 #include "SCPI/SCPI.h"
 #include "Settings/Settings.h"
+#include "Utils/Math.h"
+#include "Utils/StringUtils.h"
 
 
 // :TRIG:INPUT
@@ -83,8 +85,29 @@ static pCHAR FuncInput(pCHAR buffer)
 }
 
 
-static pCHAR FuncLevel(pCHAR)
+static void SendAnswerLevel()
 {
+    String answer("%d", set.trig._level);
+    SCPI::SendAnswer(answer.c_str());
+}
+
+static pCHAR FuncLevel(pCHAR buffer)
+{
+    SCPI_REQUEST(SendAnswerLevel());
+
+    char *end_str = nullptr;
+
+    int value = 0;
+
+    if (SU::String2Int(buffer, &value, &end_str))
+    {
+        Math::Limitation(&value, -150, 150);
+
+        TrigLevel::Set(S_TRIG_SOURCE, static_cast<int16>(value * 2));
+
+        return end_str + 1;
+    }
+
     return nullptr;
 }
 
