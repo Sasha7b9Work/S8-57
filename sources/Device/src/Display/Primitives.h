@@ -111,6 +111,8 @@ public:
     Text(const char *text);
     Text(const String &string);
 
+    const char *c_str() { return text; }
+
     int Draw(int x, int y, Color color = Color::NUMBER);
 
     int DrawInCenterRect(int x, int y, int width, int height, Color color = Color::NUMBER);

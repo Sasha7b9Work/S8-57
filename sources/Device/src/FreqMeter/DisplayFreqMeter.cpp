@@ -39,14 +39,15 @@ void DisplayFreqMeter::Update()
 {
     // \todo ¬ этой строке точку ставить не где придЄтс€, а в той позиции, где она сто€ла последний раз
 
-    if (SCPI::Sender::freqMeter)
-    {
-        needSendToSCPI = true;
-    }
-
     if(!S_FREQ_METER_ENABLED)
     {
         return;
+    }
+
+    if (SCPI::Sender::freqMeter)
+    {
+        needSendToSCPI = true;
+        SCPI::Sender::freqMeter = false;
     }
 
     DFont::Set(DTypeFont::_GOST28);
@@ -146,6 +147,11 @@ void DisplayFreqMeter::DrawFrequencyMode(int x, int _y)
 
     Text(strFreq).DrawDigitsMonospace(x + dX, yF, DFont::GetWidth('0'));
 
+    if (needSendToSCPI)
+    {
+        SCPI::SendMeasure(String("F=%s", strFreq));
+    }
+
     float freq = ConvertFrequencyToAbs(strFreq);
 
     Time time(1.0F / freq);
@@ -157,11 +163,11 @@ void DisplayFreqMeter::DrawFrequencyMode(int x, int _y)
     else
     {
         Text(time.ToStringAccuracy(false, strFreq, 6)).DrawDigitsMonospace(x + dX, yT, DFont::GetWidth('0'));
-    }
 
-    if (needSendToSCPI)
-    {
-
+        if (needSendToSCPI)
+        {
+            SCPI::SendMeasure(String("T=%s", time.ToStringAccuracy(false, strFreq, 6)));
+        }
     }
 }
 
@@ -215,6 +221,11 @@ void DisplayFreqMeter::DrawPeriodMode(int x, int _y)
 
     Text(strPeriod).DrawDigitsMonospace(x + dX, yT, DFont::GetWidth('0'));
 
+    if (needSendToSCPI)
+    {
+        SCPI::SendMeasure(String("T=%s", strPeriod));
+    }
+
     Text strFreq(strPeriod);
 
     if((std::strcmp(strPeriod, EMPTY_STRING) != 0) && (std::strcmp(strPeriod, OVERFLOW_STRING) != 0))
@@ -225,6 +236,11 @@ void DisplayFreqMeter::DrawPeriodMode(int x, int _y)
     }
 
     strFreq.DrawDigitsMonospace(x + dX, yF, DFont::GetWidth('0'));
+
+    if (needSendToSCPI)
+    {
+        SCPI::SendMeasure(String("F=%s", strFreq.c_str()));
+    }
 }
 
 
