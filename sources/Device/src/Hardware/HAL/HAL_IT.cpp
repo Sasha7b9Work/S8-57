@@ -117,6 +117,7 @@ void MemManage_Handler()
 {
     while (1)
     {
+        HAL_TIM5::ElapsedCallback();
     }
 }
 
@@ -125,6 +126,7 @@ void BusFault_Handler()
 {
     while (1)
     {
+        HAL_TIM5::ElapsedCallback();
     }
 }
 
@@ -133,6 +135,7 @@ void UsageFault_Handler()
 {
     while (1)
     {
+        HAL_TIM5::ElapsedCallback();
     }
 }
 
