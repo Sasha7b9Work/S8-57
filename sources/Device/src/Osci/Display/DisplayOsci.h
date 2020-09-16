@@ -70,6 +70,8 @@ struct DisplayOsci
         
         // \brief Возращает адрес первой и последней точки в координатах экрана
         static BitSet64 BytesOnDisplay();
+
+        static bool needSendToSCPI_FFT;
         
     private:
         

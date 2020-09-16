@@ -3,9 +3,13 @@
 #include "Display/Grid.h"
 #include "FPGA/FPGA.h"
 #include "Osci/Reader.h"
+#include "Osci/Display/DisplayOsci.h"
+#include "SCPI/SCPI.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include <cmath>
+#include <cstdio>
+#include <cstring>
 
 
 // Столько вольт содержится в одной точке сигнала по вертикали
@@ -79,7 +83,7 @@ static float const *Koeff(int numPoints)
 #endif
 
 
-void MathFPGA::CalculateFFT(float *dataR, int numPoints, float *result, float *freq0, float *density0, float *freq1, float *density1, int *y0, int *y1)
+void MathFPGA::CalculateFFT(float *dataR, int numPoints, float *result, float *freq0, float *density0, float *freq1, float *density1, int *y0, int *y1, Chan::E ch)
 {
     float scale = 1.0F / TShift::ToAbs(1, S_TIME_BASE) / 1024.0F;
 
@@ -110,10 +114,6 @@ void MathFPGA::CalculateFFT(float *dataR, int numPoints, float *result, float *f
     else if (numPoints == 1024)
     {
         logN = 10;
-    }
-    else
-    {
-        // другое количество точек не обрабатываем
     }
 
     static const float Rcoef[14] =
@@ -200,6 +200,20 @@ void MathFPGA::CalculateFFT(float *dataR, int numPoints, float *result, float *f
     result[0] = 0.0F;       // \todo нулевая составляющая мешает постоянно. надо её убрать
 
     Normalize(result, 256);
+
+    if (DisplayOsci::PainterData::needSendToSCPI_FFT)
+    {
+        SCPI::SendData(ch == ChanA ? "1 : " : "2 : ");
+
+        char buffer[50];
+        for(int i = 0; i < 255; i++)
+        {
+            std::sprintf(buffer, "%e ", result[i]);
+            SCPI::SendData(buffer);
+        }
+        std::sprintf(buffer, "%e", result[255]);
+        SCPI::SendAnswer(buffer);
+    }
 
     if (S_FFT_SCALE_IS_LOG)
     {

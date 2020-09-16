@@ -7,6 +7,7 @@
 #include "Osci/Reader.h"
 #include "Osci/Display/DisplayOsci.h"
 #include "Osci/Measurements/AutoMeasurements.h"
+#include "SCPI/SCPI.h"
 #include "Settings/Settings.h"
 #include "Utils/Buffer.h"
 #include "Utils/Math.h"
@@ -14,8 +15,18 @@
 #include <cstdlib>
 
 
+bool DisplayOsci::PainterData::needSendToSCPI_FFT = false;
+
+
 void DisplayOsci::PainterData::DrawData()
 {
+    if (SCPI::Sender::fft)
+    {
+        SCPI::Sender::fft = false;
+        needSendToSCPI_FFT = true;
+    }
+
+
     if (AutoMeasurements::DataIsSetting())
     {
         static const pFuncVV func[ModeWork::Count] =
@@ -31,6 +42,8 @@ void DisplayOsci::PainterData::DrawData()
     DrawSpectrum();
 
     Accumulator::NextFrame();
+
+    needSendToSCPI_FFT = false;
 }
 
 
@@ -145,7 +158,7 @@ void DisplayOsci::PainterData::DrawSpectrum(const uint8 *dataIn, int numPoints, 
 
         VALUE::PointsToVoltage(dataIn, numPoints, RANGE_DS(ch), (int16)RSHIFT_DS(ch), dataR);
 
-        MathFPGA::CalculateFFT(dataR, numPoints, spectrum, &freq0, &density0, &freq1, &density1, &y0, &y1);
+        MathFPGA::CalculateFFT(dataR, numPoints, spectrum, &freq0, &density0, &freq1, &density1, &y0, &y1, ch);
 
         DrawSpectrumChannel(spectrum, Color::CHAN[ch]);
 
