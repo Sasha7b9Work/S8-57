@@ -9,7 +9,7 @@ void HAL::Init()
 }
 
 
-void HAL::ErrorHandler(const char *, int)
+void HAL::ErrorHandler(pCHAR, int)
 {
     while (true) {}
 }

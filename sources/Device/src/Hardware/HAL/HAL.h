@@ -25,7 +25,7 @@ struct HAL
 {
     static void Init();
 
-    static void ErrorHandler(const char *, int);
+    static void ErrorHandler(pCHAR, int);
 
     static void Delay(uint timeMS);
 
