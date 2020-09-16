@@ -10,7 +10,7 @@ static TIM_HandleTypeDef handleTIM5 = { TIM5 };
 
 void HAL_TIM5::Init()
 {
-    HAL_NVIC_SetPriority(TIM5_IRQn, 1, 1);
+    HAL_NVIC_SetPriority(TIM5_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(TIM5_IRQn);
 
     __HAL_RCC_TIM5_CLK_ENABLE();
@@ -28,10 +28,11 @@ void HAL_TIM5::Init()
 
 void HAL_TIM5::ElapsedCallback()
 {
-    uint value = HAL_ADC1::ValueBattery();
-
-    if (value < 500)
+    if(!Battery::IsBusy())
     {
-        HAL_PIO::Reset(PIN_POWER);
+        if (HAL_ADC1::ValueBattery() < 500)
+        {
+            HAL_PIO::Reset(PIN_POWER);
+        }
     }
 }

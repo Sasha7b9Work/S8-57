@@ -56,7 +56,7 @@ void HAL_ADC1::Init()
 uint HAL_ADC1::ValueBattery()
 {
     SetActiveChannel2();
-
+    
     return ReadValue();
 }
 

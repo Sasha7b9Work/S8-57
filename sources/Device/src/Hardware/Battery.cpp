@@ -12,6 +12,8 @@ static const float MAX_ADC_REL = static_cast<float>((1 << 12) - 1);     // Макси
 static const float MAX_ADC_ABS = 3.0F;                                  // Напряжение, соответствующее MAX_ADC_REL
 const float Battery::SHUTDOWN_VOLTAGE = 5.4F;
 
+static bool isBusy = false;
+
 // Возвращает true, если зарядное устройство подключено
 static bool ChargerIsConnected();
 
@@ -39,13 +41,23 @@ void Battery::Init()
 }
 
 
+bool Battery::IsBusy()
+{
+    return isBusy;
+}
+
+
 float Battery::GetVoltage()
 {
-    static Utils::AroundAverager<float> averager(32);
+    isBusy = true;
 
+    static Utils::AroundAverager<float> averager(32);
+  
     uint akk = HAL_ADC1::ValueBattery();
 
     averager.Push(static_cast<float>(akk));
+
+    isBusy = false;
 
     return BatteryADC_ToVoltage(static_cast<float>(averager.Value()));
 }

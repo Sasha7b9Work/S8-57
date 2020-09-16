@@ -25,3 +25,9 @@ uint HAL::TimeMS()
 {
     return HAL_GetTick();
 }
+
+
+void HAL_TIM5::Init()
+{
+
+}

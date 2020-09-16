@@ -14,4 +14,7 @@ public:
 
     // Возвращает значение напряжения батареи
     static float GetVoltage();
+
+    // Нужно для HAL_TIM5 - при true нельзя обращаться к напряжению
+    static bool IsBusy();
 };

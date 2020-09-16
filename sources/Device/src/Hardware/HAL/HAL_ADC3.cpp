@@ -43,7 +43,7 @@ void HAL_ADC3::Init()
 
     HAL_PIO::Init(PIN_ADC3_IT, HMode::RisingIT, HPull::No);
 
-    HAL_NVIC_SetPriority(ADC_IRQn, 0, 0);
+    HAL_NVIC_SetPriority(ADC_IRQn, 1, 1);
     HAL_NVIC_EnableIRQ(ADC_IRQn);
 
     handle.Instance = ADC3;
