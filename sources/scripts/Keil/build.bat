@@ -22,7 +22,7 @@ goto HINT
     goto EXIT
 
 :BUILD
-    echo Compile %1
+    echo Compile Keil %1
     c:\Keil_v5\UV4\UV4 -b ..\..\%2\%2.uvprojx -j0 -z -o %2.out
     set BUILD_STATUS=%ERRORLEVEL%
     if %BUILD_STATUS%==0 goto BUILD_SUCCESS
