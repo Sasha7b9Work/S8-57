@@ -172,9 +172,13 @@ static pCHAR FuncTime(pCHAR buffer)
 }
 
 
-static pCHAR FuncValue(pCHAR)
+static pCHAR FuncValue(pCHAR buffer)
 {
-    return nullptr;
+    SCPI_PROLOG(buffer);
+
+    SCPI::Sender::freqMeter = true;
+
+    SCPI_EPILOG(buffer);
 }
 
 

@@ -38,6 +38,7 @@ static String data;
 static String badSymbols;
 
 bool SCPI::Sender::dataOsci[Chan::Count] = { false, false };
+bool SCPI::Sender::freqMeter = false;
 
 
 void SCPI::AppendNewData(const char *buffer, int size)

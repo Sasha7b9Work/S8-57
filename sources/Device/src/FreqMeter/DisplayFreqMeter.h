@@ -10,6 +10,12 @@ struct DisplayFreqMeter
 private:
     // Выводит отладочную информацию
     static void DrawDebugInfo();
+
+    static void DrawFrequencyMode(int x, int _y);
+
+    static void DrawPeriodMode(int x, int y);
+
+    static bool needSendToSCPI;
 };
 
 

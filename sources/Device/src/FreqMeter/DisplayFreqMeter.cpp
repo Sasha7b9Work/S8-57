@@ -5,6 +5,7 @@
 #include "Display/Primitives.h"
 #include "FreqMeter/DisplayFreqMeter.h"
 #include "Hardware/Timer.h"
+#include "SCPI/SCPI.h"
 #include "Settings/Settings.h"
 #include "Utils/StringUtils.h"
 #include "Utils/Values.h"
@@ -18,10 +19,7 @@
 //                         0    1    2    3    4    5    6 
 static char buffer[11] = { '0', '0', '0', '0', '0', '0', '0', 0, 0, 0, 0 };
 
-
-static void DrawFrequencyMode(int x, int _y);
-
-static void DrawPeriodMode(int x, int y);
+bool DisplayFreqMeter::needSendToSCPI = false;
 
 static pString FreqSetToString(const BitSet32 *fr);
 
@@ -40,6 +38,11 @@ static void WriteStackToBuffer(Stack<uint> *stack, int point, const char *suffix
 void DisplayFreqMeter::Update()
 {
     // \todo ¬ этой строке точку ставить не где придЄтс€, а в той позиции, где она сто€ла последний раз
+
+    if (SCPI::Sender::freqMeter)
+    {
+        needSendToSCPI = true;
+    }
 
     if(!S_FREQ_METER_ENABLED)
     {
@@ -90,6 +93,8 @@ void DisplayFreqMeter::Update()
     DFont::Pop();
     DFont::SetSpacing(spacing);
     DFont::SetMinWidth(0);
+
+    needSendToSCPI = false;
 }
 
 
@@ -115,7 +120,7 @@ static float ConvertFrequencyToAbs(const char *strFreq)
 }
 
 
-static void DrawFrequencyMode(int x, int _y)
+void DisplayFreqMeter::DrawFrequencyMode(int x, int _y)
 {
     _y += 4;
 
@@ -153,6 +158,11 @@ static void DrawFrequencyMode(int x, int _y)
     {
         Text(time.ToStringAccuracy(false, strFreq, 6)).DrawDigitsMonospace(x + dX, yT, DFont::GetWidth('0'));
     }
+
+    if (needSendToSCPI)
+    {
+
+    }
 }
 
 
@@ -178,7 +188,7 @@ static float ConvertPeriodToAbs(const char *strPeriod)
 }
 
 
-static void DrawPeriodMode(int x, int _y)
+void DisplayFreqMeter::DrawPeriodMode(int x, int _y)
 {
     _y += 4;
 
