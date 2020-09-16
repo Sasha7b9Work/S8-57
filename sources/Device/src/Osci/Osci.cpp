@@ -614,6 +614,8 @@ void Osci::SendDataToSCPI(Chan::E ch)
 
     uint8 *data = const_cast<DataSettings *>(DS)->Data(ch);
 
+    SCPI::SendData(ch == Chan::A ? "1: " : "2: ");
+
     for (int i = 0; i < numBytes - 1; i++)
     {
         std::sprintf(buffer, "%d ", data[i]);
