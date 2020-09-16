@@ -169,6 +169,17 @@ static void DrawSymbols(bool inModeOsci)
         }
     }
 
+    if (needSendToSCPI)
+    {
+        String message;
+        for (int i = 0; i < 7; i++)
+        {
+            message.Append(outBuffer[i]);
+        }
+        message.Append(' ');
+        SCPI::SendData(message);
+    }
+
     DrawUnits(inModeOsci);
 }
 
@@ -196,10 +207,25 @@ static void DrawUnits(bool inModeOsci)
         x = Text(String(outBuffer[7])).Draw(x, y);
 
         DrawSymbolOMEGA(x, y, inModeOsci);
+
+        if (needSendToSCPI)
+        {
+            String message;
+            message.Append(outBuffer[7]);
+            message.Append('O');
+            message.Append('h');
+            message.Append('m');
+            SCPI::SendAnswer(message);
+        }
     }
     else
     {
         Text(&outBuffer[7]).Draw(x, y);
+
+        if (needSendToSCPI)
+        {
+            SCPI::SendAnswer(outBuffer + 7);
+        }
 
         if(outBuffer[8] == '=' || 
            outBuffer[9] == '=')         // При миллиамперах этот симовл '=' будет девятым
@@ -495,9 +521,8 @@ static void DrawMeasure(bool inModeOsci)
 
 void DisplayMultimeter::Update()
 {
-    if (SCPI::Sender::multimeter)
+    if (SCPI::Sender::multimeter && (outBuffer[3] != '-'))
     {
-        SCPI::Sender::multimeter = false;
         needSendToSCPI = true;
     }
 
@@ -510,7 +535,11 @@ void DisplayMultimeter::Update()
         UpdateInModeMultimeter();
     }
 
-    needSendToSCPI = false;
+    if(SCPI::Sender::multimeter && needSendToSCPI)
+    {
+        SCPI::Sender::multimeter = false;
+        needSendToSCPI = false;
+    }
 }
 
 

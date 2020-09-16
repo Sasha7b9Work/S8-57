@@ -19,22 +19,22 @@ public:
     explicit String();
              String(const String &);
     explicit String(char symbol);
-    explicit String(const char *format, ...);
+    explicit String(pCHAR format, ...);
     ~String();
 
-    void Set(TypeConversionString::E conv, const char *format, ...);
+    void Set(TypeConversionString::E conv, pCHAR format, ...);
 
     char *c_str() const;
     // Отобразить текст на экране в заданнх координатах
     int Draw(int x, int y, Color color = Color::NUMBER) const;
 
-    static const char * const _ERROR;
+    static pString _ERROR;
 
     void Free();
 
-    void Append(const char *str);
+    void Append(pCHAR str);
 
-    void Append(const char *str, int numSymbols);
+    void Append(pCHAR str, int numSymbols);
 
     void Append(char symbol);
     

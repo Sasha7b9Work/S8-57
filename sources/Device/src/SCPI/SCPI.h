@@ -81,10 +81,12 @@ namespace SCPI
     bool IsLineEnding(const char **bufer);
     
     // Послать ответ м в конце дописать 0x0D, если нет
-    void SendAnswer(const char *message);
+    void SendAnswer(pCHAR message);
+    void SendAnswer(const String &message);
 
     // Послать строку как есть - без завершающего символа
-    void SendData(const char *message);
+    void SendData(pCHAR message);
+    void SendData(const String &message);
 
     // Послать измерение в SCPI - с заменой нечитаемых символов и единиц измерения
     void SendMeasure(const String &message);
