@@ -217,8 +217,6 @@ void HAL_BUS::FPGA::Write8(uint8 *address, uint8 value)
 
 uint8 HAL_BUS::FPGA::Read(const uint8 *address)
 {
-    HAL_IWDG_REFRESH();
-
     HAL_BUS_CONFIGURE_TO_FSMC();
 
     return *address;

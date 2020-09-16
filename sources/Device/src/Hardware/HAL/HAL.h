@@ -158,12 +158,6 @@ struct HAL_HCD
 };
 
 
-struct HAL_IWDG
-{
-    static void Init();
-};
-
-
 struct HAL_NVIC
 {
     static uint irqEXTI1;
@@ -227,6 +221,14 @@ struct HAL_TIM3
     static void DisableIRQ();
     static void StartIT(uint period);
     static void StopIT();
+};
+
+
+// Используется для выключения прибора в случае зависания
+struct HAL_TIM5
+{
+    static void Init();
+    static void ElapsedCallback();
 };
 
 
