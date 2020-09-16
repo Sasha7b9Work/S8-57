@@ -44,6 +44,7 @@ typedef unsigned int   uint32_t;
 typedef void (*pFuncVV)();
 typedef void (*pFuncVB)(bool);
 typedef bool (*pFuncBV)();
+typedef void (*pFuncVII)(int, int);
 
 void EmptyFuncVV();
 void EmptyFuncVB(bool);

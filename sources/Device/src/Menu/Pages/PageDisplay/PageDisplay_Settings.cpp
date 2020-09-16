@@ -23,7 +23,7 @@ void PageDisplay::SetBrightness(int value)
 DEF_GOVERNOR( gBrightness,                                                                                                                            //--- ДИСПЛЕЙ - НАСТРОЙКИ - Яркость ---
     "Яркость",
     "Установка яркости свечения дисплея",
-    S_DISP_BRIGHTNESS, 0, 100, &PageDisplay::Settings::self, Item::Active, OnChanged_Brightness
+    S_DISP_BRIGHTNESS, 0, 100, &PageDisplay::Settings::self, Item::Active, OnChanged_Brightness, Governor::AfterDraw
 )
 
 

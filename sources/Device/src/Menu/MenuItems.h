@@ -285,10 +285,11 @@ public:
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Governor ///
 struct DataGovernor
 {
-    int16  *cell;
-    int16   min;            // Минмальное значение, которое может принимать регулятор.
-    int16   max;            // Максимальное значение.
-    pFuncVV handlerChange;  // Функция, которую нужно вызывать после того, как значение регулятора изменилось.
+    int16   *cell;
+    int16    min;           // Минмальное значение, которое может принимать регулятор.
+    int16    max;           // Максимальное значение.
+    pFuncVV  handlerChange; // Функция, которую нужно вызывать после того, как значение регулятора изменилось.
+    pFuncVII afterDraw;     // Функция рисования, которая вызывается после отрисовки итема
 };
 
 // Описывает регулятор.
@@ -342,6 +343,8 @@ public:
     virtual void Draw(int x, int y, bool opened) const;
 
     static void Changed() { };
+
+    static void AfterDraw(int, int) { };
 
     const DataGovernor *OwnData() const { return static_cast<const DataGovernor *>(data->ad); }
 

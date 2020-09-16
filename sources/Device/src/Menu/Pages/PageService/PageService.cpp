@@ -1,5 +1,6 @@
 #include "defines.h"
 #include "device.h"
+#include "Display/Primitives.h"
 #include "FPGA/FPGA.h"
 #include "Settings/Settings.h"
 
@@ -38,10 +39,15 @@ DEF_CHOICE_4( cSoundVolume,
 )
 
 
+static void OnChange_TimeDisable(int x, int y)
+{
+    Text("мин").Draw(x + 36, y + 13, Color::BACK);
+}
+
 DEF_GOVERNOR( gTimeDisableDisplay,
     "Эн.сбер",
     "Время отключения дисплея",
-    S_SERV_TIME_DISABLE_DISPLAY, 0, 240, &PageService::self, Item::Active, Governor::Changed
+    S_SERV_TIME_DISABLE_DISPLAY, 0, 240, &PageService::self, Item::Active, Governor::Changed, OnChange_TimeDisable
 )
 
 

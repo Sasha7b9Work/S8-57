@@ -107,6 +107,7 @@ void Governor::DrawOpened(int x, int y) const
     DrawCommonHiPart(x, y, true);
     Rectangle(Width() - 1, HeightOpened() - 1).Draw(x, y + 1, ColorFrame());
     DrawLowPart(x, y + 13);
+    OwnData()->afterDraw(x - 10, y - 1);
 }
 
 
@@ -114,6 +115,7 @@ void Governor::DrawClosed(int x, int y) const
 {
     DrawLowPart(x, y + 14);
     DrawCommonHiPart(x, y, false);
+    OwnData()->afterDraw(x, y);
 }
 
 

@@ -3,7 +3,7 @@
 echo "keil version"
 
 cd keil
-call build.bat
+call build.bat all
 cd ..
 
 cd vs_keil
