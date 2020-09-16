@@ -106,23 +106,24 @@ static pCHAR FuncControl(pCHAR buffer)
 }
 
 
-static pCHAR FuncData(pCHAR)
+static pCHAR FuncData(pCHAR buffer)
 {
-    return nullptr;
+    SCPI_PROLOG(buffer);
+
+    SCPI::Sender::tester = true;
+
+    SCPI_EPILOG(buffer);
 }
 
 
 static void EnableTester()
 {
-    if (Menu::OpenedItem() != PageTester::self)
-    {
-        Keyboard::ShortPress(Key::Function);
-        Keyboard::ShortPress(Key::Enter);
-        Keyboard::ShortPress(Key::Enter);
-        Keyboard::ShortPress(Key::Enter);
-        Keyboard::ShortPress(Key::Function);
-        Keyboard::ShortPress(Key::F4);
-    }
+    Keyboard::ShortPress(Key::Function);
+    Keyboard::ShortPress(Key::Enter);
+    Keyboard::ShortPress(Key::Enter);
+    Keyboard::ShortPress(Key::Enter);
+    Keyboard::ShortPress(Key::Function);
+    Keyboard::ShortPress(Key::F4);
 }
 
 static void DisableTester()

@@ -5,6 +5,7 @@
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Osci/Osci.h"
+#include "SCPI/SCPI.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
 #include "Utils/Values.h"
@@ -24,15 +25,15 @@ static Settings oldSet = Settings::defaultSettings;
 static uint16 dataX[Tester::NUM_STEPS][TESTER_NUM_POINTS];  // \todo Сделать так, чтобы при включении тестер-компонента необходимая память бралась из Heap.cpp
 static uint8  dataY[Tester::NUM_STEPS][TESTER_NUM_POINTS];
 
+bool Tester::needSended[Tester::NUM_STEPS] = { false, false, false, false, false };
+bool Tester::sended[Tester::NUM_STEPS] = { false, false, false, false, false };
+
 // Читать данные с ПЛИС
 static void ReadFPGA(uint16 *dataA, uint8 *dataB);
 
 // Запустить цикл чтения для тестер-компонента. В течение time секунд должно быть считано numPoints точек
 // Если возвращает false - старт не прошёл
 static bool StartFPGA();
-
-// Считать данные очередной ступеньки
-static void ReadData();
 
 // Пересчитать точки для засылки отрисовки
 static void RecountPoints(uint16 *x, uint8 *y);
@@ -222,14 +223,39 @@ void Tester::ProcessStep()
 }
 
 
-static void ReadData()
+void Tester::ReadData()
 {
+    if (SCPI::Sender::tester)
+    {
+        SCPI::Sender::tester = false;
+
+        for (int i = 0; i < NUM_STEPS; i++)
+        {
+            sended[i] = false;
+            needSended[i] = true;
+        }
+    }
+
     int halfStep = step / 2;
 
     uint16 *x = &dataX[halfStep][0];
     uint8 *y = &dataY[halfStep][0];
 
     ReadFPGA(x, y);
+
+    if (needSended[halfStep] && !sended[halfStep])
+    {
+        needSended[halfStep] = false;
+        sended[halfStep] = true;
+
+        SCPI::SendData(String("STEP %d : ", halfStep).c_str());
+
+        for (int i = 0; i < TESTER_NUM_POINTS; i++)
+        {
+            SCPI::SendData(String("%d:%d ", x[i], y[i]).c_str());
+        }
+        SCPI::SendAnswer(" ");
+    }
 
     RecountPoints(x, y);
 

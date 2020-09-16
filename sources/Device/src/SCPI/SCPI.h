@@ -130,5 +130,6 @@ namespace SCPI
     {
         extern bool dataOsci[Chan::Count];  // Установленное в true значение означает, что данне осциллографа нужно послать в SCPI
         extern bool freqMeter;              // Установленное в true значение означает, что нужно посылать измеренное частотомером значение в SCPI
+        extern bool tester;
     }
 }

@@ -20,7 +20,6 @@ bool DisplayTester::ready[Tester::NUM_STEPS] = {false, false, false, false, fals
 static array8 *datY = (array8 *)OUT_A;
 static array16 *datX = (array16 *)OUT_B;
 
-
 void DisplayTester::Update()
 {
     Painter::BeginScene(Color::BACK);

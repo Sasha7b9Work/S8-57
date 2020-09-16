@@ -132,6 +132,14 @@ public:
             Points
         };
     };
+
+private:
+
+    // —читать данные очередной ступеньки
+    static void ReadData();
+
+    static bool needSended[NUM_STEPS];
+    static bool sended[NUM_STEPS];  // «десь true означает, что данные шага посланы
 };
 
 
