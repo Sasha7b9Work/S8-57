@@ -7,6 +7,7 @@
 #include "Hardware/Timer.h"
 #include "Menu/Menu.h"
 #include "Multimeter/Multimeter.h"
+#include "SCPI/SCPI.h"
 #include "Settings/Settings.h"
 #include <cstring>
 #include <cmath>
@@ -17,6 +18,7 @@
 
 static char outBuffer[15];      // Данные для вывода.
 static bool received = false;
+static bool needSendToSCPI = false;
 
 
 static void PrepareBell(pCHAR);
@@ -493,18 +495,11 @@ static void DrawMeasure(bool inModeOsci)
 
 void DisplayMultimeter::Update()
 {
-//    static uint prevTime = 0;
-//    static bool isMinus = true;
-//
-//    if (TIME_MS - prevTime > 1000)
-//    {
-//        isMinus = !isMinus;
-//        prevTime = TIME_MS;
-//    }
-//
-//    outBuffer[0] = isMinus ? '+' : '-';
-//
-//    outBuffer[4] = isMinus ? '1' : '2';
+    if (SCPI::Sender::multimeter)
+    {
+        SCPI::Sender::multimeter = false;
+        needSendToSCPI = true;
+    }
 
     if (Device::InModeOsci())
     {
@@ -514,6 +509,8 @@ void DisplayMultimeter::Update()
     {
         UpdateInModeMultimeter();
     }
+
+    needSendToSCPI = false;
 }
 
 
