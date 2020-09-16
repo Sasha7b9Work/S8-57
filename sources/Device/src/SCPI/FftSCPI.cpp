@@ -40,9 +40,13 @@ const StructSCPI SCPI::fft[] =
 };
 
 
-static pCHAR FuncData(pCHAR)
+static pCHAR FuncData(pCHAR buffer)
 {
-    return nullptr;
+    SCPI_PROLOG(buffer);
+
+    SCPI::Sender::fft = true;
+
+    SCPI_EPILOG(buffer);
 }
 
 

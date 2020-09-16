@@ -210,9 +210,13 @@ static pCHAR FuncMode(pCHAR buffer)
 }
 
 
-static pCHAR FuncValue(pCHAR)
+static pCHAR FuncValue(pCHAR buffer)
 {
-    return nullptr;
+    SCPI_PROLOG(buffer);
+
+    SCPI::Sender::multimeter = true;
+
+    SCPI_EPILOG(buffer);
 }
 
 

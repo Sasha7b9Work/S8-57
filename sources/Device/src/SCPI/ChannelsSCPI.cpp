@@ -165,7 +165,7 @@ static pCHAR FuncData(pCHAR buffer)
 
     SCPI_PROLOG(buffer);
 
-    SCPI::Sender::dataOsci[ch] = true;
+    SCPI::Sender::osci[ch] = true;
 
     SCPI_EPILOG(buffer);
 }

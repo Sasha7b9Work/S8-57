@@ -601,12 +601,12 @@ void Osci::SendDataToSCPI()
 
 void Osci::SendDataToSCPI(Chan::E ch)
 {
-    if (!SCPI::Sender::dataOsci[ch] || !ENABLE_CH_DS(ch))
+    if (!SCPI::Sender::osci[ch] || !ENABLE_CH_DS(ch))
     {
         return;
     }
 
-    SCPI::Sender::dataOsci[ch] = false;
+    SCPI::Sender::osci[ch] = false;
 
     int numBytes = DS->BytesInChannel();
 
