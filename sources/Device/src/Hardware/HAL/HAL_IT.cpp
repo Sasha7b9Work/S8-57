@@ -46,6 +46,19 @@ void TIM3_IRQHandler()
     }
 }
 
+void TIM5_IRQHandler()
+{
+    if ((TIM5->SR & TIM_SR_UIF) == TIM_SR_UIF)
+    {
+        if ((TIM5->DIER & TIM_DIER_UIE) == TIM_DIER_UIE)
+        {
+            TIM5->SR = ~TIM_DIER_UIE;
+
+            HAL_TIM5::ElapsedCallback();
+        }
+    }
+}
+
 
 void SysTick_Handler(void)
 {

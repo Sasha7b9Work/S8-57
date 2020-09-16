@@ -71,6 +71,8 @@ void Device::Init()
     //Sensor::Init();
 
     SetCurrentMode();
+
+    HAL_TIM5::Init();
 }
 
 
@@ -130,7 +132,7 @@ void Device::Update()
 
     Menu::Update();
 
-    PowerBreaker::Update();
+    //PowerBreaker::Update();
 }
 
 

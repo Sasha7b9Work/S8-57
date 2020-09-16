@@ -224,6 +224,14 @@ struct HAL_TIM3
 };
 
 
+// Используется для выключения прибора в случае зависания
+struct HAL_TIM5
+{
+    static void Init();
+    static void ElapsedCallback();
+};
+
+
 struct HAL_USART3
 {
     static void Init(pFuncVV recvCallback);
