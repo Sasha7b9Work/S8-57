@@ -158,12 +158,6 @@ struct HAL_HCD
 };
 
 
-struct HAL_IWDG
-{
-    static void Init();
-};
-
-
 struct HAL_NVIC
 {
     static uint irqEXTI1;
