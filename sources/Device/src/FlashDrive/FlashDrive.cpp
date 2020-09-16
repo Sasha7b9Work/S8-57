@@ -144,7 +144,7 @@ void FDrive::Update()
 
 
 
-bool FDrive::AppendStringToFile(const char *)
+bool FDrive::AppendStringToFile(pCHAR)
 {
     return false;
 }

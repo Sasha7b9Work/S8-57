@@ -19,13 +19,13 @@ static char outBuffer[15];      // Данные для вывода.
 static bool received = false;
 
 
-static void PrepareBell(const char *);
-static void PrepareConstantVoltage(const char *);
-static void PrepareVariableVoltage(const char *);
-static void PrepareConstantCurrent(const char *);
-static void PrepareVariableCurrent(const char *);
-static void PrepareResistance(const char *);
-static void PrepareTestDiode(const char *);
+static void PrepareBell(pCHAR);
+static void PrepareVoltageDC(pCHAR);
+static void PrepareVoltageAC(pCHAR);
+static void PrepareCurrentDC(pCHAR);
+static void PrepareCurrentAC(pCHAR);
+static void PrepareResistance(pCHAR);
+static void PrepareTestDiode(pCHAR);
 
 // Отрисовать значение измерения
 static void DrawSymbols(bool inModeOsci);
@@ -604,7 +604,7 @@ void DisplayMultimeter::ChangedMode()
 
 void DisplayMultimeter::SetMeasure(const uint8 buf[13])
 {
-    typedef void(*pFuncVCC)(const char *);
+    typedef void(*pFuncVCC)(pCHAR);
 
     static const struct Func
     {
@@ -613,10 +613,10 @@ void DisplayMultimeter::SetMeasure(const uint8 buf[13])
     }
     funcs[MultimeterMeasure::Count] =
     {
-        PrepareConstantVoltage,
-        PrepareVariableVoltage,
-        PrepareConstantCurrent,
-        PrepareVariableCurrent,
+        PrepareVoltageDC,
+        PrepareVoltageAC,
+        PrepareCurrentDC,
+        PrepareCurrentAC,
         PrepareResistance,
         PrepareTestDiode,
         PrepareBell
@@ -637,31 +637,31 @@ void DisplayMultimeter::SetMeasure(const uint8 buf[13])
 }
 
 
-static void PrepareTestDiode(const char *)
+static void PrepareTestDiode(pCHAR)
 {
     std::strcpy(outBuffer + 7, "  ");
 }
 
 
-static void PrepareConstantVoltage(const char *) //-V524
+static void PrepareVoltageDC(pCHAR) //-V524
 {
     std::strcpy(outBuffer + 7, "V=");
 }
 
 
-static void PrepareVariableVoltage(const char *)
+static void PrepareVoltageAC(pCHAR)
 {
     std::strcpy(outBuffer + 7, "V~");
 }
 
 
-static void PrepareConstantCurrent(const char *buf)
+static void PrepareCurrentDC(const char *buf)
 {
     std::strcpy(outBuffer + 7, (buf[10] == '1') ? "A=" : "mA=");
 }
 
 
-static void PrepareVariableCurrent(const char *buf)
+static void PrepareCurrentAC(const char *buf)
 {
     std::strcpy(outBuffer + 7, (buf[10] == '1') ? "A~" : "mA~");
 }
@@ -680,7 +680,7 @@ static bool ResistanceLess100()
 }
 
 
-static void PrepareBell(const char *)
+static void PrepareBell(pCHAR)
 {
     std::strcpy(outBuffer + 7, "  ");
 

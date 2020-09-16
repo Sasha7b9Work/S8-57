@@ -12,7 +12,7 @@
 
 class String;
 
-typedef const char *(*FuncSCPI)(const char *);
+typedef const char *(*FuncSCPI)(pCHAR);
 typedef bool (*FuncTestSCPI)();
 typedef void (*FuncHint)(String *);
 
@@ -129,9 +129,9 @@ namespace SCPI
     namespace Sender
     {
         extern bool osci[Chan::Count];  // ”становленное в true значение означает, что данне осциллографа нужно послать в SCPI
-        extern bool freqMeter;              // ”становленное в true значение означает, что нужно посылать измеренное частотомером значение в SCPI
-        extern bool tester;
-        extern bool multimeter;
-        extern bool fft;
+        extern bool freqMeter;          // ”становленное в true значение означает, что нужно посылать измеренное частотомером значение в SCPI
+        extern bool tester;             // ѕосылать данные тестера компонентов
+        extern bool multimeter;         // ѕосылать в SCPI данные мультиметра
+        extern bool fft;                // ѕосылать в SCPI спектр
     }
 }
