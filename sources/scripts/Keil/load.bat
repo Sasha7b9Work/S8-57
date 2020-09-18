@@ -1,8 +1,8 @@
 @echo off
 
 if "%1" EQU "" goto HINT
-if %1==device  ( call :LOAD Device  & call load.bat loaders & goto EXIT )
-if %1==panel   ( call :LOAD Panel   & call load.bat loaders & goto EXIT )
+if %1==device  ( call :LOAD Device  & goto EXIT )
+if %1==panel   ( call :LOAD Panel   & goto EXIT )
 if %1==dloader ( call :LOAD DLoader & goto EXIT )
 if %1==all     ( call :LOAD Device & call :LOAD Panel & call :LOAD DLoader & goto EXIT )
 
