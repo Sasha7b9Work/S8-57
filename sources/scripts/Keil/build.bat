@@ -5,7 +5,7 @@ if %1==load    goto BUILD_LOAD
 if %1==device  ( call :BUILD Device  Device ..\..\Device\S8-57.bin & goto EXIT )
 if %1==panel   ( call :BUILD Panel   Panel   & goto EXIT )
 if %1==dloader ( call :BUILD DLoader DLoader & goto EXIT )
-if %1==all     ( call build.bat device & call build.bat panel & call build.bat dloader & goto EXIT)
+if %1==all     ( call build.bat panel & call build.bat device & call build.bat dloader & goto EXIT)
 
 goto HINT
 
