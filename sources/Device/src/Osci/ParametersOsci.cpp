@@ -511,12 +511,28 @@ void RShift::Draw(Chan::E ch)
     }
 
     int y = (Grid::ChannelBottom() - Grid::Top()) / 2 + Grid::Top() - delta;
+    int x = Grid::Left() - 8;
 
-    Math::Limitation(&y, Grid::Top(), Grid::ChannelBottom());
+    if (y > Grid::ChannelBottom())
+    {
+        Char(Symbol8::TRIGLEV_LOWER).Draw(x + 1, Grid::ChannelBottom() - 11);
+        Pixel().Draw(x + 3, Grid::ChannelBottom() - 2);
+        y = Grid::ChannelBottom() - 7;
+        x += 1;
+    }
+    else if (y < Grid::Top())
+    {
+        Char(Symbol8::TRIGLEV_ABOVE).Draw(x + 1, Grid::Top() + 2);
+        Pixel().Draw(x + 3, Grid::Top() + 2);
+        y = Grid::Top() + 7;
+        x += 1;
+    }
+    else
+    {
+        Char(Symbol8::RSHIFT_NORMAL).Draw(x, y - 4);
+    }
 
-    Char(Symbol8::RSHIFT_NORMAL).Draw(Grid::Left() - 8, y - 4);
-
-    Char((ch == ChanA) ? '1' : '2', DTypeFont::_5).Draw(Grid::Left() - 7, y - 6, Color::BACK);
+    Char((ch == ChanA) ? '1' : '2', DTypeFont::_5).Draw(x + 1, y - 6, Color::BACK);
 }
 
 
