@@ -499,6 +499,27 @@ bool Trig::SyncPulse()
 }
 
 
+void RShift::Draw(Chan::E ch)
+{
+    Color::CHAN[ch].SetAsCurrent();
+
+    int delta = S_RSHIFT(ch) / STEP;
+
+    if(S_FFT_ENABLED)
+    {
+        delta /= 2;
+    }
+
+    int y = (Grid::ChannelBottom() - Grid::Top()) / 2 + Grid::Top() - delta;
+
+    Math::Limitation(&y, Grid::Top(), Grid::ChannelBottom());
+
+    Char(Symbol8::RSHIFT_NORMAL).Draw(Grid::Left() - 8, y - 4);
+
+    Char((ch == ChanA) ? '1' : '2', DTypeFont::_5).Draw(Grid::Left() - 7, y - 6, Color::BACK);
+}
+
+
 void TrigLevel::Draw()
 {
     Chan::E ch = S_TRIG_SOURCE;
@@ -534,27 +555,6 @@ void TrigLevel::Draw()
     static const char symbols[2] = { '1', '2' };
 
     Char(symbols[ch], DTypeFont::_5).Draw(xSymbol, y - 6, Color::BACK);
-}
-
-
-void RShift::Draw(Chan::E ch)
-{
-    Color::CHAN[ch].SetAsCurrent();
-
-    int delta = S_RSHIFT(ch) / STEP;
-
-    if(S_FFT_ENABLED)
-    {
-        delta /= 2;
-    }
-
-    int y = (Grid::ChannelBottom() - Grid::Top()) / 2 + Grid::Top() - delta;
-
-    Math::Limitation(&y, Grid::Top(), Grid::ChannelBottom());
-
-    Char(Symbol8::RSHIFT_NORMAL).Draw(Grid::Left() - 8, y - 4);
-
-    Char((ch == ChanA) ? '1' : '2', DTypeFont::_5).Draw(Grid::Left() - 7, y - 6, Color::BACK);
 }
 
 
