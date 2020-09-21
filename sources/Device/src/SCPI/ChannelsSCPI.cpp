@@ -199,8 +199,6 @@ static pCHAR FuncOffset(pCHAR buffer)
 
     if (SU::String2Int(buffer, &value, &end_str))
     {
-        Math::Limitation(&value, -100, 100);
-
         RShift::Set(ch, static_cast<int16>(value * 2));
 
         return end_str + 1;
