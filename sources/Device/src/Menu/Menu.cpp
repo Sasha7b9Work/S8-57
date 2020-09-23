@@ -36,8 +36,6 @@ static const Page *const pages[] =
 
 void Menu::Update()
 {
-    bool needRedraw = false;
-
     while(!BufferButtons::IsEmpty())                // Если есть события клавиатуры
     {
         KeyEvent event = BufferButtons::Extract();  // Извлекаем очередное событие
@@ -54,10 +52,7 @@ void Menu::Update()
         }
 
         Handlers::Process(event);                   // То обрабатываем его
-    }
 
-    if (needRedraw)
-    {
         DisplayOsci::SetFlagRedraw();
     }
 
