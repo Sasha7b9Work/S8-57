@@ -23,7 +23,6 @@ class Settings
 public:
     static void Load(bool _default = false);
     static void Save();
-    static void Reset();
 
     // Рассчитать и записать контрольную сумму
     uint CalcWriteCRC32();

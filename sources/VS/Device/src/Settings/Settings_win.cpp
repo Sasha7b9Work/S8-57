@@ -17,7 +17,7 @@ void Settings::Load(bool _default)
 
     if(_default || !ROM::Settings::Load())
     {
-        Reset();
+        set = Settings::defaultSettings;
         Osci::Init();
         Menu::Init();
         Osci::OnPressButtonStart();

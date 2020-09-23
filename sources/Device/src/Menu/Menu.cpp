@@ -9,6 +9,7 @@
 #include "Keyboard/HandlersKeys.h"
 #include "Menu/Menu.h"
 #include "Menu/Pages/Include/PageMemory.h"
+#include "Osci/Display/DisplayOsci.h"
 #include "Settings/Settings.h"
 #include "Settings/SettingsNRST.h"
 #include <cstdio>
@@ -35,6 +36,8 @@ static const Page *const pages[] =
 
 void Menu::Update()
 {
+    bool needRedraw = false;
+
     while(!BufferButtons::IsEmpty())                // Если есть события клавиатуры
     {
         KeyEvent event = BufferButtons::Extract();  // Извлекаем очередное событие
@@ -51,6 +54,11 @@ void Menu::Update()
         }
 
         Handlers::Process(event);                   // То обрабатываем его
+    }
+
+    if (needRedraw)
+    {
+        DisplayOsci::SetFlagRedraw();
     }
 
     HAL_BUS::ConfigureToFSMC();

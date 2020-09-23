@@ -3,14 +3,7 @@
 #include "Settings/Settings.h"
 
 
-
 Settings set = Settings::defaultSettings;
-
-
-void Settings::Reset()
-{
-    set = defaultSettings;
-}
 
 
 uint Settings::CalcWriteCRC32()
