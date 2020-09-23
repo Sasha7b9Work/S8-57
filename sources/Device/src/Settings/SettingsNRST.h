@@ -38,7 +38,7 @@ struct SettingsNRST
     bool operator!=(const SettingsNRST &rhs);
 
     // Сбросить дополнительное смеещение АЦП
-    void ResetExtraShift();
+    void SetExtraShift(int8 shift);
 
     // Сбросить дополнительную растяжку АЦП
     void ResetExtraStretch();

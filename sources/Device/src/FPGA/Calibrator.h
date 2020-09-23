@@ -9,7 +9,7 @@ public:
     static void Calibrate();
     
     // Балансировать канал на всех диапазонах
-    static bool BalanceChannel(Chan::E ch, bool showHint = true);
+    static bool BalanceChannel(Chan::E ch, bool showHint);
 
     struct Mode
     {

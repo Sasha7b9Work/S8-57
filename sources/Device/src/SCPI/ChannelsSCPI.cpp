@@ -109,7 +109,7 @@ static pCHAR FuncBalance(pCHAR buffer)
 
     SCPI_PROLOG(buffer);
 
-    Calibrator::BalanceChannel(ch);
+    Calibrator::BalanceChannel(ch, true);
 
     SCPI_EPILOG(buffer);
 }

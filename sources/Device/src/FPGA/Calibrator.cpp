@@ -28,7 +28,7 @@ void Calibrator::Calibrate()
     Settings old = set;
 
     setNRST.ResetExtraStretch();
-    setNRST.ResetExtraShift();
+    setNRST.SetExtraShift(0);
 
     if (!CalibrateChannel(ChanA))
     {
@@ -69,7 +69,7 @@ bool Calibrator::BalanceChannel(Chan::E ch, bool showHint)
 
     SettingsNRST oldNRST = setNRST;
 
-    setNRST.ResetExtraShift();
+    setNRST.SetExtraShift(0);
 
     static const pString messages[Chan::Count] =
     {

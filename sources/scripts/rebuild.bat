@@ -1,7 +1,7 @@
 @echo off
 
 cd keil
-call rebuild.bat
+call rebuild.bat all
 cd ..
 
 cd vs_keil

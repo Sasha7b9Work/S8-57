@@ -68,13 +68,13 @@ bool SettingsNRST::operator!=(const SettingsNRST &rhs)
 }
 
 
-void SettingsNRST::ResetExtraShift()
+void SettingsNRST::SetExtraShift(int8 shift)
 {
     for(int ch = 0; ch < Chan::Count; ch++)
     {
         for(int range = 0; range < Range::Count; range++)
         {
-            NRST_EX_SHIFT(ch, range) = 0;
+            NRST_EX_SHIFT(ch, range) = shift;
         }
     }
 }

@@ -86,24 +86,5 @@ struct PageDebug
     struct PageADC
     {
         static const Page *const self;
-
-
-        struct PageBalance
-        {
-            static const Page *const self;
-        };
-
-
-        struct PageStretch
-        {
-            static const Page *const self;
-        };
-
-
-        struct PageShift
-        {
-            static const Page *const self;
-        };
-
     };
 };
