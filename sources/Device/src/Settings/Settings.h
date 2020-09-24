@@ -49,6 +49,7 @@ public:
     SettingsRecorder        rec;
     SettingsService         serv;
     SettingsDebug           dbg;
+    uint           notUsed[2];
     uint notDeleted;                // Эту переменную удалять нельзя. Нужна для корректного расчёта контрольной суммы
 };
 #pragma pack(pop)

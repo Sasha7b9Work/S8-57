@@ -24,6 +24,13 @@ void Settings::Save()
             Menu::CloseOpenedItem();
         }
     }
+    if (Menu::OpenedPage()->IsSubPage(PageMultimeter::self))
+    {
+        while (Menu::OpenedPage() != PageMultimeter::self)
+        {
+            Menu::CloseOpenedItem();
+        }
+    }
 
     ROM::Settings::Save();
 }

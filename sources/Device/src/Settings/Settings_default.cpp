@@ -210,7 +210,7 @@ const Settings Settings::defaultSettings =
         
     // Μενώ ΞÒΛΐΔΚΐ
     {
-        true,                           // showConsole
+        false,                          // showConsole
         30,                             // numStrings
         false,                          // showAll
         false,                          // showFlag
