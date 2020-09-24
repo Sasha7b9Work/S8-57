@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "Log.h"
 #include "FPGA/Calibrator.h"
 #include "FPGA/FPGA.h"
 #include "FPGA/TypesFPGA.h"
@@ -8,6 +9,7 @@
 #include "Settings/SettingsNRST.h"
 #include <cmath>
 #include <cstring>
+#include <cstdio>
 
 
 // Откалибровать канал Ch
@@ -114,6 +116,11 @@ static void BalanceRange(Chan::E ch, Range::E range)
     Range::Set(ch, range);
 
     RShift::Set(ch, 0);
+
+    for (int i = 0; i < 2 * 10000000; i++)
+    {
+        i++;
+    }
 
     Osci::Start(false);
 

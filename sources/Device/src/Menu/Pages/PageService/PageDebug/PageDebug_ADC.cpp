@@ -9,11 +9,11 @@ static int16 shift2 = setNRST._exShift[1][0];
 
 static void OnChange_Shift1()
 {
-    
+    setNRST.SetExtraShift(static_cast<int8>(shift1));
 }
 
 DEF_GOVERNOR( gExShift1,
-    "",
+    "Баланс 1",
     "",
     shift1, -100, 100, &PageDebug::PageADC::self, Item::Active, OnChange_Shift1, Governor::AfterDraw
 )
@@ -21,12 +21,12 @@ DEF_GOVERNOR( gExShift1,
 
 static void OnChange_Shift2()
 {
-
+    setNRST.SetExtraShift(static_cast<int8>(shift2));
 }
 
 
 DEF_GOVERNOR( gExShift2,
-    "",
+    "Баланс 2",
     "",
     shift2, -100, 100, &PageDebug::PageADC::self, Item::Active, OnChange_Shift2, Governor::AfterDraw
 )
