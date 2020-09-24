@@ -111,7 +111,7 @@ void PageTime::OnChanged_PeakDet(bool active)
     }
     else
     {
-        Display::ShowWarning("Пик. Дет. не работает на развёртках менее 0.5мкс/дел");
+        Display::ShowWarning("Пик. Дет. не работает на развёртках менее 5 мкс/дел");
     }
 }
 
