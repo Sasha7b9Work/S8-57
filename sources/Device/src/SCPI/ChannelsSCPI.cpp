@@ -210,8 +210,8 @@ static pCHAR FuncOffset(pCHAR buffer)
 
 static pString probe[] =
 {
-    " 1X",
-    " 10X",
+    " X1",
+    " X10",
     ""
 };
 
@@ -222,7 +222,24 @@ static pCHAR FuncProbe(pCHAR buffer)
 
     SCPI_REQUEST(SCPI::SendAnswer(probe[S_DIVIDER(ch)]));
 
-    SCPI_PROCESS_ARRAY(probe, S_DIVIDER(ch) = static_cast<Divider::E>(i));
+    end = SCPI::BeginWith(buffer, " X10");
+
+    if (end)
+    {
+        SCPI_PROLOG(end);
+        S_DIVIDER(ch) = Divider::_10;
+        SCPI_EPILOG(end);
+    }
+
+    end = SCPI::BeginWith(buffer, " X1");
+    if (end)
+    {
+        SCPI_PROLOG(end);
+        S_DIVIDER(ch) = Divider::_1;
+        SCPI_EPILOG(end);
+    }
+
+    return nullptr;
 }
 
 
