@@ -134,29 +134,17 @@ static int DrawMainParameters(int _x, int _y)
     String(buffer).Draw(x, y1, Color::Trig());
 
     buffer[0] = 0;
-    static pString couple[] =
-    {
-        "\x92",
-        "\x91",
-        "\x92",
-        "\x92"
-    };
-    static pString polar[] =
-    {
-        "\xa7",
-        "\xa6"
-    };
-    static pString filtr[] =
-    {
-        "\xb5\xb6",
-        "\xb5\xb6",
-        "\xb3\xb4",
-        "\xb1\xb2"
-    };
+
     if (S_MEM_MODE_WORK_IS_DIR)
     {
+        static const pString couple[] = { "\x92", "\x92", "\x91" };
+
+        static const pString polar[] =  { "\xa7", "\xa6" };
+
         std::snprintf(buffer, SIZE, "\xa5\x10%s\x10\xa5\x10%s\x10\xa5\x10", couple[S_TRIG_INPUT], polar[S_TRIG_POLARITY]);
         String(buffer).Draw(x + 18, y1);
+
+        static const pString filtr[] = { "\xb5\xb6", "\xb3\xb4", "\xb1\xb2" };
 
         Char(filtr[S_TRIG_INPUT][0]).Draw(x + 45, y1);
         Char(filtr[S_TRIG_INPUT][1]).Draw(x + 53, y1);
