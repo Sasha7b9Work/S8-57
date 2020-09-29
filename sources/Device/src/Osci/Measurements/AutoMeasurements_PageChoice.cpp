@@ -34,20 +34,48 @@ void PageChoiceMeasures::OnKeyEvent(const KeyEvent &event)
         return;
     }
 
-    int8 delta = (event.IsArrowUp() || event.IsArrowRight()) ? 1 : -1;
+    int8 delta = 1;
+    if (event.IsArrowLeft())      { delta = -1; }
+    else if (event.IsArrowUp())   { delta = -5; }
+    else if (event.IsArrowDown()) { delta = 5;  }
 
     if (isActive)
     {
+        int prevPos = posCursor;
+
         posCursor += delta;
         Beeper::RegulatorSwitchRotate();
 
-        if (posCursor < 0)
+        if(delta == 1 || delta == -1)
         {
-            posCursor = TypeMeasure::Count - 1;
+            if (posCursor < 0)
+            {
+                posCursor = TypeMeasure::Count - 1;
+            }
+            else if (posCursor >= TypeMeasure::Count)
+            {
+                posCursor = 0;
+            }
         }
-        else if (posCursor == TypeMeasure::Count)
+        else
         {
-            posCursor = 0;
+            if (posCursor < 0)
+            {
+                if(prevPos == 0)      { posCursor = 19; }
+                else if(prevPos == 4) { posCursor = 18; }
+                else if(prevPos == 2) { posCursor = 21; }
+                else if(prevPos == 1) { posCursor = 20; }
+                else                  { posCursor = TypeMeasure::Count - 1; }
+            }
+            else if (posCursor >= TypeMeasure::Count)
+            {
+                if (prevPos == 20)     { posCursor = 1; }
+                else if(prevPos == 21) { posCursor = 2; }
+                else if(prevPos == 22) { posCursor = 3; }
+                else if(prevPos == 18) { posCursor = 4; }
+                else                   { posCursor = 0; }
+            }
+
         }
 
         S_MEAS_INDICATED(AutoMeasurements::posActive) = static_cast<TypeMeasure::E>(posCursor);
