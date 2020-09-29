@@ -13,13 +13,11 @@ int main(void)
 
     Timer::PauseOnTime(1);
 
-
-    S_SERV_ENUM_VOLUME = 3;
+    S_SERV_ENUM_VOLUME = 1;
 
     while (true)
     {
         Beeper::Beep(TypePress::Press);
-        Beeper::Beep(TypePress::Release);
     }
 
 //    AT25160N::Init();

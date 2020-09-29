@@ -19,13 +19,19 @@ int main()
     Painter::SetColorValue(Color::WHITE, 0x00000000);
     Painter::SetColorValue(Color::BLACK, 0x00ffffff);
 
+    int x = 0;
+
     while(1)
     {
         Painter::SetColor(Color::WHITE);
         Painter::BeginScene();
         Painter::SetColor(Color::BLACK);
-        Painter::FillRegion(10, 10, 100, 100);
+        Painter::FillRegion(x, x++, 100, 100);
         Painter::EndScene();
+        if (x > 100)
+        {
+            x = 0;
+        }
 
 //        static uint prevTime = 0;
 //
