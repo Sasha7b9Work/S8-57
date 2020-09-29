@@ -18,14 +18,20 @@ int main()
 
     while(1)
     {
-        static uint prevTime = 0;
+        Painter::SetColor(Color::WHITE);
+        Painter::BeginScene();
+        Painter::SetColor(Color::BLACK);
+        Painter::FillRegion(10, 10, 100, 100);
+        Painter::EndScene();
 
-        HAL_BUS::Update();
-
-        if(TIME_MS - prevTime > 2)
-        {
-            Keyboard::Update();
-            prevTime = TIME_MS;
-        }
+//        static uint prevTime = 0;
+//
+//        HAL_BUS::Update();
+//
+//        if(TIME_MS - prevTime > 2)
+//        {
+//            Keyboard::Update();
+//            prevTime = TIME_MS;
+//        }
     }
 }
