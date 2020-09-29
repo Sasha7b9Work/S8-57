@@ -16,6 +16,9 @@ int main()
     Display::Init();
     Keyboard::Init();
 
+    Painter::SetColorValue(Color::WHITE, 0x00000000);
+    Painter::SetColorValue(Color::BLACK, 0x00ffffff);
+
     while(1)
     {
         Painter::SetColor(Color::WHITE);
