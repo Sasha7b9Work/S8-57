@@ -87,7 +87,7 @@ static pCHAR FuncInput(pCHAR buffer)
 
 static void SendAnswerLevel()
 {
-    String answer("%d", S_TRIG_LEVEL_SOURCE);
+    String answer("%d", S_TRIG_LEVEL_SOURCE / 2);
     SCPI::SendAnswer(answer.c_str());
 }
 
@@ -101,8 +101,6 @@ static pCHAR FuncLevel(pCHAR buffer)
 
     if (SU::String2Int(buffer, &value, &end_str))
     {
-        Math::Limitation(&value, -150, 150);
-
         TrigLevel::Set(S_TRIG_SOURCE, static_cast<int16>(value * 2));
 
         return end_str + 1;
