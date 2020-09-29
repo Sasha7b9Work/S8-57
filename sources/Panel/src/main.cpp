@@ -16,6 +16,8 @@ int main()
     Display::Init();
     Keyboard::Init();
 
+    HAL_DAC2::SetValue(100);
+
     Painter::SetColorValue(Color::WHITE, 0x00000000);
     Painter::SetColorValue(Color::BLACK, 0x00ffffff);
 
