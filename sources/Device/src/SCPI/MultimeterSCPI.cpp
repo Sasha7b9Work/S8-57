@@ -72,7 +72,7 @@ static pString measures[] =
     " AC400V",
     " DC2V",
     " DC20V",
-    " DC400V",
+    " DC500V",
     " AC20MA",
     " AC2A",
     " DC20MA",
