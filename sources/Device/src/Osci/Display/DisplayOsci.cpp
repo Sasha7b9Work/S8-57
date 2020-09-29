@@ -30,48 +30,58 @@ static const int DELTA = 5;
 
 void DisplayOsci::Update()
 {
-    DFont::SetSpacing(1);
+//    DFont::SetSpacing(1);
+//
+//    if (needRedraw)
+//    {
+//        Painter::BeginScene(Color::BACK);
+//
+//        Grid::Draw();
+//
+//        needRedraw = false;
+//
+//        Accumulator::Reset();
+//    }
+//
+//    PainterData::DrawData();
+//
+//    Rectangle(Grid::Width(), Grid::ChannelHeight()).Draw(Grid::Left(), Grid::Top(), Color::FILL);
+//
+//    HiPart::Draw();
+//
+//    TPos::Draw();
+//
+//    TShift::Draw();
+//
+//    RShift::DrawBoth();
+//    
+//    TrigLevel::Draw();
+//
+//    DrawingValueParameter::Draw();
+//    
+//    CursorsMeasurements::Draw();
+//    
+//    BottomPart::Draw(273, Grid::Bottom() + 1);
+//    
+//    DisplayFreqMeter::Update();
+//
+//    DisplayMultimeter::Update();
+//    
+//    TableMeasures::Draw();
+//    
+//    Menu::Draw();
+//
+//    Warnings::Draw();
 
-    if (needRedraw)
+
+    Painter::BeginScene(Color::BLACK);
+    static int x = 0;
+    Region(100, 100).Fill(x, x++, Color::WHITE);
+    Painter::EndScene();
+    if (x > 100)
     {
-        Painter::BeginScene(Color::BACK);
-
-        Grid::Draw();
-
-        needRedraw = false;
-
-        Accumulator::Reset();
+        x = 0;
     }
-
-    PainterData::DrawData();
-
-    Rectangle(Grid::Width(), Grid::ChannelHeight()).Draw(Grid::Left(), Grid::Top(), Color::FILL);
-
-    HiPart::Draw();
-
-    TPos::Draw();
-
-    TShift::Draw();
-
-    RShift::DrawBoth();
-    
-    TrigLevel::Draw();
-
-    DrawingValueParameter::Draw();
-    
-    CursorsMeasurements::Draw();
-    
-    BottomPart::Draw(273, Grid::Bottom() + 1);
-    
-    DisplayFreqMeter::Update();
-
-    DisplayMultimeter::Update();
-    
-    TableMeasures::Draw();
-    
-    Menu::Draw();
-
-    Warnings::Draw();
 }
 
 
