@@ -13,7 +13,7 @@ static void DisplayUpdate();
 
 // Нахоит сигнал на канале ch. Возвращает true, если сигнал найден и параметры сигнала в tBase, range
 static bool FindSignal(Chan::E ch, TBase::E *tBase, Range::E *range, ModeCouple::E *couple);
-static bool FullSearchSignal(Chan::E ch, Settings *old);
+static bool FullSearchSignal(Chan::E ch, const Settings *old);
 
 // Отмасштабировать сигнал. Если onlyReduce - только сжать
 static void ScaleChannel(Chan::E ch, bool onlyReduce);
@@ -83,7 +83,7 @@ void Osci::RunAutoSearch()
 }
 
 
-static bool FullSearchSignal(Chan::E ch, Settings *old)
+static bool FullSearchSignal(Chan::E ch, const Settings *old)
 {
     TBase::E tBase = TBase::Count;
     Range::E range = Range::Count;

@@ -13,9 +13,9 @@
 #define __attribute(x)
 #define __attribute__(x)
 #define WCHAR unsigned short
-#endif
-
+#else
 #define nullptr 0
+#endif
 
 
 typedef signed   char        int8;
