@@ -159,6 +159,11 @@ void DisplayFreqMeter::DrawFrequencyMode(int x, int _y)
     if(time.Value() == std::numeric_limits<float>::infinity())
     {
         Text(EMPTY_STRING).DrawDigitsMonospace(x + dX, yT, DFont::GetWidth('0'));
+
+        if (needSendToSCPI)
+        {
+            SCPI::SendMeasure(String("T=%s", EMPTY_STRING));
+        }
     }
     else
     {
