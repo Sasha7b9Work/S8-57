@@ -53,7 +53,10 @@ void Menu::Update()
 
         Handlers::Process(event);                   // То обрабатываем его
 
-        DisplayOsci::SetFlagRedraw();
+        if(event.key != Key::Start)
+        {
+            DisplayOsci::SetFlagRedraw();
+        }
     }
 
     HAL_BUS::ConfigureToFSMC();
