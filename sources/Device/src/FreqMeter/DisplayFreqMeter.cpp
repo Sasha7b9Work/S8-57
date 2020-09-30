@@ -379,7 +379,7 @@ static pString FreqSetToString(const BitSet32 *fr)
         }
         break;
     case FreqMeter::TimeCounting::Count:
-    default:
+        // здесь ничего
         break;
     }
 
