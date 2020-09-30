@@ -64,9 +64,6 @@ void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id)
 
     case HOST_USER_CONNECTION:
         break;
-
-    default:
-        break;
     }
 }
 

@@ -88,9 +88,6 @@ DRESULT USBH_read(BYTE lun, BYTE *buff, DWORD sector, UINT count)
             USBH_ErrLog("USB Disk is not ready!");
             res = RES_NOTRDY;
             break;
-
-        default:
-            break;
         }
     }
 
@@ -131,9 +128,6 @@ DRESULT USBH_write(BYTE lun, const BYTE *buff, DWORD sector, UINT count)
         case SCSI_ASC_NOT_READY_TO_READY_CHANGE:
             USBH_ErrLog("USB Disk is not ready!");
             res = RES_NOTRDY;
-            break;
-
-        default:
             break;
         }
     }
