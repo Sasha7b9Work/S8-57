@@ -4,9 +4,16 @@
 #include "Settings/Settings.h"
 
 
+void PageDisplay::Settings::Colors::Init()
+{
+    colorTypeA.Init();
+    colorTypeB.Init();
+    colorTypeGrid.Init();
+}
 
 static void OnPress_ResetColors()
 {
+    
 }
 
 DEF_BUTTON( bReset,                                                                                                                          //--- ÄÈÑÏËÅÉ - ÍÀÑÒĞÎÉÊÈ - ÖÂÅÒÀ - Ñáğîñèòü ---

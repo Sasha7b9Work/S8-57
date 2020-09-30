@@ -227,6 +227,7 @@ void Menu::Init()
     PageMultimeter::Init();
     PageFreqMeter::Init();
     PageTester::Init();
+    PageDisplay::Settings::Colors::Init();
 
     if (static_cast<Page *>(LastOpened(const_cast<Page *>(PageFunction::self))) == PageMultimeter::self) //-V1027
     {

@@ -198,7 +198,10 @@ struct PageDisplay
 
         struct Colors
         {
+            static void Init();
+
             static const Page * const self;
+
             // Для сетки
             static ColorType colorTypeGrid;
             // Для первого канала

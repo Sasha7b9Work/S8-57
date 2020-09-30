@@ -81,7 +81,7 @@ static pString values[] =
     " VOVER-",      // VoltageVybrosMinus,
     " PERIOD",      // Period,
     " FREQUENCY",   // Freq,
-    " TIMERISSE",   // TimeNarastaniya,
+    " TIMERISE",    // TimeNarastaniya,
     " TIMEFALL",    // TimeSpada,
     " WIDTHP",      // DurationPlus,
     " WIDTHN",      // DurationMinus,
@@ -97,6 +97,18 @@ static pString values[] =
 static pCHAR FuncValue(pCHAR buffer)
 {
     pCHAR end = nullptr;
+
+    end = SCPI::BeginWith(buffer, " VMAXEST");
+
+    SCPI_RUN_IF_END(AutoMeasuresSender::DesignateForSending(TypeMeasure::VoltageMaxSteady));
+
+    end = SCPI::BeginWith(buffer, " VMINEST");
+
+    SCPI_RUN_IF_END(AutoMeasuresSender::DesignateForSending(TypeMeasure::VoltageMinSteady));
+
+    end = SCPI::BeginWith(buffer, " TIMERISE");
+
+    SCPI_RUN_IF_END(AutoMeasuresSender::DesignateForSending(TypeMeasure::TimeNarastaniya));
 
     SCPI_PROCESS_ARRAY(values, AutoMeasuresSender::DesignateForSending(static_cast<TypeMeasure::E>(i)));
 }
