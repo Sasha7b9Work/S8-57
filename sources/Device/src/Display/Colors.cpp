@@ -5,7 +5,7 @@
 #include "Utils/Math.h"
 
 
-extern uint GlobalColors[256] =
+uint GlobalColors[256] =
 {
     /* 0  */    MAKE_COLOR(0x00, 0x00, 0x00),       // BLACK
     /* 1  */    MAKE_COLOR(0xff, 0xff, 0xff),       // WHITE
@@ -203,7 +203,7 @@ void ColorType::BrightnessChange(int delta) // -V2506
     green += sign * stepGreen;
     blue += sign * stepBlue;
 
-    SetColor();
+    ApplyColor();
 
     if (stepRed < 0.01F && stepGreen < 0.01F && stepBlue < 0.01F)
     {
@@ -222,7 +222,7 @@ void ColorType::CalcSteps()
 }
 
 
-void ColorType::SetColor()
+void ColorType::ApplyColor()
 {
     LIMITATION(red, 0.0F, 255.0F);
     LIMITATION(green, 0.0F, 255.0F);
@@ -245,7 +245,7 @@ void ColorType::ComponentChange(int delta)
         Math::Limitation<float>(pointers[index], 0.0F, maxs[index]);
     }
 
-    SetColor();
+    ApplyColor();
 
     SetBrightness();
 }

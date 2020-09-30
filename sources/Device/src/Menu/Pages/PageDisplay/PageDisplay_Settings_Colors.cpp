@@ -13,7 +13,15 @@ void PageDisplay::Settings::Colors::Init()
 
 static void OnPress_ResetColors()
 {
-    
+    GlobalColors[3] = MAKE_COLOR(0x00, 0xdf, 0xff);
+    GlobalColors[4] = MAKE_COLOR(0x00, 0xff, 0x00);
+    GlobalColors[2] = MAKE_COLOR(0x60, 0x60, 0x60);
+    PageDisplay::Settings::Colors::colorTypeA.ReInit();
+    PageDisplay::Settings::Colors::colorTypeB.ReInit();
+    PageDisplay::Settings::Colors::colorTypeGrid.ReInit();
+    PageDisplay::Settings::Colors::colorTypeA.ApplyColor();
+    PageDisplay::Settings::Colors::colorTypeB.ApplyColor();
+    PageDisplay::Settings::Colors::colorTypeGrid.ApplyColor();
 }
 
 DEF_BUTTON( bReset,                                                                                                                          //--- ƒ»—œÀ≈… - Õ¿—“–Œ… » - ÷¬≈“¿ - —·ÓÒËÚ¸ ---
