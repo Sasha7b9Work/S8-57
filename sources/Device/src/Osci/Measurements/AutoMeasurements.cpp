@@ -196,14 +196,14 @@ void AutoMeasurements::CalculateMeasures()
     {
         TypeMeasure::E type = AutoMeasuresSender::sended;
 
-        Measure measure(type);
-
         pFuncFCh func = sMeas[type].FuncCalculate;
 
         char buffer[50];
 
         if (func)
         {
+            Measure measure(type);
+
             if (VIEW_MEASURES_A)    
             {
                 values[type].value[ChanA] = func(ChanA);

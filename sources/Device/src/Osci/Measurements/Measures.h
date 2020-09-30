@@ -46,7 +46,7 @@ struct Measure
 public:
     Measure(int r, int c) : row(r), col(c), t(TypeMeasure::Count) {};
 
-    Measure(TypeMeasure::E type) : t(type) {};
+    Measure(TypeMeasure::E type) : row(0), col(0), t(type) {};
 
     TypeMeasure::E GetType();
 

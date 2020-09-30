@@ -14,7 +14,7 @@
 #define __attribute__(x)
 #define WCHAR unsigned short
 #else
-#define nullptr 0
+#define nullptr 0 //-V1059
 #endif
 
 

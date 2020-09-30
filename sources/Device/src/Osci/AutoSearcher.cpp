@@ -446,7 +446,7 @@ void AutoFPGA::Start()
 
 void AutoFPGA::ReadData(Chan::E ch, uint8 *data)
 {
-    uint16 addrRead = (uint16)(Osci::ReadLastRecord(ch) - SIZE);
+    uint16 addrRead = static_cast<uint16>(Osci::ReadLastRecord(ch) - SIZE);
 
     HAL_BUS::FPGA::Write16(WR::PRED_LO, addrRead);
     HAL_BUS::FPGA::Write8(WR::START_ADDR, 0xff);

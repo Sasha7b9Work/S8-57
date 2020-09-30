@@ -21,7 +21,7 @@ typedef signed char         int8;
 typedef void(*pFuncVV)(void);
 
 #ifndef WIN32
-#define nullptr 0
+#define nullptr 0 //-V1059
 #endif
 
 #define ERROR_VALUE_UINT8 255

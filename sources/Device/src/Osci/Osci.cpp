@@ -601,7 +601,7 @@ void Osci::SendDataToSCPI()
 
 void Osci::SendDataToSCPI(Chan::E ch)
 {
-    if (!SCPI::Sender::osci[ch] || !ENABLE_CH_DS(ch))
+    if (!SCPI::Sender::osci[ch] || ENABLE_CH_DS(ch) == 0)
     {
         return;
     }

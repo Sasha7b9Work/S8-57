@@ -140,29 +140,25 @@ void FDrive::AttemptUpdate()
     {
     }
 
-    if((connection && active == 0) ||  // ≈сли флеша подключена, но в активное состо€ние почему-то не перешла
-        (active && state != State::Mount))     // или перешла в активное состо€ние, по почему-то не запустилс€ процесс монтировани€
+    if((connection != 0 && active == 0) ||      // ≈сли флеша подключена, но в активное состо€ние почему-то не перешла
+        (active != 0 && state != State::Mount)) // или перешла в активное состо€ние, по почему-то не запустилс€ процесс монтировани€
     {
         NVIC_SystemReset();
     }
 
-    if(state == State::Mount)                           // Ёто означает, что диск удачно примонтирован //-V774
+    if(state == State::Mount)                   // Ёто означает, что диск удачно примонтирован //-V774
     {
         if(FileExist(FILE_CLEAR))
         {
             EraseSettings();
         }
 
-        if(FileExist(FILE_FIRMWARE))                    // ≈сли на диске обнаружена прошивка
+        if(FileExist(FILE_FIRMWARE))            // ≈сли на диске обнаружена прошивка
         {
             Upgrade();
         }
-        else
-        {
-            state = State::NotFile;
-        }
     }
-    else if(state == State::WrongFlash) // ƒиск не удалось примонтировать //-V774
+    else if(state == State::WrongFlash)         // ƒиск не удалось примонтировать //-V774
     {
         Timer::PauseOnTime(5000);
     }
