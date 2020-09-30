@@ -31,6 +31,7 @@ public:
     void OnQuit(wxCommandEvent &);
     void OnGenerator(wxCommandEvent &);
     void OnSCPI(wxCommandEvent &);
+    void OnTester(wxCommandEvent &);
     void OnAbout(wxCommandEvent &);
     void OnDown(wxCommandEvent &event);
     void OnUp(wxCommandEvent &event);

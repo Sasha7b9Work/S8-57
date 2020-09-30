@@ -3,6 +3,7 @@
 #include "ConsoleSCPI.h"
 #include "Display/Painter.h"
 #include "GUI/Dialogs/TuneGeneratorDialog.h"
+#include "GUI/Dialogs/TesterDialog.h"
 #include "Settings/Settings.h"
 #include <ctime>
 
@@ -28,7 +29,8 @@ enum //-V2521
     FILE_QUIT = wxID_EXIT,
     FILE_SIZE = wxID_HIGHEST + 1,
     GENERATOR,
-    SCPI
+    SCPI,
+    TESTER
 };
 
 enum
@@ -150,6 +152,7 @@ Frame::Frame(const wxString& title)
 
     toolsMenu->Append(GENERATOR, "Генератор");
     toolsMenu->Append(SCPI, "SCPI");
+    toolsMenu->Append(TESTER, "Тестер");
 
     wxMenuBar *menuBar = new wxMenuBar();
     menuBar->Append(fileMenu, "Файл");
@@ -164,6 +167,7 @@ Frame::Frame(const wxString& title)
     Bind(wxEVT_MENU, &Frame::OnQuit, this, FILE_QUIT);
     Bind(wxEVT_MENU, &Frame::OnGenerator, this, GENERATOR);
     Bind(wxEVT_MENU, &Frame::OnSCPI, this, SCPI);
+    Bind(wxEVT_MENU, &Frame::OnTester, this, TESTER);
     Bind(wxEVT_TIMER, &Frame::OnTimer, this, TIMER_ID);
     Bind(wxEVT_TIMER, &Frame::OnTimerLong, this, TIMER_LONG_ID);
     Bind(wxEVT_CLOSE_WINDOW, &Frame::OnClose, this);
@@ -248,6 +252,14 @@ void Frame::OnGenerator(wxCommandEvent &)
 void Frame::OnSCPI(wxCommandEvent &)
 {
     ConsoleSCPI::Self()->SwitchVisibility();
+}
+
+
+void Frame::OnTester(wxCommandEvent &)
+{
+    TesterDialog dialog;
+
+    dialog.ShowModal();
 }
 
 

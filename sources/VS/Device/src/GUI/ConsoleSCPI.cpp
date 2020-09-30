@@ -51,6 +51,8 @@ ConsoleSCPI::ConsoleSCPI(wxFrame *parent) : wxFrame(parent, wxID_ANY, wxT("SCPI"
     {
         AddLine("Внешнее устройство не обнаружено. Работает эмулятор");
     }
+
+    timerTest.Bind(wxEVT_TIMER, &ConsoleSCPI::OnTimerTest, this);
 }
 
 ConsoleSCPI::~ConsoleSCPI()
@@ -146,18 +148,44 @@ void ConsoleSCPI::OnTextEnter(wxCommandEvent &)
 
     AddLine(txt.c_str());
 
-    txt.Set(TypeConversionString::None, "%s\x0d", static_cast<const char *>(line->GetLineText(0).mb_str()));
+    SendToSCPI(line->GetLineText(0).c_str());
+
+    line->Clear();
+}
+
+
+void ConsoleSCPI::OnTimerTest(wxTimerEvent &)
+{
+    SendToSCPI(":key:press function");
+}
+
+
+void ConsoleSCPI::SendToSCPI(const char *txt)
+{
+    String message("%s\x0d", txt);
 
     if (ComPort::IsOpened())
     {
-        ComPort::Send(txt.c_str());
+        ComPort::Send(message.c_str());
     }
     else
     {
-        SCPI::AppendNewData(txt.c_str(), static_cast<int>(std::strlen(txt.c_str())));
+        SCPI::AppendNewData(message.c_str(), static_cast<int>(std::strlen(message.c_str())));
     }
+}
 
-    line->Clear();
+
+void ConsoleSCPI::StartTest()
+{
+    AddLine("Тест стартовал");
+    timerTest.Start(1000);
+}
+
+
+void ConsoleSCPI::StopTest()
+{
+    AddLine("Тест завершён");
+    timerTest.Stop();
 }
 
 

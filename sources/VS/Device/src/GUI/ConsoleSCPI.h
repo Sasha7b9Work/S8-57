@@ -17,6 +17,9 @@ public:
     void AddLine(const wxString &line);
     void AddText(const wxString &text);
 
+    void StartTest();
+    void StopTest();
+
 private:
     ConsoleSCPI(wxFrame *parent);
 
@@ -26,7 +29,11 @@ private:
     void OnClose(wxCloseEvent &);
 
     wxTimer timerComPort;
+    wxTimer timerTest;
     void OnTimerComPort(wxTimerEvent &);
+    void OnTimerTest(wxTimerEvent &);
+
+    void SendToSCPI(const char *);
 
     class History
     {
