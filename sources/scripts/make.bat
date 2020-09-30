@@ -5,5 +5,5 @@ call make.bat
 cd..
 
 cd vs_win
-call make.bat
+call make.bat debug
 cd..

@@ -21,7 +21,6 @@ add_definitions(-DSTM32F437xx -DDEVICE -DVS_KEIL)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
-add_compile_options(/wd4159)    # #pragma pack(pop,...): has popped previously pushed identifier xxx
 add_compile_options(/wd4201)    # nonstandard extension used: nameless struct/union
 add_compile_options(/wd4514)    # 'function' : unreferenced inline function has been removed
 add_compile_options(/wd4623)    # 'derived class' : default constructor was implicitly defined as deleted because a base class default constructor is inaccessible or deleted
@@ -32,7 +31,6 @@ add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially thr
 add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
 add_compile_options(/wd5219)    # implicit conversion from 'xxx' to 'float', possible loss of data
 add_compile_options(/wd5220)    # a non-static data member with a volatile qualified type no longer implies
-add_compile_options(/wd26812)   #The enum type %type% is unscoped. Prefer 'enum class' over 'enum' (Enum.3)
 
 file(GLOB LIBS_FATFS                       ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFs/src/ff.*
                                            ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFs/src/diskio.*
