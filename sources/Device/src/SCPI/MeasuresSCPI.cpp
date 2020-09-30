@@ -89,8 +89,8 @@ static pString values[] =
     " DUTY-",       // SkvaznostMinus,
     " DELAY+",      // DelayPlus,
     " DELAY-",      // DelayMinus,
-    " PHASE",       // PhazaPlus,
-    " PHASE",       // PhazaMinus,
+    " PHASE+",      // PhazaPlus,
+    " PHASE-",      // PhazaMinus,
     ""
 };
 
