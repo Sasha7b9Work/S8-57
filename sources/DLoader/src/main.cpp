@@ -20,7 +20,7 @@
 #include "Hardware/Timer.h"
 
 
-#define MAIN_PROGRAM_START_ADDRESS  (uint)0x8020000
+#define MAIN_PROGRAM_START_ADDRESS  0x8020000
 
 
 typedef void(*pFunction)();
@@ -51,7 +51,7 @@ int main()
     __disable_irq();
     // Теперь переходим на основную программу
     pFunction JumpToApplication;
-    JumpToApplication = (pFunction)(*(__IO uint *)(MAIN_PROGRAM_START_ADDRESS + 4));
+    JumpToApplication = reinterpret_cast<pFunction>(*reinterpret_cast<__IO uint *>(MAIN_PROGRAM_START_ADDRESS + 4)); //-V2571
     __set_MSP(*(__IO uint *)MAIN_PROGRAM_START_ADDRESS);
     __enable_irq();
     JumpToApplication();

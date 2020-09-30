@@ -65,7 +65,7 @@ void Console::DeleteFirstString()
 }
 
 
-void Console::AddString(char *string)
+void Console::AddString(const char *string)
 {
     // \todo Мы пропускаем некоторые строки. Сделать отложенное добавление
 
