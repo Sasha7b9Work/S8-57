@@ -162,7 +162,7 @@ struct SettingsDisplay
     ENumSmoothing::E       _enumSmoothing;          // Перечисление количества точек для скользящего фильтра.
     ENumSignalsInSec::E    _enumSignalsInSec;       // Перечисление числа считываний сигнала в секунда.
     TypeGrid::E            _typeGrid;               // Тип сетки
-    uint8                  _brightness;             // Яркость дисплея.
+    int16                  _brightness;             // Яркость дисплея.
     MenuAutoHide::E        _menuAutoHide;           // Через сколько времени после последнего нажатия клавиши прятать меню.
     int16                  _shiftInMemory;          // \brief Показывает смещение левого края стеки относительно нулевого байта памяти в 
                                                     // байтах. Т.е. для пикового детектора будет в два раза больше количества точек на экране.

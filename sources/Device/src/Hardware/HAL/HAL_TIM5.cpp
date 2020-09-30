@@ -35,4 +35,11 @@ void HAL_TIM5::ElapsedCallback()
             HAL_PIO::Reset(PIN_POWER);
         }
     }
+    else
+    {
+        if (Battery::GetVoltageAverage() < 5.0F)
+        {
+            NVIC_SystemReset();
+        }
+    }
 }

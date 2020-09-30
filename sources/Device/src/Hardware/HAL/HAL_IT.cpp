@@ -117,7 +117,7 @@ void MemManage_Handler()
 {
     while (1)
     {
-        HAL_TIM5::ElapsedCallback();
+        NVIC_SystemReset();
     }
 }
 
@@ -126,7 +126,7 @@ void BusFault_Handler()
 {
     while (1)
     {
-        HAL_TIM5::ElapsedCallback();
+        NVIC_SystemReset();
     }
 }
 
@@ -135,7 +135,7 @@ void UsageFault_Handler()
 {
     while (1)
     {
-        HAL_TIM5::ElapsedCallback();
+        NVIC_SystemReset();
     }
 }
 

@@ -14,6 +14,8 @@ const float Battery::SHUTDOWN_VOLTAGE = 5.4F;
 
 static bool isBusy = false;
 
+static Utils::AroundAverager<float> averager(32);
+
 // Возвращает true, если зарядное устройство подключено
 static bool ChargerIsConnected();
 
@@ -51,14 +53,18 @@ float Battery::GetVoltage()
 {
     isBusy = true;
 
-    static Utils::AroundAverager<float> averager(32);
-  
     uint akk = HAL_ADC1::ValueBattery();
 
     averager.Push(static_cast<float>(akk));
 
     isBusy = false;
 
+    return BatteryADC_ToVoltage(static_cast<float>(averager.Value()));
+}
+
+
+float Battery::GetVoltageAverage()
+{
     return BatteryADC_ToVoltage(static_cast<float>(averager.Value()));
 }
 
