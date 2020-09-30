@@ -308,6 +308,11 @@ void SCPI::SendMeasure(const String &str)
     {
         char symbol = str[i];
 
+        if (static_cast<uint8>(symbol) == 0xa8)     // Тупо пропускаем значок фазы
+        {
+            continue;
+        }
+
         if (symbol == '\x10')     { symbol = ' '; }
         else if (symbol == 'м')
         {
