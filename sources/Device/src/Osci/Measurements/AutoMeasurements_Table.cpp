@@ -72,11 +72,11 @@ void TableMeasures::Cell::Draw(int x, int y)
 
         measure.Name().Draw(x + 4, y + 2, color);
 
-        if (type == S_MEAS_MARKED)
-        {
-            Region(DX() - 2, 9).Fill(x + 1, y + 1, active ? Color::BACK : Color::FILL);
-            measure.Name().Draw(x + 4, y + 2, active ? Color::FILL : Color::BACK);
-        }
+//        if (type == S_MEAS_MARKED)
+//        {
+//            Region(DX() - 2, 9).Fill(x + 1, y + 1, active ? Color::BACK : Color::FILL);
+//            measure.Name().Draw(x + 4, y + 2, active ? Color::FILL : Color::BACK);
+//        }
 
         DrawStringMeasure(x, y);   
     }
