@@ -156,7 +156,48 @@ void ConsoleSCPI::OnTextEnter(wxCommandEvent &)
 
 void ConsoleSCPI::OnTimerTest(wxTimerEvent &)
 {
-    SendToSCPI(":key:press function");
+    const char *names[] =
+    {
+        "NONE",
+        "FUNCTION",
+        "MEASURE",
+        "MEMORY",
+        "SERVICE",
+        "1",
+        "2",
+        "TIME",
+        "START",
+        "TRIG",
+        "DISPLAY",
+        "RANGE1+",
+        "RANGE1-",
+        "RSHIFT1+",
+        "RSHIFT1-",
+        "RANGE2+",
+        "RANGE2-",
+        "RSHIFT2+",
+        "RSHIFT2-",
+        "TBASE+",
+        "TBASE-",
+        "TSHIFT+",
+        "TSHIFT-",
+        "TRIGLEV+",
+        "TRIGLEV-",
+        "LEFT",
+        "RIGHT",
+        "UP",
+        "DOWN",
+        "ENTER",
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+    };
+
+    String message(":key:press %s", names[(rand() % 34) + 1]);
+
+    SendToSCPI(message.c_str());
 }
 
 
@@ -178,7 +219,7 @@ void ConsoleSCPI::SendToSCPI(const char *txt)
 void ConsoleSCPI::StartTest()
 {
     AddLine("Тест стартовал");
-    timerTest.Start(1000);
+    timerTest.Start(100);
 }
 
 
