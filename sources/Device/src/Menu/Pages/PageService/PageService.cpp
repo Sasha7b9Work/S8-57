@@ -99,15 +99,31 @@ void PageService::DecodePassword(const KeyEvent &event)
     {
         if(charsMatch == NUM_SYMBOLS)
         {
-            Page *page = const_cast<Page *>(&pService);
-
-            Item **items = const_cast<Item **>(page->OwnData()->items);
-
-            items[7] = const_cast<Page *>(PageDebug::self);
+            EnablePageDebug();
         }
     }
     else
     {
         charsMatch = 0;
     }
+}
+
+
+void PageService::EnablePageDebug()
+{
+    Page *page = const_cast<Page *>(&pService);
+
+    Item **items = const_cast<Item **>(page->OwnData()->items);
+
+    items[7] = const_cast<Page *>(PageDebug::self);
+}
+
+
+void PageService::DisablePageDebug()
+{
+    Page *page = const_cast<Page *>(&pService);
+
+    Item **items = const_cast<Item **>(page->OwnData()->items);
+
+    items[7] = &Item::empty;
 }

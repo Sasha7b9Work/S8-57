@@ -2,6 +2,7 @@
 #include "Settings/Settings.h"
 #include "Menu/Pages/Include/PageFunction.h"
 #include "Device.h"
+#include "Settings/SettingsNRST.h"
 
 
 static bool IsActive_Ranges()
@@ -260,6 +261,7 @@ const Page * const PageMultimeter::self = static_cast<const Page *>(&pMultimeter
 static void OnPress_Calibrate0()
 {
     Multimeter::Calibrate(0);
+    setNRST.Save();
 }
 
 DEF_BUTTON( bCalibrate0,
@@ -272,6 +274,7 @@ DEF_BUTTON( bCalibrate0,
 static void OnPress_Calibrate1()
 {
     Multimeter::Calibrate(1);
+    setNRST.Save();
 }
 
 DEF_BUTTON( bCalibrate1,
@@ -328,11 +331,7 @@ void PageMultimeter::DecodePassword(const KeyEvent &event)
     {
         if (charsMatch == NUM_SYMBOLS)
         {
-            Page *page = const_cast<Page *>(&pMultimeter);
-
-            Item **items = const_cast<Item **>(page->OwnData()->items);
-
-            items[6] = const_cast<Page *>(PageMultimeter::Calibration::self);
+            EnablePageCalibrate();
 
             Menu::CloseOpenedItem();
 
@@ -343,4 +342,24 @@ void PageMultimeter::DecodePassword(const KeyEvent &event)
     {
         charsMatch = 0;
     }
+}
+
+
+void PageMultimeter::EnablePageCalibrate()
+{
+    Page *page = const_cast<Page *>(&pMultimeter);
+
+    Item **items = const_cast<Item **>(page->OwnData()->items);
+
+    items[6] = const_cast<Page *>(PageMultimeter::Calibration::self);
+}
+
+
+void PageMultimeter::DisablePageCalibrate()
+{
+    Page *page = const_cast<Page *>(&pMultimeter);
+
+    Item **items = const_cast<Item **>(page->OwnData()->items);
+
+    items[6] = &Item::empty;
 }

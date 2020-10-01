@@ -1,4 +1,5 @@
 #include "defines.h"
+#include "log.h"
 #include "Settings.h"
 #include "Hardware/Memory/ROM.h"
 #include "Osci/Osci.h"
@@ -17,20 +18,6 @@ void Settings::Load(bool _default)
 
 void Settings::Save()
 {
-    if(Menu::OpenedPage()->IsSubPage(PageService::self))
-    {
-        while(Menu::OpenedPage() != PageService::self)
-        {
-            Menu::CloseOpenedItem();
-        }
-    }
-    if (Menu::OpenedPage()->IsSubPage(PageMultimeter::self))
-    {
-        while (Menu::OpenedPage() != PageMultimeter::self)
-        {
-            Menu::CloseOpenedItem();
-        }
-    }
-
+    LOG_WRITE("сохран€ю настройки");
     ROM::Settings::Save();
 }

@@ -33,7 +33,7 @@ void HAL_PCD_SetupStageCallback(PCD_HandleTypeDef *hpcd)
             else                                                    //
             {                                                       //
                 VCP::connectedToUSB = false;                        //
-                Settings::Save();                                   // При отконнекчивании сохраняем настройки
+                //Settings::Save();                                   // При отконнекчивании сохраняем настройки
             }                                                       // \todo Возможно, это не нужно делать
             //CONNECTED_TO_USB = prevLength != 0;                   // 
         }                                                           //

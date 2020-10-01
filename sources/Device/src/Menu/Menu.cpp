@@ -36,6 +36,9 @@ static const Page *const pages[] =
 
 void Menu::Update()
 {
+    static uint lastModified = 0;
+    static bool saved = true;
+
     while(!BufferButtons::IsEmpty())                // Если есть события клавиатуры
     {
         KeyEvent event = BufferButtons::Extract();  // Извлекаем очередное событие
@@ -57,9 +60,22 @@ void Menu::Update()
         {
             DisplayOsci::SetFlagRedraw();
         }
+
+        lastModified = TIME_MS;
+        saved = false;
     }
 
     HAL_BUS::ConfigureToFSMC();
+
+    if (!saved && TIME_MS - lastModified > 5000)
+    {
+        if(!Device::InModeTester())
+        {
+            Settings::Save();
+            setNRST.Save();
+            saved = true;
+        }
+    }
 }
 
 
@@ -225,6 +241,48 @@ void Menu::CloseIfSubPage(Page *parent, Page *page)
 }
 
 
+Item *Menu::OpenedItem()
+{
+    return LastOpened(const_cast<Page *>(GetMainPage()));
+}
+
+
+static void CloseDebugPages()
+{
+    const Page *mainPage = Menu::GetMainPage();
+
+    Menu::SetMainPage(PageFunction::self);
+
+    PageMultimeter::EnablePageCalibrate();
+
+    if(Menu::OpenedItem()->ExistKeeper(PageMultimeter::self))
+    {
+        while (Menu::OpenedPage() != PageMultimeter::self)
+        {
+            Menu::CloseOpenedItem();
+        }
+    }
+
+    PageMultimeter::DisablePageCalibrate();
+
+    Menu::SetMainPage(PageService::self);
+
+    PageService::EnablePageDebug();
+
+    if (Menu::OpenedItem()->ExistKeeper(PageDebug::self))
+    {
+        while (Menu::OpenedPage() != PageService::self)
+        {
+            Menu::CloseOpenedItem();
+        }
+    }
+
+    PageService::DisablePageDebug();
+
+    Menu::SetMainPage(mainPage);
+}
+
+
 void Menu::Init()
 {
     PageMultimeter::Init();
@@ -238,6 +296,8 @@ void Menu::Init()
     }
 
     CloseAllBadOpenedPages();
+
+    CloseDebugPages();
 }
 
 
@@ -253,12 +313,6 @@ void Menu::CloseOpenedItem()
     {
         item->Open(false);
     }
-}
-
-
-Item *Menu::OpenedItem()
-{
-    return LastOpened(const_cast<Page *>(GetMainPage()));
 }
 
 

@@ -28,6 +28,8 @@ struct PageService
     static void OnPress_ResetSettings();
 
     static void DecodePassword(const KeyEvent &event);
+    static void EnablePageDebug();
+    static void DisablePageDebug();
 
     struct Battery
     {

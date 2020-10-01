@@ -8,6 +8,7 @@
 static void OnChanged_Gates(bool)
 {
     Osci::ClearDataRand();
+    setNRST.Save();
 }
 
 
