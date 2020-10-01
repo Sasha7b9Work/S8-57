@@ -10,7 +10,7 @@
 
 
 // Отключить электропитание, если села батарея
-static void DisablePowerIfBatteryDischarged();
+//static void DisablePowerIfBatteryDischarged();
 
 // Отключить электропитание если не нажата кнопка в течение необходимого времени
 static void DisableDisplayIfTimeout();
@@ -25,12 +25,13 @@ void PowerBreaker::Init()
 
 void PowerBreaker::Update()
 {
-    DisablePowerIfBatteryDischarged();
+    //DisablePowerIfBatteryDischarged();
 
     DisableDisplayIfTimeout();
 }
 
 
+/*
 static void DisablePowerIfBatteryDischarged()
 {
     if (Battery::GetVoltage() < Battery::SHUTDOWN_VOLTAGE)
@@ -45,6 +46,7 @@ static void DisablePowerIfBatteryDischarged()
         HAL_PIO::Reset(PIN_POWER);
     }
 }
+*/
 
 
 static void DisableDisplayIfTimeout()
