@@ -62,20 +62,29 @@ const StructSCPI SCPI::key[] =
 };
 
 
+#define PROCESS_KEY(end, name, key)                                                     \
+    end = SCPI::BeginWith(buffer, name);                                                \
+    if (end)                                                                            \
+    {                                                                                   \
+        SCPI_PROLOG(end)                                                                \
+                                                                                        \
+        BufferButtons::Push(KeyEvent(static_cast<Key::E>(key), TypePress::Press));      \
+        BufferButtons::Push(KeyEvent(static_cast<Key::E>(key), TypePress::Release));    \
+                                                                                        \
+        SCPI_EPILOG(end)                                                                \
+    }                                                                                   \
+
+
 static const char *FuncKeyPress(const char *buffer)
 {
+    const char *end = nullptr;
+
+    PROCESS_KEY(end, " TRIGLEV+", Key::TrigLevMore);
+    PROCESS_KEY(end, " TRIGLEV-", Key::TrigLevLess);
+
     for(int i = 0; i < Key::Count; i++)
     {
-        const char *end = SCPI::BeginWith(buffer, keyNames[i]);
-        if(end)
-        {
-            SCPI_PROLOG(end)
-
-            BufferButtons::Push(KeyEvent(static_cast<Key::E>(i), TypePress::Press));
-            BufferButtons::Push(KeyEvent(static_cast<Key::E>(i), TypePress::Release));
-
-            SCPI_EPILOG(end)
-        }
+        PROCESS_KEY(end, keyNames[i], i);
     }
 
     return nullptr;
