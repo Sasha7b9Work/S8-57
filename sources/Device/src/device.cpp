@@ -72,7 +72,7 @@ void Device::Init()
 
     SetCurrentMode();
 
-    HAL_TIM5::Init();
+    //HAL_TIM5::Init();
 }
 
 

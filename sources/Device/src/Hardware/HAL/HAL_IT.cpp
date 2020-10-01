@@ -46,6 +46,7 @@ void TIM3_IRQHandler()
     }
 }
 
+/*
 void TIM5_IRQHandler()
 {
     if ((TIM5->SR & TIM_SR_UIF) == TIM_SR_UIF)
@@ -58,6 +59,7 @@ void TIM5_IRQHandler()
         }
     }
 }
+*/
 
 
 void SysTick_Handler(void)

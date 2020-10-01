@@ -5,11 +5,16 @@
 #include <stm32f4xx_hal.h>
 
 
+/*
+*   Таймер использовался для выключения прибора
+*/
+
 static TIM_HandleTypeDef handleTIM5 = { TIM5 };
 
 
 void HAL_TIM5::Init()
 {
+/*
     HAL_NVIC_SetPriority(TIM5_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(TIM5_IRQn);
 
@@ -23,9 +28,10 @@ void HAL_TIM5::Init()
     HAL_TIM_Base_Init(&handleTIM5);
 
     HAL_TIM_Base_Start_IT(&handleTIM5);
+*/
 }
 
-
+/*
 void HAL_TIM5::ElapsedCallback()
 {
     if(!Battery::IsBusy())
@@ -43,3 +49,4 @@ void HAL_TIM5::ElapsedCallback()
         }
     }
 }
+*/
