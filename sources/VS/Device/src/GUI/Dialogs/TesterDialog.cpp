@@ -15,7 +15,7 @@ TesterDialog::TesterDialog() : wxDialog(nullptr, wxID_ANY, wxT("Тестер"))
     wxButton *btnBegin = new wxButton(this, ID_BUTTON_BEGIN, wxT("Начать"));
     Connect(ID_BUTTON_BEGIN, wxEVT_BUTTON, wxCommandEventHandler(TesterDialog::OnButtonBegin));
 
-    wxButton *btnEnd = new wxButton(this, ID_BUTTON_END, wxT("Начать"));
+    wxButton *btnEnd = new wxButton(this, ID_BUTTON_END, wxT("Завершить"));
     Connect(ID_BUTTON_END, wxEVT_BUTTON, wxCommandEventHandler(TesterDialog::OnButtonEnd));
 
     wxBoxSizer *hBox = new wxBoxSizer(wxHORIZONTAL);
