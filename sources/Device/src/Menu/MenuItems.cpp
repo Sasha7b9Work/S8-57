@@ -11,27 +11,30 @@
 #include "Settings/Settings.h"
 
 
-enum DIRECTION
+struct DIRECTION
 {
-    NONE,
-    INCREASE,
-    DECREASE
+    enum E
+    {
+        NONE,
+        INCREASE,
+        DECREASE
+    };
 };
 
 // Структура используется для анимации элементов ГУИ Choice и Governor
 struct TimeStruct
 {
-    void       *address;    // Адрес элемента. Если 0 - не движется
-    uint        timeStart;  // Время начала анимации в миллисекундах
-    DIRECTION   dir;        // Направление изменения значения
-    uint8       notUsed0;
-    uint8       notUsed1;
-    uint8       notUsed2;
+    void        *address;    // Адрес элемента. Если 0 - не движется
+    uint         timeStart;  // Время начала анимации в миллисекундах
+    DIRECTION::E dir;        // Направление изменения значения
+    uint8        notUsed0;
+    uint8        notUsed1;
+    uint8        notUsed2;
 };
 
-static TimeStruct tsChoice = { 0, 0, NONE, 0, 0, 0 };
+static TimeStruct tsChoice = { 0, 0, DIRECTION::NONE, 0, 0, 0 };
 
-static TimeStruct tsGovernor = { 0, 0, NONE, 0, 0, 0 };
+static TimeStruct tsGovernor = { 0, 0, DIRECTION::NONE, 0, 0, 0 };
 
 DataItem Item::emptyData =
 {
@@ -513,7 +516,7 @@ float Governor::Step() const
     {
         delta = speed * (TIME_MS - tsGovernor.timeStart);
 
-        if (tsGovernor.dir == DECREASE)
+        if (tsGovernor.dir == DIRECTION::DECREASE)
         {
             delta *= -1.0F;
             if (delta == 0.0F)  // -V550 //-V2550 //-V550
@@ -522,14 +525,14 @@ float Governor::Step() const
             }
             else if (delta < -numLines)
             {
-                tsGovernor.dir = NONE;
+                tsGovernor.dir = DIRECTION::NONE;
                 SetValue(PrevValue());
                 OwnData()->handlerChange();
                 delta = 0.0F;
                 tsGovernor.address = 0;
             }
         }
-        else if (tsGovernor.dir == INCREASE)
+        else if (tsGovernor.dir == DIRECTION::INCREASE)
         {
             if (delta == 0.0F)  // -V550 //-V2550 //-V550
             {
@@ -537,7 +540,7 @@ float Governor::Step() const
             }
             else if (delta > numLines)
             {
-                tsGovernor.dir = NONE;
+                tsGovernor.dir = DIRECTION::NONE;
                 SetValue(NextValue());
                 OwnData()->handlerChange();
                 delta = 0.0F;
@@ -779,7 +782,7 @@ void Choice::StartChange(int delta) const
         {
             tsChoice.address = const_cast<void *>(static_cast<const void *>(this));
             tsChoice.timeStart = TIME_MS;
-            tsChoice.dir = delta > 0 ? INCREASE : DECREASE;
+            tsChoice.dir = delta > 0 ? DIRECTION::INCREASE : DIRECTION::DECREASE;
         }
     }
 }
@@ -805,7 +808,7 @@ float Choice::Step() const //-V2506
         }
         int8 index = *OwnData()->cell;
 
-        if (tsChoice.dir == INCREASE)
+        if (tsChoice.dir == DIRECTION::INCREASE)
         {
             if (delta <= numLines)
             {
@@ -813,7 +816,7 @@ float Choice::Step() const //-V2506
             }
             Math::CircleIncrease<int8>(&index, 0, static_cast<int8>(NumChoices()) - 1);
         }
-        else if (tsChoice.dir == DECREASE)
+        else if (tsChoice.dir == DIRECTION::DECREASE)
         {
             delta = -delta;
 
@@ -832,7 +835,7 @@ float Choice::Step() const //-V2506
         tsChoice.address = 0;
         OwnData()->handlerChange(IsActive());
         DisplayOsci::SetFlagRedraw();
-        tsChoice.dir = NONE;
+        tsChoice.dir = DIRECTION::NONE;
         return 0.0F;
     }
 

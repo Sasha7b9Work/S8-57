@@ -14,11 +14,14 @@
 
 
 
-enum TypeWelcomeScreen
+struct TypeWelcomeScreen
 {
-    TypeWelcomeScreen_Vague,
-    TypeWelcomeScreen_Wave,
-    TypeWelcomeScreen_VagueWave
+    enum E
+    {
+        Vague,
+        Wave,
+        VagueWave
+    };
 };
 
 
@@ -48,11 +51,11 @@ struct Vector
 static int numPoints = 0;
 static Vector array[7000] __attribute__ ((section("CCM_DATA")));
 
-static TypeWelcomeScreen typeScreen = TypeWelcomeScreen_Wave;
+static TypeWelcomeScreen::E typeScreen = TypeWelcomeScreen::Wave;
 
-#define VAGUE (typeScreen == TypeWelcomeScreen_Vague)
-#define WAVE (typeScreen == TypeWelcomeScreen_Wave)
-#define ALL (typeScreen == TypeWelcomeScreen_VagueWave)
+#define VAGUE (typeScreen == TypeWelcomeScreen::Vague)
+#define WAVE (typeScreen == TypeWelcomeScreen::Wave)
+#define ALL (typeScreen == TypeWelcomeScreen::VagueWave)
 #define VAGUE_OR_ALL (VAGUE || ALL)
 #define WAVE_OR_ALL (WAVE || ALL)
 
