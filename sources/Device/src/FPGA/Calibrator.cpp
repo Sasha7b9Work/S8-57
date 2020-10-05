@@ -34,15 +34,15 @@ void Calibrator::Calibrate()
 
     if (!CalibrateChannel(ChanA))
     {
-        Display::Message::ShowAndWaitKey("Калибровка канала 1 не прошла", true);
+        Display::Message::ShowAndWaitKey("Калибровка канала 1 не прошла. Нажмите любую кнопку.", true);
     }
     
     if (!CalibrateChannel(ChanB))
     {
-        Display::Message::ShowAndWaitKey("Калибровка канала 2 не прошла", true);
+        Display::Message::ShowAndWaitKey("Калибровка канала 2 не прошла. Нажмите любую кнопку.", true);
     }
 
-    Display::Message::ShowAndWaitKey("Калибровка завершена", true);
+    Display::Message::ShowAndWaitKey("Калибровка завершена. Нажмите любую кнопку.", true);
 
     set = old;
 
