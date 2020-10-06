@@ -27,7 +27,7 @@ bool Display::Breaker::powerOn = true;
 
 static pFuncVV funcOnHand = nullptr;
 static uint timeStart = 0;
-static const char *textWait = "Калибровка канала 1 не прошла";
+static const char *textWait = "Калибровка канала 1 не прошла. Нажмите любую кнопку";
 static bool clearBackground = false;
 volatile static pFuncVV funcAdditionDraw = EmptyFunc;   // Дополнительная функция рисования. Выполняется после стандартной отрисовки, но перед вызовом EndScene;
 static bool inStateDraw = false;                        // true означает, что происходит процесс отрисовки
@@ -171,7 +171,7 @@ void Display::Message::Func()
     }
     else
     {
-        Text(textWait).DrawInRectWithTransfers(x + 11, y + 20, width, height - 20);
+        Text(textWait).DrawInRectWithTransfers(x + 11, y + 20, width - 22, height - 20);
     }
 
     char buf[100] = { 0 };
