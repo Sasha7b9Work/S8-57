@@ -114,6 +114,8 @@ void Device::Update()
 
     Display::Update();
 
+    Display::Message::Func();
+
     Tester::Update();
 
     Recorder::Update();

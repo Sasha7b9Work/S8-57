@@ -83,8 +83,9 @@ struct Display
 
         static void Hide();
 
-    private:
         static void Func();
+
+    private:
 
         static bool waitKey;
 

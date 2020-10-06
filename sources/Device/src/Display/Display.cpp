@@ -27,7 +27,7 @@ bool Display::Breaker::powerOn = true;
 
 static pFuncVV funcOnHand = nullptr;
 static uint timeStart = 0;
-static const char *textWait = 0;
+static const char *textWait = "Калибровка канала 1 не прошла";
 static bool clearBackground = false;
 volatile static pFuncVV funcAdditionDraw = EmptyFunc;   // Дополнительная функция рисования. Выполняется после стандартной отрисовки, но перед вызовом EndScene;
 static bool inStateDraw = false;                        // true означает, что происходит процесс отрисовки
@@ -141,10 +141,7 @@ void Display::Message::Hide()
 
 void Display::Message::Func()
 {
-    if (clearBackground)
-    {
-        Painter::BeginScene(Color::BACK);
-    }
+    Painter::BeginScene(Color::BACK);
 
     uint time = ((TIME_MS - timeStart) / 50) % 100;
 
@@ -178,14 +175,6 @@ void Display::Message::Func()
     }
 
     char buf[100] = { 0 };
-
-    if (!waitKey)
-    {
-        for (uint i = 0; i < time; i++)
-        {
-            std::strcat(buf, "."); //-V2513
-        }
-    }
 
     Text(buf).DrawInCenterRect(x, y + 20, width, height - 20);
 
