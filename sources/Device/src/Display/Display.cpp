@@ -174,7 +174,7 @@ void Display::Message::Func()
     }
     else
     {
-        Text(textWait).DrawInRectWithTransfers(x + 11, y + 20, width, height - 20);
+        Text(textWait).DrawInRectWithTransfers(x + 11, y + 20, width - 22, height - 20);
     }
 
     char buf[100] = { 0 };
