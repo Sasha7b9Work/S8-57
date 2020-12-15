@@ -77,7 +77,7 @@ const StructSCPI SCPI::trigger[] =
 };
 
 
-static pCHAR FuncInput(pCHAR buffer)
+static pCHAR FuncInput(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(inputs[S_TRIG_INPUT]));
 
@@ -91,7 +91,7 @@ static void SendAnswerLevel()
     SCPI::SendAnswer(answer.c_str());
 }
 
-static pCHAR FuncLevel(pCHAR buffer)
+static pCHAR FuncLevel(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SendAnswerLevel());
 
@@ -110,7 +110,7 @@ static pCHAR FuncLevel(pCHAR buffer)
 }
 
 
-static pCHAR FuncMode(pCHAR buffer)
+static pCHAR FuncMode(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(modes[S_TRIG_START_MODE]));
 
@@ -118,7 +118,7 @@ static pCHAR FuncMode(pCHAR buffer)
 }
 
 
-static pCHAR FuncPolarity(pCHAR buffer)
+static pCHAR FuncPolarity(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(polarities[S_TRIG_POLARITY]));
 
@@ -126,7 +126,7 @@ static pCHAR FuncPolarity(pCHAR buffer)
 }
 
 
-static pCHAR FuncSource(pCHAR buffer)
+static pCHAR FuncSource(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(sources[S_TRIG_SOURCE]));
 

@@ -129,7 +129,7 @@ static void SetWave()
 
 
 
-static void Beep(const TypeWave::E newTypeWave, const float newFreq, const float newAmpl, const int newDuration)
+static void Beep(const TypeWave::E newTypeWave, const float newFreq, const float newAmpl, const int newDuration) //-V2506
 {
     if (bellIsEnabled || soundWarnIsBeep || set.serv.SoundVolume() == 0)
     {

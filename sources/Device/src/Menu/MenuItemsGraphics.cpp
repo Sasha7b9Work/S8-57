@@ -84,7 +84,7 @@ void GovernorColor::DrawValue(int x, int y) const
 }
 
 
-void Governor::Draw(int x, int y, bool opened) const
+void Governor::Draw(int x, int y, bool opened) const //-V2506
 {
     if (!IsActive())
     {
@@ -314,7 +314,7 @@ void Page::Draw(int x, int y, bool opened) const
 }
 
 
-void Page::DrawTitle(int y) const
+void Page::DrawTitle(int y) const //-V2506
 {
     if (!OwnData()->normalTitle())
     {
@@ -343,7 +343,7 @@ void Page::DrawTitle(int y) const
     DrawNestingPage(5, y + Menu::Title::HEIGHT - 6);
 }
 
-void Page::DrawItems(int x, int y) const
+void Page::DrawItems(int x, int y) const //-V2506
 {
     if(NumItems() == 0)
     {
@@ -468,7 +468,7 @@ void Page::DrawNestingPage(int left, int bottom) const
 }
 
 
-int GraphButton::NumHints() const
+int GraphButton::NumHints() const //-V2506
 {
     if (OwnData()->hintUGO == nullptr)
     {
@@ -488,7 +488,7 @@ int GraphButton::NumHints() const
 }
 
 
-void GraphButton::DrawHints(int x, int y, int width) const
+void GraphButton::DrawHints(int x, int y, int width) const //-V2506
 {
     if (NumHints() == 0)
     {

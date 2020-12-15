@@ -131,7 +131,7 @@ void Keyboard::Unlock()
 }
 
 
-bool Keyboard::KeyIsActive(Key::E key)
+bool Keyboard::KeyIsActive(Key::E key) //-V2506
 {
     if (allowedKeys == 0)
     {

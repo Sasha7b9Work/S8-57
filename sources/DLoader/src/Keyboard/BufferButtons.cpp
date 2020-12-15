@@ -21,7 +21,7 @@ static int start;
 
 
 
-void BufferButtons::Push(KeyEvent event)
+void BufferButtons::Push(KeyEvent event) //-V2506
 {
     if ((event.key == prevPushEvent.key) &&             // Если отпущена кнпока, которая раньше прислала "длинное" нажатие,
         prevPushEvent.IsLong() &&

@@ -4,7 +4,7 @@
 #include "Osci/DeviceSettings.h"
 
 
-const DataSettings *PacketROM::UnPack() const
+const DataSettings *PacketROM::UnPack() const //-V2506
 {
     if (!IsValid() || !IsData())
     {
@@ -15,7 +15,7 @@ const DataSettings *PacketROM::UnPack() const
 }
 
 
-PacketROM *PacketROM::Next() const
+PacketROM *PacketROM::Next() const //-V2506
 {
     if (IsFree())
     {
@@ -26,7 +26,7 @@ PacketROM *PacketROM::Next() const
 }
 
 
-int PacketROM::Size() const
+int PacketROM::Size() const //-V2506
 {
     if (IsFree())
     {
@@ -37,7 +37,7 @@ int PacketROM::Size() const
 }
 
 
-bool PacketROM::WriteToSector(const Sector *sector) const
+bool PacketROM::WriteToSector(const Sector *sector) const //-V2506
 {
     if(UnPack() == nullptr)
     {
@@ -182,7 +182,7 @@ void Sector::TranslateAddressToROM(const DataSettings *ds, const PacketROM *pack
 }
 
 
-const PacketROM *Sector::WriteData(uint numInROM, const DataSettings *ds) const
+const PacketROM *Sector::WriteData(uint numInROM, const DataSettings *ds) const //-V2506
 {
     const PacketROM *packet = FirstFreePacket();
 
@@ -241,7 +241,7 @@ const PacketROM *Sector::WriteData(uint numInROM, const DataSettings *ds) const
 }
 
 
-const PacketROM *Sector::FindValidPacket(uint numInROM) const
+const PacketROM *Sector::FindValidPacket(uint numInROM) const //-V2506
 {
     const PacketROM *packet = FirstPacket();
 
@@ -282,7 +282,7 @@ const PacketROM *Sector::FindValidPacket(uint numInROM) const
 }
 
 
-const DataSettings *Sector::ReadData(uint numInROM) const
+const DataSettings *Sector::ReadData(uint numInROM) const //-V2506
 {
     const PacketROM *packet = FindValidPacket(numInROM);
 
@@ -295,7 +295,7 @@ const DataSettings *Sector::ReadData(uint numInROM) const
 }
 
 
-const PacketROM *Sector::DeleteData(uint numInROM) const
+const PacketROM *Sector::DeleteData(uint numInROM) const //-V2506
 {
     const PacketROM *packet = FindValidPacket(numInROM);
 
@@ -315,7 +315,7 @@ const PacketROM *Sector::FirstPacket() const
 }
 
 
-const PacketROM *Sector::FirstFreePacket() const
+const PacketROM *Sector::FirstFreePacket() const //-V2506
 {
     const PacketROM *packet = FirstPacket();
 
@@ -372,7 +372,7 @@ uint Sector::GetNumberWornBytes() const
 }
 
 
-const PacketROM *Sector::GetFirstPacketWithData() const
+const PacketROM *Sector::GetFirstPacketWithData() const //-V2506
 {
     const PacketROM *result = FirstPacket();
 
@@ -390,7 +390,7 @@ const PacketROM *Sector::GetFirstPacketWithData() const
 }
 
 
-int Sector::Number(uint address)
+int Sector::Number(uint address) //-V2506
 {
     if (address < ADDR_SECTOR(0))
     {
@@ -421,7 +421,7 @@ const Sector &Sector::Get(Sector::E number)
 }
 
 
-char *TypePacket(const PacketROM *packet)
+char *TypePacket(const PacketROM *packet) //-V2506
 {
     if (packet == nullptr)
     {
@@ -446,7 +446,7 @@ char *TypePacket(const PacketROM *packet)
     return "not determinated";
 }
 
-int NumberPacket(const PacketROM *packet)
+int NumberPacket(const PacketROM *packet) //-V2506
 {
     const DataSettings *ds = packet->UnPack();
 

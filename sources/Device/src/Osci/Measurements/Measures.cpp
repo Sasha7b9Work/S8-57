@@ -111,7 +111,7 @@ String Measure::Name()
 }
 
 
-TypeMeasure::E Measure::GetType()
+TypeMeasure::E Measure::GetType() //-V2506
 {
     if(t == TypeMeasure::Count)
     {

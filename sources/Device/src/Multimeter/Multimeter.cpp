@@ -103,7 +103,7 @@ void Multimeter::Calibrate(int calibr)
 }
 
 
-void Multimeter::Update()
+void Multimeter::Update() //-V2506
 {
     if (!Device::InModeMultimeter())
     {
@@ -142,7 +142,7 @@ void Multimeter::Update()
 }
 
 
-MultimeterMeasure::E MultimeterMeasure::GetCode(const char buffer[13])
+MultimeterMeasure::E MultimeterMeasure::GetCode(const char buffer[13]) //-V2506
 {
     MultimeterMeasure::E result = Count;
 

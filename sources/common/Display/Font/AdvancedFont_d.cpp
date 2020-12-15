@@ -59,7 +59,7 @@ DAdvancedFont::DAdvancedFont(DTypeFont::E t)
 }
 
 
-bool DAdvancedFont::RowNotEmpty(uint8 s, int r)
+bool DAdvancedFont::RowNotEmpty(uint8 s, int r) //-V2506
 {
     HeaderFont *header = HeaderFont::Sefl();
 
@@ -136,7 +136,7 @@ int NativeSymbol::BytesInRow()
 }
 
 
-uint8 *NativeSymbol::GetRow(int row)
+uint8 *NativeSymbol::GetRow(int row) //-V2506
 {
     if (row > height - 1)
     {
@@ -152,7 +152,7 @@ uint8 *NativeSymbol::GetRow(int row)
 }
 
 
-NativeSymbol *HeaderFont::GetSymbol(uint8 num)
+NativeSymbol *HeaderFont::GetSymbol(uint8 num) //-V2506
 {
     HeaderFont *header = HeaderFont::Sefl();
 
@@ -187,7 +187,7 @@ bool DAdvancedFont::BitIsExist(uint8 s, int row, int bit)
 }
 
 
-bool NativeSymbol::BitIsExist(int r, int b)
+bool NativeSymbol::BitIsExist(int r, int b) //-V2506
 {
     uint8 *row = GetRow(r);
 

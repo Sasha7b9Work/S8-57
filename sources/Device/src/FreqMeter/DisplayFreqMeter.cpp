@@ -35,7 +35,7 @@ static pString StackToString(Stack<uint> *stack, int order);
 static void WriteStackToBuffer(Stack<uint> *stack, int point, const char *suffix);
 
 
-void DisplayFreqMeter::Update()
+void DisplayFreqMeter::Update() //-V2506
 {
     // \todo ¬ этой строке точку ставить не где придЄтс€, а в той позиции, где она сто€ла последний раз
 
@@ -249,7 +249,7 @@ void DisplayFreqMeter::DrawPeriodMode(int x, int _y)
 }
 
 
-static pString FreqSetToString(const BitSet32 *fr)
+static pString FreqSetToString(const BitSet32 *fr) //-V2506
 {
     if(fr->word < 2)
     {
@@ -446,7 +446,7 @@ static int LowOrder(FreqMeter::FreqClc::E freqCLC, FreqMeter::NumberPeriods::E n
 }
 
 
-static pString PeriodSetToString(const BitSet32 *pr)
+static pString PeriodSetToString(const BitSet32 *pr) //-V2506
 {
     if(pr->word == 0)
     {

@@ -200,7 +200,7 @@ void Color::SetAsCurrent()
 }
 
 
-void Color::ChangeFlash(bool reset)
+void Color::ChangeFlash(bool reset) //-V2506
 {
     static uint time = 0;
 

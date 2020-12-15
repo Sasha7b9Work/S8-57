@@ -50,7 +50,7 @@ void Display::Init()
 }
 
 
-void Display::Update()
+void Display::Update() //-V2506
 {
     static uint prevTime = 0;
 
@@ -290,7 +290,7 @@ void Display::Breaker::PowerOff()
 }
 
 
-bool Display::Breaker::PowerOn()
+bool Display::Breaker::PowerOn() //-V2506
 {
     if (!powerOn)
     {

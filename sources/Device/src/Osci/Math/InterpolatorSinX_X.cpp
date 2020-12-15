@@ -15,7 +15,7 @@
 static void InterpolateChannel(uint8 *data, int numPoints, uint tBase);
 
 
-void InterpolatorSinX_X::Run(DataSettings *ds)
+void InterpolatorSinX_X::Run(DataSettings *ds) //-V2506
 {
     if (!OSCI_IN_MODE_RANDOMIZER)
     {

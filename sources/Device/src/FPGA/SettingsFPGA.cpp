@@ -71,7 +71,7 @@ static bool NeedLoadRShift(Chan::E ch)
 }
 
 
-void RShift::Load(Chan::E ch)
+void RShift::Load(Chan::E ch) //-V2506
 {
     if(!NeedLoadRShift(ch))
     {
@@ -184,7 +184,7 @@ void TShift::Load()
 }
 
 
-void TShift::Change(const int delta)
+void TShift::Change(const int delta) //-V2506
 {
     if (Device::InModeRecorder())
     {
@@ -211,7 +211,7 @@ static void LimitForTester(Range::E *range)
 }
 
 
-void Range::Change(Chan::E ch, int16 delta)
+void Range::Change(Chan::E ch, int16 delta) //-V2506
 {
     if (Recorder::InRecordingMode())
     {

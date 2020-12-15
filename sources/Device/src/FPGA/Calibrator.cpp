@@ -186,7 +186,7 @@ static bool StretchChannel(Chan::E ch)
 }
 
 
-static float FindStretchChannel(Chan::E ch)
+static float FindStretchChannel(Chan::E ch) //-V2506
 {
 #define NUM_POINTS 300
     

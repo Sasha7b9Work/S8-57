@@ -19,7 +19,7 @@ static uint timeLastControl = 0xFFFFFFFFU;  // Возвращает время
 static bool IsBeingProcessedPower(KeyEvent event);
 
 
-void BufferButtons::Push(const KeyEvent &event)
+void BufferButtons::Push(const KeyEvent &event) //-V2506
 {
     timeLastControl = TIME_MS;
 
@@ -80,7 +80,7 @@ uint BufferButtons::TimeAfterControlMS()
 }
 
 
-static bool IsBeingProcessedPower(KeyEvent event)
+static bool IsBeingProcessedPower(KeyEvent event) //-V2506
 {
     static bool inProcessPowerOn = false;   // Установленное в true значение означает, что идёт процесс включения питания дисплея - нужно дождаться отпускания клавиши и не передавать
                                             // коды клавиш для отработки

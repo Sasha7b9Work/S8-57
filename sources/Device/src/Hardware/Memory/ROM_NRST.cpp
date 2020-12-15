@@ -56,7 +56,7 @@ static const SectorNRST sector1 = { HAL_ROM::sectors[Sector::_03_NRST_1] };
 static const SectorNRST sector2 = { HAL_ROM::sectors[Sector::_04_NRST_2] };
 
 
-SettingsNRST *ROM::NRST::GetSaved()
+SettingsNRST *ROM::NRST::GetSaved() //-V2506
 {
     if(sector2.GetSaved())          // Если во втором секторе сохранены настройки
     {
@@ -95,7 +95,7 @@ Packet *SectorNRST::CreatePacket() const
 }
 
 
-Packet *SectorNRST::LastPacket() const
+Packet *SectorNRST::LastPacket() const //-V2506
 {
     Packet *packet = CreatePacket();
 
@@ -124,7 +124,7 @@ bool Packet::IsEmpty() const
 }
 
 
-bool SectorNRST::SaveSettings(SettingsNRST *nrst) const
+bool SectorNRST::SaveSettings(SettingsNRST *nrst) const //-V2506
 {
     Packet *last = LastPacket();                            // Находим последний сохранённый в секторе пакет
 
@@ -139,7 +139,7 @@ bool SectorNRST::SaveSettings(SettingsNRST *nrst) const
 }
 
 
-bool Packet::SaveSettings(SettingsNRST *nrst)
+bool Packet::SaveSettings(SettingsNRST *nrst) //-V2506
 {
     const Sector &sector = Sector::Get(Begin());
 
@@ -158,7 +158,7 @@ bool Packet::SaveSettings(SettingsNRST *nrst)
 }
 
 
-Packet *Packet::Next()
+Packet *Packet::Next() //-V2506
 {
     if(size == 0xFFFFFFFFU)
     {

@@ -63,7 +63,7 @@ void Queue<T>::Push(T elem)
 
 
 template<typename T>
-T Queue<T>::Front()
+T Queue<T>::Front() //-V2506
 {
     if (pointer != nullptr)
     {
@@ -115,7 +115,7 @@ bool Queue<T>::IsEmpty() const
 
 
 template<typename T>
-T &Queue<T>::operator[](int n)
+T &Queue<T>::operator[](int n) //-V2506
 {
     if (pointer != nullptr)
     {

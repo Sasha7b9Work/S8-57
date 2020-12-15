@@ -93,7 +93,7 @@ PackedTime HAL_RTC::GetPackedTime()
 }
 
 
-bool HAL_RTC::SetPackedTime(const PackedTime &time)
+bool HAL_RTC::SetPackedTime(const PackedTime &time) //-V2506
 {
     RTC_DateTypeDef dateStruct;
     dateStruct.WeekDay = RTC_WEEKDAY_MONDAY;

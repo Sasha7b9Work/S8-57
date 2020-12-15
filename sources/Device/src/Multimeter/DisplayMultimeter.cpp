@@ -118,7 +118,7 @@ static void DrawChar(int numSymbol, int x, bool inModeOsci)
 
 
 // Рассчёт дополнительного смещения для точки и цифры 1 по иксу
-static int CalculateOffsetX(int i, bool inModeOsci)
+static int CalculateOffsetX(int i, bool inModeOsci) //-V2506
 {
     if (Symbol(i) == '.')
     {
@@ -543,7 +543,7 @@ void DisplayMultimeter::Update()
 }
 
 
-static void UpdateInModeOsci()
+static void UpdateInModeOsci() //-V2506
 {
     if (!S_MULT_SHOW_ALWAYS)
     {
@@ -628,7 +628,7 @@ void DisplayMultimeter::ChangedMode()
 }
 
 
-void DisplayMultimeter::SetMeasure(const uint8 buf[13])
+void DisplayMultimeter::SetMeasure(const uint8 buf[13]) //-V2506
 {
     typedef void(*pFuncVCC)(pCHAR);
 

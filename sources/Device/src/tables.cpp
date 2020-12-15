@@ -28,7 +28,7 @@ int Tables::Size()
 }
 
 
-ENumSignalsInSec::E Tables::ENumSignalsInSecToENUM(int numSignalsInSec)
+ENumSignalsInSec::E Tables::ENumSignalsInSecToENUM(int numSignalsInSec) //-V2506
 {
     if(numSignalsInSec == 1)
     {

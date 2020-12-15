@@ -320,7 +320,7 @@ static void DecCurrentFile()
 }
 
 
-bool FileManager::HandlerKey(const KeyEvent &event)
+bool FileManager::HandlerKey(const KeyEvent &event) //-V2506
 {
     if (event.IsRelease() && event.IsArrow())
     {

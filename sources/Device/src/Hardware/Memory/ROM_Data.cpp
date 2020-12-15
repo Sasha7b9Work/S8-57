@@ -43,7 +43,7 @@ void ROM::Data::GetInfo(bool existData[MAX_NUM_SAVED_WAVES])
 }
 
 
-const DataSettings *ROM::Data::Read(uint numInROM)
+const DataSettings *ROM::Data::Read(uint numInROM) //-V2506
 {
     for (int i = 0; i < NUM_SECTORS; i++)
     {
@@ -71,7 +71,7 @@ void ROM::Data::Erase(uint numInROM)
 }
 
 
-void ROM::Data::Save(uint numInROM, const DataSettings *ds)
+void ROM::Data::Save(uint numInROM, const DataSettings *ds) //-V2506
 {
     Erase(numInROM);
 
@@ -136,7 +136,7 @@ static int NumberFreeSectors()
 }
 
 
-static const Sector *GetFirstFreeSector()
+static const Sector *GetFirstFreeSector() //-V2506
 {
     for (int i = 0; i < NUM_SECTORS; i++)
     {

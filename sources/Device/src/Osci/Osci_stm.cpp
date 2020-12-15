@@ -6,7 +6,7 @@
 #include "Osci/Osci.h"
 
 
-bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
+bool Osci::ReadDataChannel(Chan::E ch, uint8 *data) //-V2506
 {
     int numPoints = ENumPointsFPGA::PointsInChannel();
 

@@ -16,7 +16,7 @@ int           Roller::firstOnDisplay = -1;
 void         (*Roller::addPoint)(BitSet16, BitSet16);
 
 
-void Roller::Prepare()
+void Roller::Prepare() //-V2506
 {
     if(!OSCI_IN_MODE_P2P)
     {
@@ -86,7 +86,7 @@ DataSettings *Roller::GetDS()
 }
 
 
-bool Roller::NeedDraw()
+bool Roller::NeedDraw() //-V2506
 {
     if(!OSCI_IN_MODE_P2P)
     {

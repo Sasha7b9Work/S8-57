@@ -16,7 +16,7 @@ static uint CurrentFrame();
 
 
 
-void DisplayOsci::Accumulator::NextFrame()
+void DisplayOsci::Accumulator::NextFrame() //-V2506
 {
     if (S_DISP_NUM_ACCUM > 1)
     {

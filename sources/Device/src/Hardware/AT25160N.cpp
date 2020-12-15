@@ -88,7 +88,7 @@ void AT25160N::Test()
 
     WriteData(0, data, size);
 
-    uint8 status = BIN_U8(00000000);
+    uint8 status = BIN_U8(00000000); //-V2501
 
     LOG_WRITE("Пишу статус %d", status);
 

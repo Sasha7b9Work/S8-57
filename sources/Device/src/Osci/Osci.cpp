@@ -128,7 +128,7 @@ void Osci::Restart()
 }
 
 
-void Osci::Update()
+void Osci::Update() //-V2506
 {
     if(!Device::InModeOsci())
     {
@@ -370,7 +370,7 @@ void Osci::ReadData()
 }
 
 
-bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
+bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data) //-V2506
 {
     ShiftPoint Tsm = gates.CalculateShiftPoint();
 
@@ -423,7 +423,7 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
 }
 
 
-ShiftPoint Gates::CalculateShiftPoint()
+ShiftPoint Gates::CalculateShiftPoint() //-V2506
 {
     ShiftPoint result(ShiftPoint::READED, 0);
 
@@ -509,7 +509,7 @@ StructReadRand RandShift::GetInfoForReadRand(ShiftPoint Tsm, const uint8 *addres
 }
 
 
-bool Gates::Calculate(uint16 value, uint16 *min, uint16 *max) 
+bool Gates::Calculate(uint16 value, uint16 *min, uint16 *max)  //-V2506
 {
     if(value < 250 || value > 4000)
     {
@@ -581,7 +581,7 @@ void Gates::CalculateWithoutGates(uint16 *min, uint16 *max)
 }
 
 
-OsciStateWork::E OsciStateWork::Current()
+OsciStateWork::E OsciStateWork::Current() //-V2506
 {
     if (!Osci::IsRunning())
     {
@@ -599,7 +599,7 @@ void Osci::SendDataToSCPI()
 }
 
 
-void Osci::SendDataToSCPI(Chan::E ch)
+void Osci::SendDataToSCPI(Chan::E ch) //-V2506
 {
     if (!SCPI::Sender::osci[ch] || ENABLE_CH_DS(ch) == 0)
     {

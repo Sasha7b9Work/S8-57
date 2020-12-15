@@ -23,7 +23,7 @@ static void PrepareDS(DataSettings *ds);
 static DataSettings *CreateDataInRAM(DataSettings *ds);
 
 
-bool Test::RAM::Test()
+bool Test::RAM::Test() //-V2506
 {
     ::RAM::Init();
 
@@ -61,7 +61,7 @@ bool Test::RAM::Test()
 }
 
 
-bool Test::ROM::Data::Test()
+bool Test::ROM::Data::Test() //-V2506
 {
     Display::AddMessage("Стираю память");
 
@@ -128,7 +128,7 @@ void TestMemoryStruct::FillData(DataSettings *ds)
     }
 
 
-bool TestMemoryStruct::CheckData(const DataSettings *ds)
+bool TestMemoryStruct::CheckData(const DataSettings *ds) //-V2506
 {
     int numPoints = ds->BytesInChannel();
 

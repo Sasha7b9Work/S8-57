@@ -68,7 +68,7 @@ DEF_PAGE_8_VAR( pService,                                                       
 const Page * const PageService::self = static_cast<const Page *>(&pService);
 
 
-void PageService::DecodePassword(const KeyEvent &event)
+void PageService::DecodePassword(const KeyEvent &event) //-V2506
 {
 #define NUM_SYMBOLS 10
 

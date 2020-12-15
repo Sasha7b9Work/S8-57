@@ -224,7 +224,7 @@ static char *VoltageSensor(int, char[30])
 }
 
 
-static void DrawParametersCursors()
+static void DrawParametersCursors() //-V2506
 {
     if (!S_REC_INFO_IS_SHOWN)
     {
@@ -364,7 +364,7 @@ static void DrawSensor()
 }
 
 
-static void DrawMemoryWindow()
+static void DrawMemoryWindow() //-V2506
 {
     static int prevNumPoints = 0;
 
@@ -402,7 +402,7 @@ static void DrawMemoryWindow()
 }
 
 
-void DisplayRecorder::MoveWindowLeft()
+void DisplayRecorder::MoveWindowLeft() //-V2506
 {
     HAL_BUS_CONFIGURE_TO_FSMC();
 
@@ -420,7 +420,7 @@ void DisplayRecorder::MoveWindowLeft()
 }
 
 
-void DisplayRecorder::MoveWindowRight()
+void DisplayRecorder::MoveWindowRight() //-V2506
 {
     HAL_BUS_CONFIGURE_TO_FSMC();
 
@@ -468,7 +468,7 @@ bool DisplayRecorder::InProcessUpdate()
 }
 
 
-void RecordIcon::Upate(int x, int y)
+void RecordIcon::Upate(int x, int y) //-V2506
 {
     if (Menu::OpenedItem() != PageRecorder::self)
     {

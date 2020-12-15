@@ -39,7 +39,7 @@ String::String(char symbol) : buffer(nullptr)
 }
 
 
-String::String(const char *format, ...) : buffer(nullptr)
+String::String(const char *format, ...) : buffer(nullptr) //-V2506
 {
     Set(TypeConversionString::None, "");
 
@@ -98,7 +98,7 @@ void String::Set(TypeConversionString::E conv, const char *format, ...)
 }
 
 
-void String::Append(const char *str)
+void String::Append(const char *str) //-V2506
 {
     if (!str || *str == '\0')
     {

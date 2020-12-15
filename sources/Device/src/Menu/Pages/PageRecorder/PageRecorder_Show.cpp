@@ -72,7 +72,7 @@ static bool IsActive_PageShow()
     return !Recorder::InRecordingMode();
 }
 
-static bool HandlerKey_PageShow(const KeyEvent &event)
+static bool HandlerKey_PageShow(const KeyEvent &event) //-V2506
 {
     if (event.IsPress() || event.IsRepeat())
     {

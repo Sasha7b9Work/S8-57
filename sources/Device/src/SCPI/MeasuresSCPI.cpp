@@ -42,7 +42,7 @@ static void DisplayMeasures(int i)
     S_MEAS_SHOW = (i == 1);
 }
 
-static pCHAR FuncDisplay(pCHAR buffer)
+static pCHAR FuncDisplay(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(S_MEAS_SHOW ? " ON" : " OFF"));
 
@@ -58,7 +58,7 @@ static pString source[] =
     ""
 };
 
-static pCHAR FuncSource(pCHAR buffer)
+static pCHAR FuncSource(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(source[S_MEAS_SOURCE]));
 
@@ -94,7 +94,7 @@ static pString values[] =
     ""
 };
 
-static pCHAR FuncValue(pCHAR buffer)
+static pCHAR FuncValue(pCHAR buffer) //-V2506
 {
     pCHAR end = nullptr;
 

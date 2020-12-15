@@ -169,7 +169,7 @@ bool OTP::SaveSerialNumber(char *servialNumber)
 }
 
 
-static Record *LastSaved()
+static Record *LastSaved() //-V2506
 {
     Record *saved1 = sectorFirst.LastSaved();
     Record *saved2 = sectorSecond.LastSaved();
@@ -215,7 +215,7 @@ bool Record::IsFree()
 }
 
 
-SectorSet *Record::GetSector()
+SectorSet *Record::GetSector() //-V2506
 {
     if(sectorFirst.Contains(this))
     {
@@ -231,7 +231,7 @@ SectorSet *Record::GetSector()
 }
 
 
-SectorSet *Record::GetAnotherSector()
+SectorSet *Record::GetAnotherSector() //-V2506
 {
     if(sectorFirst.Contains(this))
     {
@@ -259,7 +259,7 @@ uint *Record::FirstDowbleWord()
 }
 
 
-bool Record::IsCorrect()
+bool Record::IsCorrect() //-V2506
 {
     uint *start = FirstDowbleWord() + 1;
     uint *end = FirstDowbleWord() + SIZE_RECORD / 4;
@@ -313,7 +313,7 @@ bool SectorSet::Contains(Record *record)
 }
 
 
-Record *SectorSet::NextFree(Record *record)
+Record *SectorSet::NextFree(Record *record) //-V2506
 {
     record = record->Next();
 
@@ -367,7 +367,7 @@ Record *SectorSet::LastSaved()
 }
 
 
-Record *SectorSet::FirstFree()
+Record *SectorSet::FirstFree() //-V2506
 {
     Record *record = FirstRecord();
 

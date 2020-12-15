@@ -7,7 +7,7 @@
 
 
 
-int LowSignedBit(uint value)
+int LowSignedBit(uint value) //-V2506
 {
     int verValue = 1;
 
@@ -25,7 +25,7 @@ int LowSignedBit(uint value)
 }
 
 
-void Math::Smoothing(uint8 *data, int numPoints, int numSmooth)
+void Math::Smoothing(uint8 *data, int numPoints, int numSmooth) //-V2506
 {
     if (numSmooth == 0 || numSmooth == 1)
     {
@@ -82,7 +82,7 @@ float MaxFloat(float val1, float val2, float val3)
 }
 
 
-int Math::MinFrom2Int(int val0, int val1)
+int Math::MinFrom2Int(int val0, int val1) //-V2506
 {
     if (val0 < val1)
     {
@@ -162,7 +162,7 @@ float RandFloat(float min, float max)
 }
 
 
-float Math::GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, int yHorLine)
+float Math::GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, int yHorLine) //-V2506
 {
     if (y0 == y1)
     {
@@ -173,7 +173,7 @@ float Math::GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, in
 }
 
 
-uint8 Math::CalculateFiltr(const uint8 *data, int x, int numPoints, int numSmoothing)
+uint8 Math::CalculateFiltr(const uint8 *data, int x, int numPoints, int numSmoothing) //-V2506
 {
     if (numSmoothing < 2)
     {
@@ -310,7 +310,7 @@ uint8 Math::MinFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint)
 }
 
 
-int Math::FindAnotherElement(const uint8 *data, uint8 value, int numElements)
+int Math::FindAnotherElement(const uint8 *data, uint8 value, int numElements) //-V2506
 {
     for (int i = 0; i < numElements; i++)
     {

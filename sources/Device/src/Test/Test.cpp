@@ -12,7 +12,7 @@
 static void RunTest(bool (*func)(), char *message);
 
 
-void Test::Run()
+void Test::Run() //-V2506
 {
     if (!S_DBG_RUN_TEST)
     {

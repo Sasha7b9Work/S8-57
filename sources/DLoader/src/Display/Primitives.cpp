@@ -647,7 +647,7 @@ DashedVLine::DashedVLine(int _height, int _deltaFill, int _deltaEmpty, int _delt
 }
 
 
-void DashedVLine::Draw(int x, int y0)
+void DashedVLine::Draw(int x, int y0) //-V2506
 {
     if (deltaStart < 0 || deltaStart >= (deltaFill + deltaEmpty))
     {
@@ -681,7 +681,7 @@ DashedHLine::DashedHLine(int _width, int _deltaFill, int _deltaEmpty, int _delta
 }
 
 
-void DashedHLine::Draw(int x0, int y)
+void DashedHLine::Draw(int x0, int y) //-V2506
 {
     if (deltaStart < 0 || deltaStart >= (deltaFill + deltaEmpty))
     {

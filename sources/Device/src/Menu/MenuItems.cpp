@@ -593,7 +593,7 @@ void Governor::ChangeValue(int16 delta)
 }
 
 
-bool Governor::HandlerKey(const KeyEvent &event)
+bool Governor::HandlerKey(const KeyEvent &event) //-V2506
 {
     if (event.IsArrowLeft())
     {
@@ -934,7 +934,7 @@ void GovernorColor::HandlerFX(TypePress::E type) const
 }
 
 
-bool GovernorColor::HandlerKey(const KeyEvent &event)
+bool GovernorColor::HandlerKey(const KeyEvent &event) //-V2506
 {
     if (!event.IsRelease() && !event.IsRepeat())
     {

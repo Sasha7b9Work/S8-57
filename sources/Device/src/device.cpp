@@ -91,7 +91,7 @@ void SetCurrentMode()
 }
 
 
-bool SetCurrentMode(const Page *page, Device::Mode::E mode)
+bool SetCurrentMode(const Page *page, Device::Mode::E mode) //-V2506
 {
     Item *opened = Menu::OpenedItem();
 

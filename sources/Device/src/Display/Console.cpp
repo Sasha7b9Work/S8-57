@@ -23,7 +23,7 @@ void Console::Init()
 }
 
 
-void Console::Draw()
+void Console::Draw() //-V2506
 {
     if (prevMaxStrinsInConsole == -1)
     {
