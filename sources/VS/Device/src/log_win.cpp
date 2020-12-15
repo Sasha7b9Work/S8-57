@@ -52,7 +52,7 @@ static void AddToSystemConsole(const char *message)
 
 void Log::Message(const char *message)
 {
-    Console::AddString(const_cast<char *>(message));
+    Console::AddString(const_cast<char *>(message)); //-V2567
 
     AddToSystemConsole(message);
 }

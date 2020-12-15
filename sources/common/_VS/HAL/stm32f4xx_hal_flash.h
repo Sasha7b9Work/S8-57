@@ -11,7 +11,7 @@
 #define FLASH_FLAG_PGSERR   0   /*!< FLASH Programming Sequence error flag     */
 
 
-#define __HAL_FLASH_CLEAR_FLAG(x)
+#define __HAL_FLASH_CLEAR_FLAG(x) //-V2573
 
 
 HAL_StatusTypeDef HAL_FLASH_Unlock(void);

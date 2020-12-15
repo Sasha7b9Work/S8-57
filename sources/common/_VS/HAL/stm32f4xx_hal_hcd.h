@@ -2,7 +2,7 @@
 #include "stm32f4xx_ll_usb.h"
 
 
-typedef struct __HCD_HandleTypeDef
+typedef struct __HCD_HandleTypeDef //-V2573
 {
     int i;
 } HCD_HandleTypeDef;

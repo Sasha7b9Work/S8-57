@@ -12,7 +12,7 @@ typedef struct
 }CRC_HandleTypeDef;
 
 
-#define __HAL_RCC_CRC_CLK_ENABLE()
+#define __HAL_RCC_CRC_CLK_ENABLE() //-V2573
 
 
 HAL_StatusTypeDef HAL_CRC_Init(CRC_HandleTypeDef *hcrc);

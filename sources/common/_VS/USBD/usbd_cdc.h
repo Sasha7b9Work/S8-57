@@ -1,7 +1,7 @@
 #pragma once
 
 
-typedef struct _USBD_CDC_Itf
+typedef struct _USBD_CDC_Itf //-V2573
 {
     int8_t (*Init)          ();
     int8_t(*DeInit)        ();

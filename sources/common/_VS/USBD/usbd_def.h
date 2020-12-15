@@ -29,7 +29,7 @@ typedef struct
 //#endif  
 } USBD_DescriptorsTypeDef;
 
-typedef struct _Device_cb
+typedef struct _Device_cb //-V2573
 {
     int i;
 //    uint8_t(*Init)             (struct _USBD_HandleTypeDef *pdev, uint8_t cfgidx);

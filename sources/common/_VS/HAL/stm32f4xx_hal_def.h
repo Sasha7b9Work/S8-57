@@ -19,4 +19,4 @@ typedef enum
 } HAL_LockTypeDef;
 
 
-#define __HAL_LINKDMA(__HANDLE__, __PPP_DMA_FIELD__, __DMA_HANDLE__)
+#define __HAL_LINKDMA(__HANDLE__, __PPP_DMA_FIELD__, __DMA_HANDLE__) //-V2573

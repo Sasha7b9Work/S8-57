@@ -56,7 +56,7 @@ String::String(const char *format, ...) : buffer(nullptr) //-V2506
     char buf[SIZE + 1];
 
     std::va_list args;
-    va_start(args, format); //-V2528 //-V2567 //-V2563
+    va_start(args, format); //-V2528 //-V2567 //-V2563 //-V2571
     int numSymbols = std::vsprintf(buf, format, args);
     va_end(args);
 
@@ -81,7 +81,7 @@ void String::Set(TypeConversionString::E conv, const char *format, ...)
         char buf[SIZE + 1];
 
         std::va_list args;
-        va_start(args, format); //-V2528 //-V2567 //-V2563
+        va_start(args, format); //-V2528 //-V2567 //-V2563 //-V2571
         int numSymbols = std::vsprintf(buf, format, args);
         va_end(args);
 

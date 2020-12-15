@@ -14,36 +14,36 @@ uint8 eeprom[ROM::SIZE];
 
 const Sector HAL_ROM::sectors[Sector::Count] =
 {
-    { Sector::_00_BOOT_1,     reinterpret_cast<uint>(&eeprom[0]),                     _16K },
-    { Sector::_01_BOOT_2,     reinterpret_cast<uint>(&eeprom[_16K]),                  _16K },
-    { Sector::_02_BOOT_3,     reinterpret_cast<uint>(&eeprom[_16K * 2]),              _16K },
-    { Sector::_03_NRST_1,     reinterpret_cast<uint>(&eeprom[_16K * 3]),              _16K },
-    { Sector::_04_NRST_2,     reinterpret_cast<uint>(&eeprom[_16K * 4]),              _64K },
-    { Sector::_05_FIRM_1,     reinterpret_cast<uint>(&eeprom[_128K]),                 _128K },
-    { Sector::_06_FIRM_2,     reinterpret_cast<uint>(&eeprom[_128K * 2]),             _128K },
-    { Sector::_07_FIRM_3,     reinterpret_cast<uint>(&eeprom[_128K * 3]),             _128K },
-    { Sector::_08,            reinterpret_cast<uint>(&eeprom[_128K * 4]),             _128K },
-    { Sector::_09,            reinterpret_cast<uint>(&eeprom[_128K * 5]),             _128K },
-    { Sector::_10_SETTINGS_1, reinterpret_cast<uint>(&eeprom[_128K * 6]),             _128K },
-    { Sector::_11_SETTINGS_2, reinterpret_cast<uint>(&eeprom[_128K * 7]),             _128K },
-    { Sector::_12,            reinterpret_cast<uint>(&eeprom[_128K * 8]),             _16K },
-    { Sector::_13,            reinterpret_cast<uint>(&eeprom[_128K * 8 + _16K]),      _16K },
-    { Sector::_14,            reinterpret_cast<uint>(&eeprom[_128K * 8 + _16K * 2]),  _16K },
-    { Sector::_15,            reinterpret_cast<uint>(&eeprom[_128K * 8 + _16K * 3]),  _16K },
-    { Sector::_16,            reinterpret_cast<uint>(&eeprom[_128K * 8 + _16K * 4]),  _64K },
-    { Sector::_17,            reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K]),     _128K },
-    { Sector::_18,            reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 2]), _128K },
-    { Sector::_19_DATA_1,     reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 3]), _128K },
-    { Sector::_20_DATA_2,     reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 4]), _128K },
-    { Sector::_21_DATA_3,     reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 5]), _128K },
-    { Sector::_22_DATA_4,     reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 6]), _128K },
-    { Sector::_23_DATA_5,     reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 7]), _128K }
+    { Sector::_00_BOOT_1,     reinterpret_cast<uint>(&eeprom[0]),                     _16K }, //-V2571
+    { Sector::_01_BOOT_2,     reinterpret_cast<uint>(&eeprom[_16K]),                  _16K }, //-V2571
+    { Sector::_02_BOOT_3,     reinterpret_cast<uint>(&eeprom[_16K * 2]),              _16K }, //-V2571
+    { Sector::_03_NRST_1,     reinterpret_cast<uint>(&eeprom[_16K * 3]),              _16K }, //-V2571
+    { Sector::_04_NRST_2,     reinterpret_cast<uint>(&eeprom[_16K * 4]),              _64K }, //-V2571
+    { Sector::_05_FIRM_1,     reinterpret_cast<uint>(&eeprom[_128K]),                 _128K }, //-V2571
+    { Sector::_06_FIRM_2,     reinterpret_cast<uint>(&eeprom[_128K * 2]),             _128K }, //-V2571
+    { Sector::_07_FIRM_3,     reinterpret_cast<uint>(&eeprom[_128K * 3]),             _128K }, //-V2571
+    { Sector::_08,            reinterpret_cast<uint>(&eeprom[_128K * 4]),             _128K }, //-V2571
+    { Sector::_09,            reinterpret_cast<uint>(&eeprom[_128K * 5]),             _128K }, //-V2571
+    { Sector::_10_SETTINGS_1, reinterpret_cast<uint>(&eeprom[_128K * 6]),             _128K }, //-V2571
+    { Sector::_11_SETTINGS_2, reinterpret_cast<uint>(&eeprom[_128K * 7]),             _128K }, //-V2571
+    { Sector::_12,            reinterpret_cast<uint>(&eeprom[_128K * 8]),             _16K }, //-V2571
+    { Sector::_13,            reinterpret_cast<uint>(&eeprom[_128K * 8 + _16K]),      _16K }, //-V2571
+    { Sector::_14,            reinterpret_cast<uint>(&eeprom[_128K * 8 + _16K * 2]),  _16K }, //-V2571
+    { Sector::_15,            reinterpret_cast<uint>(&eeprom[_128K * 8 + _16K * 3]),  _16K }, //-V2571
+    { Sector::_16,            reinterpret_cast<uint>(&eeprom[_128K * 8 + _16K * 4]),  _64K }, //-V2571
+    { Sector::_17,            reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K]),     _128K }, //-V2571
+    { Sector::_18,            reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 2]), _128K }, //-V2571
+    { Sector::_19_DATA_1,     reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 3]), _128K }, //-V2571
+    { Sector::_20_DATA_2,     reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 4]), _128K }, //-V2571
+    { Sector::_21_DATA_3,     reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 5]), _128K }, //-V2571
+    { Sector::_22_DATA_4,     reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 6]), _128K }, //-V2571
+    { Sector::_23_DATA_5,     reinterpret_cast<uint>(&eeprom[_128K * 8 + _128K * 7]), _128K } //-V2571
 };
 
 
 void HAL_ROM::WriteBufferBytes(uint address, const void *buffer, int size)
 {
-    WriteBytes(address, static_cast<const uint8 *>(buffer), size);
+    WriteBytes(address, static_cast<const uint8 *>(buffer), size); //-V2571
 }
 
 
@@ -66,7 +66,7 @@ void HAL_ROM::Fill(uint address, uint8 value, int size)
 {
     for(int i = 0; i < size; i++)
     {
-        *reinterpret_cast<uint8 *>(address) = value;
+        *reinterpret_cast<uint8 *>(address) = value; //-V2571
         address++;
     }
 }

@@ -102,7 +102,7 @@ typedef struct
 } USBH_ClassTypeDef;
 
 
-typedef struct _USBH_HandleTypeDef
+typedef struct _USBH_HandleTypeDef //-V2573
 {
     __IO HOST_StateTypeDef     gState;       /*  Host State Machine Value */
     ENUM_StateTypeDef     EnumState;    /* Enumeration state Machine */

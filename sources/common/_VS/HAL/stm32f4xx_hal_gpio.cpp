@@ -28,7 +28,7 @@ void  HAL_GPIO_DeInit(GPIO_TypeDef  *, uint32_t)
 
 GPIO_PinState HAL_GPIO_ReadPin(const GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) //-V2506
 {
-    if (GPIOx == GPIOG && GPIO_Pin == GPIO_PIN_1)                              // Чтение готовности точки регистратора
+    if (GPIOx == GPIOG && GPIO_Pin == GPIO_PIN_1)                              // Чтение готовности точки регистратора //-V2571
     {
         if(Device::InModeRecorder())
         {

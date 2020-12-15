@@ -21,7 +21,7 @@
 #define FMC_ACCESS_MODE_C               0x20000000U
 
 
-#define __FMC_NORSRAM_ENABLE(__INSTANCE__, __BANK__)  ((__INSTANCE__)->BTCR[(__BANK__)] |= FMC_BCR1_MBKEN)
+#define __FMC_NORSRAM_ENABLE(__INSTANCE__, __BANK__)  ((__INSTANCE__)->BTCR[(__BANK__)] |= FMC_BCR1_MBKEN) //-V2573
 
 
 typedef struct
