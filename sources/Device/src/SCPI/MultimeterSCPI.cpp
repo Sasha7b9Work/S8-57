@@ -118,7 +118,7 @@ static void SendAnswerForMeasure()
     {
         SCPI::SendAnswer(" DIODE");
     }
-    else if (meas == 6)
+    else if (meas == 6) //-V2516
     {
         SCPI::SendAnswer(" BELL");
     }

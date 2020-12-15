@@ -104,15 +104,15 @@ static float ConvertFrequencyToAbs(const char *strFreq)
 {
     float result = SU::StringToFloat(strFreq);
 
-    if(std::strcmp(&strFreq[std::strlen(strFreq) - 3], "ÌÃö") == 0)
+    if(std::strcmp(&strFreq[std::strlen(strFreq) - 3], "ÌÃö") == 0) //-V2513
     {
         result *= 1e6F;
     }
-    else if(std::strcmp(&strFreq[std::strlen(strFreq) - 3], "êÃö") == 0)
+    else if(std::strcmp(&strFreq[std::strlen(strFreq) - 3], "êÃö") == 0) //-V2513
     {
         result *= 1e3F;
     }
-    else if(std::strcmp(&strFreq[std::strlen(strFreq) - 3], "ìÃö") == 0)
+    else if(std::strcmp(&strFreq[std::strlen(strFreq) - 3], "ìÃö") == 0) //-V2513 //-V2516
     {
         result *= 1e-3F;
     }
@@ -143,7 +143,7 @@ void DisplayFreqMeter::DrawFrequencyMode(int x, int _y)
     dX = 32;
 
     char strFreq[50];
-    std::strcpy(strFreq, FreqSetToString(&FreqMeter::freqActual));
+    std::strcpy(strFreq, FreqSetToString(&FreqMeter::freqActual)); //-V2513
 
     Text(strFreq).DrawDigitsMonospace(x + dX, yF, DFont::GetWidth('0'));
 
@@ -182,15 +182,15 @@ static float ConvertPeriodToAbs(const char *strPeriod)
 {
     float result = SU::StringToFloat(strPeriod);
 
-    if(std::strcmp(&strPeriod[std::strlen(strPeriod) - 2], "íñ") == 0)
+    if(std::strcmp(&strPeriod[std::strlen(strPeriod) - 2], "íñ") == 0) //-V2513
     {
         result *= 1e-9F;
     }
-    else if(std::strcmp(&strPeriod[std::strlen(strPeriod) - 3], "ìêñ") == 0)
+    else if(std::strcmp(&strPeriod[std::strlen(strPeriod) - 3], "ìêñ") == 0) //-V2513
     {
         result *= 1e-6F;
     }
-    else if(std::strcmp(&strPeriod[std::strlen(strPeriod) - 2], "ìñ") == 0)
+    else if(std::strcmp(&strPeriod[std::strlen(strPeriod) - 2], "ìñ") == 0) //-V2513 //-V2516
     {
         result *= 1e-3F;
     }
@@ -222,7 +222,7 @@ void DisplayFreqMeter::DrawPeriodMode(int x, int _y)
     dX = 32;
 
     char strPeriod[50];
-    std::strcpy(strPeriod, PeriodSetToString(&FreqMeter::periodActual));
+    std::strcpy(strPeriod, PeriodSetToString(&FreqMeter::periodActual)); //-V2513
 
     Text(strPeriod).DrawDigitsMonospace(x + dX, yT, DFont::GetWidth('0'));
 
@@ -233,7 +233,7 @@ void DisplayFreqMeter::DrawPeriodMode(int x, int _y)
 
     Text strFreq(strPeriod);
 
-    if((std::strcmp(strPeriod, EMPTY_STRING) != 0) && (std::strcmp(strPeriod, OVERFLOW_STRING) != 0))
+    if((std::strcmp(strPeriod, EMPTY_STRING) != 0) && (std::strcmp(strPeriod, OVERFLOW_STRING) != 0)) //-V2513
     {
         float period = ConvertPeriodToAbs(strPeriod);
 
@@ -255,7 +255,7 @@ static pString FreqSetToString(const BitSet32 *fr) //-V2506
     {
         return EMPTY_STRING;
     }
-    else if(fr->word == MAX_UINT)
+    else if(fr->word == MAX_UINT) //-V2516
     {
         return OVERFLOW_STRING;
     }
@@ -315,7 +315,7 @@ static pString FreqSetToString(const BitSet32 *fr) //-V2506
 
         giverFreq *= 100;
 
-        WRITE_SUFFIX("êÃö");
+        WRITE_SUFFIX("êÃö"); //-V2513
 
         if(giverFreq < _1MHz)                       // Ìåíüøå 1 ÌÃö
         {
@@ -335,7 +335,7 @@ static pString FreqSetToString(const BitSet32 *fr) //-V2506
 
         giverFreq *= 10;
 
-        WRITE_SUFFIX("Ãö");
+        WRITE_SUFFIX("Ãö"); //-V2513
 
         if(giverFreq < _1MHz)                      // Ìåíüøå 1 ÌÃö
         {
@@ -358,7 +358,7 @@ static pString FreqSetToString(const BitSet32 *fr) //-V2506
 
     case FreqMeter::TimeCounting::_10s:
 
-        WRITE_SUFFIX("Ãö");
+        WRITE_SUFFIX("Ãö"); //-V2513
 
         if(freq < _1MHz)                       // Ìåíüøå 1 ÌÃö
         {
@@ -554,7 +554,7 @@ static void WriteStackToBuffer(Stack<uint> *stack, int point, const char *suffix
         buffer[i] = static_cast<char>(stack->Pop()) | 0x30;
     }
 
-    std::strcpy(&buffer[7], suffix);
+    std::strcpy(&buffer[7], suffix); //-V2513
 }
 
 
@@ -582,7 +582,7 @@ void ProgressBarFreqMeter::Draw(int x, int y)
 
         Region(width, 3).Fill(x, y, Color::FILL);
     }
-    else if(S_FREQ_MODE_MEASURE_IS_PERIOD && (FreqMeter::timeStartMeasurePeriod != 0))
+    else if(S_FREQ_MODE_MEASURE_IS_PERIOD && (FreqMeter::timeStartMeasurePeriod != 0)) //-V2516
     {
 
     }

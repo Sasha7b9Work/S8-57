@@ -473,7 +473,7 @@ int CalculatePeriodAccurately(Chan::E ch) //-V2506
 {
     static int period[2];
 
-    int *sums = static_cast<int *>(std::malloc(static_cast<uint>(nBytes)));
+    int *sums = static_cast<int *>(std::malloc(static_cast<uint>(nBytes))); //-V2511
 
     if (sums == 0)
     {
@@ -490,7 +490,7 @@ int CalculatePeriodAccurately(Chan::E ch) //-V2506
 
         if(pic == Float::ERROR) //-V550 //-V2550
         {
-            EXIT_FROM_PERIOD_ACCURACY
+            EXIT_FROM_PERIOD_ACCURACY //-V2511
         }
         int delta = static_cast<int>(pic * 5.0F);
         sums[firstByte] = dataIn[firstByte];
@@ -505,7 +505,7 @@ int CalculatePeriodAccurately(Chan::E ch) //-V2506
             uint8 point = *data++;
             if(point < VALUE::MIN || point >= VALUE::MAX)
             {
-                EXIT_FROM_PERIOD_ACCURACY
+                EXIT_FROM_PERIOD_ACCURACY //-V2511
             }
             *pSum = *(pSum - 1) + point;
             pSum++;
@@ -540,7 +540,7 @@ int CalculatePeriodAccurately(Chan::E ch) //-V2506
                     maxDelta = delta + 1;
                     break;
                 }
-                else if(nextDelta > maxDelta)
+                else if(nextDelta > maxDelta) //-V2516
                 {
                     maxDelta = nextDelta;
                 }
@@ -560,7 +560,7 @@ int CalculatePeriodAccurately(Chan::E ch) //-V2506
         periodAccurateIsCalculating[static_cast<int>(ch)] = true;
     }
 
-    std::free(sums);
+    std::free(sums); //-V2511
 
     return period[static_cast<int>(ch)];
 }
@@ -837,7 +837,7 @@ float CalculateMinSteadyRel(Chan::E ch)
                                 ++numDeleted; //-V127
                             }
                         }
-                        else if (d - _min > value)
+                        else if (d - _min > value) //-V2516
                         {
                             sum -= d;
                             --numSums;
@@ -918,7 +918,7 @@ float CalculateMaxSteadyRel(Chan::E ch)
                                 numDeleted++; //-V127
                             }
                         }
-                        else if (_max - d > value)
+                        else if (_max - d > value) //-V2516
                         {
                             sum -= d;
                             numSums--;
@@ -1223,7 +1223,7 @@ void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase) //-V2506
     static const int deltas[5] = {100, 50, 20, 10, 5};
     int delta = deltas[static_cast<int>(tBase)];
 
-    uint8 *signedData = static_cast<uint8 *>(std::malloc(static_cast<uint>(numPoints) / 2U));
+    uint8 *signedData = static_cast<uint8 *>(std::malloc(static_cast<uint>(numPoints) / 2U)); //-V2511
     if (signedData == 0)
     {
         return;
@@ -1305,7 +1305,7 @@ void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase) //-V2506
         pos--;
     }
 
-    std::free(signedData);
+    std::free(signedData); //-V2511
 }
 
 
@@ -1320,11 +1320,11 @@ String Measure::GetStringMeasure(Chan::E ch, char* buffer, int lenBuf) //-V2506
     }
 
     buffer[0] = '\0';
-    std::strcpy(buffer, (ch == ChanA) ? "1: " : "2: ");
+    std::strcpy(buffer, (ch == ChanA) ? "1: " : "2: "); //-V2513
 
     if(!isSet || values[static_cast<int>(type)].value[static_cast<int>(ch)] == Float::ERROR) //-V550 //-V2550
     {
-        std::strcat(buffer, "-.-");
+        std::strcat(buffer, "-.-"); //-V2513
     }
     else if(sMeas[static_cast<int>(type)].FuncCalculate)
     {
@@ -1338,10 +1338,10 @@ String Measure::GetStringMeasure(Chan::E ch, char* buffer, int lenBuf) //-V2506
         }
                
         char *text = func(value, sMeas[static_cast<int>(type)].showSign, bufferForFunc);
-        int len = static_cast<int>(std::strlen(text)) + static_cast<int>(std::strlen(buffer)) + 1;
+        int len = static_cast<int>(std::strlen(text)) + static_cast<int>(std::strlen(buffer)) + 1; //-V2513
         if (len + 1 <= lenBuf)
         {
-            std::strcat(buffer, text);
+            std::strcat(buffer, text); //-V2513
         }
     }
     else
@@ -1355,21 +1355,21 @@ String Measure::GetStringMeasure(Chan::E ch, char* buffer, int lenBuf) //-V2506
 
 char* AutoMeasurements::Freq2String(float freq, bool, char buffer[20])
 {
-    std::strcpy(buffer, Frequency(freq).ToString().c_str());
+    std::strcpy(buffer, Frequency(freq).ToString().c_str()); //-V2513
     return buffer;
 }
 
 
 char* Time2String(float time, bool always, char buffer[20])
 {
-    std::strcpy(buffer, Time(time).ToString(always).c_str());
+    std::strcpy(buffer, Time(time).ToString(always).c_str()); //-V2513
     return buffer;
 }
 
 
 char* Voltage2String(float voltage, bool always, char buffer[20])
 {
-    std::strcpy(buffer, Voltage(voltage).ToString(always).c_str());
+    std::strcpy(buffer, Voltage(voltage).ToString(always).c_str()); //-V2513
     return buffer;
 }
 
@@ -1382,7 +1382,7 @@ char* Phase2String(float phase, bool, char buffer[20])
 
 char* AutoMeasurements::Float2String(float value, bool always, char buffer[20])
 {
-    std::strcpy(buffer, Float(value).ToString(always, 4).c_str());
+    std::strcpy(buffer, Float(value).ToString(always, 4).c_str()); //-V2513
     return buffer;
 }
 
@@ -1395,7 +1395,7 @@ static float Divide(float val1, float val2)
     {
         result = Float::ERROR;
     }
-    else if(isnan(result))
+    else if(isnan(result)) //-V2516
     {
         result = Float::ERROR;
     }

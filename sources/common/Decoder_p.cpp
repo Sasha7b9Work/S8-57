@@ -62,7 +62,7 @@ static bool SetTextSpacing(uint8);
 static void FinishCommand();
 
 
-void PDecoder::AddData(uint8 data)
+void PDecoder::AddData(uint8 data) //-V2506
 {
     static const struct StructFunc
     {
@@ -119,7 +119,7 @@ void PDecoder::AddData(uint8 data)
 }
 
 
-static bool InButtonPress(uint8)
+static bool InButtonPress(uint8) //-V2506
 {
     if (step == 0)
     {
@@ -143,7 +143,7 @@ static bool BeginScene(uint8)
 }
 
 
-static bool DrawTesterPoints(uint8 data)
+static bool DrawTesterPoints(uint8 data) //-V2506
 {
     // Количество полных принятых иксов
     static int numX = 0;
@@ -199,7 +199,7 @@ static bool DrawTesterPoints(uint8 data)
 }
 
 
-static bool DisplayBrightness(uint8 data)
+static bool DisplayBrightness(uint8 data) //-V2506
 {
     if (step == 0)
     {
@@ -221,7 +221,7 @@ static bool EndScene(uint8)
 }
 
 
-static bool SetColor(uint8 data)
+static bool SetColor(uint8 data) //-V2506
 {
     if (step == 0)
     {
@@ -235,7 +235,7 @@ static bool SetColor(uint8 data)
 }
 
 
-static bool FuncScreen(uint8 data)
+static bool FuncScreen(uint8 data) //-V2506
 {
     if (step == 0)
     {
@@ -424,7 +424,7 @@ static bool DrawHPointLine(uint8 data)
 }
 
 
-static bool SetMinWidthFont(uint8 data)
+static bool SetMinWidthFont(uint8 data) //-V2506
 {
     if (step == 0)
     {
@@ -439,7 +439,7 @@ static bool SetMinWidthFont(uint8 data)
 }
 
 
-static bool SetTextSpacing(uint8 data)
+static bool SetTextSpacing(uint8 data) //-V2506
 {
     if (step == 0)
     {
@@ -505,7 +505,7 @@ static bool SetPoint(uint8 data)
 }
 
 
-static bool DrawText(uint8 data)
+static bool DrawText(uint8 data) //-V2506
 {
     static int x;
     static int y;
@@ -528,7 +528,7 @@ static bool DrawText(uint8 data)
         case 4:
             numSymbols = data;
             readingSymbols = 0;
-            buffer = new char[static_cast<uint>(numSymbols + 1)];
+            buffer = new char[static_cast<uint>(numSymbols + 1)]; //-V2511
             break;
         default:
             buffer[readingSymbols++] = static_cast<char>(data);
@@ -536,7 +536,7 @@ static bool DrawText(uint8 data)
             {
                 buffer[readingSymbols] = 0;
                 Text::Draw(x, y, buffer);
-                delete []buffer;
+                delete []buffer; //-V2511
                 return true;
             }
             break;
@@ -572,7 +572,7 @@ static bool SetPalette(uint8 data)
 }
 
 
-static bool SetFont(uint8 data)
+static bool SetFont(uint8 data) //-V2506
 {
     if (step == 0)
     {

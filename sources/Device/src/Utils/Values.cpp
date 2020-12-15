@@ -135,7 +135,7 @@ static char *FrequencyToString(float freq, char bufferOut[20]) //-V2506
 
     if (Math::IsEquals(freq, Float::ERROR))
     {
-        std::strcat(bufferOut, String::_ERROR);
+        std::strcat(bufferOut, String::_ERROR); //-V2513
         return bufferOut;
     }
 
@@ -177,7 +177,7 @@ char *Frequency::ToStringAccuracy(char bufferOut[20], int numDigits) const //-V2
         suffix = "ÌÃö";
         freq /= 1e6F;
     }
-    else if (freq >= 1e3F)
+    else if (freq >= 1e3F) //-V2516
     {
         suffix = "êÃö";
         freq /= 1e3F;
@@ -254,7 +254,7 @@ char* Time::ToStringAccuracy(bool alwaysSign, char buffer[20], int numDigits) co
         suffix = "ìêñ";
         time *= 1e6F;
     }
-    else if (fabsTime + 0.5e-3F < 1.0F)
+    else if (fabsTime + 0.5e-3F < 1.0F) //-V2516
     {
         suffix = "ìñ";
         time *= 1e3F;
@@ -418,7 +418,7 @@ static char *FloatToString(float value, bool alwaysSign, int numDigits, char buf
     {
         *pBuffer++ = '-';
     }
-    else if (alwaysSign)
+    else if (alwaysSign) //-V2516
     {
         *pBuffer++ = '+';
     }
@@ -452,9 +452,9 @@ static char *FloatToString(float value, bool alwaysSign, int numDigits, char buf
     }
     
     bool signExist = alwaysSign || value < 0;
-    while (std::strlen(bufferOut) < static_cast<size_t>(numDigits + (signExist ? 2 : 1)))
+    while (std::strlen(bufferOut) < static_cast<size_t>(numDigits + (signExist ? 2 : 1))) //-V2513
     {
-        std::strcat(bufferOut, "0");
+        std::strcat(bufferOut, "0"); //-V2513
     }
     
 #ifdef WIN32

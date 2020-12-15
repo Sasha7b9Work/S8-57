@@ -216,7 +216,7 @@ static bool HandlerKey_ROM(const KeyEvent &event)
 
             result = true;
         }
-        else if (event.IsIncrease())
+        else if (event.IsIncrease()) //-V2516
         {
             Math::CircleIncrease<int8>((int8 *)&NUM_ROM_SIGNAL, 0, ROM::Data::MAX_NUM_SAVED_WAVES - 1);
 

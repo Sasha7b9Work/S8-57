@@ -56,7 +56,7 @@ static void InterpolateChannel(uint8 *data, int numPoints, uint tBase)
     static const int deltas[5] = { 50, 20, 10, 5, 2 };
     int delta = deltas[tBase];
 
-    uint8 *signedData = reinterpret_cast<uint8 *>(std::malloc(static_cast<uint>(numPoints) / 2U));
+    uint8 *signedData = reinterpret_cast<uint8 *>(std::malloc(static_cast<uint>(numPoints) / 2U)); //-V2511
     int numSignedPoints = 0;
 
     for (int pos = 0; pos < numPoints; pos++)
@@ -134,5 +134,5 @@ static void InterpolateChannel(uint8 *data, int numPoints, uint tBase)
         pos--;
     }
 
-    std::free(signedData);
+    std::free(signedData); //-V2511
 }

@@ -190,7 +190,7 @@ int Text::DrawDigitsMonospace(int x, int y, int width, Color color)
 {
     color.SetAsCurrent();
 
-    uint size = std::strlen(text);
+    uint size = std::strlen(text); //-V2513
 
     for (uint i = 0; i < size; i++)
     {
@@ -336,7 +336,7 @@ static bool FindNextTransfer(const char *letters, int8 *lettersInSyllable) //-V2
 #define VOWEL       0   // Гласная
 #define CONSONANT   1   // Согласная
 
-    *lettersInSyllable = static_cast<int8>(std::strlen(letters)); //-V1029
+    *lettersInSyllable = static_cast<int8>(std::strlen(letters)); //-V1029 //-V2513
 
     if (std::strlen(letters) <= 3) //-V2513 //-V1051
     {
@@ -477,7 +477,7 @@ static int DrawPartWord(char *word, int x, int y, int xRight, bool draw) //-V250
             {
                 String(subString).Draw(x, y);
             }
-            return static_cast<int>(std::strlen(subString) - 1);
+            return static_cast<int>(std::strlen(subString) - 1); //-V2513
         }
     }
 
@@ -495,7 +495,7 @@ int Text::DrawInRectWithTransfers(int eX, int eY, int eWidth, int eHeight, Color
     int bottom = eY + eHeight;
 
     char buffer[20];
-    int numSymbols = static_cast<int>(std::strlen(text));
+    int numSymbols = static_cast<int>(std::strlen(text)); //-V2513
 
     int y = top - 1;
     int x = left;
@@ -603,7 +603,7 @@ static bool GetHeightTextWithTransfers(int left, int top, int right, const char 
 
     *height = y - top + 4;
 
-    LIMITATION(*height, 0, 239);
+    LIMITATION(*height, 0, 239); //-V2516
 
     return curSymbol == numSymbols;
 }

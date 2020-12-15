@@ -46,7 +46,7 @@ void Math::Limitation(T *value, T min, T max)
     {
         *value = min;
     }
-    else if (*value > max)
+    else if (*value > max) //-V2516
     {
         *value = max;
     }
@@ -61,7 +61,7 @@ void Math::Swap(T *value0, T *value1)
 
 
 template<class T>
-int Math::Sign(T x)
+int Math::Sign(T x) //-V2506
 {
     if (x > (T)(0))
     {

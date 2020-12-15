@@ -95,7 +95,7 @@ void Painter::DrawHLine(int y, int x0, int x1)
 }
 
 
-void Painter::DrawLine(int x1, int y1, int x2, int y2)
+void Painter::DrawLine(int x1, int y1, int x2, int y2) //-V2506
 {
     if (x1 == x2 && y1 == y2)
     {
@@ -107,7 +107,7 @@ void Painter::DrawLine(int x1, int y1, int x2, int y2)
         DrawVLine(x1, y1, y2);
         return;
     }
-    else if (y1 == y2)
+    else if (y1 == y2) //-V2516
     {
         DrawHLine(y1, x1, x2);
         return;
@@ -266,11 +266,11 @@ void Painter::SendRow(int row)
 uint Painter::ReduceBrightness(uint colorValue, float newBrightness)
 {
     int red = static_cast<int>(static_cast<float>(R_FROM_COLOR(colorValue)) * newBrightness);
-    LIMITATION(red, 0, 0xff);
+    LIMITATION(red, 0, 0xff); //-V2516
     int green = static_cast<int>(static_cast<float>(G_FROM_COLOR(colorValue)) * newBrightness);
-    LIMITATION(green, 0, 0xff);
+    LIMITATION(green, 0, 0xff); //-V2516
     int blue = static_cast<int>(static_cast<float>(B_FROM_COLOR(colorValue)) * newBrightness);
-    LIMITATION(blue, 0, 0xff);
+    LIMITATION(blue, 0, 0xff); //-V2516
     return MAKE_COLOR(red, green, blue);
 }
 

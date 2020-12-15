@@ -111,7 +111,7 @@ void MathFPGA::CalculateFFT(float *dataR, int numPoints, float *result, float *f
     {
         logN = 9;
     }
-    else if (numPoints == 1024)
+    else if (numPoints == 1024) //-V2516
     {
         logN = 10;
     }
@@ -231,7 +231,7 @@ void MathFPGA::CalculateFFT(float *dataR, int numPoints, float *result, float *f
             {
                 *density0 = result[i];
             }
-            else if (i == S_FFT_POS_CUR_1)
+            else if (i == S_FFT_POS_CUR_1) //-V2516
             {
                 *density1 = result[i];
             }
@@ -283,7 +283,7 @@ static void MultiplyToWindow(float *data, int numPoints)
             data[i] *= a0 - a1 * std::cosf(2 * Math::PI_F * i / (numPoints - 1)) + a2 * std::cosf(4 * Math::PI_F * i / (numPoints - 1));
         }
     }
-    else if (S_FFT_WINDOW_IS_HANN)
+    else if (S_FFT_WINDOW_IS_HANN) //-V2516
     {
         for (int i = 0; i < numPoints; i++)
         {

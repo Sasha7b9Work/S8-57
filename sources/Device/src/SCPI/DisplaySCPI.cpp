@@ -306,14 +306,14 @@ static bool TestMapping() //-V2506
 
     for (int i = 0; i < 10; i++)
     {
-        SCPI_APPEND_STRING(commandLines); //-V814
+        SCPI_APPEND_STRING(commandLines); //-V814 //-V2513
 
         if (!S_DISP_MAPPING_IS_LINES)
         {
             SCPI_EXIT_ERROR();
         }
 
-        SCPI_APPEND_STRING(commandDots); //-V814
+        SCPI_APPEND_STRING(commandDots); //-V814 //-V2513
 
         if (!S_DISP_MAPPING_IS_DOTS)
         {

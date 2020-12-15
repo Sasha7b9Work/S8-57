@@ -14,17 +14,17 @@ Queue<String *> *queue = nullptr;
 
 void Test::Display::Init()
 {
-    queue = new Queue<String *>();
+    queue = new Queue<String *>(); //-V2511
 }
 
 void Test::Display::DeInit()
 {
     while(queue->Size())
     {
-        delete queue->Back();
+        delete queue->Back(); //-V2511
     }
 
-    delete queue;
+    delete queue; //-V2511
 }
 
 
@@ -51,7 +51,7 @@ static void Update()
 
 static String *CreateMessage(const char *message)
 {
-    return new String("%3d %s", Timer::TimeMS() / 1000, message);
+    return new String("%3d %s", Timer::TimeMS() / 1000, message); //-V2511
 }
 
 
@@ -74,7 +74,7 @@ int Test::Display::AddMessage(const char *message, int num)
     }
     else
     {
-        delete (*queue)[num];
+        delete (*queue)[num]; //-V2511
         (*queue)[num] = CreateMessage(message);
     }
 

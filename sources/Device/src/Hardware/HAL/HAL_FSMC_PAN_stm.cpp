@@ -241,7 +241,7 @@ void HAL_BUS::Panel::Send(const uint8 *data, int size)
         {
             Recorder::RecordPoints();
         }
-        else if(OSCI_IN_MODE_P2P)
+        else if(OSCI_IN_MODE_P2P) //-V2516
         {
             Roller::ReadPoint();
         }

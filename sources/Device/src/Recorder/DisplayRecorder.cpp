@@ -146,7 +146,7 @@ static char *DeltaTime(char buffer[30])
 {
     float delta = std::fabsf(static_cast<float>(posCursor[0] - posCursor[1])) * Recorder::ScaleX::TimeForPointMS() / 1000.0F;
 
-    std::strcpy(buffer, Time(delta).ToString(false).c_str());
+    std::strcpy(buffer, Time(delta).ToString(false).c_str()); //-V2513
 
     return buffer;
 }
@@ -164,11 +164,11 @@ static char *TimeCursor(int numCur, char buffer[30])
 
         time.AddTime((startPoint + posCursor[numCur]) * displayed->timeForPointMS);
 
-        std::strcpy(buffer, time.ToString().c_str());
+        std::strcpy(buffer, time.ToString().c_str()); //-V2513
     }
     else
     {
-        std::strcpy(buffer, "...");
+        std::strcpy(buffer, "..."); //-V2513
     }
 
     return buffer;
@@ -179,17 +179,17 @@ static void VoltagePoint(Chan::E ch, uint8 value, char buffer[30])
 {
     if (value > VALUE::MAX)
     {
-        std::strcat(buffer, "\x9d");
+        std::strcat(buffer, "\x9d"); //-V2513
     }
     else if (value < VALUE::MIN)
     {
-        std::strcat(buffer, "\xb9");
+        std::strcat(buffer, "\xb9"); //-V2513
     }
     else
     {
         float voltage = VALUE::ToVoltage(value, S_RANGE(ch), 0);
 
-        std::strcat(buffer, Voltage(voltage).ToString(true).c_str());
+        std::strcat(buffer, Voltage(voltage).ToString(true).c_str()); //-V2513
     }
 }
 
@@ -206,12 +206,12 @@ static char *VoltageCursor(Chan::E ch, int numCur, char buffer[30])
     {
         buffer[0] = '\0';
         VoltagePoint(ch, point->min, buffer);
-        std::strcat(buffer, " : ");
+        std::strcat(buffer, " : "); //-V2513
         VoltagePoint(ch, point->max, buffer);
     }
     else
     {
-        std::strcpy(buffer, "...");
+        std::strcpy(buffer, "..."); //-V2513
     }
 
     return buffer;
@@ -456,7 +456,7 @@ static int *CurrentPosCursor()
     int *result = &nullPos;
 
     if (S_REC_CURSOR_IS_1)      { result = &posCursor[0]; }
-    else if (S_REC_CURSOR_IS_2) { result = &posCursor[1]; }
+    else if (S_REC_CURSOR_IS_2) { result = &posCursor[1]; } //-V2516
 
     return result;
 }

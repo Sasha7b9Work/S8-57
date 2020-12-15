@@ -184,11 +184,11 @@ static void OnOpenClose_Set(bool open)
 {
     if (open)
     {
-        psRTC = new StructRTC();
+        psRTC = new StructRTC(); //-V2511
     }
     else
     {
-        delete psRTC;
+        delete psRTC; //-V2511
     }
 }
 
@@ -223,7 +223,7 @@ static bool HandlerKey_Set(const KeyEvent &event) //-V2506
             OnPress_SetUp();
             return true;
         }
-        else if (event.IsArrowDown())
+        else if (event.IsArrowDown()) //-V2516
         {
             OnPress_SetDown();
             return true;

@@ -26,7 +26,7 @@ uint8 *PainterMem::CreateBuffer(int w, int h)
     {
         width = w;
         height = h;
-        buffer = static_cast<uint8 *>(malloc(static_cast<uint>(width * height)));
+        buffer = static_cast<uint8 *>(malloc(static_cast<uint>(width * height))); //-V2511
         if (buffer != nullptr)
         {
             endBuffer = buffer + width * height;
@@ -43,7 +43,7 @@ uint8 *PainterMem::CreateBuffer(int w, int h)
 
 void PainterMem::DeleteBuffer()
 {
-    free(buffer);
+    free(buffer); //-V2511
     buffer = 0;
 }
 

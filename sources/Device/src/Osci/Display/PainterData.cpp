@@ -150,7 +150,7 @@ void DisplayOsci::PainterData::DrawSpectrum(const uint8 *dataIn, int numPoints, 
     int y0 = 0;
     int y1 = 0;
 
-    float *spectrum = static_cast<float *>(std::malloc(numPoints * sizeof(float)));
+    float *spectrum = static_cast<float *>(std::malloc(numPoints * sizeof(float))); //-V2511
 
     if (spectrum)
     {
@@ -169,7 +169,7 @@ void DisplayOsci::PainterData::DrawSpectrum(const uint8 *dataIn, int numPoints, 
         Rectangle(s * 2, s * 2).Draw(S_FFT_POS_CUR_0 + Grid::Left() - s, y0 - s, Color::FILL);
         Rectangle(s * 2, s * 2).Draw(S_FFT_POS_CUR_1 + Grid::Left() - s, y1 - s);
 
-        std::free(spectrum);
+        std::free(spectrum); //-V2511
     }
 }
 

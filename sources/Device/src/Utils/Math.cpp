@@ -82,8 +82,8 @@ void Math::Smoothing(uint8 *data, int numPoints, int numSmooth) //-V2506
         return;
     }
 
-    float *buffer = static_cast<float *>(std::malloc(static_cast<uint>(numPoints * static_cast<int>(sizeof(float)))));
-    int  *num = static_cast<int *>(std::malloc(static_cast<uint>(numPoints * static_cast<int>(sizeof(int)))));
+    float *buffer = static_cast<float *>(std::malloc(static_cast<uint>(numPoints * static_cast<int>(sizeof(float))))); //-V2511
+    int  *num = static_cast<int *>(std::malloc(static_cast<uint>(numPoints * static_cast<int>(sizeof(int))))); //-V2511
 
     if (num != 0 && buffer != 0)
     {
@@ -109,8 +109,8 @@ void Math::Smoothing(uint8 *data, int numPoints, int numSmooth) //-V2506
         }
     }
 
-    std::free(buffer);
-    std::free(num);
+    std::free(buffer); //-V2511
+    std::free(num); //-V2511
 }
 
 
@@ -283,7 +283,7 @@ void Math::CalculateMathFunction(float *dataAandResult, const float *dataB, int 
             dataAandResult++;
         }
     }
-    else if (S_MATH_FUNCTION_IS_MUL) //-V547
+    else if (S_MATH_FUNCTION_IS_MUL) //-V547 //-V2516
     {
         int delta = dataB - dataAandResult;
         float *end = &dataAandResult[numPoints];
@@ -528,7 +528,7 @@ T Math::Add(T value, T delta, T min, T max)
     {
         result = min;
     }
-    else if (result > max)
+    else if (result > max) //-V2516
     {
         result = max;
     }
@@ -554,7 +554,7 @@ void Math::Limitation(T *value, T min, T max)
     {
         *value = min;
     }
-    else if (*value > max)
+    else if (*value > max) //-V2516
     {
         *value = max;
     }
@@ -629,7 +629,7 @@ void Min2::Add(uint16 value)
         moreMin = lessMin;
         lessMin = value;
     }
-    else if(value < moreMin)
+    else if(value < moreMin) //-V2516
     {
         moreMin = value;
     }
@@ -643,7 +643,7 @@ void Max2::Add(uint16 value)
         lessMax = moreMax;
         moreMax = value;
     }
-    else if(value > lessMax)
+    else if(value > lessMax) //-V2516
     {
         lessMax = value;
     }

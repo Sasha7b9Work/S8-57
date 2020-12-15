@@ -24,14 +24,14 @@ static bool ChooseSymbols(const char **string);
 static bool ChooseSpaces(const char **string);
 
 
-bool String2Int(char *str, int *value)
+bool String2Int(char *str, int *value) //-V2506
 {
     int sign = str[0] == '-' ? -1 : 1;
     if (str[0] < '0' || str[0] > '9')
     {
         str++;
     }
-    uint length = std::strlen(str);
+    uint length = std::strlen(str); //-V2513
     if (length == 0)
     {
         return false;
@@ -63,8 +63,8 @@ bool String2Int(char *str, int *value)
 char *SU::Db2String(float value, int numDigits, char bufferOut[20])
 {
     bufferOut[0] = 0;
-    std::strcat(bufferOut, Float(value).ToString(false, numDigits).c_str());
-    std::strcat(bufferOut, "Да");
+    std::strcat(bufferOut, Float(value).ToString(false, numDigits).c_str()); //-V2513
+    std::strcat(bufferOut, "Да"); //-V2513
     return bufferOut;
 }
 
@@ -89,7 +89,7 @@ int BCD2Int(uint bcd)
 #define  SYMBOL(x) (*(*(x)))
 
 
-static bool ChooseSymbols(const char **string)
+static bool ChooseSymbols(const char **string) //-V2506
 {
     if (SYMBOL(string) == 0x0d && SYMBOL(string + 1) == 0x0a)
     {
@@ -105,7 +105,7 @@ static bool ChooseSymbols(const char **string)
 }
 
 
-static bool ChooseSpaces(const char **string)
+static bool ChooseSpaces(const char **string) //-V2506
 {
     if (SYMBOL(string) == 0x0d && SYMBOL(string + 1) == 0x0a)
     {
@@ -123,7 +123,7 @@ static bool ChooseSpaces(const char **string)
 #undef SYMBOL
 
 
-bool SU::GetWord(const char *string, Word *word, const int numWord)
+bool SU::GetWord(const char *string, Word *word, const int numWord) //-V2506
 {
     ChooseSpaces(&string);
 
@@ -159,7 +159,7 @@ bool SU::GetWord(const char *string, Word *word, const int numWord)
 }
 
 
-bool SU::WordEqualZeroString(Word *word, char* string)
+bool SU::WordEqualZeroString(Word *word, char* string) //-V2506
 {
     char *ch = string;
     char *w = word->address;
@@ -176,7 +176,7 @@ bool SU::WordEqualZeroString(Word *word, char* string)
 }
 
 
-bool SU::EqualsZeroStrings(char *str1, char *str2)
+bool SU::EqualsZeroStrings(char *str1, char *str2) //-V2506
 {
     while ((*str1) == (*str2))
     {
@@ -197,7 +197,7 @@ bool SU::EqualsStrings(uint8 *str1, const char * const str2, int size)
 }
 
 
-bool SU::EqualsStrings(void *_str1, void *_str2, int size)
+bool SU::EqualsStrings(void *_str1, void *_str2, int size) //-V2506
 {
     char *str1 = static_cast<char *>(_str1);
     char *str2 = static_cast<char *>(_str2);
@@ -213,9 +213,9 @@ bool SU::EqualsStrings(void *_str1, void *_str2, int size)
 }
 
 
-bool SU::EqualsStrings(const char *str1, const char *str2)
+bool SU::EqualsStrings(const char *str1, const char *str2) //-V2506
 {
-    uint size = std::strlen(str1);
+    uint size = std::strlen(str1); //-V2513
 
     for (uint i = 0; i < size; i++)
     {
@@ -303,7 +303,7 @@ float SU::StringToFloat(const char *string)
 
 char *SU::ToUpper(char *str)
 {
-    return ToUpper(str, static_cast<int>(std::strlen(str)));
+    return ToUpper(str, static_cast<int>(std::strlen(str))); //-V2513
 }
 
 
@@ -320,7 +320,7 @@ char *SU::ToUpper(char *_str, int size)
 }
 
 
-char SU::ToUpper(char symbol)
+char SU::ToUpper(char symbol) //-V2506
 {
     uint8 s = static_cast<uint8>(symbol);
 
@@ -332,7 +332,7 @@ char SU::ToUpper(char symbol)
     {
         return static_cast<char>(s - 0x20);
     }
-    else if(s >= 0xf0)
+    else if(s >= 0xf0) //-V2516
     {
         return static_cast<char>(s - 0x20);
     }
@@ -341,7 +341,7 @@ char SU::ToUpper(char symbol)
 }
 
 
-char SU::ToLower(char symbol)
+char SU::ToLower(char symbol) //-V2506
 {
     uint8 s = static_cast<uint8>(symbol);
 
@@ -349,7 +349,7 @@ char SU::ToLower(char symbol)
     {
         return static_cast<char>(s + 0x20);
     }
-    else if(s >= 0xc0 && s < 0xE0)
+    else if(s >= 0xc0 && s < 0xE0) //-V2516
     {
         return static_cast<char>(s + 0x20);
     }
@@ -421,9 +421,9 @@ bool SU::StringToDouble(double *value, const char *str)
 
 bool SU::String2Int(const char *buffer, int *value, char **end)
 {
-    Buffer string(static_cast<int>(std::strlen(buffer)) + 1);
+    Buffer string(static_cast<int>(std::strlen(buffer)) + 1); //-V2513
 
-    std::strcpy(string.DataChar(), buffer);
+    std::strcpy(string.DataChar(), buffer); //-V2513
 
     *value = std::strtol(string.DataChar(), end, 10);
 
@@ -442,11 +442,11 @@ bool SU::String2Int(const char *buffer, int *value, char **end)
 
 #ifndef GUI
 
-int strcpy_s(char *dest, uint dest_size, const char *src)
+int strcpy_s(char *dest, uint dest_size, const char *src) //-V2506
 {
-    if (std::strlen(src) + 1 < dest_size)
+    if (std::strlen(src) + 1 < dest_size) //-V2513
     {
-        std::strcpy(dest, src);
+        std::strcpy(dest, src); //-V2513
         return 0;
     }
 

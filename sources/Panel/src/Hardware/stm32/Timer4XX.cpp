@@ -39,7 +39,7 @@ void Timer4XX::EnabledIRQ(uint mainPriority, uint subPriority)
 }
 
 
-IRQn_Type Timer4XX::GetIRQn_Type()
+IRQn_Type Timer4XX::GetIRQn_Type() //-V2506
 {
     if (handler.Instance == TIM3)
     {

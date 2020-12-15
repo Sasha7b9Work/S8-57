@@ -85,7 +85,7 @@ static void DrawChar(int numSymbol, int x, bool inModeOsci)
             y += 7;
         }
     }
-    else if(symbols[0] == '+')
+    else if(symbols[0] == '+') //-V2516
     {
         y -= 9;
 
@@ -124,7 +124,7 @@ static int CalculateOffsetX(int i, bool inModeOsci) //-V2506
     {
         return inModeOsci ? -2 : 0;
     }
-    else if (Symbol(i) == '1')
+    else if (Symbol(i) == '1') //-V2516
     {
         return inModeOsci ? 2 : 10;
     }
@@ -420,7 +420,7 @@ static void DrawGraphics(bool inModeOsci)
             Line(startX + delta, startY + edge / 2 + 2, endX - delta + 1, startY + 1).Draw();
         }
     }
-    else if(S_MULT_MEASURE_IS_BELL)
+    else if(S_MULT_MEASURE_IS_BELL) //-V2516
     {
         if (inModeOsci)
         {
@@ -530,7 +530,7 @@ void DisplayMultimeter::Update()
     {
         UpdateInModeOsci();
     }
-    else if (Device::InModeMultimeter())
+    else if (Device::InModeMultimeter()) //-V2516
     {
         UpdateInModeMultimeter();
     }
@@ -619,7 +619,7 @@ void DisplayMultimeter::ChangedMode()
 
     outBuffer[position[S_MULT_MEASURE][GetRange()]] = '.';
     
-    std::strcpy(&outBuffer[7], suffix[S_MULT_MEASURE][GetRange()]);
+    std::strcpy(&outBuffer[7], suffix[S_MULT_MEASURE][GetRange()]); //-V2513
     
     if(S_MULT_MEASURE_IS_RESISTANCE)
     {
@@ -665,31 +665,31 @@ void DisplayMultimeter::SetMeasure(const uint8 buf[13]) //-V2506
 
 static void PrepareTestDiode(pCHAR)
 {
-    std::strcpy(outBuffer + 7, "  ");
+    std::strcpy(outBuffer + 7, "  "); //-V2513
 }
 
 
 static void PrepareVoltageDC(pCHAR) //-V524
 {
-    std::strcpy(outBuffer + 7, "V=");
+    std::strcpy(outBuffer + 7, "V="); //-V2513
 }
 
 
 static void PrepareVoltageAC(pCHAR)
 {
-    std::strcpy(outBuffer + 7, "V~");
+    std::strcpy(outBuffer + 7, "V~"); //-V2513
 }
 
 
 static void PrepareCurrentDC(const char *buf)
 {
-    std::strcpy(outBuffer + 7, (buf[10] == '1') ? "A=" : "mA=");
+    std::strcpy(outBuffer + 7, (buf[10] == '1') ? "A=" : "mA="); //-V2513
 }
 
 
 static void PrepareCurrentAC(const char *buf)
 {
-    std::strcpy(outBuffer + 7, (buf[10] == '1') ? "A~" : "mA~");
+    std::strcpy(outBuffer + 7, (buf[10] == '1') ? "A~" : "mA~"); //-V2513
 }
 
 
@@ -708,7 +708,7 @@ static bool ResistanceLess100()
 
 static void PrepareBell(pCHAR)
 {
-    std::strcpy(outBuffer + 7, "  ");
+    std::strcpy(outBuffer + 7, "  "); //-V2513
 
     if (ResistanceLess100())
     {
@@ -749,7 +749,7 @@ int DisplayMultimeter::Width()
     {
         result = S_MULT_RANGE_RESISTANCE_IS_10M ? 170 : 165;
     }
-    else if (S_MULT_MEASURE_IS_TEST_DIODE)
+    else if (S_MULT_MEASURE_IS_TEST_DIODE) //-V2516
     {
         result = 155;
     }

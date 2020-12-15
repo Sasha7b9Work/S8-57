@@ -89,7 +89,7 @@ void Measure::ChangeActive(int delta)
             row = TableMeasures::NumRows() - 1;
         }
     }
-    else if (col == TableMeasures::NumCols())
+    else if (col == TableMeasures::NumCols()) //-V2516
     {
         col = 0;
         row++;

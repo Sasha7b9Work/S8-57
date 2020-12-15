@@ -102,7 +102,7 @@ Color Color::MenuItem(bool shade)
     return shade ? Color(COLOR_MENU_ITEM_DARK) : Color(COLOR_MENU_ITEM);
 }
 
-Color Color::Contrast(Color color)
+Color Color::Contrast(Color color) //-V2506
 {
     uint colorValue = COLOR(color.value);
     if (R_FROM_COLOR(colorValue) > 16 || G_FROM_COLOR(colorValue) > 32 || B_FROM_COLOR(colorValue) > 16)
@@ -202,7 +202,7 @@ void ColorType::SetBrightness(float bright)
 */
 
 
-void ColorType::BrightnessChange(int delta)
+void ColorType::BrightnessChange(int delta) //-V2506
 {
     if ((delta > 0 && brightness == 1.0F) || (delta < 0 && brightness == 0.0F)) // -V550 //-V2550 //-V550
     {

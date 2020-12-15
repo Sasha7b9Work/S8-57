@@ -160,7 +160,7 @@ static bool AddToConsole(uint8 data) //-V2506
     if (step == 1)
     {
         allSymbols = data;
-        text = static_cast<char *>(std::malloc(allSymbols + 1U));
+        text = static_cast<char *>(std::malloc(allSymbols + 1U)); //-V2511
         recvSymbols = 0;
         return false;
     }
@@ -169,7 +169,7 @@ static bool AddToConsole(uint8 data) //-V2506
 
     if (recvSymbols == allSymbols)
     {
-        std::free(text);
+        std::free(text); //-V2511
     }
 
     return (recvSymbols == allSymbols);

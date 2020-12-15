@@ -199,7 +199,7 @@ void DrawGridSignal(int left, int top, int width, int height)
     {
         DrawGridType2(left, top, right, bottom, static_cast<int>(deltaX), static_cast<int>(deltaY), static_cast<int>(stepX), static_cast<int>(stepY));
     }
-    else if (S_DISP_TYPE_GRID_IS_3)
+    else if (S_DISP_TYPE_GRID_IS_3) //-V2516
     {
         DrawGridType3(left, top, right, bottom, static_cast<int>(centerX), static_cast<int>(centerY), static_cast<int>(deltaX), static_cast<int>(deltaY), static_cast<int>(stepX));
     }
@@ -386,7 +386,7 @@ static int DeltaHforLineGrid()
         {
             result = 73;
         }
-        else if (S_MEAS_ON_DISPLAY_IS_6_2)
+        else if (S_MEAS_ON_DISPLAY_IS_6_2) //-V2516
         {
             result = 83;
         }

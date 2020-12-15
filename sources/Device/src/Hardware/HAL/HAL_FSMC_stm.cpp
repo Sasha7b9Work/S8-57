@@ -242,7 +242,7 @@ uint8 HAL_BUS::FPGA::ReadA0() //-V2506
     {
         return VALUE::MIN;
     }
-    else if(result > VALUE::MAX)
+    else if(result > VALUE::MAX) //-V2516
     {
         return VALUE::MAX;
     }
@@ -261,7 +261,7 @@ uint8 HAL_BUS::FPGA::ReadA1() //-V2506
     {
         return VALUE::MIN;
     }
-    else if(result > VALUE::MAX)
+    else if(result > VALUE::MAX) //-V2516
     {
         return VALUE::MAX;
     }

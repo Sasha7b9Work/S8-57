@@ -148,7 +148,7 @@ void Display::Update()
         DrawButton(290, 55, "ДА");
         DrawButton(290, 195, "НЕТ");
     }
-    else if (FDrive::State() == State::Upgrade)
+    else if (FDrive::State() == State::Upgrade) //-V2516
     {
         Text("Подождите завершения").DrawInCenterRect(0, 0, 320, 190);
         Text("установки программного обеспечения").DrawInCenterRect(0, 0, 320, 220);

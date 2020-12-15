@@ -158,7 +158,7 @@ void FDrive::AttemptUpdate()
             Upgrade();
         }
     }
-    else if(state == State::WrongFlash)         // Диск не удалось примонтировать //-V774
+    else if(state == State::WrongFlash)         // Диск не удалось примонтировать //-V774 //-V2516
     {
         Timer::PauseOnTime(5000);
     }
@@ -203,21 +203,21 @@ bool FDrive::FileExist(const char *fileName) //-V2506
 {
     char nameFile[255];
     char f[255];
-    strcpy(f, fileName);
+    strcpy(f, fileName); //-V2513
     ToLower(f);
     StructForReadDir strd;
 
     if(GetNameFile("\\", 0, nameFile, &strd))
     {
         ToLower(nameFile);
-        if(strcmp(f, nameFile) == 0)
+        if(strcmp(f, nameFile) == 0) //-V2513
         {
             return true;
         }
         while(GetNextNameFile(nameFile, &strd))
         {
             ToLower(nameFile);
-            if(strcmp(f, nameFile) == 0)
+            if(strcmp(f, nameFile) == 0) //-V2513
             {
                 return true;
             }
@@ -231,8 +231,8 @@ bool FDrive::FileExist(const char *fileName) //-V2506
 
 static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, StructForReadDir *s) //-V2506
 {
-    memcpy(reinterpret_cast<uint8 *>(s->nameDir), const_cast<char *>(fullPath), strlen(fullPath));
-    s->nameDir[strlen(fullPath)] = '\0';
+    memcpy(reinterpret_cast<uint8 *>(s->nameDir), const_cast<char *>(fullPath), strlen(fullPath)); //-V2513
+    s->nameDir[strlen(fullPath)] = '\0'; //-V2513
 
     DIR *pDir = &s->dir;
     FILINFO *pFNO = &s->fno;
@@ -260,7 +260,7 @@ static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, St
             }
             if(numFile == numFiles && (pFNO->fattrib & AM_DIR) == 0)
             {
-                strcpy(nameFileOut, pFNO->fname);
+                strcpy(nameFileOut, pFNO->fname); //-V2513
                 return true;
             }
             if((pFNO->fattrib & AM_DIR) == 0 && (pFNO->fname[0] != '.'))
@@ -300,7 +300,7 @@ static bool GetNextNameFile(char *nameFileOut, StructForReadDir *s) //-V2506
         {
             if((pFNO->fattrib & AM_DIR) == 0 && pFNO->fname[0] != '.')
             {
-                strcpy(nameFileOut, pFNO->fname);
+                strcpy(nameFileOut, pFNO->fname); //-V2513
                 return true;
             }
         }

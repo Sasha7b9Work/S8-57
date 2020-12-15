@@ -204,7 +204,7 @@ static void LimitForTester(Range::E *range)
     {
         *range = Range::_5V;
     }
-    else if(*range < Range::_200mV)
+    else if(*range < Range::_200mV) //-V2516
     {
         *range = Range::_200mV;
     }

@@ -121,7 +121,7 @@ static void SetWave()
     {
         CalculateMeandr();
     }
-    else if(typeWave == TypeWave::Triangle) //-V547
+    else if(typeWave == TypeWave::Triangle) //-V547 //-V2516
     {
         CalculateTriangle();
     }

@@ -276,7 +276,7 @@ bool Record::IsCorrect() //-V2506
 
         return true;
     }
-    else if (set.crc32 == 0x00000000)
+    else if (set.crc32 == 0x00000000) //-V2516
     {
         for (uint *address = start; address < end; address++)
         {

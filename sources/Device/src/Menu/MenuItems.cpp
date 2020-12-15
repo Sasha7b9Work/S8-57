@@ -71,7 +71,7 @@ void Item::HandlerFX(TypePress::E type) const
     {
         pressedItem = this;
     }
-    else if (type == TypePress::Release || type == TypePress::Long)
+    else if (type == TypePress::Release || type == TypePress::Long) //-V2516
     {
         pressedItem = nullptr;
     }
@@ -287,7 +287,7 @@ void Page::HandlerFX(TypePress::E type) const
         OwnData()->funcOnOpenClose(true);
         SetAsCurrent();
     }
-    else if (type == TypePress::Long)
+    else if (type == TypePress::Long) //-V2516
     {
         if (!IsCurrentItem())
         {
@@ -333,14 +333,14 @@ bool Page::HandlerKey(const KeyEvent &event)
     {
         result = true;
     }
-    else if (event.IsPress())
+    else if (event.IsPress()) //-V2516
     {
         if (event.IsArrowLeft())
         {
             ChangeSubPage(-1);
             result = true;
         }
-        else if (event.IsArrowRight())
+        else if (event.IsArrowRight()) //-V2516
         {
             ChangeSubPage(1);
             result = true;
@@ -399,7 +399,7 @@ void Page::ChangeSubPage(int delta)
         Beeper::RegulatorSwitchRotate();
         SetCurrentSubPage(CurrentSubPage() + 1);
     }
-    else if (delta < 0 && CurrentSubPage() > 0)
+    else if (delta < 0 && CurrentSubPage() > 0) //-V2516
     {
         Beeper::RegulatorSwitchRotate();
         SetCurrentSubPage(CurrentSubPage() - 1);
@@ -474,7 +474,7 @@ void Governor::HandlerFX(TypePress::E type) const
             }
         }
     }
-    else if (type == TypePress::Long)
+    else if (type == TypePress::Long) //-V2516
     {
         if (!IsCurrentItem())
         {
@@ -523,7 +523,7 @@ float Governor::Step() const
             {
                 delta = -0.001F;
             }
-            else if (delta < -numLines)
+            else if (delta < -numLines) //-V2516
             {
                 tsGovernor.dir = DIRECTION::NONE;
                 SetValue(PrevValue());
@@ -538,7 +538,7 @@ float Governor::Step() const
             {
                 delta = 0.001F;
             }
-            else if (delta > numLines)
+            else if (delta > numLines) //-V2516
             {
                 tsGovernor.dir = DIRECTION::NONE;
                 SetValue(NextValue());
@@ -613,7 +613,7 @@ bool Governor::HandlerKey(const KeyEvent &event) //-V2506
             return true;
         }
     }
-    else if (event.IsArrowUp() || event.IsArrowDown())
+    else if (event.IsArrowUp() || event.IsArrowDown()) //-V2516
     {
         if (event.IsPress() || event.IsRepeat())
         {
@@ -703,7 +703,7 @@ void Choice::HandlerFX(TypePress::E type) const
             ChangeIndex(1);
         }
     }
-    else if (type == TypePress::Long)
+    else if (type == TypePress::Long) //-V2516
     {
         if(IsActive())
         {
@@ -923,7 +923,7 @@ void GovernorColor::HandlerFX(TypePress::E type) const
             }
         }
     }
-    else if (type == TypePress::Long)
+    else if (type == TypePress::Long) //-V2516
     {
         if (!IsCurrentItem())
         {
@@ -963,7 +963,7 @@ bool GovernorColor::HandlerKey(const KeyEvent &event) //-V2506
 
             return true;
         }
-        else if (event.IsArrowDown())
+        else if (event.IsArrowDown()) //-V2516
         {
             ct->BrightnessChange(-1);
 
@@ -978,7 +978,7 @@ bool GovernorColor::HandlerKey(const KeyEvent &event) //-V2506
 
             return true;
         }
-        else if (event.IsArrowDown())
+        else if (event.IsArrowDown()) //-V2516
         {
             ct->ComponentChange(-1);
 

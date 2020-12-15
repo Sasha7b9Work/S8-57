@@ -72,7 +72,7 @@ static bool FontIsSmall()
 }
 
 
-uint8 PFont::GetWidth(uint8 symbol)
+uint8 PFont::GetWidth(uint8 symbol) //-V2506
 {
     if (FontIsSmall())
     {
@@ -89,7 +89,7 @@ uint8 PFont::GetWidth(char symbol)
 }
 
 
-uint8 PFont::GetHeight()
+uint8 PFont::GetHeight() //-V2506
 {
     if (FontIsSmall())
     {
@@ -100,7 +100,7 @@ uint8 PFont::GetHeight()
 }
 
 
-bool PFont::RowNotEmpty(uint8 symbol, int row)
+bool PFont::RowNotEmpty(uint8 symbol, int row) //-V2506
 {
     if (FontIsSmall())
     {
@@ -111,7 +111,7 @@ bool PFont::RowNotEmpty(uint8 symbol, int row)
 }
 
 
-bool PFont::BitIsExist(uint8 symbol, int row, int bit)
+bool PFont::BitIsExist(uint8 symbol, int row, int bit) //-V2506
 {
     if (FontIsSmall())
     {

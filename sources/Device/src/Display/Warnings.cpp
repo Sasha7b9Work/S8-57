@@ -38,7 +38,7 @@ static bool BackMessagesSame() //-V2506
         return false;
     }
 
-    return (std::strcmp(warnings[warnings.Size() - 2].message.c_str(), warnings[warnings.Size() - 1].message.c_str()) == 0);
+    return (std::strcmp(warnings[warnings.Size() - 2].message.c_str(), warnings[warnings.Size() - 1].message.c_str()) == 0); //-V2513
 }
 
 

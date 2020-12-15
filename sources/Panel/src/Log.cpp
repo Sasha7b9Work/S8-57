@@ -24,7 +24,7 @@ void Log::Write(TypeTrace type, const char *format, ...)
     if (type == TypeTrace_Error)
     {
         buffer[0] = 0;
-        std::strcat(buffer, "!!! ERROR !!! ");
+        std::strcat(buffer, "!!! ERROR !!! "); //-V2513
         while (*pointer++) {};
         ++pointer;
     }
@@ -51,21 +51,21 @@ void Log::Trace(TypeTrace type, const char *module, const char *func, int numLin
 
     if (type == TypeTrace_Error)
     {
-        std::strcat(message, "!!!ERROR!!! ");
+        std::strcat(message, "!!!ERROR!!! "); //-V2513
     }
     else if (type == TypeTrace_Info) //-V547
     {
-        std::strcat(message, "            ");
+        std::strcat(message, "            "); //-V2513
     }
     else
     {
         // больше типов нет
     }
 
-    std::strcat(message, module);
-    std::strcat(message, " ");
-    std::strcat(message, func);
-    std::strcat(message, numBuffer);
+    std::strcat(message, module); //-V2513
+    std::strcat(message, " "); //-V2513
+    std::strcat(message, func); //-V2513
+    std::strcat(message, numBuffer); //-V2513
     AddToConsole(message);
     AddToConsole(buffer);
 }
@@ -73,15 +73,15 @@ void Log::Trace(TypeTrace type, const char *module, const char *func, int numLin
 
 static void AddToConsole(const char *text)
 {
-    uint8 *buffer = static_cast<uint8 *>(std::malloc(std::strlen(text) + 3U));
+    uint8 *buffer = static_cast<uint8 *>(std::malloc(std::strlen(text) + 3U)); //-V2511 //-V2513
 
     if (buffer)
     {
         buffer[0] = Command::AddToConsole;
-        buffer[1] = static_cast<uint8>(std::strlen(text));
-        std::strcpy(reinterpret_cast<char *>(buffer + 1), text);
-        HAL_BUS::SendToDevice(buffer, std::strlen(text) + 2);
+        buffer[1] = static_cast<uint8>(std::strlen(text)); //-V2513
+        std::strcpy(reinterpret_cast<char *>(buffer + 1), text); //-V2513
+        HAL_BUS::SendToDevice(buffer, std::strlen(text) + 2); //-V2513
 
-        std::free(buffer);
+        std::free(buffer); //-V2511
     }
 }

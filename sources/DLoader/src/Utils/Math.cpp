@@ -32,8 +32,8 @@ void Math::Smoothing(uint8 *data, int numPoints, int numSmooth) //-V2506
         return;
     }
 
-    float *buffer = static_cast<float *>(std::malloc(static_cast<size_t>(numPoints * sizeof(float))));
-    int  *num = static_cast<int *>(std::malloc(static_cast<size_t>(numPoints * sizeof(int))));
+    float *buffer = static_cast<float *>(std::malloc(static_cast<size_t>(numPoints * sizeof(float)))); //-V2511
+    int  *num = static_cast<int *>(std::malloc(static_cast<size_t>(numPoints * sizeof(int)))); //-V2511
 
     for (int i = 1; i < numPoints; i++)
     {
@@ -56,8 +56,8 @@ void Math::Smoothing(uint8 *data, int numPoints, int numSmooth) //-V2506
         data[i] = static_cast<uint8>(buffer[i] / num[i] + 0.5F);
     }
 
-    std::free(buffer);
-    std::free(num);
+    std::free(buffer); //-V2511
+    std::free(num); //-V2511
 }
 
 

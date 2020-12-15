@@ -133,7 +133,7 @@ void Menu::ProcessButtonForHint(Key::E button)
             "1. Кнопка РАЗВ открывает меню настроек развертки.\n"
             "2. Нажатие и удержание кнопки РАЗВ в течение 0.5с устанавливает смещение по горизонтали 0с.";
     }
-    else if (button == Key::Trig)
+    else if (button == Key::Trig) //-V2516
     {
         stringForHint =
             "1. Кнопка СИНХР открывает меню настроек синхронизации.\n"
@@ -176,7 +176,7 @@ void Menu::ChangeStateFlashDrive()
             OpenedItem()->HandlerFX(TypePress::Release);
         }
     }
-    else if(S_MEM_FLASH_AUTO_CONNECT)
+    else if(S_MEM_FLASH_AUTO_CONNECT) //-V2516
     {
         PageMemory::OnOpenClose_Drive_Manager();
     }
@@ -457,7 +457,7 @@ void Menu::DrawHint()
         {
             Text(stringForHint).DrawInBoundedRectWithTransfers(x, y, width, Color::BACK, Color::WHITE);
         }
-        else if (itemHint)
+        else if (itemHint) //-V2516
         {
             DrawHintItem(x, y, width);
         }
@@ -533,7 +533,7 @@ Page *Menu::PageFromName(PageName::E name) //-V2506
         {
             break;
         }
-        else if(pages[i]->GetName() == name)
+        else if(pages[i]->GetName() == name) //-V2516
         {
             return const_cast<Page *>(pages[i]);
         }

@@ -75,7 +75,7 @@ static float CalculatePercents(float volts) //-V2506
     {
         return 100.0F;
     }
-    else if (volts <= Voltage0())
+    else if (volts <= Voltage0()) //-V2516
     {
         return 0.0F;
     }

@@ -27,7 +27,7 @@ void Queue<T>::Destroy()
 {
     if (pointer != nullptr)
     {
-        delete[] pointer;
+        delete[] pointer; //-V2511
         pointer = nullptr;
         iFront = 0;
         iBack = 0;
@@ -40,7 +40,7 @@ void Queue<T>::Push(T elem)
 {
     if (pointer == nullptr)
     {
-        pointer = new T[1];
+        pointer = new T[1]; //-V2511
         *pointer = elem;
         iFront = 0;
         iBack = 1;
@@ -49,7 +49,7 @@ void Queue<T>::Push(T elem)
     {
         T *temp = pointer;
         int num = iBack - iFront + 1;
-        pointer = new T[static_cast<uint>(num)];
+        pointer = new T[static_cast<uint>(num)]; //-V2511
         for (int i = 0; i < num - 1; i++)
         {
             pointer[i] = temp[i + iFront];
@@ -57,7 +57,7 @@ void Queue<T>::Push(T elem)
         pointer[num - 1] = elem;
         iFront = 0;
         iBack = num;
-        delete[] temp;
+        delete[] temp; //-V2511
     }
 }
 

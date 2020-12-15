@@ -90,7 +90,7 @@ static const char *Process(const char *buffer, const StructSCPI strct[]) //-V250
             {
                 return ProcessNode(end, strct);
             }
-            else if (strct->IsLeaf())
+            else if (strct->IsLeaf()) //-V2516
             {
                 return ProcessLeaf(end, strct);
             }
@@ -217,7 +217,7 @@ static bool RemoveSeparatorsSequenceFromBegin()
 
 void SCPI::SendAnswer(pCHAR message)
 {
-    if(message[std::strlen(message) - 1] != 0x0D)
+    if(message[std::strlen(message) - 1] != 0x0D) //-V2513
     {
         String msg(message);
         msg.Append(0x0D);
@@ -271,7 +271,7 @@ static bool ProcessTest(const StructSCPI strct[]) //-V2504 //-V2506
                 return false;
             }
         }
-        else if(strct->IsLeaf())
+        else if(strct->IsLeaf()) //-V2516
         {
             if(!strct->test())
             {
@@ -326,7 +326,7 @@ void SCPI::SendMeasure(const String &str)
         else if (symbol == 'À')    { symbol = 'A'; }
         else if (symbol == 'Ì')    { symbol = 'M'; }
         else if (symbol == 'ê')    { symbol = 'k'; }
-        else if ((symbol == 'Ã') && (str[i + 1] == 'ö'))
+        else if ((symbol == 'Ã') && (str[i + 1] == 'ö')) //-V2516
         {
             message.Append('H');  message.Append('z');  i++; continue;
         }

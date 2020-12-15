@@ -350,7 +350,7 @@ static bool TestScale() //-V2506
         Range::E range = static_cast<Range::E>(std::rand() % Range::Count);
         String commandA(":channel1:range%s%c", rangeName[range], 0x0D);
 
-        SCPI_APPEND_STRING(commandA);
+        SCPI_APPEND_STRING(commandA); //-V2513
 
         if(S_RANGE_A != range)
         {
@@ -360,7 +360,7 @@ static bool TestScale() //-V2506
         range = static_cast<Range::E>(std::rand() % Range::Count);
         String commandB(":channel2:range%s%c", rangeName[range], 0x0D);
 
-        SCPI_APPEND_STRING(commandB);
+        SCPI_APPEND_STRING(commandB); //-V2513
 
         if(S_RANGE_B != range)
         {
