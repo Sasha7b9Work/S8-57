@@ -157,7 +157,7 @@ DEF_CHOICE_2( cShiftXtype,                                                      
     S_LINKING_TSHIFT, &PageTime::self, Item::Active, Choice::Changed, Choice::AfterDraw
 )
 
-DEF_PAGE_3( pTime,                                                                                                                                                        //--- РАЗВЕРТКА ---
+DEF_PAGE_3( pTime,                                                                                                                                                        //--- РАЗВЕРТКА --- //-V2567
     "РАЗВ",
     "Содержит настройки развёртки",
     &cPeakDet,

@@ -102,7 +102,7 @@ DEF_GRAPH_BUTTON( bDelete,                                                      
 )
 
 
-DEF_PAGE_5( pChoice,
+DEF_PAGE_5( pChoice, //-V2567
     "ВЫБОР",
     "Выбор сигнала для показа",
     &bPrevious,

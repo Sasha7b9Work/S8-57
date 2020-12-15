@@ -86,7 +86,7 @@ float ExtRAM::Test1()
         address++;
     }
 
-    return bad * 100.0F / SIZE;
+    return bad * 100.0F / SIZE; //-V2564
 }
 
 
@@ -122,7 +122,7 @@ float ExtRAM::Test2()
         }
     }
 
-    return (bad * 100.0F) / SIZE;
+    return (bad * 100.0F) / SIZE; //-V2564
 }
 
 
@@ -164,7 +164,7 @@ float ExtRAM::TestTime1kB(uint8 *address) //-V2506
 
     Read(out, SIZE_BUFFER, address);
 
-    float time = (Timer::TimeUS() - start) / 1e6F;
+    float time = (Timer::TimeUS() - start) / 1e6F; //-V2564
 
     for(int i = 0; i < SIZE_BUFFER; i++)
     {

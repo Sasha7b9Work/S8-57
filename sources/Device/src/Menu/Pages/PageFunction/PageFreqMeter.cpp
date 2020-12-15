@@ -94,7 +94,7 @@ DEF_CHOICE_6( cNumPeriods,                                                      
 )
 
 
-DEF_PAGE_5_VAR( pFreqMeter,                                                                                                                                    //--- ‘”Õ ÷»ﬂ - ◊¿—“Œ“ŒÃ≈– ---
+DEF_PAGE_5_VAR( pFreqMeter,                                                                                                                                    //--- ‘”Õ ÷»ﬂ - ◊¿—“Œ“ŒÃ≈– --- //-V2567
     "◊¿—“Œ“ŒÃ≈–",
     "",
     &cEnable,
@@ -111,18 +111,18 @@ const Page * const PageFreqMeter::self = static_cast<const Page *>(&pFreqMeter);
 
 void PageFreqMeter::Init()
 {
-    Page *page = const_cast<Page *>(PageFreqMeter::self);
+    Page *page = const_cast<Page *>(PageFreqMeter::self); //-V2567
 
-    Item **items = const_cast<Item **>(page->OwnData()->items);
+    Item **items = const_cast<Item **>(page->OwnData()->items); //-V2567
 
     if (S_FREQ_MODE_MEASURE_IS_FREQUENCY)
     {
-        items[2] = const_cast<Choice *>(&cTimeF); //-V2563
+        items[2] = const_cast<Choice *>(&cTimeF); //-V2563 //-V2567
         items[3] = &Item::empty; //-V2563
     }
     else if (S_FREQ_MODE_MEASURE_IS_PERIOD) //-V2516
     {
-        items[2] = const_cast<Choice *>(&cFreqClc); //-V2563
-        items[3] = const_cast<Choice *>(&cNumPeriods); //-V2563
+        items[2] = const_cast<Choice *>(&cFreqClc); //-V2563 //-V2567
+        items[3] = const_cast<Choice *>(&cNumPeriods); //-V2563 //-V2567
     }
 }

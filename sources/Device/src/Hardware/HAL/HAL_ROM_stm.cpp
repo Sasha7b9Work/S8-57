@@ -50,7 +50,7 @@ const Sector HAL_ROM::sectors[Sector::Count] =
 
 void Sector::Erase() const
 {
-    CLEAR_FLASH_FLAGS;
+    CLEAR_FLASH_FLAGS; //-V2571
 
     HAL_FLASH_Unlock();
 
@@ -73,7 +73,7 @@ void Sector::Erase() const
 
 void HAL_ROM::WriteBytes(uint address, const uint8 *data, int size)
 {
-    CLEAR_FLASH_FLAGS;
+    CLEAR_FLASH_FLAGS; //-V2571
 
     HAL_FLASH_Unlock();
 
@@ -89,7 +89,7 @@ void HAL_ROM::WriteBytes(uint address, const uint8 *data, int size)
 
 void HAL_ROM::Fill(uint address, uint8 value, int size)
 {
-    CLEAR_FLASH_FLAGS;
+    CLEAR_FLASH_FLAGS; //-V2571
 
     HAL_FLASH_Unlock();
 
@@ -107,13 +107,13 @@ void HAL_ROM::WriteBufferBytes(uint address, const void *buffer, int size)
 {
     Beeper::WaitForCompletion();
 
-    CLEAR_FLASH_FLAGS
+    CLEAR_FLASH_FLAGS //-V2571
 
     HAL_FLASH_Unlock();
 
     for (int i = 0; i < size; i++)
     {
-        uint64_t data = static_cast<uint8 *>(const_cast<void *>(buffer))[i]; //-V2563
+        uint64_t data = static_cast<uint8 *>(const_cast<void *>(buffer))[i]; //-V2563 //-V2567 //-V2571
         HAL_FLASH_Program(TYPEPROGRAM_BYTE, address, data);
         address++;
     }

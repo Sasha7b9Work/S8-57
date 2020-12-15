@@ -3,8 +3,8 @@
 #define DEBUG
 
 #ifdef WIN32
-#define __attribute(x)
-#define __attribute__(x)
+#define __attribute(x) //-V2573
+#define __attribute__(x) //-V2573
 #endif
 
 
@@ -34,7 +34,7 @@ typedef signed   char  int8_t;
 typedef unsigned short uint16_t;
 typedef unsigned int   uint32_t;
 #ifndef __IO
-#define __IO
+#define __IO //-V2573
 #endif
 #else
 #define nullptr 0 //-V1059
@@ -60,10 +60,10 @@ void EmptyFuncVB(bool);
 #endif
 
 
-#define _SET_BIT_VALUE(value, numBit, bitValue) ((value) |= ((bitValue) << (numBit)))
-#define _GET_BIT(value, numBit) (((value) >> (numBit)) & 1)
-#define _CLEAR_BIT(value, bit) ((value) &= (~(1 << (bit))))
-#define _SET_BIT(value, bit) ((value) |= (1 << (bit)))
+#define _SET_BIT_VALUE(value, numBit, bitValue) ((value) |= ((bitValue) << (numBit))) //-V2573
+#define _GET_BIT(value, numBit) (((value) >> (numBit)) & 1) //-V2573
+#define _CLEAR_BIT(value, bit) ((value) &= (~(1 << (bit)))) //-V2573
+#define _SET_BIT(value, bit) ((value) |= (1 << (bit))) //-V2573
 
 
 #define _bitset(bits)                               \

@@ -1,12 +1,12 @@
 #ifndef __STM32F4xx_HAL_CONF_H
-#define __STM32F4xx_HAL_CONF_H
+#define __STM32F4xx_HAL_CONF_H //-V2573
 
 
-#define __weak __attribute__((weak))
-#define __packed __attribute__((packed))
+#define __weak __attribute__((weak)) //-V2573
+#define __packed __attribute__((packed)) //-V2573
 
 #ifdef MSVC
-#define __attribute(x)
+#define __attribute(x) //-V2573
 #endif
 
 #ifdef __cplusplus

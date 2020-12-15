@@ -27,7 +27,7 @@ static PanelButton pressedButton = B_Empty;
 
 static SPI_HandleTypeDef handleSPI =
 {
-    SPI1,
+    SPI1, //-V2571
     {
         SPI_MODE_SLAVE,                 // Init.Mode    
         SPI_DIRECTION_2LINES,           // Init.Direction
@@ -156,7 +156,7 @@ void HAL_SPI_RxCpltCallback(SPI_HandleTypeDef* hSPI)
         HAL_SPI_Init(hSPI);
     }
 
-    SPI1->DR = 0;
+    SPI1->DR = 0; //-V2571
 }
 
 

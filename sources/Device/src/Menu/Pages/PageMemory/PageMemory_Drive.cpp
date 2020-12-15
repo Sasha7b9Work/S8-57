@@ -46,7 +46,7 @@ DEF_CHOICE_2(cAutoconnect,                                                      
 )
 
 
-DEF_PAGE_1(pDrive,   //-V1027                                                                                                                                     //--- ÏÀÌ‗ÒÜ - ÂÍÅØÍ ÇÓ ---
+DEF_PAGE_1(pDrive,   //-V1027                                                                                                                                     //--- ÏÀÌ‗ÒÜ - ÂÍÅØÍ ÇÓ --- //-V2567
     "ÂÍÅØÍ ÇÓ",
     "Ðאבמעא ס גםורםטל חאןמלטםא‏שטל ףסענמיסעגמל.",
     &cModeBtnMemory,

@@ -27,7 +27,7 @@ static void DrawPageContent()
 
     while(currentPage->pages[numPage])
     {
-        Page *page = reinterpret_cast<Page *>(currentPage->pages[numPage]);
+        Page *page = reinterpret_cast<Page *>(currentPage->pages[numPage]); //-V2567 //-V2571
         const char *title = page->Title().c_str();
         if(currentParagraph == numPage)
         {
@@ -119,7 +119,7 @@ void HelpContent::EnterParagraph()
 {
     if(currentPage->type == TypePage_Content)
     {
-        currentPage = static_cast<const PageHelpContent *>(currentPage->pages[currentParagraph]);
+        currentPage = static_cast<const PageHelpContent *>(currentPage->pages[currentParagraph]); //-V2571
     }
     currentParagraph = 0;
 }
@@ -130,7 +130,7 @@ void HelpContent::LeaveParagraph()
     currentParagraph = 0;
     if(currentPage->parent)
     {
-        currentPage = static_cast<const PageHelpContent *>(currentPage->parent);
+        currentPage = static_cast<const PageHelpContent *>(currentPage->parent); //-V2571
     }
 }
 

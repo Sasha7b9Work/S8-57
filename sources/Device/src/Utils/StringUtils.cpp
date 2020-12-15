@@ -133,7 +133,7 @@ bool SU::GetWord(const char *string, Word *word, const int numWord) //-V2506
     {
         if (currentWord == numWord)
         {
-            word->address = const_cast<char *>(string);
+            word->address = const_cast<char *>(string); //-V2567
             ChooseSymbols(&string);
             word->numSymbols = static_cast<int8>(string - word->address);
 
@@ -193,14 +193,14 @@ bool SU::EqualsZeroStrings(char *str1, char *str2) //-V2506
 
 bool SU::EqualsStrings(uint8 *str1, const char * const str2, int size)
 {
-    return EqualsStrings(static_cast<void *>(str1), const_cast<char *>(str2), size);
+    return EqualsStrings(static_cast<void *>(str1), const_cast<char *>(str2), size); //-V2567
 }
 
 
 bool SU::EqualsStrings(void *_str1, void *_str2, int size) //-V2506
 {
-    char *str1 = static_cast<char *>(_str1);
-    char *str2 = static_cast<char *>(_str2);
+    char *str1 = static_cast<char *>(_str1); //-V2571
+    char *str2 = static_cast<char *>(_str2); //-V2571
 
     for (int i = 0; i < size; i++)
     {
@@ -270,7 +270,7 @@ float SU::StringToFloat(const char *string)
 
         while (stack.Size() > 0)
         {
-            result += static_cast<float>(pow) * stack.Pop();
+            result += static_cast<float>(pow) * stack.Pop(); //-V2564
             pow *= 10;
         }
     }
@@ -290,7 +290,7 @@ float SU::StringToFloat(const char *string)
             {
                 break;
             }
-            result += pow * (symbol & 0x0f);
+            result += pow * (symbol & 0x0f); //-V2564
             pow /= 10.0F;
             string++;
         }
@@ -429,14 +429,14 @@ bool SU::String2Int(const char *buffer, int *value, char **end)
 
     if (*end == string.DataChar())
     {
-        *end = const_cast<char *>(buffer);
+        *end = const_cast<char *>(buffer); //-V2567
     }
     else
     {
-        *end = const_cast<char *>(buffer) + (*end - string.DataChar()); //-V2563
+        *end = const_cast<char *>(buffer) + (*end - string.DataChar()); //-V2563 //-V2567
     }
 
-    return (*end != const_cast<char *>(buffer));
+    return (*end != const_cast<char *>(buffer)); //-V2567
 }
 
 

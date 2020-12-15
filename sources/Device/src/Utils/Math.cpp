@@ -97,7 +97,7 @@ void Math::Smoothing(uint8 *data, int numPoints, int numSmooth) //-V2506
                 int index = i + j;
                 if (index >= 1 && index < numPoints)
                 {
-                    buffer[i] += data[index]; //-V2563
+                    buffer[i] += data[index]; //-V2563 //-V2564
                     ++num[i]; //-V2563
                 }
             }
@@ -105,7 +105,7 @@ void Math::Smoothing(uint8 *data, int numPoints, int numSmooth) //-V2506
 
         for (int i = 1; i < numPoints; i++)
         {
-            data[i] = static_cast<uint8>(buffer[i] / num[i] + 0.5F); //-V2563
+            data[i] = static_cast<uint8>(buffer[i] / num[i] + 0.5F); //-V2563 //-V2564
         }
     }
 
@@ -267,7 +267,7 @@ float Math::GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, in
         return static_cast<float>(x1);
     }
 
-    return (yHorLine - y0) / (static_cast<float>(y1 - y0) / static_cast<float>(x1 - x0)) + x0;
+    return (yHorLine - y0) / (static_cast<float>(y1 - y0) / static_cast<float>(x1 - x0)) + x0; //-V2564
 }
 
 
@@ -329,7 +329,7 @@ uint8 Math::CalculateFiltr(const uint8 *data, int x, int numPoints, int numSmoot
         }
     }
 
-    return static_cast<uint8>(sum / static_cast<float>(count));
+    return static_cast<uint8>(sum / static_cast<float>(count)); //-V2564
 }
 
 
@@ -370,7 +370,7 @@ void Math::CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoint
                 }
             }
 
-            dataOut[i] = static_cast<uint8>(sum / static_cast<float>(count)); //-V2563
+            dataOut[i] = static_cast<uint8>(sum / static_cast<float>(count)); //-V2563 //-V2564
         }
     }
 }
@@ -425,7 +425,7 @@ float Math::RoundFloat(float value, int numDigits)
     if (digsInInt < numDigits)  // Подстрахуемся
     {
         int pow = Pow10(numDigits - digsInInt);
-        absValue = (static_cast<int>(absValue * pow + 0.5F)) / static_cast<float>(pow);
+        absValue = (static_cast<int>(absValue * pow + 0.5F)) / static_cast<float>(pow); //-V2564
     }
 
     return value > 0.0F ? absValue : -absValue;
@@ -617,8 +617,8 @@ void Math::AdditionThisLimitation(T *value, int term, T min, T max)
 float Math::RandFloat(float min, float max)
 {
     float range = max - min;
-    float scale = range / RAND_MAX;
-    return min + scale * std::rand();
+    float scale = range / RAND_MAX; //-V2564
+    return min + scale * std::rand(); //-V2564
 }
 
 

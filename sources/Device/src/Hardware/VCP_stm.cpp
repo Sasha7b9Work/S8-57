@@ -36,7 +36,7 @@ void VCP::Init()
 
 static bool PrevSendingComplete()
 {
-    USBD_CDC_HandleTypeDef *pCDC = static_cast<USBD_CDC_HandleTypeDef *>(hUSBD.pClassData);
+    USBD_CDC_HandleTypeDef *pCDC = static_cast<USBD_CDC_HandleTypeDef *>(hUSBD.pClassData); //-V2571
     return pCDC->TxState == 0;
 }
 
@@ -64,7 +64,7 @@ void VCP::Flush()
 {
     if (sizeBuffer)
     {
-        volatile USBD_CDC_HandleTypeDef *pCDC = static_cast<USBD_CDC_HandleTypeDef *>(hUSBD.pClassData);
+        volatile USBD_CDC_HandleTypeDef *pCDC = static_cast<USBD_CDC_HandleTypeDef *>(hUSBD.pClassData); //-V2571
 
         while (pCDC->TxState == 1) {}; //-V712
 
@@ -81,13 +81,13 @@ void VCP::SendDataSynch(const void *_buffer, int size)
 {
     if (VCP::connectedToUSB)
     {
-        char *buffer = static_cast<char *>(const_cast<void *>(_buffer));
+        char *buffer = static_cast<char *>(const_cast<void *>(_buffer)); //-V2567 //-V2571
         if (size == 0)
         {
             size = static_cast<int>(std::strlen(buffer)); //-V2513
         }
 
-        volatile USBD_CDC_HandleTypeDef *pCDC = static_cast<USBD_CDC_HandleTypeDef *>(hUSBD.pClassData);
+        volatile USBD_CDC_HandleTypeDef *pCDC = static_cast<USBD_CDC_HandleTypeDef *>(hUSBD.pClassData); //-V2571
     
         do 
         {
@@ -118,7 +118,7 @@ void VCP::SendDataSynch(const void *_buffer, int size)
 
 void VCP::SendStringAsynch(const char *data)
 {
-    SendDataAsynch(reinterpret_cast<uint8 *>(const_cast<char *>(data)), static_cast<int>(std::strlen(data))); //-V2513
+    SendDataAsynch(reinterpret_cast<uint8 *>(const_cast<char *>(data)), static_cast<int>(std::strlen(data))); //-V2513 //-V2567
 }
 
 

@@ -49,7 +49,7 @@ void BufferMissingPoints::Pop(BitSet16 *a, BitSet16 *b)
 
 Point16 *Point16::Next(Record *record) const
 {
-    return const_cast<Point16 *>(reinterpret_cast<const Point16 *>(reinterpret_cast<const uint8 *>(this) + record->bytesOnPoint)); //-V2563
+    return const_cast<Point16 *>(reinterpret_cast<const Point16 *>(reinterpret_cast<const uint8 *>(this) + record->bytesOnPoint)); //-V2563 //-V2567
 }
 
 
@@ -186,8 +186,8 @@ void Record::Interpolate(int num1, int num2)
     PointFloat *point1 = ValueSensor(num1);
     PointFloat *point2 = ValueSensor(num2);
 
-    float dMIN = (point2->min - point1->min) / (num2 - num1);
-    float dMAX = (point2->max - point2->min) / (num2 - num1);
+    float dMIN = (point2->min - point1->min) / (num2 - num1); //-V2564
+    float dMAX = (point2->max - point2->min) / (num2 - num1); //-V2564
 
     for (int i = num1 + 1; i < num2; i++)
     {

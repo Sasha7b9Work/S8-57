@@ -46,7 +46,7 @@ static void DrawDataInRect(int x, int y, int width, int height, const uint8 *dat
     }
 
     int numIntervals = width + 1;                               // Количество интервалов, в которых будем рисовать наш сигнал - фактически, количество вертикальных линий
-    float pointsInInterval = static_cast<float>(length) / numIntervals;      // Количество точек, рисуемых в одном интервале.
+    float pointsInInterval = static_cast<float>(length) / numIntervals;      // Количество точек, рисуемых в одном интервале. //-V2564
 
     float stepY = static_cast<float>(height) / static_cast<float>(VALUE::MAX - VALUE::MIN);
 
@@ -54,8 +54,8 @@ static void DrawDataInRect(int x, int y, int width, int height, const uint8 *dat
 
     for (int i = 0; i < numIntervals - 1; i++)
     {
-        int start = static_cast<int>(i * pointsInInterval + 0.5F);          // Начальная точка в интервале
-        int end = static_cast<int>((i + 1) * pointsInInterval + 0.5F) - 1;  // Конечная точка в интервале
+        int start = static_cast<int>(i * pointsInInterval + 0.5F);          // Начальная точка в интервале //-V2564
+        int end = static_cast<int>((i + 1) * pointsInInterval + 0.5F) - 1;  // Конечная точка в интервале //-V2564
 
         int min = 255;
         int max = 0;
@@ -82,8 +82,8 @@ static void DrawDataInRect(int x, int y, int width, int height, const uint8 *dat
 
         if(needDraw)
         {
-            int deltaMIN = static_cast<int>(min * stepY + 0.5F);
-            int deltaMAX = static_cast<int>(max * stepY + 0.5F);
+            int deltaMIN = static_cast<int>(min * stepY + 0.5F); //-V2564
+            int deltaMAX = static_cast<int>(max * stepY + 0.5F); //-V2564
 
             VLine(deltaMIN - deltaMAX).Draw(x + i, y0 - deltaMIN);
         }
@@ -93,11 +93,11 @@ static void DrawDataInRect(int x, int y, int width, int height, const uint8 *dat
 
 static void DrawScreenArea()
 {
-    float relBegin = static_cast<float>(DisplayOsci::ShiftInMemory::Get()) / ENumPointsFPGA::PointsInChannel();          // Относительное начало экранной области относительно всей памяти
-    float relWidth = static_cast<float>(Grid::Width() + 1) / ENumPointsFPGA::PointsInChannel();        // Относительное (относительно всей шириный окна) ширина видимой области
+    float relBegin = static_cast<float>(DisplayOsci::ShiftInMemory::Get()) / ENumPointsFPGA::PointsInChannel();          // Относительное начало экранной области относительно всей памяти //-V2564
+    float relWidth = static_cast<float>(Grid::Width() + 1) / ENumPointsFPGA::PointsInChannel();        // Относительное (относительно всей шириный окна) ширина видимой области //-V2564
 
-    int begin = static_cast<int>(relBegin * DisplayOsci::MemoryWindow::Width() + 0.5F);                 // Реальное начало экранной области относительно начала окна памяти
-    int width = static_cast<int>(relWidth * DisplayOsci::MemoryWindow::Width() + 0.5F);                 // Реальная ширина видимой области
+    int begin = static_cast<int>(relBegin * DisplayOsci::MemoryWindow::Width() + 0.5F);                 // Реальное начало экранной области относительно начала окна памяти //-V2564
+    int width = static_cast<int>(relWidth * DisplayOsci::MemoryWindow::Width() + 0.5F);                 // Реальная ширина видимой области //-V2564
 
     Region(width, DisplayOsci::MemoryWindow::Height()).Fill(DisplayOsci::MemoryWindow::X() + begin, DisplayOsci::MemoryWindow::Y(), Color::GRAY_20);
 

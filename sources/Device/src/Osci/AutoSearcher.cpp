@@ -219,7 +219,7 @@ static bool FindFrequencyForRange(Chan::E ch, Range::E range, uint timeWaitMS, f
 
         if (counterFreq.word > 10)
         {
-            *outFreq = counterFreq.word * 10.0F;
+            *outFreq = counterFreq.word * 10.0F; //-V2564
         }
         else
         {
@@ -231,7 +231,7 @@ static bool FindFrequencyForRange(Chan::E ch, Range::E range, uint timeWaitMS, f
 
             BitSet32 counterPeriod = FreqMeter::FPGA::ReadCounterPeriod();
 
-            *outFreq = 1.0F / (counterPeriod.word * 10e-9F);
+            *outFreq = 1.0F / (counterPeriod.word * 10e-9F); //-V2564
         }
 
         return true;

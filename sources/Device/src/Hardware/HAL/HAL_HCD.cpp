@@ -12,10 +12,10 @@ void *HAL_HCD::handleHCD = &hHCD;
 
 void HAL_HCD::Init()
 {
-    __GPIOB_CLK_ENABLE();
-    __USB_OTG_HS_CLK_ENABLE(); //-V760
-    __HAL_RCC_USB_OTG_HS_CLK_ENABLE();
-    __SYSCFG_CLK_ENABLE();
+    __GPIOB_CLK_ENABLE(); //-V2571
+    __USB_OTG_HS_CLK_ENABLE(); //-V760 //-V2571
+    __HAL_RCC_USB_OTG_HS_CLK_ENABLE(); //-V2571
+    __SYSCFG_CLK_ENABLE(); //-V2571
 
     HAL_PIO::Init(PIN_HCD_DM, HMode::AF_PP, HPull::No, HSpeed::High, HAlternate::AF12_OTG_HS_FS);
     HAL_PIO::Init(PIN_HCD_DP, HMode::AF_PP, HPull::No, HSpeed::High, HAlternate::AF12_OTG_HS_FS);
@@ -28,7 +28,7 @@ void HAL_HCD::Init()
 
 void HAL_HCD::InitUSBH_LL(USBH_HandleTypeDef *phost)
 {
-    hHCD.Instance = USB_OTG_HS;
+    hHCD.Instance = USB_OTG_HS; //-V2571
     hHCD.Init.speed = HCD_SPEED_HIGH;
     hHCD.Init.Host_channels = 12;
     hHCD.Init.dma_enable = 0;

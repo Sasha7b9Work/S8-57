@@ -7,7 +7,7 @@
 #include <cstdarg>
 
 
-const char * const String::_ERROR = "---.---";
+const char * const String::_ERROR = "---.---"; //-V2573
 
 
 String::String() : buffer(nullptr)
@@ -56,7 +56,7 @@ String::String(const char *format, ...) : buffer(nullptr) //-V2506
     char buf[SIZE + 1];
 
     std::va_list args;
-    va_start(args, format); //-V2528
+    va_start(args, format); //-V2528 //-V2567
     int numSymbols = std::vsprintf(buf, format, args);
     va_end(args);
 
@@ -81,7 +81,7 @@ void String::Set(TypeConversionString::E conv, const char *format, ...)
         char buf[SIZE + 1];
 
         std::va_list args;
-        va_start(args, format); //-V2528
+        va_start(args, format); //-V2528 //-V2567
         int numSymbols = std::vsprintf(buf, format, args);
         va_end(args);
 

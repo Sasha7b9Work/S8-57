@@ -36,11 +36,11 @@ void HardFault_Handler()
 
 void TIM3_IRQHandler()
 {
-    if ((TIM3->SR & TIM_SR_UIF) == TIM_SR_UIF)
+    if ((TIM3->SR & TIM_SR_UIF) == TIM_SR_UIF) //-V2571
     {
-        if ((TIM3->DIER & TIM_DIER_UIE) == TIM_DIER_UIE)
+        if ((TIM3->DIER & TIM_DIER_UIE) == TIM_DIER_UIE) //-V2571
         {
-            TIM3->SR = ~TIM_DIER_UIE;
+            TIM3->SR = ~TIM_DIER_UIE; //-V2571
             Timer::ElapsedCallback();
         }
     }
@@ -77,7 +77,7 @@ void EXTI9_5_IRQHandler(void)
 // VCP
 void OTG_FS_IRQHandler()
 {
-    HAL_PCD_IRQHandler(static_cast<PCD_HandleTypeDef *>(VCP::handlePCD));
+    HAL_PCD_IRQHandler(static_cast<PCD_HandleTypeDef *>(VCP::handlePCD)); //-V2571
 }
 
 
@@ -105,7 +105,7 @@ void OTG_HS_IRQHandler()
 //    }
 
 
-    HAL_HCD_IRQHandler(reinterpret_cast<HCD_HandleTypeDef *>(HAL_HCD::handleHCD));
+    HAL_HCD_IRQHandler(reinterpret_cast<HCD_HandleTypeDef *>(HAL_HCD::handleHCD)); //-V2571
 }
 
 

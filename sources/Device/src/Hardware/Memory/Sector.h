@@ -31,7 +31,7 @@ struct PacketROM
     bool IsErased() const { return (state == STATE_ERASED); }
     bool IsValid() const { return (state == STATE_VALID); }
 
-    uint Address() const { return reinterpret_cast<uint>(this); };
+    uint Address() const { return reinterpret_cast<uint>(this); }; //-V2571
 
     PacketROM *Next() const;
     

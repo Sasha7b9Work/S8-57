@@ -49,7 +49,7 @@ DEF_GRAPH_BUTTON( bLeft,
 )
 
 
-DEF_PAGE_3(pCursors,
+DEF_PAGE_3(pCursors, //-V2567
     "КУРСОРЫ",
     "Работа курсорами",
     &cChoice,

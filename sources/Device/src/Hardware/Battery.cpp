@@ -102,7 +102,7 @@ static void DrawUGO(int x, int y, float percents)
 
 static void DrawFilled(int x, int y, int full, float percents)
 {
-    int filled = static_cast<int>(full * percents / 100.0F + 0.5F);
+    int filled = static_cast<int>(full * percents / 100.0F + 0.5F); //-V2564
 
     //if (ChargerIsConnected() && percents < 100.0F)
     //{
@@ -144,7 +144,7 @@ void Battery::Draw(int x, int y)
 
 static float ChargerADC_ToVoltage(uint value)
 {
-    float result = (value / MAX_ADC_REL) * MAX_ADC_ABS;
+    float result = (value / MAX_ADC_REL) * MAX_ADC_ABS; //-V2564
 
     result *= 124.0F / 24.0F;
 

@@ -3,12 +3,12 @@
 #include <stm32f4xx_hal.h>
 
 
-static TIM_HandleTypeDef handlerTIM3 = { TIM3 };
+static TIM_HandleTypeDef handlerTIM3 = { TIM3 }; //-V2571
 
 
 void HAL_TIM3::Init(uint prescaler, uint period)
 {
-    __HAL_RCC_TIM3_CLK_ENABLE();
+    __HAL_RCC_TIM3_CLK_ENABLE(); //-V2571
 
     handlerTIM3.Init.Prescaler = prescaler;
     handlerTIM3.Init.CounterMode = TIM_COUNTERMODE_UP;
@@ -33,7 +33,7 @@ void HAL_TIM3::Stop()
 
 void HAL_TIM3::DeInit()
 {
-    __HAL_RCC_TIM3_CLK_DISABLE();
+    __HAL_RCC_TIM3_CLK_DISABLE(); //-V2571
 }
 
 

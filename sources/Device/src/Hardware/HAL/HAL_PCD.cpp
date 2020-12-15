@@ -6,10 +6,10 @@
 
 void HAL_PCD::Init()
 {
-    __GPIOA_CLK_ENABLE();
-    __USB_OTG_FS_CLK_ENABLE(); //-V760
-    __HAL_RCC_USB_OTG_FS_CLK_ENABLE();
-    __SYSCFG_CLK_ENABLE();
+    __GPIOA_CLK_ENABLE(); //-V2571
+    __USB_OTG_FS_CLK_ENABLE(); //-V760 //-V2571
+    __HAL_RCC_USB_OTG_FS_CLK_ENABLE(); //-V2571
+    __SYSCFG_CLK_ENABLE(); //-V2571
 
     HAL_PIO::Init(PIN_PCD_DM, HMode::AF_PP, HPull::No, HSpeed::VeryHigh, HAlternate::AF10_OTG_FS);
     HAL_PIO::Init(PIN_PCD_DP, HMode::AF_PP, HPull::No, HSpeed::VeryHigh, HAlternate::AF10_OTG_FS);

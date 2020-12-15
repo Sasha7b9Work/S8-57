@@ -11,14 +11,14 @@ static pFuncVV recvHandler = 0;
 
 void HAL_USART3::Init(pFuncVV _recvHandler)
 {
-    __HAL_RCC_USART3_CLK_ENABLE();
+    __HAL_RCC_USART3_CLK_ENABLE(); //-V2571
 
     HAL_PIO::Init(PIN_USART3_RX, HMode::AF_PP, HPull::Up, HSpeed::VeryHigh, HAlternate::AF7_USART3);
     HAL_PIO::Init(PIN_USART3_TX, HMode::AF_PP, HPull::Up, HSpeed::VeryHigh, HAlternate::AF7_USART3);
 
     recvHandler = _recvHandler;
 
-    handler.Instance = USART3;
+    handler.Instance = USART3; //-V2571
     handler.Init.BaudRate = 9600;
     handler.Init.WordLength = UART_WORDLENGTH_8B;
     handler.Init.StopBits = UART_STOPBITS_1;
@@ -39,13 +39,13 @@ void HAL_USART3::Init(pFuncVV _recvHandler)
 
 void HAL_USART3::Transmit(void *buffer, int size, uint timeout)
 {
-    HAL_UART_Transmit(&handler, static_cast<uint8 *>(buffer), static_cast<uint16>(size), timeout);
+    HAL_UART_Transmit(&handler, static_cast<uint8 *>(buffer), static_cast<uint16>(size), timeout); //-V2571
 }
 
 
 void HAL_USART3::StartReceiveIT(void *buffer, int size)
 {
-    HAL_UART_Receive_IT(&handler, static_cast<uint8 *>(buffer), static_cast<uint16>(size));
+    HAL_UART_Receive_IT(&handler, static_cast<uint8 *>(buffer), static_cast<uint16>(size)); //-V2571
 }
 
 

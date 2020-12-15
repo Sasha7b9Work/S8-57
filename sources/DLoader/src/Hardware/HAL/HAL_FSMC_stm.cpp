@@ -26,28 +26,28 @@ static GPIO_InitTypeDef is =
 
 void HAL_BUS::Init()
 {
-    __HAL_RCC_FMC_CLK_ENABLE();
-    __HAL_RCC_GPIOF_CLK_ENABLE();
+    __HAL_RCC_FMC_CLK_ENABLE(); //-V2571
+    __HAL_RCC_GPIOF_CLK_ENABLE(); //-V2571
 
     //           D2           D3           D0            D1
     is.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_14 | GPIO_PIN_15;
-    HAL_GPIO_Init(GPIOD, &is);
+    HAL_GPIO_Init(GPIOD, &is); //-V2571
 
     //           D4           D5           D6           D7
     is.Pin = GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10;
-    HAL_GPIO_Init(GPIOE, &is);
+    HAL_GPIO_Init(GPIOE, &is); //-V2571
 
     //           A0           A1           A2           A3           A4           A5           A6            A7            A8            A9
     is.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
-    HAL_GPIO_Init(GPIOF, &is);
+    HAL_GPIO_Init(GPIOF, &is); //-V2571
 
     //           A10          A11         A12           A13          A14         A15           NE3
     is.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_10;
-    HAL_GPIO_Init(GPIOG, &is);
+    HAL_GPIO_Init(GPIOG, &is); //-V2571
 
     //           A16          A17            A18
     is.Pin = GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13;
-    HAL_GPIO_Init(GPIOD, &is);
+    HAL_GPIO_Init(GPIOD, &is); //-V2571
 
     static const GPIO_InitTypeDef isGPIO =
     {   //    NOE          NWE          NE1
@@ -60,13 +60,13 @@ void HAL_BUS::Init()
 
     /// \todo Здесь не довеедно - не хотит, почему-то
 
-    HAL_GPIO_Init(GPIOD, const_cast<GPIO_InitTypeDef *>(&isGPIO));
+    HAL_GPIO_Init(GPIOD, const_cast<GPIO_InitTypeDef *>(&isGPIO)); //-V2567 //-V2571
 
 
     static SRAM_HandleTypeDef gSramHandle =
     {
-        FMC_NORSRAM_DEVICE,
-        FMC_NORSRAM_EXTENDED_DEVICE,
+        FMC_NORSRAM_DEVICE, //-V2571
+        FMC_NORSRAM_EXTENDED_DEVICE, //-V2571
         {
             FMC_NORSRAM_BANK1,                 // Init.NSBank
             FMC_DATA_ADDRESS_MUX_DISABLE,      // Init.DataAddressMux
@@ -97,7 +97,7 @@ void HAL_BUS::Init()
     };
 
     SRAM_HandleTypeDef *hsram = &gSramHandle;
-    FMC_NORSRAM_TimingTypeDef *Timing = const_cast<FMC_NORSRAM_TimingTypeDef *>(&sramTiming);
+    FMC_NORSRAM_TimingTypeDef *Timing = const_cast<FMC_NORSRAM_TimingTypeDef *>(&sramTiming); //-V2567
 
     FMC_NORSRAM_Init(hsram->Instance, &(hsram->Init));
 
@@ -115,25 +115,25 @@ void HAL_BUS::Init()
 
 void HAL_BUS::InitRAM()
 {
-    __HAL_RCC_GPIOD_CLK_ENABLE();
-    __HAL_RCC_GPIOG_CLK_ENABLE();
+    __HAL_RCC_GPIOD_CLK_ENABLE(); //-V2571
+    __HAL_RCC_GPIOG_CLK_ENABLE(); //-V2571
 
     //           A16           A17           A18 
     is.Pin = GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13;
-    HAL_GPIO_Init(GPIOD, &is);
+    HAL_GPIO_Init(GPIOD, &is); //-V2571
 
     //           A10          A11         A12           A13          A14         A15           NE3
     is.Pin =  GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_10;
-    HAL_GPIO_Init(GPIOG, &is);
+    HAL_GPIO_Init(GPIOG, &is); //-V2571
 
     //           A6            A7          A8            A9
     is.Pin = GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
-    HAL_GPIO_Init(GPIOF, &is);
+    HAL_GPIO_Init(GPIOF, &is); //-V2571
 
     static SRAM_HandleTypeDef gSramHandle =
     {
-        FMC_NORSRAM_DEVICE,
-        FMC_NORSRAM_EXTENDED_DEVICE,
+        FMC_NORSRAM_DEVICE, //-V2571
+        FMC_NORSRAM_EXTENDED_DEVICE, //-V2571
         {
             FMC_NORSRAM_BANK3,                 // Init.NSBank
             FMC_DATA_ADDRESS_MUX_DISABLE,      // Init.DataAddressMux
@@ -163,7 +163,7 @@ void HAL_BUS::InitRAM()
         FMC_ACCESS_MODE_C  // FSMC_AccessMode
     };
 
-    FMC_NORSRAM_TimingTypeDef *timing = const_cast<FMC_NORSRAM_TimingTypeDef *>(&sramTiming);
+    FMC_NORSRAM_TimingTypeDef *timing = const_cast<FMC_NORSRAM_TimingTypeDef *>(&sramTiming); //-V2567
 
     HAL_SRAM_Init(&gSramHandle, timing, timing);
 }
@@ -175,13 +175,13 @@ void HAL_BUS::ConfigureToFSMC()
 
     //           NOE          NWE          NE1
     is.Pin = GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_7;   
-    HAL_GPIO_Init(GPIOD, &is); //-V525
+    HAL_GPIO_Init(GPIOD, &is); //-V525 //-V2571
 
     //           D2           D3           D0            D1
     is.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_14 | GPIO_PIN_15;
-    HAL_GPIO_Init(GPIOD, &is);
+    HAL_GPIO_Init(GPIOD, &is); //-V2571
 
     //           D4           D5           D6           D7
     is.Pin = GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10;
-    HAL_GPIO_Init(GPIOE, &is);
+    HAL_GPIO_Init(GPIOE, &is); //-V2571
 }

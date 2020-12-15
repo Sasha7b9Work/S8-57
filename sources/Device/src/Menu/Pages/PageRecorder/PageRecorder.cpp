@@ -101,7 +101,7 @@ static void OnOpenClose_Recorder(bool open)
     }
 }
 
-DEF_PAGE_5( pRecorder,                                                                                                                                        //--- ФУНКЦИЯ - РЕГИСТРАТОР ---
+DEF_PAGE_5( pRecorder,                                                                                                                                        //--- ФУНКЦИЯ - РЕГИСТРАТОР --- //-V2567
     "РЕГИСТРАТОР",
     "Запись и воспроизведение сигналов входов и датчиков",
     PageRecorder::Source::self,

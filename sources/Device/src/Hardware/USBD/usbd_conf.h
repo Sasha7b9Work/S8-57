@@ -5,7 +5,7 @@
 #include <string.h>
 
 #ifndef   __STATIC_INLINE
-#define __STATIC_INLINE                        static inline
+#define __STATIC_INLINE                        static inline //-V2573
 #endif
 
 

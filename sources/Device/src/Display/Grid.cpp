@@ -181,10 +181,10 @@ void DrawGridSignal(int left, int top, int width, int height)
         line.Draw(319, top + 2);
     }
 
-    float deltaX = DeltaX() * static_cast<float>(width) / width;
-    float deltaY = DeltaY() * static_cast<float>(height) / height;
-    float stepX = deltaX / 5;
-    float stepY = deltaY / 5;
+    float deltaX = DeltaX() * static_cast<float>(width) / width; //-V2564
+    float deltaY = DeltaY() * static_cast<float>(height) / height; //-V2564
+    float stepX = deltaX / 5; //-V2564
+    float stepY = deltaY / 5; //-V2564
 
     float centerX = static_cast<float>(left + width / 2);
     float centerY = static_cast<float>(top + height / 2);
@@ -213,15 +213,15 @@ void DrawGridSpectrum()
         static const int nums[] = {4, 6, 8};
         static pString strs[] = {"0", "-10", "-20", "-30", "-40", "-50", "-60", "-70"};
         int numParts = nums[S_FFT_MAX_DB];
-        float scale = static_cast<float>(Grid::MathHeight()) / numParts;
+        float scale = static_cast<float>(Grid::MathHeight()) / numParts; //-V2564
         for (int i = 1; i < numParts; i++)
         {
-            int y = MathTop() + static_cast<int>(i * scale);
+            int y = MathTop() + static_cast<int>(i * scale); //-V2564
 
 			HLine(256).Draw(Grid::Left(), y, Color::GRID);
 
             Color::FILL.SetAsCurrent();
-            String(const_cast<char *>(strs[i])).Draw(3, y - 4);
+            String(const_cast<char *>(strs[i])).Draw(3, y - 4); //-V2567
         }
 
         Color::FILL.SetAsCurrent();
@@ -230,14 +230,14 @@ void DrawGridSpectrum()
     else // SCALE_FFT_IS_LINEAR
     {
         static pString strs[] = {"1.0", "0.8", "0.6", "0.4", "0.2"};
-        float scale = static_cast<float>(Grid::MathHeight()) / 5;
+        float scale = static_cast<float>(Grid::MathHeight()) / 5; //-V2564
         for (int i = 1; i < 5; i++)
         {
-            int y = MathTop() + static_cast<int>(i * scale);
+            int y = MathTop() + static_cast<int>(i * scale); //-V2564
 
 			HLine(256).Draw(Grid::Left(), y, Color::GRID);
 
-            String(const_cast<char *>(strs[i])).Draw(5, y - 4, Color::FILL);
+            String(const_cast<char *>(strs[i])).Draw(5, y - 4, Color::FILL); //-V2567
         }
     }
 
@@ -247,14 +247,14 @@ void DrawGridSpectrum()
 
 static float DeltaY()
 {
-    float delta = (Grid::FullBottom() - Grid::Top()) / 10.0F;
+    float delta = (Grid::FullBottom() - Grid::Top()) / 10.0F; //-V2564
     return Display::IsSeparate() ? (delta / 2.0F) : delta;
 }
 
 
 static float DeltaX()
 {
-    float delta = (Grid::Right() - Grid::Left()) / 14.0F;
+    float delta = (Grid::Right() - Grid::Left()) / 14.0F; //-V2564
     return delta;
 }
 
@@ -265,7 +265,7 @@ static void DrawGridType1(int left, int top, int right, int bottom, float center
     masX[0] = static_cast<uint16>(left + 1);
     for (int i = 1; i < 7; i++)
     {
-        masX[i] = static_cast<uint16>(left + static_cast<int>(deltaX * i));
+        masX[i] = static_cast<uint16>(left + static_cast<int>(deltaX * i)); //-V2564
     }
     for (int i = 7; i < 10; i++)
     {
@@ -273,7 +273,7 @@ static void DrawGridType1(int left, int top, int right, int bottom, float center
     }
     for (int i = 10; i < 16; i++)
     {
-        masX[i] = static_cast<uint16>(centerX + deltaX * (i - 9)); //-V2004
+        masX[i] = static_cast<uint16>(centerX + deltaX * (i - 9)); //-V2004 //-V2564
     }
     masX[16] = static_cast<uint16>(right - 1);
 
@@ -283,7 +283,7 @@ static void DrawGridType1(int left, int top, int right, int bottom, float center
     mas[0] = static_cast<uint8>(top + 1);
     for (int i = 1; i < 5; i++)
     {
-        mas[i] = static_cast<uint8>(top + static_cast<int>(deltaY * i));
+        mas[i] = static_cast<uint8>(top + static_cast<int>(deltaY * i)); //-V2564
     }
     for (int i = 5; i < 8; i++)
     {
@@ -291,7 +291,7 @@ static void DrawGridType1(int left, int top, int right, int bottom, float center
     }
     for (int i = 8; i < 12; i++)
     {
-        mas[i] = static_cast<uint8>(static_cast<int>(centerY) + static_cast<int>(deltaY * (i - 7)));
+        mas[i] = static_cast<uint8>(static_cast<int>(centerY) + static_cast<int>(deltaY * (i - 7))); //-V2564
     }
     mas[12] = static_cast<uint8>(bottom - 1);
 
@@ -408,8 +408,8 @@ static void DrawTester()
 
     Color::GRID.SetAsCurrent();
 
-    int x = static_cast<int>(x0 + Display::WIDTH / 2);
-    int y = static_cast<int>(y0 + Display::HEIGHT / 2);
+    int x = static_cast<int>(x0 + Display::WIDTH / 2); //-V2564
+    int y = static_cast<int>(y0 + Display::HEIGHT / 2); //-V2564
 
     VLine(Display::HEIGHT).Draw(x, 0);
 
@@ -432,7 +432,7 @@ static void DrawTester()
         x += deltaX;
     }
 
-    x = static_cast<int>(x0 + Display::WIDTH / 2 - deltaX);
+    x = static_cast<int>(x0 + Display::WIDTH / 2 - deltaX); //-V2564
 
     while (x > 0)
     {
@@ -450,7 +450,7 @@ static void DrawTester()
         y += deltaY;
     }
 
-    y = static_cast<int>(y0 + Display::HEIGHT / 2 - deltaY);
+    y = static_cast<int>(y0 + Display::HEIGHT / 2 - deltaY); //-V2564
 
     while (y > 0)
     {

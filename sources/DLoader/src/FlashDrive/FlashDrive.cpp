@@ -74,10 +74,10 @@ void *FDrive::GetHandleUSBH()
 
 void FDrive::Init()
 {
-    __GPIOB_CLK_ENABLE();
-    __USB_OTG_HS_CLK_ENABLE(); //-V760
-    __HAL_RCC_USB_OTG_HS_CLK_ENABLE();
-    __SYSCFG_CLK_ENABLE();
+    __GPIOB_CLK_ENABLE(); //-V2571
+    __USB_OTG_HS_CLK_ENABLE(); //-V760 //-V2571
+    __HAL_RCC_USB_OTG_HS_CLK_ENABLE(); //-V2571
+    __SYSCFG_CLK_ENABLE(); //-V2571
 
     HAL_PIO::Init(PIN_HCD_DM, HMode::AF_PP, HPull::No, HSpeed::High, HAlternate::AF12_OTG_HS_FS);
     HAL_PIO::Init(PIN_HCD_DP, HMode::AF_PP, HPull::No, HSpeed::High, HAlternate::AF12_OTG_HS_FS);
@@ -231,7 +231,7 @@ bool FDrive::FileExist(const char *fileName) //-V2506
 
 static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, StructForReadDir *s) //-V2506
 {
-    memcpy(reinterpret_cast<uint8 *>(s->nameDir), const_cast<char *>(fullPath), strlen(fullPath)); //-V2513
+    memcpy(reinterpret_cast<uint8 *>(s->nameDir), const_cast<char *>(fullPath), strlen(fullPath)); //-V2513 //-V2567
     s->nameDir[strlen(fullPath)] = '\0'; //-V2513
 
     DIR *pDir = &s->dir;
@@ -337,9 +337,9 @@ void FDrive::CloseOpenedFile()
 
 void FDrive::LL_::InitHCD(void *host)
 {
-    USBH_HandleTypeDef *phost = static_cast<USBH_HandleTypeDef *>(host);
+    USBH_HandleTypeDef *phost = static_cast<USBH_HandleTypeDef *>(host); //-V2571
 
-    handleHCD.Instance = USB_OTG_HS;
+    handleHCD.Instance = USB_OTG_HS; //-V2571
     handleHCD.Init.speed = HCD_SPEED_HIGH;
     handleHCD.Init.Host_channels = 12;
     handleHCD.Init.dma_enable = 0;
@@ -411,7 +411,7 @@ void Upgrade()
         size -= readedBytes;
         address += static_cast<uint>(readedBytes);
 
-        percentsUpdate = 1.0F - static_cast<float>(size) / fullSize;
+        percentsUpdate = 1.0F - static_cast<float>(size) / fullSize; //-V2564
     }
 
     FDrive::CloseOpenedFile();

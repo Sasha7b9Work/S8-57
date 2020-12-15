@@ -275,8 +275,8 @@ static void DrawSymbolOMEGA(int x, int y, bool inModeOsci)
 
         for (int i = 0; i < radius; i++)
         {
-            float angle = std::asinf(i * (1.0F / radius));
-            float length = std::cosf(angle) * radius;
+            float angle = std::asinf(i * (1.0F / radius)); //-V2564
+            float length = std::cosf(angle) * radius; //-V2564
             Draw2HLinesRelCenter(x + radius, y + i + radius - 1, static_cast<int>(length + 0.5F));
             Draw2HLinesRelCenter(x + radius, y - i + radius - 1, static_cast<int>(length + 0.5F));
         }
@@ -314,8 +314,8 @@ static void DrawSymbolOMEGA(int x, int y, bool inModeOsci)
 
         for (int i = 0; i < radius; i++)
         {
-            float angle = std::asinf(i * (1.0F / radius));
-            float length = std::cosf(angle) * radius;
+            float angle = std::asinf(i * (1.0F / radius)); //-V2564
+            float length = std::cosf(angle) * radius; //-V2564
             Draw2HLinesRelCenter(x + radius, y + i + radius - 1, static_cast<int>(length + 0.5F));
             Draw2HLinesRelCenter(x + radius, y - i + radius - 1, static_cast<int>(length + 0.5F));
         }
@@ -648,7 +648,7 @@ void DisplayMultimeter::SetMeasure(const uint8 buf[13]) //-V2506
         PrepareBell
     };
 
-    MultimeterMeasure::E meas = MultimeterMeasure::GetCode(reinterpret_cast<const char *>(buf));
+    MultimeterMeasure::E meas = MultimeterMeasure::GetCode(reinterpret_cast<const char *>(buf)); //-V2571
 
     if (meas >= MultimeterMeasure::Count)
     {

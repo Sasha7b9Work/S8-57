@@ -50,7 +50,7 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data) //-V2506
             {
                 int delta = VALUE::AVE - static_cast<int>(*a1);
 
-                int result = static_cast<int>(VALUE::AVE - static_cast<int>(delta * stretch));
+                int result = static_cast<int>(VALUE::AVE - static_cast<int>(delta * stretch)); //-V2564
 
                 if(result < VALUE::MIN)
                 {

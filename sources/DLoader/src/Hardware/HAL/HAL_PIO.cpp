@@ -22,14 +22,14 @@ const uint16 HPin::_15 = GPIO_PIN_15;
 
 static GPIO_TypeDef *const ports[HPort::Count] =
 {
-    GPIOA,
-    GPIOB,
-    GPIOC,
-    GPIOD,
-    GPIOE,
-    GPIOF,
-    GPIOG,
-    GPIOH
+    GPIOA, //-V2571
+    GPIOB, //-V2571
+    GPIOC, //-V2571
+    GPIOD, //-V2571
+    GPIOE, //-V2571
+    GPIOF, //-V2571
+    GPIOG, //-V2571
+    GPIOH //-V2571
 };
 
 static const uint modes[HMode::Count] =
@@ -113,11 +113,11 @@ void HAL_PIO::TuneDataPinsToReceive()
         GPIO_PIN_1 |           // D3
         GPIO_PIN_14 |           // D0
         GPIO_PIN_15;            // D1
-    HAL_GPIO_Init(GPIOD, &gpio);
+    HAL_GPIO_Init(GPIOD, &gpio); //-V2571
 
     gpio.Pin = GPIO_PIN_7 |            // D4
         GPIO_PIN_8 |            // D5
         GPIO_PIN_9 |            // D6
         GPIO_PIN_10;            // D7
-    HAL_GPIO_Init(GPIOE, &gpio);
+    HAL_GPIO_Init(GPIOE, &gpio); //-V2571
 }

@@ -8,7 +8,7 @@
 #include "Menu/Pages/Include/PageTester.h"
 
 
-DEF_PAGE_5( pFunction,                                                                                                                                                      //--- ÔÓÍÊÖÈß ---
+DEF_PAGE_5( pFunction,                                                                                                                                                      //--- ÔÓÍÊÖÈß --- //-V2567
     "ÔÓÍÊÖÈß",
     "Âûáîğ ôóíêöèè",
     PageFreqMeter::self,

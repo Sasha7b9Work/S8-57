@@ -5,13 +5,13 @@
 
 void Timer4XX::Init(TIM_TypeDef *instance, uint prescaler, uint counterMode, uint period, uint clcDiv)
 {
-    if (instance == TIM2)
+    if (instance == TIM2) //-V2571
     {
-        __HAL_RCC_TIM2_CLK_ENABLE();
+        __HAL_RCC_TIM2_CLK_ENABLE(); //-V2571
     }
-    else if (instance == TIM3)
+    else if (instance == TIM3) //-V2571
     {
-        __HAL_RCC_TIM3_CLK_ENABLE();
+        __HAL_RCC_TIM3_CLK_ENABLE(); //-V2571
     }
     else
     {
@@ -40,7 +40,7 @@ void Timer4XX::EnabledIRQ(uint mainPriority, uint subPriority)
 
 IRQn_Type Timer4XX::GetIRQn_Type() //-V2506
 {
-    if (handler.Instance == TIM3)
+    if (handler.Instance == TIM3) //-V2571
     {
         return TIM3_IRQn;
     }
@@ -84,13 +84,13 @@ void Timer4XX::DeInit()
 {
     HAL_TIM_Base_DeInit(&handler);
 
-    if (handler.Instance == TIM2)
+    if (handler.Instance == TIM2) //-V2571
     {
-        __HAL_RCC_TIM2_CLK_DISABLE();
+        __HAL_RCC_TIM2_CLK_DISABLE(); //-V2571
     }
-    else if (handler.Instance == TIM3)
+    else if (handler.Instance == TIM3) //-V2571
     {
-        __HAL_RCC_TIM3_CLK_DISABLE();
+        __HAL_RCC_TIM3_CLK_DISABLE(); //-V2571
     }
     else
     {

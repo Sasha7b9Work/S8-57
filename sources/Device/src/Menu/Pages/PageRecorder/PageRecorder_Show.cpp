@@ -101,7 +101,7 @@ static void OnOpenClose_PageShow(bool open)
 }
 
 
-DEF_PAGE_5( pShow,                                                                                                                                 //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР ---
+DEF_PAGE_5( pShow,                                                                                                                                 //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР --- //-V2567
     "ПРОСМОТР",
     "Просмотр записанных данных",
     &bScreenLeft,

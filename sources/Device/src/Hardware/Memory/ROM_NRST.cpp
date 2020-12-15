@@ -21,10 +21,10 @@ struct Packet
     Packet *Next();
     
     // јдрес первого байта в пакете
-    uint Begin() { return reinterpret_cast<uint>(this);  }
+    uint Begin() { return reinterpret_cast<uint>(this);  } //-V2571
     
     // ¬озвращает адрес первого байта за этим пакетом
-    uint End()   { return reinterpret_cast<uint>(Next()); }
+    uint End()   { return reinterpret_cast<uint>(Next()); } //-V2571
     
     // ¬озвращает true, если в пакете нет данных (пакет находитс€ за последним записанным пакетом)
     bool IsEmpty() const;
@@ -91,7 +91,7 @@ SettingsNRST *SectorNRST::GetSaved() const
 
 Packet *SectorNRST::CreatePacket() const
 {
-    return reinterpret_cast<Packet *>(sector.address);
+    return reinterpret_cast<Packet *>(sector.address); //-V2571
 }
 
 
@@ -130,7 +130,7 @@ bool SectorNRST::SaveSettings(SettingsNRST *nrst) const //-V2506
 
     if(last == nullptr)                                     // ≈сли пакетов ещЄ нету
     {
-        last = reinterpret_cast<Packet *>(sector.address);  // то он будет в самом начале сектора
+        last = reinterpret_cast<Packet *>(sector.address);  // то он будет в самом начале сектора //-V2571
 
         return last->SaveSettings(nrst);                    // ¬ него и сохран€ем
     }
@@ -165,7 +165,7 @@ Packet *Packet::Next() //-V2506
         return nullptr;
     }
 
-    return reinterpret_cast<Packet *>(Begin() + size);
+    return reinterpret_cast<Packet *>(Begin() + size); //-V2571
 }
 
 

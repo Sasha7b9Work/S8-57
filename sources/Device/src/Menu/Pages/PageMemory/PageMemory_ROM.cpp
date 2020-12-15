@@ -210,7 +210,7 @@ static bool HandlerKey_ROM(const KeyEvent &event)
 
         if (event.IsDecrease())
         {
-            Math::CircleDecrease<int8>((int8 *)&NUM_ROM_SIGNAL, 0, ROM::Data::MAX_NUM_SAVED_WAVES - 1);
+            Math::CircleDecrease<int8>((int8 *)&NUM_ROM_SIGNAL, 0, ROM::Data::MAX_NUM_SAVED_WAVES - 1); //-V2567
 
             Color::ChangeFlash(true);
 
@@ -218,7 +218,7 @@ static bool HandlerKey_ROM(const KeyEvent &event)
         }
         else if (event.IsIncrease()) //-V2516
         {
-            Math::CircleIncrease<int8>((int8 *)&NUM_ROM_SIGNAL, 0, ROM::Data::MAX_NUM_SAVED_WAVES - 1);
+            Math::CircleIncrease<int8>((int8 *)&NUM_ROM_SIGNAL, 0, ROM::Data::MAX_NUM_SAVED_WAVES - 1); //-V2567
 
             Color::ChangeFlash(true);
 
@@ -234,7 +234,7 @@ static bool NormalTitle_ROM()
     return false;
 }
 
-DEF_PAGE_5                                                                                                                                                        //--- œ¿Ãﬂ“‹ - ¬Õ”“– «” ---
+DEF_PAGE_5                                                                                                                                                        //--- œ¿Ãﬂ“‹ - ¬Õ”“– «” --- //-V2567
 (
     pROM,
     "¬Õ”“– «”",

@@ -92,7 +92,7 @@ bool Item::IsCurrentItem() const
 
 void Item::Open(bool open) const
 {
-    Page *parent = const_cast<Page *>(Keeper());
+    Page *parent = const_cast<Page *>(Keeper()); //-V2567
     if (parent)
     {
         parent->SetPosActItem(open ? (parent->PosCurrentItem() | 0x80) : (parent->PosCurrentItem() & 0x7f));
@@ -128,7 +128,7 @@ bool Item::IsOpened() const
 
 void Item::SetCurrent(bool active) const
 {
-    Page *page = const_cast<Page *>(Keeper());
+    Page *page = const_cast<Page *>(Keeper()); //-V2567
 
     if (page)
     {
@@ -312,7 +312,7 @@ bool Page::IsSubPage(const Page *parent)
             break;
         }
 
-        keep = (static_cast<Item *>(const_cast<Page *>(keep)))->Keeper();
+        keep = (static_cast<Item *>(const_cast<Page *>(keep)))->Keeper(); //-V2567
     }
 
     return result;
@@ -385,7 +385,7 @@ Item *Page::GetItem(int numItem) const
 
     if (numItem < NumItems())
     {
-        result = const_cast<Item *>(OwnData()->items[numItem]); //-V2563
+        result = const_cast<Item *>(OwnData()->items[numItem]); //-V2563 //-V2567
     }
 
     return result;
@@ -514,7 +514,7 @@ float Governor::Step() const
 
     if (tsGovernor.address == this)
     {
-        delta = speed * (TIME_MS - tsGovernor.timeStart);
+        delta = speed * (TIME_MS - tsGovernor.timeStart); //-V2564
 
         if (tsGovernor.dir == DIRECTION::DECREASE)
         {
@@ -523,7 +523,7 @@ float Governor::Step() const
             {
                 delta = -0.001F;
             }
-            else if (delta < -numLines) //-V2516
+            else if (delta < -numLines) //-V2516 //-V2564
             {
                 tsGovernor.dir = DIRECTION::NONE;
                 SetValue(PrevValue());
@@ -538,7 +538,7 @@ float Governor::Step() const
             {
                 delta = 0.001F;
             }
-            else if (delta > numLines) //-V2516
+            else if (delta > numLines) //-V2516 //-V2564
             {
                 tsGovernor.dir = DIRECTION::NONE;
                 SetValue(NextValue());
@@ -780,7 +780,7 @@ void Choice::StartChange(int delta) const
         }
         else
         {
-            tsChoice.address = const_cast<void *>(static_cast<const void *>(this));
+            tsChoice.address = const_cast<void *>(static_cast<const void *>(this)); //-V2567
             tsChoice.timeStart = TIME_MS;
             tsChoice.dir = delta > 0 ? DIRECTION::INCREASE : DIRECTION::DECREASE;
         }
@@ -801,7 +801,7 @@ float Choice::Step() const //-V2506
 
     if (tsChoice.address == this)
     {
-        float delta = speed * (TIME_MS - tsChoice.timeStart);
+        float delta = speed * (TIME_MS - tsChoice.timeStart); //-V2564
         if (delta == 0.0F)  // -V550 //-V2550 //-V550
         {
             delta = 0.001F; // Таймер в несколько первых кадров может показать, что прошло 0 мс, но мы возвращаем большее число, потому что ноль будет говорить о том, что движения нет
@@ -810,7 +810,7 @@ float Choice::Step() const //-V2506
 
         if (tsChoice.dir == DIRECTION::INCREASE)
         {
-            if (delta <= numLines)
+            if (delta <= numLines) //-V2564
             {
                 return delta;
             }
@@ -820,7 +820,7 @@ float Choice::Step() const //-V2506
         {
             delta = -delta;
 
-            if (delta >= -numLines)
+            if (delta >= -numLines) //-V2564
             {
                 return delta;
             }
@@ -855,7 +855,7 @@ const char *Choice::NameNextSubItem() const
 
     if (OwnData()->cell != 0)
     {
-        int index = *(static_cast<int8 *>(OwnData()->cell)) + 1;
+        int index = *(static_cast<int8 *>(OwnData()->cell)) + 1; //-V2567
 
         if (index == NumChoices())
         {
@@ -875,7 +875,7 @@ const char *Choice::NamePrevSubItem() const
 
     if (OwnData()->cell != 0)
     {
-        int index = *(static_cast<int8 *>(OwnData()->cell)) - 1;
+        int index = *(static_cast<int8 *>(OwnData()->cell)) - 1; //-V2567
 
         if (index < 0)
         {
@@ -992,5 +992,5 @@ bool GovernorColor::HandlerKey(const KeyEvent &event) //-V2506
 
 const DataGovernorColor *GovernorColor::OwnData() const
 {
-    return static_cast<const DataGovernorColor *>(data->ad);
+    return static_cast<const DataGovernorColor *>(data->ad); //-V2571
 }

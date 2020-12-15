@@ -80,7 +80,7 @@ bool HAL_BUS::Panel::Receive() //-V2506
 {
     //if(pinReadyPAN.IsPassive() || pinDataPAN.IsPassive())
     //if((GPIOA->IDR & GPIO_PIN_7) != GPIO_PIN_RESET || (GPIOC->IDR & GPIO_PIN_4) != GPIO_PIN_RESET)
-    if((GPIOA->IDR & GPIO_PIN_7) || (GPIOC->IDR & GPIO_PIN_4)) //-V2570
+    if((GPIOA->IDR & GPIO_PIN_7) || (GPIOC->IDR & GPIO_PIN_4)) //-V2570 //-V2571
     {
         return false;
     }
@@ -95,9 +95,9 @@ bool HAL_BUS::Panel::Receive() //-V2506
 
         // Конфигурируем ШД на чтение
 
-        GPIOD->MODER &= 0x0ffffff0U;        // Настроим пины 14, 15, 0, 1 на запись D0, D1, D2, D3
+        GPIOD->MODER &= 0x0ffffff0U;        // Настроим пины 14, 15, 0, 1 на запись D0, D1, D2, D3 //-V2571
 
-        GPIOE->MODER &= 0xffc03fffU;        // Настроим пины 7, 8, 9, 10 на запись D4, D5, D6, D7
+        GPIOE->MODER &= 0xffc03fffU;        // Настроим пины 7, 8, 9, 10 на запись D4, D5, D6, D7 //-V2571
     }
     
     pinRD.SetActive();
@@ -119,7 +119,7 @@ bool HAL_BUS::Panel::Receive() //-V2506
     }
     
     //                                                 4,5,6,7              2,3                          0,1
-    data = static_cast<uint8>((GPIOE->IDR >> 3) & 0xF0 | (GPIOD->IDR << 2) & 0x0C | (GPIOD->IDR >> 14));
+    data = static_cast<uint8>((GPIOE->IDR >> 3) & 0xF0 | (GPIOD->IDR << 2) & 0x0C | (GPIOD->IDR >> 14)); //-V2571
 
     DDecoder::AddData(data);
     
@@ -174,7 +174,7 @@ void HAL_BUS::Panel::Send(uint8 byte0, uint8 byte1)
 
 void HAL_BUS::Panel::Send(const uint8 *data, int size)
 {
-    if(!(GPIOA->IDR & GPIO_PIN_7) && !(GPIOC->IDR & GPIO_PIN_4)) //-V2570
+    if(!(GPIOA->IDR & GPIO_PIN_7) && !(GPIOC->IDR & GPIO_PIN_4)) //-V2570 //-V2571
     {
         while(Receive()) { }
     }
@@ -189,11 +189,11 @@ void HAL_BUS::Panel::Send(const uint8 *data, int size)
 
         // Конфигурируем ШД на запись
 
-        GPIOD->MODER &= 0x0ffffff0U;        // Настроим пины 14, 15, 0, 1 на запись D0, D1, D2, D3
-        GPIOD->MODER |= 0x50000005U;        // Устанавливаем для этих пинов GPIO_MODE_OUTPUT_PP
+        GPIOD->MODER &= 0x0ffffff0U;        // Настроим пины 14, 15, 0, 1 на запись D0, D1, D2, D3 //-V2571
+        GPIOD->MODER |= 0x50000005U;        // Устанавливаем для этих пинов GPIO_MODE_OUTPUT_PP //-V2571
 
-        GPIOE->MODER &= 0xffc03fffU;        // Настроим пины 7, 8, 9, 10 на запись D4, D5, D6, D7
-        GPIOE->MODER |= 0x00154000U;        // Устанавливаем для этих пинов GPIO_MODE_OUTPUT_PP
+        GPIOE->MODER &= 0xffc03fffU;        // Настроим пины 7, 8, 9, 10 на запись D4, D5, D6, D7 //-V2571
+        GPIOE->MODER |= 0x00154000U;        // Устанавливаем для этих пинов GPIO_MODE_OUTPUT_PP //-V2571
     }
 
     for(int i = 0; i < size; i++)
@@ -201,36 +201,36 @@ void HAL_BUS::Panel::Send(const uint8 *data, int size)
         uint8 d = *data++;
 
         //                                                                             биты 0,1                                 биты 2,3
-        GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + static_cast<uint16>((static_cast<int16>(d) & 0x03) << 14) + ((static_cast<uint16>(d & 0x0c)) >> 2);  // Записываем данные в выходные пины
+        GPIOD->ODR = (GPIOD->ODR & 0x3ffc) + static_cast<uint16>((static_cast<int16>(d) & 0x03) << 14) + ((static_cast<uint16>(d & 0x0c)) >> 2);  // Записываем данные в выходные пины //-V2571
         //                                                                          Биты 4,5,6,7
-        GPIOE->ODR = (GPIOE->ODR & 0xf87f) + static_cast<uint16>((static_cast<int16>(d) & 0xf0) << 3);
+        GPIOE->ODR = (GPIOE->ODR & 0xf87f) + static_cast<uint16>((static_cast<int16>(d) & 0xf0) << 3); //-V2571
 
         //pinWR.SetActive();                  // Даём сигнал записи
-        GPIOD->BSRR = (uint)GPIO_PIN_5 << 16U;
+        GPIOD->BSRR = (uint)GPIO_PIN_5 << 16U; //-V2571
         
         //while(pinReadyPAN.IsPassive()) {}   // И ожидаем сигнал панели о том, что она свободна
         //while(HAL_PIO::Read(HPort::_A, HPin::_7) == 1) { };
-        volatile uint state = GPIOA->IDR & GPIO_PIN_7;
+        volatile uint state = GPIOA->IDR & GPIO_PIN_7; //-V2571
         while(state)
         {
-            state = GPIOA->IDR & GPIO_PIN_7;
+            state = GPIOA->IDR & GPIO_PIN_7; //-V2571
         }
 
         //pinCS.SetActive();                  // Даём признак того, чта данные выставлены и можно их считывать
-        GPIOG->BSRR = (uint)GPIO_PIN_12 << 16U;
+        GPIOG->BSRR = (uint)GPIO_PIN_12 << 16U; //-V2571
 
         //while(pinReadyPAN.IsActive()) {}    // Переключение PIN_PAN_READY в неактивное состояние означает, что панель приняла данные и обрабатывает их
-        state = GPIOA->IDR & GPIO_PIN_7;
+        state = GPIOA->IDR & GPIO_PIN_7; //-V2571
         while(state == 0)
         {
-            state = GPIOA->IDR & GPIO_PIN_7;
+            state = GPIOA->IDR & GPIO_PIN_7; //-V2571
         }
 
         //pinWR.SetPassive();                 // \ Устанавливаем WR и CS в неактивное состояние - элементарный цикл записи окончен
-        GPIOD->BSRR = GPIO_PIN_5;
+        GPIOD->BSRR = GPIO_PIN_5; //-V2571
 
         //pinCS.SetPassive();                 // /
-        GPIOG->BSRR = GPIO_PIN_12;
+        GPIOG->BSRR = GPIO_PIN_12; //-V2571
     }
 
     interactionWithPanel = false;
@@ -271,9 +271,9 @@ void DataBus::Init()
 {
     // Конфигурируем ШД на чтение
 
-    GPIOD->MODER &= 0x0ffffff0U;        // Настроим пины 14, 15, 0, 1 на запись D0, D1, D2, D3
+    GPIOD->MODER &= 0x0ffffff0U;        // Настроим пины 14, 15, 0, 1 на запись D0, D1, D2, D3 //-V2571
 
-    GPIOE->MODER &= 0xffc03fffU;        // Настроим пины 7, 8, 9, 10 на запись D4, D5, D6, D7
+    GPIOE->MODER &= 0xffc03fffU;        // Настроим пины 7, 8, 9, 10 на запись D4, D5, D6, D7 //-V2571
 }
 
 

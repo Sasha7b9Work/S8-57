@@ -171,7 +171,7 @@ void DisplayOsci::DrawingValueParameter::Draw()
         {
         case TrigLevel:
         {
-            float trigLevVal = RShift::ToAbs(S_TRIG_LEVEL_SOURCE, S_RANGE(S_TRIG_SOURCE)) * Divider::ToAbs(S_DIVIDER(S_TRIG_SOURCE));
+            float trigLevVal = RShift::ToAbs(S_TRIG_LEVEL_SOURCE, S_RANGE(S_TRIG_SOURCE)) * Divider::ToAbs(S_DIVIDER(S_TRIG_SOURCE)); //-V2564
             Voltage voltage(trigLevVal);
             String text("Синхр %s", voltage.ToString(true).c_str());
             DrawBoundedText(y, &text, Color::CHAN[S_TRIG_SOURCE]);

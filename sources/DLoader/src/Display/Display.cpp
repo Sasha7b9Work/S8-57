@@ -45,7 +45,7 @@ struct Vector
 };
 
 #ifdef MSVC
-#define __attribute__(x)
+#define __attribute__(x) //-V2573
 #endif
 
 static int numPoints = 0;
@@ -155,7 +155,7 @@ void Display::Update()
 
         int height = 30;
         int fullWidth = 280;
-        int width = static_cast<int>(fullWidth * FDrive::PercentsUpdated());
+        int width = static_cast<int>(fullWidth * FDrive::PercentsUpdated()); //-V2564
 
         Region(width, height).Fill(20, 130);
         Rectangle(fullWidth, height).Draw(20, 130);
@@ -174,16 +174,16 @@ void DrawProgressBar(uint dT)
     const int X = 10;
     const int Y = 200;
     
-    float step = dT / direction;
+    float step = dT / direction; //-V2564
 
     value += step;
 
-    if (direction > 0.0F && value > WIDTH)
+    if (direction > 0.0F && value > WIDTH) //-V2564
     {
         direction = -direction;
         value -= step;
     }
-    else if (direction < 0.0F && value < 0)
+    else if (direction < 0.0F && value < 0) //-V2564
     {
         direction = -direction;
         value -= step;
@@ -226,25 +226,25 @@ static void DrawBigMNIPI()
 
     uint time = TIME_MS - startTime;
 
-    int numColor = (int)(time / (float)TIME_WAIT * 14.0F);
+    int numColor = (int)(time / (float)TIME_WAIT * 14.0F); //-V2564
     Limitation(&numColor, 0, 13);
 
 
 
     static_cast<Color>(static_cast<uint8>(numColor + 2)).SetAsCurrent();
 
-    float amplitude = 3.0F - (time / (TIME_WAIT / 2.0F)) * 3;
+    float amplitude = 3.0F - (time / (TIME_WAIT / 2.0F)) * 3; //-V2564
     LIMIT_BELOW(amplitude, 0.0F);
     float frequency = 0.05F;
 
-    float radius = 5000.0F * (TIME_WAIT) / 3000.0F / time;
-    LIMIT_BELOW(radius, 0);
+    float radius = 5000.0F * (TIME_WAIT) / 3000.0F / time; //-V2564
+    LIMIT_BELOW(radius, 0); //-V2564
 
     float shift[240];
 
     for (int i = 0; i < 240; i++)
     {
-        shift[i] = WAVE_OR_ALL ? amplitude * std::sinf(frequency * time + i / 5.0F) : 0;
+        shift[i] = WAVE_OR_ALL ? amplitude * std::sinf(frequency * time + i / 5.0F) : 0; //-V2564
     }
 
     for (int i = 0; i < numPoints; i++)

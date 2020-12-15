@@ -131,7 +131,7 @@ void ROM::Settings::Save()
     set.number = lastSaved ? (lastSaved->set.number + 1) : 0;                // ≈сли запись пуста€, то номер будет равен 0 = 0xFFFFFFFF + 1
     set.crc32 = set.CalcWriteCRC32();
 
-    HAL_ROM::WriteBufferBytes(reinterpret_cast<uint>(record), &set, sizeof(set));
+    HAL_ROM::WriteBufferBytes(reinterpret_cast<uint>(record), &set, sizeof(set)); //-V2571
 }
 
 
@@ -295,19 +295,19 @@ bool Record::IsCorrect() //-V2506
 
 void Record::Erase()
 {
-    HAL_ROM::Fill(reinterpret_cast<uint>(this), 0, SIZE_RECORD);
+    HAL_ROM::Fill(reinterpret_cast<uint>(this), 0, SIZE_RECORD); //-V2571
 }
 
 
 Record *SectorSet::FirstRecord()
 {
-    return reinterpret_cast<Record *>(sector.address);
+    return reinterpret_cast<Record *>(sector.address); //-V2571
 }
 
 
 bool SectorSet::Contains(Record *record)
 {
-    uint addressRecord = reinterpret_cast<uint>(record);
+    uint addressRecord = reinterpret_cast<uint>(record); //-V2571
 
     return addressRecord >= sector.address && addressRecord < sector.End();
 }

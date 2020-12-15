@@ -96,7 +96,7 @@ bool SetCurrentMode(const Page *page, Device::Mode::E mode) //-V2506
     Item *opened = Menu::OpenedItem();
 
     if (opened &&
-        (opened == const_cast<Page *>(page) || opened->ExistKeeper(page)))
+        (opened == const_cast<Page *>(page) || opened->ExistKeeper(page))) //-V2567
     {
         Device::SetMode(mode);
         return true;

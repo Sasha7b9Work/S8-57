@@ -29,7 +29,7 @@ void Log::Write(TypeTrace type, const char *format, ...)
         ++pointer;
     }
     va_list args;
-    va_start(args, format); //-V2528
+    va_start(args, format); //-V2528 //-V2567
     vsprintf(pointer, format, args);
     va_end(args);
     AddToConsole(buffer);

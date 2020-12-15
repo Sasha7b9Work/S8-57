@@ -28,7 +28,7 @@ public:
     // Отобразить текст на экране в заданнх координатах
     int Draw(int x, int y, Color color = Color::NUMBER) const;
 
-    static pString _ERROR;
+    static pString _ERROR; //-V2573
 
     void Free();
 

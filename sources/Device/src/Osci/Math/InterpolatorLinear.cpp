@@ -99,11 +99,11 @@ static void InterpolateSegment(Segment *segment) //-V2506
 
     int numTicks = segment->end - segment->start + 1;   // На столько отрезков разбит наш сегмент
 
-    float delta = (after - before) / numTicks;
+    float delta = (after - before) / numTicks; //-V2564
 
     for(int tick = 0; tick < numTicks - 1; tick++)
     {
-        float value = before + delta * (tick + 1);
+        float value = before + delta * (tick + 1); //-V2564
 
         *(segment->start + tick) = static_cast<uint8>(value + 0.5F); //-V2563
     }

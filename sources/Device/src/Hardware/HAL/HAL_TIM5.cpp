@@ -9,7 +9,7 @@
 *   Таймер использовался для выключения прибора
 */
 
-static TIM_HandleTypeDef handleTIM5 = { TIM5 };
+static TIM_HandleTypeDef handleTIM5 = { TIM5 }; //-V2571
 
 
 void HAL_TIM5::Init()

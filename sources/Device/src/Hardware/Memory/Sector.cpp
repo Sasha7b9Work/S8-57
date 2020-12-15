@@ -11,7 +11,7 @@ const DataSettings *PacketROM::UnPack() const //-V2506
         return nullptr;
     }
 
-    return const_cast<DataSettings *>(reinterpret_cast<const DataSettings *>(reinterpret_cast<const uint8 *>(this) + sizeof(PacketROM))); //-V2563
+    return const_cast<DataSettings *>(reinterpret_cast<const DataSettings *>(reinterpret_cast<const uint8 *>(this) + sizeof(PacketROM))); //-V2563 //-V2567
 }
 
 
@@ -51,7 +51,7 @@ bool PacketROM::WriteToSector(const Sector *sector) const //-V2506
         dest = dest->Next();
     }
 
-    uint addressWrite = reinterpret_cast<uint>(dest);       // По этому адресу будет производиться запись пакета
+    uint addressWrite = reinterpret_cast<uint>(dest);       // По этому адресу будет производиться запись пакета //-V2571
 
     uint lastAddress = addressWrite + size;                 // А это последний адрес записи
 
@@ -67,11 +67,11 @@ bool PacketROM::WriteToSector(const Sector *sector) const //-V2506
 
     if (ds.enableA)
     {
-        ds.dataA = reinterpret_cast<uint8 *>(addressWrite) + sizeof(PacketROM) + sizeof(DataSettings); //-V2563
+        ds.dataA = reinterpret_cast<uint8 *>(addressWrite) + sizeof(PacketROM) + sizeof(DataSettings); //-V2563 //-V2571
     }
     if (ds.enableB)
     {
-        ds.dataB = reinterpret_cast<uint8 *>(addressWrite) + sizeof(PacketROM) + sizeof(DataSettings); //-V2563
+        ds.dataB = reinterpret_cast<uint8 *>(addressWrite) + sizeof(PacketROM) + sizeof(DataSettings); //-V2563 //-V2571
         if (ds.enableA)
         {
             ds.dataB += ds.BytesInChannel(); //-V2563
@@ -167,17 +167,17 @@ static void WriteToROM(uint *address, const void *data, int size)
 
 void Sector::TranslateAddressToROM(const DataSettings *ds, const PacketROM *packet)
 {
-    uint8 *addressData = reinterpret_cast<uint8 *>(packet->Address() + sizeof(PacketROM) + sizeof(DataSettings)); // По этому адресу будут записаны данные первого из записываемых каналов
+    uint8 *addressData = reinterpret_cast<uint8 *>(packet->Address() + sizeof(PacketROM) + sizeof(DataSettings)); // По этому адресу будут записаны данные первого из записываемых каналов //-V2571
 
     if (ds->enableA)
     {
-        const_cast<DataSettings *>(ds)->dataA = addressData;
+        const_cast<DataSettings *>(ds)->dataA = addressData; //-V2567
         addressData += ds->BytesInChannel(); //-V2563
     }
 
     if (ds->enableB)
     {
-        const_cast<DataSettings *>(ds)->dataB = addressData;
+        const_cast<DataSettings *>(ds)->dataB = addressData; //-V2567
     }
 }
 
@@ -218,7 +218,7 @@ const PacketROM *Sector::WriteData(uint numInROM, const DataSettings *ds) const 
 
     WriteToROM(&recordAddress, &record, sizeof(record));
 
-    const_cast<DataSettings *>(ds)->numInROM = numInROM;
+    const_cast<DataSettings *>(ds)->numInROM = numInROM; //-V2567
 
     uint8 *addressDataA = ds->dataA;   // По этим адресам хранятся данные, подлежащие записи. Сохраним их перед тем, как в ds будут записаны новые - по которым данные будут храниться в ROM.
     uint8 *addressDataB = ds->dataB;   // По этим адресам хранятся данные, подлежащие записи. Сохраним их перед тем, как в ds будут записаны новые - по которым данные будут храниться в ROM.
@@ -311,7 +311,7 @@ const PacketROM *Sector::DeleteData(uint numInROM) const //-V2506
 
 const PacketROM *Sector::FirstPacket() const
 {
-    return reinterpret_cast<const PacketROM *>(address);
+    return reinterpret_cast<const PacketROM *>(address); //-V2571
 }
 
 

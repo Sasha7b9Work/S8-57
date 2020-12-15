@@ -53,7 +53,7 @@ bool CursorsControl::IsEnabled2U()
 }
 
 
-DEF_PAGE_2( pMeasures,                                                                                                                                                    //--- ИЗМЕРЕНИЯ ---
+DEF_PAGE_2( pMeasures,                                                                                                                                                    //--- ИЗМЕРЕНИЯ --- //-V2567
     "ИЗМЕРЕНИЯ",
     "Доступ к настройкам измерений - курсорных и автоматических",
     PageCursorsMeasures::self,

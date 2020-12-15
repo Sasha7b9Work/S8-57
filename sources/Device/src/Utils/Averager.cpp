@@ -84,7 +84,7 @@ void Utils::AroundAverager<T>::Push(T elem)
     }
     else
     {
-        value = (1.0F - 1.0F / parts) * value + (1.0F / parts) * elem;
+        value = (1.0F - 1.0F / parts) * value + (1.0F / parts) * elem; //-V2564
     }
 }
 

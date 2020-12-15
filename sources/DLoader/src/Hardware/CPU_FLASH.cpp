@@ -15,7 +15,7 @@
 
 void CPU::FLASH_::Prepare()
 {
-    CLEAR_FLASH_FLAGS;
+    CLEAR_FLASH_FLAGS; //-V2571
 
     HAL_FLASH_Unlock();
 
@@ -35,7 +35,7 @@ void CPU::FLASH_::Prepare()
 
 void CPU::FLASH_::WriteData(uint address, uint8 *data, int size)
 {
-    CLEAR_FLASH_FLAGS;
+    CLEAR_FLASH_FLAGS; //-V2571
 
     HAL_FLASH_Unlock();
 

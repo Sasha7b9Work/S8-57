@@ -46,7 +46,7 @@ static bool HandlerKey_Tune(const KeyEvent &event) //-V2506
     return false;
 }
 
-DEF_PAGE_1( pTune,  
+DEF_PAGE_1( pTune,   //-V2567
     "НАСТРОИТЬ",
     "Переход в режим точной настройки количества и видов измерений",
     //&bMarkers,

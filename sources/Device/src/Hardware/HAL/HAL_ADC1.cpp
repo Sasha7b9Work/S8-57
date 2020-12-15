@@ -28,12 +28,12 @@ void HAL_ADC1::Init()
     // 47 : PB1 - ADC1 IN9 - контроль источника
     // Режим работы:
 
-    __ADC1_CLK_ENABLE();
+    __ADC1_CLK_ENABLE(); //-V2571
 
     HAL_PIO::Init(PIN_ADC1_IN2, HMode::Analog, HPull::No);
     HAL_PIO::Init(PIN_ADC1_IN9, HMode::Analog, HPull::No);
 
-    handle.Instance = ADC1;
+    handle.Instance = ADC1; //-V2571
     handle.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
     handle.Init.Resolution = ADC_RESOLUTION_12B;
     handle.Init.DataAlign = ADC_DATAALIGN_RIGHT;

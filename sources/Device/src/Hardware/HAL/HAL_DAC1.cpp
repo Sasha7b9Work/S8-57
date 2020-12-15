@@ -4,20 +4,20 @@
 #include <stm32f4xx_hal.h>
 
 
-static DAC_HandleTypeDef handle = { DAC };
+static DAC_HandleTypeDef handle = { DAC }; //-V2571
 
 
 void HAL_DAC1::Init()
 {
-    __DMA1_CLK_ENABLE();
-    __TIM7_CLK_ENABLE();
-    __DAC_CLK_ENABLE();
+    __DMA1_CLK_ENABLE(); //-V2571
+    __TIM7_CLK_ENABLE(); //-V2571
+    __DAC_CLK_ENABLE(); //-V2571
 
     HAL_PIO::Init(PIN_DAC1, HMode::Analog, HPull::No);
 
     static DMA_HandleTypeDef hdmaDAC1 =
     {
-        DMA1_Stream5,
+        DMA1_Stream5, //-V2571
         {
             DMA_CHANNEL_7,
             DMA_MEMORY_TO_PERIPH,
@@ -59,7 +59,7 @@ void HAL_DAC1::Init()
 
 void HAL_DAC1::StartDMA(void *points, uint numPoints)
 {
-    HAL_DAC_Start_DMA(&handle, DAC_CHANNEL_1, reinterpret_cast<uint32_t*>(points), numPoints, DAC_ALIGN_8B_R);
+    HAL_DAC_Start_DMA(&handle, DAC_CHANNEL_1, reinterpret_cast<uint32_t*>(points), numPoints, DAC_ALIGN_8B_R); //-V2571
 }
 
 
@@ -73,7 +73,7 @@ void HAL_DAC1::ConfigTIM7(uint16 prescaler, uint16 period)
 {
     static TIM_HandleTypeDef htim =
     {
-        TIM7, {}, HAL_TIM_ACTIVE_CHANNEL_1, {}, HAL_UNLOCKED, HAL_TIM_STATE_RESET
+        TIM7, {}, HAL_TIM_ACTIVE_CHANNEL_1, {}, HAL_UNLOCKED, HAL_TIM_STATE_RESET //-V2571
     };
 
     htim.Init.Prescaler = prescaler;

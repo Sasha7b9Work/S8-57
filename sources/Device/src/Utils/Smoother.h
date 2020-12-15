@@ -44,7 +44,7 @@ private:
             }
         } while (++parts < numSmooth);
 
-        return static_cast<uint8>(static_cast<float>(sum) / parts + 0.5F);
+        return static_cast<uint8>(static_cast<float>(sum) / parts + 0.5F); //-V2564
     }
 
     static int size;

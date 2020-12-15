@@ -444,9 +444,9 @@ ShiftPoint Gates::CalculateShiftPoint() //-V2506
         return result;
     }
 
-    float tin = static_cast<float>(valueADC - min) / (max - min);
+    float tin = static_cast<float>(valueADC - min) / (max - min); //-V2564
 
-    result.shift = static_cast<int>(tin * TBase::DeltaPoint());
+    result.shift = static_cast<int>(tin * TBase::DeltaPoint()); //-V2564
 
     if(result.shift < 0)
     {
@@ -533,8 +533,8 @@ bool Gates::Calculate(uint16 value, uint16 *min, uint16 *max)  //-V2506
         {
             return true;
         }
-        minGate = m.Min();
-        maxGate = m.Max();
+        minGate = m.Min(); //-V2564
+        maxGate = m.Max(); //-V2564
         m.Reset();
     }
 
@@ -554,8 +554,8 @@ bool Gates::Calculate(uint16 value, uint16 *min, uint16 *max)  //-V2506
 
 void Gates::RecalculateGates()
 {
-    minGate = 0.8F * minGate + m.Min() * 0.2F;
-    maxGate = 0.8F * maxGate + m.Max() * 0.2F;
+    minGate = 0.8F * minGate + m.Min() * 0.2F; //-V2564
+    maxGate = 0.8F * maxGate + m.Max() * 0.2F; //-V2564
 
     if(S_DBG_SHOW_RAND_GATES)
     {
@@ -612,7 +612,7 @@ void Osci::SendDataToSCPI(Chan::E ch) //-V2506
 
     char buffer[100];
 
-    uint8 *data = const_cast<DataSettings *>(DS)->Data(ch);
+    uint8 *data = const_cast<DataSettings *>(DS)->Data(ch); //-V2567
 
     SCPI::SendData(ch == Chan::A ? "1: " : "2: ");
 

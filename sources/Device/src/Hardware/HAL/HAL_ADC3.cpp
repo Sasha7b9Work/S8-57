@@ -37,7 +37,7 @@ void HAL_ADC3::Init()
     // - измерение по 1 регулярному каналу
     // - одиночное измерение по фронту внешнего запуска (прерывание от PB11)
 
-    __ADC3_CLK_ENABLE();
+    __ADC3_CLK_ENABLE(); //-V2571
 
     HAL_PIO::Init(PIN_ADC3, HMode::Analog, HPull::No);
 
@@ -46,7 +46,7 @@ void HAL_ADC3::Init()
     HAL_NVIC_SetPriority(ADC_IRQn, 1, 1);
     HAL_NVIC_EnableIRQ(ADC_IRQn);
 
-    handle.Instance = ADC3;
+    handle.Instance = ADC3; //-V2571
     handle.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
     handle.Init.Resolution = ADC_RESOLUTION12b;
     handle.Init.DataAlign = ADC_DATAALIGN_RIGHT;

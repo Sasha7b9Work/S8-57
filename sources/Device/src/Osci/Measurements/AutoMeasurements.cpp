@@ -372,11 +372,11 @@ float CalculateVoltageAverage(Chan::E ch) //-V2506
         sum += *data++;
     }
 
-    uint8 aveRel = static_cast<uint8>(static_cast<float>(sum) / period);
+    uint8 aveRel = static_cast<uint8>(static_cast<float>(sum) / period); //-V2564
 
     if(S_MEAS_MARKED == TypeMeasure::VoltageAverage)
     {
-        Measure::SetMarkerVoltage(ch, 0, aveRel);
+        Measure::SetMarkerVoltage(ch, 0, aveRel); //-V2564
     }
 
     return VALUE::ToVoltage(aveRel, RANGE_DS(ch), RSHIFT_DS(ch));
@@ -403,11 +403,11 @@ float CalculateVoltageRMS(Chan::E ch) //-V2506
         rms +=  volts * volts;
     }
 
-    rms = std::sqrtf(rms / period);
+    rms = std::sqrtf(rms / period); //-V2564
 
     if(S_MEAS_MARKED == TypeMeasure::VoltageRMS)
     {
-        Measure::SetMarkerVoltage(ch, 0, VALUE::FromVoltage(rms, range, rShift));
+        Measure::SetMarkerVoltage(ch, 0, VALUE::FromVoltage(rms, range, rShift)); //-V2564
     }
 
     return rms;
@@ -425,7 +425,7 @@ float CalculatePeriod(Chan::E ch) //-V2506
     if(!periodIsCaclulating[static_cast<int>(ch)])
     {
         float aveValue = CalculateAverageRel(ch);
-        if(aveValue == Uint8::ERROR) //-V550 //-V2550
+        if(aveValue == Uint8::ERROR) //-V550 //-V2550 //-V2564
         {
             period[static_cast<int>(ch)] = Float::ERROR;
         }
@@ -512,7 +512,7 @@ int CalculatePeriodAccurately(Chan::E ch) //-V2506
         }
 
         int addShift = firstByte - 1;
-        int maxPeriod = static_cast<int>(nBytes * 0.95F);
+        int maxPeriod = static_cast<int>(nBytes * 0.95F); //-V2564
 
         for(int nextPeriod = 10; nextPeriod < maxPeriod; nextPeriod++)
         {
@@ -799,13 +799,13 @@ float CalculateMinSteadyRel(Chan::E ch)
             while(data <= end)
             {
                 uint8 d = *data++;
-                if(d < aveValue)
+                if(d < aveValue) //-V2564
                 {
                     sum += d; //-V127
                     numSums++; //-V127
                 }
             }
-            min[static_cast<int>(ch)] = static_cast<float>(sum) / numSums;
+            min[static_cast<int>(ch)] = static_cast<float>(sum) / numSums; //-V2564
 
             float pic = CalculatePicRel(ch);
             if (pic == Float::ERROR) //-V550 //-V2550
@@ -826,18 +826,18 @@ float CalculateMinSteadyRel(Chan::E ch)
                 {
                     uint8 d = *data++;
 
-                    if (d < aveValue)
+                    if (d < aveValue) //-V2564
                     {
-                        if (d < _min)
+                        if (d < _min) //-V2564
                         {
-                            if (_min - d > value)
+                            if (_min - d > value) //-V2564
                             {
                                 sum -= d;
                                 --numSums;
                                 ++numDeleted; //-V127
                             }
                         }
-                        else if (d - _min > value) //-V2516
+                        else if (d - _min > value) //-V2516 //-V2564
                         {
                             sum -= d;
                             --numSums;
@@ -845,7 +845,7 @@ float CalculateMinSteadyRel(Chan::E ch)
                         }
                     }
                 }
-                min[static_cast<int>(ch)] = (numDeleted > numMin / 2.0F) ? CalculateMinRel(ch) : static_cast<float>(sum) / numSums;
+                min[static_cast<int>(ch)] = (numDeleted > numMin / 2.0F) ? CalculateMinRel(ch) : static_cast<float>(sum) / numSums; //-V2564
             }
         }
         minSteadyIsCalculating[static_cast<int>(ch)] = true;
@@ -879,13 +879,13 @@ float CalculateMaxSteadyRel(Chan::E ch)
             while (data <= end)
             {
                 uint8 d = *data++;
-                if(d > aveValue)
+                if(d > aveValue) //-V2564
                 {
                     sum += d; //-V127
                     numSums++; //-V127
                 }
             }
-            max[static_cast<int>(ch)] = static_cast<float>(sum) / numSums;
+            max[static_cast<int>(ch)] = static_cast<float>(sum) / numSums; //-V2564
 
             float pic = CalculatePicRel(ch);
 
@@ -907,18 +907,18 @@ float CalculateMaxSteadyRel(Chan::E ch)
                 while (data <= end)
                 {
                     uint8 d = *data++;
-                    if (d > aveValue)
+                    if (d > aveValue) //-V2564
                     {
                         if (d > _max)
                         {
-                            if (d - _max > value)
+                            if (d - _max > value) //-V2564
                             {
                                 sum -= d;
                                 numSums--;
                                 numDeleted++; //-V127
                             }
                         }
-                        else if (_max - d > value) //-V2516
+                        else if (_max - d > value) //-V2516 //-V2564
                         {
                             sum -= d;
                             numSums--;
@@ -926,7 +926,7 @@ float CalculateMaxSteadyRel(Chan::E ch)
                         }
                     }
                 }
-                max[static_cast<int>(ch)] = (numDeleted > numMax / 2) ? CalculateMaxRel(ch) : static_cast<float>(sum) / numSums;
+                max[static_cast<int>(ch)] = (numDeleted > numMax / 2) ? CalculateMaxRel(ch) : static_cast<float>(sum) / numSums; //-V2564
             }
         }
         maxSteadyIsCalculating[static_cast<int>(ch)] = true;
@@ -944,7 +944,7 @@ float CalculateMaxRel(Chan::E ch)
     if(!maxIsCalculating[static_cast<int>(ch)])
     {
         uint8 val = Math::MaxFromArrayWithErrorCode(CHOICE_BUFFER, firstByte, lastByte);
-        max[static_cast<int>(ch)] = (val == Uint8::ERROR) ? Float::ERROR : val;
+        max[static_cast<int>(ch)] = (val == Uint8::ERROR) ? Float::ERROR : val; //-V2564
         maxIsCalculating[static_cast<int>(ch)] = true;
     }
 
@@ -960,7 +960,7 @@ float CalculateMinRel(Chan::E ch)
     if (!minIsCalculating[static_cast<int>(ch)])
     {
         uint8 val = Math::MinFromArrayWithErrorCode(CHOICE_BUFFER, firstByte, lastByte);
-        min[static_cast<int>(ch)] = (val == Uint8::ERROR) ? Float::ERROR : val;
+        min[static_cast<int>(ch)] = (val == Uint8::ERROR) ? Float::ERROR : val; //-V2564
         minIsCalculating[static_cast<int>(ch)] = true;
     }
 
@@ -1129,7 +1129,7 @@ float Measure::CalculateCursorU(Chan::E ch, float posCurT) //-V2506
 
 #define SCALE (200.0F / (VALUE::MAX - VALUE::MIN))
 
-    float value = 200.0F - rel * SCALE;
+    float value = 200.0F - rel * SCALE; //-V2564
     LIMITATION(value, 0.0F, 200.0F);
     return value;
 }
@@ -1158,7 +1158,7 @@ float Measure::CalculateCursorT(Chan::E ch, float posCurU, int numCur) //-V2506
     {
         int curData = 200 - (dataIn)[i] + VALUE::MIN; //-V2563
 
-        if(curData <= posCurU && prevData > posCurU)
+        if(curData <= posCurU && prevData > posCurU) //-V2564
         {
             if(numCur == 0)
             {
@@ -1177,7 +1177,7 @@ float Measure::CalculateCursorT(Chan::E ch, float posCurU, int numCur) //-V2506
             }
         }
 
-        if(curData >= posCurU && prevData < posCurU)
+        if(curData >= posCurU && prevData < posCurU) //-V2564
         {
             if(numCur == 0)
             {
@@ -1266,7 +1266,7 @@ void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase) //-V2506
         {
             int part = num % ((delta - 1) * 2);
             num++;
-            float sinX = (part < delta - 1) ? std::sinf(Math::PI_F / delta * (part + 1)) : std::sinf(Math::PI_F / delta * (part - (delta - 1) * 2));
+            float sinX = (part < delta - 1) ? std::sinf(Math::PI_F / delta * (part + 1)) : std::sinf(Math::PI_F / delta * (part - (delta - 1) * 2)); //-V2564
 
             if (tBase > TBase::_5ns)                 // Здесь используем более быструю, но более неправильную арифметику целвых чисел
             {
@@ -1280,7 +1280,7 @@ void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase) //-V2506
                     value += signedData[n] * sinXint / (x - n * deltaXint); //-V2563
                     sinXint = -sinXint;
                 }
-                data[i] = (uint8)(value * KOEFF); //-V2563
+                data[i] = (uint8)(value * KOEFF); //-V2563 //-V2564
             }
             else                                    // На этих развёртках арифметика с плавающей запятой даёт приемлемое быстродействие
             {
@@ -1290,7 +1290,7 @@ void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase) //-V2506
                 for (int n = 0; n < numSignedPoints; n++)
                 {
                     x -= deltaX;
-                    value += signedData[n] * sinX / x; //-V2563
+                    value += signedData[n] * sinX / x; //-V2563 //-V2564
                     sinX = -sinX;
                 }
                 data[i] = static_cast<uint8>(value); //-V2563

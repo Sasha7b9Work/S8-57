@@ -109,7 +109,7 @@ static void OnOpenClose_Tester(bool enter)
 }
 
 
-DEF_PAGE_6_VAR( pTester, 
+DEF_PAGE_6_VAR( pTester,  //-V2567
     "реяреп",
     "",
     &cControl,
@@ -126,19 +126,19 @@ const Page * const PageTester::self = static_cast<const Page *>(&pTester);
 
 void PageTester::OnChanged_Control(bool)
 {
-    Page *page = const_cast<Page *>(&pTester);
+    Page *page = const_cast<Page *>(&pTester); //-V2567
 
-    Item **items = const_cast<Item **>(page->OwnData()->items);
+    Item **items = const_cast<Item **>(page->OwnData()->items); //-V2567
 
     if (S_TEST_CONTROL_IS_VOLTAGE)
     {
-        items[1] = const_cast<Choice *>(&cStepU); //-V2563
-        items[2] = const_cast<Choice *>(&cPolarity); //-V2563
+        items[1] = const_cast<Choice *>(&cStepU); //-V2563 //-V2567
+        items[2] = const_cast<Choice *>(&cPolarity); //-V2563 //-V2567
     }
     else
     {
-        items[1] = const_cast<Choice *>(&cStepI); //-V2563
-        items[2] = const_cast<Choice *>(&cConductivity); //-V2563
+        items[1] = const_cast<Choice *>(&cStepI); //-V2563 //-V2567
+        items[2] = const_cast<Choice *>(&cConductivity); //-V2563 //-V2567
     }
 
     Tester::LoadStep();

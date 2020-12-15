@@ -32,7 +32,7 @@ DEF_GOVERNOR( gExShift2,
 )
 
 
-DEF_PAGE_2( pADC,
+DEF_PAGE_2( pADC, //-V2567
     "¿÷œ",
     "",
     &gExShift1,

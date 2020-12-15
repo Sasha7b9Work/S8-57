@@ -10,8 +10,8 @@
 #define MATH_FUNC_IS_MUL false
 
 #ifdef WIN32
-#define __attribute(x)
-#define __attribute__(x)
+#define __attribute(x) //-V2573
+#define __attribute__(x) //-V2573
 #define WCHAR unsigned short
 #else
 #define nullptr 0 //-V1059
@@ -30,10 +30,10 @@ typedef uint16               col_val;
 typedef void  (*pFuncVV)();
 typedef bool  (*pFuncBV)();
 
-#define _GET_BIT(value, bit)                    (((value) >> (bit)) & 0x01)
-#define _SET_BIT(value, bit)                    ((value) |= (1 << (bit)))
-#define _CLEAR_BIT(value, bit)                  ((value) &= (~(1 << (bit))))
-#define _SET_BIT_VALUE(value, numBit, bitValue) (value |= ((bitValue) << (numBit)))
+#define _GET_BIT(value, bit)                    (((value) >> (bit)) & 0x01) //-V2573
+#define _SET_BIT(value, bit)                    ((value) |= (1 << (bit))) //-V2573
+#define _CLEAR_BIT(value, bit)                  ((value) &= (~(1 << (bit)))) //-V2573
+#define _SET_BIT_VALUE(value, numBit, bitValue) (value |= ((bitValue) << (numBit))) //-V2573
 
 // Для определения задания буферов лучше пользоваться этими макросами, чтобы потом легче было отследить, где можно памяти освободить
 #define CHAR_BUF(name, size)            char name[size]

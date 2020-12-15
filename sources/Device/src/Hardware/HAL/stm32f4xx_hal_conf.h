@@ -34,14 +34,14 @@
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32F4xx_HAL_CONF_H
-#define __STM32F4xx_HAL_CONF_H
+#define __STM32F4xx_HAL_CONF_H //-V2573
 
 #ifdef __cplusplus
  extern "C" {
 #endif
      
-#define __weak __attribute((weak))
-#define __packed __attribute((packed))
+#define __weak __attribute((weak)) //-V2573
+#define __packed __attribute((packed)) //-V2573
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

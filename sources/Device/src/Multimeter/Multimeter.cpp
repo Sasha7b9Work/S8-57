@@ -14,7 +14,7 @@ public:
     }
     static void Transmit(void *_buffer, uint timeout)
     {
-        uint8 *pointer = static_cast<uint8 *>(_buffer);
+        uint8 *pointer = static_cast<uint8 *>(_buffer); //-V2571
 
         int size = 0;
         while (*pointer != 0x0a)

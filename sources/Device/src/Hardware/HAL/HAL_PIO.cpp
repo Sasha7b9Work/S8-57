@@ -56,14 +56,14 @@ static const uint alternates[HAlternate::Count] =
 
 static GPIO_TypeDef * const ports[HPort::Count] =
 {
-    GPIOA,
-    GPIOB,
-    GPIOC,
-    GPIOD,
-    GPIOE,
-    GPIOF,
-    GPIOG,
-    GPIOH
+    GPIOA, //-V2571
+    GPIOB, //-V2571
+    GPIOC, //-V2571
+    GPIOD, //-V2571
+    GPIOE, //-V2571
+    GPIOF, //-V2571
+    GPIOG, //-V2571
+    GPIOH //-V2571
 };
 
 #define PORT(p)      (ports[p])
@@ -123,5 +123,5 @@ uint8 HAL_PIO::Read(HPort::E port, uint16 pin)
 
 void HAL_PIO::EXTI_CLEAR_IT_BIT(uint16 pin)
 {
-    __HAL_GPIO_EXTI_CLEAR_IT(pin);
+    __HAL_GPIO_EXTI_CLEAR_IT(pin); //-V2571
 }

@@ -209,22 +209,22 @@ void PageMultimeter::Init()
 
 void PageMultimeter::OnChanged_Mode(bool)
 {
-    Page *page = const_cast<Page *>(PageMultimeter::self);
+    Page *page = const_cast<Page *>(PageMultimeter::self); //-V2567
 
-    Item **items = const_cast<Item **>(page->OwnData()->items);
+    Item **items = const_cast<Item **>(page->OwnData()->items); //-V2567
 
-    items[1] = const_cast<Choice *>(&cRangesVoltageDC); //-V2563
-    items[2] = const_cast<Choice *>(&cAVP); //-V2563
-    items[3] = const_cast<Choice *>(&cZero); //-V2563
-    items[4] = const_cast<Button* >(&bExit); //-V2563
+    items[1] = const_cast<Choice *>(&cRangesVoltageDC); //-V2563 //-V2567
+    items[2] = const_cast<Choice *>(&cAVP); //-V2563 //-V2567
+    items[3] = const_cast<Choice *>(&cZero); //-V2563 //-V2567
+    items[4] = const_cast<Button* >(&bExit); //-V2563 //-V2567
 
     switch(S_MULT_MEASURE)
     {
-    case MultimeterMeasure::VoltageDC:      items[1] = const_cast<Choice *>(&cRangesVoltageDC);       break; //-V2563
-    case MultimeterMeasure::VoltageAC:      items[1] = const_cast<Choice *>(&cRangesVoltageAC);       break; //-V2563
-    case MultimeterMeasure::CurrentDC:      items[1] = const_cast<Choice *>(&cRangesCurrentDC);       break; //-V2563
-    case MultimeterMeasure::CurrentAC:      items[1] = const_cast<Choice *>(&cRangesCurrentAC);       break; //-V2563
-    case MultimeterMeasure::Resistance:     items[1] = const_cast<Choice *>(&cRangesResistance);      break; //-V2563
+    case MultimeterMeasure::VoltageDC:      items[1] = const_cast<Choice *>(&cRangesVoltageDC);       break; //-V2563 //-V2567
+    case MultimeterMeasure::VoltageAC:      items[1] = const_cast<Choice *>(&cRangesVoltageAC);       break; //-V2563 //-V2567
+    case MultimeterMeasure::CurrentDC:      items[1] = const_cast<Choice *>(&cRangesCurrentDC);       break; //-V2563 //-V2567
+    case MultimeterMeasure::CurrentAC:      items[1] = const_cast<Choice *>(&cRangesCurrentAC);       break; //-V2563 //-V2567
+    case MultimeterMeasure::Resistance:     items[1] = const_cast<Choice *>(&cRangesResistance);      break; //-V2563 //-V2567
     case MultimeterMeasure::TestDiode:  
     case MultimeterMeasure::Bell:           items[1] = &Item::empty; //-V2563
                                             items[2] = &Item::empty; //-V2563
@@ -242,7 +242,7 @@ static void OnOpenClose_Multimeter(bool enter)
     Device::SetMode(enter ? Device::Mode::Multimeter : Device::Mode::Osci);
 }
 
-DEF_PAGE_7_VAR( pMultimeter,
+DEF_PAGE_7_VAR( pMultimeter, //-V2567
     "МУЛЬТИМЕТР",
     "Управление прибором в режиме мультиметра",
     &cMode,
@@ -283,7 +283,7 @@ DEF_BUTTON( bCalibrate1,
     &PageMultimeter::Calibration::self, Item::Active, OnPress_Calibrate1
 )
 
-DEF_PAGE_2( pCalibration,
+DEF_PAGE_2( pCalibration, //-V2567
     "КАЛИБРОВКА",
     "Калибровка мультиметра",
     &bCalibrate0,
@@ -316,7 +316,7 @@ void PageMultimeter::DecodePassword(const KeyEvent &event) //-V2506
         return;
     }
 
-    if (Menu::OpenedItem() != const_cast<Choice *>(&cMode))       // И обязательно при раскрытом меню "Режим"
+    if (Menu::OpenedItem() != const_cast<Choice *>(&cMode))       // И обязательно при раскрытом меню "Режим" //-V2567
     {
         charsMatch = 0;
         return;
@@ -347,19 +347,19 @@ void PageMultimeter::DecodePassword(const KeyEvent &event) //-V2506
 
 void PageMultimeter::EnablePageCalibrate()
 {
-    Page *page = const_cast<Page *>(&pMultimeter);
+    Page *page = const_cast<Page *>(&pMultimeter); //-V2567
 
-    Item **items = const_cast<Item **>(page->OwnData()->items);
+    Item **items = const_cast<Item **>(page->OwnData()->items); //-V2567
 
-    items[6] = const_cast<Page *>(PageMultimeter::Calibration::self); //-V2563
+    items[6] = const_cast<Page *>(PageMultimeter::Calibration::self); //-V2563 //-V2567
 }
 
 
 void PageMultimeter::DisablePageCalibrate()
 {
-    Page *page = const_cast<Page *>(&pMultimeter);
+    Page *page = const_cast<Page *>(&pMultimeter); //-V2567
 
-    Item **items = const_cast<Item **>(page->OwnData()->items);
+    Item **items = const_cast<Item **>(page->OwnData()->items); //-V2567
 
     items[6] = &Item::empty; //-V2563
 }

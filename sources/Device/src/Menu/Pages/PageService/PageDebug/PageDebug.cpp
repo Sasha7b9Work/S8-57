@@ -134,7 +134,7 @@ static void OnPress_SaveFirmware()
 
     FDrive::OpenNewFileForWrite(NAME_FILE_FIRMWARE, &structForWrite);
 
-    uint8 *address = reinterpret_cast<uint8 *>(0x08020000); //-V566
+    uint8 *address = reinterpret_cast<uint8 *>(0x08020000); //-V566 //-V2571
     uint8 *endAddress = address + SIZE_FILE_FIRMWARE; //-V566 //-V2563
 
     int sizeBlock = 512;
@@ -233,7 +233,7 @@ static bool HandlerKey_SerialNumber(const KeyEvent &)
     return false;
 }
 
-DEF_PAGE_2( pSerialNumber,                                                                                                                                            //--- ОТЛАДКА - С/Н ---
+DEF_PAGE_2( pSerialNumber,                                                                                                                                            //--- ОТЛАДКА - С/Н --- //-V2567
     "С/Н",
     "Запись серийного номера в OTP-память. ВНИМАНИЕ!!! ОТP-память - память с однократной записью.",
     &bSerialNumber_Change,
@@ -245,7 +245,7 @@ DEF_PAGE_2( pSerialNumber,                                                      
 const Page * const PageDebug::PageSerialNumber::self = static_cast<const Page *>(&pSerialNumber);
 
 
-DEF_PAGE_8( pDebug,                                                                                                                                                         //--- ОТЛАДКА ---
+DEF_PAGE_8( pDebug,                                                                                                                                                         //--- ОТЛАДКА --- //-V2567
     "ОТЛАДКА",
     "",
     PageDebug::PageConsole::self,

@@ -1,6 +1,6 @@
 #pragma once
 
-#define __weak __attribute((weak))
+#define __weak __attribute((weak)) //-V2573
 
 #include "defines.h"
 

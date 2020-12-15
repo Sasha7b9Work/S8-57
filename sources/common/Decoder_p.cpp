@@ -191,7 +191,7 @@ static bool DrawTesterPoints(uint8 data) //-V2506
 
         if(numY == TESTER_NUM_POINTS)
         {
-            Painter::DrawTesterData(mode, color, reinterpret_cast<uint16 *>(buffer), buffer + TESTER_NUM_POINTS * 2); //-V1032 //-V2563
+            Painter::DrawTesterData(mode, color, reinterpret_cast<uint16 *>(buffer), buffer + TESTER_NUM_POINTS * 2); //-V1032 //-V2563 //-V2571
             return true;
         }
     }

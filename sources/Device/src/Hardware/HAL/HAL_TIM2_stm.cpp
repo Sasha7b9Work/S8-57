@@ -3,12 +3,12 @@
 #include <stm32f4xx_hal.h>
 
 
-static TIM_HandleTypeDef handlerTIM2 = { TIM2 };
+static TIM_HandleTypeDef handlerTIM2 = { TIM2 }; //-V2571
 
 
 void HAL_TIM2::Init(uint prescaler, uint period)
 {
-    __HAL_RCC_TIM2_CLK_ENABLE();
+    __HAL_RCC_TIM2_CLK_ENABLE(); //-V2571
 
     handlerTIM2.Init.Prescaler = prescaler;
     handlerTIM2.Init.CounterMode = TIM_COUNTERMODE_UP;
@@ -33,25 +33,25 @@ void HAL_TIM2::Stop()
 
 void HAL_TIM2::DeInit()
 {
-    __HAL_RCC_TIM2_CLK_DISABLE();
+    __HAL_RCC_TIM2_CLK_DISABLE(); //-V2571
 }
 
 
 uint HAL_TIM2::TimeUS()
 {
-    return TIM2->CNT / 90;
+    return TIM2->CNT / 90; //-V2571
 }
 
 
 uint HAL_TIM2::TimeTicks()
 {
-    return TIM2->CNT;
+    return TIM2->CNT; //-V2571
 }
 
 
 void HAL_TIM2::StartMultiMeasurement()
 {
-    TIM2->CR1 &= (uint)~TIM_CR1_CEN;
-    TIM2->CNT = 0;
-    TIM2->CR1 |= TIM_CR1_CEN;
+    TIM2->CR1 &= (uint)~TIM_CR1_CEN; //-V2571
+    TIM2->CNT = 0; //-V2571
+    TIM2->CR1 |= TIM_CR1_CEN; //-V2571
 }

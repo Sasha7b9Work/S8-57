@@ -186,7 +186,7 @@ void Tester::ProcessStep() //-V2506
 
     if ((step % 2) == 0)        // Если шаг кратен двум, то нужно устанавливать напряжение
     {
-        HAL_DAC2::SetValue(static_cast<uint>(stepU * step / 2));
+        HAL_DAC2::SetValue(static_cast<uint>(stepU * step / 2)); //-V2564
         // Запускаем ПЛИС для записи необходимого количества точек. Набор будет производиться в течение 2.5 мс (длительсность одного такта)
         if(!StartFPGA())
         {
@@ -259,7 +259,7 @@ void Tester::ReadData()
 
     RecountPoints(x, y);
 
-    DisplayTester::SetPoints(halfStep, x, y);
+    DisplayTester::SetPoints(halfStep, x, y); //-V2571
 }
 
 
@@ -277,12 +277,12 @@ static void RecountPoints(uint16 *x, uint8 *y)
     for (int i = 0; i < TESTER_NUM_POINTS; i++)
     {
         int X = 255 - x[i] + dX; //-V2563
-        X = static_cast<int>(x0 + (x0 - X) * scaleX);
+        X = static_cast<int>(x0 + (x0 - X) * scaleX); //-V2564
         LIMITATION(X, 0, 319);
         x[i] = static_cast<uint16>(X); //-V2563
 
         int Y = y[i] + dY; //-V2563
-        Y = static_cast<uint8>(y0 + (y0 - Y) * scaleY);
+        Y = static_cast<uint8>(y0 + (y0 - Y) * scaleY); //-V2564
         LIMITATION(Y, 0, 239);
         y[i] = static_cast<uint8>(Y); //-V2563
     }
@@ -315,11 +315,11 @@ void Tester::LoadStep()
 
     HAL_PIO::Write(PIN_TESTER_I, S_TEST_CONTROL_IS_VOLTAGE ? 0 : 1);
 
-    stepU = 255.0F / 5;
+    stepU = 255.0F / 5; //-V2564
 
     if(NeedSmallStep())
     {
-        stepU /= 5;
+        stepU /= 5; //-V2564
     }
 }
 

@@ -69,10 +69,10 @@ void Timer::Init()
         timers[i].timeNextMS = UINT_MAX;
     }
    
-    tim3.Init(TIM3, 54000 - 1, TIM_COUNTERMODE_UP, 1, TIM_CLOCKDIVISION_DIV1);
+    tim3.Init(TIM3, 54000 - 1, TIM_COUNTERMODE_UP, 1, TIM_CLOCKDIVISION_DIV1); //-V2571
     tim3.EnabledIRQ(1, 1);
 
-    tim2.Init(TIM2, 0, TIM_COUNTERMODE_UP, static_cast<uint>(-1), TIM_CLOCKDIVISION_DIV1);
+    tim2.Init(TIM2, 0, TIM_COUNTERMODE_UP, static_cast<uint>(-1), TIM_CLOCKDIVISION_DIV1); //-V2571
     tim2.Start();
 }
 
@@ -237,8 +237,8 @@ void Timer::PauseOnOPS(uint ops)
 
 void Timer::PauseOnTicks(uint numTicks)
 {
-    uint startTicks = TIME_TICKS;
-    while (TIME_TICKS - startTicks < numTicks)
+    uint startTicks = TIME_TICKS; //-V2571
+    while (TIME_TICKS - startTicks < numTicks) //-V2571
     {
     };
 }
@@ -246,23 +246,23 @@ void Timer::PauseOnTicks(uint numTicks)
 
 void Timer::StartMultiMeasurement()
 {
-    TIM2->CR1 &= (uint)~TIM_CR1_CEN;
-    TIM2->CNT = 0;
-    TIM2->CR1 |= TIM_CR1_CEN;
+    TIM2->CR1 &= (uint)~TIM_CR1_CEN; //-V2571
+    TIM2->CNT = 0; //-V2571
+    TIM2->CR1 |= TIM_CR1_CEN; //-V2571
 }
 
 
 void Timer::StartLogging()
 {
-    timeStartLogging = TIME_TICKS;
+    timeStartLogging = TIME_TICKS; //-V2571
     timePrevPoint = timeStartLogging;
 }
 
 
 uint Timer::LogPointUS(char *)
 {
-    uint interval = TIME_TICKS - timePrevPoint;
-    timePrevPoint = TIME_TICKS;
+    uint interval = TIME_TICKS - timePrevPoint; //-V2571
+    timePrevPoint = TIME_TICKS; //-V2571
     return interval;
 }
 
@@ -273,11 +273,11 @@ extern "C" {
     //---------------------------
     void TIM3_IRQHandler()
     {
-        if ((TIM3->SR & TIM_SR_UIF) == TIM_SR_UIF)
+        if ((TIM3->SR & TIM_SR_UIF) == TIM_SR_UIF) //-V2571
         {
-            if((TIM3->DIER & TIM_DIER_UIE) == TIM_DIER_UIE)
+            if((TIM3->DIER & TIM_DIER_UIE) == TIM_DIER_UIE) //-V2571
             {
-                TIM3->SR = ~TIM_DIER_UIE;
+                TIM3->SR = ~TIM_DIER_UIE; //-V2571
                 ElapsedCallback();
             }
         }
