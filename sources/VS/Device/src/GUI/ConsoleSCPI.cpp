@@ -25,9 +25,9 @@ static ConsoleSCPI *self = nullptr;
 
 ConsoleSCPI::ConsoleSCPI(wxFrame *parent) : wxFrame(parent, wxID_ANY, wxT("SCPI"))
 {
-    text = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, { 600, 300 }, wxTE_MULTILINE | wxTE_READONLY);
+    text = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, { 600, 300 }, wxTE_MULTILINE | wxTE_READONLY); //-V2511
 
-    line = new wxTextCtrl(this, ID_LINE, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
+    line = new wxTextCtrl(this, ID_LINE, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER); //-V2511
     line->SetFocus();
 
     wxFont font(11, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Courier New"));
@@ -79,7 +79,7 @@ void ConsoleSCPI::OnSize(wxSizeEvent &)
 }
 
 
-static int Consist0D(char *buffer, int size)
+static int Consist0D(char *buffer, int size) //-V2506
 {
     int i = 0;
     while (*buffer != 0x0d)
@@ -112,7 +112,7 @@ void ConsoleSCPI::OnTimerComPort(wxTimerEvent &)
             if (positionOD < 0)
             {
                 buffer[n] = '\0';
-                std::strcat(fullBuffer, buffer);
+                std::strcat(fullBuffer, buffer); //-V2513
             }
             else
             {
@@ -133,7 +133,7 @@ ConsoleSCPI *ConsoleSCPI::Self()
 {
     if (!self)
     {
-        self = new ConsoleSCPI(nullptr);
+        self = new ConsoleSCPI(nullptr); //-V2511
     }
 
     return self;
@@ -211,7 +211,7 @@ void ConsoleSCPI::SendToSCPI(const char *txt)
     }
     else
     {
-        SCPI::AppendNewData(message.c_str(), static_cast<int>(std::strlen(message.c_str())));
+        SCPI::AppendNewData(message.c_str(), static_cast<int>(std::strlen(message.c_str()))); //-V2513
     }
 }
 
@@ -296,7 +296,7 @@ void ConsoleSCPI::History::Add(const wxString &txt)
 }
 
 
-wxString ConsoleSCPI::History::Next()
+wxString ConsoleSCPI::History::Next() //-V2506
 {
     if (history.size() == 0)
     {
@@ -315,7 +315,7 @@ wxString ConsoleSCPI::History::Next()
 }
 
 
-wxString ConsoleSCPI::History::Prev()
+wxString ConsoleSCPI::History::Prev() //-V2506
 {
     if (history.size() == 0)
     {

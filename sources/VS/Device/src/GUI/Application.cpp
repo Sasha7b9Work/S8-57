@@ -42,7 +42,7 @@ enum
 static Frame *frame = nullptr;
 
 
-wxIMPLEMENT_APP_NO_MAIN(Application);
+wxIMPLEMENT_APP_NO_MAIN(Application); //-V2511
 
 
 int main(int argc, char **argv)
@@ -56,7 +56,7 @@ int main(int argc, char **argv)
 
 
 
-bool Application::OnInit()
+bool Application::OnInit() //-V2506
 {
     if (!wxApp::OnInit())
     {
@@ -82,7 +82,7 @@ int Application::OnExit()
 void Frame::SaveSettings()
 {
     wxString wsFile(FILE_CONFIG);
-    wxFileConfig *pConfig = new wxFileConfig(wxEmptyString, wxEmptyString, wsFile, wxEmptyString, wxCONFIG_USE_LOCAL_FILE | wxCONFIG_USE_RELATIVE_PATH);
+    wxFileConfig *pConfig = new wxFileConfig(wxEmptyString, wxEmptyString, wsFile, wxEmptyString, wxCONFIG_USE_LOCAL_FILE | wxCONFIG_USE_RELATIVE_PATH); //-V2511
     wxConfigBase::Set(pConfig);
 
     pConfig->SetPath(wxT("Cenerator/A"));
@@ -102,19 +102,19 @@ void Frame::SaveSettings()
     pConfig->Write(wxT("width"), ConsoleSCPI::Self()->GetSize().x);
     pConfig->Write(wxT("height"), ConsoleSCPI::Self()->GetSize().y);
 
-    delete wxConfigBase::Set(nullptr);
+    delete wxConfigBase::Set(nullptr); //-V2511
 }
 
 
 void Frame::LoadSettings()
 {
     wxString wsFile(FILE_CONFIG);   
-    wxFileConfig *pConfig = new wxFileConfig(wxEmptyString, wxEmptyString, wsFile, wxEmptyString, wxCONFIG_USE_LOCAL_FILE | wxCONFIG_USE_RELATIVE_PATH);
+    wxFileConfig *pConfig = new wxFileConfig(wxEmptyString, wxEmptyString, wsFile, wxEmptyString, wxCONFIG_USE_LOCAL_FILE | wxCONFIG_USE_RELATIVE_PATH); //-V2511
     wxConfigBase::Set(pConfig);
 
     wxConfigBase *config = wxConfigBase::Get(false);
 
-    config->SetPath(wxT("Cenerator/A"));
+    config->SetPath(wxT("Cenerator/A")); //-V522
 
     config->Read(wxT("frequency"), &TuneGeneratorDialog::frequency[0], TuneGeneratorDialog::frequency[0]);
     config->Read(wxT("amplitude"), &TuneGeneratorDialog::amplitude[0], TuneGeneratorDialog::amplitude[0]);
@@ -133,7 +133,7 @@ void Frame::LoadSettings()
     config->Read(wxT("height"), &rect.height, ConsoleSCPI::Self()->GetSize().y);
     ConsoleSCPI::Self()->SetSize(rect);
 
-    delete wxConfigBase::Set(nullptr);
+    delete wxConfigBase::Set(nullptr); //-V2511
 }
 
 
@@ -145,8 +145,8 @@ Frame::Frame(const wxString& title)
 
     SetIcon(wxICON(sample));
 
-    wxMenu *fileMenu = new wxMenu;
-    wxMenu *toolsMenu = new wxMenu;
+    wxMenu *fileMenu = new wxMenu; //-V2511
+    wxMenu *toolsMenu = new wxMenu; //-V2511
 
     fileMenu->Append(FILE_QUIT, "Выход\tAlt-X", "Закрывает окно программы");
 
@@ -154,7 +154,7 @@ Frame::Frame(const wxString& title)
     toolsMenu->Append(SCPI, "SCPI");
     toolsMenu->Append(TESTER, "Тестер");
 
-    wxMenuBar *menuBar = new wxMenuBar();
+    wxMenuBar *menuBar = new wxMenuBar(); //-V2511
     menuBar->Append(fileMenu, "Файл");
     menuBar->Append(toolsMenu, "Инструменты");
 
@@ -206,7 +206,7 @@ void Frame::DrawFPS()
 
     if (clock() - prevTime > 1000)
     {
-        float fps = static_cast<float>(count) / (clock() - prevTime) * 1000.0F;
+        float fps = static_cast<float>(count) / (clock() - prevTime) * 1000.0F; //-V2564
 
         char buffer[100];
         sprintf(buffer, "fps %f", fps);

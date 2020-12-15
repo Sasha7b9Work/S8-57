@@ -30,7 +30,7 @@ static void AddToSystemConsole(const char *message)
 
             wxRemoveFile(FILE_NAME);
 
-            file = new wxTextFile(FILE_NAME);
+            file = new wxTextFile(FILE_NAME); //-V2511
 
             file->Create();
 

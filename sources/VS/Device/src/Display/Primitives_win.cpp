@@ -75,11 +75,11 @@ int Text::DrawSmall(int x, int y, Color color)
 {
     color.SetAsCurrent();
 
-    uint numSymbols = std::strlen(text);
+    uint numSymbols = std::strlen(text); //-V2513
 
     for (uint i = 0; i < numSymbols; i++)
     {
-        x = DrawChar(x, y, text[i]);
+        x = DrawChar(x, y, text[i]); //-V2563
         x += DFont::GetSpacing();
     }
 
@@ -123,7 +123,7 @@ void MultiHPointLine::Draw(int x, Color color)
 
     for (int i = 0; i < numLines; i++)
     {
-        DrawHPointLine(x, y[i], count, delta);
+        DrawHPointLine(x, y[i], count, delta); //-V2563
     }
 }
 
@@ -144,7 +144,7 @@ void MultiVPointLine::Draw(int y, Color color)
 
     for (int i = 0; i < numLines; i++)
     {
-        DrawVPointLine(x0[i], y, count, delta);
+        DrawVPointLine(x0[i], y, count, delta); //-V2563
     }
 }
 

@@ -17,9 +17,9 @@ Dialog::Dialog(const wxString &title) : wxDialog(nullptr, wxID_ANY, title)
 {
     Connect(wxEVT_MOVE, wxMoveEventHandler(Dialog::OnMove));
 
-    wxButton *btnOk = new wxButton(this, ID_BUTTON_OK, wxT("Принять"), wxDefaultPosition, BUTTON_SIZE);
+    wxButton *btnOk = new wxButton(this, ID_BUTTON_OK, wxT("Принять"), wxDefaultPosition, BUTTON_SIZE); //-V2511
     Connect(ID_BUTTON_OK, wxEVT_BUTTON, wxCommandEventHandler(Dialog::OnButtonApply));
-    wxButton *btnCancel = new wxButton(this, ID_BUTTON_CANCEL, wxT("Отменить"), wxDefaultPosition, BUTTON_SIZE);
+    wxButton *btnCancel = new wxButton(this, ID_BUTTON_CANCEL, wxT("Отменить"), wxDefaultPosition, BUTTON_SIZE); //-V2511
     Connect(ID_BUTTON_CANCEL, wxEVT_BUTTON, wxCommandEventHandler(Dialog::OnButtonCancel));
 
     Bind(wxEVT_KEY_DOWN, &Dialog::OnKeyDown, this);
@@ -28,9 +28,9 @@ Dialog::Dialog(const wxString &title) : wxDialog(nullptr, wxID_ANY, title)
     Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(Dialog::OnKeyDown));
     Connect(wxEVT_KEY_UP, wxKeyEventHandler(Dialog::OnKeyDown));
 
-    wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL);
-    panelBox = new wxBoxSizer(wxVERTICAL);
-    wxBoxSizer *hBox = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer *vBox = new wxBoxSizer(wxVERTICAL); //-V2511
+    panelBox = new wxBoxSizer(wxVERTICAL); //-V2511
+    wxBoxSizer *hBox = new wxBoxSizer(wxHORIZONTAL); //-V2511
 
     vBox->Add(panelBox);
     hBox->Add(btnOk, 1, wxALIGN_CENTER);

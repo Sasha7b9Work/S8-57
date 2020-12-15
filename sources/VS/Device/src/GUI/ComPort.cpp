@@ -7,7 +7,7 @@
 static int openedPort = -1;
 
 
-bool ComPort::Open()
+bool ComPort::Open() //-V2506
 {
     char mode[] = { '8', 'N', '1', '\0' };
 
@@ -57,11 +57,11 @@ void ComPort::Send(const char *buffer)
     {
         char *p = const_cast<char *>(buffer);
 
-        RS232_SendBuf(openedPort, reinterpret_cast<uint8 *>(p), static_cast<int>(std::strlen(buffer)));
+        RS232_SendBuf(openedPort, reinterpret_cast<uint8 *>(p), static_cast<int>(std::strlen(buffer))); //-V2513
     }
 }
 
-int ComPort::Receive(char *buffer, int size)
+int ComPort::Receive(char *buffer, int size) //-V2506
 {
     if (IsOpened())
     {

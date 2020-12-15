@@ -23,12 +23,12 @@ void HAL_BUS::FPGA::Write16(uint8 *, uint16)
 }
 
 
-uint8 HAL_BUS::FPGA::Read(const uint8 *address)
+uint8 HAL_BUS::FPGA::Read(const uint8 *address) //-V2506
 {
-    if (address == RD::DATA_A || (address == RD::DATA_A + 1) ||
-        address == RD::DATA_B || (address == RD::DATA_B + 1))
+    if (address == RD::DATA_A || (address == RD::DATA_A + 1) || //-V2563
+        address == RD::DATA_B || (address == RD::DATA_B + 1)) //-V2563
     {
-        return RecorderHAL::ReadData((address == RD::DATA_A) || (address == RD::DATA_A + 1) ? Chan::A : Chan::B);
+        return RecorderHAL::ReadData((address == RD::DATA_A) || (address == RD::DATA_A + 1) ? Chan::A : Chan::B); //-V2563
     }
 
     return 0;
@@ -52,7 +52,7 @@ uint8 HAL_BUS::FPGA::ReadA0()
 
     double amplitude = 100.0;
 
-    double value = VALUE::AVE + amplitude * (sin(2 * Math::PI * (TIME_MS - prevTime) * freq));
+    double value = VALUE::AVE + amplitude * (sin(2 * Math::PI * (TIME_MS - prevTime) * freq)); //-V2564
 
     return static_cast<uint8>(value);
 }

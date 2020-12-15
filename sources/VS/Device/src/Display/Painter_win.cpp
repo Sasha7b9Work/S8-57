@@ -111,11 +111,11 @@ void Painter::EndScene()
 
 static void CreateFrame()
 {
-    Frame *frame = new Frame("");
+    Frame *frame = new Frame(""); //-V2511
 
-    wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL); //-V2511
 
-    screen = new Screen(frame);
+    screen = new Screen(frame); //-V2511
 
     sizer->Add(screen);
 
@@ -213,7 +213,7 @@ static void CreateButtons(Frame *frame)
 
 static void CreateButton(Key::E key, Frame *frame, const wxPoint &pos, const wxSize &size, pString title)
 {
-    wxButton *button = new wxButton(frame, static_cast<wxWindowID>(key), title, pos, size);
+    wxButton *button = new wxButton(frame, static_cast<wxWindowID>(key), title, pos, size); //-V2511
 
     button->Connect(static_cast<wxWindowID>(key), wxEVT_LEFT_DOWN, wxCommandEventHandler(Frame::OnDown));
     button->Connect(static_cast<wxWindowID>(key), wxEVT_LEFT_UP, wxCommandEventHandler(Frame::OnUp));

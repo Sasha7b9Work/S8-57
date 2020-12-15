@@ -10,7 +10,7 @@
 #include <cmath>
 
 
-bool RecorderHAL::ReadyPoint()
+bool RecorderHAL::ReadyPoint() //-V2506
 {
     static uint timeLastRead = 0;   // Время предыдущего чтения точки
 
@@ -41,5 +41,5 @@ uint8 RecorderHAL::ReadData(Chan::E ch)
 
     float amplitude = 120;
 
-    return static_cast<uint8>(VALUE::AVE + std::sinf(start[ch] + TIME_MS / 500.0F) * amplitude);
+    return static_cast<uint8>(VALUE::AVE + std::sinf(start[ch] + TIME_MS / 500.0F) * amplitude); //-V2564
 }

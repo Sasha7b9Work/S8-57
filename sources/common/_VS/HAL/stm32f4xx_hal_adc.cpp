@@ -21,7 +21,7 @@ extern "C"
     }
 
 
-    uint32_t HAL_ADC_GetValue(ADC_HandleTypeDef * /*hadc*/)
+    uint32_t HAL_ADC_GetValue(ADC_HandleTypeDef * /*hadc*/) //-V2506
     {
         uint max = (1 << 12) - 1;
 

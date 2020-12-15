@@ -32,7 +32,7 @@ void HAL_BUS::Panel::Send(const uint8 *data, int num)
     }
     else if(num == 2 && *data == Command::Paint_SetColor)
     {
-        uint color = COLOR(data[1]);
+        uint color = COLOR(data[1]); //-V2563
         uint8 b = static_cast<uint8>(color);
         uint8 g = static_cast<uint8>(color >> 8);
         uint8 r = static_cast<uint8>(color >> 16);
@@ -43,7 +43,7 @@ void HAL_BUS::Panel::Send(const uint8 *data, int num)
     }
     else if(*data == Command::Paint_SetTextSpacing)
     {
-        PFont::SetSpacing(*(data + 1));
+        PFont::SetSpacing(*(data + 1)); //-V2563
     }
     else
     {

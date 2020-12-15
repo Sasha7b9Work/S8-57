@@ -104,7 +104,7 @@ bool FPGA::Flag::PeriodInProcess()
 }
 
 
-static uint8 *addrAltera = ((uint8 *)NOR_MEMORY_ADRESS1);    // -V566 //-V2571
+static uint8 *addrAltera = ((uint8 *)NOR_MEMORY_ADRESS1);    // -V566 //-V2571 //-V566
 
 uint8 *WR::START = addrAltera + 0;
 uint8 *WR::TBASE = addrAltera + 1; //-V2563

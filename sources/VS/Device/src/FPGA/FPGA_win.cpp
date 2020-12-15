@@ -67,18 +67,18 @@ static bool GenerateNormalModeData(Chan::E ch, uint8 *data, int numBytes)
 
     for (int i = 0; i < numBytes; i++)
     {
-        double value = offset + VALUE::AVE + amplitude * (sin(2 * Math::PI * i * frequency)) + NextNoise();
+        double value = offset + VALUE::AVE + amplitude * (sin(2 * Math::PI * i * frequency)) + NextNoise(); //-V2564
 
         LIMITATION(value, static_cast<float>(VALUE::MIN), static_cast<float>(VALUE::MAX));
 
-        data[i] = static_cast<uint8>(value);
+        data[i] = static_cast<uint8>(value); //-V2563
     }
 
     return true;
 }
 
 
-bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
+bool Osci::ReadDataChannel(Chan::E ch, uint8 *data) //-V2506
 {
     if (!S_CHANNEL_ENABLED(ch))
     {
@@ -105,11 +105,11 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
 
     for (int i = 0; i < numPoints; i++)
     {
-        double value = offset + VALUE::AVE + amplitude * (sin(i * 0.1)) + NextNoise();
+        double value = offset + VALUE::AVE + amplitude * (sin(i * 0.1)) + NextNoise(); //-V2564
 
         LIMITATION(value, static_cast<float>(VALUE::MIN), static_cast<float>(VALUE::MAX));
 
-        data[i] = static_cast<uint8>(value);
+        data[i] = static_cast<uint8>(value); //-V2563
     }
 
     return true;

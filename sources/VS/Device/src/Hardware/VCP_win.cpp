@@ -24,7 +24,7 @@ void VCP::SendDataAsynch(const uint8 *text, int)
 
 
 
-static int Position0D(const char *message)
+static int Position0D(const char *message) //-V2506
 {
     int position = 0;
 
@@ -49,11 +49,11 @@ void VCP::SendStringAsynch(const char *message)
 
     if (position0D < 0)
     {
-        std::strcat(buffer, message);
+        std::strcat(buffer, message); //-V2513
     }
     else
     {
-        std::strcat(buffer, message);
+        std::strcat(buffer, message); //-V2513
         String text(">>> %s", buffer);
         ConsoleSCPI::Self()->AddText(text.c_str());
         buffer[0] = 0;
