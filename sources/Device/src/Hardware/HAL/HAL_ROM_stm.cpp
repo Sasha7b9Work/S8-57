@@ -79,7 +79,7 @@ void HAL_ROM::WriteBytes(uint address, const uint8 *data, int size)
 
     for (int i = 0; i < size; i++)
     {
-        HAL_FLASH_Program(TYPEPROGRAM_BYTE, address, data[i]);
+        HAL_FLASH_Program(TYPEPROGRAM_BYTE, address, data[i]); //-V2563
         address++;
     }
 
@@ -113,7 +113,7 @@ void HAL_ROM::WriteBufferBytes(uint address, const void *buffer, int size)
 
     for (int i = 0; i < size; i++)
     {
-        uint64_t data = static_cast<uint8 *>(const_cast<void *>(buffer))[i];
+        uint64_t data = static_cast<uint8 *>(const_cast<void *>(buffer))[i]; //-V2563
         HAL_FLASH_Program(TYPEPROGRAM_BYTE, address, data);
         address++;
     }

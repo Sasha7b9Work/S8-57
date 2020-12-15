@@ -201,7 +201,7 @@ void HAL_BUS::FPGA::Write16(uint8 *address, uint16 value)
     PAUSE_ON_TICKS(100);    // \todo Без этой строки замедлен вывод при включённой оптимизации и TBase >= 0.5мс
 
     *address = static_cast<uint8>(value);
-    *(address + 1) = static_cast<uint8>(value >> 8);
+    *(address + 1) = static_cast<uint8>(value >> 8); //-V2563
 
 
 }

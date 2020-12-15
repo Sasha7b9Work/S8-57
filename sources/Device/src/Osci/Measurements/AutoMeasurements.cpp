@@ -365,7 +365,7 @@ float CalculateVoltageAverage(Chan::E ch) //-V2506
 
     int sum = 0;
 
-    uint8 *data = &CHOICE_BUFFER[firstByte];
+    uint8 *data = &CHOICE_BUFFER[firstByte]; //-V2563
 
     for(int i = 0; i < period; i++)
     {
@@ -395,11 +395,11 @@ float CalculateVoltageRMS(Chan::E ch) //-V2506
     Range::E range = RANGE_DS(ch);
     int16 rShift = RSHIFT_DS(ch);
 
-    uint8 *dataIn = &CHOICE_BUFFER[firstByte];
+    uint8 *dataIn = &CHOICE_BUFFER[firstByte]; //-V2563
 
     for(int i = firstByte; i < firstByte + period; i++)
     {
-        float volts = VALUE::ToVoltage(dataIn[i], range, rShift);
+        float volts = VALUE::ToVoltage(dataIn[i], range, rShift); //-V2563
         rms +=  volts * volts;
     }
 
@@ -493,12 +493,12 @@ int CalculatePeriodAccurately(Chan::E ch) //-V2506
             EXIT_FROM_PERIOD_ACCURACY //-V2511
         }
         int delta = static_cast<int>(pic * 5.0F);
-        sums[firstByte] = dataIn[firstByte];
+        sums[firstByte] = dataIn[firstByte]; //-V2563
 
         int i = firstByte + 1;
-        int *pSum = &sums[i];
-        uint8 *data = &dataIn[i];
-        uint8 *end = &dataIn[lastByte];
+        int *pSum = &sums[i]; //-V2563
+        uint8 *data = &dataIn[i]; //-V2563
+        uint8 *end = &dataIn[lastByte]; //-V2563
 
         while (data < end)
         {
@@ -507,7 +507,7 @@ int CalculatePeriodAccurately(Chan::E ch) //-V2506
             {
                 EXIT_FROM_PERIOD_ACCURACY //-V2511
             }
-            *pSum = *(pSum - 1) + point;
+            *pSum = *(pSum - 1) + point; //-V2563
             pSum++;
         }
 
@@ -516,16 +516,16 @@ int CalculatePeriodAccurately(Chan::E ch) //-V2506
 
         for(int nextPeriod = 10; nextPeriod < maxPeriod; nextPeriod++)
         {
-            int sum = sums[addShift + nextPeriod];
+            int sum = sums[addShift + nextPeriod]; //-V2563
 
             int maxDelta = 0;
             int maxStart = nBytes - nextPeriod;
 
-            int *pSums = &sums[firstByte + 1];
+            int *pSums = &sums[firstByte + 1]; //-V2563
 
             for(int start = 1; start < maxStart; start++)
             {
-                int nextSum = *(pSums + nextPeriod) - (*pSums);
+                int nextSum = *(pSums + nextPeriod) - (*pSums); //-V2563
                 pSums++;
 
                 int nextDelta = nextSum - sum;
@@ -583,13 +583,13 @@ float FindIntersectionWithHorLine(Chan::E ch, int numIntersection, bool downToUp
     int compValue = lastByte - 1;
     int step = PEAKDET_ENABLED(DS) ? 2 : 1;
 
-    uint8 *data = &CHOICE_BUFFER[0];
+    uint8 *data = &CHOICE_BUFFER[0]; //-V2563
 
     if(downToUp)
     {
         while((num < numIntersection) && (x < compValue))
         {
-            if(data[x] < yLine && data[x + step] >= yLine)
+            if(data[x] < yLine && data[x + step] >= yLine) //-V2563
             {
                 num++;
             }
@@ -600,7 +600,7 @@ float FindIntersectionWithHorLine(Chan::E ch, int numIntersection, bool downToUp
     {
         while((num < numIntersection) && (x < compValue))
         {
-            if(data[x] > yLine && data[x + step] <= yLine)
+            if(data[x] > yLine && data[x + step] <= yLine) //-V2563
             {
                 num++;
             }
@@ -614,7 +614,7 @@ float FindIntersectionWithHorLine(Chan::E ch, int numIntersection, bool downToUp
         return Float::ERROR;
     }
     
-    return ::Math::GetIntersectionWithHorizontalLine(x, data[x], x + step, data[x + step], yLine);
+    return ::Math::GetIntersectionWithHorizontalLine(x, data[x], x + step, data[x + step], yLine); //-V2563
 }
 
 
@@ -794,8 +794,8 @@ float CalculateMinSteadyRel(Chan::E ch)
             int sum = 0;
             int numSums = 0;
 
-            uint8 *data = &dataIn[firstByte];
-            const uint8 * const end = &dataIn[lastByte];
+            uint8 *data = &dataIn[firstByte]; //-V2563
+            const uint8 * const end = &dataIn[lastByte]; //-V2563
             while(data <= end)
             {
                 uint8 d = *data++;
@@ -820,7 +820,7 @@ float CalculateMinSteadyRel(Chan::E ch)
 
                 float value = pic / 9.0F;
 
-                data = &dataIn[firstByte];
+                data = &dataIn[firstByte]; //-V2563
                 float _min = min[static_cast<int>(ch)];
                 while (data <= end)
                 {
@@ -874,8 +874,8 @@ float CalculateMaxSteadyRel(Chan::E ch)
         {
             int sum = 0;
             int numSums = 0;
-            uint8 *data = &dataIn[firstByte];
-            const uint8 * const end = &dataIn[lastByte];
+            uint8 *data = &dataIn[firstByte]; //-V2563
+            const uint8 * const end = &dataIn[lastByte]; //-V2563
             while (data <= end)
             {
                 uint8 d = *data++;
@@ -901,7 +901,7 @@ float CalculateMaxSteadyRel(Chan::E ch)
 
                 float value = pic / 9.0F;
 
-                data = &dataIn[firstByte];
+                data = &dataIn[firstByte]; //-V2563
                 uint8 _max = static_cast<uint8>(max[static_cast<int>(ch)]);
 
                 while (data <= end)
@@ -1125,7 +1125,7 @@ float Measure::CalculateCursorU(Chan::E ch, float posCurT) //-V2506
     
     BitSet64 points = DisplayOsci::PainterData::PointsOnDisplay();
 
-    int rel = static_cast<int>((CHOICE_BUFFER)[static_cast<int>(points.word0) + ROUND(int, posCurT)]) - VALUE::MIN;
+    int rel = static_cast<int>((CHOICE_BUFFER)[static_cast<int>(points.word0) + ROUND(int, posCurT)]) - VALUE::MIN; //-V2563
 
 #define SCALE (200.0F / (VALUE::MAX - VALUE::MIN))
 
@@ -1150,13 +1150,13 @@ float Measure::CalculateCursorT(Chan::E ch, float posCurU, int numCur) //-V2506
     
     BitSet64 points = DisplayOsci::PainterData::PointsOnDisplay();
 
-    int prevData = 200 - dataIn[FIRST_POINT] + VALUE::MIN;
+    int prevData = 200 - dataIn[FIRST_POINT] + VALUE::MIN; //-V2563
 
     int numIntersections = 0;
 
     for(int i = FIRST_POINT + 1; i < LAST_POINT; i++)
     {
-        int curData = 200 - (dataIn)[i] + VALUE::MIN;
+        int curData = 200 - (dataIn)[i] + VALUE::MIN; //-V2563
 
         if(curData <= posCurU && prevData > posCurU)
         {
@@ -1232,9 +1232,9 @@ void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase) //-V2506
     
     for (int pos = 0; pos < numPoints; pos++)
     {
-        if (data[pos] > 0)
+        if (data[pos] > 0) //-V2563
         {
-            signedData[numSignedPoints++] = data[pos];
+            signedData[numSignedPoints++] = data[pos]; //-V2563
         }
     }
 
@@ -1243,7 +1243,7 @@ void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase) //-V2506
     int shift = 0;
     for (int pos = 0; pos < numPoints; pos++)
     {
-        if (data[pos] > 0)
+        if (data[pos] > 0) //-V2563
         {
             shift = pos;
             break;
@@ -1260,7 +1260,7 @@ void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase) //-V2506
         x0 += stepX0;
         if((i % delta) == 0)
         {
-            data[i] = signedData[i / delta];
+            data[i] = signedData[i / delta]; //-V2563
         }
         else
         {
@@ -1277,10 +1277,10 @@ void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase) //-V2506
 
                 for (int n = 0; n < numSignedPoints; n++)
                 {
-                    value += signedData[n] * sinXint / (x - n * deltaXint);
+                    value += signedData[n] * sinXint / (x - n * deltaXint); //-V2563
                     sinXint = -sinXint;
                 }
-                data[i] = (uint8)(value * KOEFF);
+                data[i] = (uint8)(value * KOEFF); //-V2563
             }
             else                                    // На этих развёртках арифметика с плавающей запятой даёт приемлемое быстродействие
             {
@@ -1290,10 +1290,10 @@ void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase) //-V2506
                 for (int n = 0; n < numSignedPoints; n++)
                 {
                     x -= deltaX;
-                    value += signedData[n] * sinX / x;
+                    value += signedData[n] * sinX / x; //-V2563
                     sinX = -sinX;
                 }
-                data[i] = static_cast<uint8>(value);
+                data[i] = static_cast<uint8>(value); //-V2563
             }
         }
     }
@@ -1301,7 +1301,7 @@ void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase) //-V2506
     int pos = numPoints - 1;
     while (pos > shift)
     {
-        data[pos] = data[pos - shift];
+        data[pos] = data[pos - shift]; //-V2563
         pos--;
     }
 
@@ -1319,7 +1319,7 @@ String Measure::GetStringMeasure(Chan::E ch, char* buffer, int lenBuf) //-V2506
         return String("");
     }
 
-    buffer[0] = '\0';
+    buffer[0] = '\0'; //-V2563
     std::strcpy(buffer, (ch == ChanA) ? "1: " : "2: "); //-V2513
 
     if(!isSet || values[static_cast<int>(type)].value[static_cast<int>(ch)] == Float::ERROR) //-V550 //-V2550
@@ -1427,7 +1427,7 @@ void AutoMeasurements::SetData()
         {
             for (int i = static_cast<int>(BYTES_IN_CHANNEL_DS - 1); i >= 0; --i)
             {
-                if (IN_A[i] != VALUE::NONE)                // Если это значение считано
+                if (IN_A[i] != VALUE::NONE)                // Если это значение считано //-V2563
                 {
                     lastByte = i;
                     firstByte = lastByte - nBytes;
@@ -1512,8 +1512,8 @@ void AutoMeasurements::CountedToCurrentRShift(Chan::E ch, uint numBytes, const u
     {
         for(uint i = 0; i < numBytes; i++)
         {
-            float voltage = VALUE::ToVoltage(in[i], rangeDS, shiftDS);
-            out[i] = VALUE::FromVoltage(voltage, rangeSET, shiftSET);
+            float voltage = VALUE::ToVoltage(in[i], rangeDS, shiftDS); //-V2563
+            out[i] = VALUE::FromVoltage(voltage, rangeSET, shiftSET); //-V2563
         }
     }
 }

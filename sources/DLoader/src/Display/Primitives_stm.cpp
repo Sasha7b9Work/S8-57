@@ -127,13 +127,13 @@ int Text::DrawSmall(int x, int y, Color color)
     uint sizeBuffer = 1 + 2 + 1 + 1 + std::strlen(text); //-V2513
 
     Buffer buffer(sizeBuffer);
-    buffer.data[0] = Command::Paint_DrawText;
-    buffer.data[1] = static_cast<uint8>(x);
-    buffer.data[2] = static_cast<uint8>(x >> 8);
-    buffer.data[3] = static_cast<uint8>(y);
-    buffer.data[4] = static_cast<uint8>(std::strlen(text)); //-V1029 //-V2513
+    buffer.data[0] = Command::Paint_DrawText; //-V2563
+    buffer.data[1] = static_cast<uint8>(x); //-V2563
+    buffer.data[2] = static_cast<uint8>(x >> 8); //-V2563
+    buffer.data[3] = static_cast<uint8>(y); //-V2563
+    buffer.data[4] = static_cast<uint8>(std::strlen(text)); //-V1029 //-V2513 //-V2563
 
-    std::memcpy(&buffer.data[5], static_cast<void *>(const_cast<char *>(text)), std::strlen(text)); //-V2513
+    std::memcpy(&buffer.data[5], static_cast<void *>(const_cast<char *>(text)), std::strlen(text)); //-V2513 //-V2563
 
     HAL_BUS::Panel::Send(buffer.data, sizeBuffer);
 
@@ -159,7 +159,7 @@ void MultiHPointLine::Draw(int x, Color color)
     {
         buffer[1] = static_cast<uint8>(x);
         buffer[2] = static_cast<uint8>(x >> 8);
-        buffer[3] = y[i];
+        buffer[3] = y[i]; //-V2563
 
         HAL_BUS::Panel::Send(buffer, 6);
     }
@@ -182,7 +182,7 @@ void MultiVPointLine::Draw(int y0, Color color)
 
     for (int i = 0; i < numLines; i++)
     {
-        int x = x0[i];
+        int x = x0[i]; //-V2563
 
         buffer[1] = static_cast<uint8>(x);
         buffer[2] = static_cast<uint8>(x >> 8);

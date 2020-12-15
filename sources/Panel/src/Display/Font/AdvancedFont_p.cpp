@@ -78,7 +78,7 @@ bool PAdvancedFont::RowNotEmpty(uint8 s, int r) //-V2506
         {
             for (int i = 0; i < symbol->BytesInRow(); i++)
             {
-                if (row[i] != 0)
+                if (row[i] != 0) //-V2563
                 {
                     return true;
                 }
@@ -148,7 +148,7 @@ uint8 *NativeSymbol::GetRow(int row) //-V2506
         return nullptr;
     }
 
-    return Data() + (row - firstRow) * BytesInRow();
+    return Data() + (row - firstRow) * BytesInRow(); //-V2563
 }
 
 
@@ -161,7 +161,7 @@ NativeSymbol *HeaderFont::GetSymbol(uint8 num) //-V2506
         return nullptr;
     }
 
-    uint8 *offset = reinterpret_cast<uint8 *>(header) + header->offsets[num];
+    uint8 *offset = reinterpret_cast<uint8 *>(header) + header->offsets[num]; //-V2563
 
     return reinterpret_cast<NativeSymbol *>(offset);
 }
@@ -175,7 +175,7 @@ HeaderFont *HeaderFont::Sefl()
 
 uint8 *NativeSymbol::Data()
 {
-    return reinterpret_cast<uint8 *>(this) + sizeof(*this);
+    return reinterpret_cast<uint8 *>(this) + sizeof(*this); //-V2563
 }
 
 

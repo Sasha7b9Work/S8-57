@@ -61,9 +61,9 @@ static void InterpolateChannel(uint8 *data, int numPoints, uint tBase)
 
     for (int pos = 0; pos < numPoints; pos++)
     {
-        if (data[pos] > 0)
+        if (data[pos] > 0) //-V2563
         {
-            signedData[numSignedPoints++] = data[pos]; //-V522
+            signedData[numSignedPoints++] = data[pos]; //-V522 //-V2563
         }
     }
 
@@ -72,7 +72,7 @@ static void InterpolateChannel(uint8 *data, int numPoints, uint tBase)
     int shift = 0;
     for (int pos = 0; pos < numPoints; pos++)
     {
-        if (data[pos] > 0)
+        if (data[pos] > 0) //-V2563
         {
             shift = pos;
             break;
@@ -89,7 +89,7 @@ static void InterpolateChannel(uint8 *data, int numPoints, uint tBase)
         x0 += stepX0;
         if ((i % delta) == 0)
         {
-            data[i] = signedData[i / delta];
+            data[i] = signedData[i / delta]; //-V2563
         }
         else
         {
@@ -106,10 +106,10 @@ static void InterpolateChannel(uint8 *data, int numPoints, uint tBase)
 
                 for (int n = 0; n < numSignedPoints; n++)
                 {
-                    value += signedData[n] * sinXint / (x - n * deltaXint);
+                    value += signedData[n] * sinXint / (x - n * deltaXint); //-V2563
                     sinXint = -sinXint;
                 }
-                data[i] = (uint8)(value * KOEFF);
+                data[i] = (uint8)(value * KOEFF); //-V2563
             }
             else                                    // На этих развёртках арифметика с плавающей запятой даёт приемлемое быстродействие
             {
@@ -119,10 +119,10 @@ static void InterpolateChannel(uint8 *data, int numPoints, uint tBase)
                 for (int n = 0; n < numSignedPoints; n++)
                 {
                     x -= deltaX;
-                    value += signedData[n] * sinX / x;
+                    value += signedData[n] * sinX / x; //-V2563
                     sinX = -sinX;
                 }
-                data[i] = static_cast<uint8>(value);
+                data[i] = static_cast<uint8>(value); //-V2563
             }
         }
     }
@@ -130,7 +130,7 @@ static void InterpolateChannel(uint8 *data, int numPoints, uint tBase)
     int pos = numPoints - 1;
     while (pos > shift)
     {
-        data[pos] = data[pos - shift];
+        data[pos] = data[pos - shift]; //-V2563
         pos--;
     }
 

@@ -77,9 +77,9 @@ static void AddToConsole(const char *text)
 
     if (buffer)
     {
-        buffer[0] = Command::AddToConsole;
-        buffer[1] = static_cast<uint8>(std::strlen(text)); //-V2513
-        std::strcpy(reinterpret_cast<char *>(buffer + 1), text); //-V2513
+        buffer[0] = Command::AddToConsole; //-V2563
+        buffer[1] = static_cast<uint8>(std::strlen(text)); //-V2513 //-V2563
+        std::strcpy(reinterpret_cast<char *>(buffer + 1), text); //-V2513 //-V2563
         HAL_BUS::SendToDevice(buffer, std::strlen(text) + 2); //-V2513
 
         std::free(buffer); //-V2511

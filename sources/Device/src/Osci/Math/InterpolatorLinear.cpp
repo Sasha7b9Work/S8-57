@@ -50,7 +50,7 @@ static uint8 *FindEmptyElement(uint8 * const start)
 {
     uint8 *element = start;
 
-    uint8 *interpol = IntRAM::DataRand(ChanA) + (start - begin);
+    uint8 *interpol = IntRAM::DataRand(ChanA) + (start - begin); //-V2563
 
     while(element != end)
     {
@@ -69,7 +69,7 @@ static uint8 *FindEmptyElement(uint8 * const start)
 static uint8 *FindReadedElement(uint8 * const start)
 {
     uint8 *element = start;
-    uint8 *interpol = IntRAM::DataRand(ChanA) + (start - begin);
+    uint8 *interpol = IntRAM::DataRand(ChanA) + (start - begin); //-V2563
     
     while(element != end)
     {
@@ -94,7 +94,7 @@ static void InterpolateSegment(Segment *segment) //-V2506
         return;
     }
 
-    float before = *(segment->start - 1);               // Значение перед "пустым" сегментом
+    float before = *(segment->start - 1);               // Значение перед "пустым" сегментом //-V2563
     float after = *(segment->end);                      // Значение после "пустого" сегмента
 
     int numTicks = segment->end - segment->start + 1;   // На столько отрезков разбит наш сегмент
@@ -105,7 +105,7 @@ static void InterpolateSegment(Segment *segment) //-V2506
     {
         float value = before + delta * (tick + 1);
 
-        *(segment->start + tick) = static_cast<uint8>(value + 0.5F);
+        *(segment->start + tick) = static_cast<uint8>(value + 0.5F); //-V2563
     }
 }
 
@@ -127,7 +127,7 @@ static void InterpolateChannel(uint8 *data, int size)
 {
     int readed = 0;                                     // Число реально считанных точек
     uint8 *pointer = data;
-    uint8 *last = pointer + size;
+    uint8 *last = pointer + size; //-V2563
     int halfSize = size / 2;
 
     while(pointer < last)
@@ -140,7 +140,7 @@ static void InterpolateChannel(uint8 *data, int size)
         if(readed > halfSize)
         {
             begin = data;
-            end = begin + size;
+            end = begin + size; //-V2563
 
             Segment segment;
 

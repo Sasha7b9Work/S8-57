@@ -383,17 +383,17 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data) //-V2506
 
     int step = infoRead.step;
 
-    uint8 *dataWrite = data + infoRead.posFirst;                                // —юда запишем первую считанную точку
+    uint8 *dataWrite = data + infoRead.posFirst;                                // —юда запишем первую считанную точку //-V2563
 
-    uint8 *interpolated = IntRAM::DataRand(ChanA) + infoRead.posFirst;
+    uint8 *interpolated = IntRAM::DataRand(ChanA) + infoRead.posFirst; //-V2563
 
-    uint8 *last = data + ENumPointsFPGA::PointsInChannel();
+    uint8 *last = data + ENumPointsFPGA::PointsInChannel(); //-V2563
 
     HAL_BUS::FPGA::SetAddrData(addr);
 
     if(S_OSCI_AVERAGING_IS_ENABLED)
     {
-        uint8 *dataPointer = &data[infoRead.posFirst];              // ”казатель в переданном массиве
+        uint8 *dataPointer = &data[infoRead.posFirst];              // ”казатель в переданном массиве //-V2563
 
         while(dataWrite < last)
         {
@@ -401,9 +401,9 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data) //-V2506
             *dataPointer = *dataWrite;
             *interpolated = *dataWrite;
             
-            dataWrite += step;
-            dataPointer += step;
-            interpolated += step;
+            dataWrite += step; //-V2563
+            dataPointer += step; //-V2563
+            interpolated += step; //-V2563
         }
     }
     else
@@ -413,8 +413,8 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data) //-V2506
             *dataWrite = HAL_BUS::FPGA::ReadA0();
             *interpolated = *dataWrite;
 
-            dataWrite += step;
-            interpolated += step;
+            dataWrite += step; //-V2563
+            interpolated += step; //-V2563
 
         }
     }
@@ -618,10 +618,10 @@ void Osci::SendDataToSCPI(Chan::E ch) //-V2506
 
     for (int i = 0; i < numBytes - 1; i++)
     {
-        std::sprintf(buffer, "%d ", data[i]);
+        std::sprintf(buffer, "%d ", data[i]); //-V2563
         SCPI::SendData(buffer);
     }
 
-    std::sprintf(buffer, "%d", data[numBytes - 1]);
+    std::sprintf(buffer, "%d", data[numBytes - 1]); //-V2563
     SCPI::SendAnswer(buffer);
 }

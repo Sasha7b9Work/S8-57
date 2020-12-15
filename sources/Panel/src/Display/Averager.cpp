@@ -93,7 +93,7 @@ void AveragerTester::Process(const uint16 *dataX, const uint8 *dataY, int step) 
 
     for (int i = 0; i < TESTER_NUM_POINTS; i++)
     {
-        ave32[i] = static_cast<uint>(ave32[i] - (ave32[i] >> enumAve) + dataX[i]);
+        ave32[i] = static_cast<uint>(ave32[i] - (ave32[i] >> enumAve) + dataX[i]); //-V2563
         data.x[i] = static_cast<uint16>(ave32[i] >> enumAve);
     }
 
@@ -104,7 +104,7 @@ void AveragerTester::Process(const uint16 *dataX, const uint8 *dataY, int step) 
 
     for (int i = 0; i < TESTER_NUM_POINTS; i++)
     {
-        ave16[i] = static_cast<uint16>(ave16[i] - (ave16[i] >> enumAve) + dataY[i]);
+        ave16[i] = static_cast<uint16>(ave16[i] - (ave16[i] >> enumAve) + dataY[i]); //-V2563
         data.y[i] = static_cast<uint8>(ave16[i] >> enumAve);
     }
 }

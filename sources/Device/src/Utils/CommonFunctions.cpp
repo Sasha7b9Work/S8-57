@@ -17,17 +17,17 @@ void CF::LogBufferU8_HEX(const uint8 *buffer, int num) //-V2506
         return;
     }
 
-    message[0] = 0;
+    message[0] = 0; //-V2563
 
     char value[10];
 
     for (int i = 0; i < num; ++i)
     {
-        std::sprintf(value, "%02x ", buffer[i]);
+        std::sprintf(value, "%02x ", buffer[i]); //-V2563
         std::strcat(message, value); //-V2513
     }
 
-    message[num * 3 - 1] = 0;
+    message[num * 3 - 1] = 0; //-V2563
 
     LOG_WRITE(message);
 
@@ -45,17 +45,17 @@ void CF::LogBufferU8_DEC(const uint8 *buffer, int num) //-V2506
         return;
     }
 
-    message[0] = 0;
+    message[0] = 0; //-V2563
 
     char value[10];
 
     for (int i = 0; i < num; ++i)
     {
-        std::sprintf(value, "%03d ", buffer[i]);
+        std::sprintf(value, "%03d ", buffer[i]); //-V2563
         std::strcat(message, value); //-V2513
     }
 
-    message[num * 3 - 1] = 0;
+    message[num * 3 - 1] = 0; //-V2563
 
     LOG_WRITE(message);
 
@@ -133,9 +133,9 @@ char *CF::GetWord(char *string, int n, char *out, int size) //-V2506
 
     for (int i = 0; i < length; i++)
     {
-        out[i] = string[i];
+        out[i] = string[i]; //-V2563
     }
-    out[length] = 0;
+    out[length] = 0; //-V2563
 
     return out;
 }

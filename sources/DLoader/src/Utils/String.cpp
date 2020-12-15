@@ -32,8 +32,8 @@ String::String(char symbol) : buffer(nullptr)
 
     if (Allocate(2))
     {
-        buffer[0] = symbol;
-        buffer[1] = 0;
+        buffer[0] = symbol; //-V2563
+        buffer[1] = 0; //-V2563
     }
 }
 
@@ -134,8 +134,8 @@ void String::Append(const char *str, uint numSymbols) //-V2506
     Allocate(size);
 
     std::strcpy(buffer, old.c_str()); //-V2513
-    std::memcpy(buffer + old.Size(), str, numSymbols);
-    buffer[size - 1] = '\0';
+    std::memcpy(buffer + old.Size(), str, numSymbols); //-V2563
+    buffer[size - 1] = '\0'; //-V2563
 }
 
 
@@ -203,7 +203,7 @@ void String::RemoveFromBegin(uint numSymbols)
 
         Allocate(old.Size() - numSymbols + 1);
 
-        std::strcpy(buffer, old.c_str() + numSymbols); //-V2513
+        std::strcpy(buffer, old.c_str() + numSymbols); //-V2513 //-V2563
     }
 }
 
@@ -212,7 +212,7 @@ void String::RemoveFromEnd()
 {
     if(Size() > 0)
     {
-        buffer[Size() - 1] = '\0';
+        buffer[Size() - 1] = '\0'; //-V2563
     }
 }
 
@@ -237,5 +237,5 @@ char &String::operator[](uint i) //-V2506
         return result;
     }
 
-    return buffer[i];
+    return buffer[i]; //-V2563
 }

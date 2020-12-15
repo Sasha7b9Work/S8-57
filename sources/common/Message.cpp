@@ -76,11 +76,11 @@ Message::Message(uint8 v0, uint8 v1, uint8 v2, uint8 *b0, uint16 s0, uint8 *b1, 
         PutByte(v2);
         for (int i = 0; i < s0; i++)
         {
-            PutByte(b0[i]);
+            PutByte(b0[i]); //-V2563
         }
         for (int i = 0; i < s1; i++)
         {
-            PutByte(b1[i]);
+            PutByte(b1[i]); //-V2563
         }
     }
 }
@@ -130,7 +130,7 @@ void Message::PutByte(uint8 v0)
 {
     if (used < allocated)
     {
-        data[used++] = v0;
+        data[used++] = v0; //-V2563
     }
 }
 

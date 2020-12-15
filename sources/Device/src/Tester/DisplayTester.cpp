@@ -81,8 +81,8 @@ void DisplayTester::SetPoints(int numStep, const uint16 dx[TESTER_NUM_POINTS], c
 
     for(int i = 0; i < TESTER_NUM_POINTS; i++)
     {
-        x[i] = dx[i];
-        y[i] = dy[i];
+        x[i] = dx[i]; //-V2563
+        y[i] = dy[i]; //-V2563
     }
 }
 

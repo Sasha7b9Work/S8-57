@@ -22,7 +22,7 @@ public:
         {
             for (uint i = 0; i < numBytes; i++)
             {
-                out[i] = CalculatePoint(static_cast<int>(i));
+                out[i] = CalculatePoint(static_cast<int>(i)); //-V2563
             }
         }
     }
@@ -40,7 +40,7 @@ private:
         {
             if (index >= 0 && index < size)
             {
-                sum += data[index++];
+                sum += data[index++]; //-V2563
             }
         } while (++parts < numSmooth);
 

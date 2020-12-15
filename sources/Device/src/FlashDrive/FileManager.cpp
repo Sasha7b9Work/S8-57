@@ -134,14 +134,14 @@ static void DrawNameCurrentDir(int left, int top) //-V2506
     }
     else
     {
-        char *pointer = currentDir + 2;
+        char *pointer = currentDir + 2; //-V2563
         while (length > 277)
         {
-            while (*pointer != '\\' && pointer < currentDir + 255)
+            while (*pointer != '\\' && pointer < currentDir + 255) //-V2563
             {
                 pointer++;
             }
-            if (pointer >= currentDir + 255)
+            if (pointer >= currentDir + 255) //-V2563
             {
                 return;
             }
@@ -228,7 +228,7 @@ void FileManager::Press_LevelUp() //-V2506
     {
         return;
     }
-    char *pointer = currentDir + std::strlen(currentDir); //-V2513
+    char *pointer = currentDir + std::strlen(currentDir); //-V2513 //-V2563
     while (*pointer != '\\')
     {
         pointer--;
@@ -394,9 +394,9 @@ bool FileManager::GetNameForNewFile(char name[255]) //-V2506
                 if (*ch == 0x07)
                 {
                     number++;
-                    char *strNumber = Integer(number).ToString(false, *(ch + 1)).c_str();
+                    char *strNumber = Integer(number).ToString(false, *(ch + 1)).c_str(); //-V2563
                     std::strcpy(wr, strNumber); //-V2513
-                    wr += std::strlen(strNumber); //-V2513
+                    wr += std::strlen(strNumber); //-V2513 //-V2563
                     ch++;
                 }
                 else
@@ -405,7 +405,7 @@ bool FileManager::GetNameForNewFile(char name[255]) //-V2506
                     {
                         char *strValue = Integer(static_cast<int>(values[*ch])).ToString(false, 2).c_str();
                         std::strcpy(wr, strValue); //-V2513
-                        wr += std::strlen(strValue); //-V2513
+                        wr += std::strlen(strValue); //-V2513 //-V2563
                     }
                 }
             }
@@ -413,7 +413,7 @@ bool FileManager::GetNameForNewFile(char name[255]) //-V2506
         }
 
         *wr = '.';
-        *(wr + 1) = '\0';
+        *(wr + 1) = '\0'; //-V2563
 
         std::strcat(name, S_MEM_MODE_SAVE_SIGNAL_IS_BMP ? "bmp" : "txt"); //-V2513
 

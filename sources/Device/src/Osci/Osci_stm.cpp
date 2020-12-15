@@ -19,7 +19,7 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data) //-V2506
     HAL_BUS::FPGA::Write8(WR::START_ADDR, 0xff);
 
     uint8 *a0 = (ch == ChanA) ? RD::DATA_A : RD::DATA_B;  // -V566
-    uint8 *a1 = a0 + 1;
+    uint8 *a1 = a0 + 1; //-V2563
 
     HAL_BUS::FPGA::SetAddrData(a0, a1);
 
@@ -54,15 +54,15 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data) //-V2506
 
                 if(result < VALUE::MIN)
                 {
-                    p[i] = VALUE::MIN;
+                    p[i] = VALUE::MIN; //-V2563
                 }
                 else if(result > VALUE::MAX)
                 {
-                    p[i] = VALUE::MAX;
+                    p[i] = VALUE::MAX; //-V2563
                 }
                 else
                 {
-                    p[i] = static_cast<uint8>(result);
+                    p[i] = static_cast<uint8>(result); //-V2563
                 }
             }
         }

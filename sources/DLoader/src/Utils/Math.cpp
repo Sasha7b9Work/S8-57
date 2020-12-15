@@ -37,23 +37,23 @@ void Math::Smoothing(uint8 *data, int numPoints, int numSmooth) //-V2506
 
     for (int i = 1; i < numPoints; i++)
     {
-        buffer[i] = 0.0F; //-V522
+        buffer[i] = 0.0F; //-V522 //-V2563
 
-        num[i] = 0; //-V522
+        num[i] = 0; //-V522 //-V2563
         for (int j = -numSmooth / 2; j < numSmooth / 2; j++)
         {
             int index = i + j;
             if (index >= 1 && index < numPoints)
             {
-                buffer[i] += data[index];
-                ++num[i];
+                buffer[i] += data[index]; //-V2563
+                ++num[i]; //-V2563
             }
         }
     }
     
     for (int i = 1; i < numPoints; i++)
     {
-        data[i] = static_cast<uint8>(buffer[i] / num[i] + 0.5F);
+        data[i] = static_cast<uint8>(buffer[i] / num[i] + 0.5F); //-V2563
     }
 
     std::free(buffer); //-V2511
@@ -111,7 +111,7 @@ uint8 Math::MaxFromArray(const uint8 *data, int firstPoint, int lastPoint)
 #define MAX_IF_ABOVE if(d > max) { max = d; }
 
     uint8 max = 0;
-    const uint8 *pointer = &data[firstPoint];
+    const uint8 *pointer = &data[firstPoint]; //-V2563
 
     for (int i = firstPoint; i < lastPoint; i += 2)
     {
@@ -136,7 +136,7 @@ uint8 Math::MinFromArray(const uint8 *data, int firstPoint, int lastPoint)
 #define MIN_IF_LESS if(d < min) { min = d; }
 
     uint8 min = 255;
-    const uint8 *pointer = &data[firstPoint];
+    const uint8 *pointer = &data[firstPoint]; //-V2563
 
     for (int i = firstPoint; i < lastPoint; i += 2)
     {
@@ -177,11 +177,11 @@ uint8 Math::CalculateFiltr(const uint8 *data, int x, int numPoints, int numSmoot
 {
     if (numSmoothing < 2)
     {
-        return data[x];
+        return data[x]; //-V2563
     }
 
     int count = 1;
-    int sum = data[x];
+    int sum = data[x]; //-V2563
     int startDelta = 1;
 
     int endDelta = numSmoothing / 2;
@@ -190,8 +190,8 @@ uint8 Math::CalculateFiltr(const uint8 *data, int x, int numPoints, int numSmoot
     {
         if (((x - delta) >= 0) && ((x + delta) < (numPoints)))
         {
-            sum += data[x - delta];
-            sum += data[x + delta];
+            sum += data[x - delta]; //-V2563
+            sum += data[x + delta]; //-V2563
             count += 2;
         }
     }
@@ -201,7 +201,7 @@ uint8 Math::CalculateFiltr(const uint8 *data, int x, int numPoints, int numSmoot
         int delta = numSmoothing / 2;
         if ((x + delta) < numPoints)
         {
-            sum += data[x + delta];
+            sum += data[x + delta]; //-V2563
             count++;
         }
     }
@@ -226,14 +226,14 @@ void Math::CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoint
         for (int i = 0; i < numPoints; i++)
         {
             int count = 1;
-            int sum = dataIn[i];
+            int sum = dataIn[i]; //-V2563
 
             for (int delta = startDelta; delta <= endDelta; delta++)
             {
                 if (((i - delta) >= 0) && ((i + delta) < (numPoints)))
                 {
-                    sum += dataIn[i - delta];
-                    sum += dataIn[i + delta];
+                    sum += dataIn[i - delta]; //-V2563
+                    sum += dataIn[i + delta]; //-V2563
                     count += 2;
                 }
             }
@@ -242,12 +242,12 @@ void Math::CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoint
             {
                 if ((i + d) < numPoints)
                 {
-                    sum += dataIn[i + d];
+                    sum += dataIn[i + d]; //-V2563
                     count++;
                 }
             }
 
-            dataOut[i] = static_cast<uint8>(sum / static_cast<float>(count));
+            dataOut[i] = static_cast<uint8>(sum / static_cast<float>(count)); //-V2563
         }
     }
 }
@@ -257,7 +257,7 @@ uint8 Math::MaxFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint)
 {
     uint8 max = 0;
 
-    const uint16 *pointer = &data[firstPoint];
+    const uint16 *pointer = &data[firstPoint]; //-V2563
 
     const int endPoint = lastPoint / 2;
 
@@ -286,7 +286,7 @@ uint8 Math::MinFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint)
 {
     uint8 min = 255;
 
-    const uint16 *pointer = &data[firstPoint];
+    const uint16 *pointer = &data[firstPoint]; //-V2563
 
     const int endPoint = lastPoint / 2;
 
@@ -314,7 +314,7 @@ int Math::FindAnotherElement(const uint8 *data, uint8 value, int numElements) //
 {
     for (int i = 0; i < numElements; i++)
     {
-        if (data[i] != value)
+        if (data[i] != value) //-V2563
         {
             return i;
         }

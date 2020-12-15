@@ -93,10 +93,10 @@ void Recorder::RecordPoints()
         {
             if (StorageRecorder::LastRecord()->FreeMemory() > 4)
             {
-                HAL_BUS::FPGA::SetAddrData(RD::DATA_A, RD::DATA_A + 1);
+                HAL_BUS::FPGA::SetAddrData(RD::DATA_A, RD::DATA_A + 1); //-V2563
                 BitSet16 dataA(HAL_BUS::FPGA::ReadA0(), HAL_BUS::FPGA::ReadA1());
 
-                HAL_BUS::FPGA::SetAddrData(RD::DATA_B, RD::DATA_B + 1);
+                HAL_BUS::FPGA::SetAddrData(RD::DATA_B, RD::DATA_B + 1); //-V2563
                 BitSet16 dataB(HAL_BUS::FPGA::ReadA0(), HAL_BUS::FPGA::ReadA1());
 
                 StorageRecorder::LastRecord()->AddPoints(dataA, dataB);

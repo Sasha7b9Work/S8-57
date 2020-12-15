@@ -203,7 +203,7 @@ Record *Record::Next()
 {
     uint8 *addressThis = reinterpret_cast<uint8 *>(this);
 
-    uint8 *addressNext = addressThis + SIZE_RECORD;
+    uint8 *addressNext = addressThis + SIZE_RECORD; //-V2563
 
     return reinterpret_cast<Record *>(addressNext);
 }
@@ -261,8 +261,8 @@ uint *Record::FirstDowbleWord()
 
 bool Record::IsCorrect() //-V2506
 {
-    uint *start = FirstDowbleWord() + 1;
-    uint *end = FirstDowbleWord() + SIZE_RECORD / 4;
+    uint *start = FirstDowbleWord() + 1; //-V2563
+    uint *end = FirstDowbleWord() + SIZE_RECORD / 4; //-V2563
 
     if (set.crc32 == 0xFFFFFFFFU)
     {

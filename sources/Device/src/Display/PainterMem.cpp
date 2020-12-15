@@ -29,7 +29,7 @@ uint8 *PainterMem::CreateBuffer(int w, int h)
         buffer = static_cast<uint8 *>(malloc(static_cast<uint>(width * height))); //-V2511
         if (buffer != nullptr)
         {
-            endBuffer = buffer + width * height;
+            endBuffer = buffer + width * height; //-V2563
         }
         else
         {
@@ -52,7 +52,7 @@ void PainterMem::SetPoint(int x, int y, Color col)
 {
     color = col;
 
-    uint8 *address = ADDRESS_BYTE(x, y);
+    uint8 *address = ADDRESS_BYTE(x, y); //-V2563
 
     if (address >= buffer && address < endBuffer)
     {
@@ -63,7 +63,7 @@ void PainterMem::SetPoint(int x, int y, Color col)
 
 void PainterMem::SetPoint(int x, int y)
 {
-    uint8 *address = ADDRESS_BYTE(x, y);
+    uint8 *address = ADDRESS_BYTE(x, y); //-V2563
 
     if(address >= buffer && address < endBuffer)
     {
@@ -95,7 +95,7 @@ void PainterMem::DrawVLine(int x, int y0, int y1, Color col)
 
     for (int y = y0; y <= y1; y++)
     {
-        SET_POINT(x, y);
+        SET_POINT(x, y); //-V2563
     }
 }
 
@@ -109,7 +109,7 @@ void PainterMem::DrawHLine(int y, int x0, int x1, Color col)
 
     for(int x = x0; x <= x1; x++)
     {
-        SET_POINT(x, y);
+        SET_POINT(x, y); //-V2563
     }
 }
 

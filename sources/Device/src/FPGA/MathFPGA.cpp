@@ -100,7 +100,7 @@ void MathFPGA::CalculateFFT(float *dataR, int numPoints, float *result, float *f
 
     for (int i = 0; i < numPoints; i++)
     {
-        result[i] = 0.0F;
+        result[i] = 0.0F; //-V2563
     }
 
     MultiplyToWindow(dataR, numPoints);
@@ -149,16 +149,16 @@ void MathFPGA::CalculateFFT(float *dataR, int numPoints, float *result, float *f
             for (int i = j; i < static_cast<int>(numPoints); i += ie)
             {
                 int io = i + in;
-                float dRi = dataR[i];
-                float dRio = dataR[io];
-                float ri = result[i];
-                float rio = result[io];
-                dataR[i] = dRi + dRio;
-                result[i] = ri + rio;
+                float dRi = dataR[i]; //-V2563
+                float dRio = dataR[io]; //-V2563
+                float ri = result[i]; //-V2563
+                float rio = result[io]; //-V2563
+                dataR[i] = dRi + dRio; //-V2563
+                result[i] = ri + rio; //-V2563
                 float rtq = dRi - dRio;
                 float itq = ri - rio;
-                dataR[io] = rtq * ru - itq * iu;
-                result[io] = itq * ru + rtq * iu;
+                dataR[io] = rtq * ru - itq * iu; //-V2563
+                result[io] = itq * ru + rtq * iu; //-V2563
             }
             float sr = ru;
             ru = ru * rw - iu * iw;
@@ -173,12 +173,12 @@ void MathFPGA::CalculateFFT(float *dataR, int numPoints, float *result, float *f
         {
             int io = i - 1;
             int in = j - 1;
-            float rtp = dataR[in];
-            float itp = result[in];
-            dataR[in] = dataR[io];
-            result[in] = result[io];
-            dataR[io] = rtp;
-            result[io] = itp;
+            float rtp = dataR[in]; //-V2563
+            float itp = result[in]; //-V2563
+            dataR[in] = dataR[io]; //-V2563
+            result[in] = result[io]; //-V2563
+            dataR[io] = rtp; //-V2563
+            result[io] = itp; //-V2563
         }
 
         int k = nn;
@@ -194,10 +194,10 @@ void MathFPGA::CalculateFFT(float *dataR, int numPoints, float *result, float *f
 
     for (int i = 0; i < 256; i++)
     {
-        result[i] = std::sqrtf(dataR[i] * dataR[i] + result[i] * result[i]);
+        result[i] = std::sqrtf(dataR[i] * dataR[i] + result[i] * result[i]); //-V2563
     }
 
-    result[0] = 0.0F;       // \todo нулева€ составл€юща€ мешает посто€нно. надо еЄ убрать
+    result[0] = 0.0F;       // \todo нулева€ составл€юща€ мешает посто€нно. надо еЄ убрать //-V2563
 
     Normalize(result, 256);
 
@@ -208,10 +208,10 @@ void MathFPGA::CalculateFFT(float *dataR, int numPoints, float *result, float *f
         char buffer[50];
         for(int i = 0; i < 255; i++)
         {
-            std::sprintf(buffer, "%e ", result[i]);
+            std::sprintf(buffer, "%e ", result[i]); //-V2563
             SCPI::SendData(buffer);
         }
-        std::sprintf(buffer, "%e", result[255]);
+        std::sprintf(buffer, "%e", result[255]); //-V2563
         SCPI::SendAnswer(buffer);
     }
 
@@ -222,35 +222,35 @@ void MathFPGA::CalculateFFT(float *dataR, int numPoints, float *result, float *f
         for (int i = 0; i < 256; i++)
         {
 #ifdef DEBUG
-            result[i] = 20 * std::log10f(result[i]);
+            result[i] = 20 * std::log10f(result[i]); //-V2563
 #else
             result[i] = Log10[static_cast<int>(result[i] * 10000)];
 #endif
 
             if (i == S_FFT_POS_CUR_0)
             {
-                *density0 = result[i];
+                *density0 = result[i]; //-V2563
             }
             else if (i == S_FFT_POS_CUR_1) //-V2516
             {
-                *density1 = result[i];
+                *density1 = result[i]; //-V2563
             }
 
-            if (result[i] < minDB)
+            if (result[i] < minDB) //-V2563
             {
-                result[i] = minDB;
+                result[i] = minDB; //-V2563
             }
 
-            result[i] = 1.0F - result[i] / minDB;
+            result[i] = 1.0F - result[i] / minDB; //-V2563
         }
     }
     else
     {
-        *density0 = result[S_FFT_POS_CUR_0];
-        *density1 = result[S_FFT_POS_CUR_1];
+        *density0 = result[S_FFT_POS_CUR_0]; //-V2563
+        *density1 = result[S_FFT_POS_CUR_1]; //-V2563
     }
-    *y0 = static_cast<int>(Grid::MathBottom() - result[S_FFT_POS_CUR_0] * Grid::MathHeight());
-    *y1 = static_cast<int>(Grid::MathBottom() - result[S_FFT_POS_CUR_1] * Grid::MathHeight());
+    *y0 = static_cast<int>(Grid::MathBottom() - result[S_FFT_POS_CUR_0] * Grid::MathHeight()); //-V2563
+    *y1 = static_cast<int>(Grid::MathBottom() - result[S_FFT_POS_CUR_1] * Grid::MathHeight()); //-V2563
 }
 
 
@@ -269,7 +269,7 @@ static void MultiplyToWindow(float *data, int numPoints)
     {
         for (int i = 0; i < numPoints; i++)
         {
-            data[i] *= 0.53836F - 0.46164F * std::cosf(2 * Math::PI_F * i / (numPoints - 1));
+            data[i] *= 0.53836F - 0.46164F * std::cosf(2 * Math::PI_F * i / (numPoints - 1)); //-V2563
         }
     }
     else if (S_FFT_WINDOW_IS_BLACKMAN)
@@ -280,14 +280,14 @@ static void MultiplyToWindow(float *data, int numPoints)
         float a2 = alpha / 2.0F;
         for (int i = 0; i < numPoints; i++)
         {
-            data[i] *= a0 - a1 * std::cosf(2 * Math::PI_F * i / (numPoints - 1)) + a2 * std::cosf(4 * Math::PI_F * i / (numPoints - 1));
+            data[i] *= a0 - a1 * std::cosf(2 * Math::PI_F * i / (numPoints - 1)) + a2 * std::cosf(4 * Math::PI_F * i / (numPoints - 1)); //-V2563
         }
     }
     else if (S_FFT_WINDOW_IS_HANN) //-V2516
     {
         for (int i = 0; i < numPoints; i++)
         {
-            data[i] *= 0.5F * (1.0F - std::cosf(2.0F * Math::PI_F * i / (numPoints - 1.0F)));
+            data[i] *= 0.5F * (1.0F - std::cosf(2.0F * Math::PI_F * i / (numPoints - 1.0F))); //-V2563
         }
     }
 
@@ -300,14 +300,14 @@ static void Normalize(float *data, int)
     float max = 0.0;
     for (int i = 0; i < 256; i++)
     {
-        if (data[i] > max)
+        if (data[i] > max) //-V2563
         {
-            max = data[i];
+            max = data[i]; //-V2563
         }
     }
 
     for (int i = 0; i < 256; i++)
     {
-        data[i] /= max;
+        data[i] /= max; //-V2563
     }
 }

@@ -26,8 +26,8 @@ static bool ChooseSpaces(const char **string);
 
 bool String2Int(char *str, int *value) //-V2506
 {
-    int sign = str[0] == '-' ? -1 : 1;
-    if (str[0] < '0' || str[0] > '9')
+    int sign = str[0] == '-' ? -1 : 1; //-V2563
+    if (str[0] < '0' || str[0] > '9') //-V2563
     {
         str++;
     }
@@ -43,7 +43,7 @@ bool String2Int(char *str, int *value) //-V2506
     do
     {
         --i;
-        int val = str[i] & (~(0x30));
+        int val = str[i] & (~(0x30)); //-V2563
         if (val < 0 || val > 9)
         {
             return false;
@@ -91,12 +91,12 @@ int BCD2Int(uint bcd)
 
 static bool ChooseSymbols(const char **string) //-V2506
 {
-    if (SYMBOL(string) == 0x0d && SYMBOL(string + 1) == 0x0a)
+    if (SYMBOL(string) == 0x0d && SYMBOL(string + 1) == 0x0a) //-V2563
     {
         return false;
     }
 
-    while (SYMBOL(string) != ' ' && SYMBOL(string) != 0x0d && SYMBOL(string + 1) != 0x0a)
+    while (SYMBOL(string) != ' ' && SYMBOL(string) != 0x0d && SYMBOL(string + 1) != 0x0a) //-V2563
     {
         (*string)++;
     }
@@ -107,7 +107,7 @@ static bool ChooseSymbols(const char **string) //-V2506
 
 static bool ChooseSpaces(const char **string) //-V2506
 {
-    if (SYMBOL(string) == 0x0d && SYMBOL(string + 1) == 0x0a)
+    if (SYMBOL(string) == 0x0d && SYMBOL(string + 1) == 0x0a) //-V2563
     {
         return false;
     }
@@ -204,7 +204,7 @@ bool SU::EqualsStrings(void *_str1, void *_str2, int size) //-V2506
 
     for (int i = 0; i < size; i++)
     {
-        if (str1[i] != str2[i])
+        if (str1[i] != str2[i]) //-V2563
         {
             return false;
         }
@@ -219,7 +219,7 @@ bool SU::EqualsStrings(const char *str1, const char *str2) //-V2506
 
     for (uint i = 0; i < size; i++)
     {
-        if (str1[i] != str2[i])
+        if (str1[i] != str2[i]) //-V2563
         {
             return false;
         }
@@ -313,7 +313,7 @@ char *SU::ToUpper(char *_str, int size)
 
     for(int i = 0; i < size; i++)
     {
-        str[i] = static_cast<char>(std::toupper(str[i]));
+        str[i] = static_cast<char>(std::toupper(str[i])); //-V2563
     }
 
     return str;
@@ -433,7 +433,7 @@ bool SU::String2Int(const char *buffer, int *value, char **end)
     }
     else
     {
-        *end = const_cast<char *>(buffer) + (*end - string.DataChar());
+        *end = const_cast<char *>(buffer) + (*end - string.DataChar()); //-V2563
     }
 
     return (*end != const_cast<char *>(buffer));

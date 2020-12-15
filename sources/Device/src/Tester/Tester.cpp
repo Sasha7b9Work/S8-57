@@ -252,7 +252,7 @@ void Tester::ReadData()
 
         for (int i = 0; i < TESTER_NUM_POINTS; i++)
         {
-            SCPI::SendData(String("%d:%d ", x[i], y[i]).c_str());
+            SCPI::SendData(String("%d:%d ", x[i], y[i]).c_str()); //-V2563
         }
         SCPI::SendAnswer(" ");
     }
@@ -276,15 +276,15 @@ static void RecountPoints(uint16 *x, uint8 *y)
 
     for (int i = 0; i < TESTER_NUM_POINTS; i++)
     {
-        int X = 255 - x[i] + dX;
+        int X = 255 - x[i] + dX; //-V2563
         X = static_cast<int>(x0 + (x0 - X) * scaleX);
         LIMITATION(X, 0, 319);
-        x[i] = static_cast<uint16>(X);
+        x[i] = static_cast<uint16>(X); //-V2563
 
-        int Y = y[i] + dY;
+        int Y = y[i] + dY; //-V2563
         Y = static_cast<uint8>(y0 + (y0 - Y) * scaleY);
         LIMITATION(Y, 0, 239);
-        y[i] = static_cast<uint8>(Y);
+        y[i] = static_cast<uint8>(Y); //-V2563
     }
 }
 
@@ -379,7 +379,7 @@ static void ReadFPGA(uint16 *dataA, uint8 *dataB)
     HAL_BUS::FPGA::Write16(WR::PRED_LO, aRead);         // Указываем адрес, с которого будем читать данные
     HAL_BUS::FPGA::Write8(WR::START_ADDR, 0xff);        // И даём команду ПЛИС, чтобы чтение начиналось с него
 
-    HAL_BUS::FPGA::SetAddrData(RD::DATA_A + 1, RD::DATA_B + 1);
+    HAL_BUS::FPGA::SetAddrData(RD::DATA_A + 1, RD::DATA_B + 1); //-V2563
 
     for(int i = 0; i < TESTER_NUM_POINTS; i++)         // Читаем данные первого канала
     {

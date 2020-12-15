@@ -146,8 +146,8 @@ static int DrawMainParameters(int _x, int _y)
 
         static const pString filtr[] = { "\xb5\xb6", "\xb3\xb4", "\xb1\xb2" };
 
-        Char(filtr[S_TRIG_INPUT][0]).Draw(x + 45, y1);
-        Char(filtr[S_TRIG_INPUT][1]).Draw(x + 53, y1);
+        Char(filtr[S_TRIG_INPUT][0]).Draw(x + 45, y1); //-V2563
+        Char(filtr[S_TRIG_INPUT][1]).Draw(x + 53, y1); //-V2563
     }
 
     buffer[0] = '\0';

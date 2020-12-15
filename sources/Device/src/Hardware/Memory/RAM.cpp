@@ -47,7 +47,7 @@ static uint *WriteToRAM(uint *dest, const void *src, int size)
 
     std::memcpy(address, src, static_cast<uint>(size));
     
-    return reinterpret_cast<uint *>(address + size);
+    return reinterpret_cast<uint *>(address + size); //-V2563
 }
 
 
@@ -111,13 +111,13 @@ struct Packet
 
         ds->dataA = nullptr;
         ds->dataB = nullptr;
-        uint8 *addrData = reinterpret_cast<uint8 *>(reinterpret_cast<uint8 *>(address) + sizeof(DataSettings));
+        uint8 *addrData = reinterpret_cast<uint8 *>(reinterpret_cast<uint8 *>(address) + sizeof(DataSettings)); //-V2563
 
         if (ds->enableA)
         {
             ds->dataA = addrData;
             std::memset(addrData, VALUE::NONE, static_cast<uint>(bytesInChannel));
-            addrData += bytesInChannel;
+            addrData += bytesInChannel; //-V2563
         }
 
         if (ds->enableB)

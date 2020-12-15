@@ -101,7 +101,7 @@ static const char *Process(const char *buffer, const StructSCPI strct[]) //-V250
 
     badSymbols.Append(*buffer);         // Перебрали все ключи в strct и не нашли ни одного соответствия. Поэтому помещаем начальный разделитель в бракованные символыа
 
-    return buffer + 1;
+    return buffer + 1; //-V2563
 }
 
 
@@ -151,7 +151,7 @@ static const char *ProcessLeaf(const char *begin, const StructSCPI *node) //-V25
 
     badSymbols.Append(*begin);
 
-    return begin + 1;
+    return begin + 1; //-V2563
 }
 
 
@@ -217,7 +217,7 @@ static bool RemoveSeparatorsSequenceFromBegin()
 
 void SCPI::SendAnswer(pCHAR message)
 {
-    if(message[std::strlen(message) - 1] != 0x0D) //-V2513
+    if(message[std::strlen(message) - 1] != 0x0D) //-V2513 //-V2563
     {
         String msg(message);
         msg.Append(0x0D);
@@ -289,9 +289,9 @@ static bool ProcessTest(const StructSCPI strct[]) //-V2504 //-V2506
 void SCPI::ProcessHint(String *message, const char *const *names)
 {
     message->Append(" {");
-    for(int i = 0; i < names[i][0] != 0; i++)
+    for(int i = 0; i < names[i][0] != 0; i++) //-V2563
     {
-        message->Append(names[i]);
+        message->Append(names[i]); //-V2563
         message->Append(" |");
     }
     message->RemoveFromEnd();

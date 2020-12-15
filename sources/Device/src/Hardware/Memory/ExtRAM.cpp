@@ -27,7 +27,7 @@ uint8 *ExtRAM::Begin()
 
 uint8 *ExtRAM::End()
 {
-    return Begin() + SIZE_RAM;
+    return Begin() + SIZE_RAM; //-V2563
 }
 
 
@@ -105,7 +105,7 @@ float ExtRAM::Test2()
         bufferIN[x] = static_cast<uint8>(std::rand());
     }
 
-    uint8 *address = Begin() + (std::rand() % (500 * 1024));
+    uint8 *address = Begin() + (std::rand() % (500 * 1024)); //-V2563
 
     Write(bufferIN, SIZE, address);
 
@@ -132,7 +132,7 @@ float ExtRAM::TestTime(int sizekB) //-V2506
 
     for(int i = 0; i < sizekB; i++)
     {
-        float time = TestTime1kB(Begin() + i * 1024);
+        float time = TestTime1kB(Begin() + i * 1024); //-V2563
 
         if(time == -1.0F) //-V550 //-V2550
         {

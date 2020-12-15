@@ -191,7 +191,7 @@ static bool DrawTesterPoints(uint8 data) //-V2506
 
         if(numY == TESTER_NUM_POINTS)
         {
-            Painter::DrawTesterData(mode, color, reinterpret_cast<uint16 *>(buffer), buffer + TESTER_NUM_POINTS * 2); //-V1032
+            Painter::DrawTesterData(mode, color, reinterpret_cast<uint16 *>(buffer), buffer + TESTER_NUM_POINTS * 2); //-V1032 //-V2563
             return true;
         }
     }
@@ -531,10 +531,10 @@ static bool DrawText(uint8 data) //-V2506
             buffer = new char[static_cast<uint>(numSymbols + 1)]; //-V2511
             break;
         default:
-            buffer[readingSymbols++] = static_cast<char>(data);
+            buffer[readingSymbols++] = static_cast<char>(data); //-V2563
             if (readingSymbols == numSymbols)
             {
-                buffer[readingSymbols] = 0;
+                buffer[readingSymbols] = 0; //-V2563
                 Text::Draw(x, y, buffer);
                 delete []buffer; //-V2511
                 return true;

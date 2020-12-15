@@ -187,7 +187,7 @@ static pCHAR FuncCalibratorMode(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(calibratorMode[S_SERV_CALIBRATOR_MODE]));
     
-    SCPI_PROCESS_ARRAY(calibratorMode, SetCalibratorMode(i));
+    SCPI_PROCESS_ARRAY(calibratorMode, SetCalibratorMode(i)); //-V2563
 }
 
 
@@ -205,7 +205,7 @@ static pCHAR FuncMemoryLength(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(length[set.mem._enumPoints]));
 
-    SCPI_PROCESS_ARRAY(length, set.mem._enumPoints = static_cast<ENumPointsFPGA::E>(i));
+    SCPI_PROCESS_ARRAY(length, set.mem._enumPoints = static_cast<ENumPointsFPGA::E>(i)); //-V2563
 }
 
 

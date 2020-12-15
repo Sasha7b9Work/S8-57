@@ -72,7 +72,7 @@ uint8 *Display::GetBuffer()
 
 uint8 *Display::GetBufferEnd()
 {
-    return backBuffer + BUFFER_WIDTH * BUFFER_HEIGHT;
+    return backBuffer + BUFFER_WIDTH * BUFFER_HEIGHT; //-V2563
 }
 
 

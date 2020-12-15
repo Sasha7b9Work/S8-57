@@ -224,7 +224,7 @@ static void DrawUnits(bool inModeOsci)
 
         if (needSendToSCPI)
         {
-            SCPI::SendAnswer(outBuffer + 7);
+            SCPI::SendAnswer(outBuffer + 7); //-V2563
         }
 
         if(outBuffer[8] == '=' || 
@@ -655,7 +655,7 @@ void DisplayMultimeter::SetMeasure(const uint8 buf[13]) //-V2506
         return;
     }
 
-    std::memcpy(outBuffer, buf + 1, 7); //-V512
+    std::memcpy(outBuffer, buf + 1, 7); //-V512 //-V2563
 
     funcs[meas].func(reinterpret_cast<const char *>(buf));
 
@@ -665,37 +665,37 @@ void DisplayMultimeter::SetMeasure(const uint8 buf[13]) //-V2506
 
 static void PrepareTestDiode(pCHAR)
 {
-    std::strcpy(outBuffer + 7, "  "); //-V2513
+    std::strcpy(outBuffer + 7, "  "); //-V2513 //-V2563
 }
 
 
 static void PrepareVoltageDC(pCHAR) //-V524
 {
-    std::strcpy(outBuffer + 7, "V="); //-V2513
+    std::strcpy(outBuffer + 7, "V="); //-V2513 //-V2563
 }
 
 
 static void PrepareVoltageAC(pCHAR)
 {
-    std::strcpy(outBuffer + 7, "V~"); //-V2513
+    std::strcpy(outBuffer + 7, "V~"); //-V2513 //-V2563
 }
 
 
 static void PrepareCurrentDC(const char *buf)
 {
-    std::strcpy(outBuffer + 7, (buf[10] == '1') ? "A=" : "mA="); //-V2513
+    std::strcpy(outBuffer + 7, (buf[10] == '1') ? "A=" : "mA="); //-V2513 //-V2563
 }
 
 
 static void PrepareCurrentAC(const char *buf)
 {
-    std::strcpy(outBuffer + 7, (buf[10] == '1') ? "A~" : "mA~"); //-V2513
+    std::strcpy(outBuffer + 7, (buf[10] == '1') ? "A~" : "mA~"); //-V2513 //-V2563
 }
 
 
 void PrepareResistance(const char *buf)
 {
-    outBuffer[7] = buf[8];
+    outBuffer[7] = buf[8]; //-V2563
     outBuffer[8] = SYMBOL_OMEGA;
 }
 
@@ -708,7 +708,7 @@ static bool ResistanceLess100()
 
 static void PrepareBell(pCHAR)
 {
-    std::strcpy(outBuffer + 7, "  "); //-V2513
+    std::strcpy(outBuffer + 7, "  "); //-V2513 //-V2563
 
     if (ResistanceLess100())
     {

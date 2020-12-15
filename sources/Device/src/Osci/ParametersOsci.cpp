@@ -650,7 +650,7 @@ void VALUE::PointsToVoltage(const uint8 *points, int numPoints, Range::E range, 
     float koeff = 1.0F / 20e3F;
     for (int i = 0; i < numPoints; i++)
     {
-        voltage[i] = (points[i] * voltInPixel - diff) * koeff; //-V636
+        voltage[i] = (points[i] * voltInPixel - diff) * koeff; //-V636 //-V2563
     }
 }
 
@@ -699,20 +699,20 @@ void VALUE::PointsFromVoltage(const float *voltage, int numPoints, Range::E rang
 
     for (int i = 0; i < numPoints; i++)
     {
-        int value = static_cast<int>(voltage[i] * voltInPixel + delta);
+        int value = static_cast<int>(voltage[i] * voltInPixel + delta); //-V2563
 
         if (value < 0)
         {
-            points[i] = 0;
+            points[i] = 0; //-V2563
             continue;
         }
         else if (value > 255) //-V2516
         {
-            points[i] = 255;
+            points[i] = 255; //-V2563
             continue;
         }
 
-        points[i] = static_cast<uint8>(value);
+        points[i] = static_cast<uint8>(value); //-V2563
     }
 }
 

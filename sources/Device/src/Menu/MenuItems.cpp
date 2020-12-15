@@ -243,7 +243,7 @@ int Item::PositionInKeeperList() const
     {
         for (int i = 0; i < parent->NumItems(); i++)
         {
-            if (this == parent->OwnData()->items[i])
+            if (this == parent->OwnData()->items[i]) //-V2563
             {
                 result = i;
                 break;
@@ -264,7 +264,7 @@ int Page::NumSubPages() const
 
 int Page::NumItems() const //-V2506
 {
-    const Item * const * item = &OwnData()->items[0];
+    const Item * const * item = &OwnData()->items[0]; //-V2563
 
     int result = 0;
 
@@ -385,7 +385,7 @@ Item *Page::GetItem(int numItem) const
 
     if (numItem < NumItems())
     {
-        result = const_cast<Item *>(OwnData()->items[numItem]);
+        result = const_cast<Item *>(OwnData()->items[numItem]); //-V2563
     }
 
     return result;
@@ -845,7 +845,7 @@ float Choice::Step() const //-V2506
 
 String Choice::NameCurrentSubItem() const
 {
-    return (OwnData()->cell == 0) ? String("") : String(NAME_FROM_INDEX(*OwnData()->cell));
+    return (OwnData()->cell == 0) ? String("") : String(NAME_FROM_INDEX(*OwnData()->cell)); //-V2563
 }
 
 
@@ -862,7 +862,7 @@ const char *Choice::NameNextSubItem() const
             index = 0;
         }
 
-        result = NAME_FROM_INDEX(index);
+        result = NAME_FROM_INDEX(index); //-V2563
     }
 
     return result;
@@ -882,7 +882,7 @@ const char *Choice::NamePrevSubItem() const
             index = NumChoices() - 1;
         }
 
-        result = NAME_FROM_INDEX(index);
+        result = NAME_FROM_INDEX(index); //-V2563
     }
 
     return result;
@@ -891,7 +891,7 @@ const char *Choice::NamePrevSubItem() const
 
 String Choice::NameSubItem(int i) const
 {
-    return String(NAME_FROM_INDEX(i));
+    return String(NAME_FROM_INDEX(i)); //-V2563
 }
 
 

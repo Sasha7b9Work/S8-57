@@ -98,16 +98,16 @@ void VCP::SendDataSynch(const void *_buffer, int size)
 
                 while (pCDC->TxState == 1) {}; //-V712
 
-                std::memcpy(buffSend + sizeBuffer, static_cast<void *>(buffer), static_cast<uint>(reqBytes));
+                std::memcpy(buffSend + sizeBuffer, static_cast<void *>(buffer), static_cast<uint>(reqBytes)); //-V2563
                 USBD_CDC_SetTxBuffer(&hUSBD, buffSend, SIZE_BUFFER_VCP);
                 USBD_CDC_TransmitPacket(&hUSBD);
                 size -= reqBytes;
-                buffer += reqBytes;
+                buffer += reqBytes; //-V2563
                 sizeBuffer = 0;
             }
             else
             {
-                std::memcpy(buffSend + sizeBuffer, static_cast<void *>(buffer), static_cast<uint>(size));
+                std::memcpy(buffSend + sizeBuffer, static_cast<void *>(buffer), static_cast<uint>(size)); //-V2563
                 sizeBuffer += size;
                 size = 0;
             }

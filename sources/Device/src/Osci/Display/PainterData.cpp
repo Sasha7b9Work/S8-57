@@ -85,7 +85,7 @@ void DisplayOsci::PainterData::DrawSpectrumChannel(const float *spectrum, Color 
     int gridHeight = Grid::MathHeight();
     for (int i = 0; i < 256; i++)
     {
-        int height = static_cast<int>(gridHeight * spectrum[i]);
+        int height = static_cast<int>(gridHeight * spectrum[i]); //-V2563
 
         VLine(height).Draw(gridLeft + i, gridBottom - height);
     }
@@ -247,11 +247,11 @@ void DisplayOsci::PainterData::DrawChannel(Chan::E ch) //-V2506
 
     uint8 *data = OUT(ch);
 
-    data += DisplayOsci::ShiftInMemory::Get();
+    data += DisplayOsci::ShiftInMemory::Get(); //-V2563
 
     if (PEAKDET_ENABLED(DS))
     {
-        data += DisplayOsci::ShiftInMemory::Get();
+        data += DisplayOsci::ShiftInMemory::Get(); //-V2563
     }
 
     int center = (Grid::Bottom() - Grid::Top()) / 2 + Grid::Top();
@@ -312,8 +312,8 @@ void DisplayOsci::PainterData::DrawModeLinesPeakDetOn(int center, const uint8 *d
 {
     for (int i = 0; i < 281 * 2; i += 2)
     {
-        int min = static_cast<int>(center - (data[i] - VALUE::AVE) * scale + 0.5F);
-        int max = static_cast<int>(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F);
+        int min = static_cast<int>(center - (data[i] - VALUE::AVE) * scale + 0.5F); //-V2563
+        int max = static_cast<int>(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F); //-V2563
 
         VLine(min - max).Draw(x++, max);
     }
@@ -324,10 +324,10 @@ void DisplayOsci::PainterData::DrawModeLinesPeakDetOff(int center, const uint8 *
 {
     for (int i = 1; i < 281; i++)
     {
-        int value = static_cast<int>(center - (data[i] - VALUE::AVE) * scale + 0.5F);
-        int valuePrev = static_cast<int>(center - (data[i - 1] - VALUE::AVE) * scale + 0.5F);
+        int value = static_cast<int>(center - (data[i] - VALUE::AVE) * scale + 0.5F); //-V2563
+        int valuePrev = static_cast<int>(center - (data[i - 1] - VALUE::AVE) * scale + 0.5F); //-V2563
 
-        if(data[i] != VALUE::NONE && data[i - 1] != VALUE::NONE)
+        if(data[i] != VALUE::NONE && data[i - 1] != VALUE::NONE) //-V2563
         {
             if(value == valuePrev)
             {
@@ -363,8 +363,8 @@ void DisplayOsci::PainterData::DrawModePointsPeakDetOn(int center, const uint8 *
 {
     for (int i = 0; i < 281 * 2; i += 2)
     {
-        Pixel().Draw(x, static_cast<int>(center - (data[i] - VALUE::AVE) * scale + 0.5F));
-        Pixel().Draw(x, static_cast<int>(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F));
+        Pixel().Draw(x, static_cast<int>(center - (data[i] - VALUE::AVE) * scale + 0.5F)); //-V2563
+        Pixel().Draw(x, static_cast<int>(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F)); //-V2563
         x++;
     }
 }
@@ -374,7 +374,7 @@ void DisplayOsci::PainterData::DrawModePointsPeakDetOff(int center, const uint8 
 {
     for (int i = 0; i < 280; i++)
     {
-        uint8 v8 = data[i];
+        uint8 v8 = data[i]; //-V2563
         if(v8 != VALUE::NONE)
         {
             float value = center - (v8 - VALUE::AVE) * scale;

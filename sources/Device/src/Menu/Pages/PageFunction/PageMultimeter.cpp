@@ -213,22 +213,22 @@ void PageMultimeter::OnChanged_Mode(bool)
 
     Item **items = const_cast<Item **>(page->OwnData()->items);
 
-    items[1] = const_cast<Choice *>(&cRangesVoltageDC);
-    items[2] = const_cast<Choice *>(&cAVP);
-    items[3] = const_cast<Choice *>(&cZero);
-    items[4] = const_cast<Button* >(&bExit);
+    items[1] = const_cast<Choice *>(&cRangesVoltageDC); //-V2563
+    items[2] = const_cast<Choice *>(&cAVP); //-V2563
+    items[3] = const_cast<Choice *>(&cZero); //-V2563
+    items[4] = const_cast<Button* >(&bExit); //-V2563
 
     switch(S_MULT_MEASURE)
     {
-    case MultimeterMeasure::VoltageDC:      items[1] = const_cast<Choice *>(&cRangesVoltageDC);       break;
-    case MultimeterMeasure::VoltageAC:      items[1] = const_cast<Choice *>(&cRangesVoltageAC);       break;
-    case MultimeterMeasure::CurrentDC:      items[1] = const_cast<Choice *>(&cRangesCurrentDC);       break;
-    case MultimeterMeasure::CurrentAC:      items[1] = const_cast<Choice *>(&cRangesCurrentAC);       break;
-    case MultimeterMeasure::Resistance:     items[1] = const_cast<Choice *>(&cRangesResistance);      break;
+    case MultimeterMeasure::VoltageDC:      items[1] = const_cast<Choice *>(&cRangesVoltageDC);       break; //-V2563
+    case MultimeterMeasure::VoltageAC:      items[1] = const_cast<Choice *>(&cRangesVoltageAC);       break; //-V2563
+    case MultimeterMeasure::CurrentDC:      items[1] = const_cast<Choice *>(&cRangesCurrentDC);       break; //-V2563
+    case MultimeterMeasure::CurrentAC:      items[1] = const_cast<Choice *>(&cRangesCurrentAC);       break; //-V2563
+    case MultimeterMeasure::Resistance:     items[1] = const_cast<Choice *>(&cRangesResistance);      break; //-V2563
     case MultimeterMeasure::TestDiode:  
-    case MultimeterMeasure::Bell:           items[1] = &Item::empty;
-                                            items[2] = &Item::empty;
-                                            items[3] = &Item::empty;                                  break;
+    case MultimeterMeasure::Bell:           items[1] = &Item::empty; //-V2563
+                                            items[2] = &Item::empty; //-V2563
+                                            items[3] = &Item::empty;                                  break; //-V2563
 
     case MultimeterMeasure::Count:
         break;
@@ -351,7 +351,7 @@ void PageMultimeter::EnablePageCalibrate()
 
     Item **items = const_cast<Item **>(page->OwnData()->items);
 
-    items[6] = const_cast<Page *>(PageMultimeter::Calibration::self);
+    items[6] = const_cast<Page *>(PageMultimeter::Calibration::self); //-V2563
 }
 
 
@@ -361,5 +361,5 @@ void PageMultimeter::DisablePageCalibrate()
 
     Item **items = const_cast<Item **>(page->OwnData()->items);
 
-    items[6] = &Item::empty;
+    items[6] = &Item::empty; //-V2563
 }

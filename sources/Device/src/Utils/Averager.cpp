@@ -33,16 +33,16 @@ void Utils::Averager<T>::Push(T elem)
 {
     if (numELements < size)
     {
-        buffer[numELements] = elem;
+        buffer[numELements] = elem; //-V2563
         numELements++;
     }
     else
     {
         for (uint i = 1; i < size; i++)
         {
-            buffer[i - 1] = buffer[i];
+            buffer[i - 1] = buffer[i]; //-V2563
         }
-        buffer[size - 1] = elem;
+        buffer[size - 1] = elem; //-V2563
     }
 }
 
@@ -54,7 +54,7 @@ T Utils::Averager<T>::Value() const
 
     for (uint i = 0; i < numELements; i++)
     {
-        result += buffer[i];
+        result += buffer[i]; //-V2563
     }
 
     return result / numELements;

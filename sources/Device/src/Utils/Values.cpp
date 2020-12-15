@@ -56,9 +56,9 @@ char* Hex::ToBin(int depth, char buffer[36]) const
         BinToString8(static_cast<uint8>(value >> (byte * 8)), pointer);
         if (byte > 0)
         {
-            *(pointer + 8) = ' ';
+            *(pointer + 8) = ' '; //-V2563
         }
-        pointer += 9;
+        pointer += 9; //-V2563
         byte--;
     }
 
@@ -117,7 +117,7 @@ static char *IntegerToString(int value, bool alwaysSign, int numMinFields, char 
     if (alwaysSign && value >= 0)
     {
         buffer[0] = '+';
-        std::snprintf(buffer + 1, SIZE - 1, format, value);
+        std::snprintf(buffer + 1, SIZE - 1, format, value); //-V2563
     }
     else
     {
