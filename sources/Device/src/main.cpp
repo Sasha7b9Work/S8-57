@@ -1,25 +1,26 @@
 #include "defines.h"
-#include "device.h"
-#include "Hardware/AT25160N.h"
+#include "Hardware/HAL/HAL.h"
 #include "Hardware/Timer.h"
-#include "Hardware/Memory/ExtRAM.h"
-#include "Test/Test.h"
+#include "FlashDrive/FlashDrive.h"
 
 
 int main(void)
 {
-    Device::Init();
+    HAL::Init();
 
-    Timer::PauseOnTime(1);
+    Timer::Init();
 
-//    AT25160N::Init();
+    PAUSE_ON_MS(500);
 
-//    AT25160N::Test();
-    
-//    Test::Run();
-  
-    while (1)
-    {
-        Device::Update();
-    }
+    FDrive::Init();
+
+    StructForWrite sw;
+
+    FDrive::OpenNewFileForWrite("test.txt", &sw);
+
+    char buffer[] = "test string";
+
+    FDrive::WriteToFile((uint8 *)buffer, (int)std::strlen(buffer), &sw);
+
+    FDrive::CloseFile(&sw);
 }
