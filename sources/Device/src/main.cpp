@@ -22,14 +22,23 @@ int main(void)
 
             StructForWrite sw;
 
-            if (FDrive::OpenNewFileForWrite("test.txt", &sw))
+            if (FDrive::OpenNewFileForWrite("eeprom.bin", &sw))
             {
-                char buffer[] = "test string";
+                uint start = 0x8000000;
+                uint end = start + (1024 * 1024 * 2);
+                
+                uint address = start;
 
-                if (FDrive::WriteToFile((uint8 *)buffer, (int)std::strlen(buffer), &sw))
+                static const int SIZE_BUFFER = 512;
+
+                while(address < end)
                 {
-                    FDrive::CloseFile(&sw);
+                    FDrive::WriteToFile((uint8 *)address, SIZE_BUFFER, &sw);
+                    
+                    address += SIZE_BUFFER;
                 }
+                
+                FDrive::CloseFile(&sw);
             }
 
         }
