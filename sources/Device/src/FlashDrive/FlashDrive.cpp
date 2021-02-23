@@ -120,25 +120,15 @@ void FDrive::Update()
 
         if (f_mount(&USBDISKFatFs, static_cast<TCHAR const*>(USBDISKPath), 1) != FR_OK)
         {
-            DISPLAY_SHOW_WARNING("Не могу прочитать флешку. Убедитесь, что на ней FAT32");
         }
         else
         {
-            DISPLAY_SHOW_WARNING("Обнаружено запоминающее устройство");
             isConnected = true;
-            FileManager::Init();
-            Menu::ChangeStateFlashDrive();
         }
     }
     else
     {
         USBH_Process(&handleUSBH);
-    }
-
-    if(needSaveScreen)
-    {
-        SaveScreenToFlash();
-        needSaveScreen = false;
     }
 }
 

@@ -36,6 +36,9 @@ static const Page *const pages[] =
 
 void Menu::Update()
 {
+
+    return;
+
     static uint lastModified = 0;
     static bool saved = true;
 
@@ -409,6 +412,8 @@ int Menu::Y0()
 
 void Menu::Draw()
 {
+    return;
+
     DFont::Set(DTypeFont::_8);
 
     if (Menu::IsShown())

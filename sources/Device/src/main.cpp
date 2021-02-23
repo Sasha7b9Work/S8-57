@@ -1,26 +1,37 @@
 #include "defines.h"
-#include "Hardware/HAL/HAL.h"
-#include "Hardware/Timer.h"
+#include "device.h"
 #include "FlashDrive/FlashDrive.h"
+#include "Hardware/Beeper.h"
+#include "Hardware/Timer.h"
+#include "Hardware/HAL/HAL.h"
 
 
 int main(void)
 {
-    HAL::Init();
+    Device::Init();
+    
+    while (1)
+    {
+        FDrive::Update();
 
-    Timer::Init();
+        static bool alreadySave = false;
 
-    PAUSE_ON_MS(500);
+        if (FDrive::IsConnected() && !alreadySave)
+        {
+            alreadySave = true;
 
-    FDrive::Init();
+            StructForWrite sw;
 
-    StructForWrite sw;
+            if (FDrive::OpenNewFileForWrite("test.txt", &sw))
+            {
+                char buffer[] = "test string";
 
-    FDrive::OpenNewFileForWrite("test.txt", &sw);
+                if (FDrive::WriteToFile((uint8 *)buffer, (int)std::strlen(buffer), &sw))
+                {
+                    FDrive::CloseFile(&sw);
+                }
+            }
 
-    char buffer[] = "test string";
-
-    FDrive::WriteToFile((uint8 *)buffer, (int)std::strlen(buffer), &sw);
-
-    FDrive::CloseFile(&sw);
+        }
+    }
 }

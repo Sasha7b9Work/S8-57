@@ -62,17 +62,13 @@ void Device::Init()
 
     Osci::Init();
 
-    Menu::Init();
+//    Menu::Init();
 
-    Multimeter::Init();
+//    Multimeter::Init();
 
     FDrive::Init();
 
-    //Sensor::Init();
-
     SetCurrentMode();
-
-    //HAL_TIM5::Init();
 }
 
 
@@ -109,6 +105,8 @@ bool SetCurrentMode(const Page *page, Device::Mode::E mode) //-V2506
 void Device::Update()
 {
     Timer::StartMultiMeasurement();
+    
+    return;
 
     Osci::Update();
 
@@ -119,8 +117,6 @@ void Device::Update()
     Recorder::Update();
 
     FDrive::Update();
-
-    //Sensor::Update();
 
     while (HAL_BUS::Panel::Receive())
     {
