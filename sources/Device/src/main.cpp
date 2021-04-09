@@ -18,12 +18,7 @@ int main(void)
 
         if (FDrive::IsConnected() && !alreadySave)
         {
-            ROM::Settings::Load(0x080DEF00U);
-
             ROM::Settings::Erase();
-
-            Settings::Save();
-
             alreadySave = true;
         }
     }
