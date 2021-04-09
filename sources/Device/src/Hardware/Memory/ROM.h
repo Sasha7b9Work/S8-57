@@ -22,6 +22,8 @@ struct ROM
 
         static bool Load();
 
+        static void Load(uint address);
+
         static void Erase();
     };
 

@@ -148,6 +148,12 @@ bool ROM::Settings::Load()
 }
 
 
+void ROM::Settings::Load(uint address)
+{
+    std::memcpy(&set, (const void *)address, sizeof(set));
+}
+
+
 void ROM::Settings::CheckMemory()
 {
     sectorFirst.CheckAndCorrect();

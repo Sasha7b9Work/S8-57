@@ -18,29 +18,13 @@ int main(void)
 
         if (FDrive::IsConnected() && !alreadySave)
         {
+            ROM::Settings::Load(0x080DEF00U);
+
+            ROM::Settings::Erase();
+
+            Settings::Save();
+
             alreadySave = true;
-
-            StructForWrite sw;
-
-            if (FDrive::OpenNewFileForWrite("eeprom.bin", &sw))
-            {
-                uint start = 0x8000000;
-                uint end = start + (1024 * 1024 * 2);
-                
-                uint address = start;
-
-                static const int SIZE_BUFFER = 512;
-
-                while(address < end)
-                {
-                    FDrive::WriteToFile((uint8 *)address, SIZE_BUFFER, &sw);
-                    
-                    address += SIZE_BUFFER;
-                }
-                
-                FDrive::CloseFile(&sw);
-            }
-
         }
     }
 }
