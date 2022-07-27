@@ -4,13 +4,7 @@
 #include "Utils/StringUtils.h"
 #include "Utils/Values.h"
 #include <iomanip>
-#include <cstring>
-#include <cctype>
 #include <sstream>
-#include <cstdlib>
-#ifdef WIN32
-#include <cstring>
-#endif
 
 #ifndef LANG
 #define LANG 0

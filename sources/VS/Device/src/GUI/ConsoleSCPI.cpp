@@ -219,8 +219,8 @@ void ConsoleSCPI::SendToSCPI(const char *txt)
 void ConsoleSCPI::StartTest()
 {
     AddLine("Тест стартовал");
-    time_t current;
-    srand(time(0));
+//    time_t current;
+    srand((uint)time(0));
     timerTest.Start(500);
 }
 

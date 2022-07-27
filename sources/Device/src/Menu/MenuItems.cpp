@@ -994,3 +994,9 @@ const DataGovernorColor *GovernorColor::OwnData() const
 {
     return static_cast<const DataGovernorColor *>(data->ad); //-V2571
 }
+
+
+const DataPage* Page::OwnData() const
+{
+    return static_cast<const DataPage*>(data->ad);
+}

@@ -297,7 +297,7 @@ void Menu::Init()
 
     CloseAllBadOpenedPages();
 
-    CloseDebugPages();
+//    CloseDebugPages();
 }
 
 

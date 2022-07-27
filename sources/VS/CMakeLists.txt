@@ -19,4 +19,8 @@ project (S8-57_GUI)
 
 set (TARGET_NAME S8-57_GUI)
 
+if(${CMAKE_BUILD_TYPE} STREQUAL Debug)
+    add_definitions(-DDEBUG)
+endif()
+
 add_subdirectory(Device)

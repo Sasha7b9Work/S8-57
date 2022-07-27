@@ -217,7 +217,7 @@ public:
 
     virtual void Draw(int x, int y, bool opened) const;
 
-    const DataPage *OwnData() const { return static_cast<const DataPage *>(data->ad); } //-V2571
+    const DataPage* OwnData() const;
 
     const Item *ItemForFuncKey(Key::E key) const;
 

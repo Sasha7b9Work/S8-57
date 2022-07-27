@@ -11,7 +11,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <cstring>
-
+#include <limits>
 
 static float CalculateVoltageMax(Chan::E ch);
 static float CalculateVoltageMin(Chan::E ch);

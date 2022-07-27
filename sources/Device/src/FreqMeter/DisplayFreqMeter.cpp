@@ -10,7 +10,7 @@
 #include "Utils/StringUtils.h"
 #include "Utils/Values.h"
 #include <cstring>
-
+#include <limits>
 
 #define EMPTY_STRING    "---.---"
 #define OVERFLOW_STRING ">>>"
