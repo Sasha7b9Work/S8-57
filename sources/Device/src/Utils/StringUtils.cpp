@@ -5,6 +5,7 @@
 #include "Utils/Values.h"
 #include <iomanip>
 #include <sstream>
+#include <cctype>
 
 #ifndef LANG
 #define LANG 0
