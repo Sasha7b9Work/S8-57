@@ -28,7 +28,7 @@ goto HINT
     cd ../..
     rmdir "generated/Win32" /s /q
     cd scripts/vs_win
-    if %1==debug ( @echo on & cmake ../../VS/CMakeLists.txt -B../../generated/Win32 -G "Visual Studio 17 2022" -A Win32 )
+    if %1==debug ( @echo on & cmake ../../VS/CMakeLists.txt -B../../generated/Win32 -G "Visual Studio 17 2022" -A Win32 -DCMAKE_BUILD_TYPE=Debug)
     @echo off
     if %1==release ( @echo on & cmake ../../VS/CMakeLists.txt -B../../generated/Win32 -G "Visual Studio 17 2022" -A Win32 -DBUILD_USE_STATIC_RUNTIME=ON -DCMAKE_BUILD_TYPE=Release )
     @echo off

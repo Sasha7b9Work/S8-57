@@ -260,12 +260,10 @@ add_executable(S8-57 ${COMMON} ${VS} ${VS_CMSIS} ${VS_FATFS} ${VS_HAL} ${VS_HAL_
                      ${TEST} ${TESTER} ${UTILS} ${SRC} ${DISPLAY} ${DISPLAY_FONT} ${_FPGA} ${HARDWARE} ${HARDWARE_HAL} ${HARDWARE_MEMORY} ${OSCI} ${RECORDER}
                      ${SETTINGS})
 
-#target_link_libraries(S8-57 ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase31ud)
-#target_link_libraries(S8-57 ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw31ud_core)
-target_link_libraries(S8-57 ../../../ThirdParty/wxWidgets/generated/lib/vc_lib/wxbase31ud)
-target_link_libraries(S8-57 ../../../ThirdParty/wxWidgets/generated/lib/vc_lib/wxmsw31ud_core)
-target_link_libraries(S8-57 ../../../ThirdParty/wxWidgets/generated/lib/vc_lib/wxpngd)
-target_link_libraries(S8-57 ../../../ThirdParty/wxWidgets/generated/lib/vc_lib/wxzlibd)
+target_link_libraries(S8-57 ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxbase32ud)
+target_link_libraries(S8-57 ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxmsw32ud_core)
+target_link_libraries(S8-57 ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxpngd)
+target_link_libraries(S8-57 ../../../ThirdParty/wxWidgets/generated/lib/vc_dll/wxzlibd)
 
 target_link_libraries(S8-57 WinMM.lib)
 target_link_libraries(S8-57 version.lib)
