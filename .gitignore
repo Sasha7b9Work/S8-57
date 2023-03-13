@@ -2,7 +2,6 @@
 *.out
 *.bak
 *~*
-*.bin
 *.pyc
 *.tmp
 *.uvguix.*
