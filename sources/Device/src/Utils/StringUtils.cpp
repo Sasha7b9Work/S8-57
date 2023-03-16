@@ -6,6 +6,8 @@
 #include <iomanip>
 #include <sstream>
 #include <cctype>
+#include <cstring>
+#include <cstdlib>
 
 #ifndef LANG
 #define LANG 0
