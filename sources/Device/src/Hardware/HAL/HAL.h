@@ -55,10 +55,10 @@ struct HAL_ADC1
 
 
 // Исользуется в режиме рандомизатора
-struct HAL_ADC3
+namespace HAL_ADC3
 {
-    static void Init();
-    static uint16 ValueRandomizer();
+    void Init();
+    uint16 ValueRandomizer();
 };
 
 

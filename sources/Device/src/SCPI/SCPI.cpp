@@ -7,41 +7,44 @@
 #include <cstring>
 
 
-// Рекурсивная функция обработки массива структур StructSCPI.
-// В случае успешного выполнения возвращает адрес символа, расположенного за последним обработанным символом.
-// В случае неуспешного завершения - возвращает nullptr. Код ошибки находится в *error
-static const char *Process(const char *buffer, const StructSCPI structs[]); //-V2504
+namespace SCPI
+{
+    // Рекурсивная функция обработки массива структур StructSCPI.
+    // В случае успешного выполнения возвращает адрес символа, расположенного за последним обработанным символом.
+    // В случае неуспешного завершения - возвращает nullptr. Код ошибки находится в *error
+    static const char *Process(const char *buffer, const StructSCPI structs[]); //-V2504
 
-                                                                            // Рекурсивная функция тестирования
-static bool ProcessTest(const StructSCPI strct[]); //-V2504
+    // Рекурсивная функция тестирования
+    static bool ProcessTest(const StructSCPI strct[]); //-V2504
 
-                                                   // Обработка узла дерева node
-static const char *ProcessNode(const char *begin, const StructSCPI *node);
+    // Обработка узла дерева node
+    static const char *ProcessNode(const char *begin, const StructSCPI *node);
 
-// Обработка листа node
-static const char *ProcessLeaf(const char *begin, const StructSCPI *node);
+    // Обработка листа node
+    static const char *ProcessLeaf(const char *begin, const StructSCPI *node);
 
-// Возвращает true, если символ является началом комнады - разделителем или '*'
-static bool IsBeginCommand(const char &symbol);
+    // Возвращает true, если символ является началом комнады - разделителем или '*'
+    static bool IsBeginCommand(const char &symbol);
 
-// Удаляет неправильные символы из начала строки
-static void RemoveBadSymbolsFromBegin();
+    // Удаляет неправильные символы из начала строки
+    static void RemoveBadSymbolsFromBegin();
 
-// Удалить последовательность разделителей из начала строки до последнего имеющегося
-static bool RemoveSeparatorsSequenceFromBegin();
+    // Удалить последовательность разделителей из начала строки до последнего имеющегося
+    static bool RemoveSeparatorsSequenceFromBegin();
 
-// Удалить все символы до первого разделителя
-static bool RemoveSymbolsBeforeSeparator();
+    // Удалить все символы до первого разделителя
+    static bool RemoveSymbolsBeforeSeparator();
 
-static String data;
+    static String data;
 
-static String badSymbols;
+    static String badSymbols;
 
-bool SCPI::Sender::osci[Chan::Count] = { false, false };
-bool SCPI::Sender::freqMeter = false;
-bool SCPI::Sender::tester = false;
-bool SCPI::Sender::multimeter = false;
-bool SCPI::Sender::fft = false;
+    bool SCPI::Sender::osci[Chan::Count] = { false, false };
+    bool SCPI::Sender::freqMeter = false;
+    bool SCPI::Sender::tester = false;
+    bool SCPI::Sender::multimeter = false;
+    bool SCPI::Sender::fft = false;
+}
 
 
 void SCPI::AppendNewData(const char *buffer, int size)
@@ -78,7 +81,7 @@ void SCPI::Update() //-V2506
 }
 
 
-static const char *Process(const char *buffer, const StructSCPI strct[]) //-V2504 //-V2506
+const char *SCPI::Process(const char *buffer, const StructSCPI strct[]) //-V2504 //-V2506
 {
     while (!strct->IsEmpty())
     {
@@ -129,13 +132,13 @@ const char *SCPI::BeginWith(const char *buffer, const char *word) //-V2506
 }
 
 
-static const char *ProcessNode(const char *begin, const StructSCPI *node)
+const char *SCPI::ProcessNode(const char *begin, const StructSCPI *node)
 {
     return Process(begin, node->strct);
 }
 
 
-static const char *ProcessLeaf(const char *begin, const StructSCPI *node) //-V2506
+const char *SCPI::ProcessLeaf(const char *begin, const StructSCPI *node) //-V2506
 {
     if (*begin == '\0')                     // Подстраховка от того, что символ окончания команды не принят
     {
@@ -179,13 +182,13 @@ void SCPI::SendBadSymbols()
 }
 
 
-static void RemoveBadSymbolsFromBegin()
+void SCPI::RemoveBadSymbolsFromBegin()
 {
     while (RemoveSymbolsBeforeSeparator() || RemoveSeparatorsSequenceFromBegin())  { }
 }
 
 
-static bool RemoveSymbolsBeforeSeparator()
+bool SCPI::RemoveSymbolsBeforeSeparator()
 {
     bool result = false;
 
@@ -200,7 +203,7 @@ static bool RemoveSymbolsBeforeSeparator()
 }
 
 
-static bool RemoveSeparatorsSequenceFromBegin()
+bool SCPI::RemoveSeparatorsSequenceFromBegin()
 {
     bool result = false;
 
@@ -248,7 +251,7 @@ void SCPI::SendData(const String &message)
 }
 
 
-static bool IsBeginCommand(const char &symbol)
+bool SCPI::IsBeginCommand(const char &symbol)
 {
     return (symbol == SCPI::SEPARATOR) || (symbol == '*');
 }
@@ -260,7 +263,7 @@ bool SCPI::Test()
 }
 
 
-static bool ProcessTest(const StructSCPI strct[]) //-V2504 //-V2506
+bool SCPI::ProcessTest(const StructSCPI strct[]) //-V2504 //-V2506
 {
     while(!strct->IsEmpty())
     {

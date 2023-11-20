@@ -7,26 +7,28 @@
 #include "Osci/Osci.h"
 
 
-
-static ADC_HandleTypeDef handle;
-
-static ADC_ChannelConfTypeDef config =
+namespace HAL_ADC3
 {
-    ADC_CHANNEL_8,
-    1,
-    ADC_SAMPLETIME_28CYCLES,
-    0
-};
+    static ADC_HandleTypeDef handle;
+
+    static ADC_ChannelConfTypeDef config =
+    {
+        ADC_CHANNEL_8,
+        1,
+        ADC_SAMPLETIME_28CYCLES,
+        0
+    };
 
 
-// Сконфигурировать на чтение по прерыванию
-static void ConfigToIT();
+    // Сконфигурировать на чтение по прерыванию
+    static void ConfigToIT();
 
-// Сконфигурировать на чтение в ручном режиме
-static void ConfigToHand();
+    // Сконфигурировать на чтение в ручном режиме
+    static void ConfigToHand();
 
+    static uint16 value = 0;
+}
 
-static uint16 value = 0;
 
 void HAL_ADC3::Init()
 {
@@ -67,7 +69,7 @@ uint16 HAL_ADC3::ValueRandomizer()
 }
 
 
-static void ConfigToIT()
+void HAL_ADC3::ConfigToIT()
 {
     handle.Init.EOCSelection = ENABLE;
     handle.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_RISING;
@@ -81,7 +83,7 @@ static void ConfigToIT()
 }
 
 
-static void ConfigToHand()
+void HAL_ADC3::ConfigToHand()
 {
     handle.Init.EOCSelection = DISABLE;
     handle.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
@@ -100,7 +102,7 @@ INTERRUPT_BEGIN
 
 void ADC_IRQHandler(void)
 {
-    HAL_ADC_IRQHandler(&handle);
+    HAL_ADC_IRQHandler(&HAL_ADC3::handle);
 }
 
 
@@ -112,17 +114,17 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 
     if (OSCI_IN_MODE_RANDOMIZER)
     {
-        ConfigToHand();
+        HAL_ADC3::ConfigToHand();
 
         while(TIME_US - start < 5)
         {
         }
 
-        HAL_ADC_PollForConversion(&handle, 10);
+        HAL_ADC_PollForConversion(&HAL_ADC3::handle, 10);
 
-        value = static_cast<uint16>(HAL_ADC_GetValue(hadc));
+        HAL_ADC3::value = static_cast<uint16>(HAL_ADC_GetValue(hadc));
 
-        ConfigToIT();
+        HAL_ADC3::ConfigToIT();
     }
 }
 

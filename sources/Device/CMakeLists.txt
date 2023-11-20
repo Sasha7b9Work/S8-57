@@ -1,7 +1,7 @@
 # 2023/11/20 16:31:28 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 project (Device)
 
-set(CMAKE_UNITY_BUILD ON)
+#set(CMAKE_UNITY_BUILD ON)
 
 include_directories(..
                     ../common/_VS
@@ -139,6 +139,7 @@ set_source_files_properties(src/Menu/Pages/PageFunction/PageTester.cpp
                             src/Hardware/USBD/usbd_core.cpp
                             src/Menu/Pages/PageMemory/PageMemory_ROM.cpp
                             src/SCPI/FreqMeterSCPI.cpp
+                            src/Hardware/Memory/ROM_NRST.cpp
                             PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
 
 source_group(common                              FILES ${COMMON})
