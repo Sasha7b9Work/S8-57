@@ -5,29 +5,27 @@
 struct Record;
 
 
-class DisplayRecorder
+namespace DisplayRecorder
 {
-public:
-
-    static void Update();
+    void Update();
 
     // Сместить окно просмотра влево
-    static void MoveWindowLeft();
+    void MoveWindowLeft();
 
     // Сместить окно просмотра вправо
-    static void MoveWindowRight();
+    void MoveWindowRight();
 
     // Переместить текущий курсор влево
-    static void MoveCursorLeft();
+    void MoveCursorLeft();
 
     // Переместить текущий курсор вправо
-    static void MoveCursorRight();
+    void MoveCursorRight();
 
     // Возвращает true, если как раз происходит отображение данных
-    static bool InProcessUpdate();
+    bool InProcessUpdate();
 
     // Установить отображаемую запись
-    static void SetDisplayedRecord(Record *record, bool forListening);
+    void SetDisplayedRecord(Record *record, bool forListening);
 
     struct Cursor
     {
@@ -54,5 +52,5 @@ public:
         int NumPoints() const;      // Возвращает число точек, на которое нужно сдвинуть экран
     };
 
-    static SpeedWindow speed;
+    extern SpeedWindow speed;
 };

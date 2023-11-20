@@ -17,63 +17,50 @@
 #include <cstring>
 
 
-
-static Record *displayed = nullptr;             // Текущая отображаемая запись
-static int startPoint = -1;                     // С этой точки начинается вывод
-static int posCursor[2] = { 100, 220 };
-static bool inProcessUpdate = false;            // true, если в данный момент происходит отрисовка
-
-
-DisplayRecorder::SpeedWindow DisplayRecorder::speed = DisplayRecorder::SpeedWindow::_1Window;
-
-
-// Изобразить установленные настройки
-static void DrawSettings(int x, int y);
-
-// Отобразить данные
-static void DrawData();
-
-// Нарисовать данные канала, начиная с точки start
-static void DrawChannel(Chan::E ch);
-
-// Нарисовать данные датчика
-static void DrawSensor();
-
-static void DrawMemoryWindow();
-
-// Возвращает значение Y экрана для value точки
-static int Y(int value);
-
-
-static void DrawCursors();
-
-
-static void DrawParametersCursors();
-
-
-static char *TimeCursor(int numCur, char buffer[30]);
-
-
-static char *VoltageCursor(Chan::E, int, char[30]);
-
-// Дописывает в buffer символьное представление value
-static void VoltagePoint(Chan::E ch, uint8 value, char buffer[30]);
-
-
-static char *VoltageSensor(int numCur, char[30]);
-
-
-static char *DeltaTime(char buffer[30]);
-
-// Возвращает указатель на переменную с позицией текущего курсора (0, если курсор для перемещения не выбран)
-static int *CurrentPosCursor();
-
-
-// Значок, который показывает, в каком состоянии сейчас находится регистратор
-struct RecordIcon
+namespace DisplayRecorder
 {
-    static void Upate(int x, int y);
-};
+    static Record *displayed = nullptr;             // Текущая отображаемая запись
+    static int startPoint = -1;                     // С этой точки начинается вывод
+    static int posCursor[2] = { 100, 220 };
+    static bool inProcessUpdate = false;            // true, если в данный момент происходит отрисовка
+
+
+    DisplayRecorder::SpeedWindow DisplayRecorder::speed = DisplayRecorder::SpeedWindow::_1Window;
+
+
+    // Изобразить установленные настройки
+    static void DrawSettings(int x, int y);
+
+    // Отобразить данные
+    static void DrawData();
+
+    // Нарисовать данные канала, начиная с точки start
+    static void DrawChannel(Chan::E ch);
+
+    static void DrawMemoryWindow();
+
+    static void DrawCursors();
+
+    static void DrawParametersCursors();
+
+    static char *TimeCursor(int numCur, char buffer[30]);
+
+    static char *VoltageCursor(Chan::E, int, char[30]);
+
+    // Дописывает в buffer символьное представление value
+    static void VoltagePoint(Chan::E ch, uint8 value, char buffer[30]);
+
+    static char *DeltaTime(char buffer[30]);
+
+    // Возвращает указатель на переменную с позицией текущего курсора (0, если курсор для перемещения не выбран)
+    static int *CurrentPosCursor();
+
+    // Значок, который показывает, в каком состоянии сейчас находится регистратор
+    struct RecordIcon
+    {
+        static void Upate(int x, int y);
+    };
+}
 
 
 void DisplayRecorder::Update()
@@ -106,7 +93,7 @@ void DisplayRecorder::Update()
 }
 
 
-static void DrawSettings(int x, int y)
+void DisplayRecorder::DrawSettings(int x, int y)
 {
     if (Menu::OpenedItem() == PageRecorder::self)
     {
@@ -142,7 +129,7 @@ static int Y(int value)
 }
 
 
-static char *DeltaTime(char buffer[30])
+char *DisplayRecorder::DeltaTime(char buffer[30])
 {
     float delta = std::fabsf(static_cast<float>(posCursor[0] - posCursor[1])) * Recorder::ScaleX::TimeForPointMS() / 1000.0F; //-V2564
 
@@ -152,7 +139,7 @@ static char *DeltaTime(char buffer[30])
 }
 
 
-static char *TimeCursor(int numCur, char buffer[30])
+char *DisplayRecorder::TimeCursor(int numCur, char buffer[30])
 {
     HAL_BUS_CONFIGURE_TO_FSMC();
 
@@ -175,7 +162,7 @@ static char *TimeCursor(int numCur, char buffer[30])
 }
 
 
-static void VoltagePoint(Chan::E ch, uint8 value, char buffer[30])
+void DisplayRecorder::VoltagePoint(Chan::E ch, uint8 value, char buffer[30])
 {
     if (value > VALUE::MAX)
     {
@@ -194,7 +181,7 @@ static void VoltagePoint(Chan::E ch, uint8 value, char buffer[30])
 }
 
 
-static char *VoltageCursor(Chan::E ch, int numCur, char buffer[30])
+char *DisplayRecorder::VoltageCursor(Chan::E ch, int numCur, char buffer[30])
 {
     HAL_BUS_CONFIGURE_TO_FSMC();
 
@@ -224,7 +211,7 @@ static char *VoltageSensor(int, char[30])
 }
 
 
-static void DrawParametersCursors() //-V2506
+void DisplayRecorder::DrawParametersCursors() //-V2506
 {
     if (!S_REC_INFO_IS_SHOWN)
     {
@@ -279,7 +266,8 @@ static void DrawParametersCursors() //-V2506
     Text(String("dT %s", DeltaTime(buffer))).Draw(x, y, Color::FILL);
 }
 
-static void DrawCursors()
+
+void DisplayRecorder::DrawCursors()
 {
     if (Menu::OpenedItem() == PageRecorder::Show::self || Menu::OpenedItem()->Keeper() == PageRecorder::Show::self)
     {
@@ -296,7 +284,7 @@ static void DrawCursors()
 }
 
 
-static void DrawData()
+void DisplayRecorder::DrawData()
 {
     HAL_BUS_CONFIGURE_TO_FSMC();
 
@@ -309,15 +297,10 @@ static void DrawData()
     {
         DrawChannel(ChanB);
     }
-
-    if(displayed->ContainsSensor())
-    {
-        DrawSensor();
-    }
 }
 
 
-static void DrawChannel(Chan::E ch)
+void DisplayRecorder::DrawChannel(Chan::E ch)
 {
     int numPoints = displayed->NumPoints();
 
@@ -358,13 +341,7 @@ static void DrawChannel(Chan::E ch)
 }
 
 
-static void DrawSensor()
-{
-
-}
-
-
-static void DrawMemoryWindow() //-V2506
+void DisplayRecorder::DrawMemoryWindow() //-V2506
 {
     static int prevNumPoints = 0;
 
@@ -450,7 +427,7 @@ void DisplayRecorder::MoveCursorRight()
 }
 
 
-static int *CurrentPosCursor()
+int *DisplayRecorder::CurrentPosCursor()
 {
     static int nullPos;
     int *result = &nullPos;
@@ -468,7 +445,7 @@ bool DisplayRecorder::InProcessUpdate()
 }
 
 
-void RecordIcon::Upate(int x, int y) //-V2506
+void DisplayRecorder::RecordIcon::Upate(int x, int y) //-V2506
 {
     if (Menu::OpenedItem() != PageRecorder::self)
     {
