@@ -3,9 +3,7 @@
 #include "common/Command.h"
 
 
-
-class PDecoder
+namespace PDecoder
 {
-public:
-    static void AddData(uint8 data);
+    void AddData(uint8 data);
 };

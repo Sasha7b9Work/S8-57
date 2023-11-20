@@ -37,7 +37,7 @@ struct HeaderFont
 PTypeFont::E PAdvancedFont::currentType = PTypeFont::None;
 
 
-static const unsigned char * font = nullptr;
+static const unsigned char * a_font = nullptr;
 
 
 PAdvancedFont::PAdvancedFont(PTypeFont::E t)
@@ -46,15 +46,15 @@ PAdvancedFont::PAdvancedFont(PTypeFont::E t)
     
     if(currentType == PTypeFont::_GOST28)
     {
-        font = fontGOST28;
+        a_font = fontGOST28;
     }
     else if(currentType == PTypeFont::_GOST72bold)
     {
-        font = fontGOST72bold;
+        a_font = fontGOST72bold;
     }
     else
     {
-        font = nullptr;
+        a_font = nullptr;
     }
 }
 
@@ -169,7 +169,7 @@ NativeSymbol *HeaderFont::GetSymbol(uint8 num) //-V2506
 
 HeaderFont *HeaderFont::Sefl()
 {
-    return reinterpret_cast<HeaderFont *>(const_cast<uint8 *>(font)); //-V2567
+    return reinterpret_cast<HeaderFont *>(const_cast<uint8 *>(a_font)); //-V2567
 }
 
 
