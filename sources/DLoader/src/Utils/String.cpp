@@ -47,15 +47,15 @@ String::String(const char *format, ...) : buffer(nullptr) //-V2506
         return;
     }
 
-    static const int SIZE = 500;
-    char buf[SIZE + 1];
+    static const int SIZE_BUF = 500;
+    char buf[SIZE_BUF + 1];
 
     std::va_list args;
     va_start(args, format); //-V2528 //-V2567
     int numSymbols = std::vsprintf(buf, format, args);
     va_end(args);
 
-    if (numSymbols < 0 || numSymbols > SIZE)
+    if (numSymbols < 0 || numSymbols > SIZE_BUF)
     {
         std::strcpy(buffer, "Буфер слишком мал"); //-V2513
     }
@@ -76,15 +76,15 @@ void String::Set(TypeConversionString::E /*conv*/, const char *format, ...)
 
     if(format)
     {
-        static const int SIZE = 100;
-        char buf[SIZE + 1];
+        static const int SIZE_BUF = 100;
+        char buf[SIZE_BUF + 1];
 
         std::va_list args;
         va_start(args, format); //-V2528 //-V2567
         int numSymbols = std::vsprintf(buf, format, args);
         va_end(args);
 
-        if(numSymbols < 0 || numSymbols > SIZE)
+        if(numSymbols < 0 || numSymbols > SIZE_BUF)
         {
             std::strcpy(buffer, "Буфер слишком мал"); //-V2513
         }

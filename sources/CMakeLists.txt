@@ -19,6 +19,8 @@ project (S8-57)
 
 set (TARGET_NAME S8-57)
 
+#set(CMAKE_UNITY_BUILD ON)
+
 add_subdirectory(Device)
 add_subdirectory(DLoader)
 add_subdirectory(Panel)

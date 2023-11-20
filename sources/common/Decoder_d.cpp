@@ -9,22 +9,25 @@
 #include <cstdlib>
 
 
-static int pointer = 0;
-static pFuncBU8 curFunc = nullptr;  // Выполняемая функция
-static int step = 0;                // Текущий байт выполняемой функции
-static const int SIZE_BUFFER = 1024;
-static uint8 buffer[SIZE_BUFFER];
+namespace DDecoder
+{
+    static int pointer = 0;
+    static pFuncBU8 curFunc = nullptr;  // Выполняемая функция
+    static int step = 0;                // Текущий байт выполняемой функции
+    static const int SIZE_BUFFER = 1024;
+    static uint8 buffer[SIZE_BUFFER];
 
 
-static void RunStep(uint8 data);
+    static void RunStep(uint8 data);
 
-// Эту функцию надо вызывать после выполнения последнего шага
-static void FinishCommand();
+    // Эту функцию надо вызывать после выполнения последнего шага
+    static void FinishCommand();
 
-// Добавляет текстовую строку в консоль
-static bool AddToConsole(uint8);
+    // Добавляет текстовую строку в консоль
+    static bool AddToConsole(uint8);
 
-static bool ButtonPress(uint8);
+    static bool ButtonPress(uint8);
+}
 
 
 void DDecoder::AddData(uint8 data)
@@ -59,7 +62,7 @@ static bool E(uint8)
 }
 
 
-static void RunStep(uint8 data) //-V2506
+void DDecoder::RunStep(uint8 data) //-V2506
 {
     static const struct StructFunc
     {
@@ -123,7 +126,7 @@ static void RunStep(uint8 data) //-V2506
 }
 
 
-static bool ButtonPress(uint8 data) //-V2506
+bool DDecoder::ButtonPress(uint8 data) //-V2506
 {
     static Key::E button;
     if (step == 0)
@@ -144,7 +147,7 @@ static bool ButtonPress(uint8 data) //-V2506
 }
 
 
-static bool AddToConsole(uint8 data) //-V2506
+bool DDecoder::AddToConsole(uint8 data) //-V2506
 {
     static char *text = nullptr;        // Здесь будет храниться принятая строка
 
@@ -176,7 +179,7 @@ static bool AddToConsole(uint8 data) //-V2506
 }
 
 
-static void FinishCommand()
+void DDecoder::FinishCommand()
 {
     step = 0;
     curFunc = 0;
