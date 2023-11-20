@@ -2090,11 +2090,6 @@
           <GroupName>Osci/Math</GroupName>
           <Files>
             <File>
-              <FileName>Averager.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Osci\Math\Averager.cpp</FilePath>
-            </File>
-            <File>
               <FileName>InterpolatorLinear.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Osci\Math\InterpolatorLinear.cpp</FilePath>
@@ -2108,6 +2103,11 @@
               <FileName>OsciMath.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Osci\Math\OsciMath.h</FilePath>
+            </File>
+            <File>
+              <FileName>MAverager.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Osci\Math\MAverager.cpp</FilePath>
             </File>
           </Files>
         </Group>

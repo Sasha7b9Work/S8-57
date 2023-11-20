@@ -1,3 +1,4 @@
+# 2023/11/20 16:31:28 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 project (Panel)
 
 set(CMAKE_UNITY_BUILD ON)
@@ -10,7 +11,7 @@ include_directories(../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc
                     ../common/Display/Font
                     src
                     src/Hardware/HAL)
-                    
+
 add_definitions(-DSTM32F429xx -DPANEL)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")

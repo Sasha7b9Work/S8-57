@@ -4,7 +4,7 @@
 #include "Settings/Settings.h"
 #include <cstring>
 #include <cmath>
-#include <stdlib.h>
+#include <cstdlib>
 #include <cstdio>
 #include <limits>
 
@@ -438,7 +438,7 @@ static char *FloatToString(float value, bool alwaysSign, int numDigits, char buf
     float absValue = std::fabsf(value);
     std::sprintf(pBuffer, static_cast<char *>(format), static_cast<double>(absValue));
     
-    float val = static_cast<float>(atof(pBuffer)); //-V2508
+    float val = static_cast<float>(std::atof(pBuffer)); //-V2508
     
     if (Math::DigitsInIntPart(val) != numDigitsInInt)
     {
@@ -452,7 +452,7 @@ static char *FloatToString(float value, bool alwaysSign, int numDigits, char buf
     }
     
     bool signExist = alwaysSign || value < 0; //-V2564
-    while (std::strlen(bufferOut) < static_cast<size_t>(numDigits + (signExist ? 2 : 1))) //-V2513
+    while (std::strlen(bufferOut) < static_cast<uint>(numDigits + (signExist ? 2 : 1))) //-V2513
     {
         std::strcat(bufferOut, "0"); //-V2513
     }
