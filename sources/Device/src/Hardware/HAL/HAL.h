@@ -71,19 +71,19 @@ struct HAL_CRC32
 };
 
 
-struct HAL_DAC1
+namespace HAL_DAC1
 {
-    static void Init();
-    static void StartDMA(void *points, uint numPoints);
-    static void StopDMA();
-    static void ConfigTIM7(uint16 prescaler, uint16 period);
+    void Init();
+    void StartDMA(void *points, uint numPoints);
+    void StopDMA();
+    void ConfigTIM7(uint16 prescaler, uint16 period);
 };
 
 
-struct HAL_DAC2
+namespace HAL_DAC2
 {
-    static void Init();
-    static void SetValue(uint value);
+    void Init();
+    void SetValue(uint value);
 };
 
 

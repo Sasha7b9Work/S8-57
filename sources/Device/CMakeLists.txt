@@ -1,7 +1,7 @@
 # 2023/11/20 16:31:28 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 project (Device)
 
-#set(CMAKE_UNITY_BUILD ON)
+set(CMAKE_UNITY_BUILD ON)
 
 include_directories(..
                     ../common/_VS
@@ -90,7 +90,7 @@ file(GLOB SRC                              src/*.h src/*.cpp)
 file(GLOB DISPLAY                          src/Display/*.h src/Display/*.cpp)
 file(GLOB DISPLAY_FONT                     ../common/Display/Font/*)
 file(GLOB FLASHDRIVE                       src/FlashDrive/*)
-file(GLOB _FPGA                            src/FPGA/*)
+file(GLOB FPGA                             src/FPGA/*)
 file(GLOB FREQMETER                        src/FreqMeter/*)
 file(GLOB KEYBOARD                         src/Keyboard/*)
 file(GLOB MENU                             src/Menu/*.h src/Menu/*.cpp)
@@ -106,12 +106,12 @@ file(GLOB MENU_PAGES_PAGESERVICE           src/Menu/Pages/PageService/*.h src/Me
 file(GLOB MENU_PAGES_PAGESERVICE_PAGEDEBUG src/Menu/Pages/PageService/PageDebug/*)
 file(GLOB MENU_PAGES_PAGETRIG              src/Menu/Pages/PageTrig/*)
 file(GLOB MULTIMETER                       src/Multimeter/*)
-file(GLOB _OSCI                            src/Osci/*.h src/Osci/*.cpp)
+file(GLOB OSCI                             src/Osci/*.h src/Osci/*.cpp)
 file(GLOB OSCI_DISPLAY                     src/Osci/Display/*)
 file(GLOB OSCI_MATH                        src/Osci/Math/*)
 file(GLOB OSCI_MEASUREMENTS                src/Osci/Measurements/*)
 file(GLOB RECORDER                         src/Recorder/*)
-file(GLOB _SCPI                            src/SCPI/*)
+file(GLOB SCPI                             src/SCPI/*)
 file(GLOB SETTINGS                         src/Settings/*)
 file(GLOB TEST                             src/Test/*)
 file(GLOB TESTER                           src/Tester/*)
@@ -130,6 +130,10 @@ set_source_files_properties(src/Menu/Pages/PageFunction/PageTester.cpp
                             src/SCPI/FftSCPI.cpp
                             src/Menu/Pages/PageRecorder/PageRecorder_Show_Cursors.cpp
                             src/Menu/Pages/PageHelp/PageHelp.cpp
+                            src/Menu/Pages/PageRecorder/PageRecorder.cpp
+                            src/SCPI/MeasuresSCPI.cpp
+                            ../common/Display/Font/Font_d.cpp
+                            src/SCPI/TriggerSCPI.cpp
                             PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
 
 source_group(common                              FILES ${COMMON})
@@ -140,7 +144,7 @@ source_group(src                                 FILES ${SRC})
 source_group(Display                             FILES ${DISPLAY})
 source_group(Display\\Font                       FILES ${DISPLAY_FONT})
 source_group(FDrive                              FILES ${FLASHDRIVE})
-source_group(FPGA                                FILES ${_FPGA})
+source_group(FPGA                                FILES ${FPGA})
 source_group(FreqMeter                           FILES ${FREQMETER})
 source_group(Hardware                            FILES ${HARDWARE})
 source_group(Hardware\\CMSIS                     FILES ${HARDWARE_CMSIS})
@@ -166,23 +170,23 @@ source_group(Menu\\Pages\\PageService            FILES ${MENU_PAGES_PAGESERVICE}
 source_group(Menu\\Pages\\PageService\\PageDebug FILES ${MENU_PAGES_PAGESERVICE_PAGEDEBUG})
 source_group(Menu\\Pages\\PageTrig               FILES ${MENU_PAGES_PAGETRIG})
 source_group(Multimeter                          FILES ${MULTIMETER})
-source_group(Osci                                FILES ${_OSCI})
+source_group(Osci                                FILES ${OSCI})
 source_group(Osci\\Display                       FILES ${OSCI_DISPLAY})
 source_group(Osci\\Math                          FILES ${OSCI_MATH})
 source_group(Osci\\Measurements                  FILES ${OSCI_MEASUREMENTS})
 source_group(Recorder                            FILES ${RECORDER})
-source_group(SCPI                                FILES ${_SCPI})
+source_group(SCPI                                FILES ${SCPI})
 source_group(Settings                            FILES ${SETTINGS})
 source_group(Test                                FILES ${TEST})
 source_group(Tester                              FILES ${TESTER})
 source_group(Utils                               FILES ${UTILS})
 
-add_library(Device ${COMMON} ${DOC} ${VS} ${VS_STD_INCLUDES} ${SRC} ${DISPLAY} ${DISPLAY_FONT} ${FLASHDRIVE} ${_FPGA}
+add_library(Device ${COMMON} ${DOC} ${VS} ${VS_STD_INCLUDES} ${SRC} ${DISPLAY} ${DISPLAY_FONT} ${FLASHDRIVE} ${FPGA}
                    ${FREQMETER} ${HARDWARE} ${HARDWARE_CMSIS} ${HARDWARE_HAL}
                    ${HARDWARE_MEMORY} ${HARDWARE_USBD} ${HARDWARE_USBH} ${LIBS_FATFS} ${LIBS_HAL} ${LIBS_USBD}
                    ${LIBS_USBH} ${KEYBOARD} ${MENU} ${MENU_PAGES} ${MENU_PAGES_INCLUDE} ${MENU_PAGES_PAGEDISPLAY}
                    ${MENU_PAGES_PAGEFUNCTION} ${MENU_PAGES_PAGERECORDER} ${MENU_PAGES_PAGEHELP}
                    ${MENU_PAGES_PAGEMEASURES} ${MENU_PAGES_PAGEMEMORY}
                    ${MENU_PAGES_PAGESERVICE} ${MENU_PAGES_PAGESERVICE_PAGEDEBUG} ${MENU_PAGES_PAGETRIG} ${MULTIMETER}
-                   ${_OSCI} ${OSCI_DISPLAY} ${OSCI_MATH}
-                   ${OSCI_MEASUREMENTS} ${RECORDER} ${_SCPI} ${SETTINGS} ${TEST} ${TESTER} ${UTILS})
+                   ${OSCI} ${OSCI_DISPLAY} ${OSCI_MATH}
+                   ${OSCI_MEASUREMENTS} ${RECORDER} ${SCPI} ${SETTINGS} ${TEST} ${TESTER} ${UTILS})

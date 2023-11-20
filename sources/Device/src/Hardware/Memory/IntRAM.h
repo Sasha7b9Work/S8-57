@@ -2,15 +2,14 @@
 #include "Osci/ParametersOsci.h"
 
 
-class IntRAM
+namespace IntRAM
 {
-public:
     // Указатель на 16k байт памяти, предназначенной для работы усреднителя
-    static uint16 *Averager32k(Chan::E ch);
+    uint16 *Averager32k(Chan::E ch);
 
     // Память для чтения канала в режиме рандомизатора
-    static uint8 *DataRand(Chan::E ch);
+    uint8 *DataRand(Chan::E ch);
 
     // Указатель на данные поточечного фрейма
-    static DataSettings *PrepareForP2P();
+    DataSettings *PrepareForP2P();
 };

@@ -148,7 +148,7 @@ float ExtRAM::TestTime(int sizekB) //-V2506
 
 float ExtRAM::TestTime1kB(uint8 *address) //-V2506
 {
-#define SIZE_BUFFER 1024
+    static const int SIZE_BUFFER = 1024;
 
     uint8 data[SIZE_BUFFER];
     uint8 out[SIZE_BUFFER];

@@ -183,7 +183,7 @@ USBD_StatusTypeDef USBD_LL_DataInStage(USBD_HandleTypeDef *pdev ,uint8_t epnum, 
 
                 USBD_CtlContinueSendData(pdev, pdata, static_cast<uint16>(pep->rem_length));
 
-                USBD_LL_PrepareReceive(pdev, 0, NULL, 0);
+                USBD_LL_PrepareReceive(pdev, 0, nullptr, 0);
             }
             else
             {

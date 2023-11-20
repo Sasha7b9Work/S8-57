@@ -4,7 +4,10 @@
 #include <stm32f4xx_hal.h>
 
 
-static DAC_HandleTypeDef handle = { DAC }; //-V2571
+namespace HAL_DAC1
+{
+    static DAC_HandleTypeDef handle = { DAC }; //-V2571
+}
 
 
 void HAL_DAC1::Init()
@@ -100,7 +103,7 @@ INTERRUPT_BEGIN
 
 void DMA1_Stream5_IRQHandler()
 {
-    HAL_DMA_IRQHandler(handle.DMA_Handle1);
+    HAL_DMA_IRQHandler(HAL_DAC1::handle.DMA_Handle1);
 }
 
 INTERRUPT_END
