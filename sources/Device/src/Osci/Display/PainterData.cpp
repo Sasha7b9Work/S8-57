@@ -134,7 +134,8 @@ void DisplayOsci::PainterData::DrawSpectrum(const uint8 *dataIn, int numPoints, 
     }
 
 #undef SIZE_BUFFER
-#define SIZE_BUFFER (1024 * 4)
+
+    static const int SIZE_BUFFER = (1024 * 4);
 
     if (numPoints > SIZE_BUFFER)
     {

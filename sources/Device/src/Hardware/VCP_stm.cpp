@@ -43,7 +43,7 @@ static bool PrevSendingComplete()
 
 void VCP::SendDataAsynch(const uint8 *buffer, int size)
 {
-#define SIZE_BUFFER 64
+    static const int  SIZE_BUFFER = 64;
     static uint8 trBuf[SIZE_BUFFER];
 
     size = Math::Min(size, SIZE_BUFFER);

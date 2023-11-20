@@ -4,7 +4,7 @@
 #include "Utils/String.h"
 
 
-#define SIZE_BUFFER 100
+static const int SIZE_BUFFER = 100;
 
 
 void Log::Message(const char *message)
