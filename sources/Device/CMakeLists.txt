@@ -124,7 +124,7 @@ set_source_files_properties(${LIBS_FATFS} ${LIBS_HAL} ${LIBS_USBD} ${LIBS_USBH} 
 set_source_files_properties(
                             ../common/Display/Font/Font_d.cpp
                             src/Hardware/USBD/usbd_core.cpp
-                            src/Hardware/Memory/ROM_NRST.cpp
+#                            src/Hardware/Memory/ROM_NRST.cpp
                             PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
 
 source_group(common                              FILES ${COMMON})
