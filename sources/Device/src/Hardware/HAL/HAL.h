@@ -43,15 +43,15 @@ struct HAL_RTC
 
 
 // Используется для работы с питанием
-struct HAL_ADC1
+namespace HAL_ADC1
 {
-    static void Init();
+    void Init();
 
     // Читает АЦП батареи
-    static uint ValueBattery();
+    uint ValueBattery();
 
     // Читает АЦП зарядного устройства
-    static uint ValueCharger();
+    uint ValueCharger();
 };
 
 

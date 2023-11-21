@@ -1,24 +1,27 @@
+// 2023/11/21 09:58:29 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/HAL/HAL_PIO.h"
 #include <stm32f4xx_hal.h>
 
 
-// Для датчика напряжения аккумулятора
-static ADC_HandleTypeDef handle;
-// Для конфигурации
-static ADC_ChannelConfTypeDef config =
+namespace HAL_ADC1
 {
-    ADC_CHANNEL_2,
-    1,
-    ADC_SAMPLETIME_3CYCLES,
-    0
-};
+    // Для датчика напряжения аккумулятора
+    static ADC_HandleTypeDef handle;
+    // Для конфигурации
+    static ADC_ChannelConfTypeDef config =
+    {
+        ADC_CHANNEL_2,
+        1,
+        ADC_SAMPLETIME_3CYCLES,
+        0
+    };
 
-
-static void SetActiveChannel2();
-static void SetActiveChannel9();
-static uint ReadValue();
+    static void SetActiveChannel2();
+    static void SetActiveChannel9();
+    static uint ReadValue();
+}
 
 
 void HAL_ADC1::Init()
@@ -69,7 +72,7 @@ uint HAL_ADC1::ValueCharger()
 }
 
 
-static uint ReadValue()
+uint HAL_ADC1::ReadValue()
 {
     HAL_ADC_Start(&handle);
 
@@ -81,7 +84,7 @@ static uint ReadValue()
 }
 
 
-static void SetActiveChannel2()
+void HAL_ADC1::SetActiveChannel2()
 {
     config.Channel = ADC_CHANNEL_2;
 
@@ -89,7 +92,7 @@ static void SetActiveChannel2()
 }
 
 
-static void SetActiveChannel9()
+void HAL_ADC1::SetActiveChannel9()
 {
     config.Channel = ADC_CHANNEL_9;
 
