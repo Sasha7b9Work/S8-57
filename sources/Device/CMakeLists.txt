@@ -123,11 +123,9 @@ set_source_files_properties(${LIBS_FATFS} ${LIBS_HAL} ${LIBS_USBD} ${LIBS_USBH} 
 
 set_source_files_properties(
                             src/Osci/Measurements/AutoMeasurements.cpp
-                            src/Menu/Pages/PageFunction/PageMultimeter.cpp
                             src/Utils/CommonFunctions.cpp
                             src/SCPI/MultimeterSCPI.cpp
                             src/SCPI/FftSCPI.cpp
-                            src/Menu/Pages/PageRecorder/PageRecorder_Show_Cursors.cpp
                             src/Menu/Pages/PageHelp/PageHelp.cpp
                             src/Menu/Pages/PageRecorder/PageRecorder.cpp
                             src/SCPI/MeasuresSCPI.cpp

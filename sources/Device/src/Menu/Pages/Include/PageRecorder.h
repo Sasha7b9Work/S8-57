@@ -26,27 +26,27 @@ struct SettingsRecorder
 };
 
 
-struct PageRecorder
+namespace PageRecorder
 {
-    static const Page *const self;
+    extern const Page *const self;
 
-    struct Source
+    namespace Source
     {
-        static const Page *const self;
+        extern const Page *const self;
     };
 
-    struct Show
+    namespace Show
     {
-        static const Page *const self;
+        extern const Page *const self;
 
-        struct Choice
+        namespace CChoice
         {
-            static const Page *const self;
+            extern const Page *const self;
         };
 
-        struct Cursors
+        namespace Cursors
         {
-            static const Page *const self;
+            extern const Page *const self;
         };
     };
 };

@@ -14,11 +14,11 @@ struct SettingsTester
 
 
 
-struct PageTester
+namespace PageTester
 {
-    static void Init();
+    void Init();
 
-    static void OnChanged_Control(bool = true);
+    void OnChanged_Control(bool = true);
 
-    static const Page *const self;
+    extern const Page *const self;
 };

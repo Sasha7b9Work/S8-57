@@ -22,7 +22,7 @@ static bool IsActive_Previous()
 DEF_GRAPH_BUTTON( bPrevious,                                                                                                          //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Предыдущий ---
     "Предыдущий",
     "Перейти к предыдущей записи",
-    &PageRecorder::Show::Choice::self, IsActive_Previous, OnPress_Previous, Draw_Previous
+    &PageRecorder::Show::CChoice::self, IsActive_Previous, OnPress_Previous, Draw_Previous
 )
 
 
@@ -44,7 +44,7 @@ static bool IsActive_Next()
 DEF_GRAPH_BUTTON( bNext,                                                                                                               //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - Следующий ---
     "Следующий",
     "Перейти к следующей записи",
-    &PageRecorder::Show::Choice::self, IsActive_Next, OnPress_Next, Draw_Next
+    &PageRecorder::Show::CChoice::self, IsActive_Next, OnPress_Next, Draw_Next
 )
 
 
@@ -66,7 +66,7 @@ static bool IsActive_Confirm()
 DEF_GRAPH_BUTTON( bConfirm,                                                                                                  //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ВЫБОР - Подтвердить ---
     "Подтвердить",
     "Выбрать текущий сигнал",
-    &PageRecorder::Show::Choice::self, IsActive_Confirm, OnPress_Confirm, Draw_Confirm
+    &PageRecorder::Show::CChoice::self, IsActive_Confirm, OnPress_Confirm, Draw_Confirm
 )
 
 
@@ -82,7 +82,7 @@ static void Draw_Leave(int x, int y)
 DEF_GRAPH_BUTTON( bLeave,                                                                                                        //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ВЫБОР - Возврат ---
     "Возврат",
     "Возврат на предыдущую страницу меню",
-    &PageRecorder::Show::Choice::self, Button::Active, OnPress_Leave, Draw_Leave
+    &PageRecorder::Show::CChoice::self, Button::Active, OnPress_Leave, Draw_Leave
 )
 
 
@@ -98,7 +98,7 @@ static void Draw_Delete(int x, int y)
 DEF_GRAPH_BUTTON( bDelete,                                                                                                       //--- ФУНКЦИЯ - РЕГИСТРАТОР - ПРОСМОТР - ВЫБОР - Удалить ---
     "Удалить",
     "Удаление текущей записи",
-    &PageRecorder::Show::Choice::self, Button::Active, OnPress_Delete, Draw_Delete
+    &PageRecorder::Show::CChoice::self, Button::Active, OnPress_Delete, Draw_Delete
 )
 
 
@@ -115,4 +115,4 @@ DEF_PAGE_5( pChoice, //-V2567
 )
 
 
-const Page *const PageRecorder::Show::Choice::self = static_cast<const Page *>(&pChoice);
+const Page *const PageRecorder::Show::CChoice::self = static_cast<const Page *>(&pChoice);
