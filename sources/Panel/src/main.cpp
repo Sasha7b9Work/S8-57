@@ -30,13 +30,13 @@ static void UpdateDisplay()
     x += dx;
     y += dy;
 
-    if (x + width > Display::WIDTH)
+    if (x + width == Display::WIDTH)
     {
         x--;
         dx = 0;
         dy = 1;
     }
-    else if (y + width > Display::HEIGHT)
+    else if (y + width == Display::HEIGHT)
     {
         y--;
         dx = -1;
@@ -59,7 +59,7 @@ static void UpdateDisplay()
 
     for (int i = 0; i < Control::Count; i++)
     {
-        if (states[i])
+        if (!states[i])
         {
             Painter::DrawFormatText(20 + (i / 12) * 90, 20 + (i % 12) * 15, "%s",
                 Keyboard::ControlName((Control::E)i));
