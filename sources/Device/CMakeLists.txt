@@ -135,7 +135,6 @@ set_source_files_properties(
                             src/Display/Grid.cpp
                             src/FreqMeter/FreqMeter.cpp
                             src/Hardware/Beeper.cpp
-                            src/Menu/Pages/PageService/PageDebug/PageDebug_Console.cpp
                             PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
 
 source_group(common                              FILES ${COMMON})
