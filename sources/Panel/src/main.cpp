@@ -12,9 +12,23 @@
 
 static void UpdateDisplay()
 {
+    static int x = 0;
+    static int y = 0;
+
+
     Painter::SetColor(Color::WHITE);
 
     Painter::BeginScene();
+
+    Painter::SetColor(Color::BLACK);
+
+    Painter::FillRegion(x++, y++, 100, 100);
+
+    if (x > 220 || y > 140)
+    {
+        x = 0;
+        y = 0;
+    }
 
     Painter::EndScene();
 }
@@ -26,9 +40,19 @@ int main()
     Display::Init();
     Keyboard::Init();
 
+    Painter::SetColorValue(Color::WHITE, 0xFFFFFFFF);
+    Painter::SetColorValue(Color::BLACK, 0x00000000);
+
+    Painter::LoadPalette();
+
+    HAL_DAC2::SetValue(255);
+
     while(1)
     {
-        UpdateDisplay();
+        if (!HAL_BUS::DataIsReceived())
+        {
+            UpdateDisplay();
+        }
 
         static uint prevTime = 0;
 

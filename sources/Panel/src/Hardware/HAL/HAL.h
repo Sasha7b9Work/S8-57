@@ -26,4 +26,6 @@ struct HAL_BUS
     static void SendToDevice(uint8 *data, uint size);
 
     static void Update();
+
+    static bool DataIsReceived();
 };

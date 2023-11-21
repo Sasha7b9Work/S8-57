@@ -87,6 +87,8 @@ static InPin  pinRD(RD); //-V2571
 
 static Queue<uint8> queueData;
 
+static bool data_received = false;
+
 
 struct DataBus
 {
@@ -126,6 +128,12 @@ void HAL_BUS::SendToDevice(uint8 *data, uint size)
 }
 
 
+bool HAL_BUS::DataIsReceived()
+{
+    return data_received;
+}
+
+
 void HAL_BUS::Update()
 {
     //while(pinCS.IsActive())
@@ -134,6 +142,8 @@ void HAL_BUS::Update()
         //if(pinWR.IsActive())                            // Чтение байта из устройства
         if((GPIOD->IDR & GPIO_PIN_5) == 0) //-V2571
         {
+            data_received = true;
+
             //uint8 data = DataBus::Read();
             uint8 data = (uint8)GPIOE->IDR; //-V2571
 
