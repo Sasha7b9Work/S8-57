@@ -1,3 +1,4 @@
+// 2023/11/21 10:00:39 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "common/Display/Font/Font_d.h"
 #include "Display/Grid.h"
@@ -16,28 +17,45 @@
 #include <cstring>
 
 
+ModeRedrawFM::E ModeRedrawFM::modeRedraw = ModeRedrawFM::Full;
+
+
+namespace FileManager
+{
 #define FM_CURSOR_IN_DIRS       (bf.cursorsInDirs)
 
-static struct BitFieldFileManager
-{
-    uint  cursorsInDirs : 1;
-    uint  notUsed       : 31;
-} bf = {1, 0};
+    static struct BitFieldFileManager
+    {
+        uint  cursorsInDirs : 1;
+        uint  notUsed : 31;
+    } bf = { 1, 0 };
 
 
 #define RECS_ON_PAGE    23
 #define WIDTH_COL       135
 
-static char currentDir[255] = "\\";
-static int numFirstDir = 0;         // Номер первого выведенного каталога в левой панели. Всего может быть выведено RECS_ON_PAGE каталогов
-static int numCurDir = 0;           // Номер подсвеченного каталога
-static int numFirstFile = 0;        // Номер первого выведенного файла в правой панели. Всего может быть выведено RECS_ON_PAGE файлов.
-static int numCurFile = 0;          // Номер подсвеченного файла
-static int numDirs = 0;
-static int numFiles = 0;
+    static char currentDir[255] = "\\";
+    static int numFirstDir = 0;         // Номер первого выведенного каталога в левой панели. Всего может быть выведено RECS_ON_PAGE каталогов
+    static int numCurDir = 0;           // Номер подсвеченного каталога
+    static int numFirstFile = 0;        // Номер первого выведенного файла в правой панели. Всего может быть выведено RECS_ON_PAGE файлов.
+    static int numCurFile = 0;          // Номер подсвеченного файла
+    static int numDirs = 0;
+    static int numFiles = 0;
 
+    static void DrawDirs(int x, int y);
 
-ModeRedrawFM::E ModeRedrawFM::modeRedraw = ModeRedrawFM::Full;
+    static void DrawFiles(int x, int y);
+
+    static void DrawNameCurrentDir(int left, int top);
+
+    static void IncCurrentDir();
+
+    static void DecCurrentDir();
+
+    static void IncCurrentFile();
+
+    static void DecCurrentFile();
+}
 
 
 void FileManager::Init()
@@ -69,7 +87,7 @@ static void DrawLongString(int x, int y, const char *string, bool hightlight)
     {
         color.SetAsCurrent();
 
-		Text(string).DrawWithLimitation(x, y, x, y, WIDTH_COL, 10);
+        Text(string).DrawWithLimitation(x, y, x, y, WIDTH_COL, 10);
 
         String("...").Draw(x + WIDTH_COL + 3, y);
     }
@@ -81,11 +99,11 @@ static void DrawHat(int x, int y, const char *string, int num1, int num2)
     Region(WIDTH_COL + 9, RECS_ON_PAGE * 9 + 11).Fill(x - 1, y, Color::BACK);
     String(string, num1, num2).Draw(x + 60, y, Color::FILL);
 
-	HLine(138).Draw(x + 2, y + 10);
+    HLine(138).Draw(x + 2, y + 10);
 }
 
 
-static void DrawDirs(int x, int y)
+void FileManager::DrawDirs(int x, int y)
 {
     FDrive::GetNumDirsAndFiles(currentDir, &numDirs, &numFiles);
     DrawHat(x, y, "Каталог : %d/%d", numCurDir + ((numDirs == 0) ? 0 : 1), numDirs);
@@ -95,17 +113,17 @@ static void DrawDirs(int x, int y)
     if (FDrive::GetNameDir(currentDir, numFirstDir, nameDir, &sfrd))
     {
         int  drawingDirs = 0;
-        DrawLongString(x, y, nameDir, (FM_CURSOR_IN_DIRS != 0) && ( numFirstDir == numCurDir));
+        DrawLongString(x, y, nameDir, (FM_CURSOR_IN_DIRS != 0) && (numFirstDir == numCurDir));
         while (drawingDirs < (RECS_ON_PAGE - 1) && FDrive::GetNextNameDir(nameDir, &sfrd))
         {
             drawingDirs++;
-            DrawLongString(x, y + drawingDirs * 9, nameDir, (FM_CURSOR_IN_DIRS != 0) && ( numFirstDir + drawingDirs == numCurDir));
+            DrawLongString(x, y + drawingDirs * 9, nameDir, (FM_CURSOR_IN_DIRS != 0) && (numFirstDir + drawingDirs == numCurDir));
         }
     }
 }
 
 
-static void DrawFiles(int x, int y)
+void FileManager::DrawFiles(int x, int y)
 {
     DrawHat(x, y, "Файл : %d/%d", numCurFile + ((numFiles == 0) ? 0 : 1), numFiles);
     char nameFile[255];
@@ -124,7 +142,7 @@ static void DrawFiles(int x, int y)
 }
 
 
-static void DrawNameCurrentDir(int left, int top) //-V2506
+void FileManager::DrawNameCurrentDir(int left, int top) //-V2506
 {
     Color::FILL.SetAsCurrent();
     int length = DFont::GetLengthText(currentDir);
@@ -174,7 +192,7 @@ void FileManager::Draw() //-V2506
         DrawNameCurrentDir(left, top + 2);
 
         VLine(223 - top).Draw(left2col, top + 16, Color::FILL);
-		HLine(width).Draw(0, top + 15);
+        HLine(width).Draw(0, top + 15);
     }
 
     if (!ModeRedrawFM::Is(ModeRedrawFM::Files))
@@ -242,7 +260,7 @@ void FileManager::Press_LevelUp() //-V2506
 }
 
 
-static void IncCurrentDir()
+void FileManager::IncCurrentDir()
 {
     if (numDirs > 1)
     {
@@ -260,7 +278,7 @@ static void IncCurrentDir()
 }
 
 
-static void DecCurrentDir()
+void FileManager::DecCurrentDir()
 {
     if (numDirs > 1)
     {
@@ -281,7 +299,7 @@ static void DecCurrentDir()
 }
 
 
-static void IncCurrentFile()
+void FileManager::IncCurrentFile()
 {
     if (numFiles > 1)
     {
@@ -299,7 +317,7 @@ static void IncCurrentFile()
 }
 
 
-static void DecCurrentFile()
+void FileManager::DecCurrentFile()
 {
     if (numFiles > 1)
     {
@@ -371,8 +389,8 @@ bool FileManager::GetNameForNewFile(char name[255]) //-V2506
     else
     {
         PackedTime time = HAL_RTC::GetPackedTime();
-                           //  1          2           3         4           5             6
-        uint values[] = {0U, time.year, time.month, time.day, time.hours, time.minutes, time.seconds};
+        //  1          2           3         4           5             6
+        uint values[] = { 0U, time.year, time.month, time.day, time.hours, time.minutes, time.seconds };
 
         char *ch = S_MEM_FILE_NAME_MASK;
         char *wr = name;

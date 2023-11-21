@@ -1,3 +1,4 @@
+// 2023/11/21 10:00:20 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Keyboard/Keyboard.h"
 
@@ -21,21 +22,21 @@ private:
 };
 
 
-class FileManager
+namespace FileManager
 {
-public:
     // Вызывается один раз при обнаружении новой флешки
-    static void Init();
-    // Нарисовать файловый менеджер
-    static void Draw();
-    
-    static void Press_LevelUp();
-    
-    static void Press_LevelDown();
-    
-    static bool HandlerKey(const KeyEvent &event);
-    
-    static bool GetNameForNewFile(char name[255]);
+    void Init();
 
-    static void Press_Tab();
+    // Нарисовать файловый менеджер
+    void Draw();
+
+    void Press_LevelUp();
+
+    void Press_LevelDown();
+
+    bool HandlerKey(const KeyEvent &event);
+
+    bool GetNameForNewFile(char name[255]);
+
+    void Press_Tab();
 };
