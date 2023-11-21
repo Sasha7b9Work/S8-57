@@ -99,7 +99,8 @@ void Beeper::CalculateMeandr()
 
 void Beeper::CalculateTriangle()
 {
-    float k = 255.0F / POINTS_IN_PERIOD_SOUND; //-V2564
+    static const float k = 255.0F / (float)POINTS_IN_PERIOD_SOUND;
+
     for (int i = 0; i < POINTS_IN_PERIOD_SOUND; i++)
     {
         points[i] = static_cast<uint8>(k * static_cast<float>(i) * amplitude);
