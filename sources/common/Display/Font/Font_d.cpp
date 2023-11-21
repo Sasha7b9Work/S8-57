@@ -1,3 +1,4 @@
+// 2023/11/21 14:10:09 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Font_d.h"
 #include "AdvancedFont_d.h"
@@ -15,9 +16,9 @@
 
 
 #ifdef LOADER
-const DFont *fonts[DTypeFont::Count] = {&font8, &font8, &font8, &font8, nullptr};
+const DFont *fonts[DTypeFont::Count] = { &font8, &font8, &font8, &font8, nullptr };
 #else
-const DFont *fonts[DTypeFont::Count] = {&font5, &font8, &fontUGO, &fontUGO2, nullptr};
+const DFont *fonts[DTypeFont::Count] = { &font5, &font8, &fontUGO, &fontUGO2, nullptr };
 #endif
 const DFont *font = &font8;
 
@@ -32,7 +33,7 @@ int DFont::GetLengthText(pString text)
     int result = 0;
     char *symbol = const_cast<char *>(text);
 
-    while(*symbol)
+    while (*symbol)
     {
         result += GetWidth(*symbol) + spacing;
         symbol++;
@@ -90,8 +91,8 @@ void DFont::Set(const DTypeFont::E typeFont)
         {
             font = nullptr;
             volatile DAdvancedFont f(typeFont);
-        }       
-            break;
+        }
+        break;
         case DTypeFont::None:
         case DTypeFont::Count:
             break;
