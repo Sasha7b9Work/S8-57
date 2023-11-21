@@ -5,33 +5,43 @@
 #include "Menu/Pages/Include/PageTester.h"
 #include "SCPI/SCPI.h"
 
-// :TESTER:CONDUCTION
-static pCHAR FuncConduction(pCHAR);
-static void HintConduction(String *);
-static bool TestConduction();
 
-// :TESTER:CONTROL
-static pCHAR FuncControl(pCHAR);
-static void HintControl(String *);
-static bool TestControl();
+namespace S_TESTER
+{
+    // :TESTER:CONDUCTION
+    static pCHAR FuncConduction(pCHAR);
+    static void HintConduction(String *);
+    static bool TestConduction();
 
-// :TESTER:DATA?
-static pCHAR FuncData(pCHAR);
-static void HintData(String *);
-static bool TestData();
+    // :TESTER:CONTROL
+    static pCHAR FuncControl(pCHAR);
+    static void HintControl(String *);
+    static bool TestControl();
+    static void SendAnswerForControl();
+    static void EnableControl(int);
 
-// :TESTER:MODE
-static pCHAR FuncMode(pCHAR);
-static void HintMode(String *);
-static bool TestMode();
+    // :TESTER:DATA?
+    static pCHAR FuncData(pCHAR);
+    static void HintData(String *);
+    static bool TestData();
+
+    // :TESTER:MODE
+    static pCHAR FuncMode(pCHAR);
+    static void HintMode(String *);
+    static bool TestMode();
+
+    static void SetPolarity(int);
+    static void EnableTester();
+    static void DisableTester();
+}
 
 
 const StructSCPI SCPI::tester[] =
 {
-    SCPI_LEAF(":CONDUCTION", FuncConduction, TestConduction, "", HintConduction),
-    SCPI_LEAF(":CONTROL",    FuncControl,    TestControl,    "", HintControl),
-    SCPI_LEAF(":DATA?",      FuncData,       TestData,       "", HintData),
-    SCPI_LEAF(":MODE",       FuncMode,       TestMode,       "", HintMode),
+    SCPI_LEAF(":CONDUCTION", S_TESTER::FuncConduction, S_TESTER::TestConduction, "", S_TESTER::HintConduction),
+    SCPI_LEAF(":CONTROL",    S_TESTER::FuncControl,    S_TESTER::TestControl,    "", S_TESTER::HintControl),
+    SCPI_LEAF(":DATA?",      S_TESTER::FuncData,       S_TESTER::TestData,       "", S_TESTER::HintData),
+    SCPI_LEAF(":MODE",       S_TESTER::FuncMode,       S_TESTER::TestMode,       "", S_TESTER::HintMode),
     SCPI_EMPTY()
 };
 
@@ -44,14 +54,14 @@ static pString polarity[] =
 };
 
 
-static void SetPolarity(int i)
+void S_TESTER::SetPolarity(int i)
 {
     set.test._polarity = static_cast<Tester::Polarity::E>(i);
     Tester::LoadPolarity();
 }
 
 
-static pCHAR FuncConduction(pCHAR buffer) //-V2506
+pCHAR S_TESTER::FuncConduction(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(polarity[set.test._polarity]));
 
@@ -59,7 +69,7 @@ static pCHAR FuncConduction(pCHAR buffer) //-V2506
 }
 
 
-static void SendAnswerForControl()
+void S_TESTER::SendAnswerForControl()
 {
     if (set.test._control == Tester::Control::Current)
     {
@@ -82,7 +92,7 @@ static pString controls[] =
 };
 
 
-static void EnableControl(int i)
+void S_TESTER::EnableControl(int i)
 {
     if (i < 2)
     {
@@ -99,7 +109,7 @@ static void EnableControl(int i)
 }
 
 
-static pCHAR FuncControl(pCHAR buffer) //-V2506
+pCHAR S_TESTER::FuncControl(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SendAnswerForControl());
 
@@ -107,7 +117,7 @@ static pCHAR FuncControl(pCHAR buffer) //-V2506
 }
 
 
-static pCHAR FuncData(pCHAR buffer) //-V2506
+pCHAR S_TESTER::FuncData(pCHAR buffer) //-V2506
 {
     SCPI_PROLOG(buffer);
 
@@ -117,7 +127,7 @@ static pCHAR FuncData(pCHAR buffer) //-V2506
 }
 
 
-static void EnableTester()
+void S_TESTER::EnableTester()
 {
     Keyboard::ShortPress(Key::Function);
     Keyboard::ShortPress(Key::Enter);
@@ -127,7 +137,7 @@ static void EnableTester()
     Keyboard::ShortPress(Key::F4);
 }
 
-static void DisableTester()
+void S_TESTER::DisableTester()
 {
     if (Menu::OpenedItem() == PageTester::self)
     {
@@ -136,7 +146,7 @@ static void DisableTester()
     }
 }
 
-static pCHAR FuncMode(pCHAR buffer) //-V2506
+pCHAR S_TESTER::FuncMode(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(Device::InModeTester() ? " ON" : " OFF"));
 
@@ -148,49 +158,49 @@ static pCHAR FuncMode(pCHAR buffer) //-V2506
 }
 
 
-static void HintConduction(String *)
+void S_TESTER::HintConduction(String *)
 {
 
 }
 
 
-static void HintControl(String *)
+void S_TESTER::HintControl(String *)
 {
 
 }
 
 
-static void HintData(String *)
+void S_TESTER::HintData(String *)
 {
 
 }
 
 
-static void HintMode(String *)
+void S_TESTER::HintMode(String *)
 {
 
 }
 
 
-static bool TestConduction()
-{
-    return false;
-}
-
-
-static bool TestControl()
+bool S_TESTER::TestConduction()
 {
     return false;
 }
 
 
-static bool TestData()
+bool S_TESTER::TestControl()
 {
     return false;
 }
 
 
-static bool TestMode()
+bool S_TESTER::TestData()
+{
+    return false;
+}
+
+
+bool S_TESTER::TestMode()
 {
     return false;
 }
