@@ -1,9 +1,13 @@
+// 2023/11/21 09:57:44 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "HAL.h"
 #include <stm32f4xx_hal.h>
 
 
-static CRC_HandleTypeDef handle = { CRC }; //-V2571
+namespace HAL_CRC32
+{
+    static CRC_HandleTypeDef handle = { CRC }; //-V2571
+}
 
 
 void HAL_CRC32::Init()

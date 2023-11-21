@@ -1,3 +1,4 @@
+// 2023/11/21 09:57:33 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Hardware/Memory/Sector.h"
 #include "Osci/DeviceSettings.h"
@@ -62,12 +63,12 @@ namespace HAL_ADC3
 };
 
 
-struct HAL_CRC32
+namespace HAL_CRC32
 {
-    static void Init();
+    void Init();
 
     // Расчитывает контрольную сумму последовательности байт из buffer. Если size не кратно четырём, последние байты не участвуют в вычислении контрольной суммы
-    static uint Calculate8bit(uint8 *buffer, int size);
+    uint Calculate8bit(uint8 *buffer, int size);
 };
 
 
