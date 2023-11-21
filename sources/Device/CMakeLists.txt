@@ -130,7 +130,6 @@ set_source_files_properties(
                             ../common/Display/Font/Font_d.cpp
                             src/SCPI/TriggerSCPI.cpp
                             src/Hardware/USBD/usbd_core.cpp
-                            src/Menu/Pages/PageMemory/PageMemory_ROM.cpp
                             src/SCPI/FreqMeterSCPI.cpp
                             src/Hardware/Memory/ROM_NRST.cpp
                             src/Display/Grid.cpp

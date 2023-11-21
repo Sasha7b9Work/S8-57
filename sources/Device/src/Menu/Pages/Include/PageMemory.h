@@ -168,9 +168,9 @@ struct PageRAM
 
 
 
-struct PageROM
+namespace PageROM
 {
-    static const Page * const self;
+    extern const Page * const self;
 };
 
 
