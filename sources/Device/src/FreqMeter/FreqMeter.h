@@ -16,7 +16,8 @@ public:
     static void LoadPeriodSettings();
 
     static void Update();
-    
+
+    static void DrawDebugInfo();
     // ¬озвращает измеренное значение частоты
     static float GetFrequency();
 

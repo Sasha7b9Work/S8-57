@@ -12,27 +12,35 @@
 #include <cstring>
 #include <limits>
 
+
+namespace DisplayFreqMeter
+{
 #define EMPTY_STRING    "---.---"
 #define OVERFLOW_STRING ">>>"
 
 
-//                         0    1    2    3    4    5    6 
-static char buffer[11] = { '0', '0', '0', '0', '0', '0', '0', 0, 0, 0, 0 };
+    //                         0    1    2    3    4    5    6 
+    static char buffer[11] = { '0', '0', '0', '0', '0', '0', '0', 0, 0, 0, 0 };
 
-bool DisplayFreqMeter::needSendToSCPI = false;
+    static bool needSendToSCPI = false;
 
-static pString FreqSetToString(const BitSet32 *fr);
+    static pString FreqSetToString(const BitSet32 *fr);
 
-static pString PeriodSetToString(const BitSet32 *pr);
+    static pString PeriodSetToString(const BitSet32 *pr);
 
-// Возвращает порядок младшего разряда считанного значения счётчика периода при данных настройках
-static int LowOrder(FreqMeter::FreqClc::E freqCLC, FreqMeter::NumberPeriods::E numPeriods);
+    // Возвращает порядок младшего разряда считанного значения счётчика периода при данных настройках
+    static int LowOrder(FreqMeter::FreqClc::E freqCLC, FreqMeter::NumberPeriods::E numPeriods);
 
-// Преобразует 6 разрядов числа, хранящиеся в стеке, в текстовую строку периода. Младший значащий разряд хранится на вершине стека. order - его порядок
-static pString StackToString(Stack<uint> *stack, int order);
+    // Преобразует 6 разрядов числа, хранящиеся в стеке, в текстовую строку периода. Младший значащий разряд хранится на вершине стека. order - его порядок
+    static pString StackToString(Stack<uint> *stack, int order);
 
-// Записывает 6 разрядов из стека stack в буфер buffer. Младший разряд на вершине стека. Точку ставить на point позиции, начиная с buffer[0]
-static void WriteStackToBuffer(Stack<uint> *stack, int point, const char *suffix);
+    // Записывает 6 разрядов из стека stack в буфер buffer. Младший разряд на вершине стека. Точку ставить на point позиции, начиная с buffer[0]
+    static void WriteStackToBuffer(Stack<uint> *stack, int point, const char *suffix);
+
+    static void DrawFrequencyMode(int x, int _y);
+
+    static void DrawPeriodMode(int x, int y);
+}
 
 
 void DisplayFreqMeter::Update() //-V2506
@@ -88,7 +96,7 @@ void DisplayFreqMeter::Update() //-V2506
 
     if(false)
     {
-        DrawDebugInfo();
+        FreqMeter::DrawDebugInfo();
     }
 
     DFont::Pop();
@@ -249,7 +257,7 @@ void DisplayFreqMeter::DrawPeriodMode(int x, int _y)
 }
 
 
-static pString FreqSetToString(const BitSet32 *fr) //-V2506
+static pString DisplayFreqMeter::FreqSetToString(const BitSet32 *fr) //-V2506
 {
     if(fr->word < 2)
     {
@@ -392,7 +400,7 @@ static pString FreqSetToString(const BitSet32 *fr) //-V2506
 }
 
 
-static int LowOrder(FreqMeter::FreqClc::E freqCLC, FreqMeter::NumberPeriods::E numPeriods)
+int DisplayFreqMeter::LowOrder(FreqMeter::FreqClc::E freqCLC, FreqMeter::NumberPeriods::E numPeriods)
 {
     /*
         Измеряемое значение | Принимаемое значение | Вывод на экран | последний значащий разряд
@@ -446,7 +454,7 @@ static int LowOrder(FreqMeter::FreqClc::E freqCLC, FreqMeter::NumberPeriods::E n
 }
 
 
-static pString PeriodSetToString(const BitSet32 *pr) //-V2506
+static pString DisplayFreqMeter::PeriodSetToString(const BitSet32 *pr) //-V2506
 {
     if(pr->word == 0)
     {
@@ -499,7 +507,7 @@ static pString PeriodSetToString(const BitSet32 *pr) //-V2506
 }
 
 
-static pString StackToString(Stack<uint> *stack, int order)
+pString DisplayFreqMeter::StackToString(Stack<uint> *stack, int order)
 {
     static const struct StructOrder
     {
@@ -542,7 +550,7 @@ static pString StackToString(Stack<uint> *stack, int order)
 }
 
 
-static void WriteStackToBuffer(Stack<uint> *stack, int point, const char *suffix)
+void DisplayFreqMeter::WriteStackToBuffer(Stack<uint> *stack, int point, const char *suffix)
 {
     for(int i = 6; i >= 0; i--)
     {

@@ -249,7 +249,7 @@ void FreqMeter::SetStateLampPeriod()
 }
 
 
-void DisplayFreqMeter::DrawDebugInfo()
+void FreqMeter::DrawDebugInfo()
 {
     int width = 50;
     int height = 27;
