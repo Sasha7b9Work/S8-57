@@ -6,135 +6,137 @@
 #include "Settings/Settings.h"
 
 
-
-static bool IsActive_Parameter()
+namespace PageFFT
 {
-    return S_FFT_ENABLED;
-}
-
-
-DEF_CHOICE_2( cView,                                                                                                                                 //--- ФУНКЦИЯ - СПЕКТР - Отображение ---
-    "Отображение",
-    "Включает и выключает отображение спектра",
-    DISABLE_RU,
-    ENABLE_RU,
-    S_FFT_ENABLED, &PageFFT::self, Item::Active, Choice::Changed, Choice::AfterDraw
-)
-
-
-DEF_CHOICE_2( cScale,                                                                                                                                      //--- ФУНКЦИЯ - СПЕКТР - Шкала ---
-    "Шкала",
-    "Задаёт масштаб вывода спектра - линейный или логарифмический",
-    "Логарифм",
-    "Линейная",
-    S_FFT_SCALE, &PageFFT::self, IsActive_Parameter, Choice::Changed, Choice::AfterDraw
-)
-
-
-DEF_CHOICE_3( cSource,                                                                                                                                  //--- ФУНКЦИЯ - СПЕКТР - Источник ---
-    "Источник",
-    "Выбор источника для расчёта спектра",
-    "Канал 1",
-    "Канал 2",
-    "Канал 1 + 2",
-    S_FFT_SOURCE, &PageFFT::self, IsActive_Parameter, Choice::Changed, Choice::AfterDraw
-)
-
-
-DEF_CHOICE_4( cWindow,                                                                                                                                      //--- ФУНКЦИЯ - СПЕКТР - Окно ---
-    "Окно",
-    "Задаёт окно для расчёта спектра",
-    "Прямоугольн",
-    "Хэмминга",
-    "Блэкмена",
-    "Ханна",
-    S_FFT_WINDOW, &PageFFT::self, IsActive_Parameter, Choice::Changed, Choice::AfterDraw
-)
-
-
-static bool IsActive_Range()
-{
-    return (S_FFT_ENABLED && S_FFT_SCALE_IS_LOG);
-}
-
-DEF_CHOICE_3( cRange,                                                                                                                                   //--- ФУНКЦИЯ - СПЕКТР - Диапазон ---
-    "Диапазон",
-    "Здесь можно задать предел наблюдения за мощностью спектра",
-    "-40дБ",
-    "-60дБ",
-    "-80дБ",
-    S_FFT_MAX_DB, &PageFFT::self, IsActive_Range, Choice::Changed, Choice::AfterDraw
-)
-
-
-static bool HandlerKey_FFT_Cursors(const KeyEvent &event) //-V2506
-{
-    if (event.IsArrow())
+    static bool IsActive_Parameter()
     {
-        if (event.IsPress() || event.IsRepeat())
+        return S_FFT_ENABLED;
+    }
+
+
+    DEF_CHOICE_2(cView,                                                                                                                                 //--- ФУНКЦИЯ - СПЕКТР - Отображение ---
+        "Отображение",
+        "Включает и выключает отображение спектра",
+        DISABLE_RU,
+        ENABLE_RU,
+        S_FFT_ENABLED, &PageFFT::self, Item::Active, Choice::Changed, Choice::AfterDraw
+    )
+
+
+        DEF_CHOICE_2(cScale,                                                                                                                                      //--- ФУНКЦИЯ - СПЕКТР - Шкала ---
+            "Шкала",
+            "Задаёт масштаб вывода спектра - линейный или логарифмический",
+            "Логарифм",
+            "Линейная",
+            S_FFT_SCALE, &PageFFT::self, IsActive_Parameter, Choice::Changed, Choice::AfterDraw
+        )
+
+
+        DEF_CHOICE_3(cSource,                                                                                                                                  //--- ФУНКЦИЯ - СПЕКТР - Источник ---
+            "Источник",
+            "Выбор источника для расчёта спектра",
+            "Канал 1",
+            "Канал 2",
+            "Канал 1 + 2",
+            S_FFT_SOURCE, &PageFFT::self, IsActive_Parameter, Choice::Changed, Choice::AfterDraw
+        )
+
+
+        DEF_CHOICE_4(cWindow,                                                                                                                                      //--- ФУНКЦИЯ - СПЕКТР - Окно ---
+            "Окно",
+            "Задаёт окно для расчёта спектра",
+            "Прямоугольн",
+            "Хэмминга",
+            "Блэкмена",
+            "Ханна",
+            S_FFT_WINDOW, &PageFFT::self, IsActive_Parameter, Choice::Changed, Choice::AfterDraw
+        )
+
+
+        static bool IsActive_Range()
+    {
+        return (S_FFT_ENABLED && S_FFT_SCALE_IS_LOG);
+    }
+
+    DEF_CHOICE_3(cRange,                                                                                                                                   //--- ФУНКЦИЯ - СПЕКТР - Диапазон ---
+        "Диапазон",
+        "Здесь можно задать предел наблюдения за мощностью спектра",
+        "-40дБ",
+        "-60дБ",
+        "-80дБ",
+        S_FFT_MAX_DB, &PageFFT::self, IsActive_Range, Choice::Changed, Choice::AfterDraw
+    )
+
+
+        static bool HandlerKey_FFT_Cursors(const KeyEvent &event) //-V2506
+    {
+        if (event.IsArrow())
         {
-            int delta = (event.IsArrowUp() || event.IsArrowRight()) ? 1 : -1;
+            if (event.IsPress() || event.IsRepeat())
+            {
+                int delta = (event.IsArrowUp() || event.IsArrowRight()) ? 1 : -1;
 
-            S_FFT_POS_ACTIVE_CURSOR += static_cast<uint8>(delta);
-            Beeper::RegulatorShiftRotate();
+                S_FFT_POS_ACTIVE_CURSOR += static_cast<uint8>(delta);
+                Beeper::RegulatorShiftRotate();
 
+                return true;
+            }
+        }
+        else if (event.key == Key::F1 && event.IsRelease()) //-V2516
+        {
+            S_FFT_ACTIVE_CURSOR = static_cast<uint8>((S_FFT_ACTIVE_CURSOR + 1) % 2);
             return true;
         }
+
+        return false;
     }
-    else if(event.key == Key::F1 && event.IsRelease()) //-V2516
+
+    static bool ShowTitle()
     {
-        S_FFT_ACTIVE_CURSOR = static_cast<uint8>((S_FFT_ACTIVE_CURSOR + 1) % 2);
-        return true;
+        return false;
     }
 
-    return false;
-}
 
-static bool ShowTitle()
-{
-    return false;
-}
-
-
-static void OnCursors_BeforeDraw()
-{
-    Region(60, 20).DrawBounded(0, 219, Color::BACK, Color::FILL);
-
-    Text(S_FFT_ACTIVE_CURSOR_IS_0 ? "Курсор 1" : "Курсор 2").Draw(12, 224, Color::FILL);
-}
-
-
-DEF_PAGE_0( pCursors,
-    "КУРСОРЫ",
-    PageName::FFT_Cursors, &PageFFT::self, ShowTitle, Page::OpenClose, OnCursors_BeforeDraw, HandlerKey_FFT_Cursors
-)
-
-
-const Page * const PageFFT::Cursors::self = static_cast<const Page *>(&pCursors);
-
-static bool IsActive_FFT()
-{
-    return S_MATH_MODE_DRAW_IS_DISABLED;
-}
-
-static void OnOpenClose_FFT(bool)
-{
-    if (!IsActive_FFT())
+    static void OnCursors_BeforeDraw()
     {
-        Display::ShowWarning("Отключите математическую функцию");
+        Region(60, 20).DrawBounded(0, 219, Color::BACK, Color::FILL);
+
+        Text(S_FFT_ACTIVE_CURSOR_IS_0 ? "Курсор 1" : "Курсор 2").Draw(12, 224, Color::FILL);
     }
+
+
+    DEF_PAGE_0(pCursors,
+        "КУРСОРЫ",
+        PageName::FFT_Cursors, &PageFFT::self, ShowTitle, Page::OpenClose, OnCursors_BeforeDraw, HandlerKey_FFT_Cursors
+    )
+
+
+        const Page *const PageFFT::Cursors::self = static_cast<const Page *>(&pCursors);
+
+    static bool IsActive_FFT()
+    {
+        return S_MATH_MODE_DRAW_IS_DISABLED;
+    }
+
+    static void OnOpenClose_FFT(bool)
+    {
+        if (!IsActive_FFT())
+        {
+            Display::ShowWarning("Отключите математическую функцию");
+        }
+    }
+
+    DEF_PAGE_6(pFFT,                                                                                                                                                   //--- СЕРВИС - СПЕКТР --- //-V2567
+        "СПЕКТР",
+        "Отображение спектра входного сигнала",
+        &cView,
+        &cScale,
+        &cSource,
+        &cWindow,
+        &pCursors,
+        &cRange,
+        PageName::FFT, &PageFunction::self, IsActive_FFT, Page::NormalTitle, OnOpenClose_FFT, Page::BeforeDraw, Page::HandlerKeyEvent
+    )
 }
 
-DEF_PAGE_6( pFFT,                                                                                                                                                   //--- СЕРВИС - СПЕКТР --- //-V2567
-    "СПЕКТР",
-    "Отображение спектра входного сигнала",
-    &cView,
-    &cScale,
-    &cSource,
-    &cWindow,
-    &pCursors,
-    &cRange,
-    PageName::FFT, &PageFunction::self, IsActive_FFT, Page::NormalTitle, OnOpenClose_FFT, Page::BeforeDraw, Page::HandlerKeyEvent
-)
-
-const Page * const PageFFT::self = static_cast<const Page *>(&pFFT);
+const Page * const PageFFT::self = static_cast<const Page *>(&PageFFT::pFFT);
