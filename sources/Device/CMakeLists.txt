@@ -1,7 +1,7 @@
 # 2023/11/20 16:31:28 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 project (Device)
 
-set(CMAKE_UNITY_BUILD OFF)
+#set(CMAKE_UNITY_BUILD OFF)
 
 include_directories(..
                     ../common/_VS
@@ -126,8 +126,6 @@ set_source_files_properties(
                             src/Utils/CommonFunctions.cpp
                             src/SCPI/MultimeterSCPI.cpp
                             src/SCPI/FftSCPI.cpp
-                            src/Menu/Pages/PageHelp/PageHelp.cpp
-                            src/Menu/Pages/PageRecorder/PageRecorder.cpp
                             src/SCPI/MeasuresSCPI.cpp
                             ../common/Display/Font/Font_d.cpp
                             src/SCPI/TriggerSCPI.cpp
