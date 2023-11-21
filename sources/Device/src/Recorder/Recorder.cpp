@@ -1,3 +1,4 @@
+// 2023/11/21 13:22:56 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/HAL/HAL.h"
@@ -10,33 +11,36 @@
 #include "Utils/Math.h"
 
 
-// Состояние осциллографа перед переходом в режим регистратора
-struct StateOsci
+namespace Recorder
 {
-    // Смещение по вертикали для первого и второго каналов
-    int16 storedRShift[2];
-};
-
-
-struct Mode
-{
-    enum E
+    // Состояние осциллографа перед переходом в режим регистратора
+    struct StateOsci
     {
-        Listening,      // Режим "прослушивания" входов, при котором на экране мы видим то, что подаётся на входы, без сохранения в память  
-        Recording,      // Режим записи, в котором пользователь наблюдает за записываемым сигналом
-        Review          // Режим просмотра
+        // Смещение по вертикали для первого и второго каналов
+        int16 storedRShift[2];
     };
-};
 
-static Mode::E mode = Mode::Listening;
-static bool initialized = false;        // true, если регистратор был инициализирован
-static StateOsci osci;                  // Сюда сохраним состояние осциллографа в момент перехода в режим регистратора
 
-// Сохранить установленные настройки осциллографа
-static void StoreOsciSettings();
+    struct Mode
+    {
+        enum E
+        {
+            Listening,      // Режим "прослушивания" входов, при котором на экране мы видим то, что подаётся на входы, без сохранения в память  
+            Recording,      // Режим записи, в котором пользователь наблюдает за записываемым сигналом
+            Review          // Режим просмотра
+        };
+    };
 
-// Восстановить ранее сохранённые настройки осциллорафа
-static void RestoreOsciSettings();
+    static Mode::E mode = Mode::Listening;
+    static bool initialized = false;        // true, если регистратор был инициализирован
+    static StateOsci osci;                  // Сюда сохраним состояние осциллографа в момент перехода в режим регистратора
+
+    // Сохранить установленные настройки осциллографа
+    static void StoreOsciSettings();
+
+    // Восстановить ранее сохранённые настройки осциллорафа
+    static void RestoreOsciSettings();
+}
 
 
 void Recorder::Init()
@@ -126,14 +130,14 @@ void Recorder::Stop()
 }
 
 
-static void StoreOsciSettings()
+void Recorder::StoreOsciSettings()
 {
     osci.storedRShift[ChanA] = S_RSHIFT_A;
     osci.storedRShift[ChanB] = S_RSHIFT_B;
 }
 
 
-static void RestoreOsciSettings()
+void Recorder::RestoreOsciSettings()
 {
     RShift::Set(ChanA, osci.storedRShift[ChanA]);
     RShift::Set(ChanB, osci.storedRShift[ChanB]);

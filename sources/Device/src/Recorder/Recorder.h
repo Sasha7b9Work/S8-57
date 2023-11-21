@@ -1,28 +1,28 @@
+// 2023/11/21 13:22:52 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 
 
-class Recorder
+namespace Recorder
 {
-public:
-    static void Init();
+    void Init();
 
-    static void Update();
+    void Update();
 
-    static void DeInit();
+    void DeInit();
 
-    static void OnPressStart();
+    void OnPressStart();
 
-    static void Start();
+    void Start();
 
-    static void Stop();
+    void Stop();
 
     // true означает, что регистратор находится в режиме записи
-    static bool InRecordingMode();
+    bool InRecordingMode();
 
-    static void RecordPoints();
+    void RecordPoints();
 
     // Начать процесс "прослушивания" входов
-    static void StartListening();
+    void StartListening();
 
     // Где хранятся данные
 #define S_REC_TYPE_MEMORY   (set.rec._typeMemory)
