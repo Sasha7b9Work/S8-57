@@ -1,3 +1,4 @@
+// 2023/11/21 13:52:49 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 /*
     Здесь работа с памятью на макете, где не было внешней RAM
 */
@@ -30,136 +31,149 @@
 #endif
 
 
-int16 RAM::currentSignal = 0;
-Packet *RAM::oldest = reinterpret_cast<Packet *>(BEGIN); //-V2571
-Packet *RAM::newest = nullptr;
-
-
-bool RAM::needNewFrame = true;
-
-
-// Записывает по адресу dest. Возвращает адрес первого байта после записи
-static uint *WriteToRAM(uint *dest, const void *src, int size)
+namespace RAM
 {
-    HAL_BUS::ConfigureToFSMC();
-    
-    uint8 *address = reinterpret_cast<uint8 *>(dest);
-
-    std::memcpy(address, src, static_cast<uint>(size));
-    
-    return reinterpret_cast<uint *>(address + size);
-}
-
-
-bool RAM::canTrace = false;
-
-
-struct Packet
-{
-    // Адрес следующего пакета, более "свежего". Если addrNext == 0x00000000, следующего пакета нет, этот пакет самый новый
-    uint addrNewest;
-
-    bool IsValid()
+    // Записывает по адресу dest. Возвращает адрес первого байта после записи
+    static uint *WriteToRAM(uint *dest, const void *src, int size)
     {
-        return reinterpret_cast<uint8*>(this) >= ExtRAM::Begin() && reinterpret_cast<uint8*>(this) < ExtRAM::End();
+        HAL_BUS::ConfigureToFSMC();
+
+        uint8 *address = reinterpret_cast<uint8 *>(dest);
+
+        std::memcpy(address, src, static_cast<uint>(size));
+
+        return reinterpret_cast<uint *>(address + size);
     }
 
-    void Trace(uint)
+    struct Packet
     {
-        if(addrNewest == 0 && RAM::canTrace)
+        // Адрес следующего пакета, более "свежего". Если addrNext == 0x00000000, следующего пакета нет, этот пакет самый новый
+        uint addrNewest;
+
+        bool IsValid()
         {
-            addrNewest = addrNewest; //-V570
+            return reinterpret_cast<uint8 *>(this) >= ExtRAM::Begin() && reinterpret_cast<uint8 *>(this) < ExtRAM::End();
         }
 
-        //LOG_WRITE("%d %x", line, addrNewest);
-    }
-
-    // Упаковать данные по адресу this. Возвращает указатель на пакет, следующий за ним
-    void Pack(const DataSettings *ds)
-    {
-        DataSettings data = *ds;
-        data.dataA = nullptr;
-        data.dataB = nullptr;
-
-        addrNewest = 0x0000000;                                                                         // Указываем, что это самый последний пакет
-
-        uint *address = reinterpret_cast<uint *>(Address() + sizeof(Packet));                           // По этому адресу запишем DataSettings //-V2571
-
-        address = WriteToRAM(address, ds, sizeof(DataSettings));                                        // Записываем DataSettings
-
-        if (ds->enableA)                                                                                // Записываем данные первого канала
+        void Trace(uint)
         {
-            data.dataA = reinterpret_cast<uint8 *>(address);
-            address = WriteToRAM(address, ds->dataA, ds->BytesInChannel());
+            if (addrNewest == 0 && RAM::canTrace)
+            {
+                addrNewest = addrNewest; //-V570
+            }
+
+            //LOG_WRITE("%d %x", line, addrNewest);
         }
 
-        if (ds->dataB)                                                                                  // Записываем данные второго канала
+        // Упаковать данные по адресу this. Возвращает указатель на пакет, следующий за ним
+        void Pack(const DataSettings *ds)
         {
-            data.dataB = reinterpret_cast<uint8 *>(address);
-            WriteToRAM(address, ds->dataB, ds->BytesInChannel());
+            DataSettings data = *ds;
+            data.dataA = nullptr;
+            data.dataB = nullptr;
+
+            addrNewest = 0x0000000;                                                                         // Указываем, что это самый последний пакет
+
+            uint *address = reinterpret_cast<uint *>(Address() + sizeof(Packet));                           // По этому адресу запишем DataSettings //-V2571
+
+            address = WriteToRAM(address, ds, sizeof(DataSettings));                                        // Записываем DataSettings
+
+            if (ds->enableA)                                                                                // Записываем данные первого канала
+            {
+                data.dataA = reinterpret_cast<uint8 *>(address);
+                address = WriteToRAM(address, ds->dataA, ds->BytesInChannel());
+            }
+
+            if (ds->dataB)                                                                                  // Записываем данные второго канала
+            {
+                data.dataB = reinterpret_cast<uint8 *>(address);
+                WriteToRAM(address, ds->dataB, ds->BytesInChannel());
+            }
+
+            std::memcpy(reinterpret_cast<uint *>(Address() + sizeof(Packet)), &data, sizeof(DataSettings)); // Записываем скорректированные настройки //-V2571
+        }
+        // Подготовить пакет для сохранения данных в соответствии с настройками ds
+        void Prepare(DataSettings *ds)
+        {
+            int bytesInChannel = ds->BytesInChannel();
+
+            addrNewest = 0x00000000;
+            uint *address = reinterpret_cast<uint *>(Address() + sizeof(Packet)); //-V2571
+
+            ds->dataA = nullptr;
+            ds->dataB = nullptr;
+            uint8 *addrData = reinterpret_cast<uint8 *>(reinterpret_cast<uint8 *>(address) + sizeof(DataSettings));
+
+            if (ds->enableA)
+            {
+                ds->dataA = addrData;
+                std::memset(addrData, VALUE::NONE, static_cast<uint>(bytesInChannel));
+                addrData += bytesInChannel;
+            }
+
+            if (ds->enableB)
+            {
+                ds->dataB = addrData;
+                std::memset(addrData, VALUE::NONE, static_cast<uint>(bytesInChannel));
+            }
+
+            WriteToRAM(address, ds, sizeof(DataSettings));
         }
 
-        std::memcpy(reinterpret_cast<uint *>(Address() + sizeof(Packet)), &data, sizeof(DataSettings)); // Записываем скорректированные настройки //-V2571
-    }
-    // Подготовить пакет для сохранения данных в соответствии с настройками ds
-    void Prepare(DataSettings *ds)
-    {
-        int bytesInChannel = ds->BytesInChannel();
-
-        addrNewest = 0x00000000;
-        uint *address = reinterpret_cast<uint *>(Address() + sizeof(Packet)); //-V2571
-
-        ds->dataA = nullptr;
-        ds->dataB = nullptr;
-        uint8 *addrData = reinterpret_cast<uint8 *>(reinterpret_cast<uint8 *>(address) + sizeof(DataSettings));
-
-        if (ds->enableA)
+        uint Address() const
         {
-            ds->dataA = addrData;
-            std::memset(addrData, VALUE::NONE, static_cast<uint>(bytesInChannel));
-            addrData += bytesInChannel;
+            return reinterpret_cast<uint>(this); //-V2571
+        };
+        // Возвращает адрес первого следующего за пакетом байта
+        uint End() const
+        {
+            return Address() + Size();
+        }
+        // Возвращает размер памяти, необходимой для хранения данных в соответсвии с настройками ds
+        static int NeedMemoryForPacedData(const DataSettings *ds)
+        {
+            uint size = sizeof(Packet) + sizeof(DataSettings) + ds->NeedMemoryForData();
+
+            return static_cast<int>(size);
         }
 
-        if (ds->enableB)
+        int Size() const
         {
-            ds->dataB = addrData;
-            std::memset(addrData, VALUE::NONE, static_cast<uint>(bytesInChannel));
+            uint size = sizeof(Packet) + sizeof(DataSettings) + GetDataSettings()->NeedMemoryForData();
+
+            return static_cast<int>(size);
         }
 
-        WriteToRAM(address, ds, sizeof(DataSettings));
-    }
+        DataSettings *GetDataSettings() const
+        {
+            uint address = Address() + sizeof(Packet);
 
-    uint Address() const
-    {
-        return reinterpret_cast<uint>(this); //-V2571
+            return reinterpret_cast<DataSettings *>(address); //-V2571
+        }
     };
-    // Возвращает адрес первого следующего за пакетом байта
-    uint End() const
-    {
-        return Address() + Size();
-    }
-    // Возвращает размер памяти, необходимой для хранения данных в соответсвии с настройками ds
-    static int NeedMemoryForPacedData(const DataSettings *ds)
-    {
-        uint size = sizeof(Packet) + sizeof(DataSettings) + ds->NeedMemoryForData();
 
-        return static_cast<int>(size);
-    }
 
-    int Size() const
-    {
-        uint size = sizeof(Packet) + sizeof(DataSettings) + GetDataSettings()->NeedMemoryForData();
+    // Освободить место для записи пакета с данными в соответствии с ds. Возвращает адрес
+    static uint AllocateMemoryForPacket(const DataSettings *ds);
 
-        return static_cast<int>(size);
-    }
+    // Удалить самую старую запись
+    static void RemoveOldest();
 
-    DataSettings *GetDataSettings() const
-    {
-        uint address = Address() + sizeof(Packet);
+    // Освободить size байт памяти с начала буфера
+    static void AllocateMemoryFromBegin(int size);
 
-        return reinterpret_cast<DataSettings *>(address); //-V2571
-    }
-};
+    int16 currentSignal = 0;
+
+    // Указатель на самый старый записанный пакет. Он будет стёрт первым
+    Packet *oldest = reinterpret_cast<Packet *>(BEGIN); //-V2571
+
+    // Указатель на последний записанный пакет. Он будет стёрт последним
+    Packet *newest = nullptr;
+
+    static bool needNewFrame = true;
+
+    bool canTrace = false;
+}
 
 
 void RAM::Init()
@@ -351,4 +365,10 @@ bool RAM::LastSettingsEqualsCurrent() //-V2506
     }
 
     return Get()->EqualsCurrentSettings();
+}
+
+
+void RAM::NewFrameForRandomize()
+{
+    needNewFrame = true;
 }
