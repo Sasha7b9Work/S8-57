@@ -16,11 +16,11 @@
 
 
 #ifdef LOADER
-const DFont *fonts[DTypeFont::Count] = { &font8, &font8, &font8, &font8, nullptr };
+const DFont *DFont::fonts[DTypeFont::Count] = { &font8, &font8, &font8, &font8, nullptr };
 #else
-const DFont *fonts[DTypeFont::Count] = { &font5, &font8, &fontUGO, &fontUGO2, nullptr };
+const DFont *DFont::fonts[DTypeFont::Count] = { &font5, &font8, &fontUGO, &fontUGO2, nullptr };
 #endif
-const DFont *font = &font8;
+const DFont *DFont::font = &font8;
 
 DTypeFont::E pushedFont = DTypeFont::_8;
 DTypeFont::E currentFont = DTypeFont::_8;

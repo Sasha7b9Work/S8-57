@@ -19,7 +19,7 @@ include_directories(..
                     src/Hardware/FatFS
                     src/Hardware/USBH
                     src/Hardware/USBD)
-                    
+
 add_definitions(-DSTM32F437xx -DDEVICE -DVS_KEIL)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
@@ -122,7 +122,6 @@ file(GLOB UTILS                            src/Utils/*)
 set_source_files_properties(${LIBS_FATFS} ${LIBS_HAL} ${LIBS_USBD} ${LIBS_USBH} PROPERTIES HEADER_FILE_ONLY TRUE)
 
 set_source_files_properties(
-#                            ../common/Display/Font/Font_d.cpp
                             src/Hardware/USBD/usbd_core.cpp
                             PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
 
