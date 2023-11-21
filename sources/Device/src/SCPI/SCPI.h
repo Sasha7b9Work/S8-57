@@ -1,3 +1,4 @@
+// 2023/11/21 10:10:58 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 
 
@@ -76,10 +77,10 @@ namespace SCPI
     void AppendNewData(const char *buffer, int length);
 
     void Update();
-    
+
     // Возвращает true, если указатель указывает на завершающую последовательность
     bool IsLineEnding(const char **bufer);
-    
+
     // Послать ответ м в конце дописать 0x0D, если нет
     void SendAnswer(pCHAR message);
     void SendAnswer(const String &message);
@@ -90,11 +91,11 @@ namespace SCPI
 
     // Послать измерение в SCPI - с заменой нечитаемых символов и единиц измерения
     void SendMeasure(const String &message);
-    
+
     // Если строка buffer начинается с последовательности символов word, то возвращает указатель на символ, следующий за последним символом последовательности word.
     // Иначе возвращает nullptr.
     const char *BeginWith(const char *buffer, const char *word);
-    
+
     // Послать сообщение об ошибочных символах, если таковые имеются
     void SendBadSymbols();
 

@@ -1,3 +1,4 @@
+// 2023/11/21 10:11:04 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Hardware/VCP.h"
 #include "SCPI/SCPI.h"

@@ -1,3 +1,4 @@
+// 2023/11/21 10:10:36 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Device.h"
 #include "Menu/Menu.h"
