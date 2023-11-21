@@ -59,7 +59,7 @@ static void UpdateDisplay()
 
     for (int i = 0; i < Control::Count; i++)
     {
-        if (!states[i])
+        if (states[i])
         {
             Painter::DrawFormatText(20 + (i / 12) * 90, 20 + (i % 12) * 15, "%s",
                 Keyboard::ControlName((Control::E)i));
