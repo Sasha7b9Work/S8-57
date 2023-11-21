@@ -3,6 +3,7 @@
 #include "common/Command.h"
 #include "Hardware/Keyboard.h"
 #include "Hardware/HAL/HAL.h"
+#include <cstring>
 
 
 #define SL0 GPIO_PIN_14
@@ -22,33 +23,35 @@
 #define RL5 GPIO_PIN_12
 
 
-static const Control controls[Keyboard::NUM_RL][Keyboard::NUM_SL] =
-{ //          SL0/SL6                SL1/SL7                  SL2                     SL3                     SL4                     SL5              
-    {Control::K_None,       Control::B_3,            Control::B_Down,        Control::K_None,        Control::B_TrigLevLess, Control::B_TrigLevMore,
-     Control::B_RangeLessB, Control::B_RShiftMoreB},                                                                                            // RL0
+namespace Keyboard
+{
+    static const Control controls[Keyboard::NUM_RL][Keyboard::NUM_SL] =
+    { //          SL0/SL6                SL1/SL7                  SL2                     SL3                     SL4                     SL5              
+        {Control::K_None,       Control::B_3,            Control::B_Down,        Control::K_None,        Control::B_TrigLevLess, Control::B_TrigLevMore,
+         Control::B_RangeLessB, Control::B_RShiftMoreB},                                                                                            // RL0
 
-    {Control::B_1,          Control::B_4,            Control::B_Right,       Control::B_Enter,       Control::K_Start,       Control::K_Trig,
-     Control::B_RangeMoreB, Control::B_RShiftLessB},                                                                                            // RL1
+        {Control::B_1,          Control::B_4,            Control::B_Right,       Control::B_Enter,       Control::K_Start,       Control::K_Trig,
+         Control::B_RangeMoreB, Control::B_RShiftLessB},                                                                                            // RL1
 
-    {Control::B_2,          Control::B_5,            Control::B_Up,          Control::B_Left,        Control::K_None,        Control::K_None,
-     Control::K_None,       Control::K_ChannelB},                                                                                               // RL2
+        {Control::B_2,          Control::B_5,            Control::B_Up,          Control::B_Left,        Control::K_None,        Control::K_None,
+         Control::K_None,       Control::K_ChannelB},                                                                                               // RL2
 
-    {Control::K_Function,   Control::K_Service,      Control::B_RangeLessA,  Control::K_RangeMoreA,  Control::K_None,        Control::B_TShiftLess,
-     Control::K_None,       Control::K_None},                                                                                                   // RL3
+        {Control::K_Function,   Control::K_Service,      Control::B_RangeLessA,  Control::K_RangeMoreA,  Control::K_None,        Control::B_TShiftLess,
+         Control::K_None,       Control::K_None},                                                                                                   // RL3
 
-    {Control::K_Measures,   Control::K_None,         Control::K_ChannelA,    Control::K_None,        Control::B_TBaseMore,   Control::B_TShiftMore,
-     Control::K_None,       Control::K_None},                                                                                                   // RL4
+        {Control::K_Measures,   Control::K_None,         Control::K_ChannelA,    Control::K_None,        Control::B_TBaseMore,   Control::B_TShiftMore,
+         Control::K_None,       Control::K_None},                                                                                                   // RL4
 
-    {Control::K_Memory,     Control::K_Display,      Control::B_RShiftMoreA, Control::B_RShiftLessA, Control::K_Time,        Control::B_TBaseLess,
-     Control::K_None,       Control::K_None}                                                                                                    // RL5
-};
+        {Control::K_Memory,     Control::K_Display,      Control::B_RShiftMoreA, Control::B_RShiftLessA, Control::K_Time,        Control::B_TBaseLess,
+         Control::K_None,       Control::K_None}                                                                                                    // RL5
+    };
 
 
-static uint16 sls[Keyboard::NUM_SL] = { SL0,   SL1,   SL2,   SL3,   SL4,   SL5,   SL6,   SL7 };
-static GPIO_TypeDef *slsPorts[Keyboard::NUM_SL] = { GPIOB, GPIOB, GPIOB, GPIOB, GPIOD, GPIOC, GPIOD, GPIOC }; //-V2571
+    static uint16 sls[Keyboard::NUM_SL] = { SL0,   SL1,   SL2,   SL3,   SL4,   SL5,   SL6,   SL7 };
+    static GPIO_TypeDef *slsPorts[Keyboard::NUM_SL] = { GPIOB, GPIOB, GPIOB, GPIOB, GPIOD, GPIOC, GPIOD, GPIOC }; //-V2571
 
-static uint16 rls[Keyboard::NUM_RL] = { RL0,   RL1,   RL2,   RL3,   RL4,   RL5 };
-static GPIO_TypeDef *rlsPorts[Keyboard::NUM_RL] = { GPIOD, GPIOA, GPIOA, GPIOD, GPIOA, GPIOD }; //-V2571
+    static uint16 rls[Keyboard::NUM_RL] = { RL0,   RL1,   RL2,   RL3,   RL4,   RL5 };
+    static GPIO_TypeDef *rlsPorts[Keyboard::NUM_RL] = { GPIOD, GPIOA, GPIOA, GPIOD, GPIOA, GPIOD }; //-V2571
 
 #define SET_SL(n)   HAL_GPIO_WritePin(slsPorts[n], sls[n], GPIO_PIN_SET);
 #define SET_ALL_SL  HAL_GPIO_WritePin(GPIOB, SL0 | SL1 | SL2 | SL3, GPIO_PIN_SET);  \
@@ -59,23 +62,32 @@ static GPIO_TypeDef *rlsPorts[Keyboard::NUM_RL] = { GPIOD, GPIOA, GPIOA, GPIOD, 
 
 #define BUTTON_IS_PRESS(state) ((state) == 0)
 
-// Время последнего автонажатия нопки
-static uint prevRepeat = 0;
-static uint prevPause = 0;
+    // Время последнего автонажатия нопки
+    static uint prevRepeat = 0;
+    static uint prevPause = 0;
 
 
-static void SendCommand(Control control, Control::Action::E action);
+    static void SendCommand(Control control, Control::Action::E action);
 
-static uint TimeBetweenRepeats(uint time);
-// При обнаружении нажатия кнопки сюда записывается время нажатия
-static uint timePress[Keyboard::NUM_RL][Keyboard::NUM_SL];
-// Установленное в true значение означает, что сохранять куда-либо информацию о её состоянии нельзя до отпускания (чтобы не было ложных
-// срабатываний типа Long
-static bool alreadyLong[Keyboard::NUM_RL][Keyboard::NUM_SL];
+    static uint TimeBetweenRepeats(uint time);
+    // При обнаружении нажатия кнопки сюда записывается время нажатия
+    static uint timePress[Keyboard::NUM_RL][Keyboard::NUM_SL];
+    // Установленное в true значение означает, что сохранять куда-либо информацию о её состоянии нельзя до отпускания (чтобы не было ложных
+    // срабатываний типа Long
+    static bool alreadyLong[Keyboard::NUM_RL][Keyboard::NUM_SL];
 
-static bool init;
+    static bool init;
 
-static bool states[Control::Count];
+    static bool states[Control::Count];
+
+    static bool sl_rl[NUM_SL][NUM_RL];
+}
+
+
+void Keyboard::GetSL_RL(bool out[NUM_SL][NUM_RL])
+{
+    std::memcpy(out, sl_rl, sizeof(bool) * NUM_SL * NUM_RL);
+}
 
 
 void Keyboard::Init()
@@ -83,6 +95,14 @@ void Keyboard::Init()
     for (int i = 0; i < Control::Count; i++)
     {
         states[i] = false;
+    }
+
+    for (int sl = 0; sl < NUM_SL; sl++)
+    {
+        for (int rl = 0; rl < NUM_RL; rl++)
+        {
+            sl_rl[sl][rl] = false;
+        }
     }
 
     for (int i = 0; i < NUM_RL; ++i)
@@ -137,6 +157,8 @@ void Keyboard::Update() //-V2506
         for (int rl = 0; rl < NUM_RL; ++rl)
         {
             uint state = READ_RL(rl);
+
+            sl_rl[sl][rl] = state ? true : false;
 
             Control control = controls[rl][sl];
 
@@ -202,7 +224,7 @@ void Keyboard::Update() //-V2506
 }
 
 
-static void SendCommand(Control control, Control::Action::E action)
+void Keyboard::SendCommand(Control control, Control::Action::E action)
 {
     if (HAL_BUS::DataIsReceived())
     {
@@ -293,7 +315,7 @@ bool Control::IsRepeatable() const
 }
 
 
-static uint TimeBetweenRepeats(uint prev)
+uint Keyboard::TimeBetweenRepeats(uint prev)
 {
     uint retValue = static_cast<uint>(static_cast<float>(prev) / 1.1F);
 

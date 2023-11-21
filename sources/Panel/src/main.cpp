@@ -61,8 +61,32 @@ static void UpdateDisplay()
     {
         if (states[i])
         {
-            Painter::DrawFormatText(20 + (i / 12) * 90, 20 + (i % 12) * 15, "%s",
+            Painter::DrawFormatText(5 + (i / 12) * 80, 5 + (i % 12) * 15, "%s",
                 Keyboard::ControlName((Control::E)i));
+        }
+    }
+
+    bool sl_rl[Keyboard::NUM_SL][Keyboard::NUM_RL];
+
+    Keyboard::GetSL_RL(sl_rl);
+
+    int x0 = 265;
+    int y0 = 170;
+
+    for (int sl = 0; sl < Keyboard::NUM_SL; sl++)
+    {
+        Painter::DrawFormatText(x0 - 15, y0 + 8 * sl, "sl%d", sl + 1);
+
+        for (int rl = 0; rl < Keyboard::NUM_RL; rl++)
+        {
+            if (!sl_rl[sl][rl])
+            {
+                Painter::DrawFormatText(x0 + 8 * rl, y0 + 8 * sl, "%d", rl + 1);
+            }
+            else
+            {
+                Text::Draw(x0 + 8 * rl + 2, y0 + 8 * sl - 3, ".");
+            }
         }
     }
 

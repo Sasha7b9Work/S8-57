@@ -4,11 +4,11 @@
 #include "defines.h"
 
 
-struct Keyboard
+namespace Keyboard
 {
-    static void Init();
+    void Init();
 
-    static void Update();
+    void Update();
 
     //  оличество выводов RL дл€ опроса клавиатуры
     static const int NUM_RL = 6;
@@ -17,7 +17,10 @@ struct Keyboard
     static const int NUM_SL = 8;
 
     // ¬озращает им€ органа управлени€
-    static const char *ControlName(Control control);
+    const char *ControlName(Control control);
 
-    static bool *GetStateControls();
+    bool *GetStateControls();
+
+    //                         sl rl
+    void GetSL_RL(bool[NUM_SL][NUM_RL]);
 };
