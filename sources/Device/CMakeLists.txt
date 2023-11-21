@@ -122,7 +122,6 @@ file(GLOB UTILS                            src/Utils/*)
 set_source_files_properties(${LIBS_FATFS} ${LIBS_HAL} ${LIBS_USBD} ${LIBS_USBH} PROPERTIES HEADER_FILE_ONLY TRUE)
 
 set_source_files_properties(
-                            src/Menu/Pages/PageFunction/PageFFT.cpp
                             src/Osci/Measurements/AutoMeasurements.cpp
                             src/Menu/Pages/PageFunction/PageMultimeter.cpp
                             src/Utils/CommonFunctions.cpp
