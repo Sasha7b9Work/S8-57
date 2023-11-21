@@ -2,8 +2,7 @@
 #include "Menu/MenuItems.h"
 
 
-class PageHelp
+namespace PageHelp
 {
-public:
-    static const Page * const self;
+    extern const Page * const self;
 };

@@ -132,7 +132,6 @@ set_source_files_properties(
                             src/SCPI/FreqMeterSCPI.cpp
                             src/Hardware/Memory/ROM_NRST.cpp
                             src/FreqMeter/FreqMeter.cpp
-                            src/Hardware/Beeper.cpp
                             PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
 
 source_group(common                              FILES ${COMMON})

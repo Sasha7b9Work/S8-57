@@ -21,19 +21,19 @@ struct SettingsService
 
 
 
-struct PageService
+namespace PageService
 {
-    static const Page * const self;
+    extern const Page * const self;
 
-    static void OnPress_ResetSettings();
+    void OnPress_ResetSettings();
 
-    static void DecodePassword(const KeyEvent &event);
-    static void EnablePageDebug();
-    static void DisablePageDebug();
+    void DecodePassword(const KeyEvent &event);
+    void EnablePageDebug();
+    void DisablePageDebug();
 
-    struct Battery
+    namespace Battery
     {
-        static const Page *const self;
+        extern const Page *const self;
     };
 
 

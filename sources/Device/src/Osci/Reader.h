@@ -1,26 +1,22 @@
+// 2023/11/21 13:09:35 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Osci/DeviceSettings.h"
 #include "Hardware/Memory/RAM.h"
 #include "Menu/Pages/Include/PageMemory.h"
 
 
-extern const DataSettings *pDS;     // Указатель на настройки текущего рисуемого сигнала. Обращаться к нему следует через макрос DS.
-extern uint8 *dataOUT[2];           // Считанные данные второго канала
-extern uint8 *dataIN[2];
-extern uint16 *ave[2];
-
-#define DS          pDS             // Указатель на настройки текущего рисуемого сигнала.
+#define DS   (Reader::pDS)             // Указатель на настройки текущего рисуемого сигнала.
 
 #define ENABLE_CH_DS(ch)  (((ch) == Chan::A) ? DS->enableA : DS->enableB)
 
-#define IN(ch)  (dataIN[static_cast<int>(ch)])
+#define IN(ch)  (Reader::dataIN[static_cast<int>(ch)])
 #define IN_A    IN(ChanA)
 #define IN_B    IN(ChanB)
-#define OUT(ch) (dataOUT[static_cast<int>(ch)])
+#define OUT(ch) (Reader::dataOUT[static_cast<int>(ch)])
 #define OUT_A   OUT(ChanA)
 #define OUT_B   OUT(ChanB)
 
-#define AVE_DATA(ch) ave[static_cast<int>(ch)]
+#define AVE_DATA(ch) (Reader::ave[static_cast<int>(ch)])
 #define AVE_1        AVE_DATA(ChanA)
 #define AVE_2        AVE_DATA(ChanB)
 
@@ -56,14 +52,20 @@ struct StructDataDrawing
 
 
 
-class Reader
+namespace Reader
 {
-public:
     // Читает данные из хранилища
-    static void ReadDataFromRAM();
+    void ReadDataFromRAM();
 
-    static void ReadDataFromROM();
-private:
-    // Поиск уровня синхронизации, если установлен автоматический режим поиска
-    //static void FindTrigLevelIfNeed();
+    void ReadDataFromROM();
+
+    // Указатель на настройки текущего рисуемого сигнала. Обращаться к нему следует через макрос DS.
+    // Указатель на настройки считанных данных
+    extern const DataSettings *pDS;
+
+    extern uint8 *dataIN[2];
+
+    extern uint8 *dataOUT[2];           // Считанные данные второго канала
+
+    extern uint16 *ave[2];
 };

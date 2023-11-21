@@ -9,25 +9,26 @@
 #include <cstring>
 
 
-// Это пространство CCM-памяти
-static uint8 ccm[8][8 * 1024] __attribute__((section("CCM_DATA")));
+namespace Reader
+{
+    // Это пространство CCM-памяти
+    static uint8 ccm[8][8 * 1024] __attribute__((section("CCM_DATA")));
 
-// Это указатели на считанные данные
-uint8 *dataIN[2] = { ccm[0], ccm[1] };
+    // Это указатели на считанные данные
+    uint8 *dataIN[2] = { ccm[0], ccm[1] };
 
-// Это указатели на данные, пересчитанные и готовые к выводу
-uint8 *dataOUT[2] = { ccm[2], ccm[3] };
+    // Это указатели на данные, пересчитанные и готовые к выводу
+    uint8 *dataOUT[2] = { ccm[2], ccm[3] };
 
-// 
-uint16 *ave[2] = { IntRAM::Averager32k(ChanA), IntRAM::Averager32k(ChanB) };
+    // 
+    uint16 *ave[2] = { IntRAM::Averager32k(ChanA), IntRAM::Averager32k(ChanB) };
 
-DataSettings ds;
+    DataSettings ds;
 
-// Указатель на настройки считанных данных
-const DataSettings *pDS = nullptr;
+    FrameP2P *frameP2P = nullptr;
 
-
-FrameP2P *frameP2P = nullptr;
+    const DataSettings *pDS = nullptr;
+}
 
 
 void Reader::ReadDataFromRAM()
