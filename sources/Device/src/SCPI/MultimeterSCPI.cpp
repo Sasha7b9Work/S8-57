@@ -3,44 +3,51 @@
 #include "SCPI/SCPI.h"
 
 
-// :MULTIMETER:AVP
-static pCHAR FuncAVP(pCHAR);
-static void HintAVP(String *);
-static bool TestAVP();
+namespace S_MULT
+{
+    // :MULTIMETER:AVP
+    static pCHAR FuncAVP(pCHAR);
+    static void HintAVP(String *);
+    static bool TestAVP();
 
-// :MULTIMETER:MEASURE
-static pCHAR FuncMeasure(pCHAR);
-static void HintMeasure(String *);
-static bool TestMeasure();
+    // :MULTIMETER:MEASURE
+    static pCHAR FuncMeasure(pCHAR);
+    static void HintMeasure(String *);
+    static bool TestMeasure();
 
-// :MULTIMETER:MODE
-static pCHAR FuncMode(pCHAR);
-static void HintMode(String *);
-static bool TestMode();
+    // :MULTIMETER:MODE
+    static pCHAR FuncMode(pCHAR);
+    static void HintMode(String *);
+    static bool TestMode();
 
-// :MULTIMETER:VALUE?
-static pCHAR FuncValue(pCHAR);
-static void HintValue(String *);
-static bool TestValue();
+    // :MULTIMETER:VALUE?
+    static pCHAR FuncValue(pCHAR);
+    static void HintValue(String *);
+    static bool TestValue();
 
-// :MULTIMETER:ZERO
-static pCHAR FuncZero(pCHAR);
-static void HintZero(String *);
-static bool TestZero();
+    // :MULTIMETER:ZERO
+    static pCHAR FuncZero(pCHAR);
+    static void HintZero(String *);
+    static bool TestZero();
+
+    static void EnableMultimeter();
+    static void DisableMultimeter();
+    static void TuneAVP(int);
+}
 
 
 const StructSCPI SCPI::multimeter[] =
 {
-    SCPI_LEAF(":AVP",     FuncAVP,     TestAVP,     "", HintAVP),
-    SCPI_LEAF(":MEASURE", FuncMeasure, TestMeasure, "", HintMeasure),
-    SCPI_LEAF(":MODE",    FuncMode,    TestMode,    "", HintMode),
-    SCPI_LEAF(":VALUE?",  FuncValue,   TestValue,   "", HintValue),
-    SCPI_LEAF(":ZERO",    FuncZero,    TestZero,    "", HintZero),
+    SCPI_LEAF(":AVP",     S_MULT::FuncAVP,     S_MULT::TestAVP,     "", S_MULT::HintAVP),
+    SCPI_LEAF(":MEASURE", S_MULT::FuncMeasure, S_MULT::TestMeasure, "", S_MULT::HintMeasure),
+    SCPI_LEAF(":MODE",    S_MULT::FuncMode,    S_MULT::TestMode,    "", S_MULT::HintMode),
+    SCPI_LEAF(":VALUE?",  S_MULT::FuncValue,   S_MULT::TestValue,   "", S_MULT::HintValue),
+    SCPI_LEAF(":ZERO",    S_MULT::FuncZero,    S_MULT::TestZero,    "", S_MULT::HintZero),
     SCPI_EMPTY()
 };
 
 
-static void TuneAVP(int i)
+void S_MULT::TuneAVP(int i)
 {
     if (Device::InModeMultimeter())
     {
@@ -50,7 +57,7 @@ static void TuneAVP(int i)
 }
 
 
-static pCHAR FuncAVP(pCHAR buffer) //-V2506
+pCHAR S_MULT::FuncAVP(pCHAR buffer) //-V2506
 {
     static pString avp[] =
     {
@@ -166,7 +173,7 @@ static void EnableMeasure(int i)
 }
 
 
-static pCHAR FuncMeasure(pCHAR buffer) //-V2506
+pCHAR S_MULT::FuncMeasure(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SendAnswerForMeasure());
 
@@ -174,7 +181,7 @@ static pCHAR FuncMeasure(pCHAR buffer) //-V2506
 }
 
 
-static void EnableMultimeter()
+void S_MULT::EnableMultimeter()
 {
     if (Menu::OpenedPage() != PageMultimeter::self)
     {
@@ -188,7 +195,7 @@ static void EnableMultimeter()
 }
 
 
-static void DisableMultimeter()
+void S_MULT::DisableMultimeter()
 {
     if (Menu::OpenedPage() == PageMultimeter::self)
     {
@@ -198,7 +205,7 @@ static void DisableMultimeter()
 }
 
 
-static pCHAR FuncMode(pCHAR buffer) //-V2506
+pCHAR S_MULT::FuncMode(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(Device::InModeMultimeter() ? " ON" : " OFF"));
 
@@ -210,7 +217,7 @@ static pCHAR FuncMode(pCHAR buffer) //-V2506
 }
 
 
-static pCHAR FuncValue(pCHAR buffer) //-V2506
+pCHAR S_MULT::FuncValue(pCHAR buffer) //-V2506
 {
     SCPI_PROLOG(buffer);
 
@@ -220,7 +227,7 @@ static pCHAR FuncValue(pCHAR buffer) //-V2506
 }
 
 
-static pCHAR FuncZero(pCHAR buffer) //-V2506
+pCHAR S_MULT::FuncZero(pCHAR buffer) //-V2506
 {
     static pString zero[] =
     {
@@ -235,61 +242,61 @@ static pCHAR FuncZero(pCHAR buffer) //-V2506
 }
 
 
-static bool TestAVP()
+bool S_MULT::TestAVP()
 {
     return false;
 }
 
 
-static bool TestMeasure()
+bool S_MULT::TestMeasure()
 {
     return false;
 }
 
 
-static bool TestMode()
+bool S_MULT::TestMode()
 {
     return false;
 }
 
 
-static bool TestValue()
+bool S_MULT::TestValue()
 {
     return false;
 }
 
 
-static bool TestZero()
+bool S_MULT::TestZero()
 {
     return false;
 }
 
 
-static void HintAVP(String *)
+void S_MULT::HintAVP(String *)
 {
 
 }
 
 
-static void HintMeasure(String *)
+void S_MULT::HintMeasure(String *)
 {
 
 }
 
 
-static void HintMode(String *)
+void S_MULT::HintMode(String *)
 {
 
 }
 
 
-static void HintValue(String *)
+void S_MULT::HintValue(String *)
 {
 
 }
 
 
-static void HintZero(String *)
+void S_MULT::HintZero(String *)
 {
 
 }
