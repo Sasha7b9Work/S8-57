@@ -19,13 +19,13 @@ struct HAL_DAC2
 };
 
 
-struct HAL_BUS
+namespace HAL_BUS
 {
-    static void Init();
+    void Init();
 
-    static void SendToDevice(uint8 *data, uint size);
+    void SendToDevice(uint8 *data, uint size);
 
-    static void Update();
+    void Update();
 
-    static bool DataIsReceived();
+    bool DataIsReceived();
 };
