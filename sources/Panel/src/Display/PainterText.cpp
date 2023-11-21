@@ -1,3 +1,4 @@
+// 2023/11/21 11:21:20 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "Painter.h"
 #include "Display/Font/Font_p.h"
 #include "Display/Text.h"
@@ -5,7 +6,6 @@
 #include <cstdarg>
 #include <stdio.h>
 #include <string.h>
-
 
 
 int Painter::DrawFormatText(int x, int y, char *format, ...)

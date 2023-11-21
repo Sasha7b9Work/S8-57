@@ -1,3 +1,4 @@
+// 2023/11/21 11:21:15 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "defines.h"
 
