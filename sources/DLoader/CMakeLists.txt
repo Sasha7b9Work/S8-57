@@ -1,7 +1,7 @@
 project (DLoader)
 
 
-set(CMAKE_UNITY_BUILD ON)
+#set(CMAKE_UNITY_BUILD OFF)
 
 
 include_directories(../common/libs/STM32Cube_F4/Drivers/STM32F4xx_HAL_Driver/Inc
