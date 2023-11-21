@@ -14,20 +14,44 @@ static void UpdateDisplay()
 {
     static int x = 0;
     static int y = 0;
-
-
-    Painter::SetColor(Color::WHITE);
-
-    Painter::BeginScene();
+    static int width = 10;
+    static int dx = 1;
+    static int dy = 0;
 
     Painter::SetColor(Color::BLACK);
 
-    Painter::FillRegion(x++, y++, 100, 100);
+    Painter::BeginScene();
 
-    if (x > 220 || y > 140)
+    Painter::SetColor(Color::WHITE);
+
+    Painter::FillRegion(x, y, width, width);
+
+    x += dx;
+    y += dy;
+
+    if (x + width > Display::WIDTH)
     {
-        x = 0;
-        y = 0;
+        x--;
+        dx = 0;
+        dy = 1;
+    }
+    else if (y + width > Display::HEIGHT)
+    {
+        y--;
+        dx = -1;
+        dy = 0;
+    }
+    else if (x < 0)
+    {
+        x++;
+        dx = 0;
+        dy = -1;
+    }
+    else if (y < 0)
+    {
+        y++;
+        dx = 1;
+        dy = 0;
     }
 
     Painter::EndScene();
