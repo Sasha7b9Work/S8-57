@@ -7,6 +7,7 @@
 #include "Hardware/Timer.h"
 #include "Hardware/Keyboard.h"
 #include "Hardware/HAL/HAL.h"
+#include "Display/Text.h"
 #include <stdlib.h>
 
 
@@ -54,6 +55,17 @@ static void UpdateDisplay()
         dy = 0;
     }
 
+    bool *states = Keyboard::GetStateControls();
+
+    for (int i = 0; i < Control::Count; i++)
+    {
+        if (states[i])
+        {
+            Painter::DrawFormatText(20 + (i / 12) * 90, 20 + (i % 12) * 15, "%s",
+                Keyboard::ControlName((Control::E)i));
+        }
+    }
+
     Painter::EndScene();
 }
 
@@ -70,6 +82,10 @@ int main()
     Painter::LoadPalette();
 
     HAL_DAC2::SetValue(255);
+
+    PFont::Set(PTypeFont::_8);
+
+    Text::SetSpacing(1);
 
     while(1)
     {
