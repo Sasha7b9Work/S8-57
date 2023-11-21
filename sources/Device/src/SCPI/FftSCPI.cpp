@@ -3,44 +3,49 @@
 #include "SCPI/SCPI.h"
 #include "Settings/Settings.h"
 
-// :FFT:DATA?
-static pCHAR FuncData(pCHAR);
-static void HintData(String *);
-static bool TestData();
+namespace S_FFT
+{
+    // :FFT:DATA?
+    static pCHAR FuncData(pCHAR);
+    static void HintData(String *);
+    static bool TestData();
 
-// :FFT:DISPLAY
-static pCHAR FuncDisplay(pCHAR);
-static void HintDisplay(String *);
-static bool TestDisplay();
+    // :FFT:DISPLAY
+    static pCHAR FuncDisplay(pCHAR);
+    static void HintDisplay(String *);
+    static bool TestDisplay();
 
-// :FFT:SCALE
-static pCHAR FuncScale(pCHAR);
-static void HintScale(String *);
-static bool TestScale();
+    // :FFT:SCALE
+    static pCHAR FuncScale(pCHAR);
+    static void HintScale(String *);
+    static bool TestScale();
 
-// :FFT:SOUCRE
-static pCHAR FuncSource(pCHAR);
-static void HintSource(String *);
-static bool TestSource();
+    // :FFT:SOUCRE
+    static pCHAR FuncSource(pCHAR);
+    static void HintSource(String *);
+    static bool TestSource();
 
-// :FFT:WINDOW
-static pCHAR FuncWindow(pCHAR);
-static void HintWindow(String *);
-static bool TestWindow();
+    // :FFT:WINDOW
+    static pCHAR FuncWindow(pCHAR);
+    static void HintWindow(String *);
+    static bool TestWindow();
+
+    static void EnableFFT(int i);
+}
 
 
 const StructSCPI SCPI::fft[] =
 {
-    SCPI_LEAF(":DATA?",   FuncData,    TestData,    "", HintData),
-    SCPI_LEAF(":DISPLAY", FuncDisplay, TestDisplay, "", HintDisplay),
-    SCPI_LEAF(":SCALE",   FuncScale,   TestScale,   "", HintScale),
-    SCPI_LEAF(":SOURCE",  FuncSource,  TestSource,  "", HintSource),
-    SCPI_LEAF(":WINDOW",  FuncWindow,  TestWindow,  "", HintWindow),
+    SCPI_LEAF(":DATA?",   S_FFT::FuncData,    S_FFT::TestData,    "", S_FFT::HintData),
+    SCPI_LEAF(":DISPLAY", S_FFT::FuncDisplay, S_FFT::TestDisplay, "", S_FFT::HintDisplay),
+    SCPI_LEAF(":SCALE",   S_FFT::FuncScale,   S_FFT::TestScale,   "", S_FFT::HintScale),
+    SCPI_LEAF(":SOURCE",  S_FFT::FuncSource,  S_FFT::TestSource,  "", S_FFT::HintSource),
+    SCPI_LEAF(":WINDOW",  S_FFT::FuncWindow,  S_FFT::TestWindow,  "", S_FFT::HintWindow),
     SCPI_EMPTY()
 };
 
 
-static pCHAR FuncData(pCHAR buffer) //-V2506
+pCHAR S_FFT::FuncData(pCHAR buffer) //-V2506
 {
     SCPI_PROLOG(buffer);
 
@@ -57,12 +62,12 @@ static pString display[] =
     ""
 };
 
-static void EnableFFT(int i)
+void S_FFT::EnableFFT(int i)
 {
     S_FFT_ENABLED = (i == 0);
 }
 
-static pCHAR FuncDisplay(pCHAR buffer) //-V2506
+pCHAR S_FFT::FuncDisplay(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(display[S_FFT_ENABLED ? 0 : 1]));
 
@@ -77,7 +82,7 @@ static pString scale[] =
     ""
 };
 
-static pCHAR FuncScale(pCHAR buffer) //-V2506
+pCHAR S_FFT::FuncScale(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(scale[S_FFT_SCALE]));
 
@@ -93,7 +98,7 @@ static pString source[] =
     ""
 };
 
-static pCHAR FuncSource(pCHAR buffer) //-V2506
+pCHAR S_FFT::FuncSource(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(source[S_FFT_SOURCE]));
 
@@ -110,7 +115,7 @@ static pString window[] =
     ""
 };
 
-static pCHAR FuncWindow(pCHAR buffer) //-V2506
+pCHAR S_FFT::FuncWindow(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(window[S_FFT_WINDOW]));
 
@@ -118,61 +123,61 @@ static pCHAR FuncWindow(pCHAR buffer) //-V2506
 }
 
 
-static bool TestData()
+bool S_FFT::TestData()
 {
     return false;
 }
 
 
-static bool TestDisplay()
+bool S_FFT::TestDisplay()
 {
     return false;
 }
 
 
-static bool TestScale()
+bool S_FFT::TestScale()
 {
     return false;
 }
 
 
-static bool TestSource()
+bool S_FFT::TestSource()
 {
     return false;
 }
 
 
-static bool TestWindow()
+bool S_FFT::TestWindow()
 {
     return false;
 }
 
 
-static void HintData(String *)
+void S_FFT::HintData(String *)
 {
 
 }
 
 
-static void HintDisplay(String *)
+void S_FFT::HintDisplay(String *)
 {
 
 }
 
 
-static void HintScale(String *)
+void S_FFT::HintScale(String *)
 {
 
 }
 
 
-static void HintSource(String *)
+void S_FFT::HintSource(String *)
 {
 
 }
 
 
-static void HintWindow(String *)
+void S_FFT::HintWindow(String *)
 {
 
 }

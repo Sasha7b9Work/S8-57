@@ -122,7 +122,6 @@ file(GLOB UTILS                            src/Utils/*)
 set_source_files_properties(${LIBS_FATFS} ${LIBS_HAL} ${LIBS_USBD} ${LIBS_USBH} PROPERTIES HEADER_FILE_ONLY TRUE)
 
 set_source_files_properties(
-                            src/SCPI/FftSCPI.cpp
                             src/SCPI/MeasuresSCPI.cpp
                             ../common/Display/Font/Font_d.cpp
                             src/SCPI/TriggerSCPI.cpp
