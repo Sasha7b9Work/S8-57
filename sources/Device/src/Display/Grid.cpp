@@ -32,6 +32,8 @@ namespace Grid
     static float DeltaX();
 
     static int MathTop();
+
+    static void EmptyFunc();
 }
 
 
@@ -121,7 +123,7 @@ int Grid::ChannelHeight()
 }
 
 
-static void EmptyFunc()
+void Grid::EmptyFunc()
 {
 
 }

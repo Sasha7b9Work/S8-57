@@ -131,7 +131,6 @@ set_source_files_properties(
                             src/Hardware/USBD/usbd_core.cpp
                             src/SCPI/FreqMeterSCPI.cpp
                             src/Hardware/Memory/ROM_NRST.cpp
-                            src/Display/Grid.cpp
                             src/FreqMeter/FreqMeter.cpp
                             src/Hardware/Beeper.cpp
                             PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
