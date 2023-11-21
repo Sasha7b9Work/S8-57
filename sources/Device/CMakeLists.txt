@@ -140,6 +140,9 @@ set_source_files_properties(src/Menu/Pages/PageFunction/PageTester.cpp
                             src/Menu/Pages/PageMemory/PageMemory_ROM.cpp
                             src/SCPI/FreqMeterSCPI.cpp
                             src/Hardware/Memory/ROM_NRST.cpp
+                            src/Display/Grid.cpp
+                            src/FreqMeter/FreqMeter.cpp
+                            src/Menu/Pages/PageService/PageDebug/PageDebug_Console.cpp
                             PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
 
 source_group(common                              FILES ${COMMON})

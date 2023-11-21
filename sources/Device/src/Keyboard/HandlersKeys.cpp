@@ -8,51 +8,54 @@
 #include "Osci/Display/DisplayOsci.h"
 
 
-// Обрабатываемое событие
-static KeyEvent event;
+namespace Handlers
+{
+    // Обрабатываемое событие
+    static KeyEvent event;
 
-// Общий обработчик изменения параметра канала - масштаба или смещения
-static void OnChangeParameterChannel(pFuncVChI16, Chan::E, int16);
+    // Общий обработчик изменения параметра канала - масштаба или смещения
+    static void OnChangeParameterChannel(pFuncVChI16, Chan::E, int16);
 
-// Пустой обработчик
-static void Empty();
+    // Пустой обработчик
+    static void Empty();
 
-// Общий обработчик раскрытой страницы. Возвращает true, если отработал и дальнейшая обработка события клавиатуры не требуется.
-static bool CommonHandlerPage();
+    // Общий обработчик раскрытой страницы. Возвращает true, если отработал и дальнейшая обработка события клавиатуры не требуется.
+    static bool CommonHandlerPage();
 
-// Общий обработчик изменения временных параметров
-static void OnChangeParameterTime(pFuncVI, int);
+    // Общий обработчик изменения временных параметров
+    static void OnChangeParameterTime(pFuncVI, int);
 
-// Открывает страницу или закрывает меню в зависимости от того, какая страница сейчас раскрыта
-static void ShowHidePage(const Page *page);
+    // Открывает страницу или закрывает меню в зависимости от того, какая страница сейчас раскрыта
+    static void ShowHidePage(const Page *page);
 
-static void ChangeRShift(Chan::E ch, int16 delta);
+    static void ChangeRShift(Chan::E ch, int16 delta);
 
-// Обработчики нажатия кнопок
-static void OnTime();      // Key::Time
-static void OnFunction();  // Key::Function
-static void OnService();   // Key::Service
-static void OnMeasures();  // Key::Measure
-static void OnDisplay();   // Key::Display
-static void OnMemory();    // Key::Memory
-static void OnChannelA();  // Key::ChannelA
-static void OnChannelB();  // Key::ChannelB
-static void OnTrig();      // Key::Trig
+    // Обработчики нажатия кнопок
+    static void OnTime();      // Key::Time
+    static void OnFunction();  // Key::Function
+    static void OnService();   // Key::Service
+    static void OnMeasures();  // Key::Measure
+    static void OnDisplay();   // Key::Display
+    static void OnMemory();    // Key::Memory
+    static void OnChannelA();  // Key::ChannelA
+    static void OnChannelB();  // Key::ChannelB
+    static void OnTrig();      // Key::Trig
 
-static void OnArrow();     // Key::Left, Key::Up, Key::Right, Key::Down
-static void OnEnter();     // Key::Enter
-static void OnStart();     // Key::Start
-static void OnTrigLev();   // Key::TrigLevLess, Key::TrigLevMore
-static void OnRangeA();    // Key::RangeLessA, Key::RangeMoreA
-static void OnRangeB();    // Key::RangeLessB, Key::RangeMoreB
-static void OnRShiftA();   // Key::RShiftLessA, Key::RShiftMoreB
-static void OnRShiftB();   // Key::RShiftLessB, Key::RShiftMoreB
-static void OnTBase();     // Key::TBaseLess, Key::TBase::More
-static void OnTShift();    // Key::TShiftLess, Key::TShiftMore
-static void OnFX();        // Key::F1, Key::F2, Key::F3, Key::F4, Key::F5
+    static void OnArrow();     // Key::Left, Key::Up, Key::Right, Key::Down
+    static void OnEnter();     // Key::Enter
+    static void OnStart();     // Key::Start
+    static void OnTrigLev();   // Key::TrigLevLess, Key::TrigLevMore
+    static void OnRangeA();    // Key::RangeLessA, Key::RangeMoreA
+    static void OnRangeB();    // Key::RangeLessB, Key::RangeMoreB
+    static void OnRShiftA();   // Key::RShiftLessA, Key::RShiftMoreB
+    static void OnRShiftB();   // Key::RShiftLessB, Key::RShiftMoreB
+    static void OnTBase();     // Key::TBaseLess, Key::TBase::More
+    static void OnTShift();    // Key::TShiftLess, Key::TShiftMore
+    static void OnFX();        // Key::F1, Key::F2, Key::F3, Key::F4, Key::F5
 
-// Общая функция при нажатии на кнопку со страницей
-static void CommonButtonPage(const Page *page);
+    // Общая функция при нажатии на кнопку со страницей
+    static void CommonButtonPage(const Page *page);
+}
 
 
 void Handlers::Process(KeyEvent e)
@@ -110,11 +113,11 @@ void Handlers::Process(KeyEvent e)
     }
 }
 
-static void Empty()
+void Handlers::Empty()
 {
 }
 
-static void ChangeRShift(Chan::E ch, int16 delta)
+void Handlers::ChangeRShift(Chan::E ch, int16 delta)
 {
     if (!Device::InModeRecorder())
     {
@@ -125,43 +128,43 @@ static void ChangeRShift(Chan::E ch, int16 delta)
 }
 
 
-static void OnRShiftA()
+void Handlers::OnRShiftA()
 {
     OnChangeParameterChannel(ChangeRShift, ChanA, (event.key == Key::RShiftMoreA) ? 1 : -1);
 }
 
 
-static void OnRShiftB()
+void Handlers::OnRShiftB()
 {
     OnChangeParameterChannel(ChangeRShift, ChanB, (event.key == Key::RShiftMoreB) ? 1 : -1);
 }
 
 
-static void OnRangeA()
+void Handlers::OnRangeA()
 {
     OnChangeParameterChannel(Range::Change, ChanA, (event.key == Key::RangeMoreA) ? 1 : -1);
 }
 
 
-static void OnRangeB()
+void Handlers::OnRangeB()
 {
     OnChangeParameterChannel(Range::Change, ChanB, (event.key == Key::RangeMoreB) ? 1 : -1);
 }
 
 
-static void OnChangeParameterChannel(pFuncVChI16 func, Chan::E ch, int16 delta)
+void Handlers::OnChangeParameterChannel(pFuncVChI16 func, Chan::E ch, int16 delta)
 {
     func(ch, delta);
 }
 
 
-static void OnChangeParameterTime(pFuncVI func, int delta)
+void Handlers::OnChangeParameterTime(pFuncVI func, int delta)
 {
     func(delta);
 }
 
 
-static void OnTShift()
+void Handlers::OnTShift()
 {
     int delta = (event.key == Key::TShiftMore) ? 1 : -1;
 
@@ -176,7 +179,7 @@ static void OnTShift()
 }
 
 
-static void OnTBase()
+void Handlers::OnTBase()
 {
     int delta = (event.key == Key::TBaseMore) ? 1 : -1;
 
@@ -191,7 +194,7 @@ static void OnTBase()
 }
 
 
-static void OnFX()
+void Handlers::OnFX()
 {
     if (Menu::IsShown())
     {
@@ -209,7 +212,7 @@ static void OnFX()
 }
 
 
-static void OnArrow()
+void Handlers::OnArrow()
 {
     Item *openedItem = Menu::OpenedItem();
 
@@ -227,7 +230,7 @@ static void OnArrow()
 }
 
 
-static bool CommonHandlerPage()
+bool Handlers::CommonHandlerPage()
 {
     bool result = false;
 
@@ -252,7 +255,7 @@ static bool CommonHandlerPage()
 }
 
 
-static void OnEnter()
+void Handlers::OnEnter()
 {
     if (event.IsRelease())
     {
@@ -272,13 +275,13 @@ static void OnEnter()
 }
 
 
-static void OnTrigLev()
+void Handlers::OnTrigLev()
 {
     TrigLevel::Change((event.key == Key::TrigLevMore) ? 1 : -1);
 }
 
 
-static void OnChannelA()
+void Handlers::OnChannelA()
 {
     if (event.IsRelease())
     {
@@ -293,7 +296,7 @@ static void OnChannelA()
 }
 
 
-static void OnChannelB()
+void Handlers::OnChannelB()
 {
     if (event.IsRelease())
     {
@@ -308,7 +311,7 @@ static void OnChannelB()
 }
 
 
-static void OnFunction()
+void Handlers::OnFunction()
 {
     CommonButtonPage(PageFunction::self);
 
@@ -316,7 +319,7 @@ static void OnFunction()
 }
 
 
-static void OnMeasures()
+void Handlers::OnMeasures()
 {
     CommonButtonPage(PageMeasures::self);
 
@@ -324,7 +327,7 @@ static void OnMeasures()
 }
 
 
-static void OnMemory()
+void Handlers::OnMemory()
 {
     if (FDrive::IsConnected() && S_MEM_MODE_BTN_MEMORY_IS_SAVE)
     {
@@ -339,7 +342,7 @@ static void OnMemory()
 }
 
 
-static void OnService()
+void Handlers::OnService()
 {
     CommonButtonPage(PageService::self);
 
@@ -347,7 +350,7 @@ static void OnService()
 }
 
 
-static void OnTime()
+void Handlers::OnTime()
 {
     CommonButtonPage(PageTime::self);
 
@@ -369,7 +372,7 @@ static void OnTime()
 }
 
 
-static void OnStart()
+void Handlers::OnStart()
 {
     if (Device::InModeTester())
     {
@@ -386,7 +389,7 @@ static void OnStart()
 }
 
 
-static void OnTrig()
+void Handlers::OnTrig()
 {
     if (event.IsRelease())
     {
@@ -401,7 +404,7 @@ static void OnTrig()
 }
 
 
-static void OnDisplay()
+void Handlers::OnDisplay()
 {
     CommonButtonPage(PageDisplay::self);
 
@@ -409,7 +412,7 @@ static void OnDisplay()
 }
 
 
-static void ShowHidePage(const Page *page)
+void Handlers::ShowHidePage(const Page *page)
 {
     if (Menu::OpenedItem() == page)
     {
@@ -427,7 +430,7 @@ static void ShowHidePage(const Page *page)
 }
 
 
-static void CommonButtonPage(const Page *page)
+void Handlers::CommonButtonPage(const Page *page)
 {
     if(Menu::GetMainPage() != page)
     {

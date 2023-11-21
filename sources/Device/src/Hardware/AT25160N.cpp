@@ -42,8 +42,8 @@ struct PinOut : public Pin
 
 static PinOut CLK(PIN_AT2516_CLK);
 static PinOut CS(PIN_AT2516_CS);
-static PinOut OUT(PIN_AT2516_OUT);
-static PinIn  IN(PIN_AT2516_IN);
+static PinOut pinOUT(PIN_AT2516_OUT);
+static PinIn  pinIN(PIN_AT2516_IN);
 
 
 void AT25160N::Init()
@@ -62,11 +62,11 @@ void AT25160N::Init()
 
     CLK.Init();
     CS.Init();
-    OUT.Init();
-    IN.Init();
+    pinOUT.Init();
+    pinIN.Init();
 
     CS.Set();
-    OUT.Reset();
+    pinOUT.Reset();
     CLK.Reset();
 }
 
@@ -254,12 +254,12 @@ void AT25160N::WriteByte(uint8 byte)
     {
         if (_GET_BIT(byte, bit))
         {
-            OUT.Set();
+            pinOUT.Set();
         }
 
         CLK.Set();
         CLK.Reset();
-        OUT.Reset();
+        pinOUT.Reset();
     }
 }
 
@@ -274,7 +274,7 @@ uint8 AT25160N::ReadByte()
 
         CLK.Reset();
 
-        if(IN.Read())
+        if(pinIN.Read())
         {
             retValue |= 0x01;
         }
