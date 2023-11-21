@@ -4,6 +4,7 @@
 #include "Hardware/LTDC.h"
 #include "Hardware/HAL/HAL.h"
 #include "Settings/SettingsTypes.h"
+#include "Hardware/Timer.h"
 
 
 static LTDC_HandleTypeDef handleLTDC;
@@ -147,6 +148,8 @@ void LTDC_::ToggleBuffers()
 
     hDMA2D.Instance = DMA2D; //-V2571
 
+    uint start = TIME_MS;
+
     if (HAL_DMA2D_Init(&hDMA2D) == HAL_OK)
     {
         if (HAL_DMA2D_ConfigLayer(&hDMA2D, 1) == HAL_OK)
@@ -157,4 +160,8 @@ void LTDC_::ToggleBuffers()
             }
         }
     }
+
+    uint time = TIME_MS - start;
+
+    time = time;
 }
