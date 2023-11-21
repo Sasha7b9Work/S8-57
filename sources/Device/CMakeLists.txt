@@ -123,7 +123,6 @@ set_source_files_properties(${LIBS_FATFS} ${LIBS_HAL} ${LIBS_USBD} ${LIBS_USBH} 
 
 set_source_files_properties(
                             src/Osci/Measurements/AutoMeasurements.cpp
-                            src/Utils/CommonFunctions.cpp
                             src/SCPI/MultimeterSCPI.cpp
                             src/SCPI/FftSCPI.cpp
                             src/SCPI/MeasuresSCPI.cpp
