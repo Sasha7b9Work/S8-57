@@ -407,8 +407,8 @@ bool FDrive::WriteToFile(uint8 *data, int sizeData, StructForWrite *structForWri
             dataToCopy = SIZE_FLASH_TEMP_BUFFER - structForWrite->sizeData;
         }
         sizeData -= dataToCopy;
-        std::memcpy(structForWrite->tempBuffer + structForWrite->sizeData, data, static_cast<uint>(dataToCopy)); //-V2563
-        data += dataToCopy; // -V102 //-V2563
+        std::memcpy(structForWrite->tempBuffer + structForWrite->sizeData, data, static_cast<uint>(dataToCopy));
+        data += dataToCopy; // -V102
         structForWrite->sizeData += dataToCopy;
         if (structForWrite->sizeData == SIZE_FLASH_TEMP_BUFFER)
         {
@@ -619,7 +619,7 @@ static void ReadRow(uint8 row, uint8 pixels[320])
         HAL_BUS::Panel::Receive();
     }
 
-    std::memcpy(pixels, DDecoder::Buffer() + 2, 320); //-V2563
+    std::memcpy(pixels, DDecoder::Buffer() + 2, 320);
 }
 
 

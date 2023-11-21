@@ -36,7 +36,7 @@ void Buffer::Fill(uint8 value)
 
 void Buffer::Free()
 {
-    std::free(data); //-V2511
+    std::free(data);
     data = nullptr;
     size = 0U;
 }
@@ -46,7 +46,7 @@ void Buffer::Malloc(int s)
 {
     if (s > 0)
     {
-        data = static_cast<uint8 *>(std::malloc(static_cast<uint>(s))); //-V2511
+        data = static_cast<uint8 *>(std::malloc(static_cast<uint>(s)));
         size = (data) ? s : 0;
 
         if(!data)
@@ -70,5 +70,5 @@ void Buffer::Log()
 
 void Buffer::LogU8(const uint8 *buffer)
 {
-    LOG_WRITE("%d %d %d %d %d %d %d %d %d %d", buffer[0], buffer[1], buffer[2], buffer[3], buffer[4], buffer[5], buffer[6], buffer[7], buffer[8], buffer[9]); //-V2563
+    LOG_WRITE("%d %d %d %d %d %d %d %d %d %d", buffer[0], buffer[1], buffer[2], buffer[3], buffer[4], buffer[5], buffer[6], buffer[7], buffer[8], buffer[9]);
 }

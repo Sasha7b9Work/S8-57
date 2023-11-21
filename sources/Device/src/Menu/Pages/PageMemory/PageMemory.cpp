@@ -204,7 +204,7 @@ static void OnPress_Mask_Insert() //-V2506
     }
     if (index < 0x41)
     {
-        S_MEM_FILE_NAME_MASK[size] = Tables::Get(index)[0]; //-V2563
+        S_MEM_FILE_NAME_MASK[size] = Tables::Get(index)[0];
         S_MEM_FILE_NAME_MASK[size + 1] = '\0';
     }
     else
@@ -276,7 +276,7 @@ static void DrawSetMask()
     int deltaY = 12;
 
     // Рисуем большие буквы английского алфавита
-    while (Tables::Get(index)[0] != ' ') //-V2563
+    while (Tables::Get(index)[0] != ' ')
     {
         Tables::DrawStr(index, x0 + deltaX + position * 7, y0 + deltaY0);
         index++;
@@ -285,7 +285,7 @@ static void DrawSetMask()
 
     // Теперь рисуем цифры и пробел
     position = 0;
-    while (Tables::Get(index)[0] != 'a') //-V2563
+    while (Tables::Get(index)[0] != 'a')
     {
         Tables::DrawStr(index, x0 + deltaX + 50 + position * 7, y0 + deltaY0 + deltaY);
         index++;
@@ -294,7 +294,7 @@ static void DrawSetMask()
 
     // Теперь рисуем малые буквы алфавита
     position = 0;
-    while (Tables::Get(index)[0] != '%') //-V2563
+    while (Tables::Get(index)[0] != '%')
     {
         Tables::DrawStr(index, x0 + deltaX + position * 7, y0 + deltaY0 + deltaY * 2);
         index++;
@@ -344,7 +344,7 @@ static void DrawFileMask(int x, int y)
             if (*ch == 0x07)
             {
                 x = Char('%').Draw(x, y);
-                x = Char(0x30 | *(ch + 1)).Draw(x, y); //-V2563
+                x = Char(0x30 | *(ch + 1)).Draw(x, y);
                 x = Char('N').Draw(x, y);
                 ch++;
             }
@@ -450,7 +450,7 @@ static void DrawSetName()
     int deltaY = 12;
 
     // Рисуем большие буквы английского алфавита
-    while (Tables::Get(index)[0] != ' ') //-V2563
+    while (Tables::Get(index)[0] != ' ')
     {
         Tables::DrawStr(index, x0 + deltaX + position * 7, y0 + deltaY0);
         index++;
@@ -459,7 +459,7 @@ static void DrawSetName()
 
     // Теперь рисуем цифры и пробел
     position = 0;
-    while (Tables::Get(index)[0] != 'a') //-V2563
+    while (Tables::Get(index)[0] != 'a')
     {
         Tables::DrawStr(index, x0 + deltaX + 50 + position * 7, y0 + deltaY0 + deltaY);
         index++;
@@ -468,7 +468,7 @@ static void DrawSetName()
 
     // Теперь рисуем малые буквы алфавита
     position = 0;
-    while (Tables::Get(index)[0] != '%') //-V2563
+    while (Tables::Get(index)[0] != '%')
     {
         Tables::DrawStr(index, x0 + deltaX + position * 7, y0 + deltaY0 + deltaY * 2);
         index++;
@@ -535,7 +535,7 @@ static void OnPress_SetName_Insert()
     uint size = std::strlen(S_MEM_FILE_NAME); //-V2513
     if (size < MAX_SYMBOLS_IN_FILE_NAME - 1)
     {
-        S_MEM_FILE_NAME[size] = Tables::Get(S_MEM_INDEX_CUR_SYMBOL_MASK)[0]; //-V2563
+        S_MEM_FILE_NAME[size] = Tables::Get(S_MEM_INDEX_CUR_SYMBOL_MASK)[0];
         S_MEM_FILE_NAME[size + 1] = '\0';
     }
 }

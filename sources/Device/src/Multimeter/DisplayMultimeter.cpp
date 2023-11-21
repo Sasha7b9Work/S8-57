@@ -224,7 +224,7 @@ static void DrawUnits(bool inModeOsci)
 
         if (needSendToSCPI)
         {
-            SCPI::SendAnswer(outBuffer + 7); //-V2563
+            SCPI::SendAnswer(outBuffer + 7);
         }
 
         if(outBuffer[8] == '=' || 
@@ -275,8 +275,8 @@ static void DrawSymbolOMEGA(int x, int y, bool inModeOsci)
 
         for (int i = 0; i < radius; i++)
         {
-            float angle = std::asinf(i * (1.0F / radius)); //-V2564
-            float length = std::cosf(angle) * radius; //-V2564
+            float angle = std::asinf(i * (1.0F / radius));
+            float length = std::cosf(angle) * radius;
             Draw2HLinesRelCenter(x + radius, y + i + radius - 1, static_cast<int>(length + 0.5F));
             Draw2HLinesRelCenter(x + radius, y - i + radius - 1, static_cast<int>(length + 0.5F));
         }
@@ -314,8 +314,8 @@ static void DrawSymbolOMEGA(int x, int y, bool inModeOsci)
 
         for (int i = 0; i < radius; i++)
         {
-            float angle = std::asinf(i * (1.0F / radius)); //-V2564
-            float length = std::cosf(angle) * radius; //-V2564
+            float angle = std::asinf(i * (1.0F / radius));
+            float length = std::cosf(angle) * radius;
             Draw2HLinesRelCenter(x + radius, y + i + radius - 1, static_cast<int>(length + 0.5F));
             Draw2HLinesRelCenter(x + radius, y - i + radius - 1, static_cast<int>(length + 0.5F));
         }
@@ -655,7 +655,7 @@ void DisplayMultimeter::SetMeasure(const uint8 buf[13]) //-V2506
         return;
     }
 
-    std::memcpy(outBuffer, buf + 1, 7); //-V512 //-V2563
+    std::memcpy(outBuffer, buf + 1, 7); //-V512
 
     funcs[meas].func(reinterpret_cast<const char *>(buf));
 
@@ -665,37 +665,37 @@ void DisplayMultimeter::SetMeasure(const uint8 buf[13]) //-V2506
 
 static void PrepareTestDiode(pCHAR)
 {
-    std::strcpy(outBuffer + 7, "  "); //-V2513 //-V2563
+    std::strcpy(outBuffer + 7, "  "); //-V2513
 }
 
 
 static void PrepareVoltageDC(pCHAR) //-V524
 {
-    std::strcpy(outBuffer + 7, "V="); //-V2513 //-V2563
+    std::strcpy(outBuffer + 7, "V="); //-V2513
 }
 
 
 static void PrepareVoltageAC(pCHAR)
 {
-    std::strcpy(outBuffer + 7, "V~"); //-V2513 //-V2563
+    std::strcpy(outBuffer + 7, "V~"); //-V2513
 }
 
 
 static void PrepareCurrentDC(const char *buf)
 {
-    std::strcpy(outBuffer + 7, (buf[10] == '1') ? "A=" : "mA="); //-V2513 //-V2563
+    std::strcpy(outBuffer + 7, (buf[10] == '1') ? "A=" : "mA="); //-V2513
 }
 
 
 static void PrepareCurrentAC(const char *buf)
 {
-    std::strcpy(outBuffer + 7, (buf[10] == '1') ? "A~" : "mA~"); //-V2513 //-V2563
+    std::strcpy(outBuffer + 7, (buf[10] == '1') ? "A~" : "mA~"); //-V2513
 }
 
 
 void PrepareResistance(const char *buf)
 {
-    outBuffer[7] = buf[8]; //-V2563
+    outBuffer[7] = buf[8];
     outBuffer[8] = SYMBOL_OMEGA;
 }
 
@@ -708,7 +708,7 @@ static bool ResistanceLess100()
 
 static void PrepareBell(pCHAR)
 {
-    std::strcpy(outBuffer + 7, "  "); //-V2513 //-V2563
+    std::strcpy(outBuffer + 7, "  "); //-V2513
 
     if (ResistanceLess100())
     {

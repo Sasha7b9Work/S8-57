@@ -65,7 +65,7 @@ pCHAR S_TESTER::FuncConduction(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(polarity[set.test._polarity]));
 
-    SCPI_PROCESS_ARRAY(polarity, SetPolarity(i)); //-V2563
+    SCPI_PROCESS_ARRAY(polarity, SetPolarity(i));
 }
 
 
@@ -113,7 +113,7 @@ pCHAR S_TESTER::FuncControl(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SendAnswerForControl());
 
-    SCPI_PROCESS_ARRAY(controls, EnableControl(i)); //-V2563
+    SCPI_PROCESS_ARRAY(controls, EnableControl(i));
 }
 
 

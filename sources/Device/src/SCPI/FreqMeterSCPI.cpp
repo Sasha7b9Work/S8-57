@@ -72,7 +72,7 @@ static pCHAR FuncAvePeriods(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(periodsReverse[S_FREQ_NUMBER_PERIODS]));
 
-    SCPI_PROCESS_ARRAY(periodsReverse, SetNumberPeriods(i)); //-V2563
+    SCPI_PROCESS_ARRAY(periodsReverse, SetNumberPeriods(i));
 }
 
 
@@ -99,7 +99,7 @@ static pCHAR FuncLabels(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(labels[S_FREQ_FREQ_CLC]));
 
-    SCPI_PROCESS_ARRAY(labels, SetLabels(i)); //-V2563
+    SCPI_PROCESS_ARRAY(labels, SetLabels(i));
 }
 
 
@@ -120,7 +120,7 @@ static pCHAR FuncMeasure(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(measures[S_FREQ_MODE_MEASURE]));
 
-    SCPI_PROCESS_ARRAY(measures, SetMeasure(i)); //-V2563
+    SCPI_PROCESS_ARRAY(measures, SetMeasure(i));
 }
 
 
@@ -142,7 +142,7 @@ static pCHAR FuncMode(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(S_FREQ_METER_ENABLED ? " ON" : " OFF"));
 
-    SCPI_PROCESS_ARRAY(mode, SetMode(i)); //-V2563
+    SCPI_PROCESS_ARRAY(mode, SetMode(i));
 }
 
 
@@ -168,7 +168,7 @@ static pCHAR FuncTime(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(time[S_FREQ_TIME_COUNTING]));
 
-    SCPI_PROCESS_ARRAY(time, SetTime(i)); //-V2563
+    SCPI_PROCESS_ARRAY(time, SetTime(i));
 }
 
 

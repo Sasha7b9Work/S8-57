@@ -23,8 +23,8 @@ static bool ChooseSpaces(const char **string);
 
 bool String2Int(char *str, int *value) //-V2506
 {
-    int sign = str[0] == '-' ? -1 : 1; //-V2563
-    if (str[0] < '0' || str[0] > '9') //-V2563
+    int sign = str[0] == '-' ? -1 : 1;
+    if (str[0] < '0' || str[0] > '9')
     {
         str++;
     }
@@ -40,7 +40,7 @@ bool String2Int(char *str, int *value) //-V2506
     do
     {
         --i;
-        int val = str[i] & (~(0x30)); //-V2563
+        int val = str[i] & (~(0x30));
         if (val < 0 || val > 9)
         {
             return false;
@@ -88,12 +88,12 @@ int BCD2Int(uint bcd)
 
 static bool ChooseSymbols(const char **string) //-V2506
 {
-    if (SYMBOL(string) == 0x0d && SYMBOL(string + 1) == 0x0a) //-V2563
+    if (SYMBOL(string) == 0x0d && SYMBOL(string + 1) == 0x0a)
     {
         return false;
     }
 
-    while (SYMBOL(string) != ' ' && SYMBOL(string) != 0x0d && SYMBOL(string + 1) != 0x0a) //-V2563
+    while (SYMBOL(string) != ' ' && SYMBOL(string) != 0x0d && SYMBOL(string + 1) != 0x0a)
     {
         (*string)++;
     }
@@ -104,7 +104,7 @@ static bool ChooseSymbols(const char **string) //-V2506
 
 static bool ChooseSpaces(const char **string) //-V2506
 {
-    if (SYMBOL(string) == 0x0d && SYMBOL(string + 1) == 0x0a) //-V2563
+    if (SYMBOL(string) == 0x0d && SYMBOL(string + 1) == 0x0a)
     {
         return false;
     }
@@ -201,7 +201,7 @@ bool SU::EqualsStrings(void *_str1, void *_str2, int size) //-V2506
 
     for (int i = 0; i < size; i++)
     {
-        if (str1[i] != str2[i]) //-V2563
+        if (str1[i] != str2[i])
         {
             return false;
         }
@@ -216,7 +216,7 @@ bool SU::EqualsStrings(const char *str1, const char *str2) //-V2506
 
     for (uint i = 0; i < size; i++)
     {
-        if (str1[i] != str2[i]) //-V2563
+        if (str1[i] != str2[i])
         {
             return false;
         }
@@ -267,7 +267,7 @@ float SU::StringToFloat(const char *string)
 
         while (stack.Size() > 0)
         {
-            result += static_cast<float>(pow) * stack.Pop(); //-V2564
+            result += static_cast<float>(pow) * stack.Pop();
             pow *= 10;
         }
     }
@@ -287,7 +287,7 @@ float SU::StringToFloat(const char *string)
             {
                 break;
             }
-            result += pow * (symbol & 0x0f); //-V2564
+            result += pow * (symbol & 0x0f);
             pow /= 10.0F;
             string++;
         }
@@ -310,7 +310,7 @@ char *SU::ToUpper(char *_str, int size)
 
     for(int i = 0; i < size; i++)
     {
-        str[i] = static_cast<char>(std::toupper(str[i])); //-V2563
+        str[i] = static_cast<char>(std::toupper(str[i]));
     }
 
     return str;
@@ -430,7 +430,7 @@ bool SU::String2Int(const char *buffer, int *value, char **end)
     }
     else
     {
-        *end = const_cast<char *>(buffer) + (*end - string.DataChar()); //-V2563 //-V2567
+        *end = const_cast<char *>(buffer) + (*end - string.DataChar()); //-V2567
     }
 
     return (*end != const_cast<char *>(buffer)); //-V2567

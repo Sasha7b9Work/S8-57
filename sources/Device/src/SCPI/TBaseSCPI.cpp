@@ -117,7 +117,7 @@ pCHAR S_TBASE::FuncMode(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(modes[S_RAND_SAMPLE_TYPE]));
 
-    SCPI_PROCESS_ARRAY(modes, SetSampleType(i)); //-V2563
+    SCPI_PROCESS_ARRAY(modes, SetSampleType(i));
 }
 
 
@@ -139,7 +139,7 @@ pCHAR S_TBASE::FuncOffsetBase(pCHAR buffer) //-V2506
     {
         TShift::Set(value);
 
-        return end_str + 1; //-V2563
+        return end_str + 1;
     }
 
     return nullptr;
@@ -150,7 +150,7 @@ pCHAR S_TBASE::FuncPeakDet(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(peakdets[S_PEAK_DET]));
 
-    SCPI_PROCESS_ARRAY(peakdets, PeakDetMode::Set(static_cast<PeakDetMode::E>(i))); //-V2563
+    SCPI_PROCESS_ARRAY(peakdets, PeakDetMode::Set(static_cast<PeakDetMode::E>(i)));
 }
 
 
@@ -158,7 +158,7 @@ pCHAR S_TBASE::FuncScale(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(tBaseNames[S_TIME_BASE]));
 
-    SCPI_PROCESS_ARRAY(tBaseNames, TBase::Set(static_cast<TBase::E>(i))); //-V2563
+    SCPI_PROCESS_ARRAY(tBaseNames, TBase::Set(static_cast<TBase::E>(i)));
 }
 
 
@@ -166,7 +166,7 @@ pCHAR S_TBASE::FuncTPos(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(tposes[S_TPOS]));
 
-    SCPI_PROCESS_ARRAY(tposes, TPos::Set(static_cast<TPos::E>(i))); //-V2563
+    SCPI_PROCESS_ARRAY(tposes, TPos::Set(static_cast<TPos::E>(i)));
 }
 
 

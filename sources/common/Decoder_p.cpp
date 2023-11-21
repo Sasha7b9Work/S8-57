@@ -194,7 +194,7 @@ bool PDecoder::DrawTesterPoints(uint8 data) //-V2506
 
         if (numY == TESTER_NUM_POINTS)
         {
-            Painter::DrawTesterData(mode, color, reinterpret_cast<uint16 *>(buffer), buffer + TESTER_NUM_POINTS * 2); //-V1032 //-V2563 //-V2571
+            Painter::DrawTesterData(mode, color, reinterpret_cast<uint16 *>(buffer), buffer + TESTER_NUM_POINTS * 2); //-V1032 //-V2571
             return true;
         }
     }
@@ -531,15 +531,15 @@ bool PDecoder::DrawText(uint8 data) //-V2506
     case 4:
         numSymbols = data;
         readingSymbols = 0;
-        buffer = new char[static_cast<uint>(numSymbols + 1)]; //-V2511
+        buffer = new char[static_cast<uint>(numSymbols + 1)];
         break;
     default:
-        buffer[readingSymbols++] = static_cast<char>(data); //-V2563
+        buffer[readingSymbols++] = static_cast<char>(data);
         if (readingSymbols == numSymbols)
         {
-            buffer[readingSymbols] = 0; //-V2563
+            buffer[readingSymbols] = 0;
             Text::Draw(x, y, (const char *)buffer);
-            delete[]buffer; //-V2511
+            delete[]buffer;
             return true;
         }
         break;

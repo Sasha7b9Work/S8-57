@@ -138,7 +138,7 @@ void AT25160N::WriteData(uint address, uint8 *data, int size)
         }
         Write32BytesOrLess(address, data, 32);
         address += 32;
-        data += 32; //-V2563
+        data += 32;
         size -= 32;    
     }
 }
@@ -298,7 +298,7 @@ void AT25160N::ReadData(uint address, uint8 *data, int size)
 
     for(int i = 0; i < size; i++) //-V756
     {
-        data[i] = 0; //-V2563
+        data[i] = 0;
 
         for (int j = 0; j < 8; j++)
         {

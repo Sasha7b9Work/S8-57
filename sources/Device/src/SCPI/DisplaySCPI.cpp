@@ -95,7 +95,7 @@ static pCHAR FuncAccumulation(pCHAR buffer) //-V2506
 
     SCPI_IF_BEGIN_WITH_THEN(" CLEAR", PageDisplay::Accumulation::OnPress_Accumulation_Clear());
 
-    SCPI_PROCESS_ARRAY(accumulationDirect, S_DISP_ENUM_ACCUM = static_cast<ENumAccum::E>(i)); //-V2563
+    SCPI_PROCESS_ARRAY(accumulationDirect, S_DISP_ENUM_ACCUM = static_cast<ENumAccum::E>(i));
 }
 
 
@@ -125,7 +125,7 @@ static pCHAR FuncAverages(pCHAR buffer) //-V2506
 
     SCPI_REQUEST(SCPI::SendAnswer(averagesDirect[S_OSCI_ENUM_AVERAGE]));
 
-    SCPI_PROCESS_ARRAY(averages, SetAverage(i)); //-V2563
+    SCPI_PROCESS_ARRAY(averages, SetAverage(i));
 }
 
 
@@ -140,7 +140,7 @@ static pCHAR FuncBrightness(pCHAR buffer) //-V2506
     if (SU::String2Int(buffer, &value, &end_str))
     {
         PageDisplay::SetBrightness(value);
-        return end_str + 1; //-V2563
+        return end_str + 1;
     }
 
     return nullptr;
@@ -161,7 +161,7 @@ static pCHAR FuncFPS(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(fps[S_DISP_ENUM_FPS]));
 
-    SCPI_PROCESS_ARRAY(fps, S_DISP_ENUM_FPS = static_cast<ENumSignalsInSec::E>(i)); //-V2563
+    SCPI_PROCESS_ARRAY(fps, S_DISP_ENUM_FPS = static_cast<ENumSignalsInSec::E>(i));
 }
 
 
@@ -169,7 +169,7 @@ static const char *FuncGrid(const char *buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(grids[S_DISP_TYPE_GRID]));
 
-    SCPI_PROCESS_ARRAY(grids, PageDisplay::SetTypeGrid(static_cast<TypeGrid::E>(i))); //-V2563
+    SCPI_PROCESS_ARRAY(grids, PageDisplay::SetTypeGrid(static_cast<TypeGrid::E>(i)));
 }
 
 
@@ -177,7 +177,7 @@ static pCHAR FuncMapping(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(mapping[S_DISP_MAPPING]));
 
-    SCPI_PROCESS_ARRAY(mapping, S_DISP_MAPPING = static_cast<DisplayMapping::E>(i)); //-V2563
+    SCPI_PROCESS_ARRAY(mapping, S_DISP_MAPPING = static_cast<DisplayMapping::E>(i));
 }
 
 
@@ -223,7 +223,7 @@ static pCHAR FuncSmoothing(pCHAR buffer) //-V2506
 
     static pString smoothings[] = { " 10", " 2", " 3", " 4", " 5", " 6", " 7", " 8", " 9", " 1", "" };
 
-    SCPI_PROCESS_ARRAY(smoothings, SetSmoothing(i)); //-V2563
+    SCPI_PROCESS_ARRAY(smoothings, SetSmoothing(i));
 }
 
 

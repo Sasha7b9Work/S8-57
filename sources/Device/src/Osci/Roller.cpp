@@ -35,10 +35,10 @@ void Roller::ReadPoint()
 {
     if (FPGA::IsRunning() && (HAL_PIO::Read(PIN_P2P) != 0))
     {
-        HAL_BUS::FPGA::SetAddrData(RD::DATA_A, RD::DATA_A + 1); //-V2563
+        HAL_BUS::FPGA::SetAddrData(RD::DATA_A, RD::DATA_A + 1);
         BitSet16 dataA(HAL_BUS::FPGA::ReadA0(), HAL_BUS::FPGA::ReadA1());
     
-        HAL_BUS::FPGA::SetAddrData(RD::DATA_B, RD::DATA_B + 1); //-V2563
+        HAL_BUS::FPGA::SetAddrData(RD::DATA_B, RD::DATA_B + 1);
         BitSet16 dataB(HAL_BUS::FPGA::ReadA0(), HAL_BUS::FPGA::ReadA1());
     
         addPoint(dataA, dataB);
@@ -50,14 +50,14 @@ void Roller::AddPointPeakDetEnabled(BitSet16 dataA, BitSet16 dataB)
 {
     if(ds->dataA)
     {
-        ds->dataA[currentPoint * 2] = dataA.byte0; //-V2563
-        ds->dataA[currentPoint * 2 + 1] = dataA.byte1; //-V2563
+        ds->dataA[currentPoint * 2] = dataA.byte0;
+        ds->dataA[currentPoint * 2 + 1] = dataA.byte1;
     }
 
     if(ds->dataB)
     {
-        ds->dataB[currentPoint * 2] = dataB.byte0; //-V2563
-        ds->dataB[currentPoint * 2 + 1] = dataB.byte1; //-V2563
+        ds->dataB[currentPoint * 2] = dataB.byte0;
+        ds->dataB[currentPoint * 2 + 1] = dataB.byte1;
     }
 
     Math::CircleIncrease<int>(&currentPoint, 0, ds->PointsInChannel());
@@ -68,12 +68,12 @@ void Roller::AddPointPeakDetDisabled(BitSet16 dataA, BitSet16 dataB)
 {
     if(ds->dataA)
     {
-        ds->dataA[currentPoint] = dataA.byte0; //-V2563
+        ds->dataA[currentPoint] = dataA.byte0;
     }
 
     if(ds->dataB)
     {
-        ds->dataB[currentPoint] = dataB.byte1; //-V2563
+        ds->dataB[currentPoint] = dataB.byte1;
     }
 
     Math::CircleIncrease<int>(&currentPoint, 0, ds->PointsInChannel());
@@ -150,7 +150,7 @@ int Roller::FillScreenBuffer(Chan::E ch, Buffer &buffer, int width)
 
     for(int i = firstOnDisplay; i < numBytes; i++)
     {
-        out[position] = in[i]; //-V2563
+        out[position] = in[i];
         Math::CircleIncrease<uint>(&position, 0, static_cast<uint>(width - 1));
     }
 

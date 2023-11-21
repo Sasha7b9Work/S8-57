@@ -49,7 +49,7 @@ void BufferMissingPoints::Pop(BitSet16 *a, BitSet16 *b)
 
 Point16 *Point16::Next(Record *record) const
 {
-    return const_cast<Point16 *>(reinterpret_cast<const Point16 *>(reinterpret_cast<const uint8 *>(this) + record->bytesOnPoint)); //-V2563 //-V2567
+    return const_cast<Point16 *>(reinterpret_cast<const Point16 *>(reinterpret_cast<const uint8 *>(this) + record->bytesOnPoint)); //-V2567
 }
 
 
@@ -144,7 +144,7 @@ void Record::DeleteOldPoints()
 
         uint8 *dest = BeginData();
 
-        uint8 *src = dest + bytesOnPoint; //-V2563
+        uint8 *src = dest + bytesOnPoint;
 
         std::memmove(dest, src, numBytes);
 
@@ -186,8 +186,8 @@ void Record::Interpolate(int num1, int num2)
     PointFloat *point1 = ValueSensor(num1);
     PointFloat *point2 = ValueSensor(num2);
 
-    float dMIN = (point2->min - point1->min) / (num2 - num1); //-V2564
-    float dMAX = (point2->max - point2->min) / (num2 - num1); //-V2564
+    float dMIN = (point2->min - point1->min) / (num2 - num1);
+    float dMAX = (point2->max - point2->min) / (num2 - num1);
 
     for (int i = num1 + 1; i < num2; i++)
     {
@@ -207,25 +207,25 @@ Point16 *Record::ValueA(int number)
 
 Point16 *Record::ValueB(int number)
 {
-    return reinterpret_cast<Point16 *>(AddressPoints(number) + offsetB); //-V2563
+    return reinterpret_cast<Point16 *>(AddressPoints(number) + offsetB);
 }
 
 
 PointFloat *Record::ValueSensor(int number)
 {
-    return EXIST_SENS ? reinterpret_cast<PointFloat *>(AddressPoints(number) + offsetSensor) : &empty; //-V2563
+    return EXIST_SENS ? reinterpret_cast<PointFloat *>(AddressPoints(number) + offsetSensor) : &empty;
 }
 
 
 uint8 *Record::BeginData()
 {
-    return reinterpret_cast<uint8 *>(this) + sizeof(Record); //-V2563
+    return reinterpret_cast<uint8 *>(this) + sizeof(Record);
 }
 
 
 uint8 *Record::AddressPoints(int number)
 {
-    return BeginData() + bytesOnPoint * number; //-V2563
+    return BeginData() + bytesOnPoint * number;
 }
 
 
@@ -284,7 +284,7 @@ uint8 *Record::End() const
 {
     HAL_BUS_CONFIGURE_TO_FSMC();
 
-    return Begin() + sizeof(*this) + bytesOnPoint * numPoints; //-V2563
+    return Begin() + sizeof(*this) + bytesOnPoint * numPoints;
 }
 
 
@@ -292,7 +292,7 @@ bool Record::IsValid() const //-V2506
 {
     HAL_BUS_CONFIGURE_TO_FSMC();
 
-    if(Begin() < ExtRAM::Begin() || (End() + 1024) > ExtRAM::End()) //-V2563
+    if(Begin() < ExtRAM::Begin() || (End() + 1024) > ExtRAM::End())
     {
         return false;
     }

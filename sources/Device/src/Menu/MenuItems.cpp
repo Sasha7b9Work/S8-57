@@ -243,7 +243,7 @@ int Item::PositionInKeeperList() const
     {
         for (int i = 0; i < parent->NumItems(); i++)
         {
-            if (this == parent->OwnData()->items[i]) //-V2563
+            if (this == parent->OwnData()->items[i])
             {
                 result = i;
                 break;
@@ -264,7 +264,7 @@ int Page::NumSubPages() const
 
 int Page::NumItems() const //-V2506
 {
-    const Item * const * item = &OwnData()->items[0]; //-V2563
+    const Item * const * item = &OwnData()->items[0];
 
     int result = 0;
 
@@ -385,7 +385,7 @@ Item *Page::GetItem(int numItem) const
 
     if (numItem < NumItems())
     {
-        result = const_cast<Item *>(OwnData()->items[numItem]); //-V2563 //-V2567
+        result = const_cast<Item *>(OwnData()->items[numItem]); //-V2567
     }
 
     return result;
@@ -514,16 +514,16 @@ float Governor::Step() const
 
     if (tsGovernor.address == this)
     {
-        delta = speed * (TIME_MS - tsGovernor.timeStart); //-V2564
+        delta = speed * (TIME_MS - tsGovernor.timeStart);
 
         if (tsGovernor.dir == DIRECTION::DECREASE)
         {
             delta *= -1.0F;
-            if (delta == 0.0F)  // -V550 //-V2550 //-V550
+            if (delta == 0.0F)  // -V550
             {
                 delta = -0.001F;
             }
-            else if (delta < -numLines) //-V2516 //-V2564
+            else if (delta < -numLines) //-V2516
             {
                 tsGovernor.dir = DIRECTION::NONE;
                 SetValue(PrevValue());
@@ -534,11 +534,11 @@ float Governor::Step() const
         }
         else if (tsGovernor.dir == DIRECTION::INCREASE)
         {
-            if (delta == 0.0F)  // -V550 //-V2550 //-V550
+            if (delta == 0.0F)  // -V550
             {
                 delta = 0.001F;
             }
-            else if (delta > numLines) //-V2516 //-V2564
+            else if (delta > numLines) //-V2516
             {
                 tsGovernor.dir = DIRECTION::NONE;
                 SetValue(NextValue());
@@ -801,8 +801,8 @@ float Choice::Step() const //-V2506
 
     if (tsChoice.address == this)
     {
-        float delta = speed * (TIME_MS - tsChoice.timeStart); //-V2564
-        if (delta == 0.0F)  // -V550 //-V2550 //-V550
+        float delta = speed * (TIME_MS - tsChoice.timeStart);
+        if (delta == 0.0F)  // -V550
         {
             delta = 0.001F; // Таймер в несколько первых кадров может показать, что прошло 0 мс, но мы возвращаем большее число, потому что ноль будет говорить о том, что движения нет
         }
@@ -810,7 +810,7 @@ float Choice::Step() const //-V2506
 
         if (tsChoice.dir == DIRECTION::INCREASE)
         {
-            if (delta <= numLines) //-V2564
+            if (delta <= numLines)
             {
                 return delta;
             }
@@ -820,7 +820,7 @@ float Choice::Step() const //-V2506
         {
             delta = -delta;
 
-            if (delta >= -numLines) //-V2564
+            if (delta >= -numLines)
             {
                 return delta;
             }
@@ -845,7 +845,7 @@ float Choice::Step() const //-V2506
 
 String Choice::NameCurrentSubItem() const
 {
-    return (OwnData()->cell == 0) ? String("") : String(NAME_FROM_INDEX(*OwnData()->cell)); //-V2563
+    return (OwnData()->cell == 0) ? String("") : String(NAME_FROM_INDEX(*OwnData()->cell));
 }
 
 
@@ -862,7 +862,7 @@ const char *Choice::NameNextSubItem() const
             index = 0;
         }
 
-        result = NAME_FROM_INDEX(index); //-V2563
+        result = NAME_FROM_INDEX(index);
     }
 
     return result;
@@ -882,7 +882,7 @@ const char *Choice::NamePrevSubItem() const
             index = NumChoices() - 1;
         }
 
-        result = NAME_FROM_INDEX(index); //-V2563
+        result = NAME_FROM_INDEX(index);
     }
 
     return result;
@@ -891,7 +891,7 @@ const char *Choice::NamePrevSubItem() const
 
 String Choice::NameSubItem(int i) const
 {
-    return String(NAME_FROM_INDEX(i)); //-V2563
+    return String(NAME_FROM_INDEX(i));
 }
 
 

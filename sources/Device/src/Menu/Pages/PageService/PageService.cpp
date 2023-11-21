@@ -115,7 +115,7 @@ void PageService::EnablePageDebug()
 
     Item **items = const_cast<Item **>(page->OwnData()->items); //-V2567
 
-    items[7] = const_cast<Page *>(PageDebug::self); //-V2563 //-V2567
+    items[7] = const_cast<Page *>(PageDebug::self); //-V2567
 }
 
 
@@ -125,5 +125,5 @@ void PageService::DisablePageDebug()
 
     Item **items = const_cast<Item **>(page->OwnData()->items); //-V2567
 
-    items[7] = &Item::empty; //-V2563
+    items[7] = &Item::empty;
 }

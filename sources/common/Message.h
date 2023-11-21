@@ -18,7 +18,7 @@ public:
 
     uint Size() const { return allocated; }
 
-    uint8 *Data(int pos = 0) { return data + pos; }	// -V104 //-V2563
+    uint8 *Data(int pos = 0) { return data + pos; }	// -V104
 
     class Create
     {

@@ -496,7 +496,7 @@ void GraphButton::DrawHints(int x, int y, int width) const //-V2506
     }
     Region(width, 239 - y).Fill(x, y, ColorTitleBackground());
     Rectangle(width, 239 - y).Draw(x, y, ColorFrame());
-    const StructHelpDrawButton *structHelp = &OwnData()->hintUGO[0]; //-V2563
+    const StructHelpDrawButton *structHelp = &OwnData()->hintUGO[0];
     x += 3;
     y += 3;
     for (int i = 0; i < NumHints(); i++)

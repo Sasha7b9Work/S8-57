@@ -12,7 +12,7 @@ template class Utils::AroundAverager<float>;
 template <typename T>
 Utils::Averager<T>::Averager(int _size) : buffer(nullptr), size(_size), numELements(0)
 {
-    buffer = static_cast<T *>(std::malloc(sizeof(T) * _size)); //-V2511
+    buffer = static_cast<T *>(std::malloc(sizeof(T) * _size));
 
     if (buffer == nullptr)
     {
@@ -24,7 +24,7 @@ Utils::Averager<T>::Averager(int _size) : buffer(nullptr), size(_size), numELeme
 template <typename T>
 Utils::Averager<T>::~Averager()
 {
-    std::free(buffer); //-V2511
+    std::free(buffer);
 }
 
 
@@ -33,16 +33,16 @@ void Utils::Averager<T>::Push(T elem)
 {
     if (numELements < size)
     {
-        buffer[numELements] = elem; //-V2563
+        buffer[numELements] = elem;
         numELements++;
     }
     else
     {
         for (uint i = 1; i < size; i++)
         {
-            buffer[i - 1] = buffer[i]; //-V2563
+            buffer[i - 1] = buffer[i];
         }
-        buffer[size - 1] = elem; //-V2563
+        buffer[size - 1] = elem;
     }
 }
 
@@ -54,7 +54,7 @@ T Utils::Averager<T>::Value() const
 
     for (uint i = 0; i < numELements; i++)
     {
-        result += buffer[i]; //-V2563
+        result += buffer[i];
     }
 
     return result / numELements;
@@ -84,7 +84,7 @@ void Utils::AroundAverager<T>::Push(T elem)
     }
     else
     {
-        value = (1.0F - 1.0F / parts) * value + (1.0F / parts) * elem; //-V2564
+        value = (1.0F - 1.0F / parts) * value + (1.0F / parts) * elem;
     }
 }
 

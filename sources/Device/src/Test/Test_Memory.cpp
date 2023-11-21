@@ -35,7 +35,7 @@ bool Test::RAM::Test() //-V2506
 
         if (i % 50 == 0)
         {
-            line = Display::AddMessage(String("Запись %d из %d, %3.1f%%", i, numRecord, 100.0F * i / numRecord).c_str(), line); //-V2564
+            line = Display::AddMessage(String("Запись %d из %d, %3.1f%%", i, numRecord, 100.0F * i / numRecord).c_str(), line);
         }
 
         DataSettings *ds = ::RAM::PrepareForNewData();
@@ -73,7 +73,7 @@ bool Test::ROM::Data::Test() //-V2506
     {
         static int num = -1;
 
-        num = Display::AddMessage(String("Запись %d из %d, %3.1f%%", i, numRecord, 100.0F * i / numRecord).c_str(), num); //-V2564
+        num = Display::AddMessage(String("Запись %d из %d, %3.1f%%", i, numRecord, 100.0F * i / numRecord).c_str(), num);
 
         uint numInROM = std::rand() % ::ROM::Data::MAX_NUM_SAVED_WAVES;
 
@@ -115,8 +115,8 @@ void TestMemoryStruct::FillData(DataSettings *ds)
 {
     int numPoints = ds->BytesInChannel();
 
-    FILL(ds->enableA, ds->dataA); //-V2563
-    FILL(ds->enableB, ds->dataB); //-V2563
+    FILL(ds->enableA, ds->dataA);
+    FILL(ds->enableB, ds->dataB);
 }
 
 
@@ -132,8 +132,8 @@ bool TestMemoryStruct::CheckData(const DataSettings *ds) //-V2506
 {
     int numPoints = ds->BytesInChannel();
 
-    CHECK(ds->enableA, ds->dataA); //-V2563
-    CHECK(ds->enableB, ds->dataB); //-V2563
+    CHECK(ds->enableA, ds->dataA);
+    CHECK(ds->enableB, ds->dataB);
 
     return false;
 }

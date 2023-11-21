@@ -120,7 +120,7 @@ int Text::Draw(int x, int y, Color color)
 {
     color.SetAsCurrent();
 
-    if (text[0] != '\0') //-V2563
+    if (text[0] != '\0')
     {
         x = DrawSmall(x, y);
     }
@@ -194,7 +194,7 @@ int Text::DrawDigitsMonospace(int x, int y, int width, Color color)
 
     for (uint i = 0; i < size; i++)
     {
-        char symbol = text[i]; //-V2563
+        char symbol = text[i];
 
         int dX = 0;
 
@@ -319,7 +319,7 @@ static bool CompareArrays(const bool *array1, const bool *array2, int numElems) 
 {
     for (int i = 0; i < numElems; i++)
     {
-        if (array1[i] != array2[i]) //-V2563
+        if (array1[i] != array2[i])
         {
             return false;
         }
@@ -358,7 +358,7 @@ static bool FindNextTransfer(const char *letters, int8 *lettersInSyllable) //-V2
 
     for (int i = 0; i < size; i++)
     {
-        consonant[i] = IsConsonant(letters[i]); //-V2563
+        consonant[i] = IsConsonant(letters[i]);
     }
 
     if (CompareArrays(template1, consonant, 3))
@@ -413,7 +413,7 @@ static int8 *BreakWord(char *word)
     char *position = word;
     while (FindNextTransfer(position, &(lengthSyllables[num])))
     {
-        position += lengthSyllables[num]; //-V2563
+        position += lengthSyllables[num];
         num++;
     }
     lengthSyllables[num + 1] = 0;
@@ -443,7 +443,7 @@ static char *PartWordForTransfer(char *word, const int8 *lengthSyllables, int nu
     uint length = 0;
     for (int i = 0; i <= numSyllable; i++)
     {
-        length += static_cast<uint>(lengthSyllables[i]); //-V2563
+        length += static_cast<uint>(lengthSyllables[i]);
     }
     std::memcpy(static_cast<void *>(buffer), static_cast<void *>(word), length);
     buffer[length] = '-';
@@ -507,11 +507,11 @@ int Text::DrawInRectWithTransfers(int eX, int eY, int eWidth, int eHeight, Color
         while (x < right - 1 && curSymbol < numSymbols)
         {
             int length = 0;
-            char *word = GetWord(text + curSymbol, &length, buffer); //-V2563
+            char *word = GetWord(text + curSymbol, &length, buffer);
 
             if (length <= 1)                            // Нет буквенных символов или один, т.е. слово не найдено
             {
-                char symbol = text[curSymbol++]; //-V2563
+                char symbol = text[curSymbol++];
                 if (symbol == '\n')
                 {
                     x = right;
@@ -564,11 +564,11 @@ static bool GetHeightTextWithTransfers(int left, int top, int right, const char 
         while (x < right - 1 && curSymbol < numSymbols)
         {
             int length = 0;
-            char *word = GetWord(text + curSymbol, &length, buffer); //-V2563
+            char *word = GetWord(text + curSymbol, &length, buffer);
 
             if (length <= 1)                            // Нет буквенных символов или один, т.е. слово не найдено
             {
-                char symbol = text[curSymbol++]; //-V2563
+                char symbol = text[curSymbol++];
                 if (symbol == '\n')
                 {
                     x = right;

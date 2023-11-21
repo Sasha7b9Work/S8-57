@@ -68,7 +68,7 @@ pCHAR S_MULT::FuncAVP(pCHAR buffer) //-V2506
 
     SCPI_REQUEST(SCPI::SendAnswer(String(avp[set.mult._avp]).c_str()));
 
-    SCPI_PROCESS_ARRAY(avp, TuneAVP(i)); //-V2563
+    SCPI_PROCESS_ARRAY(avp, TuneAVP(i));
 }
 
 
@@ -177,7 +177,7 @@ pCHAR S_MULT::FuncMeasure(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SendAnswerForMeasure());
 
-    SCPI_PROCESS_ARRAY(measures, EnableMeasure(i)); //-V2563
+    SCPI_PROCESS_ARRAY(measures, EnableMeasure(i));
 }
 
 
@@ -238,7 +238,7 @@ pCHAR S_MULT::FuncZero(pCHAR buffer) //-V2506
 
     SCPI_REQUEST(SCPI::SendAnswer(String(PageMultimeter::ZeroEnabled() ? " ON" : " OFF").c_str()));
 
-    SCPI_PROCESS_ARRAY(zero, PageMultimeter::EnableZero(i != 0)); //-V2563
+    SCPI_PROCESS_ARRAY(zero, PageMultimeter::EnableZero(i != 0));
 }
 
 

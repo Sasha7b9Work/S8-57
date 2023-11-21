@@ -85,7 +85,7 @@ void DisplayOsci::PainterData::DrawSpectrumChannel(const float *spectrum, Color 
     int gridHeight = Grid::MathHeight();
     for (int i = 0; i < 256; i++)
     {
-        int height = static_cast<int>(gridHeight * spectrum[i]); //-V2563 //-V2564
+        int height = static_cast<int>(gridHeight * spectrum[i]);
 
         VLine(height).Draw(gridLeft + i, gridBottom - height);
     }
@@ -151,7 +151,7 @@ void DisplayOsci::PainterData::DrawSpectrum(const uint8 *dataIn, int numPoints, 
     int y0 = 0;
     int y1 = 0;
 
-    float *spectrum = static_cast<float *>(std::malloc(numPoints * sizeof(float))); //-V2511
+    float *spectrum = static_cast<float *>(std::malloc(numPoints * sizeof(float)));
 
     if (spectrum)
     {
@@ -170,7 +170,7 @@ void DisplayOsci::PainterData::DrawSpectrum(const uint8 *dataIn, int numPoints, 
         Rectangle(s * 2, s * 2).Draw(S_FFT_POS_CUR_0 + Grid::Left() - s, y0 - s, Color::FILL);
         Rectangle(s * 2, s * 2).Draw(S_FFT_POS_CUR_1 + Grid::Left() - s, y1 - s);
 
-        std::free(spectrum); //-V2511
+        std::free(spectrum);
     }
 }
 
@@ -248,18 +248,18 @@ void DisplayOsci::PainterData::DrawChannel(Chan::E ch) //-V2506
 
     uint8 *data = OUT(ch);
 
-    data += DisplayOsci::ShiftInMemory::Get(); //-V2563
+    data += DisplayOsci::ShiftInMemory::Get();
 
     if (PEAKDET_ENABLED(DS))
     {
-        data += DisplayOsci::ShiftInMemory::Get(); //-V2563
+        data += DisplayOsci::ShiftInMemory::Get();
     }
 
     int center = (Grid::Bottom() - Grid::Top()) / 2 + Grid::Top();
 
     int left = Grid::Left();
 
-    float scale = static_cast<float>(Grid::Height()) / (VALUE::MAX - VALUE::MIN); //-V2564
+    float scale = static_cast<float>(Grid::Height()) / (VALUE::MAX - VALUE::MIN);
 
     if (S_FFT_ENABLED)
     {
@@ -313,8 +313,8 @@ void DisplayOsci::PainterData::DrawModeLinesPeakDetOn(int center, const uint8 *d
 {
     for (int i = 0; i < 281 * 2; i += 2)
     {
-        int min = static_cast<int>(center - (data[i] - VALUE::AVE) * scale + 0.5F); //-V2563 //-V2564
-        int max = static_cast<int>(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F); //-V2563 //-V2564
+        int min = static_cast<int>(center - (data[i] - VALUE::AVE) * scale + 0.5F);
+        int max = static_cast<int>(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F);
 
         VLine(min - max).Draw(x++, max);
     }
@@ -325,10 +325,10 @@ void DisplayOsci::PainterData::DrawModeLinesPeakDetOff(int center, const uint8 *
 {
     for (int i = 1; i < 281; i++)
     {
-        int value = static_cast<int>(center - (data[i] - VALUE::AVE) * scale + 0.5F); //-V2563 //-V2564
-        int valuePrev = static_cast<int>(center - (data[i - 1] - VALUE::AVE) * scale + 0.5F); //-V2563 //-V2564
+        int value = static_cast<int>(center - (data[i] - VALUE::AVE) * scale + 0.5F);
+        int valuePrev = static_cast<int>(center - (data[i - 1] - VALUE::AVE) * scale + 0.5F);
 
-        if(data[i] != VALUE::NONE && data[i - 1] != VALUE::NONE) //-V2563
+        if(data[i] != VALUE::NONE && data[i - 1] != VALUE::NONE)
         {
             if(value == valuePrev)
             {
@@ -364,8 +364,8 @@ void DisplayOsci::PainterData::DrawModePointsPeakDetOn(int center, const uint8 *
 {
     for (int i = 0; i < 281 * 2; i += 2)
     {
-        Pixel().Draw(x, static_cast<int>(center - (data[i] - VALUE::AVE) * scale + 0.5F)); //-V2563 //-V2564
-        Pixel().Draw(x, static_cast<int>(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F)); //-V2563 //-V2564
+        Pixel().Draw(x, static_cast<int>(center - (data[i] - VALUE::AVE) * scale + 0.5F));
+        Pixel().Draw(x, static_cast<int>(center - (data[i + 1] - VALUE::AVE) * scale + 0.5F));
         x++;
     }
 }
@@ -375,10 +375,10 @@ void DisplayOsci::PainterData::DrawModePointsPeakDetOff(int center, const uint8 
 {
     for (int i = 0; i < 280; i++)
     {
-        uint8 v8 = data[i]; //-V2563
+        uint8 v8 = data[i];
         if(v8 != VALUE::NONE)
         {
-            float value = center - (v8 - VALUE::AVE) * scale; //-V2564
+            float value = center - (v8 - VALUE::AVE) * scale;
             Pixel().Draw(x + i, ROUND(uint8, value));
         }
     }

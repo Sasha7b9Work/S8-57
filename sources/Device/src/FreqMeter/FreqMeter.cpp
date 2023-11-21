@@ -168,7 +168,7 @@ void FreqMeter::ReadPeriod()
 float FreqMeter::FreqSetToFreq(const BitSet32 *fr)
 {
     const float k[3] = {10.0F, 1.0F, 0.1F};
-    return S_FREQ_METER_ENABLED ? (fr->word * k[S_FREQ_TIME_COUNTING]) : (fr->word * 10.0F); //-V2564
+    return S_FREQ_METER_ENABLED ? (fr->word * k[S_FREQ_TIME_COUNTING]) : (fr->word * 10.0F);
 }
 
 
@@ -200,7 +200,7 @@ void FreqMeter::ClearMeasure()
 
 bool FreqMeter::FrequencyIsFound()
 {
-    return (frequency != 0.0F); //-V2550 //-V550
+    return (frequency != 0.0F);
 }
 
 

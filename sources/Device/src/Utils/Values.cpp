@@ -56,9 +56,9 @@ char* Hex::ToBin(int depth, char buffer[36]) const
         BinToString8(static_cast<uint8>(value >> (byte * 8)), pointer); //-V2571
         if (byte > 0)
         {
-            *(pointer + 8) = ' '; //-V2563
+            *(pointer + 8) = ' ';
         }
-        pointer += 9; //-V2563
+        pointer += 9;
         byte--;
     }
 
@@ -117,7 +117,7 @@ static char *IntegerToString(int value, bool alwaysSign, int numMinFields, char 
     if (alwaysSign && value >= 0)
     {
         buffer[0] = '+';
-        std::snprintf(buffer + 1, SIZE - 1, format, value); //-V2563
+        std::snprintf(buffer + 1, SIZE - 1, format, value);
     }
     else
     {
@@ -396,7 +396,7 @@ int Integer::operator [](int n)
         val /= 10;
     }
 
-    float rest = val - static_cast<int>(val / 10.0F) * 10.0F; //-V2564
+    float rest = val - static_cast<int>(val / 10.0F) * 10.0F;
 
     return static_cast<int>(rest);
 }
@@ -414,7 +414,7 @@ static char *FloatToString(float value, bool alwaysSign, int numDigits, char buf
     
     char *pBuffer = bufferOut;
     
-    if (value < 0) //-V2564
+    if (value < 0)
     {
         *pBuffer++ = '-';
     }
@@ -451,7 +451,7 @@ static char *FloatToString(float value, bool alwaysSign, int numDigits, char buf
         std::sprintf(pBuffer, format, static_cast<double>(value));
     }
     
-    bool signExist = alwaysSign || value < 0; //-V2564
+    bool signExist = alwaysSign || value < 0;
     while (std::strlen(bufferOut) < static_cast<uint>(numDigits + (signExist ? 2 : 1))) //-V2513
     {
         std::strcat(bufferOut, "0"); //-V2513

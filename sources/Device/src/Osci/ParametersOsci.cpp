@@ -45,19 +45,19 @@ static const int voltsInPixelInt[] =   // Коэффициент 20000
 
 const float VALUE::voltsInPoint[Range::Count] =
 {
-    2e-3F   / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 2mV //-V2564
-    5e-3F   / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 5mV //-V2564
-    10e-3F  / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 10mV //-V2564
-    20e-3F  / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 20mV //-V2564
-    50e-3F  / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 50mV //-V2564
-    100e-3F / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 100mV //-V2564
-    200e-3F / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 200mV //-V2564
-    500e-3F / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 500mV //-V2564
-    1.0F    / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 1V //-V2564
-    2.0F    / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 2V //-V2564
-    5.0F    / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 5V //-V2564
-    10.0F   / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 10V //-V2564
-    20.0F   / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN)     // 20V //-V2564
+    2e-3F   / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 2mV
+    5e-3F   / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 5mV
+    10e-3F  / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 10mV
+    20e-3F  / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 20mV
+    50e-3F  / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 50mV
+    100e-3F / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 100mV
+    200e-3F / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 200mV
+    500e-3F / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 500mV
+    1.0F    / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 1V
+    2.0F    / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 2V
+    5.0F    / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 5V
+    10.0F   / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN),    // 10V
+    20.0F   / 20 * Grid::Height() / (VALUE::MAX - VALUE::MIN)     // 20V
 };
 
 
@@ -87,54 +87,54 @@ ranges[Range::Count][2] =
 
 const float RShift::absStep[Range::Count] =
 {
-    2e-3F   / 20 / RShift::STEP, //-V2564
-    5e-3F   / 20 / RShift::STEP, //-V2564
-    10e-3F  / 20 / RShift::STEP, //-V2564
-    20e-3F  / 20 / RShift::STEP, //-V2564
-    50e-3F  / 20 / RShift::STEP, //-V2564
-    100e-3F / 20 / RShift::STEP, //-V2564
-    200e-3F / 20 / RShift::STEP, //-V2564
-    500e-3F / 20 / RShift::STEP, //-V2564
-    1.0F    / 20 / RShift::STEP, //-V2564
-    2.0F    / 20 / RShift::STEP, //-V2564
-    5.0F    / 20 / RShift::STEP, //-V2564
-    10.0F   / 20 / RShift::STEP, //-V2564
-    20.0F   / 20 / RShift::STEP //-V2564
+    2e-3F   / 20 / RShift::STEP,
+    5e-3F   / 20 / RShift::STEP,
+    10e-3F  / 20 / RShift::STEP,
+    20e-3F  / 20 / RShift::STEP,
+    50e-3F  / 20 / RShift::STEP,
+    100e-3F / 20 / RShift::STEP,
+    200e-3F / 20 / RShift::STEP,
+    500e-3F / 20 / RShift::STEP,
+    1.0F    / 20 / RShift::STEP,
+    2.0F    / 20 / RShift::STEP,
+    5.0F    / 20 / RShift::STEP,
+    10.0F   / 20 / RShift::STEP,
+    20.0F   / 20 / RShift::STEP
 };
 
 
 const float TShift::absStep[TBase::Count] =
 {
-    /* 2 нс    */ 2e-9F   / 20, //-V2564
-    /* 5 нс    */ 5e-9F   / 20, //-V2564
-    /* 10 нс   */ 10e-9F  / 20, //-V2564
-    /* 20 нс   */ 20e-9F  / 20, //-V2564
-    /* 50 нс   */ 50e-9F  / 20,   // 1.0  Это коэффициенты для реализации алгоритма прореживания отсчётов //-V2564
-    /* 100 нс  */ 100e-9F / 20,   // 2.0 //-V2564
-    /* 200 нс  */ 200e-9F / 20,   // 4.0 //-V2564
-    /* 500 нс  */ 500e-9F / 20,   // 10.0 //-V2564
-    /* 1 мкс   */ 1e-6F   / 20,   // 20.0 //-V2564
-    /* 2 мкс   */ 2e-6F   / 20,   // 40.0 //-V2564
-    /* 5 мкс   */ 5e-6F   / 20,   // 100.0 //-V2564
-    /* 10 мкс  */ 10e-6F  / 20,   // 200.0 //-V2564
-    /* 20 мкс  */ 20e-6F  / 20,   // 400.0 //-V2564
-    /* 50 мкс  */ 50e-6F  / 20,   // 1e3 //-V2564
-    /* 100 мкс */ 100e-6F / 20,   // 2e3 //-V2564
-    /* 200 мкс */ 200e-6F / 20,   // 4e3 //-V2564
-    /* 500 мкс */ 500e-6F / 20,   // 10e3 //-V2564
-    /* 1 мс    */ 1e-3F   / 20,   // 20e3 //-V2564
-    /* 2 мс    */ 2e-3F   / 20,   // 40e3 //-V2564
-    /* 5 мс    */ 5e-3F   / 20,   // 100e3 //-V2564
-    /* 10 мс   */ 10e-3F  / 20,   // 200e3 //-V2564
-    /* 20 мс   */ 20e-3F  / 20,   // 400e3 //-V2564
-    /* 50 мс   */ 50e-3F  / 20,   // 1e4 //-V2564
-    /* 100 мс  */ 100e-3F / 20,   // 2e4 //-V2564
-    /* 200 мс  */ 200e-3F / 20,   // 4e4 //-V2564
-    /* 500 мс  */ 500e-3F / 20,   // 10e4 //-V2564
-    /* 1 с     */ 1.0F    / 20,   // 20e4 //-V2564
-    /* 2 с     */ 2.0F    / 20,   // 40e4 //-V2564
-    /* 5 с     */ 5.0F    / 20,   // 100e4 //-V2564
-    /* 10 с    */ 10.0F   / 20    // 200e4 //-V2564
+    /* 2 нс    */ 2e-9F   / 20,
+    /* 5 нс    */ 5e-9F   / 20,
+    /* 10 нс   */ 10e-9F  / 20,
+    /* 20 нс   */ 20e-9F  / 20,
+    /* 50 нс   */ 50e-9F  / 20,   // 1.0  Это коэффициенты для реализации алгоритма прореживания отсчётов
+    /* 100 нс  */ 100e-9F / 20,   // 2.0
+    /* 200 нс  */ 200e-9F / 20,   // 4.0
+    /* 500 нс  */ 500e-9F / 20,   // 10.0
+    /* 1 мкс   */ 1e-6F   / 20,   // 20.0
+    /* 2 мкс   */ 2e-6F   / 20,   // 40.0
+    /* 5 мкс   */ 5e-6F   / 20,   // 100.0
+    /* 10 мкс  */ 10e-6F  / 20,   // 200.0
+    /* 20 мкс  */ 20e-6F  / 20,   // 400.0
+    /* 50 мкс  */ 50e-6F  / 20,   // 1e3
+    /* 100 мкс */ 100e-6F / 20,   // 2e3
+    /* 200 мкс */ 200e-6F / 20,   // 4e3
+    /* 500 мкс */ 500e-6F / 20,   // 10e3
+    /* 1 мс    */ 1e-3F   / 20,   // 20e3
+    /* 2 мс    */ 2e-3F   / 20,   // 40e3
+    /* 5 мс    */ 5e-3F   / 20,   // 100e3
+    /* 10 мс   */ 10e-3F  / 20,   // 200e3
+    /* 20 мс   */ 20e-3F  / 20,   // 400e3
+    /* 50 мс   */ 50e-3F  / 20,   // 1e4
+    /* 100 мс  */ 100e-3F / 20,   // 2e4
+    /* 200 мс  */ 200e-3F / 20,   // 4e4
+    /* 500 мс  */ 500e-3F / 20,   // 10e4
+    /* 1 с     */ 1.0F    / 20,   // 20e4
+    /* 2 с     */ 2.0F    / 20,   // 40e4
+    /* 5 с     */ 5.0F    / 20,   // 100e4
+    /* 10 с    */ 10.0F   / 20    // 200e4
 };
 
 
@@ -423,10 +423,10 @@ void TrigLevel::Find()
 
         int deltaRShift = S_RSHIFT(ch);
 
-        float k = 200 / 125.0F;     // Этот коэффициент получается так, что на верхей границе экрана лежит 125-я точка сигнала от центра экрана (нулевого значение), //-V2564
+        float k = 200 / 125.0F;     // Этот коэффициент получается так, что на верхей границе экрана лежит 125-я точка сигнала от центра экрана (нулевого значение),
                                     // а маркер в этой точке смещён на 200 единиц относительно цента экрана
 
-        float additionShift = deltaValue + deltaRShift / k;     // Итоговое смщение, которое нужно добавить к TrigLev::Zero //-V2564
+        float additionShift = deltaValue + deltaRShift / k;     // Итоговое смщение, которое нужно добавить к TrigLev::Zero
 
         TrigLevel::Set(ch, static_cast<int16>(-additionShift * k + 0.5F));
     }
@@ -540,9 +540,9 @@ void TrigLevel::Draw()
 {
     Chan::E ch = S_TRIG_SOURCE;
 
-    float scale = 1.0F / ((MAX - MIN) / 2.4F / Grid::Height()); //-V2564
+    float scale = 1.0F / ((MAX - MIN) / 2.4F / Grid::Height());
 
-    int y = Grid::ChannelCenterHeight() - static_cast<int>((S_TRIG_LEVEL(ch) + S_RSHIFT(ch)) * scale); //-V2564
+    int y = Grid::ChannelCenterHeight() - static_cast<int>((S_TRIG_LEVEL(ch) + S_RSHIFT(ch)) * scale);
 
     int x = Grid::Right();
     int xSymbol = Grid::Right() + 5;
@@ -576,7 +576,7 @@ void TrigLevel::Draw()
 
 float RShift::ToAbs(int16 rShift, Range::E range)
 {
-    return (rShift * absStep[range]); //-V2564
+    return (rShift * absStep[range]);
 }
 
 
@@ -638,7 +638,7 @@ bool RShift::ChangeMath(int delta) //-V2506
 
 float TShift::ToAbs(const int tShift, const TBase::E tBase)
 {
-    return absStep[tBase] * tShift; //-V2564
+    return absStep[tBase] * tShift;
 }
 
 void VALUE::PointsToVoltage(const uint8 *points, int numPoints, Range::E range, int16 rShift, float *voltage)
@@ -646,11 +646,11 @@ void VALUE::PointsToVoltage(const uint8 *points, int numPoints, Range::E range, 
     int voltInPixel = voltsInPixelInt[range];
     float maxVoltsOnScreen = Range::MaxVoltageOnScreen(range);
     float rShiftAbs = RShift::ToAbs(rShift, range);
-    int diff = static_cast<int>((MIN * voltInPixel) + (maxVoltsOnScreen + rShiftAbs) * 20e3F); //-V2564
+    int diff = static_cast<int>((MIN * voltInPixel) + (maxVoltsOnScreen + rShiftAbs) * 20e3F);
     float koeff = 1.0F / 20e3F;
     for (int i = 0; i < numPoints; i++)
     {
-        voltage[i] = (points[i] * voltInPixel - diff) * koeff; //-V636 //-V2563 //-V2564
+        voltage[i] = (points[i] * voltInPixel - diff) * koeff; //-V636
     }
 }
 
@@ -669,7 +669,7 @@ float Range::MaxVoltageOnScreen(Range::E range)
 
 uint8 VALUE::FromVoltage(float voltage, Range::E range, int16 rShift)
 {
-    int relValue = static_cast<int>((voltage + Range::MaxVoltageOnScreen(range) + RShift::ToAbs(rShift, range)) / voltsInPoint[range] + MIN); //-V2564
+    int relValue = static_cast<int>((voltage + Range::MaxVoltageOnScreen(range) + RShift::ToAbs(rShift, range)) / voltsInPoint[range] + MIN);
     ::Math::Limitation<int>(&relValue, 0, 255);
     return static_cast<uint8>(relValue);
 }
@@ -683,7 +683,7 @@ float VALUE::ToVoltage(uint8 value, Range::E range, int16 rShift)
 
     float maxVoltage = Range::MaxVoltageOnScreen(range);
 
-    return delta * voltsInPoint[range] - maxVoltage - rShiftAbs; //-V2564
+    return delta * voltsInPoint[range] - maxVoltage - rShiftAbs;
 }
 
 
@@ -691,28 +691,28 @@ void VALUE::PointsFromVoltage(const float *voltage, int numPoints, Range::E rang
 {
     float maxVoltOnScreen = Range::MaxVoltageOnScreen(range);
     float rShiftAbs = RShift::ToAbs(rShift, range);
-    float voltInPixel = 1.0F / (voltsInPoint[range] / ((MAX - MIN) / 200.0F)); //-V2564
+    float voltInPixel = 1.0F / (voltsInPoint[range] / ((MAX - MIN) / 200.0F));
 
     float add = maxVoltOnScreen + rShiftAbs;
 
-    float delta = add * voltInPixel + MIN; //-V2564
+    float delta = add * voltInPixel + MIN;
 
     for (int i = 0; i < numPoints; i++)
     {
-        int value = static_cast<int>(voltage[i] * voltInPixel + delta); //-V2563
+        int value = static_cast<int>(voltage[i] * voltInPixel + delta);
 
         if (value < 0)
         {
-            points[i] = 0; //-V2563
+            points[i] = 0;
             continue;
         }
         else if (value > 255) //-V2516
         {
-            points[i] = 255; //-V2563
+            points[i] = 255;
             continue;
         }
 
-        points[i] = static_cast<uint8>(value); //-V2563
+        points[i] = static_cast<uint8>(value);
     }
 }
 

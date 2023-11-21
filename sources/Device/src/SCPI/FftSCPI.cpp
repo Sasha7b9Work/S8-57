@@ -71,7 +71,7 @@ pCHAR S_FFT::FuncDisplay(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(display[S_FFT_ENABLED ? 0 : 1]));
 
-    SCPI_PROCESS_ARRAY(display, EnableFFT(i)); //-V2563
+    SCPI_PROCESS_ARRAY(display, EnableFFT(i));
 }
 
 
@@ -86,7 +86,7 @@ pCHAR S_FFT::FuncScale(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(scale[S_FFT_SCALE]));
 
-    SCPI_PROCESS_ARRAY(scale, S_FFT_SCALE = static_cast<ScaleFFT::E>(i)); //-V2563
+    SCPI_PROCESS_ARRAY(scale, S_FFT_SCALE = static_cast<ScaleFFT::E>(i));
 }
 
 
@@ -102,7 +102,7 @@ pCHAR S_FFT::FuncSource(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(source[S_FFT_SOURCE]));
 
-    SCPI_PROCESS_ARRAY(source, S_FFT_SOURCE = static_cast<SourceFFT::E>(i)); //-V2563
+    SCPI_PROCESS_ARRAY(source, S_FFT_SOURCE = static_cast<SourceFFT::E>(i));
 }
 
 
@@ -119,7 +119,7 @@ pCHAR S_FFT::FuncWindow(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(window[S_FFT_WINDOW]));
 
-    SCPI_PROCESS_ARRAY(window, S_FFT_WINDOW = static_cast<WindowFFT::E>(i)); //-V2563
+    SCPI_PROCESS_ARRAY(window, S_FFT_WINDOW = static_cast<WindowFFT::E>(i));
 }
 
 

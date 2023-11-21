@@ -219,7 +219,7 @@ static bool FindFrequencyForRange(Chan::E ch, Range::E range, uint timeWaitMS, f
 
         if (counterFreq.word > 10)
         {
-            *outFreq = counterFreq.word * 10.0F; //-V2564
+            *outFreq = counterFreq.word * 10.0F;
         }
         else
         {
@@ -231,7 +231,7 @@ static bool FindFrequencyForRange(Chan::E ch, Range::E range, uint timeWaitMS, f
 
             BitSet32 counterPeriod = FreqMeter::FPGA::ReadCounterPeriod();
 
-            *outFreq = 1.0F / (counterPeriod.word * 10e-9F); //-V2564
+            *outFreq = 1.0F / (counterPeriod.word * 10e-9F);
         }
 
         return true;
@@ -452,7 +452,7 @@ void AutoFPGA::ReadData(Chan::E ch, uint8 *data)
     HAL_BUS::FPGA::Write8(WR::START_ADDR, 0xff);
 
     uint8 *a0 = (ch == ChanA) ? RD::DATA_A : RD::DATA_B;
-    uint8 *a1 = a0 + 1; //-V2563
+    uint8 *a1 = a0 + 1;
 
     HAL_BUS::FPGA::SetAddrData(a0, a1);
 

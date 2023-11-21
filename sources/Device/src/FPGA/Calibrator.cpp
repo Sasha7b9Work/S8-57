@@ -128,7 +128,7 @@ static void BalanceRange(Chan::E ch, Range::E range)
 
     int numPoints = 0;
 
-    uint8 *addr = ((ch == ChanA) ? RD::DATA_A : RD::DATA_B) + 1; //-V2563
+    uint8 *addr = ((ch == ChanA) ? RD::DATA_A : RD::DATA_B) + 1;
 
     while (numPoints < 100)
     {
@@ -137,13 +137,13 @@ static void BalanceRange(Chan::E ch, Range::E range)
             if (HAL_PIO::Read(PIN_P2P))
             {
                 HAL_BUS::FPGA::SetAddrData(addr);
-                sum += HAL_BUS::FPGA::ReadA0(); //-V2564
+                sum += HAL_BUS::FPGA::ReadA0();
                 numPoints++;
             }
         }
     }
 
-    float delta = std::fabsf(sum / numPoints - 127.0F); //-V2564
+    float delta = std::fabsf(sum / numPoints - 127.0F);
 
     if (delta > 0.0F)
     {
@@ -215,7 +215,7 @@ static float FindStretchChannel(Chan::E ch) //-V2506
     HAL_BUS::FPGA::Write8(WR::START_ADDR, 0xff);
 
     uint8 *a0 = (ch == ChanA) ? RD::DATA_A : RD::DATA_B;
-    uint8 *a1 = a0 + 1; //-V2563
+    uint8 *a1 = a0 + 1;
 
     HAL_BUS::FPGA::SetAddrData(a0, a1);
 
@@ -247,10 +247,10 @@ static float FindStretchChannel(Chan::E ch) //-V2506
         }
     }
 
-    float patternDelta = (VALUE::MAX - VALUE::MIN) / 10.0F * 8.0F;    // Образцоввая разница между минимальным и максимальным значениями - ровно на 8 клеток из десяти //-V2564
+    float patternDelta = (VALUE::MAX - VALUE::MIN) / 10.0F * 8.0F;    // Образцоввая разница между минимальным и максимальным значениями - ровно на 8 клеток из десяти
 
-    float min = static_cast<float>(sumMIN) / numMIN; //-V2564
-    float max = static_cast<float>(sumMAX) / numMAX; //-V2564
+    float min = static_cast<float>(sumMIN) / numMIN;
+    float max = static_cast<float>(sumMAX) / numMAX;
 
     return patternDelta / (max - min);
 }

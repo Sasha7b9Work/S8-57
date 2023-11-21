@@ -61,7 +61,7 @@ int Text::Draw(int x, int y, const char *text)
     for (uint i = 0; i < numSymbols; ++i)
     {
         int prevX = x;
-        x = DrawChar(x, y, static_cast<uint8>(text[i])); //-V2563
+        x = DrawChar(x, y, static_cast<uint8>(text[i]));
 
         if (x - prevX < minWidth)
         {

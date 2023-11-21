@@ -114,7 +114,7 @@ static int Y(int value)
 
     float scale = 120.0F / 125.0F;
 
-    int y = 120 + static_cast<int>(delta * scale); //-V2564
+    int y = 120 + static_cast<int>(delta * scale);
 
     if (y < 0)
     {
@@ -131,7 +131,7 @@ static int Y(int value)
 
 char *DisplayRecorder::DeltaTime(char buffer[30])
 {
-    float delta = std::fabsf(static_cast<float>(posCursor[0] - posCursor[1])) * Recorder::ScaleX::TimeForPointMS() / 1000.0F; //-V2564
+    float delta = std::fabsf(static_cast<float>(posCursor[0] - posCursor[1])) * Recorder::ScaleX::TimeForPointMS() / 1000.0F;
 
     std::strcpy(buffer, Time(delta).ToString(false).c_str()); //-V2513
 
@@ -361,7 +361,7 @@ void DisplayRecorder::DrawMemoryWindow() //-V2506
 
     Region(319, 5).DrawBounded(0, 3, Color::BACK, Color::FILL);
 
-    int width = static_cast<int>(320.0F / numPoints * 320.0F + 0.5F); //-V2564
+    int width = static_cast<int>(320.0F / numPoints * 320.0F + 0.5F);
 
     if (width > 319)
     {
@@ -372,7 +372,7 @@ void DisplayRecorder::DrawMemoryWindow() //-V2506
 
     if (numPoints > 320)
     {
-        x = static_cast<int>(static_cast<float>(startPoint) / numPoints * 320.0F + 0.5F); //-V2564
+        x = static_cast<int>(static_cast<float>(startPoint) / numPoints * 320.0F + 0.5F);
     }
 
     Region(width, 10).DrawBounded(x, 0, Color::BACK, Color::FILL);

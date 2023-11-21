@@ -22,7 +22,7 @@ public:
         {
             for (uint i = 0; i < numBytes; i++)
             {
-                out[i] = CalculatePoint(static_cast<int>(i)); //-V2563
+                out[i] = CalculatePoint(static_cast<int>(i));
             }
         }
     }
@@ -40,11 +40,11 @@ private:
         {
             if (index >= 0 && index < size)
             {
-                sum += data[index++]; //-V2563
+                sum += data[index++];
             }
         } while (++parts < numSmooth);
 
-        return static_cast<uint8>(static_cast<float>(sum) / parts + 0.5F); //-V2564
+        return static_cast<uint8>(static_cast<float>(sum) / parts + 0.5F);
     }
 
     static int size;

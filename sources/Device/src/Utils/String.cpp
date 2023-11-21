@@ -33,8 +33,8 @@ String::String(char symbol) : buffer(nullptr)
 
     if (Allocate(2))
     {
-        buffer[0] = symbol; //-V2563
-        buffer[1] = 0; //-V2563
+        buffer[0] = symbol;
+        buffer[1] = 0;
     }
 }
 
@@ -56,7 +56,7 @@ String::String(const char *format, ...) : buffer(nullptr) //-V2506
     char buf[SIZE + 1];
 
     std::va_list args;
-    va_start(args, format); //-V2528 //-V2567 //-V2563 //-V2571
+    va_start(args, format); //-V2528 //-V2567 //-V2571
     int numSymbols = std::vsprintf(buf, format, args);
     va_end(args);
 
@@ -81,7 +81,7 @@ void String::Set(TypeConversionString::E conv, const char *format, ...)
         char buf[SIZE + 1];
 
         std::va_list args;
-        va_start(args, format); //-V2528 //-V2567 //-V2563 //-V2571
+        va_start(args, format); //-V2528 //-V2567 //-V2571
         int numSymbols = std::vsprintf(buf, format, args);
         va_end(args);
 
@@ -132,8 +132,8 @@ void String::Append(const char *str, int numSymbols) //-V2506
     Allocate(size);
 
     std::strcpy(buffer, old.c_str()); //-V2513
-    std::memcpy(buffer + old.Size(), str, static_cast<uint>(numSymbols)); //-V2563
-    buffer[size - 1] = '\0'; //-V2563
+    std::memcpy(buffer + old.Size(), str, static_cast<uint>(numSymbols));
+    buffer[size - 1] = '\0';
 }
 
 
@@ -146,7 +146,7 @@ void String::Append(char symbol)
 
 String::~String()
 {
-    std::free(buffer); //-V2511
+    std::free(buffer);
 }
 
 
@@ -154,7 +154,7 @@ void String::Free()
 {
     if(buffer)
     {
-        std::free(buffer); //-V2511
+        std::free(buffer);
         buffer = nullptr;
         Set(TypeConversionString::None, "");
     }
@@ -169,8 +169,8 @@ char *String::c_str() const
 
 bool String::Allocate(int size) //-V2506
 {
-    std::free(buffer); //-V2511
-    buffer = static_cast<char *>(std::malloc(static_cast<uint>(size))); //-V2511
+    std::free(buffer);
+    buffer = static_cast<char *>(std::malloc(static_cast<uint>(size)));
     if (buffer)
     {
         return true;
@@ -222,7 +222,7 @@ void String::RemoveFromBegin(int numSymbols)
 
         Allocate(old.Size() - numSymbols + 1);
 
-        std::strcpy(buffer, old.c_str() + numSymbols); //-V2513 //-V2563
+        std::strcpy(buffer, old.c_str() + numSymbols); //-V2513
     }
 }
 
@@ -231,7 +231,7 @@ void String::RemoveFromEnd()
 {
     if(Size() > 0)
     {
-        buffer[Size() - 1] = '\0'; //-V2563
+        buffer[Size() - 1] = '\0';
     }
 }
 
@@ -256,5 +256,5 @@ char &String::operator[](int i) const //-V2506
         return result;
     }
 
-    return buffer[i]; //-V2563
+    return buffer[i];
 }

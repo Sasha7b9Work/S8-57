@@ -201,7 +201,7 @@ void HAL_BUS::FPGA::Write16(uint8 *address, uint16 value)
     PAUSE_ON_TICKS(100);    // \todo Без этой строки замедлен вывод при включённой оптимизации и TBase >= 0.5мс
 
     *address = static_cast<uint8>(value);
-    *(address + 1) = static_cast<uint8>(value >> 8); //-V2563
+    *(address + 1) = static_cast<uint8>(value >> 8);
 
 
 }
@@ -236,7 +236,7 @@ uint8 HAL_BUS::FPGA::ReadA0() //-V2506
 {
     int delta = VALUE::AVE - static_cast<int>(*addrData0);
 
-    int result = static_cast<int>(VALUE::AVE - static_cast<int>(delta * GetStretch(addrData0))); //-V2564
+    int result = static_cast<int>(VALUE::AVE - static_cast<int>(delta * GetStretch(addrData0)));
 
     if(result < VALUE::MIN)
     {
@@ -255,7 +255,7 @@ uint8 HAL_BUS::FPGA::ReadA1() //-V2506
 {
     int delta = VALUE::AVE - static_cast<int>(*addrData1);
 
-    int result = static_cast<uint8>(VALUE::AVE - static_cast<int>(delta * GetStretch(addrData1))); //-V2564
+    int result = static_cast<uint8>(VALUE::AVE - static_cast<int>(delta * GetStretch(addrData1)));
 
     if(result < VALUE::MIN)
     {

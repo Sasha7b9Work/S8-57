@@ -383,17 +383,17 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data) //-V2506
 
     int step = infoRead.step;
 
-    uint8 *dataWrite = data + infoRead.posFirst;                                // —юда запишем первую считанную точку //-V2563
+    uint8 *dataWrite = data + infoRead.posFirst;                                // —юда запишем первую считанную точку
 
-    uint8 *interpolated = IntRAM::DataRand(ChanA) + infoRead.posFirst; //-V2563
+    uint8 *interpolated = IntRAM::DataRand(ChanA) + infoRead.posFirst;
 
-    uint8 *last = data + ENumPointsFPGA::PointsInChannel(); //-V2563
+    uint8 *last = data + ENumPointsFPGA::PointsInChannel();
 
     HAL_BUS::FPGA::SetAddrData(addr);
 
     if(S_OSCI_AVERAGING_IS_ENABLED)
     {
-        uint8 *dataPointer = &data[infoRead.posFirst];              // ”казатель в переданном массиве //-V2563
+        uint8 *dataPointer = &data[infoRead.posFirst];              // ”казатель в переданном массиве
 
         while(dataWrite < last)
         {
@@ -401,9 +401,9 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data) //-V2506
             *dataPointer = *dataWrite;
             *interpolated = *dataWrite;
             
-            dataWrite += step; //-V2563
-            dataPointer += step; //-V2563
-            interpolated += step; //-V2563
+            dataWrite += step;
+            dataPointer += step;
+            interpolated += step;
         }
     }
     else
@@ -413,8 +413,8 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data) //-V2506
             *dataWrite = HAL_BUS::FPGA::ReadA0();
             *interpolated = *dataWrite;
 
-            dataWrite += step; //-V2563
-            interpolated += step; //-V2563
+            dataWrite += step;
+            interpolated += step;
 
         }
     }
@@ -444,9 +444,9 @@ ShiftPoint Gates::CalculateShiftPoint() //-V2506
         return result;
     }
 
-    float tin = static_cast<float>(valueADC - min) / (max - min); //-V2564
+    float tin = static_cast<float>(valueADC - min) / (max - min);
 
-    result.shift = static_cast<int>(tin * TBase::DeltaPoint()); //-V2564
+    result.shift = static_cast<int>(tin * TBase::DeltaPoint());
 
     if(result.shift < 0)
     {
@@ -525,7 +525,7 @@ bool Gates::Calculate(uint16 value, uint16 *min, uint16 *max)  //-V2506
         return true;
     }
 
-    if(minGate == 0.0F) //-V550 //-V2550
+    if(minGate == 0.0F)
     {
         *min = m.Min();
         *max = m.Max();
@@ -533,8 +533,8 @@ bool Gates::Calculate(uint16 value, uint16 *min, uint16 *max)  //-V2506
         {
             return true;
         }
-        minGate = m.Min(); //-V2564
-        maxGate = m.Max(); //-V2564
+        minGate = m.Min();
+        maxGate = m.Max();
         m.Reset();
     }
 
@@ -554,8 +554,8 @@ bool Gates::Calculate(uint16 value, uint16 *min, uint16 *max)  //-V2506
 
 void Gates::RecalculateGates()
 {
-    minGate = 0.8F * minGate + m.Min() * 0.2F; //-V2564
-    maxGate = 0.8F * maxGate + m.Max() * 0.2F; //-V2564
+    minGate = 0.8F * minGate + m.Min() * 0.2F;
+    maxGate = 0.8F * maxGate + m.Max() * 0.2F;
 
     if(S_DBG_SHOW_RAND_GATES)
     {
@@ -568,7 +568,7 @@ void Gates::RecalculateGates()
 
 void Gates::CalculateWithoutGates(uint16 *min, uint16 *max)
 {
-    if(minGate == 0.0F) //-V550 //-V2550
+    if(minGate == 0.0F)
     {
         *min = m.Min();
         *max = m.Max();
@@ -618,10 +618,10 @@ void Osci::SendDataToSCPI(Chan::E ch) //-V2506
 
     for (int i = 0; i < numBytes - 1; i++)
     {
-        std::sprintf(buffer, "%d ", data[i]); //-V2563
+        std::sprintf(buffer, "%d ", data[i]);
         SCPI::SendData(buffer);
     }
 
-    std::sprintf(buffer, "%d", data[numBytes - 1]); //-V2563
+    std::sprintf(buffer, "%d", data[numBytes - 1]);
     SCPI::SendAnswer(buffer);
 }

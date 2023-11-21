@@ -184,11 +184,11 @@ static void OnOpenClose_Set(bool open)
 {
     if (open)
     {
-        psRTC = new StructRTC(); //-V2511
+        psRTC = new StructRTC();
     }
     else
     {
-        delete psRTC; //-V2511
+        delete psRTC;
     }
 }
 

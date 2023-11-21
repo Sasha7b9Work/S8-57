@@ -136,13 +136,13 @@ void PageTester::OnChanged_Control(bool)
 
     if (S_TEST_CONTROL_IS_VOLTAGE)
     {
-        items[1] = const_cast<Choice *>(&cStepU); //-V2563 //-V2567
-        items[2] = const_cast<Choice *>(&cPolarity); //-V2563 //-V2567
+        items[1] = const_cast<Choice *>(&cStepU); //-V2567
+        items[2] = const_cast<Choice *>(&cPolarity); //-V2567
     }
     else
     {
-        items[1] = const_cast<Choice *>(&cStepI); //-V2563 //-V2567
-        items[2] = const_cast<Choice *>(&cConductivity); //-V2563 //-V2567
+        items[1] = const_cast<Choice *>(&cStepI); //-V2567
+        items[2] = const_cast<Choice *>(&cConductivity); //-V2567
     }
 
     Tester::LoadStep();

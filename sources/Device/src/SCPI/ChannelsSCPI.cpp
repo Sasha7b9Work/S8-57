@@ -105,7 +105,7 @@ const StructSCPI SCPI::channels[] =
 
 static pCHAR FuncBalance(pCHAR buffer) //-V2506
 {
-    EXTRACT_CHANNEL(9); //-V2563
+    EXTRACT_CHANNEL(9);
 
     SCPI_PROLOG(buffer);
 
@@ -132,11 +132,11 @@ static void SetBandwidth(Chan::E ch, int i)
 
 static pCHAR FuncBandwidth(pCHAR buffer) //-V2506
 {
-    EXTRACT_CHANNEL(11); //-V2563
+    EXTRACT_CHANNEL(11);
 
     SCPI_REQUEST(SCPI::SendAnswer(bandwidth[S_BANDWIDTH(ch)]));
 
-    SCPI_PROCESS_ARRAY(bandwidth, SetBandwidth(ch, i)); //-V2563
+    SCPI_PROCESS_ARRAY(bandwidth, SetBandwidth(ch, i));
 }
 
 
@@ -151,17 +151,17 @@ static pString couple[] =
 
 static pCHAR FuncCoupling(pCHAR buffer) //-V2506
 {
-    EXTRACT_CHANNEL(10); //-V2563
+    EXTRACT_CHANNEL(10);
 
     SCPI_REQUEST(SCPI::SendAnswer(couple[S_MODE_COUPLE(ch)]));
 
-    SCPI_PROCESS_ARRAY(couple, ModeCouple::Set(ch, static_cast<ModeCouple::E>(i))); //-V2563
+    SCPI_PROCESS_ARRAY(couple, ModeCouple::Set(ch, static_cast<ModeCouple::E>(i)));
 }
 
 
 static pCHAR FuncData(pCHAR buffer) //-V2506
 {
-    EXTRACT_CHANNEL(7); //-V2563
+    EXTRACT_CHANNEL(7);
 
     SCPI_PROLOG(buffer);
 
@@ -173,11 +173,11 @@ static pCHAR FuncData(pCHAR buffer) //-V2506
 
 static pCHAR FuncDisplay(pCHAR buffer) //-V2506
 {
-    EXTRACT_CHANNEL(9); //-V2563
+    EXTRACT_CHANNEL(9);
 
     SCPI_REQUEST(SCPI::SendAnswer(displays[S_CHANNEL_ENABLED(ch)]));
 
-    SCPI_PROCESS_ARRAY(displays, PageChannel::Enable(ch, i)); //-V2563
+    SCPI_PROCESS_ARRAY(displays, PageChannel::Enable(ch, i));
 }
 
 
@@ -189,7 +189,7 @@ static void SendAnswerForOffst(Chan::E ch)
 
 static pCHAR FuncOffset(pCHAR buffer) //-V2506
 {
-    EXTRACT_CHANNEL(8); //-V2563
+    EXTRACT_CHANNEL(8);
 
     SCPI_REQUEST(SendAnswerForOffst(ch));
 
@@ -201,7 +201,7 @@ static pCHAR FuncOffset(pCHAR buffer) //-V2506
     {
         RShift::Set(ch, static_cast<int16>(value * 2));
 
-        return end_str + 1; //-V2563
+        return end_str + 1;
     }
 
     return nullptr;
@@ -218,7 +218,7 @@ static pString probe[] =
 
 static pCHAR FuncProbe(pCHAR buffer) //-V2506
 {
-    EXTRACT_CHANNEL(7); //-V2563
+    EXTRACT_CHANNEL(7);
 
     SCPI_REQUEST(SCPI::SendAnswer(probe[S_DIVIDER(ch)]));
 
@@ -245,11 +245,11 @@ static pCHAR FuncProbe(pCHAR buffer) //-V2506
 
 static pCHAR FuncScale(pCHAR buffer) //-V2506
 {
-    EXTRACT_CHANNEL(7); //-V2563
+    EXTRACT_CHANNEL(7);
 
     SCPI_REQUEST(SCPI::SendAnswer(rangeName[S_RANGE(ch)]));
 
-    SCPI_PROCESS_ARRAY(rangeName, Range::Set(ch, static_cast<Range::E>(i))) //-V2563
+    SCPI_PROCESS_ARRAY(rangeName, Range::Set(ch, static_cast<Range::E>(i)))
 }
 
 

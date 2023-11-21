@@ -316,7 +316,7 @@ String TShift::ToString(const TBase::E _base)
 
 String RShift::ToString(int16 rShiftRel, Range::E range, Divider::E divider)
 {
-    float rShiftVal = ToAbs(rShiftRel, range) * Divider::ToAbs(divider); //-V2564
+    float rShiftVal = ToAbs(rShiftRel, range) * Divider::ToAbs(divider);
     return Voltage(rShiftVal).ToString(true);
 }
 

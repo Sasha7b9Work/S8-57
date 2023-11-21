@@ -33,7 +33,7 @@ struct StructSCPI
 
     FuncHint funcHint;
 
-    bool IsEmpty() const { return key[0] == '\0'; }; //-V2563
+    bool IsEmpty() const { return key[0] == '\0'; };
     bool IsNode() const { return strct != nullptr; };   // Структура является "узлом" дерева, нужно идти дальше по дереву через structs
     bool IsLeaf() const { return func != nullptr; };    // Стурктура является "листом" дерева, нужно выполнять функцию func
 };

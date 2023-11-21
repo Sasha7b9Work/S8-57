@@ -112,15 +112,15 @@ static float ConvertFrequencyToAbs(const char *strFreq)
 {
     float result = SU::StringToFloat(strFreq);
 
-    if(std::strcmp(&strFreq[std::strlen(strFreq) - 3], "ћ√ц") == 0) //-V2513 //-V2563
+    if(std::strcmp(&strFreq[std::strlen(strFreq) - 3], "ћ√ц") == 0) //-V2513
     {
         result *= 1e6F;
     }
-    else if(std::strcmp(&strFreq[std::strlen(strFreq) - 3], "к√ц") == 0) //-V2513 //-V2563
+    else if(std::strcmp(&strFreq[std::strlen(strFreq) - 3], "к√ц") == 0) //-V2513
     {
         result *= 1e3F;
     }
-    else if(std::strcmp(&strFreq[std::strlen(strFreq) - 3], "м√ц") == 0) //-V2513 //-V2516 //-V2563
+    else if(std::strcmp(&strFreq[std::strlen(strFreq) - 3], "м√ц") == 0) //-V2513 //-V2516
     {
         result *= 1e-3F;
     }
@@ -190,15 +190,15 @@ static float ConvertPeriodToAbs(const char *strPeriod)
 {
     float result = SU::StringToFloat(strPeriod);
 
-    if(std::strcmp(&strPeriod[std::strlen(strPeriod) - 2], "нс") == 0) //-V2513 //-V2563
+    if(std::strcmp(&strPeriod[std::strlen(strPeriod) - 2], "нс") == 0) //-V2513
     {
         result *= 1e-9F;
     }
-    else if(std::strcmp(&strPeriod[std::strlen(strPeriod) - 3], "мкс") == 0) //-V2513 //-V2563
+    else if(std::strcmp(&strPeriod[std::strlen(strPeriod) - 3], "мкс") == 0) //-V2513
     {
         result *= 1e-6F;
     }
-    else if(std::strcmp(&strPeriod[std::strlen(strPeriod) - 2], "мс") == 0) //-V2513 //-V2516 //-V2563
+    else if(std::strcmp(&strPeriod[std::strlen(strPeriod) - 2], "мс") == 0) //-V2513 //-V2516
     {
         result *= 1e-3F;
     }
@@ -323,19 +323,19 @@ static pString DisplayFreqMeter::FreqSetToString(const BitSet32 *fr) //-V2506
 
         giverFreq *= 100;
 
-        WRITE_SUFFIX("к√ц"); //-V2513 //-V2563
+        WRITE_SUFFIX("к√ц"); //-V2513
 
         if(giverFreq < _1MHz)                       // ћеньше 1 ћ√ц
         {
             if(freq >= _10Hz)                       // Ѕольше или равно 10 √ц
             {
-                std::memmove(buffer, buffer + 1, 5); //-V2563
+                std::memmove(buffer, buffer + 1, 5);
             }
             buffer[4] = '.';
         }
         else
         {
-            HIGH_FREQ; //-V2563
+            HIGH_FREQ;
         }
         break;
 
@@ -343,52 +343,52 @@ static pString DisplayFreqMeter::FreqSetToString(const BitSet32 *fr) //-V2506
 
         giverFreq *= 10;
 
-        WRITE_SUFFIX("√ц"); //-V2513 //-V2563
+        WRITE_SUFFIX("√ц"); //-V2513
 
         if(giverFreq < _1MHz)                      // ћеньше 1 ћ√ц
         {
             if(giverFreq < _1kHz)                   // ћеньше 1 к√ц
             {
-                std::memmove(buffer, buffer + 1, 6); //-V2563
+                std::memmove(buffer, buffer + 1, 6);
                 buffer[6] = '.';
             }
             else
             {
-                std::memmove(buffer, buffer + 1, 4); //-V2563
+                std::memmove(buffer, buffer + 1, 4);
                 buffer[3] = '.';
             }
         }
         else
         {
-            HIGH_FREQ; //-V2563
+            HIGH_FREQ;
         }
         break;
 
     case FreqMeter::TimeCounting::_10s:
 
-        WRITE_SUFFIX("√ц"); //-V2513 //-V2563
+        WRITE_SUFFIX("√ц"); //-V2513
 
         if(freq < _1MHz)                       // ћеньше 1 ћ√ц
         {
             if(giverFreq < _1kHz)              // ћеньше 1 к√ц
             {
-                std::memmove(buffer, buffer + 1, 5); //-V2563
+                std::memmove(buffer, buffer + 1, 5);
                 buffer[5] = '.';
             }
             else if(giverFreq < _100kHz)
             {
-                std::memmove(buffer, buffer + 1, 3); //-V2563
+                std::memmove(buffer, buffer + 1, 3);
                 buffer[2] = '.';
             }
             else
             {
-                std::memmove(buffer, buffer + 1, 3); //-V2563
+                std::memmove(buffer, buffer + 1, 3);
                 buffer[3] = '.';
             }
         }
         else
         {
-            HIGH_FREQ; //-V2563
+            HIGH_FREQ;
         }
         break;
     case FreqMeter::TimeCounting::Count:
@@ -574,9 +574,9 @@ void ProgressBarFreqMeter::Draw(int x, int y)
 
         int length = 185;
 
-        float percents = (TIME_MS - FreqMeter::timeStartMeasureFreq) / time[S_FREQ_TIME_COUNTING]; //-V2564
+        float percents = (TIME_MS - FreqMeter::timeStartMeasureFreq) / time[S_FREQ_TIME_COUNTING];
 
-        int width = static_cast<int>(length * percents); //-V2564
+        int width = static_cast<int>(length * percents);
 
         if(width > length)
         {

@@ -146,8 +146,8 @@ static int DrawMainParameters(int _x, int _y)
 
         static const pString filtr[] = { "\xb5\xb6", "\xb3\xb4", "\xb1\xb2" };
 
-        Char(filtr[S_TRIG_INPUT][0]).Draw(x + 45, y1); //-V2563
-        Char(filtr[S_TRIG_INPUT][1]).Draw(x + 53, y1); //-V2563
+        Char(filtr[S_TRIG_INPUT][0]).Draw(x + 45, y1);
+        Char(filtr[S_TRIG_INPUT][1]).Draw(x + 53, y1);
     }
 
     buffer[0] = '\0';
@@ -285,7 +285,7 @@ static void DrawFrequency(int x, int y)
     {
         char mesFreq[20] = "\x7c=";
         float freq = FreqMeter::GetFrequency();
-        if (freq == -1.0F) //-V550 //-V2550
+        if (freq == -1.0F)
         {
             std::strcat(mesFreq, "******"); //-V2513
         }
@@ -390,7 +390,7 @@ static void WriteCursors()
             x = 49;
             float pos0 = MathFPGA::VoltageCursor(CursorsMeasurements::PosU(source, 0), S_RANGE(source), S_RSHIFT(source));
             float pos1 = MathFPGA::VoltageCursor(CursorsMeasurements::PosU(source, 1), S_RANGE(source), S_RSHIFT(source));
-            float delta = std::fabsf(pos1 - pos0) * Divider::ToAbs(S_DIVIDER(source)); //-V2564
+            float delta = std::fabsf(pos1 - pos0) * Divider::ToAbs(S_DIVIDER(source));
             String(":dU=").Draw(x, y1);
             Voltage(delta).ToString(false).Draw(x + 17, y1);
             String(':').Draw(x, y2);
@@ -424,7 +424,7 @@ static void WriteCursors()
                 Rectangle(width, 12).Draw(x, Grid::Top(), Color::FILL);
                 Region(width - 2, 10).Fill(x + 1, Grid::Top() + 1, Color::BACK);
                 String("1/dT=").Draw(x + 1, Grid::Top() + 2, colorText);
-                if (delta != 0.0F) //-V550 //-V2550
+                if (delta != 0.0F)
                 {
                     Frequency(1.0F / delta).ToString().Draw(x + 25, Grid::Top() + 2);
                 }

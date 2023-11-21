@@ -11,7 +11,7 @@ const DataSettings *PacketROM::UnPack() const //-V2506
         return nullptr;
     }
 
-    return const_cast<DataSettings *>(reinterpret_cast<const DataSettings *>(reinterpret_cast<const uint8 *>(this) + sizeof(PacketROM))); //-V2563 //-V2567
+    return const_cast<DataSettings *>(reinterpret_cast<const DataSettings *>(reinterpret_cast<const uint8 *>(this) + sizeof(PacketROM))); //-V2567
 }
 
 
@@ -22,7 +22,7 @@ PacketROM *PacketROM::Next() const //-V2506
         return nullptr;
     }
 
-    return reinterpret_cast<PacketROM *>(reinterpret_cast<uint8 *>(const_cast<PacketROM *>(this)) + size); //-V2563
+    return reinterpret_cast<PacketROM *>(reinterpret_cast<uint8 *>(const_cast<PacketROM *>(this)) + size);
 }
 
 
@@ -67,14 +67,14 @@ bool PacketROM::WriteToSector(const Sector *sector) const //-V2506
 
     if (ds.enableA)
     {
-        ds.dataA = reinterpret_cast<uint8 *>(addressWrite) + sizeof(PacketROM) + sizeof(DataSettings); //-V2563 //-V2571
+        ds.dataA = reinterpret_cast<uint8 *>(addressWrite) + sizeof(PacketROM) + sizeof(DataSettings); //-V2571
     }
     if (ds.enableB)
     {
-        ds.dataB = reinterpret_cast<uint8 *>(addressWrite) + sizeof(PacketROM) + sizeof(DataSettings); //-V2563 //-V2571
+        ds.dataB = reinterpret_cast<uint8 *>(addressWrite) + sizeof(PacketROM) + sizeof(DataSettings); //-V2571
         if (ds.enableA)
         {
-            ds.dataB += ds.BytesInChannel(); //-V2563
+            ds.dataB += ds.BytesInChannel();
         }
     }
 
@@ -172,7 +172,7 @@ void Sector::TranslateAddressToROM(const DataSettings *ds, const PacketROM *pack
     if (ds->enableA)
     {
         const_cast<DataSettings *>(ds)->dataA = addressData; //-V2567
-        addressData += ds->BytesInChannel(); //-V2563
+        addressData += ds->BytesInChannel();
     }
 
     if (ds->enableB)
@@ -257,14 +257,14 @@ const PacketROM *Sector::FindValidPacket(uint numInROM) const //-V2506
                 {
                     if (ds->enableA)
                     {
-                        if (ds->dataA[j] != static_cast<uint8>(j)) //-V2563
+                        if (ds->dataA[j] != static_cast<uint8>(j))
                         {
                             return packet;
                         }
                     }
                     if (ds->enableB)
                     {
-                        if (ds->dataB[j] != static_cast<uint8>(j)) //-V2563
+                        if (ds->dataB[j] != static_cast<uint8>(j))
                         {
                             return packet;
                         }
