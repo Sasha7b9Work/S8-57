@@ -1,3 +1,4 @@
+// 2023/11/21 13:48:42 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 
 
@@ -13,10 +14,9 @@ public:
 
 
 
-class InterpolatorLinear
+namespace InterpolatorLinear
 {
-public:
-    static void Run(DataSettings *ds);
+    void Run(DataSettings *ds);
 };
 
 

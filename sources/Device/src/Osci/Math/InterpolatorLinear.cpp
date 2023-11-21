@@ -1,3 +1,4 @@
+// 2023/11/21 13:48:48 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "log.h"
 #include "FPGA/FPGA.h"
@@ -8,35 +9,38 @@
 #include "Osci/Math/OsciMath.h"
 
 
-static uint8 *begin = nullptr;  // Начало обрабатываемых данных
-static uint8 *end = nullptr;    // Конец обрабатываемых данных
-
-
-// Структура описывает отрезок
-struct Segment
+namespace InterpolatorLinear
 {
-    uint8 *start;   // Указатель на первый элемент отрезка
-    uint8 *end;     // Указатель на первый элемент за отрезком
-};
+    static uint8 *begin = nullptr;  // Начало обрабатываемых данных
+    static uint8 *end = nullptr;    // Конец обрабатываемых данных
 
 
-// Интерполировать данные одного канала
-static void InterpolateChannel(uint8 *data, int size);
-
-// Находит первый пустой сегмент (т.е. в котором находятся толдько "пустые" элементы), начиная с элемента с адресом start
-static bool FindEmptySegment(uint8 *start, Segment *segment);
-
-// Интерполировать данные в сегменте
-static void InterpolateSegment(Segment *segment);
-
-// Находим адрес пустого элемента. Возвращает end, если такого элемента нет
-static uint8 *FindEmptyElement(uint8 * const start);
-
-// Найти первый "непустой" элемент данных. Возвращает end, если такого элемента нет
-static uint8 *FindReadedElement(uint8 * const start);
+    // Структура описывает отрезок
+    struct Segment
+    {
+        uint8 *start;   // Указатель на первый элемент отрезка
+        uint8 *end;     // Указатель на первый элемент за отрезком
+    };
 
 
-static bool FindEmptySegment(uint8 *start, Segment *segment)
+    // Интерполировать данные одного канала
+    static void InterpolateChannel(uint8 *data, int size);
+
+    // Находит первый пустой сегмент (т.е. в котором находятся толдько "пустые" элементы), начиная с элемента с адресом start
+    static bool FindEmptySegment(uint8 *start, Segment *segment);
+
+    // Интерполировать данные в сегменте
+    static void InterpolateSegment(Segment *segment);
+
+    // Находим адрес пустого элемента. Возвращает end, если такого элемента нет
+    static uint8 *FindEmptyElement(uint8 *const start);
+
+    // Найти первый "непустой" элемент данных. Возвращает end, если такого элемента нет
+    static uint8 *FindReadedElement(uint8 *const start);
+}
+
+
+bool InterpolatorLinear::FindEmptySegment(uint8 *start, Segment *segment)
 {
     segment->start = FindEmptyElement(start);
 
@@ -46,7 +50,7 @@ static bool FindEmptySegment(uint8 *start, Segment *segment)
 }
 
 
-static uint8 *FindEmptyElement(uint8 * const start)
+uint8 *InterpolatorLinear::FindEmptyElement(uint8 * const start)
 {
     uint8 *element = start;
 
@@ -66,7 +70,7 @@ static uint8 *FindEmptyElement(uint8 * const start)
 }
 
 
-static uint8 *FindReadedElement(uint8 * const start)
+uint8 *InterpolatorLinear::FindReadedElement(uint8 * const start)
 {
     uint8 *element = start;
     uint8 *interpol = IntRAM::DataRand(ChanA) + (start - begin);
@@ -85,7 +89,7 @@ static uint8 *FindReadedElement(uint8 * const start)
 }
 
 
-static void InterpolateSegment(Segment *segment) //-V2506
+void InterpolatorLinear::InterpolateSegment(Segment *segment) //-V2506
 {
     if((segment->start == end) ||
        (segment->start == begin) ||
@@ -123,7 +127,7 @@ void InterpolatorLinear::Run(DataSettings *ds)
 }
 
 
-static void InterpolateChannel(uint8 *data, int size)
+void InterpolatorLinear::InterpolateChannel(uint8 *data, int size)
 {
     int readed = 0;                                     // Число реально считанных точек
     uint8 *pointer = data;
