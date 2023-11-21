@@ -5,31 +5,36 @@
 #include "Utils/StringUtils.h"
 
 
-// :TIMEBASE:MODE
-static pCHAR FuncMode(pCHAR);
-static bool TestMode();
-static void HintMode(String *);
+namespace S_TBASE
+{
+    // :TIMEBASE:MODE
+    static pCHAR FuncMode(pCHAR);
+    static bool TestMode();
+    static void HintMode(String *);
 
-// :TIMEBASE:OFFSETBASE
-static pCHAR FuncOffsetBase(pCHAR);
-static bool TestOffsetBase();
-static void HintOffsetBase(String *);
+    // :TIMEBASE:OFFSETBASE
+    static pCHAR FuncOffsetBase(pCHAR);
+    static bool TestOffsetBase();
+    static void HintOffsetBase(String *);
+    static void AnswerOffsetBase();
 
-// :TIMEBASE:PEAKDET
-static pCHAR FuncPeakDet(pCHAR);
-static bool TestPeakDet();
-static void HintPeakDet(String *);
+    // :TIMEBASE:PEAKDET
+    static pCHAR FuncPeakDet(pCHAR);
+    static bool TestPeakDet();
+    static void HintPeakDet(String *);
 
-// :TIMEBASE:SCALE:
-static pCHAR FuncScale(pCHAR);
-static bool TestScale();
-static void HintScale(String *);
+    // :TIMEBASE:SCALE:
+    static pCHAR FuncScale(pCHAR);
+    static bool TestScale();
+    static void HintScale(String *);
 
-// :TIMEBASE:TPOS:
-static pCHAR FuncTPos(pCHAR);
-static bool TestTPos();
-static void HintTPos(String *);
+    // :TIMEBASE:TPOS:
+    static pCHAR FuncTPos(pCHAR);
+    static bool TestTPos();
+    static void HintTPos(String *);
 
+    static void SetSampleType(int);
+}
 
 
 static pString tBaseNames[] =
@@ -87,11 +92,11 @@ static pString tposes[] =
 
 const StructSCPI SCPI::tBase[] =
 {
-    SCPI_LEAF(":MODE",       FuncMode,       TestMode,       "",                        HintMode),
-    SCPI_LEAF(":PEAKDET",    FuncPeakDet,    TestPeakDet,    "Peak detector control",   HintPeakDet),
-    SCPI_LEAF(":OFFSETBASE", FuncOffsetBase, TestOffsetBase, "",                        HintOffsetBase),
-    SCPI_LEAF(":SCALE",      FuncScale,      TestScale,      "Horizontal zoom control", HintScale),
-    SCPI_LEAF(":TPOS",       FuncTPos,       TestTPos,       "Snap sync to screen",     HintTPos),
+    SCPI_LEAF(":MODE",       S_TBASE::FuncMode,       S_TBASE::TestMode,       "",                        S_TBASE::HintMode),
+    SCPI_LEAF(":PEAKDET",    S_TBASE::FuncPeakDet,    S_TBASE::TestPeakDet,    "Peak detector control",   S_TBASE::HintPeakDet),
+    SCPI_LEAF(":OFFSETBASE", S_TBASE::FuncOffsetBase, S_TBASE::TestOffsetBase, "",                        S_TBASE::HintOffsetBase),
+    SCPI_LEAF(":SCALE",      S_TBASE::FuncScale,      S_TBASE::TestScale,      "Horizontal zoom control", S_TBASE::HintScale),
+    SCPI_LEAF(":TPOS",       S_TBASE::FuncTPos,       S_TBASE::TestTPos,       "Snap sync to screen",     S_TBASE::HintTPos),
     SCPI_EMPTY()
 };
 
@@ -103,12 +108,12 @@ static pString modes[] =
     ""
 };
 
-static void SetSampleType(int i)
+void S_TBASE::SetSampleType(int i)
 {
     PageTime::SetSampleTime(static_cast<SampleType::E>(i));
 }
 
-static pCHAR FuncMode(pCHAR buffer) //-V2506
+pCHAR S_TBASE::FuncMode(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(modes[S_RAND_SAMPLE_TYPE]));
 
@@ -116,13 +121,13 @@ static pCHAR FuncMode(pCHAR buffer) //-V2506
 }
 
 
-static void AnswerOffsetBase()
+void S_TBASE::AnswerOffsetBase()
 {
     String answer("%d", set.time._shift);
     SCPI::SendAnswer(answer.c_str());
 }
 
-static pCHAR FuncOffsetBase(pCHAR buffer) //-V2506
+pCHAR S_TBASE::FuncOffsetBase(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(AnswerOffsetBase());
 
@@ -141,7 +146,7 @@ static pCHAR FuncOffsetBase(pCHAR buffer) //-V2506
 }
 
 
-static pCHAR FuncPeakDet(pCHAR buffer) //-V2506
+pCHAR S_TBASE::FuncPeakDet(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(peakdets[S_PEAK_DET]));
 
@@ -149,7 +154,7 @@ static pCHAR FuncPeakDet(pCHAR buffer) //-V2506
 }
 
 
-static pCHAR FuncScale(pCHAR buffer) //-V2506
+pCHAR S_TBASE::FuncScale(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(tBaseNames[S_TIME_BASE]));
 
@@ -157,7 +162,7 @@ static pCHAR FuncScale(pCHAR buffer) //-V2506
 }
 
 
-static pCHAR FuncTPos(pCHAR buffer) //-V2506
+pCHAR S_TBASE::FuncTPos(pCHAR buffer) //-V2506
 {
     SCPI_REQUEST(SCPI::SendAnswer(tposes[S_TPOS]));
 
@@ -165,61 +170,61 @@ static pCHAR FuncTPos(pCHAR buffer) //-V2506
 }
 
 
-static bool TestMode()
+bool S_TBASE::TestMode()
 {
     return true;
 }
 
 
-static bool TestOffsetBase()
+bool S_TBASE::TestOffsetBase()
 {
     return false;
 }
 
 
-static bool TestPeakDet()
+bool S_TBASE::TestPeakDet()
 {
     return true;
 }
 
 
-static bool TestScale()
+bool S_TBASE::TestScale()
 {
    return true;
 }
 
 
-static bool TestTPos()
+bool S_TBASE::TestTPos()
 {
     return true;
 }
 
 
-static void HintMode(String *message)
+void S_TBASE::HintMode(String *message)
 {
     SCPI::ProcessHint(message, modes);
 }
 
 
-static void HintOffsetBase(String *)
+void S_TBASE::HintOffsetBase(String *)
 {
 
 }
 
 
-static void HintPeakDet(String *message)
+void S_TBASE::HintPeakDet(String *message)
 {
     SCPI::ProcessHint(message, peakdets);
 }
 
 
-static void HintScale(String *message)
+void S_TBASE::HintScale(String *message)
 {
     SCPI::ProcessHint(message, tBaseNames);
 }
 
 
-static void HintTPos(String *message)
+void S_TBASE::HintTPos(String *message)
 {
     SCPI::ProcessHint(message, tposes);
 }
