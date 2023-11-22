@@ -21,44 +21,43 @@ struct StructForReadDir
 };
 
 
-class FDrive
+namespace FDrive
 {
-public:
-    static void Init();
+    void Init();
 
-    static void DeInit();
-    
-    static void Update();
-    
-    static void Mount();
-    
-    static bool IsConnected();
-    
-    static void GetNumDirsAndFiles(const char *fullPath, int *numDirs, int *numFiles);
-  
-    static bool AppendStringToFile(const char *string);
+    void DeInit();
 
-    static bool GetNameDir(const char *fuulPath, int numDir, char *nameDirOut, StructForReadDir *sfrd);
+    void Update();
 
-    static bool GetNextNameDir(char *nameDirOut, StructForReadDir *sfrd);
+    void Mount();
 
-    static void CloseCurrentDir(StructForReadDir *sfrd);
+    bool IsConnected();
 
-    static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, StructForReadDir *sfrd);
+    void GetNumDirsAndFiles(const char *fullPath, int *numDirs, int *numFiles);
 
-    static bool GetNextNameFile(char *nameFileOut, StructForReadDir *sfrd);
+    bool AppendStringToFile(const char *string);
 
-    static bool ExistFile(const char *fullPath, const char *fileName);
+    bool GetNameDir(const char *fuulPath, int numDir, char *nameDirOut, StructForReadDir *sfrd);
+
+    bool GetNextNameDir(char *nameDirOut, StructForReadDir *sfrd);
+
+    void CloseCurrentDir(StructForReadDir *sfrd);
+
+    bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, StructForReadDir *sfrd);
+
+    bool GetNextNameFile(char *nameFileOut, StructForReadDir *sfrd);
+
+    bool ExistFile(const char *fullPath, const char *fileName);
 
     // Функция создаст файл для записи. Если такой файл уже существует, сотрёт его, заменит новым нулевой длины и откроет его
-    static bool OpenNewFileForWrite(const char *fullPathToFile, StructForWrite *structForWrite);
+    bool OpenNewFileForWrite(const char *fullPathToFile, StructForWrite *structForWrite);
 
-    static bool WriteToFile(uint8 *data, int sizeData, StructForWrite *structForWrite);
+    bool WriteToFile(uint8 *data, int sizeData, StructForWrite *structForWrite);
 
-    static bool CloseFile(StructForWrite *structForWrite);
+    bool CloseFile(StructForWrite *structForWrite);
 
     // Сохранить изображение экрана на флешку
-    static void SaveScreen();
+    void SaveScreen();
 
-    static void *handle;
+    extern void *handle;
 };
