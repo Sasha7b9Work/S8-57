@@ -6,8 +6,6 @@ namespace Recorder
 {
     void Init();
 
-    void Update();
-
     void DeInit();
 
     void OnPressStart();

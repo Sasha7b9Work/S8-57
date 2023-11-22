@@ -5,7 +5,6 @@
 #include "Osci/Osci.h"
 #include "Recorder/DisplayRecorder.h"
 #include "Recorder/Recorder.h"
-#include "Recorder/Sensor.h"
 #include "Recorder/StorageRecorder.h"
 #include "Settings/Settings.h"
 #include "Utils/Math.h"
@@ -80,12 +79,6 @@ void Recorder::DeInit()
 
         initialized = false;
     }
-}
-
-
-void Recorder::Update()
-{
-    Sensor::Update();
 }
 
 

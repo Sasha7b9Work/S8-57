@@ -2180,16 +2180,6 @@
               <FilePath>.\src\Recorder\Recorder.cpp</FilePath>
             </File>
             <File>
-              <FileName>Sensor.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Recorder\Sensor.h</FilePath>
-            </File>
-            <File>
-              <FileName>Sensor.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Recorder\Sensor.cpp</FilePath>
-            </File>
-            <File>
               <FileName>StorageRecorder.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Recorder\StorageRecorder.h</FilePath>

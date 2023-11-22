@@ -13,7 +13,6 @@
 #include "Keyboard/BufferButtons.h"
 #include "Menu/MenuItems.h"
 #include "Recorder/Recorder.h"
-#include "Recorder/Sensor.h"
 #include "SCPI/SCPI.h"
 #include "Settings/SettingsNRST.h"
 #include <cstdlib>
@@ -115,8 +114,6 @@ void Device::Update()
     Display::Update();
 
     Tester::Update();
-
-    Recorder::Update();
 
     FDrive::Update();
 

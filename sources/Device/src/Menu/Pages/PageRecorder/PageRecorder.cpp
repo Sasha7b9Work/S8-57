@@ -5,7 +5,6 @@
 #include "Menu/MenuItems.h"
 #include "Settings/Settings.h"
 #include "Recorder/Recorder.h"
-#include "Recorder/Sensor.h"
 
 
 namespace PageRecorder
