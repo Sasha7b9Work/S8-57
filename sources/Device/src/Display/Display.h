@@ -30,24 +30,24 @@ struct DrawMode
     } value;
 };
 
-struct Display
+namespace Display
 {
-    static const int HEIGHT = 240;
+    const int HEIGHT = 240;
 
-    static const int WIDTH = 320;
+    const int WIDTH = 320;
 
-    static void Init();
+    void Init();
 
     // Здесь происходит вся отрисовка
-    static void Update();
+    void Update();
 
     // Возвращаемое значение true означает, что дисплей находится в состоянии отрисовки
-    static bool InProcess();
+    bool InProcess();
 
     // Устанавливает функцию, которая выполится после отрисовки кадра однократно
-    static void SetFuncAfterUpadteOnce(pFuncVV func);
+    void SetFuncAfterUpadteOnce(pFuncVV func);
 
-    static void ShowWarning(const char *warning);
+    void ShowWarning(const char *warning);
 
     // @brief Установить функцию и режим отрисовки экрана.
     // @details Возможны три варианта.
@@ -56,22 +56,22 @@ struct Display
     // 2. DrawMode::Auto и func == 0 - в этом случае будет выполняться функция Update() в главном цикле.
     // 3. DrawMode::Auto и func != 0 - в этом случае будет выполняться функция func(), определяемая пользователем, но в теле
     // главного цикла, будучи вызываемой из Update() вместо Update().
-    static void SetDrawMode(DrawMode::E mode, pFuncVV func = nullptr);
+    void SetDrawMode(DrawMode::E mode, pFuncVV func = nullptr);
 
     // Устанавливает дополнительную функцию, которая будет отрисовываться каждый раз после обновления экрана
     // timeRemove - время, по истечении которого дополнительная функция отрисовки будет удалена. Если его не указывать, фукнция удаляться самостоятельно не будет
-    static void SetAddDrawFunction(pFuncVV func, uint timeRemove = 0);
+    void SetAddDrawFunction(pFuncVV func, uint timeRemove = 0);
 
     // Удаляет дополнительую функцию отрисовки, установленную вызовом функции SetAddDrawFunction()
-    static void RemoveAddDrawFunction();
+    void RemoveAddDrawFunction();
 
     // Возвращает время, через которое меню автоматически скрывается, если не было больше нажатий
-    static int TimeMenuAutoHide();
+    int TimeMenuAutoHide();
 
     // Если экран разделён на две части и основной сигнал выводится сверху - например, в режиме вывода спектра
-    static bool IsSeparate();
+    bool IsSeparate();
 
-    static void LoadBrightness();
+    void LoadBrightness();
 
     struct Message
     {
