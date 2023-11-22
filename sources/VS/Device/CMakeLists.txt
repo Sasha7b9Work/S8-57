@@ -1,6 +1,6 @@
 project (S8-57)
 
-#set(CMAKE_UNITY_BUILD ON)
+#set(CMAKE_UNITY_BUILD OFF)
 
 include_directories(../../VS/Device/src
                     ../../Device/src

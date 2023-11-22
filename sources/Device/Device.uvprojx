@@ -2421,11 +2421,6 @@
               <FilePath>.\src\Utils\Smoother.h</FilePath>
             </File>
             <File>
-              <FileName>Smoother.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Utils\Smoother.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Stack.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Utils\Stack.h</FilePath>

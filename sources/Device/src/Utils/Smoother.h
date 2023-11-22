@@ -4,31 +4,14 @@
 
 
 // Специальный класс для сглаживающего фильтра
-class Smoother
+namespace Smoother
 {
-public:
-    // Сгладить данные in и положить их в out
-    static void Run(const uint8 *in, uint8 *out, uint numBytes, int _numSmooth)
-    {
-        numSmooth = _numSmooth;
-        size = static_cast<int>(numBytes);
-        data = in;
+    static int size = 0;
+    static const uint8 *data = nullptr;
+    static int numSmooth = 0;
 
-        if (numSmooth < 2)
-        {
-            std::memcpy(out, in, numBytes);
-        }
-        else
-        {
-            for (uint i = 0; i < numBytes; i++)
-            {
-                out[i] = CalculatePoint(static_cast<int>(i));
-            }
-        }
-    }
-private:
     // Рассчитывает одну сглаженную точку
-    static uint8 CalculatePoint(int index)
+    inline uint8 CalculatePoint(int index)
     {
         uint sum = 0U;          // Здесь будет храниться сумма
 
@@ -47,7 +30,23 @@ private:
         return static_cast<uint8>(static_cast<float>(sum) / parts + 0.5F);
     }
 
-    static int size;
-    const static uint8 *data;
-    static int numSmooth;
+    // Сгладить данные in и положить их в out
+    inline void Run(const uint8 *in, uint8 *out, uint numBytes, int _numSmooth)
+    {
+        numSmooth = _numSmooth;
+        size = static_cast<int>(numBytes);
+        data = in;
+
+        if (numSmooth < 2)
+        {
+            std::memcpy(out, in, numBytes);
+        }
+        else
+        {
+            for (uint i = 0; i < numBytes; i++)
+            {
+                out[i] = CalculatePoint(static_cast<int>(i));
+            }
+        }
+    }
 };
