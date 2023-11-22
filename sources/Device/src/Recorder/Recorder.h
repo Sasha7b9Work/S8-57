@@ -24,7 +24,7 @@ namespace Recorder
 
     // Где хранятся данные
 #define S_REC_TYPE_MEMORY   (set.rec._typeMemory)
-    struct TypeMemory
+    namespace TypeMemory
     {
         enum E
         {
@@ -37,7 +37,7 @@ namespace Recorder
     
     // Используется при выборе оси
 #define S_REC_AXIS_MOVE     (set.rec._axisMove)
-    struct Axis
+    namespace Axis
     {
         enum E
         {
@@ -49,7 +49,7 @@ namespace Recorder
     
     // Масшаб по времени
 #define S_REC_SCALE_X   (set.rec._scaleX)
-    struct ScaleX
+    namespace ScaleX
     {
         enum E
         {
@@ -63,16 +63,16 @@ namespace Recorder
             Count
         };
 
-        static void Load();
+        void Load();
 
-        static void Change(int delta);
+        void Change(int delta);
 
-        static pString ToString();
+        pString ToString();
         
         // Возвращает скорость потребления памяти в байтах/сек
-        static int BytesToSec();
+        int BytesToSec();
         
         // Возвращает время считывания одной точки
-        static int TimeForPointMS();
+        int TimeForPointMS();
     };
 };
