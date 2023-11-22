@@ -4,13 +4,16 @@
 #include <stdlib.h>
 
 
-uint8 *PainterMem::buffer = 0;
-uint8 *PainterMem::endBuffer = 0;
-int   PainterMem::width = 0;
-int   PainterMem::height = 0;
-Color PainterMem::color = Color::FILL;
+namespace PainterMem
+{
+    // Адрес начала области памяти, в которой хранится буфер для рисования. Если == 0, то буфер не создан.
+    static uint8 *buffer = 0;
+    static uint8 *endBuffer = 0;
+    static int    width = 0;
+    static int    height = 0;
+    static Color  color = Color::FILL;
 
-// Возвращает адрес байта с координатами x, y.
+    // Возвращает адрес байта с координатами x, y.
 #define ADDRESS_BYTE(x, y) (buffer + ((y) * width + (x)))
 
 #define SET_POINT(x, y)                             \
@@ -19,6 +22,7 @@ Color PainterMem::color = Color::FILL;
     {                                               \
         *address = color.value;                     \
     }
+}
 
 
 uint8 *PainterMem::CreateBuffer(int w, int h)
