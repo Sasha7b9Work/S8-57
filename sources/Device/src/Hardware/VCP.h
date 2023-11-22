@@ -5,37 +5,36 @@
 
 namespace VCP
 {
-public:
     static const int DEVICE_FS = 0;
 
     // Инициализация
-    static void Init();
+    void Init();
 
-    static void SendDataAsynch(const uint8 *data, int size);
+    void SendDataAsynch(const uint8 *data, int size);
 
-    static void SendDataSynch(const void *data, int size = 0);
-
-    // Передаётся строка без завершающего нуля
-    static void SendStringAsynch(const char *data);
+    void SendDataSynch(const void *data, int size = 0);
 
     // Передаётся строка без завершающего нуля
-    static void SendStringSynch(char *data);
+    void SendStringAsynch(const char *data);
+
+    // Передаётся строка без завершающего нуля
+    void SendStringSynch(char *data);
 
     // Эта строка передаётся с завершающими символами \\r\\n
-    static void SendFormatStringAsynch(char *format, ...);
+    void SendFormatStringAsynch(char *format, ...);
 
     // Эта строка передаётся с завершающими символами \\r\\n
-    static void SendFormatStringSynch(char *format, ...);
+    void SendFormatStringSynch(char *format, ...);
 
-    static void SendByte(uint8 data);
+    void SendByte(uint8 data);
 
-    static void Flush();
+    void Flush();
 
-    static bool connectedToUSB;
+    extern bool connectedToUSB;
 
-    static bool cableUSBisConnected;
+    extern bool cableUSBisConnected;
 
-    static void *handleUSBD;
+    extern void *handleUSBD;
 
-    static void *handlePCD;
+    extern void *handlePCD;
 };

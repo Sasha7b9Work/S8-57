@@ -12,17 +12,18 @@
 
 
 
-USBD_HandleTypeDef hUSBD;
-PCD_HandleTypeDef  hPCD;
+namespace VCP
+{
+    USBD_HandleTypeDef hUSBD;
+    PCD_HandleTypeDef  hPCD;
 
-void *VCP::handleUSBD = &hUSBD;
-void *VCP::handlePCD = &hPCD;
-bool VCP::cableUSBisConnected = false;
-bool VCP::connectedToUSB = false;
+    void *handleUSBD = &hUSBD;
+    void *handlePCD = &hPCD;
+    bool cableUSBisConnected = false;
+    bool connectedToUSB = false;
 
-
-
-static bool PrevSendingComplete();
+    static bool PrevSendingComplete();
+}
 
 
 
@@ -35,7 +36,7 @@ void VCP::Init()
 }
 
 
-static bool PrevSendingComplete()
+bool VCP::PrevSendingComplete()
 {
     USBD_CDC_HandleTypeDef *pCDC = static_cast<USBD_CDC_HandleTypeDef *>(hUSBD.pClassData); //-V2571
     return pCDC->TxState == 0;
