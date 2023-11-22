@@ -43,22 +43,22 @@ namespace DisplayOsci
 
 
     // Управление выводимой на экран частью сигнала
-    struct ShiftInMemory
+    namespace ShiftInMemory
     {
         // Возвращает индекс первой точки на экране
-        static int16 Get();
+        int16 Get();
 
         // Устанавливает индекс первой точки на экране
-        static void Set(int16 shift);
+        void Set(int16 shift);
 
         // Вызывать при изменении TPos
-        static void OnChangeTPos();
+        void OnChangeTPos();
 
         // Изменить смещение в памяти на delta точек
-        static void Change(int delta);
+        void Change(int delta);
 
         // Возвращает индекс первой точки по умолчанию при данном tPos
-        static int16 Default(TPos::E tPos);
+        int16 Default(TPos::E tPos);
     };
 
 
