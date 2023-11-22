@@ -168,7 +168,7 @@ void FDrive::AttemptUpdate()
 
 
 
-static bool Process() //-V2506
+static bool Process()
 {
     USBH_Process(&handleUSBH);
     if(stateDisk == StateDisk::Start)
@@ -199,7 +199,7 @@ static void ToLower(char *str)
 
 
 
-bool FDrive::FileExist(const char *fileName) //-V2506
+bool FDrive::FileExist(const char *fileName)
 {
     char nameFile[255];
     char f[255];
@@ -229,7 +229,7 @@ bool FDrive::FileExist(const char *fileName) //-V2506
 
 
 
-static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, StructForReadDir *s) //-V2506
+static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, StructForReadDir *s)
 {
     memcpy(reinterpret_cast<uint8 *>(s->nameDir), const_cast<char *>(fullPath), strlen(fullPath)); //-V2513 //-V2567
     s->nameDir[strlen(fullPath)] = '\0'; //-V2513
@@ -274,7 +274,7 @@ static bool GetNameFile(const char *fullPath, int numFile, char *nameFileOut, St
 
 
 
-static bool GetNextNameFile(char *nameFileOut, StructForReadDir *s) //-V2506
+static bool GetNextNameFile(char *nameFileOut, StructForReadDir *s)
 {
     FILINFO *pFNO = &s->fno;
     bool alreadyNull = false;
@@ -308,7 +308,7 @@ static bool GetNextNameFile(char *nameFileOut, StructForReadDir *s) //-V2506
 }
 
 
-int FDrive::OpenFileForRead(const char *fileName) //-V2506
+int FDrive::OpenFileForRead(const char *fileName)
 {
     if(f_open(&file, fileName, FA_READ) == FR_OK)
     {
@@ -318,7 +318,7 @@ int FDrive::OpenFileForRead(const char *fileName) //-V2506
 }
 
 
-int FDrive::ReadFromFile(int numBytes, uint8 *buffer) //-V2506
+int FDrive::ReadFromFile(int numBytes, uint8 *buffer)
 {
     uint readed = 0;
     if(f_read(&file, buffer, static_cast<UINT>(numBytes), &readed) == FR_OK)

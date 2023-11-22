@@ -63,7 +63,7 @@ void SCPI::AppendNewData(const char *buffer, int size)
 }
 
 
-void SCPI::Update() //-V2506
+void SCPI::Update()
 {
     RemoveBadSymbolsFromBegin();
 
@@ -82,7 +82,7 @@ void SCPI::Update() //-V2506
 }
 
 
-const char *SCPI::Process(const char *buffer, const StructSCPI strct[]) //-V2504 //-V2506
+const char *SCPI::Process(const char *buffer, const StructSCPI strct[]) //-V2504
 {
     while (!strct->IsEmpty())
     {
@@ -109,7 +109,7 @@ const char *SCPI::Process(const char *buffer, const StructSCPI strct[]) //-V2504
 }
 
 
-const char *SCPI::BeginWith(const char *buffer, const char *word) //-V2506
+const char *SCPI::BeginWith(const char *buffer, const char *word)
 {
     while (*word)
     {
@@ -139,7 +139,7 @@ const char *SCPI::ProcessNode(const char *begin, const StructSCPI *node)
 }
 
 
-const char *SCPI::ProcessLeaf(const char *begin, const StructSCPI *node) //-V2506
+const char *SCPI::ProcessLeaf(const char *begin, const StructSCPI *node)
 {
     if (*begin == '\0')                     // Подстраховка от того, что символ окончания команды не принят
     {
@@ -264,7 +264,7 @@ bool SCPI::Test()
 }
 
 
-bool SCPI::ProcessTest(const StructSCPI strct[]) //-V2504 //-V2506
+bool SCPI::ProcessTest(const StructSCPI strct[]) //-V2504
 {
     while(!strct->IsEmpty())
     {

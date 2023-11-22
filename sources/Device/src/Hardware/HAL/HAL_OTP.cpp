@@ -5,7 +5,7 @@
 #include <cstring>
 
 
-int HAL_OTP::GetSerialNumber(char buffer[17]) //-V2506
+int HAL_OTP::GetSerialNumber(char buffer[17])
 {
     // \todo улучшить - нельз€ разбрасыватьс€ байтами.  ажда€ запись должна занимать столько места, сколько в ней символов, а не 16, как сейчас.
 
@@ -30,7 +30,7 @@ int HAL_OTP::GetSerialNumber(char buffer[17]) //-V2506
 }
 
 
-bool HAL_OTP::SaveSerialNumber(char *servialNumber) //-V2506
+bool HAL_OTP::SaveSerialNumber(char *servialNumber)
 {
     // Ќаходим первую пустую строку длиной 16 байт в области OTP, начина€ с начала
     uint8 *address = (uint8 *)FLASH_OTP_BASE; //-V566 //-V2571

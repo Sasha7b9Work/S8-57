@@ -86,9 +86,9 @@ template<class T> void Swap(T *value0, T *value1) { T temp = *value0; *value0 = 
 /// –азмещает переменные value0 и value1 в пор€дке возрастани€
 template<class T> void Sort(T *value0, T *value1) { if (*value1 < *value0) { Swap<T>(value0, value1); } }
 
-template<class T> int Sign(T x) { if (x > (T)(0)) { return 1; } if (x < (T)(0)) { return -1; } return 0; } //-V2506
+template<class T> int Sign(T x) { if (x > (T)(0)) { return 1; } if (x < (T)(0)) { return -1; } return 0; }
 
-template<class T> T Abs(T x) { if (x < (T)0)   { return -x; }  return x; } //-V2506
+template<class T> T Abs(T x) { if (x < (T)0)   { return -x; }  return x; }
 
 template<class T> T Min(T x1, T x2) { return x1 < x2 ? x1 : x2; }
 
@@ -120,7 +120,7 @@ template<class T> static void Limitation(T *value, T min, T max)
     }
 }
 
-template<class T> static T LimitationRet(T value, T min, T max) //-V2506
+template<class T> static T LimitationRet(T value, T min, T max)
 {
     if (value < min) { return min; }
     if (value > max) { return max; }

@@ -41,7 +41,7 @@ static bool IsActive_Points()
     return !PeakDetMode().IsEnabled();
 }
 
-void PageMemory::OnChanged_LengthMemoryChannel(bool active) //-V2506
+void PageMemory::OnChanged_LengthMemoryChannel(bool active)
 {
     // Если включен пиковый детектор, то не можем переключать память
     if (PeakDetMode().IsEnabled() && !active)
@@ -195,7 +195,7 @@ DEF_GRAPH_BUTTON( bMask_Backspace,                                              
 )
 
 
-static void OnPress_Mask_Insert() //-V2506
+static void OnPress_Mask_Insert()
 {
     int index = S_MEM_INDEX_CUR_SYMBOL_MASK;
     uint size = std::strlen(S_MEM_FILE_NAME_MASK); //-V2513
@@ -359,7 +359,7 @@ static void DrawFileMask(int x, int y)
     Region(5, 8).Fill(x, y, Color::FLASH_10);
 }
 
-static bool HandlerKey_Mask(const KeyEvent &event) //-V2506
+static bool HandlerKey_Mask(const KeyEvent &event)
 {
     if(event.IsArrowUp() || event.IsArrowRight())
     {

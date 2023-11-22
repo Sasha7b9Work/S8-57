@@ -16,7 +16,7 @@ static void DrawDataInRect(int x, int y, int width, int height, const uint8 *dat
 static void DrawScreenArea();
 
 
-void DisplayOsci::MemoryWindow::Draw() //-V2506
+void DisplayOsci::MemoryWindow::Draw()
 {
     if (CursorsMeasurements::NecessaryDraw())
     {

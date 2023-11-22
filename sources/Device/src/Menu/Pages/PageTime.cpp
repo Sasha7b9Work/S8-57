@@ -7,7 +7,7 @@
 #include "Utils/Math.h"
 
 
-bool SampleType::IsReal() //-V2506
+bool SampleType::IsReal()
 {
     if (!OSCI_IN_MODE_RANDOMIZER || S_TRIG_START_MODE_IS_SINGLE)
     {
@@ -33,7 +33,7 @@ void TPos::Set(TPos::E v)
 }
 
 
-void TPos::Draw() //-V2506
+void TPos::Draw()
 {
     int x0 = PosX();
 

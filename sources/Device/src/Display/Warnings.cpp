@@ -32,7 +32,7 @@ void Warnings::AddWarning(const char *warning)
 }
 
 
-static bool BackMessagesSame() //-V2506
+static bool BackMessagesSame()
 {
     if (warnings.Size() < 2)
     {

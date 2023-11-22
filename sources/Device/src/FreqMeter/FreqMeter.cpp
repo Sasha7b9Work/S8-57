@@ -174,7 +174,7 @@ float FreqMeter::FreqSetToFreq(const BitSet32 *fr)
 }
 
 
-float FreqMeter::PeriodSetToFreq(const BitSet32 *period_) //-V2506
+float FreqMeter::PeriodSetToFreq(const BitSet32 *period_)
 {
     if (period_->word == 0)
     {

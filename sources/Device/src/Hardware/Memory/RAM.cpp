@@ -183,7 +183,7 @@ void RAM::Init()
 }
 
 
-DataSettings *RAM::PrepareForNewData() //-V2506
+DataSettings *RAM::PrepareForNewData()
 {
     if(OSCI_IN_MODE_RANDOMIZER &&           // В рандомизаторе иногда будем возвращать указатель на последние считанные данные
        (NumberDatas() != 0) &&              // Но только если в хранилище они есть
@@ -235,7 +235,7 @@ DataSettings *RAM::PrepareForNewData() //-V2506
 }
 
 
-DataSettings *RAM::Get(int numFromEnd) //-V2506
+DataSettings *RAM::Get(int numFromEnd)
 {
     int number = NumberDatas();
     
@@ -258,7 +258,7 @@ DataSettings *RAM::Get(int numFromEnd) //-V2506
 }
 
 
-int RAM::NumberDatas() //-V2506
+int RAM::NumberDatas()
 {
     HAL_BUS::ConfigureToFSMC();
 
@@ -292,7 +292,7 @@ int RAM::NumberDatas() //-V2506
     return result;
 }
 
-uint RAM::AllocateMemoryForPacket(const DataSettings *ds) //-V2506
+uint RAM::AllocateMemoryForPacket(const DataSettings *ds)
 {
     if (newest == nullptr)                                                  // Ещё нет ни одной записи
     {
@@ -357,7 +357,7 @@ void RAM::RemoveOldest()
 }
 
 
-bool RAM::LastSettingsEqualsCurrent() //-V2506
+bool RAM::LastSettingsEqualsCurrent()
 {
     if(NumberDatas() == 0)
     {

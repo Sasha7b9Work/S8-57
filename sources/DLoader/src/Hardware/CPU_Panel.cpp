@@ -94,7 +94,7 @@ void CPU::Panel::TransmitData(uint16 data)
 
 
 
-uint16 CPU::Panel::NextData() //-V2506
+uint16 CPU::Panel::NextData()
 {
     if (lastPos > 0)
     {

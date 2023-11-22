@@ -60,7 +60,7 @@ PAdvancedFont::PAdvancedFont(PTypeFont::E t)
 }
 
 
-bool PAdvancedFont::RowNotEmpty(uint8 s, int r) //-V2506
+bool PAdvancedFont::RowNotEmpty(uint8 s, int r)
 {
     HeaderFont *header = HeaderFont::Sefl();
 
@@ -137,7 +137,7 @@ int NativeSymbol::BytesInRow()
 }
 
 
-uint8 *NativeSymbol::GetRow(int row) //-V2506
+uint8 *NativeSymbol::GetRow(int row)
 {
     if (row > height - 1)
     {
@@ -153,7 +153,7 @@ uint8 *NativeSymbol::GetRow(int row) //-V2506
 }
 
 
-NativeSymbol *HeaderFont::GetSymbol(uint8 num) //-V2506
+NativeSymbol *HeaderFont::GetSymbol(uint8 num)
 {
     HeaderFont *header = HeaderFont::Sefl();
 
@@ -188,7 +188,7 @@ bool PAdvancedFont::BitIsExist(uint8 s, int row, int bit)
 }
 
 
-bool NativeSymbol::BitIsExist(int r, int b) //-V2506
+bool NativeSymbol::BitIsExist(int r, int b)
 {
     uint8 *row = GetRow(r);
 

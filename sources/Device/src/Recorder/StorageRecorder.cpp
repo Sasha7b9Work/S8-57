@@ -91,7 +91,7 @@ int Record::NumPoints() const
 }
 
 
-void Record::AddPoints(BitSet16 dataA, BitSet16 dataB) //-V2506
+void Record::AddPoints(BitSet16 dataA, BitSet16 dataB)
 {
     if(DisplayRecorder::InProcessUpdate())
     {
@@ -289,7 +289,7 @@ uint8 *Record::End() const
 }
 
 
-bool Record::IsValid() const //-V2506
+bool Record::IsValid() const
 {
     HAL_BUS_CONFIGURE_TO_FSMC();
 
@@ -326,7 +326,7 @@ Record *StorageRecorder::LastRecord()
 }
 
 
-bool StorageRecorder::CreateNewRecord() //-V2506
+bool StorageRecorder::CreateNewRecord()
 {
     HAL_BUS_CONFIGURE_TO_FSMC();
 

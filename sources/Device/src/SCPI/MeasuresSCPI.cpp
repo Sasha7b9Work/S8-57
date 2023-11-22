@@ -35,7 +35,7 @@ namespace S_MEAS
         S_MEAS_SHOW = (i == 1);
     }
 
-    static pCHAR FuncDisplay(pCHAR buffer) //-V2506
+    static pCHAR FuncDisplay(pCHAR buffer)
     {
         SCPI_REQUEST(SCPI::SendAnswer(S_MEAS_SHOW ? " ON" : " OFF"));
 
@@ -51,7 +51,7 @@ namespace S_MEAS
         ""
     };
 
-    static pCHAR FuncSource(pCHAR buffer) //-V2506
+    static pCHAR FuncSource(pCHAR buffer)
     {
         SCPI_REQUEST(SCPI::SendAnswer(source[S_MEAS_SOURCE]));
 
@@ -87,7 +87,7 @@ namespace S_MEAS
         ""
     };
 
-    static pCHAR FuncValue(pCHAR buffer) //-V2506
+    static pCHAR FuncValue(pCHAR buffer)
     {
         pCHAR end = nullptr;
 

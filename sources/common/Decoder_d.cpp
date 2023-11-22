@@ -63,7 +63,7 @@ static bool E(uint8)
 }
 
 
-void DDecoder::RunStep(uint8 data) //-V2506
+void DDecoder::RunStep(uint8 data)
 {
     static const struct StructFunc
     {
@@ -127,7 +127,7 @@ void DDecoder::RunStep(uint8 data) //-V2506
 }
 
 
-bool DDecoder::ButtonPress(uint8 data) //-V2506
+bool DDecoder::ButtonPress(uint8 data)
 {
     static Key::E button;
     if (step == 0)
@@ -148,7 +148,7 @@ bool DDecoder::ButtonPress(uint8 data) //-V2506
 }
 
 
-bool DDecoder::AddToConsole(uint8 data) //-V2506
+bool DDecoder::AddToConsole(uint8 data)
 {
     static char *text = nullptr;        // Здесь будет храниться принятая строка
 

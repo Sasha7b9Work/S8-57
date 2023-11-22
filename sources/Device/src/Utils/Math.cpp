@@ -57,7 +57,7 @@ template uint  Math::Min<uint>(uint, uint);
 
 
 
-int Math::LowSignedBit(uint value) //-V2506
+int Math::LowSignedBit(uint value)
 {
     int verValue = 1;
 
@@ -75,7 +75,7 @@ int Math::LowSignedBit(uint value) //-V2506
 }
 
 
-void Math::Smoothing(uint8 *data, int numPoints, int numSmooth) //-V2506
+void Math::Smoothing(uint8 *data, int numPoints, int numSmooth)
 {
     if (numSmooth == 0 || numSmooth == 1)
     {
@@ -137,7 +137,7 @@ T Math::Min(T x1, T x2)
 }
 
 
-int Math::MinFrom2Int(int val0, int val1) //-V2506
+int Math::MinFrom2Int(int val0, int val1)
 {
     if (val0 < val1)
     {
@@ -260,7 +260,7 @@ uint8 Math::MinFromArrayWithErrorCode(const uint8 *data, int firstPoint, int las
 }
 
 
-float Math::GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, int yHorLine) //-V2506
+float Math::GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, int yHorLine)
 {
     if (y0 == y1)
     {
@@ -296,7 +296,7 @@ void Math::CalculateMathFunction(float *dataAandResult, const float *dataB, int 
 }
 
 
-uint8 Math::CalculateFiltr(const uint8 *data, int x, int numPoints, int numSmoothing) //-V2506
+uint8 Math::CalculateFiltr(const uint8 *data, int x, int numPoints, int numSmoothing)
 {
     if (numSmoothing < 2)
     {
@@ -376,7 +376,7 @@ void Math::CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoint
 }
 
 
-int Math::FindAnotherElement(const uint8 *data, uint8 value, int numElements) //-V2506
+int Math::FindAnotherElement(const uint8 *data, uint8 value, int numElements)
 {
     for (int i = 0; i < numElements; i++)
     {
@@ -390,7 +390,7 @@ int Math::FindAnotherElement(const uint8 *data, uint8 value, int numElements) //
 }
 
 
-int Math::DigitsInIntPart(float value) //-V2506
+int Math::DigitsInIntPart(float value)
 {
     if (value == std::numeric_limits<float>::infinity())
     {
@@ -466,7 +466,7 @@ void Math::Sort(T *value0, T *value1)
 
 
 template<class T>
-int Math::Sign(T x) //-V2506
+int Math::Sign(T x)
 {
      if (x > (T)(0))
      {
@@ -481,7 +481,7 @@ int Math::Sign(T x) //-V2506
 
 
 template<class T>
-T Math::Abs(T x) //-V2506
+T Math::Abs(T x)
 {
      if (x < (T)0)
      {
@@ -572,7 +572,7 @@ void Math::LimitationDecrease(T *value, T min)
 
 
 template<class T>
-T Math::LimitationRet(T value, T min, T max) //-V2506
+T Math::LimitationRet(T value, T min, T max)
 {
     if (value < min)
     {

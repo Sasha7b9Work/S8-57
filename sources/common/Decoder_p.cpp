@@ -65,7 +65,7 @@ namespace PDecoder
 }
 
 
-void PDecoder::AddData(uint8 data) //-V2506
+void PDecoder::AddData(uint8 data)
 {
     static const struct StructFunc
     {
@@ -122,7 +122,7 @@ void PDecoder::AddData(uint8 data) //-V2506
 }
 
 
-bool PDecoder::InButtonPress(uint8) //-V2506
+bool PDecoder::InButtonPress(uint8)
 {
     if (step == 0)
     {
@@ -146,7 +146,7 @@ bool PDecoder::BeginScene(uint8)
 }
 
 
-bool PDecoder::DrawTesterPoints(uint8 data) //-V2506
+bool PDecoder::DrawTesterPoints(uint8 data)
 {
     // Количество полных принятых иксов
     static int numX = 0;
@@ -202,7 +202,7 @@ bool PDecoder::DrawTesterPoints(uint8 data) //-V2506
 }
 
 
-bool PDecoder::DisplayBrightness(uint8 data) //-V2506
+bool PDecoder::DisplayBrightness(uint8 data)
 {
     if (step == 0)
     {
@@ -224,7 +224,7 @@ bool PDecoder::EndScene(uint8)
 }
 
 
-bool PDecoder::SetColor(uint8 data) //-V2506
+bool PDecoder::SetColor(uint8 data)
 {
     if (step == 0)
     {
@@ -238,7 +238,7 @@ bool PDecoder::SetColor(uint8 data) //-V2506
 }
 
 
-bool PDecoder::FuncScreen(uint8 data) //-V2506
+bool PDecoder::FuncScreen(uint8 data)
 {
     if (step == 0)
     {
@@ -427,7 +427,7 @@ bool PDecoder::DrawHPointLine(uint8 data)
 }
 
 
-bool PDecoder::SetMinWidthFont(uint8 data) //-V2506
+bool PDecoder::SetMinWidthFont(uint8 data)
 {
     if (step == 0)
     {
@@ -442,7 +442,7 @@ bool PDecoder::SetMinWidthFont(uint8 data) //-V2506
 }
 
 
-bool PDecoder::SetTextSpacing(uint8 data) //-V2506
+bool PDecoder::SetTextSpacing(uint8 data)
 {
     if (step == 0)
     {
@@ -508,7 +508,7 @@ bool PDecoder::SetPoint(uint8 data)
 }
 
 
-bool PDecoder::DrawText(uint8 data) //-V2506
+bool PDecoder::DrawText(uint8 data)
 {
     __IO static int x;
     __IO static int y;
@@ -575,7 +575,7 @@ bool PDecoder::SetPalette(uint8 data)
 }
 
 
-bool PDecoder::SetFont(uint8 data) //-V2506
+bool PDecoder::SetFont(uint8 data)
 {
     if (step == 0)
     {

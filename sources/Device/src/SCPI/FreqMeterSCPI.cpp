@@ -58,7 +58,7 @@ namespace S_FREQ
         }
     }
 
-    static pCHAR FuncAvePeriods(pCHAR buffer) //-V2506
+    static pCHAR FuncAvePeriods(pCHAR buffer)
     {
         SCPI_REQUEST(SCPI::SendAnswer(periodsReverse[S_FREQ_NUMBER_PERIODS]));
 
@@ -85,7 +85,7 @@ namespace S_FREQ
         }
     }
 
-    static pCHAR FuncLabels(pCHAR buffer) //-V2506
+    static pCHAR FuncLabels(pCHAR buffer)
     {
         SCPI_REQUEST(SCPI::SendAnswer(labels[S_FREQ_FREQ_CLC]));
 
@@ -106,7 +106,7 @@ namespace S_FREQ
         PageFreqMeter::Init();
     }
 
-    static pCHAR FuncMeasure(pCHAR buffer) //-V2506
+    static pCHAR FuncMeasure(pCHAR buffer)
     {
         SCPI_REQUEST(SCPI::SendAnswer(measures[S_FREQ_MODE_MEASURE]));
 
@@ -128,7 +128,7 @@ namespace S_FREQ
     }
 
 
-    static pCHAR FuncMode(pCHAR buffer) //-V2506
+    static pCHAR FuncMode(pCHAR buffer)
     {
         SCPI_REQUEST(SCPI::SendAnswer(S_FREQ_METER_ENABLED ? " ON" : " OFF"));
 
@@ -154,7 +154,7 @@ namespace S_FREQ
         }
     }
 
-    static pCHAR FuncTime(pCHAR buffer) //-V2506
+    static pCHAR FuncTime(pCHAR buffer)
     {
         SCPI_REQUEST(SCPI::SendAnswer(time[S_FREQ_TIME_COUNTING]));
 
@@ -162,7 +162,7 @@ namespace S_FREQ
     }
 
 
-    static pCHAR FuncValue(pCHAR buffer) //-V2506
+    static pCHAR FuncValue(pCHAR buffer)
     {
         SCPI_PROLOG(buffer);
 

@@ -90,7 +90,7 @@ void Utils::AroundAverager<T>::Push(T elem)
 
 
 template <typename T>
-T Utils::AroundAverager<T>::Value() //-V2506
+T Utils::AroundAverager<T>::Value()
 {
     if (pushed < parts)
     {

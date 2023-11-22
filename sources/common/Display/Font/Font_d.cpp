@@ -90,7 +90,7 @@ void DFont::Set(const DTypeFont::E typeFont)
         case DTypeFont::_GOST72bold:
         {
             font = nullptr;
-            volatile DAdvancedFont f(typeFont);
+            DAdvancedFont::Set(typeFont);
         }
         break;
         case DTypeFont::None:
@@ -135,14 +135,14 @@ static bool FontIsSmall()
 }
 
 
-uint8 DFont::GetWidth(uint8 symbol) //-V2506
+uint8 DFont::GetWidth(uint8 symbol)
 {
     if (FontIsSmall())
     {
         return font->symbols[symbol].width;
     }
 
-    return DAdvancedFont().GetWidth(symbol);
+    return DAdvancedFont::GetWidth(symbol);
 }
 
 
@@ -152,36 +152,36 @@ uint8 DFont::GetWidth(char symbol)
 }
 
 
-uint8 DFont::GetHeight() //-V2506
+uint8 DFont::GetHeight()
 {
     if (FontIsSmall())
     {
         return static_cast<uint8>(font->_height);
     }
 
-    return DAdvancedFont().GetHeight();
+    return DAdvancedFont::GetHeight();
 }
 
 
-bool DFont::RowNotEmpty(uint8 symbol, int row) //-V2506
+bool DFont::RowNotEmpty(uint8 symbol, int row)
 {
     if (FontIsSmall())
     {
         return font->symbols[symbol].bytes[row] != 0;
     }
 
-    return DAdvancedFont().RowNotEmpty(symbol, row);
+    return DAdvancedFont::RowNotEmpty(symbol, row);
 }
 
 
-bool DFont::BitIsExist(uint8 symbol, int row, int bit) //-V2506
+bool DFont::BitIsExist(uint8 symbol, int row, int bit)
 {
     if (FontIsSmall())
     {
         return font->symbols[symbol].bytes[row] & (1 << (7 - bit));
     }
 
-    return DAdvancedFont().BitIsExist(symbol, row, bit);
+    return DAdvancedFont::BitIsExist(symbol, row, bit);
 }
 
 

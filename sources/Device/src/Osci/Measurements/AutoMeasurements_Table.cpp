@@ -16,7 +16,7 @@ static int GetTopTable();
 
 
 
-void TableMeasures::Draw() //-V2506
+void TableMeasures::Draw()
 {
     if (!S_MEAS_SHOW)
     {
@@ -108,7 +108,7 @@ void TableMeasures::Cell::DrawStringMeasure(int x, int y)
 }
 
 
-static int GetTopTable() //-V2506
+static int GetTopTable()
 {
     if (S_MEAS_ON_DISPLAY_IS_6_1 || S_MEAS_ON_DISPLAY_IS_6_2)
     {
@@ -164,7 +164,7 @@ int TableMeasures::GetDeltaGridLeft()
 }
 
 
-int TableMeasures::DY() //-V2506
+int TableMeasures::DY()
 {
     if (S_MEAS_SOURCE_IS_A_B)
     {

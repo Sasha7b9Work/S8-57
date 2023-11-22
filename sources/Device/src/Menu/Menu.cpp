@@ -526,7 +526,7 @@ int8 &Menu::Position::ActItem(PageName::E name)
 }
 
 
-Page *Menu::PageFromName(PageName::E name) //-V2506
+Page *Menu::PageFromName(PageName::E name)
 {
     for(int i = 0; true; i++)
     {

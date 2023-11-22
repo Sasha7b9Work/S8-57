@@ -36,7 +36,7 @@ static bool IsActive_Tune()
     return S_MEAS_SHOW;
 }
 
-static bool HandlerKey_Tune(const KeyEvent &event) //-V2506
+static bool HandlerKey_Tune(const KeyEvent &event)
 {
     if (event.IsArrow())
     {

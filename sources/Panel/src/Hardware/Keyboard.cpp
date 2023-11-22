@@ -141,7 +141,7 @@ void Keyboard::Init()
 }
 
 
-void Keyboard::Update() //-V2506
+void Keyboard::Update()
 {
     if (!init)
     {

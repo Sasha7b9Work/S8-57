@@ -233,7 +233,7 @@ void HAL_BUS::FPGA::SetAddrData(uint8 *address0, uint8 *address1)
 }
 
 
-uint8 HAL_BUS::FPGA::ReadA0() //-V2506
+uint8 HAL_BUS::FPGA::ReadA0()
 {
     int delta = VALUE::AVE - static_cast<int>(*addrData0);
 
@@ -252,7 +252,7 @@ uint8 HAL_BUS::FPGA::ReadA0() //-V2506
 }
 
 
-uint8 HAL_BUS::FPGA::ReadA1() //-V2506
+uint8 HAL_BUS::FPGA::ReadA1()
 {
     int delta = VALUE::AVE - static_cast<int>(*addrData1);
 

@@ -76,7 +76,7 @@ void AveragerTester::SetCount(int count)
 }
 
 
-void AveragerTester::Process(const uint16 *dataX, const uint8 *dataY, int step) //-V2506
+void AveragerTester::Process(const uint16 *dataX, const uint8 *dataY, int step)
 {
     Copy16(current[step].x, dataX);
     Copy8(current[step].y, dataY);

@@ -28,7 +28,7 @@ void PageChoiceMeasures::OnOpenCloseEvent()
 }
 
 
-void PageChoiceMeasures::OnKeyEvent(const KeyEvent &event) //-V2506
+void PageChoiceMeasures::OnKeyEvent(const KeyEvent &event)
 {
     if (event.type != TypePress::Press)
     {
@@ -91,7 +91,7 @@ void PageChoiceMeasures::OnKeyEvent(const KeyEvent &event) //-V2506
 }
 
 
-void PageChoiceMeasures::Draw() //-V2506
+void PageChoiceMeasures::Draw()
 {
     if (!isActive)
     {

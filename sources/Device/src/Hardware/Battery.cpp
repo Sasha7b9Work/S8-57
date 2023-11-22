@@ -70,7 +70,7 @@ float Battery::GetVoltageAverage()
 }
 
 
-static float CalculatePercents(float volts) //-V2506
+static float CalculatePercents(float volts)
 {
     if (volts >= Voltage100())
     {

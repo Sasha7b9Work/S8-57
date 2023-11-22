@@ -61,7 +61,7 @@ void Math::Swap(T *value0, T *value1)
 
 
 template<class T>
-int Math::Sign(T x) //-V2506
+int Math::Sign(T x)
 {
     if (x > (T)(0))
     {

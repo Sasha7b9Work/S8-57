@@ -161,7 +161,7 @@ void Tester::StartStop()
 }
 
 
-void Tester::ProcessStep() //-V2506
+void Tester::ProcessStep()
 {
                                                                                                                                                 /*
        |-----|     |-----|     |-----|     |-----|     |-----|     |-----|     |-----|     |-----|     |-----|     |-----|     |---
@@ -297,7 +297,7 @@ void Tester::LoadPolarity()
 
 
 // Возвращает true, если для данноого режима работы нужна уменьшенная ступенька
-static bool NeedSmallStep() //-V2506
+static bool NeedSmallStep()
 {
     if(S_TEST_CONTROL_IS_VOLTAGE)
     {
@@ -396,7 +396,7 @@ static void ReadFPGA(uint16 *dataA, uint8 *dataB)
 }
 
 
-static bool StartFPGA() //-V2506
+static bool StartFPGA()
 {
     // У нас двенадцать делений. На двенадцать делений должно приходиться не менее 2.5 мс
     // 2.5мс / 12дел = 0.2 мс/дел = 10мкс/тчк

@@ -315,7 +315,7 @@ static bool IsConsonant(char symbol)
 }
 
 
-static bool CompareArrays(const bool *array1, const bool *array2, int numElems) //-V2506
+static bool CompareArrays(const bool *array1, const bool *array2, int numElems)
 {
     for (int i = 0; i < numElems; i++)
     {
@@ -330,7 +330,7 @@ static bool CompareArrays(const bool *array1, const bool *array2, int numElems) 
 
 /// \brief Находит следующий перенос. C letters начинается часть слово, где нужно найти перенос, в lettersInSyllable будет записано число букв в 
 /// найденном слоге. Если слово закончилось, функция возвращает false
-static bool FindNextTransfer(const char *letters, int8 *lettersInSyllable) //-V2506
+static bool FindNextTransfer(const char *letters, int8 *lettersInSyllable)
 {
 
 #define VOWEL       0   // Гласная
@@ -453,7 +453,7 @@ static char *PartWordForTransfer(char *word, const int8 *lengthSyllables, int nu
 
 
 // Если draw == false, то рисовать символ не надо, фунция используется только для вычислений
-static int DrawPartWord(char *word, int x, int y, int xRight, bool draw) //-V2506
+static int DrawPartWord(char *word, int x, int y, int xRight, bool draw)
 {
     int8 *lengthSyllables = BreakWord(word);
     int numSyllabels = 0;
@@ -647,7 +647,7 @@ DashedVLine::DashedVLine(int _height, int _deltaFill, int _deltaEmpty, int _delt
 }
 
 
-void DashedVLine::Draw(int x, int y0) //-V2506
+void DashedVLine::Draw(int x, int y0)
 {
     if (deltaStart < 0 || deltaStart >= (deltaFill + deltaEmpty))
     {
@@ -681,7 +681,7 @@ DashedHLine::DashedHLine(int _width, int _deltaFill, int _deltaEmpty, int _delta
 }
 
 
-void DashedHLine::Draw(int x0, int y) //-V2506
+void DashedHLine::Draw(int x0, int y)
 {
     if (deltaStart < 0 || deltaStart >= (deltaFill + deltaEmpty))
     {

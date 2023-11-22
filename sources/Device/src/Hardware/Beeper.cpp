@@ -127,7 +127,7 @@ void Beeper::SetWave()
 }
 
 
-void Beeper::Beep(const TypeWave::E newTypeWave, const float newFreq, const float newAmpl, const int newDuration) //-V2506
+void Beeper::Beep(const TypeWave::E newTypeWave, const float newFreq, const float newAmpl, const int newDuration)
 {
     if (bellIsEnabled || soundWarnIsBeep || set.serv.SoundVolume() == 0)
     {

@@ -43,7 +43,7 @@ void DisplayTester::Update()
 }
 
 
-Color DisplayTester::ColorForStep(int _step) //-V2506
+Color DisplayTester::ColorForStep(int _step)
 {
     static const Color colors[Tester::NUM_STEPS] = {Color::FILL, Color::GRID, Color::RED, Color::GREEN, Color::BLUE};
 
@@ -56,7 +56,7 @@ Color DisplayTester::ColorForStep(int _step) //-V2506
 }
 
 
-void DisplayTester::DrawData(int numStep) //-V2506
+void DisplayTester::DrawData(int numStep)
 {
     if(!ready[numStep])
     {
@@ -102,7 +102,7 @@ void DisplayTester::DrawLegend(int x, int y)
 }
 
 
-String DisplayTester::ValueForStep(int step) //-V2506
+String DisplayTester::ValueForStep(int step)
 {
     static pString valuesU[2][5] =
     {

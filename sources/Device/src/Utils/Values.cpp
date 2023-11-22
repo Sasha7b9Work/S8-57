@@ -128,7 +128,7 @@ static char *IntegerToString(int value, bool alwaysSign, int numMinFields, char 
 }
 
 
-static char *FrequencyToString(float freq, char bufferOut[20]) //-V2506
+static char *FrequencyToString(float freq, char bufferOut[20])
 {
     bufferOut[0] = 0;
     const char *suffix = 0;
@@ -159,7 +159,7 @@ static char *FrequencyToString(float freq, char bufferOut[20]) //-V2506
 }
 
 
-char *Frequency::ToStringAccuracy(char bufferOut[20], int numDigits) const //-V2506
+char *Frequency::ToStringAccuracy(char bufferOut[20], int numDigits) const
 {
     float freq = value;
 
@@ -203,7 +203,7 @@ String Frequency::ToString() const
 }
 
 
-char *TimeToString(float time, bool alwaysSign, char buffer[20]) //-V2506
+char *TimeToString(float time, bool alwaysSign, char buffer[20])
 {
     if (Math::IsEquals(time, Float::ERROR))
     {
@@ -230,7 +230,7 @@ char *TimeToString(float time, bool alwaysSign, char buffer[20]) //-V2506
 }
 
 
-char* Time::ToStringAccuracy(bool alwaysSign, char buffer[20], int numDigits) const //-V2506
+char* Time::ToStringAccuracy(bool alwaysSign, char buffer[20], int numDigits) const
 {
     float time = value;
 
@@ -274,7 +274,7 @@ String Voltage::ToString(bool alwaysSign) const
 }
 
 
-static char* VoltageToString(float voltage, bool alwaysSign, char buffer[20]) //-V2506
+static char* VoltageToString(float voltage, bool alwaysSign, char buffer[20])
 {
     if (Math::IsEquals(voltage, Float::ERROR))
     {
@@ -322,7 +322,7 @@ String Current::ToString() const
 }
 
 
-char *Current::ToString(char buffer[50]) const //-V2506
+char *Current::ToString(char buffer[50]) const
 {
     float current = value;
 
@@ -402,7 +402,7 @@ int Integer::operator [](int n)
 }
 
 
-static char *FloatToString(float value, bool alwaysSign, int numDigits, char bufferOut[20]) //-V2506
+static char *FloatToString(float value, bool alwaysSign, int numDigits, char bufferOut[20])
 {
     if (Math::IsEquals(value, Float::ERROR))
     {

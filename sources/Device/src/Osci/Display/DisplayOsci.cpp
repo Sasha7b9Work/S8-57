@@ -133,7 +133,7 @@ void DisplayOsci::BottomPart::Draw(int x0, int y0)
 }
 
 
-void DisplayOsci::DrawingValueParameter::Enable(DrawingValueParameter::E v) //-V2506
+void DisplayOsci::DrawingValueParameter::Enable(DrawingValueParameter::E v)
 {
     if(S_FFT_ENABLED)                                                                     // Не будем рисовать при включённом спектре
     {
@@ -234,7 +234,7 @@ void DisplayOsci::ShiftInMemory::OnChangeTPos()
 }
 
 
-int16 DisplayOsci::ShiftInMemory::Default(TPos::E tPos) //-V2506
+int16 DisplayOsci::ShiftInMemory::Default(TPos::E tPos)
 {
     if (tPos == TPos::Center)
     {

@@ -48,7 +48,7 @@ void DisplayOsci::PainterData::DrawData()
 }
 
 
-void DisplayOsci::PainterData::DrawCurrent() //-V2506
+void DisplayOsci::PainterData::DrawCurrent()
 {
     if (DS == nullptr)
     {
@@ -127,7 +127,7 @@ void DisplayOsci::PainterData::WriteParametersFFT(Chan::E ch, float freq0, float
 }
 
 
-void DisplayOsci::PainterData::DrawSpectrum(const uint8 *dataIn, int numPoints, Chan::E ch) //-V2506
+void DisplayOsci::PainterData::DrawSpectrum(const uint8 *dataIn, int numPoints, Chan::E ch)
 {
     if (!S_CHANNEL_ENABLED(ch))
     {
@@ -176,7 +176,7 @@ void DisplayOsci::PainterData::DrawSpectrum(const uint8 *dataIn, int numPoints, 
 }
 
 
-void DisplayOsci::PainterData::DrawSpectrum() //-V2506
+void DisplayOsci::PainterData::DrawSpectrum()
 {
     if (!S_FFT_ENABLED || !DS)
     {
@@ -240,7 +240,7 @@ void DisplayOsci::PainterData::DrawROM()
 }
 
 
-void DisplayOsci::PainterData::DrawChannel(Chan::E ch) //-V2506
+void DisplayOsci::PainterData::DrawChannel(Chan::E ch)
 {
     if (!S_CHANNEL_ENABLED(ch))
     {

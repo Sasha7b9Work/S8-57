@@ -5,43 +5,46 @@
 #include "fontGOST72bold.inc"
 
 
-struct NativeSymbol
+namespace DAdvancedFont
 {
-    uint8 width;        // Ширина символа в пикселях
-    uint8 height;       // Высота символа в пикселях
-    uint8 firstRow;     // Номер первой непустой строки. Именно её первый байт хранится в data
-//    uint8 data;     // Первый байт первой строки символа
+    struct NativeSymbol
+    {
+        uint8 width;        // Ширина символа в пикселях
+        uint8 height;       // Высота символа в пикселях
+        uint8 firstRow;     // Номер первой непустой строки. Именно её первый байт хранится в data
+        //    uint8 data;     // Первый байт первой строки символа
 
-    // Возвращает количество байт в строке
-    int BytesInRow();
-    // Возвращает указатель на первый байт строки
-    uint8 *GetRow(int row);
-    // Возвращает указатель на первый байт данных
-    uint8 *Data();
+            // Возвращает количество байт в строке
+        int BytesInRow();
+        // Возвращает указатель на первый байт строки
+        uint8 *GetRow(int row);
+        // Возвращает указатель на первый байт данных
+        uint8 *Data();
 
-    bool BitIsExist(int row, int bit);
-};
+        bool BitIsExist(int row, int bit);
+    };
 
-// Структрура заголовка
-struct HeaderFont
-{
-    uint16       offsets[256];  // Смещения 256 символов таблицы. 0 означает, что символ отсутствует
-    NativeSymbol symbol;        // Первый символ в таблице его смещение 256
+    // Структрура заголовка
+    struct HeaderFont
+    {
+        uint16       offsets[256];  // Смещения 256 символов таблицы. 0 означает, что символ отсутствует
+        NativeSymbol symbol;        // Первый символ в таблице его смещение 256
 
-    // Возвращает указатель на символ, если он присутствует в таблице и nullptr в обратном случае
-    NativeSymbol *GetSymbol(uint8 num);
+        // Возвращает указатель на символ, если он присутствует в таблице и nullptr в обратном случае
+        NativeSymbol *GetSymbol(uint8 num);
 
-    static HeaderFont *Sefl();
-};
-
-
-DTypeFont::E DAdvancedFont::currentType = DTypeFont::None;
-
-
-static const unsigned char * font = nullptr;
+        static HeaderFont *Sefl();
+    };
 
 
-DAdvancedFont::DAdvancedFont(DTypeFont::E t)
+    DTypeFont::E currentType = DTypeFont::None;
+
+
+    static const unsigned char *font = nullptr;
+}
+
+
+void DAdvancedFont::Set(DTypeFont::E t)
 {
     currentType = t;
     
@@ -60,7 +63,7 @@ DAdvancedFont::DAdvancedFont(DTypeFont::E t)
 }
 
 
-bool DAdvancedFont::RowNotEmpty(uint8 s, int r) //-V2506
+bool DAdvancedFont::RowNotEmpty(uint8 s, int r)
 {
     HeaderFont *header = HeaderFont::Sefl();
 
@@ -124,7 +127,7 @@ uint8 DAdvancedFont::GetHeight()
 }
 
 
-int NativeSymbol::BytesInRow()
+int DAdvancedFont::NativeSymbol::BytesInRow()
 {
     int result = width / 8;
 
@@ -137,7 +140,7 @@ int NativeSymbol::BytesInRow()
 }
 
 
-uint8 *NativeSymbol::GetRow(int row) //-V2506
+uint8 *DAdvancedFont::NativeSymbol::GetRow(int row)
 {
     if (row > height - 1)
     {
@@ -153,7 +156,7 @@ uint8 *NativeSymbol::GetRow(int row) //-V2506
 }
 
 
-NativeSymbol *HeaderFont::GetSymbol(uint8 num) //-V2506
+DAdvancedFont::NativeSymbol *DAdvancedFont::HeaderFont::GetSymbol(uint8 num)
 {
     HeaderFont *header = HeaderFont::Sefl();
 
@@ -168,13 +171,13 @@ NativeSymbol *HeaderFont::GetSymbol(uint8 num) //-V2506
 }
 
 
-HeaderFont *HeaderFont::Sefl()
+DAdvancedFont::HeaderFont *DAdvancedFont::HeaderFont::Sefl()
 {
     return reinterpret_cast<HeaderFont *>(const_cast<uint8 *>(font)); //-V2567
 }
 
 
-uint8 *NativeSymbol::Data()
+uint8 *DAdvancedFont::NativeSymbol::Data()
 {
     return reinterpret_cast<uint8 *>(this) + sizeof(*this);
 }
@@ -188,7 +191,7 @@ bool DAdvancedFont::BitIsExist(uint8 s, int row, int bit)
 }
 
 
-bool NativeSymbol::BitIsExist(int r, int b) //-V2506
+bool DAdvancedFont::NativeSymbol::BitIsExist(int r, int b)
 {
     uint8 *row = GetRow(r);
 

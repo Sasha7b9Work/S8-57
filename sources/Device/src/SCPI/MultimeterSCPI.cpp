@@ -45,7 +45,7 @@ namespace S_MULT
     }
 
 
-    pCHAR S_MULT::FuncAVP(pCHAR buffer) //-V2506
+    pCHAR S_MULT::FuncAVP(pCHAR buffer)
     {
         static pString avp[] =
         {
@@ -161,7 +161,7 @@ namespace S_MULT
     }
 
 
-    pCHAR S_MULT::FuncMeasure(pCHAR buffer) //-V2506
+    pCHAR S_MULT::FuncMeasure(pCHAR buffer)
     {
         SCPI_REQUEST(SendAnswerForMeasure());
 
@@ -193,7 +193,7 @@ namespace S_MULT
     }
 
 
-    pCHAR S_MULT::FuncMode(pCHAR buffer) //-V2506
+    pCHAR S_MULT::FuncMode(pCHAR buffer)
     {
         SCPI_REQUEST(SCPI::SendAnswer(Device::InModeMultimeter() ? " ON" : " OFF"));
 
@@ -205,7 +205,7 @@ namespace S_MULT
     }
 
 
-    pCHAR S_MULT::FuncValue(pCHAR buffer) //-V2506
+    pCHAR S_MULT::FuncValue(pCHAR buffer)
     {
         SCPI_PROLOG(buffer);
 
@@ -215,7 +215,7 @@ namespace S_MULT
     }
 
 
-    pCHAR S_MULT::FuncZero(pCHAR buffer) //-V2506
+    pCHAR S_MULT::FuncZero(pCHAR buffer)
     {
         static pString zero[] =
         {

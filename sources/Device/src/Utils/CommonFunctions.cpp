@@ -9,7 +9,7 @@
 
 
 
-void CF::LogBufferU8_HEX(const uint8 *buffer, int num) //-V2506
+void CF::LogBufferU8_HEX(const uint8 *buffer, int num)
 {
     char *message = static_cast<char *>(std::malloc(static_cast<uint>(num * 3)));
 
@@ -36,7 +36,7 @@ void CF::LogBufferU8_HEX(const uint8 *buffer, int num) //-V2506
 }
 
 
-void CF::LogBufferU8_DEC(const uint8 *buffer, int num) //-V2506
+void CF::LogBufferU8_DEC(const uint8 *buffer, int num)
 {
     char *message = static_cast<char *>(std::malloc(static_cast<uint>(num * 3)));
 
@@ -88,7 +88,7 @@ int CF::NumWords(char *string)
 }
 
 
-char *CF::GetWord(char *string, int n, char *out, int size) //-V2506
+char *CF::GetWord(char *string, int n, char *out, int size)
 {
     if (n >= NumWords(string))
     {
@@ -177,7 +177,7 @@ void BufferMax5::Push(uint16 value)
 }
 
 
-uint16 BufferMax5::GetValue(int index) //-V2506
+uint16 BufferMax5::GetValue(int index)
 {
     if (index >= numElements)
     {

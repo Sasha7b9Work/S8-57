@@ -89,7 +89,7 @@ uint8 *InterpolatorLinear::FindReadedElement(uint8 * const start)
 }
 
 
-void InterpolatorLinear::InterpolateSegment(Segment *segment) //-V2506
+void InterpolatorLinear::InterpolateSegment(Segment *segment)
 {
     if((segment->start == end) ||
        (segment->start == begin) ||

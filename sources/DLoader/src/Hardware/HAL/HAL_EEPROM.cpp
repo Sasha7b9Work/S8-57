@@ -44,7 +44,7 @@ void HAL_EEPROM::EraseSector(uint startAddress)
 }
 
 
-static uint GetSector(uint startAddress) //-V2506
+static uint GetSector(uint startAddress)
 {
     static const uint addresses[24] =
     {

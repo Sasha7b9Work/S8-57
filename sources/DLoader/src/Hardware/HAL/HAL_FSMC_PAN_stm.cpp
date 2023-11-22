@@ -66,7 +66,7 @@ void HAL_BUS::InitPanel()
 }
 
 
-bool HAL_BUS::Panel::Receive() //-V2506
+bool HAL_BUS::Panel::Receive()
 {
     //if(pinReadyPAN.IsPassive() || pinDataPAN.IsPassive())
     //if((GPIOA->IDR & GPIO_PIN_7) != GPIO_PIN_RESET || (GPIOC->IDR & GPIO_PIN_4) != GPIO_PIN_RESET)

@@ -205,7 +205,7 @@ static void BeforeDraw_Set()
     DrawTime();
 }
 
-static bool HandlerKey_Set(const KeyEvent &event) //-V2506
+static bool HandlerKey_Set(const KeyEvent &event)
 {
     if (event.IsRelease())
     {

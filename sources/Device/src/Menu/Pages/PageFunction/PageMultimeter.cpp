@@ -295,7 +295,7 @@ DEF_PAGE_2( pCalibration, //-V2567
 const Page * const PageMultimeter::Calibration::self = static_cast<const Page *>(&pCalibration);
 
 
-void PageMultimeter::DecodePassword(const KeyEvent &event) //-V2506
+void PageMultimeter::DecodePassword(const KeyEvent &event)
 {
 #define NUM_SYMBOLS 10
     // Пароль

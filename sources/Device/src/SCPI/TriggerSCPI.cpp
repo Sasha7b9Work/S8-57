@@ -68,7 +68,7 @@ namespace S_TRIG
     };
 
 
-    static pCHAR FuncInput(pCHAR buffer) //-V2506
+    static pCHAR FuncInput(pCHAR buffer)
     {
         SCPI_REQUEST(SCPI::SendAnswer(inputs[S_TRIG_INPUT]));
 
@@ -82,7 +82,7 @@ namespace S_TRIG
         SCPI::SendAnswer(answer.c_str());
     }
 
-    static pCHAR FuncLevel(pCHAR buffer) //-V2506
+    static pCHAR FuncLevel(pCHAR buffer)
     {
         SCPI_REQUEST(SendAnswerLevel());
 
@@ -101,7 +101,7 @@ namespace S_TRIG
     }
 
 
-    static pCHAR FuncMode(pCHAR buffer) //-V2506
+    static pCHAR FuncMode(pCHAR buffer)
     {
         SCPI_REQUEST(SCPI::SendAnswer(modes[S_TRIG_START_MODE]));
 
@@ -109,7 +109,7 @@ namespace S_TRIG
     }
 
 
-    static pCHAR FuncPolarity(pCHAR buffer) //-V2506
+    static pCHAR FuncPolarity(pCHAR buffer)
     {
         SCPI_REQUEST(SCPI::SendAnswer(polarities[S_TRIG_POLARITY]));
 
@@ -117,7 +117,7 @@ namespace S_TRIG
     }
 
 
-    static pCHAR FuncSource(pCHAR buffer) //-V2506
+    static pCHAR FuncSource(pCHAR buffer)
     {
         SCPI_REQUEST(SCPI::SendAnswer(sources[S_TRIG_SOURCE]));
 

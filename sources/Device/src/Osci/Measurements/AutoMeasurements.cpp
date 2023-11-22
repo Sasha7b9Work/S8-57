@@ -147,7 +147,7 @@ static bool picIsCalculating[2] = { false, false };
 #define CHOICE_BUFFER (OUT(ch))
 
 
-void AutoMeasurements::CalculateMeasures() //-V2506
+void AutoMeasurements::CalculateMeasures()
 {
     if (!S_MEAS_SHOW || !isSet)
     {
@@ -238,7 +238,7 @@ void AutoMeasurements::CalculateMeasures() //-V2506
 
 
 
-float AutoMeasurements::CalculateVoltageMax(Chan::E ch) //-V2506
+float AutoMeasurements::CalculateVoltageMax(Chan::E ch)
 {
     float max = CalculateMaxRel(ch);
     EXIT_IF_ERROR_FLOAT(max); //-V2507
@@ -258,7 +258,7 @@ float AutoMeasurements::CalculateVoltageMax(Chan::E ch) //-V2506
 
 
 
-float AutoMeasurements::CalculateVoltageMin(Chan::E ch) //-V2506
+float AutoMeasurements::CalculateVoltageMin(Chan::E ch)
 {
     float min = CalculateMinRel(ch);
     EXIT_IF_ERROR_FLOAT(min); //-V2507
@@ -272,7 +272,7 @@ float AutoMeasurements::CalculateVoltageMin(Chan::E ch) //-V2506
 
 
 
-float AutoMeasurements::CalculateVoltagePic(Chan::E ch) //-V2506
+float AutoMeasurements::CalculateVoltagePic(Chan::E ch)
 {
     float max = CalculateVoltageMax(ch);
     float min = CalculateVoltageMin(ch);
@@ -289,7 +289,7 @@ float AutoMeasurements::CalculateVoltagePic(Chan::E ch) //-V2506
 
 
 
-float AutoMeasurements::CalculateVoltageMinSteady(Chan::E ch) //-V2506
+float AutoMeasurements::CalculateVoltageMinSteady(Chan::E ch)
 {
     float min = CalculateMinSteadyRel(ch);
     EXIT_IF_ERROR_FLOAT(min); //-V2507
@@ -303,7 +303,7 @@ float AutoMeasurements::CalculateVoltageMinSteady(Chan::E ch) //-V2506
 
 
 
-float AutoMeasurements::CalculateVoltageMaxSteady(Chan::E ch) //-V2506
+float AutoMeasurements::CalculateVoltageMaxSteady(Chan::E ch)
 {
     float max = CalculateMaxSteadyRel(ch);
 
@@ -319,7 +319,7 @@ float AutoMeasurements::CalculateVoltageMaxSteady(Chan::E ch) //-V2506
 
 
 
-float AutoMeasurements::CalculateVoltageVybrosPlus(Chan::E ch) //-V2506
+float AutoMeasurements::CalculateVoltageVybrosPlus(Chan::E ch)
 {
     float max = CalculateMaxRel(ch);
     float maxSteady = CalculateMaxSteadyRel(ch);
@@ -338,7 +338,7 @@ float AutoMeasurements::CalculateVoltageVybrosPlus(Chan::E ch) //-V2506
 
 
 
-float AutoMeasurements::CalculateVoltageVybrosMinus(Chan::E ch) //-V2506
+float AutoMeasurements::CalculateVoltageVybrosMinus(Chan::E ch)
 {
     float min = CalculateMinRel(ch);
     float minSteady = CalculateMinSteadyRel(ch);
@@ -356,7 +356,7 @@ float AutoMeasurements::CalculateVoltageVybrosMinus(Chan::E ch) //-V2506
 
 
 
-float AutoMeasurements::CalculateVoltageAmpl(Chan::E ch) //-V2506
+float AutoMeasurements::CalculateVoltageAmpl(Chan::E ch)
 {
     float max = CalculateVoltageMaxSteady(ch);
     float min = CalculateVoltageMinSteady(ch);
@@ -373,7 +373,7 @@ float AutoMeasurements::CalculateVoltageAmpl(Chan::E ch) //-V2506
 
 
 
-float AutoMeasurements::CalculateVoltageAverage(Chan::E ch) //-V2506
+float AutoMeasurements::CalculateVoltageAverage(Chan::E ch)
 {
     int period = CalculatePeriodAccurately(ch);
 
@@ -400,7 +400,7 @@ float AutoMeasurements::CalculateVoltageAverage(Chan::E ch) //-V2506
 
 
 
-float AutoMeasurements::CalculateVoltageRMS(Chan::E ch) //-V2506
+float AutoMeasurements::CalculateVoltageRMS(Chan::E ch)
 {
     int period = CalculatePeriodAccurately(ch);
 
@@ -431,7 +431,7 @@ float AutoMeasurements::CalculateVoltageRMS(Chan::E ch) //-V2506
 
 
 
-float AutoMeasurements::CalculatePeriod(Chan::E ch) //-V2506
+float AutoMeasurements::CalculatePeriod(Chan::E ch)
 {
     static float period[2] = { 0.0F, 0.0F };
 
@@ -485,7 +485,7 @@ float AutoMeasurements::CalculatePeriod(Chan::E ch) //-V2506
 
 
 
-int AutoMeasurements::CalculatePeriodAccurately(Chan::E ch) //-V2506
+int AutoMeasurements::CalculatePeriodAccurately(Chan::E ch)
 {
     static int period[2];
 
@@ -592,7 +592,7 @@ float AutoMeasurements::CalculateFreq(Chan::E ch)
 
 
 
-float FindIntersectionWithHorLine(Chan::E ch, int numIntersection, bool downToUp, uint8 yLine) //-V2506
+float FindIntersectionWithHorLine(Chan::E ch, int numIntersection, bool downToUp, uint8 yLine)
 {
     int num = 0;
     int x = firstByte;
@@ -635,7 +635,7 @@ float FindIntersectionWithHorLine(Chan::E ch, int numIntersection, bool downToUp
 
 
 
-float AutoMeasurements::CalculateDurationPlus(Chan::E ch) //-V2506
+float AutoMeasurements::CalculateDurationPlus(Chan::E ch)
 {
     float aveValue = CalculateAverageRel(ch);
     EXIT_IF_ERROR_FLOAT(aveValue); //-V2507
@@ -663,7 +663,7 @@ float AutoMeasurements::CalculateDurationPlus(Chan::E ch) //-V2506
 
 
 
-float AutoMeasurements::CalculateDurationMinus(Chan::E ch) //-V2506
+float AutoMeasurements::CalculateDurationMinus(Chan::E ch)
 {
     float aveValue = CalculateAverageRel(ch);
     EXIT_IF_ERROR_FLOAT(aveValue); //-V2507
@@ -691,7 +691,7 @@ float AutoMeasurements::CalculateDurationMinus(Chan::E ch) //-V2506
 
 
 
-float AutoMeasurements::CalculateTimeNarastaniya(Chan::E ch)   /** \todo «десь, возможно, нужно увеличить точность - брать не целые значени рассто€ний между  //-V2506
+float AutoMeasurements::CalculateTimeNarastaniya(Chan::E ch)   /** \todo «десь, возможно, нужно увеличить точность - брать не целые значени рассто€ний между 
                                               отсчЄтами по времени, а рассчитывать пересечени€ линий. */
 {
     float maxSteady = CalculateMaxSteadyRel(ch);
@@ -730,7 +730,7 @@ float AutoMeasurements::CalculateTimeNarastaniya(Chan::E ch)   /** \todo «десь, 
 
 
 
-float AutoMeasurements::CalculateTimeSpada(Chan::E ch)        // \todo јналогично времени нарастани€ //-V2506
+float AutoMeasurements::CalculateTimeSpada(Chan::E ch)        // \todo јналогично времени нарастани€
 {
     float maxSteady = CalculateMaxSteadyRel(ch);
     float minSteady = CalculateMinSteadyRel(ch);
@@ -768,7 +768,7 @@ float AutoMeasurements::CalculateTimeSpada(Chan::E ch)        // \todo јналогичн
 
 
 
-float AutoMeasurements::CalculateSkvaznostPlus(Chan::E ch) //-V2506
+float AutoMeasurements::CalculateSkvaznostPlus(Chan::E ch)
 {
     float period = CalculatePeriod(ch);
     float duration = CalculateDurationPlus(ch);
@@ -780,7 +780,7 @@ float AutoMeasurements::CalculateSkvaznostPlus(Chan::E ch) //-V2506
 
 
 
-float AutoMeasurements::CalculateSkvaznostMinus(Chan::E ch) //-V2506
+float AutoMeasurements::CalculateSkvaznostMinus(Chan::E ch)
 {
     float period = CalculatePeriod(ch);
     float duration = CalculateDurationMinus(ch);
@@ -1018,7 +1018,7 @@ float AutoMeasurements::CalculatePicRel(Chan::E ch)
 
 
 
-float AutoMeasurements::CalculateDelayPlus(Chan::E ch) //-V2506
+float AutoMeasurements::CalculateDelayPlus(Chan::E ch)
 {
     float periodA = CalculatePeriod(ChanA);
     float periodB = CalculatePeriod(ChanB);
@@ -1056,7 +1056,7 @@ float AutoMeasurements::CalculateDelayPlus(Chan::E ch) //-V2506
 
 
 
-float AutoMeasurements::CalculateDelayMinus(Chan::E ch) //-V2506
+float AutoMeasurements::CalculateDelayMinus(Chan::E ch)
 {
     float period0 = CalculatePeriod(ChanA);
     float period1 = CalculatePeriod(ChanB);
@@ -1103,7 +1103,7 @@ float AutoMeasurements::CalculateDelayMinus(Chan::E ch) //-V2506
 
 
 
-float AutoMeasurements::CalculatePhazaPlus(Chan::E ch) //-V2506
+float AutoMeasurements::CalculatePhazaPlus(Chan::E ch)
 {
     float delay = CalculateDelayPlus(ch);
     float period = CalculatePeriod(ch);
@@ -1132,7 +1132,7 @@ float AutoMeasurements::CalculatePhazaMinus(Chan::E ch)
 }
 
 
-float Measure::CalculateCursorU(Chan::E ch, float posCurT) //-V2506
+float Measure::CalculateCursorU(Chan::E ch, float posCurT)
 {
     if (!CHOICE_BUFFER)
     {
@@ -1152,7 +1152,7 @@ float Measure::CalculateCursorU(Chan::E ch, float posCurT) //-V2506
 
 
 
-float Measure::CalculateCursorT(Chan::E ch, float posCurU, int numCur) //-V2506
+float Measure::CalculateCursorT(Chan::E ch, float posCurU, int numCur)
 {
     uint8 *dataIn = CHOICE_BUFFER;
 
@@ -1221,7 +1221,7 @@ float Measure::CalculateCursorT(Chan::E ch, float posCurU, int numCur) //-V2506
 
 
 
-void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase) //-V2506
+void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase)
 {
     /*
          ѕоследовательности x в sin(x)   // Ёто, наверное, неправильно
@@ -1326,7 +1326,7 @@ void InterpolationSinX_X(uint8 *data, int numPoints, TBase::E tBase) //-V2506
 
 
 
-String Measure::GetStringMeasure(Chan::E ch, char *buffer, int lenBuf) //-V2506
+String Measure::GetStringMeasure(Chan::E ch, char *buffer, int lenBuf)
 {
     TypeMeasure::E type = GetType();
 
