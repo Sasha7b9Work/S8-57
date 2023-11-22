@@ -9,34 +9,37 @@
 #include <stm32f4xx_hal.h>
 
 
-namespace HAL_BUS
-{
-    // Настроить FSMC для работы с внешней RAM
-    static void InitRAM();
-}
-
-
 #define ADDR_ALTERA1    ((uint8 *)NOR_MEMORY_ADRESS1)
 //#define ADDR_ALTERA2    ((uint8 *)NOR_MEMORY_ADRESS2)
 //#define ADDR_ALTERA3    ((uint8 *)NOR_MEMORY_ADRESS3)
 //#define ADDR_DISPLAY    ((uint8 *)NOR_MEMORY_ADRESS4)
 
 
-uint8 *HAL_BUS::FPGA::addrData0 = nullptr;
-uint8 *HAL_BUS::FPGA::addrData1 = nullptr;
-
-
-HAL_BUS::Mode::E HAL_BUS::mode = HAL_BUS::Mode::FSMC;
-
-
-static GPIO_InitTypeDef is =
+namespace HAL_BUS
 {
-    GPIO_PIN_0,
-    GPIO_MODE_AF_PP,
-    GPIO_PULLUP,
-    GPIO_SPEED_FREQ_VERY_HIGH,
-    GPIO_AF12_FMC
-};
+    // Настроить FSMC для работы с внешней RAM
+    static void InitRAM();
+
+    Mode::E mode = Mode::FSMC;
+
+    namespace FPGA
+    {
+        // Первый адрес чтения данных
+        static uint8 *addrData0 = nullptr;
+
+        // Второй адрес чтения данных
+        static uint8 *addrData1 = nullptr;
+    }
+
+    static GPIO_InitTypeDef is =
+    {
+        GPIO_PIN_0,
+        GPIO_MODE_AF_PP,
+        GPIO_PULLUP,
+        GPIO_SPEED_FREQ_VERY_HIGH,
+        GPIO_AF12_FMC
+    };
+}
 
 
 void HAL_BUS::Init()

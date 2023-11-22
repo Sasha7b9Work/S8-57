@@ -114,23 +114,18 @@ namespace HAL_BUS
         static void AllowOtherActions();
     };
 
-    struct FPGA
+    namespace FPGA
     {
-        static void Write8(uint8 *address, uint8 value);
-        static void Write16(uint8 *address, uint16 value);
-        static uint8 Read(const uint8 *address);
+        void Write8(uint8 *address, uint8 value);
+        void Write16(uint8 *address, uint16 value);
+        uint8 Read(const uint8 *address);
         // Установить адрес для чтения данных
-        static void SetAddrData(uint8 *address0, uint8 *address1 = nullptr);
+        void SetAddrData(uint8 *address0, uint8 *address1 = nullptr);
         // Читать данные с установленного адреса
-        static uint8 ReadA0();
-        static uint8 ReadA1();
+        uint8 ReadA0();
+        uint8 ReadA1();
         // Возвращает растяжку для данного адреса
-        static float GetStretch(const uint8 *address);
-    private:
-        // Первый адрес чтения данных
-        static uint8 *addrData0;
-        // Второй адрес чтения данных
-        static uint8 *addrData1;
+        float GetStretch(const uint8 *address);
     };
 
     struct Mode
