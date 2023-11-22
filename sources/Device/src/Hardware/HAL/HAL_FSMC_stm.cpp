@@ -9,6 +9,13 @@
 #include <stm32f4xx_hal.h>
 
 
+namespace HAL_BUS
+{
+    // Настроить FSMC для работы с внешней RAM
+    static void InitRAM();
+}
+
+
 #define ADDR_ALTERA1    ((uint8 *)NOR_MEMORY_ADRESS1)
 //#define ADDR_ALTERA2    ((uint8 *)NOR_MEMORY_ADRESS2)
 //#define ADDR_ALTERA3    ((uint8 *)NOR_MEMORY_ADRESS3)

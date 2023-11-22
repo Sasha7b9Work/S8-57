@@ -88,11 +88,15 @@ namespace HAL_DAC2
 };
 
 
-struct HAL_BUS
+namespace HAL_BUS
 {
-    static void Init();
+    void Init();
+
+    // Инициализация пинов панели, которые не изменяют свой режим во время всей работы программы
+    void InitPanel();
+
     // Конфигурировать для работы по шине FSMC с альтерой и памятью
-    static void ConfigureToFSMC();
+    void ConfigureToFSMC();
 
     struct Panel
     {
@@ -139,13 +143,7 @@ struct HAL_BUS
         };
     };
 
-    static Mode::E mode;
-
-private:
-    // Настроить FSMC для работы с внешней RAM
-    static void InitRAM();
-    // Инициализация пинов панели, которые не изменяют свой режим во время всей работы программы
-    static void InitPanel();
+    extern Mode::E mode;
 };
 
 
