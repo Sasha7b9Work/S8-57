@@ -16,6 +16,7 @@ sources/ThirdParty/wxWidgets/generated/*
 
 doc/doxygen/S8-57/*
 
+sources/Device/*.bin
 sources/Device/DebugConfig/*
 sources/Device/Listings/*
 sources/Device/Objects/*
