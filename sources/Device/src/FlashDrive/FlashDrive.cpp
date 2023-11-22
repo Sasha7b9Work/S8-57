@@ -1,3 +1,4 @@
+// 2023/11/22 13:37:03 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "common/Decoder_d.h"
 #include "FlashDrive/FileManager.h"

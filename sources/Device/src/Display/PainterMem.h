@@ -1,7 +1,6 @@
-﻿#pragma once
+﻿// 2023/11/22 13:37:27 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
+#pragma once
 #include "Colors.h"
-
-
 
 
 /** @addtogroup Display

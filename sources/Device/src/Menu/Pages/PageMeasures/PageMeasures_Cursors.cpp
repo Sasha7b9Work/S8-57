@@ -1,3 +1,4 @@
+// 2023/11/22 13:43:19 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Display/Painter.h"
 #include "Menu/Pages/Include/PageMeasures.h"

@@ -1,3 +1,4 @@
+// 2023/11/22 13:46:53 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Display/Grid.h"
 #include "Display/Primitives.h"

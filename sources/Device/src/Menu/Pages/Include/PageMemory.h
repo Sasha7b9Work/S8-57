@@ -1,3 +1,4 @@
+// 2023/11/22 13:44:24 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Menu/MenuItems.h"
 #include "Menu/Pages/Include/PageTime.h"

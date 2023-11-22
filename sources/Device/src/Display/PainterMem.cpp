@@ -1,3 +1,4 @@
+// 2023/11/22 13:37:37 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "PainterMem.h"
 #include <stdlib.h>

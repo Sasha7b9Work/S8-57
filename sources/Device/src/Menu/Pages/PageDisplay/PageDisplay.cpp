@@ -1,3 +1,4 @@
+// 2023/11/22 13:43:59 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Menu/Pages/Include/PageDisplay.h"
 #include "Osci/Osci.h"

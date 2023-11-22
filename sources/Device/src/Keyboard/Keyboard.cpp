@@ -1,3 +1,4 @@
+// 2023/11/22 13:40:18 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Keyboard/BufferButtons.h"
 #include "Keyboard/Keyboard.h"

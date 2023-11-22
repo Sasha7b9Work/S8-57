@@ -1,3 +1,4 @@
+// 2023/11/22 13:47:37 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Osci/DeviceSettings.h"
 #include "Osci/Reader.h"

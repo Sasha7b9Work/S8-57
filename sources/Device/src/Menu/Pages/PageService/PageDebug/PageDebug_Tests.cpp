@@ -1,3 +1,4 @@
+// 2023/11/22 13:42:30 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "device.h"
 #include "Menu/Pages/Include/DebugPage.h"

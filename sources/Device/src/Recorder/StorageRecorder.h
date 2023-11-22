@@ -1,3 +1,4 @@
+// 2023/11/22 13:45:50 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Osci/DeviceSettings.h"
 

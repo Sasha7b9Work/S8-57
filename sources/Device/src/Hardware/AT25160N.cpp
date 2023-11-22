@@ -1,3 +1,4 @@
+// 2023/11/22 13:39:29 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "log.h"
 #include "AT25160N.h"

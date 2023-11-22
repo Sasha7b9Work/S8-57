@@ -1,3 +1,4 @@
+// 2023/11/22 13:40:24 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "device.h"
 #include "FlashDrive/FlashDrive.h"

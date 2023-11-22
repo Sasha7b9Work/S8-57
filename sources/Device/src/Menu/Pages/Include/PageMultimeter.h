@@ -1,3 +1,4 @@
+// 2023/11/22 13:44:21 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Multimeter/Multimeter.h"
 

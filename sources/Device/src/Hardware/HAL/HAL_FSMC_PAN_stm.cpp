@@ -1,3 +1,4 @@
+// 2023/11/22 13:25:44 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Device.h"
 #include "common/Decoder_d.h"

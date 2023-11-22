@@ -1,3 +1,4 @@
+// 2023/11/22 13:38:24 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "AdvancedFont_d.h"
 #include "fontGOST28.inc"

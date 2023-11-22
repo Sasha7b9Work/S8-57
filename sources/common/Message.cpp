@@ -1,3 +1,4 @@
+// 2023/11/22 13:20:27 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "structs.h"
 #include "common/Command.h"

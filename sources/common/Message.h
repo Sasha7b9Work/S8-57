@@ -1,5 +1,5 @@
+// 2023/11/22 13:20:23 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-
 
 
 class Message

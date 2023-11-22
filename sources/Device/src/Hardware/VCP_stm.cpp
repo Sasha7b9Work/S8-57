@@ -1,3 +1,4 @@
+// 2023/11/22 13:38:59 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "usbd_desc.h"
 #include "usbd_cdc_interface.h"

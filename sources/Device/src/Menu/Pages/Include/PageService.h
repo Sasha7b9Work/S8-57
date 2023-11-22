@@ -1,3 +1,4 @@
+// 2023/11/22 13:44:15 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "FPGA/Calibrator.h"
 #include "Menu/MenuItems.h"

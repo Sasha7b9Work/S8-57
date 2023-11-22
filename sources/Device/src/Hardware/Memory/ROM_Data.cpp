@@ -1,3 +1,4 @@
+// 2023/11/22 13:39:40 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/Memory/Sector.h"

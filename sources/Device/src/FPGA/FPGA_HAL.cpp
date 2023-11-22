@@ -1,3 +1,4 @@
+// 2023/11/22 13:36:16 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "device.h"
 #include "FPGA/FPGA.h"

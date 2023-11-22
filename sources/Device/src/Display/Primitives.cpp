@@ -1,3 +1,4 @@
+// 2023/11/22 13:37:24 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Primitives.h"
 #include "Utils/Math.h"

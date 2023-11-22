@@ -1,3 +1,4 @@
+// 2023/11/22 13:46:47 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Osci/Measurements/AutoMeasurements.h"
 #include "Settings/Settings.h"

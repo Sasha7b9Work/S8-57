@@ -1,3 +1,4 @@
+// 2023/11/22 13:39:56 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/Memory/IntRAM.h"

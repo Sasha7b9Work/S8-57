@@ -1,3 +1,4 @@
+// 2023/11/22 13:43:38 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Settings/Settings.h"
 #include "Menu/Pages/Include/PageFunction.h"

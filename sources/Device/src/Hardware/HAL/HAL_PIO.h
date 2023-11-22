@@ -1,3 +1,4 @@
+// 2023/11/22 13:24:28 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Hardware/HAL/HAL_PINS.h"
 

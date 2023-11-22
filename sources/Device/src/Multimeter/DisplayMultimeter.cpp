@@ -1,3 +1,4 @@
+// 2023/11/22 13:47:40 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "device.h"
 #include "Display/Grid.h"

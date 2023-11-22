@@ -1,6 +1,6 @@
+// 2023/11/22 13:37:51 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "Keyboard/Keyboard.h"
-
 
 
 #define DISPLAY_SHOW_WARNING(warn)  Display::ShowWarning(warn)

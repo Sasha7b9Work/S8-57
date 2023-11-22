@@ -1,3 +1,4 @@
+// 2023/11/22 13:42:20 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "FPGA/Calibrator.h"
 #include "FPGA/FPGA.h"

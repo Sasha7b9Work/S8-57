@@ -1,3 +1,4 @@
+// 2023/11/22 13:46:36 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Hardware/Memory/IntRAM.h"
 #include "Hardware/Timer.h"

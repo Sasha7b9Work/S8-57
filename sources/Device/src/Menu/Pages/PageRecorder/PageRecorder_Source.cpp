@@ -1,8 +1,8 @@
+// 2023/11/22 13:42:45 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Menu/Pages/Include/PageRecorder.h"
 #include "Settings/Settings.h"
 #include "Recorder/Recorder.h"
-
 
 
 DEF_CHOICE_2( cChanA,                                                                                                                    //--- ‘”Õ ÷»ﬂ - –≈√»—“–¿“Œ– - »—“Œ◊Õ»  -  ‡Ì‡Î 1 ---

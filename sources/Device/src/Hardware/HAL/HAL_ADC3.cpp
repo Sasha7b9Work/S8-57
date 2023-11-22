@@ -1,10 +1,11 @@
-#include <stm32f4xx_hal.h>
+// 2023/11/22 13:35:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "FPGA/FPGA.h"
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Settings/Settings.h"
 #include "Osci/Osci.h"
+#include <stm32f4xx_hal.h>
 
 
 namespace HAL_ADC3

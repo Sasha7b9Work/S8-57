@@ -1,3 +1,4 @@
+// 2023/11/22 13:35:42 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Hardware/PowerBreaker.h"
 #include "Hardware/HAL/HAL.h"

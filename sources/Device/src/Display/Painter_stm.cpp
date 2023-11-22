@@ -1,3 +1,4 @@
+// 2023/11/22 13:37:35 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "common/Command.h"
 #include "Display/Painter.h"

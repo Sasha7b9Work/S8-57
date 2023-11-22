@@ -1,3 +1,4 @@
+// 2023/11/22 13:42:14 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "Osci/DeviceSettings.h"
 #include "Display/Painter.h"
