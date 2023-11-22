@@ -23,6 +23,12 @@
 #include <cstdio>
 
 
+namespace Osci
+{
+    static void SendDataToSCPI(Chan::E ch);
+}
+
+
 // Структура для хранения информации, необходимой для чтения в режиме рандомизатора
 struct StructReadRand
 {
