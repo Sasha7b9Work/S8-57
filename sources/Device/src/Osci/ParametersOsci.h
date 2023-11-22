@@ -133,38 +133,30 @@ namespace Range
 };
 
 
-struct RShift
+namespace RShift
 {
-public:
-
     // Этим конструктором можно установить значение
-    static void Set(Chan::E ch, int16 rShift);
+    void Set(Chan::E ch, int16 rShift);
 
     // Изменить на delta
-    static void Change(Chan::E ch, int16 delta);
+    void Change(Chan::E ch, int16 delta);
 
     // Загрузить в аппаратуру
-    static void Load(Chan::E ch);
+    void Load(Chan::E ch);
 
     // Отрисовать оба на экране
-    static void DrawBoth();
+    void DrawBoth();
 
     // Преобразовать в строку
-    static String ToString(int16 rShiftRel, Range::E range, Divider::E divider);
+    String ToString(int16 rShiftRel, Range::E range, Divider::E divider);
 
-    static float ToAbs(int16 rShift, Range::E range);
+    float ToAbs(int16 rShift, Range::E range);
 
-    static int16 ToRel(float rShiftAbs, Range::E range);
+    int16 ToRel(float rShiftAbs, Range::E range);
 
-    static bool ChangeMath(int delta);
+    bool ChangeMath(int delta);
 
-private:
-
-    // Отрисовать маркер вертикального смещения на сетке
-    static void Draw(Chan::E ch);
-
-    static const float absStep[Range::Count];
-
+    extern const float absStep[Range::Count];
     // Это значение соответствует минимуму смещения
     static const int16 MIN = -480;
 

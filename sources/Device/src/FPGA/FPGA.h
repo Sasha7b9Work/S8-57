@@ -13,7 +13,6 @@ struct FPGA
     friend struct Randomizer;
 
     friend struct Bandwidth;
-    friend struct RShift;
     friend struct TrigInput;
     friend struct TrigPolarity;
     friend struct TShift;
