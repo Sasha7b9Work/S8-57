@@ -50,7 +50,7 @@ struct WindowFFT
 };
 
 
-struct MaxDBFFT
+namespace MaxDBFFT
 {
 #define S_FFT_MAX_DB    (set.fft._maxDB)
 
@@ -61,7 +61,7 @@ struct MaxDBFFT
         _80
     };
 
-    static float MaxDBforFFT(MaxDBFFT::E maxDB)
+    inline float MaxDBforFFT(MaxDBFFT::E maxDB)
     {
         static const float arrayMAX_DB_FOR_FFT[] = { -40.0F, -60.0F, -80.0F };
 
