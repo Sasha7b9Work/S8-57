@@ -13,10 +13,10 @@ namespace Console
     static char buffer[33][100];
 
     // true означает, что идЄт процесс вывода консоли и добавл€ть в неЄ новые строки нельз€ (это происходит, когда добавление идЄт из прерывани€)
-    static bool inProcessDraw = false;
+    bool inProcessDraw = false;
 
     // true, если происходит процесс добавлени€ строки
-    static bool inProcessAddingString = false;
+    bool inProcessAddingString = false;
 
     //  оличество заполненных строк в консоли
     static int stringInConsole = 0;
@@ -27,7 +27,7 @@ namespace Console
     static void DeleteFirstString();
 
     // ¬озвращает true, если консоль зан€та и с ней нельз€ производить работу
-    static bool IsBusy();
+    bool IsBusy();
 }
 
 
@@ -126,7 +126,7 @@ void Console::OnChanged_MaxStringsInConsole()
 }
 
 
-bool Console::IsBusy()
-{
-    return inProcessDraw || inProcessAddingString;
-}
+//bool Console::IsBusy()
+//{
+//    return inProcessDraw || inProcessAddingString;
+//}

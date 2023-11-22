@@ -13,24 +13,41 @@
 #include <cstring>
 
 
-// для отладки
-// \todo удалить
-static BitSet32 lastFreq;
-static BitSet32 lastPeriod;
+namespace FreqMeter
+{
+    // для отладки
+    // \todo удалить
+    static BitSet32 lastFreq;
+    static BitSet32 lastPeriod;
 
-BitSet32 FreqMeter::freqActual;
-BitSet32 FreqMeter::periodActual;
-uint     FreqMeter::lastFreqRead;
-uint     FreqMeter::lastPeriodRead;
-uint     FreqMeter::lastFreqOver;
-uint     FreqMeter::lastPeriodOver;
-uint     FreqMeter::timeStartMeasureFreq = 0;
-uint     FreqMeter::timeStartMeasurePeriod = 0;
+    BitSet32 FreqMeter::freqActual;
+    BitSet32 FreqMeter::periodActual;
+    uint     FreqMeter::lastFreqRead;
+    uint     FreqMeter::lastPeriodRead;
+    uint     FreqMeter::lastFreqOver;
+    uint     FreqMeter::lastPeriodOver;
+    uint     FreqMeter::timeStartMeasureFreq = 0;
+    uint     FreqMeter::timeStartMeasurePeriod = 0;
 
-static bool freqNeedCalculateFromPeriod = false;    // Установленное в true значение означает, что частоту нужно считать по счётчику периода
-static float prevFreq = 0.0F;
-static float frequency = 0.0F;                      // Значение частоты для встроенного частотомера справа вверху экрана
+    static bool freqNeedCalculateFromPeriod = false;    // Установленное в true значение означает, что частоту нужно считать по счётчику периода
+    static float prevFreq = 0.0F;
+    static float frequency = 0.0F;                      // Значение частоты для встроенного частотомера справа вверху экрана
 
+    // Установить состояние лампочек счётчиков в состояние, соответствующее текущему моменту
+    static void SetStateLamps();
+
+    static void SetStateLampFreq();
+
+    static void SetStateLampPeriod();
+
+    static void ReadFreq();
+
+    static void ReadPeriod();
+
+    static float FreqSetToFreq(const BitSet32 *fr);
+
+    static float PeriodSetToFreq(const BitSet32 *period);
+}
 
 
 void FreqMeter::Init()
