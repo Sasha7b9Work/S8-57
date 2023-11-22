@@ -26,26 +26,25 @@ struct Point16
 
 
 // Здесь хранятся точки, которые были пропущены во время вывода на дисплей
-struct BufferMissingPoints
+namespace BufferMissingPoints
 {
-    // Возвращает количество хранящихся точек
-    static int Size() { return last - first; };
-
-    // Ложит две точки в буфер
-    static void Push(BitSet16 a, BitSet16 b);
-
-    // Извлекает точки из буфера
-    static void Pop(BitSet16 *a, BitSet16 *b);
-
-private:
-    // Здесь сохраняются пропущенные точки
-    static BitSet16 points[2][256];
-
     // Индекс "запоследней" точки
-    static int last;
+    extern int last;
 
     // Индекс первой точки
-    static int first;
+    extern int first;
+
+    // Возвращает количество хранящихся точек
+    inline int Size() { return last - first; };
+
+    // Ложит две точки в буфер
+    void Push(BitSet16 a, BitSet16 b);
+
+    // Извлекает точки из буфера
+    void Pop(BitSet16 *a, BitSet16 *b);
+
+    // Здесь сохраняются пропущенные точки
+    extern BitSet16 points[2][256];
 };
 
 
