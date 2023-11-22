@@ -1,6 +1,6 @@
+// 2023/11/22 21:14:11 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "defines.h"
-
 
 
 #define PI 3.141592653589793f
@@ -42,38 +42,37 @@ float RandFloat(float min, float max);
 
 
 
-class Math
+namespace Math
 {
-public:
-    static void Smoothing(uint8 *data, int numPoints, int numSmooth);
-    
-    static int MinFrom2Int(int val0, int val1);
+    void Smoothing(uint8 *data, int numPoints, int numSmooth);
 
-    static uint8 MaxFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint);
+    int MinFrom2Int(int val0, int val1);
 
-    static uint8 MinFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint);
+    uint8 MaxFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint);
 
-    static uint8 MaxFromArray(const uint8 *data, int firstPoint, int lastPoint);
+    uint8 MinFromArray_RAM(const uint16 *data, int firstPoint, int lastPoint);
 
-    static uint8 MinFromArray(const uint8 *data, int firstPoint, int lastPoint);
+    uint8 MaxFromArray(const uint8 *data, int firstPoint, int lastPoint);
 
-    static uint8 MaxFromArrayWithErrorCode(const uint8 *data, int firstPoint, int lastPoint);
+    uint8 MinFromArray(const uint8 *data, int firstPoint, int lastPoint);
 
-    static uint8 MinFromArrayWithErrorCode(const uint8 *data, int firstPoint, int lastPoint);
+    uint8 MaxFromArrayWithErrorCode(const uint8 *data, int firstPoint, int lastPoint);
+
+    uint8 MinFromArrayWithErrorCode(const uint8 *data, int firstPoint, int lastPoint);
     /// \brief ¬озвращает координату x пересечени€ линии, проход€щей через (x0, y0), (x1, y1), с горизонтальной линией, проход€щей через точку с 
     /// ординатой yHorLine.
-    static float GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, int yHorLine);
-    
-    static uint8 CalculateFiltr(const uint8 *data, int x, int numPoints, int numSmoothing);
+    float GetIntersectionWithHorizontalLine(int x0, int y0, int x1, int y1, int yHorLine);
 
-    static void CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoints, int numSmoothing);
+    uint8 CalculateFiltr(const uint8 *data, int x, int numPoints, int numSmoothing);
+
+    void CalculateFiltrArray(const uint8 *dataIn, uint8 *dataOut, int numPoints, int numSmoothing);
     /// Ќайти первый элемент массива, не соотвествующий заданному
-    static int FindAnotherElement(const uint8 *data, uint8 value, int numElements);
+    int FindAnotherElement(const uint8 *data, uint8 value, int numElements);
 
-    static int DigitsInIntPart(float value);
+    int DigitsInIntPart(float value);
     /// \brief ќкругл€ет число с плавающей точкой. numDigits - полное число знаков, по которым производитс€ округление.
     /// Ќапример, RoundFloat(12.37137, 4) округлит до 12.40)
-    static float RoundFloat(float value, int numDigits);
+    float RoundFloat(float value, int numDigits);
 };
 
 
@@ -88,7 +87,7 @@ template<class T> void Sort(T *value0, T *value1) { if (*value1 < *value0) { Swa
 
 template<class T> int Sign(T x) { if (x > (T)(0)) { return 1; } if (x < (T)(0)) { return -1; } return 0; }
 
-template<class T> T Abs(T x) { if (x < (T)0)   { return -x; }  return x; }
+template<class T> T Abs(T x) { if (x < (T)0) { return -x; }  return x; }
 
 template<class T> T Min(T x1, T x2) { return x1 < x2 ? x1 : x2; }
 
@@ -97,13 +96,13 @@ template<class T> T Max(T x1, T x2) { return x1 > x2 ? x1 : x2; }
 template<class T> void CircleIncrease(T *value, T min, T max)
 {
     if (*value < max) { ++(*value); }
-    else              { *value = (T)min; }
+    else { *value = (T)min; }
 }
 
 template<class T> void CircleDecrease(T *value, T min, T max)
 {
     if (*value > min) { --(*value); }
-    else              { *value = (T)max; }
+    else { *value = (T)max; }
 }
 /// »нкрементировать *value, но не больше, чем max
 template<class T> static void LimitationIncrease(T *value, T max) { if ((*value) < max) { ++(*value); } }
@@ -112,7 +111,7 @@ template<class T> static void LimitationDecrease(T *value, T min) { if (*value >
 
 template<class T> static void Limitation(T *value, T min, T max)
 {
-    if (*value < min)      { *value = min; }
+    if (*value < min) { *value = min; }
     else if (*value > max) { *value = max; }
     else
     {
@@ -129,12 +128,14 @@ template<class T> static T LimitationRet(T value, T min, T max)
 /// ѕрибавить к *value term и ограничить, если результат выходит за границы [min, max]
 template<class T> static void AddtionThisLimitation(T *value, int term, T min, T max)
 {
-    if (term > 0){
+    if (term > 0) {
         if (max - term >= *value) { *value += (T)term; }
-        else                      { *value = max; } }
-    else         {
+        else { *value = max; }
+    }
+    else {
         if (min - term <= *value) { *value += (T)term; }
-        else                      { *value = min; } }
+        else { *value = min; }
+    }
 }
 
 #define _bitset(bits)                               \
