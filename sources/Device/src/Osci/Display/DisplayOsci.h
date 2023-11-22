@@ -108,22 +108,22 @@ namespace DisplayOsci
     };
 
 
-    struct MemoryWindow
+    namespace MemoryWindow
     {
-        static void Draw();
+        void Draw();
 
-        static int X();
+        int X();
 
-        static int Y();
+        int Y();
 
-        static int Width();
+        int Width();
 
-        static int Height();
+        int Height();
     };
 
 
     // —труктура дл€ обслуживани€ параметра, значение которого необходимо отрисовывать поверх сетки (в течение некоторого времени поисле того, как этот параметр изменилс€)
-    struct DrawingValueParameter
+    namespace DrawingValueParameter
     {
         enum E
         {
@@ -137,18 +137,17 @@ namespace DisplayOsci
         };
 
         // ѕосле изменени€ параметра (вращени€ ручки) нужно вызывать эту функцию
-        static void Enable(DrawingValueParameter::E v);
+        void Enable(DrawingValueParameter::E v);
 
-        static void Draw();
+        void Draw();
 
-    private:
-        static bool                     needDrawParameter;
-        static DrawingValueParameter::E parameter;
+        extern bool                     needDrawParameter;
+        extern DrawingValueParameter::E parameter;
 
-        static void Disable();
+        void Disable();
 
         // ќтобразить строку в пр€моугольнике на высоте y
-        static void DrawBoundedText(int y, const String *text, Color color);
+        void DrawBoundedText(int y, const String *text, Color color);
     };
 
     // ѕризнак того, что дисплей нуждаетс€ в полной перерисовке
