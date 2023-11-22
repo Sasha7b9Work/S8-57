@@ -97,7 +97,7 @@ namespace Divider
 #define S_RANGE_A           S_RANGE(0)
 #define S_RANGE_B           S_RANGE(1)
 #define S_RANGE_MATH        set.math._range
-struct Range
+namespace Range
 {
     enum E
     {
@@ -117,19 +117,19 @@ struct Range
         Count
     };
 
-    static void Set(Chan::E ch, E range);
+    void Set(Chan::E ch, E range);
 
-    static pString Name(Chan::E ch);
+    pString Name(Chan::E ch);
 
-    static pString ToString(Chan::E ch, Divider::E divider);
+    pString ToString(Chan::E ch, Divider::E divider);
 
-    static pString ToString(Range::E range, Divider::E divider);
+    pString ToString(Range::E range, Divider::E divider);
     // ¬озвращает напр€жение, соответствующее верхней границе сетки
-    static float MaxVoltageOnScreen(Range::E range);
+    float MaxVoltageOnScreen(Range::E range);
 
-    static void Change(Chan::E ch, int16 delta);
+    void Change(Chan::E ch, int16 delta);
     // «агружатьс€ эта настройка может только дл€ обоих каналов одновременно
-    static void LoadBoth();
+    void LoadBoth();
 };
 
 
