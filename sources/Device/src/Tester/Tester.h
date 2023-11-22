@@ -135,30 +135,10 @@ namespace Tester
 };
 
 
-struct DisplayTester
+namespace DisplayTester
 {
-    static void Update();
+    void Update();
 
     // ”станавливает точки дл€ рисовани€, соответствующие шагу numStep
-    static void SetPoints(int numStep, const uint16 dx[TESTER_NUM_POINTS], const uint8 dy[TESTER_NUM_POINTS]);
-
-private:
-
-    // ≈сли true, то шаг готов дл€ вывода
-    static bool ready[Tester::NUM_STEPS];
-
-    // Ќаписать легенду изображени€
-    static void DrawLegend(int x, int y);
-
-    // ќтображает параметры одного канала
-    static void DrawParametersChannel(Chan::E ch, int x, int y);
-
-    // ¬озвращает цвет, которым нужно рисовать соответствующую "ступеньку"
-    static Color ColorForStep(int step);
-
-    // –исовать данные ступеньки numStep
-    static void DrawData(int step);
-
-    // ¬озвращает числовое значение величины соответствующей "ступеньки"
-    static String ValueForStep(int step);
+    void SetPoints(int numStep, const uint16 dx[TESTER_NUM_POINTS], const uint8 dy[TESTER_NUM_POINTS]);
 };

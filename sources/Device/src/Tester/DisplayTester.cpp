@@ -11,14 +11,34 @@
 #include "Utils/Values.h"
 
 
-// В таком массиве хранятся считанные точки тестер-компонента
-typedef uint8 array8[Tester::NUM_STEPS][TESTER_NUM_POINTS];
-typedef uint16 array16[Tester::NUM_STEPS][TESTER_NUM_POINTS];
+namespace DisplayTester
+{
+    // Написать легенду изображения
+    static void DrawLegend(int x, int y);
 
-bool DisplayTester::ready[Tester::NUM_STEPS] = {false, false, false, false, false};
+    // Отображает параметры одного канала
+    static void DrawParametersChannel(Chan::E ch, int x, int y);
 
-static array8 *datY = (array8 *)OUT_A;
-static array16 *datX = (array16 *)OUT_B;
+    // Возвращает цвет, которым нужно рисовать соответствующую "ступеньку"
+    static Color ColorForStep(int step);
+
+    // Рисовать данные ступеньки numStep
+    static void DrawData(int step);
+
+    // Возвращает числовое значение величины соответствующей "ступеньки"
+    static String ValueForStep(int step);
+
+    // В таком массиве хранятся считанные точки тестер-компонента
+    typedef uint8 array8[Tester::NUM_STEPS][TESTER_NUM_POINTS];
+    typedef uint16 array16[Tester::NUM_STEPS][TESTER_NUM_POINTS];
+
+    // Если true, то шаг готов для вывода
+    static bool ready[Tester::NUM_STEPS] = { false, false, false, false, false };
+
+    static array8 *datY = (array8 *)OUT_A;
+    static array16 *datX = (array16 *)OUT_B;
+}
+
 
 void DisplayTester::Update()
 {
