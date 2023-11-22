@@ -35,47 +35,56 @@ struct TypeTimer
 };
 
 
-struct Timer
+namespace Timer
 {
-    static void Init();
+    void Init();
 
-    static void DeInit();
+    void DeInit();
+
     // Назначает таймеру timer функцию и время срабатывания
-    static void Set(TypeTimer::E type, pFuncVV func, uint dTms);
+    void Set(TypeTimer::E type, pFuncVV func, uint dTms);
 
-    static void SetAndStartOnce(TypeTimer::E type, pFuncVV func, uint dTms);
+    void SetAndStartOnce(TypeTimer::E type, pFuncVV func, uint dTms);
 
-    static void SetAndEnable(TypeTimer::E type, pFuncVV func, uint dTms);
+    void SetAndEnable(TypeTimer::E type, pFuncVV func, uint dTms);
 
-    static void StartOnce(TypeTimer::E type);
+    void StartOnce(TypeTimer::E type);
 
-    static void Enable(TypeTimer::E type);
+    void Enable(TypeTimer::E type);
 
-    static void Disable(TypeTimer::E type);
+    void Disable(TypeTimer::E type);
+
     // Возвращает true, если таймер в данный момент ведёт отсчёт
-    static bool IsRunning(TypeTimer::E type);
+    bool IsRunning(TypeTimer::E type);
 
-    static void PauseOnTime(uint timeMS);
+    void PauseOnTime(uint timeMS);
 
-    static void PauseOnTicks(uint numTicks);
+    void PauseOnTicks(uint numTicks);
+
     // Запускает счётчик для измерения малых отрезков времени
-    static void StartMultiMeasurement();
+    void StartMultiMeasurement();
+
     // Ожидать определённое число элементарных операция в цилке for
-    static void PauseOnOPS(uint ops);
+    void PauseOnOPS(uint ops);
 
-    static bool IsBusy();
+    bool IsBusy();
+
     // Возвращает количество микросекунд, прошедших с момента последнего вызова StartMultiMeasurement()
-    static uint TimeUS();
+    uint TimeUS();
+
     // Возвращает количество тиков, прошедших с момента последнего вызова StartMultiMeasurement();
-    static uint TimeTicks();
+    uint TimeTicks();
+
     // Возвращает количество миллисекунд, прошедших с момента старта программы
-    static uint TimeMS();
+    uint TimeMS();
+
     // Устанавливает стартовую точку логгирования. Далее вызовы Timer_LogPoint засекают временные интервалы от это точки
-    static void StartLogging();
+    void StartLogging();
 
-    static uint LogPointUS(char *name);
+    uint LogPointUS(char *name);
 
-    static uint LogPointMS(char *name);
+    uint LogPointMS(char *name);
+
     // Служебная функция. Вызывается строго из прерывания
-    static void ElapsedCallback();
+    void ElapsedCallback();
 };
