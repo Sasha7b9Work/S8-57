@@ -769,19 +769,21 @@ void TShift::Reset()
 
 namespace TShift
 {
+    // Нарисовать "нормальное" изображение маркера смещения, когда позиция смещения находится на экране
     void DrawNormal(const int x, const int y)
     {
         Char(Symbol8::TSHIFT_NORMAL_BACK).Draw(x - 3, y, Color::BACK);
         Char(Symbol8::TSHIFT_NORMAL).Draw(x - 3, y, Color::FILL);
     }
 
-
+    // Нарисовать маркер смещения, когда позиция смещения находится за левой границей экрана
     void DrawLeft()
     {
         Char(Symbol8::TRIGLEV_NORMAL).Draw(Grid::Left(), Grid::Top(), Color::BACK);
         Char(Symbol8::TSHIFT_LEFT).Draw(Grid::Left(), Grid::Top(), Color::FILL);
     }
 
+    // Нарисовать маркер смещения, когда позиция смещения находится за правой границей экрана
     void DrawRight()
     {
         Char(Symbol8::RSHIFT_NORMAL).Draw(Grid::Right() - 7, Grid::Top(), Color::BACK);

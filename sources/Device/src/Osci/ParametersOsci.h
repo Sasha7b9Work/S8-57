@@ -224,19 +224,9 @@ namespace TShift
 
     void Draw();
 
-//private:
-//    static void LoadReal();
-//
-//    static void LoadRandomize();
-//
-//    // Нарисовать "нормальное" изображение маркера смещения, когда позиция смещения находится на экране
-//    static void DrawNormal(const int x, const int y);
-//
-//    // Нарисовать маркер смещения, когда позиция смещения находится за левой границей экрана
-//    static void DrawLeft();
-//
-//    // Нарисовать маркер смещения, когда позиция смещения находится за правой границей экрана
-//    static void DrawRight();
+    void LoadReal();
+
+    void LoadRandomize();
 
     extern const float absStep[TBase::Count];
 };

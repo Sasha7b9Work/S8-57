@@ -120,57 +120,54 @@ static int GetK()
 }
 
 
-namespace TShift
+void TShift::LoadReal()
 {
-    void LoadReal()
+    FPGA::post = static_cast<uint16>(S_TIME_SHIFT - TShift::Min() + 10);
+    int Pred = static_cast<int>(ENumPointsFPGA::PointsInChannel()) - static_cast<int>(FPGA::post);
+
+    if (Pred < 0)
     {
-        FPGA::post = static_cast<uint16>(S_TIME_SHIFT - TShift::Min() + 10);
-        int Pred = static_cast<int>(ENumPointsFPGA::PointsInChannel()) - static_cast<int>(FPGA::post);
+        Pred = 0;
+    }
+    FPGA::pred = static_cast<uint16>(Pred);
 
-        if (Pred < 0)
-        {
-            Pred = 0;
-        }
-        FPGA::pred = static_cast<uint16>(Pred);
+    FPGA::post = static_cast<uint16>(~(FPGA::post + 1));
+    FPGA::pred = static_cast<uint16>(~(FPGA::pred + 3));
 
-        FPGA::post = static_cast<uint16>(~(FPGA::post + 1));
-        FPGA::pred = static_cast<uint16>(~(FPGA::pred + 3));
+    HAL_BUS::FPGA::Write16(WR::PRED_LO, FPGA::post);
+    HAL_BUS::FPGA::Write16(WR::POST_LO, FPGA::pred);
+}
 
-        HAL_BUS::FPGA::Write16(WR::PRED_LO, FPGA::post);
-        HAL_BUS::FPGA::Write16(WR::POST_LO, FPGA::pred);
+void TShift::LoadRandomize()
+{
+    int k = TBase::DeltaPoint();
+
+    FPGA::post = static_cast<uint16>((S_TIME_SHIFT - TShift::Min() - GetK()) / k);
+
+    if ((S_TIME_SHIFT - static_cast<int>(GetK())) < TShift::Min())
+    {
+        FPGA::post = 0;
     }
 
-    void LoadRandomize()
+    int Pred = static_cast<int>(ENumPointsFPGA::PointsInChannel()) / static_cast<int>(k) - static_cast<int>(FPGA::post);
+
+    if (Pred < 5)
     {
-        int k = TBase::DeltaPoint();
-
-        FPGA::post = static_cast<uint16>((S_TIME_SHIFT - TShift::Min() - GetK()) / k);
-
-        if ((S_TIME_SHIFT - static_cast<int>(GetK())) < TShift::Min())
-        {
-            FPGA::post = 0;
-        }
-
-        int Pred = static_cast<int>(ENumPointsFPGA::PointsInChannel()) / static_cast<int>(k) - static_cast<int>(FPGA::post);
-
-        if (Pred < 5)
-        {
-            Pred = 5;
-        }
-
-        FPGA::pred = static_cast<uint16>(Pred);
-
-        if (S_DBG_SHOW_RAND_PRED_POST)
-        {
-            LOG_WRITE("pred = %d, post = %d", FPGA::pred, FPGA::post);
-        }
-
-        FPGA::post = static_cast<uint16>(~(FPGA::post + 10));
-        FPGA::pred = static_cast<uint16>(~(FPGA::pred));
-
-        HAL_BUS::FPGA::Write16(WR::PRED_LO, FPGA::pred);
-        HAL_BUS::FPGA::Write16(WR::POST_LO, FPGA::post);
+        Pred = 5;
     }
+
+    FPGA::pred = static_cast<uint16>(Pred);
+
+    if (S_DBG_SHOW_RAND_PRED_POST)
+    {
+        LOG_WRITE("pred = %d, post = %d", FPGA::pred, FPGA::post);
+    }
+
+    FPGA::post = static_cast<uint16>(~(FPGA::post + 10));
+    FPGA::pred = static_cast<uint16>(~(FPGA::pred));
+
+    HAL_BUS::FPGA::Write16(WR::PRED_LO, FPGA::pred);
+    HAL_BUS::FPGA::Write16(WR::POST_LO, FPGA::post);
 }
 
 
