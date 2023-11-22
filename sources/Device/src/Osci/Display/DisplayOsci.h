@@ -12,11 +12,11 @@ struct DisplayOsci
     static void Update();
 
     void DrawScaleLine(int x, bool forTrigLev);
-    
+
     // Установить признак того, что дисплей нуждается в перерисовке
     static void SetFlagRedraw();
 
-    
+
     struct HiPart
     {
         static void Draw();
@@ -25,18 +25,18 @@ struct DisplayOsci
         static void DrawRightPart(int x0, int y0);
     };
 
-      
+
     struct BottomPart
     {
         static void Draw(int x, int y);
     };
 
-    
+
     struct Accumulator
     {
         // Эту функцию нужно вызывать после каждой отрисовки сигналов
         static void NextFrame();
-    
+
         // Сброс информации
         static void Reset();
     };
@@ -65,23 +65,23 @@ struct DisplayOsci
     struct PainterData
     {
         static void DrawData();
-      
+
         // Возвращает адрес первой и последней точки на экране в координатах экрана
         static BitSet64 PointsOnDisplay();
-        
+
         // \brief Возращает адрес первой и последней точки в координатах экрана
         static BitSet64 BytesOnDisplay();
 
         static bool needSendToSCPI_FFT;
-        
+
     private:
-        
+
         // Нарисовать актуальные данные - соответствующие текущим установкам
         static void DrawCurrent();
-        
+
         // Нарисовать данные из ОЗУ
         static void DrawRAM();
-        
+
         // Нарисовать данные из ППЗУ
         static void DrawROM();
 
@@ -98,7 +98,7 @@ struct DisplayOsci
         static void DrawModePointsPeakDetOn(int center, const uint8 *data, float scale, int x);
 
         static void DrawModePointsPeakDetOff(int center, const uint8 *data, float scale, int x);
-        
+
         // Нарисовать спектр
         static void DrawSpectrum();
 
@@ -123,7 +123,7 @@ struct DisplayOsci
         static int Height();
     };
 
-    
+
     // Структура для обслуживания параметра, значение которого необходимо отрисовывать поверх сетки (в течение некоторого времени поисле того, как этот параметр изменился)
     struct DrawingValueParameter
     {
