@@ -141,20 +141,20 @@ private:
 };
 
 
-struct StorageRecorder
+namespace StorageRecorder
 {
     // Инициализация после перехода в режим "РЕГИСТРАТОР"
-    static void Init();
+    void Init();
 
     // Создаёт новую запись для хранения данных в хранилище
-    static bool CreateNewRecord();
+    bool CreateNewRecord();
 
     // Создаёт запись для "прослушивания".
-    static bool CreateListeningRecord();
+    bool CreateListeningRecord();
 
     // Возвращает указатель на текущую запись
-    static Record *LastRecord();
+    Record *LastRecord();
 
     // Возвращает количество сохранённых записей. 0 - последняя, 1 - предпоследняя. Если идёт запись, то в 0-ую заппсь добавляются новые данные
-    static uint NumRecords();
+    uint NumRecords();
 };
