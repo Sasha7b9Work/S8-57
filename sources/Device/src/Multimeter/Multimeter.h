@@ -5,7 +5,7 @@
 struct DisplayMultimeter
 {
     static void Update();
-    
+
     // Через эту функцию поступает измерение от прибора
     static void SetMeasure(const uint8 buffer[13]);
 
@@ -17,24 +17,24 @@ struct DisplayMultimeter
 };
 
 
-struct Multimeter
+namespace Multimeter
 {
     // Инициализация
-    static void Init();
+    void Init();
 
-    static void DeInit();
-   
+    void DeInit();
+
     // Сообщает мультиметру, что произошло изменение режима и нужно дождаться результата измерения перед выводом
-    static void ChangeMode();
+    void ChangeMode();
 
-    static void Calibrate(int calibr);
+    void Calibrate(int calibr);
 
-    static void ChangeAVP();
-    
+    void ChangeAVP();
+
     // Если (zero != 0) - заслать режим нуля
-    static void LoadZero(int zero);
+    void LoadZero(int zero);
 
-    static void Update();
+    void Update();
 };
 
 
