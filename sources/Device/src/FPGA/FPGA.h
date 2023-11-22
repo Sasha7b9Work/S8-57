@@ -16,7 +16,6 @@ struct FPGA
     //    friend struct Device;
     friend struct Range;
     friend struct RShift;
-    friend struct TBase;
     friend struct TrigInput;
     friend struct TrigPolarity;
     friend struct TShift;
