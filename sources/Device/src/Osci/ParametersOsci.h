@@ -78,7 +78,7 @@ struct TBase
 #define S_DIVIDER_A         S_DIVIDER(0)
 #define S_DIVIDER_B         S_DIVIDER(1)
 #define S_DIVIDER_MATH      (set.math._divider)
-struct Divider
+namespace Divider
 {
     enum E
     {
@@ -86,7 +86,7 @@ struct Divider
         _10
     };
 
-    static int ToAbs(Divider::E v)
+    inline int ToAbs(Divider::E v)
     {
         return (v == _1) ? 1 : 10;
     };
