@@ -11,10 +11,25 @@
 #include <cstring>
 
 
-DataSettings *Roller::ds = nullptr;
-int           Roller::currentPoint = 0;
-int           Roller::firstOnDisplay = -1;
-void         (*Roller::addPoint)(BitSet16, BitSet16);
+namespace Roller
+{
+    // Функция добавления считанной точки
+    static void (*addPoint)(BitSet16, BitSet16);
+    static void AddPointPeakDetEnabled(BitSet16 dataA, BitSet16 dataB);
+    static void AddPointPeakDetDisabled(BitSet16 dataA, BitSet16 dataB);
+
+    // Возвращает true, если данный фрейм выводится впервые
+    static bool FirstDrawThisFrame();
+
+    // Указатель на настройки текущих данных
+    static DataSettings *ds = nullptr;
+
+    // Позиция точки, которая будет записана следующей
+    static int    currentPoint = 0;
+
+    // С этой точки следует начинать отрисовку текущего поточечного фрейма. Если firstOnDisplay == -1, то нужно запомнить текущую точку в качестве первой выводимой
+    static int    firstOnDisplay = -1;
+}
 
 
 void Roller::Prepare()

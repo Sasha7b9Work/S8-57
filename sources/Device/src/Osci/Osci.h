@@ -82,42 +82,22 @@ namespace Osci
 };
 
 
-class Roller
+namespace Roller
 {
-public:
     // Функцию нужно вызывать перед каждым стартом
-    static void Prepare();
+    void Prepare();
 
     // Эту функцию нужно постоянно вызывать во время выполнения программы для чтения точек поточечного фрейма, если мы находимся в поточечном режиме
-    static void ReadPoint();
+    void ReadPoint();
 
     // Возвращает true, если нужно рисовать поточечный фрейм
-    static bool NeedDraw();
+    bool NeedDraw();
 
     // Возвращает указатель на данные, которые нужно рисовать
-    static DataSettings *GetDS();
+    DataSettings *GetDS();
 
     // Заполняет buffer точками для отрисовки. width - ширина окна для отрисовки. Возвращает позицию, в которой нужно рисовать разделитель
-    static int FillScreenBuffer(Chan::E ch, Buffer &buffer, int width);
-
-private:
-
-    // Функция добавления считанной точки
-    static void (*addPoint)(BitSet16, BitSet16);
-    static void AddPointPeakDetEnabled(BitSet16 dataA, BitSet16 dataB);
-    static void AddPointPeakDetDisabled(BitSet16 dataA, BitSet16 dataB);
-
-    // Возвращает true, если данный фрейм выводится впервые
-    static bool FirstDrawThisFrame();
-
-    // Указатель на настройки текущих данных
-    static DataSettings *ds;
-
-    // Позиция точки, которая будет записана следующей
-    static int currentPoint;
-
-    // С этой точки следует начинать отрисовку текущего поточечного фрейма. Если firstOnDisplay == -1, то нужно запомнить текущую точку в качестве первой выводимой
-    static int firstOnDisplay;
+    int FillScreenBuffer(Chan::E ch, Buffer &buffer, int width);
 };
 
 
