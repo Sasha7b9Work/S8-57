@@ -8,8 +8,17 @@
 #include <cmath>
 
 
-const float PageCursorsMeasures::Set::MAX_POS_U = 200.0F;
-const float PageCursorsMeasures::Set::MAX_POS_T = 280.0F;
+namespace PageCursorsMeasures
+{
+    namespace Set
+    {
+        static const float MAX_POS_U = 200.0F;
+        static const float MAX_POS_T = 280.0F;
+
+        // Установить источник курсорных измерений
+        static void SetCursSource(Chan::E ch);
+    }
+}
 
 
 // Рассчитывает условия отрисовки УГО малых кнопок управления выбором курсорами.

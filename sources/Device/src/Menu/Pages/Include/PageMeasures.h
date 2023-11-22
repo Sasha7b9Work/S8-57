@@ -243,75 +243,67 @@ struct SettingsMath
 
 struct PageMeasures
 {
-    static const Page * const self;
+    static const Page *const self;
 };
 
 
 
 struct PageAutoMeasures
 {
-    static const Page * const self;
+    static const Page *const self;
 
 
     class Tune
     {
     public:
-        static const Page * const self;
+        static const Page *const self;
     };
 };
 
 
 
-struct PageCursorsMeasures
+namespace PageCursorsMeasures
 {
-    static const Page * const self;
+    extern const Page *const self;
 
-
-    struct Set
+    namespace Set
     {
-        static const Page * const self;
+        extern const Page *const self;
 
-        static void Draw_Channel(int x, int y);
+        void Draw_Channel(int x, int y);
 
-        static void OnPress_Channel();
-
-        // Выбрать следующий курсор
-        static void IncCursCntrlU(Chan::E ch);
+        void OnPress_Channel();
 
         // Выбрать следующий курсор
-        static void IncCursCntrlT(Chan::E ch);
+        void IncCursCntrlU(Chan::E ch);
 
-        static void OnPress_U();
+        // Выбрать следующий курсор
+        void IncCursCntrlT(Chan::E ch);
 
-        static void OnPress_T();
+        void OnPress_U();
 
-        static void SetCursPos100(Chan::E ch);
+        void OnPress_T();
+
+        void SetCursPos100(Chan::E ch);
 
         // Изменить значение позиции курсора напряжения на delta точек
-        static void SetShiftCursPosU(Chan::E ch, int numCur, float delta);
+        void SetShiftCursPosU(Chan::E ch, int numCur, float delta);
 
         // Изменить значение позиции курсора времени на delta точек
-        static void SetShiftCursPosT(Chan::E ch, int numCur, float delta);
+        void SetShiftCursPosT(Chan::E ch, int numCur, float delta);
 
-        static bool HandlerKey(const KeyEvent &event);
+        bool HandlerKey(const KeyEvent &event);
 
-        static void UpdateCursorsForLook();
+        void UpdateCursorsForLook();
 
         // Установить позицию курсора напряжения
-        static void SetCursorU(Chan::E ch, int numCur, float pos);
+        void SetCursorU(Chan::E ch, int numCur, float pos);
 
         // Установить позицию курсора времени
-        static void SetCursorT(Chan::E ch, int numCur, float pos);
+        void SetCursorT(Chan::E ch, int numCur, float pos);
 
         // Возвращает true, если вращение ручки УСТАНОВКА будет перемещать курсоры/курсоры
-        static bool IsRegSetActiveOnCursors();
-
-    private:
-        static const float MAX_POS_U;
-        static const float MAX_POS_T;
-
-        // Установить источник курсорных измерений
-        static void SetCursSource(Chan::E ch);
+        bool IsRegSetActiveOnCursors();
     };
 };
 
@@ -319,5 +311,5 @@ struct PageCursorsMeasures
 
 struct PageMath
 {
-    static const Page * const self;
+    static const Page *const self;
 };
