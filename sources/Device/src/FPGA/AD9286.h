@@ -2,8 +2,8 @@
 #pragma once
 
 
-struct AD9286
+namespace AD9286
 {
-    static void Init();
-    static void Tune();
+    void Init();
+    void Tune();
 };
