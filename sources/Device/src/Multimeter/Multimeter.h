@@ -2,18 +2,18 @@
 #pragma once
 
 
-struct DisplayMultimeter
+namespace DisplayMultimeter
 {
-    static void Update();
+    void Update();
 
     // Через эту функцию поступает измерение от прибора
-    static void SetMeasure(const uint8 buffer[13]);
+    void SetMeasure(const uint8 buffer[13]);
 
-    static void ChangedMode();
+    void ChangedMode();
 
-    static int Width();
+    int Width();
 
-    static const int HEIGHT = 30;
+    const int HEIGHT = 30;
 };
 
 
