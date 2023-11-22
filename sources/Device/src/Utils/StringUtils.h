@@ -1,5 +1,5 @@
+// 2023/11/22 21:13:31 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
-
 
 
 struct Word
@@ -12,41 +12,40 @@ struct Word
 };
 
 
-class SU
+namespace SU
 {
-public:
     // Эта команда сразу преобразует к верхенму регистру слово.
-    static bool GetWord(const char *string, Word *word, const int numWord);
+    bool GetWord(const char *string, Word *word, const int numWord);
 
-    static bool WordEqualZeroString(Word *word, char* string);
+    bool WordEqualZeroString(Word *word, char* string);
 
-    static char *Db2String(float value, int numDigits, char bufferOut[20]);
+    char *Db2String(float value, int numDigits, char bufferOut[20]);
     // Сравнивает две строки. Число символов берётся из str1
-    static bool EqualsStrings(const char *str1, const char *str2);
+    bool EqualsStrings(const char *str1, const char *str2);
 
-    static bool EqualsStrings(void *str1, void *str2, int size);
+    bool EqualsStrings(void *str1, void *str2, int size);
 
-    static bool EqualsStrings(uint8 *str1, const char * const str2, int size);
+    bool EqualsStrings(uint8 *str1, const char * const str2, int size);
 
-    static bool EqualsZeroStrings(char *str1, char *str2);
+    bool EqualsZeroStrings(char *str1, char *str2);
     // Возвращает позицию первого символа, который не является цифрой либо точкой
-    static int FirstNotNumeral(char *buffer);
+    int FirstNotNumeral(char *buffer);
     // Преобразует строку в float. Обрабатываются символы до первого нецифрового символа
-    static float StringToFloat(const char *string);
+    float StringToFloat(const char *string);
 
-    static char *ToUpper(char *str, int size);
+    char *ToUpper(char *str, int size);
 
-    static char *ToUpper(char *str);
+    char *ToUpper(char *str);
 
-    static char ToUpper(char symbol);
+    char ToUpper(char symbol);
 
-    static char ToLower(char symbol);
+    char ToLower(char symbol);
 
-    static char *DoubleToString(double value);
+    char *DoubleToString(double value);
 
-    static bool StringToDouble(double *value, const char *buffer);
+    bool StringToDouble(double *value, const char *buffer);
 
-    static bool String2Int(const char *buffer, int *value, char **end);
+    bool String2Int(const char *buffer, int *value, char **end);
 };
 
 
