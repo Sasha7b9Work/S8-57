@@ -54,7 +54,7 @@ void Device::Init()
 
     Settings::Load();
 
-    setNRST.Init();
+//    setNRST.Init();
 
     Display::Init();
 
