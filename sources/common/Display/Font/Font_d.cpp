@@ -89,8 +89,10 @@ void DFont::Set(const DTypeFont::E typeFont)
         case DTypeFont::_GOST28:
         case DTypeFont::_GOST72bold:
         {
+#ifndef LOADER
             font = nullptr;
             DAdvancedFont::Set(typeFont);
+#endif
         }
         break;
         case DTypeFont::None:
