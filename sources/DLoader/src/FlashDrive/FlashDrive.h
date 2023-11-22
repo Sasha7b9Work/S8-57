@@ -19,41 +19,37 @@ struct State
 };
 
 
-class FDrive
+namespace FDrive
 {
-    friend class CPU;
-
-public:
-    static void Init();
+    void Init();
 
     // Сделать попытку обновления
-    static void AttemptUpdate();
+    void AttemptUpdate();
 
-    static bool FileExist(const char *fileName);
+    bool FileExist(const char *fileName);
 
     // Открывает файл для чтения. Возвращает размер файла
-    static int OpenFileForRead(const char *fileName);
+    int OpenFileForRead(const char *fileName);
 
     // Считывает из открытого файла numBytes байт. Возвращает число реально считанных байт
-    static int ReadFromFile(int numBytes, uint8 *buffer);
+    int ReadFromFile(int numBytes, uint8 *buffer);
 
-    static void CloseOpenedFile();
+    void CloseOpenedFile();
 
-    static void *GetHandleHCD();
+    void *GetHandleHCD();
 
-    static void *GetHandleUSBH();
+    void *GetHandleUSBH();
 
-    static float PercentsUpdated();
+    float PercentsUpdated();
 
-    static State::E State();
+    State::E State();
 
-    class LL_
+    namespace LL_
     {
-    public:
-        static void InitHCD(void *phost);
+        void InitHCD(void *phost);
 
-        static void SetToggle(uint8 pipe, uint8 toggle);
+        void SetToggle(uint8 pipe, uint8 toggle);
 
-        static uint8 GetToggle(uint8 pipe);
+        uint8 GetToggle(uint8 pipe);
     };
 };
