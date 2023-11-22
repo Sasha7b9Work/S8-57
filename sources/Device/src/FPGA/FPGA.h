@@ -15,7 +15,6 @@ struct FPGA
     friend struct Bandwidth;
     friend struct TrigInput;
     friend struct TrigPolarity;
-    friend struct TShift;
     friend struct TrigLevel;
 
     static void Init();

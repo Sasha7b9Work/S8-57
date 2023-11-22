@@ -61,7 +61,7 @@ namespace TBase
 
     // — этого значени€ должен включатьс€ режим поточечного вывода
     const E MIN_P2P = _10ms;
-    
+
     // ћинимальный масштаб по времени, при котором ещЄ возможно включение режима пикового детектора
     static const E MIN_PEAK_DET = _5us;
 
@@ -205,40 +205,40 @@ struct Bandwidth
 };
 
 
-struct TShift
+namespace TShift
 {
-    static void Set(int);
+    void Set(int);
 
-    static int Min();
-    static int Max();
+    int Min();
+    int Max();
 
-    static void Load();
+    void Load();
 
-    static void Change(const int delta);
+    void Change(const int delta);
 
-    static String ToString(const TBase::E tBase = TBase::Count);
+    String ToString(const TBase::E tBase = TBase::Count);
 
-    static float ToAbs(const int shift, const TBase::E tBase);
+    float ToAbs(const int shift, const TBase::E tBase);
 
-    static void Reset();
+    void Reset();
 
-    static void Draw();
+    void Draw();
 
-private:
-    static void LoadReal();
+//private:
+//    static void LoadReal();
+//
+//    static void LoadRandomize();
+//
+//    // Ќарисовать "нормальное" изображение маркера смещени€, когда позици€ смещени€ находитс€ на экране
+//    static void DrawNormal(const int x, const int y);
+//
+//    // Ќарисовать маркер смещени€, когда позици€ смещени€ находитс€ за левой границей экрана
+//    static void DrawLeft();
+//
+//    // Ќарисовать маркер смещени€, когда позици€ смещени€ находитс€ за правой границей экрана
+//    static void DrawRight();
 
-    static void LoadRandomize();
-    
-    // Ќарисовать "нормальное" изображение маркера смещени€, когда позици€ смещени€ находитс€ на экране
-    static void DrawNormal(const int x, const int y);
-    
-    // Ќарисовать маркер смещени€, когда позици€ смещени€ находитс€ за левой границей экрана
-    static void DrawLeft();
-    
-    // Ќарисовать маркер смещени€, когда позици€ смещени€ находитс€ за правой границей экрана
-    static void DrawRight();
-
-    static const float absStep[TBase::Count];
+    extern const float absStep[TBase::Count];
 };
 
 namespace Trig
