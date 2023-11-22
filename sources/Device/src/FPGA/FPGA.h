@@ -22,8 +22,6 @@ struct FPGA
     friend struct TShift;
     friend struct TrigLevel;
 
-    friend class Tester;
-
     static void Init();
 
     static bool IsRunning();
@@ -67,8 +65,6 @@ struct FPGA
     static bool isRunning;
 
     static void Reset();
-
-private:
 
     static void OnPressStart();
 };

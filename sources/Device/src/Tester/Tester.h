@@ -1,36 +1,36 @@
+// 2023/11/22 16:31:18 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #pragma once
 #include "common/Command.h"
 #include "Hardware/HAL/HAL_PIO.h"
 #include "Menu/Pages/Include/PageDisplay.h"
 
 
-class Tester
+namespace Tester
 {
-public:
     static const int NUM_STEPS = 5;
-    
+
     // Инициализация аппаратной части
-    static void Init();
+    void Init();
 
     void DeInit();
 
-    static void Enable();
+    void Enable();
 
-    static void Disable();
+    void Disable();
 
-    static void StartStop();
+    void StartStop();
 
-    static void Update();
+    void Update();
 
-    static void ProcessStep();
-    
+    void ProcessStep();
+
     // Загружает полярность из Settings
-    static void LoadPolarity();
-    
-    // Устанавливает шаг изменения напряжения в соотвествии с настройками Settings
-    static void LoadStep();
+    void LoadPolarity();
 
-    static int16 DeltaRShiftA();
+    // Устанавливает шаг изменения напряжения в соотвествии с настройками Settings
+    void LoadStep();
+
+    int16 DeltaRShiftA();
 
     // Масштаб
     struct Scale
@@ -57,7 +57,7 @@ public:
         pString ToString() const;
     };
 
-    
+
     // Смещение
     struct Shift
     {
@@ -68,7 +68,7 @@ public:
         Chan::E ch;
     };
 
-    
+
     // Чем будем управлять в тестер-компоненте - напряжением или током
     struct Control
     {
@@ -82,7 +82,7 @@ public:
         };
     };
 
-    
+
     struct Polarity
     {
 #define S_TEST_POLARITY             (set.test._polarity)
@@ -95,7 +95,7 @@ public:
         };
     };
 
-    
+
     struct StepI
     {
 #define S_TEST_STEP_I           (set.test._stepI)
@@ -108,7 +108,7 @@ public:
         };
     };
 
-    
+
     struct StepU
     {
 #define S_TEST_STEP_U           (set.test._stepU)
@@ -132,41 +132,33 @@ public:
             Points
         };
     };
-
-private:
-
-    // Считать данные очередной ступеньки
-    static void ReadData();
-
-    static bool needSended[NUM_STEPS];
-    static bool sended[NUM_STEPS];  // Здесь true означает, что данные шага посланы
 };
 
 
 struct DisplayTester
 {
     static void Update();
-    
+
     // Устанавливает точки для рисования, соответствующие шагу numStep
     static void SetPoints(int numStep, const uint16 dx[TESTER_NUM_POINTS], const uint8 dy[TESTER_NUM_POINTS]);
 
 private:
-    
+
     // Если true, то шаг готов для вывода
     static bool ready[Tester::NUM_STEPS];
-    
+
     // Написать легенду изображения
     static void DrawLegend(int x, int y);
-    
+
     // Отображает параметры одного канала
     static void DrawParametersChannel(Chan::E ch, int x, int y);
-    
+
     // Возвращает цвет, которым нужно рисовать соответствующую "ступеньку"
     static Color ColorForStep(int step);
-    
+
     // Рисовать данные ступеньки numStep
     static void DrawData(int step);
-    
+
     // Возвращает числовое значение величины соответствующей "ступеньки"
     static String ValueForStep(int step);
 };

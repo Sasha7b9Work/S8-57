@@ -4,9 +4,6 @@
 #include "Utils/String.h"
 
 
-static const int SIZE_BUFFER = 100;
-
-
 void Log::Message(const char *message)
 {
     Console::AddString(message);
