@@ -13,7 +13,7 @@ struct FPGA
     friend struct Randomizer;
 
     friend struct Bandwidth;
-    friend struct Device;
+    //    friend struct Device;
     friend struct Range;
     friend struct RShift;
     friend struct TBase;
@@ -24,6 +24,8 @@ struct FPGA
     friend struct Osci;
 
     friend class Tester;
+
+    static void Init();
 
     static bool IsRunning();
 
@@ -59,17 +61,15 @@ struct FPGA
 
 private:
 
-    static void Init();
-
     static void OnPressStart();
-    
+
     static void Reset();
 
     static uint16 post;
-    static uint16 pred;   
+    static uint16 pred;
 
     static bool isRunning;
-   
+
     // True, если дан принудительный запуск
     static bool forcedStart;
 };

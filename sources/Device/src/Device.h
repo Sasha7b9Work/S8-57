@@ -4,8 +4,7 @@
 #include "Tester/Tester.h"
 
 
-
-struct Device
+namespace Device
 {
     struct Mode
     {
@@ -20,21 +19,23 @@ struct Device
         explicit Mode(E v) : value(v) {};
     };
 
-    static void Init();
+    void Init();
 
-    static void Update();
+    void Update();
 
-    static void Reset();
+    void Reset();
+
     // Устанавливает режим работы
-    static void SetMode(Mode::E mode);
+    void SetMode(Mode::E mode);
+
     // Возвращает текущий режим работы
-    static Mode::E CurrentMode();
+    Mode::E CurrentMode();
 
-    static bool InModeTester();
+    bool InModeTester();
 
-    static bool InModeMultimeter();
+    bool InModeMultimeter();
 
-    static bool InModeRecorder();
+    bool InModeRecorder();
 
-    static bool InModeOsci();
+    bool InModeOsci();
 };
