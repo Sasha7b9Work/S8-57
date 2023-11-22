@@ -17,12 +17,12 @@ namespace DisplayOsci
     void SetFlagRedraw();
 
 
-    struct HiPart
+    namespace HiPart
     {
-        static void Draw();
-    private:
+        void Draw();
+
         // Нарисовать правую часть - синхронизация и режим работы
-        static void DrawRightPart(int x0, int y0);
+        void DrawRightPart(int x0, int y0);
     };
 
 
