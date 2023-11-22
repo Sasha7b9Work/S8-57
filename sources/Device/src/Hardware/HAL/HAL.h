@@ -163,11 +163,11 @@ struct HAL_NVIC
 };
 
 
-struct HAL_OTP
+namespace HAL_OTP
 {
     // ¬озвращает число свободных мест дл€ записи. ≈сли 0, то места в OTP уже не осталось.
-    static int GetSerialNumber(char buffer[17]);
-    static bool SaveSerialNumber(char *servialNumber);
+    int GetSerialNumber(char buffer[17]);
+    bool SaveSerialNumber(char *servialNumber);
 };
 
 
