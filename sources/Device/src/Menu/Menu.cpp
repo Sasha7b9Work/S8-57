@@ -16,8 +16,35 @@
 #include <cstdio>
 
 
-Item *Menu::itemHint = nullptr;
-const char *Menu::stringForHint = nullptr;
+namespace Menu
+{
+    // Последний открытый контрол на дереве странице page
+    static Item *LastOpened(Page *page);
+
+    // Обработка события таймера автоматического сокрытия меню
+    static void OnTimerAutoHide();
+
+    static void ProcessButtonForHint(Key::E button);
+
+    // Написать подсказку
+    static void DrawHint();
+
+    // Закрыть все страницы, которые не могут быть открытыми при включении
+    static void CloseAllBadOpenedPages();
+
+    // Закрыть parent, если он является хранителем page
+    static void CloseIfSubPage(Page *parent, Page *page);
+
+    static void ClosePage(Page *page);
+
+    static void DrawHintItem(int x, int y, int width);
+
+    // Итем, для которого нужно выводить подсказку
+    static Item *itemHint = nullptr;
+
+    // Строка подсказки, которую надо выводить в случае включённого режима подсказок.
+    static const char *stringForHint = nullptr;
+}
 
 
 static const Page *const pages[] =
