@@ -62,51 +62,49 @@ namespace DisplayOsci
     };
 
 
-    struct PainterData
+    namespace PainterData
     {
-        static void DrawData();
+        void DrawData();
 
         // Возвращает адрес первой и последней точки на экране в координатах экрана
-        static BitSet64 PointsOnDisplay();
+        BitSet64 PointsOnDisplay();
 
         // \brief Возращает адрес первой и последней точки в координатах экрана
-        static BitSet64 BytesOnDisplay();
+        BitSet64 BytesOnDisplay();
 
-        static bool needSendToSCPI_FFT;
-
-    private:
+        extern bool needSendToSCPI_FFT;
 
         // Нарисовать актуальные данные - соответствующие текущим установкам
-        static void DrawCurrent();
+        void DrawCurrent();
 
         // Нарисовать данные из ОЗУ
-        static void DrawRAM();
+        void DrawRAM();
 
         // Нарисовать данные из ППЗУ
-        static void DrawROM();
+        void DrawROM();
 
-        static void DrawChannel(Chan::E ch);
+        void DrawChannel(Chan::E ch);
 
-        static void DrawModeLines(Chan::E ch, int left, int center, const uint8 *data, float scale);
+        void DrawModeLines(Chan::E ch, int left, int center, const uint8 *data, float scale);
 
-        static void DrawModeLinesPeakDetOn(int center, const uint8 *data, float scale, int x);
+        void DrawModeLinesPeakDetOn(int center, const uint8 *data, float scale, int x);
 
-        static void DrawModeLinesPeakDetOff(int center, const uint8 *data, float scale, int x);
+        void DrawModeLinesPeakDetOff(int center, const uint8 *data, float scale, int x);
 
-        static void DrawModePoints(Chan::E ch, int left, int center, const uint8 *data, float scale);
+        void DrawModePoints(Chan::E ch, int left, int center, const uint8 *data, float scale);
 
-        static void DrawModePointsPeakDetOn(int center, const uint8 *data, float scale, int x);
+        void DrawModePointsPeakDetOn(int center, const uint8 *data, float scale, int x);
 
-        static void DrawModePointsPeakDetOff(int center, const uint8 *data, float scale, int x);
+        void DrawModePointsPeakDetOff(int center, const uint8 *data, float scale, int x);
 
         // Нарисовать спектр
-        static void DrawSpectrum();
+        void DrawSpectrum();
 
-        static void DrawSpectrum(const uint8 *dataIn, int numPoints, Chan::E ch);
+        void DrawSpectrum(const uint8 *dataIn, int numPoints, Chan::E ch);
 
-        static void DrawSpectrumChannel(const float *spectrum, Color color);
+        void DrawSpectrumChannel(const float *spectrum, Color color);
 
-        static void WriteParametersFFT(Chan::E ch, float freq0, float density0, float freq1, float density1);
+        void WriteParametersFFT(Chan::E ch, float freq0, float density0, float freq1, float density1);
     };
 
 
