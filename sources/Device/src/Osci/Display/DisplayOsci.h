@@ -26,19 +26,19 @@ namespace DisplayOsci
     };
 
 
-    struct BottomPart
+    namespace BottomPart
     {
-        static void Draw(int x, int y);
+        void Draw(int x, int y);
     };
 
 
-    struct Accumulator
+    namespace Accumulator
     {
         // Ёту функцию нужно вызывать после каждой отрисовки сигналов
-        static void NextFrame();
+        void NextFrame();
 
         // —брос информации
-        static void Reset();
+        void Reset();
     };
 
 
