@@ -1391,16 +1391,6 @@
               <FilePath>.\src\Display\Painter_common.h</FilePath>
             </File>
             <File>
-              <FileName>Averager.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\Averager.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Averager.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\Averager.h</FilePath>
-            </File>
-            <File>
               <FileName>Painter_stm.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\Painter_stm.cpp</FilePath>
@@ -1409,6 +1399,16 @@
               <FileName>Text_stm.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\Text_stm.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DAverager.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\DAverager.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DAverager.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\DAverager.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -2874,16 +2874,6 @@
               <FilePath>.\src\Display\Painter_common.h</FilePath>
             </File>
             <File>
-              <FileName>Averager.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\src\Display\Averager.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>Averager.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\src\Display\Averager.h</FilePath>
-            </File>
-            <File>
               <FileName>Painter_stm.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\Painter_stm.cpp</FilePath>
@@ -2892,6 +2882,16 @@
               <FileName>Text_stm.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\src\Display\Text_stm.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DAverager.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\src\Display\DAverager.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DAverager.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Display\DAverager.h</FilePath>
             </File>
           </Files>
         </Group>

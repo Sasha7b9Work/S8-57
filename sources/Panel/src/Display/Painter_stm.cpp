@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "Display/Averager.h"
+#include "Display/DAverager.h"
 #include "Display/Painter.h"
 #include "Display/Display.h"
 #include "Hardware/LTDC.h"

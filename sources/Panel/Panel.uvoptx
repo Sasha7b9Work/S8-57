@@ -800,7 +800,7 @@
 
   <Group>
     <GroupName>Hardware</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1387,20 +1387,20 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Display\Averager.cpp</PathWithFileName>
-      <FilenameWithoutPath>Averager.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Display\Painter_stm.cpp</PathWithFileName>
+      <FilenameWithoutPath>Painter_stm.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>8</GroupNumber>
       <FileNumber>74</FileNumber>
-      <FileType>5</FileType>
+      <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Display\Averager.h</PathWithFileName>
-      <FilenameWithoutPath>Averager.h</FilenameWithoutPath>
+      <PathWithFileName>.\src\Display\Text_stm.cpp</PathWithFileName>
+      <FilenameWithoutPath>Text_stm.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1411,20 +1411,20 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Display\Painter_stm.cpp</PathWithFileName>
-      <FilenameWithoutPath>Painter_stm.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Display\DAverager.cpp</PathWithFileName>
+      <FilenameWithoutPath>DAverager.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>8</GroupNumber>
       <FileNumber>76</FileNumber>
-      <FileType>8</FileType>
+      <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\src\Display\Text_stm.cpp</PathWithFileName>
-      <FilenameWithoutPath>Text_stm.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\src\Display\DAverager.h</PathWithFileName>
+      <FilenameWithoutPath>DAverager.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

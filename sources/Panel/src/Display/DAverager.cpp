@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "common/Command.h"
-#include "Averager.h"
+#include "Display/DAverager.h"
 #include <cstring>
 
 
