@@ -3,7 +3,7 @@
 #include <usbd_def.h>
 
 
-class VCP
+namespace VCP
 {
 public:
     static const int DEVICE_FS = 0;
@@ -14,16 +14,16 @@ public:
     static void SendDataAsynch(const uint8 *data, int size);
 
     static void SendDataSynch(const void *data, int size = 0);
-    
+
     // Передаётся строка без завершающего нуля
     static void SendStringAsynch(const char *data);
-    
+
     // Передаётся строка без завершающего нуля
     static void SendStringSynch(char *data);
-    
+
     // Эта строка передаётся с завершающими символами \\r\\n
     static void SendFormatStringAsynch(char *format, ...);
-    
+
     // Эта строка передаётся с завершающими символами \\r\\n
     static void SendFormatStringSynch(char *format, ...);
 
