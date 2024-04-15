@@ -293,6 +293,8 @@ void DisplayRecorder::DrawChannel(Chan::E ch)
 {
     int numPoints = displayed->NumPoints();
 
+    VCP_WRITE("numPointes = %d", numPoints);
+
     if(numPoints == 0)
     {
         return;
@@ -306,16 +308,11 @@ void DisplayRecorder::DrawChannel(Chan::E ch)
 
     int index = (numPoints < 320) ? 0 : (numPoints - 320);
 
-    if (startPoint >= 0)
-    {
-        index = startPoint;
-    }
-
     Point16 *point = (displayed->*func)(index);
 
     for(int x = 0; x < 320; x++)
     {
-        if(!point->IsEmpty())
+        if((numPoints-- > 0) && !point->IsEmpty())
         {
             int min = Y(point->min);
             int max = Y(point->max);
@@ -462,26 +459,19 @@ void DisplayRecorder::RecordIcon::Upate(int x, int y)
 }
 
 
-void DisplayRecorder::SetDisplayedRecord(Record *record, bool forListening)
+void DisplayRecorder::SetDisplayedRecord(Record *record)
 {
     HAL_BUS_CONFIGURE_TO_FSMC();
 
     displayed = record;
 
-    if (forListening)
-    {
-        startPoint = -1;
-    }
-    else
-    {
-        startPoint = 0;
+    startPoint = 0;
 
-        if (displayed)
+    if (displayed)
+    {
+        if (displayed->NumPoints() > 320)
         {
-            if (displayed->NumPoints() > 320)
-            {
-                startPoint = displayed->NumPoints() - 320;
-            }
+            startPoint = displayed->NumPoints() - 320;
         }
     }
 }

@@ -14,8 +14,8 @@
 
 #define LOG_TRACE               Log::Message(String("%s : %d", __FILE__, __LINE__).c_str())
 
-//#define TRACE   VCP_WRITE("%s:%d", __FILE__, __LINE__)
-//#define VCP_WRITE(...)           VCP::SendFormatStringAsynch(String(__VA_ARGS__).c_str())
+#define TRACE   VCP_WRITE("%s:%d", __FILE__, __LINE__)
+#define VCP_WRITE(...)           VCP::SendFormatStringAsynch(String(__VA_ARGS__).c_str())
 
 
 struct Log

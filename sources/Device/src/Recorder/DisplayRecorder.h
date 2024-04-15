@@ -26,7 +26,7 @@ namespace DisplayRecorder
     bool InProcessUpdate();
 
     // Установить отображаемую запись
-    void SetDisplayedRecord(Record *record, bool forListening);
+    void SetDisplayedRecord(Record *record);
 
     struct Cursor
     {

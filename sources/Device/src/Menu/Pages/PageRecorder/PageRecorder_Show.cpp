@@ -97,7 +97,7 @@ static void OnOpenClose_PageShow(bool open)
     if (open)
     {
         HAL_BUS_CONFIGURE_TO_FSMC();
-        DisplayRecorder::SetDisplayedRecord(StorageRecorder::LastRecord(), false);
+        DisplayRecorder::SetDisplayedRecord(StorageRecorder::LastRecord());
     }
 }
 

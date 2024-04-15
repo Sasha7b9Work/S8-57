@@ -59,16 +59,6 @@ void Recorder::Init()
 }
 
 
-void Recorder::StartListening()
-{
-    StorageRecorder::CreateListeningRecord();
-    FPGA::GiveStart(0, 0);
-    FPGA::ForcedStart();
-    mode = Mode::Listening;
-    DisplayRecorder::SetDisplayedRecord(StorageRecorder::LastRecord(), true);
-}
-
-
 void Recorder::DeInit()
 {
     if (initialized)
@@ -111,9 +101,19 @@ void Recorder::Start()
 {
     StorageRecorder::CreateNewRecord(__FILE__, __LINE__);
 
-    DisplayRecorder::SetDisplayedRecord(StorageRecorder::LastRecord(), true);
+    DisplayRecorder::SetDisplayedRecord(StorageRecorder::LastRecord());
 
     mode = Mode::Recording;
+}
+
+
+void Recorder::StartListening()
+{
+    StorageRecorder::CreateListeningRecord();
+    FPGA::GiveStart(0, 0);
+    FPGA::ForcedStart();
+    mode = Mode::Listening;
+    DisplayRecorder::SetDisplayedRecord(StorageRecorder::LastRecord());
 }
 
 
@@ -152,14 +152,22 @@ void Recorder::OnPressStart()
 
     if (Menu::OpenedItem() == const_cast<Page *>(PageRecorder::self)) //-V2567
     {
-        if (mode == Mode::Recording)
+        const Key::E keys[] = { Key::F4, Key::Start, Key::None };
+
+        if (mode == Mode::Listening)
+        {
+            Stop();
+            Start();
+            Keyboard::Lock(keys);
+        }
+        else if (mode == Mode::Recording)
         {
             Stop();
             Keyboard::Unlock();
         }
-        else
+        else if (mode == Mode::Review)
         {
-            static const Key::E keys[] = { Key::F4, Key::Start, Key::None };
+            Stop();
             Start();
             Keyboard::Lock(keys);
         }
