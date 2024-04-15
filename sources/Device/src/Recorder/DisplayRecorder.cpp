@@ -293,8 +293,6 @@ void DisplayRecorder::DrawChannel(Chan::E ch)
 {
     int numPoints = displayed->NumPoints();
 
-    VCP_WRITE("numPointes = %d", numPoints);
-
     if(numPoints == 0)
     {
         return;

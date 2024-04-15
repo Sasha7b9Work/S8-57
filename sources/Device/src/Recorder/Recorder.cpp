@@ -99,7 +99,7 @@ void Recorder::RecordPoints()
 
 void Recorder::Start()
 {
-    StorageRecorder::CreateNewRecord(__FILE__, __LINE__);
+    StorageRecorder::CreateNewRecord();
 
     DisplayRecorder::SetDisplayedRecord(StorageRecorder::LastRecord());
 
@@ -109,7 +109,7 @@ void Recorder::Start()
 
 void Recorder::StartListening()
 {
-    StorageRecorder::CreateNewRecord(__FILE__, __LINE__);
+    StorageRecorder::CreateNewRecord();
 
     StorageRecorder::LastRecord()->SetMaxPoints(320);
 

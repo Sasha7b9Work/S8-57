@@ -214,7 +214,14 @@ uint8 *Record::End() const
 {
     HAL_BUS_CONFIGURE_TO_FSMC();
 
-    return Begin() + sizeof(*this) + bytesOnPoint * numPoints;
+    uint result = (uint)(Begin() + sizeof(*this) + bytesOnPoint * numPoints);
+
+    while (result % 4)
+    {
+        result++;
+    }
+
+    return (uint8 *)result;
 }
 
 
@@ -249,7 +256,7 @@ Record *StorageRecorder::LastRecord()
 }
 
 
-Record *StorageRecorder::CreateNewRecord(char * /*file*/, int /*line*/)
+Record *StorageRecorder::CreateNewRecord()
 {
     HAL_BUS_CONFIGURE_TO_FSMC();
 

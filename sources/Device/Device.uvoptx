@@ -159,7 +159,7 @@
           <Type>0</Type>
           <LineNumber>423</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134478720</Address>
+          <Address>134478296</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -175,7 +175,7 @@
           <Type>0</Type>
           <LineNumber>414</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134478702</Address>
+          <Address>134478278</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -185,6 +185,22 @@
           <Filename>&lt;1&gt;.\src\Osci\Osci.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\S8_57\src/Osci/Osci.cpp\414</Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>260</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134452534</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>&lt;1&gt;.\src\Recorder\StorageRecorder.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\S8_57\src/Recorder/StorageRecorder.cpp\260</Expression>
         </Bp>
       </Breakpoint>
       <Tracepoint>
@@ -1429,7 +1445,7 @@
 
   <Group>
     <GroupName>Hardware/HAL</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -4233,7 +4249,7 @@
 
   <Group>
     <GroupName>Recorder</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
