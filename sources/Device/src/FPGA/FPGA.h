@@ -5,6 +5,21 @@
 #include "FPGA/MathFPGA.h"
 
 
+struct PredFPGA
+{
+    PredFPGA(uint16 raw) : value(raw) { }
+    void SetRaw(uint16 raw) { value = raw; }
+    uint16 ConvertForReal() { value = (uint16)(~(value + 3)); return value; }
+    uint16 ConvertForRand() { value = (uint16)(~value); return value; }
+    uint16 Get() const { return value; }
+private:
+    uint16 value;
+};
+
+
+extern PredFPGA predFPGA;
+
+
 struct FPGA
 {
     friend struct ContextFreqMeter;
@@ -55,7 +70,6 @@ struct FPGA
     static bool forcedStart;
 
     static uint16 post;
-    static uint16 pred;
 
     static bool isRunning;
 

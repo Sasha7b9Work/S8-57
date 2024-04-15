@@ -129,13 +129,13 @@ void TShift::LoadReal()
     {
         Pred = 0;
     }
-    FPGA::pred = static_cast<uint16>(Pred);
+
+    predFPGA.SetRaw((uint16)Pred);
 
     FPGA::post = static_cast<uint16>(~(FPGA::post + 1));
-    FPGA::pred = static_cast<uint16>(~(FPGA::pred + 3));
 
     HAL_BUS::FPGA::Write16(WR::PRED_LO, FPGA::post);
-    HAL_BUS::FPGA::Write16(WR::POST_LO, FPGA::pred);
+    HAL_BUS::FPGA::Write16(WR::POST_LO, predFPGA.ConvertForReal());
 }
 
 void TShift::LoadRandomize()
@@ -156,17 +156,16 @@ void TShift::LoadRandomize()
         Pred = 5;
     }
 
-    FPGA::pred = static_cast<uint16>(Pred);
+    predFPGA.SetRaw((uint16)Pred);
 
     if (S_DBG_SHOW_RAND_PRED_POST)
     {
-        LOG_WRITE("pred = %d, post = %d", FPGA::pred, FPGA::post);
+        LOG_WRITE("pred = %d, post = %d", predFPGA.Get(), FPGA::post);
     }
 
     FPGA::post = static_cast<uint16>(~(FPGA::post + 10));
-    FPGA::pred = static_cast<uint16>(~(FPGA::pred));
 
-    HAL_BUS::FPGA::Write16(WR::PRED_LO, FPGA::pred);
+    HAL_BUS::FPGA::Write16(WR::PRED_LO, predFPGA.ConvertForRand());
     HAL_BUS::FPGA::Write16(WR::POST_LO, FPGA::post);
 }
 
