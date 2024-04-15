@@ -175,44 +175,26 @@ uint8 *Record::AddressPoints(int number)
 
 void Record::Init()
 {
-    TRACE;
     maxPoints = 0;
-    TRACE;
     timeStart = HAL_RTC::GetPackedTime();
-    TRACE;
     numPoints = 0;
     sources = 0;
     bytesOnPoint = 0;
-    TRACE;
     timeForPointMS = static_cast<uint>(Recorder::ScaleX::TimeForPointMS());
-    TRACE;
-
     offsetB = 0;
-
-    TRACE;
 
     if(S_REC_ENABLED_A)
     {
-        TRACE;
         sources |= (1 << 0);
         bytesOnPoint += 2;
-
         offsetB = sizeof(BitSet16);
-        TRACE;
     }
-
-    TRACE;
 
     if(S_REC_ENABLED_B)
     {
-        TRACE;
         sources |= (1 << 1);
         bytesOnPoint += 2;
-
-        TRACE;
     }
-
-    TRACE;
 }
 
 
@@ -267,41 +249,27 @@ Record *StorageRecorder::LastRecord()
 }
 
 
-bool StorageRecorder::CreateNewRecord(char *file, int line)
+bool StorageRecorder::CreateNewRecord(char * /*file*/, int /*line*/)
 {
-    VCP_WRITE(" ");
-    VCP_WRITE("CreateNewRecord() from %s:%d", file, line);
-
-    TRACE;
     HAL_BUS_CONFIGURE_TO_FSMC();
-
-    VCP_WRITE("lastRecord before %x", lastRecord);
-    VCP_WRITE("size Record = %u", sizeof(Record));
 
     if(lastRecord)
     {
-        TRACE;
         Record *next = reinterpret_cast<Record *>(lastRecord ->End());
 
         if(!next->IsValid())
         {
-            TRACE;
             return false;
         }
 
-        TRACE;
         lastRecord = next;
     }
     else
     {
-        TRACE;
         lastRecord = reinterpret_cast<Record *>(ExtRAM::Begin());
     }
 
-    TRACE;
-    VCP_WRITE("lastRecord after %x", lastRecord);
     lastRecord->Init();
-    TRACE;
 
     return true;
 }
