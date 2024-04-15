@@ -9,6 +9,7 @@
 #include "Utils/Math.h"
 #include "Utils/Smoother.h"
 #include "Utils/Values.h"
+#include "Utils/Buffer.h"
 #include <cmath>
 #include <cstdlib>
 #include <cstring>
@@ -144,7 +145,7 @@ static bool picIsCalculating[2] = { false, false };
 #define EXIT_IF_ERROR_INT(x)        if((x) == Integer::ERROR)   return Float::ERROR;
 
 // Входной буфер данных канала ch
-#define CHOICE_BUFFER (OUT(ch))
+#define CHOICE_BUFFER (_OUT(ch))
 
 
 void AutoMeasurements::CalculateMeasures()
@@ -1443,7 +1444,7 @@ void AutoMeasurements::SetData()
         {
             for (int i = static_cast<int>(BYTES_IN_CHANNEL_DS - 1); i >= 0; --i)
             {
-                if (IN_A[i] != VALUE::NONE)                // Если это значение считано
+                if (_IN_A[i] != VALUE::NONE)                // Если это значение считано
                 {
                     lastByte = i;
                     firstByte = lastByte - nBytes;
@@ -1475,10 +1476,10 @@ void AutoMeasurements::CountedToCurrentSettings()
 
     if (ENABLED_DS_A)
     {
-        Smoother::Run(IN_A, OUT_A, NUM_BYTES, S_DISP_NUM_SMOOTH);
-        std::memcpy(IN_A, OUT_A, NUM_BYTES);
-        CountedToCurrentSettings(ChanA, NUM_BYTES, IN_A, OUT_A);
-        LimitationData(OUT_A, NUM_BYTES);
+        Smoother::Run(_IN_A, _OUT_A, NUM_BYTES, S_DISP_NUM_SMOOTH);
+        std::memcpy(_IN_A, _OUT_A, NUM_BYTES);
+        CountedToCurrentSettings(ChanA, NUM_BYTES, _IN_A, _OUT_A);
+        LimitationData(_OUT_A, NUM_BYTES);
     }
 
     if (ENABLED_DS_B)

@@ -197,7 +197,7 @@ void DisplayOsci::PainterData::DrawSpectrum()
     
         if (S_FFT_SOURCE_IS_A)
         {
-            DrawSpectrum(OUT_A, numPoints, ChanA);
+            DrawSpectrum(_OUT_A, numPoints, ChanA);
         }
         else if (S_FFT_SOURCE_IS_B)
         {
@@ -208,11 +208,11 @@ void DisplayOsci::PainterData::DrawSpectrum()
             if (S_DISP_LAST_AFFECTED_CHANNEL_IS_A)
             {
                 DrawSpectrum(OUT_B, numPoints, ChanB);
-                DrawSpectrum(OUT_A, numPoints, ChanA);
+                DrawSpectrum(_OUT_A, numPoints, ChanA);
             }
             else
             {
-                DrawSpectrum(OUT_A, numPoints, ChanA);
+                DrawSpectrum(_OUT_A, numPoints, ChanA);
                 DrawSpectrum(OUT_B, numPoints, ChanB);
             }
         }
@@ -247,7 +247,7 @@ void DisplayOsci::PainterData::DrawChannel(Chan::E ch)
         return;
     }
 
-    uint8 *data = OUT(ch);
+    uint8 *data = _OUT(ch);
 
     data += DisplayOsci::ShiftInMemory::Get();
 

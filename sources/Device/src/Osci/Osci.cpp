@@ -19,6 +19,7 @@
 #include "Settings/SettingsNRST.h"
 #include "Utils/Math.h"
 #include "Utils/Values.h"
+#include "Hardware/VCP.h"
 #include <cstring>
 #include <cstdio>
 
@@ -366,10 +367,14 @@ void Osci::ReadData()
 
     if(ReadDataChannel(ChanA, ds->dataA))
     {
+        Buffer::LogU8(ds->dataA + 15, 50);
+
         if(ReadDataChannel(ChanB, ds->dataB))
         {
             if (SampleType::IsReal())
             {
+                VCP::SendStringAsynch("Interpolation\r\n");
+
                 InterpolatorSinX_X::Run(ds);
             }
         }

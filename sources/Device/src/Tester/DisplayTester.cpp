@@ -35,7 +35,7 @@ namespace DisplayTester
     // Если true, то шаг готов для вывода
     static bool ready[Tester::NUM_STEPS] = { false, false, false, false, false };
 
-    static array8 *datY = (array8 *)OUT_A;
+    static array8 *datY = (array8 *)_OUT_A;
     static array16 *datX = (array16 *)OUT_B;
 }
 

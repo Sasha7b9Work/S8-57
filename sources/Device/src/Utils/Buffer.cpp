@@ -78,7 +78,7 @@ void Buffer::LogU8(const uint8 *buffer)
 
 void Buffer::LogU8(const uint8 *buffer, int size)
 {
-    char message[128] = { '\0' };
+    char message[256] = { '\0' };
 
     for (int i = 0; i < size; i++)
     {

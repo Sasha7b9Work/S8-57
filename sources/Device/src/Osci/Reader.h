@@ -9,12 +9,12 @@
 
 #define ENABLE_CH_DS(ch)  (((ch) == Chan::A) ? DS->enableA : DS->enableB)
 
-#define IN(ch)  (Reader::dataIN[static_cast<int>(ch)])
-#define IN_A    IN(ChanA)
-#define IN_B    IN(ChanB)
-#define OUT(ch) (Reader::dataOUT[static_cast<int>(ch)])
-#define OUT_A   OUT(ChanA)
-#define OUT_B   OUT(ChanB)
+#define _IN(ch)  (Reader::dataIN[static_cast<int>(ch)])
+#define _IN_A    _IN(ChanA)
+#define IN_B    _IN(ChanB)
+#define _OUT(ch) (Reader::dataOUT[static_cast<int>(ch)])
+#define _OUT_A   _OUT(ChanA)
+#define OUT_B   _OUT(ChanB)
 
 #define AVE_DATA(ch) (Reader::ave[static_cast<int>(ch)])
 #define AVE_1        AVE_DATA(ChanA)

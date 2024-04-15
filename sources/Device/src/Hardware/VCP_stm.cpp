@@ -53,12 +53,20 @@ void VCP::SendDataAsynch(const uint8 *buffer, int size)
     static const int  SIZE_BUFFER = 64;
     static uint8 trBuf[SIZE_BUFFER];
 
-    size = Math::Min(size, SIZE_BUFFER);
-    while (!PrevSendingComplete())  {};
-    std::memcpy(trBuf, buffer, static_cast<uint>(size));
+    while (size)
+    {
+        int size_chunks = Math::Min(SIZE_BUFFER, size);
 
-    USBD_CDC_SetTxBuffer(&hUSBD, trBuf, static_cast<uint16>(size));
-    USBD_CDC_TransmitPacket(&hUSBD);
+        std::memcpy(trBuf, buffer, static_cast<uint>(size_chunks));
+
+        buffer += size_chunks;
+        size -= size_chunks;
+
+        while (!PrevSendingComplete()) {}
+
+        USBD_CDC_SetTxBuffer(&hUSBD, trBuf, static_cast<uint16>(size_chunks));
+        USBD_CDC_TransmitPacket(&hUSBD);
+    }
 }
 
 
