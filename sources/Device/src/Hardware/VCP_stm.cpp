@@ -45,6 +45,11 @@ bool VCP::PrevSendingComplete()
 
 void VCP::SendDataAsynch(const uint8 *buffer, int size)
 {
+    if (!connectedToUSB)
+    {
+        return;
+    }
+
     static const int  SIZE_BUFFER = 64;
     static uint8 trBuf[SIZE_BUFFER];
 

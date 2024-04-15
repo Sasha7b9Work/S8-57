@@ -18,6 +18,7 @@ public:
 
     void Log();
     static void LogU8(const uint8 *buffer);
+    static void LogU8(const uint8 *buffer, int size);
 private:
     int size;
     void Free();
