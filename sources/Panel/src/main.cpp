@@ -23,6 +23,13 @@ static void UpdateDisplay()
 
     Painter::BeginScene();
 
+    if (TIME_MS < 1000)
+    {
+        Painter::EndScene();
+
+        return;
+    }
+
     Painter::SetColor(Color::WHITE);
 
     Painter::FillRegion(x, y, width, width);
