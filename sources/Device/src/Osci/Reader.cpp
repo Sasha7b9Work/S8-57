@@ -7,7 +7,6 @@
 #include "Osci/Osci.h"
 #include "Osci/Reader.h"
 #include "Settings/Settings.h"
-#include "Utils/Buffer.h"
 #include <cstring>
 
 
@@ -48,7 +47,7 @@ void Reader::ReadDataFromRAM()
     {
         if (DS->enableA)
         {
-            std::memcpy(_IN_A, DS->dataA, 8 * 1024);
+            std::memcpy(IN_A, DS->dataA, 8 * 1024);
         }
         if (DS->enableB)
         {
@@ -71,7 +70,7 @@ void Reader::ReadDataFromROM()
     {
         if (DS->enableA)
         {
-            std::memcpy(_IN_A, DS->dataA, 8 * 1024);
+            std::memcpy(IN_A, DS->dataA, 8 * 1024);
         }
         if (DS->enableB)
         {

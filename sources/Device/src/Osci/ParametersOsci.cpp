@@ -413,7 +413,7 @@ void TrigLevel::Find()
 
     if (DS && ENABLED_DS(ch))
     {
-        const uint8 *data = _IN(ch);
+        const uint8 *data = IN(ch);
 
         int numBytes = DS->BytesInChannel();
 

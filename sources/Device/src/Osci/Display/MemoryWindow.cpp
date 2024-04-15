@@ -33,7 +33,7 @@ void DisplayOsci::MemoryWindow::Draw()
         if (S_CHANNEL_ENABLED(ch))
         {
             Color::CHAN[ch].SetAsCurrent();
-            DrawDataInRect(X(), Y(), Width(), Height(), _OUT(ch), ENumPointsFPGA::PointsInChannel());
+            DrawDataInRect(X(), Y(), Width(), Height(), OUT(ch), ENumPointsFPGA::PointsInChannel());
         }
     }
 }
