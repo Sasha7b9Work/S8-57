@@ -132,7 +132,7 @@ namespace StorageRecorder
     void Init();
 
     // Создаёт новую запись для хранения данных в хранилище
-    bool CreateNewRecord(char *file, int line);
+    Record *CreateNewRecord(char *file, int line);
 
     // Возвращает указатель на текущую запись
     Record *LastRecord();

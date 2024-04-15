@@ -249,7 +249,7 @@ Record *StorageRecorder::LastRecord()
 }
 
 
-bool StorageRecorder::CreateNewRecord(char * /*file*/, int /*line*/)
+Record *StorageRecorder::CreateNewRecord(char * /*file*/, int /*line*/)
 {
     HAL_BUS_CONFIGURE_TO_FSMC();
 
@@ -261,7 +261,7 @@ bool StorageRecorder::CreateNewRecord(char * /*file*/, int /*line*/)
 
             if (!next->IsValid())
             {
-                return false;
+                return nullptr;
             }
 
             lastRecord = next;
@@ -274,7 +274,7 @@ bool StorageRecorder::CreateNewRecord(char * /*file*/, int /*line*/)
 
     lastRecord->Init();
 
-    return true;
+    return lastRecord;
 }
 
 
