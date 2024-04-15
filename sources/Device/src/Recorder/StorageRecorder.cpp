@@ -37,7 +37,7 @@ void BufferMissingPoints::Pop(BitSet16 *a, BitSet16 *b)
     *b = points[1][first];
     first++;
 
-    if(last == first)
+    if (last == first)
     {
         last = 0;
         first = 0;
@@ -66,16 +66,16 @@ bool PointFloat::IsEmpty() const
 
 void PointFloat::Add(float value)
 {
-    if(min > max)
+    if (min > max)
     {
         min = value;
         max = value;
     }
-    else if(value < min)
+    else if (value < min)
     {
         min = value;
     }
-    else if(value > max) //-V2516
+    else if (value > max) //-V2516
     {
         max = value;
     }
@@ -90,7 +90,7 @@ int Record::NumPoints() const
 
 void Record::AddPoints(BitSet16 dataA, BitSet16 dataB)
 {
-    if(DisplayRecorder::InProcessUpdate())
+    if (DisplayRecorder::InProcessUpdate())
     {
         BufferMissingPoints::Push(dataA, dataB);
 
@@ -99,17 +99,17 @@ void Record::AddPoints(BitSet16 dataA, BitSet16 dataB)
 
     HAL_BUS_CONFIGURE_TO_FSMC();
 
-    if(maxPoints)
+    if (maxPoints)
     {
         DeleteOldPoints();
     }
 
-    if(EXIST_A)
+    if (EXIST_A)
     {
         *ValueA(numPoints) = dataA;
     }
 
-    if(EXIST_B)
+    if (EXIST_B)
     {
         *ValueB(numPoints) = dataB;
     }
@@ -120,7 +120,7 @@ void Record::AddPoints(BitSet16 dataA, BitSet16 dataB)
 
 void Record::AddMissingPoints()
 {
-    while(BufferMissingPoints::Size())
+    while (BufferMissingPoints::Size())
     {
         BitSet16 a;
         BitSet16 b;
@@ -134,7 +134,7 @@ void Record::AddMissingPoints()
 
 void Record::DeleteOldPoints()
 {
-    if(numPoints == maxPoints)
+    if (numPoints == maxPoints)
     {
         uint numBytes = bytesOnPoint * static_cast<uint>(numPoints - 1);      // Столько байт будем перемещать
 
@@ -183,14 +183,14 @@ void Record::Init()
     timeForPointMS = static_cast<uint>(Recorder::ScaleX::TimeForPointMS());
     offsetB = 0;
 
-    if(S_REC_ENABLED_A)
+    if (S_REC_ENABLED_A)
     {
         sources |= (1 << 0);
         bytesOnPoint += 2;
         offsetB = sizeof(BitSet16);
     }
 
-    if(S_REC_ENABLED_B)
+    if (S_REC_ENABLED_B)
     {
         sources |= (1 << 1);
         bytesOnPoint += 2;
@@ -222,7 +222,7 @@ bool Record::IsValid() const
 {
     HAL_BUS_CONFIGURE_TO_FSMC();
 
-    if(Begin() < ExtRAM::Begin() || (End() + 1024) > ExtRAM::End())
+    if (Begin() < ExtRAM::Begin() || (End() + 1024) > ExtRAM::End())
     {
         return false;
     }
@@ -253,9 +253,9 @@ bool StorageRecorder::CreateNewRecord(char * /*file*/, int /*line*/)
 {
     HAL_BUS_CONFIGURE_TO_FSMC();
 
-    if(lastRecord)
+    if (lastRecord)
     {
-        if(lastRecord->maxPoints == 0)
+        if (lastRecord->maxPoints == 0)
         {
             Record *next = reinterpret_cast<Record *>(lastRecord->End());
 
@@ -306,7 +306,7 @@ uint StorageRecorder::NumRecords()
 
     uint result = 0;
 
-    while(record->IsValid())
+    while (record->IsValid())
     {
         record = reinterpret_cast<const Record *>(record->End());
         result++;
