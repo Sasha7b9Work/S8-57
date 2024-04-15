@@ -19,12 +19,9 @@ int BufferMissingPoints::first = 0;
 // Последняя запись. Если идёт запись, то именно в неё.
 static Record *lastRecord = nullptr;
 
-static PointFloat empty = { 1.0F, -1.0F };
-
 #define EXIST_A      (sources & (1 << 0))
 #define EXIST_B      (sources & (1 << 1))
 #define EXIST_A_OR_B (sources & (1 << 3))
-#define EXIST_SENS   (sources & (1 << 2))
 
 
 void BufferMissingPoints::Push(BitSet16 a, BitSet16 b)
@@ -118,8 +115,6 @@ void Record::AddPoints(BitSet16 dataA, BitSet16 dataB)
     }
 
     numPoints++;
-
-    ValueSensor(numPoints)->Prepare();
 }
 
 
@@ -154,52 +149,6 @@ void Record::DeleteOldPoints()
 }
 
 
-void Record::AddPoint(float value)
-{
-    HAL_BUS_CONFIGURE_TO_FSMC();
-
-    if(EXIST_SENS)
-    {
-        ValueSensor(numPoints)->Add(value);
-
-        // Теперь интерполируем отсутствующие точки
-
-        int i = numPoints - 1;
-
-        for(; i >= 0; i--)
-        {
-            if (!ValueSensor(i)->IsEmpty())
-            {
-                break;
-            }
-        }
-
-        if (numPoints - i > 1)
-        {
-            Interpolate(i, numPoints);
-        }
-    }
-}
-
-
-void Record::Interpolate(int num1, int num2)
-{
-    PointFloat *point1 = ValueSensor(num1);
-    PointFloat *point2 = ValueSensor(num2);
-
-    float dMIN = (point2->min - point1->min) / (num2 - num1);
-    float dMAX = (point2->max - point2->min) / (num2 - num1);
-
-    for (int i = num1 + 1; i < num2; i++)
-    {
-        PointFloat *prev = ValueSensor(i - 1);
-        PointFloat *point = ValueSensor(i);
-        point->max = prev->max + dMAX;
-        point->min = prev->min + dMIN;
-    }
-}
-
-
 Point16 *Record::ValueA(int number)
 {
     return reinterpret_cast<Point16 *>(AddressPoints(number));
@@ -209,12 +158,6 @@ Point16 *Record::ValueA(int number)
 Point16 *Record::ValueB(int number)
 {
     return reinterpret_cast<Point16 *>(AddressPoints(number) + offsetB);
-}
-
-
-PointFloat *Record::ValueSensor(int number)
-{
-    return EXIST_SENS ? reinterpret_cast<PointFloat *>(AddressPoints(number) + offsetSensor) : &empty;
 }
 
 
@@ -232,40 +175,44 @@ uint8 *Record::AddressPoints(int number)
 
 void Record::Init()
 {
+    TRACE;
     maxPoints = 0;
+    TRACE;
     timeStart = HAL_RTC::GetPackedTime();
+    TRACE;
     numPoints = 0;
     sources = 0;
     bytesOnPoint = 0;
+    TRACE;
     timeForPointMS = static_cast<uint>(Recorder::ScaleX::TimeForPointMS());
+    TRACE;
 
     offsetB = 0;
-    offsetSensor = 0;
+
+    TRACE;
 
     if(S_REC_ENABLED_A)
     {
+        TRACE;
         sources |= (1 << 0);
         bytesOnPoint += 2;
 
         offsetB = sizeof(BitSet16);
-        offsetSensor = sizeof(BitSet16);
+        TRACE;
     }
+
+    TRACE;
 
     if(S_REC_ENABLED_B)
     {
+        TRACE;
         sources |= (1 << 1);
         bytesOnPoint += 2;
 
-        offsetSensor += sizeof(BitSet16);
+        TRACE;
     }
 
-    if(S_REC_ENABLED_SENSOR)
-    {
-        sources |= (1 << 2);
-        bytesOnPoint += sizeof(float) * 2;      // Каждая точка датчика требует 2 значения типа float - минимальное и максимальное
-    }
-
-    ValueSensor(0)->Prepare();
+    TRACE;
 }
 
 
@@ -314,39 +261,47 @@ bool Record::ContainsChannelB() const
 }
 
 
-bool Record::ContainsSensor() const
-{
-    return (sources & 0x04) != 0;
-}
-
-
 Record *StorageRecorder::LastRecord()
 {
     return lastRecord;
 }
 
 
-bool StorageRecorder::CreateNewRecord()
+bool StorageRecorder::CreateNewRecord(char *file, int line)
 {
+    VCP_WRITE(" ");
+    VCP_WRITE("CreateNewRecord() from %s:%d", file, line);
+
+    TRACE;
     HAL_BUS_CONFIGURE_TO_FSMC();
+
+    VCP_WRITE("lastRecord before %x", lastRecord);
+    VCP_WRITE("size Record = %u", sizeof(Record));
 
     if(lastRecord)
     {
+        TRACE;
         Record *next = reinterpret_cast<Record *>(lastRecord ->End());
 
         if(!next->IsValid())
         {
+            TRACE;
             return false;
         }
 
+        TRACE;
         lastRecord = next;
     }
     else
     {
+        TRACE;
         lastRecord = reinterpret_cast<Record *>(ExtRAM::Begin());
     }
 
+    TRACE;
+    VCP_WRITE("lastRecord after %x", lastRecord);
     lastRecord->Init();
+    TRACE;
 
     return true;
 }
@@ -354,7 +309,7 @@ bool StorageRecorder::CreateNewRecord()
 
 bool StorageRecorder::CreateListeningRecord()
 {
-    bool result = CreateNewRecord();
+    bool result = CreateNewRecord(__FILE__, __LINE__);
 
     if (result)
     {

@@ -109,7 +109,7 @@ void Recorder::RecordPoints()
 
 void Recorder::Start()
 {
-    StorageRecorder::CreateNewRecord();
+    StorageRecorder::CreateNewRecord(__FILE__, __LINE__);
 
     DisplayRecorder::SetDisplayedRecord(StorageRecorder::LastRecord(), true);
 
@@ -144,7 +144,7 @@ void Recorder::OnPressStart()
         return;
     }
 
-    if(!S_REC_ENABLED_A && !S_REC_ENABLED_B && !S_REC_ENABLED_SENSOR)
+    if(!S_REC_ENABLED_A && !S_REC_ENABLED_B)
     {
         Display::ShowWarning("Ќужно выбрать хот€ бы один источник записи");
         return;

@@ -31,22 +31,24 @@ int main()
     CPU::Init();
 
     Timer::PauseOnTime(250);
-    
+
     Display::Init();
-   
+
     //Timer::SetAndEnable(kTemp, Display::Update, 10);
 
     FDrive::Init();
 
     FDrive::AttemptUpdate();
-    
+
     Timer::Disable(kTemp);
 
     //while (Display::IsRun())
     //{
     //}
-    
+
     CPU::DeInit();
+
+#ifndef WIN32
 
     __disable_irq();
     // Теперь переходим на основную программу
@@ -55,6 +57,8 @@ int main()
     __set_MSP(*(__IO uint *)MAIN_PROGRAM_START_ADDRESS);
     __enable_irq();
     JumpToApplication();
+
+#endif
 
     return 0;
 }

@@ -23,15 +23,6 @@ DEF_CHOICE_2( cChanB,                                                           
 )
 
 
-DEF_CHOICE_2( cSensor,                                                                                                                    //--- ФУНКЦИЯ - РЕГИСТРАТОР - ИСТОЧИНК - Датчик ---
-    "Датчик",
-    "Выбор датчика для записи и просмотра",
-    DISABLE_RU,
-    ENABLE_RU,
-    S_REC_ENABLED_SENSOR, &PageRecorder::Source::self, Item::Active, Choice::Changed, Choice::AfterDraw
-)
-
-
 
 static bool IsActive_Source()
 {
@@ -43,7 +34,6 @@ DEF_PAGE_2( pSource,                                                            
     "Выбор записываемых сигналов",
     &cChanA,
     &cChanB,
-    //&cSensor,
     PageName::Recorder_Source, &PageRecorder::self, IsActive_Source, Page::NormalTitle, Page::OpenClose, Page::BeforeDraw, Page::HandlerKeyEvent
 )
 

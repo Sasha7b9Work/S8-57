@@ -1,7 +1,7 @@
 // 2023/11/22 13:37:37 (c) Aleksandr Shevchenko e-mail : Sasha7b9@tut.by
 #include "defines.h"
 #include "PainterMem.h"
-#include <stdlib.h>
+#include <cstdlib>
 
 
 namespace PainterMem
@@ -31,7 +31,7 @@ uint8 *PainterMem::CreateBuffer(int w, int h)
     {
         width = w;
         height = h;
-        buffer = static_cast<uint8 *>(malloc(static_cast<uint>(width * height)));
+        buffer = static_cast<uint8 *>(std::malloc(static_cast<uint>(width * height)));
         if (buffer != nullptr)
         {
             endBuffer = buffer + width * height;
@@ -48,7 +48,7 @@ uint8 *PainterMem::CreateBuffer(int w, int h)
 
 void PainterMem::DeleteBuffer()
 {
-    free(buffer);
+    std::free(buffer);
     buffer = 0;
 }
 

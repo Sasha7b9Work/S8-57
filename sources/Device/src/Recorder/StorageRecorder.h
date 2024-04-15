@@ -73,7 +73,6 @@ struct Record
     uint8      bytesOnPoint;    // Сколько байт нужно на одну точку всех источников
 
     uint8      offsetB;         // Смещение отсчётов канала B
-    uint8      offsetSensor;    // Смещение отсчётов датчика
     uint16     maxPoints;       // Если не равно 0, то длина записи ограничена maxPoints точками. При поступлении точки стирается первая точка.
 
     // Инициализировать структуру перед стартом записи
@@ -84,9 +83,6 @@ struct Record
 
     // Добавить точки, которые были пропущены во время рисования
     void AddMissingPoints();
-
-    // Добавление точки датчика в запись
-    void AddPoint(float value);
 
     // Число точек в регистрограмме
     int NumPoints() const;
@@ -109,17 +105,11 @@ struct Record
     // Указатель на точку number канала B
     Point16 *ValueB(int number);
 
-    // Указатель на точку number датчика
-    PointFloat *ValueSensor(int number);
-
     // Возвращает true, если запись содержит данные канала A
     bool ContainsChannelA() const;
 
     // Возвращает true, если запись содержит данные канала B
     bool ContainsChannelB() const;
-
-    // Возвращает true, если запись содержит данные датчика
-    bool ContainsSensor() const;
 
     // Устанавливает максимальное количество точек для записи
     void SetMaxPoints(uint16 max) {  maxPoints = max; }
@@ -132,9 +122,6 @@ private:
     // Указатель на начало данных точки в позиции number
     uint8 *AddressPoints(int number);
 
-    // Интерполировать точки между позициями num1 и num2
-    void Interpolate(int num1, int num2);
-
     // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     void DeleteOldPoints();
 };
@@ -146,7 +133,7 @@ namespace StorageRecorder
     void Init();
 
     // Создаёт новую запись для хранения данных в хранилище
-    bool CreateNewRecord();
+    bool CreateNewRecord(char *file, int line);
 
     // Создаёт запись для "прослушивания".
     bool CreateListeningRecord();

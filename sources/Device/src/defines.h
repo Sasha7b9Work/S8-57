@@ -260,3 +260,5 @@ struct Chan
 
     static pString Name(Chan::E ch);
 };
+
+#include "log.h"

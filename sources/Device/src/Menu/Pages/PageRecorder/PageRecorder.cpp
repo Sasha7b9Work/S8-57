@@ -24,7 +24,7 @@ namespace PageRecorder
     )
 
 
-        static bool IsActive_Clear()
+    static bool IsActive_Clear()
     {
         return !Recorder::InRecordingMode();
     }
@@ -37,9 +37,9 @@ namespace PageRecorder
     )
 
 
-        static bool IsActive_Start()
+    static bool IsActive_Start()
     {
-        return (S_REC_ENABLED_A || S_REC_ENABLED_B || S_REC_ENABLED_SENSOR);
+        return (S_REC_ENABLED_A || S_REC_ENABLED_B);
     }
 
     static void Draw_Start(int x, int y)
@@ -66,7 +66,7 @@ namespace PageRecorder
     )
 
 
-        static void OnPress_Exit()
+    static void OnPress_Exit()
     {
         Menu::CloseOpenedItem();
     }

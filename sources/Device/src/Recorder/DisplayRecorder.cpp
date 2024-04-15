@@ -206,12 +206,6 @@ char *DisplayRecorder::VoltageCursor(Chan::E ch, int numCur, char buffer[30])
 }
 
 
-static char *VoltageSensor(int, char[30])
-{
-    return "";
-}
-
-
 void DisplayRecorder::DrawParametersCursors()
 {
     if (!S_REC_INFO_IS_SHOWN)
@@ -225,7 +219,6 @@ void DisplayRecorder::DrawParametersCursors()
 
     bool enA = displayed->ContainsChannelA();
     bool enB = displayed->ContainsChannelB();
-    bool enSensor = displayed->ContainsSensor();
 
     int width = 100;
     int height = 29;
@@ -238,7 +231,6 @@ void DisplayRecorder::DrawParametersCursors()
 
     if (enA)      { height += dHeight; }
     if (enB)      { height += dHeight; }
-    if (enSensor) { height += dHeight; }
 
     Region(width + 2, height).DrawBounded(x - 2, 10, Color::BACK, Color::FILL);
 
@@ -252,8 +244,6 @@ void DisplayRecorder::DrawParametersCursors()
 
     DRAW_IF_ENABLED(enB, Text(VoltageCursor(ChanB, 0, buffer)).Draw(x1, y, Color::CHAN[ChanB]));
 
-    DRAW_IF_ENABLED(enSensor, Text(VoltageSensor(0, buffer)).Draw(x1, y, Color::FILL));
-
     Text(String("2:%s", TimeCursor(1, buffer))).Draw(x, y, Color::FILL);
 
     y += d;
@@ -261,8 +251,6 @@ void DisplayRecorder::DrawParametersCursors()
     DRAW_IF_ENABLED(enA, Text(VoltageCursor(ChanA, 1, buffer)).Draw(x1, y, Color::CHAN[ChanA]));
 
     DRAW_IF_ENABLED(enB, Text(VoltageCursor(ChanB, 1, buffer)).Draw(x1, y, Color::CHAN[ChanB]));
-
-    DRAW_IF_ENABLED(enSensor, Text(VoltageSensor(1, buffer)).Draw(x1, y, Color::FILL));
 
     Text(String("dT %s", DeltaTime(buffer))).Draw(x, y, Color::FILL);
 }
