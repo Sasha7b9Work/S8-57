@@ -126,7 +126,7 @@ void Record::AddMissingPoints()
         BitSet16 b;
 
         BufferMissingPoints::Pop(&a, &b);
-         
+
         AddPoints(a, b);
     }
 }
@@ -255,14 +255,17 @@ bool StorageRecorder::CreateNewRecord(char * /*file*/, int /*line*/)
 
     if(lastRecord)
     {
-        Record *next = reinterpret_cast<Record *>(lastRecord ->End());
-
-        if(!next->IsValid())
+        if(lastRecord->maxPoints == 0)
         {
-            return false;
-        }
+            Record *next = reinterpret_cast<Record *>(lastRecord->End());
 
-        lastRecord = next;
+            if (!next->IsValid())
+            {
+                return false;
+            }
+
+            lastRecord = next;
+        }
     }
     else
     {
