@@ -109,7 +109,10 @@ void Recorder::Start()
 
 void Recorder::StartListening()
 {
-    StorageRecorder::CreateListeningRecord();
+    StorageRecorder::CreateNewRecord(__FILE__, __LINE__);
+
+    StorageRecorder::LastRecord()->SetMaxPoints(320);
+
     FPGA::GiveStart(0, 0);
     FPGA::ForcedStart();
     mode = Mode::Listening;

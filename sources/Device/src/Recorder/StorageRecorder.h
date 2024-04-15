@@ -134,9 +134,6 @@ namespace StorageRecorder
     // Создаёт новую запись для хранения данных в хранилище
     bool CreateNewRecord(char *file, int line);
 
-    // Создаёт запись для "прослушивания".
-    bool CreateListeningRecord();
-
     // Возвращает указатель на текущую запись
     Record *LastRecord();
 

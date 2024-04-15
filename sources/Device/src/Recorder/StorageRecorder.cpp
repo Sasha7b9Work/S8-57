@@ -278,19 +278,6 @@ bool StorageRecorder::CreateNewRecord(char * /*file*/, int /*line*/)
 }
 
 
-bool StorageRecorder::CreateListeningRecord()
-{
-    bool result = CreateNewRecord(__FILE__, __LINE__);
-
-    if (result)
-    {
-        LastRecord()->SetMaxPoints(320);
-    }
-
-    return result;
-}
-
-
 void StorageRecorder::Init()
 {
     ExtRAM::Fill();
