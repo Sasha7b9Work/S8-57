@@ -255,8 +255,8 @@ Record *StorageRecorder::CreateNewRecord(char * /*file*/, int /*line*/)
 
     if (lastRecord)
     {
-        if (lastRecord->maxPoints == 0)
-        {
+        if (lastRecord->maxPoints == 0)                                     // Если последняя запись имеет ограничение по точкам,
+        {                                                                   // то она используется для просмотра, без записи. Используем её
             Record *next = reinterpret_cast<Record *>(lastRecord->End());
 
             if (!next->IsValid())
