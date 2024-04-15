@@ -64,7 +64,7 @@ void SettingsNRST::Reset()
 
 bool SettingsNRST::operator!=(const SettingsNRST &rhs)
 {
-    return std::memcmp(this, &rhs, sizeof(*this)) != 0;
+    return std::memcmp(this, &rhs, sizeof(*this)) != 0; //-V1014
 }
 
 

@@ -380,7 +380,7 @@ bool PageCursorsMeasures::Set::HandlerKey(const KeyEvent &event)
     return false;
 }
 
-static bool IsActive_Set()
+static bool IsActive_Set() //-V524
 {
     return S_CURS_SHOW;
 }

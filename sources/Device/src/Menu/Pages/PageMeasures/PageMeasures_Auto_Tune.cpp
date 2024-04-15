@@ -31,7 +31,7 @@ DEF_GRAPH_BUTTON( bSettings,                                                    
 )
 
 
-static bool IsActive_Tune()
+static bool IsActive_Tune() //-V524
 {
     return S_MEAS_SHOW;
 }
