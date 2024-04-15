@@ -35,7 +35,7 @@ int DFont::GetLengthText(pString text)
 
     while (*symbol)
     {
-        result += GetWidth(*symbol) + spacing;
+        result += GetWidth(*symbol) + spacing; //-V1026
         symbol++;
     }
     return result;
