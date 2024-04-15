@@ -398,31 +398,42 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
 
     HAL_BUS::FPGA::SetAddrData(addr);
 
-    if(S_OSCI_AVERAGING_IS_ENABLED)
+    if (data)
     {
-        uint8 *dataPointer = &data[infoRead.posFirst];              // ”казатель в переданном массиве
-
-        while(dataWrite < last)
+        if (S_OSCI_AVERAGING_IS_ENABLED)
         {
-            *dataWrite = HAL_BUS::FPGA::ReadA0();
-            *dataPointer = *dataWrite;
-            *interpolated = *dataWrite;
-            
-            dataWrite += step;
-            dataPointer += step;
-            interpolated += step;
+            uint8 *dataPointer = &data[infoRead.posFirst];              // ”казатель в переданном массиве
+
+            while (dataWrite < last)
+            {
+                *dataWrite = HAL_BUS::FPGA::ReadA0();
+                *dataPointer = *dataWrite;
+                *interpolated = *dataWrite;
+
+                dataWrite += step;
+                dataPointer += step;
+                interpolated += step;
+            }
+        }
+        else
+        {
+            while (dataWrite < last)
+            {
+                *dataWrite = HAL_BUS::FPGA::ReadA0();
+                *interpolated = *dataWrite;
+
+                dataWrite += step;
+                interpolated += step;
+
+            }
         }
     }
     else
     {
-        while(dataWrite < last)
+        while (dataWrite < last)
         {
-            *dataWrite = HAL_BUS::FPGA::ReadA0();
-            *interpolated = *dataWrite;
-
+            HAL_BUS::FPGA::ReadA0();
             dataWrite += step;
-            interpolated += step;
-
         }
     }
 

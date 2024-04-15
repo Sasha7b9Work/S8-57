@@ -28,7 +28,7 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
     {
         return ReadDataChannelRand(a1, data);
     }
-    else
+    else if(data)
     {
         uint8 *p = data;
 
@@ -65,6 +65,25 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
                 {
                     p[i] = static_cast<uint8>(result);
                 }
+            }
+        }
+    }
+    else
+    {
+        if (PeakDetMode().IsEnabled())
+        {
+            for (int i = 0; i < numPoints; i++)
+            {
+                HAL_BUS::FPGA::ReadA0();
+                HAL_BUS::FPGA::ReadA1();
+            }
+        }
+        else
+        {
+            for (int i = 0; i < numPoints; i++)
+            {
+                volatile uint8 d = *a1;
+                d = d;
             }
         }
     }
