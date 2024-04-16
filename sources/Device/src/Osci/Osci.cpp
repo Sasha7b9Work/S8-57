@@ -111,7 +111,7 @@ void Osci::Start(bool)
 
     Roller::Prepare();
 
-    FPGA::GiveStart(predFPGA.Get(), FPGA::post);
+    FPGA::GiveStart(predFPGA.Get(), postFPGA.Get());
 
     FPGA::isRunning = true;
 }

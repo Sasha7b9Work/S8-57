@@ -13,9 +13,9 @@
 
 
 bool   FPGA::forcedStart = false;
-uint16 FPGA::post = static_cast<uint16>(~(512));
 
 PredFPGA predFPGA((uint16)(~512));
+PostFPGA postFPGA((uint16)(~512));
 
 bool          FPGA::isRunning = false;
 

@@ -122,8 +122,8 @@ static int GetK()
 
 void TShift::LoadReal()
 {
-    FPGA::post = static_cast<uint16>(S_TIME_SHIFT - TShift::Min() + 10);
-    int Pred = static_cast<int>(ENumPointsFPGA::PointsInChannel()) - static_cast<int>(FPGA::post);
+    postFPGA.SetRaw((uint16)(S_TIME_SHIFT - TShift::Min() + 10));
+    int Pred = static_cast<int>(ENumPointsFPGA::PointsInChannel()) - postFPGA.Get();
 
     if (Pred < 0)
     {
@@ -132,24 +132,22 @@ void TShift::LoadReal()
 
     predFPGA.SetRaw((uint16)Pred);
 
-    FPGA::post = static_cast<uint16>(~(FPGA::post + 1));
-
-    HAL_BUS::FPGA::Write16(WR::PRED_LO, FPGA::post);
-    HAL_BUS::FPGA::Write16(WR::POST_LO, predFPGA.ConvertForReal());
+    HAL_BUS::FPGA::Write16(WR::PRED_LO, predFPGA.ConvertForReal());
+    HAL_BUS::FPGA::Write16(WR::POST_LO, postFPGA.ConvertForReal());
 }
 
 void TShift::LoadRandomize()
 {
     int k = TBase::DeltaPoint();
 
-    FPGA::post = static_cast<uint16>((S_TIME_SHIFT - TShift::Min() - GetK()) / k);
+    postFPGA.SetRaw((uint16)((S_TIME_SHIFT - TShift::Min() - GetK()) / k));
 
     if ((S_TIME_SHIFT - static_cast<int>(GetK())) < TShift::Min())
     {
-        FPGA::post = 0;
+        postFPGA.SetRaw(0);
     }
 
-    int Pred = static_cast<int>(ENumPointsFPGA::PointsInChannel()) / static_cast<int>(k) - static_cast<int>(FPGA::post);
+    int Pred = static_cast<int>(ENumPointsFPGA::PointsInChannel()) / static_cast<int>(k) - (int)postFPGA.Get();
 
     if (Pred < 5)
     {
@@ -160,13 +158,11 @@ void TShift::LoadRandomize()
 
     if (S_DBG_SHOW_RAND_PRED_POST)
     {
-        LOG_WRITE("pred = %d, post = %d", predFPGA.Get(), FPGA::post);
+        LOG_WRITE("pred = %d, post = %d", predFPGA.Get(), postFPGA.Get());
     }
 
-    FPGA::post = static_cast<uint16>(~(FPGA::post + 10));
-
     HAL_BUS::FPGA::Write16(WR::PRED_LO, predFPGA.ConvertForRand());
-    HAL_BUS::FPGA::Write16(WR::POST_LO, FPGA::post);
+    HAL_BUS::FPGA::Write16(WR::POST_LO, postFPGA.ConvertForRand());
 }
 
 

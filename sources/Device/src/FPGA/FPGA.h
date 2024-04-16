@@ -10,7 +10,19 @@ struct PredFPGA
     PredFPGA(uint16 raw) : value(raw) { }
     void SetRaw(uint16 raw) { value = raw; }
     uint16 ConvertForReal() { value = (uint16)(~(value + 3)); return value; }
-    uint16 ConvertForRand() { value = (uint16)(~value); return value; }
+    uint16 ConvertForRand() { value = (uint16)(~(value)); return value; }
+    uint16 Get() const { return value; }
+private:
+    uint16 value;
+};
+
+
+struct PostFPGA
+{
+    PostFPGA(uint16 raw) : value(raw) { }
+    void SetRaw(uint16 raw) { value = raw; }
+    uint16 ConvertForReal() { value = (uint16)(~(value + 1)); return value; }
+    uint16 ConvertForRand() { value = (uint16)(~(value + 11)); return value; }
     uint16 Get() const { return value; }
 private:
     uint16 value;
@@ -18,6 +30,7 @@ private:
 
 
 extern PredFPGA predFPGA;
+extern PostFPGA postFPGA;
 
 
 struct FPGA
@@ -68,8 +81,6 @@ struct FPGA
 
     // True, если дан принудительный запуск
     static bool forcedStart;
-
-    static uint16 post;
 
     static bool isRunning;
 
