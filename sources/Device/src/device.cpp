@@ -107,6 +107,8 @@ bool SetCurrentMode(const Page *page, Device::Mode::E mode)
 
 void Device::Update()
 {
+//    HAL_WWDG::Update();
+
     Timer::StartMultiMeasurement();
 
     Osci::Update();

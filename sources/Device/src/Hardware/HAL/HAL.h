@@ -232,3 +232,11 @@ struct HAL_USART3
     static void Transmit(void *buffer, int size, uint timeout);
     static void StartReceiveIT(void *buffer, int size);
 };
+
+
+namespace HAL_WWDG
+{
+    void Init();
+
+    void Update();
+}

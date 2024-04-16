@@ -53,6 +53,8 @@ void HAL::Init()
     HAL_PCD::Init();
 
     HAL_HCD::Init();
+
+//    HAL_WWDG::Init();
 }
 
 

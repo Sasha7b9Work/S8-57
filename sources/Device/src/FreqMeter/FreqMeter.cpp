@@ -115,6 +115,8 @@ void FreqMeter::Update()
     {
         periodActual = FPGA::ReadCounterPeriod();
 
+        LOG_WRITE("period %d", periodActual.word);
+
         lastPeriod.Set(periodActual.word);
 
         if (freqNeedCalculateFromPeriod)
