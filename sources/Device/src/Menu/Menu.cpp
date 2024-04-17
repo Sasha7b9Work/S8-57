@@ -275,40 +275,40 @@ Item *Menu::OpenedItem()
 }
 
 
-//static void CloseDebugPages()
-//{
-//    const Page *mainPage = Menu::GetMainPage();
-//
-//    Menu::SetMainPage(PageFunction::self);
-//
-//    PageMultimeter::EnablePageCalibrate();
-//
-//    if(Menu::OpenedItem()->ExistKeeper(PageMultimeter::self))
-//    {
-//        while (Menu::OpenedPage() != PageMultimeter::self)
-//        {
-//            Menu::CloseOpenedItem();
-//        }
-//    }
-//
-//    PageMultimeter::DisablePageCalibrate();
-//
-//    Menu::SetMainPage(PageService::self);
-//
-//    PageService::EnablePageDebug();
-//
-//    if (Menu::OpenedItem()->ExistKeeper(PageDebug::self))
-//    {
-//        while (Menu::OpenedPage() != PageService::self)
-//        {
-//            Menu::CloseOpenedItem();
-//        }
-//    }
-//
-//    PageService::DisablePageDebug();
-//
-//    Menu::SetMainPage(mainPage);
-//}
+static void CloseDebugPages()
+{
+    const Page *mainPage = Menu::GetMainPage();
+
+    Menu::SetMainPage(PageFunction::self);
+
+    PageMultimeter::EnablePageCalibrate();
+
+    if(Menu::OpenedItem()->ExistKeeper(PageMultimeter::self))
+    {
+        while (Menu::OpenedPage() != PageMultimeter::self)
+        {
+            Menu::CloseOpenedItem();
+        }
+    }
+
+    PageMultimeter::DisablePageCalibrate();
+
+    Menu::SetMainPage(PageService::self);
+
+    PageService::EnablePageDebug();
+
+    if (Menu::OpenedItem()->ExistKeeper(PageDebug::self))
+    {
+        while (Menu::OpenedPage() != PageService::self)
+        {
+            Menu::CloseOpenedItem();
+        }
+    }
+
+    PageService::DisablePageDebug();
+
+    Menu::SetMainPage(mainPage);
+}
 
 
 void Menu::Init()
@@ -325,7 +325,7 @@ void Menu::Init()
 
     CloseAllBadOpenedPages();
 
-//    CloseDebugPages();
+    CloseDebugPages();
 }
 
 

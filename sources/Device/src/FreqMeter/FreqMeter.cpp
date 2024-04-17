@@ -52,7 +52,7 @@ namespace FreqMeter
 
 void FreqMeter::Init()
 {
-    FPGA::LoadSettings();
+    FPGA::_LoadSettings();
     FPGA::ResetCounterFreq();
     FPGA::ResetCounterPeriod();
     
@@ -63,7 +63,7 @@ void FreqMeter::Init()
 
 void FreqMeter::LoadFreqSettings()
 {
-    FPGA::LoadSettings();
+    FPGA::_LoadSettings();
     FPGA::ResetCounterFreq();
 
     freqActual.word = 0;
@@ -73,7 +73,7 @@ void FreqMeter::LoadFreqSettings()
 
 void FreqMeter::LoadPeriodSettings()
 {
-    FPGA::LoadSettings();
+    FPGA::_LoadSettings();
     FPGA::ResetCounterPeriod();
 
     periodActual.word = 0;
@@ -388,7 +388,7 @@ BitSet32 FreqMeter::FPGA::ReadCounterPeriod()
 #endif
 
 
-void FreqMeter::FPGA::LoadSettings()
+void FreqMeter::FPGA::_LoadSettings()
 {
     uint8 data = 0;
 

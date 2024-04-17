@@ -249,7 +249,7 @@ void FrequencyMeter::TuneForFind()
     S_FREQ_FREQ_CLC = FreqMeter::FreqClc::_100MHz;
     S_FREQ_NUMBER_PERIODS = FreqMeter::NumberPeriods::_1;
 
-    FreqMeter::FPGA::LoadSettings();
+    FreqMeter::FPGA::_LoadSettings();
 }
 
 

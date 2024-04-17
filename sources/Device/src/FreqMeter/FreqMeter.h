@@ -37,7 +37,7 @@ namespace FreqMeter
 
     struct FPGA
     {
-        static void LoadSettings();
+        static void _LoadSettings();
         static void ResetCounterFreq();
         static void ResetCounterPeriod();
         static BitSet32 ReadCounterFreq();
