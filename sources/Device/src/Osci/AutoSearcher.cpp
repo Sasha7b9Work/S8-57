@@ -171,6 +171,8 @@ static bool FindFrequencyForRanges(Chan::E ch, uint timeWaitMS, float *outFreq, 
 
     for (int range = static_cast<int>(Range::_20V); range >= 0; range -= 2)
     {
+        Timer::watchdowg = 0;
+
         float frequency1 = 0.0F;
 
         if (FindFrequencyForRange(ch, static_cast<Range::E>(range), timeWaitMS, &frequency1))
@@ -275,6 +277,8 @@ static bool WaitSync(uint timeWaitMS)
 
 static void DisplayUpdate()
 {
+    Timer::watchdowg = 0;
+
     Painter::BeginScene(Color::BACK);
 
     Text("Поиск сигнала").DrawInCenterRect(0, 0, 320, 200, Color::FILL);

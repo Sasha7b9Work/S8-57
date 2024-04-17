@@ -133,6 +133,8 @@ static void BalanceRange(Chan::E ch, Range::E range)
 
     while (numPoints < 100)
     {
+        Timer::watchdowg = 0;
+
         if (!HAL_BUS::Panel::InInteraction())
         {
             if (HAL_PIO::Read(PIN_P2P))
@@ -199,6 +201,7 @@ static float FindStretchChannel(Chan::E ch)
 
     while(!FPGA::Flag::Pred())
     {
+        Timer::watchdowg = 0;
         FPGA::Flag::Read();
     }
 
@@ -206,6 +209,8 @@ static float FindStretchChannel(Chan::E ch)
 
     do 
     {
+        Timer::watchdowg = 0;
+
         FPGA::Flag::Read();
 
     } while (!FPGA::Flag::DataReady());
@@ -230,6 +235,8 @@ static float FindStretchChannel(Chan::E ch)
 
     for(uint i = 0; i < NUM_POINTS; i++)
     {
+        Timer::watchdowg = 0;
+
         data = *a1;
 
         if(data < VALUE::MIN + 64)
