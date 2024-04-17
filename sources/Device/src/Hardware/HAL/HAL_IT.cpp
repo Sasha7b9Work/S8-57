@@ -37,6 +37,11 @@ void HardFault_Handler()
 void SysTick_Handler(void)
 {
     HAL_IncTick();
+
+    if (Timer::watchdowg++ > 10000)
+    {
+        NVIC_SystemReset();
+    }
 }
 
 

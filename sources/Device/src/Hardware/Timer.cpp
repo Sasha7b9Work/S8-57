@@ -25,6 +25,7 @@ namespace Timer
     static uint timePrevPoint = 0;
     static bool busy = false;
 
+    uint watchdowg = 0;
 
 #undef TIME_NEXT
 #define TIME_NEXT(type) (timers[type].timeNextMS)
