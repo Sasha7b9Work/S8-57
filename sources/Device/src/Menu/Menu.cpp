@@ -437,6 +437,8 @@ int Menu::Y0()
 
 void Menu::Draw()
 {
+    Timer::watchdowg = 0;
+
     DFont::Set(DTypeFont::_8);
 
     if (Menu::IsShown())

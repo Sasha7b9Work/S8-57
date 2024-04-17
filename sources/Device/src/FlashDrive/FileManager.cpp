@@ -14,6 +14,7 @@
 #include "Utils/Math.h"
 #include "Utils/Values.h"
 #include "Settings/Settings.h"
+#include "Hardware/Timer.h"
 #include <cstring>
 
 
@@ -176,6 +177,8 @@ void FileManager::Draw()
     {
         return;
     }
+
+    Timer::watchdowg = 0;
 
     int left = 1;
     int top = 1;

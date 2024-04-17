@@ -57,6 +57,8 @@ void Display::Init()
 
 void Display::Update()
 {
+    Timer::watchdowg = 0;
+
     static uint prevTime = 0;
 
     if(Device::InModeOsci() && (TIME_MS - prevTime < ENumSignalsInSec::TimeBetweenFramesMS()))
@@ -121,7 +123,7 @@ void Display::ShowWarning(const char *warn)
 }
 
 
-void Display::SetDrawMode(DrawMode::E mode, pFuncVV func)
+void Display::_SetDrawMode(DrawMode::E mode, pFuncVV func)
 {
     funcOnHand = func;
 
@@ -138,7 +140,7 @@ void Display::SetDrawMode(DrawMode::E mode, pFuncVV func)
 
 void Display::Message::Hide()
 {
-    Display::SetDrawMode(DrawMode::Auto, nullptr);
+    Display::_SetDrawMode(DrawMode::Auto, nullptr);
     running = false;
     BufferButtons::Clear();
 }
@@ -198,12 +200,17 @@ void Display::Message::Func()
 
     if (waitKey)
     {
-        while (HAL_BUS::Panel::Receive()) {};
+        while (HAL_BUS::Panel::Receive())
+        {
+            Timer::watchdowg = 0;
+        };
 
         DDecoder::Update();
 
         while (!BufferButtons::IsEmpty())
         {
+            Timer::watchdowg = 0;
+
             if (BufferButtons::Extract().IsRelease())
             {
                 Hide();
@@ -222,7 +229,7 @@ void Display::Message::Show(const char *text, bool eraseBackground)
     textWait = text;
     clearBackground = eraseBackground;
     waitKey = false;
-    Display::SetDrawMode(DrawMode::Hand, Func);
+    Display::_SetDrawMode(DrawMode::Hand, Func);
 }
 
 
@@ -230,7 +237,10 @@ void Display::Message::ShowAndWaitKey(const char *text, bool eraseBackground)
 {
     Show(text, eraseBackground);
     waitKey = true;
-    while (running) {};
+    while (running)
+    {
+        Timer::watchdowg = 0;
+    };
 }
 
 

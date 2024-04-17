@@ -14,6 +14,8 @@ void Painter::Init()
 
 void Painter::BeginScene(Color color)
 {
+    Timer::watchdowg = 0;
+
     color.SetAsCurrent();
 
     HAL_BUS::Panel::Send(Command::Paint_BeginScene);
@@ -22,6 +24,8 @@ void Painter::BeginScene(Color color)
 
 void Painter::EndScene()
 {
+    Timer::watchdowg = 0;
+
     HAL_BUS::Panel::Send(Command::Paint_EndScene);
 }
 
