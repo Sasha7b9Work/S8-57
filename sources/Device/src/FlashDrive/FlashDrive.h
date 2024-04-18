@@ -33,6 +33,9 @@ namespace FDrive
 
     bool IsConnected();
 
+    // Если true - идёт процесс сохранения файла
+    bool IsProcessSavingFile();
+
     void GetNumDirsAndFiles(const char *fullPath, int *numDirs, int *numFiles);
 
     bool AppendStringToFile(const char *string);

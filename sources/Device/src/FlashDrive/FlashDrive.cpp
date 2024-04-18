@@ -20,6 +20,7 @@ namespace FDrive
     static bool isConnected;
     static bool needMount;
     static bool needSaveScreen = false;     // Если true - нажно сохранять экрна на флешку
+    static bool is_process_ssving = false;  // находимся в процессе сохранения фалйа
 
     static void USBH_UserProcess(USBH_HandleTypeDef *, uint8 id);
 
@@ -32,6 +33,12 @@ namespace FDrive
     static void CreateFileName(char name[256]);
 
     static void ReadRow(uint8 row, uint8 pixels[320]);
+}
+
+
+bool FDrive::IsProcessSavingFile()
+{
+    return is_process_ssving;
 }
 
 
@@ -477,6 +484,8 @@ void FDrive::SaveScreenToFlash()
         return;
     }
 
+    is_process_ssving = true;
+
     needSaveScreen = false;
 
     if(!FDrive::IsConnected())
@@ -593,6 +602,7 @@ void FDrive::SaveScreenToFlash()
 
     DISPLAY_SHOW_WARNING("Файл сохранён");
 
+    is_process_ssving = false;
 
     HAL_BUS::Panel::AllowOtherActions();
 }
@@ -616,6 +626,7 @@ void FDrive::ReadRow(uint8 row, uint8 pixels[320])
 {
     while(DDecoder::Update())                       // Обрабатываем данные, которые приняты на данный момент
     {
+        Timer::watchdowg = 0;
     }
 
     HAL_BUS::Panel::Send(Command::Screen, row);
@@ -623,6 +634,7 @@ void FDrive::ReadRow(uint8 row, uint8 pixels[320])
     while(DDecoder::BytesInBuffer() < 322)          // Ожидаем, пока панель пришлёт запрошенные байты
     {
         HAL_BUS::Panel::Receive();
+        Timer::watchdowg = 0;
     }
 
     std::memcpy(pixels, DDecoder::Buffer() + 2, 320);

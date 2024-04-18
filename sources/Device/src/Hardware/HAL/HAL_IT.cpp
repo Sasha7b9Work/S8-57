@@ -7,6 +7,7 @@
 #include "Hardware/HAL/HAL_PINS.h"
 #include "Tester/Tester.h"
 #include "Utils/Debug.h"
+#include "FlashDrive/FlashDrive.h"
 #include <stm32f4xx_hal.h>
 
 
@@ -40,7 +41,10 @@ void SysTick_Handler(void)
 
     if (Timer::watchdowg++ > 10000)
     {
-        NVIC_SystemReset();
+        if (!FDrive::IsProcessSavingFile())
+        {
+            NVIC_SystemReset();
+        }
     }
 }
 
