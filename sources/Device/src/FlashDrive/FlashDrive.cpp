@@ -405,6 +405,8 @@ bool FDrive::WriteToFile(uint8 *data, int sizeData, StructForWrite *structForWri
 {
     while (sizeData > 0)
     {
+        Timer::watchdowg = 0;
+
         int dataToCopy = sizeData;
         if (sizeData + structForWrite->sizeData > SIZE_FLASH_TEMP_BUFFER)
         {
