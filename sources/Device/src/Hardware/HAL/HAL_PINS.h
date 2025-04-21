@@ -53,7 +53,7 @@ struct HPin
 #define PIN_TESTER_U    HPort::_F, HPin::_15
 #define PIN_TESTER_PNP  HPort::_F, HPin::_14
 #else
-#define PIN_A2         HPort::_B, HPin::_13
+#define PIN_A2         HPort::_B, HPin::_13     // 74
 #define PIN_A3         HPort::_G, HPin::_8
 #define PIN_A4         HPort::_C, HPin::_6
 #define PIN_LF1        HPort::_C, HPin::_7
@@ -72,7 +72,7 @@ struct HPin
 
 #define PIN_POWER       HPort::_E, HPin::_2
 
-#define PIN_A1          HPort::_D, HPin::_10
+#define PIN_A1          HPort::_D, HPin::_10    // 79
 #define PIN_LFS         HPort::_G, HPin::_6
 
 #define PIN_ADC1_IN2    HPort::_A, HPin::_2
