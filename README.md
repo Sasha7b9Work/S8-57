@@ -5,7 +5,7 @@
 
 ### Предустановленное программное обеспечение
 
-uVision V5.24.2.0
+uVision V5.36.0.0  ARM Compiler v5.06 update 7 (build 960)
 Microsoft Visual Studio Professional 2017 Version 15.9.6
 Python 3.7.2
 

@@ -5,19 +5,21 @@
 
   <Header>### uVision Project, (C) Keil Software</Header>
 
-  <WorkspaceName>WorkSpace</WorkspaceName>
+  <WorkspaceName>D:\Projects\S8-57\sources\S8-57.uvmpw</WorkspaceName>
 
   <project>
     <PathAndName>.\Device\Device.uvprojx</PathAndName>
+    <NodeIsActive>1</NodeIsActive>
+    <NodeIsExpanded>1</NodeIsExpanded>
   </project>
 
   <project>
     <PathAndName>.\Panel\Panel.uvprojx</PathAndName>
-    <NodeIsActive>1</NodeIsActive>
   </project>
 
   <project>
     <PathAndName>.\DLoader\DLoader.uvprojx</PathAndName>
+    <NodeIsExpanded>1</NodeIsExpanded>
   </project>
 
 </ProjectWorkspace>
