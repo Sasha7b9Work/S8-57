@@ -23,7 +23,7 @@ static void UpdateDisplay()
 
     Painter::BeginScene();
 
-    if (TIME_MS < 1000)
+    if (TIME_MS < 2000)
     {
         Painter::EndScene();
 

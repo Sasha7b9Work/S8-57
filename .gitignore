@@ -16,6 +16,10 @@ sources/ThirdParty/wxWidgets/generated/*
 
 doc/doxygen/S8-57/*
 
+sources/Device/RTE/*
+sources/DLoader/RTE/*
+sources/Panel/RTE/*
+
 sources/Device/*.bin
 sources/Device/DebugConfig/*
 sources/Device/Listings/*
@@ -32,3 +36,5 @@ sources/Panel/Listings/*
 sources/Panel/Objects/*
 
 sources/fonts/big/out/*
+
+
