@@ -140,7 +140,7 @@ static void BalanceRange(Chan::E ch, Range::E range)
             if (HAL_PIO::Read(PIN_P2P))
             {
                 HAL_BUS::FPGA::SetAddrData(addr);
-                sum += HAL_BUS::FPGA::ReadA0();
+                sum += HAL_BUS::FPGA::ReadA0(ch);
                 numPoints++;
             }
         }

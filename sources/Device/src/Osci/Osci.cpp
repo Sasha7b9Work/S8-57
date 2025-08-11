@@ -377,7 +377,7 @@ void Osci::ReadData()
 }
 
 
-bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
+bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data, Chan::E ch)
 {
     ShiftPoint Tsm = gates.CalculateShiftPoint();
 
@@ -406,7 +406,7 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
 
             while (dataWrite < last)
             {
-                *dataWrite = HAL_BUS::FPGA::ReadA0();
+                *dataWrite = HAL_BUS::FPGA::ReadA0(ch);
                 *dataPointer = *dataWrite;
                 *interpolated = *dataWrite;
 
@@ -419,7 +419,7 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
         {
             while (dataWrite < last)
             {
-                *dataWrite = HAL_BUS::FPGA::ReadA0();
+                *dataWrite = HAL_BUS::FPGA::ReadA0(ch);
                 *interpolated = *dataWrite;
 
                 dataWrite += step;
@@ -432,7 +432,7 @@ bool Osci::ReadDataChannelRand(uint8 *addr, uint8 *data)
     {
         while (dataWrite < last)
         {
-            HAL_BUS::FPGA::ReadA0();
+            HAL_BUS::FPGA::ReadA0(ch);
             dataWrite += step;
         }
     }

@@ -52,10 +52,10 @@ void Roller::ReadPoint()
     if (FPGA::IsRunning() && (HAL_PIO::Read(PIN_P2P) != 0))
     {
         HAL_BUS::FPGA::SetAddrData(RD::DATA_A, RD::DATA_A + 1);
-        BitSet16 dataA(HAL_BUS::FPGA::ReadA0(), HAL_BUS::FPGA::ReadA1());
+        BitSet16 dataA(HAL_BUS::FPGA::ReadA0(ChanA), HAL_BUS::FPGA::ReadA1(ChanA));
     
         HAL_BUS::FPGA::SetAddrData(RD::DATA_B, RD::DATA_B + 1);
-        BitSet16 dataB(HAL_BUS::FPGA::ReadA0(), HAL_BUS::FPGA::ReadA1());
+        BitSet16 dataB(HAL_BUS::FPGA::ReadA0(ChanB), HAL_BUS::FPGA::ReadA1(ChanB));
     
         addPoint(dataA, dataB);
     }

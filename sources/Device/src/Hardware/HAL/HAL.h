@@ -122,8 +122,8 @@ namespace HAL_BUS
         // Установить адрес для чтения данных
         void SetAddrData(uint8 *address0, uint8 *address1 = nullptr);
         // Читать данные с установленного адреса
-        uint8 ReadA0();
-        uint8 ReadA1();
+        uint8 ReadA0(Chan::E);
+        uint8 ReadA1(Chan::E);
         // Возвращает растяжку для данного адреса
         float GetStretch(const uint8 *address);
     };

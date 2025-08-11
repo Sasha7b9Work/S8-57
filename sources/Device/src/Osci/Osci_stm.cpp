@@ -26,21 +26,21 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
 
     if(OSCI_IN_MODE_RANDOMIZER)
     {
-        return ReadDataChannelRand(a1, data);
+        return ReadDataChannelRand(a1, data, ch);
     }
     else if(data)
     {
         uint8 *p = data;
 
-        *p = HAL_BUS::FPGA::ReadA0();    // Первая точка почему-то неправильная читается. Просто откидываем её.
-        *p = HAL_BUS::FPGA::ReadA1();    // -V519
+        *p = HAL_BUS::FPGA::ReadA0(ch);    // Первая точка почему-то неправильная читается. Просто откидываем её.
+        *p = HAL_BUS::FPGA::ReadA1(ch);    // -V519
 
         if(PeakDetMode().IsEnabled())
         {
             for(int i = 0; i < numPoints; i++)
             {
-                *p++ = HAL_BUS::FPGA::ReadA0();
-                *p++ = HAL_BUS::FPGA::ReadA1();
+                *p++ = HAL_BUS::FPGA::ReadA0(ch);
+                *p++ = HAL_BUS::FPGA::ReadA1(ch);
             }
         }
         else
@@ -52,6 +52,8 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
                 int delta = VALUE::AVE - static_cast<int>(*a1);
 
                 int result = static_cast<int>(VALUE::AVE - static_cast<int>(delta * stretch));
+
+                INVERSE_DATA(ch);
 
                 if(result < VALUE::MIN)
                 {
@@ -74,8 +76,8 @@ bool Osci::ReadDataChannel(Chan::E ch, uint8 *data)
         {
             for (int i = 0; i < numPoints; i++)
             {
-                HAL_BUS::FPGA::ReadA0();
-                HAL_BUS::FPGA::ReadA1();
+                HAL_BUS::FPGA::ReadA0(ch);
+                HAL_BUS::FPGA::ReadA1(ch);
             }
         }
         else

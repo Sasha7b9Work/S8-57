@@ -32,7 +32,7 @@ namespace Tester
     static bool sended[Tester::NUM_STEPS] = { false, false, false, false, false };     // Здесь true означает, что данные шага посланы
 
     // Читать данные с ПЛИС
-    void ReadFPGA(uint16 *dataA, uint8 *dataB);
+    void ReadFPGA(uint16 *dataA, uint8 *dataB, Chan::E);
 
     // Запустить цикл чтения для тестер-компонента. В течение time секунд должно быть считано numPoints точек
     // Если возвращает false - старт не прошёл
@@ -42,7 +42,7 @@ namespace Tester
     void RecountPoints(uint16 *x, uint8 *y);
 
     // Считать данные очередной ступеньки
-    static void ReadData();
+    static void ReadData(Chan::E);
 }
 
 
@@ -208,7 +208,7 @@ void Tester::ProcessStep()
         FPGA::Flag::Read();
         if(FPGA::Flag::DataReady())
         {
-            ReadData();
+            ReadData(ChanA);
             countRead = 0;
         }
         else
@@ -230,7 +230,7 @@ void Tester::ProcessStep()
 }
 
 
-void Tester::ReadData()
+void Tester::ReadData(Chan::E ch)
 {
     if (SCPI::Sender::tester)
     {
@@ -248,7 +248,7 @@ void Tester::ReadData()
     uint16 *x = &dataX[halfStep][0];
     uint8 *y = &dataY[halfStep][0];
 
-    ReadFPGA(x, y);
+    ReadFPGA(x, y, ch);
 
     if (needSended[halfStep] && !sended[halfStep])
     {
@@ -379,7 +379,7 @@ String Tester::Shift::ToString(Scale::E scale) // -V2506
 }
 
 
-void Tester::ReadFPGA(uint16 *dataA, uint8 *dataB)
+void Tester::ReadFPGA(uint16 *dataA, uint8 *dataB, Chan::E ch)
 {
     uint16 aRead = (uint16)(Osci::ReadLastRecord(ChanA) - TESTER_NUM_POINTS);
 
@@ -390,7 +390,7 @@ void Tester::ReadFPGA(uint16 *dataA, uint8 *dataB)
 
     for(int i = 0; i < TESTER_NUM_POINTS; i++)         // Читаем данные первого канала
     {
-        *dataA++ = HAL_BUS::FPGA::ReadA0();
+        *dataA++ = HAL_BUS::FPGA::ReadA0(ch);
     }
 
     HAL_BUS::FPGA::Write16(WR::PRED_LO, aRead);         // Указываем адрес, с котонрого будем читать данные
@@ -398,7 +398,7 @@ void Tester::ReadFPGA(uint16 *dataA, uint8 *dataB)
 
     for(int i = 0; i < TESTER_NUM_POINTS; i++)         // Читаем данные второго канала
     {
-        *dataB++ = HAL_BUS::FPGA::ReadA1();
+        *dataB++ = HAL_BUS::FPGA::ReadA1(ch);
     }
 }
 

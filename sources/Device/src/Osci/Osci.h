@@ -8,6 +8,15 @@
 #define OSCI_IN_MODE_RANDOMIZER (S_TIME_BASE <= TBase::_50ns)
 
 
+#define INVERSE_DATA(ch)                                    \
+    if(S_INVERSE(ch))                                       \
+    {                                                       \
+        if(result > VALUE::AVE)                             \
+            result = VALUE::AVE - (result - VALUE::AVE);    \
+        else                                                \
+            result = VALUE::AVE + (VALUE::AVE - result);    \
+    }
+
 
 namespace OsciStateWork
 {
@@ -78,7 +87,7 @@ namespace Osci
     // „итать данные канала в пам€ить data
     bool ReadDataChannel(Chan::E ch, uint8 *data);
 
-    bool ReadDataChannelRand(uint8 *address, uint8 *data);
+    bool ReadDataChannelRand(uint8 *address, uint8 *data, Chan::E);
 };
 
 

@@ -462,11 +462,11 @@ void AutoFPGA::ReadData(Chan::E ch, uint8 *data)
     HAL_BUS::FPGA::SetAddrData(a0, a1);
 
     uint8 *p = data;
-    *p = HAL_BUS::FPGA::ReadA1();
+    *p = HAL_BUS::FPGA::ReadA1(ch);
 
     for (int i = 0; i < SIZE; i++)
     {
-        *p = HAL_BUS::FPGA::ReadA1();
+        *p = HAL_BUS::FPGA::ReadA1(ch);
         p++;
     }
 }

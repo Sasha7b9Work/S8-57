@@ -6,6 +6,7 @@
 #include "Settings/SettingsNRST.h"
 #include "Utils/Debug.h"
 #include "Utils/Math.h"
+#include "Osci/Osci.h"
 #include <stm32f4xx_hal.h>
 
 
@@ -243,11 +244,13 @@ void HAL_BUS::FPGA::SetAddrData(uint8 *address0, uint8 *address1)
 }
 
 
-uint8 HAL_BUS::FPGA::ReadA0()
+uint8 HAL_BUS::FPGA::ReadA0(Chan::E ch)
 {
     int delta = VALUE::AVE - static_cast<int>(*addrData0);
 
     int result = static_cast<int>(VALUE::AVE - static_cast<int>(delta * GetStretch(addrData0)));
+
+    INVERSE_DATA(ch);
 
     if(result < VALUE::MIN)
     {
@@ -262,11 +265,13 @@ uint8 HAL_BUS::FPGA::ReadA0()
 }
 
 
-uint8 HAL_BUS::FPGA::ReadA1()
+uint8 HAL_BUS::FPGA::ReadA1(Chan::E ch)
 {
     int delta = VALUE::AVE - static_cast<int>(*addrData1);
 
     int result = static_cast<uint8>(VALUE::AVE - static_cast<int>(delta * GetStretch(addrData1)));
+
+    INVERSE_DATA(ch);
 
     if(result < VALUE::MIN)
     {
