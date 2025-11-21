@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.9)
+cmake_minimum_required(VERSION 2.15)
 
 # Set CMake policy required by UrhoCommon module
 if (COMMAND cmake_policy)
@@ -24,5 +24,7 @@ set(CMAKE_UNITY_BUILD ON)
 if(${CMAKE_BUILD_TYPE} STREQUAL Debug)
     add_definitions(-DDEBUG)
 endif()
+
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded")         # Установка флага линковки /MT
 
 add_subdirectory(Device)

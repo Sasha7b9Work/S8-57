@@ -24,40 +24,6 @@ add_definitions(-DSTM32F437xx -DWXUSINGDLL -DGUI -DDEVICE)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
-# Older cmake versions don't support string(APPEND ...) provide a workaround
-macro(wx_string_append var str)
-    set(${var} ${${var}}${str})
-endmacro()
-
-set(MSVC_LIB_USE "/MDd")
-set(MSVC_LIB_REPLACE "/MTd")
-
-if(${CMAKE_BUILD_TYPE} STREQUAL Release)
-    set(MSVC_LIB_USE "/MTd")
-    set(MSVC_LIB_REPLACE "/MDd")
-endif()
-
-# Set MSVC runtime flags for all configurations
-foreach(cfg "" ${CMAKE_CONFIGURATION_TYPES})
-    set(c_flag_var CMAKE_C_FLAGS)
-    set(cxx_flag_var CMAKE_CXX_FLAGS)
-    if(cfg)
-        string(TOUPPER ${cfg} cfg_upper)
-        wx_string_append(c_flag_var "_${cfg_upper}")
-        wx_string_append(cxx_flag_var "_${cfg_upper}")
-    endif()
-    if(${c_flag_var} MATCHES ${MSVC_LIB_REPLACE})
-        string(REPLACE ${MSVC_LIB_REPLACE} ${MSVC_LIB_USE} ${c_flag_var} "${${c_flag_var}}")
-        set(${c_flag_var} ${${c_flag_var}} CACHE STRING
-        "Flags used by the C compiler during ${cfg_upper} builds." FORCE)
-    endif()
-    if(${cxx_flag_var} MATCHES ${MSVC_LIB_REPLACE})
-        string(REPLACE ${MSVC_LIB_REPLACE} ${MSVC_LIB_USE} ${cxx_flag_var} "${${cxx_flag_var}}")
-        set(${cxx_flag_var} ${${cxx_flag_var}} CACHE STRING
-        "Flags used by the CXX compiler during ${cfg_upper} builds." FORCE)
-    endif()
-endforeach()
-
 add_compile_options(/wd4201)    # nonstandard extension used: nameless struct/union
 add_compile_options(/wd4464)    # relative include path contains '..'
 add_compile_options(/wd4514)    # 'function' : unreferenced inline function has been removed
