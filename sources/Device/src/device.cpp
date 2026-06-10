@@ -119,8 +119,6 @@ void Device::Update()
 
     FDrive::Update();
 
-    //Sensor::Update();
-
     while (HAL_BUS::Panel::Receive())
     {
     };
