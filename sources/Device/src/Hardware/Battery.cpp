@@ -169,13 +169,13 @@ float Battery::BatteryADC_ToVoltage(float value)
 
 float Battery::Voltage100()
 {
-    return ChargerIsConnected() ? 8.301F : 7.4F;
+    return 7.4F;
 }
 
 
 float Battery::Voltage0()
 {
-    return ChargerIsConnected() ? Battery::SHUTDOWN_VOLTAGE : Battery::SHUTDOWN_VOLTAGE; //-V583
+    return Battery::SHUTDOWN_VOLTAGE;
 }
 
 
