@@ -26,21 +26,28 @@ add_definitions(-DSTM32F437xx -DDEVICE -DVS_KEIL)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -MP -Wall")
 
-add_compile_options(/wd4201)    # nonstandard extension used: nameless struct/union
-add_compile_options(/wd4505)
-add_compile_options(/wd4514)    # 'function' : unreferenced inline function has been removed
-add_compile_options(/wd4623)    # 'derived class' : default constructor was implicitly defined as deleted because a
+add_compile_options(/wd4201     # nonstandard extension used: nameless struct/union
+                    /wd4244
+                    /wd4302
+                    /wd4311
+                    /wd4312
+                    /wd4388
+                    /wd4505
+                    /wd4514     # 'function' : unreferenced inline function has been removed
+                    /wd4623     # 'derived class' : default constructor was implicitly defined as deleted because a
                                 # base class default constructor is inaccessible or deleted
-add_compile_options(/wd4626)    # 'xxx': assignment operator was implicitly defined as deleted
-add_compile_options(/wd4820)    # '<anonymous-tag>': 'N' bytes padding added after data member
-add_compile_options(/wd5027)    # 'type': move assignment operator was implicitly defined as deleted
-add_compile_options(/wd5039)    # 'xxx': pointer or reference to potentially throwing function passed to extern C
+                    /wd4626     # 'xxx': assignment operator was implicitly defined as deleted
+                    /wd4820     # '<anonymous-tag>': 'N' bytes padding added after data member
+                    /wd5027     # 'type': move assignment operator was implicitly defined as deleted
+                    /wd5039     # 'xxx': pointer or reference to potentially throwing function passed to extern C
                                 # function under -EHc.
-add_compile_options(/wd5045)    # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-add_compile_options(/wd5219)    # implicit conversion from 'xxx' to 'float', possible loss of data
-add_compile_options(/wd5220)    # a non-static data member with a volatile qualified type no longer implies
-add_compile_options(/wd5246)
-add_compile_options(/wd5264)
+                    /wd5045     # Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+                    /wd5219     # implicit conversion from 'xxx' to 'float', possible loss of data
+                    /wd5220     # a non-static data member with a volatile qualified type no longer implies
+                    /wd5246 
+                    /wd5264
+                    /wd5333)
+
 
 file(GLOB LIBS_FATFS    ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFs/src/ff.*
                         ../common/libs/STM32Cube_F4/Middlewares/Third_Party/FatFs/src/diskio.*
