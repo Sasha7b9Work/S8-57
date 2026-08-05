@@ -4,6 +4,7 @@
 #include "Hardware/Timer.h"
 #include "Hardware/HAL/HAL.h"
 #include "Hardware/HAL/HAL_PIO.h"
+#include "Display/Display.h"
 #include <usbh_diskio.h>
 #include <ctype.h>
 
@@ -155,6 +156,7 @@ void FDrive::AttemptUpdate()
 
         if(FileExist(FILE_FIRMWARE))            // Если на диске обнаружена прошивка
         {
+            state = State::Upgrade;
             Upgrade();
         }
     }
@@ -395,7 +397,7 @@ void EraseSettings()
 void Upgrade()
 {
 #define sizeSector (1 * 1024)
-
+    
     uint8 buffer[sizeSector];
 
     CPU::FLASH_::Prepare();

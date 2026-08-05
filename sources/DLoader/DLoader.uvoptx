@@ -157,9 +157,9 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>149</LineNumber>
+          <LineNumber>143</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134245546</Address>
+          <Address>134245460</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -168,7 +168,7 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>&lt;3&gt;.\src\FlashDrive\FlashDrive.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\DLoader57\src/FlashDrive/FlashDrive.cpp\149</Expression>
+          <Expression>\\DLoader57\src/FlashDrive/FlashDrive.cpp\143</Expression>
         </Bp>
       </Breakpoint>
       <Tracepoint>
@@ -597,7 +597,7 @@
 
   <Group>
     <GroupName>Hardware</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -969,7 +969,7 @@
 
   <Group>
     <GroupName>src</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1057,7 +1057,7 @@
 
   <Group>
     <GroupName>Display</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
