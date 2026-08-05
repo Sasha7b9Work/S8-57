@@ -7,7 +7,7 @@
 #define S_MENU_SHOW                     (set.menu._show)
 #define S_MENU_POS_ACT_ITEM(name)       (set.menu._posActItem[name])
 #define S_MENU_CURRENT_SUB_PAGE(name)   (set.menu._currentSubPage[name])
-#define S_MENU_MAIN_PAGE                (set.menu._mainPage)
+#define S_MENU_CURRENT_PAGE             (set.menu._currentPage)
 
 
 struct SettingsMenu
@@ -15,7 +15,7 @@ struct SettingsMenu
     bool        _show;                               // Если true, то нужно показывать текущую страницу
     int8        _posActItem[PageName::Count];        // \brief Позиция активного пункта. bit7 == 1 - item is opened, 0x7f - нет активного пункта.
     int8        _currentSubPage[PageName::Count];    // Номер текущей подстраницы.
-    PageName::E _mainPage;                           // Имя текущей главной страницы
+    PageName::E _currentPage;                        // Имя текущей главной страницы
 };
 
 
@@ -53,7 +53,7 @@ namespace Menu
     Page *OpenedPage();
 
     // Возвращает указатель на текущую главную страницу
-    const Page *GetMainPage();
+    const Page *GetCurrentPage();
 
     void CloseOpenedItem();
 
@@ -68,7 +68,7 @@ namespace Menu
     Page *PageFromName(PageName::E name);
 
     // Устанавливает текущую главную страницу
-    void SetMainPage(const Page *page);
+    void SetCurrentPage(const Page *page);
 
     struct Title
     {

@@ -421,7 +421,7 @@ void Handlers::ShowHidePage(const Page *page)
     }
     else
     {
-        Menu::SetMainPage(page);
+        Menu::SetCurrentPage(page);
 
         if (!Menu::IsShown())
         {
@@ -433,7 +433,7 @@ void Handlers::ShowHidePage(const Page *page)
 
 void Handlers::CommonButtonPage(const Page *page)
 {
-    if(Menu::GetMainPage() != page)
+    if(Menu::GetCurrentPage() != page)
     {
         if(!Menu::OpenedItem()->IsPage())
         {

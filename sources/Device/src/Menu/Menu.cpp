@@ -229,7 +229,7 @@ void Menu::Hide()
 
 bool Menu::IsShown()
 {
-    return S_MENU_SHOW && GetMainPage() != nullptr;
+    return S_MENU_SHOW && GetCurrentPage() != nullptr;
 }
 
 
@@ -244,7 +244,7 @@ void Menu::ClosePage(Page *page)
         keeper->SetPosActItem(0x7f);
     }
 
-    if (page == GetMainPage())
+    if (page == GetCurrentPage())
     {
         Menu::Hide();
     }
@@ -271,15 +271,15 @@ void Menu::CloseIfSubPage(Page *parent, Page *page)
 
 Item *Menu::OpenedItem()
 {
-    return LastOpened(const_cast<Page *>(GetMainPage())); //-V2567
+    return LastOpened(const_cast<Page *>(GetCurrentPage())); //-V2567
 }
 
 
 static void CloseDebugPages()
 {
-    const Page *mainPage = Menu::GetMainPage();
+    const Page *mainPage = Menu::GetCurrentPage();
 
-    Menu::SetMainPage(PageFunction::self);
+    Menu::SetCurrentPage(PageFunction::self);
 
     PageMultimeter::EnablePageCalibrate();
 
@@ -293,7 +293,7 @@ static void CloseDebugPages()
 
     PageMultimeter::DisablePageCalibrate();
 
-    Menu::SetMainPage(PageService::self);
+    Menu::SetCurrentPage(PageService::self);
 
     PageService::EnablePageDebug();
 
@@ -307,7 +307,7 @@ static void CloseDebugPages()
 
     PageService::DisablePageDebug();
 
-    Menu::SetMainPage(mainPage);
+    Menu::SetCurrentPage(mainPage);
 }
 
 
@@ -573,13 +573,13 @@ Page *Menu::PageFromName(PageName::E name)
 }
 
 
-void Menu::SetMainPage(const Page *page)
+void Menu::SetCurrentPage(const Page *page)
 {
-    S_MENU_MAIN_PAGE = page->GetName();
+    S_MENU_CURRENT_PAGE = page->GetName();
 }
 
 
-const Page *Menu::GetMainPage()
+const Page *Menu::GetCurrentPage()
 {
-    return PageFromName(S_MENU_MAIN_PAGE);
+    return PageFromName(S_MENU_CURRENT_PAGE);
 }
