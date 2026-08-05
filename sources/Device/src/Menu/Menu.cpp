@@ -271,7 +271,11 @@ void Menu::CloseIfSubPage(Page *parent, Page *page)
 
 Item *Menu::OpenedItem()
 {
-    return LastOpened(const_cast<Page *>(GetCurrentPage())); //-V2567
+    const Page *currentPage = GetCurrentPage();
+    
+    Item *result = LastOpened(const_cast<Page *>(currentPage));
+    
+    return result;
 }
 
 
@@ -362,6 +366,13 @@ Item *Menu::LastOpened(Page *page)
             int8 posActItem = page->PosCurrentItem();
             Item *item = page->GetItem(posActItem);
 
+            if (item == &Item::empty && posActItem > 0)
+            {
+                S_MENU_POS_ACT_ITEM(page->GetName()) = posActItem - 1;
+                posActItem = page->PosCurrentItem();
+                item = page->GetItem(posActItem);
+            }
+
             if (page->GetItem(posActItem)->Is(TypeItem::Page))
             {
                 result = LastOpened(static_cast<Page *>(item));
@@ -378,6 +389,12 @@ Item *Menu::LastOpened(Page *page)
     }
 
     return result;
+}
+
+
+int8 &Menu::Position::ActItem(PageName::E name)
+{
+    return S_MENU_POS_ACT_ITEM(name);
 }
 
 
@@ -549,12 +566,6 @@ void Menu::CloseAllBadOpenedPages()
 }
 
 
-int8 &Menu::Position::ActItem(PageName::E name)
-{
-    return S_MENU_POS_ACT_ITEM(name);
-}
-
-
 Page *Menu::PageFromName(PageName::E name)
 {
     for(int i = 0; true; i++)
@@ -581,5 +592,7 @@ void Menu::SetCurrentPage(const Page *page)
 
 const Page *Menu::GetCurrentPage()
 {
-    return PageFromName(S_MENU_CURRENT_PAGE);
+    const Page *result = PageFromName(S_MENU_CURRENT_PAGE);
+    
+    return result;
 }
