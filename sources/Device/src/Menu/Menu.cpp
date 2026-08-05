@@ -366,7 +366,7 @@ Item *Menu::LastOpened(Page *page)
             int8 posActItem = page->PosCurrentItem();
             Item *item = page->GetItem(posActItem);
 
-            if (item == &Item::empty && posActItem > 0)
+            if (item == &Item::empty && posActItem > 0)   // Это случается, когда прибор был выключен на странице ОТЛАДКА
             {
                 S_MENU_POS_ACT_ITEM(page->GetName()) = posActItem - 1;
                 posActItem = page->PosCurrentItem();
